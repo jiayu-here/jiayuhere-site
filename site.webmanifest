@@ -1,0 +1,16 @@
+{
+  "name": "JiaYu Here",
+  "short_name": "JiaYu Here",
+  "description": "旅行、日常手记与知识见解分享网站。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#f7f3ea",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}
