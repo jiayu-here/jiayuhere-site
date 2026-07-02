@@ -9,6 +9,7 @@ const posts = document.querySelectorAll(".post-card");
 const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
 const filterStatus = document.querySelector("#filterStatus");
+const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
 progressTrack.className = "scroll-progress";
@@ -78,30 +79,48 @@ mobileNav?.addEventListener("click", (event) => {
   }
 });
 
+const applyFilter = (category) => {
+  const activeButton = Array.from(filters).find((button) => button.dataset.filter === category);
+
+  if (!activeButton) {
+    return;
+  }
+
+  const label = activeButton.textContent.trim();
+  let visibleCount = 0;
+
+  filters.forEach((item) => {
+    const isActive = item === activeButton;
+    item.classList.toggle("active", isActive);
+    item.setAttribute("aria-pressed", String(isActive));
+  });
+
+  posts.forEach((post) => {
+    const shouldShow = category === "all" || post.dataset.category === category;
+    post.classList.toggle("is-hidden", !shouldShow);
+
+    if (shouldShow) {
+      visibleCount += 1;
+    }
+  });
+
+  if (filterStatus) {
+    filterStatus.textContent = `当前显示${label} ${visibleCount} 篇内容。`;
+  }
+};
+
 filters.forEach((button) => {
   button.addEventListener("click", () => {
-    const category = button.dataset.filter;
-    const label = button.textContent.trim();
-    let visibleCount = 0;
+    applyFilter(button.dataset.filter);
+  });
+});
 
-    filters.forEach((item) => {
-      const isActive = item === button;
-      item.classList.toggle("active", isActive);
-      item.setAttribute("aria-pressed", String(isActive));
-    });
-    button.classList.add("active");
+filterShortcutLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const category = link.getAttribute("data-filter-target");
 
-    posts.forEach((post) => {
-      const shouldShow = category === "all" || post.dataset.category === category;
-      post.classList.toggle("is-hidden", !shouldShow);
-
-      if (shouldShow) {
-        visibleCount += 1;
-      }
-    });
-
-    if (filterStatus) {
-      filterStatus.textContent = `当前显示${label} ${visibleCount} 篇内容。`;
+    if (category) {
+      applyFilter(category);
     }
   });
 });

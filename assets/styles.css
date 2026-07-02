@@ -229,6 +229,74 @@ h3 {
   margin-top: 28px;
 }
 
+.recent-highlights {
+  padding-top: 34px;
+}
+
+.recent-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.75fr);
+  gap: clamp(20px, 5vw, 56px);
+  align-items: end;
+  margin-bottom: 26px;
+}
+
+.recent-heading p:last-child,
+.recent-card p {
+  color: var(--muted);
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.recent-card {
+  display: grid;
+  gap: 14px;
+  min-height: 248px;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.98), rgba(240, 234, 223, 0.82));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 26px rgba(31, 38, 36, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.recent-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(55, 91, 115, 0.34);
+  box-shadow: var(--shadow);
+}
+
+.recent-label {
+  margin: 0;
+  color: var(--clay);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.recent-card h3,
+.recent-card p {
+  margin: 0;
+}
+
+.recent-card span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.88);
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 800;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -571,12 +639,14 @@ h3 {
   .intro,
   .about,
   .newsletter,
+  .recent-heading,
   .reading-path,
   .section-heading {
     grid-template-columns: 1fr;
     display: grid;
   }
 
+  .recent-grid,
   .category-grid,
   .post-grid,
   .stats {
