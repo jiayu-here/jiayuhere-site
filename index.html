@@ -33,7 +33,7 @@
       <a href="#insight">见解</a>
       <a href="#about">关于</a>
     </nav>
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobileNav">
+    <button class="menu-button" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -119,12 +119,13 @@
           <h2>近期可以发布的栏目样例</h2>
         </div>
         <div class="filters" role="group" aria-label="文章筛选">
-          <button class="filter active" data-filter="all" type="button">全部</button>
-          <button class="filter" data-filter="travel" type="button">旅行</button>
-          <button class="filter" data-filter="journal" type="button">日常</button>
-          <button class="filter" data-filter="insight" type="button">见解</button>
+          <button class="filter active" data-filter="all" type="button" aria-pressed="true">全部</button>
+          <button class="filter" data-filter="travel" type="button" aria-pressed="false">旅行</button>
+          <button class="filter" data-filter="journal" type="button" aria-pressed="false">日常</button>
+          <button class="filter" data-filter="insight" type="button" aria-pressed="false">见解</button>
         </div>
       </div>
+      <p class="filter-status" id="filterStatus" aria-live="polite">当前显示全部 6 篇内容。</p>
 
       <div class="post-grid">
         <article class="post-card" data-category="travel">

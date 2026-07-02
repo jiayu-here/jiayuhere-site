@@ -8,6 +8,7 @@ const filters = document.querySelectorAll(".filter");
 const posts = document.querySelectorAll(".post-card");
 const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
+const filterStatus = document.querySelector("#filterStatus");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
 progressTrack.className = "scroll-progress";
@@ -59,29 +60,49 @@ const updateActiveSection = () => {
   }
 };
 
+const closeMobileNav = () => {
+  mobileNav?.classList.remove("open");
+  menuButton?.setAttribute("aria-expanded", "false");
+  menuButton?.setAttribute("aria-label", "打开导航菜单");
+};
+
 menuButton?.addEventListener("click", () => {
   const isOpen = mobileNav?.classList.toggle("open");
   menuButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
+  menuButton.setAttribute("aria-label", isOpen ? "关闭导航菜单" : "打开导航菜单");
 });
 
 mobileNav?.addEventListener("click", (event) => {
   if (event.target.matches("a")) {
-    mobileNav.classList.remove("open");
-    menuButton?.setAttribute("aria-expanded", "false");
+    closeMobileNav();
   }
 });
 
 filters.forEach((button) => {
   button.addEventListener("click", () => {
     const category = button.dataset.filter;
+    const label = button.textContent.trim();
+    let visibleCount = 0;
 
-    filters.forEach((item) => item.classList.remove("active"));
+    filters.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("active", isActive);
+      item.setAttribute("aria-pressed", String(isActive));
+    });
     button.classList.add("active");
 
     posts.forEach((post) => {
       const shouldShow = category === "all" || post.dataset.category === category;
       post.classList.toggle("is-hidden", !shouldShow);
+
+      if (shouldShow) {
+        visibleCount += 1;
+      }
     });
+
+    if (filterStatus) {
+      filterStatus.textContent = `当前显示${label} ${visibleCount} 篇内容。`;
+    }
   });
 });
 
@@ -98,6 +119,12 @@ window.addEventListener("scroll", () => {
 });
 
 window.addEventListener("resize", updateActiveSection);
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMobileNav();
+  }
+});
 
 updateScrollProgress();
 updateActiveSection();

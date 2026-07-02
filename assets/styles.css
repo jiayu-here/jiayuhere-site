@@ -408,6 +408,12 @@ h3 {
   box-shadow: 0 4px 14px rgba(31, 38, 36, 0.08);
 }
 
+.filter-status {
+  margin: -8px 0 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
 .post-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
