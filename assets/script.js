@@ -2,7 +2,7 @@ const menuButton = document.querySelector(".menu-button");
 const mobileNav = document.querySelector("#mobileNav");
 const siteHeader = document.querySelector(".site-header");
 const navLinks = Array.from(
-  document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"]')
+  document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"], .section-rail a[href^="#"]')
 );
 const filters = document.querySelectorAll(".filter");
 const posts = document.querySelectorAll(".post-card");
@@ -12,6 +12,8 @@ const filterStatus = document.querySelector("#filterStatus");
 const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
+let activeRailHref = "";
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 progressTrack.className = "scroll-progress";
 progressTrack.setAttribute("aria-hidden", "true");
 progressBar.className = "scroll-progress-bar";
@@ -38,6 +40,18 @@ const setActiveSection = (sectionId) => {
       link.removeAttribute("aria-current");
     }
   });
+
+  const nextRailHref = `#${sectionId}`;
+
+  if (nextRailHref !== activeRailHref) {
+    activeRailHref = nextRailHref;
+    const activeRailLink = document.querySelector(`.section-rail a[href="${nextRailHref}"]`);
+    activeRailLink?.scrollIntoView({
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+      inline: "nearest",
+      block: "nearest"
+    });
+  }
 };
 
 const updateScrollProgress = () => {
