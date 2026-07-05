@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20260704">
+  <link rel="stylesheet" href="assets/styles.css?v=20260705">
 </head>
 <body>
   <header class="site-header" id="top">
@@ -173,6 +173,29 @@
       </div>
       <p class="filter-status" id="filterStatus" aria-live="polite">当前显示全部 6 篇内容。</p>
 
+      <div class="browse-modes" role="group" aria-label="按阅读目的进入">
+        <button class="browse-mode active" data-filter="all" type="button" aria-pressed="true">
+          <span class="browse-mode-meta">总览入口</span>
+          <strong>先看全部精选</strong>
+          <span>适合第一次访问，快速建立对这个站点内容结构的整体印象。</span>
+        </button>
+        <button class="browse-mode" data-filter="travel" type="button" aria-pressed="false">
+          <span class="browse-mode-meta">城市与路线</span>
+          <strong>想先感受旅行气质</strong>
+          <span>直接进入记录地方、街区观察和短途清单的内容。</span>
+        </button>
+        <button class="browse-mode" data-filter="journal" type="button" aria-pressed="false">
+          <span class="browse-mode-meta">生活与秩序</span>
+          <strong>想先看日常片段</strong>
+          <span>从清晨、周末和生活留白切入，更快理解站点的个人感。</span>
+        </button>
+        <button class="browse-mode" data-filter="insight" type="button" aria-pressed="false">
+          <span class="browse-mode-meta">方法与判断</span>
+          <strong>想先看知识见解</strong>
+          <span>优先浏览阅读、学习和整理想法的方法论表达。</span>
+        </button>
+      </div>
+
       <div class="post-grid">
         <article class="post-card" data-category="travel">
           <p class="post-meta">旅行 · 8 分钟阅读</p>
@@ -251,6 +274,6 @@
     </div>
   </footer>
 
-  <script src="assets/script.js?v=20260704"></script>
+  <script src="assets/script.js?v=20260705"></script>
 </body>
 </html>

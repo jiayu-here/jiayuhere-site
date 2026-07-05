@@ -5,6 +5,7 @@ const navLinks = Array.from(
   document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"], .section-rail a[href^="#"]')
 );
 const filters = document.querySelectorAll(".filter");
+const browseModes = document.querySelectorAll(".browse-mode");
 const posts = document.querySelectorAll(".post-card");
 const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
@@ -93,6 +94,14 @@ mobileNav?.addEventListener("click", (event) => {
   }
 });
 
+const syncFilterControls = (category) => {
+  [...filters, ...browseModes].forEach((item) => {
+    const isActive = item.dataset.filter === category;
+    item.classList.toggle("active", isActive);
+    item.setAttribute("aria-pressed", String(isActive));
+  });
+};
+
 const applyFilter = (category) => {
   const activeButton = Array.from(filters).find((button) => button.dataset.filter === category);
 
@@ -103,11 +112,7 @@ const applyFilter = (category) => {
   const label = activeButton.textContent.trim();
   let visibleCount = 0;
 
-  filters.forEach((item) => {
-    const isActive = item === activeButton;
-    item.classList.toggle("active", isActive);
-    item.setAttribute("aria-pressed", String(isActive));
-  });
+  syncFilterControls(category);
 
   posts.forEach((post) => {
     const shouldShow = category === "all" || post.dataset.category === category;
@@ -124,6 +129,12 @@ const applyFilter = (category) => {
 };
 
 filters.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyFilter(button.dataset.filter);
+  });
+});
+
+browseModes.forEach((button) => {
   button.addEventListener("click", () => {
     applyFilter(button.dataset.filter);
   });
