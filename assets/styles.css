@@ -550,6 +550,31 @@ h3 {
   font-size: 15px;
 }
 
+.reading-cue {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.96), rgba(239, 232, 220, 0.78));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.reading-cue-label {
+  margin: 0;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reading-cue-copy {
+  margin: 0;
+  color: #43514c;
+  font-size: 15px;
+}
+
 .browse-modes {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

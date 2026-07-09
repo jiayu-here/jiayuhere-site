@@ -10,9 +10,16 @@ const posts = document.querySelectorAll(".post-card");
 const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
 const filterStatus = document.querySelector("#filterStatus");
+const readingCue = document.querySelector("#readingCue");
 const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
+const filterDescriptions = {
+  all: "先快速扫一遍全部内容，再按你此刻更想看的主题切换，会更容易建立对这个站点的整体印象。",
+  travel: "适合先看路线、地方、移动过程和旅途中那些更具体的现场感。",
+  journal: "适合先看日常节奏、生活细节和更安静一点的个人感受。",
+  insight: "适合先看方法、判断和那些可以带走继续用的想法。"
+};
 let activeRailHref = "";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 progressTrack.className = "scroll-progress";
@@ -125,6 +132,12 @@ const applyFilter = (category) => {
 
   if (filterStatus) {
     filterStatus.textContent = `当前显示${label} ${visibleCount} 篇内容。`;
+  }
+
+  const cueCopy = readingCue?.querySelector(".reading-cue-copy");
+
+  if (cueCopy) {
+    cueCopy.textContent = filterDescriptions[category] || filterDescriptions.all;
   }
 };
 
