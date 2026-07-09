@@ -11,6 +11,7 @@ const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
 const filterStatus = document.querySelector("#filterStatus");
 const readingCue = document.querySelector("#readingCue");
+const backToTopButton = document.querySelector("#backToTop");
 const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
@@ -66,6 +67,12 @@ const updateScrollProgress = () => {
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
   document.documentElement.style.setProperty("--scroll-progress", `${progress}%`);
+};
+
+const updateBackToTopControl = () => {
+  if (backToTopButton) {
+    backToTopButton.hidden = window.scrollY < 560;
+  }
 };
 
 const updateActiveSection = () => {
@@ -170,8 +177,16 @@ form?.addEventListener("submit", (event) => {
   form.reset();
 });
 
+backToTopButton?.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+  });
+});
+
 window.addEventListener("scroll", () => {
   updateScrollProgress();
+  updateBackToTopControl();
   updateActiveSection();
 });
 
@@ -184,4 +199,5 @@ window.addEventListener("keydown", (event) => {
 });
 
 updateScrollProgress();
+updateBackToTopControl();
 updateActiveSection();

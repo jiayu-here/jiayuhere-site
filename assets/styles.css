@@ -760,6 +760,34 @@ h3 {
   gap: 18px;
 }
 
+.back-to-top {
+  position: fixed;
+  right: clamp(18px, 4vw, 44px);
+  bottom: 28px;
+  z-index: 22;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(247, 243, 234, 0.42);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: 0 14px 36px rgba(31, 38, 36, 0.18);
+  cursor: pointer;
+  font: 900 22px/1 "Inter", system-ui, sans-serif;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.back-to-top:hover {
+  background: var(--blue);
+  transform: translateY(-2px);
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .nav {
     display: none;
@@ -882,6 +910,11 @@ h3 {
 
   .subscribe-form div {
     grid-template-columns: 1fr;
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 18px;
   }
 }
 
