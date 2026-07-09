@@ -659,6 +659,25 @@ h3 {
   font-weight: 800;
 }
 
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.post-tags li {
+  padding: 5px 9px;
+  background: #eef2ee;
+  border: 1px solid rgba(113, 137, 119, 0.26);
+  border-radius: 999px;
+  color: #4b5d55;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .post-card.is-hidden {
   display: none;
 }
