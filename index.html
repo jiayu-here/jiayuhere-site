@@ -53,9 +53,10 @@
   </script>
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20260709">
+  <link rel="stylesheet" href="assets/styles.css?v=20260710">
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
   <header class="site-header" id="top">
     <a class="brand" href="#top" aria-label="JiaYu Here 首页">
       <span class="brand-mark">JH</span>
@@ -73,15 +74,16 @@
     </button>
   </header>
 
-  <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航" hidden>
     <a href="#pathways">路线</a>
     <a href="#travel">旅行</a>
     <a href="#journal">日常</a>
     <a href="#insight">见解</a>
     <a href="#about">关于</a>
   </nav>
+  <button class="mobile-nav-backdrop" id="mobileNavBackdrop" type="button" aria-label="关闭移动端导航" hidden></button>
 
-  <main>
+  <main id="mainContent" tabindex="-1">
     <section class="hero" aria-labelledby="hero-title">
       <img src="assets/images/hero-travel-desk.png" alt="旅行桌面、手记本、相机和茶杯构成的温暖场景">
       <div class="hero-overlay"></div>
@@ -207,6 +209,27 @@
         </div>
       </div>
       <p class="filter-status" id="filterStatus" aria-live="polite">当前显示全部 6 篇内容。</p>
+      <div class="reading-overview" id="readingOverview" aria-live="polite">
+        <p class="reading-overview-label">阅读概览</p>
+        <div class="reading-overview-grid">
+          <div class="reading-overview-item">
+            <span>当前主题</span>
+            <strong id="overviewLabel">全部</strong>
+          </div>
+          <div class="reading-overview-item">
+            <span>可读篇数</span>
+            <strong id="overviewCount">6 篇</strong>
+          </div>
+          <div class="reading-overview-item">
+            <span>预计时长</span>
+            <strong id="overviewTime">40 分钟</strong>
+          </div>
+          <div class="reading-overview-item reading-overview-item-wide">
+            <span>建议先看</span>
+            <strong id="overviewLead">在陌生城市里，如何找到自己的步调</strong>
+          </div>
+        </div>
+      </div>
 
       <div class="browse-modes" role="group" aria-label="按阅读目的进入">
         <button class="browse-mode active" data-filter="all" type="button" aria-pressed="true">
@@ -340,6 +363,6 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="返回页面顶部" hidden>↑</button>
 
-  <script src="assets/script.js?v=20260709"></script>
+  <script src="assets/script.js?v=20260710"></script>
 </body>
 </html>

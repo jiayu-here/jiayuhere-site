@@ -1,6 +1,8 @@
 const menuButton = document.querySelector(".menu-button");
 const mobileNav = document.querySelector("#mobileNav");
+const mobileNavBackdrop = document.querySelector("#mobileNavBackdrop");
 const siteHeader = document.querySelector(".site-header");
+const mainContent = document.querySelector("#mainContent");
 const navLinks = Array.from(
   document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"], .section-rail a[href^="#"]')
 );
@@ -11,8 +13,10 @@ const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
 const filterStatus = document.querySelector("#filterStatus");
 const readingCue = document.querySelector("#readingCue");
+const readingOverview = document.querySelector("#readingOverview");
 const backToTopButton = document.querySelector("#backToTop");
 const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
+const mobileNavLinks = Array.from(document.querySelectorAll('.mobile-nav a[href^="#"]'));
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
 const filterDescriptions = {
@@ -21,13 +25,17 @@ const filterDescriptions = {
   journal: "适合先看日常节奏、生活细节和更安静一点的个人感受。",
   insight: "适合先看方法、判断和那些可以带走继续用的想法。"
 };
+
 let activeRailHref = "";
+let lastFocusedElement = null;
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 progressTrack.className = "scroll-progress";
 progressTrack.setAttribute("aria-hidden", "true");
 progressBar.className = "scroll-progress-bar";
 progressTrack.append(progressBar);
 siteHeader?.insertAdjacentElement("afterend", progressTrack);
+
 const trackedSections = Array.from(
   new Set(
     navLinks
@@ -37,6 +45,44 @@ const trackedSections = Array.from(
       .filter(Boolean)
   )
 );
+
+const formatCount = (count) => `${count} 篇`;
+const formatMinutes = (minutes) => `${minutes} 分钟`;
+
+const extractReadingMinutes = (post) => {
+  const meta = post.querySelector(".post-meta")?.textContent || "";
+  const matchedMinutes = meta.match(/(\d+)/);
+  return matchedMinutes ? Number(matchedMinutes[1]) : 0;
+};
+
+const updateReadingOverview = (label, visiblePosts) => {
+  if (!readingOverview) {
+    return;
+  }
+
+  const overviewLabel = readingOverview.querySelector("#overviewLabel");
+  const overviewCount = readingOverview.querySelector("#overviewCount");
+  const overviewTime = readingOverview.querySelector("#overviewTime");
+  const overviewLead = readingOverview.querySelector("#overviewLead");
+  const totalMinutes = visiblePosts.reduce((sum, post) => sum + extractReadingMinutes(post), 0);
+  const leadTitle = visiblePosts[0]?.querySelector("h3")?.textContent?.trim() || "暂无推荐";
+
+  if (overviewLabel) {
+    overviewLabel.textContent = label;
+  }
+
+  if (overviewCount) {
+    overviewCount.textContent = formatCount(visiblePosts.length);
+  }
+
+  if (overviewTime) {
+    overviewTime.textContent = formatMinutes(totalMinutes);
+  }
+
+  if (overviewLead) {
+    overviewLead.textContent = leadTitle;
+  }
+};
 
 const setActiveSection = (sectionId) => {
   navLinks.forEach((link) => {
@@ -90,22 +136,49 @@ const updateActiveSection = () => {
   }
 };
 
-const closeMobileNav = () => {
-  mobileNav?.classList.remove("open");
-  menuButton?.setAttribute("aria-expanded", "false");
-  menuButton?.setAttribute("aria-label", "打开导航菜单");
+const setMobileNavState = (isOpen) => {
+  if (!mobileNav || !menuButton || !mobileNavBackdrop) {
+    return;
+  }
+
+  mobileNav.classList.toggle("open", isOpen);
+  mobileNav.hidden = !isOpen;
+  mobileNavBackdrop.hidden = !isOpen;
+  document.body.classList.toggle("nav-open", isOpen);
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "关闭导航菜单" : "打开导航菜单");
+};
+
+const closeMobileNav = ({ restoreFocus = true } = {}) => {
+  const wasOpen = mobileNav?.classList.contains("open");
+  setMobileNavState(false);
+
+  if (wasOpen && restoreFocus && lastFocusedElement instanceof HTMLElement) {
+    lastFocusedElement.focus();
+  }
+
+  lastFocusedElement = null;
 };
 
 menuButton?.addEventListener("click", () => {
-  const isOpen = mobileNav?.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(Boolean(isOpen)));
-  menuButton.setAttribute("aria-label", isOpen ? "关闭导航菜单" : "打开导航菜单");
+  if (mobileNav?.classList.contains("open")) {
+    closeMobileNav();
+    return;
+  }
+
+  lastFocusedElement = document.activeElement;
+  setMobileNavState(true);
+  mobileNavLinks[0]?.focus();
 });
 
 mobileNav?.addEventListener("click", (event) => {
   if (event.target.matches("a")) {
-    closeMobileNav();
+    closeMobileNav({ restoreFocus: false });
   }
+});
+
+mobileNavBackdrop?.addEventListener("click", () => {
+  closeMobileNav();
 });
 
 const syncFilterControls = (category) => {
@@ -124,7 +197,7 @@ const applyFilter = (category) => {
   }
 
   const label = activeButton.textContent.trim();
-  let visibleCount = 0;
+  const visiblePosts = [];
 
   syncFilterControls(category);
 
@@ -133,12 +206,12 @@ const applyFilter = (category) => {
     post.classList.toggle("is-hidden", !shouldShow);
 
     if (shouldShow) {
-      visibleCount += 1;
+      visiblePosts.push(post);
     }
   });
 
   if (filterStatus) {
-    filterStatus.textContent = `当前显示${label} ${visibleCount} 篇内容。`;
+    filterStatus.textContent = `当前显示${label} ${visiblePosts.length} 篇内容。`;
   }
 
   const cueCopy = readingCue?.querySelector(".reading-cue-copy");
@@ -146,6 +219,8 @@ const applyFilter = (category) => {
   if (cueCopy) {
     cueCopy.textContent = filterDescriptions[category] || filterDescriptions.all;
   }
+
+  updateReadingOverview(label, visiblePosts);
 };
 
 filters.forEach((button) => {
@@ -195,6 +270,31 @@ window.addEventListener("resize", updateActiveSection);
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMobileNav();
+  }
+
+  if (event.key === "Tab" && mobileNav?.classList.contains("open") && mobileNavLinks.length > 0) {
+    const firstLink = mobileNavLinks[0];
+    const lastLink = mobileNavLinks[mobileNavLinks.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstLink) {
+      event.preventDefault();
+      lastLink.focus();
+    } else if (!event.shiftKey && document.activeElement === lastLink) {
+      event.preventDefault();
+      firstLink.focus();
+    }
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 860 && mobileNav?.classList.contains("open")) {
+    closeMobileNav({ restoreFocus: false });
+  }
+});
+
+mainContent?.addEventListener("focus", () => {
+  if (mobileNav?.classList.contains("open")) {
+    closeMobileNav({ restoreFocus: false });
   }
 });
 
