@@ -595,13 +595,46 @@ h3 {
   border-radius: 8px;
 }
 
+.reading-overview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
 .reading-overview-label {
-  margin: 0 0 14px;
+  margin: 0;
   color: var(--blue);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.view-link-button {
+  border: 1px solid rgba(55, 91, 115, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.9);
+  color: var(--blue);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.view-link-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(55, 91, 115, 0.38);
+  background: rgba(232, 238, 234, 0.95);
+}
+
+.view-link-status {
+  margin: 0 0 14px;
+  color: #4c5a55;
+  font-size: 14px;
 }
 
 .reading-overview-grid {
@@ -1075,6 +1108,11 @@ h3 {
   }
 
   .post-index-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .reading-overview-head {
     align-items: start;
     flex-direction: column;
   }

@@ -53,7 +53,7 @@
   </script>
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20260711">
+  <link rel="stylesheet" href="assets/styles.css?v=20260711b">
 </head>
 <body>
   <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -210,7 +210,11 @@
       </div>
       <p class="filter-status" id="filterStatus" aria-live="polite">当前显示全部 6 篇内容。</p>
       <div class="reading-overview" id="readingOverview" aria-live="polite">
-        <p class="reading-overview-label">阅读概览</p>
+        <div class="reading-overview-head">
+          <p class="reading-overview-label">阅读概览</p>
+          <button class="view-link-button" id="copyViewLink" type="button">复制当前视图链接</button>
+        </div>
+        <p class="view-link-status" id="copyViewStatus">当前链接对应全部精选内容。</p>
         <div class="reading-overview-grid">
           <div class="reading-overview-item">
             <span>当前主题</span>
@@ -372,6 +376,6 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="返回页面顶部" hidden>↑</button>
 
-  <script src="assets/script.js?v=20260711"></script>
+  <script src="assets/script.js?v=20260711b"></script>
 </body>
 </html>

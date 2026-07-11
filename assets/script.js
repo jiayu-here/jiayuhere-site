@@ -6,9 +6,9 @@ const mainContent = document.querySelector("#mainContent");
 const navLinks = Array.from(
   document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"], .section-rail a[href^="#"]')
 );
-const filters = document.querySelectorAll(".filter");
-const browseModes = document.querySelectorAll(".browse-mode");
-const posts = document.querySelectorAll(".post-card");
+const filters = Array.from(document.querySelectorAll(".filter"));
+const browseModes = Array.from(document.querySelectorAll(".browse-mode"));
+const posts = Array.from(document.querySelectorAll(".post-card"));
 const form = document.querySelector(".subscribe-form");
 const note = document.querySelector(".form-note");
 const filterStatus = document.querySelector("#filterStatus");
@@ -19,8 +19,11 @@ const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const mobileNavLinks = Array.from(document.querySelectorAll('.mobile-nav a[href^="#"]'));
 const postIndexList = document.querySelector("#postIndexList");
 const postIndexEmpty = document.querySelector("#postIndexEmpty");
+const copyViewLinkButton = document.querySelector("#copyViewLink");
+const copyViewStatus = document.querySelector("#copyViewStatus");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
+const availableFilters = new Set(filters.map((button) => button.dataset.filter).filter(Boolean));
 const filterDescriptions = {
   all: "先快速扫一遍全部内容，再按你此刻更想看的主题切换，会更容易建立对这个站点的整体印象。",
   travel: "适合先看路线、地方、移动过程和旅途中那些更具体的现场感。",
@@ -29,6 +32,7 @@ const filterDescriptions = {
 };
 
 let activeRailHref = "";
+let activeFilter = "all";
 let lastFocusedElement = null;
 let postIndexLinks = [];
 
@@ -51,6 +55,46 @@ const trackedSections = Array.from(
 
 const formatCount = (count) => `${count} 篇`;
 const formatMinutes = (minutes) => `${minutes} 分钟`;
+
+const buildViewUrl = (category = activeFilter) => {
+  const nextUrl = new URL(window.location.href);
+
+  if (category === "all") {
+    nextUrl.searchParams.delete("view");
+  } else {
+    nextUrl.searchParams.set("view", category);
+  }
+
+  nextUrl.hash = "featured";
+  return nextUrl;
+};
+
+const updateCopyViewStatus = (message) => {
+  if (copyViewStatus) {
+    copyViewStatus.textContent = message;
+  }
+};
+
+const updateViewUrl = (category, { replace = true } = {}) => {
+  const nextUrl = buildViewUrl(category);
+
+  if (nextUrl.href === window.location.href) {
+    return;
+  }
+
+  const state = { view: category };
+
+  if (replace) {
+    window.history.replaceState(state, "", nextUrl);
+  } else {
+    window.history.pushState(state, "", nextUrl);
+  }
+};
+
+const getViewFromLocation = () => {
+  const view = new URL(window.location.href).searchParams.get("view");
+  return availableFilters.has(view) ? view : "all";
+};
 
 const extractReadingMinutes = (post) => {
   const meta = post.querySelector(".post-meta")?.textContent || "";
@@ -135,6 +179,15 @@ const updateReadingOverview = (label, visiblePosts) => {
   if (overviewLead) {
     overviewLead.textContent = leadTitle;
   }
+};
+
+const updateCopyViewButton = (label) => {
+  if (!copyViewLinkButton) {
+    return;
+  }
+
+  copyViewLinkButton.dataset.filter = activeFilter;
+  copyViewLinkButton.setAttribute("aria-label", `复制当前${label}视图链接`);
 };
 
 const setActiveSection = (sectionId) => {
@@ -242,8 +295,8 @@ const syncFilterControls = (category) => {
   });
 };
 
-const applyFilter = (category) => {
-  const activeButton = Array.from(filters).find((button) => button.dataset.filter === category);
+const applyFilter = (category, { updateUrl = true, replaceUrl = true } = {}) => {
+  const activeButton = filters.find((button) => button.dataset.filter === category);
 
   if (!activeButton) {
     return;
@@ -251,6 +304,7 @@ const applyFilter = (category) => {
 
   const label = activeButton.textContent.trim();
   const visiblePosts = [];
+  activeFilter = category;
 
   syncFilterControls(category);
 
@@ -274,18 +328,30 @@ const applyFilter = (category) => {
   }
 
   updateReadingOverview(label, visiblePosts);
+  updateCopyViewButton(label);
   updatePostIndex(visiblePosts);
+
+  const nextStatus =
+    category === "all"
+      ? "当前链接对应全部精选内容。"
+      : `当前链接会保留“${label}”视图。`;
+
+  updateCopyViewStatus(nextStatus);
+
+  if (updateUrl) {
+    updateViewUrl(category, { replace: replaceUrl });
+  }
 };
 
 filters.forEach((button) => {
   button.addEventListener("click", () => {
-    applyFilter(button.dataset.filter);
+    applyFilter(button.dataset.filter, { updateUrl: true, replaceUrl: false });
   });
 });
 
 browseModes.forEach((button) => {
   button.addEventListener("click", () => {
-    applyFilter(button.dataset.filter);
+    applyFilter(button.dataset.filter, { updateUrl: true, replaceUrl: false });
   });
 });
 
@@ -294,9 +360,61 @@ filterShortcutLinks.forEach((link) => {
     const category = link.getAttribute("data-filter-target");
 
     if (category) {
-      applyFilter(category);
+      applyFilter(category, { updateUrl: true, replaceUrl: false });
     }
   });
+});
+
+const registerFilterKeyboardNavigation = (controls) => {
+  controls.forEach((control, index) => {
+    control.addEventListener("keydown", (event) => {
+      let nextIndex = index;
+
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        nextIndex = (index + 1) % controls.length;
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        nextIndex = (index - 1 + controls.length) % controls.length;
+      } else if (event.key === "Home") {
+        nextIndex = 0;
+      } else if (event.key === "End") {
+        nextIndex = controls.length - 1;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      const nextControl = controls[nextIndex];
+      nextControl.focus();
+      applyFilter(nextControl.dataset.filter, { updateUrl: true, replaceUrl: false });
+    });
+  });
+};
+
+registerFilterKeyboardNavigation(filters);
+registerFilterKeyboardNavigation(browseModes);
+
+copyViewLinkButton?.addEventListener("click", async () => {
+  const targetUrl = buildViewUrl().toString();
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(targetUrl);
+    } else {
+      const fallbackField = document.createElement("input");
+      fallbackField.value = targetUrl;
+      fallbackField.setAttribute("readonly", "true");
+      fallbackField.style.position = "absolute";
+      fallbackField.style.left = "-9999px";
+      document.body.append(fallbackField);
+      fallbackField.select();
+      document.execCommand("copy");
+      fallbackField.remove();
+    }
+
+    updateCopyViewStatus("当前视图链接已复制，可以直接分享或继续看。");
+  } catch (error) {
+    updateCopyViewStatus("当前浏览器不允许自动复制，可以从地址栏手动复制这个链接。");
+  }
 });
 
 postIndexList?.addEventListener("click", (event) => {
@@ -368,6 +486,10 @@ window.addEventListener("resize", () => {
   }
 });
 
+window.addEventListener("popstate", () => {
+  applyFilter(getViewFromLocation(), { updateUrl: false });
+});
+
 mainContent?.addEventListener("focus", () => {
   if (mobileNav?.classList.contains("open")) {
     closeMobileNav({ restoreFocus: false });
@@ -378,4 +500,4 @@ updateScrollProgress();
 updateBackToTopControl();
 updateActiveSection();
 buildPostIndex();
-applyFilter("all");
+applyFilter(getViewFromLocation(), { updateUrl: true });
