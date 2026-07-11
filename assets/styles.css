@@ -662,6 +662,83 @@ h3 {
   font-size: 15px;
 }
 
+.post-index {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 24px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.98), rgba(232, 238, 234, 0.82));
+  border: 1px solid rgba(113, 137, 119, 0.24);
+  border-radius: 8px;
+}
+
+.post-index-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.post-index-heading h3 {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+.post-index-label {
+  margin: 0;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-index-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.post-index-link {
+  display: grid;
+  gap: 6px;
+  min-height: 84px;
+  padding: 14px 16px;
+  background: rgba(255, 253, 250, 0.9);
+  border: 1px solid rgba(217, 209, 192, 0.92);
+  border-radius: 8px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.post-index-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(55, 91, 115, 0.34);
+  box-shadow: 0 10px 26px rgba(31, 38, 36, 0.08);
+}
+
+.post-index-link strong {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.post-index-meta {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.post-index-link.is-hidden {
+  display: none;
+}
+
+.post-index-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .browse-modes {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -737,6 +814,11 @@ h3 {
 .post-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
+}
+
+.post-card:target {
+  border-color: rgba(55, 91, 115, 0.48);
+  box-shadow: 0 0 0 3px rgba(55, 91, 115, 0.16), var(--shadow);
 }
 
 .post-card a {
@@ -945,6 +1027,7 @@ h3 {
 
   .recent-grid,
   .reading-overview-grid,
+  .post-index-list,
   .browse-modes,
   .category-grid,
   .post-grid,
@@ -989,6 +1072,11 @@ h3 {
   .section {
     width: calc(100% - 32px);
     padding: 54px 0;
+  }
+
+  .post-index-heading {
+    align-items: start;
+    flex-direction: column;
   }
 
   .section-rail {

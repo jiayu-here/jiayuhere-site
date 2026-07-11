@@ -17,6 +17,8 @@ const readingOverview = document.querySelector("#readingOverview");
 const backToTopButton = document.querySelector("#backToTop");
 const filterShortcutLinks = document.querySelectorAll("[data-filter-target]");
 const mobileNavLinks = Array.from(document.querySelectorAll('.mobile-nav a[href^="#"]'));
+const postIndexList = document.querySelector("#postIndexList");
+const postIndexEmpty = document.querySelector("#postIndexEmpty");
 const progressTrack = document.createElement("div");
 const progressBar = document.createElement("span");
 const filterDescriptions = {
@@ -28,6 +30,7 @@ const filterDescriptions = {
 
 let activeRailHref = "";
 let lastFocusedElement = null;
+let postIndexLinks = [];
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 progressTrack.className = "scroll-progress";
@@ -53,6 +56,56 @@ const extractReadingMinutes = (post) => {
   const meta = post.querySelector(".post-meta")?.textContent || "";
   const matchedMinutes = meta.match(/(\d+)/);
   return matchedMinutes ? Number(matchedMinutes[1]) : 0;
+};
+
+const buildPostIndex = () => {
+  if (!postIndexList) {
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  posts.forEach((post, index) => {
+    if (!post.id) {
+      post.id = `post-${index + 1}`;
+    }
+
+    const link = document.createElement("a");
+    const meta = document.createElement("span");
+    const title = document.createElement("strong");
+
+    link.className = "post-index-link";
+    link.href = `#${post.id}`;
+    link.dataset.postId = post.id;
+    link.dataset.category = post.dataset.category || "all";
+
+    meta.className = "post-index-meta";
+    meta.textContent = post.querySelector(".post-meta")?.textContent?.trim() || "";
+    title.textContent = post.querySelector("h3")?.textContent?.trim() || `Post ${index + 1}`;
+
+    link.append(meta, title);
+    fragment.append(link);
+  });
+
+  postIndexList.replaceChildren(fragment);
+  postIndexLinks = Array.from(postIndexList.querySelectorAll(".post-index-link"));
+};
+
+const updatePostIndex = (visiblePosts) => {
+  if (!postIndexLinks.length) {
+    return;
+  }
+
+  const visiblePostIds = new Set(visiblePosts.map((post) => post.id));
+
+  postIndexLinks.forEach((link) => {
+    const shouldShow = visiblePostIds.has(link.dataset.postId || "");
+    link.classList.toggle("is-hidden", !shouldShow);
+  });
+
+  if (postIndexEmpty) {
+    postIndexEmpty.hidden = visiblePosts.length > 0;
+  }
 };
 
 const updateReadingOverview = (label, visiblePosts) => {
@@ -221,6 +274,7 @@ const applyFilter = (category) => {
   }
 
   updateReadingOverview(label, visiblePosts);
+  updatePostIndex(visiblePosts);
 };
 
 filters.forEach((button) => {
@@ -243,6 +297,28 @@ filterShortcutLinks.forEach((link) => {
       applyFilter(category);
     }
   });
+});
+
+postIndexList?.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const link = event.target.closest(".post-index-link");
+
+  if (!(link instanceof HTMLAnchorElement)) {
+    return;
+  }
+
+  const target = document.querySelector(link.getAttribute("href"));
+
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    target.focus({ preventScroll: true });
+  }, 0);
 });
 
 form?.addEventListener("submit", (event) => {
@@ -301,3 +377,5 @@ mainContent?.addEventListener("focus", () => {
 updateScrollProgress();
 updateBackToTopControl();
 updateActiveSection();
+buildPostIndex();
+applyFilter("all");
