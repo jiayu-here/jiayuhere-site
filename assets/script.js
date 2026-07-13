@@ -3,6 +3,7 @@ const mobileNav = document.querySelector("#mobileNav");
 const mobileNavBackdrop = document.querySelector("#mobileNavBackdrop");
 const siteHeader = document.querySelector(".site-header");
 const mainContent = document.querySelector("#mainContent");
+const sectionRail = document.querySelector(".section-rail");
 const navLinks = Array.from(
   document.querySelectorAll('.nav a[href^="#"], .mobile-nav a[href^="#"], .section-rail a[href^="#"]')
 );
@@ -207,11 +208,16 @@ const setActiveSection = (sectionId) => {
   if (nextRailHref !== activeRailHref) {
     activeRailHref = nextRailHref;
     const activeRailLink = document.querySelector(`.section-rail a[href="${nextRailHref}"]`);
-    activeRailLink?.scrollIntoView({
-      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-      inline: "nearest",
-      block: "nearest"
-    });
+
+    if (activeRailLink && sectionRail) {
+      const targetLeft = activeRailLink.offsetLeft - sectionRail.offsetLeft
+        - (sectionRail.clientWidth - activeRailLink.offsetWidth) / 2;
+
+      sectionRail.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+      });
+    }
   }
 };
 
@@ -500,4 +506,4 @@ updateScrollProgress();
 updateBackToTopControl();
 updateActiveSection();
 buildPostIndex();
-applyFilter(getViewFromLocation(), { updateUrl: true });
+applyFilter(getViewFromLocation(), { updateUrl: false });
