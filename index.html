@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://www.jiayuhere.com/">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/hero-travel-desk.png">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" as="image" href="assets/images/hero-travel-1536.webp" type="image/webp" imagesrcset="assets/images/hero-travel-768.webp 768w, assets/images/hero-travel-1536.webp 1536w" imagesizes="100vw">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -85,7 +86,10 @@
 
   <main id="mainContent" tabindex="-1">
     <section class="hero" aria-labelledby="hero-title">
-      <img src="assets/images/hero-travel-desk.png" alt="旅行桌面、手记本、相机和茶杯构成的温暖场景">
+      <picture>
+        <source type="image/webp" srcset="assets/images/hero-travel-768.webp 768w, assets/images/hero-travel-1536.webp 1536w" sizes="100vw">
+        <img src="assets/images/hero-travel-desk.png" width="1536" height="1024" fetchpriority="high" decoding="async" alt="旅行桌面、手记本、相机和茶杯构成的温暖场景">
+      </picture>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="eyebrow">www.jiayuhere.com</p>
