@@ -319,7 +319,7 @@ const footer = (prefix) => `
     <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}feed.xml">RSS</a><a href="${prefix}sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260714e"></script>`;
+  <script src="${prefix}assets/script.js?v=20260714f"></script>`;
 
 const page = ({ prefix, active, title, description, content, type = "website", keywords = [] }) => `<!doctype html>
 <html lang="zh-CN">
@@ -339,7 +339,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="${prefix}feed.xml">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714i">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714j">
 </head>
 <body>
 ${nav(prefix, active)}

@@ -1,5 +1,6 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#siteNav");
+const siteHeader = document.querySelector(".site-header");
 
 const setNavOpen = (open) => {
   if (!navToggle || !siteNav) return;
@@ -30,7 +31,11 @@ const sectionLabels = { projects: "项目", articles: "博客", notes: "笔记" 
 const searchTrigger = document.createElement("button");
 searchTrigger.type = "button";
 searchTrigger.className = "nav-search";
-searchTrigger.textContent = "搜索";
+searchTrigger.innerHTML = `
+  <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M11.5 10.5 15 14l-1 1-3.5-3.5a5.5 5.5 0 1 1 1-1ZM7.5 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"/></svg>
+  <span class="nav-search-text">搜索项目、文章和笔记</span>
+  <kbd>Ctrl K</kbd>`;
+searchTrigger.setAttribute("aria-label", "打开全站搜索");
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
 
@@ -49,8 +54,7 @@ searchDialog.innerHTML = `
     <div class="search-results"></div>
   </section>`;
 
-const navContact = siteNav?.querySelector(".nav-cta");
-if (siteNav) siteNav.insertBefore(searchTrigger, navContact || null);
+siteHeader?.insertBefore(searchTrigger, navToggle || siteNav || null);
 document.body.append(searchDialog);
 
 const dialogInput = searchDialog.querySelector("input");
