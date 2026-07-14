@@ -19,6 +19,54 @@
       <category>Gray</category>
     </item>
     <item>
+      <title>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</title>
+      <link>https://www.jiayuhere.com/blog/stm32-temperature-nonblocking-design/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/stm32-temperature-nonblocking-design/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。</description>
+      <category>STM32</category>
+      <category>DS18B20</category>
+      <category>PT100</category>
+      <category>Non-blocking</category>
+      <category>Alarm</category>
+    </item>
+    <item>
+      <title>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</title>
+      <link>https://www.jiayuhere.com/blog/fpga-dds-frequency-word-to-display/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/fpga-dds-frequency-word-to-display/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</description>
+      <category>FPGA</category>
+      <category>DDS</category>
+      <category>Verilog</category>
+      <category>ADC</category>
+      <category>Quartus</category>
+    </item>
+    <item>
+      <title>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</title>
+      <link>https://www.jiayuhere.com/blog/matlab-modulation-recognition-features/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/matlab-modulation-recognition-features/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>从信号生成、SNR 注入、归一化、特征设计到混淆矩阵，整理调制识别实验的可靠流程。</description>
+      <category>MATLAB</category>
+      <category>Modulation</category>
+      <category>SVM</category>
+      <category>Feature</category>
+      <category>SNR</category>
+    </item>
+    <item>
+      <title>RRT 与 RRT* 不只是动画：碰撞检测、重连和可重复验证</title>
+      <link>https://www.jiayuhere.com/blog/rrt-rrtstar-reliable-planner/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/rrt-rrtstar-reliable-planner/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>从扩展步长、边碰撞、目标连接到 RRT* 重连，说明如何把路径规划演示变成可测试的规划器。</description>
+      <category>Python</category>
+      <category>RRT</category>
+      <category>RRT Star</category>
+      <category>Collision</category>
+      <category>Path Planning</category>
+    </item>
+    <item>
       <title>FPGA 定点 FFT 设计前必须想清楚的五件事</title>
       <link>https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/</guid>

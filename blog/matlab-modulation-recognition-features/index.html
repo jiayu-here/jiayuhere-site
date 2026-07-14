@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征 | jiayuhere</title>
+  <meta name="description" content="从信号生成、SNR 注入、归一化、特征设计到混淆矩阵，整理调制识别实验的可靠流程。">
+  <meta name="keywords" content="MATLAB, Modulation, SVM, Feature, SNR">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征 | JiaYu Here">
+  <meta property="og:description" content="从信号生成、SNR 注入、归一化、特征设计到混淆矩阵，整理调制识别实验的可靠流程。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714k">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a aria-current="page" href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</h1><p class="article-lead">从信号生成、SNR 注入、归一化、特征设计到混淆矩阵，整理调制识别实验的可靠流程。</p><div class="article-meta"><span>通信与算法 · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>SVM</span><span>Feature</span><span>SNR</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先定义实验问题</a><a href="#section-2">数据生成要把变量分开</a><a href="#section-3">AWGN 功率必须从定义出发</a><a href="#section-4">归一化是为了去掉无关尺度</a><a href="#section-5">特征应覆盖幅度、相位和统计结构</a><a href="#section-6">为什么要保留基线模型</a><a href="#section-7">总准确率远远不够</a><a href="#section-8">画图时避免形成错误结论</a><a href="#section-9">建立可重复的实验记录</a><a href="#section-10">可以继续扩展的方向</a></aside><div class="prose"><h2 id="section-1">先定义实验问题</h2>
+<p>数字调制识别不是把星座图交给分类器就结束。开始实验前应明确类别集合、每帧符号数、采样率、脉冲成形方式、载波和相位条件、SNR 范围，以及训练阶段能够使用哪些先验信息。</p>
+<p>如果训练集中的某一类总是使用更高功率、更长帧或固定随机种子，分类器可能学到数据生成规则，而不是调制方式本身。实验结果看起来很高，却不能推广到新的信号。</p>
+<h2 id="section-2">数据生成要把变量分开</h2>
+<p>每个样本至少包含调制类别、SNR、随机种子和复数基带序列。建议让下列变量相互独立：</p>
+<ul>
+<li>信息比特与符号序列。</li>
+<li>噪声序列。</li>
+<li>初始相位和频偏。</li>
+<li>训练集、验证集与测试集的样本编号。</li>
+</ul>
+<p>同一段干净信号分别加不同噪声后放进训练集和测试集，仍可能造成信息泄漏。更稳妥的方法是先划分独立样本，再分别生成信道扰动。</p>
+<h2 id="section-3">AWGN 功率必须从定义出发</h2>
+<p>对于复数基带信号，可以先计算平均信号功率，再根据目标 SNR 得到噪声功率：</p>
+<pre><code class="language-matlab">signalPower = mean(abs(signal).^2);
+noisePower = signalPower / (10^(snrDb / 10));
+noise = sqrt(noisePower / 2) .* ...
+    (randn(size(signal)) + 1j * randn(size(signal)));
+noisySignal = signal + noise;</code></pre>
+<p>除以 2 是因为复高斯噪声的实部和虚部分担总噪声功率。若实验使用每比特信噪比或每符号信噪比，还需要根据每符号比特数和采样设置完成换算，不能把所有 dB 参数都直接当成同一个 SNR。</p>
+<h2 id="section-4">归一化是为了去掉无关尺度</h2>
+<p>不同调制类别若使用不同默认幅度，分类器会优先利用能量差异。每帧按平均功率归一化，可以让模型更多关注结构特征：</p>
+<pre><code class="language-matlab">z = signal(:);
+z = z / sqrt(mean(abs(z).^2) + eps);
+zCentered = z - mean(z);</code></pre>
+<p>归一化不是越多越好。如果研究目标本身包含功率变化或自动增益控制误差，就应把这些变化作为明确实验变量，而不是在预处理阶段全部消除。</p>
+<h2 id="section-5">特征应覆盖幅度、相位和统计结构</h2>
+<p>单一特征通常只能区分一部分调制方式。一个可解释的特征集合可以包含：</p>
+<ul>
+<li>幅度均值、方差、峰均比和分位数。</li>
+<li>瞬时相位差分的均值、方差与直方图统计。</li>
+<li>频谱集中度、带宽和谱峰结构。</li>
+<li>二阶、四阶矩以及高阶累积量。</li>
+<li>星座点到原点的半径分布。</li>
+</ul>
+<p>例如四阶累积量可以按中心化信号计算：</p>
+<pre><code class="language-matlab">m20 = mean(zCentered.^2);
+m40 = mean(zCentered.^4);
+c40 = m40 - 3 * m20^2;
+
+phaseStep = diff(unwrap(angle(z)));
+phaseMean = mean(phaseStep);
+phaseStd = std(phaseStep);</code></pre>
+<p>高阶统计量对样本长度和噪声较敏感。使用前应检查特征是否出现 NaN、极端值或明显量纲差异，并在训练数据上完成标准化。</p>
+<h2 id="section-6">为什么要保留基线模型</h2>
+<p>直接使用复杂模型不利于判断问题来自特征还是分类器。可以先建立 KNN、线性分类器或决策树作为基线，再使用 RBF-SVM 比较。</p>
+<pre><code class="language-matlab">learner = templateSVM( ...
+    &quot;KernelFunction&quot;, &quot;rbf&quot;, ...
+    &quot;Standardize&quot;, true);
+
+svmModel = fitcecoc( ...
+    XTrain, YTrain, ...
+    &quot;Learners&quot;, learner, ...
+    &quot;Coding&quot;, &quot;onevsone&quot;);
+
+prediction = predict(svmModel, XTest);</code></pre>
+<p>多分类 SVM 的参数选择只能使用训练集或交叉验证集。若根据测试集准确率反复调整参数，测试集就失去了独立评估意义。</p>
+<h2 id="section-7">总准确率远远不够</h2>
+<p>调制识别应至少同时观察：</p>
+<ul>
+<li>每个 SNR 下的总体准确率。</li>
+<li>每个类别的召回率和误判去向。</li>
+<li>混淆矩阵随 SNR 的变化。</li>
+<li>特征分布和异常样本。</li>
+</ul>
+<p>低 SNR 下，PSK 类别之间可能因为相位特征不稳定而混淆；幅度归一化后，ASK 与 QAM 的区分也可能更依赖高阶统计。混淆矩阵能够告诉我们“错在哪里”，而一个总准确率只能告诉我们“错了多少”。</p>
+<h2 id="section-8">画图时避免形成错误结论</h2>
+<p>t-SNE 或 PCA 图适合观察，但二维分离并不等于分类器一定可靠。降维方法可能夸大局部结构，也可能使用完整数据后间接泄漏测试集信息。</p>
+<p>更有价值的图包括各类特征随 SNR 的分布、准确率-SNR 曲线、归一化前后的对照，以及典型误判样本的时域、频谱和星座图。</p>
+<h2 id="section-9">建立可重复的实验记录</h2>
+<p>每次运行应保存随机种子、MATLAB 版本、类别定义、样本数量、SNR 列表、特征名称、模型参数和数据划分。输出模型文件时，还要同时保存生成它的配置，而不是只留下一个难以追溯的 <code>.mat</code> 文件。</p>
+<h2 id="section-10">可以继续扩展的方向</h2>
+<p>当前流程适合建立传统特征与分类器基线。后续可以逐步加入频偏、采样偏差、瑞利衰落、脉冲成形和硬件采集数据，并比较传统特征与深度网络。但每增加一种复杂因素，都应保留单变量对照，避免一次改变太多条件后无法解释性能变化。</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../fpga-dds-frequency-word-to-display/index.html"><span>← 上一篇</span><strong>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</strong></a>
+    <a class="article-pagination-next" href="../rrt-rrtstar-reliable-planner/index.html"><span>下一篇 →</span><strong>RRT 与 RRT* 不只是动画：碰撞检测、重连和可重复验证</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714f"></script>
+</body>
+</html>

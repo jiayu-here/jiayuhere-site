@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径 | jiayuhere</title>
+  <meta name="description" content="说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。">
+  <meta name="keywords" content="FPGA, DDS, Verilog, ADC, Quartus">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径 | JiaYu Here">
+  <meta property="og:description" content="说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714k">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a aria-current="page" href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</h1><p class="article-lead">说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</p><div class="article-meta"><span>FPGA · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">DDS 的核心不是波形表，而是相位</a><a href="#section-2">相位累加器保持简单</a><a href="#section-3">多种波形可以共享相位</a><a href="#section-4">LUT 生成过程也需要版本管理</a><a href="#section-5">ADC 数据必须带有效信号</a><a href="#section-6">显示模块不要反向控制算法模块</a><a href="#section-7">仿真应分四层推进</a><a href="#section-12">TimeQuest 中需要关注什么</a><a href="#section-13">上板前后的验收边界</a></aside><div class="prose"><h2 id="section-1">DDS 的核心不是波形表，而是相位</h2>
+<p>直接数字频率合成器的核心是相位累加器。每个系统时钟到来时，相位增加一个固定步长，再用相位高位查询波形表。只要相位按照模二进制自然回绕，就能连续产生周期波形。</p>
+<p>当相位累加器宽度为 N、系统时钟为 <code>f_clk</code>、频率控制字为 <code>phase_inc</code> 时，理想输出频率为：</p>
+<pre><code class="language-text">f_out = phase_inc × f_clk / 2^N</code></pre>
+<p>因此频率分辨率由 <code>f_clk / 2^N</code> 决定。增加相位位宽可以提高分辨率，但波形表地址不一定要使用全部相位位；常见做法是用高若干位作为 LUT 地址。</p>
+<h2 id="section-2">相位累加器保持简单</h2>
+<p>相位核心只需要处理复位、使能和步长更新，不应混入数码管或 ADC 控制：</p>
+<pre><code class="language-verilog">reg [PHASE_WIDTH-1:0] phase_acc;
+
+always @(posedge clk or negedge reset_n) begin
+  if (!reset_n)
+    phase_acc &lt;= {PHASE_WIDTH{1'b0}};
+  else if (sample_en)
+    phase_acc &lt;= phase_acc + phase_inc;
+end
+
+assign lut_addr = phase_acc[PHASE_WIDTH-1 -: LUT_ADDR_WIDTH];</code></pre>
+<p><code>sample_en</code> 的含义必须写清。如果它不是每个时钟都有效，输出频率公式中的有效更新频率也会随之改变。验证频率时应以真正的相位更新速率为准。</p>
+<h2 id="section-3">多种波形可以共享相位</h2>
+<p>正弦波、方波、三角波和锯齿波可以使用同一个相位累加器。正弦波通过 LUT 输出；方波可直接使用相位最高位；锯齿波可截取相位高位；三角波则根据象限对相位做折返。</p>
+<p>共享相位的好处是切换波形时频率定义一致，测试平台也能用同一套周期测量方法。切换控制应在明确的时钟边界采样，避免组合选择信号在 DAC 输出路径上产生毛刺。</p>
+<h2 id="section-4">LUT 生成过程也需要版本管理</h2>
+<p>正弦表通常由 MATLAB 或 Python 生成。生成脚本应固定以下参数：</p>
+<ul>
+<li>表深度和地址位宽。</li>
+<li>输出是否有符号、是否带直流偏置。</li>
+<li>幅值范围和量化方式。</li>
+<li>输出文件的进制、位宽和排列顺序。</li>
+</ul>
+<p>ROM 初始化文件与生成脚本应一起提交。只保存 <code>.mif</code> 或 <code>.hex</code> 而没有生成方法，会让后续修改位宽时难以确认量化规则。</p>
+<h2 id="section-5">ADC 数据必须带有效信号</h2>
+<p>测量链路中，ADC 接口、统计模块和显示模块的更新频率不同。不要假设 ADC 数据总是有效，应把数据和 <code>sample_valid</code> 一起传递。最小值、最大值和平均值只在有效采样到达时更新：</p>
+<pre><code class="language-verilog">always @(posedge clk or negedge reset_n) begin
+  if (!reset_n || clear) begin
+    min_value &lt;= {WIDTH{1'b1}};
+    max_value &lt;= {WIDTH{1'b0}};
+    avg_acc   &lt;= {(WIDTH+AVG_SHIFT){1'b0}};
+  end else if (sample_valid) begin
+    if (sample_in &lt; min_value) min_value &lt;= sample_in;
+    if (sample_in &gt; max_value) max_value &lt;= sample_in;
+    avg_acc &lt;= avg_acc - (avg_acc &gt;&gt; AVG_SHIFT) + sample_in;
+  end
+end</code></pre>
+<p>这里的平均值是指数平均，不等同于固定窗口算术平均。它的优点是资源开销小、无需保存整段样本；代价是结果带有时间权重。因此页面和文档应准确说明统计定义。</p>
+<h2 id="section-6">显示模块不要反向控制算法模块</h2>
+<p>数码管扫描速度通常远高于人眼观察需要，显示数据更新又远低于扫描频率。正确结构是先把测量结果锁存为显示快照，再由扫描模块循环输出段选和位选。显示链路不应改变 DDS 或统计模块的更新条件。</p>
+<p>74HC595 还涉及串行位序、锁存时刻和有效电平。出现全灭或乱码时，先用固定段码验证移位链路，再接入动态数字；不要一开始就同时怀疑 DDS、ADC 和显示。</p>
+<h2 id="section-7">仿真应分四层推进</h2>
+<h3 id="section-8">相位层</h3>
+<p>检查相位差是否恒定、回绕是否正确、使能关闭时是否保持。</p>
+<h3 id="section-9">波形层</h3>
+<p>分别检查正弦表地址、方波占空比、三角折返和锯齿单调性。此阶段不接 ADC 与显示。</p>
+<h3 id="section-10">测量层</h3>
+<p>向统计模块输入人工序列，明确最小值、最大值和指数平均的期望结果，并插入无效周期检查门控。</p>
+<h3 id="section-11">系统层</h3>
+<p>最后连接顶层，检查模式切换、显示快照、复位和跨模块有效信号。系统仿真通过后再进行 Quartus 全编译和 TimeQuest 检查。</p>
+<h2 id="section-12">TimeQuest 中需要关注什么</h2>
+<p>编译成功只说明语法和布局布线完成，不代表时序一定满足。至少应确认所有主时钟已创建、外部接口约束有依据、关键路径没有负裕量、没有意外的未约束时钟。</p>
+<p>如果设计含多个时钟域，应使用同步器、握手或异步 FIFO，不要直接跨域传递多位数据。显示慢时钟可以优先使用时钟使能，而不是在逻辑中随意分频生成新的时钟。</p>
+<h2 id="section-13">上板前后的验收边界</h2>
+<p>仿真可以证明数字逻辑在测试条件下符合预期，Quartus 和 TimeQuest 可以证明工程能够实现并满足约束；但 DAC 波形幅值、ADC 模拟输入、数码管亮度和引脚电平仍需实物确认。</p>
+<p>一份可靠的项目记录应明确区分“仿真通过”“编译通过”“时序通过”和“实物验证通过”，避免把不同层级的证据混为一个结论。</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../stm32-temperature-nonblocking-design/index.html"><span>← 上一篇</span><strong>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</strong></a>
+    <a class="article-pagination-next" href="../matlab-modulation-recognition-features/index.html"><span>下一篇 →</span><strong>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714f"></script>
+</body>
+</html>
