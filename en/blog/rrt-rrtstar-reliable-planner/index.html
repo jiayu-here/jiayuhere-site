@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests | jiayuhere</title>
+  <meta name="description" content="Turn a planning animation into a testable planner through step size, edge collision, goal connection and correct RRT* rewiring.">
+  <meta name="keywords" content="Python, RRT, RRT Star, Collision, Path Planning">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests | JiaYu Here">
+  <meta property="og:description" content="Turn a planning animation into a testable planner through step size, edge collision, goal connection and correct RRT* rewiring.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/rrt-rrtstar-reliable-planner/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/rrt-rrtstar-reliable-planner/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/rrt-rrtstar-reliable-planner/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/rrt-rrtstar-reliable-planner/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/rrt-rrtstar-reliable-planner/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests</h1><p class="article-lead">Turn a planning animation into a testable planner through step size, edge collision, goal connection and correct RRT* rewiring.</p><div class="article-meta"><span>Algorithms and Python · 2026-07-14</span><span>3 min read</span><div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Collision</span><span>Path Planning</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Drawing a Line Is Not Enough</a><a href="#section-2">Basic Extension Sequence</a><a href="#section-3">Step Size Changes More Than Speed</a><a href="#section-4">Check the Entire Edge</a><a href="#section-5">Validate the Final Goal Edge</a><a href="#section-6">RRT* Uses Neighborhoods Twice</a><a href="#section-7">Rewiring Must Update the Subtree</a><a href="#section-8">Separate Path Recovery from Smoothing</a><a href="#section-9">Make Random Tests Stable</a><a href="#section-10">Report Distributions, Not One Run</a><a href="#section-11">State the Engineering Boundary</a></aside><div class="prose"><h2 id="section-1">Drawing a Line Is Not Enough</h2>
+<p>An RRT animation can look successful while an edge crosses an obstacle or the final goal connection is unsafe. A reliable planner defines workspace bounds, robot size, collision model, termination and an explicit failure result, then makes randomness reproducible.</p>
+<h2 id="section-2">Basic Extension Sequence</h2>
+<ol>
+<li>Sample within the map.</li>
+<li>Find the nearest tree node.</li>
+<li>Steer toward the sample by at most one step.</li>
+<li>Check both the new node and the entire edge.</li>
+<li>Add the node with a parent when safe.</li>
+<li>Validate a goal connection or continue.</li>
+</ol>
+<p>Goal bias accelerates some searches, but too much bias can reduce exploration around complex obstacles.</p>
+<h2 id="section-3">Step Size Changes More Than Speed</h2>
+<p>Large steps grow quickly but miss narrow passages and create more rejected edges. Small steps need more nodes and distance calculations. Choose the value from map scale, obstacle spacing and robot radius.</p>
+<pre><code class="language-python">def steer(source, target, step_size):
+    dx = target[0] - source[0]
+    dy = target[1] - source[1]
+    length = math.hypot(dx, dy)
+    if length == 0:
+        return source
+    scale = min(1.0, step_size / length)
+    return source[0] + dx * scale, source[1] + dy * scale</code></pre>
+<h2 id="section-4">Check the Entire Edge</h2>
+<p>Endpoint-only checks miss segments crossing obstacles. For a circle, compare radius plus robot clearance against the shortest center-to-segment distance:</p>
+<pre><code class="language-python">def distance_point_to_segment(point, a, b):
+    ax, ay = a
+    bx, by = b
+    px, py = point
+    dx, dy = bx - ax, by - ay
+    if dx == 0 and dy == 0:
+        return math.hypot(px - ax, py - ay)
+    t = ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)
+    t = min(1.0, max(0.0, t))
+    closest_x = ax + t * dx
+    closest_y = ay + t * dy
+    return math.hypot(px - closest_x, py - closest_y)</code></pre>
+<p>Obstacle inflation converts robot radius into point-planner geometry for circles, rectangles and polygons.</p>
+<h2 id="section-5">Validate the Final Goal Edge</h2>
+<p>Entering the goal radius does not prove the last segment is clear. Check the exact connection separately. Success should return a path or node chain, while exhausted iterations should return a distinct no-solution state.</p>
+<h2 id="section-6">RRT* Uses Neighborhoods Twice</h2>
+<p>Before insertion, RRT* chooses the collision-free neighbor with the lowest cumulative start-to-new-node cost. After insertion it tries to rewire neighbors through the new node.</p>
+<pre><code class="language-python">best_parent = nearest
+best_cost = nearest.cost + distance(nearest.point, new_point)
+for node in near_nodes:
+    candidate_cost = node.cost + distance(node.point, new_point)
+    if candidate_cost &lt; best_cost and collision_free(node.point, new_point):
+        best_parent = node
+        best_cost = candidate_cost</code></pre>
+<h2 id="section-7">Rewiring Must Update the Subtree</h2>
+<p>Changing one node's parent and cost without updating descendants corrupts every later cost comparison. Track children, detach from the old parent and propagate the new cumulative cost through the complete subtree.</p>
+<h2 id="section-8">Separate Path Recovery from Smoothing</h2>
+<p>First follow parents from goal to start to recover a valid path. Smoothing may then skip intermediate points only when the exact same collision checker approves each shortcut. It must not change the clearance definition.</p>
+<h2 id="section-9">Make Random Tests Stable</h2>
+<p>Use fixed seeds on an empty map, a single obstacle, a narrow passage, a sealed goal and invalid start/goal cases. GUI and CLI must call the same planner core; visualization only displays the tree and result.</p>
+<h2 id="section-10">Report Distributions, Not One Run</h2>
+<p>Compare success rate, node count, planning time and path-length distributions over the same seed set. RRT and RRT* comparisons also need identical maps, steps and collision rules.</p>
+<h2 id="section-11">State the Engineering Boundary</h2>
+<p>A collision-free path in a static 2D geometry model does not prove a real vehicle can execute it. Robotics adds kinematic constraints, turning radius, dynamic obstacles, localization error and trajectory tracking. The current planner's claim should remain limited to its stated model.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../matlab-modulation-recognition-features/index.html"><span>← Previous article</span><strong>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

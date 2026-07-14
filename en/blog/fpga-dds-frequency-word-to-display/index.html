@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path | jiayuhere</title>
+  <meta name="description" content="Layered design and verification for the phase accumulator, waveform LUT, sample-valid contract, statistics and board display.">
+  <meta name="keywords" content="FPGA, DDS, Verilog, ADC, Quartus">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path | JiaYu Here">
+  <meta property="og:description" content="Layered design and verification for the phase accumulator, waveform LUT, sample-valid contract, statistics and board display.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/fpga-dds-frequency-word-to-display/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/fpga-dds-frequency-word-to-display/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/fpga-dds-frequency-word-to-display/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path</h1><p class="article-lead">Layered design and verification for the phase accumulator, waveform LUT, sample-valid contract, statistics and board display.</p><div class="article-meta"><span>FPGA · 2026-07-14</span><span>3 min read</span><div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">DDS Starts with Phase, Not the Waveform Table</a><a href="#section-2">Keep the Phase Accumulator Simple</a><a href="#section-3">Share Phase Across Waveforms</a><a href="#section-4">Version the LUT Generator</a><a href="#section-5">Send ADC Data with a Valid Signal</a><a href="#section-6">Do Not Let the Display Control the Algorithm</a><a href="#section-7">Verify in Four Layers</a><a href="#section-12">Read TimeQuest as a Separate Result</a><a href="#section-13">Keep Acceptance Boundaries Explicit</a></aside><div class="prose"><h2 id="section-1">DDS Starts with Phase, Not the Waveform Table</h2>
+<p>A direct digital synthesizer advances phase by a fixed step on each effective sample clock and uses high phase bits to address a waveform. For an N-bit accumulator:</p>
+<pre><code class="language-text">f_out = phase_inc × f_clk / 2^N</code></pre>
+<p>Resolution is <code>f_clk / 2^N</code>. A wide phase accumulator improves resolution without requiring the LUT address to use every phase bit.</p>
+<h2 id="section-2">Keep the Phase Accumulator Simple</h2>
+<p>It should handle reset, enable and the step, not ADC or display control:</p>
+<pre><code class="language-verilog">reg [PHASE_WIDTH-1:0] phase_acc;
+
+always @(posedge clk or negedge reset_n) begin
+  if (!reset_n)
+    phase_acc &lt;= {PHASE_WIDTH{1'b0}};
+  else if (sample_en)
+    phase_acc &lt;= phase_acc + phase_inc;
+end
+
+assign lut_addr = phase_acc[PHASE_WIDTH-1 -: LUT_ADDR_WIDTH];</code></pre>
+<p>If <code>sample_en</code> is not asserted every clock, the formula must use the true phase-update rate.</p>
+<h2 id="section-3">Share Phase Across Waveforms</h2>
+<p>Sine uses a LUT, square can use the top phase bit, sawtooth can use high bits, and triangle can fold the phase by quadrant. Sharing phase keeps frequency consistent across modes. Sample mode selection on a defined clock boundary to avoid combinational glitches in the DAC path.</p>
+<h2 id="section-4">Version the LUT Generator</h2>
+<p>Store the MATLAB or Python generator next to the ROM file. Fix depth, address width, signedness, DC offset, amplitude, quantization rule, radix and ordering. A <code>.mif</code> without its generation contract is not reproducible.</p>
+<h2 id="section-5">Send ADC Data with a Valid Signal</h2>
+<p>The ADC interface, statistics and display run at different effective rates. Minimum, maximum and average must update only for valid samples:</p>
+<pre><code class="language-verilog">always @(posedge clk or negedge reset_n) begin
+  if (!reset_n || clear) begin
+    min_value &lt;= {WIDTH{1'b1}};
+    max_value &lt;= {WIDTH{1'b0}};
+    avg_acc   &lt;= {(WIDTH+AVG_SHIFT){1'b0}};
+  end else if (sample_valid) begin
+    if (sample_in &lt; min_value) min_value &lt;= sample_in;
+    if (sample_in &gt; max_value) max_value &lt;= sample_in;
+    avg_acc &lt;= avg_acc - (avg_acc &gt;&gt; AVG_SHIFT) + sample_in;
+  end
+end</code></pre>
+<p>This is an exponential average, not a fixed-window arithmetic mean. Documentation must state that distinction.</p>
+<h2 id="section-6">Do Not Let the Display Control the Algorithm</h2>
+<p>Latch a measurement snapshot, then scan the display independently. A 74HC595 adds bit order, latch timing and active-level concerns. When output is blank or corrupted, first shift a fixed pattern before involving DDS and ADC data.</p>
+<h2 id="section-7">Verify in Four Layers</h2>
+<h3 id="section-8">Phase Layer</h3>
+<p>Check constant increments, natural wrap and hold while disabled.</p>
+<h3 id="section-9">Waveform Layer</h3>
+<p>Check sine addresses, square duty cycle, triangle folding and sawtooth monotonicity without ADC or display.</p>
+<h3 id="section-10">Measurement Layer</h3>
+<p>Feed known sample sequences, including invalid cycles, and calculate exact expected statistics.</p>
+<h3 id="section-11">System Layer</h3>
+<p>Only then connect mode switching, snapshots, reset and cross-module valid signals before full Quartus compilation.</p>
+<h2 id="section-12">Read TimeQuest as a Separate Result</h2>
+<p>Compilation does not prove timing. Confirm that clocks are constrained, external assumptions are documented, critical paths have non-negative slack and no unexpected clock is unconstrained. Use synchronizers, handshakes or asynchronous FIFOs for clock-domain crossings. Prefer clock enables over casually generated slow clocks.</p>
+<h2 id="section-13">Keep Acceptance Boundaries Explicit</h2>
+<p>Simulation supports digital functional claims. Quartus and TimeQuest support implementation and timing claims. DAC amplitude, ADC analog behavior, display brightness and physical pin levels require board evidence. Report “simulation passed,” “compiled,” “timing passed” and “hardware verified” as separate states.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../stm32-temperature-nonblocking-design/index.html"><span>← Previous article</span><strong>Non-Blocking STM32 Temperature Monitoring: From Sampling State Machines to Alarm Tasks</strong></a>
+    <a class="article-pagination-next" href="../matlab-modulation-recognition-features/index.html"><span>Next article →</span><strong>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

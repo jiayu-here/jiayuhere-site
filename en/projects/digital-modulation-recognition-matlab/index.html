@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATLAB Digital Modulation Recognition Simulation | jiayuhere</title>
+  <meta name="description" content="Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.">
+  <meta name="keywords" content="MATLAB, Modulation, AWGN, SVM, KNN">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MATLAB Digital Modulation Recognition Simulation | JiaYu Here">
+  <meta property="og:description" content="Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/digital-modulation-recognition-matlab/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/digital-modulation-recognition-matlab/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/digital-modulation-recognition-matlab/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/digital-modulation-recognition-matlab/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/digital-modulation-recognition-matlab/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>MATLAB Digital Modulation Recognition Simulation</h1><p class="article-lead">Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.</p><div class="article-meta"><span>Communication Simulation · 2026-07 · Simulation completed</span><span>3 min read</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>AWGN</span><span>SVM</span><span>KNN</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Functional Modules</a><a href="#section-6">Implementation</a><a href="#section-7">Key Code</a><a href="#section-8">Debugging and Verification</a><a href="#section-9">Problems and Solutions</a><a href="#section-10">Current Result</a><a href="#section-11">Summary</a><a href="#section-12">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>MATLAB generates ASK, FSK, BPSK, QPSK and 16QAM signals, adds AWGN over multiple SNR values, extracts amplitude, phase, frequency-change and higher-order cumulant features, then compares RBF-SVM and KNN classification.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Use one repeatable data-generation pipeline for all five classes.</li>
+<li>Cover noise conditions from <code>-10:2:20 dB</code>.</li>
+<li>Produce training and test sets, feature tables, accuracy curves and confusion matrices.</li>
+<li>Use SVM as the main model and KNN as a baseline.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>MATLAB complex-baseband modeling, AWGN, amplitude/phase/frequency features, higher-order cumulants, RBF-SVM, ECOC multiclass classification, KNN, confusion matrices and CSV/MAT exports. It is an offline simulation requiring MATLAB and Statistics and Machine Learning Toolbox, not dedicated hardware.</p>
+<h2 id="section-4">System Architecture</h2>
+<p>The script moves through configuration, waveform generation, noise injection, feature extraction, dataset construction, training, prediction and export. Training and test frames are generated by class and SNR, standardized and sent independently to SVM and KNN.</p>
+<div class="system-flow" role="img" aria-label="System architecture：Configuration to Modulated signals to AWGN to 17 features to Standardization to SVM and KNN to Accuracy and confusion matrices; Evaluation to CSV and MAT to Waveforms, spectra and constellations to Report assets"><div class="system-flow-row"><span class="system-flow-node">Configuration</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Modulated signals</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">AWGN</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">17 features</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Standardization</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">SVM and KNN</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Accuracy and confusion matrices</span></div>
+<div class="system-flow-row"><span class="system-flow-node">Evaluation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CSV and MAT</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Waveforms, spectra and constellations</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Report assets</span></div></div>
+<h2 id="section-5">Functional Modules</h2>
+<ul>
+<li>Five normalized complex-baseband waveform generators.</li>
+<li>Complex Gaussian noise injection.</li>
+<li>Seventeen amplitude, phase, frequency and cumulant features.</li>
+<li>SVM/KNN training, per-SNR accuracy and a 10 dB confusion matrix.</li>
+<li>Waveform, spectrum, constellation, CSV, MAT and report exports.</li>
+</ul>
+<h2 id="section-6">Implementation</h2>
+<ol>
+<li>Fix the random seed and define SNR, sample rate and frame length.</li>
+<li>Generate normalized frames for every modulation.</li>
+<li>Compute noise power from signal power and target SNR.</li>
+<li>Extract 17 features and build independent train/test sets.</li>
+<li>Train an RBF-SVM ECOC model and <code>k=5</code> KNN.</li>
+<li>Export accuracy, confusion matrices, feature data and model files.</li>
+</ol>
+<h2 id="section-7">Key Code</h2>
+<p>Noise power follows directly from the SNR definition:</p>
+<pre><code class="language-matlab">noisePower = signalPower / (10^(snrDb / 10));
+noise = sqrt(noisePower / 2) * (randn(size(signal)) + 1j * randn(size(signal)));
+noisy = signal + noise;</code></pre>
+<p>Frames are power-normalized before phase differences and cumulants are computed. <code>fitcecoc</code> organizes the RBF-SVM learners in a one-vs-one multiclass model.</p>
+<h2 id="section-8">Debugging and Verification</h2>
+<p>Waveforms, spectra and constellations were inspected before feature ranges and NaN checks. Low- and high-SNR confusion matrices were then compared to ensure that gains followed changing SNR rather than train/test leakage.</p>
+<h2 id="section-9">Problems and Solutions</h2>
+<p>Different modulation amplitudes can let a classifier rely on energy alone, while low SNR destabilizes phase and frequency differences. Per-frame power normalization and complementary amplitude, phase and cumulant features reduce those effects. ECOC supplies the necessary multiclass organization for binary SVM learners.</p>
+<h2 id="section-10">Current Result</h2>
+<p>Repository results show SVM accuracy approaching 100% after 4 dB and reaching 100% after 6 dB. KNN performs well at high SNR but is less stable at low SNR. The project exports per-SNR accuracy, five constellations, two confusion matrices, the complete feature table and trained models.</p>
+<h2 id="section-11">Summary</h2>
+<p>This is a reproducible machine-learning workflow for communication signals with parameters, data, models and figures retained. Its reported accuracy applies to simulated data and is not equivalent to recognition on real RF captures.</p>
+<h2 id="section-12">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/digital-modulation-recognition-matlab" target="_blank" rel="noreferrer">Open digital-modulation-recognition-matlab</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../temperature-inspector-stm32f103/index.html"><span>← Previous item</span><strong>STM32F103 Dual-Channel Temperature Monitoring and Alarm System</strong></a>
+    <a class="article-pagination-next" href="../personal-knowledge-base/index.html"><span>Next item →</span><strong>Personal Knowledge Base and Local Document Search</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

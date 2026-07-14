@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>remote-repo Remote Synchronization Exercise | jiayuhere</title>
+  <meta name="description" content="A minimal exercise focused on connecting a local Git repository to GitHub and verifying push, pull and synchronization.">
+  <meta name="keywords" content="Git, GitHub, Remote, Push, Pull">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="remote-repo Remote Synchronization Exercise | JiaYu Here">
+  <meta property="og:description" content="A minimal exercise focused on connecting a local Git repository to GitHub and verifying push, pull and synchronization.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/remote-repo/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/remote-repo/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/remote-repo/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/remote-repo/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/remote-repo/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>remote-repo Remote Synchronization Exercise</h1><p class="article-lead">A minimal exercise focused on connecting a local Git repository to GitHub and verifying push, pull and synchronization.</p><div class="article-meta"><span>Engineering Foundations · 2026-07 · Learning repository</span><span>2 min read</span><div class="tag-list"><span>Git</span><span>GitHub</span><span>Remote</span><span>Push</span><span>Pull</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/remote-repo" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/remote-repo#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/remote-repo/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/remote-repo/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/remote-repo/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Implementation</a><a href="#section-6">Key Commands</a><a href="#section-7">Debugging and Verification</a><a href="#section-8">Problems and Solutions</a><a href="#section-9">Current Result</a><a href="#section-10">Summary</a><a href="#section-11">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p><code>remote-repo</code> is a minimal example for practicing Git remotes. Its content stays small so attention remains on the relationship between local commits and GitHub branches.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Initialize a local repository and connect a GitHub remote.</li>
+<li>Practice <code>add</code>, <code>commit</code>, <code>push</code> and <code>pull</code>.</li>
+<li>Confirm the same revision locally and on GitHub.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>Git, GitHub, Markdown, text files, a terminal, editor and GitHub account.</p>
+<h2 id="section-4">System Architecture</h2>
+<p>The repository contains only <code>README.md</code> and <code>hello.txt</code>. The README records goals, the text file creates observable diffs, and the remote connects the local branch to GitHub.</p>
+<div class="system-flow" role="img" aria-label="System architecture：Local working tree to Git commit to Local branch to Remote to GitHub repository; GitHub update to fetch or pull to Local synchronization check"><div class="system-flow-row"><span class="system-flow-node">Local working tree</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Git commit</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Local branch</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Remote</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">GitHub repository</span></div>
+<div class="system-flow-row"><span class="system-flow-node">GitHub update</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">fetch or pull</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Local synchronization check</span></div></div>
+<h2 id="section-5">Implementation</h2>
+<ol>
+<li>Initialize the local repository and add files.</li>
+<li>Configure the GitHub remote.</li>
+<li>Stage and create a local commit.</li>
+<li>Push the current branch.</li>
+<li>Pull a remote update and inspect the change.</li>
+</ol>
+<h2 id="section-6">Key Commands</h2>
+<p>Confirm the target and current branch before pushing, then rebase onto remote updates when necessary:</p>
+<pre><code class="language-bash">git remote -v
+git branch --show-current
+git status --short --branch
+git fetch origin
+git pull --rebase origin main
+git add .
+git commit -m &quot;Update hello file&quot;
+git push origin main</code></pre>
+<h2 id="section-7">Debugging and Verification</h2>
+<p><code>git remote -v</code> verifies the destination, <code>git branch --show-current</code> verifies the branch, and <code>git status</code> shows ahead/behind state. The final content is confirmed on GitHub.</p>
+<h2 id="section-8">Problems and Solutions</h2>
+<p>Common failures include a wrong remote, wrong branch, rejected pushes because the remote is ahead, and the assumption that saving locally updates GitHub. The workflow treats save, stage, commit and push as four separate operations and pulls before pushing when history has changed.</p>
+<h2 id="section-9">Current Result</h2>
+<p>The public repository records the complete learning path for connecting, committing, pushing and pulling a local repository.</p>
+<h2 id="section-10">Summary</h2>
+<p>The exercise establishes remote-synchronization habits for later branching, collaboration and conflict resolution; it is not presented as an application.</p>
+<h2 id="section-11">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/remote-repo" target="_blank" rel="noreferrer">Open remote-repo</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../first-repo/index.html"><span>← Previous item</span><strong>first-repo Git and GitHub Starter Exercise</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPGA QPSK Baseband Link and Visualization System | jiayuhere</title>
+  <meta name="description" content="An FPGA communications project covering PRBS, Gray mapping, phase rotation, hard decisions, BER, UART telemetry and Python constellation plots.">
+  <meta name="keywords" content="QPSK, Verilog, BER, UART, Python">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FPGA QPSK Baseband Link and Visualization System | JiaYu Here">
+  <meta property="og:description" content="An FPGA communications project covering PRBS, Gray mapping, phase rotation, hard decisions, BER, UART telemetry and Python constellation plots.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/fpga-qpsk-baseband-system/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/fpga-qpsk-baseband-system/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/fpga-qpsk-baseband-system/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/fpga-qpsk-baseband-system/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/fpga-qpsk-baseband-system/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>FPGA QPSK Baseband Link and Visualization System</h1><p class="article-lead">An FPGA communications project covering PRBS, Gray mapping, phase rotation, hard decisions, BER, UART telemetry and Python constellation plots.</p><div class="article-meta"><span>FPGA · 2026-07 · Compilation and simulation completed</span><span>3 min read</span><div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology</a><a href="#section-4">Hardware and Software</a><a href="#section-5">System Architecture</a><a href="#section-6">Functional Modules</a><a href="#section-7">Implementation</a><a href="#section-8">Key Code</a><a href="#section-9">Debugging and Verification</a><a href="#section-10">Problems and Solutions</a><a href="#section-11">Current Result</a><a href="#section-12">Summary</a><a href="#section-13">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This project implements a complete educational QPSK baseband link on a Cyclone IV E FPGA. UART and a Python desktop program expose transmitted and received points, I/Q traces and BER. A ModelSim-to-CSV path also supports verification without connected hardware.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Generate test bits with PRBS7 and apply Gray-coded QPSK mapping.</li>
+<li>Support 0, 90, 180 and 270-degree phase rotations.</li>
+<li>Perform hard-decision demodulation and BER counting.</li>
+<li>Export observations through UART or simulation CSV for Python visualization.</li>
+</ul>
+<h2 id="section-3">Technology</h2>
+<p>Verilog HDL, PRBS7, Gray coding, signed fixed-point I/Q, quadrant decisions, pipeline alignment, UART telemetry, ModelSim, Quartus and Python Tkinter.</p>
+<h2 id="section-4">Hardware and Software</h2>
+<ul>
+<li>Wildfire Zhengdian Pro / Cyclone IV E <code>EP4CE10F17C8</code>, 50 MHz clock, keys, LEDs and CH340 USB UART.</li>
+<li>Quartus II Web Edition 13.0sp1 and ModelSim-Altera Starter Edition.</li>
+<li>Python 3; CSV mode uses the standard library and serial mode requires <code>pyserial</code>.</li>
+</ul>
+<h2 id="section-5">System Architecture</h2>
+<p>The transmitter combines a symbol tick, PRBS7 and Gray mapping. The channel applies discrete phase rotations by swapping and negating I/Q. The receiver makes quadrant decisions and compares them with delayed reference bits. Telemetry samples I/Q and counters for UART or CSV output.</p>
+<div class="system-flow" role="img" aria-label="System architecture：Symbol tick and PRBS7 to Gray mapping to QPSK modulator to Discrete phase channel to Quadrant decision to BER counter; I/Q and error data to Telemetry framing to UART or simulation CSV to Python host to Constellation and statistics"><div class="system-flow-row"><span class="system-flow-node">Symbol tick and PRBS7</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Gray mapping</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">QPSK modulator</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Discrete phase channel</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Quadrant decision</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">BER counter</span></div>
+<div class="system-flow-row"><span class="system-flow-node">I/Q and error data</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Telemetry framing</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">UART or simulation CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Python host</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Constellation and statistics</span></div></div>
+<h2 id="section-6">Functional Modules</h2>
+<ul>
+<li><code>prbs7.v</code>, <code>symbol_tick.v</code>: source data and symbol timing.</li>
+<li><code>qpsk_mapper.v</code>, <code>qpsk_channel_model.v</code>: Gray mapping and phase rotation.</li>
+<li><code>qpsk_demapper.v</code>, <code>ber_counter.v</code>: hard decisions and error statistics.</li>
+<li><code>telemetry_uart.v</code>, <code>uart_tx.v</code>: telemetry framing and serial transmission.</li>
+<li><code>qpsk_visualizer.py</code>: constellation, waveform and BER display.</li>
+</ul>
+<h2 id="section-7">Implementation</h2>
+<ol>
+<li>Define one fixed mapping between two-bit symbols and four I/Q quadrants.</li>
+<li>Drive mapping, channel, decisions and counters from the same symbol-valid signal.</li>
+<li>Delay the transmitted reference bits by the receiver pipeline latency.</li>
+<li>Define telemetry fields and export CSV from the testbench.</li>
+<li>Implement Python parsing, the Quartus project and board UART constraints.</li>
+</ol>
+<h2 id="section-8">Key Code</h2>
+<p>The phase model uses swaps and negation rather than trigonometric functions:</p>
+<pre><code class="language-verilog">case (phase_sel)
+  2'd0: begin ch_i = tx_i;  ch_q = tx_q;  end
+  2'd1: begin ch_i = -tx_q; ch_q = tx_i;  end
+  2'd2: begin ch_i = -tx_i; ch_q = -tx_q; end
+  2'd3: begin ch_i = tx_q;  ch_q = -tx_i; end
+endcase</code></pre>
+<p>Each valid QPSK symbol adds two compared bits to the BER counters:</p>
+<pre><code class="language-verilog">wire [1:0] diff = tx_bits ^ rx_bits;
+wire [1:0] err_count = diff[0] + diff[1];
+
+always @(posedge clk) begin
+  if (!rst_n) begin
+    total_bits &lt;= 32'd0;
+    error_bits &lt;= 32'd0;
+  end else if (sym_en) begin
+    total_bits &lt;= total_bits + 32'd2;
+    error_bits &lt;= error_bits + err_count;
+  end
+end</code></pre>
+<h2 id="section-9">Debugging and Verification</h2>
+<p>Constellation points were first checked under a fixed phase, then under all four rotations. Reference bits and decisions were inspected cycle by cycle to establish pipeline alignment. The testbench continuously produced <code>qpsk_samples.csv</code>, which was validated offline before live UART use.</p>
+<h2 id="section-10">Problems and Solutions</h2>
+<p>Reference and received data had different pipeline delays; signed negation could lose the sign bit; and UART could not transmit every baseband symbol. A reference delay line, explicit signed widths and sampled telemetry resolved these issues while keeping visualization independent from baseband rate.</p>
+<h2 id="section-11">Current Result</h2>
+<p>ModelSim passes and generates CSV. Quartus produces <code>fpga_qpsk_baseband_visual_system.sof</code>, with positive setup and hold slack for the 50 MHz build. Python loads CSV or serial data. Physical UART pin and jumper placement still require confirmation on the target board.</p>
+<h2 id="section-12">Summary</h2>
+<p>The design turns constellation mapping, phase changes and BER into observable RTL timing. It is an educational verification model; the disabled noise interface is not presented as measured AWGN performance.</p>
+<h2 id="section-13">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">Open fpga_qpsk_baseband_visual_system</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../fpga-dds-measure-system/index.html"><span>← Previous item</span><strong>Multi-Function FPGA DDS Signal Generation and Measurement System</strong></a>
+    <a class="article-pagination-next" href="../stm32f103-freertos-smartcar/index.html"><span>Next item →</span><strong>STM32F103 FreeRTOS Multi-Mode Smart Car</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

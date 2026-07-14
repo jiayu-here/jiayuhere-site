@@ -11,7 +11,7 @@
 
 网站采用轻量静态架构，继续兼容 GitHub Pages 根目录部署。项目、文章和笔记使用 Markdown 维护，由零依赖 Node.js 脚本生成静态详情页和站点地图。
 
-目前支持跟随系统深浅色、全站内容搜索、分类与标签、阅读时间、代码复制、前后内容导航、返回顶部、RSS 订阅、404 引导、轻量离线访问和 Google Analytics 4 访问统计。公开项目由 GitHub Actions 每小时同步，私有仓库与本站仓库不会展示。
+目前支持完整中英文页面、对应页面语言切换、双语全文搜索、分类与标签、阅读时间、代码复制、前后内容导航、返回顶部、双语 RSS、404 引导、轻量离线访问和 Google Analytics 4 访问统计。公开项目由 GitHub Actions 每小时同步，私有仓库与本站仓库不会展示。
 
 ## 目录结构
 
@@ -28,6 +28,10 @@ contact/                    联系方式
 content/projects/*.md       项目 Markdown 源文件
 content/articles/*.md       文章 Markdown 源文件
 content/notes/*.md          笔记 Markdown 源文件
+content/en/projects/*.md    英文项目源文件，与中文文件同名
+content/en/articles/*.md    英文文章源文件，与中文文件同名
+content/en/notes/*.md       英文笔记源文件，与中文文件同名
+en/                         完整英文站点
 content/templates/          可复制的文章、笔记与项目模板
 scripts/build-content.mjs   静态内容生成脚本
 assets/styles.css           全站样式
@@ -40,7 +44,7 @@ feed.xml / rss.xml          自动生成的技术博客 RSS
 
 ## 新增内容
 
-在 `content/templates` 中复制对应模板到内容目录，再修改 front matter 和正文。完整步骤见根目录的 `写作与发布说明.md`。
+在 `content/templates` 中复制对应模板到中文内容目录，同时在 `content/en` 的对应目录创建同名英文稿。完整步骤见根目录的 `写作与发布说明.md`。
 
 ```md
 ---
@@ -67,7 +71,7 @@ npm run check
 npm run build
 ```
 
-`npm run build` 会重新生成项目、博客和笔记页面，同时更新正文搜索索引 `assets/data/search-index.json` 与 `sitemap.xml`。详情页的阅读时间、目录和前后内容导航也会随 Markdown 自动更新。
+`npm run build` 会先校验中文与英文 Markdown 的文件名、slug 和项目仓库是否一一对应；缺少任何一种语言时会直接报错，避免产生无效的语言切换链接。校验通过后会生成中英文项目、博客和笔记页面，同时更新两个搜索索引、两个 RSS 与 `sitemap.xml`。
 
 ## 本地预览
 

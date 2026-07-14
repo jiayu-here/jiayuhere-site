@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embedded C Review Checklist | jiayuhere</title>
+  <meta name="description" content="A systematic guide to data types, bit operations, pointers, volatile, interrupts, state machines, module interfaces and testability in embedded C.">
+  <meta name="keywords" content="C, Embedded, Pointer, Volatile">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Embedded C Review Checklist | JiaYu Here">
+  <meta property="og:description" content="A systematic guide to data types, bit operations, pointers, volatile, interrupts, state machines, module interfaces and testability in embedded C.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/embedded-c-checklist/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/embedded-c-checklist/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/embedded-c-checklist/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/embedded-c-checklist/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/embedded-c-checklist/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><p class="eyebrow">Learning Notes</p><h1>Embedded C Review Checklist</h1><p class="article-lead">A systematic guide to data types, bit operations, pointers, volatile, interrupts, state machines, module interfaces and testability in embedded C.</p><div class="article-meta"><span>Programming Languages · 2026-07</span><span>4 min read</span><div class="tag-list"><span>C</span><span>Embedded</span><span>Pointer</span><span>Volatile</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">What Makes Embedded C Different</a><a href="#section-2">Fixed-Width Integers and Conversion</a><a href="#section-3">Overflow, Boundaries and Units</a><a href="#section-4">Bit Operations and Registers</a><a href="#section-5">Pointers and Object Lifetime</a><a href="#section-6">Arrays, Strings and Buffers</a><a href="#section-7">Endianness, Alignment and Layout</a><a href="#section-8">What volatile Does and Does Not Do</a><a href="#section-9">Interrupt Service Routines</a><a href="#section-10">Prefer State Machines to Blocking Waits</a><a href="#section-11">Compare Time Safely Across Wrap</a><a href="#section-12">Layer Module Interfaces</a><a href="#section-13">Errors and Assertions</a><a href="#section-14">Testability and Verification</a><a href="#section-15">Pre-Commit Checklist</a></aside><div class="prose"><h2 id="section-1">What Makes Embedded C Different</h2>
+<p>The language is the same, but the environment includes direct register access, tight memory and compute limits, interrupts, deadlines, concurrency and hardware faults. Compilation is only the first check. Width, execution time, object lifetime, hardware ordering and failure states must be explicit.</p>
+<h2 id="section-2">Fixed-Width Integers and Conversion</h2>
+<p>Use <code>uint8_t</code>, <code>int16_t</code> and <code>uint32_t</code> for registers, protocols and storage formats. Mixed signed/unsigned operations can turn a negative value into a large unsigned one, and integer promotion can change small operands before arithmetic.</p>
+<pre><code class="language-c">uint16_t adc = 3000U;
+uint32_t millivolts = ((uint32_t)adc * 3300U) / 4095U;</code></pre>
+<p>Widen before multiplication so the intermediate result cannot overflow.</p>
+<h2 id="section-3">Overflow, Boundaries and Units</h2>
+<p>Unsigned overflow wraps modulo its range; do not rely on signed overflow. Names such as <code>timeout_ms</code>, <code>frequency_hz</code> and <code>voltage_mv</code> prevent unit ambiguity. Check intermediate as well as final ranges in sensor formulas.</p>
+<h2 id="section-4">Bit Operations and Registers</h2>
+<pre><code class="language-c">reg |= (1U &lt;&lt; bit);        /* set */
+reg &amp;= ~(1U &lt;&lt; bit);       /* clear */
+reg ^= (1U &lt;&lt; bit);        /* toggle */
+state = (reg &gt;&gt; bit) &amp; 1U; /* read */</code></pre>
+<p>Keep <code>bit</code> below the type width and shift unsigned values. Use named masks rather than unexplained hex constants. Read the reference manual before read-modify-write: write-one-to-clear, clear-on-read and reserved-bit rules require special handling.</p>
+<h2 id="section-5">Pointers and Object Lifetime</h2>
+<p>Pointers do not carry buffer length or lifetime. Accept data and length together:</p>
+<pre><code class="language-c">bool uart_send(const uint8_t *data, size_t length);</code></pre>
+<p>Never return the address of a local object. Long-lived systems often prefer static storage or fixed pools over fragmented dynamic allocation. <code>const uint8_t *p</code> protects pointed data through <code>p</code>; <code>uint8_t * const p</code> fixes the pointer; combining both fixes both.</p>
+<h2 id="section-6">Arrays, Strings and Buffers</h2>
+<p>An array parameter decays to a pointer, so pass length explicitly. Verify string termination and never trust external lengths before writing or parsing. Use bounded formatting and check its return value. Binary buffers may contain zero bytes and are not strings.</p>
+<h2 id="section-7">Endianness, Alignment and Layout</h2>
+<p>Protocols define byte order explicitly. Do not cast a byte buffer to a structure pointer because alignment, padding and strict aliasing differ by platform.</p>
+<pre><code class="language-c">uint16_t read_u16_be(const uint8_t *data)
+{
+    return (uint16_t)(((uint16_t)data[0] &lt;&lt; 8) | data[1]);
+}</code></pre>
+<h2 id="section-8">What volatile Does and Does Not Do</h2>
+<p><code>volatile</code> forces observable reads and writes for hardware registers or data changed asynchronously by an ISR. It does not guarantee atomic multi-byte access, transaction boundaries or task synchronization. Use critical sections, queues, semaphores, mutexes or atomic operations where the data relationship requires them.</p>
+<h2 id="section-9">Interrupt Service Routines</h2>
+<p>Keep ISRs short: capture status, move minimal data, clear the source and notify a task or main loop. Verify clear order, shared-data races, priority, maximum duration, nesting and use of RTOS ISR-specific APIs. Ring-buffer producer and consumer ownership must ensure the consumer never sees partially written data.</p>
+<h2 id="section-10">Prefer State Machines to Blocking Waits</h2>
+<p>Split peripheral or protocol sequences into observable states with entry, action, exit and timeout:</p>
+<pre><code class="language-c">switch (state) {
+case UART_IDLE:
+    if (start_requested) {
+        start_transfer();
+        deadline = now_ms + 100U;
+        state = UART_WAIT;
+    }
+    break;
+case UART_WAIT:
+    if (transfer_done()) state = UART_IDLE;
+    else if (time_reached(now_ms, deadline)) {
+        abort_transfer();
+        state = UART_ERROR;
+    }
+    break;
+case UART_ERROR:
+    report_error();
+    state = UART_IDLE;
+    break;
+}</code></pre>
+<h2 id="section-11">Compare Time Safely Across Wrap</h2>
+<p>For durations within the unambiguous half-range of the counter, unsigned subtraction works across one wrap:</p>
+<pre><code class="language-c">bool time_elapsed(uint32_t now, uint32_t start, uint32_t duration)
+{
+    return (uint32_t)(now - start) &gt;= duration;
+}</code></pre>
+<h2 id="section-12">Layer Module Interfaces</h2>
+<ul>
+<li>Driver: GPIO, UART, SPI and ADC register access.</li>
+<li>Service: sensors, protocols and buffers.</li>
+<li>Application: state machines, control policies and user logic.</li>
+</ul>
+<p>Headers expose stable interfaces and necessary types. File-private state and helpers remain <code>static</code>. Return values should distinguish success, busy, timeout and invalid parameters where the caller can act differently.</p>
+<h2 id="section-13">Errors and Assertions</h2>
+<p>Return errors that callers can recover from. Assertions capture impossible internal conditions during development, with a defined production policy such as fault recording and controlled reset. Do not silently discard I2C NACK, Flash failure or full-buffer results. Keep high-rate logs bounded so diagnostics do not break real-time behavior.</p>
+<h2 id="section-14">Testability and Verification</h2>
+<p>Separate pure calculations from hardware effects. An ADC-to-temperature function that accepts and returns ordinary values can be tested on a PC. Cover normal, min/max, empty input, timeout, checksum failure, full buffer, repeated initialization and ISR/main interleavings. Enable meaningful compiler warnings and treat conversion, bounds and ignored-return warnings seriously.</p>
+<h2 id="section-15">Pre-Commit Checklist</h2>
+<ul>
+<li>Are fixed-format fields represented with fixed-width types?</li>
+<li>Can intermediate multiplication, shifts or conversions overflow?</li>
+<li>Do buffer interfaces include length?</li>
+<li>Is protocol byte order explicit?</li>
+<li>Is <code>volatile</code> limited to truly asynchronous objects?</li>
+<li>Does shared data require a critical section, queue or atomic operation?</li>
+<li>Are ISRs free of blocking, long loops and unnecessary logs?</li>
+<li>Does every wait have a timeout and error exit?</li>
+<li>Do state machines cover every state and failure transition?</li>
+<li>Are hardware access and business logic separated?</li>
+<li>Are peripheral return values and boundaries verified?</li>
+<li>Can core calculations be tested without hardware?</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../communication-theory-index/index.html"><span>← Previous item</span><strong>Communication Theory Review Index</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

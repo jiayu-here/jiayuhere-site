@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Origin 2024 Battery Aging and Thermal Safety Analysis | jiayuhere</title>
+  <meta name="description" content="A workflow using CSV, Excel, PowerShell COM and Origin 2024 for cycle aging, dQ/dV, thermal response and EIS analysis.">
+  <meta name="keywords" content="Origin, Excel, PowerShell, Battery, EIS">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Origin 2024 Battery Aging and Thermal Safety Analysis | JiaYu Here">
+  <meta property="og:description" content="A workflow using CSV, Excel, PowerShell COM and Origin 2024 for cycle aging, dQ/dV, thermal response and EIS analysis.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/originlab-battery-aging/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/originlab-battery-aging/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/originlab-battery-aging/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/originlab-battery-aging/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/originlab-battery-aging/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>Origin 2024 Battery Aging and Thermal Safety Analysis</h1><p class="article-lead">A workflow using CSV, Excel, PowerShell COM and Origin 2024 for cycle aging, dQ/dV, thermal response and EIS analysis.</p><div class="article-meta"><span>Data Analysis · 2026-07 · Analysis artifacts generated</span><span>3 min read</span><div class="tag-list"><span>Origin</span><span>Excel</span><span>PowerShell</span><span>Battery</span><span>EIS</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Functional Modules</a><a href="#section-6">Implementation</a><a href="#section-7">Key Code</a><a href="#section-8">Debugging and Verification</a><a href="#section-9">Problems and Solutions</a><a href="#section-10">Current Result</a><a href="#section-11">Summary</a><a href="#section-12">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This Origin 2024 demonstration covers lithium-ion cycle aging and thermal-safety analysis. It includes research-style synthetic data, an Excel review workbook, Origin COM automation, preview figures and a generated <code>.opju</code> project.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Connect CSV import, workbook organization, scientific plots and deliverables.</li>
+<li>Cover capacity retention, dQ/dV, thermal response and EIS Nyquist analysis.</li>
+<li>Regenerate the Origin project from scripts after CSV changes.</li>
+<li>Provide both an Excel review package and the formal Origin project.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>Origin 2024, Origin COM Automation, a LabTalk draft, PowerShell, CSV, Excel and scientific visualization. No laboratory hardware is required; Windows, Excel and Origin 2024 are needed to reproduce the workflow.</p>
+<h2 id="section-4">System Architecture</h2>
+<p><code>data/</code> stores source and wide-form CSV. PowerShell reads numeric data and uses Origin COM to create workbooks, set column types, execute <code>plotxy</code> and save OPJU. <code>analysis/</code> contains the Excel summary, while <code>results/</code> contains the Origin project and previews.</p>
+<div class="system-flow" role="img" aria-label="System architecture：Source and wide CSV to PowerShell processing to Origin COM to Workbooks and plotxy to OPJU and previews; Analysis data to Excel summary to Capacity, EIS and thermal results"><div class="system-flow-row"><span class="system-flow-node">Source and wide CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PowerShell processing</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Origin COM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Workbooks and plotxy</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OPJU and previews</span></div>
+<div class="system-flow-row"><span class="system-flow-node">Analysis data</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Excel summary</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Capacity, EIS and thermal results</span></div></div>
+<h2 id="section-5">Functional Modules</h2>
+<ul>
+<li>Capacity-retention trends over cycles.</li>
+<li>dQ/dV peak movement.</li>
+<li>Thermal response by ambient temperature and C-rate.</li>
+<li>EIS Nyquist data at 0, 250 and 500 cycles.</li>
+<li>Automated Origin workbooks, graph pages and OPJU output.</li>
+<li>Excel formulas, summaries and quick previews.</li>
+</ul>
+<h2 id="section-6">Implementation</h2>
+<ol>
+<li>Generate and organize four synthetic CSV datasets.</li>
+<li>Build the Excel review workbook and preview charts.</li>
+<li>Convert data into the wide shape required by Origin.</li>
+<li>Create workbooks, matrices and column metadata through COM.</li>
+<li>Run Origin commands for graph pages and save <code>.opju</code>.</li>
+<li>Document the Chinese operating and acceptance steps.</li>
+</ol>
+<h2 id="section-7">Key Code</h2>
+<p>The automation creates an Origin page, configures columns and writes the complete matrix in one operation:</p>
+<pre><code class="language-powershell">$book = $Origin.CreatePage(2, $BookName)
+$wks = $Origin.FindWorksheet($book)
+$wks.Name = $SheetName
+$wks.Cols = $data.ColCount
+for ($i = 0; $i -lt $Columns.Count; $i++) {
+    $col = $wks.Columns.Item([byte]$i)
+    $col.Type = $Types[$i]
+    $col.LongName = $Columns[$i]
+}
+$wks.SetData($data.Matrix, 0, 0)</code></pre>
+<h2 id="section-8">Debugging and Verification</h2>
+<p>The source tables, summaries and previews were checked in Excel before generating OPJU. If the Origin window did not appear, result timestamps and the background process were inspected. CSV edits retained the column contract before regeneration.</p>
+<h2 id="section-9">Problems and Solutions</h2>
+<p>PowerShell policy may block scripts, <code>.opju</code> requires Origin, changing column names breaks COM mappings, and Origin must exit cleanly. A process-scoped execution-policy bypass, separate OPJU/XLSX deliverables, centralized column configuration and explicit save-and-exit checks address these points.</p>
+<h2 id="section-10">Current Result</h2>
+<p>The repository provides <code>OriginLab_Battery_Aging_Project.opju</code>, an Excel analysis package, four datasets, preview figures and repeatable PowerShell automation.</p>
+<h2 id="section-11">Summary</h2>
+<p>This project demonstrates an end-to-end workflow across Origin, Excel and automation. All battery data is synthetic demonstration data and does not represent a real experiment or safety certification.</p>
+<h2 id="section-12">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/originlab-battery-aging-project" target="_blank" rel="noreferrer">Open originlab-battery-aging-project</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../personal-knowledge-base/index.html"><span>← Previous item</span><strong>Personal Knowledge Base and Local Document Search</strong></a>
+    <a class="article-pagination-next" href="../rrt-path-planning/index.html"><span>Next item →</span><strong>Python RRT and RRT* Path Planning Demo</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

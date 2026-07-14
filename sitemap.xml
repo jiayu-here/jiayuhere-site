@@ -10,6 +10,16 @@
   <url><loc>https://www.jiayuhere.com/lab/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/contact/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/wechat/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/about/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/notes/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/toolbox/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/resources/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/lab/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/contact/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/wechat/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/projects/fpga-dds-measure-system/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/projects/fpga-qpsk-baseband-system/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/projects/stm32f103-freertos-smartcar/</loc><lastmod>2026-07-14</lastmod></url>
@@ -32,4 +42,26 @@
   <url><loc>https://www.jiayuhere.com/notes/technical-english-system/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/notes/communication-theory-index/</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://www.jiayuhere.com/notes/embedded-c-checklist/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/fpga-dds-measure-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/fpga-qpsk-baseband-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/stm32f103-freertos-smartcar/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/temperature-inspector-stm32f103/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/digital-modulation-recognition-matlab/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/personal-knowledge-base/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/originlab-battery-aging/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/rrt-path-planning/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/first-repo/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/projects/remote-repo/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/freertos-priority-design/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/mysql-index-debug-path/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/stm32-temperature-nonblocking-design/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/matlab-modulation-recognition-features/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/blog/rrt-rrtstar-reliable-planner/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/notes/engineering-math-map/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/notes/technical-english-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/notes/communication-theory-index/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/en/notes/embedded-c-checklist/</loc><lastmod>2026-07-14</lastmod></url>
 </urlset>

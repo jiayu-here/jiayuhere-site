@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FreeRTOS Priority Is About Urgency, Not Importance | jiayuhere</title>
+  <meta name="description" content="Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.">
+  <meta name="keywords" content="FreeRTOS, STM32, Scheduling, RTOS">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FreeRTOS Priority Is About Urgency, Not Importance | JiaYu Here">
+  <meta property="og:description" content="Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/freertos-priority-design/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/freertos-priority-design/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/freertos-priority-design/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/freertos-priority-design/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/freertos-priority-design/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS Priority Is About Urgency, Not Importance</h1><p class="article-lead">Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.</p><div class="article-meta"><span>Embedded Systems · 2026-07-10</span><span>3 min read</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Priority Describes Scheduling Urgency</a><a href="#section-2">Record Timing Properties First</a><a href="#section-3">Use a Small Priority Hierarchy</a><a href="#section-4">Use vTaskDelayUntil for Periodic Work</a><a href="#section-5">Event Tasks Should Block</a><a href="#section-6">Keep Interrupt Handlers Minimal</a><a href="#section-7">Prefer Clear Resource Ownership</a><a href="#section-8">A Binary Semaphore Is Not a Mutex</a><a href="#section-9">Keep Critical Sections Tiny</a><a href="#section-10">Size Queues from Rates and Delay</a><a href="#section-11">Measure Stack and Heap</a><a href="#section-12">Let the Watchdog Observe Progress</a><a href="#section-13">Verify Under Load</a><a href="#section-14">Acceptance Checklist</a></aside><div class="prose"><h2 id="section-1">Priority Describes Scheduling Urgency</h2>
+<p>A higher FreeRTOS priority does not mean a task is more important to the product. It means the scheduler runs that ready task first. Short response deadlines, buffers that can overflow and work that unblocks downstream processing deserve priority. An OLED refresh can often wait; draining a DMA receive buffer may not.</p>
+<h2 id="section-2">Record Timing Properties First</h2>
+<p>For each task, record its trigger, deadline, worst execution time, preemption constraints, peripheral or resource waits and the consequence of backlog. Without these facts, priority assignment becomes intuition and eventually every task is raised.</p>
+<h2 id="section-3">Use a Small Priority Hierarchy</h2>
+<p>One practical starting point is:</p>
+<pre><code class="language-text">High: short-deadline movement, control loops and urgent notifications
+Medium: protocol parsing, state estimation and business state machines
+Low: display, logging, statistics and maintenance
+Idle: cleanup and low-priority diagnostics</code></pre>
+<p>Tasks in one layer do not need unique priorities. Fewer levels are easier to reason about.</p>
+<h2 id="section-4">Use vTaskDelayUntil for Periodic Work</h2>
+<p><code>vTaskDelay()</code> adds the task's execution time to every interval. A stable control loop should use an absolute wake reference:</p>
+<pre><code class="language-c">void ControlTask(void *argument)
+{
+    TickType_t last_wake = xTaskGetTickCount();
+    for (;;) {
+        ReadSensors();
+        UpdateController();
+        ApplyMotorOutput();
+        vTaskDelayUntil(&amp;last_wake, pdMS_TO_TICKS(10));
+    }
+}</code></pre>
+<p>This does not repair an overrun. Execution time and deadline misses still need measurement.</p>
+<h2 id="section-5">Event Tasks Should Block</h2>
+<p>Wait on queues, notifications, semaphores or event groups instead of polling flags. Blocked tasks consume no CPU and reduce unnecessary context switches and power.</p>
+<h2 id="section-6">Keep Interrupt Handlers Minimal</h2>
+<p>An ISR should capture status, move a small amount of data and notify a task. Parsing, logging and control calculations belong in task context. Use the <code>FromISR</code> APIs, pass the higher-priority-woken flag to <code>portYIELD_FROM_ISR</code>, and ensure interrupt priorities satisfy the FreeRTOS configuration.</p>
+<h2 id="section-7">Prefer Clear Resource Ownership</h2>
+<p>One task can own a UART, I2C controller or filesystem while other tasks submit requests through a queue. This serializes access, centralizes retry and timeout handling, avoids duplicated locks and makes request order observable.</p>
+<h2 id="section-8">A Binary Semaphore Is Not a Mutex</h2>
+<p>Mutexes provide priority inheritance. If a low-priority task holds a resource required by a high-priority task, inheritance reduces extended blocking by medium-priority tasks. Binary semaphores are primarily event signals; use a short-held mutex for resource ownership when a queue-owner design is not practical.</p>
+<h2 id="section-9">Keep Critical Sections Tiny</h2>
+<p>Do not format strings, copy large buffers, wait for UART, erase Flash, wait for sensors or call blocking APIs while interrupts are disabled. A critical section should protect one small invariant that cannot be handled atomically, by queue or by mutex.</p>
+<h2 id="section-10">Size Queues from Rates and Delay</h2>
+<p>Capacity depends on producer rate, worst consumer delay and drop policy. Record send failures and peak occupancy. Persistent near-full queues indicate a consumer timing or priority problem, not merely a need for more RAM. Stream buffers or DMA rings suit byte streams; queues suit structured messages.</p>
+<h2 id="section-11">Measure Stack and Heap</h2>
+<p>Use stack high-water marks along the deepest error, logging and call paths, enable overflow and allocation-failure hooks, and convert failures into observable task names, codes or controlled resets.</p>
+<h2 id="section-12">Let the Watchdog Observe Progress</h2>
+<p>Independent tasks feeding the watchdog can hide deadlock. A supervisor should confirm that critical tasks completed meaningful work within their windows, then feed the hardware watchdog once.</p>
+<h2 id="section-13">Verify Under Load</h2>
+<p>Measure normal periodic operation, burst input, simultaneous display/log/storage, peripheral timeouts, near-full queues and elevated CPU load. Track execution time, maximum response delay, queue peaks, drops, minimum stack and watchdog state.</p>
+<h2 id="section-14">Acceptance Checklist</h2>
+<ul>
+<li>Trigger, period, worst execution time and deadline are recorded per task.</li>
+<li>Periodic tasks use stable wake references; event tasks block.</li>
+<li>ISRs perform minimal work with correct <code>FromISR</code> calls.</li>
+<li>Shared peripherals and data have explicit owners.</li>
+<li>Lock and critical-section durations are short.</li>
+<li>Queue peaks, drops, stack margin and timing are observable.</li>
+<li>The watchdog detects lost progress rather than being fed independently.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../fpga-fixed-point-fft-checklist/index.html"><span>← Previous article</span><strong>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</strong></a>
+    <a class="article-pagination-next" href="../mysql-index-debug-path/index.html"><span>Next article →</span><strong>Why MySQL Did Not Use the Index: A Structured Debugging Path</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

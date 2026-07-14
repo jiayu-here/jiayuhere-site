@@ -1,12 +1,14 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#siteNav");
 const siteHeader = document.querySelector(".site-header");
+const isEnglish = document.documentElement.lang.toLowerCase().startsWith("en");
+const t = (chinese, english) => isEnglish ? english : chinese;
 
 const setNavOpen = (open) => {
   if (!navToggle || !siteNav) return;
   siteNav.classList.toggle("is-open", open);
   navToggle.setAttribute("aria-expanded", String(open));
-  navToggle.setAttribute("aria-label", open ? "关闭导航" : "打开导航");
+  navToggle.setAttribute("aria-label", open ? t("关闭导航", "Close navigation") : t("打开导航", "Open navigation"));
 };
 
 navToggle?.addEventListener("click", () => setNavOpen(!siteNav?.classList.contains("is-open")));
@@ -27,15 +29,17 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
 
-const sectionLabels = { projects: "项目", articles: "博客", notes: "笔记" };
+const sectionLabels = isEnglish
+  ? { projects: "Project", articles: "Article", notes: "Note" }
+  : { projects: "项目", articles: "博客", notes: "笔记" };
 const searchTrigger = document.createElement("button");
 searchTrigger.type = "button";
 searchTrigger.className = "nav-search";
 searchTrigger.innerHTML = `
   <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M11.5 10.5 15 14l-1 1-3.5-3.5a5.5 5.5 0 1 1 1-1ZM7.5 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"/></svg>
-  <span class="nav-search-text">搜索项目、文章和笔记</span>
+  <span class="nav-search-text">${t("搜索项目、文章和笔记", "Search projects, articles and notes")}</span>
   <kbd>Ctrl K</kbd>`;
-searchTrigger.setAttribute("aria-label", "打开全站搜索");
+searchTrigger.setAttribute("aria-label", t("打开全站搜索", "Open site search"));
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
 
@@ -46,11 +50,11 @@ searchDialog.hidden = true;
 searchDialog.innerHTML = `
   <section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="siteSearchTitle">
     <div class="search-dialog-head">
-      <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">搜索全站内容</h2></div>
-      <button class="search-close" type="button" aria-label="关闭搜索">×</button>
+      <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">${t("搜索全站内容", "Search the site")}</h2></div>
+      <button class="search-close" type="button" aria-label="${t("关闭搜索", "Close search")}">×</button>
     </div>
-    <label class="search-dialog-field"><span>输入项目、文章、笔记或技术关键词</span><input type="search" autocomplete="off" placeholder="例如：FPGA、FreeRTOS、通信原理"></label>
-    <p class="search-dialog-status" aria-live="polite">输入关键词后开始搜索。</p>
+    <label class="search-dialog-field"><span>${t("输入项目、文章、笔记或技术关键词", "Enter a project, article, note or technical keyword")}</span><input type="search" autocomplete="off" placeholder="${t("例如：FPGA、FreeRTOS、通信原理", "For example: FPGA, FreeRTOS, communication theory")}"></label>
+    <p class="search-dialog-status" aria-live="polite">${t("输入关键词后开始搜索。", "Enter a keyword to search.")}</p>
     <div class="search-results"></div>
   </section>`;
 
@@ -63,7 +67,7 @@ const dialogResults = searchDialog.querySelector(".search-results");
 let searchIndexPromise;
 
 const loadSearchIndex = () => {
-  searchIndexPromise ||= fetch("/assets/data/search-index.json")
+  searchIndexPromise ||= fetch(isEnglish ? "/assets/data/search-index.en.json" : "/assets/data/search-index.json")
     .then((response) => {
       if (!response.ok) throw new Error("Search index unavailable");
       return response.json();
@@ -77,12 +81,12 @@ const renderSearchResults = async () => {
   dialogResults.replaceChildren();
   if (!query) {
     dialogStatus.classList.remove("is-error");
-    dialogStatus.textContent = "输入关键词后开始搜索。";
+    dialogStatus.textContent = t("输入关键词后开始搜索。", "Enter a keyword to search.");
     return;
   }
 
   dialogStatus.classList.remove("is-error");
-  dialogStatus.textContent = "正在搜索…";
+  dialogStatus.textContent = t("正在搜索…", "Searching…");
   try {
     const index = await loadSearchIndex();
     const terms = query.split(/\s+/).filter(Boolean);
@@ -91,7 +95,7 @@ const renderSearchResults = async () => {
       return terms.every((term) => haystack.includes(term));
     });
 
-    dialogStatus.textContent = matches.length ? `找到 ${matches.length} 项内容。` : "没有找到匹配内容，请换一个关键词。";
+    dialogStatus.textContent = matches.length ? t(`找到 ${matches.length} 项内容。`, `${matches.length} result${matches.length === 1 ? "" : "s"} found.`) : t("没有找到匹配内容，请换一个关键词。", "No matching content. Try another keyword.");
     matches.slice(0, 12).forEach((item) => {
       const link = document.createElement("a");
       link.className = "search-result";
@@ -99,7 +103,7 @@ const renderSearchResults = async () => {
 
       const meta = document.createElement("span");
       meta.className = "search-result-meta";
-      meta.textContent = `${sectionLabels[item.section] || "内容"} · ${item.category || "未分类"}`;
+      meta.textContent = `${sectionLabels[item.section] || t("内容", "Content")} · ${item.category || t("未分类", "Uncategorized")}`;
 
       const title = document.createElement("strong");
       title.textContent = item.title;
@@ -111,7 +115,7 @@ const renderSearchResults = async () => {
     });
   } catch {
     dialogStatus.classList.add("is-error");
-    dialogStatus.textContent = "搜索内容暂时无法加载，请稍后重试。";
+    dialogStatus.textContent = t("搜索内容暂时无法加载，请稍后重试。", "Search is temporarily unavailable. Please try again later.");
   }
 };
 
@@ -119,7 +123,7 @@ document.querySelectorAll("img").forEach((image) => {
   const showFallback = () => {
     const fallback = document.createElement("span");
     fallback.className = "image-error";
-    fallback.textContent = image.alt ? `图片暂时无法加载：${image.alt}` : "图片暂时无法加载。";
+    fallback.textContent = image.alt ? t(`图片暂时无法加载：${image.alt}`, `Image unavailable: ${image.alt}`) : t("图片暂时无法加载。", "Image unavailable.");
     (image.closest("picture") || image).replaceWith(fallback);
   };
   if (image.complete && image.naturalWidth === 0) showFallback();
@@ -161,14 +165,14 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "copy-code";
-  button.textContent = "复制代码";
+  button.textContent = t("复制代码", "Copy code");
   button.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(code.textContent || "");
-      button.textContent = "已复制";
-      window.setTimeout(() => { button.textContent = "复制代码"; }, 1600);
+      button.textContent = t("已复制", "Copied");
+      window.setTimeout(() => { button.textContent = t("复制代码", "Copy code"); }, 1600);
     } catch {
-      button.textContent = "复制失败";
+      button.textContent = t("复制失败", "Copy failed");
     }
   });
   const language = Array.from(code.classList).find((name) => name.startsWith("language-"))?.slice(9);
@@ -186,7 +190,7 @@ const backToTop = document.createElement("button");
 backToTop.type = "button";
 backToTop.className = "back-to-top";
 backToTop.textContent = "↑";
-backToTop.setAttribute("aria-label", "返回页面顶部");
+backToTop.setAttribute("aria-label", t("返回页面顶部", "Back to top"));
 backToTop.hidden = true;
 document.body.append(backToTop);
 
@@ -199,7 +203,9 @@ backToTop.addEventListener("click", () => {
 
 const searchInput = document.querySelector("[data-content-search]");
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-const contentCards = Array.from(document.querySelectorAll("[data-content-card]"));
+const contentCards = searchInput
+  ? Array.from(document.querySelectorAll("[data-content-card], .tool-grid > .tool-card, .resource-grid > .resource-group, .timeline > .timeline-item"))
+  : Array.from(document.querySelectorAll("[data-content-card]"));
 const resultStatus = document.querySelector("[data-result-status]");
 const emptyState = document.querySelector("[data-empty-state]");
 let activeFilter = "all";
@@ -211,13 +217,14 @@ const updateContentList = () => {
 
   contentCards.forEach((card) => {
     const matchesFilter = activeFilter === "all" || card.dataset.category === activeFilter;
-    const matchesQuery = !query || (card.dataset.search || "").includes(query);
+    const searchableText = card.dataset.search || card.textContent?.toLowerCase() || "";
+    const matchesQuery = !query || searchableText.includes(query);
     const visible = matchesFilter && matchesQuery;
     card.classList.toggle("is-hidden", !visible);
     if (visible) visibleCount += 1;
   });
 
-  if (resultStatus) resultStatus.textContent = `找到 ${visibleCount} 项内容。`;
+  if (resultStatus) resultStatus.textContent = t(`找到 ${visibleCount} 项内容。`, `${visibleCount} item${visibleCount === 1 ? "" : "s"} shown.`);
   if (emptyState) emptyState.hidden = visibleCount > 0;
 };
 
@@ -247,7 +254,7 @@ document.querySelector("[data-base-form]")?.addEventListener("submit", (event) =
   const decimal = patterns[sourceBase]?.test(rawValue) ? Number.parseInt(rawValue, sourceBase) : Number.NaN;
   if (!result) return;
   if (!Number.isFinite(decimal)) {
-    result.textContent = "请输入与当前进制匹配的有效整数。";
+    result.textContent = t("请输入与当前进制匹配的有效整数。", "Enter a valid integer for the selected base.");
     return;
   }
   result.textContent = `BIN  ${decimal.toString(2)}\nDEC  ${decimal}\nHEX  ${decimal.toString(16).toUpperCase()}\nOCT  ${decimal.toString(8)}`;
@@ -261,13 +268,13 @@ document.querySelector("[data-baud-form]")?.addEventListener("submit", (event) =
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!clock || !baud || clock <= 0 || baud <= 0) {
-    result.textContent = "请输入大于 0 的时钟频率和目标波特率。";
+    result.textContent = t("请输入大于 0 的时钟频率和目标波特率。", "Clock frequency and target baud rate must be greater than zero.");
     return;
   }
   const divider = Math.max(1, Math.round(clock / baud));
   const actual = clock / divider;
   const error = ((actual - baud) / baud) * 100;
-  result.textContent = `整数分频值  ${divider}\n实际波特率  ${actual.toFixed(2)} bps\n相对误差    ${error.toFixed(3)}%`;
+  result.textContent = t(`整数分频值  ${divider}\n实际波特率  ${actual.toFixed(2)} bps\n相对误差    ${error.toFixed(3)}%`, `Integer divider  ${divider}\nActual baud rate ${actual.toFixed(2)} bps\nRelative error   ${error.toFixed(3)}%`);
 });
 
 document.querySelector("[data-divider-form]")?.addEventListener("submit", (event) => {
@@ -279,12 +286,12 @@ document.querySelector("[data-divider-form]")?.addEventListener("submit", (event
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (vin === null || !r1 || !r2 || r1 <= 0 || r2 <= 0) {
-    result.textContent = "请输入有效的输入电压与正电阻值。";
+    result.textContent = t("请输入有效的输入电压与正电阻值。", "Enter a valid input voltage and positive resistor values.");
     return;
   }
   const vout = vin * r2 / (r1 + r2);
   const current = vin / ((r1 + r2) * 1000) * 1000;
-  result.textContent = `输出电压  ${vout.toFixed(4)} V\n回路电流  ${current.toFixed(4)} mA\n分压比例  ${(vout / vin * 100).toFixed(2)}%`;
+  result.textContent = t(`输出电压  ${vout.toFixed(4)} V\n回路电流  ${current.toFixed(4)} mA\n分压比例  ${(vout / vin * 100).toFixed(2)}%`, `Output voltage ${vout.toFixed(4)} V\nLoop current   ${current.toFixed(4)} mA\nDivider ratio  ${(vout / vin * 100).toFixed(2)}%`);
 });
 
 document.querySelector("[data-pwm-form]")?.addEventListener("submit", (event) => {
@@ -297,20 +304,20 @@ document.querySelector("[data-pwm-form]")?.addEventListener("submit", (event) =>
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!timerClock || !Number.isInteger(prescaler) || !frequency || duty === null || timerClock <= 0 || prescaler < 0 || frequency <= 0 || duty < 0 || duty > 100) {
-    result.textContent = "请输入有效参数：时钟和频率应大于 0，PSC 为非负整数，占空比为 0–100%。";
+    result.textContent = t("请输入有效参数：时钟和频率应大于 0，PSC 为非负整数，占空比为 0–100%。", "Enter valid parameters: clock and frequency above zero, a non-negative integer PSC, and duty cycle from 0 to 100%.");
     return;
   }
   const counterClock = timerClock / (prescaler + 1);
   const periodCounts = Math.round(counterClock / frequency);
   if (periodCounts < 1) {
-    result.textContent = "当前计数时钟低于目标 PWM 频率，请减小 PSC 或降低目标频率。";
+    result.textContent = t("当前计数时钟低于目标 PWM 频率，请减小 PSC 或降低目标频率。", "The counter clock is below the target PWM frequency. Reduce PSC or lower the target frequency.");
     return;
   }
   const compare = Math.round(periodCounts * duty / 100);
   const actualFrequency = counterClock / periodCounts;
   const actualDuty = compare / periodCounts * 100;
   const highTimeUs = compare / counterClock * 1e6;
-  result.textContent = `计数时钟       ${counterClock.toFixed(3)} Hz\n周期计数       ${periodCounts}\nARR            ${periodCounts - 1}\nCCR            ${compare}\n实际频率       ${actualFrequency.toFixed(6)} Hz\n实际占空比     ${actualDuty.toFixed(4)}%\n高电平时间     ${highTimeUs.toFixed(3)} μs`;
+  result.textContent = t(`计数时钟       ${counterClock.toFixed(3)} Hz\n周期计数       ${periodCounts}\nARR            ${periodCounts - 1}\nCCR            ${compare}\n实际频率       ${actualFrequency.toFixed(6)} Hz\n实际占空比     ${actualDuty.toFixed(4)}%\n高电平时间     ${highTimeUs.toFixed(3)} μs`, `Counter clock   ${counterClock.toFixed(3)} Hz\nPeriod counts   ${periodCounts}\nARR             ${periodCounts - 1}\nCCR             ${compare}\nActual frequency ${actualFrequency.toFixed(6)} Hz\nActual duty      ${actualDuty.toFixed(4)}%\nHigh time        ${highTimeUs.toFixed(3)} μs`);
 });
 
 document.querySelector("[data-serial-form]")?.addEventListener("submit", (event) => {
@@ -323,15 +330,15 @@ document.querySelector("[data-serial-form]")?.addEventListener("submit", (event)
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!baud || !Number.isInteger(dataBits) || stopBits === null || baud <= 0 || dataBits < 5 || dataBits > 9 || ![1, 1.5, 2].includes(stopBits) || !["N", "E", "O"].includes(parity)) {
-    result.textContent = "请选择有效的数据位、校验位和停止位，并输入大于 0 的波特率。";
+    result.textContent = t("请选择有效的数据位、校验位和停止位，并输入大于 0 的波特率。", "Choose valid data, parity and stop bits, and enter a baud rate greater than zero.");
     return;
   }
   const parityBits = parity === "N" ? 0 : 1;
   const frameBits = 1 + dataBits + parityBits + stopBits;
   const framesPerSecond = baud / frameBits;
   const payloadBytesPerSecond = framesPerSecond * dataBits / 8;
-  const parityText = { N: "无校验", E: "偶校验", O: "奇校验" }[parity];
-  result.textContent = `串口格式       ${dataBits}${parity}${stopBits}\n含义           ${dataBits} 数据位、${parityText}、${stopBits} 停止位\n单帧结构       1 起始 + ${dataBits} 数据 + ${parityBits} 校验 + ${stopBits} 停止\n每帧线路位数   ${frameBits}\n最大字符速率   ${framesPerSecond.toFixed(2)} 字符/s\n有效载荷       ${payloadBytesPerSecond.toFixed(2)} Byte/s\n线路效率       ${(dataBits / frameBits * 100).toFixed(2)}%`;
+  const parityText = isEnglish ? { N: "no parity", E: "even parity", O: "odd parity" }[parity] : { N: "无校验", E: "偶校验", O: "奇校验" }[parity];
+  result.textContent = t(`串口格式       ${dataBits}${parity}${stopBits}\n含义           ${dataBits} 数据位、${parityText}、${stopBits} 停止位\n单帧结构       1 起始 + ${dataBits} 数据 + ${parityBits} 校验 + ${stopBits} 停止\n每帧线路位数   ${frameBits}\n最大字符速率   ${framesPerSecond.toFixed(2)} 字符/s\n有效载荷       ${payloadBytesPerSecond.toFixed(2)} Byte/s\n线路效率       ${(dataBits / frameBits * 100).toFixed(2)}%`, `Serial format   ${dataBits}${parity}${stopBits}\nMeaning         ${dataBits} data bits, ${parityText}, ${stopBits} stop bits\nFrame structure 1 start + ${dataBits} data + ${parityBits} parity + ${stopBits} stop\nLine bits/frame ${frameBits}\nMax frame rate  ${framesPerSecond.toFixed(2)} frames/s\nPayload         ${payloadBytesPerSecond.toFixed(2)} Byte/s\nLine efficiency ${(dataBits / frameBits * 100).toFixed(2)}%`);
 });
 
 document.querySelector("[data-dds-form]")?.addEventListener("submit", (event) => {
@@ -343,7 +350,7 @@ document.querySelector("[data-dds-form]")?.addEventListener("submit", (event) =>
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!clock || !frequency || !Number.isInteger(phaseBits) || clock <= 0 || frequency <= 0 || frequency >= clock / 2 || phaseBits < 4 || phaseBits > 52) {
-    result.textContent = "请输入有效参数：频率应大于 0 且低于系统时钟的一半，位宽为 4–52 的整数。";
+    result.textContent = t("请输入有效参数：频率应大于 0 且低于系统时钟的一半，位宽为 4–52 的整数。", "Frequency must be above zero and below half the system clock; width must be an integer from 4 to 52.");
     return;
   }
   const phaseScale = 2 ** phaseBits;
@@ -352,7 +359,7 @@ document.querySelector("[data-dds-form]")?.addEventListener("submit", (event) =>
   const errorHz = actualFrequency - frequency;
   const errorPpm = errorHz / frequency * 1e6;
   const hexWidth = Math.ceil(phaseBits / 4);
-  result.textContent = `频率字 FTW       ${tuningWord} (0x${tuningWord.toString(16).toUpperCase().padStart(hexWidth, "0")})\n实际输出频率      ${actualFrequency.toFixed(6)} Hz\n频率分辨率        ${(clock / phaseScale).toExponential(6)} Hz\n频率误差          ${errorHz.toExponential(6)} Hz (${errorPpm.toFixed(3)} ppm)`;
+  result.textContent = t(`频率字 FTW       ${tuningWord} (0x${tuningWord.toString(16).toUpperCase().padStart(hexWidth, "0")})\n实际输出频率      ${actualFrequency.toFixed(6)} Hz\n频率分辨率        ${(clock / phaseScale).toExponential(6)} Hz\n频率误差          ${errorHz.toExponential(6)} Hz (${errorPpm.toFixed(3)} ppm)`, `Frequency word FTW ${tuningWord} (0x${tuningWord.toString(16).toUpperCase().padStart(hexWidth, "0")})\nActual frequency    ${actualFrequency.toFixed(6)} Hz\nResolution          ${(clock / phaseScale).toExponential(6)} Hz\nFrequency error     ${errorHz.toExponential(6)} Hz (${errorPpm.toFixed(3)} ppm)`);
 });
 
 document.querySelector("[data-uart-budget-form]")?.addEventListener("submit", (event) => {
@@ -365,7 +372,7 @@ document.querySelector("[data-uart-budget-form]")?.addEventListener("submit", (e
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!baud || !Number.isInteger(frameBytes) || !frameRate || !Number.isInteger(bitsPerByte) || baud <= 0 || frameBytes <= 0 || frameRate <= 0 || bitsPerByte <= 0) {
-    result.textContent = "请输入大于 0 的波特率、帧长、更新率和每字节线路位数。";
+    result.textContent = t("请输入大于 0 的波特率、帧长、更新率和每字节线路位数。", "Baud rate, frame length, update rate and line bits per byte must be greater than zero.");
     return;
   }
   const frameBits = frameBytes * bitsPerByte;
@@ -373,8 +380,8 @@ document.querySelector("[data-uart-budget-form]")?.addEventListener("submit", (e
   const utilization = requiredRate / baud;
   const maxRate = baud / frameBits;
   const frameTime = frameBits / baud * 1000;
-  const status = utilization <= 0.7 ? "利用率留有余量" : utilization <= 1 ? "可发送，但链路余量较小" : "超出当前链路带宽";
-  result.textContent = `单帧线路位数      ${frameBits} bit\n所需线路带宽      ${requiredRate.toFixed(2)} bps\n链路利用率        ${(utilization * 100).toFixed(2)}%（${status}）\n理论最大更新率    ${maxRate.toFixed(2)} Hz\n单帧发送时间      ${frameTime.toFixed(3)} ms`;
+  const status = utilization <= 0.7 ? t("利用率留有余量", "healthy margin") : utilization <= 1 ? t("可发送，但链路余量较小", "feasible with little margin") : t("超出当前链路带宽", "exceeds link capacity");
+  result.textContent = t(`单帧线路位数      ${frameBits} bit\n所需线路带宽      ${requiredRate.toFixed(2)} bps\n链路利用率        ${(utilization * 100).toFixed(2)}%（${status}）\n理论最大更新率    ${maxRate.toFixed(2)} Hz\n单帧发送时间      ${frameTime.toFixed(3)} ms`, `Line bits/frame   ${frameBits} bit\nRequired bandwidth ${requiredRate.toFixed(2)} bps\nLink utilization   ${(utilization * 100).toFixed(2)}% (${status})\nMaximum update rate ${maxRate.toFixed(2)} Hz\nFrame time          ${frameTime.toFixed(3)} ms`);
 });
 
 document.querySelector("[data-adc-form]")?.addEventListener("submit", (event) => {
@@ -386,7 +393,7 @@ document.querySelector("[data-adc-form]")?.addEventListener("submit", (event) =>
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (!vref || !Number.isInteger(bits) || input === null || vref <= 0 || input < 0 || input > vref || bits < 1 || bits > 24) {
-    result.textContent = "请输入有效参数：输入电压应位于 0 到参考电压之间，位数为 1–24 的整数。";
+    result.textContent = t("请输入有效参数：输入电压应位于 0 到参考电压之间，位数为 1–24 的整数。", "Input voltage must be between zero and Vref, and ADC width must be an integer from 1 to 24.");
     return;
   }
   const levels = 2 ** bits;
@@ -394,7 +401,7 @@ document.querySelector("[data-adc-form]")?.addEventListener("submit", (event) =>
   const code = Math.round(input / vref * maxCode);
   const quantizedVoltage = code * vref / maxCode;
   const errorMv = (quantizedVoltage - input) * 1000;
-  result.textContent = `理想 1 LSB        ${(vref / levels * 1000).toFixed(6)} mV\n量化码            ${code} / ${maxCode} (0x${code.toString(16).toUpperCase()})\n码值对应电压      ${quantizedVoltage.toFixed(6)} V\n量化误差          ${errorMv.toFixed(6)} mV`;
+  result.textContent = t(`理想 1 LSB        ${(vref / levels * 1000).toFixed(6)} mV\n量化码            ${code} / ${maxCode} (0x${code.toString(16).toUpperCase()})\n码值对应电压      ${quantizedVoltage.toFixed(6)} V\n量化误差          ${errorMv.toFixed(6)} mV`, `Ideal 1 LSB      ${(vref / levels * 1000).toFixed(6)} mV\nQuantized code    ${code} / ${maxCode} (0x${code.toString(16).toUpperCase()})\nCode voltage      ${quantizedVoltage.toFixed(6)} V\nQuantization error ${errorMv.toFixed(6)} mV`);
 });
 
 const erf = (value) => {
@@ -416,7 +423,7 @@ document.querySelector("[data-snr-ber-form]")?.addEventListener("submit", (event
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
   if (ebn0Db === null || !bitRate || !noiseBandwidth || !Number.isInteger(bitCount) || bitRate <= 0 || noiseBandwidth <= 0 || bitCount < 1 || bitCount > 1e12 || !["bpsk", "qpsk"].includes(modulation)) {
-    result.textContent = "请输入有效的 Eb/N0、比特率、噪声带宽和 1 到 10¹² 之间的整数统计比特数。";
+    result.textContent = t("请输入有效的 Eb/N0、比特率、噪声带宽和 1 到 10¹² 之间的整数统计比特数。", "Enter valid Eb/N0, bit rate, noise bandwidth and an integer bit count from 1 to 10¹².");
     return;
   }
   const ebn0Linear = 10 ** (ebn0Db / 10);
@@ -427,7 +434,7 @@ document.querySelector("[data-snr-ber-form]")?.addEventListener("submit", (event
   const expectedErrors = bitCount * ber;
   const anyErrorProbability = -Math.expm1(bitCount * Math.log1p(-ber));
   const model = modulation === "qpsk" ? "Gray QPSK" : "BPSK";
-  result.textContent = `等效 SNR          ${snrDb.toFixed(3)} dB\nEs/N0             ${esn0Db.toFixed(3)} dB\n理论 BER          ${ber.toExponential(4)}\n预计误码数        ${expectedErrors.toFixed(3)} / ${bitCount}\n至少出现 1 个误码  ${(anyErrorProbability * 100).toFixed(4)}%\n模型              ${model}、相干解调、理想 AWGN`;
+  result.textContent = t(`等效 SNR          ${snrDb.toFixed(3)} dB\nEs/N0             ${esn0Db.toFixed(3)} dB\n理论 BER          ${ber.toExponential(4)}\n预计误码数        ${expectedErrors.toFixed(3)} / ${bitCount}\n至少出现 1 个误码  ${(anyErrorProbability * 100).toFixed(4)}%\n模型              ${model}、相干解调、理想 AWGN`, `Equivalent SNR    ${snrDb.toFixed(3)} dB\nEs/N0             ${esn0Db.toFixed(3)} dB\nTheoretical BER   ${ber.toExponential(4)}\nExpected errors   ${expectedErrors.toFixed(3)} / ${bitCount}\nP(at least 1 error) ${(anyErrorProbability * 100).toFixed(4)}%\nModel             ${model}, coherent detection, ideal AWGN`);
 });
 
 const escapeToolHtml = (value) => String(value)
@@ -500,10 +507,10 @@ document.querySelector("[data-markdown-form]")?.addEventListener("submit", (even
   const form = event.currentTarget;
   const result = form.querySelector("[data-markdown-result]");
   const markdown = form.querySelector("[name='markdown']")?.value || "";
-  if (result) result.innerHTML = renderMarkdownPreview(markdown) || "<p>请输入 Markdown 内容。</p>";
+  if (result) result.innerHTML = renderMarkdownPreview(markdown) || `<p>${t("请输入 Markdown 内容。", "Enter Markdown content.")}</p>`;
 });
 
-const formulas = {
+const formulasZh = {
   ohm: "欧姆定律\nV = I × R\nV：电压（V），I：电流（A），R：电阻（Ω）",
   power: "电功率\nP = V × I = I²R = V²/R\nP：功率（W）",
   divider: "电阻分压\nVout = Vin × R2 / (R1 + R2)\nR1 接输入端，R2 接地",
@@ -514,13 +521,25 @@ const formulas = {
   wavelength: "波长与频率\nλ = v / f\n电磁波在真空中 v ≈ 3 × 10⁸ m/s",
   db: "功率比与 dB\nGdB = 10 × log₁₀(P2/P1)\n电压比且阻抗相同时：GdB = 20 × log₁₀(V2/V1)"
 };
+const formulasEn = {
+  ohm: "Ohm's law\nV = I × R\nV: voltage (V), I: current (A), R: resistance (Ω)",
+  power: "Electrical power\nP = V × I = I²R = V²/R\nP: power (W)",
+  divider: "Resistor divider\nVout = Vin × R2 / (R1 + R2)\nR1 connects to input and R2 to ground",
+  rc: "RC cutoff frequency\nfc = 1 / (2πRC)\nR: Ω, C: F, fc: Hz",
+  lc: "LC resonant frequency\nf0 = 1 / (2π√(LC))\nL: H, C: F, f0: Hz",
+  shannon: "Shannon channel capacity\nC = B × log₂(1 + S/N)\nB: bandwidth (Hz), S/N: linear SNR",
+  nyquist: "Nyquist sampling theorem\nfs ≥ 2fmax\nSample rate is at least twice the highest signal frequency",
+  wavelength: "Wavelength and frequency\nλ = v / f\nFor electromagnetic waves in vacuum, v ≈ 3 × 10⁸ m/s",
+  db: "Power ratio and dB\nGdB = 10 × log₁₀(P2/P1)\nFor equal impedance voltage ratios: GdB = 20 × log₁₀(V2/V1)"
+};
+const formulas = isEnglish ? formulasEn : formulasZh;
 
 document.querySelector("[data-formula-form]")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.currentTarget;
   const key = form.querySelector("[name='formula']")?.value || "ohm";
   const result = form.querySelector("[data-formula-result]");
-  if (result) result.textContent = formulas[key] || "没有找到该公式。";
+  if (result) result.textContent = formulas[key] || t("没有找到该公式。", "Formula not found.");
 });
 
 let mathJaxPromise;
@@ -549,20 +568,20 @@ document.querySelector("[data-latex-form]")?.addEventListener("submit", async (e
   const result = form.querySelector("[data-latex-result]");
   if (!result) return;
   if (!latex) {
-    result.textContent = "请输入 LaTeX 公式。";
+    result.textContent = t("请输入 LaTeX 公式。", "Enter a LaTeX expression.");
     return;
   }
-  result.textContent = "正在加载并渲染公式…";
+  result.textContent = t("正在加载并渲染公式…", "Loading and rendering the formula…");
   try {
     const mathJax = await loadMathJax();
     const rendered = await mathJax.tex2svgPromise(latex, { display: true });
     result.replaceChildren(rendered);
   } catch {
-    result.textContent = "公式渲染失败，请检查 LaTeX 语法或网络连接。";
+    result.textContent = t("公式渲染失败，请检查 LaTeX 语法或网络连接。", "Formula rendering failed. Check the LaTeX syntax or network connection.");
   }
 });
 
-const toolErrorPattern = /请输入|请选择|失败|无效|超出|不能为空|没有找到|低于/;
+const toolErrorPattern = /请输入|请选择|失败|无效|超出|不能为空|没有找到|低于|enter|choose|must|failed|invalid|unavailable|not found|exceeds|below/i;
 document.querySelectorAll(".tool-form").forEach((form) => {
   const result = form.querySelector(".tool-result, [data-markdown-result], [data-latex-result]");
   if (result) {
@@ -582,8 +601,8 @@ document.querySelectorAll(".tool-form").forEach((form) => {
     if (!(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement || control instanceof HTMLSelectElement)) return;
     control.setAttribute("aria-invalid", "true");
     if (result) {
-      const label = control.closest("label")?.childNodes[0]?.textContent?.trim() || "输入内容";
-      result.textContent = `${label}：${control.validationMessage || "输入不符合要求"}`;
+      const label = control.closest("label")?.childNodes[0]?.textContent?.trim() || t("输入内容", "Input");
+      result.textContent = `${label}: ${control.validationMessage || t("输入不符合要求", "Input does not meet the requirement")}`;
     }
   }, true);
 

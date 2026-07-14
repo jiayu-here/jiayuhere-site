@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Communication Theory Review Index | jiayuhere</title>
+  <meta name="description" content="An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.">
+  <meta name="keywords" content="Communication Theory, Modulation, Channel, Detection">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Communication Theory Review Index | JiaYu Here">
+  <meta property="og:description" content="An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/communication-theory-index/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/communication-theory-index/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/communication-theory-index/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/communication-theory-index/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/communication-theory-index/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><p class="eyebrow">Learning Notes</p><h1>Communication Theory Review Index</h1><p class="article-lead">An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.</p><div class="article-meta"><span>Engineering Courses · 2026-07</span><span>5 min read</span><div class="tag-list"><span>Communication Theory</span><span>Modulation</span><span>Channel</span><span>Detection</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Start with the Complete Link</a><a href="#section-2">Signal Classes and Metrics</a><a href="#section-3">Spectrum, Bandwidth and Filtering</a><a href="#section-4">Sampling, Quantization and PCM</a><a href="#section-5">Baseband Transmission and ISI</a><a href="#section-6">Analog Modulation</a><a href="#section-7">Digital Passband Modulation</a><a href="#section-8">Channels and Noise</a><a href="#section-9">Matched Filtering and Detection</a><a href="#section-10">Synchronization</a><a href="#section-11">BER and Simulation</a><a href="#section-12">Channel Coding Basics</a><a href="#section-13">Review Checklist</a></aside><div class="prose"><h2 id="section-1">Start with the Complete Link</h2>
+<p>A digital link contains source, source coding, channel coding, modulation, channel, demodulation, decoding and information recovery. Place every concept in that chain and identify its input, output and problem. Pulse shaping controls bandwidth and ISI, coding adds corrective redundancy, and matched filtering improves sample-time SNR.</p>
+<h2 id="section-2">Signal Classes and Metrics</h2>
+<p>Continuous/discrete refers to the independent variable, while analog/digital refers to value range. Digital symbols must ultimately become continuous-time waveforms for a physical channel.</p>
+<p>Know energy, average power, peak-to-average ratio, correlation, PSD, bandwidth definitions, SNR, Es/N0, Eb/N0, symbol rate and spectral efficiency. For M-ary modulation, one symbol carries <code>log2(M)</code> bits and ideally <code>Rb = Rs·log2(M)</code>. Higher order improves spectral efficiency but generally requires more SNR.</p>
+<h2 id="section-3">Spectrum, Bandwidth and Filtering</h2>
+<p>An LTI system performs convolution in time and multiplication in frequency. Sharp rectangular pulses have wide sidelobes, so practical links use pulse-shaping filters. Inspect phase, group delay and transients as well as magnitude response. For FFT measurements, retain sample rate, length, window and amplitude correction.</p>
+<h2 id="section-4">Sampling, Quantization and PCM</h2>
+<p>For a signal band-limited to <code>fmax</code>, ideal reconstruction requires <code>fs &gt; 2fmax</code>. Real systems reserve transition bands and add an analog anti-alias filter. Aliasing folds high-frequency content irreversibly into the baseband.</p>
+<p>Quantization maps continuous amplitude to finite levels. Each added bit improves the ideal full-scale-sine quantization SNR by about 6 dB. PCM consists of sampling, quantization and coding, followed by decoding, hold and reconstruction filtering.</p>
+<h2 id="section-5">Baseband Transmission and ISI</h2>
+<p>ISI occurs when channel and filter responses make adjacent pulses overlap at decision times. The first Nyquist criterion requires the total pulse to be zero at other symbol sampling instants. Practical links use raised-cosine or root-raised-cosine filters. More roll-off uses more bandwidth but often eases implementation and timing tolerance.</p>
+<p>An eye diagram exposes ISI, noise and timing error. Greater opening means more decision margin, and the preferred sample is near the widest point.</p>
+<h2 id="section-6">Analog Modulation</h2>
+<p>AM is simple but power-inefficient; DSB-SC suppresses the carrier and needs coherent detection; SSB saves bandwidth. FM and PM resist amplitude noise better but use more complex spectra and demodulators. Review time waveforms, spectral translation, detector blocks, bandwidth, power efficiency and noise behavior.</p>
+<h2 id="section-7">Digital Passband Modulation</h2>
+<p>ASK uses amplitude, FSK frequency and PSK phase. BPSK carries one bit per symbol, QPSK carries two, and QAM varies both I and Q for higher spectral efficiency with tighter amplitude, phase and linearity requirements. Gray mapping limits common nearest-neighbor decisions to one bit error. Mapper, decision table, signed I/Q convention and bit order must match.</p>
+<h2 id="section-8">Channels and Noise</h2>
+<p>AWGN is additive, spectrally white and Gaussian. Wireless links also include path loss, shadowing and multipath fading. Multipath can create frequency-selective amplitude and phase response.</p>
+<pre><code class="language-text">Power ratio: 10·log10(P2/P1)
+Amplitude ratio: 20·log10(A2/A1)</code></pre>
+<p>When adding noise, account for actual signal power, bits per symbol, samples per symbol and real-versus-complex variance definitions.</p>
+<h2 id="section-9">Matched Filtering and Detection</h2>
+<p>Under AWGN, a matched filter maximizes SNR at a chosen sample time. Correlation and matched-filter receivers project the observation onto candidate basis functions. For equal priors and energies in AWGN, maximum likelihood often becomes minimum Euclidean distance; MAP additionally uses prior probabilities.</p>
+<h2 id="section-10">Synchronization</h2>
+<p>Receivers need carrier, symbol-timing and frame synchronization. Frequency offset continuously rotates a constellation, fixed phase offset rotates it once, and timing error moves samples away from the eye center. Preambles support frame, frequency and channel estimation. Loop filters balance noise rejection and tracking speed.</p>
+<p>For constellation diagnosis, inspect DC offset, I/Q gain mismatch, quadrature error, frequency offset, fixed phase, timing error and noise in a deliberate order.</p>
+<h2 id="section-11">BER and Simulation</h2>
+<p>BER is erroneous bits divided by compared bits; SER uses symbols. A reliable simulation:</p>
+<ol>
+<li>Generate enough independent bits.</li>
+<li>Apply one fixed mapper.</li>
+<li>Upsample and pulse-shape.</li>
+<li>Add noise or fading by a precise definition.</li>
+<li>Matched-filter and compensate group delay.</li>
+<li>Sample and decide at the correct instants.</li>
+<li>Align source and decisions before counting.</li>
+<li>Sweep Eb/N0 and compare simulation with theory.</li>
+</ol>
+<p>At high SNR, rare errors require many bits. Observing zero errors only bounds BER for that sample count; it does not prove true BER is zero.</p>
+<h2 id="section-12">Channel Coding Basics</h2>
+<p>Coding adds controlled redundancy. Block codes map fixed information blocks to longer codewords; convolutional codes depend on current input and encoder state. Minimum Hamming distance <code>dmin</code> typically detects up to <code>dmin-1</code> errors and corrects <code>floor((dmin-1)/2)</code>. Soft decisions retain confidence and usually outperform hard decisions, at a cost in bandwidth, delay, storage and computation.</p>
+<h2 id="section-13">Review Checklist</h2>
+<ul>
+<li>Draw and explain the complete digital link.</li>
+<li>Distinguish bit rate, symbol rate and sample rate.</li>
+<li>Explain irreversible aliasing and raised-cosine roll-off.</li>
+<li>Draw BPSK, QPSK and QAM constellations with Gray mapping.</li>
+<li>Relate SNR, Es/N0 and Eb/N0 under stated assumptions.</li>
+<li>Explain why matched filtering improves sample-time SNR.</li>
+<li>Diagnose rotation, spreading and stretching of a constellation.</li>
+<li>Build a BER simulation with correct noise variance and alignment.</li>
+<li>State coding correction capability, benefit and cost.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../technical-english-system/index.html"><span>← Previous item</span><strong>A Long-Term System for Technical English</strong></a>
+    <a class="article-pagination-next" href="../embedded-c-checklist/index.html"><span>Next item →</span><strong>Embedded C Review Checklist</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

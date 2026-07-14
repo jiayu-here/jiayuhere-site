@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why MySQL Did Not Use the Index: A Structured Debugging Path | jiayuhere</title>
+  <meta name="description" content="Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.">
+  <meta name="keywords" content="MySQL, Index, SQL, EXPLAIN">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why MySQL Did Not Use the Index: A Structured Debugging Path | JiaYu Here">
+  <meta property="og:description" content="Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/mysql-index-debug-path/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/mysql-index-debug-path/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/mysql-index-debug-path/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/mysql-index-debug-path/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/mysql-index-debug-path/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>Why MySQL Did Not Use the Index: A Structured Debugging Path</h1><p class="article-lead">Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.</p><div class="article-meta"><span>Databases · 2026-07-08</span><span>4 min read</span><div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Preserve a Reproducible Query</a><a href="#section-2">Start with EXPLAIN</a><a href="#section-3">Use EXPLAIN ANALYZE Carefully</a><a href="#section-4">Check Implicit Type Conversion</a><a href="#section-5">Keep Functions Off Indexed Columns</a><a href="#section-6">Respect the Leftmost Prefix</a><a href="#section-7">Understand Range Conditions</a><a href="#section-8">A Table Scan Can Be Correct</a><a href="#section-9">Use Covering Indexes Selectively</a><a href="#section-10">Include ORDER BY and LIMIT</a><a href="#section-11">Know the Limits of LIKE</a><a href="#section-12">Analyze OR and JOIN Branches</a><a href="#section-13">Refresh Stale Statistics</a><a href="#section-14">Treat FORCE INDEX as a Last Resort</a><a href="#section-15">Measure the Tradeoff</a><a href="#section-16">Recommended Sequence</a><a href="#section-17">Acceptance Checklist</a></aside><div class="prose"><h2 id="section-1">Preserve a Reproducible Query</h2>
+<p>Record the full SQL, parameters, schema, index definitions, MySQL version and approximate data volume. The same SQL can have different selectivity and plans with different values. In production also record concurrency, lock waits and cache state; a slow request may be storage jitter, contention or connection-pool delay rather than an index issue.</p>
+<pre><code class="language-sql">SHOW CREATE TABLE orders;
+SHOW INDEX FROM orders;
+SELECT VERSION();</code></pre>
+<h2 id="section-2">Start with EXPLAIN</h2>
+<p>Inspect <code>possible_keys</code>, the chosen <code>key</code>, access <code>type</code>, estimated <code>rows</code>, <code>filtered</code> and <code>Extra</code>. A non-empty key is not proof of efficiency: an index scan can still read many entries to return few rows.</p>
+<pre><code class="language-sql">EXPLAIN FORMAT=TREE
+SELECT id, created_at, total_amount
+FROM orders
+WHERE user_id = 1001 AND status = 'PAID'
+ORDER BY created_at DESC
+LIMIT 20;</code></pre>
+<h2 id="section-3">Use EXPLAIN ANALYZE Carefully</h2>
+<p>Supported versions can execute the query and report actual rows and timings. Because it really runs the statement, assess risk before using it on expensive or side-effecting work, especially during peak traffic.</p>
+<h2 id="section-4">Check Implicit Type Conversion</h2>
+<p>Compare a <code>VARCHAR</code> phone column with a quoted string, not a numeric literal. Join keys should agree on type, length, character set and collation. Converting the indexed column can prevent ordered lookup.</p>
+<h2 id="section-5">Keep Functions Off Indexed Columns</h2>
+<p>Rewrite <code>DATE(created_at) = '2026-07-14'</code> as a half-open timestamp range. Generated columns or functional indexes may help recurring expressions, but a sargable predicate is the first option.</p>
+<pre><code class="language-sql">WHERE created_at &gt;= '2026-07-14 00:00:00'
+  AND created_at &lt;  '2026-07-15 00:00:00'</code></pre>
+<h2 id="section-6">Respect the Leftmost Prefix</h2>
+<p>An index on <code>(user_id, status, created_at)</code> begins with <code>user_id</code>. It does not generally provide the same access for queries using only <code>status</code> or <code>created_at</code>. Equality filters often precede range columns, but actual filter and order patterns must determine the final sequence.</p>
+<h2 id="section-7">Understand Range Conditions</h2>
+<p>After a range column, later columns may still participate in index condition pushdown but may not further narrow the scanned key interval. Test candidate orders with actual plans rather than asking whether all columns merely appear in the index.</p>
+<h2 id="section-8">A Table Scan Can Be Correct</h2>
+<p>Boolean or low-cardinality values may match most rows. Scanning a secondary index and then repeatedly accessing the clustered index can cost more than a sequential table scan. Optimizer avoidance is not automatically a bug.</p>
+<h2 id="section-9">Use Covering Indexes Selectively</h2>
+<p>Adding a small set of returned columns can reduce clustered-index lookups, but increases index size, write cost and buffer pressure. Do not try to cover <code>SELECT *</code> with a huge secondary index.</p>
+<h2 id="section-10">Include ORDER BY and LIMIT</h2>
+<p>One composite index may filter and return rows in order, avoiding a separate sort. Still, <code>Using filesort</code> is not automatically an error; judge it from scanned rows, result size and LIMIT.</p>
+<h2 id="section-11">Know the Limits of LIKE</h2>
+<p><code>LIKE 'STM32%'</code> can use a B-tree prefix range, while <code>LIKE '%STM32%'</code> has no known start. Large body searches belong in full-text or dedicated search systems.</p>
+<h2 id="section-12">Analyze OR and JOIN Branches</h2>
+<p>Run each <code>OR</code> branch separately to find the broad predicate. <code>UNION ALL</code> can enable different indexes but changes duplicate semantics and is not a universal template. For joins, inspect table order, filtered driver rows, indexed join keys and matching types.</p>
+<h2 id="section-13">Refresh Stale Statistics</h2>
+<p>Large imports, deletes or distribution changes can invalidate cardinality estimates. <code>ANALYZE TABLE orders</code> refreshes statistics. Highly skewed columns may benefit from histograms, but their maintenance must be documented.</p>
+<h2 id="section-14">Treat FORCE INDEX as a Last Resort</h2>
+<p>Hints can bypass a bad plan today and become wrong after data changes. First correct types and predicates, design the composite index, update statistics and compare actual execution. Only then consider a controlled hint with evidence across parameter values.</p>
+<h2 id="section-15">Measure the Tradeoff</h2>
+<p>Every index consumes disk and buffer space and adds work to INSERT, UPDATE and DELETE. A complete before/after record includes SQL, parameters, plans, actual rows, latency distribution, index size, write impact and regression checks on other queries.</p>
+<h2 id="section-16">Recommended Sequence</h2>
+<ol>
+<li>Distinguish execution time from lock or connection wait.</li>
+<li>Save SQL, parameters, schema and indexes.</li>
+<li>Run <code>EXPLAIN</code>, then safe <code>EXPLAIN ANALYZE</code> when appropriate.</li>
+<li>Inspect type conversion, column functions and rewrites.</li>
+<li>Inspect composite order, range predicates, ordering and coverage.</li>
+<li>Compare estimated and actual rows; refresh statistics if needed.</li>
+<li>Repeat comparable tests and regress other workloads.</li>
+</ol>
+<h2 id="section-17">Acceptance Checklist</h2>
+<ul>
+<li>Query, parameters and data distribution are reproducible.</li>
+<li>Access type, scanned rows and filtering are explained.</li>
+<li>Comparison and join types match without accidental conversion.</li>
+<li>Composite order matches real filtering and sorting.</li>
+<li>Read gains are weighed against write and space costs.</li>
+<li>Before/after tests use the same conditions more than once.</li>
+<li><code>FORCE INDEX</code> is not the default solution.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../freertos-priority-design/index.html"><span>← Previous article</span><strong>FreeRTOS Priority Is About Urgency, Not Importance</strong></a>
+    <a class="article-pagination-next" href="../stm32-temperature-nonblocking-design/index.html"><span>Next article →</span><strong>Non-Blocking STM32 Temperature Monitoring: From Sampling State Machines to Alarm Tasks</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

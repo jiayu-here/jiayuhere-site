@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT | jiayuhere</title>
+  <meta name="description" content="A design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point FFTs.">
+  <meta name="keywords" content="FFT, Fixed Point, FPGA, DSP">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Five Decisions to Make Before Designing a Fixed-Point FPGA FFT | JiaYu Here">
+  <meta property="og:description" content="A design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point FFTs.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/fpga-fixed-point-fft-checklist/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</h1><p class="article-lead">A design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point FFTs.</p><div class="article-meta"><span>Digital Signal Processing · 2026-07-12</span><span>4 min read</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Start from System Requirements</a><a href="#section-2">Document Every Q Format</a><a href="#section-3">Butterfly Addition Creates Growth</a><a href="#section-4">Derive Complex-Multiply Widths</a><a href="#section-5">Make Twiddle Tables Reproducible</a><a href="#section-6">Data Order Determines Address Control</a><a href="#section-7">Stream Data and State Together</a><a href="#section-8">Overflow, Rounding and Saturation Are Different</a><a href="#section-9">The Reference Model Must Be Fixed-Point</a><a href="#section-10">Use Diagnostic Test Vectors</a><a href="#section-11">Check Timing After Structure Stabilizes</a><a href="#section-12">Acceptance Checklist</a></aside><div class="prose"><h2 id="section-1">Start from System Requirements</h2>
+<p>Width and architecture depend on the required FFT length, runtime configurability, sample interval, latency, input organization, output order and the resource that matters most. Quantization error, overflow probability and dynamic range must also be stated. Resource counts are meaningless without an interface and throughput target.</p>
+<h2 id="section-2">Document Every Q Format</h2>
+<p>For a signed 16-bit value with 14 fractional bits:</p>
+<pre><code class="language-text">x_real = x_int / 2^14</code></pre>
+<p>Inputs, twiddles, products and outputs may use different formats. Every port should state total width, fractional width and signedness so that a later truncation still has a known binary-point position.</p>
+<h2 id="section-3">Butterfly Addition Creates Growth</h2>
+<p>A radix-2 addition can double magnitude and needs one extra worst-case bit per stage. The main strategies are:</p>
+<ul>
+<li>Shift right at every stage for simple, predictable headroom.</li>
+<li>Scale selected stages to balance range and error.</li>
+<li>Use block floating point with a frame exponent.</li>
+<li>Retain all growth bits and round or saturate once at the end.</li>
+</ul>
+<p>Whichever rule is used must also exist in the software model. An unexplained RTL shift makes output amplitude impossible to interpret.</p>
+<h2 id="section-4">Derive Complex-Multiply Widths</h2>
+<p>For <code>(a + jb)(c + jd)</code>, the real output is <code>ac - bd</code> and the imaginary output is <code>ad + bc</code>. W-bit inputs generally create about 2W-bit products and another growth bit for the sum:</p>
+<pre><code class="language-verilog">wire signed [2*W-1:0] ac = a * c;
+wire signed [2*W-1:0] bd = b * d;
+wire signed [2*W:0] real_full = ac - bd;</code></pre>
+<p>Retain the full product before applying the target Q format. Taking high bits is truncation and creates biased error; rounding mode must be chosen deliberately and mirrored in the reference model.</p>
+<h2 id="section-5">Make Twiddle Tables Reproducible</h2>
+<p>The generation script should fix FFT size, width, fractional bits, rounding and output format, then be versioned with the ROM file. Check <code>+1</code> and <code>-1</code>: two's-complement fixed point often represents <code>-1</code> exactly but not positive <code>+1</code>, so the generator must clamp rather than wrap.</p>
+<h2 id="section-6">Data Order Determines Address Control</h2>
+<p>DIT, DIF and pipeline variants may use natural or bit-reversed input/output. Reversing the bits of index <code>3'b011</code>, for example, gives <code>3'b110</code>. If software plots natural order while RTL emits bit-reversed order, peaks appear at the wrong bins.</p>
+<p>The top-level contract must identify the first output bin, frame markers, any extra samples and whether reorder RAM is present.</p>
+<h2 id="section-7">Stream Data and State Together</h2>
+<p>Real, imaginary, <code>valid</code>, start-of-frame, end-of-frame and any scale exponent need identical pipeline delay. A valid-only interface normally requires fixed-rate input; a ready/valid interface must hold data and state stable during backpressure.</p>
+<h2 id="section-8">Overflow, Rounding and Saturation Are Different</h2>
+<p>Overflow means the exact result exceeds the width. Rounding determines how removed low bits are approximated. Saturation clamps out-of-range values instead of wrapping. Instrument each stage for add growth, product error, saturation count and accumulated scaling so that the first failing stage can be found.</p>
+<h2 id="section-9">The Reference Model Must Be Fixed-Point</h2>
+<p>Keep three results:</p>
+<ol>
+<li>Double-precision FFT as the mathematical reference.</li>
+<li>Stage-by-stage software fixed-point FFT as the RTL behavioral reference.</li>
+<li>RTL simulation output.</li>
+</ol>
+<p>If the fixed model is already too far from floating point, revise the numeric plan. If only RTL differs, inspect widths, addresses and timing.</p>
+<h2 id="section-10">Use Diagnostic Test Vectors</h2>
+<ul>
+<li>Impulse: confirms order and overall scale.</li>
+<li>Integer-bin sine: confirms bin location, mirror, magnitude and leakage behavior.</li>
+<li>Two tones: tests simultaneous peaks and dynamic range.</li>
+<li>Full-scale and alternating extremes: stress overflow and saturation.</li>
+<li>Random complex samples: support maximum-error and mean-square-error statistics.</li>
+</ul>
+<h2 id="section-11">Check Timing After Structure Stabilizes</h2>
+<p>DSP blocks, long adders and address logic may become critical. Review DSP, RAM, registers and worst timing slack. Added pipeline registers require matching delay in valid and frame-control paths.</p>
+<h2 id="section-12">Acceptance Checklist</h2>
+<ul>
+<li>Q formats are recorded for inputs, twiddles, intermediate stages and outputs.</li>
+<li>Scaling, rounding, truncation and saturation agree in software and RTL.</li>
+<li>Natural or bit-reversed order is explicit.</li>
+<li>Impulse, tone, two-tone, full-scale and random vectors agree.</li>
+<li>Data and control delays match exactly.</li>
+<li>Resource and timing reports are checked separately from functional simulation.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../qpsk-from-constellation-to-rtl/index.html"><span>← Previous article</span><strong>From Constellation to RTL: A Verifiable Order for Building a QPSK Link</strong></a>
+    <a class="article-pagination-next" href="../freertos-priority-design/index.html"><span>Next article →</span><strong>FreeRTOS Priority Is About Urgency, Not Importance</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

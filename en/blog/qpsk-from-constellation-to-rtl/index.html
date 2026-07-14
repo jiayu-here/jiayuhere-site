@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Constellation to RTL: A Verifiable Order for Building a QPSK Link | jiayuhere</title>
+  <meta name="description" content="A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.">
+  <meta name="keywords" content="QPSK, FPGA, BER, Gray">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="From Constellation to RTL: A Verifiable Order for Building a QPSK Link | JiaYu Here">
+  <meta property="og:description" content="A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/qpsk-from-constellation-to-rtl/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>From Constellation to RTL: A Verifiable Order for Building a QPSK Link</h1><p class="article-lead">A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.</p><div class="article-meta"><span>Communication Theory · 2026-07-14</span><span>3 min read</span><div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Define the Complete Data Path First</a><a href="#section-2">Fix One Gray Mapping Table</a><a href="#section-3">Keep the Bit Source Separate</a><a href="#section-4">Discrete Phase Rotation Needs No Trigonometry</a><a href="#section-5">Hard Decisions Must Invert the Mapper</a><a href="#section-6">Pipeline Alignment Is the Common Failure</a><a href="#section-7">State the BER Denominator</a><a href="#section-8">Check Width and Negation Explicitly</a><a href="#section-9">Verify in Layers</a><a href="#section-10">Add Visualization After Algorithm Verification</a><a href="#section-11">Acceptance Checklist</a></aside><div class="prose"><h2 id="section-1">Define the Complete Data Path First</h2>
+<p>A QPSK RTL link is more than mapping two bits to a point. Data crosses a source, serial-to-parallel conversion, Gray mapping, channel model, decision logic, reference delay, error counters and telemetry. Every stage can change width, signed meaning or timing.</p>
+<p>Before coding, define bit order, signed I/Q representation, quadrant orientation, the cycle represented by <code>valid</code>, and whether the counter measures bit or symbol errors. The Verilog, testbench and Python display must use the same contract.</p>
+<h2 id="section-2">Fix One Gray Mapping Table</h2>
+<p>One common convention is:</p>
+<pre><code class="language-text">00 -&gt; I=+A, Q=+A
+01 -&gt; I=-A, Q=+A
+11 -&gt; I=-A, Q=-A
+10 -&gt; I=+A, Q=-A</code></pre>
+<p>Write the complete mapping explicitly and declare <code>AMP</code>, I and Q as signed values:</p>
+<pre><code class="language-verilog">always @* begin
+  case (tx_bits)
+    2'b00: begin i_symbol =  AMP; q_symbol =  AMP; end
+    2'b01: begin i_symbol = -AMP; q_symbol =  AMP; end
+    2'b11: begin i_symbol = -AMP; q_symbol = -AMP; end
+    2'b10: begin i_symbol =  AMP; q_symbol = -AMP; end
+    default: begin i_symbol = 0; q_symbol = 0; end
+  endcase
+end</code></pre>
+<p>An unsigned operand can silently alter comparison, negation and extension rules.</p>
+<h2 id="section-3">Keep the Bit Source Separate</h2>
+<p>PRBS is useful for continuous data, but start with <code>00, 01, 11, 10</code> in the testbench. Verify all points before connecting PRBS. The source should only produce reference bits and validity; the mapper should only map symbols. That separation also makes later UART or memory sources easy to substitute.</p>
+<h2 id="section-4">Discrete Phase Rotation Needs No Trigonometry</h2>
+<p>For 0, 90, 180 and 270 degrees, swaps and negation are sufficient:</p>
+<pre><code class="language-verilog">case (phase_sel)
+  2'd0: begin rx_i =  tx_i; rx_q =  tx_q; end
+  2'd1: begin rx_i = -tx_q; rx_q =  tx_i; end
+  2'd2: begin rx_i = -tx_i; rx_q = -tx_q; end
+  2'd3: begin rx_i =  tx_q; rx_q = -tx_i; end
+endcase</code></pre>
+<p>Arbitrary phase, frequency offset or noise should first be verified in MATLAB or Python before choosing CORDIC, a LUT or external sample injection.</p>
+<h2 id="section-5">Hard Decisions Must Invert the Mapper</h2>
+<p>In an ideal zero-threshold baseband model, the signs of I and Q select the quadrant. The decoded bits must exactly invert the transmitter table, including the convention for values equal to zero.</p>
+<pre><code class="language-verilog">if (rx_i &gt;= 0 &amp;&amp; rx_q &gt;= 0)      decided_bits = 2'b00;
+else if (rx_i &lt; 0 &amp;&amp; rx_q &gt;= 0)  decided_bits = 2'b01;
+else if (rx_i &lt; 0 &amp;&amp; rx_q &lt; 0)   decided_bits = 2'b11;
+else                              decided_bits = 2'b10;</code></pre>
+<h2 id="section-6">Pipeline Alignment Is the Common Failure</h2>
+<p>Mapping, channel, decisions and output registers introduce latency. BER logic must compare a delayed reference with the decision from the same symbol. Data and <code>valid</code> should travel through every stage together, while the transmitted reference follows an equal-length delay line.</p>
+<p>Do not debug from the final BER number alone. Print the reference, decision and valid signal cycle by cycle.</p>
+<h2 id="section-7">State the BER Denominator</h2>
+<p>Each valid QPSK symbol represents two bits. XOR the reference and decision, count zero, one or two bit differences, add two to <code>total_bits</code>, and leave the final division to the host or low-rate display logic.</p>
+<pre><code class="language-verilog">wire [1:0] bit_diff = reference_bits ^ decided_bits;
+wire [1:0] error_count = bit_diff[0] + bit_diff[1];</code></pre>
+<h2 id="section-8">Check Width and Negation Explicitly</h2>
+<p>The most negative two's-complement value cannot be negated in the same width. If full-scale negative samples are possible, limit amplitude, add a guard bit or use saturation. All cross-module I/Q ports must be signed and widened with sign extension.</p>
+<h2 id="section-9">Verify in Layers</h2>
+<ol>
+<li>Map all four symbols and verify inverse decisions.</li>
+<li>Rotate one point through all four phase states.</li>
+<li>Send numbered symbols and verify latency and valid timing.</li>
+<li>Inject controlled bit errors and confirm increments of 0, 1 or 2.</li>
+<li>Run long PRBS sequences and test reset and clear behavior.</li>
+</ol>
+<h2 id="section-10">Add Visualization After Algorithm Verification</h2>
+<p>Export I/Q, reference bits and counters to CSV first. Once offline Python plots agree, connect UART. Because serial bandwidth is normally far below the internal symbol rate, sample or aggregate telemetry instead of transmitting every symbol. The host displays the agreed data contract; it must not redefine mapping or BER.</p>
+<h2 id="section-11">Acceptance Checklist</h2>
+<ul>
+<li>Mapping and decision tables are exact inverses.</li>
+<li>Error count remains zero with no noise and zero rotation.</li>
+<li>All four rotations match the I/Q definition.</li>
+<li>Reference bits and decisions meet on the same valid cycle.</li>
+<li>Injected errors add 0, 1 or 2 correctly.</li>
+<li>CSV and UART use identical fields and symbol conventions.</li>
+<li>Simulation, timing compilation and board verification are reported separately.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+
+    <a class="article-pagination-next" href="../fpga-fixed-point-fft-checklist/index.html"><span>Next article →</span><strong>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

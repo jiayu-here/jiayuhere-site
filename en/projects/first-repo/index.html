@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>first-repo Git and GitHub Starter Exercise | jiayuhere</title>
+  <meta name="description" content="A first GitHub repository using small text and Shell files to practice creation, README authoring, commits and pushes.">
+  <meta name="keywords" content="Git, GitHub, Shell, README">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="first-repo Git and GitHub Starter Exercise | JiaYu Here">
+  <meta property="og:description" content="A first GitHub repository using small text and Shell files to practice creation, README authoring, commits and pushes.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/first-repo/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/first-repo/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/first-repo/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/first-repo/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/first-repo/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>first-repo Git and GitHub Starter Exercise</h1><p class="article-lead">A first GitHub repository using small text and Shell files to practice creation, README authoring, commits and pushes.</p><div class="article-meta"><span>Engineering Foundations · 2026-07 · Learning repository</span><span>2 min read</span><div class="tag-list"><span>Git</span><span>GitHub</span><span>Shell</span><span>README</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/first-repo" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/first-repo#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/first-repo/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/first-repo/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/first-repo/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Implementation</a><a href="#section-6">Key Commands</a><a href="#section-7">Debugging and Verification</a><a href="#section-8">Problems and Solutions</a><a href="#section-9">Current Result</a><a href="#section-10">Summary</a><a href="#section-11">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This first GitHub learning repository uses a few text and Shell files to record the path from local edits to a remote commit. It is version-control practice, not a complete application.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Create a repository and write a useful README.</li>
+<li>Distinguish the working tree, staging area, local commits and remote repository.</li>
+<li>Complete edit, commit, push and browser-verification steps.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>Git, GitHub, Markdown, Shell, a command line, a text editor and a regular computer.</p>
+<h2 id="section-4">System Architecture</h2>
+<p>The structure is intentionally minimal: the README states the purpose, three practice files make changes visible, and one Shell file demonstrates executable content and version history.</p>
+<div class="system-flow" role="img" aria-label="System architecture：README and practice files to Working-tree changes to Staging area to Local commit to History; Shell file to Permission and content changes to Version diff"><div class="system-flow-row"><span class="system-flow-node">README and practice files</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Working-tree changes</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Staging area</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Local commit</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">History</span></div>
+<div class="system-flow-row"><span class="system-flow-node">Shell file</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Permission and content changes</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Version diff</span></div></div>
+<h2 id="section-5">Implementation</h2>
+<ol>
+<li>Create the GitHub repository and local directory.</li>
+<li>Add the README and practice files.</li>
+<li>Inspect changes with <code>git status</code>.</li>
+<li>Stage, commit and push.</li>
+<li>Confirm files and history on GitHub.</li>
+</ol>
+<h2 id="section-6">Key Commands</h2>
+<pre><code class="language-bash">git status
+git add README.md file3.txt file4.txt file5.sh
+git commit -m &quot;Update practice files&quot;
+git push
+git diff
+git diff --cached
+git log --oneline --decorate -5</code></pre>
+<h2 id="section-7">Debugging and Verification</h2>
+<p><code>git status</code>, <code>git log</code> and the GitHub commit page are compared. Missing files are traced through staging state, target branch and remote address.</p>
+<h2 id="section-8">Problems and Solutions</h2>
+<p>Beginners often confuse saving a file, committing locally and pushing remotely. Running <code>git status</code> at every stage, checking the log after commit and confirming the GitHub page after push creates a repeatable mental model.</p>
+<h2 id="section-9">Current Result</h2>
+<p>The public repository contains the README, text files, Shell file and commit history, completing the basic GitHub workflow exercise.</p>
+<h2 id="section-10">Summary</h2>
+<p>Its value is disciplined version-control practice, and it is clearly labeled as a learning repository rather than a full engineering project.</p>
+<h2 id="section-11">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/first-repo" target="_blank" rel="noreferrer">Open first-repo</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../rrt-path-planning/index.html"><span>← Previous item</span><strong>Python RRT and RRT* Path Planning Demo</strong></a>
+    <a class="article-pagination-next" href="../remote-repo/index.html"><span>Next item →</span><strong>remote-repo Remote Synchronization Exercise</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

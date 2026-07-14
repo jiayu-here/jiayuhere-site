@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STM32F103 Dual-Channel Temperature Monitoring and Alarm System | jiayuhere</title>
+  <meta name="description" content="An STM32 design integrating DS18B20, PT100, OLED, audible and visual alarms, SD logging, serial configuration and Flash threshold storage.">
+  <meta name="keywords" content="STM32, DS18B20, PT100, FatFs, OLED">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="STM32F103 Dual-Channel Temperature Monitoring and Alarm System | JiaYu Here">
+  <meta property="og:description" content="An STM32 design integrating DS18B20, PT100, OLED, audible and visual alarms, SD logging, serial configuration and Flash threshold storage.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/temperature-inspector-stm32f103/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/temperature-inspector-stm32f103/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/temperature-inspector-stm32f103/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/temperature-inspector-stm32f103/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/temperature-inspector-stm32f103/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 Dual-Channel Temperature Monitoring and Alarm System</h1><p class="article-lead">An STM32 design integrating DS18B20, PT100, OLED, audible and visual alarms, SD logging, serial configuration and Flash threshold storage.</p><div class="article-meta"><span>Embedded Systems · 2026-07 · Project and firmware generated</span><span>3 min read</span><div class="tag-list"><span>STM32</span><span>DS18B20</span><span>PT100</span><span>FatFs</span><span>OLED</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Functional Modules</a><a href="#section-6">Implementation</a><a href="#section-7">Key Code</a><a href="#section-8">Debugging and Verification</a><a href="#section-9">Problems and Solutions</a><a href="#section-10">Current Result</a><a href="#section-11">Summary</a><a href="#section-12">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This dual-channel temperature monitor targets an STM32F103C8T6 minimum board. It samples a digital DS18B20 and the voltage from a PT100 module, drives an OLED and alarms, logs CSV to an SD card, accepts serial commands and stores thresholds across power cycles. An ESP-01S cloud workflow is reserved but disabled by default.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Acquire digital and analog temperature channels together.</li>
+<li>Adjust thresholds from keys or serial commands and retain them in Flash.</li>
+<li>Provide alarms, min/max tracking, SD CSV logs and status diagnostics.</li>
+<li>Keep Keil, CubeMX and GCC outputs together with complete wiring documents.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>C, STM32 HAL, ADC, 1-Wire, I2C, SPI, FatFs, UART, internal Flash, non-blocking periodic scheduling and debounced limit decisions. Hardware includes the STM32F103C8T6, ST-Link, DS18B20, PT100 voltage module, SSD1306 OLED, SD SPI module, keys, buzzer and alarm LED. Serial is 115200 8N1.</p>
+<h2 id="section-4">System Architecture</h2>
+<p>The main loop uses independent millisecond timestamps. Sampling updates channel values and ranges; the alarm block requires two consecutive violations; the display refreshes only after content changes; FatFs appends CSV records; and UART receives and parses whole lines without blocking.</p>
+<div class="system-flow" role="img" aria-label="System architecture：DS18B20 and PT100 to Non-blocking sampler to Limit confirmation to OLED status to Buzzer and LED; Temperature and thresholds to FatFs CSV to Flash settings to UART query and configuration"><div class="system-flow-row"><span class="system-flow-node">DS18B20 and PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Non-blocking sampler</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Limit confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED status</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Buzzer and LED</span></div>
+<div class="system-flow-row"><span class="system-flow-node">Temperature and thresholds</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash settings</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">UART query and configuration</span></div></div>
+<h2 id="section-5">Functional Modules</h2>
+<ul>
+<li><code>app_ds18b20.c</code>, <code>app_pt100.c</code>: two sensing paths.</li>
+<li><code>app_alarm.c</code>, <code>app_keys.c</code>: alarm output and key configuration.</li>
+<li><code>app_oled.c</code>: status, thresholds and min/max display.</li>
+<li><code>app_storage.c</code>: SD-card CSV logging.</li>
+<li><code>app_settings.c</code>: persistent storage for four thresholds.</li>
+<li><code>app.c</code>: state aggregation, serial commands and periodic scheduling.</li>
+</ul>
+<h2 id="section-6">Implementation</h2>
+<ol>
+<li>Configure ADC, I2C, SPI, UART and GPIO from the pin table.</li>
+<li>Verify DS18B20 and PT100 conversion independently.</li>
+<li>Add thresholds, two-sample confirmation and audible/visual alarms.</li>
+<li>Integrate the OLED, short/long key presses and Flash storage.</li>
+<li>Integrate FatFs logs and serial commands.</li>
+<li>Generate the Keil project, GCC HEX and user documentation.</li>
+</ol>
+<h2 id="section-7">Key Code</h2>
+<p>Threshold pairs are normalized before persistence, and alarm cadence uses the system tick instead of a blocking delay:</p>
+<pre><code class="language-c">void Alarm_Task(uint8_t enabled)
+{
+    static uint32_t last_toggle = 0;
+    static uint8_t state = 0;
+    if (!enabled) {
+        state = 0;
+        Alarm_Set(0);
+        return;
+    }
+    if ((HAL_GetTick() - last_toggle) &gt;= 200U) {
+        state ^= 1U;
+        Alarm_Set(state);
+        last_toggle = HAL_GetTick();
+    }
+}</code></pre>
+<h2 id="section-8">Debugging and Verification</h2>
+<p>Bring-up proceeds through MCU and ST-Link, one sensor at a time, OLED, alarm, keys, SD and serial. PB3/PB4 key use requires disabling full JTAG while retaining Serial Wire. OLED SD status and error counts help isolate card failures.</p>
+<h2 id="section-9">Problems and Solutions</h2>
+<p>PB3/PB4 conflict with default JTAG, PT100 module output may exceed the 3.3 V ADC limit, one bad sample can cause false alarms, and SD power or formatting can fail. The design fixes debug mode to SWD, requires input-voltage checks, confirms two consecutive violations and exposes storage status and error counters. FAT32, insertion before power-on and a common ground are documented requirements.</p>
+<h2 id="section-10">Current Result</h2>
+<p>The repository contains a complete HAL project, Keil project, CubeMX configuration, FatFs, documentation and a flashable HEX image. Defaults are 15-second sampling and logging, 10–60 °C for DS18B20 and 0–100 °C for PT100. Cloud support remains a documented flow, not a claimed deployed feature.</p>
+<h2 id="section-11">Summary</h2>
+<p>The project integrates acquisition, interaction, persistence and fault status in one STM32 exercise. Sensor accuracy, PT100 calibration and long-term SD reliability still require physical acceptance testing.</p>
+<h2 id="section-12">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6" target="_blank" rel="noreferrer">Open TemperatureInspector_STM32F103C8T6</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../stm32f103-freertos-smartcar/index.html"><span>← Previous item</span><strong>STM32F103 FreeRTOS Multi-Mode Smart Car</strong></a>
+    <a class="article-pagination-next" href="../digital-modulation-recognition-matlab/index.html"><span>Next item →</span><strong>MATLAB Digital Modulation Recognition Simulation</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

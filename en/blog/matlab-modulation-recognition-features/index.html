@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features | jiayuhere</title>
+  <meta name="description" content="A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.">
+  <meta name="keywords" content="MATLAB, Modulation, SVM, Feature, SNR">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features | JiaYu Here">
+  <meta property="og:description" content="A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/matlab-modulation-recognition-features/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/matlab-modulation-recognition-features/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/matlab-modulation-recognition-features/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/matlab-modulation-recognition-features/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/matlab-modulation-recognition-features/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><p class="eyebrow">Technical Writing</p><h1>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</h1><p class="article-lead">A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.</p><div class="article-meta"><span>Communications and Algorithms · 2026-07-14</span><span>3 min read</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>SVM</span><span>Feature</span><span>SNR</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Define the Experiment Before Training</a><a href="#section-2">Keep Data-Generation Variables Independent</a><a href="#section-3">Derive AWGN Power from Its Definition</a><a href="#section-4">Normalize to Remove Irrelevant Scale</a><a href="#section-5">Combine Amplitude, Phase and Statistics</a><a href="#section-6">Keep a Baseline Model</a><a href="#section-7">Overall Accuracy Is Not Enough</a><a href="#section-8">Plot Without Overclaiming</a><a href="#section-9">Record Every Run</a><a href="#section-10">Extend One Variable at a Time</a></aside><div class="prose"><h2 id="section-1">Define the Experiment Before Training</h2>
+<p>State the class set, symbols per frame, sample rate, pulse shaping, carrier and phase conditions, SNR range and any prior knowledge available at training time. If one class always has different power, length or random seeds, the classifier may learn the generator rather than modulation structure.</p>
+<h2 id="section-2">Keep Data-Generation Variables Independent</h2>
+<p>Each sample should record class, SNR, seed and complex baseband sequence. Information symbols, noise, phase/frequency offsets and train/validation/test identities should be independent. Adding different noise to the same clean frame on both sides of the train/test boundary can still leak information; split sample identities first, then generate impairments independently.</p>
+<h2 id="section-3">Derive AWGN Power from Its Definition</h2>
+<p>For complex baseband:</p>
+<pre><code class="language-matlab">signalPower = mean(abs(signal).^2);
+noisePower = signalPower / (10^(snrDb / 10));
+noise = sqrt(noisePower / 2) .* ...
+    (randn(size(signal)) + 1j * randn(size(signal)));
+noisySignal = signal + noise;</code></pre>
+<p>Real and imaginary components each receive half the total complex-noise power. Eb/N0 and Es/N0 require conversion by bits per symbol and sampling assumptions; not every dB parameter is the same SNR.</p>
+<h2 id="section-4">Normalize to Remove Irrelevant Scale</h2>
+<p>Per-frame average-power normalization prevents energy alone from separating classes:</p>
+<pre><code class="language-matlab">z = signal(:);
+z = z / sqrt(mean(abs(z).^2) + eps);
+zCentered = z - mean(z);</code></pre>
+<p>If power variation or AGC error is part of the research question, retain it as an explicit variable instead of normalizing it away.</p>
+<h2 id="section-5">Combine Amplitude, Phase and Statistics</h2>
+<p>An interpretable feature set can include amplitude moments and percentiles, peak-to-average ratio, phase-difference statistics, spectral concentration and bandwidth, second- and fourth-order moments, cumulants and radius distribution.</p>
+<pre><code class="language-matlab">m20 = mean(zCentered.^2);
+m40 = mean(zCentered.^4);
+c40 = m40 - 3 * m20^2;
+
+phaseStep = diff(unwrap(angle(z)));
+phaseMean = mean(phaseStep);
+phaseStd = std(phaseStep);</code></pre>
+<p>Higher-order estimates need enough samples and degrade under noise. Check NaN, outliers and scale, then fit standardization on training data only.</p>
+<h2 id="section-6">Keep a Baseline Model</h2>
+<p>KNN, a linear classifier or a tree reveals whether gains come from the features or a more complex model. An RBF-SVM can then be organized as multiclass ECOC:</p>
+<pre><code class="language-matlab">learner = templateSVM(&quot;KernelFunction&quot;, &quot;rbf&quot;, &quot;Standardize&quot;, true);
+svmModel = fitcecoc(XTrain, YTrain, &quot;Learners&quot;, learner, &quot;Coding&quot;, &quot;onevsone&quot;);
+prediction = predict(svmModel, XTest);</code></pre>
+<p>Select model parameters from training or validation data. Repeated tuning against the test set destroys independent evaluation.</p>
+<h2 id="section-7">Overall Accuracy Is Not Enough</h2>
+<p>Inspect overall accuracy per SNR, recall per class, error destinations, confusion matrices across SNR and feature distributions. A single number says how much is wrong; a confusion matrix explains which signal structures are being confused.</p>
+<h2 id="section-8">Plot Without Overclaiming</h2>
+<p>PCA and t-SNE are exploratory and a separated 2D picture does not prove robust classification. Prefer feature distributions versus SNR, accuracy-SNR curves, normalization comparisons and waveform/spectrum/constellation views of typical errors.</p>
+<h2 id="section-9">Record Every Run</h2>
+<p>Save random seed, MATLAB version, class definitions, sample counts, SNR list, feature names, model parameters and split identities. Store the configuration next to each <code>.mat</code> model.</p>
+<h2 id="section-10">Extend One Variable at a Time</h2>
+<p>Frequency offset, sample-rate error, Rayleigh fading, pulse shaping and hardware captures can be added after the baseline is stable. Preserve single-variable comparisons so performance changes remain explainable.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../fpga-dds-frequency-word-to-display/index.html"><span>← Previous article</span><strong>FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path</strong></a>
+    <a class="article-pagination-next" href="../rrt-rrtstar-reliable-planner/index.html"><span>Next article →</span><strong>RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Long-Term System for Technical English | jiayuhere</title>
+  <meta name="description" content="A sustainable method for terminology, sentence patterns, close reading, project writing and periodic review.">
+  <meta name="keywords" content="English, Vocabulary, Reading, Writing">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Long-Term System for Technical English | JiaYu Here">
+  <meta property="og:description" content="A sustainable method for terminology, sentence patterns, close reading, project writing and periodic review.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/technical-english-system/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/technical-english-system/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/technical-english-system/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/technical-english-system/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/technical-english-system/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><p class="eyebrow">Learning Notes</p><h1>A Long-Term System for Technical English</h1><p class="article-lead">A sustainable method for terminology, sentence patterns, close reading, project writing and periodic review.</p><div class="article-meta"><span>English · 2026-07</span><span>4 min read</span><div class="tag-list"><span>English</span><span>Vocabulary</span><span>Reading</span><span>Writing</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Learning Goal</a><a href="#section-2">Learn Terms in Collocations</a><a href="#section-3">Identify the Function of a Sentence</a><a href="#section-8">Decompose Long Sentences</a><a href="#section-9">Read Datasheets by Task</a><a href="#section-10">Read Documentation and Papers Differently</a><a href="#section-11">Structure an English README</a><a href="#section-12">Write Useful Commits and Debug Logs</a><a href="#section-13">Weekly Routine</a><a href="#section-14">Self-Check</a></aside><div class="prose"><h2 id="section-1">Learning Goal</h2>
+<p>Technical English is not a contest to memorize the most words. The goal is accurate reading of datasheets, official documentation and papers, plus clear, concise and verifiable descriptions of your own work.</p>
+<p>Progress through keyword recognition, complete-sentence understanding, paragraph structure and independent technical writing. Practice input and output together so vocabulary lookup turns into usable language.</p>
+<h2 id="section-2">Learn Terms in Collocations</h2>
+<p>Ordinary words often have specialized meanings: <code>drive</code> can mean driving a pin or load, while <code>assert</code> can mean placing a digital signal in its active state. Record context rather than a Chinese gloss alone.</p>
+<pre><code class="language-text">Term: propagation delay
+Meaning: delay from input change to output response
+Collocation: maximum propagation delay
+Context: The output changes after the specified propagation delay.
+My sentence: The timing constraint must include the propagation delay of the device.</code></pre>
+<p>Useful collocations include <code>meet the timing requirement</code>, <code>sample the input signal</code>, <code>configure the peripheral</code>, <code>allocate a buffer</code>, <code>handle an interrupt</code>, <code>reduce power consumption</code>, <code>introduce measurement error</code> and <code>under normal operating conditions</code>.</p>
+<h2 id="section-3">Identify the Function of a Sentence</h2>
+<p>Technical sentences define, instruct, explain cause, compare tradeoffs, state conditions, warn or conclude. Identifying that function is faster than translating word by word.</p>
+<h3 id="section-4">Definition and Description</h3>
+<p>Use structures such as <code>X is defined as</code>, <code>X refers to</code>, <code>X is used to</code> and <code>X consists of</code>.</p>
+<h3 id="section-5">Cause and Result</h3>
+<p>Separate symptom, cause and consequence: <code>The sampling clock was unstable, which caused occasional frame errors.</code></p>
+<h3 id="section-6">Comparison and Tradeoff</h3>
+<p>State the improved metric and the cost: <code>Although A is faster, it requires more memory.</code> Avoid writing only that one option is “better.”</p>
+<h3 id="section-7">Conditions and Limits</h3>
+<p>Phrases such as <code>valid only when</code>, <code>must not be operated above</code> and <code>unless otherwise specified</code> carry requirements. <code>must</code>, <code>shall</code>, <code>should</code> and <code>may</code> do not have the same force.</p>
+<h2 id="section-8">Decompose Long Sentences</h2>
+<ol>
+<li>Find the main subject and verb.</li>
+<li>Mark clauses introduced by <code>that</code>, <code>which</code>, <code>when</code> or <code>if</code>.</li>
+<li>Temporarily remove prepositional and parenthetical details.</li>
+<li>Decide whether the sentence describes an action, condition or conclusion.</li>
+<li>Restore parameters, ranges and exceptions.</li>
+</ol>
+<p>In <code>When the enable signal is asserted, the controller, which is driven by the system clock, starts sampling the input after two clock cycles</code>, the core is <code>the controller starts sampling the input</code>; the remaining phrases give condition, clock context and delay.</p>
+<h2 id="section-9">Read Datasheets by Task</h2>
+<p>Do not always read page one to the end. Follow the current engineering question:</p>
+<ol>
+<li>Functional block diagram.</li>
+<li>Pin directions, multiplexing and active levels.</li>
+<li>Absolute maximum ratings versus recommended operation.</li>
+<li>Electrical and timing tables with min/typ/max units.</li>
+<li>Timing diagrams and named edges.</li>
+<li>Initialization, reset values and application examples.</li>
+</ol>
+<p>Use diagrams and tables to establish context before looking up every unknown word.</p>
+<h2 id="section-10">Read Documentation and Papers Differently</h2>
+<p>Official documentation emphasizes prerequisites, steps, parameters, return values and constraints. Papers emphasize the problem, related work, contribution, experimental setup and whether results support the claim.</p>
+<p>For a first pass, read title and abstract, figures, conclusion and introduction. Then inspect method and experiments. Notes should contain the core conclusion, terms and sentence patterns, your own explanation, project relevance and unresolved questions—not copied paragraphs.</p>
+<h2 id="section-11">Structure an English README</h2>
+<pre><code class="language-text">Overview
+Features
+Hardware and Software Requirements
+Architecture
+Getting Started
+Verification
+Known Limitations
+Repository Structure</code></pre>
+<p>Prefer short active sentences. Summarize what was built, how it was implemented and how far it was verified. Replace words such as <code>perfect</code> or <code>very advanced</code> with test results, measurements and known limitations.</p>
+<h2 id="section-12">Write Useful Commits and Debug Logs</h2>
+<p>Good commit results include <code>Add UART receive timeout handling</code>, <code>Fix QPSK reference-bit alignment</code> and <code>Document FPGA pin assignments</code>. Avoid <code>update</code> or <code>fix bug</code> without scope.</p>
+<p>Use a stable debug format:</p>
+<pre><code class="language-text">Symptom: What was observed?
+Cause: What produced the problem?
+Fix: What changed?
+Verification: How was the fix confirmed?</code></pre>
+<h2 id="section-13">Weekly Routine</h2>
+<ul>
+<li>Day 1: collect ten terms and real examples from current documentation.</li>
+<li>Day 2: closely read one datasheet section and decompose three long sentences.</li>
+<li>Day 3: explain one technical idea in under 100 English words.</li>
+<li>Day 4: revise a README or lab record.</li>
+<li>Day 5: review without Chinese definitions and write new examples.</li>
+<li>Weekend: rewrite an older note for greater accuracy and concision.</li>
+</ul>
+<h2 id="section-14">Self-Check</h2>
+<ul>
+<li>Did I record collocations rather than translations alone?</li>
+<li>Can I identify the sentence core, condition and limit?</li>
+<li>Can I distinguish recommended values from absolute maximum ratings?</li>
+<li>Can I explain a module's input, processing and output?</li>
+<li>Does my project description include evidence and limitations?</li>
+<li>Did I avoid unsupported promotional language?</li>
+<li>Have I used each new term in my own sentence?</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../engineering-math-map/index.html"><span>← Previous item</span><strong>Engineering Mathematics Map: Complex Numbers, Transforms and Probability</strong></a>
+    <a class="article-pagination-next" href="../communication-theory-index/index.html"><span>Next item →</span><strong>Communication Theory Review Index</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

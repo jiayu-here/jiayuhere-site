@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python RRT and RRT* Path Planning Demo | jiayuhere</title>
+  <meta name="description" content="A standard-library-only Python project for 2D random-tree planning, obstacle collision checks, GUI animation and path export.">
+  <meta name="keywords" content="Python, RRT, RRT Star, Tkinter, Path Planning">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Python RRT and RRT* Path Planning Demo | JiaYu Here">
+  <meta property="og:description" content="A standard-library-only Python project for 2D random-tree planning, obstacle collision checks, GUI animation and path export.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/rrt-path-planning/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/rrt-path-planning/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/rrt-path-planning/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/rrt-path-planning/">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="JiaYu Here home"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/rrt-path-planning/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><p class="eyebrow">Engineering Portfolio</p><h1>Python RRT and RRT* Path Planning Demo</h1><p class="article-lead">A standard-library-only Python project for 2D random-tree planning, obstacle collision checks, GUI animation and path export.</p><div class="article-meta"><span>Algorithms · 2026-07 · Completed</span><span>3 min read</span><div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Technology and Environment</a><a href="#section-4">System Architecture</a><a href="#section-5">Functional Modules</a><a href="#section-6">Implementation</a><a href="#section-7">Key Code</a><a href="#section-8">Debugging and Verification</a><a href="#section-9">Problems and Solutions</a><a href="#section-10">Current Result</a><a href="#section-11">Summary</a><a href="#section-12">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This 2D RRT/RRT* planner uses only the Python standard library. It offers both a Tkinter animation and a headless CLI, reads JSON maps, handles multiple obstacle types, exports paths and includes unit tests.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Find feasible paths quickly with basic RRT.</li>
+<li>Optimize parent selection and neighborhood rewiring with RRT*.</li>
+<li>Support circles, rectangles, polygons and a robot clearance radius.</li>
+<li>Provide pause, single-step, random-seed selection and export controls.</li>
+</ul>
+<h2 id="section-3">Technology and Environment</h2>
+<p>Python dataclasses, random sampling trees, computational geometry, segment collision tests, RRT* rewiring, Tkinter, JSON, CSV and <code>unittest</code>. <code>python app.py</code> starts the GUI; <code>python app.py --headless --algorithm rrt_star --export</code> runs without a display.</p>
+<h2 id="section-4">System Architecture</h2>
+<p><code>rrt.py</code> owns planning, obstacles and geometry. <code>map_io.py</code> handles JSON input and CSV/JSON export. <code>app.py</code> implements GUI, CLI arguments and animation. The result retains both original and simplified paths.</p>
+<div class="system-flow" role="img" aria-label="System architecture：JSON map and parameters to Geometry and collision checks to RRT or RRT* to Raw path to Simplification to GUI and export; GUI or CLI to app.py to rrt.py planner to map_io.py export"><div class="system-flow-row"><span class="system-flow-node">JSON map and parameters</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Geometry and collision checks</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">RRT or RRT*</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Raw path</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Simplification</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">GUI and export</span></div>
+<div class="system-flow-row"><span class="system-flow-node">GUI or CLI</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">app.py</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">rrt.py planner</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">map_io.py export</span></div></div>
+<h2 id="section-5">Functional Modules</h2>
+<ul>
+<li>Basic RRT and RRT*.</li>
+<li>Goal-biased sampling, step size, goal radius and iteration limits.</li>
+<li>Circle, axis-aligned rectangle and polygon collision checks.</li>
+<li>Obstacle inflation for robot clearance.</li>
+<li>Default, narrow-passage and impossible maps.</li>
+<li>Animation, pause, stepping, speed control and export.</li>
+</ul>
+<h2 id="section-6">Implementation</h2>
+<ol>
+<li>Define points, nodes, results and three obstacle types.</li>
+<li>Implement sampling, nearest-node search, fixed-step steering and edge collisions.</li>
+<li>Recover paths through parent pointers and simplify them visibly.</li>
+<li>Add neighborhood parent selection and rewiring for RRT*.</li>
+<li>Connect JSON maps, Tkinter and export.</li>
+<li>Test normal, narrow, impossible and invalid inputs.</li>
+</ol>
+<h2 id="section-7">Key Code</h2>
+<p>A circle collision uses the shortest distance from its center to a finite path segment, including robot clearance:</p>
+<pre><code class="language-python">return distance_point_to_segment((self.x, self.y), a, b) &lt;= self.radius + clearance</code></pre>
+<p>The projection ratio is clamped to <code>[0, 1]</code>, ensuring the closest point lies on the finite segment rather than the infinite line.</p>
+<h2 id="section-8">Debugging and Verification</h2>
+<p>Fixed seeds reproduce individual plans. The default map verifies success, the narrow passage exposes step-size and clearance effects, and a closed-wall map verifies the no-solution branch. GUI and headless modes consume the same planner result.</p>
+<h2 id="section-9">Problems and Solutions</h2>
+<p>Random runs are difficult to reproduce; checking only nodes misses edges crossing obstacles; RRT* rewiring changes subtree costs; and robot radius complicates geometry. Independent seeds, collision checks on every edge, cumulative-cost updates after rewiring and obstacle inflation make the behavior testable.</p>
+<h2 id="section-10">Current Result</h2>
+<p>The project runs animated or headless RRT/RRT*, reads JSON maps and exports CSV/JSON paths. Tests cover default, narrow and impossible maps, export and invalid starts.</p>
+<h2 id="section-11">Summary</h2>
+<p>Planning, computational geometry, visualization and testing are separated cleanly. This is an educational desktop planner; it does not yet include robot localization, motion constraints or dynamic obstacles.</p>
+<h2 id="section-12">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">Open rrt-path-planning</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../originlab-battery-aging/index.html"><span>← Previous item</span><strong>Origin 2024 Battery Aging and Thermal Safety Analysis</strong></a>
+    <a class="article-pagination-next" href="../first-repo/index.html"><span>Next item →</span><strong>first-repo Git and GitHub Starter Exercise</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">JIAYUHERE</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>
