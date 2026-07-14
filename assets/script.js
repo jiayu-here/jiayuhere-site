@@ -72,10 +72,12 @@ const renderSearchResults = async () => {
   const query = dialogInput.value.trim().toLowerCase();
   dialogResults.replaceChildren();
   if (!query) {
+    dialogStatus.classList.remove("is-error");
     dialogStatus.textContent = "输入关键词后开始搜索。";
     return;
   }
 
+  dialogStatus.classList.remove("is-error");
   dialogStatus.textContent = "正在搜索…";
   try {
     const index = await loadSearchIndex();
@@ -104,9 +106,21 @@ const renderSearchResults = async () => {
       dialogResults.append(link);
     });
   } catch {
+    dialogStatus.classList.add("is-error");
     dialogStatus.textContent = "搜索内容暂时无法加载，请稍后重试。";
   }
 };
+
+document.querySelectorAll("img").forEach((image) => {
+  const showFallback = () => {
+    const fallback = document.createElement("span");
+    fallback.className = "image-error";
+    fallback.textContent = image.alt ? `图片暂时无法加载：${image.alt}` : "图片暂时无法加载。";
+    (image.closest("picture") || image).replaceWith(fallback);
+  };
+  if (image.complete && image.naturalWidth === 0) showFallback();
+  else image.addEventListener("error", showFallback, { once: true });
+});
 
 const openSearch = () => {
   setNavOpen(false);
@@ -153,6 +167,13 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
       button.textContent = "复制失败";
     }
   });
+  const language = Array.from(code.classList).find((name) => name.startsWith("language-"))?.slice(9);
+  if (language) {
+    const label = document.createElement("span");
+    label.className = "code-language";
+    label.textContent = language.toUpperCase();
+    wrapper.append(label);
+  }
   pre.before(wrapper);
   wrapper.append(button, pre);
 });
@@ -535,6 +556,36 @@ document.querySelector("[data-latex-form]")?.addEventListener("submit", async (e
   } catch {
     result.textContent = "公式渲染失败，请检查 LaTeX 语法或网络连接。";
   }
+});
+
+const toolErrorPattern = /请输入|请选择|失败|无效|超出|不能为空|没有找到|低于/;
+document.querySelectorAll(".tool-form").forEach((form) => {
+  const result = form.querySelector(".tool-result, [data-markdown-result], [data-latex-result]");
+  if (result) {
+    result.setAttribute("role", "status");
+    result.setAttribute("aria-live", "polite");
+    const updateResultState = () => {
+      const isError = toolErrorPattern.test(result.textContent || "");
+      result.classList.toggle("is-error", isError);
+      result.setAttribute("aria-live", isError ? "assertive" : "polite");
+    };
+    new MutationObserver(updateResultState).observe(result, { childList: true, subtree: true, characterData: true });
+    updateResultState();
+  }
+
+  form.addEventListener("invalid", (event) => {
+    const control = event.target;
+    if (!(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement || control instanceof HTMLSelectElement)) return;
+    control.setAttribute("aria-invalid", "true");
+    if (result) {
+      const label = control.closest("label")?.childNodes[0]?.textContent?.trim() || "输入内容";
+      result.textContent = `${label}：${control.validationMessage || "输入不符合要求"}`;
+    }
+  }, true);
+
+  form.addEventListener("input", (event) => {
+    if (event.target instanceof HTMLElement) event.target.removeAttribute("aria-invalid");
+  });
 });
 
 if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location.protocol)) {

@@ -57,12 +57,45 @@ DS18B20 与 PT100 -> 非阻塞采样调度 -> 越限确认 -> OLED 状态显示 
 6. 生成 Keil 工程、GCC HEX 和使用文档。
 
 ## 关键代码
-串口修改阈值后先规范上下限，再立即写入 Flash：
+### `Core/Src/app.c`：阈值规范化与保存
+阈值修改后先保证低值不高于高值，再写入 Flash：
 
 ```c
-NormalizeThresholds();
-SaveThresholds();
-return 1;
+static void NormalizeThresholds(void)
+{
+    float t;
+    if (ds_low_limit_c > ds_high_limit_c) {
+        t = ds_low_limit_c;
+        ds_low_limit_c = ds_high_limit_c;
+        ds_high_limit_c = t;
+    }
+    if (pt_low_limit_c > pt_high_limit_c) {
+        t = pt_low_limit_c;
+        pt_low_limit_c = pt_high_limit_c;
+        pt_high_limit_c = t;
+    }
+}
+```
+
+### `Core/Src/app_alarm.c`：非阻塞报警节奏
+报警任务用系统节拍翻转状态，不使用阻塞延时：
+
+```c
+void Alarm_Task(uint8_t enabled)
+{
+    static uint32_t last_toggle = 0;
+    static uint8_t state = 0;
+    if (!enabled) {
+        state = 0;
+        Alarm_Set(0);
+        return;
+    }
+    if ((HAL_GetTick() - last_toggle) >= 200U) {
+        state ^= 1U;
+        Alarm_Set(state);
+        last_toggle = HAL_GetTick();
+    }
+}
 ```
 
 ## 调试过程

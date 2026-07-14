@@ -23,7 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714i">
 </head>
 <body>
 
@@ -43,8 +43,14 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>MATLAB 数字调制识别仿真系统</h1><p class="article-lead">生成五类调制信号，在 AWGN 与多信噪比条件下提取特征并比较 RBF-SVM 和 KNN。</p><div class="article-meta"><span>通信仿真 · 2026-07 · 已完成仿真</span><span>约 3 分钟阅读</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>AWGN</span><span>SVM</span><span>KNN</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>MATLAB 数字调制识别仿真系统</h1><p class="article-lead">生成五类调制信号，在 AWGN 与多信噪比条件下提取特征并比较 RBF-SVM 和 KNN。</p><div class="article-meta"><span>通信仿真 · 2026-07 · 已完成仿真</span><span>约 4 分钟阅读</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>AWGN</span><span>SVM</span><span>KNN</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/digital-modulation-recognition-matlab/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-12">调试过程</a><a href="#section-13">遇到的问题</a><a href="#section-14">解决方案</a><a href="#section-15">最终效果</a><a href="#section-16">项目总结</a><a href="#section-17">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>项目使用 MATLAB 生成 ASK、FSK、BPSK、QPSK 和 16QAM 五类信号，在不同 SNR 下加入 AWGN，提取幅度、相位、频率变化和高阶累积量特征，并比较 RBF-SVM 与 KNN 的调制识别效果。</p>
 <h2 id="section-2">项目目标</h2>
 <ul>
@@ -85,25 +91,41 @@
 <li>输出准确率、混淆矩阵、特征数据和模型文件。</li>
 </ol>
 <h2 id="section-9">关键代码</h2>
+<h3 id="section-10"><code>src/run_modulation_recognition.m</code>：AWGN 注入</h3>
 <p>噪声功率由信号功率和目标 SNR 直接计算：</p>
 <pre><code class="language-matlab">noisePower = signalPower / (10^(snrDb / 10));
 noise = sqrt(noisePower / 2) * (randn(size(signal)) + 1j * randn(size(signal)));
 noisy = signal + noise;</code></pre>
-<h2 id="section-10">调试过程</h2>
+<h3 id="section-11"><code>src/run_modulation_recognition.m</code>：特征与分类器</h3>
+<p>信号先归一化，再计算相位差分与高阶累积量；训练阶段同时建立 SVM 和 KNN 作为对照：</p>
+<pre><code class="language-matlab">z = signal(:);
+z = z / sqrt(mean(abs(z).^2) + eps);
+zCentered = z - mean(z);
+phaseStep = wrapToPiLocal(diff(unwrap(angle(z))));
+
+m20 = mean(zCentered.^2);
+m40 = mean(zCentered.^4);
+c40 = m40 - 3 * m20^2;
+
+svmModel = fitcecoc(XTrain, YTrain, ...
+    &quot;Learners&quot;, templateSVM(&quot;KernelFunction&quot;, &quot;rbf&quot;, &quot;Standardize&quot;, true), ...
+    &quot;Coding&quot;, &quot;onevsone&quot;);
+svmPred = predict(svmModel, XTest);</code></pre>
+<h2 id="section-12">调试过程</h2>
 <p>先检查每类信号的时域、频谱和星座，再核对特征是否出现 NaN 或量纲异常；随后分别观察低 SNR 与高 SNR 的混淆矩阵，确认模型提升来自信噪比变化而不是数据泄漏。</p>
-<h2 id="section-11">遇到的问题</h2>
+<h2 id="section-13">遇到的问题</h2>
 <ul>
 <li>五类调制的幅度尺度不同，会让分类器过度依赖能量。</li>
 <li>低 SNR 下相位与频率差分特征波动明显。</li>
 <li>多分类 SVM 不能直接使用单个二分类器完成。</li>
 </ul>
-<h2 id="section-12">解决方案</h2>
+<h2 id="section-14">解决方案</h2>
 <p>每帧按平均功率归一化；同时使用幅度统计、相位差分和高阶累积量形成互补特征；通过 <code>fitcecoc</code> 采用 one-vs-one 编码组织多个 RBF-SVM 学习器。</p>
-<h2 id="section-13">最终效果</h2>
+<h2 id="section-15">最终效果</h2>
 <p>仓库结果显示 SVM 在 4 dB 后准确率接近 100%，6 dB 后达到 100%；KNN 在高 SNR 下表现良好，但低 SNR 稳定性较弱。工程输出逐 SNR 准确率、五类星座、两种混淆矩阵、完整特征表和模型文件。</p>
-<h2 id="section-14">项目总结</h2>
+<h2 id="section-16">项目总结</h2>
 <p>该项目形成了可重复的通信信号机器学习实验链路，并清楚保留参数、数据、模型和图表。结果属于仿真数据上的识别性能，不等同于真实射频采集环境。</p>
-<h2 id="section-15">GitHub 仓库链接</h2>
+<h2 id="section-17">GitHub 仓库链接</h2>
 <p><a href="https://github.com/jiayu-here/digital-modulation-recognition-matlab" target="_blank" rel="noreferrer">访问 digital-modulation-recognition-matlab</a></p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../temperature-inspector-stm32f103/index.html"><span>← 上一项</span><strong>STM32F103 双路温度检测与报警系统</strong></a>
     <a class="article-pagination-next" href="../personal-knowledge-base/index.html"><span>下一项 →</span><strong>个人知识库与本地资料检索应用</strong></a>
@@ -115,6 +137,6 @@ noisy = signal + noise;</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714c"></script>
+  <script src="../../assets/script.js?v=20260714e"></script>
 </body>
 </html>

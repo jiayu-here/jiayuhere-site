@@ -47,14 +47,24 @@ GitHub 远程更新 -> fetch 或 pull -> 本地同步确认
 5. 拉取远程更新并观察文件变化。
 
 ## 关键代码
-远程同步的最小命令链如下：
+### 检查远程与分支
+推送前先确认 remote 和当前分支，避免把提交发送到错误仓库：
 
 ```bash
 git remote -v
+git branch --show-current
+git status --short --branch
+```
+
+### 同步远程更新
+远程已经包含新提交时，先拉取并基于最新历史继续工作：
+
+```bash
+git fetch origin
+git pull --rebase origin main
 git add .
 git commit -m "Update hello file"
-git push
-git pull
+git push origin main
 ```
 
 ## 调试过程

@@ -54,13 +54,31 @@ Origin 2024、Origin COM Automation、LabTalk 草案、PowerShell、CSV、Excel 
 6. 整理中文操作文档和验收清单。
 
 ## 关键代码
-核心脚本通过 Origin COM 创建页面、写入矩阵并执行绘图命令：
+### `scripts/build_origin_project_com.ps1`：创建工作簿
+脚本通过 Origin COM 创建页面、配置列类型并一次写入数值矩阵：
 
 ```powershell
 $book = $Origin.CreatePage(2, $BookName)
 $wks = $Origin.FindWorksheet($book)
+$wks.Name = $SheetName
+$wks.Cols = $data.ColCount
+for ($i = 0; $i -lt $Columns.Count; $i++) {
+    $col = $wks.Columns.Item([byte]$i)
+    $col.Type = $Types[$i]
+    $col.LongName = $Columns[$i]
+}
 $wks.SetData($data.Matrix, 0, 0)
+```
+
+### `scripts/build_origin_project_com.ps1`：生成图页
+绘图函数统一处理标题、坐标轴和自动缩放：
+
+```powershell
 [void]$Origin.Execute("plotxy [$Book]1!($XCol1Based,$YCol1Based) plot:=200;")
+[void]$Origin.Execute("page.longname$ = `"$Title`";")
+[void]$Origin.Execute("layer.x.label$ = `"$XLabel`";")
+[void]$Origin.Execute("layer.y.label$ = `"$YLabel`";")
+[void]$Origin.Execute("rescale;")
 ```
 
 ## 调试过程

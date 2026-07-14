@@ -23,7 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714i">
 </head>
 <body>
 
@@ -43,8 +43,14 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>Python RRT 与 RRT* 路径规划演示</h1><p class="article-lead">纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。</p><div class="article-meta"><span>算法 · 2026-07 · 已完成</span><span>约 4 分钟阅读</span><div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>Python RRT 与 RRT* 路径规划演示</h1><p class="article-lead">纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。</p><div class="article-meta"><span>算法 · 2026-07 · 已完成</span><span>约 4 分钟阅读</span><div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/rrt-path-planning/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-12">调试过程</a><a href="#section-13">遇到的问题</a><a href="#section-14">解决方案</a><a href="#section-15">最终效果</a><a href="#section-16">项目总结</a><a href="#section-17">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>这是一个纯 Python 标准库实现的二维 RRT / RRT* 路径规划工程。项目同时提供 Tkinter 动画界面和无界面命令行模式，可读取 JSON 地图、处理多种障碍物、导出路径并运行单元测试。</p>
 <h2 id="section-2">项目目标</h2>
 <ul>
@@ -87,24 +93,38 @@
 <li>为正常、窄通道、无解和非法输入编写测试。</li>
 </ol>
 <h2 id="section-9">关键代码</h2>
+<h3 id="section-10"><code>src/rrt.py</code>：圆形障碍物碰撞</h3>
 <p>圆形障碍物通过“圆心到路径线段的最短距离”判断碰撞，并把机器人半径作为额外间隙：</p>
 <pre><code class="language-python">return distance_point_to_segment((self.x, self.y), a, b) &lt;= self.radius + clearance</code></pre>
-<h2 id="section-10">调试过程</h2>
+<h3 id="section-11"><code>src/rrt.py</code>：点到线段距离</h3>
+<p>投影比例会被限制在 <code>[0, 1]</code>，因此最近点始终位于有限线段而不是无限直线上：</p>
+<pre><code class="language-python">def distance_point_to_segment(point, a, b):
+    ax, ay = a
+    bx, by = b
+    px, py = point
+    dx, dy = bx - ax, by - ay
+    if dx == 0 and dy == 0:
+        return distance(point, a)
+    t = ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)
+    t = min(1.0, max(0.0, t))
+    closest = (ax + t * dx, ay + t * dy)
+    return distance(point, closest)</code></pre>
+<h2 id="section-12">调试过程</h2>
 <p>使用固定随机种子复现规划过程；先在默认地图验证成功路径，再使用窄通道观察步长与安全半径影响，最后用封闭墙地图检查无解分支。GUI 与无界面模式使用同一规划器结果。</p>
-<h2 id="section-11">遇到的问题</h2>
+<h2 id="section-13">遇到的问题</h2>
 <ul>
 <li>随机算法结果不固定，问题难以复现。</li>
 <li>只检查节点会漏掉路径线段穿越障碍物。</li>
 <li>RRT* 重连后需要同步维护子树代价。</li>
 <li>多边形和机器人半径使碰撞判断更复杂。</li>
 </ul>
-<h2 id="section-12">解决方案</h2>
+<h2 id="section-14">解决方案</h2>
 <p>为规划器提供独立随机种子；所有扩展边执行线段碰撞检测；RRT* 保存累计 cost 并在重连后刷新；通过障碍物膨胀统一处理机器人安全距离。</p>
-<h2 id="section-13">最终效果</h2>
+<h2 id="section-15">最终效果</h2>
 <p>工程可运行 RRT/RRT* 动画或无界面规划，支持 JSON 地图和路径 CSV/JSON 导出。测试目录覆盖默认地图、窄通道、无解地图、导出和非法起点。</p>
-<h2 id="section-14">项目总结</h2>
+<h2 id="section-16">项目总结</h2>
 <p>项目把路径规划算法、计算几何、可视化和可测试接口分层实现。它适合算法教学与桌面演示，尚未接入真实机器人定位、运动学或动态障碍物。</p>
-<h2 id="section-15">GitHub 仓库链接</h2>
+<h2 id="section-17">GitHub 仓库链接</h2>
 <p><a href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">访问 rrt-path-planning</a></p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../originlab-battery-aging/index.html"><span>← 上一项</span><strong>Origin 2024 锂电池老化与热安全分析</strong></a>
     <a class="article-pagination-next" href="../first-repo/index.html"><span>下一项 →</span><strong>first-repo Git 与 GitHub 入门练习</strong></a>
@@ -116,6 +136,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714c"></script>
+  <script src="../../assets/script.js?v=20260714e"></script>
 </body>
 </html>

@@ -54,6 +54,7 @@ PCF8591T ADC -> adc_valid -> 采样统计 -> 显示选择 -> 74HC595 数码管
 5. 运行 ModelSim、Quartus 全编译和 TimeQuest 检查。
 
 ## 关键代码
+### `rtl/dds_core.v`：相位累加器
 相位累加器每个时钟加上频率控制字，波形频率由 `phase_inc` 决定：
 
 ```verilog
@@ -62,6 +63,23 @@ always @(posedge clk or negedge reset_n) begin
     phase_acc <= 32'd0;
   else
     phase_acc <= phase_acc + phase_inc;
+end
+```
+
+### `rtl/adc_stats.v`：采样统计
+统计模块只在 `sample_valid` 有效时更新，并用移位实现资源开销较低的指数平均：
+
+```verilog
+always @(posedge clk or negedge rst_n) begin
+  if (!rst_n || clear) begin
+    min_value <= {WIDTH{1'b1}};
+    max_value <= {WIDTH{1'b0}};
+    avg_acc   <= {(WIDTH+AVG_SHIFT){1'b0}};
+  end else if (sample_valid) begin
+    if (sample_in < min_value) min_value <= sample_in;
+    if (sample_in > max_value) max_value <= sample_in;
+    avg_acc <= avg_acc - (avg_acc >> AVG_SHIFT) + sample_in;
+  end
 end
 ```
 

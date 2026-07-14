@@ -23,7 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714i">
 </head>
 <body>
 
@@ -43,8 +43,14 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 FreeRTOS 多模式智能小车</h1><p class="article-lead">包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p><div class="article-meta"><span>嵌入式 · 2026-07 · 软件构建完成，实车待验证</span><span>约 4 分钟阅读</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 FreeRTOS 多模式智能小车</h1><p class="article-lead">包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p><div class="article-meta"><span>嵌入式 · 2026-07 · 软件构建完成，实车待验证</span><span>约 4 分钟阅读</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-12">调试过程</a><a href="#section-13">遇到的问题</a><a href="#section-14">解决方案</a><a href="#section-15">最终效果</a><a href="#section-16">项目总结</a><a href="#section-17">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>这是面向 STM32F103C8T6 和 RCT6 的双轮智能小车固件。工程包含 HAL、CMSIS、FreeRTOS、启动文件、链接脚本、应用源码、预编译镜像、接线表、BOM、主机测试和操作文档，可直接构建并继续上板标定。</p>
 <h2 id="section-2">项目目标</h2>
 <ul>
@@ -91,26 +97,43 @@
 <li>运行主机测试并生成 ELF、HEX、BIN、MAP 与校验文件。</li>
 </ol>
 <h2 id="section-9">关键代码</h2>
+<h3 id="section-10"><code>App/Src/pid.c</code>：带限幅的 PID</h3>
 <p>PID 模块对积分项和最终输出分别限幅，降低积分饱和风险：</p>
-<pre><code class="language-c">pid-&gt;integral = clampf(pid-&gt;integral + error * dt_s, pid-&gt;integral_limit);
-output = pid-&gt;kp * error + pid-&gt;ki * pid-&gt;integral + pid-&gt;kd * derivative;
-return clampf(output, pid-&gt;output_limit);</code></pre>
-<h2 id="section-10">调试过程</h2>
+<pre><code class="language-c">float PID_Update(PIDController *pid, float setpoint, float measurement, float dt_s)
+{
+    const float error = setpoint - measurement;
+    const float derivative = (error - pid-&gt;previous_error) / dt_s;
+    pid-&gt;integral = clampf(pid-&gt;integral + error * dt_s, pid-&gt;integral_limit);
+    float output = pid-&gt;kp * error + pid-&gt;ki * pid-&gt;integral + pid-&gt;kd * derivative;
+    pid-&gt;previous_error = error;
+    return clampf(output, pid-&gt;output_limit);
+}</code></pre>
+<h3 id="section-11"><code>App/Src/protocol.c</code>：蓝牙命令解析</h3>
+<p>解析器严格检查参数数量和数值格式，避免错误命令进入控制任务：</p>
+<pre><code class="language-c">if (strcmp(verb, &quot;DRIVE&quot;) == 0) {
+    command-&gt;type = CMD_DRIVE;
+    if (!parse_float(next_token(&amp;cursor), &amp;command-&gt;a) ||
+        !parse_float(next_token(&amp;cursor), &amp;command-&gt;b)) {
+        return false;
+    }
+    return next_token(&amp;cursor) == NULL;
+}</code></pre>
+<h2 id="section-12">调试过程</h2>
 <p>先运行 PID 与协议主机测试，再分别构建 C8T6 和 RCT6。实车调试应按“架空车轮确认方向—标定 CPR/轮径/轮距—调整 PID—落地循迹避障—验证安全保护”的顺序推进，并通过 <code>STATUS</code>、<code>CONFIG</code> 和 <code>DIAG</code> 观察状态。</p>
-<h2 id="section-11">遇到的问题</h2>
+<h2 id="section-13">遇到的问题</h2>
 <ul>
 <li>C8T6 只有 64 KB Flash 和 20 KB RAM，FreeRTOS 任务与文档化功能容易超资源。</li>
 <li>电机、舵机浪涌可能造成复位。</li>
 <li>编码器符号错误会让 PID 形成正反馈。</li>
 <li>纯编码器里程计会因打滑累计漂移。</li>
 </ul>
-<h2 id="section-12">解决方案</h2>
+<h2 id="section-14">解决方案</h2>
 <p>链接脚本保留最后 1 KB 参数页，固定数组替代动态结构，OLED 不使用全屏缓冲；舵机使用独立 5 V 并共地；调 PID 前先验证编码器正方向；通过 <code>DIAG</code>、故障码和分阶段验收定位电源与控制问题。</p>
-<h2 id="section-13">最终效果</h2>
+<h2 id="section-15">最终效果</h2>
 <p>C8T6/RCT6 Arm GNU 交叉编译通过，PID 和协议主机测试通过，并生成预编译固件。C8T6 程序约 55 KB，保留参数页和约 8.9 KB Flash 余量。仓库明确标注：交付环境未连接实车，电气、机械、标定和长期运行仍需实物验证。</p>
-<h2 id="section-14">项目总结</h2>
+<h2 id="section-16">项目总结</h2>
 <p>该项目重点不是堆叠小车功能，而是建立任务优先级、控制周期、参数持久化、安全策略和可诊断交付。软件边界已验证，硬件结论仍按证据分开说明。</p>
-<h2 id="section-15">GitHub 仓库链接</h2>
+<h2 id="section-17">GitHub 仓库链接</h2>
 <p><a href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">访问 stm32f103-freertos-smartcar</a></p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../fpga-qpsk-baseband-system/index.html"><span>← 上一项</span><strong>FPGA QPSK 数字基带链路与可视化系统</strong></a>
     <a class="article-pagination-next" href="../temperature-inspector-stm32f103/index.html"><span>下一项 →</span><strong>STM32F103 双路温度检测与报警系统</strong></a>
@@ -122,6 +145,6 @@ return clampf(output, pid-&gt;output_limit);</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714c"></script>
+  <script src="../../assets/script.js?v=20260714e"></script>
 </body>
 </html>

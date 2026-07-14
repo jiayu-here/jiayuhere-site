@@ -319,7 +319,7 @@ const footer = (prefix) => `
     <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}feed.xml">RSS</a><a href="${prefix}sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260714c"></script>`;
+  <script src="${prefix}assets/script.js?v=20260714e"></script>`;
 
 const page = ({ prefix, active, title, description, content, type = "website", keywords = [] }) => `<!doctype html>
 <html lang="zh-CN">
@@ -339,7 +339,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="${prefix}feed.xml">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714h">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714i">
 </head>
 <body>
 ${nav(prefix, active)}
@@ -384,7 +384,14 @@ const buildDetail = async (section, item, index, items) => {
   const rendered = markdownToHtml(item.body);
   const toc = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
   const metaLine = [item.meta.category, item.meta.date, item.meta.status].filter(Boolean).map(escapeHtml).join(" · ");
-  const repository = item.meta.repository ? `<a class="button primary-button" href="${escapeHtml(item.meta.repository)}" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>` : "";
+  const repositoryBase = String(item.meta.repository || "").replace(/\/$/, "");
+  const repository = repositoryBase ? `<div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="${escapeHtml(repositoryBase)}" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="${escapeHtml(repositoryBase)}#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div>` : "";
   const previous = items[index - 1];
   const next = items[index + 1];
   const previousLabel = section === "articles" ? "上一篇" : "上一项";
@@ -403,15 +410,19 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   await writeFile(path.join(output, "index.html"), page({ prefix: "../../", active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [] }));
 };
 
-const updateHomeStats = async (counts) => {
+const updateHomeStats = async (counts, lastUpdated) => {
   const homePath = path.join(root, "index.html");
   let home = await readFile(homePath, "utf8");
 
   for (const [key, count] of Object.entries(counts)) {
-    const pattern = new RegExp(`(<strong data-site-stat="${key}">)\\d+(</strong>)`);
+    const pattern = new RegExp(`(<strong data-site-stat="${key}">)\\d+(</strong>)`, "g");
     if (!pattern.test(home)) throw new Error(`Homepage statistic marker missing: ${key}`);
     home = home.replace(pattern, `$1${count}$2`);
   }
+
+  const updatedPattern = /(<time data-site-updated>)[^<]+(<\/time>)/;
+  if (!updatedPattern.test(home)) throw new Error("Homepage last-updated marker missing");
+  home = home.replace(updatedPattern, `$1${lastUpdated}$2`);
 
   await writeFile(homePath, home);
 };
@@ -419,6 +430,7 @@ const updateHomeStats = async (counts) => {
 const build = async () => {
   const searchIndex = [];
   const sectionCounts = {};
+  const contentDates = [];
   let articleItems = [];
   const publicRepositories = await fetchPublicRepositories();
   for (const [section, config] of Object.entries(sections)) {
@@ -442,6 +454,7 @@ const build = async () => {
     for (const [index, item] of items.entries()) {
       await buildDetail(section, item, index, items);
       searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], content: plainText(item.body), url: `/${config.output}/${item.meta.slug}/` });
+      if (item.meta.date) contentDates.push(String(item.meta.date));
     }
     sectionCounts[section] = items.length;
     if (section === "articles") articleItems = items;
@@ -450,7 +463,24 @@ const build = async () => {
   await buildRss(articleItems);
   const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
   const toolCount = (toolbox.match(/<article\b[^>]*\bclass="[^"]*\btool-card\b[^"]*"/g) || []).length;
-  await updateHomeStats({ projects: sectionCounts.projects, articles: sectionCounts.articles, notes: sectionCounts.notes, tools: toolCount });
+  const lab = await readFile(path.join(root, "lab/index.html"), "utf8");
+  const logCount = (lab.match(/<article\b[^>]*\bclass="[^"]*\btimeline-item\b[^"]*">\s*<time>\d{4}/g) || []).length;
+  const topicCount = (terms) => searchIndex.filter((item) => {
+    const text = [item.title, item.description, item.category, ...(item.tags || [])].join(" ").toLowerCase();
+    return terms.some((term) => text.includes(term));
+  }).length;
+  await updateHomeStats({
+    projects: sectionCounts.projects,
+    articles: sectionCounts.articles,
+    notes: sectionCounts.notes,
+    tools: toolCount,
+    logs: logCount,
+    repositories: publicRepositories.length,
+    embedded: topicCount(["嵌入式", "stm32", "freertos", "adc", "pwm"]),
+    fpga: topicCount(["fpga", "verilog", "quartus", "modelsim", "dds"]),
+    communications: topicCount(["通信", "qpsk", "调制", "信号", "fft", "ber"]),
+    software: topicCount(["python", "数据库", "mysql", "docker", "web", "算法", "git"])
+  }, contentDates.sort().at(-1) || "暂无更新");
   await mkdir(path.join(root, "assets/data"), { recursive: true });
   await writeFile(path.join(root, "assets/data/search-index.json"), `${JSON.stringify(searchIndex, null, 2)}\n`);
   const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/"];

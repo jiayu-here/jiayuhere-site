@@ -46,13 +46,24 @@ Shell 练习文件 -> 权限与内容修改 -> 版本差异
 5. 在 GitHub 页面核对文件与提交历史。
 
 ## 关键代码
-核心练习是完整执行最小 Git 提交流程：
+### 最小提交与推送流程
+先查看状态，再明确暂存需要提交的文件：
 
 ```bash
 git status
 git add README.md file3.txt file4.txt file5.sh
 git commit -m "Update practice files"
 git push
+```
+
+### 提交前后的检查
+通过差异和日志确认提交内容，而不是把“保存文件”误认为“已经同步”：
+
+```bash
+git diff
+git diff --cached
+git log --oneline --decorate -5
+git status --short --branch
 ```
 
 ## 调试过程

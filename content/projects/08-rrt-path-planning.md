@@ -54,10 +54,28 @@ GUI 和命令行 -> app.py -> rrt.py 规划器 -> map_io.py 导出
 6. 为正常、窄通道、无解和非法输入编写测试。
 
 ## 关键代码
+### `src/rrt.py`：圆形障碍物碰撞
 圆形障碍物通过“圆心到路径线段的最短距离”判断碰撞，并把机器人半径作为额外间隙：
 
 ```python
 return distance_point_to_segment((self.x, self.y), a, b) <= self.radius + clearance
+```
+
+### `src/rrt.py`：点到线段距离
+投影比例会被限制在 `[0, 1]`，因此最近点始终位于有限线段而不是无限直线上：
+
+```python
+def distance_point_to_segment(point, a, b):
+    ax, ay = a
+    bx, by = b
+    px, py = point
+    dx, dy = bx - ax, by - ay
+    if dx == 0 and dy == 0:
+        return distance(point, a)
+    t = ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)
+    t = min(1.0, max(0.0, t))
+    closest = (ax + t * dx, ay + t * dy)
+    return distance(point, closest)
 ```
 
 ## 调试过程

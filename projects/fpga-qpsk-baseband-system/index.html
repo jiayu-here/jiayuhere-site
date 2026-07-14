@@ -23,7 +23,7 @@
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714i">
 </head>
 <body>
 
@@ -43,8 +43,14 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>FPGA QPSK 数字基带链路与可视化系统</h1><p class="article-lead">覆盖 PRBS、Gray 映射、相位信道、硬判决、BER、UART 遥测和 Python 星座图的 FPGA 通信工程。</p><div class="article-meta"><span>FPGA · 2026-07 · 已完成编译与仿真</span><span>约 4 分钟阅读</span><div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>FPGA QPSK 数字基带链路与可视化系统</h1><p class="article-lead">覆盖 PRBS、Gray 映射、相位信道、硬判决、BER、UART 遥测和 Python 星座图的 FPGA 通信工程。</p><div class="article-meta"><span>FPGA · 2026-07 · 已完成编译与仿真</span><span>约 4 分钟阅读</span><div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-12">调试过程</a><a href="#section-13">遇到的问题</a><a href="#section-14">解决方案</a><a href="#section-15">最终效果</a><a href="#section-16">项目总结</a><a href="#section-17">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>项目在 Cyclone IV E FPGA 上实现完整 QPSK 数字基带教学链路，并用 UART 和 Python 上位机观察发射点、接收点、I/Q 波形及误码率。工程同时提供 ModelSim CSV 路径，未连接硬件时也能验证数据链路。</p>
 <h2 id="section-2">项目目标</h2>
 <ul>
@@ -88,6 +94,7 @@
 <li>完成 Python 解析、Quartus 工程和板级 UART 约束。</li>
 </ol>
 <h2 id="section-9">关键代码</h2>
+<h3 id="section-10"><code>rtl/qpsk_channel_model.v</code>：离散相位旋转</h3>
 <p>相位旋转不使用三角函数，而是通过交换与取反完成：</p>
 <pre><code class="language-verilog">case (phase_sel)
   2'd0: begin ch_i = tx_i;  ch_q = tx_q;  end
@@ -95,21 +102,35 @@
   2'd2: begin ch_i = -tx_i; ch_q = -tx_q; end
   2'd3: begin ch_i = tx_q;  ch_q = -tx_i; end
 endcase</code></pre>
-<h2 id="section-10">调试过程</h2>
+<h3 id="section-11"><code>rtl/ber_counter.v</code>：误码统计</h3>
+<p>每个有效 QPSK 符号比较两个比特，并分别累计总比特数和错误比特数：</p>
+<pre><code class="language-verilog">wire [1:0] diff = tx_bits ^ rx_bits;
+wire [1:0] err_count = diff[0] + diff[1];
+
+always @(posedge clk) begin
+  if (!rst_n) begin
+    total_bits &lt;= 32'd0;
+    error_bits &lt;= 32'd0;
+  end else if (sym_en) begin
+    total_bits &lt;= total_bits + 32'd2;
+    error_bits &lt;= error_bits + err_count;
+  end
+end</code></pre>
+<h2 id="section-12">调试过程</h2>
 <p>先在固定相位下核对星座点，再逐一切换四种旋转状态；随后检查参考比特和判决结果的周期对齐。测试平台持续输出 <code>qpsk_samples.csv</code>，Python 先验证离线数据，再用于串口实时显示。</p>
-<h2 id="section-11">遇到的问题</h2>
+<h2 id="section-13">遇到的问题</h2>
 <ul>
 <li>发射参考和接收结果存在流水线延迟。</li>
 <li>I/Q 取反与位宽扩展容易丢失符号位。</li>
 <li>UART 吞吐量低于基带符号速率，不能逐符号无条件输出。</li>
 </ul>
-<h2 id="section-12">解决方案</h2>
+<h2 id="section-14">解决方案</h2>
 <p>增加参考数据延迟线；显式声明有符号信号并统一位宽；遥测采用抽样输出，使显示刷新率与通信链路速率解耦。</p>
-<h2 id="section-13">最终效果</h2>
+<h2 id="section-15">最终效果</h2>
 <p>ModelSim 仿真通过并生成 CSV；Quartus 生成 <code>fpga_qpsk_baseband_visual_system.sof</code>，当前 50 MHz 工程的 setup 与 hold slack 均为正。Python 程序可加载 CSV 或连接串口显示星座图、I/Q 和 BER。实际板卡 UART 管脚与跳帽仍需按实物确认。</p>
-<h2 id="section-14">项目总结</h2>
+<h2 id="section-16">项目总结</h2>
 <p>项目把通信原理中的星座映射、相位变化和 BER 落到可观察的 RTL 时序上。当前模型适合教学和链路验证，不把默认关闭的噪声接口描述为真实 AWGN 性能测试。</p>
-<h2 id="section-15">GitHub 仓库链接</h2>
+<h2 id="section-17">GitHub 仓库链接</h2>
 <p><a href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">访问 fpga_qpsk_baseband_visual_system</a></p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../fpga-dds-measure-system/index.html"><span>← 上一项</span><strong>FPGA 多功能 DDS 信号发生与测量系统</strong></a>
     <a class="article-pagination-next" href="../stm32f103-freertos-smartcar/index.html"><span>下一项 →</span><strong>STM32F103 FreeRTOS 多模式智能小车</strong></a>
@@ -121,6 +142,6 @@ endcase</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714c"></script>
+  <script src="../../assets/script.js?v=20260714e"></script>
 </body>
 </html>
