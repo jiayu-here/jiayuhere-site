@@ -4,6 +4,14 @@ import path from "node:path";
 const root = process.cwd();
 const githubUser = "jiayu-here";
 const excludedRepositories = new Set(["jiayuhere-site"]);
+const googleAnalyticsId = "G-V2VWFFLH85";
+const googleAnalyticsTag = `  <script async src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${googleAnalyticsId}');
+  </script>`;
 
 const sections = {
   projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品", eyebrow: "Engineering Portfolio" },
@@ -387,6 +395,14 @@ const build = async () => {
   const urls = [...staticUrls, ...searchIndex.map((item) => item.url.replace(/^\//, ""))];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>https://www.jiayuhere.com/${url}</loc><lastmod>2026-07-14</lastmod></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(root, "sitemap.xml"), sitemap);
+  for (const url of urls) {
+    const htmlPath = url ? path.join(root, url, "index.html") : path.join(root, "index.html");
+    let html = await readFile(htmlPath, "utf8");
+    if (!html.includes(`gtag/js?id=${googleAnalyticsId}`)) {
+      html = html.replace("<head>", `<head>\n${googleAnalyticsTag}`);
+      await writeFile(htmlPath, html);
+    }
+  }
   console.log(`Built ${searchIndex.length} Markdown pages.`);
 };
 
