@@ -438,7 +438,7 @@ const footer = (prefix, locale) => {
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [] }) => {
   const isEnglish = locale === "en";
-  const styleVersion = /^(projects|blog|notes)\/$/.test(route) ? "20260715b" : "20260714s";
+  const styleVersion = /^(projects|blog|notes)\/$/.test(route) ? "20260715d" : "20260714s";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
