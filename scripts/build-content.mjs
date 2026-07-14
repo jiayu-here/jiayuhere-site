@@ -339,7 +339,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="${prefix}feed.xml">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714k">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714l">
 </head>
 <body>
 ${nav(prefix, active)}
