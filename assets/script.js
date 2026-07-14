@@ -26,6 +26,152 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
 
+const sectionLabels = { projects: "项目", articles: "博客", notes: "笔记" };
+const searchTrigger = document.createElement("button");
+searchTrigger.type = "button";
+searchTrigger.className = "nav-search";
+searchTrigger.textContent = "搜索";
+searchTrigger.setAttribute("aria-haspopup", "dialog");
+searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
+
+const searchDialog = document.createElement("div");
+searchDialog.className = "search-overlay";
+searchDialog.id = "siteSearchDialog";
+searchDialog.hidden = true;
+searchDialog.innerHTML = `
+  <section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="siteSearchTitle">
+    <div class="search-dialog-head">
+      <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">搜索全站内容</h2></div>
+      <button class="search-close" type="button" aria-label="关闭搜索">×</button>
+    </div>
+    <label class="search-dialog-field"><span>输入项目、文章、笔记或技术关键词</span><input type="search" autocomplete="off" placeholder="例如：FPGA、FreeRTOS、通信原理"></label>
+    <p class="search-dialog-status" aria-live="polite">输入关键词后开始搜索。</p>
+    <div class="search-results"></div>
+  </section>`;
+
+const navContact = siteNav?.querySelector(".nav-cta");
+if (siteNav) siteNav.insertBefore(searchTrigger, navContact || null);
+document.body.append(searchDialog);
+
+const dialogInput = searchDialog.querySelector("input");
+const dialogStatus = searchDialog.querySelector(".search-dialog-status");
+const dialogResults = searchDialog.querySelector(".search-results");
+let searchIndexPromise;
+
+const loadSearchIndex = () => {
+  searchIndexPromise ||= fetch("/assets/data/search-index.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Search index unavailable");
+      return response.json();
+    });
+  return searchIndexPromise;
+};
+
+const renderSearchResults = async () => {
+  if (!dialogInput || !dialogStatus || !dialogResults) return;
+  const query = dialogInput.value.trim().toLowerCase();
+  dialogResults.replaceChildren();
+  if (!query) {
+    dialogStatus.textContent = "输入关键词后开始搜索。";
+    return;
+  }
+
+  dialogStatus.textContent = "正在搜索…";
+  try {
+    const index = await loadSearchIndex();
+    const terms = query.split(/\s+/).filter(Boolean);
+    const matches = index.filter((item) => {
+      const haystack = [item.title, item.description, item.category, ...(item.tags || []), item.content || ""].join(" ").toLowerCase();
+      return terms.every((term) => haystack.includes(term));
+    });
+
+    dialogStatus.textContent = matches.length ? `找到 ${matches.length} 项内容。` : "没有找到匹配内容，请换一个关键词。";
+    matches.slice(0, 12).forEach((item) => {
+      const link = document.createElement("a");
+      link.className = "search-result";
+      link.href = item.url;
+
+      const meta = document.createElement("span");
+      meta.className = "search-result-meta";
+      meta.textContent = `${sectionLabels[item.section] || "内容"} · ${item.category || "未分类"}`;
+
+      const title = document.createElement("strong");
+      title.textContent = item.title;
+
+      const description = document.createElement("span");
+      description.textContent = item.description;
+      link.append(meta, title, description);
+      dialogResults.append(link);
+    });
+  } catch {
+    dialogStatus.textContent = "搜索内容暂时无法加载，请稍后重试。";
+  }
+};
+
+const openSearch = () => {
+  setNavOpen(false);
+  searchDialog.hidden = false;
+  document.body.classList.add("search-open");
+  dialogInput?.focus();
+};
+
+const closeSearch = () => {
+  searchDialog.hidden = true;
+  document.body.classList.remove("search-open");
+  searchTrigger.focus();
+};
+
+searchTrigger.addEventListener("click", openSearch);
+searchDialog.querySelector(".search-close")?.addEventListener("click", closeSearch);
+searchDialog.addEventListener("click", (event) => {
+  if (event.target === searchDialog) closeSearch();
+});
+dialogInput?.addEventListener("input", renderSearchResults);
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !searchDialog.hidden) closeSearch();
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    openSearch();
+  }
+});
+
+document.querySelectorAll(".prose pre").forEach((pre) => {
+  const code = pre.querySelector("code");
+  if (!code) return;
+  const wrapper = document.createElement("div");
+  wrapper.className = "code-block";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "copy-code";
+  button.textContent = "复制代码";
+  button.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(code.textContent || "");
+      button.textContent = "已复制";
+      window.setTimeout(() => { button.textContent = "复制代码"; }, 1600);
+    } catch {
+      button.textContent = "复制失败";
+    }
+  });
+  pre.before(wrapper);
+  wrapper.append(button, pre);
+});
+
+const backToTop = document.createElement("button");
+backToTop.type = "button";
+backToTop.className = "back-to-top";
+backToTop.textContent = "↑";
+backToTop.setAttribute("aria-label", "返回页面顶部");
+backToTop.hidden = true;
+document.body.append(backToTop);
+
+const updateBackToTop = () => { backToTop.hidden = window.scrollY < 700; };
+window.addEventListener("scroll", updateBackToTop, { passive: true });
+backToTop.addEventListener("click", () => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+});
+
 const searchInput = document.querySelector("[data-content-search]");
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
 const contentCards = Array.from(document.querySelectorAll("[data-content-card]"));
@@ -204,3 +350,9 @@ document.querySelector("[data-qpsk-ber-form]")?.addEventListener("submit", (even
   const anyErrorProbability = -Math.expm1(bitCount * Math.log1p(-ber));
   result.textContent = `Es/N0             ${(ebn0Db + 10 * Math.log10(2)).toFixed(3)} dB\n理论 BER          ${ber.toExponential(4)}\n预计误码数        ${expectedErrors.toFixed(3)} / ${bitCount}\n至少出现 1 个误码  ${(anyErrorProbability * 100).toFixed(4)}%\n模型              Gray QPSK、相干解调、理想 AWGN`;
 });
+
+if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location.protocol)) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}

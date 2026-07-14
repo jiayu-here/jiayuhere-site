@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MySQL 索引为什么没有被使用：一份排查路径 | JiaYu Here</title>
   <meta name="description" content="从查询形态、选择性、类型转换和统计信息逐步定位索引失效。">
+  <meta name="keywords" content="MySQL, Index, SQL, EXPLAIN">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>MySQL 索引为什么没有被使用：一份排查路径</h1><p class="article-lead">从查询形态、选择性、类型转换和统计信息逐步定位索引失效。</p><div class="article-meta"><span>数据库 · 2026-07-08</span><div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>MySQL 索引为什么没有被使用：一份排查路径</h1><p class="article-lead">从查询形态、选择性、类型转换和统计信息逐步定位索引失效。</p><div class="article-meta"><span>数据库 · 2026-07-08</span><span>约 1 分钟阅读</span><div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先看执行计划</a><a href="#section-2">检查隐式类型转换</a><a href="#section-3">检查最左前缀</a><a href="#section-4">评估选择性</a><a href="#section-5">最后更新统计信息</a></aside><div class="prose"><h2 id="section-1">先看执行计划</h2>
 <p>使用 <code>EXPLAIN</code> 确认访问类型、候选索引、实际索引和预估扫描行数。不要仅凭查询耗时猜测数据库是否使用了索引。</p>
 <h2 id="section-2">检查隐式类型转换</h2>
@@ -43,7 +45,10 @@
 <h2 id="section-4">评估选择性</h2>
 <p>只有少量不同值的列即使有索引，也可能因为回表成本而被优化器放弃。索引不是越多越好。</p>
 <h2 id="section-5">最后更新统计信息</h2>
-<p>大量导入或删除数据后，统计信息可能与实际分布不一致。更新统计信息并重新查看计划，比强制索引更稳妥。</p></div></div>
+<p>大量导入或删除数据后，统计信息可能与实际分布不一致。更新统计信息并重新查看计划，比强制索引更稳妥。</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../freertos-priority-design/index.html"><span>← 上一篇</span><strong>FreeRTOS 任务优先级不是越高越重要</strong></a>
+
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -51,6 +56,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

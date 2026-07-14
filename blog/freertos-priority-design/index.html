@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FreeRTOS 任务优先级不是越高越重要 | JiaYu Here</title>
   <meta name="description" content="从响应期限、阻塞关系和资源竞争出发设计任务优先级。">
+  <meta name="keywords" content="FreeRTOS, STM32, Scheduling, RTOS">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 1 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">从截止时间开始</a><a href="#section-2">让任务主动阻塞</a><a href="#section-3">缩短临界区</a><a href="#section-4">注意优先级反转</a><a href="#section-5">用数据验证</a></aside><div class="prose"><h2 id="section-1">从截止时间开始</h2>
 <p>高优先级应留给真正有响应期限的工作，例如接收缓冲区即将溢出，而不是留给业务上“看起来重要”的模块。</p>
 <h2 id="section-2">让任务主动阻塞</h2>
@@ -43,7 +45,10 @@
 <h2 id="section-4">注意优先级反转</h2>
 <p>多个任务共享资源时使用互斥量而不是二值信号量，利用优先级继承降低反转风险。更好的做法是减少共享资源，让单一任务拥有外设。</p>
 <h2 id="section-5">用数据验证</h2>
-<p>记录任务运行时间、队列峰值、最小剩余堆栈和丢包计数。优先级设计应由这些数据修正，而不是只靠直觉。</p></div></div>
+<p>记录任务运行时间、队列峰值、最小剩余堆栈和丢包计数。优先级设计应由这些数据修正，而不是只靠直觉。</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../fpga-fixed-point-fft-checklist/index.html"><span>← 上一篇</span><strong>FPGA 定点 FFT 设计前必须想清楚的五件事</strong></a>
+    <a class="article-pagination-next" href="../mysql-index-debug-path/index.html"><span>下一篇 →</span><strong>MySQL 索引为什么没有被使用：一份排查路径</strong></a>
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -51,6 +56,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

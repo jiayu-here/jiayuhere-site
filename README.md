@@ -11,6 +11,8 @@
 
 网站采用轻量静态架构，继续兼容 GitHub Pages 根目录部署。项目、文章和笔记使用 Markdown 维护，由零依赖 Node.js 脚本生成静态详情页和站点地图。
 
+目前支持跟随系统深浅色、全站内容搜索、分类与标签、阅读时间、代码复制、前后内容导航、返回顶部和轻量离线访问。公开项目由 GitHub Actions 每小时同步，私有仓库与本站仓库不会展示。
+
 ## 目录结构
 
 ```text
@@ -28,7 +30,9 @@ content/articles/*.md       文章 Markdown 源文件
 content/notes/*.md          笔记 Markdown 源文件
 scripts/build-content.mjs   静态内容生成脚本
 assets/styles.css           全站样式
-assets/script.js            导航、筛选、搜索与工具交互
+assets/script.js            导航、全站搜索、阅读增强与工具交互
+assets/data/search-index.json  项目、博客、笔记的全站搜索索引
+sw.js                       PWA 离线缓存
 ```
 
 ## 新增内容
@@ -60,7 +64,7 @@ npm run check
 npm run build
 ```
 
-`npm run build` 会重新生成项目、博客和笔记页面，同时更新 `assets/data/search-index.json` 与 `sitemap.xml`。
+`npm run build` 会重新生成项目、博客和笔记页面，同时更新正文搜索索引 `assets/data/search-index.json` 与 `sitemap.xml`。详情页的阅读时间、目录和前后内容导航也会随 Markdown 自动更新。
 
 ## 本地预览
 

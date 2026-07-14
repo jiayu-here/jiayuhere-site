@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STM32F103 FreeRTOS 多模式智能小车 | JiaYu Here</title>
   <meta name="description" content="包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。">
+  <meta name="keywords" content="STM32, FreeRTOS, PID, Encoder, Bluetooth">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 FreeRTOS 多模式智能小车</h1><p class="article-lead">包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p><div class="article-meta"><span>嵌入式 · 2026-07 · 软件构建完成，实车待验证</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 FreeRTOS 多模式智能小车</h1><p class="article-lead">包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p><div class="article-meta"><span>嵌入式 · 2026-07 · 软件构建完成，实车待验证</span><span>约 4 分钟阅读</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>这是面向 STM32F103C8T6 和 RCT6 的双轮智能小车固件。工程包含 HAL、CMSIS、FreeRTOS、启动文件、链接脚本、应用源码、预编译镜像、接线表、BOM、主机测试和操作文档，可直接构建并继续上板标定。</p>
 <h2 id="section-2">项目目标</h2>
@@ -99,7 +101,10 @@ return clampf(output, pid-&gt;output_limit);</code></pre>
 <h2 id="section-14">项目总结</h2>
 <p>该项目重点不是堆叠小车功能，而是建立任务优先级、控制周期、参数持久化、安全策略和可诊断交付。软件边界已验证，硬件结论仍按证据分开说明。</p>
 <h2 id="section-15">GitHub 仓库链接</h2>
-<p><a href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">访问 stm32f103-freertos-smartcar</a></p></div></div>
+<p><a href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">访问 stm32f103-freertos-smartcar</a></p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../fpga-qpsk-baseband-system/index.html"><span>← 上一项</span><strong>FPGA QPSK 数字基带链路与可视化系统</strong></a>
+    <a class="article-pagination-next" href="../temperature-inspector-stm32f103/index.html"><span>下一项 →</span><strong>STM32F103 双路温度检测与报警系统</strong></a>
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -107,6 +112,6 @@ return clampf(output, pid-&gt;output_limit);</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

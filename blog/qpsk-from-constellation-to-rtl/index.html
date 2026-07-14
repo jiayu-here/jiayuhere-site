@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>从星座图到 RTL：QPSK 链路的实现顺序 | JiaYu Here</title>
   <meta name="description" content="用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。">
+  <meta name="keywords" content="QPSK, FPGA, BER, Gray">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>从星座图到 RTL：QPSK 链路的实现顺序</h1><p class="article-lead">用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</p><div class="article-meta"><span>通信原理 · 2026-07-14</span><div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>从星座图到 RTL：QPSK 链路的实现顺序</h1><p class="article-lead">用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</p><div class="article-meta"><span>通信原理 · 2026-07-14</span><span>约 2 分钟阅读</span><div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先固定映射约定</a><a href="#section-2">再处理有效信号</a><a href="#section-3">相位旋转不需要三角函数</a><a href="#section-4">最后接入可视化</a><a href="#section-5">验收清单</a></aside><div class="prose"><h2 id="section-1">先固定映射约定</h2>
 <p>QPSK 最容易出现的问题不是公式，而是发送端、接收端和绘图程序使用了不同的象限编号。实现前应把二比特到 I/Q 的表格写进文档和测试平台。</p>
 <h2 id="section-2">再处理有效信号</h2>
@@ -48,7 +50,10 @@
 <li>无噪声、零相位条件下 BER 为 0。</li>
 <li>四种旋转的星座位置符合预期。</li>
 <li>参考比特与判决结果在相同有效周期比较。</li>
-</ul></div></div>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+
+    <a class="article-pagination-next" href="../fpga-fixed-point-fft-checklist/index.html"><span>下一篇 →</span><strong>FPGA 定点 FFT 设计前必须想清楚的五件事</strong></a>
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -56,6 +61,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

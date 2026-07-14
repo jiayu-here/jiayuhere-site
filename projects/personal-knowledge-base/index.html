@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>个人知识库与本地资料检索应用 | JiaYu Here</title>
   <meta name="description" content="可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。">
+  <meta name="keywords" content="Python, SQLite, Docker, Search, Web">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>个人知识库与本地资料检索应用</h1><p class="article-lead">可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。</p><div class="article-meta"><span>Web 应用 · 2026-07 · 已完成本地验证</span><div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>个人知识库与本地资料检索应用</h1><p class="article-lead">可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。</p><div class="article-meta"><span>Web 应用 · 2026-07 · 已完成本地验证</span><span>约 4 分钟阅读</span><div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
 <p>这是一个运行在本机 Docker 中的个人知识库。用户登录后可上传 TXT、Markdown、PDF 和 DOCX，系统自动提取文本、切分资料并建立本地检索索引；提问时返回相关片段，配置 OpenAI API Key 后可进一步生成基于资料的回答。</p>
 <h2 id="section-2">项目目标</h2>
@@ -93,7 +95,10 @@ hits = sorted(rows, key=lambda row: cosine(query_vector, json.loads(row[2])), re
 <h2 id="section-14">项目总结</h2>
 <p>该项目优先保证个人场景下的简单、可迁移和可离线运行。当前本地向量适合个人资料检索与演示，不把它描述为商业级向量数据库或通用大模型平台。</p>
 <h2 id="section-15">GitHub 仓库链接</h2>
-<p><a href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">访问 personal-knowledge-base</a></p></div></div>
+<p><a href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">访问 personal-knowledge-base</a></p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../digital-modulation-recognition-matlab/index.html"><span>← 上一项</span><strong>MATLAB 数字调制识别仿真系统</strong></a>
+    <a class="article-pagination-next" href="../originlab-battery-aging/index.html"><span>下一项 →</span><strong>Origin 2024 锂电池老化与热安全分析</strong></a>
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -101,6 +106,6 @@ hits = sorted(rows, key=lambda row: cosine(query_vector, json.loads(row[2])), re
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

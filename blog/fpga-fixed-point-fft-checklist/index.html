@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FPGA 定点 FFT 设计前必须想清楚的五件事 | JiaYu Here</title>
   <meta name="description" content="从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。">
+  <meta name="keywords" content="FFT, Fixed Point, FPGA, DSP">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
@@ -13,7 +14,8 @@
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
 </head>
 <body>
 
@@ -33,7 +35,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 1 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">输入范围与 Q 格式</a><a href="#section-2">每级是否缩放</a><a href="#section-3">旋转因子的量化</a><a href="#section-4">数据顺序</a><a href="#section-5">验证方法</a></aside><div class="prose"><h2 id="section-1">输入范围与 Q 格式</h2>
 <p>先明确输入是否归一化、整数位有多少、符号位如何表示。没有统一 Q 格式，后续乘法器和误差分析都没有可靠基准。</p>
 <h2 id="section-2">每级是否缩放</h2>
@@ -43,7 +45,10 @@
 <h2 id="section-4">数据顺序</h2>
 <p>自然序输入、位反转输出和流式接口必须在顶层文档中写清。很多“FFT 结果错误”其实只是索引顺序不一致。</p>
 <h2 id="section-5">验证方法</h2>
-<p>使用冲激、单频正弦、双音和随机数据四组输入；把 RTL 输出还原为浮点后，与软件参考模型逐点比较误差。</p></div></div>
+<p>使用冲激、单频正弦、双音和随机数据四组输入；把 RTL 输出还原为浮点后，与软件参考模型逐点比较误差。</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../qpsk-from-constellation-to-rtl/index.html"><span>← 上一篇</span><strong>从星座图到 RTL：QPSK 链路的实现顺序</strong></a>
+    <a class="article-pagination-next" href="../freertos-priority-design/index.html"><span>下一篇 →</span><strong>FreeRTOS 任务优先级不是越高越重要</strong></a>
+  </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
@@ -51,6 +56,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714b"></script>
+  <script src="../../assets/script.js?v=20260714c"></script>
 </body>
 </html>

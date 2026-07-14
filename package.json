@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-content.mjs",
-    "check": "node --check assets/script.js && node --check scripts/build-content.mjs && node --check scripts/serve.mjs",
+    "check": "node --check assets/script.js && node --check scripts/build-content.mjs && node --check scripts/serve.mjs && node --check sw.js",
     "preview": "node scripts/serve.mjs"
   }
 }

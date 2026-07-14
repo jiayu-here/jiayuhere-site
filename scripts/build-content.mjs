@@ -17,6 +17,21 @@ const escapeHtml = (value = "") => String(value)
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");
 
+const plainText = (value = "") => String(value)
+  .replace(/^---[\s\S]*?---/m, " ")
+  .replace(/```[\s\S]*?```/g, " ")
+  .replace(/!?(?:\[([^\]]*)\])\([^)]*\)/g, "$1")
+  .replace(/[#>*_`~-]/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
+const readingMinutes = (value) => {
+  const text = plainText(value);
+  const chineseCharacters = (text.match(/[\u3400-\u9fff]/g) || []).length;
+  const latinWords = (text.replace(/[\u3400-\u9fff]/g, " ").match(/[A-Za-z0-9]+/g) || []).length;
+  return Math.max(1, Math.ceil(chineseCharacters / 300 + latinWords / 200));
+};
+
 const parseValue = (raw) => {
   const value = raw.trim();
   if (value.startsWith("[") && value.endsWith("]")) {
@@ -238,15 +253,16 @@ const footer = (prefix) => `
     <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260714b"></script>`;
+  <script src="${prefix}assets/script.js?v=20260714c"></script>`;
 
-const page = ({ prefix, active, title, description, content, type = "website" }) => `<!doctype html>
+const page = ({ prefix, active, title, description, content, type = "website", keywords = [] }) => `<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | JiaYu Here</title>
   <meta name="description" content="${escapeHtml(description)}">
+${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
@@ -255,7 +271,8 @@ const page = ({ prefix, active, title, description, content, type = "website" })
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714e">
+  <link rel="manifest" href="${prefix}site.webmanifest">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714f">
 </head>
 <body>
 ${nav(prefix, active)}
@@ -295,20 +312,28 @@ const buildIndex = async (section, items) => {
   await writeFile(path.join(root, config.output, "index.html"), page({ prefix: "../", active: section, title: config.title, description: config.title, content }));
 };
 
-const buildDetail = async (section, item) => {
+const buildDetail = async (section, item, index, items) => {
   const config = sections[section];
   const rendered = markdownToHtml(item.body);
   const toc = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
   const metaLine = [item.meta.category, item.meta.date, item.meta.status].filter(Boolean).map(escapeHtml).join(" · ");
   const repository = item.meta.repository ? `<a class="button primary-button" href="${escapeHtml(item.meta.repository)}" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>` : "";
+  const previous = items[index - 1];
+  const next = items[index + 1];
+  const previousLabel = section === "articles" ? "上一篇" : "上一项";
+  const nextLabel = section === "articles" ? "下一篇" : "下一项";
+  const pagination = previous || next ? `<nav class="article-pagination" aria-label="相邻内容">
+${previous ? `    <a href="../${escapeHtml(previous.meta.slug)}/index.html"><span>← ${previousLabel}</span><strong>${escapeHtml(previous.meta.title)}</strong></a>` : ""}
+${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta.slug)}/index.html"><span>${nextLabel} →</span><strong>${escapeHtml(next.meta.title)}</strong></a>` : ""}
+  </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回${config.label}</a><p class="eyebrow">${escapeHtml(config.eyebrow)}</p><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta"><span>${metaLine}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p>${toc}</aside><div class="prose">${rendered.html}</div></div>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回${config.label}</a><p class="eyebrow">${escapeHtml(config.eyebrow)}</p><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>约 ${readingMinutes(item.body)} 分钟阅读</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p>${toc}</aside><div class="prose">${rendered.html}${pagination}</div></div>
     </article>`;
   const output = path.join(root, config.output, item.meta.slug);
   await mkdir(output, { recursive: true });
-  await writeFile(path.join(output, "index.html"), page({ prefix: "../../", active: section, title: item.meta.title, description: item.meta.description, content, type: "article" }));
+  await writeFile(path.join(output, "index.html"), page({ prefix: "../../", active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [] }));
 };
 
 const updateHomeStats = async (counts) => {
@@ -346,9 +371,9 @@ const build = async () => {
       items.push(...publicRepositories.filter((repository) => !authoredNames.has(repository.name.toLowerCase())).map(fallbackProjectFor));
       await pruneProjectOutputs(items);
     }
-    for (const item of items) {
-      await buildDetail(section, item);
-      searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], url: `/${config.output}/${item.meta.slug}/` });
+    for (const [index, item] of items.entries()) {
+      await buildDetail(section, item, index, items);
+      searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], content: plainText(item.body), url: `/${config.output}/${item.meta.slug}/` });
     }
     sectionCounts[section] = items.length;
     await buildIndex(section, items);
