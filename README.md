@@ -28,6 +28,7 @@ contact/                    联系方式
 content/projects/*.md       项目 Markdown 源文件
 content/articles/*.md       文章 Markdown 源文件
 content/notes/*.md          笔记 Markdown 源文件
+content/templates/          可复制的文章、笔记与项目模板
 scripts/build-content.mjs   静态内容生成脚本
 assets/styles.css           全站样式
 assets/script.js            导航、全站搜索、阅读增强与工具交互
@@ -37,7 +38,7 @@ sw.js                       PWA 离线缓存
 
 ## 新增内容
 
-在对应 `content` 子目录复制一个现有 Markdown 文件，修改 front matter 和正文：
+在 `content/templates` 中复制对应模板到内容目录，再修改 front matter 和正文。完整步骤见根目录的 `写作与发布说明.md`。
 
 ```md
 ---
@@ -69,11 +70,12 @@ npm run build
 ## 本地预览
 
 ```powershell
-python -m http.server 8000
+npm run build
+npm run preview
 ```
 
 浏览器访问 `http://localhost:8000`。
 
 ## 发布
 
-仓库保留 `CNAME`，继续通过 GitHub Pages 发布到 `www.jiayuhere.com`。提交前应运行构建、链接检查和本地浏览器检查，并把 Markdown 源文件与生成后的 HTML 一起提交。
+仓库保留 `CNAME`，继续通过 GitHub Pages 发布到 `www.jiayuhere.com`。修改 Markdown 后提交并推送到 `main`，GitHub Actions 会自动构建生成页面、搜索索引和站点地图，再由 GitHub Pages 发布。公开项目仍会每小时同步一次。

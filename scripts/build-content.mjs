@@ -149,8 +149,8 @@ GitHub 标注的主要语言或技术为 ${language}。
   };
 };
 
-const pruneProjectOutputs = async (items) => {
-  const outputDir = path.join(root, sections.projects.output);
+const pruneOutputs = async (section, items) => {
+  const outputDir = path.join(root, sections[section].output);
   const activeSlugs = new Set(items.map((item) => item.meta.slug));
   const entries = await readdir(outputDir, { withFileTypes: true });
   for (const entry of entries) {
@@ -377,8 +377,8 @@ const build = async () => {
       const authoredNames = new Set(items.map(repositoryNameFor));
       items = items.filter((item) => publicByName.has(repositoryNameFor(item)));
       items.push(...publicRepositories.filter((repository) => !authoredNames.has(repository.name.toLowerCase())).map(fallbackProjectFor));
-      await pruneProjectOutputs(items);
     }
+    await pruneOutputs(section, items);
     for (const [index, item] of items.entries()) {
       await buildDetail(section, item, index, items);
       searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], content: plainText(item.body), url: `/${config.output}/${item.meta.slug}/` });
