@@ -362,10 +362,10 @@
       <form class="subscribe-form">
         <label for="email">邮箱</label>
         <div>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" enterkeyhint="send" aria-describedby="subscribeNote" required>
           <button class="button primary" type="submit">订阅</button>
         </div>
-        <p class="form-note" aria-live="polite"></p>
+        <p class="form-note" id="subscribeNote" aria-live="polite"></p>
       </form>
     </section>
   </main>
