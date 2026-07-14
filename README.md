@@ -11,7 +11,7 @@
 
 网站采用轻量静态架构，继续兼容 GitHub Pages 根目录部署。项目、文章和笔记使用 Markdown 维护，由零依赖 Node.js 脚本生成静态详情页和站点地图。
 
-目前支持跟随系统深浅色、全站内容搜索、分类与标签、阅读时间、代码复制、前后内容导航、返回顶部、轻量离线访问和 Google Analytics 4 访问统计。公开项目由 GitHub Actions 每小时同步，私有仓库与本站仓库不会展示。
+目前支持跟随系统深浅色、全站内容搜索、分类与标签、阅读时间、代码复制、前后内容导航、返回顶部、RSS 订阅、404 引导、轻量离线访问和 Google Analytics 4 访问统计。公开项目由 GitHub Actions 每小时同步，私有仓库与本站仓库不会展示。
 
 ## 目录结构
 
@@ -34,6 +34,8 @@ assets/styles.css           全站样式
 assets/script.js            导航、全站搜索、阅读增强与工具交互
 assets/data/search-index.json  项目、博客、笔记的全站搜索索引
 sw.js                       PWA 离线缓存
+404.html                    页面不存在时的引导页
+feed.xml / rss.xml          自动生成的技术博客 RSS
 ```
 
 ## 新增内容

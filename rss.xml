@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JiaYu Here 技术博客</title>
+    <link>https://www.jiayuhere.com/blog/</link>
+    <description>围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 14 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://www.jiayuhere.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从星座图到 RTL：QPSK 链路的实现顺序</title>
+      <link>https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</description>
+      <category>QPSK</category>
+      <category>FPGA</category>
+      <category>BER</category>
+      <category>Gray</category>
+    </item>
+    <item>
+      <title>FPGA 定点 FFT 设计前必须想清楚的五件事</title>
+      <link>https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/</guid>
+      <pubDate>Sun, 12 Jul 2026 00:00:00 GMT</pubDate>
+      <description>从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</description>
+      <category>FFT</category>
+      <category>Fixed Point</category>
+      <category>FPGA</category>
+      <category>DSP</category>
+    </item>
+    <item>
+      <title>FreeRTOS 任务优先级不是越高越重要</title>
+      <link>https://www.jiayuhere.com/blog/freertos-priority-design/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/freertos-priority-design/</guid>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
+      <description>从响应期限、阻塞关系和资源竞争出发设计任务优先级。</description>
+      <category>FreeRTOS</category>
+      <category>STM32</category>
+      <category>Scheduling</category>
+      <category>RTOS</category>
+    </item>
+    <item>
+      <title>MySQL 索引为什么没有被使用：一份排查路径</title>
+      <link>https://www.jiayuhere.com/blog/mysql-index-debug-path/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/mysql-index-debug-path/</guid>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
+      <description>从查询形态、选择性、类型转换和统计信息逐步定位索引失效。</description>
+      <category>MySQL</category>
+      <category>Index</category>
+      <category>SQL</category>
+      <category>EXPLAIN</category>
+    </item>
+  </channel>
+</rss>

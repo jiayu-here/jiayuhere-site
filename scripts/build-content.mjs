@@ -25,6 +25,13 @@ const escapeHtml = (value = "") => String(value)
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");
 
+const escapeXml = (value = "") => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&apos;");
+
 const plainText = (value = "") => String(value)
   .replace(/^---[\s\S]*?---/m, " ")
   .replace(/```[\s\S]*?```/g, " ")
@@ -175,6 +182,45 @@ const architectureDiagram = (lines) => {
   return `<div class="system-flow" role="img" aria-label="系统架构：${escapeHtml(label)}">${content}</div>`;
 };
 
+const rssDate = (value = "") => {
+  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00Z` : `${value}-01T00:00:00Z`;
+  const date = new Date(normalized);
+  if (Number.isNaN(date.valueOf())) throw new Error(`Invalid RSS date: ${value}`);
+  return date.toUTCString();
+};
+
+const buildRss = async (items) => {
+  const ordered = [...items].sort((left, right) => String(right.meta.date || "").localeCompare(String(left.meta.date || "")));
+  const entries = ordered.map((item) => {
+    const url = `https://www.jiayuhere.com/blog/${item.meta.slug}/`;
+    const categories = (item.meta.tags || []).map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\n");
+    return `    <item>
+      <title>${escapeXml(item.meta.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <pubDate>${rssDate(item.meta.date)}</pubDate>
+      <description>${escapeXml(item.meta.description)}</description>
+${categories}
+    </item>`;
+  }).join("\n");
+  const latestDate = ordered.length ? rssDate(ordered[0].meta.date) : new Date(0).toUTCString();
+  const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JiaYu Here 技术博客</title>
+    <link>https://www.jiayuhere.com/blog/</link>
+    <description>围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>${latestDate}</lastBuildDate>
+    <atom:link href="https://www.jiayuhere.com/feed.xml" rel="self" type="application/rss+xml" />
+${entries}
+  </channel>
+</rss>
+`;
+  await writeFile(path.join(root, "feed.xml"), feed);
+  await writeFile(path.join(root, "rss.xml"), feed);
+};
+
 const markdownToHtml = (markdown) => {
   const lines = markdown.split(/\r?\n/);
   const html = [];
@@ -270,7 +316,7 @@ const nav = (prefix, active = "") => `
 const footer = (prefix) => `
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="${prefix}index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
-    <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}sitemap.xml">站点地图</a></div>
+    <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}feed.xml">RSS</a><a href="${prefix}sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
   <script src="${prefix}assets/script.js?v=20260714c"></script>`;
@@ -290,6 +336,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="${prefix}feed.xml">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714h">
@@ -372,6 +419,7 @@ const updateHomeStats = async (counts) => {
 const build = async () => {
   const searchIndex = [];
   const sectionCounts = {};
+  let articleItems = [];
   const publicRepositories = await fetchPublicRepositories();
   for (const [section, config] of Object.entries(sections)) {
     const sourceDir = path.join(root, config.source);
@@ -396,8 +444,10 @@ const build = async () => {
       searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], content: plainText(item.body), url: `/${config.output}/${item.meta.slug}/` });
     }
     sectionCounts[section] = items.length;
+    if (section === "articles") articleItems = items;
     await buildIndex(section, items);
   }
+  await buildRss(articleItems);
   const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
   const toolCount = (toolbox.match(/<article\b[^>]*\bclass="[^"]*\btool-card\b[^"]*"/g) || []).length;
   await updateHomeStats({ projects: sectionCounts.projects, articles: sectionCounts.articles, notes: sectionCounts.notes, tools: toolCount });
