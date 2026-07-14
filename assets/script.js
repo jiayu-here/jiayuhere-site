@@ -238,6 +238,35 @@ filterButtons.forEach((button) => {
 searchInput?.addEventListener("input", updateContentList);
 updateContentList();
 
+document.querySelectorAll(".tool-card").forEach((card, index) => {
+  const form = card.querySelector(".tool-form");
+  if (!form) return;
+
+  const panelId = form.id || `tool-panel-${index + 1}`;
+  const toggleId = `tool-toggle-${index + 1}`;
+  form.id = panelId;
+  form.hidden = true;
+  form.setAttribute("aria-labelledby", toggleId);
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.id = toggleId;
+  toggle.className = "tool-card-toggle";
+  toggle.setAttribute("aria-controls", panelId);
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.innerHTML = `<span>${t("展开使用", "Open tool")}</span><span class="tool-toggle-icon" aria-hidden="true">+</span>`;
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    toggle.firstElementChild.textContent = expanded ? t("展开使用", "Open tool") : t("收起工具", "Close tool");
+    form.hidden = expanded;
+    card.classList.toggle("is-expanded", !expanded);
+  });
+
+  form.before(toggle);
+});
+
 const toNumber = (value) => {
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
