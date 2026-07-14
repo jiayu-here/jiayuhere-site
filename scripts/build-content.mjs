@@ -1,7 +1,9 @@
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
+const githubUser = "jiayu-here";
+const excludedRepositories = new Set(["jiayuhere-site"]);
 
 const sections = {
   projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品", eyebrow: "Engineering Portfolio" },
@@ -39,6 +41,100 @@ const parseDocument = (source, filePath) => {
   }
 
   return { meta, body: match[2].trim() };
+};
+
+const repositoryNameFor = (item) => {
+  if (!item.meta.repository) throw new Error(`Project repository missing: ${item.meta.title}`);
+  const repositoryUrl = new URL(item.meta.repository);
+  const [owner, name] = repositoryUrl.pathname.split("/").filter(Boolean);
+  if (owner?.toLowerCase() !== githubUser || !name) throw new Error(`Unexpected project repository: ${item.meta.repository}`);
+  return name.toLowerCase();
+};
+
+const fetchPublicRepositories = async () => {
+  const headers = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "jiayuhere-site-build"
+  };
+  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+
+  const response = await fetch(`https://api.github.com/users/${githubUser}/repos?per_page=100&sort=updated&direction=desc`, { headers });
+  if (!response.ok) throw new Error(`GitHub repository sync failed: ${response.status} ${response.statusText}`);
+  const repositories = await response.json();
+  return repositories.filter((repository) => !repository.fork && !excludedRepositories.has(repository.name));
+};
+
+const fallbackProjectFor = (repository) => {
+  const language = repository.language || "仓库未标注主要语言";
+  const description = repository.description || `公开仓库 ${repository.name}，仓库暂未填写简介。`;
+  const url = repository.html_url;
+  return {
+    meta: {
+      title: repository.name,
+      slug: repository.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      description,
+      category: language,
+      status: "公开仓库，自动同步",
+      date: String(repository.pushed_at || "").slice(0, 7),
+      tags: [language],
+      repository: url
+    },
+    body: `## 项目简介
+${description}
+
+## 项目目标
+此页面由公开仓库状态自动生成。更完整的目标以仓库 README 和后续项目文档为准。
+
+## 使用技术
+GitHub 标注的主要语言或技术为 ${language}。
+
+## 硬件环境
+当前公开仓库元数据未记录专用硬件环境。
+
+## 软件环境
+当前公开仓库元数据未记录完整软件版本，请查看仓库 README。
+
+## 系统架构
+系统架构尚未在网站内容源中单独整理。
+
+## 功能模块
+功能模块以仓库当前目录和 README 为准。
+
+## 实现步骤
+实现步骤尚未在网站内容源中单独整理。
+
+## 关键代码
+关键代码请直接进入 GitHub 仓库查看。
+
+## 调试过程
+调试记录尚未在网站内容源中单独整理。
+
+## 遇到的问题
+仓库元数据未提供问题记录。
+
+## 解决方案
+仓库元数据未提供解决方案记录。
+
+## 最终效果
+该仓库当前为公开状态，因此自动出现在项目列表中。
+
+## 项目总结
+这是一份自动同步的基础项目档案，后续可补充为完整手写说明。
+
+## GitHub 仓库链接
+[访问 ${repository.name}](${url})`
+  };
+};
+
+const pruneProjectOutputs = async (items) => {
+  const outputDir = path.join(root, sections.projects.output);
+  const activeSlugs = new Set(items.map((item) => item.meta.slug));
+  const entries = await readdir(outputDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory() && !activeSlugs.has(entry.name)) {
+      await rm(path.join(outputDir, entry.name), { recursive: true, force: true });
+    }
+  }
 };
 
 const inline = (value) => escapeHtml(value)
@@ -151,14 +247,15 @@ const page = ({ prefix, active, title, description, content, type = "website" })
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | JiaYu Here</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <meta name="theme-color" content="#f6f8fa">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
   <meta property="og:title" content="${escapeHtml(title)} | JiaYu Here">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714d">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714e">
 </head>
 <body>
 ${nav(prefix, active)}
@@ -230,16 +327,26 @@ const updateHomeStats = async (counts) => {
 const build = async () => {
   const searchIndex = [];
   const sectionCounts = {};
+  const publicRepositories = await fetchPublicRepositories();
   for (const [section, config] of Object.entries(sections)) {
     const sourceDir = path.join(root, config.source);
     const outputDir = path.join(root, config.output);
     await mkdir(outputDir, { recursive: true });
     const files = (await readdir(sourceDir)).filter((file) => file.endsWith(".md")).sort();
-    const items = [];
+    let items = [];
     for (const file of files) {
       const source = await readFile(path.join(sourceDir, file), "utf8");
       const item = parseDocument(source, file);
       items.push(item);
+    }
+    if (section === "projects") {
+      const publicByName = new Map(publicRepositories.map((repository) => [repository.name.toLowerCase(), repository]));
+      const authoredNames = new Set(items.map(repositoryNameFor));
+      items = items.filter((item) => publicByName.has(repositoryNameFor(item)));
+      items.push(...publicRepositories.filter((repository) => !authoredNames.has(repository.name.toLowerCase())).map(fallbackProjectFor));
+      await pruneProjectOutputs(items);
+    }
+    for (const item of items) {
       await buildDetail(section, item);
       searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], url: `/${config.output}/${item.meta.slug}/` });
     }

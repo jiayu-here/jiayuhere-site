@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python RRT 与 RRT* 路径规划演示 | JiaYu Here</title>
+  <meta name="description" content="纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Python RRT 与 RRT* 路径规划演示 | JiaYu Here">
+  <meta property="og:description" content="纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>Python RRT 与 RRT* 路径规划演示</h1><p class="article-lead">纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。</p><div class="article-meta"><span>算法 · 2026-07 · 已完成</span><div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+<p>这是一个纯 Python 标准库实现的二维 RRT / RRT* 路径规划工程。项目同时提供 Tkinter 动画界面和无界面命令行模式，可读取 JSON 地图、处理多种障碍物、导出路径并运行单元测试。</p>
+<h2 id="section-2">项目目标</h2>
+<ul>
+<li>实现基础 RRT 的快速可行路径搜索。</li>
+<li>实现 RRT* 的父节点优化和邻域重连。</li>
+<li>支持圆形、矩形、多边形和机器人安全半径。</li>
+<li>提供可暂停、单步、换随机种子和导出的可视化界面。</li>
+</ul>
+<h2 id="section-3">使用技术</h2>
+<p>Python、数据类、随机采样树、计算几何、线段碰撞检测、RRT* 重连、Tkinter、JSON、CSV 和 <code>unittest</code>。</p>
+<h2 id="section-4">硬件环境</h2>
+<p>不依赖专用硬件。普通电脑即可运行；图形模式需要桌面环境，命令行模式可在无界面环境执行。</p>
+<h2 id="section-5">软件环境</h2>
+<ul>
+<li>Python 3，项目不要求第三方包。</li>
+<li><code>python app.py</code> 启动 GUI。</li>
+<li><code>python app.py --headless --algorithm rrt_star --export</code> 执行无界面规划。</li>
+<li><code>python -m unittest discover -s tests -v</code> 运行测试。</li>
+</ul>
+<h2 id="section-6">系统架构</h2>
+<p><code>rrt.py</code> 只负责规划器、障碍物和几何计算；<code>map_io.py</code> 负责 JSON 读取和 CSV/JSON 导出；<code>app.py</code> 负责 GUI、命令行参数和动画播放。算法输出同时保留原始路径与简化路径。</p>
+<h2 id="section-7">功能模块</h2>
+<ul>
+<li>基础 RRT 和 RRT*。</li>
+<li>目标偏置采样、步长、终点半径与最大迭代参数。</li>
+<li>圆、轴对齐矩形和多边形碰撞检测。</li>
+<li>机器人半径对应的障碍物膨胀。</li>
+<li>默认、窄通道和无解地图。</li>
+<li>GUI 动画、暂停、单步、速度和路径导出。</li>
+</ul>
+<h2 id="section-8">实现步骤</h2>
+<ol>
+<li>定义点、树节点、规划结果和三类障碍物。</li>
+<li>实现采样、最近节点、定步长扩展和边碰撞检测。</li>
+<li>通过 parent 指针回溯路径并进行可视简化。</li>
+<li>为 RRT* 加入邻域选父和重连。</li>
+<li>接入 JSON 地图、Tkinter 动画和导出。</li>
+<li>为正常、窄通道、无解和非法输入编写测试。</li>
+</ol>
+<h2 id="section-9">关键代码</h2>
+<p>圆形障碍物通过“圆心到路径线段的最短距离”判断碰撞，并把机器人半径作为额外间隙：</p>
+<pre><code class="language-python">return distance_point_to_segment((self.x, self.y), a, b) &lt;= self.radius + clearance</code></pre>
+<h2 id="section-10">调试过程</h2>
+<p>使用固定随机种子复现规划过程；先在默认地图验证成功路径，再使用窄通道观察步长与安全半径影响，最后用封闭墙地图检查无解分支。GUI 与无界面模式使用同一规划器结果。</p>
+<h2 id="section-11">遇到的问题</h2>
+<ul>
+<li>随机算法结果不固定，问题难以复现。</li>
+<li>只检查节点会漏掉路径线段穿越障碍物。</li>
+<li>RRT* 重连后需要同步维护子树代价。</li>
+<li>多边形和机器人半径使碰撞判断更复杂。</li>
+</ul>
+<h2 id="section-12">解决方案</h2>
+<p>为规划器提供独立随机种子；所有扩展边执行线段碰撞检测；RRT* 保存累计 cost 并在重连后刷新；通过障碍物膨胀统一处理机器人安全距离。</p>
+<h2 id="section-13">最终效果</h2>
+<p>工程可运行 RRT/RRT* 动画或无界面规划，支持 JSON 地图和路径 CSV/JSON 导出。测试目录覆盖默认地图、窄通道、无解地图、导出和非法起点。</p>
+<h2 id="section-14">项目总结</h2>
+<p>项目把路径规划算法、计算几何、可视化和可测试接口分层实现。它适合算法教学与桌面演示，尚未接入真实机器人定位、运动学或动态障碍物。</p>
+<h2 id="section-15">GitHub 仓库链接</h2>
+<p><a href="https://github.com/jiayu-here/rrt-path-planning" target="_blank" rel="noreferrer">访问 rrt-path-planning</a></p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714b"></script>
+</body>
+</html>

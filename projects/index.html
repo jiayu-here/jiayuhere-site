@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>项目作品 | JiaYu Here</title>
   <meta name="description" content="项目作品">
-  <meta name="theme-color" content="#f6f8fa">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:title" content="项目作品 | JiaYu Here">
   <meta property="og:description" content="项目作品">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="../assets/styles.css?v=20260714d">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260714e">
 </head>
 <body>
 
@@ -34,42 +35,66 @@
     <section class="page-hero compact-hero">
       <div class="container"><p class="eyebrow">Engineering Portfolio</p><h1>项目作品</h1><p>记录从需求分析、系统设计到调试交付的完整工程过程。</p></div>
     </section>
-    <section class="section container"><div class="filter-row section-filter" role="group" aria-label="内容分类"><button class="filter-chip is-active" type="button" data-filter="all">全部</button><button class="filter-chip" type="button" data-filter="FPGA">FPGA</button><button class="filter-chip" type="button" data-filter="数据库">数据库</button><button class="filter-chip" type="button" data-filter="STM32">STM32</button><button class="filter-chip" type="button" data-filter="通信仿真">通信仿真</button><button class="filter-chip" type="button" data-filter="工程环境">工程环境</button></div><div class="content-grid" data-content-grid><article class="content-card" data-content-card data-category="FPGA" data-search="fpga 多功能 dds 信号发生与测量系统 在 cyclone iv e 上完成多波形 dds、ad/da 采集、实时统计、数码管显示与完整编译交付。 fpga verilog dds quartus modelsim matlab">
-    <div class="card-topline"><span>FPGA</span><span>已完成</span></div>
+    <section class="section container"><div class="filter-row section-filter" role="group" aria-label="内容分类"><button class="filter-chip is-active" type="button" data-filter="all">全部</button><button class="filter-chip" type="button" data-filter="FPGA">FPGA</button><button class="filter-chip" type="button" data-filter="嵌入式">嵌入式</button><button class="filter-chip" type="button" data-filter="通信仿真">通信仿真</button><button class="filter-chip" type="button" data-filter="Web 应用">Web 应用</button><button class="filter-chip" type="button" data-filter="数据分析">数据分析</button><button class="filter-chip" type="button" data-filter="算法">算法</button><button class="filter-chip" type="button" data-filter="工程基础">工程基础</button></div><div class="content-grid" data-content-grid><article class="content-card" data-content-card data-category="FPGA" data-search="fpga 多功能 dds 信号发生与测量系统 面向 cyclone iv e 开发板的多波形 dds、pcf8591 ad/da、实时统计和数码管显示完整工程。 fpga verilog dds quartus modelsim matlab">
+    <div class="card-topline"><span>FPGA</span><span>已完成编译与仿真</span></div>
     <h2><a href="../projects/fpga-dds-measure-system/index.html">FPGA 多功能 DDS 信号发生与测量系统</a></h2>
-    <p>在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。</p>
+    <p>面向 Cyclone IV E 开发板的多波形 DDS、PCF8591 AD/DA、实时统计和数码管显示完整工程。</p>
     <div class="tag-list"><span>Verilog</span><span>DDS</span><span>Quartus</span><span>ModelSim</span><span>MATLAB</span></div>
     <a class="text-link" href="../projects/fpga-dds-measure-system/index.html">查看详情 <span aria-hidden="true">→</span></a>
-  </article><article class="content-card" data-content-card data-category="FPGA" data-search="fpga qpsk 数字基带链路与可视化系统 从 prbs、gray 映射、相位信道、硬判决到 ber 统计和 python 星座图的完整数字通信实践。 fpga qpsk verilog ber uart python">
-    <div class="card-topline"><span>FPGA</span><span>已完成</span></div>
+  </article><article class="content-card" data-content-card data-category="FPGA" data-search="fpga qpsk 数字基带链路与可视化系统 覆盖 prbs、gray 映射、相位信道、硬判决、ber、uart 遥测和 python 星座图的 fpga 通信工程。 fpga qpsk verilog ber uart python">
+    <div class="card-topline"><span>FPGA</span><span>已完成编译与仿真</span></div>
     <h2><a href="../projects/fpga-qpsk-baseband-system/index.html">FPGA QPSK 数字基带链路与可视化系统</a></h2>
-    <p>从 PRBS、Gray 映射、相位信道、硬判决到 BER 统计和 Python 星座图的完整数字通信实践。</p>
+    <p>覆盖 PRBS、Gray 映射、相位信道、硬判决、BER、UART 遥测和 Python 星座图的 FPGA 通信工程。</p>
     <div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div>
     <a class="text-link" href="../projects/fpga-qpsk-baseband-system/index.html">查看详情 <span aria-hidden="true">→</span></a>
-  </article><article class="content-card" data-content-card data-category="数据库" data-search="个人知识库与全文检索 web 应用 使用 python、sqlite、本地向量检索和轻量前端构建可登录、可检索、可维护的个人知识管理系统。 数据库 python sqlite search docker web">
-    <div class="card-topline"><span>数据库</span><span>已完成</span></div>
-    <h2><a href="../projects/personal-knowledge-base/index.html">个人知识库与全文检索 Web 应用</a></h2>
-    <p>使用 Python、SQLite、本地向量检索和轻量前端构建可登录、可检索、可维护的个人知识管理系统。</p>
-    <div class="tag-list"><span>Python</span><span>SQLite</span><span>Search</span><span>Docker</span><span>Web</span></div>
+  </article><article class="content-card" data-content-card data-category="嵌入式" data-search="stm32f103 freertos 多模式智能小车 包含双轮 pid、编码器里程计、循迹避障、flash 参数、安全保护和完整文档的 freertos 小车固件。 嵌入式 stm32 freertos pid encoder bluetooth">
+    <div class="card-topline"><span>嵌入式</span><span>软件构建完成，实车待验证</span></div>
+    <h2><a href="../projects/stm32f103-freertos-smartcar/index.html">STM32F103 FreeRTOS 多模式智能小车</a></h2>
+    <p>包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p>
+    <div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div>
+    <a class="text-link" href="../projects/stm32f103-freertos-smartcar/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="嵌入式" data-search="stm32f103 双路温度检测与报警系统 集成 ds18b20、pt100、oled、声光报警、sd 记录、串口调参和 flash 阈值保存的 stm32 工程。 嵌入式 stm32 ds18b20 pt100 fatfs oled">
+    <div class="card-topline"><span>嵌入式</span><span>工程与固件已生成</span></div>
+    <h2><a href="../projects/temperature-inspector-stm32f103/index.html">STM32F103 双路温度检测与报警系统</a></h2>
+    <p>集成 DS18B20、PT100、OLED、声光报警、SD 记录、串口调参和 Flash 阈值保存的 STM32 工程。</p>
+    <div class="tag-list"><span>STM32</span><span>DS18B20</span><span>PT100</span><span>FatFs</span><span>OLED</span></div>
+    <a class="text-link" href="../projects/temperature-inspector-stm32f103/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="通信仿真" data-search="matlab 数字调制识别仿真系统 生成五类调制信号，在 awgn 与多信噪比条件下提取特征并比较 rbf-svm 和 knn。 通信仿真 matlab modulation awgn svm knn">
+    <div class="card-topline"><span>通信仿真</span><span>已完成仿真</span></div>
+    <h2><a href="../projects/digital-modulation-recognition-matlab/index.html">MATLAB 数字调制识别仿真系统</a></h2>
+    <p>生成五类调制信号，在 AWGN 与多信噪比条件下提取特征并比较 RBF-SVM 和 KNN。</p>
+    <div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>AWGN</span><span>SVM</span><span>KNN</span></div>
+    <a class="text-link" href="../projects/digital-modulation-recognition-matlab/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="Web 应用" data-search="个人知识库与本地资料检索应用 可登录、可上传文档、可本地检索并可选接入 ai 回答的 docker 化个人知识库。 web 应用 python sqlite docker search web">
+    <div class="card-topline"><span>Web 应用</span><span>已完成本地验证</span></div>
+    <h2><a href="../projects/personal-knowledge-base/index.html">个人知识库与本地资料检索应用</a></h2>
+    <p>可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。</p>
+    <div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div>
     <a class="text-link" href="../projects/personal-knowledge-base/index.html">查看详情 <span aria-hidden="true">→</span></a>
-  </article><article class="content-card" data-content-card data-category="STM32" data-search="stm32 + freertos 多任务采集终端 面向传感器采集、串口通信和状态显示的嵌入式多任务项目记录模板。 stm32 stm32 freertos uart dma c">
-    <div class="card-topline"><span>STM32</span><span>规划中</span></div>
-    <h2><a href="../projects/stm32-freertos-data-terminal/index.html">STM32 + FreeRTOS 多任务采集终端</a></h2>
-    <p>面向传感器采集、串口通信和状态显示的嵌入式多任务项目记录模板。</p>
-    <div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>UART</span><span>DMA</span><span>C</span></div>
-    <a class="text-link" href="../projects/stm32-freertos-data-terminal/index.html">查看详情 <span aria-hidden="true">→</span></a>
-  </article><article class="content-card" data-content-card data-category="通信仿真" data-search="matlab 数字通信链路仿真平台 用统一参数和可重复实验脚本比较调制、滤波、信道与误码率性能。 通信仿真 matlab qpsk awgn ber dsp">
-    <div class="card-topline"><span>通信仿真</span><span>规划中</span></div>
-    <h2><a href="../projects/matlab-digital-communication-link/index.html">MATLAB 数字通信链路仿真平台</a></h2>
-    <p>用统一参数和可重复实验脚本比较调制、滤波、信道与误码率性能。</p>
-    <div class="tag-list"><span>MATLAB</span><span>QPSK</span><span>AWGN</span><span>BER</span><span>DSP</span></div>
-    <a class="text-link" href="../projects/matlab-digital-communication-link/index.html">查看详情 <span aria-hidden="true">→</span></a>
-  </article><article class="content-card" data-content-card data-category="工程环境" data-search="docker + mysql 可复现实验环境 为数据库与 web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。 工程环境 docker mysql compose backup linux">
-    <div class="card-topline"><span>工程环境</span><span>规划中</span></div>
-    <h2><a href="../projects/docker-mysql-lab-environment/index.html">Docker + MySQL 可复现实验环境</a></h2>
-    <p>为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。</p>
-    <div class="tag-list"><span>Docker</span><span>MySQL</span><span>Compose</span><span>Backup</span><span>Linux</span></div>
-    <a class="text-link" href="../projects/docker-mysql-lab-environment/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="数据分析" data-search="origin 2024 锂电池老化与热安全分析 使用 csv、excel、powershell com 与 origin 2024 组织循环老化、dq/dv、热响应和 eis 分析。 数据分析 origin excel powershell battery eis">
+    <div class="card-topline"><span>数据分析</span><span>已生成分析成果</span></div>
+    <h2><a href="../projects/originlab-battery-aging/index.html">Origin 2024 锂电池老化与热安全分析</a></h2>
+    <p>使用 CSV、Excel、PowerShell COM 与 Origin 2024 组织循环老化、dQ/dV、热响应和 EIS 分析。</p>
+    <div class="tag-list"><span>Origin</span><span>Excel</span><span>PowerShell</span><span>Battery</span><span>EIS</span></div>
+    <a class="text-link" href="../projects/originlab-battery-aging/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="算法" data-search="python rrt 与 rrt* 路径规划演示 纯 python 标准库实现的二维随机树规划、障碍物碰撞检测、gui 演示和路径导出工程。 算法 python rrt rrt star tkinter path planning">
+    <div class="card-topline"><span>算法</span><span>已完成</span></div>
+    <h2><a href="../projects/rrt-path-planning/index.html">Python RRT 与 RRT* 路径规划演示</a></h2>
+    <p>纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。</p>
+    <div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div>
+    <a class="text-link" href="../projects/rrt-path-planning/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="工程基础" data-search="first-repo git 与 github 入门练习 用简单文本与 shell 文件练习仓库创建、readme、提交和推送的第一个 github 仓库。 工程基础 git github shell readme">
+    <div class="card-topline"><span>工程基础</span><span>学习仓库</span></div>
+    <h2><a href="../projects/first-repo/index.html">first-repo Git 与 GitHub 入门练习</a></h2>
+    <p>用简单文本与 Shell 文件练习仓库创建、README、提交和推送的第一个 GitHub 仓库。</p>
+    <div class="tag-list"><span>Git</span><span>GitHub</span><span>Shell</span><span>README</span></div>
+    <a class="text-link" href="../projects/first-repo/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="工程基础" data-search="remote-repo 远程仓库同步练习 聚焦 git 本地仓库与 github 远程仓库连接、推送、拉取和同步确认的最小练习项目。 工程基础 git github remote push pull">
+    <div class="card-topline"><span>工程基础</span><span>学习仓库</span></div>
+    <h2><a href="../projects/remote-repo/index.html">remote-repo 远程仓库同步练习</a></h2>
+    <p>聚焦 Git 本地仓库与 GitHub 远程仓库连接、推送、拉取和同步确认的最小练习项目。</p>
+    <div class="tag-list"><span>Git</span><span>GitHub</span><span>Remote</span><span>Push</span><span>Pull</span></div>
+    <a class="text-link" href="../projects/remote-repo/index.html">查看详情 <span aria-hidden="true">→</span></a>
   </article></div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section></main>
 
   <footer class="site-footer">

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>first-repo Git 与 GitHub 入门练习 | JiaYu Here</title>
+  <meta name="description" content="用简单文本与 Shell 文件练习仓库创建、README、提交和推送的第一个 GitHub 仓库。">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="first-repo Git 与 GitHub 入门练习 | JiaYu Here">
+  <meta property="og:description" content="用简单文本与 Shell 文件练习仓库创建、README、提交和推送的第一个 GitHub 仓库。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>first-repo Git 与 GitHub 入门练习</h1><p class="article-lead">用简单文本与 Shell 文件练习仓库创建、README、提交和推送的第一个 GitHub 仓库。</p><div class="article-meta"><span>工程基础 · 2026-07 · 学习仓库</span><div class="tag-list"><span>Git</span><span>GitHub</span><span>Shell</span><span>README</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/first-repo" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+<p>这是第一个 GitHub 学习仓库，用少量文本和 Shell 文件记录从本地修改到远程提交的基础流程。仓库定位是版本控制练习，不是完整业务应用。</p>
+<h2 id="section-2">项目目标</h2>
+<ul>
+<li>学会创建仓库和编写 README。</li>
+<li>理解工作区、暂存区、本地提交和远程仓库。</li>
+<li>跑通修改、提交、推送和网页确认流程。</li>
+</ul>
+<h2 id="section-3">使用技术</h2>
+<p>Git、GitHub、Markdown、Shell 和命令行。</p>
+<h2 id="section-4">硬件环境</h2>
+<p>不需要专用硬件，普通电脑即可完成练习。</p>
+<h2 id="section-5">软件环境</h2>
+<p>Git 命令行、文本编辑器、终端和 GitHub 账号。</p>
+<h2 id="section-6">系统架构</h2>
+<p>仓库结构保持最小：README 说明用途，三个文本练习文件用于观察变更，一个 Shell 文件用于练习可执行脚本和版本记录。</p>
+<h2 id="section-7">功能模块</h2>
+<ul>
+<li><code>README.md</code>：项目说明。</li>
+<li><code>file3.txt</code>、<code>file4.txt</code>：文本修改练习。</li>
+<li><code>file5.sh</code>：Shell 文件练习。</li>
+</ul>
+<h2 id="section-8">实现步骤</h2>
+<ol>
+<li>创建 GitHub 仓库并建立本地目录。</li>
+<li>添加 README 和练习文件。</li>
+<li>使用 <code>git status</code> 检查变化。</li>
+<li>暂存、提交并推送。</li>
+<li>在 GitHub 页面核对文件与提交历史。</li>
+</ol>
+<h2 id="section-9">关键代码</h2>
+<p>核心练习是完整执行最小 Git 提交流程：</p>
+<pre><code class="language-bash">git status
+git add README.md file3.txt file4.txt file5.sh
+git commit -m &quot;Update practice files&quot;
+git push</code></pre>
+<h2 id="section-10">调试过程</h2>
+<p>通过 <code>git status</code>、<code>git log</code> 和 GitHub 提交页面对照本地与远程状态；文件未出现时检查是否已暂存、是否提交到正确分支以及 remote 地址是否正确。</p>
+<h2 id="section-11">遇到的问题</h2>
+<p>初学阶段容易混淆“保存文件”“本地提交”和“推送远程”三个动作，也容易遗漏 README 或错误文件。</p>
+<h2 id="section-12">解决方案</h2>
+<p>每一步都先运行 <code>git status</code>，提交后查看 <code>git log</code>，推送后再到 GitHub 页面核对，建立可重复的检查顺序。</p>
+<h2 id="section-13">最终效果</h2>
+<p>仓库已公开保存 README、文本文件、Shell 文件和提交记录，完成了最基础的 GitHub 工作流练习。</p>
+<h2 id="section-14">项目总结</h2>
+<p>这个仓库的价值是建立版本控制操作习惯。它明确标注为学习仓库，避免与完整工程项目混淆。</p>
+<h2 id="section-15">GitHub 仓库链接</h2>
+<p><a href="https://github.com/jiayu-here/first-repo" target="_blank" rel="noreferrer">访问 first-repo</a></p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714b"></script>
+</body>
+</html>

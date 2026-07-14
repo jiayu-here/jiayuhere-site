@@ -2,7 +2,7 @@
   {
     "section": "projects",
     "title": "FPGA 多功能 DDS 信号发生与测量系统",
-    "description": "在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。",
+    "description": "面向 Cyclone IV E 开发板的多波形 DDS、PCF8591 AD/DA、实时统计和数码管显示完整工程。",
     "category": "FPGA",
     "tags": [
       "Verilog",
@@ -16,7 +16,7 @@
   {
     "section": "projects",
     "title": "FPGA QPSK 数字基带链路与可视化系统",
-    "description": "从 PRBS、Gray 映射、相位信道、硬判决到 BER 统计和 Python 星座图的完整数字通信实践。",
+    "description": "覆盖 PRBS、Gray 映射、相位信道、硬判决、BER、UART 遥测和 Python 星座图的 FPGA 通信工程。",
     "category": "FPGA",
     "tags": [
       "QPSK",
@@ -29,59 +29,114 @@
   },
   {
     "section": "projects",
-    "title": "个人知识库与全文检索 Web 应用",
-    "description": "使用 Python、SQLite、本地向量检索和轻量前端构建可登录、可检索、可维护的个人知识管理系统。",
-    "category": "数据库",
+    "title": "STM32F103 FreeRTOS 多模式智能小车",
+    "description": "包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。",
+    "category": "嵌入式",
+    "tags": [
+      "STM32",
+      "FreeRTOS",
+      "PID",
+      "Encoder",
+      "Bluetooth"
+    ],
+    "url": "/projects/stm32f103-freertos-smartcar/"
+  },
+  {
+    "section": "projects",
+    "title": "STM32F103 双路温度检测与报警系统",
+    "description": "集成 DS18B20、PT100、OLED、声光报警、SD 记录、串口调参和 Flash 阈值保存的 STM32 工程。",
+    "category": "嵌入式",
+    "tags": [
+      "STM32",
+      "DS18B20",
+      "PT100",
+      "FatFs",
+      "OLED"
+    ],
+    "url": "/projects/temperature-inspector-stm32f103/"
+  },
+  {
+    "section": "projects",
+    "title": "MATLAB 数字调制识别仿真系统",
+    "description": "生成五类调制信号，在 AWGN 与多信噪比条件下提取特征并比较 RBF-SVM 和 KNN。",
+    "category": "通信仿真",
+    "tags": [
+      "MATLAB",
+      "Modulation",
+      "AWGN",
+      "SVM",
+      "KNN"
+    ],
+    "url": "/projects/digital-modulation-recognition-matlab/"
+  },
+  {
+    "section": "projects",
+    "title": "个人知识库与本地资料检索应用",
+    "description": "可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。",
+    "category": "Web 应用",
     "tags": [
       "Python",
       "SQLite",
-      "Search",
       "Docker",
+      "Search",
       "Web"
     ],
     "url": "/projects/personal-knowledge-base/"
   },
   {
     "section": "projects",
-    "title": "STM32 + FreeRTOS 多任务采集终端",
-    "description": "面向传感器采集、串口通信和状态显示的嵌入式多任务项目记录模板。",
-    "category": "STM32",
+    "title": "Origin 2024 锂电池老化与热安全分析",
+    "description": "使用 CSV、Excel、PowerShell COM 与 Origin 2024 组织循环老化、dQ/dV、热响应和 EIS 分析。",
+    "category": "数据分析",
     "tags": [
-      "STM32",
-      "FreeRTOS",
-      "UART",
-      "DMA",
-      "C"
+      "Origin",
+      "Excel",
+      "PowerShell",
+      "Battery",
+      "EIS"
     ],
-    "url": "/projects/stm32-freertos-data-terminal/"
+    "url": "/projects/originlab-battery-aging/"
   },
   {
     "section": "projects",
-    "title": "MATLAB 数字通信链路仿真平台",
-    "description": "用统一参数和可重复实验脚本比较调制、滤波、信道与误码率性能。",
-    "category": "通信仿真",
+    "title": "Python RRT 与 RRT* 路径规划演示",
+    "description": "纯 Python 标准库实现的二维随机树规划、障碍物碰撞检测、GUI 演示和路径导出工程。",
+    "category": "算法",
     "tags": [
-      "MATLAB",
-      "QPSK",
-      "AWGN",
-      "BER",
-      "DSP"
+      "Python",
+      "RRT",
+      "RRT Star",
+      "Tkinter",
+      "Path Planning"
     ],
-    "url": "/projects/matlab-digital-communication-link/"
+    "url": "/projects/rrt-path-planning/"
   },
   {
     "section": "projects",
-    "title": "Docker + MySQL 可复现实验环境",
-    "description": "为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。",
-    "category": "工程环境",
+    "title": "first-repo Git 与 GitHub 入门练习",
+    "description": "用简单文本与 Shell 文件练习仓库创建、README、提交和推送的第一个 GitHub 仓库。",
+    "category": "工程基础",
     "tags": [
-      "Docker",
-      "MySQL",
-      "Compose",
-      "Backup",
-      "Linux"
+      "Git",
+      "GitHub",
+      "Shell",
+      "README"
     ],
-    "url": "/projects/docker-mysql-lab-environment/"
+    "url": "/projects/first-repo/"
+  },
+  {
+    "section": "projects",
+    "title": "remote-repo 远程仓库同步练习",
+    "description": "聚焦 Git 本地仓库与 GitHub 远程仓库连接、推送、拉取和同步确认的最小练习项目。",
+    "category": "工程基础",
+    "tags": [
+      "Git",
+      "GitHub",
+      "Remote",
+      "Push",
+      "Pull"
+    ],
+    "url": "/projects/remote-repo/"
   },
   {
     "section": "articles",

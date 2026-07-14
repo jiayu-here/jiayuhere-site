@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Origin 2024 锂电池老化与热安全分析 | JiaYu Here</title>
+  <meta name="description" content="使用 CSV、Excel、PowerShell COM 与 Origin 2024 组织循环老化、dQ/dV、热响应和 EIS 分析。">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Origin 2024 锂电池老化与热安全分析 | JiaYu Here">
+  <meta property="og:description" content="使用 CSV、Excel、PowerShell COM 与 Origin 2024 组织循环老化、dQ/dV、热响应和 EIS 分析。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>Origin 2024 锂电池老化与热安全分析</h1><p class="article-lead">使用 CSV、Excel、PowerShell COM 与 Origin 2024 组织循环老化、dQ/dV、热响应和 EIS 分析。</p><div class="article-meta"><span>数据分析 · 2026-07 · 已生成分析成果</span><div class="tag-list"><span>Origin</span><span>Excel</span><span>PowerShell</span><span>Battery</span><span>EIS</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/originlab-battery-aging-project" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+<p>这是一个使用 Origin 2024 完成的锂离子电池循环老化与热安全综合示范项目。仓库包含科研风格的演示数据、Excel 审阅工作簿、Origin COM 自动化脚本、图表预览和已生成的 <code>.opju</code> 项目文件。</p>
+<h2 id="section-2">项目目标</h2>
+<ul>
+<li>串联 CSV 导入、工作簿整理、科研作图和结果交付。</li>
+<li>覆盖容量保持率、dQ/dV、热响应和 EIS Nyquist 分析。</li>
+<li>让修改 CSV 后能够通过脚本重新生成 Origin 项目。</li>
+<li>同时提供 Excel 审阅入口和 Origin 正式项目入口。</li>
+</ul>
+<h2 id="section-3">使用技术</h2>
+<p>Origin 2024、Origin COM Automation、LabTalk 草案、PowerShell、CSV、Excel 工作簿和科研数据可视化。</p>
+<h2 id="section-4">硬件环境</h2>
+<p>不依赖实验硬件。项目使用合成但接近科研格式的演示数据，需要一台可运行 Windows、Excel 和 Origin 2024 的电脑。</p>
+<h2 id="section-5">软件环境</h2>
+<ul>
+<li>Windows PowerShell。</li>
+<li>Origin 2024，用于打开和重新生成 <code>.opju</code>。</li>
+<li>Microsoft Excel，用于审阅 <code>Battery_Aging_Origin_Analysis.xlsx</code>。</li>
+<li>脚本入口为 <code>scripts/run_origin_automation.ps1</code>。</li>
+</ul>
+<h2 id="section-6">系统架构</h2>
+<p><code>data/</code> 保存原始和宽表 CSV；PowerShell 读取数值并通过 Origin COM 创建工作簿、设置列类型、执行 <code>plotxy</code> 和保存 OPJU；<code>analysis/</code> 提供 Excel 汇总；<code>results/</code> 保存 Origin 项目和预览图。</p>
+<h2 id="section-7">功能模块</h2>
+<ul>
+<li>循环容量保持率趋势。</li>
+<li>dQ/dV 峰位移动数据。</li>
+<li>环境温度与倍率对应的热响应数据。</li>
+<li>0、250、500 次循环的 EIS Nyquist 数据。</li>
+<li>COM 自动创建工作簿、图页和 OPJU。</li>
+<li>Excel 公式、汇总页和快速预览。</li>
+</ul>
+<h2 id="section-8">实现步骤</h2>
+<ol>
+<li>生成并整理四类演示 CSV 数据。</li>
+<li>构建 Excel 审阅工作簿与图表预览。</li>
+<li>将 Origin 所需数据转换为宽表。</li>
+<li>编写 COM 函数创建工作簿、写入矩阵和设置列类型。</li>
+<li>调用 Origin 命令生成图页并保存 <code>.opju</code>。</li>
+<li>整理中文操作文档和验收清单。</li>
+</ol>
+<h2 id="section-9">关键代码</h2>
+<p>核心脚本通过 Origin COM 创建页面、写入矩阵并执行绘图命令：</p>
+<pre><code class="language-powershell">$book = $Origin.CreatePage(2, $BookName)
+$wks = $Origin.FindWorksheet($book)
+$wks.SetData($data.Matrix, 0, 0)
+[void]$Origin.Execute(&quot;plotxy [$Book]1!($XCol1Based,$YCol1Based) plot:=200;&quot;)</code></pre>
+<h2 id="section-10">调试过程</h2>
+<p>先在 Excel 中核对原始表、汇总和预览图，再运行 COM 脚本生成 OPJU。若 Origin 窗口未出现，则检查结果文件修改时间和后台进程；修改数据时先保持列名与结构不变，再验证脚本可重复生成。</p>
+<h2 id="section-11">遇到的问题</h2>
+<ul>
+<li>PowerShell 执行策略可能阻止脚本。</li>
+<li><code>.opju</code> 必须由 Origin 打开，Excel 只能查看审阅包。</li>
+<li>修改列名或增删列后，COM 脚本的列配置会失效。</li>
+<li>自动化结束后需要确保 Origin 进程正常退出。</li>
+</ul>
+<h2 id="section-12">解决方案</h2>
+<p>使用进程级 <code>ExecutionPolicy Bypass</code> 临时放行；分别提供 OPJU 与 XLSX；把列名和类型集中到脚本参数中；保存后调用 Origin 退出，并通过结果文件和进程状态验收。</p>
+<h2 id="section-13">最终效果</h2>
+<p>仓库包含可直接打开的 <code>OriginLab_Battery_Aging_Project.opju</code>、Excel 分析包、四类数据、预览图和可重复执行的 PowerShell 自动化脚本。</p>
+<h2 id="section-14">项目总结</h2>
+<p>项目展示了 Origin、Excel 和脚本自动化之间的完整数据工作流。所有电池数据均为合成演示数据，结果用于流程展示，不属于真实实验或安全认证结论。</p>
+<h2 id="section-15">GitHub 仓库链接</h2>
+<p><a href="https://github.com/jiayu-here/originlab-battery-aging-project" target="_blank" rel="noreferrer">访问 originlab-battery-aging-project</a></p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714b"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STM32F103 FreeRTOS 多模式智能小车 | JiaYu Here</title>
+  <meta name="description" content="包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="STM32F103 FreeRTOS 多模式智能小车 | JiaYu Here">
+  <meta property="og:description" content="包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714e">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32F103 FreeRTOS 多模式智能小车</h1><p class="article-lead">包含双轮 PID、编码器里程计、循迹避障、Flash 参数、安全保护和完整文档的 FreeRTOS 小车固件。</p><div class="article-meta"><span>嵌入式 · 2026-07 · 软件构建完成，实车待验证</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">使用技术</a><a href="#section-4">硬件环境</a><a href="#section-5">软件环境</a><a href="#section-6">系统架构</a><a href="#section-7">功能模块</a><a href="#section-8">实现步骤</a><a href="#section-9">关键代码</a><a href="#section-10">调试过程</a><a href="#section-11">遇到的问题</a><a href="#section-12">解决方案</a><a href="#section-13">最终效果</a><a href="#section-14">项目总结</a><a href="#section-15">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+<p>这是面向 STM32F103C8T6 和 RCT6 的双轮智能小车固件。工程包含 HAL、CMSIS、FreeRTOS、启动文件、链接脚本、应用源码、预编译镜像、接线表、BOM、主机测试和操作文档，可直接构建并继续上板标定。</p>
+<h2 id="section-2">项目目标</h2>
+<ul>
+<li>在资源较小的 C8T6 上实现可调度、可诊断的多任务小车控制。</li>
+<li>完成电机闭环、循迹、避障、定距、定角和路线队列。</li>
+<li>加入低电、急停、堵转、任务健康和看门狗保护。</li>
+<li>同时支持 C8T6 与 RCT6 构建，保留完整交付资料。</li>
+</ul>
+<h2 id="section-3">使用技术</h2>
+<p>C、STM32 HAL、FreeRTOS、双轮速度 PID、AB 相编码器、二维里程计、Flash CRC 记录、StreamBuffer、IWDG、CMake、Ninja、Arm GNU Toolchain 和 Python 串口控制台。</p>
+<h2 id="section-4">硬件环境</h2>
+<ul>
+<li>STM32F103C8T6 或 STM32F103RCT6。</li>
+<li>TB6612FNG、电机与双 AB 相编码器。</li>
+<li>五路红外、HC-SR04、SG90、HC-05、SSD1306 OLED。</li>
+<li>电池采样、蜂鸣器、LED、ST-Link 和独立 5 V 舵机电源。</li>
+</ul>
+<h2 id="section-5">软件环境</h2>
+<ul>
+<li>Windows PowerShell。</li>
+<li>Arm GNU Toolchain、CMake 和 Ninja。</li>
+<li>Python 3 串口控制台。</li>
+<li>仓库自带 HAL、CMSIS、FreeRTOS 和一键构建、烧录、测试脚本。</li>
+</ul>
+<h2 id="section-6">系统架构</h2>
+<p>系统分为应用层、BSP、HAL/CMSIS 和 FreeRTOS 内核。七个任务按安全、控制、通信、行为、传感、显示和监控分工；安全任务优先级最高，控制任务以 10 ms 周期完成编码器、斜坡、PID 和里程计；通信任务通过 StreamBuffer 解析蓝牙命令。</p>
+<h2 id="section-7">功能模块</h2>
+<ul>
+<li>双电机 20 kHz PWM、双编码器测速和独立 PID。</li>
+<li>手动、循迹、避障、融合和巡航模式。</li>
+<li><code>MOVE</code>、<code>TURN</code> 与 8 段路线队列。</li>
+<li>Flash 参数保存、CRC 和追加式磨损均衡。</li>
+<li>OLED、UART 日志、故障历史、复位原因与任务栈诊断。</li>
+</ul>
+<h2 id="section-8">实现步骤</h2>
+<ol>
+<li>建立 BSP 和 C8T6/RCT6 双目标构建。</li>
+<li>完成编码器方向、RPM 计算和左右轮 PID。</li>
+<li>在 FreeRTOS 中划分安全、控制、行为和通信任务。</li>
+<li>加入模式状态机、里程计和定量运动。</li>
+<li>加入 Flash 参数、安全保护、诊断和文档。</li>
+<li>运行主机测试并生成 ELF、HEX、BIN、MAP 与校验文件。</li>
+</ol>
+<h2 id="section-9">关键代码</h2>
+<p>PID 模块对积分项和最终输出分别限幅，降低积分饱和风险：</p>
+<pre><code class="language-c">pid-&gt;integral = clampf(pid-&gt;integral + error * dt_s, pid-&gt;integral_limit);
+output = pid-&gt;kp * error + pid-&gt;ki * pid-&gt;integral + pid-&gt;kd * derivative;
+return clampf(output, pid-&gt;output_limit);</code></pre>
+<h2 id="section-10">调试过程</h2>
+<p>先运行 PID 与协议主机测试，再分别构建 C8T6 和 RCT6。实车调试应按“架空车轮确认方向—标定 CPR/轮径/轮距—调整 PID—落地循迹避障—验证安全保护”的顺序推进，并通过 <code>STATUS</code>、<code>CONFIG</code> 和 <code>DIAG</code> 观察状态。</p>
+<h2 id="section-11">遇到的问题</h2>
+<ul>
+<li>C8T6 只有 64 KB Flash 和 20 KB RAM，FreeRTOS 任务与文档化功能容易超资源。</li>
+<li>电机、舵机浪涌可能造成复位。</li>
+<li>编码器符号错误会让 PID 形成正反馈。</li>
+<li>纯编码器里程计会因打滑累计漂移。</li>
+</ul>
+<h2 id="section-12">解决方案</h2>
+<p>链接脚本保留最后 1 KB 参数页，固定数组替代动态结构，OLED 不使用全屏缓冲；舵机使用独立 5 V 并共地；调 PID 前先验证编码器正方向；通过 <code>DIAG</code>、故障码和分阶段验收定位电源与控制问题。</p>
+<h2 id="section-13">最终效果</h2>
+<p>C8T6/RCT6 Arm GNU 交叉编译通过，PID 和协议主机测试通过，并生成预编译固件。C8T6 程序约 55 KB，保留参数页和约 8.9 KB Flash 余量。仓库明确标注：交付环境未连接实车，电气、机械、标定和长期运行仍需实物验证。</p>
+<h2 id="section-14">项目总结</h2>
+<p>该项目重点不是堆叠小车功能，而是建立任务优先级、控制周期、参数持久化、安全策略和可诊断交付。软件边界已验证，硬件结论仍按证据分开说明。</p>
+<h2 id="section-15">GitHub 仓库链接</h2>
+<p><a href="https://github.com/jiayu-here/stm32f103-freertos-smartcar" target="_blank" rel="noreferrer">访问 stm32f103-freertos-smartcar</a></p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714b"></script>
+</body>
+</html>
