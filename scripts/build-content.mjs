@@ -142,7 +142,7 @@ const footer = (prefix) => `
     <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260714a"></script>`;
+  <script src="${prefix}assets/script.js?v=20260714b"></script>`;
 
 const page = ({ prefix, active, title, description, content, type = "website" }) => `<!doctype html>
 <html lang="zh-CN">
@@ -151,14 +151,14 @@ const page = ({ prefix, active, title, description, content, type = "website" })
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | JiaYu Here</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <meta name="theme-color" content="#eef7f4">
+  <meta name="theme-color" content="#f6f8fa">
   <meta property="og:type" content="${type}">
   <meta property="og:title" content="${escapeHtml(title)} | JiaYu Here">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714a">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714b">
 </head>
 <body>
 ${nav(prefix, active)}

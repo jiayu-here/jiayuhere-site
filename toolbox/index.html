@@ -1,9 +1,98 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人工具箱 | JiaYu Here</title><meta name="description" content="进制转换、波特率计算和电阻分压计算等轻量工程工具。"><meta name="theme-color" content="#eef7f4"><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles.css?v=20260714a"></head><body>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人工具箱 | JiaYu Here</title><meta name="description" content="进制转换、波特率计算和电阻分压计算等轻量工程工具。"><meta name="theme-color" content="#f6f8fa"><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles.css?v=20260714b"></head><body>
 <a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button><nav class="site-nav" id="siteNav" aria-label="主要导航"><a href="../projects/index.html">项目</a><a href="../blog/index.html">博客</a><a href="../notes/index.html">笔记</a><a aria-current="page" href="index.html">工具箱</a><a href="../resources/index.html">资源</a><a href="../lab/index.html">日志</a><a class="nav-cta" href="../contact/index.html">联系我</a></nav></header>
-<main id="main"><section class="page-hero compact-hero"><div class="container"><p class="eyebrow">Personal Toolbox</p><h1>少而实用的工程工具</h1><p>所有计算都在当前浏览器本地完成，不上传输入数据。结果用于快速核对，关键设计仍应结合目标芯片手册验证。</p></div></section>
-<section class="section container"><div class="tool-grid">
-<article class="tool-card"><p class="eyebrow">01 · NUMBER</p><h2>进制转换</h2><p>输入一个整数，快速查看二、八、十和十六进制表示。</p><form class="tool-form" data-base-form><label class="tool-field">原始进制<select name="sourceBase"><option value="10">十进制</option><option value="2">二进制</option><option value="8">八进制</option><option value="16">十六进制</option></select></label><label class="tool-field">数值<input name="baseValue" value="255" required></label><button class="tool-button" type="submit">转换</button><output class="tool-result" data-tool-result>等待计算</output></form></article>
-<article class="tool-card"><p class="eyebrow">02 · UART</p><h2>波特率分频估算</h2><p>按整数分频模型估算实际波特率与相对误差。</p><form class="tool-form" data-baud-form><label class="tool-field">外设时钟 Hz<input name="clock" type="number" value="72000000" min="1" required></label><label class="tool-field">目标波特率 bps<input name="baud" type="number" value="115200" min="1" required></label><button class="tool-button" type="submit">计算</button><output class="tool-result" data-tool-result>等待计算</output></form></article>
-<article class="tool-card"><p class="eyebrow">03 · CIRCUIT</p><h2>电阻分压计算</h2><p>R1 接输入端、R2 接地，电阻单位为 kΩ。</p><form class="tool-form" data-divider-form><label class="tool-field">输入电压 V<input name="vin" type="number" value="5" step="any" required></label><label class="tool-field">R1 kΩ<input name="r1" type="number" value="10" min="0.001" step="any" required></label><label class="tool-field">R2 kΩ<input name="r2" type="number" value="10" min="0.001" step="any" required></label><button class="tool-button" type="submit">计算</button><output class="tool-result" data-tool-result>等待计算</output></form></article>
-</div></section></main>
-<footer class="site-footer"><div><a class="brand footer-brand" href="../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div><div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../sitemap.xml">站点地图</a></div><p class="copyright">© <span data-current-year></span> JiaYu Here</p></footer><script src="../assets/script.js?v=20260714a"></script></body></html>
+<main id="main">
+  <section class="page-hero compact-hero">
+    <div class="container">
+      <p class="eyebrow">Personal Toolbox</p>
+      <h1>少而实用的工程工具</h1>
+      <p>所有计算都在当前浏览器本地完成，不上传输入数据。除基础换算外，补充了 DDS、UART 遥测、ADC 与 QPSK 链路设计常用的快速核对工具；关键设计仍应结合目标芯片手册、约束和仿真验证。</p>
+    </div>
+  </section>
+  <section class="section container">
+    <div class="tool-grid">
+      <article class="tool-card">
+        <p class="eyebrow">01 · NUMBER</p>
+        <h2>进制转换</h2>
+        <p>输入一个整数，快速查看二、八、十和十六进制表示。</p>
+        <form class="tool-form" data-base-form>
+          <label class="tool-field">原始进制<select name="sourceBase"><option value="10">十进制</option><option value="2">二进制</option><option value="8">八进制</option><option value="16">十六进制</option></select></label>
+          <label class="tool-field">数值<input name="baseValue" value="255" required></label>
+          <button class="tool-button" type="submit">转换</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">02 · UART</p>
+        <h2>波特率分频估算</h2>
+        <p>按整数分频模型估算实际波特率与相对误差。</p>
+        <form class="tool-form" data-baud-form>
+          <label class="tool-field">外设时钟 Hz<input name="clock" type="number" value="72000000" min="1" required></label>
+          <label class="tool-field">目标波特率 bps<input name="baud" type="number" value="115200" min="1" required></label>
+          <button class="tool-button" type="submit">计算</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">03 · CIRCUIT</p>
+        <h2>电阻分压计算</h2>
+        <p>R1 接输入端、R2 接地，电阻单位为 kΩ。</p>
+        <form class="tool-form" data-divider-form>
+          <label class="tool-field">输入电压 V<input name="vin" type="number" value="5" step="any" required></label>
+          <label class="tool-field">R1 kΩ<input name="r1" type="number" value="10" min="0.001" step="any" required></label>
+          <label class="tool-field">R2 kΩ<input name="r2" type="number" value="10" min="0.001" step="any" required></label>
+          <button class="tool-button" type="submit">计算</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">04 · FPGA</p>
+        <h2>DDS 频率字计算</h2>
+        <p>根据系统时钟、目标频率和相位累加器位宽计算 FTW、实际输出和频率分辨率。</p>
+        <form class="tool-form" data-dds-form>
+          <label class="tool-field">系统时钟 Hz<input name="ddsClock" type="number" value="50000000" min="1" required></label>
+          <label class="tool-field">目标输出 Hz<input name="ddsFrequency" type="number" value="10000" min="0.000001" step="any" required></label>
+          <label class="tool-field">相位累加器位宽<input name="phaseBits" type="number" value="32" min="4" max="52" step="1" required></label>
+          <button class="tool-button" type="submit">计算频率字</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">05 · UART</p>
+        <h2>UART 遥测带宽预算</h2>
+        <p>估算一帧数据在线路上的占用、链路利用率、最大更新率和单帧发送时间。</p>
+        <form class="tool-form" data-uart-budget-form>
+          <label class="tool-field">波特率 bps<input name="uartBaud" type="number" value="115200" min="1" required></label>
+          <label class="tool-field">单帧总字节数（含帧头/校验）<input name="frameBytes" type="number" value="16" min="1" step="1" required></label>
+          <label class="tool-field">目标更新率 Hz<input name="frameRate" type="number" value="100" min="0.001" step="any" required></label>
+          <label class="tool-field">每字节线路位数（8N1 为 10）<input name="bitsPerByte" type="number" value="10" min="1" step="1" required></label>
+          <button class="tool-button" type="submit">计算带宽</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">06 · ADC</p>
+        <h2>ADC 量化与码值</h2>
+        <p>计算单极性 ADC 的理想 LSB、量化码、码值对应电压与量化误差。</p>
+        <form class="tool-form" data-adc-form>
+          <label class="tool-field">参考电压 V<input name="vref" type="number" value="3.3" min="0.000001" step="any" required></label>
+          <label class="tool-field">ADC 位数<input name="adcBits" type="number" value="12" min="1" max="24" step="1" required></label>
+          <label class="tool-field">输入电压 V<input name="adcInput" type="number" value="1.65" min="0" step="any" required></label>
+          <button class="tool-button" type="submit">计算量化</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">07 · QPSK</p>
+        <h2>QPSK 理论 BER</h2>
+        <p>计算 Gray 映射、相干解调、AWGN 条件下的理论 BER 与预期误码数量。</p>
+        <form class="tool-form" data-qpsk-ber-form>
+          <label class="tool-field">Eb/N0 dB<input name="ebn0" type="number" value="6" step="0.1" required></label>
+          <label class="tool-field">统计比特数<input name="bitCount" type="number" value="1000000" min="1" max="1000000000000" step="1" required></label>
+          <button class="tool-button" type="submit">计算理论 BER</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><div><a class="brand footer-brand" href="../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div><div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../sitemap.xml">站点地图</a></div><p class="copyright">© <span data-current-year></span> JiaYu Here</p></footer><script src="../assets/script.js?v=20260714b"></script></body></html>
