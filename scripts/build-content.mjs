@@ -214,8 +214,22 @@ const buildDetail = async (section, item) => {
   await writeFile(path.join(output, "index.html"), page({ prefix: "../../", active: section, title: item.meta.title, description: item.meta.description, content, type: "article" }));
 };
 
+const updateHomeStats = async (counts) => {
+  const homePath = path.join(root, "index.html");
+  let home = await readFile(homePath, "utf8");
+
+  for (const [key, count] of Object.entries(counts)) {
+    const pattern = new RegExp(`(<strong data-site-stat="${key}">)\\d+(</strong>)`);
+    if (!pattern.test(home)) throw new Error(`Homepage statistic marker missing: ${key}`);
+    home = home.replace(pattern, `$1${count}$2`);
+  }
+
+  await writeFile(homePath, home);
+};
+
 const build = async () => {
   const searchIndex = [];
+  const sectionCounts = {};
   for (const [section, config] of Object.entries(sections)) {
     const sourceDir = path.join(root, config.source);
     const outputDir = path.join(root, config.output);
@@ -229,8 +243,12 @@ const build = async () => {
       await buildDetail(section, item);
       searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], url: `/${config.output}/${item.meta.slug}/` });
     }
+    sectionCounts[section] = items.length;
     await buildIndex(section, items);
   }
+  const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
+  const toolCount = (toolbox.match(/<article\b[^>]*\bclass="[^"]*\btool-card\b[^"]*"/g) || []).length;
+  await updateHomeStats({ projects: sectionCounts.projects, articles: sectionCounts.articles, notes: sectionCounts.notes, tools: toolCount });
   await mkdir(path.join(root, "assets/data"), { recursive: true });
   await writeFile(path.join(root, "assets/data/search-index.json"), `${JSON.stringify(searchIndex, null, 2)}\n`);
   const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/"];
