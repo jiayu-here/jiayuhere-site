@@ -29,7 +29,7 @@
 
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主要导航">
       <a  href="../../projects/index.html">项目</a>
@@ -43,21 +43,114 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>从星座图到 RTL：QPSK 链路的实现顺序</h1><p class="article-lead">用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</p><div class="article-meta"><span>通信原理 · 2026-07-14</span><span>约 2 分钟阅读</span><div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先固定映射约定</a><a href="#section-2">再处理有效信号</a><a href="#section-3">相位旋转不需要三角函数</a><a href="#section-4">最后接入可视化</a><a href="#section-5">验收清单</a></aside><div class="prose"><h2 id="section-1">先固定映射约定</h2>
-<p>QPSK 最容易出现的问题不是公式，而是发送端、接收端和绘图程序使用了不同的象限编号。实现前应把二比特到 I/Q 的表格写进文档和测试平台。</p>
-<h2 id="section-2">再处理有效信号</h2>
-<p>RTL 中每一级都有延迟。BER 比较需要把原始比特延迟到与判决输出同一个 <code>valid</code> 周期，否则即使星座点完全正确也会统计出大量误码。</p>
-<h2 id="section-3">相位旋转不需要三角函数</h2>
-<p>0、90、180、270 度旋转都能通过 I/Q 交换和取反完成。这种方式资源少、行为明确，也更容易在测试平台中逐项检查。</p>
-<h2 id="section-4">最后接入可视化</h2>
-<p>先让仿真导出 CSV，再接串口。这样可以把算法问题和硬件通信问题分开定位。上位机只负责展示，不应改变 BER 的定义。</p>
-<h2 id="section-5">验收清单</h2>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>从星座图到 RTL：QPSK 链路的实现顺序</h1><p class="article-lead">用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</p><div class="article-meta"><span>通信原理 · 2026-07-14</span><span>约 6 分钟阅读</span><div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先定义一条完整的数据链</a><a href="#section-2">固定 Gray 映射表</a><a href="#section-3">把比特源和调制器分开</a><a href="#section-4">离散相位旋转不需要三角函数</a><a href="#section-5">硬判决必须与映射互逆</a><a href="#section-6">最容易忽略的是流水线对齐</a><a href="#section-7">BER 统计要说明分母</a><a href="#section-8">位宽和取负需要单独检查</a><a href="#section-9">仿真按层次推进</a><a href="#section-15">可视化应放在算法验证之后</a><a href="#section-16">常见错误与定位顺序</a><a href="#section-17">验收清单</a></aside><div class="prose"><h2 id="section-1">先定义一条完整的数据链</h2>
+<p>QPSK 链路不只是“两个比特映射成一个星座点”。在 RTL 中，数据需要依次经过比特源、串并转换、Gray 映射、信道、判决、参考延迟、误码统计和遥测输出。每一级都可能改变位宽、符号含义或时序。</p>
+<p>开始编码前应写清以下约定：</p>
+<ul>
+<li>每个 QPSK 符号包含哪两个比特，先发送高位还是低位。</li>
+<li>I、Q 使用有符号二进制还是无符号偏置表示。</li>
+<li>正方向对应星座图的哪个象限。</li>
+<li><code>valid</code> 在哪个周期表示输入或输出有效。</li>
+<li>BER 统计的是比特错误数还是符号错误数。</li>
+</ul>
+<p>这些约定必须同时用于 Verilog、测试平台和 Python 可视化。只要三处有一处使用不同定义，波形可能看起来合理，统计结果却会错误。</p>
+<h2 id="section-2">固定 Gray 映射表</h2>
+<p>Gray 映射让相邻星座点只相差一个比特。一个常用约定是：</p>
+<pre><code class="language-text">00 -&gt; I=+A, Q=+A
+01 -&gt; I=-A, Q=+A
+11 -&gt; I=-A, Q=-A
+10 -&gt; I=+A, Q=-A</code></pre>
+<p>RTL 中可以把映射写成完整 <code>case</code>，避免用难以追踪的位运算压缩逻辑：</p>
+<pre><code class="language-verilog">always @* begin
+  case (tx_bits)
+    2'b00: begin i_symbol =  AMP; q_symbol =  AMP; end
+    2'b01: begin i_symbol = -AMP; q_symbol =  AMP; end
+    2'b11: begin i_symbol = -AMP; q_symbol = -AMP; end
+    2'b10: begin i_symbol =  AMP; q_symbol = -AMP; end
+    default: begin i_symbol = 0; q_symbol = 0; end
+  endcase
+end</code></pre>
+<p><code>AMP</code>、<code>i_symbol</code> 和 <code>q_symbol</code> 都应显式声明为有符号量。Verilog 中只要表达式的一部分被当成无符号数，负数比较、取反和位宽扩展就可能偏离预期。</p>
+<h2 id="section-3">把比特源和调制器分开</h2>
+<p>PRBS 适合持续产生可重复的伪随机比特，但调试映射时不应一开始就连接 PRBS。先在测试平台中按顺序输入 <code>00、01、11、10</code>，确认四个星座点，再加入 PRBS。</p>
+<p>比特源模块只负责产生参考比特和有效信号，调制器只负责符号映射。这样可以在固定输入下独立验证调制器，也方便以后替换为 UART、存储器或其他数据源。</p>
+<h2 id="section-4">离散相位旋转不需要三角函数</h2>
+<p>如果信道只模拟 0、90、180、270 度旋转，可以通过 I/Q 交换和取反完成：</p>
+<pre><code class="language-verilog">case (phase_sel)
+  2'd0: begin rx_i =  tx_i; rx_q =  tx_q; end
+  2'd1: begin rx_i = -tx_q; rx_q =  tx_i; end
+  2'd2: begin rx_i = -tx_i; rx_q = -tx_q; end
+  2'd3: begin rx_i =  tx_q; rx_q = -tx_i; end
+endcase</code></pre>
+<p>这种方式不需要乘法器和三角函数表，行为也容易逐项验证。需要任意相位、频偏或噪声时，可以先在 MATLAB/Python 模型中验证，再决定使用 CORDIC、查表还是外部数据注入。</p>
+<h2 id="section-5">硬判决必须与映射互逆</h2>
+<p>在零门限、理想基带条件下，硬判决只需判断 I、Q 的符号。但判决后的两比特组合必须严格对应发送端映射：</p>
+<pre><code class="language-verilog">always @* begin
+  if (rx_i &gt;= 0 &amp;&amp; rx_q &gt;= 0)      decided_bits = 2'b00;
+  else if (rx_i &lt; 0 &amp;&amp; rx_q &gt;= 0)  decided_bits = 2'b01;
+  else if (rx_i &lt; 0 &amp;&amp; rx_q &lt; 0)   decided_bits = 2'b11;
+  else                              decided_bits = 2'b10;
+end</code></pre>
+<p>边界值等于 0 时归入哪个象限也要固定。理想仿真中可能很少遇到零值，但量化、滤波和噪声会让边界定义影响结果。</p>
+<h2 id="section-6">最容易忽略的是流水线对齐</h2>
+<p>映射、旋转、判决和输出寄存器都会引入延迟。BER 比较时不能把当前发送比特与数个周期后的判决结果直接比较，而应让参考比特经过等长延迟线。</p>
+<p>建议为每一级同时传递数据和 <code>valid</code>：</p>
+<pre><code class="language-text">tx_bits + tx_valid
+  -&gt; mapper
+  -&gt; channel
+  -&gt; decision
+  -&gt; decided_bits + decided_valid</code></pre>
+<p>参考路径中的 <code>tx_bits</code> 需要延迟到 <code>decided_valid</code> 对应的周期。测试平台应逐周期打印参考值、判决值和有效信号，而不是只观察最终 BER 数字。</p>
+<h2 id="section-7">BER 统计要说明分母</h2>
+<p>每个有效 QPSK 符号包含两个比特。统计模块可以先异或发送与接收比特，再累计错误位数：</p>
+<pre><code class="language-verilog">wire [1:0] bit_diff = reference_bits ^ decided_bits;
+wire [1:0] error_count = bit_diff[0] + bit_diff[1];
+
+always @(posedge clk) begin
+  if (!reset_n) begin
+    total_bits &lt;= 32'd0;
+    error_bits &lt;= 32'd0;
+  end else if (decided_valid) begin
+    total_bits &lt;= total_bits + 32'd2;
+    error_bits &lt;= error_bits + error_count;
+  end
+end</code></pre>
+<p>BER 等于 <code>error_bits / total_bits</code>。RTL 中通常只累计两个整数，把除法交给上位机或显示换算模块，避免为了一个低速显示值引入不必要的除法器。</p>
+<h2 id="section-8">位宽和取负需要单独检查</h2>
+<p>补码最小负数的绝对值无法在原位宽内表示。例如 8 位有符号数 <code>-128</code> 取负仍可能得到 <code>-128</code>。如果相位旋转可能处理满量程负数，应限制输入幅值、增加一位保护位，或明确采用饱和逻辑。</p>
+<p>跨模块端口都应显式写出 <code>signed</code>。对 I/Q 扩位时使用符号扩展，不能简单在高位补 0。</p>
+<h2 id="section-9">仿真按层次推进</h2>
+<h3 id="section-10">映射测试</h3>
+<p>按固定顺序输入四种符号，检查 I/Q 和反向判决。</p>
+<h3 id="section-11">相位测试</h3>
+<p>在同一个星座点上依次切换四种相位，确认交换与取反关系。</p>
+<h3 id="section-12">时序测试</h3>
+<p>连续输入带编号的符号，逐周期核对参考延迟、输出有效和 BER 更新时刻。</p>
+<h3 id="section-13">误码注入测试</h3>
+<p>人为翻转判决比特，验证每个符号可能增加 0、1 或 2 个错误比特。</p>
+<h3 id="section-14">长序列测试</h3>
+<p>接入 PRBS，检查计数器持续运行、复位和清零行为。</p>
+<h2 id="section-15">可视化应放在算法验证之后</h2>
+<p>先让仿真导出 I/Q、参考比特和误码计数到 CSV，再由 Python 绘制星座图和统计曲线。离线数据正确后再接 UART，可以把算法错误与串口丢帧、波特率或协议解析问题分开。</p>
+<p>串口带宽通常远低于 FPGA 内部符号率，因此遥测应抽样发送或按帧汇总。上位机只负责解析和展示，不应重新定义映射或修改 BER 计算方式。</p>
+<h2 id="section-16">常见错误与定位顺序</h2>
+<ul>
+<li>星座整体旋转但 BER 很高：先检查相位补偿和映射约定。</li>
+<li>星座正确但 BER 持续增加：优先检查参考数据延迟。</li>
+<li>只有部分象限错误：检查符号位、取负和判决表。</li>
+<li>UART 图像断裂：检查抽样节奏、帧格式和接收缓存，不要先修改调制器。</li>
+<li>复位后计数异常：检查 <code>valid</code> 是否在复位释放时产生伪脉冲。</li>
+</ul>
+<h2 id="section-17">验收清单</h2>
 <ul>
 <li>四个符号的映射与判决完全互逆。</li>
-<li>无噪声、零相位条件下 BER 为 0。</li>
-<li>四种旋转的星座位置符合预期。</li>
-<li>参考比特与判决结果在相同有效周期比较。</li>
+<li>无噪声、零相位条件下错误比特数保持为 0。</li>
+<li>四种离散旋转的 I/Q 位置符合定义。</li>
+<li>参考比特与判决结果在同一有效周期比较。</li>
+<li>人工注入错误时计数按 0、1、2 正确增加。</li>
+<li>CSV 与 UART 数据使用相同字段和符号定义。</li>
+<li>文档明确区分仿真验证、编译时序验证和板级验证。</li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
 
     <a class="article-pagination-next" href="../fpga-fixed-point-fft-checklist/index.html"><span>下一篇 →</span><strong>FPGA 定点 FFT 设计前必须想清楚的五件事</strong></a>
@@ -65,9 +158,9 @@
     </article></main>
 
   <footer class="site-footer">
-    <div><a class="brand footer-brand" href="../../index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div><a class="brand footer-brand" href="../../index.html">JIAYUHERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
-    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
   </footer>
   <script src="../../assets/script.js?v=20260714f"></script>
 </body>

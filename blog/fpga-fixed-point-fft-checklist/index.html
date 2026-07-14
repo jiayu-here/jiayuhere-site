@@ -29,7 +29,7 @@
 
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主要导航">
       <a  href="../../projects/index.html">项目</a>
@@ -43,26 +43,116 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 1 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">输入范围与 Q 格式</a><a href="#section-2">每级是否缩放</a><a href="#section-3">旋转因子的量化</a><a href="#section-4">数据顺序</a><a href="#section-5">验证方法</a></aside><div class="prose"><h2 id="section-1">输入范围与 Q 格式</h2>
-<p>先明确输入是否归一化、整数位有多少、符号位如何表示。没有统一 Q 格式，后续乘法器和误差分析都没有可靠基准。</p>
-<h2 id="section-2">每级是否缩放</h2>
-<p>蝶形加法可能让幅值翻倍。可以逐级右移、块浮点缩放或保留增长位，不同策略对应不同信噪比和资源代价。</p>
-<h2 id="section-3">旋转因子的量化</h2>
-<p>旋转因子位宽既影响乘法器资源，也影响旁瓣和噪声底。应由 MATLAB 或 Python 生成定点表，并保留量化误差对照。</p>
-<h2 id="section-4">数据顺序</h2>
-<p>自然序输入、位反转输出和流式接口必须在顶层文档中写清。很多“FFT 结果错误”其实只是索引顺序不一致。</p>
-<h2 id="section-5">验证方法</h2>
-<p>使用冲激、单频正弦、双音和随机数据四组输入；把 RTL 输出还原为浮点后，与软件参考模型逐点比较误差。</p><nav class="article-pagination" aria-label="相邻内容">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先确定系统指标</a><a href="#section-2">Q 格式必须写进接口文档</a><a href="#section-3">蝶形加法会产生增长位</a><a href="#section-4">复数乘法的位宽要逐项推导</a><a href="#section-5">旋转因子表也需要可追溯</a><a href="#section-6">数据顺序决定地址控制</a><a href="#section-7">流式接口要把数据和状态一起传递</a><a href="#section-8">溢出、舍入和饱和是三件事</a><a href="#section-9">软件参考模型必须模拟定点过程</a><a href="#section-10">测试向量要覆盖不同问题</a><a href="#section-16">时序与资源要在结构稳定后检查</a><a href="#section-17">常见错误与排查顺序</a><a href="#section-18">验收清单</a></aside><div class="prose"><h2 id="section-1">先确定系统指标</h2>
+<p>定点 FFT 的位宽和结构不能脱离系统需求单独决定。开始设计前应明确：</p>
+<ul>
+<li>FFT 点数是否固定，是否需要运行时切换。</li>
+<li>输入是逐点流式、整帧缓存还是多通道并行。</li>
+<li>每个样本的有效间隔和允许的最大处理延迟。</li>
+<li>输出需要自然序还是位反转序。</li>
+<li>资源更受限的是乘法器、RAM 还是逻辑单元。</li>
+<li>允许的量化误差、溢出概率和动态范围。</li>
+</ul>
+<p>这些条件决定采用全并行、流水线、单蝶形复用还是厂商 IP。没有先固定接口与吞吐量，仅比较“用了多少资源”没有实际意义。</p>
+<h2 id="section-2">Q 格式必须写进接口文档</h2>
+<p>定点数通常用 Q 格式描述。以 16 位有符号数为例，如果约定 1 位符号、1 位整数和 14 位小数，那么整数值 <code>x_int</code> 对应实数：</p>
+<pre><code class="language-text">x_real = x_int / 2^14</code></pre>
+<p>输入、旋转因子、乘法中间结果和输出可能使用不同 Q 格式。每个模块端口都应注明总位宽、小数位数和是否有符号，否则截位之后很难判断二进制小数点位于哪里。</p>
+<h2 id="section-3">蝶形加法会产生增长位</h2>
+<p>基 2 蝶形的加减法在最坏情况下可能使幅值扩大一倍，因此每一级理论上需要增加一位。如果完全保留增长位，N 点 FFT 经过 <code>log2(N)</code> 级后会增加对应位数；如果每级都缩放，则位宽可保持不变，但会损失低位信息。</p>
+<p>常见缩放策略包括：</p>
+<ul>
+<li>每一级固定右移一位，行为简单、最不容易溢出。</li>
+<li>按预设级别选择性缩放，在动态范围和误差之间折中。</li>
+<li>块浮点，根据整帧最大幅值决定指数。</li>
+<li>全程保留增长位，最后统一舍入或饱和。</li>
+</ul>
+<p>缩放策略必须与软件模型一致。只在 RTL 中“为了不溢出”随意右移，会让最终幅值无法解释。</p>
+<h2 id="section-4">复数乘法的位宽要逐项推导</h2>
+<p>复数旋转为：</p>
+<pre><code class="language-text">(a + jb)(c + jd) = (ac - bd) + j(ad + bc)</code></pre>
+<p>如果两个输入都是 W 位，单个乘积通常需要约 2W 位，两个乘积相加还可能增加一位。实现时应先保留完整乘积，再根据目标 Q 格式进行舍入和截位。</p>
+<pre><code class="language-verilog">wire signed [2*W-1:0] ac = a * c;
+wire signed [2*W-1:0] bd = b * d;
+wire signed [2*W:0] real_full = ac - bd;</code></pre>
+<p>直接取乘积高位虽然简单，但属于截断，会产生有偏误差。可根据资源和误差要求选择四舍五入、收敛舍入或简单截断，并在参考模型中使用同一种规则。</p>
+<h2 id="section-5">旋转因子表也需要可追溯</h2>
+<p>旋转因子 <code>exp(-j2πk/N)</code> 需要量化为定点数。生成脚本应固定 FFT 点数、位宽、小数位、舍入方式和输出格式，并与 ROM 初始化文件一起保存。</p>
+<p>需要特别检查 <code>+1</code> 和 <code>-1</code> 的表示范围。补码定点格式通常能精确表示 <code>-1</code>，却不一定能表示正的 <code>+1</code>，生成脚本应限制到最大正数，不能让整数转换发生回绕。</p>
+<h2 id="section-6">数据顺序决定地址控制</h2>
+<p>基 2 DIT、DIF 和不同流水结构的数据顺序不同。常见组合包括自然序输入、位反转输出，或位反转输入、自然序输出。</p>
+<p>所谓位反转，是把索引的二进制位顺序倒过来。例如 8 点 FFT 中，索引 <code>3'b011</code> 反转后为 <code>3'b110</code>。如果软件按自然顺序绘图，而 RTL 输出位反转顺序，频谱峰位置会显得完全错误。</p>
+<p>顶层接口应明确：</p>
+<ul>
+<li>第一个有效输出对应哪个频点。</li>
+<li>帧头和帧尾如何标记。</li>
+<li>是否包含循环前缀或其他额外样本。</li>
+<li>输出是否需要额外重排 RAM。</li>
+</ul>
+<h2 id="section-7">流式接口要把数据和状态一起传递</h2>
+<p>FFT 流水线不仅要传递实部和虚部，还要传递 <code>valid</code>、帧起始、帧结束和可能的缩放指数。每一级新增寄存器时，这些控制信号必须同步延迟。</p>
+<p>如果输入允许暂停，就要明确流水线是否支持反压。仅有 <code>valid</code> 而没有 <code>ready</code> 的接口通常要求上游按固定节奏发送；带 <code>ready/valid</code> 的接口则需要保证停顿时数据和状态都保持稳定。</p>
+<h2 id="section-8">溢出、舍入和饱和是三件事</h2>
+<p>溢出表示真实结果超过当前位宽；舍入表示丢弃小数低位时如何近似；饱和表示超范围时限制到最大或最小值，而不是补码回绕。</p>
+<p>调试中应分别统计：</p>
+<ul>
+<li>每一级加法是否出现进位或符号异常。</li>
+<li>乘法截位前后误差。</li>
+<li>饱和逻辑触发次数。</li>
+<li>固定缩放累计造成的幅值变化。</li>
+</ul>
+<p>只看最终波形，往往无法定位误差最早出现在哪一级。</p>
+<h2 id="section-9">软件参考模型必须模拟定点过程</h2>
+<p>直接把 RTL 输出与浮点 <code>fft()</code> 比较，只能看到总误差，不能解释误差来源。更可靠的参考模型应逐级执行与 RTL 相同的量化、缩放、舍入和溢出规则。</p>
+<p>可以同时保留三组结果：</p>
+<ol>
+<li>双精度浮点 FFT，作为理论参考。</li>
+<li>软件定点逐级模型，作为 RTL 行为参考。</li>
+<li>RTL 仿真输出，验证实现是否与定点模型一致。</li>
+</ol>
+<p>如果软件定点模型与浮点结果差异过大，应先调整数值方案；如果 RTL 与软件定点模型不同，再检查位宽、地址和时序实现。</p>
+<h2 id="section-10">测试向量要覆盖不同问题</h2>
+<h3 id="section-11">冲激输入</h3>
+<p>理论上所有频点幅度相同，适合检查数据顺序和整体缩放。</p>
+<h3 id="section-12">单频正弦</h3>
+<p>用于检查频点位置、镜像、幅值和泄漏。频率应先选择整数频点，避免窗函数问题干扰基础验证。</p>
+<h3 id="section-13">双音输入</h3>
+<p>用于检查多个频点是否能同时保持，以及强弱信号的动态范围。</p>
+<h3 id="section-14">满量程与交替极值</h3>
+<p>用于触发最坏情况增长，检查溢出和饱和。</p>
+<h3 id="section-15">随机复数输入</h3>
+<p>适合批量比较每个频点误差，并统计最大误差、均方误差和异常样本。</p>
+<h2 id="section-16">时序与资源要在结构稳定后检查</h2>
+<p>乘法器、长加法链和大规模地址控制可能成为关键路径。应在 Quartus 或其他综合工具中检查 DSP 使用量、RAM 使用量、寄存器数量和最差时序裕量。</p>
+<p>提高频率的常见方法是增加流水寄存器，但每增加一级都要同步调整 <code>valid</code>、帧标记和参考延迟。只让数据路径增加寄存器而忘记控制路径，会产生难以察觉的帧错位。</p>
+<h2 id="section-17">常见错误与排查顺序</h2>
+<ul>
+<li>峰值出现在错误位置：先检查位反转和频点索引。</li>
+<li>幅值整体偏小：检查每级缩放与最终归一化。</li>
+<li>只有大信号错误：检查增长位和溢出策略。</li>
+<li>实部、虚部符号异常：检查 <code>signed</code> 声明和符号扩展。</li>
+<li>随机误差但固定向量正常：检查暂停、帧边界和流水有效信号。</li>
+<li>软件与 RTL 相差固定倍数：检查 Q 格式和二进制小数点位置。</li>
+</ul>
+<h2 id="section-18">验收清单</h2>
+<ul>
+<li>输入、旋转因子、各级中间量和输出 Q 格式完整记录。</li>
+<li>缩放、舍入、截位与饱和规则在软件和 RTL 中一致。</li>
+<li>自然序或位反转顺序在接口文档中明确。</li>
+<li>冲激、单频、双音、满量程和随机向量全部通过对照。</li>
+<li>控制信号与数据延迟完全一致。</li>
+<li>综合资源和时序报告已检查，未把“仿真正确”当成“硬件已满足时序”。</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../qpsk-from-constellation-to-rtl/index.html"><span>← 上一篇</span><strong>从星座图到 RTL：QPSK 链路的实现顺序</strong></a>
     <a class="article-pagination-next" href="../freertos-priority-design/index.html"><span>下一篇 →</span><strong>FreeRTOS 任务优先级不是越高越重要</strong></a>
   </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
-    <div><a class="brand footer-brand" href="../../index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div><a class="brand footer-brand" href="../../index.html">JIAYUHERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
-    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
   </footer>
   <script src="../../assets/script.js?v=20260714f"></script>
 </body>

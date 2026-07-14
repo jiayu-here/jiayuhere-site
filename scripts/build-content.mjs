@@ -300,7 +300,7 @@ const markdownToHtml = (markdown) => {
 const nav = (prefix, active = "") => `
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
-    <a class="brand" href="${prefix}index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <a class="brand" href="${prefix}index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主要导航">
       <a ${active === "projects" ? 'aria-current="page"' : ""} href="${prefix}projects/index.html">项目</a>
@@ -315,9 +315,9 @@ const nav = (prefix, active = "") => `
 
 const footer = (prefix) => `
   <footer class="site-footer">
-    <div><a class="brand footer-brand" href="${prefix}index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div><a class="brand footer-brand" href="${prefix}index.html">JIAYUHERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
     <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}feed.xml">RSS</a><a href="${prefix}sitemap.xml">站点地图</a></div>
-    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
   </footer>
   <script src="${prefix}assets/script.js?v=20260714f"></script>`;
 

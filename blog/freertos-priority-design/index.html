@@ -29,7 +29,7 @@
 
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主要导航">
       <a  href="../../projects/index.html">项目</a>
@@ -43,26 +43,145 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 1 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">从截止时间开始</a><a href="#section-2">让任务主动阻塞</a><a href="#section-3">缩短临界区</a><a href="#section-4">注意优先级反转</a><a href="#section-5">用数据验证</a></aside><div class="prose"><h2 id="section-1">从截止时间开始</h2>
-<p>高优先级应留给真正有响应期限的工作，例如接收缓冲区即将溢出，而不是留给业务上“看起来重要”的模块。</p>
-<h2 id="section-2">让任务主动阻塞</h2>
-<p>任务等待队列、通知或定时器时应进入阻塞态。持续轮询即使优先级不高，也会消耗 CPU 并干扰功耗和调试。</p>
-<h2 id="section-3">缩短临界区</h2>
-<p>临界区只保护最小共享操作。字符串格式化、日志输出和外设等待不应放在关中断区间内。</p>
-<h2 id="section-4">注意优先级反转</h2>
-<p>多个任务共享资源时使用互斥量而不是二值信号量，利用优先级继承降低反转风险。更好的做法是减少共享资源，让单一任务拥有外设。</p>
-<h2 id="section-5">用数据验证</h2>
-<p>记录任务运行时间、队列峰值、最小剩余堆栈和丢包计数。优先级设计应由这些数据修正，而不是只靠直觉。</p><nav class="article-pagination" aria-label="相邻内容">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">优先级描述的是调度紧迫性</a><a href="#section-2">先列出任务的时间属性</a><a href="#section-3">一个实用的优先级分层</a><a href="#section-4">周期任务使用 vTaskDelayUntil</a><a href="#section-5">事件任务应该主动阻塞</a><a href="#section-6">ISR 只做必须立即完成的工作</a><a href="#section-7">用所有权减少共享资源</a><a href="#section-8">二值信号量不能替代互斥量</a><a href="#section-9">临界区只保护最小原子操作</a><a href="#section-10">队列长度不能凭感觉设置</a><a href="#section-11">栈和堆必须测量</a><a href="#section-12">看门狗要监督系统进展</a><a href="#section-13">如何验证优先级设计</a><a href="#section-14">常见问题与定位顺序</a><a href="#section-15">验收清单</a></aside><div class="prose"><h2 id="section-1">优先级描述的是调度紧迫性</h2>
+<p>FreeRTOS 的高优先级并不等于“业务上更重要”。调度器只关心当前有哪些任务处于就绪态，并优先运行数值更高的任务。真正应该获得高优先级的，是具有短响应期限、缓冲区可能溢出或会阻塞下游链路的工作。</p>
+<p>例如，串口接收数据若不能及时从 DMA 缓冲区取走，后续字节可能覆盖旧数据；而 OLED 刷新即使晚几十毫秒，通常也不会破坏系统状态。前者比后者更需要及时调度。</p>
+<h2 id="section-2">先列出任务的时间属性</h2>
+<p>创建任务前，可以为每个功能记录：</p>
+<ul>
+<li>触发方式：周期、事件、中断通知或队列消息。</li>
+<li>最迟响应时间。</li>
+<li>单次最坏执行时间。</li>
+<li>是否允许被打断。</li>
+<li>是否等待外设或共享资源。</li>
+<li>输入积压后会发生什么。</li>
+</ul>
+<p>没有这些信息时，给任务分配优先级只能依赖直觉。任务越多，直觉越容易产生“全部提高一级”的循环，最终失去层次。</p>
+<h2 id="section-3">一个实用的优先级分层</h2>
+<p>小型 STM32 系统可以先按性质分层，再根据测量结果调整：</p>
+<pre><code class="language-text">高：短时限的数据搬运、控制闭环、必须及时处理的通知
+中：协议解析、状态估计、业务状态机
+低：显示刷新、日志整理、统计和后台维护
+空闲：清理、低优先级诊断或由 Idle Hook 完成的工作</code></pre>
+<p>同一层不一定需要不同优先级。任务数量少、阻塞关系明确时，减少优先级等级反而更容易分析。</p>
+<h2 id="section-4">周期任务使用 vTaskDelayUntil</h2>
+<p>普通 <code>vTaskDelay()</code> 表示从当前时刻延迟一段时间，任务本身的执行时间会累计到周期中。稳定的周期任务更适合使用 <code>vTaskDelayUntil()</code>：</p>
+<pre><code class="language-c">void ControlTask(void *argument)
+{
+    TickType_t last_wake = xTaskGetTickCount();
+
+    for (;;) {
+        ReadSensors();
+        UpdateController();
+        ApplyMotorOutput();
+        vTaskDelayUntil(&amp;last_wake, pdMS_TO_TICKS(10));
+    }
+}</code></pre>
+<p>如果任务执行时间超过 10 ms，延时函数不会自动修复超期。系统仍需要记录执行时间或超期计数，确认控制任务是否满足周期要求。</p>
+<h2 id="section-5">事件任务应该主动阻塞</h2>
+<p>任务等待队列、通知、信号量或事件组时，应进入阻塞态，而不是循环检查标志位：</p>
+<pre><code class="language-c">void ProtocolTask(void *argument)
+{
+    ProtocolFrame frame;
+
+    for (;;) {
+        if (xQueueReceive(protocol_queue, &amp;frame, portMAX_DELAY) == pdPASS) {
+            ParseAndDispatch(&amp;frame);
+        }
+    }
+}</code></pre>
+<p>阻塞任务不占用 CPU 时间。持续轮询即使优先级较低，也会增加功耗、干扰空闲任务，并让调度波形充满无意义的切换。</p>
+<h2 id="section-6">ISR 只做必须立即完成的工作</h2>
+<p>中断中应读取状态、搬运少量数据并通知任务，复杂协议解析、日志格式化和控制计算应放到任务上下文。</p>
+<pre><code class="language-c">void USART_IRQHandler(void)
+{
+    BaseType_t higher_priority_woken = pdFALSE;
+    const uint8_t byte = USART_ReadByte();
+
+    xStreamBufferSendFromISR(
+        rx_stream,
+        &amp;byte,
+        sizeof(byte),
+        &amp;higher_priority_woken);
+
+    portYIELD_FROM_ISR(higher_priority_woken);
+}</code></pre>
+<p>从 ISR 调用的 FreeRTOS API 必须使用 <code>FromISR</code> 版本。还要确认中断优先级满足 FreeRTOS 的配置限制，否则系统可能在高负载下出现难以复现的异常。</p>
+<h2 id="section-7">用所有权减少共享资源</h2>
+<p>相比让多个任务直接操作同一个 UART、I2C 或文件系统，更稳妥的方法是让单一任务拥有外设，其他任务通过队列提交请求。</p>
+<p>这种结构的优点是：</p>
+<ul>
+<li>外设访问天然串行化。</li>
+<li>超时、重试和错误统计集中处理。</li>
+<li>不需要在多个调用点重复加锁。</li>
+<li>调试时能够看到完整请求顺序。</li>
+</ul>
+<p>互斥量仍然有价值，但所有权设计通常比增加更多锁更容易维护。</p>
+<h2 id="section-8">二值信号量不能替代互斥量</h2>
+<p>互斥量带有优先级继承机制。当低优先级任务持有资源、高优先级任务等待该资源时，低优先级任务可以临时提升优先级，减少被中优先级任务长期抢占的风险。</p>
+<p>二值信号量主要用于事件同步，不提供相同的资源所有权语义。用于保护共享资源时，应优先选择互斥量，并确保持锁时间足够短。</p>
+<h2 id="section-9">临界区只保护最小原子操作</h2>
+<p>关闭中断会影响整个系统的响应时间。临界区内不应执行：</p>
+<ul>
+<li>字符串格式化和大块内存复制。</li>
+<li>串口发送等待。</li>
+<li>Flash 擦写。</li>
+<li>传感器转换等待。</li>
+<li>可能阻塞的 FreeRTOS API。</li>
+</ul>
+<p>临界区只用于无法通过原子访问、队列或互斥量解决的极短共享操作。进入临界区前应能说明它保护了哪一个具体不变量。</p>
+<h2 id="section-10">队列长度不能凭感觉设置</h2>
+<p>队列容量取决于生产速率、消费任务最坏延迟和允许丢失策略。队列过短会在突发数据时溢出；队列过长会占用 RAM，并把处理延迟隐藏成大量积压。</p>
+<p>系统应记录发送失败次数和历史峰值。若队列持续接近满载，应该分析消费者执行时间和优先级，而不是只把队列扩大。</p>
+<p>对于连续字节流，Stream Buffer 或 DMA 环形缓冲通常比逐字节队列更合适；对于固定结构消息，队列更清晰。</p>
+<h2 id="section-11">栈和堆必须测量</h2>
+<p>每个任务栈都占用有限 RAM。栈太小会破坏内存，栈太大又会挤压其他任务。可以使用高水位接口记录任务历史最小剩余栈：</p>
+<pre><code class="language-c">UBaseType_t words_left = uxTaskGetStackHighWaterMark(task_handle);</code></pre>
+<p>测量应覆盖最复杂路径，例如最长日志、错误处理和最大嵌套调用。仅在系统空闲时读取一次高水位，不能代表真实最坏情况。</p>
+<p>同时应启用栈溢出钩子和 malloc 失败钩子，并让故障进入可观察状态，例如记录任务名、错误码或触发受控复位。</p>
+<h2 id="section-12">看门狗要监督系统进展</h2>
+<p>每个任务各自喂狗会掩盖局部死锁。更可靠的做法是由监督任务检查关键任务是否在限定时间内更新心跳，再统一喂硬件看门狗。</p>
+<p>心跳不能只表示任务仍被调度，还应表示它完成了关键工作。例如通信任务应在成功处理帧或确认链路状态后更新，而不是每次进入循环都更新。</p>
+<h2 id="section-13">如何验证优先级设计</h2>
+<p>至少在以下场景下记录调度和统计数据：</p>
+<ul>
+<li>正常周期运行。</li>
+<li>串口或网络突发输入。</li>
+<li>显示、日志和存储同时工作。</li>
+<li>外设超时或返回错误。</li>
+<li>队列接近满载。</li>
+<li>CPU 负载升高和任务执行时间变长。</li>
+</ul>
+<p>关注任务运行时间、最大响应延迟、队列峰值、丢包计数、最小剩余栈和看门狗状态。优先级应根据这些数据调整，而不是只看系统“暂时没有卡死”。</p>
+<h2 id="section-14">常见问题与定位顺序</h2>
+<ul>
+<li>高优先级任务占满 CPU：检查是否缺少阻塞等待。</li>
+<li>低优先级任务长期不运行：检查高优先级任务执行时间和时间片配置。</li>
+<li>偶发死锁：列出锁获取顺序，检查嵌套互斥量。</li>
+<li>中断后任务不立即运行：检查 <code>FromISR</code> API、唤醒标志和中断优先级。</li>
+<li>队列偶尔溢出：记录生产速率、消费延迟和峰值，而不是直接扩大容量。</li>
+<li>运行一段时间后崩溃：优先检查栈高水位、数组边界和动态内存。</li>
+</ul>
+<h2 id="section-15">验收清单</h2>
+<ul>
+<li>每个任务的触发方式、周期、最坏执行时间和截止要求有记录。</li>
+<li>周期任务使用稳定的周期基准，事件任务处于阻塞等待。</li>
+<li>ISR 只完成最小工作，并使用正确的 <code>FromISR</code> 接口。</li>
+<li>外设和共享数据具有明确所有者。</li>
+<li>临界区和持锁时间足够短。</li>
+<li>队列峰值、丢包、栈高水位和执行时间可观测。</li>
+<li>看门狗能够发现任务失去进展，而不是被任意任务单独喂养。</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../fpga-fixed-point-fft-checklist/index.html"><span>← 上一篇</span><strong>FPGA 定点 FFT 设计前必须想清楚的五件事</strong></a>
     <a class="article-pagination-next" href="../mysql-index-debug-path/index.html"><span>下一篇 →</span><strong>MySQL 索引为什么没有被使用：一份排查路径</strong></a>
   </nav></div></div>
     </article></main>
 
   <footer class="site-footer">
-    <div><a class="brand footer-brand" href="../../index.html">JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div><a class="brand footer-brand" href="../../index.html">JIAYUHERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
-    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
   </footer>
   <script src="../../assets/script.js?v=20260714f"></script>
 </body>
