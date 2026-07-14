@@ -483,7 +483,7 @@ const build = async () => {
   }, contentDates.sort().at(-1) || "暂无更新");
   await mkdir(path.join(root, "assets/data"), { recursive: true });
   await writeFile(path.join(root, "assets/data/search-index.json"), `${JSON.stringify(searchIndex, null, 2)}\n`);
-  const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/"];
+  const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/"];
   const urls = [...staticUrls, ...searchIndex.map((item) => item.url.replace(/^\//, ""))];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>https://www.jiayuhere.com/${url}</loc><lastmod>2026-07-14</lastmod></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(root, "sitemap.xml"), sitemap);

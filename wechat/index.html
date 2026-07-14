@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>添加我的 WeChat | jiayuhere</title>
+  <meta name="description" content="扫描微信二维码或复制微信号 jiayu_here，添加 JiaYu 为好友。">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://www.jiayuhere.com/wechat/">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="添加我的 WeChat | jiayuhere">
+  <meta property="og:description" content="扫描二维码或使用微信号 jiayu_here 添加好友。">
+  <meta property="og:url" content="https://www.jiayuhere.com/wechat/">
+  <link rel="icon" href="../assets/images/github-avatar.jpg" type="image/jpeg">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260714k">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="JiaYu Here 首页"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a href="../projects/index.html">项目</a>
+      <a href="../blog/index.html">博客</a>
+      <a href="../notes/index.html">笔记</a>
+      <a href="../toolbox/index.html">工具箱</a>
+      <a href="../resources/index.html">资源</a>
+      <a href="../lab/index.html">日志</a>
+      <a class="nav-cta" href="../contact/index.html">联系我</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container"><p class="eyebrow">WeChat</p><h1>添加我的微信</h1><p>扫描二维码，或者复制微信号后在微信中搜索添加。</p></div>
+    </section>
+    <section class="section">
+      <div class="container wechat-layout">
+        <article class="panel wechat-qr-panel">
+          <img class="wechat-qr" src="../assets/images/wechat-qr.jpg" width="592" height="792" alt="JiaYu 的微信个人二维码，微信号 jiayu_here">
+        </article>
+        <article class="panel wechat-contact-panel">
+          <p class="eyebrow">Account</p>
+          <h2>jiayu_here</h2>
+          <p>电脑访问时可以直接使用手机微信扫码。手机访问时，可以保存二维码后在微信“扫一扫”中从相册选择，也可以复制下面的微信号搜索。</p>
+          <div class="wechat-id"><span>微信号</span><strong>jiayu_here</strong></div>
+          <div class="button-row">
+            <button class="button primary-button" type="button" data-copy-wechat>复制微信号</button>
+            <a class="button secondary-button" href="../assets/images/wechat-qr.jpg" target="_blank" rel="noreferrer">查看二维码原图</a>
+          </div>
+          <p class="wechat-copy-status" data-copy-status aria-live="polite"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../index.html">JIAYUHERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../feed.xml">RSS</a><a href="../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+  </footer>
+  <script src="../assets/script.js?v=20260714f"></script>
+  <script>
+    const copyButton = document.querySelector("[data-copy-wechat]");
+    const copyStatus = document.querySelector("[data-copy-status]");
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("jiayu_here");
+        copyStatus.textContent = "微信号已复制：jiayu_here";
+      } catch {
+        copyStatus.textContent = "复制失败，请手动选择微信号 jiayu_here。";
+      }
+    });
+  </script>
+</body>
+</html>
