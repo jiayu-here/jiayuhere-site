@@ -438,6 +438,7 @@ const footer = (prefix, locale) => {
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [] }) => {
   const isEnglish = locale === "en";
+  const styleVersion = /^(projects|blog|notes)\/$/.test(route) ? "20260715b" : "20260714s";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -463,7 +464,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "JiaYu Here Technical Blog" : "JiaYu Here 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714s">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=${styleVersion}">
 </head>
 <body>
 ${nav(prefix, locale, route, active)}
