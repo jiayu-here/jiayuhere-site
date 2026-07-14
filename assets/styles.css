@@ -185,7 +185,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 
 .project-grid, .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .project-card, .content-card { display: flex; flex-direction: column; min-height: 320px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 14px 36px rgba(31,35,40,.05); }
-.project-card.featured { grid-column: span 2; background: linear-gradient(140deg, #fff 0%, #f6f8fa 100%); }
+.project-card.featured { background: var(--surface); }
 .card-topline { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 32px; color: var(--muted); font: 700 12px ui-monospace, Consolas, monospace; text-transform: uppercase; }
 .project-card h3, .content-card h2 { margin-bottom: 12px; font-size: 24px; }
 .project-card p, .content-card p { margin: 0 0 20px; color: var(--muted); }
@@ -340,7 +340,6 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .module-card:hover { border-color: #6e7681; box-shadow: 0 16px 34px rgba(0, 0, 0, 0.3); }
   .module-number span:last-child, .skill-group li::before, .resource-group a::after { color: #8b949e; }
   .skill-group, .project-card, .content-card { box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24); }
-  .project-card.featured { background: linear-gradient(140deg, #161b22 0%, #0d1117 100%); }
   .tag-list span { color: #8b949e; }
   .contact-strip { background: #161b22; color: #f0f6fc; }
   .contact-strip .button { border-color: #8b949e; background: #f0f6fc; color: #0d1117; }
