@@ -33,7 +33,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>FPGA QPSK 数字基带链路与可视化系统</h1><p class="article-lead">从 PRBS、Gray 映射、相位信道、硬判决到 BER 统计和 Python 星座图的完整数字通信实践。</p><div class="article-meta"><span>FPGA · 2026-07 · 已完成</span><div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/fpga_qpsk_baseband_visual_system" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">RTL 模块分工与时序处理</a><a href="#section-12">仿真、上位机与板级观测流程</a><a href="#section-13">验证证据与当前边界</a><a href="#section-14">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
 <p>通信原理中的星座映射和误码率如果只停留在公式层面，很难建立算法与硬件时序之间的联系。本项目把完整 QPSK 基带链路放到 FPGA 中，并通过上位机观察数据。</p>
 <h2 id="section-2">功能目标</h2>
 <ul>
@@ -79,7 +79,23 @@ endcase</code></pre>
 <p>为参考比特增加等长延迟线；所有 I/Q 运算显式声明为 <code>signed</code>；遥测采用抽样输出，把通信链路与显示刷新速率解耦。</p>
 <h2 id="section-10">最终效果</h2>
 <p>仓库包含可综合 RTL、ModelSim 仿真、CSV 导出、Quartus 工程和 Python 上位机。链路可显示星座图、I/Q 波形以及 BER 统计。</p>
-<h2 id="section-11">后续改进</h2>
+<h2 id="section-11">RTL 模块分工与时序处理</h2>
+<ul>
+<li><code>prbs7.v</code> 和 <code>symbol_tick.v</code> 产生稳定的比特源与符号节拍；映射、信道、判决和 BER 计数都以同一有效节拍为边界，避免不同模块各自计数造成符号错位。</li>
+<li><code>qpsk_mapper.v</code> 将两比特符号映射到四象限 I/Q；<code>qpsk_channel_model.v</code> 通过 I/Q 交换和取反实现 0、90、180、270 度旋转，不在 RTL 中引入浮点三角函数。</li>
+<li><code>qpsk_demapper.v</code> 根据 I/Q 符号完成象限硬判决；<code>ber_counter.v</code> 比较经过等长延迟的发射参考比特与接收比特，这是保证 BER 数字有意义的关键。</li>
+<li><code>telemetry_uart.v</code> 与 <code>uart_tx.v</code> 将发射/接收 I/Q、累计比特数和误码数封装为串口遥测；遥测采用抽样输出，显示吞吐不会反过来改变基带符号速率。</li>
+</ul>
+<h2 id="section-12">仿真、上位机与板级观测流程</h2>
+<p>先执行 <code>sim/run_msim.bat</code>，由测试平台导出 <code>sim/qpsk_samples.csv</code>；再运行 <code>host_app/qpsk_visualizer.py</code>，用 CSV 模式检查星座点位置、I/Q 波形和 BER。确认仿真链路后，才下载 <code>.sof</code> 到 EP4CE10F17C8，通过板载 CH340 的 UART 进行实时观测。默认 <code>uart_txd</code> 连接 <code>PIN_N5</code>；若 PC 端没有串口数据，应先检查 CH340 跳帽，再按硬件说明尝试 <code>PIN_N6</code> 并重新编译。</p>
+<h2 id="section-13">验证证据与当前边界</h2>
+<ul>
+<li>2026-07-03 的本机验证中，ModelSim 仿真通过并生成 CSV；Python 上位机可加载该文件进行可视化。</li>
+<li>Quartus Web Edition 已完成全流程编译并生成 <code>quartus/output_files/fpga_qpsk_baseband_visual_system.sof</code>；最差 setup slack 为 11.216 ns、hold slack 为 0.452 ns，满足当前 50 MHz 单时钟演示工程的时序要求。</li>
+<li>板级 RTL 已提供 <code>sw_noise</code> 噪声模型接口，但默认顶层设为 0；因此当前成果用于验证映射、相位旋转、判决、时序对齐和可视化，不把它表述为带真实 AWGN 信道的物理层性能测试。</li>
+<li>交付内容包括 RTL、测试平台、仿真脚本、Quartus 工程和约束、Python 可视化程序、硬件连接说明、测试报告与发布包，方便按“仿真 CSV → 上位机 → 板卡 UART”三段式复现。</li>
+</ul>
+<h2 id="section-14">后续改进</h2>
 <p>可继续增加脉冲成形、AWGN 近似、载波同步与定时恢复，让模型从基带教学链路逐步接近真实接收机。</p></div></div>
     </article></main>
 

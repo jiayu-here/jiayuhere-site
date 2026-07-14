@@ -59,5 +59,20 @@ end
 ## 最终效果
 工程已通过 ModelSim 测试、Quartus 全流程编译和 50 MHz 时序检查，并生成 `.sof` 下载文件。仓库同时保留 RTL、仿真脚本、MATLAB 查找表脚本、约束和测试报告。
 
+## 模块职责与数据边界
+- `dds_core.v` 维护相位累加器，并把相位数据转换为四种波形的统一采样输出；正弦波使用查找表，其他波形直接由相位码变换得到，避免为每种波形复制一套时序控制。
+- `pcf8591_i2c.v` 负责 SCL/SDA 时序、DAC 写入与 ADC 读取。采集结果只有在 `adc_valid` 有效时才交给后级，数据未更新的周期不会被误当成新样本。
+- `adc_stats.v` 只针对有效 ADC 样本更新最小值、最大值和指数平均值；统计逻辑与 I2C 状态机分离，便于单独检查“采样是否正确”和“统计是否正确”。
+- `seg7_74hc595.v` 与显示编码逻辑负责把当前选择的统计量送到六位数码管；按键、LED 和显示选择均在顶层汇合，不侵入 DDS 或采集核心。
+
+## 板级交互与使用方式
+开发板上，KEY1/KEY2 选择正弦、方波、锯齿和三角波；KEY3/KEY4 在 ADC 平均值、最小值、最大值与当前 DDS 输出之间切换。PCF8591T 同时承担 8 bit DAC 输出和 A_IN0 ADC 采集，板载电位器可作为 ADC 的直观输入来源。四个 LED 分别用于观察复位状态、波形选择位和 ADC 更新脉冲，数码管异常时可先借此区分“核心没有运行”和“显示链路有问题”。
+
+## 验证证据与交付物
+- ModelSim 测试平台运行到 `$finish`，并生成 `sim/dds_measure.vcd`；覆盖 DDS 波形切换、PWM 输出、ADC 统计和显示选择的基础逻辑。
+- Quartus II Web Edition 13.0sp1 已完成 Analysis & Synthesis、Fitter、Assembler、TimeQuest 和 EDA Netlist Writer；输出文件为 `quartus/fpga_dds_measure_system.sof`。
+- 50 MHz 时钟约束为 20 ns；最近一次编译在慢速 85°C 角的 setup slack 为 7.137 ns，满足时序要求。
+- 交付包中包含 Quartus 工程与约束、RTL、ModelSim 脚本、MATLAB 查找表生成脚本、硬件连接说明、测试报告和可下载的 `.sof`，第三方可按文档复现编译与下载流程。
+
 ## 后续改进
 后续可加入按键配置频率字、串口输出采样数据，以及更完整的板级波形实测图片和视频。

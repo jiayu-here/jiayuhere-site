@@ -33,7 +33,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>STM32 + FreeRTOS 多任务采集终端</h1><p class="article-lead">面向传感器采集、串口通信和状态显示的嵌入式多任务项目记录模板。</p><div class="article-meta"><span>STM32 · 2026-07 · 规划中</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>UART</span><span>DMA</span><span>C</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">计划中的任务边界与数据路径</a><a href="#section-12">中断、DMA 与共享资源约定</a><a href="#section-13">完成判定与预期交付物</a><a href="#section-14">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
 <p>这个页面用于承接后续 STM32 与 FreeRTOS 实验，目标是把零散外设例程整理为一个有明确任务边界、通信协议和调试记录的完整终端项目。</p>
 <h2 id="section-2">功能目标</h2>
 <ul>
@@ -71,7 +71,13 @@
 <p>使用互斥量的优先级继承、双缓冲、有限等待时间和明确的溢出计数；所有推断在实测后更新到实验日志。</p>
 <h2 id="section-10">最终效果</h2>
 <p>当前为项目结构与验收模板，尚不标记为已完成。后续将补充原理图、CubeMX 配置、核心源码、串口抓包和实物视频。</p>
-<h2 id="section-11">后续改进</h2>
+<h2 id="section-11">计划中的任务边界与数据路径</h2>
+<p>采集任务按固定周期读取 ADC 或 I2C 传感器，并把带时间戳的样本写入队列；处理任务只做滤波、单位换算和异常标记；通信任务从队列读取已处理的数据，负责组帧和 UART DMA 收发；监控任务定期检查各任务心跳、队列水位、最小剩余堆栈和错误计数。这样可以把“数据没有采到”“数据没有处理”“数据没有发出”拆成可定位的三类问题。</p>
+<h2 id="section-12">中断、DMA 与共享资源约定</h2>
+<p>DMA 完成中断只提交事件或释放信号量，不进行字符串拼接、滤波等耗时处理。任务之间优先使用队列、事件组和互斥量传递所有权，不让多个任务直接读写同一可变缓冲区。对于队列满、DMA 忙和串口突发等情况，将保留丢样计数、超时计数和错误码，而不是静默覆盖旧数据；具体队列深度、采样率和优先级会在开发板型号与传感器确定后由实测填写。</p>
+<h2 id="section-13">完成判定与预期交付物</h2>
+<p>项目完成前至少需要提供：CubeMX 工程与时钟配置、可编译的 HAL/FreeRTOS 源码、任务与队列关系图、串口协议说明、长时间运行日志、UART 抓包，以及一次故障注入后的恢复记录。验收将以“裸机外设可用、单任务可用、多任务数据链路正确、连续运行无未解释丢样”为顺序，而不是仅以程序能烧录作为完成条件。</p>
+<h2 id="section-14">后续改进</h2>
 <p>可扩展 OLED 显示、Flash 参数保存、Bootloader 和低功耗模式。</p></div></div>
     </article></main>
 

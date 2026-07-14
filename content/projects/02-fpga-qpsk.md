@@ -59,5 +59,20 @@ endcase
 ## 最终效果
 仓库包含可综合 RTL、ModelSim 仿真、CSV 导出、Quartus 工程和 Python 上位机。链路可显示星座图、I/Q 波形以及 BER 统计。
 
+## RTL 模块分工与时序处理
+- `prbs7.v` 和 `symbol_tick.v` 产生稳定的比特源与符号节拍；映射、信道、判决和 BER 计数都以同一有效节拍为边界，避免不同模块各自计数造成符号错位。
+- `qpsk_mapper.v` 将两比特符号映射到四象限 I/Q；`qpsk_channel_model.v` 通过 I/Q 交换和取反实现 0、90、180、270 度旋转，不在 RTL 中引入浮点三角函数。
+- `qpsk_demapper.v` 根据 I/Q 符号完成象限硬判决；`ber_counter.v` 比较经过等长延迟的发射参考比特与接收比特，这是保证 BER 数字有意义的关键。
+- `telemetry_uart.v` 与 `uart_tx.v` 将发射/接收 I/Q、累计比特数和误码数封装为串口遥测；遥测采用抽样输出，显示吞吐不会反过来改变基带符号速率。
+
+## 仿真、上位机与板级观测流程
+先执行 `sim/run_msim.bat`，由测试平台导出 `sim/qpsk_samples.csv`；再运行 `host_app/qpsk_visualizer.py`，用 CSV 模式检查星座点位置、I/Q 波形和 BER。确认仿真链路后，才下载 `.sof` 到 EP4CE10F17C8，通过板载 CH340 的 UART 进行实时观测。默认 `uart_txd` 连接 `PIN_N5`；若 PC 端没有串口数据，应先检查 CH340 跳帽，再按硬件说明尝试 `PIN_N6` 并重新编译。
+
+## 验证证据与当前边界
+- 2026-07-03 的本机验证中，ModelSim 仿真通过并生成 CSV；Python 上位机可加载该文件进行可视化。
+- Quartus Web Edition 已完成全流程编译并生成 `quartus/output_files/fpga_qpsk_baseband_visual_system.sof`；最差 setup slack 为 11.216 ns、hold slack 为 0.452 ns，满足当前 50 MHz 单时钟演示工程的时序要求。
+- 板级 RTL 已提供 `sw_noise` 噪声模型接口，但默认顶层设为 0；因此当前成果用于验证映射、相位旋转、判决、时序对齐和可视化，不把它表述为带真实 AWGN 信道的物理层性能测试。
+- 交付内容包括 RTL、测试平台、仿真脚本、Quartus 工程和约束、Python 可视化程序、硬件连接说明、测试报告与发布包，方便按“仿真 CSV → 上位机 → 板卡 UART”三段式复现。
+
 ## 后续改进
 可继续增加脉冲成形、AWGN 近似、载波同步与定时恢复，让模型从基带教学链路逐步接近真实接收机。

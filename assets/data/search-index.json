@@ -30,11 +30,11 @@
   {
     "section": "projects",
     "title": "个人知识库与全文检索 Web 应用",
-    "description": "使用 Python、MySQL 和轻量前端构建可登录、可检索、可维护的个人知识管理系统。",
+    "description": "使用 Python、SQLite、本地向量检索和轻量前端构建可登录、可检索、可维护的个人知识管理系统。",
     "category": "数据库",
     "tags": [
       "Python",
-      "MySQL",
+      "SQLite",
       "Search",
       "Docker",
       "Web"

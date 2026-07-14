@@ -33,7 +33,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>MATLAB 数字通信链路仿真平台</h1><p class="article-lead">用统一参数和可重复实验脚本比较调制、滤波、信道与误码率性能。</p><div class="article-meta"><span>通信仿真 · 2026-07 · 规划中</span><div class="tag-list"><span>MATLAB</span><span>QPSK</span><span>AWGN</span><span>BER</span><span>DSP</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">参数关系与可复现实验约定</a><a href="#section-12">预定实验链路与输出</a><a href="#section-13">完成判定与 FPGA 对照方式</a><a href="#section-14">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
 <p>不同课程实验常把调制、滤波和误码率拆开验证。本项目计划建立统一链路，让参数、图像和结论能够重复生成并与 FPGA 实现对照。</p>
 <h2 id="section-2">功能目标</h2>
 <ul>
@@ -69,7 +69,13 @@ rx = awgn(tx, snr, 'measured');</code></pre>
 <p>在配置中显式保存能量定义；对发送与接收滤波器总延迟进行统一裁剪；所有曲线旁保存实验参数。</p>
 <h2 id="section-10">最终效果</h2>
 <p>当前页面是实施蓝图。完成后将补充脚本仓库、理论对照表、星座图和 BER 图，不提前宣称未完成结果。</p>
-<h2 id="section-11">后续改进</h2>
+<h2 id="section-11">参数关系与可复现实验约定</h2>
+<p>每次实验会把调制阶数、比特数、每符号采样点、滤波滚降系数、滤波器跨度、Eb/N0 扫描范围和随机数种子写入同一份配置。发送端与接收端统一采用平均功率归一化；加入过采样和根升余弦滤波后，会显式记录群时延及裁剪位置。这样 BER 曲线的变化能追溯到某一个物理参数，而不是由脚本默认值或手动改图造成。</p>
+<h2 id="section-12">预定实验链路与输出</h2>
+<p>基础链路将按“随机比特 → 调制 → 成形滤波 → 信道 → 匹配滤波 → 定时对齐 → 判决 → 误码统计”执行。每组参数将同时导出时域波形、频谱、眼图、星座图、理论/仿真 BER 对照和机器可读的结果摘要；无噪声旁路将作为每次运行的基线，用来先排除映射、滤波时延和判决对齐错误。</p>
+<h2 id="section-13">完成判定与 FPGA 对照方式</h2>
+<p>完成版本需要提供一键运行入口、固定种子的复现实验、参数文件、图像输出和结果说明。BPSK/QPSK 的蒙特卡洛 BER 应先与对应理论曲线在合理误差范围内一致，再引入成形滤波或更复杂信道。与 FPGA 项目对照时，优先比对映射表、符号顺序、位宽/量化方式和延迟，而不直接拿浮点仿真曲线替代 RTL 的定点验证。</p>
+<h2 id="section-14">后续改进</h2>
 <p>增加瑞利衰落、载波频偏、同步算法和 OFDM 链路。</p></div></div>
     </article></main>
 
