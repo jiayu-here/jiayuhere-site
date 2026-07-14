@@ -25,12 +25,12 @@
   <link rel="alternate" type="application/rss+xml" title="JiaYu Here 技术博客" href="feed.xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" href="assets/images/github-avatar.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="assets/styles.css?v=20260714o">
+  <link rel="stylesheet" href="assets/styles.css?v=20260714p">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
-      {"@type":"Person","@id":"https://www.jiayuhere.com/#person","name":"JiaYu","url":"https://www.jiayuhere.com/","sameAs":["https://github.com/jiayu-here","https://www.linkedin.com/in/jiayuhere","https://www.instagram.com/jiayuhere_/","https://jiayuhere.blogspot.com"],"knowsAbout":["Embedded Systems","FPGA","Digital Signal Processing","Communication Systems","Databases"]},
+      {"@type":"Person","@id":"https://www.jiayuhere.com/#person","name":"JiaYu","url":"https://www.jiayuhere.com/","sameAs":["https://github.com/jiayu-here","https://www.linkedin.com/in/jiayuhere","https://www.instagram.com/jiayuhere_/","https://jiayuhere.blogspot.com","https://v.douyin.com/lisWB6e9ImQ/"],"knowsAbout":["Embedded Systems","FPGA","Digital Signal Processing","Communication Systems","Databases"]},
       {"@type":"WebSite","@id":"https://www.jiayuhere.com/#website","url":"https://www.jiayuhere.com/","name":"JiaYu Here","description":"工程、代码与长期学习的个人数字空间","inLanguage":"zh-CN","author":{"@id":"https://www.jiayuhere.com/#person"}}
     ]
   }
@@ -88,27 +88,38 @@
               <a class="hero-social-link wechat" href="wechat/index.html" aria-label="WeChat：查看二维码并添加好友" title="WeChat">
                 <img src="assets/icons/wechat.svg" width="21" height="21" alt="">
               </a>
+              <a class="hero-social-link douyin" href="https://v.douyin.com/lisWB6e9ImQ/" target="_blank" rel="noreferrer" aria-label="抖音" title="抖音">
+                <img src="assets/icons/douyin.svg" width="21" height="21" alt="">
+              </a>
             </nav>
           </div>
         </div>
 
-        <aside class="terminal-card" aria-label="当前技术方向">
-          <div class="terminal-head"><i></i><i></i><i></i><span>profile.json</span></div>
-          <div class="terminal-body">
-            <p>{</p>
-            <p>&nbsp;&nbsp;<span class="code-key">"name"</span>: <span class="code-string">"JiaYu"</span>,</p>
-            <p>&nbsp;&nbsp;<span class="code-key">"focus"</span>: [</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Embedded Systems"</span>,</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"FPGA & DSP"</span>,</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Communication"</span></p>
-            <p>&nbsp;&nbsp;],</p>
-            <p>&nbsp;&nbsp;<span class="code-key">"principle"</span>: <span class="code-string">"build → verify → document"</span></p>
-            <p>}</p>
-            <div class="status-list">
-              <div><span>Current</span><strong>整理项目与知识体系</strong></div>
-              <div><span>Writing</span><strong>通信 · FPGA · 嵌入式</strong></div>
-              <div><span>Open source</span><strong>github.com/jiayu-here</strong></div>
-            </div>
+        <aside class="terminal-card" aria-label="STM32 HAL 初始化代码示例">
+          <div class="terminal-head"><i></i><i></i><i></i><span>stm32_hal_msp.c</span></div>
+          <div class="terminal-body code-editor" role="img" aria-label="带行号和语法高亮的 STM32 C 代码">
+            <div class="code-line"><span class="code-line-number">10</span><code><span class="syntax-keyword">void</span> <span class="syntax-function">HAL_ADC_MspInit</span>(<span class="syntax-type">ADC_HandleTypeDef</span> *<span class="syntax-variable">hadc</span>)</code></div>
+            <div class="code-line"><span class="code-line-number">11</span><code><span class="syntax-brace">{</span></code></div>
+            <div class="code-line"><span class="code-line-number">12</span><code>  <span class="syntax-type">GPIO_InitTypeDef</span> gpio = <span class="syntax-brace">{</span><span class="syntax-number">0</span><span class="syntax-brace">}</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">13</span><code>  <span class="syntax-keyword">if</span> (hadc-&gt;Instance == ADC1) <span class="syntax-brace">{</span></code></div>
+            <div class="code-line"><span class="code-line-number">14</span><code>    <span class="syntax-function">__HAL_RCC_GPIOA_CLK_ENABLE</span>();</code></div>
+            <div class="code-line"><span class="code-line-number">15</span><code>    gpio.Pin = <span class="syntax-constant">GPIO_PIN_2</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">16</span><code>    gpio.Mode = <span class="syntax-constant">GPIO_MODE_ANALOG</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">17</span><code>    <span class="syntax-function">HAL_GPIO_Init</span>(GPIOA, &amp;gpio);</code></div>
+            <div class="code-line"><span class="code-line-number">18</span><code>  <span class="syntax-brace">}</span></code></div>
+            <div class="code-line"><span class="code-line-number">19</span><code><span class="syntax-brace">}</span></code></div>
+            <div class="code-line is-blank"><span class="code-line-number">20</span><code></code></div>
+            <div class="code-line"><span class="code-line-number">21</span><code><span class="syntax-keyword">void</span> <span class="syntax-function">HAL_TIM_Encoder_MspInit</span>(<span class="syntax-type">TIM_HandleTypeDef</span> *<span class="syntax-variable">htim</span>)</code></div>
+            <div class="code-line"><span class="code-line-number">22</span><code><span class="syntax-brace">{</span></code></div>
+            <div class="code-line"><span class="code-line-number">23</span><code>  <span class="syntax-type">GPIO_InitTypeDef</span> gpio = <span class="syntax-brace">{</span><span class="syntax-number">0</span><span class="syntax-brace">}</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">24</span><code>  gpio.Mode = <span class="syntax-constant">GPIO_MODE_INPUT</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">25</span><code>  gpio.Pull = <span class="syntax-constant">GPIO_PULLUP</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">26</span><code>  <span class="syntax-keyword">if</span> (htim-&gt;Instance == TIM3) <span class="syntax-brace">{</span></code></div>
+            <div class="code-line"><span class="code-line-number">27</span><code>    <span class="syntax-function">__HAL_RCC_GPIOA_CLK_ENABLE</span>();</code></div>
+            <div class="code-line"><span class="code-line-number">28</span><code>    gpio.Pin = <span class="syntax-constant">GPIO_PIN_6</span> | <span class="syntax-constant">GPIO_PIN_7</span>;</code></div>
+            <div class="code-line"><span class="code-line-number">29</span><code>    <span class="syntax-function">HAL_GPIO_Init</span>(GPIOA, &amp;gpio);</code></div>
+            <div class="code-line"><span class="code-line-number">30</span><code>  <span class="syntax-brace">}</span></code></div>
+            <div class="code-line"><span class="code-line-number">31</span><code><span class="syntax-brace">}</span></code></div>
           </div>
         </aside>
       </div>

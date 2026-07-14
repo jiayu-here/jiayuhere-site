@@ -132,6 +132,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .hero-social-link.instagram .instagram-dot { fill: currentColor; }
 .hero-social-link.blogger { background: #ff5722; }
 .hero-social-link.wechat { background: #07c160; }
+.hero-social-link.douyin { background: #000; }
 
 .wechat-layout { display: grid; grid-template-columns: minmax(280px, 430px) minmax(0, 1fr); gap: 28px; align-items: center; }
 .wechat-qr-panel { display: grid; place-items: center; padding: 24px; }
@@ -142,21 +143,25 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .wechat-id strong { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 20px; }
 .wechat-copy-status { min-height: 24px; margin: 14px 0 0; color: var(--muted); }
 
-.terminal-card { overflow: hidden; border: 1px solid #cbded9; border-radius: 22px; background: #18312f; color: #dff1ec; box-shadow: var(--shadow); }
-.terminal-head { display: flex; align-items: center; gap: 7px; padding: 15px 18px; border-bottom: 1px solid rgba(255,255,255,.09); color: #91b7ae; font: 12px ui-monospace, SFMono-Regular, Consolas, monospace; }
-.terminal-head i { width: 9px; height: 9px; border-radius: 50%; background: #6e9189; }
+.terminal-card { min-width: 0; overflow: hidden; border: 1px solid #2b2f33; border-radius: 18px; background: #111315; color: #d6deeb; box-shadow: var(--shadow); }
+.terminal-head { display: flex; align-items: center; gap: 7px; padding: 13px 16px; border-bottom: 1px solid #292d31; background: #16191c; color: #8996a3; font: 12px ui-monospace, SFMono-Regular, Consolas, monospace; }
+.terminal-head i { width: 9px; height: 9px; border-radius: 50%; background: #6f7b85; }
 .terminal-head i:first-child { background: #e48b75; }
 .terminal-head i:nth-child(2) { background: #e7be6d; }
 .terminal-head i:nth-child(3) { background: #68b995; }
 .terminal-head span { margin-left: 8px; }
-.terminal-body { padding: 26px; font: 14px/1.85 ui-monospace, SFMono-Regular, Consolas, monospace; }
-.terminal-body p { margin: 0; }
-.code-key { color: #8bd5c5; }
-.code-string { color: #f2c879; }
-.code-comment { color: #7fa49c; }
-.status-list { display: grid; gap: 12px; margin: 24px 0 0; padding: 22px 0 0; border-top: 1px solid rgba(255,255,255,.1); }
-.status-list div { display: flex; justify-content: space-between; gap: 20px; }
-.status-list span { color: #8badab; }
+.terminal-body { overflow-x: auto; padding: 14px 0 18px; font: 13px/1.72 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.code-line { display: grid; min-width: 660px; grid-template-columns: 48px minmax(max-content, 1fr); }
+.code-line-number { padding-right: 12px; border-right: 1px solid #35393d; color: #84919d; text-align: right; user-select: none; }
+.code-line code { display: block; padding: 0 18px; background: transparent; color: #d6deeb; white-space: pre; }
+.code-line.is-blank code { min-height: 1.72em; }
+.syntax-keyword { color: #ff6b6b; }
+.syntax-function { color: #c792ea; }
+.syntax-type { color: #d6deeb; }
+.syntax-variable { color: #f78c6c; }
+.syntax-constant { color: #82aaff; }
+.syntax-number { color: #f78c6c; }
+.syntax-brace { color: #ffcb6b; }
 
 .section { padding: 84px 0; }
 .section-soft { background: #f6f8fa; border-block: 1px solid var(--line); }
