@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docker + MySQL 可复现实验环境 | JiaYu Here</title>
+  <meta name="description" content="为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Docker + MySQL 可复现实验环境 | JiaYu Here">
+  <meta property="og:description" content="为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714a">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>Docker + MySQL 可复现实验环境</h1><p class="article-lead">为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。</p><div class="article-meta"><span>工程环境 · 2026-07 · 规划中</span><div class="tag-list"><span>Docker</span><span>MySQL</span><span>Compose</span><span>Backup</span><span>Linux</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+<p>数据库实验最容易因版本、端口、初始化顺序和数据卷状态产生“只在某台电脑能运行”的问题。这个项目专门记录可复现环境的边界与检查方式。</p>
+<h2 id="section-2">功能目标</h2>
+<ul>
+<li>使用 Compose 声明应用与 MySQL 服务。</li>
+<li>通过健康检查控制启动顺序。</li>
+<li>将配置、敏感信息和持久化数据分离。</li>
+<li>提供备份、恢复和故障排查步骤。</li>
+</ul>
+<h2 id="section-3">硬件与软件环境</h2>
+<ul>
+<li>Windows + Docker Desktop 或 Linux + Docker Engine。</li>
+<li>Docker Compose、MySQL 8.0 与轻量 Web 应用。</li>
+</ul>
+<h2 id="section-4">系统架构</h2>
+<p>应用和数据库位于独立容器，通过内部网络通信；数据库数据使用命名卷；初始化 SQL 只在新数据卷上执行；主机仅暴露必要端口。</p>
+<h2 id="section-5">实现步骤</h2>
+<ol>
+<li>固定镜像版本和端口边界。</li>
+<li>编写数据库健康检查与应用依赖条件。</li>
+<li>增加 <code>.env.example</code> 和最小配置说明。</li>
+<li>验证全新启动、保留数据重启和完整恢复。</li>
+<li>记录非 Docker 本地运行的等价路径。</li>
+</ol>
+<h2 id="section-6">核心代码说明</h2>
+<p>健康检查必须验证数据库真正可接受连接，而不是只检查容器进程存在。应用连接使用服务名，不写死主机 IP。</p>
+<pre><code class="language-yaml">healthcheck:
+  test: [&quot;CMD&quot;, &quot;mysqladmin&quot;, &quot;ping&quot;, &quot;-h&quot;, &quot;localhost&quot;]
+  interval: 5s
+  timeout: 3s
+  retries: 12</code></pre>
+<h2 id="section-7">调试过程</h2>
+<p>依次检查容器状态、健康检查、网络解析、端口占用和数据库日志。备份验证必须包含一次真实恢复，不能只确认导出文件存在。</p>
+<h2 id="section-8">遇到的问题</h2>
+<p>预计常见问题包括数据卷残留旧密码、宿主端口冲突、环境变量未加载和 Windows 文件权限差异。</p>
+<h2 id="section-9">解决方案</h2>
+<p>把重建容器与删除数据卷区分开；启动前检查端口；提供示例环境文件；为 Windows 和 Linux 分别记录路径注意事项。</p>
+<h2 id="section-10">最终效果</h2>
+<p>当前为工程环境模板。完成后将提供 Compose 文件、初始化脚本、健康检查结果和备份恢复记录。</p>
+<h2 id="section-11">后续改进</h2>
+<p>加入只读数据库账号、自动备份任务和最小监控面板。</p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714a"></script>
+</body>
+</html>

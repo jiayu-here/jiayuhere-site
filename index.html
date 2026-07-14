@@ -3,383 +3,150 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JiaYu Here | 旅行、日常手记与知识见解</title>
-  <meta name="description" content="JiaYu Here 是 jiayuhere.com 的个人分享网站，记录旅行见闻、日常手记与知识见解。">
-  <meta name="keywords" content="JiaYu Here,jiayuhere,旅行手记,日常记录,知识分享,个人博客">
-  <meta name="author" content="JiaYu">
-  <meta name="theme-color" content="#f7f3ea">
+  <title>JiaYu Here | 工程、代码与长期学习</title>
+  <meta name="description" content="JiaYu 的个人主页、技术博客、工程作品集、学习知识库与个人工具箱，聚焦通信、嵌入式、FPGA、信号处理和计算机技术。">
+  <meta name="theme-color" content="#eef7f4">
   <link rel="canonical" href="https://www.jiayuhere.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="JiaYu Here">
-  <meta property="og:title" content="JiaYu Here | 旅行、日常手记与知识见解">
-  <meta property="og:description" content="把走过的地方、平常生活和认真想过的问题，整理成可以慢慢读的文字。">
+  <meta property="og:title" content="JiaYu Here | 工程、代码与长期学习">
+  <meta property="og:description" content="个人主页、技术博客、工程作品集、学习知识库与个人工具箱。">
   <meta property="og:url" content="https://www.jiayuhere.com/">
-  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/hero-travel-desk.png">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preload" as="image" href="assets/images/hero-travel-1536.webp" type="image/webp" imagesrcset="assets/images/hero-travel-768.webp 768w, assets/images/hero-travel-1536.webp 1536w" imagesizes="100vw">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://www.jiayuhere.com/#person",
-          "name": "JiaYu",
-          "url": "https://www.jiayuhere.com/"
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.jiayuhere.com/#website",
-          "url": "https://www.jiayuhere.com/",
-          "name": "JiaYu Here",
-          "description": "旅行、日常手记与知识见解分享网站。",
-          "inLanguage": "zh-CN",
-          "author": {
-            "@id": "https://www.jiayuhere.com/#person"
-          }
-        },
-        {
-          "@type": "Blog",
-          "@id": "https://www.jiayuhere.com/#blog",
-          "url": "https://www.jiayuhere.com/",
-          "name": "JiaYu Here",
-          "description": "把走过的地方、平常生活和认真想过的问题，整理成可以慢慢读的文字。",
-          "inLanguage": "zh-CN",
-          "isPartOf": {
-            "@id": "https://www.jiayuhere.com/#website"
-          }
-        }
-      ]
-    }
-  </script>
   <link rel="manifest" href="site.webmanifest">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20260711b">
+  <link rel="stylesheet" href="assets/styles.css?v=20260714a">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {"@type":"Person","@id":"https://www.jiayuhere.com/#person","name":"JiaYu","url":"https://www.jiayuhere.com/","sameAs":["https://github.com/jiayu-here"],"knowsAbout":["Embedded Systems","FPGA","Digital Signal Processing","Communication Systems","Databases"]},
+      {"@type":"WebSite","@id":"https://www.jiayuhere.com/#website","url":"https://www.jiayuhere.com/","name":"JiaYu Here","description":"工程、代码与长期学习的个人数字空间","inLanguage":"zh-CN","author":{"@id":"https://www.jiayuhere.com/#person"}}
+    ]
+  }
+  </script>
 </head>
 <body>
-  <a class="skip-link" href="#mainContent">跳到主要内容</a>
-  <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="JiaYu Here 首页">
-      <span class="brand-mark">JH</span>
-      <span>JiaYu Here</span>
-    </a>
-    <nav class="nav" aria-label="主要导航">
-      <a href="#pathways">路线</a>
-      <a href="#travel">旅行</a>
-      <a href="#journal">日常</a>
-      <a href="#insight">见解</a>
-      <a href="#about">关于</a>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a href="projects/index.html">项目</a>
+      <a href="blog/index.html">博客</a>
+      <a href="notes/index.html">笔记</a>
+      <a href="toolbox/index.html">工具箱</a>
+      <a href="resources/index.html">资源</a>
+      <a href="lab/index.html">日志</a>
+      <a class="nav-cta" href="contact/index.html">联系我</a>
     </nav>
-    <button class="menu-button" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileNav">
-      <span></span><span></span><span></span>
-    </button>
   </header>
 
-  <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航" hidden>
-    <a href="#pathways">路线</a>
-    <a href="#travel">旅行</a>
-    <a href="#journal">日常</a>
-    <a href="#insight">见解</a>
-    <a href="#about">关于</a>
-  </nav>
-  <button class="mobile-nav-backdrop" id="mobileNavBackdrop" type="button" aria-label="关闭移动端导航" hidden></button>
-
-  <main id="mainContent" tabindex="-1">
-    <section class="hero" aria-labelledby="hero-title">
-      <picture>
-        <source type="image/webp" srcset="assets/images/hero-travel-768.webp 768w, assets/images/hero-travel-1536.webp 1536w" sizes="100vw">
-        <img src="assets/images/hero-travel-desk.png" width="1536" height="1024" fetchpriority="high" decoding="async" alt="旅行桌面、手记本、相机和茶杯构成的温暖场景">
-      </picture>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="eyebrow">www.jiayuhere.com</p>
-        <h1 id="hero-title">旅行、日常手记与知识见解</h1>
-        <p class="hero-copy">把走过的地方、平常生活和认真想过的问题，整理成可以慢慢读的文字。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#featured">开始阅读</a>
-          <a class="button ghost" href="#newsletter">订阅更新</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="recent-highlights section" aria-labelledby="recent-title">
-      <div class="recent-heading">
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
         <div>
-          <p class="section-kicker">最近更新导览</p>
-          <h2 id="recent-title">如果只看三篇，可以先从这里开始</h2>
-        </div>
-        <p>参考成熟个人站首页常见的“最新阅读入口”做法，把最能代表这个站点方向的内容前置，减少第一次访问时的选择成本。</p>
-      </div>
-      <div class="recent-grid" aria-label="最近推荐阅读">
-        <a class="recent-card" href="#featured" data-filter-target="travel">
-          <p class="recent-label">最新旅行 · 8 分钟阅读</p>
-          <h3>在陌生城市里，如何找到自己的步调</h3>
-          <p>从路线安排、街区漫步到临时改变计划，先快速进入这座站的旅行气质。</p>
-          <span>只看旅行</span>
-        </a>
-        <a class="recent-card" href="#featured" data-filter-target="journal">
-          <p class="recent-label">最新日常 · 5 分钟阅读</p>
-          <h3>一个普通工作日的清晨记录</h3>
-          <p>从早餐、通勤和阅读开始，先感受这里如何保存日常里的细节与秩序。</p>
-          <span>只看日常</span>
-        </a>
-        <a class="recent-card" href="#featured" data-filter-target="insight">
-          <p class="recent-label">最新见解 · 10 分钟阅读</p>
-          <h3>如何把零散输入变成可复用的知识</h3>
-          <p>如果更想先看方法论，这篇能直接代表站点在阅读、学习和表达上的重心。</p>
-          <span>只看见解</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section section-rail-shell" aria-labelledby="sectionRailTitle">
-      <div class="section-rail-copy">
-        <p class="section-kicker">Page Map</p>
-        <h2 id="sectionRailTitle">快速跳到你现在更想看的部分</h2>
-      </div>
-      <nav class="section-rail" aria-label="页面快速跳转">
-        <a href="#featured">精选内容</a>
-        <a href="#pathways">阅读路线</a>
-        <a href="#travel">旅行</a>
-        <a href="#journal">日常</a>
-        <a href="#insight">见解</a>
-        <a href="#about">关于</a>
-        <a href="#newsletter">订阅</a>
-      </nav>
-    </section>
-
-    <section class="intro section">
-      <div>
-        <p class="section-kicker">编辑方向</p>
-        <h2>一个适合长期更新的个人内容站</h2>
-      </div>
-      <p>网站按「旅行」「日常」「见解」组织内容，适合发布城市观察、路线记录、生活片段、读书笔记、学习方法和个人观点。结构已经预留上线常用配置，后续可以继续扩展成博客系统。</p>
-    </section>
-
-    <section class="reading-path section" id="pathways" aria-labelledby="pathways-title">
-      <div class="pathway-lead">
-        <p class="section-kicker">阅读路线</p>
-        <h2 id="pathways-title">第一次来，可以先从这三条线索进入</h2>
-        <p>个人网站最重要的不是把所有内容一次摆满，而是让读者看见一个稳定的人和清晰的写作方向。这里把旅行、日常和见解整理成三条入口，后续每篇文章都能自然归位。</p>
-      </div>
-      <div class="pathway-grid" aria-label="推荐阅读路线">
-        <a class="pathway-card" href="#travel">
-          <span>01</span>
-          <h3>看见地方</h3>
-          <p>适合从城市、路线、照片和旅途中具体的瞬间开始读。</p>
-        </a>
-        <a class="pathway-card" href="#journal">
-          <span>02</span>
-          <h3>保存日常</h3>
-          <p>把普通一天里的秩序、情绪和细节留下来，形成可回看的生活记录。</p>
-        </a>
-        <a class="pathway-card" href="#insight">
-          <span>03</span>
-          <h3>整理想法</h3>
-          <p>把读书、学习和工作里的零散输入，变成可复用的判断和方法。</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="category-grid section" aria-label="内容分类">
-      <article class="category" id="travel">
-        <span class="category-icon">✈</span>
-        <h3>旅行手记</h3>
-        <p>记录城市、路线、住宿、美食和旅途中的具体感受。</p>
-      </article>
-      <article class="category" id="journal">
-        <span class="category-icon">☕</span>
-        <h3>日常片段</h3>
-        <p>整理生活里的小事、习惯、照片背后的心情与阶段复盘。</p>
-      </article>
-      <article class="category" id="insight">
-        <span class="category-icon">◎</span>
-        <h3>知识见解</h3>
-        <p>分享学习、阅读、工作方法和对问题的结构化思考。</p>
-      </article>
-    </section>
-
-    <section class="section" id="featured">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">精选内容</p>
-          <h2>近期可以发布的栏目样例</h2>
-        </div>
-        <div class="filters" role="group" aria-label="文章筛选">
-          <button class="filter active" data-filter="all" type="button" aria-pressed="true">全部</button>
-          <button class="filter" data-filter="travel" type="button" aria-pressed="false">旅行</button>
-          <button class="filter" data-filter="journal" type="button" aria-pressed="false">日常</button>
-          <button class="filter" data-filter="insight" type="button" aria-pressed="false">见解</button>
-        </div>
-      </div>
-      <p class="filter-status" id="filterStatus" aria-live="polite">当前显示全部 6 篇内容。</p>
-      <div class="reading-overview" id="readingOverview" aria-live="polite">
-        <div class="reading-overview-head">
-          <p class="reading-overview-label">阅读概览</p>
-          <button class="view-link-button" id="copyViewLink" type="button">复制当前视图链接</button>
-        </div>
-        <p class="view-link-status" id="copyViewStatus">当前链接对应全部精选内容。</p>
-        <div class="reading-overview-grid">
-          <div class="reading-overview-item">
-            <span>当前主题</span>
-            <strong id="overviewLabel">全部</strong>
+          <div class="availability">持续学习与工程实践中</div>
+          <p class="eyebrow">Communication · Embedded · FPGA</p>
+          <h1>你好，我是 JiaYu。<br>把工程做完，也把过程<span>写清楚。</span></h1>
+          <p class="hero-copy">这里是我的个人主页、技术博客、项目作品集、学习知识库和工具箱。长期记录通信、数字信号处理、嵌入式、FPGA 与计算机技术的学习和实践。</p>
+          <div class="hero-actions">
+            <a class="button primary-button" href="projects/index.html">查看项目作品</a>
+            <a class="button secondary-button" href="about/index.html">了解我的方向</a>
           </div>
-          <div class="reading-overview-item">
-            <span>可读篇数</span>
-            <strong id="overviewCount">6 篇</strong>
-          </div>
-          <div class="reading-overview-item">
-            <span>预计时长</span>
-            <strong id="overviewTime">40 分钟</strong>
-          </div>
-          <div class="reading-overview-item reading-overview-item-wide">
-            <span>建议先看</span>
-            <strong id="overviewLead">在陌生城市里，如何找到自己的步调</strong>
+          <div class="hero-meta" aria-label="站点概览">
+            <div><strong>6</strong>项目档案</div>
+            <div><strong>4</strong>技术主题</div>
+            <div><strong>4</strong>学习专题</div>
+            <div><strong>3</strong>可用工具</div>
           </div>
         </div>
-      </div>
 
-      <div class="browse-modes" role="group" aria-label="按阅读目的进入">
-        <button class="browse-mode active" data-filter="all" type="button" aria-pressed="true">
-          <span class="browse-mode-meta">总览入口</span>
-          <strong>先看全部精选</strong>
-          <span>适合第一次访问，快速建立对这个站点内容结构的整体印象。</span>
-        </button>
-        <button class="browse-mode" data-filter="travel" type="button" aria-pressed="false">
-          <span class="browse-mode-meta">城市与路线</span>
-          <strong>想先感受旅行气质</strong>
-          <span>直接进入记录地方、街区观察和短途清单的内容。</span>
-        </button>
-        <button class="browse-mode" data-filter="journal" type="button" aria-pressed="false">
-          <span class="browse-mode-meta">生活与秩序</span>
-          <strong>想先看日常片段</strong>
-          <span>从清晨、周末和生活留白切入，更快理解站点的个人感。</span>
-        </button>
-        <button class="browse-mode" data-filter="insight" type="button" aria-pressed="false">
-          <span class="browse-mode-meta">方法与判断</span>
-          <strong>想先看知识见解</strong>
-          <span>优先浏览阅读、学习和整理想法的方法论表达。</span>
-        </button>
-      </div>
-
-      <div class="reading-cue" id="readingCue" aria-live="polite">
-        <p class="reading-cue-label">阅读提示</p>
-        <p class="reading-cue-copy">先看完整个精选列表，再切到你现在更想进入的主题，会更容易找到适合的阅读起点。</p>
-      </div>
-
-      <div class="post-index" id="postIndex" aria-labelledby="postIndexTitle">
-        <div class="post-index-heading">
-          <p class="post-index-label">Content Index</p>
-          <h3 id="postIndexTitle">Scan the list first, then jump into a post card</h3>
-        </div>
-        <div class="post-index-list" id="postIndexList"></div>
-        <p class="post-index-empty" id="postIndexEmpty" hidden>No posts in this view yet.</p>
-      </div>
-
-      <div class="post-grid">
-        <article class="post-card" id="post-1" data-category="travel" tabindex="-1">
-          <p class="post-meta">旅行 · 8 分钟阅读</p>
-          <h3>在陌生城市里，如何找到自己的步调</h3>
-          <p>从路线安排、街区漫步到临时改变计划，记录一次轻松但有密度的城市旅行。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>城市漫步</li>
-            <li>路线节奏</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
-        <article class="post-card" id="post-2" data-category="journal" tabindex="-1">
-          <p class="post-meta">日常 · 5 分钟阅读</p>
-          <h3>一个普通工作日的清晨记录</h3>
-          <p>关于早餐、通勤、读书和整理桌面的微小秩序，也是生活状态的温度计。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>清晨</li>
-            <li>生活秩序</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
-        <article class="post-card" id="post-3" data-category="insight" tabindex="-1">
-          <p class="post-meta">见解 · 10 分钟阅读</p>
-          <h3>如何把零散输入变成可复用的知识</h3>
-          <p>用主题、问题、案例和结论四层结构，减少收藏很多但真正吸收很少的情况。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>知识整理</li>
-            <li>方法论</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
-        <article class="post-card" id="post-4" data-category="travel" tabindex="-1">
-          <p class="post-meta">旅行 · 6 分钟阅读</p>
-          <h3>短途旅行清单：轻装但不将就</h3>
-          <p>把背包、证件、衣物、电子设备和应急物品整理成可直接复用的出行清单。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>短途出行</li>
-            <li>清单</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
-        <article class="post-card" id="post-5" data-category="journal" tabindex="-1">
-          <p class="post-meta">日常 · 4 分钟阅读</p>
-          <h3>周末留白：不安排也是一种安排</h3>
-          <p>把休息从任务列表里拿出来，重新感受时间、空间和身体真正需要什么。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>周末</li>
-            <li>休息感</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
-        <article class="post-card" id="post-6" data-category="insight" tabindex="-1">
-          <p class="post-meta">见解 · 7 分钟阅读</p>
-          <h3>读完一本书之后，应该留下什么</h3>
-          <p>不是摘抄更多句子，而是形成一个能改变判断、行动或表达的小结论。</p>
-          <ul class="post-tags" aria-label="文章关键词">
-            <li>阅读复盘</li>
-            <li>判断</li>
-          </ul>
-          <a href="#">阅读全文</a>
-        </article>
+        <aside class="terminal-card" aria-label="当前技术方向">
+          <div class="terminal-head"><i></i><i></i><i></i><span>profile.json</span></div>
+          <div class="terminal-body">
+            <p>{</p>
+            <p>&nbsp;&nbsp;<span class="code-key">"name"</span>: <span class="code-string">"JiaYu"</span>,</p>
+            <p>&nbsp;&nbsp;<span class="code-key">"focus"</span>: [</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Embedded Systems"</span>,</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"FPGA & DSP"</span>,</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Communication"</span></p>
+            <p>&nbsp;&nbsp;],</p>
+            <p>&nbsp;&nbsp;<span class="code-key">"principle"</span>: <span class="code-string">"build → verify → document"</span></p>
+            <p>}</p>
+            <div class="status-list">
+              <div><span>Current</span><strong>整理项目与知识体系</strong></div>
+              <div><span>Writing</span><strong>通信 · FPGA · 嵌入式</strong></div>
+              <div><span>Open source</span><strong>github.com/jiayu-here</strong></div>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="section about" id="about">
-      <div>
-        <p class="section-kicker">关于本站</p>
-        <h2>JiaYu Here</h2>
-        <p>这里会保存真实的体验、清晰的观察和能被复用的想法。内容不追求热闹，追求有用、耐读和带一点个人气息。</p>
+    <section class="section section-soft" aria-labelledby="modules-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">Site Map</p><h2 id="modules-title">一个站点，保存完整的成长轨迹</h2></div>
+          <p>从个人介绍到工程交付，从课程笔记到实用工具，每个模块各有边界，又能相互链接。</p>
+        </div>
+        <div class="module-grid">
+          <a class="module-card" href="about/index.html"><div class="module-number"><span>01</span><span>ABOUT</span></div><h3>关于我</h3><p>方向、能力、经历和当前目标。</p></a>
+          <a class="module-card" href="projects/index.html"><div class="module-number"><span>02</span><span>WORK</span></div><h3>项目作品</h3><p>从背景、架构到调试结果的工程档案。</p></a>
+          <a class="module-card" href="blog/index.html"><div class="module-number"><span>03</span><span>WRITING</span></div><h3>技术博客</h3><p>通信、DSP、嵌入式和计算机文章。</p></a>
+          <a class="module-card" href="notes/index.html"><div class="module-number"><span>04</span><span>NOTES</span></div><h3>学习笔记</h3><p>数学、英语、专业课与编程知识树。</p></a>
+          <a class="module-card" href="toolbox/index.html"><div class="module-number"><span>05</span><span>TOOLS</span></div><h3>个人工具箱</h3><p>进制、波特率和电阻分压计算。</p></a>
+          <a class="module-card" href="resources/index.html"><div class="module-number"><span>06</span><span>LINKS</span></div><h3>资源导航</h3><p>官方文档、开发工具和学习资源。</p></a>
+          <a class="module-card" href="lab/index.html"><div class="module-number"><span>07</span><span>LAB</span></div><h3>实验日志</h3><p>调试现象、Bug 复盘和工程经验。</p></a>
+          <a class="module-card" href="contact/index.html"><div class="module-number"><span>08</span><span>CONTACT</span></div><h3>联系我</h3><p>邮箱、GitHub 与合作方向。</p></a>
+        </div>
       </div>
-      <dl class="stats">
-        <div><dt>3</dt><dd>核心栏目</dd></div>
-        <div><dt>12</dt><dd>月度更新目标</dd></div>
-        <div><dt>100%</dt><dd>原创表达</dd></div>
-      </dl>
     </section>
 
-    <section class="newsletter section" id="newsletter">
-      <div>
-        <p class="section-kicker">订阅</p>
-        <h2>收到新的手记与见解</h2>
-        <p>上线后可以接入邮件服务、RSS 或微信公众号。现在表单会先在本地模拟提交效果。</p>
-      </div>
-      <form class="subscribe-form">
-        <label for="email">邮箱</label>
-        <div>
-          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" enterkeyhint="send" aria-describedby="subscribeNote" required>
-          <button class="button primary" type="submit">订阅</button>
+    <section class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Capabilities</p><h2 id="skills-title">专业方向与技能栈</h2></div><p>围绕“信号如何产生、处理、传输并落到真实系统”建立跨硬件、算法和软件的能力结构。</p></div>
+        <div class="skills-grid">
+          <article class="skill-group"><h3>嵌入式系统</h3><ul><li>C / STM32 HAL</li><li>FreeRTOS</li><li>UART / I2C / SPI</li><li>DMA 与中断</li></ul></article>
+          <article class="skill-group"><h3>FPGA 与数字逻辑</h3><ul><li>Verilog HDL</li><li>Quartus / ModelSim</li><li>时序约束</li><li>DDS / FFT / 基带链路</li></ul></article>
+          <article class="skill-group"><h3>通信与信号处理</h3><ul><li>通信原理</li><li>数字信号处理</li><li>MATLAB 仿真</li><li>调制解调与 BER</li></ul></article>
+          <article class="skill-group"><h3>软件与工程</h3><ul><li>Python / JavaScript</li><li>MySQL / SQL</li><li>Linux / Docker</li><li>Git / 文档交付</li></ul></article>
         </div>
-        <p class="form-note" id="subscribeNote" aria-live="polite"></p>
-      </form>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Selected Work</p><h2 id="projects-title">代表项目</h2></div><a class="text-link" href="projects/index.html">查看全部项目 <span aria-hidden="true">→</span></a></div>
+        <div class="project-grid">
+          <article class="project-card featured"><div class="card-topline"><span>FPGA · DIGITAL COMMUNICATION</span><span>已完成</span></div><h3>QPSK 数字基带链路与可视化系统</h3><p>完整覆盖 PRBS、Gray 映射、相位信道、硬判决、BER 统计、UART 遥测与 Python 星座图。</p><div class="tag-list"><span>Verilog</span><span>QPSK</span><span>Python</span><span>Quartus</span></div><a class="text-link" href="projects/fpga-qpsk-baseband-system/index.html">阅读项目档案 <span aria-hidden="true">→</span></a></article>
+          <article class="project-card"><div class="card-topline"><span>FPGA · AD/DA</span><span>已完成</span></div><h3>多功能 DDS 信号发生与测量系统</h3><p>四种波形、AD/DA 采集、实时统计和数码管显示的一体化 FPGA 工程。</p><div class="tag-list"><span>DDS</span><span>ModelSim</span><span>MATLAB</span></div><a class="text-link" href="projects/fpga-dds-measure-system/index.html">阅读项目档案 <span aria-hidden="true">→</span></a></article>
+          <article class="project-card"><div class="card-topline"><span>WEB · DATABASE</span><span>已完成</span></div><h3>个人知识库与全文检索应用</h3><p>使用 Python 和 MySQL 建立可登录、可检索、可备份的本地知识管理系统。</p><div class="tag-list"><span>Python</span><span>MySQL</span><span>Search</span></div><a class="text-link" href="projects/personal-knowledge-base/index.html">阅读项目档案 <span aria-hidden="true">→</span></a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="knowledge-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Writing & Knowledge</p><h2 id="knowledge-title">最新文章与学习索引</h2></div><p>文章解释“为什么”，笔记保存“怎么查”，实验日志记录“哪里出过问题”。</p></div>
+        <div class="split-grid">
+          <article class="panel"><p class="eyebrow">Latest Articles</p><h3>技术博客</h3><div class="list-links"><a href="blog/qpsk-from-constellation-to-rtl/index.html"><small>通信原理</small><strong>从星座图到 RTL</strong><span>5 min</span></a><a href="blog/fpga-fixed-point-fft-checklist/index.html"><small>DSP</small><strong>定点 FFT 检查清单</strong><span>6 min</span></a><a href="blog/freertos-priority-design/index.html"><small>嵌入式</small><strong>FreeRTOS 优先级设计</strong><span>5 min</span></a></div><a class="text-link" href="blog/index.html">搜索全部文章 →</a></article>
+          <article class="panel"><p class="eyebrow">Learning Map</p><h3>学习知识库</h3><div class="list-links"><a href="notes/engineering-math-map/index.html"><small>数学</small><strong>工程数学知识树</strong><span>持续更新</span></a><a href="notes/communication-theory-index/index.html"><small>专业课</small><strong>通信原理复习索引</strong><span>持续更新</span></a><a href="notes/embedded-c-checklist/index.html"><small>编程</small><strong>嵌入式 C 检查清单</strong><span>持续更新</span></a></div><a class="text-link" href="notes/index.html">进入学习笔记 →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="contact-title">
+      <div class="container contact-strip"><div><p class="eyebrow">Keep in touch</p><h2 id="contact-title">对项目、技术或合作有想法？</h2><p>欢迎通过邮件或 GitHub 与我交流，也欢迎对公开项目提出建议。</p></div><div class="button-row"><a class="button" href="mailto:jiayuhere@gmail.com">发送邮件</a><a class="button" href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">访问 GitHub</a></div></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© 2026 JiaYu Here. All rights reserved.</p>
-    <div>
-      <a href="https://www.jiayuhere.com/">www.jiayuhere.com</a>
-      <a href="sitemap.xml">Sitemap</a>
-    </div>
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
   </footer>
-
-  <button class="back-to-top" id="backToTop" type="button" aria-label="返回页面顶部" hidden>↑</button>
-
-  <script src="assets/script.js?v=20260711b"></script>
+  <script src="assets/script.js?v=20260714a"></script>
 </body>
 </html>

@@ -1,0 +1,243 @@
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import path from "node:path";
+
+const root = process.cwd();
+
+const sections = {
+  projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品", eyebrow: "Engineering Portfolio" },
+  articles: { source: "content/articles", output: "blog", label: "技术博客", title: "技术博客", eyebrow: "Technical Writing" },
+  notes: { source: "content/notes", output: "notes", label: "学习笔记", title: "学习笔记", eyebrow: "Learning Notes" }
+};
+
+const escapeHtml = (value = "") => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
+
+const parseValue = (raw) => {
+  const value = raw.trim();
+  if (value.startsWith("[") && value.endsWith("]")) {
+    return value.slice(1, -1).split(",").map((item) => item.trim().replace(/^['"]|['"]$/g, "")).filter(Boolean);
+  }
+  return value.replace(/^['"]|['"]$/g, "");
+};
+
+const parseDocument = (source, filePath) => {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) throw new Error(`Missing front matter: ${filePath}`);
+
+  const meta = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const separator = line.indexOf(":");
+    if (separator === -1) continue;
+    meta[line.slice(0, separator).trim()] = parseValue(line.slice(separator + 1));
+  }
+
+  if (!meta.title || !meta.slug || !meta.description) {
+    throw new Error(`Required front matter missing: ${filePath}`);
+  }
+
+  return { meta, body: match[2].trim() };
+};
+
+const inline = (value) => escapeHtml(value)
+  .replace(/`([^`]+)`/g, "<code>$1</code>")
+  .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+  .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+
+const markdownToHtml = (markdown) => {
+  const lines = markdown.split(/\r?\n/);
+  const html = [];
+  const headings = [];
+  let inCode = false;
+  let codeLanguage = "";
+  let codeLines = [];
+  let listType = "";
+  let headingIndex = 0;
+
+  const closeList = () => {
+    if (listType) html.push(`</${listType}>`);
+    listType = "";
+  };
+
+  for (const line of lines) {
+    const fence = line.match(/^```([\w-]*)/);
+    if (fence) {
+      closeList();
+      if (inCode) {
+        html.push(`<pre><code${codeLanguage ? ` class="language-${escapeHtml(codeLanguage)}"` : ""}>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        codeLines = [];
+        codeLanguage = "";
+        inCode = false;
+      } else {
+        inCode = true;
+        codeLanguage = fence[1];
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(line);
+      continue;
+    }
+
+    const heading = line.match(/^(##|###)\s+(.+)$/);
+    if (heading) {
+      closeList();
+      headingIndex += 1;
+      const level = heading[1].length;
+      const id = `section-${headingIndex}`;
+      headings.push({ level, id, text: heading[2] });
+      html.push(`<h${level} id="${id}">${inline(heading[2])}</h${level}>`);
+      continue;
+    }
+
+    const unordered = line.match(/^[-*]\s+(.+)$/);
+    const ordered = line.match(/^\d+\.\s+(.+)$/);
+    if (unordered || ordered) {
+      const nextType = unordered ? "ul" : "ol";
+      if (listType !== nextType) {
+        closeList();
+        listType = nextType;
+        html.push(`<${listType}>`);
+      }
+      html.push(`<li>${inline((unordered || ordered)[1])}</li>`);
+      continue;
+    }
+
+    closeList();
+    if (!line.trim()) continue;
+    if (line.startsWith("> ")) {
+      html.push(`<blockquote>${inline(line.slice(2))}</blockquote>`);
+    } else {
+      html.push(`<p>${inline(line)}</p>`);
+    }
+  }
+
+  closeList();
+  if (inCode) throw new Error("Unclosed code fence");
+  return { html: html.join("\n"), headings };
+};
+
+const nav = (prefix, active = "") => `
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="${prefix}index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a ${active === "projects" ? 'aria-current="page"' : ""} href="${prefix}projects/index.html">项目</a>
+      <a ${active === "articles" ? 'aria-current="page"' : ""} href="${prefix}blog/index.html">博客</a>
+      <a ${active === "notes" ? 'aria-current="page"' : ""} href="${prefix}notes/index.html">笔记</a>
+      <a href="${prefix}toolbox/index.html">工具箱</a>
+      <a href="${prefix}resources/index.html">资源</a>
+      <a href="${prefix}lab/index.html">日志</a>
+      <a class="nav-cta" href="${prefix}contact/index.html">联系我</a>
+    </nav>
+  </header>`;
+
+const footer = (prefix) => `
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="${prefix}index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="${prefix}about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${prefix}sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="${prefix}assets/script.js?v=20260714a"></script>`;
+
+const page = ({ prefix, active, title, description, content, type = "website" }) => `<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHtml(title)} | JiaYu Here</title>
+  <meta name="description" content="${escapeHtml(description)}">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="${type}">
+  <meta property="og:title" content="${escapeHtml(title)} | JiaYu Here">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714a">
+</head>
+<body>
+${nav(prefix, active)}
+<main id="main">${content}</main>
+${footer(prefix)}
+</body>
+</html>`;
+
+const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
+
+const cardFor = (item, section, prefix = "../") => {
+  const targetFolder = section === "articles" ? "blog" : section;
+  const href = `${prefix}${targetFolder}/${escapeHtml(item.meta.slug)}/index.html`;
+  const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || [])].join(" ");
+  return `<article class="content-card" data-content-card data-category="${escapeHtml(item.meta.category || "全部")}" data-search="${escapeHtml(searchText.toLowerCase())}">
+    <div class="card-topline"><span>${escapeHtml(item.meta.category || sections[section].label)}</span><span>${escapeHtml(item.meta.status || item.meta.date || "持续更新")}</span></div>
+    <h2><a href="${href}">${escapeHtml(item.meta.title)}</a></h2>
+    <p>${escapeHtml(item.meta.description)}</p>
+    ${tagList(item.meta.tags || [])}
+    <a class="text-link" href="${href}">查看详情 <span aria-hidden="true">→</span></a>
+  </article>`;
+};
+
+const buildIndex = async (section, items) => {
+  const config = sections[section];
+  const categories = [...new Set(items.map((item) => item.meta.category).filter(Boolean))];
+  const controls = section === "articles" ? `<div class="content-controls">
+    <label class="search-box"><span>搜索文章</span><input type="search" data-content-search placeholder="输入标题、标签或关键词"></label>
+    <div class="filter-row" role="group" aria-label="内容分类"><button class="filter-chip is-active" type="button" data-filter="all">全部</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}</div>
+    <p class="result-status" data-result-status aria-live="polite"></p>
+  </div>` : `<div class="filter-row section-filter" role="group" aria-label="内容分类"><button class="filter-chip is-active" type="button" data-filter="all">全部</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}</div>`;
+  const content = `
+    <section class="page-hero compact-hero">
+      <div class="container"><p class="eyebrow">${config.eyebrow}</p><h1>${config.title}</h1><p>${section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。"}</p></div>
+    </section>
+    <section class="section container">${controls}<div class="content-grid" data-content-grid>${items.map((item) => cardFor(item, section)).join("")}</div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section>`;
+  await writeFile(path.join(root, config.output, "index.html"), page({ prefix: "../", active: section, title: config.title, description: config.title, content }));
+};
+
+const buildDetail = async (section, item) => {
+  const config = sections[section];
+  const rendered = markdownToHtml(item.body);
+  const toc = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
+  const metaLine = [item.meta.category, item.meta.date, item.meta.status].filter(Boolean).map(escapeHtml).join(" · ");
+  const repository = item.meta.repository ? `<a class="button primary-button" href="${escapeHtml(item.meta.repository)}" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>` : "";
+  const content = `
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回${config.label}</a><p class="eyebrow">${escapeHtml(config.eyebrow)}</p><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta"><span>${metaLine}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p>${toc}</aside><div class="prose">${rendered.html}</div></div>
+    </article>`;
+  const output = path.join(root, config.output, item.meta.slug);
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({ prefix: "../../", active: section, title: item.meta.title, description: item.meta.description, content, type: "article" }));
+};
+
+const build = async () => {
+  const searchIndex = [];
+  for (const [section, config] of Object.entries(sections)) {
+    const sourceDir = path.join(root, config.source);
+    const outputDir = path.join(root, config.output);
+    await mkdir(outputDir, { recursive: true });
+    const files = (await readdir(sourceDir)).filter((file) => file.endsWith(".md")).sort();
+    const items = [];
+    for (const file of files) {
+      const source = await readFile(path.join(sourceDir, file), "utf8");
+      const item = parseDocument(source, file);
+      items.push(item);
+      await buildDetail(section, item);
+      searchIndex.push({ section, title: item.meta.title, description: item.meta.description, category: item.meta.category, tags: item.meta.tags || [], url: `/${config.output}/${item.meta.slug}/` });
+    }
+    await buildIndex(section, items);
+  }
+  await mkdir(path.join(root, "assets/data"), { recursive: true });
+  await writeFile(path.join(root, "assets/data/search-index.json"), `${JSON.stringify(searchIndex, null, 2)}\n`);
+  const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/"];
+  const urls = [...staticUrls, ...searchIndex.map((item) => item.url.replace(/^\//, ""))];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>https://www.jiayuhere.com/${url}</loc><lastmod>2026-07-14</lastmod></url>`).join("\n")}\n</urlset>\n`;
+  await writeFile(path.join(root, "sitemap.xml"), sitemap);
+  console.log(`Built ${searchIndex.length} Markdown pages.`);
+};
+
+await build();

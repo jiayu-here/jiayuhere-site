@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.jiayuhere.com/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://www.jiayuhere.com/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/about/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/blog/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/notes/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/toolbox/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/resources/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/lab/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/contact/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/fpga-dds-measure-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/fpga-qpsk-baseband-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/personal-knowledge-base/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/stm32-freertos-data-terminal/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/matlab-digital-communication-link/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/projects/docker-mysql-lab-environment/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/blog/freertos-priority-design/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/blog/mysql-index-debug-path/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/notes/engineering-math-map/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/notes/technical-english-system/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/notes/communication-theory-index/</loc><lastmod>2026-07-14</lastmod></url>
+  <url><loc>https://www.jiayuhere.com/notes/embedded-c-checklist/</loc><lastmod>2026-07-14</lastmod></url>
 </urlset>

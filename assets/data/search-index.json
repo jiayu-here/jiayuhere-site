@@ -1,0 +1,190 @@
+[
+  {
+    "section": "projects",
+    "title": "FPGA 多功能 DDS 信号发生与测量系统",
+    "description": "在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。",
+    "category": "FPGA",
+    "tags": [
+      "Verilog",
+      "DDS",
+      "Quartus",
+      "ModelSim",
+      "MATLAB"
+    ],
+    "url": "/projects/fpga-dds-measure-system/"
+  },
+  {
+    "section": "projects",
+    "title": "FPGA QPSK 数字基带链路与可视化系统",
+    "description": "从 PRBS、Gray 映射、相位信道、硬判决到 BER 统计和 Python 星座图的完整数字通信实践。",
+    "category": "FPGA",
+    "tags": [
+      "QPSK",
+      "Verilog",
+      "BER",
+      "UART",
+      "Python"
+    ],
+    "url": "/projects/fpga-qpsk-baseband-system/"
+  },
+  {
+    "section": "projects",
+    "title": "个人知识库与全文检索 Web 应用",
+    "description": "使用 Python、MySQL 和轻量前端构建可登录、可检索、可维护的个人知识管理系统。",
+    "category": "数据库",
+    "tags": [
+      "Python",
+      "MySQL",
+      "Search",
+      "Docker",
+      "Web"
+    ],
+    "url": "/projects/personal-knowledge-base/"
+  },
+  {
+    "section": "projects",
+    "title": "STM32 + FreeRTOS 多任务采集终端",
+    "description": "面向传感器采集、串口通信和状态显示的嵌入式多任务项目记录模板。",
+    "category": "STM32",
+    "tags": [
+      "STM32",
+      "FreeRTOS",
+      "UART",
+      "DMA",
+      "C"
+    ],
+    "url": "/projects/stm32-freertos-data-terminal/"
+  },
+  {
+    "section": "projects",
+    "title": "MATLAB 数字通信链路仿真平台",
+    "description": "用统一参数和可重复实验脚本比较调制、滤波、信道与误码率性能。",
+    "category": "通信仿真",
+    "tags": [
+      "MATLAB",
+      "QPSK",
+      "AWGN",
+      "BER",
+      "DSP"
+    ],
+    "url": "/projects/matlab-digital-communication-link/"
+  },
+  {
+    "section": "projects",
+    "title": "Docker + MySQL 可复现实验环境",
+    "description": "为数据库与 Web 实验建立可启动、可检查、可备份、可恢复的容器化环境模板。",
+    "category": "工程环境",
+    "tags": [
+      "Docker",
+      "MySQL",
+      "Compose",
+      "Backup",
+      "Linux"
+    ],
+    "url": "/projects/docker-mysql-lab-environment/"
+  },
+  {
+    "section": "articles",
+    "title": "从星座图到 RTL：QPSK 链路的实现顺序",
+    "description": "用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。",
+    "category": "通信原理",
+    "tags": [
+      "QPSK",
+      "FPGA",
+      "BER",
+      "Gray"
+    ],
+    "url": "/blog/qpsk-from-constellation-to-rtl/"
+  },
+  {
+    "section": "articles",
+    "title": "FPGA 定点 FFT 设计前必须想清楚的五件事",
+    "description": "从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。",
+    "category": "数字信号处理",
+    "tags": [
+      "FFT",
+      "Fixed Point",
+      "FPGA",
+      "DSP"
+    ],
+    "url": "/blog/fpga-fixed-point-fft-checklist/"
+  },
+  {
+    "section": "articles",
+    "title": "FreeRTOS 任务优先级不是越高越重要",
+    "description": "从响应期限、阻塞关系和资源竞争出发设计任务优先级。",
+    "category": "嵌入式",
+    "tags": [
+      "FreeRTOS",
+      "STM32",
+      "Scheduling",
+      "RTOS"
+    ],
+    "url": "/blog/freertos-priority-design/"
+  },
+  {
+    "section": "articles",
+    "title": "MySQL 索引为什么没有被使用：一份排查路径",
+    "description": "从查询形态、选择性、类型转换和统计信息逐步定位索引失效。",
+    "category": "数据库",
+    "tags": [
+      "MySQL",
+      "Index",
+      "SQL",
+      "EXPLAIN"
+    ],
+    "url": "/blog/mysql-index-debug-path/"
+  },
+  {
+    "section": "notes",
+    "title": "工程数学知识树：复数、变换与概率",
+    "description": "把通信与信号处理中反复出现的数学概念按依赖关系整理。",
+    "category": "数学",
+    "tags": [
+      "复数",
+      "傅里叶变换",
+      "概率",
+      "线性代数"
+    ],
+    "url": "/notes/engineering-math-map/"
+  },
+  {
+    "section": "notes",
+    "title": "技术英语长期笔记体系",
+    "description": "用术语、句型、精读和输出四层结构积累技术英语。",
+    "category": "英语",
+    "tags": [
+      "English",
+      "Vocabulary",
+      "Reading",
+      "Writing"
+    ],
+    "url": "/notes/technical-english-system/"
+  },
+  {
+    "section": "notes",
+    "title": "通信原理复习索引",
+    "description": "从信号表示到调制、信道、检测与编码的课程知识索引。",
+    "category": "专业课",
+    "tags": [
+      "通信原理",
+      "调制",
+      "信道",
+      "检测"
+    ],
+    "url": "/notes/communication-theory-index/"
+  },
+  {
+    "section": "notes",
+    "title": "嵌入式 C 语言检查清单",
+    "description": "聚焦位操作、内存、volatile、接口边界与可测试性。",
+    "category": "编程语言",
+    "tags": [
+      "C",
+      "Embedded",
+      "Pointer",
+      "Volatile"
+    ],
+    "url": "/notes/embedded-c-checklist/"
+  }
+]

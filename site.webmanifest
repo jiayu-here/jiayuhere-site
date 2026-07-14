@@ -1,16 +1,17 @@
 {
   "name": "JiaYu Here",
-  "short_name": "JiaYu Here",
-  "description": "旅行、日常手记与知识见解分享网站。",
+  "short_name": "JIAYU.HERE",
+  "description": "工程、代码与长期学习的个人数字空间",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f3ea",
-  "theme_color": "#f7f3ea",
+  "background_color": "#f3f8f6",
+  "theme_color": "#287d72",
   "icons": [
     {
       "src": "/favicon.svg",
-      "sizes": "64x64",
-      "type": "image/svg+xml"
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

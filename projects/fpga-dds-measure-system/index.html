@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPGA 多功能 DDS 信号发生与测量系统 | JiaYu Here</title>
+  <meta name="description" content="在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FPGA 多功能 DDS 信号发生与测量系统 | JiaYu Here">
+  <meta property="og:description" content="在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714a">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>FPGA 多功能 DDS 信号发生与测量系统</h1><p class="article-lead">在 Cyclone IV E 上完成多波形 DDS、AD/DA 采集、实时统计、数码管显示与完整编译交付。</p><div class="article-meta"><span>FPGA · 2026-07 · 已完成</span><div class="tag-list"><span>Verilog</span><span>DDS</span><span>Quartus</span><span>ModelSim</span><span>MATLAB</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/fpga_dds_measure_system" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+<p>课程实验往往只验证单个 RTL 模块，这个项目把波形发生、模拟采集、统计显示和板级交互串成一个可以综合、仿真、编译和下载的完整系统。</p>
+<h2 id="section-2">功能目标</h2>
+<ul>
+<li>生成正弦、方波、锯齿和三角四种波形。</li>
+<li>通过 PCF8591T 完成 8 bit DAC 输出与 ADC 采集。</li>
+<li>实时统计采样最小值、最大值和指数平均值。</li>
+<li>使用按键切换波形和显示项，使用 LED 提示工作状态。</li>
+</ul>
+<h2 id="section-3">硬件与软件环境</h2>
+<ul>
+<li>野火 Altera EP4CE10 征途 Pro 开发板。</li>
+<li>Quartus II Web Edition 13.0sp1。</li>
+<li>ModelSim-Altera Starter Edition 10.1d。</li>
+<li>MATLAB 用于生成 DDS 正弦查找表。</li>
+</ul>
+<h2 id="section-4">系统架构</h2>
+<p>数据链路分为 DDS 相位累加与波形查表、I2C AD/DA 驱动、ADC 统计、显示格式化和 74HC595 数码管扫描五层。顶层只负责连接接口与板级引脚，核心逻辑保持可复用。</p>
+<h2 id="section-5">实现步骤</h2>
+<ol>
+<li>使用相位累加器建立 DDS 核心，并为四种波形提供统一采样接口。</li>
+<li>编写 PCF8591T I2C 状态机，分离时序控制与采样有效信号。</li>
+<li>对 ADC 数据计算最小值、最大值和指数平均值。</li>
+<li>完成数码管编码、扫描与按键去抖。</li>
+<li>通过 ModelSim、Quartus 编译和 TimeQuest 逐层验证。</li>
+</ol>
+<h2 id="section-6">核心代码说明</h2>
+<p><code>dds_core.v</code> 根据相位高位索引查找表；方波、三角波与锯齿波直接由相位数据变换得到。<code>adc_stats.v</code> 只在 <code>adc_valid</code> 到来时更新统计值，避免把无效周期计入结果。</p>
+<pre><code class="language-verilog">always @(posedge clk or negedge reset_n) begin
+  if (!reset_n)
+    phase_acc &lt;= 32'd0;
+  else
+    phase_acc &lt;= phase_acc + phase_inc;
+end</code></pre>
+<h2 id="section-7">调试过程</h2>
+<p>先用通用顶层验证 DDS 和统计模块，再接入板级 I2C 与显示。仿真通过后依次检查 Analysis &amp; Synthesis、Fitter、Assembler 和 TimeQuest，避免只看最终是否生成下载文件。</p>
+<h2 id="section-8">遇到的问题</h2>
+<ul>
+<li>Web Edition 对部分器件和脚本路径较敏感。</li>
+<li>74HC595 串行位序与数码管有效电平容易造成全灭或乱码。</li>
+<li>板级 I2C 行为无法只靠纯数字仿真完全覆盖。</li>
+</ul>
+<h2 id="section-9">解决方案</h2>
+<p>固定经过验证的 Quartus 13.0sp1 工具链；把显示位序与有效电平集中在单一模块；保留硬件检查清单，把仿真结论与上板结论分开记录。</p>
+<h2 id="section-10">最终效果</h2>
+<p>工程已通过 ModelSim 测试、Quartus 全流程编译和 50 MHz 时序检查，并生成 <code>.sof</code> 下载文件。仓库同时保留 RTL、仿真脚本、MATLAB 查找表脚本、约束和测试报告。</p>
+<h2 id="section-11">后续改进</h2>
+<p>后续可加入按键配置频率字、串口输出采样数据，以及更完整的板级波形实测图片和视频。</p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714a"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>个人知识库与全文检索 Web 应用 | JiaYu Here</title>
+  <meta name="description" content="使用 Python、MySQL 和轻量前端构建可登录、可检索、可维护的个人知识管理系统。">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="个人知识库与全文检索 Web 应用 | JiaYu Here">
+  <meta property="og:description" content="使用 Python、MySQL 和轻量前端构建可登录、可检索、可维护的个人知识管理系统。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714a">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><p class="eyebrow">Engineering Portfolio</p><h1>个人知识库与全文检索 Web 应用</h1><p class="article-lead">使用 Python、MySQL 和轻量前端构建可登录、可检索、可维护的个人知识管理系统。</p><div class="article-meta"><span>数据库 · 2026-07 · 已完成</span><div class="tag-list"><span>Python</span><span>MySQL</span><span>Search</span><span>Docker</span><span>Web</span></div></div><a class="button primary-button" href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">查看 GitHub 仓库</a></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目背景</a><a href="#section-2">功能目标</a><a href="#section-3">硬件与软件环境</a><a href="#section-4">系统架构</a><a href="#section-5">实现步骤</a><a href="#section-6">核心代码说明</a><a href="#section-7">调试过程</a><a href="#section-8">遇到的问题</a><a href="#section-9">解决方案</a><a href="#section-10">最终效果</a><a href="#section-11">后续改进</a></aside><div class="prose"><h2 id="section-1">项目背景</h2>
+<p>零散文档和浏览器收藏很难长期形成知识结构。这个项目把内容录入、分类、检索和访问控制收拢到一个本地可运行的 Web 应用中。</p>
+<h2 id="section-2">功能目标</h2>
+<ul>
+<li>提供口令登录与会话保持。</li>
+<li>管理知识条目、分类、标签和摘要。</li>
+<li>支持关键词搜索与清晰的内容详情页。</li>
+<li>保持本地部署简单，并可完整备份迁移。</li>
+</ul>
+<h2 id="section-3">硬件与软件环境</h2>
+<ul>
+<li>Windows 本地开发环境。</li>
+<li>Python Web 服务与原生 HTML/CSS/JavaScript。</li>
+<li>MySQL 8.0 数据库。</li>
+<li>Docker 方案作为可选部署路径，而非运行前提。</li>
+</ul>
+<h2 id="section-4">系统架构</h2>
+<p>浏览器通过 HTTP 访问 Python 应用；应用处理认证、路由和数据访问；MySQL 保存结构化内容。静态资源与后端代码分离，配置通过环境变量传入。</p>
+<h2 id="section-5">实现步骤</h2>
+<ol>
+<li>定义条目、分类和会话的最小数据模型。</li>
+<li>实现登录、退出和受保护路由。</li>
+<li>完成条目列表、详情与搜索流程。</li>
+<li>增加初始化脚本、示例配置和运行说明。</li>
+<li>使用真实 Cookie 流程验证登录到搜索的完整路径。</li>
+</ol>
+<h2 id="section-6">核心代码说明</h2>
+<p>认证通过服务端会话 Cookie 完成；数据访问使用参数化查询，避免把用户输入拼接到 SQL。搜索输入在后端统一清理和限制。</p>
+<pre><code class="language-sql">SELECT id, title, summary
+FROM entries
+WHERE title LIKE CONCAT('%', ?, '%')
+   OR content LIKE CONCAT('%', ?, '%')
+ORDER BY updated_at DESC;</code></pre>
+<h2 id="section-7">调试过程</h2>
+<p>先检查 MySQL 服务和 3306 端口，再验证数据库初始化。应用启动后用保存 Cookie 的 HTTP 请求依次验证登录、列表、搜索和退出，避免只确认首页能打开。</p>
+<h2 id="section-8">遇到的问题</h2>
+<ul>
+<li>依赖较重的容器方案会增加首次启动成本。</li>
+<li>本地配置、数据库密码和仓库内容必须分离。</li>
+<li>仅看页面状态不容易发现会话和重定向问题。</li>
+</ul>
+<h2 id="section-9">解决方案</h2>
+<p>默认采用轻量本地 Python + MySQL 路径；敏感配置放入未提交的环境文件；使用端到端 HTTP 流程检查 Cookie 和跳转。</p>
+<h2 id="section-10">最终效果</h2>
+<p>应用可以在本地完成登录、知识浏览和搜索，仓库包含运行文档、初始化说明和基础部署配置，并保留完整备份方案。</p>
+<h2 id="section-11">后续改进</h2>
+<p>后续可加入 Markdown 编辑器、附件管理、双向链接和定期导出，同时保持数据可迁移。</p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714a"></script>
+</body>
+</html>

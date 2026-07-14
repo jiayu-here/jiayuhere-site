@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>技术博客 | JiaYu Here</title>
+  <meta name="description" content="技术博客">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="技术博客 | JiaYu Here">
+  <meta property="og:description" content="技术博客">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260714a">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../projects/index.html">项目</a>
+      <a aria-current="page" href="../blog/index.html">博客</a>
+      <a  href="../notes/index.html">笔记</a>
+      <a href="../toolbox/index.html">工具箱</a>
+      <a href="../resources/index.html">资源</a>
+      <a href="../lab/index.html">日志</a>
+      <a class="nav-cta" href="../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <section class="page-hero compact-hero">
+      <div class="container"><p class="eyebrow">Technical Writing</p><h1>技术博客</h1><p>围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。</p></div>
+    </section>
+    <section class="section container"><div class="content-controls">
+    <label class="search-box"><span>搜索文章</span><input type="search" data-content-search placeholder="输入标题、标签或关键词"></label>
+    <div class="filter-row" role="group" aria-label="内容分类"><button class="filter-chip is-active" type="button" data-filter="all">全部</button><button class="filter-chip" type="button" data-filter="通信原理">通信原理</button><button class="filter-chip" type="button" data-filter="数字信号处理">数字信号处理</button><button class="filter-chip" type="button" data-filter="嵌入式">嵌入式</button><button class="filter-chip" type="button" data-filter="数据库">数据库</button></div>
+    <p class="result-status" data-result-status aria-live="polite"></p>
+  </div><div class="content-grid" data-content-grid><article class="content-card" data-content-card data-category="通信原理" data-search="从星座图到 rtl：qpsk 链路的实现顺序 用可验证的顺序拆解 gray 映射、相位旋转、硬判决与 ber 对齐。 通信原理 qpsk fpga ber gray">
+    <div class="card-topline"><span>通信原理</span><span>2026-07-14</span></div>
+    <h2><a href="../blog/qpsk-from-constellation-to-rtl/index.html">从星座图到 RTL：QPSK 链路的实现顺序</a></h2>
+    <p>用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</p>
+    <div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div>
+    <a class="text-link" href="../blog/qpsk-from-constellation-to-rtl/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="数字信号处理" data-search="fpga 定点 fft 设计前必须想清楚的五件事 从位宽、缩放、旋转因子到时序接口，整理定点 fft 的设计检查项。 数字信号处理 fft fixed point fpga dsp">
+    <div class="card-topline"><span>数字信号处理</span><span>2026-07-12</span></div>
+    <h2><a href="../blog/fpga-fixed-point-fft-checklist/index.html">FPGA 定点 FFT 设计前必须想清楚的五件事</a></h2>
+    <p>从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p>
+    <div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div>
+    <a class="text-link" href="../blog/fpga-fixed-point-fft-checklist/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="嵌入式" data-search="freertos 任务优先级不是越高越重要 从响应期限、阻塞关系和资源竞争出发设计任务优先级。 嵌入式 freertos stm32 scheduling rtos">
+    <div class="card-topline"><span>嵌入式</span><span>2026-07-10</span></div>
+    <h2><a href="../blog/freertos-priority-design/index.html">FreeRTOS 任务优先级不是越高越重要</a></h2>
+    <p>从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p>
+    <div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div>
+    <a class="text-link" href="../blog/freertos-priority-design/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article><article class="content-card" data-content-card data-category="数据库" data-search="mysql 索引为什么没有被使用：一份排查路径 从查询形态、选择性、类型转换和统计信息逐步定位索引失效。 数据库 mysql index sql explain">
+    <div class="card-topline"><span>数据库</span><span>2026-07-08</span></div>
+    <h2><a href="../blog/mysql-index-debug-path/index.html">MySQL 索引为什么没有被使用：一份排查路径</a></h2>
+    <p>从查询形态、选择性、类型转换和统计信息逐步定位索引失效。</p>
+    <div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div>
+    <a class="text-link" href="../blog/mysql-index-debug-path/index.html">查看详情 <span aria-hidden="true">→</span></a>
+  </article></div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../assets/script.js?v=20260714a"></script>
+</body>
+</html>

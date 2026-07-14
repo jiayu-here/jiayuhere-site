@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>嵌入式 C 语言检查清单 | JiaYu Here</title>
+  <meta name="description" content="聚焦位操作、内存、volatile、接口边界与可测试性。">
+  <meta name="theme-color" content="#eef7f4">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="嵌入式 C 语言检查清单 | JiaYu Here">
+  <meta property="og:description" content="聚焦位操作、内存、volatile、接口边界与可测试性。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714a">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><p class="eyebrow">Learning Notes</p><h1>嵌入式 C 语言检查清单</h1><p class="article-lead">聚焦位操作、内存、volatile、接口边界与可测试性。</p><div class="article-meta"><span>编程语言 · 2026-07</span><div class="tag-list"><span>C</span><span>Embedded</span><span>Pointer</span><span>Volatile</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">整数与位宽</a><a href="#section-2">指针与内存</a><a href="#section-3">volatile 的边界</a><a href="#section-4">模块接口</a></aside><div class="prose"><h2 id="section-1">整数与位宽</h2>
+<p>使用明确宽度的整数类型；位移前确认符号、提升规则和溢出行为。</p>
+<h2 id="section-2">指针与内存</h2>
+<p>区分对象生命周期、指针所有权和缓冲区长度，不把数组退化后的指针误当成仍携带长度。</p>
+<h2 id="section-3">volatile 的边界</h2>
+<p><code>volatile</code> 用于可能被硬件或中断异步改变的对象，但它不提供原子性，也不是线程同步工具。</p>
+<h2 id="section-4">模块接口</h2>
+<p>头文件只暴露稳定接口；硬件寄存器访问集中封装；业务逻辑尽可能接收普通数据以便脱离硬件测试。</p></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> JiaYu Here</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714a"></script>
+</body>
+</html>
