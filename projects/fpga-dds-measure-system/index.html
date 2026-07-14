@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -69,6 +69,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>顶层连接 DDS、PCF8591T I2C、ADC 统计和数码管显示。DDS 产生统一 8 bit 波形数据并送入 DAC；I2C 模块在写 DAC 的同时读取 ADC；<code>adc_valid</code> 作为统计模块的更新边界；显示层根据按键选择输出平均值、最小值、最大值或当前 DDS 采样值。</p>
+<div class="system-flow" role="img" aria-label="系统架构：按键与频率控制 到 DDS 波形核心 到 8 bit 波形数据 到 PCF8591T DAC 到 模拟输出；PCF8591T ADC 到 adc_valid 到 采样统计 到 显示选择 到 74HC595 数码管"><div class="system-flow-row"><span class="system-flow-node">按键与频率控制</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">DDS 波形核心</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">8 bit 波形数据</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PCF8591T DAC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模拟输出</span></div>
+<div class="system-flow-row"><span class="system-flow-node">PCF8591T ADC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">adc_valid</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">采样统计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">显示选择</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">74HC595 数码管</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li><code>dds_core.v</code>：相位累加和四种波形选择。</li>

@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -70,6 +70,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>系统分为应用层、BSP、HAL/CMSIS 和 FreeRTOS 内核。七个任务按安全、控制、通信、行为、传感、显示和监控分工；安全任务优先级最高，控制任务以 10 ms 周期完成编码器、斜坡、PID 和里程计；通信任务通过 StreamBuffer 解析蓝牙命令。</p>
+<div class="system-flow" role="img" aria-label="系统架构：传感器与蓝牙 到 BSP 与 HAL 驱动 到 FreeRTOS 任务层 到 模式与安全决策 到 PID 与里程计 到 PWM 电机驱动；编码器与故障状态 到 控制和监控任务 到 OLED 与 UART 日志"><div class="system-flow-row"><span class="system-flow-node">传感器与蓝牙</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">BSP 与 HAL 驱动</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FreeRTOS 任务层</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模式与安全决策</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PID 与里程计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PWM 电机驱动</span></div>
+<div class="system-flow-row"><span class="system-flow-node">编码器与故障状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">控制和监控任务</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 与 UART 日志</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>双电机 20 kHz PWM、双编码器测速和独立 PID。</li>

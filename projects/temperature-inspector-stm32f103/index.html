@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -70,6 +70,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>主循环使用多个毫秒时间戳进行非阻塞调度：采样任务更新两路温度和范围；报警模块执行连续两次越限确认；显示任务只在内容变化时刷新；存储任务通过 FatFs 追加 CSV；串口任务以非阻塞方式接收并解析整行命令。</p>
+<div class="system-flow" role="img" aria-label="系统架构：DS18B20 与 PT100 到 非阻塞采样调度 到 越限确认 到 OLED 状态显示 到 蜂鸣器报警；温度与阈值状态 到 FatFs CSV 记录 到 Flash 参数保存 到 串口命令查询"><div class="system-flow-row"><span class="system-flow-node">DS18B20 与 PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">非阻塞采样调度</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">越限确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 状态显示</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">蜂鸣器报警</span></div>
+<div class="system-flow-row"><span class="system-flow-node">温度与阈值状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV 记录</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash 参数保存</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">串口命令查询</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li><code>app_ds18b20.c</code>、<code>app_pt100.c</code>：两路温度采集。</li>

@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -59,6 +59,8 @@
 <p>Git 命令行、终端、文本编辑器和 GitHub 账号。</p>
 <h2 id="section-6">系统架构</h2>
 <p>仓库只包含 <code>README.md</code> 和 <code>hello.txt</code>。README 记录学习目标，文本文件用于制造可观察的提交差异，remote 负责连接本地分支与 GitHub。</p>
+<div class="system-flow" role="img" aria-label="系统架构：本地工作区 到 Git 提交 到 本地分支 到 remote 到 GitHub 远程仓库；GitHub 远程更新 到 fetch 或 pull 到 本地同步确认"><div class="system-flow-row"><span class="system-flow-node">本地工作区</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Git 提交</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">本地分支</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">remote</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">GitHub 远程仓库</span></div>
+<div class="system-flow-row"><span class="system-flow-node">GitHub 远程更新</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">fetch 或 pull</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">本地同步确认</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>本地仓库初始化与状态检查。</li>

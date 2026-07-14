@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -68,6 +68,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>发送端由符号节拍、PRBS7 和 QPSK 映射组成；信道层通过 I/Q 交换和取反实现离散相位旋转；接收端执行象限判决并与延迟后的参考比特比较；遥测层抽样封装 I/Q、累计比特和误码数，交给 UART 或仿真 CSV。</p>
+<div class="system-flow" role="img" aria-label="系统架构：符号节拍与 PRBS7 到 Gray 映射 到 QPSK 调制 到 离散相位信道 到 象限判决 到 BER 统计；I/Q 与误码数据 到 遥测封装 到 UART 或仿真 CSV 到 Python 上位机 到 星座图与统计"><div class="system-flow-row"><span class="system-flow-node">符号节拍与 PRBS7</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Gray 映射</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">QPSK 调制</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">离散相位信道</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">象限判决</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">BER 统计</span></div>
+<div class="system-flow-row"><span class="system-flow-node">I/Q 与误码数据</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">遥测封装</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">UART 或仿真 CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Python 上位机</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">星座图与统计</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li><code>prbs7.v</code>、<code>symbol_tick.v</code>：测试数据与符号节拍。</li>

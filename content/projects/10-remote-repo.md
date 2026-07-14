@@ -28,6 +28,11 @@ Git 命令行、终端、文本编辑器和 GitHub 账号。
 ## 系统架构
 仓库只包含 `README.md` 和 `hello.txt`。README 记录学习目标，文本文件用于制造可观察的提交差异，remote 负责连接本地分支与 GitHub。
 
+```architecture
+本地工作区 -> Git 提交 -> 本地分支 -> remote -> GitHub 远程仓库
+GitHub 远程更新 -> fetch 或 pull -> 本地同步确认
+```
+
 ## 功能模块
 - 本地仓库初始化与状态检查。
 - 远程地址配置。

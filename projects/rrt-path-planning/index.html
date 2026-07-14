@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -65,6 +65,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p><code>rrt.py</code> 只负责规划器、障碍物和几何计算；<code>map_io.py</code> 负责 JSON 读取和 CSV/JSON 导出；<code>app.py</code> 负责 GUI、命令行参数和动画播放。算法输出同时保留原始路径与简化路径。</p>
+<div class="system-flow" role="img" aria-label="系统架构：JSON 地图与参数 到 几何和碰撞检测 到 RRT 或 RRT* 到 原始路径 到 路径简化 到 GUI 动画与结果导出；GUI 和命令行 到 app.py 到 rrt.py 规划器 到 map_io.py 导出"><div class="system-flow-row"><span class="system-flow-node">JSON 地图与参数</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">几何和碰撞检测</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">RRT 或 RRT*</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">原始路径</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">路径简化</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">GUI 动画与结果导出</span></div>
+<div class="system-flow-row"><span class="system-flow-node">GUI 和命令行</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">app.py</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">rrt.py 规划器</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">map_io.py 导出</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>基础 RRT 和 RRT*。</li>

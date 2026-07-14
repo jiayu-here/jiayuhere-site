@@ -215,6 +215,10 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .prose pre code { padding: 0; background: transparent; color: inherit; }
 .prose blockquote { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--primary); background: var(--surface-soft); color: #57606a; }
 .prose a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 3px; }
+.system-flow { display: grid; gap: 14px; margin: 26px 0; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-soft); }
+.system-flow-row { display: flex; align-items: stretch; gap: 10px; overflow-x: auto; }
+.system-flow-node { display: flex; flex: 1 0 118px; min-height: 68px; align-items: center; justify-content: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); text-align: center; font-size: 14px; font-weight: 800; line-height: 1.45; }
+.system-flow-arrow { align-self: center; flex: 0 0 auto; color: var(--muted); font-size: 20px; font-weight: 900; }
 .code-block { position: relative; margin: 26px 0; }
 .code-block .copy-code { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 6px 10px; border: 1px solid #30363d; border-radius: 8px; background: #21262d; color: #c9d1d9; cursor: pointer; font-size: 12px; font-weight: 750; }
 .code-block pre { margin: 0; padding-top: 52px; }
@@ -348,6 +352,9 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .article-pagination { flex-direction: column; }
   .prose .article-pagination a { width: 100%; }
   .article-pagination-next { margin-left: 0; }
+  .system-flow-row { align-items: stretch; flex-direction: column; overflow: visible; }
+  .system-flow-node { flex-basis: auto; min-height: 54px; }
+  .system-flow-arrow { align-self: center; line-height: 1; transform: rotate(90deg); }
   .search-overlay { padding: 18px 12px; }
   .search-dialog { max-height: calc(100vh - 36px); padding: 20px; border-radius: 16px; }
   .timeline-item { grid-template-columns: 1fr; gap: 8px; }

@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -64,6 +64,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>脚本分为参数配置、信号生成、加噪、特征提取、数据集构建、模型训练、预测评估和结果导出八个阶段。训练集与测试集按调制类型和 SNR 生成，特征矩阵统一标准化后分别送入 SVM 与 KNN。</p>
+<div class="system-flow" role="img" aria-label="系统架构：参数配置 到 调制信号生成 到 AWGN 加噪 到 17 维特征提取 到 特征标准化 到 SVM 与 KNN 到 准确率与混淆矩阵；评估结果 到 CSV 与 MAT 到 时域频谱和星座图 到 论文材料"><div class="system-flow-row"><span class="system-flow-node">参数配置</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">调制信号生成</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">AWGN 加噪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">17 维特征提取</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">特征标准化</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">SVM 与 KNN</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">准确率与混淆矩阵</span></div>
+<div class="system-flow-row"><span class="system-flow-node">评估结果</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CSV 与 MAT</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">时域频谱和星座图</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">论文材料</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>五类调制信号生成和功率归一化。</li>

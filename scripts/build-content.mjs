@@ -165,6 +165,16 @@ const inline = (value) => escapeHtml(value)
   .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
   .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
 
+const architectureDiagram = (lines) => {
+  const rows = lines
+    .map((line) => line.split(/\s*(?:->|→)\s*/).filter(Boolean))
+    .filter((nodes) => nodes.length > 1);
+  if (!rows.length) throw new Error("Architecture diagram requires at least two nodes");
+  const label = rows.map((nodes) => nodes.join(" 到 ")).join("；");
+  const content = rows.map((nodes) => `<div class="system-flow-row">${nodes.map((node, index) => `${index ? '<span class="system-flow-arrow" aria-hidden="true">→</span>' : ""}<span class="system-flow-node">${escapeHtml(node)}</span>`).join("")}</div>`).join("\n");
+  return `<div class="system-flow" role="img" aria-label="系统架构：${escapeHtml(label)}">${content}</div>`;
+};
+
 const markdownToHtml = (markdown) => {
   const lines = markdown.split(/\r?\n/);
   const html = [];
@@ -185,7 +195,9 @@ const markdownToHtml = (markdown) => {
     if (fence) {
       closeList();
       if (inCode) {
-        html.push(`<pre><code${codeLanguage ? ` class="language-${escapeHtml(codeLanguage)}"` : ""}>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        html.push(codeLanguage === "architecture"
+          ? architectureDiagram(codeLines)
+          : `<pre><code${codeLanguage ? ` class="language-${escapeHtml(codeLanguage)}"` : ""}>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
         codeLines = [];
         codeLanguage = "";
         inCode = false;
@@ -280,7 +292,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714h">
 </head>
 <body>
 ${nav(prefix, active)}

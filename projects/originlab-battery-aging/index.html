@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -65,6 +65,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p><code>data/</code> 保存原始和宽表 CSV；PowerShell 读取数值并通过 Origin COM 创建工作簿、设置列类型、执行 <code>plotxy</code> 和保存 OPJU；<code>analysis/</code> 提供 Excel 汇总；<code>results/</code> 保存 Origin 项目和预览图。</p>
+<div class="system-flow" role="img" aria-label="系统架构：原始与宽表 CSV 到 PowerShell 数据处理 到 Origin COM 到 工作簿与 plotxy 到 OPJU 和预览图；分析数据 到 Excel 汇总 到 容量保持率 EIS 与热响应结果"><div class="system-flow-row"><span class="system-flow-node">原始与宽表 CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PowerShell 数据处理</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Origin COM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">工作簿与 plotxy</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OPJU 和预览图</span></div>
+<div class="system-flow-row"><span class="system-flow-node">分析数据</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Excel 汇总</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">容量保持率 EIS 与热响应结果</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>循环容量保持率趋势。</li>

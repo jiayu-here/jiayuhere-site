@@ -32,6 +32,11 @@ Origin 2024、Origin COM Automation、LabTalk 草案、PowerShell、CSV、Excel 
 ## 系统架构
 `data/` 保存原始和宽表 CSV；PowerShell 读取数值并通过 Origin COM 创建工作簿、设置列类型、执行 `plotxy` 和保存 OPJU；`analysis/` 提供 Excel 汇总；`results/` 保存 Origin 项目和预览图。
 
+```architecture
+原始与宽表 CSV -> PowerShell 数据处理 -> Origin COM -> 工作簿与 plotxy -> OPJU 和预览图
+分析数据 -> Excel 汇总 -> 容量保持率 EIS 与热响应结果
+```
+
 ## 功能模块
 - 循环容量保持率趋势。
 - dQ/dV 峰位移动数据。

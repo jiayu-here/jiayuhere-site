@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260714f">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714h">
 </head>
 <body>
 
@@ -65,6 +65,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>浏览器访问 Python 服务；服务处理认证、文件解析、文本切分、索引和问答；SQLite 保存文档元数据、分块文本和向量；<code>data/</code> 作为持久化挂载目录。前端静态资源和后端逻辑分开，敏感配置从 <code>.env</code> 读取。</p>
+<div class="system-flow" role="img" aria-label="系统架构：浏览器 到 Python 服务 到 登录与文档接口 到 检索和问答 到 页面结果；上传文件 到 文本解析与切分 到 SQLite 元数据和索引 到 data 持久化目录"><div class="system-flow-row"><span class="system-flow-node">浏览器</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Python 服务</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">登录与文档接口</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">检索和问答</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">页面结果</span></div>
+<div class="system-flow-row"><span class="system-flow-node">上传文件</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">文本解析与切分</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">SQLite 元数据和索引</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">data 持久化目录</span></div></div>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>密码登录、会话 Cookie 和受保护接口。</li>
