@@ -184,7 +184,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .compact-hero { padding-block: 66px 44px; }
 .content-controls { display: grid; gap: 18px; margin-bottom: 28px; }
 .search-box { display: grid; gap: 7px; max-width: 620px; color: var(--muted); font-size: 13px; font-weight: 800; }
-.search-box input, .field input, .field textarea, .tool-field input, .tool-field select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); }
+.search-box input, .field input, .field textarea, .tool-field input, .tool-field select, .tool-field textarea { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); }
 .filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .section-filter { margin-bottom: 28px; }
 .filter-chip { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); cursor: pointer; font-size: 13px; font-weight: 800; }
@@ -232,8 +232,19 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .tool-card > p { color: var(--muted); }
 .tool-form { display: grid; gap: 13px; margin-top: 22px; }
 .tool-field { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 800; }
+.tool-field textarea { min-height: 120px; padding: 12px 14px; resize: vertical; }
 .tool-button { min-height: 44px; border: 0; border-radius: 10px; background: var(--primary); color: var(--on-primary); cursor: pointer; font-weight: 850; }
 .tool-result { min-height: 74px; margin-top: 16px; padding: 14px; border-radius: 11px; background: var(--surface-soft); color: #24292f; font: 13px/1.7 ui-monospace, Consolas, monospace; white-space: pre-line; }
+.tool-preview { min-height: 110px; margin-top: 16px; overflow-x: auto; padding: 16px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-soft); color: var(--ink); }
+.tool-preview h1, .tool-preview h2, .tool-preview h3 { margin: 0 0 12px; font-size: 19px; }
+.tool-preview p, .tool-preview ul, .tool-preview ol, .tool-preview blockquote, .tool-preview pre { margin: 0 0 12px; }
+.tool-preview ul, .tool-preview ol { padding-left: 22px; }
+.tool-preview code { padding: 2px 5px; border-radius: 5px; background: var(--surface); font-family: ui-monospace, Consolas, monospace; }
+.tool-preview pre { overflow-x: auto; padding: 12px; border-radius: 8px; background: #0d1117; color: #c9d1d9; }
+.tool-preview pre code { padding: 0; background: transparent; color: inherit; }
+.tool-preview blockquote { padding-left: 12px; border-left: 3px solid var(--primary); color: var(--muted); }
+.tool-preview a { color: var(--primary-dark); text-decoration: underline; }
+.latex-preview { display: grid; place-items: center; text-align: center; }
 .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .resource-group { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .resource-group h2 { font-size: 21px; }

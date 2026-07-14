@@ -262,6 +262,53 @@ document.querySelector("[data-divider-form]")?.addEventListener("submit", (event
   result.textContent = `输出电压  ${vout.toFixed(4)} V\n回路电流  ${current.toFixed(4)} mA\n分压比例  ${(vout / vin * 100).toFixed(2)}%`;
 });
 
+document.querySelector("[data-pwm-form]")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const timerClock = toNumber(form.querySelector("[name='timerClock']")?.value);
+  const prescaler = toNumber(form.querySelector("[name='prescaler']")?.value);
+  const frequency = toNumber(form.querySelector("[name='pwmFrequency']")?.value);
+  const duty = toNumber(form.querySelector("[name='dutyCycle']")?.value);
+  const result = form.querySelector("[data-tool-result]");
+  if (!result) return;
+  if (!timerClock || !Number.isInteger(prescaler) || !frequency || duty === null || timerClock <= 0 || prescaler < 0 || frequency <= 0 || duty < 0 || duty > 100) {
+    result.textContent = "请输入有效参数：时钟和频率应大于 0，PSC 为非负整数，占空比为 0–100%。";
+    return;
+  }
+  const counterClock = timerClock / (prescaler + 1);
+  const periodCounts = Math.round(counterClock / frequency);
+  if (periodCounts < 1) {
+    result.textContent = "当前计数时钟低于目标 PWM 频率，请减小 PSC 或降低目标频率。";
+    return;
+  }
+  const compare = Math.round(periodCounts * duty / 100);
+  const actualFrequency = counterClock / periodCounts;
+  const actualDuty = compare / periodCounts * 100;
+  const highTimeUs = compare / counterClock * 1e6;
+  result.textContent = `计数时钟       ${counterClock.toFixed(3)} Hz\n周期计数       ${periodCounts}\nARR            ${periodCounts - 1}\nCCR            ${compare}\n实际频率       ${actualFrequency.toFixed(6)} Hz\n实际占空比     ${actualDuty.toFixed(4)}%\n高电平时间     ${highTimeUs.toFixed(3)} μs`;
+});
+
+document.querySelector("[data-serial-form]")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const baud = toNumber(form.querySelector("[name='serialBaud']")?.value);
+  const dataBits = toNumber(form.querySelector("[name='dataBits']")?.value);
+  const parity = form.querySelector("[name='parity']")?.value || "N";
+  const stopBits = toNumber(form.querySelector("[name='stopBits']")?.value);
+  const result = form.querySelector("[data-tool-result]");
+  if (!result) return;
+  if (!baud || !Number.isInteger(dataBits) || stopBits === null || baud <= 0 || dataBits < 5 || dataBits > 9 || ![1, 1.5, 2].includes(stopBits) || !["N", "E", "O"].includes(parity)) {
+    result.textContent = "请选择有效的数据位、校验位和停止位，并输入大于 0 的波特率。";
+    return;
+  }
+  const parityBits = parity === "N" ? 0 : 1;
+  const frameBits = 1 + dataBits + parityBits + stopBits;
+  const framesPerSecond = baud / frameBits;
+  const payloadBytesPerSecond = framesPerSecond * dataBits / 8;
+  const parityText = { N: "无校验", E: "偶校验", O: "奇校验" }[parity];
+  result.textContent = `串口格式       ${dataBits}${parity}${stopBits}\n含义           ${dataBits} 数据位、${parityText}、${stopBits} 停止位\n单帧结构       1 起始 + ${dataBits} 数据 + ${parityBits} 校验 + ${stopBits} 停止\n每帧线路位数   ${frameBits}\n最大字符速率   ${framesPerSecond.toFixed(2)} 字符/s\n有效载荷       ${payloadBytesPerSecond.toFixed(2)} Byte/s\n线路效率       ${(dataBits / frameBits * 100).toFixed(2)}%`;
+});
+
 document.querySelector("[data-dds-form]")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.currentTarget;
@@ -333,22 +380,161 @@ const erf = (value) => {
   return sign * (1 - polynomial * Math.exp(-x * x));
 };
 
-document.querySelector("[data-qpsk-ber-form]")?.addEventListener("submit", (event) => {
+document.querySelector("[data-snr-ber-form]")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.currentTarget;
+  const modulation = form.querySelector("[name='modulation']")?.value || "qpsk";
   const ebn0Db = toNumber(form.querySelector("[name='ebn0']")?.value);
+  const bitRate = toNumber(form.querySelector("[name='bitRate']")?.value);
+  const noiseBandwidth = toNumber(form.querySelector("[name='noiseBandwidth']")?.value);
   const bitCount = toNumber(form.querySelector("[name='bitCount']")?.value);
   const result = form.querySelector("[data-tool-result]");
   if (!result) return;
-  if (ebn0Db === null || !Number.isInteger(bitCount) || bitCount < 1 || bitCount > 1e12) {
-    result.textContent = "请输入有效的 Eb/N0 和 1 到 10¹² 之间的整数统计比特数。";
+  if (ebn0Db === null || !bitRate || !noiseBandwidth || !Number.isInteger(bitCount) || bitRate <= 0 || noiseBandwidth <= 0 || bitCount < 1 || bitCount > 1e12 || !["bpsk", "qpsk"].includes(modulation)) {
+    result.textContent = "请输入有效的 Eb/N0、比特率、噪声带宽和 1 到 10¹² 之间的整数统计比特数。";
     return;
   }
   const ebn0Linear = 10 ** (ebn0Db / 10);
   const ber = 0.5 * (1 - erf(Math.sqrt(ebn0Linear)));
+  const bitsPerSymbol = modulation === "qpsk" ? 2 : 1;
+  const esn0Db = ebn0Db + 10 * Math.log10(bitsPerSymbol);
+  const snrDb = ebn0Db + 10 * Math.log10(bitRate / noiseBandwidth);
   const expectedErrors = bitCount * ber;
   const anyErrorProbability = -Math.expm1(bitCount * Math.log1p(-ber));
-  result.textContent = `Es/N0             ${(ebn0Db + 10 * Math.log10(2)).toFixed(3)} dB\n理论 BER          ${ber.toExponential(4)}\n预计误码数        ${expectedErrors.toFixed(3)} / ${bitCount}\n至少出现 1 个误码  ${(anyErrorProbability * 100).toFixed(4)}%\n模型              Gray QPSK、相干解调、理想 AWGN`;
+  const model = modulation === "qpsk" ? "Gray QPSK" : "BPSK";
+  result.textContent = `等效 SNR          ${snrDb.toFixed(3)} dB\nEs/N0             ${esn0Db.toFixed(3)} dB\n理论 BER          ${ber.toExponential(4)}\n预计误码数        ${expectedErrors.toFixed(3)} / ${bitCount}\n至少出现 1 个误码  ${(anyErrorProbability * 100).toFixed(4)}%\n模型              ${model}、相干解调、理想 AWGN`;
+});
+
+const escapeToolHtml = (value) => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
+
+const renderMarkdownInline = (value) => escapeToolHtml(value)
+  .replace(/`([^`]+)`/g, "<code>$1</code>")
+  .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+  .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+  .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+
+const renderMarkdownPreview = (source) => {
+  const html = [];
+  let listType = "";
+  let inCode = false;
+  let codeLines = [];
+  const closeList = () => {
+    if (listType) html.push(`</${listType}>`);
+    listType = "";
+  };
+
+  for (const line of String(source).split(/\r?\n/)) {
+    if (line.startsWith("```")) {
+      closeList();
+      if (inCode) {
+        html.push(`<pre><code>${escapeToolHtml(codeLines.join("\n"))}</code></pre>`);
+        codeLines = [];
+      }
+      inCode = !inCode;
+      continue;
+    }
+    if (inCode) {
+      codeLines.push(line);
+      continue;
+    }
+    const heading = line.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+      closeList();
+      const level = heading[1].length;
+      html.push(`<h${level}>${renderMarkdownInline(heading[2])}</h${level}>`);
+      continue;
+    }
+    const unordered = line.match(/^[-*]\s+(.+)$/);
+    const ordered = line.match(/^\d+\.\s+(.+)$/);
+    if (unordered || ordered) {
+      const nextType = unordered ? "ul" : "ol";
+      if (listType !== nextType) {
+        closeList();
+        listType = nextType;
+        html.push(`<${listType}>`);
+      }
+      html.push(`<li>${renderMarkdownInline((unordered || ordered)[1])}</li>`);
+      continue;
+    }
+    closeList();
+    if (!line.trim()) continue;
+    if (line.startsWith("> ")) html.push(`<blockquote>${renderMarkdownInline(line.slice(2))}</blockquote>`);
+    else html.push(`<p>${renderMarkdownInline(line)}</p>`);
+  }
+  closeList();
+  if (inCode) html.push(`<pre><code>${escapeToolHtml(codeLines.join("\n"))}</code></pre>`);
+  return html.join("");
+};
+
+document.querySelector("[data-markdown-form]")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const result = form.querySelector("[data-markdown-result]");
+  const markdown = form.querySelector("[name='markdown']")?.value || "";
+  if (result) result.innerHTML = renderMarkdownPreview(markdown) || "<p>请输入 Markdown 内容。</p>";
+});
+
+const formulas = {
+  ohm: "欧姆定律\nV = I × R\nV：电压（V），I：电流（A），R：电阻（Ω）",
+  power: "电功率\nP = V × I = I²R = V²/R\nP：功率（W）",
+  divider: "电阻分压\nVout = Vin × R2 / (R1 + R2)\nR1 接输入端，R2 接地",
+  rc: "RC 截止频率\nfc = 1 / (2πRC)\nR：Ω，C：F，fc：Hz",
+  lc: "LC 谐振频率\nf0 = 1 / (2π√(LC))\nL：H，C：F，f0：Hz",
+  shannon: "香农信道容量\nC = B × log₂(1 + S/N)\nB：带宽（Hz），S/N：线性信噪比",
+  nyquist: "奈奎斯特采样定理\nfs ≥ 2fmax\n采样率至少为最高信号频率的两倍",
+  wavelength: "波长与频率\nλ = v / f\n电磁波在真空中 v ≈ 3 × 10⁸ m/s",
+  db: "功率比与 dB\nGdB = 10 × log₁₀(P2/P1)\n电压比且阻抗相同时：GdB = 20 × log₁₀(V2/V1)"
+};
+
+document.querySelector("[data-formula-form]")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const key = form.querySelector("[name='formula']")?.value || "ohm";
+  const result = form.querySelector("[data-formula-result]");
+  if (result) result.textContent = formulas[key] || "没有找到该公式。";
+});
+
+let mathJaxPromise;
+const loadMathJax = () => {
+  if (window.MathJax?.tex2svgPromise) return Promise.resolve(window.MathJax);
+  if (mathJaxPromise) return mathJaxPromise;
+  window.MathJax = { svg: { fontCache: "global" } };
+  mathJaxPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js";
+    script.async = true;
+    script.addEventListener("load", () => {
+      const ready = window.MathJax?.startup?.promise || Promise.resolve();
+      ready.then(() => resolve(window.MathJax), reject);
+    });
+    script.addEventListener("error", () => reject(new Error("MathJax load failed")));
+    document.head.append(script);
+  });
+  return mathJaxPromise;
+};
+
+document.querySelector("[data-latex-form]")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const latex = form.querySelector("[name='latex']")?.value.trim() || "";
+  const result = form.querySelector("[data-latex-result]");
+  if (!result) return;
+  if (!latex) {
+    result.textContent = "请输入 LaTeX 公式。";
+    return;
+  }
+  result.textContent = "正在加载并渲染公式…";
+  try {
+    const mathJax = await loadMathJax();
+    const rendered = await mathJax.tex2svgPromise(latex, { display: true });
+    result.replaceChildren(rendered);
+  } catch {
+    result.textContent = "公式渲染失败，请检查 LaTeX 语法或网络连接。";
+  }
 });
 
 if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location.protocol)) {

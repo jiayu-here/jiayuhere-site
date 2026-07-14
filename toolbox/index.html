@@ -5,14 +5,14 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-V2VWFFLH85');
-  </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人工具箱 | JiaYu Here</title><meta name="description" content="进制转换、波特率计算和电阻分压计算等轻量工程工具。"><meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)"><link rel="icon" href="../assets/images/github-avatar.jpg" type="image/jpeg"><link rel="manifest" href="../site.webmanifest"><link rel="stylesheet" href="../assets/styles.css?v=20260714f"></head><body>
+  </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>个人工具箱 | JiaYu Here</title><meta name="description" content="进制、波特率、PWM、串口、SNR/BER、Markdown、常用公式和 LaTeX 等工程学习工具。"><meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)"><link rel="icon" href="../assets/images/github-avatar.jpg" type="image/jpeg"><link rel="manifest" href="../site.webmanifest"><link rel="stylesheet" href="../assets/styles.css?v=20260714g"></head><body>
 <a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="../index.html" aria-label="JiaYu Here 首页"><span class="brand-dot"></span><span>JIAYU<span class="brand-muted">.HERE</span></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button><nav class="site-nav" id="siteNav" aria-label="主要导航"><a href="../projects/index.html">项目</a><a href="../blog/index.html">博客</a><a href="../notes/index.html">笔记</a><a aria-current="page" href="index.html">工具箱</a><a href="../resources/index.html">资源</a><a href="../lab/index.html">日志</a><a class="nav-cta" href="../contact/index.html">联系我</a></nav></header>
 <main id="main">
   <section class="page-hero compact-hero">
     <div class="container">
       <p class="eyebrow">Personal Toolbox</p>
-      <h1>少而实用的工程工具</h1>
-      <p>所有计算都在当前浏览器本地完成，不上传输入数据。除基础换算外，补充了 DDS、UART 遥测、ADC 与 QPSK 链路设计常用的快速核对工具；关键设计仍应结合目标芯片手册、约束和仿真验证。</p>
+      <h1>工程与学习工具箱</h1>
+      <p>提供 12 个可直接使用的计算、说明与预览工具。除 LaTeX 首次渲染需要加载 MathJax 外，输入和计算都在当前浏览器本地完成，不上传数据。</p>
     </div>
   </section>
   <section class="section container">
@@ -52,7 +52,33 @@
         </form>
       </article>
       <article class="tool-card">
-        <p class="eyebrow">04 · FPGA</p>
+        <p class="eyebrow">04 · PWM</p>
+        <h2>PWM 占空比计算</h2>
+        <p>按通用定时器模型计算计数时钟、ARR、CCR、实际频率和高电平时间。</p>
+        <form class="tool-form" data-pwm-form>
+          <label class="tool-field">定时器时钟 Hz<input name="timerClock" type="number" value="72000000" min="1" required></label>
+          <label class="tool-field">预分频器 PSC<input name="prescaler" type="number" value="71" min="0" step="1" required></label>
+          <label class="tool-field">目标 PWM 频率 Hz<input name="pwmFrequency" type="number" value="1000" min="0.000001" step="any" required></label>
+          <label class="tool-field">目标占空比 %<input name="dutyCycle" type="number" value="50" min="0" max="100" step="any" required></label>
+          <button class="tool-button" type="submit">计算 PWM 参数</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">05 · SERIAL</p>
+        <h2>串口参数说明</h2>
+        <p>把数据位、校验位和停止位组合成常见串口格式，并计算帧开销与有效吞吐量。</p>
+        <form class="tool-form" data-serial-form>
+          <label class="tool-field">波特率 bps<input name="serialBaud" type="number" value="115200" min="1" required></label>
+          <label class="tool-field">数据位<select name="dataBits"><option value="8">8 位</option><option value="7">7 位</option><option value="9">9 位</option><option value="6">6 位</option><option value="5">5 位</option></select></label>
+          <label class="tool-field">校验位<select name="parity"><option value="N">无校验 N</option><option value="E">偶校验 E</option><option value="O">奇校验 O</option></select></label>
+          <label class="tool-field">停止位<select name="stopBits"><option value="1">1 位</option><option value="1.5">1.5 位</option><option value="2">2 位</option></select></label>
+          <button class="tool-button" type="submit">解释并计算</button>
+          <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">06 · FPGA</p>
         <h2>DDS 频率字计算</h2>
         <p>根据系统时钟、目标频率和相位累加器位宽计算 FTW、实际输出和频率分辨率。</p>
         <form class="tool-form" data-dds-form>
@@ -64,7 +90,7 @@
         </form>
       </article>
       <article class="tool-card">
-        <p class="eyebrow">05 · UART</p>
+        <p class="eyebrow">07 · UART</p>
         <h2>UART 遥测带宽预算</h2>
         <p>估算一帧数据在线路上的占用、链路利用率、最大更新率和单帧发送时间。</p>
         <form class="tool-form" data-uart-budget-form>
@@ -77,7 +103,7 @@
         </form>
       </article>
       <article class="tool-card">
-        <p class="eyebrow">06 · ADC</p>
+        <p class="eyebrow">08 · ADC</p>
         <h2>ADC 量化与码值</h2>
         <p>计算单极性 ADC 的理想 LSB、量化码、码值对应电压与量化误差。</p>
         <form class="tool-form" data-adc-form>
@@ -89,17 +115,57 @@
         </form>
       </article>
       <article class="tool-card">
-        <p class="eyebrow">07 · QPSK</p>
-        <h2>QPSK 理论 BER</h2>
-        <p>计算 Gray 映射、相干解调、AWGN 条件下的理论 BER 与预期误码数量。</p>
-        <form class="tool-form" data-qpsk-ber-form>
+        <p class="eyebrow">09 · COMMUNICATION</p>
+        <h2>通信系统 SNR / BER</h2>
+        <p>计算 BPSK 或 Gray QPSK 在理想 AWGN 信道中的 SNR、Es/N0、理论 BER 与预期误码。</p>
+        <form class="tool-form" data-snr-ber-form>
+          <label class="tool-field">调制方式<select name="modulation"><option value="qpsk">Gray QPSK</option><option value="bpsk">BPSK</option></select></label>
           <label class="tool-field">Eb/N0 dB<input name="ebn0" type="number" value="6" step="0.1" required></label>
+          <label class="tool-field">比特率 bps<input name="bitRate" type="number" value="100000" min="0.000001" step="any" required></label>
+          <label class="tool-field">噪声带宽 Hz<input name="noiseBandwidth" type="number" value="100000" min="0.000001" step="any" required></label>
           <label class="tool-field">统计比特数<input name="bitCount" type="number" value="1000000" min="1" max="1000000000000" step="1" required></label>
-          <button class="tool-button" type="submit">计算理论 BER</button>
+          <button class="tool-button" type="submit">计算 SNR / BER</button>
           <output class="tool-result" data-tool-result>等待计算</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">10 · MARKDOWN</p>
+        <h2>Markdown 预览器</h2>
+        <p>安全预览标题、强调、链接、引用、列表、行内代码和代码块，不执行输入中的 HTML。</p>
+        <form class="tool-form" data-markdown-form>
+          <label class="tool-field">Markdown 内容<textarea name="markdown" rows="9" required># 调试记录
+
+**结论：** 接口时序已通过验证。
+
+- 检查输入
+- 对照输出
+
+`status = pass`</textarea></label>
+          <button class="tool-button" type="submit">生成预览</button>
+          <div class="tool-preview" data-markdown-result aria-live="polite">等待预览</div>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">11 · FORMULA</p>
+        <h2>常用公式速查</h2>
+        <p>快速查看电路、信号与通信中常用公式及变量含义。</p>
+        <form class="tool-form" data-formula-form>
+          <label class="tool-field">选择公式<select name="formula"><option value="ohm">欧姆定律</option><option value="power">电功率</option><option value="divider">电阻分压</option><option value="rc">RC 截止频率</option><option value="lc">LC 谐振频率</option><option value="shannon">香农容量</option><option value="nyquist">奈奎斯特采样</option><option value="wavelength">波长与频率</option><option value="db">功率比与 dB</option></select></label>
+          <button class="tool-button" type="submit">查看公式</button>
+          <output class="tool-result" data-formula-result>等待查询</output>
+        </form>
+      </article>
+      <article class="tool-card">
+        <p class="eyebrow">12 · LATEX</p>
+        <h2>LaTeX 公式测试器</h2>
+        <p>输入一条 LaTeX 数学公式并渲染为矢量公式；首次使用需要联网加载 MathJax。</p>
+        <form class="tool-form" data-latex-form>
+          <label class="tool-field">LaTeX 公式<textarea name="latex" rows="5" required>\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}</textarea></label>
+          <button class="tool-button" type="submit">渲染公式</button>
+          <div class="tool-preview latex-preview" data-latex-result aria-live="polite">等待渲染</div>
         </form>
       </article>
     </div>
   </section>
 </main>
-<footer class="site-footer"><div><a class="brand footer-brand" href="../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div><div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../sitemap.xml">站点地图</a></div><p class="copyright">© <span data-current-year></span> JiaYu Here</p></footer><script src="../assets/script.js?v=20260714c"></script></body></html>
+<footer class="site-footer"><div><a class="brand footer-brand" href="../index.html"><span class="brand-dot"></span>JIAYU.HERE</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div><div class="footer-links"><a href="../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../sitemap.xml">站点地图</a></div><p class="copyright">© <span data-current-year></span> JiaYu Here</p></footer><script src="../assets/script.js?v=20260714d"></script></body></html>
