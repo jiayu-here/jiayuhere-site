@@ -157,7 +157,7 @@ const page = ({ prefix, active, title, description, content, type = "website" })
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=20260714c">
 </head>
 <body>
