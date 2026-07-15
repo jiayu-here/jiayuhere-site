@@ -26,7 +26,7 @@ const localeConfig = {
     contentRoot: "content",
     strings: {
       skip: "跳到主要内容",
-      homeLabel: "JiaYu Here 首页",
+      homeLabel: "Jiayu Lab 首页",
       openNav: "打开导航",
       navLabel: "主要导航",
       projects: "项目",
@@ -49,7 +49,7 @@ const localeConfig = {
     contentRoot: "content/en",
     strings: {
       skip: "Skip to main content",
-      homeLabel: "JiaYu Here home",
+      homeLabel: "Jiayu Lab home",
       openNav: "Open navigation",
       navLabel: "Primary navigation",
       projects: "Projects",
@@ -312,7 +312,7 @@ ${categories}
   const feed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${isEnglish ? "JiaYu Here Technical Blog" : "JiaYu Here 技术博客"}</title>
+    <title>${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}</title>
     <link>https://www.jiayuhere.com/${isEnglish ? "en/" : ""}blog/</link>
     <description>${isEnglish ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。"}</description>
     <language>${isEnglish ? "en" : "zh-CN"}</language>
@@ -410,7 +410,7 @@ const nav = (prefix, locale, route, active = "") => {
   return `
   <a class="skip-link" href="#main">${strings.skip}</a>
   <header class="site-header">
-    <a class="brand" href="${routeFromRoot(prefix, locale, "index.html")}" aria-label="${strings.homeLabel}"><span>JIAYU<span class="brand-muted">HERE</span></span></a>
+    <a class="brand" href="${routeFromRoot(prefix, locale, "index.html")}" aria-label="${strings.homeLabel}"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="${strings.openNav}"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="${strings.navLabel}">
       <a ${active === "projects" ? 'aria-current="page"' : ""} href="${routeFromRoot(prefix, locale, "projects/index.html")}">${strings.projects}</a>
@@ -429,9 +429,9 @@ const footer = (prefix, locale) => {
   const strings = localeConfig[locale].strings;
   return `
   <footer class="site-footer">
-    <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">JIAYUHERE</a><p>${strings.footer}</p></div>
+    <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">Jiayu Lab</a><p>${strings.footer}</p></div>
     <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
-    <p class="copyright">© <span data-current-year></span> JIAYUHERE</p>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
   <script src="${prefix}assets/script.js?v=20260714s"></script>`;
 };
@@ -447,13 +447,13 @@ const page = ({ prefix, locale, route, active, title, description, content, type
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escapeHtml(title)} | jiayuhere</title>
+  <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
-  <meta property="og:title" content="${escapeHtml(title)} | JiaYu Here">
+  <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -461,7 +461,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
   <link rel="alternate" hreflang="x-default" href="${chinese}">
-  <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "JiaYu Here Technical Blog" : "JiaYu Here 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
+  <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
   <link rel="icon" href="${prefix}assets/images/github-avatar.jpg" type="image/jpeg">
   <link rel="manifest" href="${prefix}site.webmanifest">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=${styleVersion}">

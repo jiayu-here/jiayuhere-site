@@ -1,4 +1,4 @@
-# JiaYu Here
+# Jiayu Lab
 
 [![Website](https://img.shields.io/badge/Website-www.jiayuhere.com-0969da?style=flat-square)](https://www.jiayuhere.com/)
 [![Languages](https://img.shields.io/badge/Languages-中文%20%7C%20English-24292f?style=flat-square)](#language)
@@ -16,7 +16,7 @@
 
 ### Overview
 
-[JiaYu Here](https://www.jiayuhere.com/en/) is a personal technology website that combines:
+[Jiayu Lab](https://www.jiayuhere.com/en/) is a personal technology website that combines:
 
 - A personal homepage
 - A technical blog
@@ -130,7 +130,7 @@ The repository keeps its `CNAME` file and is published at [www.jiayuhere.com](ht
 
 ### 项目简介
 
-[JiaYu Here](https://www.jiayuhere.com/) 是一个综合型个人技术网站，主要包含：
+[Jiayu Lab](https://www.jiayuhere.com/) 是一个综合型个人技术网站，主要包含：
 
 - 个人主页
 - 技术博客

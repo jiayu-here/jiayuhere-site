@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JiaYu Here Technical Blog</title>
+    <title>Jiayu Lab Technical Blog</title>
     <link>https://www.jiayuhere.com/en/blog/</link>
     <description>Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals.</description>
     <language>en</language>
