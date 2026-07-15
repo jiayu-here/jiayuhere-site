@@ -48,7 +48,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">优先级描述的是调度紧迫性</a><a href="#section-2">先列出任务的时间属性</a><a href="#section-3">一个实用的优先级分层</a><a href="#section-4">周期任务使用 vTaskDelayUntil</a><a href="#section-5">事件任务应该主动阻塞</a><a href="#section-6">ISR 只做必须立即完成的工作</a><a href="#section-7">用所有权减少共享资源</a><a href="#section-8">二值信号量不能替代互斥量</a><a href="#section-9">临界区只保护最小原子操作</a><a href="#section-10">队列长度不能凭感觉设置</a><a href="#section-11">栈和堆必须测量</a><a href="#section-12">看门狗要监督系统进展</a><a href="#section-13">如何验证优先级设计</a><a href="#section-14">常见问题与定位顺序</a><a href="#section-15">验收清单</a></aside><div class="prose"><h2 id="section-1">优先级描述的是调度紧迫性</h2>
 <p>FreeRTOS 的高优先级并不等于“业务上更重要”。调度器只关心当前有哪些任务处于就绪态，并优先运行数值更高的任务。真正应该获得高优先级的，是具有短响应期限、缓冲区可能溢出或会阻塞下游链路的工作。</p>
 <p>例如，串口接收数据若不能及时从 DMA 缓冲区取走，后续字节可能覆盖旧数据；而 OLED 刷新即使晚几十毫秒，通常也不会破坏系统状态。前者比后者更需要及时调度。</p>

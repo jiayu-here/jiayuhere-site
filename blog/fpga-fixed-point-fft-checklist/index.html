@@ -48,7 +48,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先确定系统指标</a><a href="#section-2">Q 格式必须写进接口文档</a><a href="#section-3">蝶形加法会产生增长位</a><a href="#section-4">复数乘法的位宽要逐项推导</a><a href="#section-5">旋转因子表也需要可追溯</a><a href="#section-6">数据顺序决定地址控制</a><a href="#section-7">流式接口要把数据和状态一起传递</a><a href="#section-8">溢出、舍入和饱和是三件事</a><a href="#section-9">软件参考模型必须模拟定点过程</a><a href="#section-10">测试向量要覆盖不同问题</a><a href="#section-16">时序与资源要在结构稳定后检查</a><a href="#section-17">常见错误与排查顺序</a><a href="#section-18">验收清单</a></aside><div class="prose"><h2 id="section-1">先确定系统指标</h2>
 <p>定点 FFT 的位宽和结构不能脱离系统需求单独决定。开始设计前应明确：</p>
 <ul>

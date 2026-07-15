@@ -48,7 +48,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><p class="eyebrow">Learning Notes</p><h1>嵌入式 C 语言检查清单</h1><p class="article-lead">系统整理嵌入式 C 中的数据类型、位操作、指针、volatile、中断、状态机、模块接口和可测试性。</p><div class="article-meta"><span>编程语言 · 2026-07</span><span>约 9 分钟阅读</span><div class="tag-list"><span>C</span><span>Embedded</span><span>Pointer</span><span>Volatile</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>嵌入式 C 语言检查清单</h1><p class="article-lead">系统整理嵌入式 C 中的数据类型、位操作、指针、volatile、中断、状态机、模块接口和可测试性。</p><div class="article-meta"><span>编程语言 · 2026-07</span><span>约 9 分钟阅读</span><div class="tag-list"><span>C</span><span>Embedded</span><span>Pointer</span><span>Volatile</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">嵌入式 C 的核心特点</a><a href="#section-2">固定宽度整数与类型转换</a><a href="#section-3">溢出、边界与单位</a><a href="#section-4">位操作与寄存器访问</a><a href="#section-5">指针与对象生命周期</a><a href="#section-6">数组、字符串与缓冲区</a><a href="#section-7">字节序、对齐与数据布局</a><a href="#section-8">volatile 的作用与边界</a><a href="#section-9">中断服务程序</a><a href="#section-10">状态机代替阻塞等待</a><a href="#section-11">时间比较与计数器回绕</a><a href="#section-12">模块接口与分层</a><a href="#section-13">错误处理与断言</a><a href="#section-14">可测试性与验证</a><a href="#section-15">提交前检查清单</a></aside><div class="prose"><h2 id="section-1">嵌入式 C 的核心特点</h2>
 <p>嵌入式 C 与普通应用程序使用同一种语言，但运行环境不同。代码经常直接访问寄存器，内存和计算资源有限，还要处理中断、时序、并发和硬件异常。</p>
 <p>因此代码是否“能编译”只是最低要求，还要确认数据位宽、执行时间、对象生命周期、硬件访问顺序和异常状态。写每个模块前应先明确输入、输出、更新时机和失败后的处理方式。</p>

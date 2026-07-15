@@ -14,9 +14,9 @@ const googleAnalyticsTag = `  <script async src="https://www.googletagmanager.co
   </script>`;
 
 const sections = {
-  projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品", eyebrow: "Engineering Portfolio" },
-  articles: { source: "content/articles", output: "blog", label: "技术博客", title: "技术博客", eyebrow: "Technical Writing" },
-  notes: { source: "content/notes", output: "notes", label: "学习笔记", title: "学习笔记", eyebrow: "Learning Notes" }
+  projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品" },
+  articles: { source: "content/articles", output: "blog", label: "技术博客", title: "技术博客" },
+  notes: { source: "content/notes", output: "notes", label: "学习笔记", title: "学习笔记" }
 };
 
 const localeConfig = {
@@ -71,9 +71,9 @@ const localeConfig = {
 const localizedSections = {
   zh: sections,
   en: {
-    projects: { ...sections.projects, label: "Projects", title: "Projects", eyebrow: "Engineering Portfolio" },
-    articles: { ...sections.articles, label: "Technical Blog", title: "Technical Blog", eyebrow: "Technical Writing" },
-    notes: { ...sections.notes, label: "Learning Notes", title: "Learning Notes", eyebrow: "Learning Notes" }
+    projects: { ...sections.projects, label: "Projects", title: "Projects" },
+    articles: { ...sections.articles, label: "Technical Blog", title: "Technical Blog" },
+    notes: { ...sections.notes, label: "Learning Notes", title: "Learning Notes" }
   }
 };
 
@@ -507,7 +507,7 @@ const buildIndex = async (section, items, locale) => {
   </div>`;
   const content = `
     <section class="page-hero compact-hero index-hero">
-      <div class="container"><p class="eyebrow">${config.eyebrow}</p><h1>${config.title}</h1><p>${isEnglish
+      <div class="container"><h1>${config.title}</h1><p>${isEnglish
         ? section === "projects" ? "Complete engineering records from requirements and architecture through debugging and delivery." : section === "articles" ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "A long-term knowledge tree covering mathematics, English, engineering courses and programming."
         : section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。"}</p></div>
     </section>
@@ -541,7 +541,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><p class="eyebrow">${escapeHtml(config.eyebrow)}</p><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
       <div class="article-layout container"><aside class="article-toc"><p>${isEnglish ? "On this page" : "本页目录"}</p>${toc}</aside><div class="prose">${rendered.html}${pagination}</div></div>
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);

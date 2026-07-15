@@ -10,7 +10,6 @@
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <p class="eyebrow">About Me</p>
       <h1>用工程验证想法，<br>用文档积累能力。</h1>
       <p>我关注通信、嵌入式、FPGA、数字信号处理和计算机系统。对我而言，学习不是收集名词，而是把一个问题从原理分析、可运行实现、仿真与调试，一直推进到他人能够复现和使用的交付物。</p>
     </div>
@@ -18,14 +17,12 @@
   <section class="section container">
     <div class="split-grid">
       <article class="panel">
-        <p class="eyebrow">My Focus</p>
         <h2>我在做什么</h2>
         <p>目前以电子信息与计算机的交叉方向为主线，重点把通信原理、数字信号处理、FPGA RTL、STM32/FreeRTOS、Python 与工程环境连接成完整的实践链路。</p>
         <p>我更在意一个系统是否有清晰的输入、输出、边界条件和验证证据，而不只是在页面或仿真中“看起来能跑”。因此，每个项目都会尽量保留源码、测试入口、工具版本、关键约束、结果说明和已知限制。</p>
         <p>这个网站不是一次性的简历页，而是一份长期公开的学习档案：项目页说明做了什么、如何验证和哪些部分尚待完善；博客记录方法；实验日志保留排查过程与失败经验。</p>
       </article>
       <article class="panel">
-        <p class="eyebrow">Representative Work</p>
         <h2>已完成的实践</h2>
         <div class="list-links">
           <div><small>FPGA</small><strong>DDS、AD/DA 采集与板级显示</strong><span>RTL · ModelSim · Quartus · .sof</span></div>
@@ -40,28 +37,26 @@
   <section class="section section-soft">
     <div class="container">
       <div class="section-heading">
-        <div><p class="eyebrow">Working Style</p><h2>我如何推进一个项目</h2></div>
+        <div><h2>我如何推进一个项目</h2></div>
         <p>把大问题拆成可独立判断的小阶段；每一阶段都尽量留下一个可以复查的结果，再进入下一阶段。</p>
       </div>
       <div class="module-grid">
-        <article class="module-card"><div class="module-number"><span>01</span><span>SCOPE</span></div><h3>先定义验收结果</h3><p>明确目标板卡、输入输出、使用场景和完成判据。对 FPGA 项目，验收不止是生成文件，还包括仿真、约束与时序；对 Web 项目，则包括完整的用户流程。</p></article>
-        <article class="module-card"><div class="module-number"><span>02</span><span>CORE</span></div><h3>分层实现核心</h3><p>把算法、时序控制、接口适配和展示层分开。这样出现问题时可以先定位在数据本身、模块边界还是板级连接，而不是在一个大文件中反复猜测。</p></article>
-        <article class="module-card"><div class="module-number"><span>03</span><span>VERIFY</span></div><h3>用证据推进调试</h3><p>优先使用测试平台、波形、日志、串口抓包和 HTTP 请求验证真实行为。遇到异常时记录现象、假设、最小实验、根因和回归结果，而不是只保留最终版本。</p></article>
-        <article class="module-card"><div class="module-number"><span>04</span><span>HANDOFF</span></div><h3>完成文档与交付</h3><p>整理源码、约束、脚本、运行说明、测试报告与已知限制。计划中的功能会明确标注为规划，而已经完成的部分才会给出可追溯的验证结论。</p></article>
+        <article class="module-card"><div class="module-number"><span>01</span></div><h3>先定义验收结果</h3><p>明确目标板卡、输入输出、使用场景和完成判据。对 FPGA 项目，验收不止是生成文件，还包括仿真、约束与时序；对 Web 项目，则包括完整的用户流程。</p></article>
+        <article class="module-card"><div class="module-number"><span>02</span></div><h3>分层实现核心</h3><p>把算法、时序控制、接口适配和展示层分开。这样出现问题时可以先定位在数据本身、模块边界还是板级连接，而不是在一个大文件中反复猜测。</p></article>
+        <article class="module-card"><div class="module-number"><span>03</span></div><h3>用证据推进调试</h3><p>优先使用测试平台、波形、日志、串口抓包和 HTTP 请求验证真实行为。遇到异常时记录现象、假设、最小实验、根因和回归结果，而不是只保留最终版本。</p></article>
+        <article class="module-card"><div class="module-number"><span>04</span></div><h3>完成文档与交付</h3><p>整理源码、约束、脚本、运行说明、测试报告与已知限制。计划中的功能会明确标注为规划，而已经完成的部分才会给出可追溯的验证结论。</p></article>
       </div>
     </div>
   </section>
   <section class="section container">
     <div class="split-grid">
       <article class="panel">
-        <p class="eyebrow">Technical Map</p>
         <h2>当前使用的技术</h2>
         <p><strong>通信与 DSP：</strong>围绕调制解调、QPSK、误码率、定点实现、频率与采样关系建立理论和仿真的对应关系。</p>
         <p><strong>FPGA 与嵌入式：</strong>使用 Verilog、ModelSim、Quartus、时序约束、UART、I2C、AD/DA 和 DMA/FreeRTOS 等工具与接口，把逻辑从仿真推进到开发板。</p>
         <p><strong>软件与交付：</strong>使用 Python、MATLAB、SQLite、Docker、Git 和技术文档，承担可视化、检索、验证、环境复现与项目发布的工作。</p>
       </article>
       <article class="panel">
-        <p class="eyebrow">Boundary</p>
         <h2>我如何说明能力边界</h2>
         <p>网站会区分“已完成”“规划中”和“后续改进”。已完成项目会列出实际使用的工具链、测试或编译证据；规划项目只记录目标架构、接口约定和验收条件，不提前把设计蓝图写成结果。</p>
         <p>同样地，仿真通过、工程编译通过、时序通过和实物上板通过是不同层次的结论。我会尽量分别说明它们，避免用模糊描述掩盖尚未验证的部分。</p>
@@ -72,20 +67,20 @@
   <section class="section section-soft">
     <div class="container">
       <div class="section-heading">
-        <div><p class="eyebrow">Roadmap</p><h2>长期能力路线</h2></div>
+        <div><h2>长期能力路线</h2></div>
         <p>目标不是堆叠工具名，而是逐步建立从数学与信号，到硬件与软件，再到完整系统交付的连接。</p>
       </div>
       <div class="timeline">
-        <article class="timeline-item"><time>FOUNDATION</time><div><h2>数学、通信与计算机基础</h2><p>持续巩固工程数学、通信原理、数字信号处理、数据结构、操作系统和数据库，并把公式中的能量、采样、时延和误码概念落到可观察的数据上。</p></div></article>
-        <article class="timeline-item"><time>HARDWARE</time><div><h2>嵌入式与 FPGA 实现</h2><p>通过 Verilog、时序约束、板级接口、STM32、FreeRTOS、DMA 与外设调试，建立从模块仿真到硬件行为的判断能力，并逐步增加实物验证证据。</p></div></article>
-        <article class="timeline-item"><time>SYSTEM</time><div><h2>软硬件协同与工具链</h2><p>让 Python、MATLAB、Linux、Docker、数据库和小型上位机程序成为验证与交付手段：既能生成参考结果，也能读取、展示和追踪真实系统的运行数据。</p></div></article>
-        <article class="timeline-item"><time>OUTPUT</time><div><h2>项目、文章与长期知识库</h2><p>把完成的系统整理为可阅读、可复现、可继续演进的公开资产，并持续补齐测试说明、限制、复盘和下一阶段的改进方向。</p></div></article>
+        <article class="timeline-item"><time>01</time><div><h2>数学、通信与计算机基础</h2><p>持续巩固工程数学、通信原理、数字信号处理、数据结构、操作系统和数据库，并把公式中的能量、采样、时延和误码概念落到可观察的数据上。</p></div></article>
+        <article class="timeline-item"><time>02</time><div><h2>嵌入式与 FPGA 实现</h2><p>通过 Verilog、时序约束、板级接口、STM32、FreeRTOS、DMA 与外设调试，建立从模块仿真到硬件行为的判断能力，并逐步增加实物验证证据。</p></div></article>
+        <article class="timeline-item"><time>03</time><div><h2>软硬件协同与工具链</h2><p>让 Python、MATLAB、Linux、Docker、数据库和小型上位机程序成为验证与交付手段：既能生成参考结果，也能读取、展示和追踪真实系统的运行数据。</p></div></article>
+        <article class="timeline-item"><time>04</time><div><h2>项目、文章与长期知识库</h2><p>把完成的系统整理为可阅读、可复现、可继续演进的公开资产，并持续补齐测试说明、限制、复盘和下一阶段的改进方向。</p></div></article>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container contact-strip">
-      <div><p class="eyebrow">Next</p><h2>先看真实项目，再看持续积累</h2><p>从 FPGA DDS、QPSK 基带链路和个人知识库开始，可以直接看到代码、验证方式、交付内容和后续计划。</p></div>
+      <div><h2>先看真实项目，再看持续积累</h2><p>从 FPGA DDS、QPSK 基带链路和个人知识库开始，可以直接看到代码、验证方式、交付内容和后续计划。</p></div>
       <a class="button" href="../projects/index.html">进入项目作品</a>
     </div>
   </section>

@@ -48,7 +48,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><p class="eyebrow">Technical Writing</p><h1>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</h1><p class="article-lead">说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</p><div class="article-meta"><span>FPGA · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</h1><p class="article-lead">说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</p><div class="article-meta"><span>FPGA · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div></div></header>
       <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">DDS 的核心不是波形表，而是相位</a><a href="#section-2">相位累加器保持简单</a><a href="#section-3">多种波形可以共享相位</a><a href="#section-4">LUT 生成过程也需要版本管理</a><a href="#section-5">ADC 数据必须带有效信号</a><a href="#section-6">显示模块不要反向控制算法模块</a><a href="#section-7">仿真应分四层推进</a><a href="#section-12">TimeQuest 中需要关注什么</a><a href="#section-13">上板前后的验收边界</a></aside><div class="prose"><h2 id="section-1">DDS 的核心不是波形表，而是相位</h2>
 <p>直接数字频率合成器的核心是相位累加器。每个系统时钟到来时，相位增加一个固定步长，再用相位高位查询波形表。只要相位按照模二进制自然回绕，就能连续产生周期波形。</p>
 <p>当相位累加器宽度为 N、系统时钟为 <code>f_clk</code>、频率控制字为 <code>phase_inc</code> 时，理想输出频率为：</p>
