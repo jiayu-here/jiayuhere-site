@@ -22,6 +22,7 @@
 - A technical blog
 - An engineering project portfolio
 - A learning knowledge base
+- A privacy-safe bilingual online resume with PDF downloads
 - A browser-based engineering toolbox
 - Resource navigation and engineering lab logs
 
@@ -49,6 +50,7 @@ Private repositories and this website's own repository are excluded from the pub
 index.html                    Chinese homepage
 en/                           Complete English site
 about/                        About page
+resume/                       Privacy-safe online resume and PDF entry
 projects/                     Project index and generated project pages
 blog/                         Blog index and generated article pages
 notes/                        Note index and generated note pages
@@ -65,6 +67,7 @@ content/en/notes/*.md         Matching English note source files
 content/templates/            Reusable Markdown templates
 scripts/build-content.mjs     Static content generator
 assets/styles.css             Global styles
+assets/files/                 Chinese and English resume PDFs
 assets/script.js              Navigation, search and interactive tools
 assets/data/                  Chinese and English search indexes
 sw.js                         Offline cache service worker
@@ -136,6 +139,7 @@ The repository keeps its `CNAME` file and is published at [www.jiayuhere.com](ht
 - 技术博客
 - 工程项目作品集
 - 学习知识库
+- 隐私保护的中英文在线简历与 PDF 下载
 - 浏览器在线工程工具箱
 - 常用资源导航与实验日志
 
@@ -163,6 +167,7 @@ The repository keeps its `CNAME` file and is published at [www.jiayuhere.com](ht
 index.html                    中文首页
 en/                           完整英文网站
 about/                        关于我
+resume/                       隐私保护的在线简历与 PDF 入口
 projects/                     项目列表与生成后的项目详情
 blog/                         博客列表与生成后的文章详情
 notes/                        笔记列表与生成后的笔记详情
@@ -179,6 +184,7 @@ content/en/notes/*.md         对应的英文笔记源文件
 content/templates/            可复用的 Markdown 模板
 scripts/build-content.mjs     静态内容生成脚本
 assets/styles.css             全站样式
+assets/files/                 中英文简历 PDF
 assets/script.js              导航、搜索与工具交互
 assets/data/                  中英文搜索索引
 sw.js                         离线缓存 Service Worker

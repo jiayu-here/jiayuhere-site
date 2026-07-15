@@ -681,7 +681,7 @@ const build = async () => {
   await updateHomeStats(homeStats, lastUpdated, "zh");
   await updateHomeStats(homeStats, lastUpdated, "en");
 
-  const staticUrls = ["", "about/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/"];
+  const staticUrls = ["", "about/", "resume/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/"];
   const englishStaticUrls = staticUrls.map((url) => `en/${url}`);
   const urls = [...staticUrls, ...englishStaticUrls, ...Object.values(localeBuilds).flatMap(({ searchIndex }) => searchIndex.map((item) => item.url.replace(/^\//, "")))];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>https://www.jiayuhere.com/${url}</loc><lastmod>2026-07-14</lastmod></url>`).join("\n")}\n</urlset>\n`;
