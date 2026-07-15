@@ -193,6 +193,13 @@ def build(language):
             ["Seven task areas around a 10 ms control loop with diagnostics and watchdog protection.", "Both targets cross-build; PID and protocol host tests pass; ELF/HEX/BIN/MAP artifacts produced."],
             "Software build complete; vehicle electrical, mechanical and calibration tests pending.", s,
         )
+        projects += project(
+            "Mathematical Modeling: Accurate Localization of Multiple Rocket Debris Objects",
+            "Mathematical Modeling | Localization Analysis | Second Prize",
+            "Modeled and analyzed the accurate localization of multiple rocket debris objects.",
+            ["Translated the real-world positioning problem into solvable constraints and completed the competition submission."],
+            "Competition project; Second Prize in Mathematical Modeling.", s,
+        )
         right += section("SELECTED PROJECTS", projects, s)
         right += section("ENGINEERING METHOD", [
             p("Define acceptance criteria first, verify modules independently, retain evidence at each boundary, and package source, constraints, scripts, results and limitations for reproducible handoff.", s["body"])
@@ -258,6 +265,13 @@ def build(language):
             "构建双轮 PID、里程计、循迹避障、Flash 参数、安全保护和蓝牙命令的多任务固件。",
             ["七类任务围绕 10 ms 控制周期运行，并加入诊断和看门狗保护。", "双目标交叉编译、PID 与协议主机测试通过，生成 ELF/HEX/BIN/MAP。"],
             "软件构建完成；实车电气、机械与标定待验证。", s,
+        )
+        projects += project(
+            "数学建模：多个火箭残骸的准确定位",
+            "数学建模 | 定位分析 | 二等奖",
+            "围绕多个火箭残骸的准确定位问题完成建模与结果分析。",
+            ["将实际定位问题整理为可求解的约束关系，并形成完整竞赛成果。"],
+            "竞赛项目；数学建模二等奖。", s,
         )
         right += section("代表项目", projects, s)
         right += section("工程方法", [
