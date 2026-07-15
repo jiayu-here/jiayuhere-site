@@ -223,11 +223,11 @@ def build(language):
             "Competition project; Second Prize in Mathematical Modeling.", s,
         )
         projects += project(
-            "STM32 Multi-Channel Temperature Inspection System",
-            "STM32 | Multi-Channel Sampling | Threshold Alarm",
-            "Independently built periodic temperature sampling, real-time monitoring, storage, processing and display across multiple measurement points.",
-            ["Automatically inspected channels and triggered visual and audible alarms when readings exceeded configured thresholds.", "Organized acquisition, display and alarm flows around equipment safety and operational stability."],
-            "Independent development | 2024.05 - 2024.06", s,
+            "<a href='https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6' color='#24292f'>STM32F103 Dual-Channel Temperature Monitoring and Alarm System</a>",
+            "STM32 | DS18B20 | PT100 | OLED | FatFs",
+            "Samples a DS18B20 and PT100 module voltage, with OLED display, threshold alarms, SD CSV logging, serial configuration and persistent Flash thresholds.",
+            ["Non-blocking periodic scheduling coordinates acquisition, alarms, display, storage and serial tasks.", "Includes HAL, Keil/CubeMX, FatFs, documentation and a flashable HEX; ESP-01S cloud flow is disabled by default."],
+            "Independent development | 2024.05 - 2024.06 | Public repository packaged 2026.07", s,
         )
         projects += project(
             "STM32 Remote Five-DOF Robotic Arm Control",
@@ -317,11 +317,11 @@ def build(language):
             "竞赛项目；数学建模二等奖。", s,
         )
         projects += project(
-            "基于 STM32 的多通道温度巡检仪",
-            "STM32 | 多通道采集 | 阈值告警",
-            "独立实现多个测温点的周期采集、实时监测、数据存储、处理与显示。",
-            ["自动巡检各温度通道，并在超过设定阈值时触发声光报警。", "围绕设备运行安全性与稳定性组织采集、显示和告警流程。"],
-            "独立开发 | 2024.05 - 2024.06", s,
+            "<a href='https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6' color='#24292f'>STM32F103 双路温度检测与报警系统</a>",
+            "STM32 | DS18B20 | PT100 | OLED | FatFs",
+            "同时采集 DS18B20 数字温度与 PT100 模块电压，完成显示、报警、SD CSV 记录、串口调参和 Flash 阈值保存。",
+            ["非阻塞周期调度采样、报警、显示、存储和串口任务。", "包含 HAL、Keil/CubeMX、FatFs、完整文档和可烧录 HEX；ESP-01S 云服务默认关闭。"],
+            "独立开发 | 2024.05 - 2024.06 | 2026.07 完成公开仓库整理", s,
         )
         projects += project(
             "基于 STM32 的五自由度远程机械臂控制",

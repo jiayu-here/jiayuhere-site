@@ -147,10 +147,11 @@
               <span class="resume-entry-status">Competition Project | Second Prize in Mathematical Modeling</span>
             </article>
             <article class="resume-entry">
-              <div class="resume-entry-heading"><h3>STM32 Multi-Channel Temperature Inspection System</h3><span class="resume-entry-meta">STM32 | Multi-Channel Sampling | Threshold Alarm</span></div>
-              <p>Independently designed and implemented a multi-channel temperature inspection system for periodic sampling across multiple measurement points, real-time monitoring, storage, processing and display.</p>
-              <ul><li>Automatically inspected temperature channels and triggered visual and audible alarms when readings exceeded configured thresholds.</li><li>Organized acquisition, display and alarm flows around equipment safety and operational stability.</li></ul>
-              <span class="resume-entry-status">Independent Development | 2024.05 - 2024.06</span>
+              <div class="resume-entry-heading"><h3>STM32F103 Dual-Channel Temperature Monitoring and Alarm System</h3><span class="resume-entry-meta">STM32 | DS18B20 | PT100 | OLED | FatFs</span></div>
+              <p>Samples a DS18B20 digital sensor and PT100 module voltage on STM32F103C8T6, with OLED display, threshold alarms, SD-card CSV logging, serial configuration and persistent Flash thresholds.</p>
+              <ul><li>Uses non-blocking periodic scheduling for acquisition, alarms, display, storage and serial tasks, confirming two consecutive out-of-range readings before alarming.</li><li>The repository includes STM32 HAL, Keil/CubeMX projects, FatFs, documentation and a flashable HEX; the reserved ESP-01S cloud flow is disabled by default.</li></ul>
+              <span class="resume-entry-status">Independent Development | 2024.05 - 2024.06 | Public repository packaged 2026.07</span>
+              <a class="resume-entry-status" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6" target="_blank" rel="noreferrer">Open GitHub Repository</a>
             </article>
             <article class="resume-entry">
               <div class="resume-entry-heading"><h3>STM32 Remote Five-DOF Robotic Arm Control</h3><span class="resume-entry-meta">STM32 | PWM | Serial | Inverse Kinematics</span></div>

@@ -147,10 +147,11 @@
               <span class="resume-entry-status">竞赛项目｜数学建模二等奖</span>
             </article>
             <article class="resume-entry">
-              <div class="resume-entry-heading"><h3>基于 STM32 的多通道温度巡检仪</h3><span class="resume-entry-meta">STM32｜多通道采集｜阈值告警</span></div>
-              <p>独立设计并实现多通道温度巡检系统，对多个测温点进行周期性数据采集，支持实时监测、数据存储、处理与显示。</p>
-              <ul><li>自动巡检各温度通道，并在温度超过设定阈值时触发声光报警。</li><li>围绕设备运行安全性与稳定性组织采集、显示和告警流程。</li></ul>
-              <span class="resume-entry-status">独立开发｜2024.05 - 2024.06</span>
+              <div class="resume-entry-heading"><h3>STM32F103 双路温度检测与报警系统</h3><span class="resume-entry-meta">STM32｜DS18B20｜PT100｜OLED｜FatFs</span></div>
+              <p>基于 STM32F103C8T6 同时采集 DS18B20 数字温度与 PT100 模块电压，完成 OLED 显示、阈值报警、SD 卡 CSV 记录、串口调参和 Flash 阈值保存。</p>
+              <ul><li>采用非阻塞周期调度组织采样、报警、显示、存储和串口任务，连续两次越限后触发声光报警。</li><li>仓库包含 STM32 HAL、Keil/CubeMX 工程、FatFs、完整文档和可烧录 HEX；ESP-01S 云服务流程默认关闭。</li></ul>
+              <span class="resume-entry-status">独立开发｜2024.05 - 2024.06｜2026.07 完成公开仓库整理</span>
+              <a class="resume-entry-status" href="https://github.com/jiayu-here/TemperatureInspector_STM32F103C8T6" target="_blank" rel="noreferrer">打开 GitHub 仓库</a>
             </article>
             <article class="resume-entry">
               <div class="resume-entry-heading"><h3>基于 STM32 的五自由度远程机械臂控制</h3><span class="resume-entry-meta">STM32｜PWM｜串口｜逆运动学</span></div>
