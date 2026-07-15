@@ -117,6 +117,21 @@ def draw_footer(canvas, doc, language):
 def build(language):
     s = styles()
     is_en = language == "en"
+    if is_en:
+        s["section"].fontSize = 9.8
+        s["section"].leading = 11.2
+        s["section"].spaceAfter = 5
+        s["body"].fontSize = 6.7
+        s["body"].leading = 8.3
+        s["body"].spaceAfter = 4
+        s["body_tight"].fontSize = 6.5
+        s["body_tight"].leading = 8
+        s["body_tight"].spaceAfter = 2
+        s["entry_title"].fontSize = 8.1
+        s["entry_title"].leading = 9.5
+        s["entry_meta"].fontSize = 6.2
+        s["entry_meta"].leading = 7.5
+        s["entry_meta"].spaceAfter = 2
     output = OUTPUT_DIR / f"zhao-jiayu-resume-{language}.pdf"
     doc = SimpleDocTemplate(
         str(output),
@@ -146,6 +161,9 @@ def build(language):
             *fact("DATES", "2021 - 2025", s),
             *fact("COURSEWORK", "Signals and Systems, Digital Circuits, Analog Electronics, C Programming, Microcontrollers", s),
         ], s)
+        left += section("CAREER FOCUS", [
+            p("FPGA and embedded systems, electronic hardware development, communications and DSP roles.", s["body"]),
+        ], s)
         left += section("AWARDS AND CREDENTIALS", [
             p("<b>University Scholarship</b><br/>Awarded during undergraduate study.", s["body"]),
             p("<b>Second Prize in Mathematical Modeling</b><br/>Accurate localization of multiple rocket debris objects.", s["body"]),
@@ -160,7 +178,11 @@ def build(language):
             p("<b>FPGA:</b> Verilog, Quartus, ModelSim, TimeQuest, DDS, QPSK, UART, I2C", s["body"]),
             p("<b>Embedded:</b> C, STM32 HAL, FreeRTOS, PWM, ADC, DMA, encoders, PID, Flash", s["body"]),
             p("<b>DSP:</b> MATLAB, BER, FFT, sampling, spectra, filtering, features", s["body"]),
-            p("<b>Software:</b> Python, Git, Linux, Docker, SQLite/MySQL, CMake, documentation", s["body"]),
+            p("<b>Circuits:</b> Altium Designer, Multisim, PCB design and soldering, Keil", s["body"]),
+            p("<b>Software:</b> Python, data structures and algorithms, Git, Linux, Docker, SQLite/MySQL, CMake, documentation", s["body"]),
+        ], s)
+        left += section("STRENGTHS", [
+            p("- Connect theory, implementation and verification in engineering work.<br/>- Develop and debug in Windows and Linux environments.<br/>- Document technical work and share reusable knowledge.<br/>- Interested in photography and knowledge sharing.", s["body_tight"]),
         ], s)
         left += section("PUBLIC CONTACT", [
             p("No phone number, age, gender, salary expectation, preferred city or previous email is included in this public version.", s["body"])
@@ -200,9 +222,23 @@ def build(language):
             ["Translated the real-world positioning problem into solvable constraints and completed the competition submission."],
             "Competition project; Second Prize in Mathematical Modeling.", s,
         )
+        projects += project(
+            "STM32 Multi-Channel Temperature Inspection System",
+            "STM32 | Multi-Channel Sampling | Threshold Alarm",
+            "Independently built periodic temperature sampling, real-time monitoring, storage, processing and display across multiple measurement points.",
+            ["Automatically inspected channels and triggered visual and audible alarms when readings exceeded configured thresholds.", "Organized acquisition, display and alarm flows around equipment safety and operational stability."],
+            "Independent development | 2024.05 - 2024.06", s,
+        )
+        projects += project(
+            "STM32 Remote Five-DOF Robotic Arm Control",
+            "STM32 | PWM | Serial | Inverse Kinematics",
+            "Contributed to a five-DOF robotic arm using PWM servo control and serial host communication for remote operation.",
+            ["Structured the project around mechanical, hardware, software, control, communication and power modules.", "Calculated joint angles from end-effector coordinates with inverse kinematics and used trajectory interpolation for smooth motion."],
+            "Team member | 2023.05 - 2023.06", s,
+        )
         right += section("SELECTED PROJECTS", projects, s)
         right += section("ENGINEERING METHOD", [
-            p("Define acceptance criteria first, verify modules independently, retain evidence at each boundary, and package source, constraints, scripts, results and limitations for reproducible handoff.", s["body"])
+            p("- Define acceptance criteria before implementation.<br/>- Verify modules independently with waveforms, logs, scripts and build reports.<br/>- Package source, constraints, results and known limits for reproducible handoff.", s["body_tight"])
         ], s)
     else:
         name = "赵家瑜"
@@ -219,6 +255,9 @@ def build(language):
             *fact("时间", "2021 - 2025", s),
             *fact("核心课程", "信号与系统、数字电路、模拟电子技术、C 语言、单片机", s),
         ], s)
+        left += section("求职方向", [
+            p("FPGA 与嵌入式系统开发、电子硬件开发、通信与数字信号处理相关岗位。", s["body"]),
+        ], s)
         left += section("奖项与证书", [
             p("<b>学校奖学金</b><br/>在校期间获得学校奖学金。", s["body"]),
             p("<b>数学建模二等奖</b><br/>围绕多个火箭残骸的准确定位完成建模与分析。", s["body"]),
@@ -233,7 +272,11 @@ def build(language):
             p("<b>FPGA:</b> Verilog、Quartus、ModelSim、TimeQuest、DDS、QPSK、UART、I2C", s["body"]),
             p("<b>嵌入式:</b> C、STM32 HAL、FreeRTOS、PWM、ADC、DMA、编码器、PID、Flash", s["body"]),
             p("<b>通信与 DSP:</b> MATLAB、BER、FFT、采样、频谱、滤波、特征提取", s["body"]),
-            p("<b>软件交付:</b> Python、Git、Linux、Docker、SQLite/MySQL、CMake、技术文档", s["body"]),
+            p("<b>电路工具:</b> Altium Designer、Multisim、PCB 设计与焊接、Keil", s["body"]),
+            p("<b>软件交付:</b> Python、数据结构与算法、Git、Linux、Docker、SQLite/MySQL、CMake、技术文档", s["body"]),
+        ], s)
+        left += section("个人优势", [
+            p("- 重视理论、实现和验证之间的衔接。<br/>- 熟悉 Windows 与 Linux 环境下的开发和调试。<br/>- 习惯整理技术过程并分享可复用知识。<br/>- 爱好摄影与知识分享。", s["body_tight"]),
         ], s)
         left += section("公开联系方式", [
             p("本公开版不包含手机号、年龄、性别、期望薪资、求职城市和旧邮箱。", s["body"])
@@ -273,9 +316,23 @@ def build(language):
             ["将实际定位问题整理为可求解的约束关系，并形成完整竞赛成果。"],
             "竞赛项目；数学建模二等奖。", s,
         )
+        projects += project(
+            "基于 STM32 的多通道温度巡检仪",
+            "STM32 | 多通道采集 | 阈值告警",
+            "独立实现多个测温点的周期采集、实时监测、数据存储、处理与显示。",
+            ["自动巡检各温度通道，并在超过设定阈值时触发声光报警。", "围绕设备运行安全性与稳定性组织采集、显示和告警流程。"],
+            "独立开发 | 2024.05 - 2024.06", s,
+        )
+        projects += project(
+            "基于 STM32 的五自由度远程机械臂控制",
+            "STM32 | PWM | 串口 | 逆运动学",
+            "参与五自由度机械臂控制系统开发，使用 PWM 驱动多路舵机，并通过串口连接上位机实现远程控制。",
+            ["系统按结构、硬件、软件、控制算法、通信和供电模块进行设计。", "根据末端坐标通过逆运动学计算关节角度，并用轨迹插值实现平滑运动。"],
+            "小组成员 | 2023.05 - 2023.06", s,
+        )
         right += section("代表项目", projects, s)
         right += section("工程方法", [
-            p("先定义验收结果，再独立验证模块；在每个边界保留证据，并整理源码、约束、脚本、结果和限制，形成可复现的交付。", s["body"])
+            p("- 实现前先定义验收结果。<br/>- 使用波形、日志、脚本和编译报告独立验证模块。<br/>- 整理源码、约束、结果和已知限制，形成可复现交付。", s["body_tight"])
         ], s)
 
     header_left = [p(name, s["name"]), p(role, s["role"])]
