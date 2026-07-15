@@ -19,6 +19,8 @@ const sections = {
   notes: { source: "content/notes", output: "notes", label: "学习笔记", title: "学习笔记" }
 };
 
+const logConfig = { source: "content/logs", output: "lab" };
+
 const localeConfig = {
   zh: {
     lang: "zh-CN",
@@ -418,7 +420,7 @@ const nav = (prefix, locale, route, active = "") => {
       <a ${active === "notes" ? 'aria-current="page"' : ""} href="${routeFromRoot(prefix, locale, "notes/index.html")}">${strings.notes}</a>
       <a href="${routeFromRoot(prefix, locale, "toolbox/index.html")}">${strings.toolbox}</a>
       <a href="${routeFromRoot(prefix, locale, "resources/index.html")}">${strings.resources}</a>
-      <a href="${routeFromRoot(prefix, locale, "lab/index.html")}">${strings.lab}</a>
+      <a${active === "logs" ? ' aria-current="page"' : ""} href="${routeFromRoot(prefix, locale, "lab/index.html")}">${strings.lab}</a>
       <a class="nav-cta" href="${routeFromRoot(prefix, locale, "contact/index.html")}">${strings.contact}</a>
       <a class="language-switch" href="${languageHref}" lang="${locale === "en" ? "zh-CN" : "en"}" hreflang="${locale === "en" ? "zh-CN" : "en"}" aria-label="${strings.switchLabel}">${strings.switchText}</a>
     </nav>
@@ -438,7 +440,7 @@ const footer = (prefix, locale) => {
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [] }) => {
   const isEnglish = locale === "en";
-  const styleVersion = /^(projects|blog|notes)\/$/.test(route) ? "20260715d" : "20260714s";
+  const styleVersion = /^(projects|blog|notes|lab)\/$/.test(route) ? "20260715d" : "20260714s";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -551,6 +553,39 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [] }));
 };
 
+const buildLabIndex = async (items, locale) => {
+  const isEnglish = locale === "en";
+  const prefix = isEnglish ? "../../" : "../";
+  const route = `${logConfig.output}/`;
+  const timeline = items.map((item) => {
+    const projectSlug = String(item.meta.projectSlug || "");
+    if (!projectSlug) throw new Error(`Log projectSlug missing: ${item.meta.title}`);
+    const rendered = markdownToHtml(item.body, locale).html;
+    const searchText = [item.meta.title, item.meta.description, plainText(item.body)].join(" ").toLowerCase();
+    return `<article class="timeline-item" id="${escapeHtml(item.meta.slug)}" data-search="${escapeHtml(searchText)}"><time>${escapeHtml(item.meta.date)}</time><div><h2>${escapeHtml(item.meta.title)}</h2><div class="log-details">${rendered}</div><a class="text-link" href="../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project" : "查看项目详情"} <span aria-hidden="true">→</span></a></div></article>`;
+  }).join("\n");
+  const template = isEnglish
+    ? `<article class="timeline-item"><time>TEMPLATE</time><div><h2>Future Log Template</h2><p><strong>Date:</strong> YYYY-MM-DD · <strong>Project:</strong> name</p><p><strong>Symptom:</strong> Repeatable and observable behavior.</p><p><strong>Hypothesis:</strong> Ranked possibilities, not conclusions.</p><p><strong>Investigation:</strong> Environment → reproduction → minimal experiment → comparison.</p><p><strong>Root cause:</strong> Evidence-supported explanation.</p><p><strong>Fix:</strong> Change plus regression evidence.</p><p><strong>Lesson:</strong> Reusable method and remaining limits.</p></div></article>`
+    : `<article class="timeline-item"><time>TEMPLATE</time><div><h2>后续日志记录模板</h2><p><strong>日期：</strong>YYYY-MM-DD　<strong>项目：</strong>项目名称</p><p><strong>问题现象：</strong>可复现、可观察的异常。</p><p><strong>初步判断：</strong>按可能性列出假设，不把猜测写成结论。</p><p><strong>排查过程：</strong>环境与版本 → 复现步骤 → 最小实验 → 对照结果。</p><p><strong>最终原因：</strong>由证据支持的根因。</p><p><strong>解决方法：</strong>修改内容与回归验证。</p><p><strong>经验总结：</strong>可复用的方法和仍未解决的限制。</p></div></article>`;
+  const heroDescription = isEnglish
+    ? `${items.length} public-project debugging records preserving the symptom, hypothesis, investigation, evidence-supported cause, fix and reusable lesson.`
+    : `${items.length} 条公开项目调试记录，保留问题现象、初步判断、排查过程、证据支持的根因、解决方法与可复用经验。`;
+  const content = `
+    <section class="page-hero compact-hero index-hero"><div class="container"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1><p>${heroDescription}</p></div></section>
+    <section class="section container content-index-section"><div class="content-controls compact-controls"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div><div class="timeline">${timeline}\n${template}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
+  const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output);
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({
+    prefix,
+    locale,
+    route,
+    active: "logs",
+    title: isEnglish ? "Engineering Lab Log" : "工程实验日志",
+    description: heroDescription,
+    content
+  }));
+};
+
 const updateHomeStats = async (counts, lastUpdated, locale) => {
   const homePath = path.join(root, localeConfig[locale].routeRoot, "index.html");
   let home = await readFile(homePath, "utf8");
@@ -611,8 +646,50 @@ const loadPairedContent = async () => {
   return content;
 };
 
+const loadPairedLogs = async () => {
+  const directories = {
+    zh: path.join(root, logConfig.source),
+    en: path.join(root, localeConfig.en.contentRoot, "logs")
+  };
+  await mkdir(directories.zh, { recursive: true });
+  await mkdir(directories.en, { recursive: true });
+  const files = {};
+  for (const locale of Object.keys(localeConfig)) {
+    files[locale] = (await readdir(directories[locale])).filter((file) => file.endsWith(".md")).sort();
+  }
+  const missingEnglish = files.zh.filter((file) => !files.en.includes(file));
+  const missingChinese = files.en.filter((file) => !files.zh.includes(file));
+  if (missingEnglish.length || missingChinese.length) {
+    const details = [
+      missingEnglish.length ? `missing English: ${missingEnglish.join(", ")}` : "",
+      missingChinese.length ? `missing Chinese: ${missingChinese.join(", ")}` : ""
+    ].filter(Boolean).join("; ");
+    throw new Error(`Bilingual pair validation failed for logs: ${details}`);
+  }
+
+  const logs = { zh: [], en: [] };
+  for (const locale of Object.keys(localeConfig)) {
+    for (const file of files[locale]) {
+      const source = await readFile(path.join(directories[locale], file), "utf8");
+      logs[locale].push({ ...parseDocument(source, `${locale}/logs/${file}`), file });
+    }
+  }
+  for (let index = 0; index < files.zh.length; index += 1) {
+    const chinese = logs.zh[index];
+    const english = logs.en[index];
+    if (chinese.file !== english.file || chinese.meta.slug !== english.meta.slug) {
+      throw new Error(`Bilingual log slug mismatch: ${chinese.file} (${chinese.meta.slug}) / ${english.file} (${english.meta.slug})`);
+    }
+    if (chinese.meta.date !== english.meta.date || chinese.meta.projectSlug !== english.meta.projectSlug) {
+      throw new Error(`Bilingual log metadata mismatch: ${chinese.file}`);
+    }
+  }
+  return logs;
+};
+
 const build = async () => {
   const authoredContent = await loadPairedContent();
+  const authoredLogs = await loadPairedLogs();
   const publicRepositories = await fetchPublicRepositories();
   const localeBuilds = {};
 
@@ -649,17 +726,17 @@ const build = async () => {
       if (section === "articles") articleItems = items;
       await buildIndex(section, items, locale);
     }
+    await buildLabIndex(authoredLogs[locale], locale);
+    contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.date || "")).filter(Boolean));
     await buildRss(articleItems, locale);
     const searchFile = locale === "en" ? "search-index.en.json" : "search-index.json";
     await mkdir(path.join(root, "assets/data"), { recursive: true });
     await writeFile(path.join(root, "assets/data", searchFile), `${JSON.stringify(searchIndex, null, 2)}\n`);
-    localeBuilds[locale] = { searchIndex, sectionCounts, contentDates };
+    localeBuilds[locale] = { searchIndex, sectionCounts, contentDates, logCount: authoredLogs[locale].length };
   }
 
   const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
   const toolCount = (toolbox.match(/<article\b[^>]*\bclass="[^"]*\btool-card\b[^"]*"/g) || []).length;
-  const lab = await readFile(path.join(root, "lab/index.html"), "utf8");
-  const logCount = (lab.match(/<article\b[^>]*\bclass="[^"]*\btimeline-item\b[^"]*">\s*<time>\d{4}/g) || []).length;
   const chineseBuild = localeBuilds.zh;
   const topicCount = (terms) => chineseBuild.searchIndex.filter((item) => {
     const text = [item.title, item.description, item.category, ...(item.tags || [])].join(" ").toLowerCase();
@@ -670,7 +747,7 @@ const build = async () => {
     articles: chineseBuild.sectionCounts.articles,
     notes: chineseBuild.sectionCounts.notes,
     tools: toolCount,
-    logs: logCount,
+    logs: chineseBuild.logCount,
     repositories: publicRepositories.length,
     embedded: topicCount(["嵌入式", "stm32", "freertos", "adc", "pwm"]),
     fpga: topicCount(["fpga", "verilog", "quartus", "modelsim", "dds"]),
@@ -694,7 +771,7 @@ const build = async () => {
       await writeFile(htmlPath, html);
     }
   }
-  console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual Markdown pages.`);
+  console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual Markdown pages and ${authoredLogs.zh.length} bilingual log entries.`);
 };
 
 await build();

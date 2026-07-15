@@ -61,9 +61,11 @@ contact/                      Contact methods
 content/projects/*.md         Chinese project source files
 content/articles/*.md         Chinese article source files
 content/notes/*.md            Chinese note source files
+content/logs/*.md             Chinese lab-log source files
 content/en/projects/*.md      Matching English project source files
 content/en/articles/*.md      Matching English article source files
 content/en/notes/*.md         Matching English note source files
+content/en/logs/*.md          Matching English lab-log source files
 content/templates/            Reusable Markdown templates
 scripts/build-content.mjs     Static content generator
 assets/styles.css             Global styles
@@ -95,7 +97,7 @@ tags: [Tag One, Tag Two]
 Article content.
 ```
 
-Projects may also define `status` and `repository`. The complete workflow is documented in [`写作与发布说明.md`](写作与发布说明.md).
+Projects may also define `status` and `repository`. Lab logs use `projectSlug` to link back to the related generated project page. The complete workflow is documented in [`写作与发布说明.md`](写作与发布说明.md).
 
 ### Build and Validate
 
@@ -106,9 +108,9 @@ npm run check
 npm run build
 ```
 
-The build validates that every Chinese Markdown file has a matching English file with the same filename and slug. Project pairs must also reference the same GitHub repository. A missing or mismatched translation stops the build before invalid language links can be published.
+The build validates that every Chinese Markdown file has a matching English file with the same filename and slug. Project pairs must reference the same GitHub repository; log pairs must use the same date and `projectSlug`. A missing or mismatched translation stops the build before invalid language links can be published.
 
-After validation, the build generates both language versions of all project, blog and note pages, together with search indexes, RSS feeds and `sitemap.xml`.
+After validation, the build generates both language versions of all project, blog, note and lab-log pages, together with search indexes, RSS feeds and `sitemap.xml`.
 
 ### Local Preview
 
@@ -143,14 +145,14 @@ The repository keeps its `CNAME` file and is published at [www.jiayuhere.com](ht
 - 浏览器在线工程工具箱
 - 常用资源导航与实验日志
 
-网站采用轻量静态架构，兼容 GitHub Pages 根目录部署。项目、文章和笔记使用 Markdown 维护，再由零依赖 Node.js 构建脚本生成静态详情页、搜索索引、RSS 和站点地图。
+网站采用轻量静态架构，兼容 GitHub Pages 根目录部署。项目、文章、笔记和实验日志使用 Markdown 维护，再由零依赖 Node.js 构建脚本生成静态页面、搜索索引、RSS 和站点地图。
 
 ### 主要功能
 
 - 完整中文与英文网站
 - 中英文对应页面一键切换
 - 双语全文搜索、分类和标签
-- 使用 Markdown 管理项目、文章和笔记
+- 使用 Markdown 管理项目、文章、笔记和实验日志
 - 阅读时间、上下篇导航和返回顶部
 - 代码高亮与一键复制
 - 电脑端和手机端响应式布局
@@ -178,9 +180,11 @@ contact/                      联系方式
 content/projects/*.md         中文项目源文件
 content/articles/*.md         中文文章源文件
 content/notes/*.md            中文笔记源文件
+content/logs/*.md             中文实验日志源文件
 content/en/projects/*.md      对应的英文项目源文件
 content/en/articles/*.md      对应的英文文章源文件
 content/en/notes/*.md         对应的英文笔记源文件
+content/en/logs/*.md          对应的英文实验日志源文件
 content/templates/            可复用的 Markdown 模板
 scripts/build-content.mjs     静态内容生成脚本
 assets/styles.css             全站样式
@@ -212,7 +216,7 @@ tags: [标签一, 标签二]
 正文内容。
 ```
 
-项目还可以设置 `status` 和 `repository`。完整写作流程见 [`写作与发布说明.md`](写作与发布说明.md)。
+项目还可以设置 `status` 和 `repository`；日志使用 `projectSlug` 关联项目详情页。完整写作流程见 [`写作与发布说明.md`](写作与发布说明.md)。
 
 ### 构建与检查
 
@@ -223,9 +227,9 @@ npm run check
 npm run build
 ```
 
-构建脚本会校验每一篇中文 Markdown 是否存在文件名和 slug 相同的英文稿。中英文项目还必须指向同一个 GitHub 仓库。缺少翻译或配对不一致时，构建会立即失败，避免发布无效的语言切换链接。
+构建脚本会校验每一篇中文 Markdown 是否存在文件名和 slug 相同的英文稿。中英文项目必须指向同一个 GitHub 仓库；中英文日志必须使用相同的日期和 `projectSlug`。缺少翻译或配对不一致时，构建会立即失败，避免发布无效的语言切换链接。
 
-校验通过后，构建脚本会生成中英文项目、博客和笔记页面，同时更新双语搜索索引、RSS 和 `sitemap.xml`。
+校验通过后，构建脚本会生成中英文项目、博客、笔记和实验日志页面，同时更新双语搜索索引、RSS 和 `sitemap.xml`。
 
 ### 本地预览
 
