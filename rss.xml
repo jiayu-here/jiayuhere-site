@@ -5,8 +5,20 @@
     <link>https://www.jiayuhere.com/blog/</link>
     <description>围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 14 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://www.jiayuhere.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</title>
+      <link>https://www.jiayuhere.com/blog/vision-robot-arm-coordinate-safety-boundaries/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/blog/vision-robot-arm-coordinate-safety-boundaries/</guid>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+      <description>结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</description>
+      <category>OpenCV</category>
+      <category>STM32</category>
+      <category>Homography</category>
+      <category>Inverse Kinematics</category>
+      <category>UART</category>
+    </item>
     <item>
       <title>从星座图到 RTL：QPSK 链路的实现顺序</title>
       <link>https://www.jiayuhere.com/blog/qpsk-from-constellation-to-rtl/</link>

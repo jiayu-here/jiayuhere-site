@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vision-Guided Arm Calibration, Communications and Hardware Acceptance Checklist | Jiayu Lab</title>
+  <meta name="description" content="A staged checklist covering power, vision, calibration, kinematics, serial transport, FreeRTOS and physical safety from simulation to commissioning.">
+  <meta name="keywords" content="STM32, OpenCV, Calibration, FreeRTOS, Safety">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Vision-Guided Arm Calibration, Communications and Hardware Acceptance Checklist | Jiayu Lab">
+  <meta property="og:description" content="A staged checklist covering power, vision, calibration, kinematics, serial transport, FreeRTOS and physical safety from simulation to commissioning.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/vision-robot-arm-commissioning-checklist/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Vision-Guided Arm Calibration, Communications and Hardware Acceptance Checklist</h1><p class="article-lead">A staged checklist covering power, vision, calibration, kinematics, serial transport, FreeRTOS and physical safety from simulation to commissioning.</p><div class="article-meta"><span>Embedded Systems and Control · 2026-07-15</span><span>5 min read</span><div class="tag-list"><span>STM32</span><span>OpenCV</span><span>Calibration</span><span>FreeRTOS</span><span>Safety</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Purpose</a><a href="#section-2">1. Power and Wiring Preconditions</a><a href="#section-3">2. Hardware-Free Software Acceptance</a><a href="#section-4">3. Vision Detection</a><a href="#section-5">4. Four-Point Calibration</a><a href="#section-6">5. Kinematics and Servo Parameters</a><a href="#section-7">6. Serial Protocol</a><a href="#section-8">7. FreeRTOS and Firmware</a><a href="#section-9">8. FSR Grasp Confirmation and Retry</a><a href="#section-10">9. Staged Physical Acceptance</a><a href="#section-11">10. What to Record</a><a href="#section-12">Review Summary</a></aside><div class="prose"><h2 id="section-1">Purpose</h2>
+<p>Use this checklist to keep “simulation runs,” “firmware builds” and “physical operation is safe” as separate results. Save data, screenshots, logs or measurements for every completed item.</p>
+<h2 id="section-2">1. Power and Wiring Preconditions</h2>
+<ul>
+<li>Power servos from a separate regulated 5-6 V high-current supply.</li>
+<li>Never power servos from the STM32F103 5 V or 3.3 V pin.</li>
+<li>Join servo-supply, controller and USB-to-TTL grounds.</li>
+<li>Verify ST-Link SWDIO, SWCLK, GND and 3.3 V; keep BOOT0 at zero.</li>
+<li>Remove servo horns or mechanical load for the first powered checks where instructed.</li>
+<li>Verify that the physical E-stop halts motion in every operating state.</li>
+<li>Confirm limit-input polarity, idle level and disconnected behavior.</li>
+<li>Ensure the FSR divider cannot exceed the ADC input range.</li>
+</ul>
+<h2 id="section-3">2. Hardware-Free Software Acceptance</h2>
+<ul>
+<li>The Python environment installs OpenCV, NumPy, Pillow and pyserial.</li>
+<li>The simulator shows red, blue and yellow objects and processes the queue.</li>
+<li>Manual, semi-automatic and fully automatic modes switch correctly.</li>
+<li>All 14 automated tests pass.</li>
+<li>The GUI smoke test starts and completes its basic interaction.</li>
+<li>CMake/Ninja and the ARM GNU Toolchain cross-build the firmware.</li>
+<li>ELF, HEX, BIN, MAP and size reports are generated.</li>
+<li>Flash and RAM stay within STM32F103C8T6 limits.</li>
+</ul>
+<h2 id="section-4">3. Vision Detection</h2>
+<ul>
+<li>The camera is mechanically fixed and cannot change height, angle or focus during operation.</li>
+<li>Red uses two hue ranges so values near both zero and 179 are covered.</li>
+<li>S/V limits are checked under actual lighting for reflections and shadows.</li>
+<li>Opening removes small noise without erasing targets; closing does not merge neighbors.</li>
+<li>Minimum contour area matches the real object size.</li>
+<li>Every detection retains class, pixel center, area and bounding box.</li>
+<li>De-duplication prevents one object from entering the queue repeatedly.</li>
+</ul>
+<h2 id="section-5">4. Four-Point Calibration</h2>
+<ul>
+<li>Select at least four non-collinear points on the work plane.</li>
+<li>Keep pixel and robot coordinate point order identical.</li>
+<li>Spread calibration points across the usable workspace.</li>
+<li>Validate and save the 3x3 homography matrix.</li>
+<li>Measure millimeter error at interior and edge points not used for fitting.</li>
+<li>Recalibrate after camera movement, focus changes or work-plane height changes.</li>
+<li>Treat homography as a planar mapping; configure grasp height separately.</li>
+</ul>
+<h2 id="section-6">5. Kinematics and Servo Parameters</h2>
+<ul>
+<li>Measure upper arm, forearm, base height and tool offset on the real arm.</li>
+<li>Verify direction for base, shoulder, elbow, wrist and gripper individually.</li>
+<li>Record mechanical center, zero offset and safe range for every servo.</li>
+<li>Exclude base-collision and mechanical-limit regions from the workspace.</li>
+<li>Reject unreachable coordinates, missing geometric solutions and out-of-range angles.</li>
+<li>Keep interpolation speed and steps low enough to avoid impact.</li>
+<li>Do not run combined trajectories before each joint passes individually.</li>
+</ul>
+<h2 id="section-7">6. Serial Protocol</h2>
+<ul>
+<li>PC and firmware share version, message types, field layout and byte order.</li>
+<li>Frames include <code>AA 55</code>, version, type, sequence, length, payload and CRC16.</li>
+<li>Payload length has a fixed maximum and coordinates are range-checked before encoding.</li>
+<li>Test complete, split, merged, noisy, bad-CRC and unknown-type input.</li>
+<li>The parser resynchronizes after discarding corrupt data.</li>
+<li>Command sequence numbers match ACK, STATUS or ERROR responses.</li>
+<li>A communications timeout forces a safe or E-stop state while the arm is moving.</li>
+</ul>
+<h2 id="section-8">7. FreeRTOS and Firmware</h2>
+<ul>
+<li>Communication tasks parse frames outside the interrupt handler.</li>
+<li>The 20 ms control task uses a fixed period without cumulative drift.</li>
+<li>Sensor tasks monitor limits, FSR and optional voltage state.</li>
+<li>Telemetry reports status periodically so the PC can detect a live scheduler.</li>
+<li>Task stack sizes are interpreted in <code>StackType_t</code> units and high-water marks are recorded.</li>
+<li>Five PWM outputs run at 50 Hz with pulse limits matching the servos.</li>
+<li>An E-stop remains latched until an explicit safe reset procedure completes.</li>
+</ul>
+<h2 id="section-9">8. FSR Grasp Confirmation and Retry</h2>
+<ul>
+<li>Measure unloaded, light-touch and stable-grip ADC values.</li>
+<li>Place the threshold between unloaded and reliable grip values with noise margin.</li>
+<li>Do not treat disconnected, shorted or invalid FSR readings as success.</li>
+<li>Limit offset retries to the configured count.</li>
+<li>Report an error instead of retrying forever.</li>
+<li>Read completed and failed pick counts through status frames.</li>
+</ul>
+<h2 id="section-10">9. Staged Physical Acceptance</h2>
+<ol>
+<li>Controller, serial link, LED and E-stop.</li>
+<li>Direction, center and limits for one servo at a time.</li>
+<li>Low-speed multi-joint motion and workspace boundaries.</li>
+<li>Fixed camera and four-point calibration.</li>
+<li>Manual joint control.</li>
+<li>Semi-automatic click-to-pick.</li>
+<li>FSR confirmation and failed-grasp retry.</li>
+<li>Fully automatic color sorting.</li>
+<li>Endurance, communications loss and E-stop recovery.</li>
+</ol>
+<h2 id="section-11">10. What to Record</h2>
+<ul>
+<li>Hardware revision, firmware commit, PC commit and configuration version.</li>
+<li>Servo model, supply voltage, current capacity and grounding.</li>
+<li>Link dimensions, zero offsets, angle limits, homography and FSR threshold.</li>
+<li>Test scene, target count, successes, failure causes and E-stop results.</li>
+<li>Flash/RAM, task stack, serial error counts and longest continuous run.</li>
+<li>Failed checks, temporary workarounds and conditions for retest.</li>
+</ul>
+<h2 id="section-12">Review Summary</h2>
+<p>Commission from power and one joint, then move to calibration, coordinated motion and automatic sorting. When a stage fails, return to the nearest verified boundary instead of changing vision thresholds, kinematic parameters and servo offsets at the same time.</p>
+<p>[Related project: STM32 Vision-Guided Robotic Arm Sorter](../../projects/stm32-vision-robot-arm-sorter/)</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../embedded-c-checklist/index.html"><span>← Previous item</span><strong>Embedded C Review Checklist</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

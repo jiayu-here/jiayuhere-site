@@ -179,7 +179,7 @@ def build(language):
             p("<b>Embedded:</b> C, STM32 HAL, FreeRTOS, PWM, ADC, DMA, encoders, PID, Flash", s["body"]),
             p("<b>DSP:</b> MATLAB, BER, FFT, sampling, spectra, filtering, features", s["body"]),
             p("<b>Circuits:</b> Altium Designer, Multisim, PCB design and soldering, Keil", s["body"]),
-            p("<b>Software:</b> Python, data structures and algorithms, Git, Linux, Docker, SQLite/MySQL, CMake, documentation", s["body"]),
+            p("<b>Software:</b> Python, OpenCV, NumPy, data structures, Git, Linux, Docker, SQLite/MySQL, CMake, documentation", s["body"]),
         ], s)
         left += section("STRENGTHS", [
             p("- Connect theory, implementation and verification in engineering work.<br/>- Develop and debug in Windows and Linux environments.<br/>- Document technical work and share reusable knowledge.<br/>- Interested in photography and knowledge sharing.", s["body_tight"]),
@@ -230,11 +230,11 @@ def build(language):
             "Independent development | 2024.05 - 2024.06 | Public repository packaged 2026.07", s,
         )
         projects += project(
-            "STM32 Remote Five-DOF Robotic Arm Control",
-            "STM32 | PWM | Serial | Inverse Kinematics",
-            "Contributed to a five-DOF robotic arm using PWM servo control and serial host communication for remote operation.",
-            ["Structured the project around mechanical, hardware, software, control, communication and power modules.", "Calculated joint angles from end-effector coordinates with inverse kinematics and used trajectory interpolation for smooth motion."],
-            "Team member | 2023.05 - 2023.06", s,
+            "<a href='https://github.com/jiayu-here/stm32-vision-robot-arm-sorter' color='#24292f'>STM32 Vision-Guided Robotic Arm Sorter</a>",
+            "STM32 | FreeRTOS | OpenCV | Inverse Kinematics",
+            "Vision-guided sorting with color detection, four-point calibration, CRC16 UART, inverse kinematics and FSR grasp confirmation.",
+            ["Simulator, 14 automated tests and GUI smoke test pass; firmware cross-build produces ELF/HEX/BIN/MAP.", "Five PWM channels, four RTOS tasks, workspace checks, smooth motion, E-stop and retry handling."],
+            "Team member 2023.05 - 2023.06 | Public repository packaged 2026.07 | Hardware validation pending", s,
         )
         right += section("SELECTED PROJECTS", projects, s)
         right += section("ENGINEERING METHOD", [
@@ -273,7 +273,7 @@ def build(language):
             p("<b>嵌入式:</b> C、STM32 HAL、FreeRTOS、PWM、ADC、DMA、编码器、PID、Flash", s["body"]),
             p("<b>通信与 DSP:</b> MATLAB、BER、FFT、采样、频谱、滤波、特征提取", s["body"]),
             p("<b>电路工具:</b> Altium Designer、Multisim、PCB 设计与焊接、Keil", s["body"]),
-            p("<b>软件交付:</b> Python、数据结构与算法、Git、Linux、Docker、SQLite/MySQL、CMake、技术文档", s["body"]),
+            p("<b>软件交付:</b> Python、OpenCV、NumPy、数据结构、Git、Linux、Docker、SQLite/MySQL、CMake、技术文档", s["body"]),
         ], s)
         left += section("个人优势", [
             p("- 重视理论、实现和验证之间的衔接。<br/>- 熟悉 Windows 与 Linux 环境下的开发和调试。<br/>- 习惯整理技术过程并分享可复用知识。<br/>- 爱好摄影与知识分享。", s["body_tight"]),
@@ -324,11 +324,11 @@ def build(language):
             "独立开发 | 2024.05 - 2024.06 | 2026.07 完成公开仓库整理", s,
         )
         projects += project(
-            "基于 STM32 的五自由度远程机械臂控制",
-            "STM32 | PWM | 串口 | 逆运动学",
-            "参与五自由度机械臂控制系统开发，使用 PWM 驱动多路舵机，并通过串口连接上位机实现远程控制。",
-            ["系统按结构、硬件、软件、控制算法、通信和供电模块进行设计。", "根据末端坐标通过逆运动学计算关节角度，并用轨迹插值实现平滑运动。"],
-            "小组成员 | 2023.05 - 2023.06", s,
+            "<a href='https://github.com/jiayu-here/stm32-vision-robot-arm-sorter' color='#24292f'>STM32 视觉机械臂自动分拣系统</a>",
+            "STM32 | FreeRTOS | OpenCV | 逆运动学",
+            "实现颜色识别、四点标定、CRC16 串口、逆运动学和 FSR 抓取确认的视觉分拣闭环。",
+            ["仿真器、14 项自动测试和 GUI 冒烟测试通过；固件生成 ELF/HEX/BIN/MAP。", "实现 5 路 PWM、RTOS 四任务、工作空间检查、平滑运动、急停和失败重试。"],
+            "小组成员 2023.05 - 2023.06 | 2026.07 完成公开仓库整理 | 实机待验证", s,
         )
         right += section("代表项目", projects, s)
         right += section("工程方法", [

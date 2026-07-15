@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STM32 视觉机械臂自动分拣系统 | Jiayu Lab</title>
+  <meta name="description" content="基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。">
+  <meta name="keywords" content="STM32, FreeRTOS, OpenCV, Inverse Kinematics, UART">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="STM32 视觉机械臂自动分拣系统 | Jiayu Lab">
+  <meta property="og:description" content="基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a aria-current="page" href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/projects/stm32-vision-robot-arm-sorter/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><h1>STM32 视觉机械臂自动分拣系统</h1><p class="article-lead">基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。</p><div class="article-meta"><span>嵌入式与机器视觉 · 2026-07 · 软件闭环与固件编译已验证</span><span>约 6 分钟阅读</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>OpenCV</span><span>Inverse Kinematics</span><span>UART</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+        <a class="button primary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter" target="_blank" rel="noreferrer">查看源码</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter#readme" target="_blank" rel="noreferrer">查看 README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/commits" target="_blank" rel="noreferrer">提交记录</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/releases" target="_blank" rel="noreferrer">版本日志</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">项目简介</a><a href="#section-2">项目目标</a><a href="#section-3">已验证状态</a><a href="#section-4">使用技术</a><a href="#section-5">硬件环境</a><a href="#section-6">软件环境</a><a href="#section-7">系统架构</a><a href="#section-8">功能模块</a><a href="#section-9">实现步骤</a><a href="#section-10">关键代码</a><a href="#section-14">调试与验证过程</a><a href="#section-15">遇到的问题</a><a href="#section-16">解决方案</a><a href="#section-17">最终效果</a><a href="#section-18">已知限制</a><a href="#section-19">项目总结</a><a href="#section-20">GitHub 仓库链接</a></aside><div class="prose"><h2 id="section-1">项目简介</h2>
+<p>这是简历中 2023.05 - 2023.06 机械臂项目的公开工程化版本。系统围绕 STM32F103C8T6、FreeRTOS、Python 和 OpenCV 构建，从摄像头识别红、蓝、黄目标，经四点手眼标定得到机械臂平面坐标，再通过带 CRC16 校验的串口协议下发抓取任务。</p>
+<p>公开仓库于 2026.07 完成整理，加入了无硬件仿真器、自动测试、可复现固件构建、接线与标定文档。软件闭环和固件编译已经验证，但开发期间没有机械臂实物，因此舵机零偏、真实连杆尺寸、摄像头标定、FSR 阈值、电气保护和抓取精度仍需装机验收。</p>
+<h2 id="section-2">项目目标</h2>
+<ul>
+<li>完成颜色目标从像素坐标到机械臂工作平面坐标的转换。</li>
+<li>支持手动关节控制、半自动点击抓取和全自动分拣。</li>
+<li>让上位机与固件共享可校验、可恢复的二进制串口协议。</li>
+<li>在 STM32F103 的资源范围内实现多舵机、传感、通信和遥测任务。</li>
+<li>没有硬件时仍能通过仿真和测试验证完整软件流程。</li>
+<li>明确区分软件验证、固件编译和实机验收三种完成状态。</li>
+</ul>
+<h2 id="section-3">已验证状态</h2>
+<ul>
+<li>Python 上位机与仿真器通过 14 项自动测试和 GUI 冒烟测试。</li>
+<li>红、蓝、黄 HSV 识别已在生成的仿真画面中验证。</li>
+<li>STM32F103 固件交叉编译成功，生成 ELF、HEX、BIN、MAP 和容量报告。</li>
+<li>链接器报告 Flash 使用 34,580 / 65,536 B，RAM 使用 10,136 / 20,480 B。</li>
+<li>实体机械臂、电源、舵机和真实抓取精度尚未验证。</li>
+</ul>
+<h2 id="section-4">使用技术</h2>
+<p>Python、OpenCV、NumPy、Pillow、pyserial、C、STM32 HAL、FreeRTOS、UART、CRC16-CCITT、PWM、ADC、逆运动学、Homography、CMake、Ninja 和 ARM GNU Toolchain。</p>
+<h2 id="section-5">硬件环境</h2>
+<ul>
+<li>STM32F103C8T6 蓝板、ST-Link V2、USB 转 TTL。</li>
+<li>底座、肩、肘、腕和夹爪 5 个舵机。</li>
+<li>独立稳压 5-6 V 大电流舵机电源，控制板与舵机电源共地。</li>
+<li>固定在工作平面上方的 USB 摄像头。</li>
+<li>FSR 压力传感器、10 kOhm 分压、电气急停和可选限位开关。</li>
+</ul>
+<h2 id="section-6">软件环境</h2>
+<ul>
+<li>Windows 10/11 与 Python 3.11-3.13。</li>
+<li>OpenCV、NumPy、Pillow 和 pyserial 上位机依赖。</li>
+<li>CMake、Ninja 与 ARM GNU Toolchain 固件构建链。</li>
+<li>STM32CubeProgrammer 用于 SWD 或 UART 烧录。</li>
+<li>STM32CubeMX 用于检查 <code>robot_arm_f103.ioc</code>，CubeIDE 为可选浏览环境。</li>
+</ul>
+<h2 id="section-7">系统架构</h2>
+<p>上位机负责视觉识别、标定、任务队列和交互；STM32 固件负责安全检查、运动学、舵机轨迹、压力反馈和遥测。两个边界通过带版本、序号和 CRC16 的二进制帧连接。</p>
+<div class="system-flow" role="img" aria-label="系统架构：USB 摄像头 到 OpenCV 颜色识别 到 四点手眼标定 到 任务队列与工作空间检查 到 CRC16 串口协议；STM32F103 与 FreeRTOS 到 逆运动学与平滑 PWM 到 四轴机械臂与夹爪 到 FSR 抓取确认 到 状态遥测"><div class="system-flow-row"><span class="system-flow-node">USB 摄像头</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV 颜色识别</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四点手眼标定</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">任务队列与工作空间检查</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 串口协议</span></div>
+<div class="system-flow-row"><span class="system-flow-node">STM32F103 与 FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">逆运动学与平滑 PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四轴机械臂与夹爪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR 抓取确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">状态遥测</span></div></div>
+<h2 id="section-8">功能模块</h2>
+<ul>
+<li><code>vision.py</code>：HSV 分割、形态学处理、轮廓过滤和目标中心提取。</li>
+<li><code>calibration.py</code>：四点 Homography 标定与像素到毫米坐标转换。</li>
+<li><code>scheduler.py</code>、<code>controller.py</code>：目标去重、最近目标优先和最多 20 项任务队列。</li>
+<li><code>protocol.py</code>：帧编码、CRC16、拆包、粘包、噪声和坏帧恢复。</li>
+<li><code>kinematics.c</code>：工作空间检查和底座、肩、肘的解析逆运动学。</li>
+<li><code>app_tasks.c</code>：通信、控制、传感器和遥测四个 FreeRTOS 任务。</li>
+<li><code>robot_control.c</code>、<code>servo_control.c</code>：关节限位、平滑插值、5 路 50 Hz PWM 与急停。</li>
+<li><code>sensors.c</code>：FSR、限位和可选电压监测。</li>
+</ul>
+<h2 id="section-9">实现步骤</h2>
+<ol>
+<li>使用 HSV 阈值检测红、蓝、黄目标并过滤小轮廓。</li>
+<li>用至少四组像素点与工作平面坐标估计 Homography。</li>
+<li>在上位机执行目标去重、优先级排序和工作空间预检查。</li>
+<li>使用带序号和 CRC16 的二进制帧发送抓取坐标。</li>
+<li>固件检查坐标、求解逆运动学并生成平滑关节轨迹。</li>
+<li>使用 FSR 确认夹持，失败时执行两次偏移重试并上报结果。</li>
+<li>通过仿真、自动测试、GUI 冒烟测试和固件交叉编译保留验证证据。</li>
+</ol>
+<h2 id="section-10">关键代码</h2>
+<h3 id="section-11">四点标定与坐标转换</h3>
+<p><code>calibration.py</code> 用 3x3 Homography 描述固定桌面平面，不把二维标定误写成深度估计：</p>
+<pre><code class="language-python">matrix, mask = cv2.findHomography(
+    np.float32(pixel_points),
+    np.float32(robot_points),
+    cv2.RANSAC,
+)
+source = np.float32([[[pixel_x, pixel_y]]])
+robot_xy = cv2.perspectiveTransform(source, matrix)[0, 0]</code></pre>
+<h3 id="section-12">可恢复的串口帧</h3>
+<p>帧格式为 <code>AA 55 | version | type | seq | length | payload | crc</code>。增量解析器保存未消费字节，能够处理一次读取不足一帧、一次读取多帧、前缀噪声和 CRC 错误。</p>
+<pre><code class="language-python">body = struct.pack(&quot;&lt;BBBH&quot;, VERSION, int(message_type), sequence, len(payload))
+frame = b&quot;\xAA\x55&quot; + body + payload
+frame += struct.pack(&quot;&lt;H&quot;, crc16_ccitt(body + payload))</code></pre>
+<h3 id="section-13">固件运动学边界</h3>
+<p>固件先检查保守工作空间，再计算解析解并验证舵机角度范围。不可达坐标直接失败，不发送危险角度。</p>
+<pre><code class="language-c">if (solution == NULL || !kinematics_in_workspace(x_mm, y_mm, z_mm)) {
+    return false;
+}
+const float base = atan2f(y_mm, x_mm) * RAD_TO_DEG + 90.0f;</code></pre>
+<h2 id="section-14">调试与验证过程</h2>
+<ul>
+<li>用固定生成画面验证三种颜色、面积过滤、中心点和标注结果。</li>
+<li>用正常帧、拆包、粘包、噪声、错误 CRC 和超长 payload 测试串口解析器。</li>
+<li>用工作空间内、边界和不可达坐标测试 Python 与 C 两端运动学。</li>
+<li>运行无硬件仿真器，检查目标入队、抓取状态、目标移除和失败路径。</li>
+<li>交叉编译 STM32 固件并核对 Flash、RAM 和 ELF/HEX/BIN/MAP 产物。</li>
+</ul>
+<h2 id="section-15">遇到的问题</h2>
+<ul>
+<li>摄像头像素坐标不能直接作为机械臂毫米坐标。</li>
+<li>串口读取天然存在拆包、粘包、噪声和坏帧。</li>
+<li>数学上可计算的角度不一定满足真实工作空间与关节限位。</li>
+<li>舵机大电流、急停、限位和压力阈值无法只靠仿真证明安全。</li>
+</ul>
+<h2 id="section-16">解决方案</h2>
+<p>固定摄像头后使用四点 Homography；串口加入版本、序号、长度和 CRC16，并用增量解析器恢复同步；上位机和固件同时检查工作空间与角度；舵机使用独立电源，并把急停、限位、FSR 标定和逐关节测试列为装机前置条件。</p>
+<h2 id="section-17">最终效果</h2>
+<p>仓库可在没有机械臂时启动仿真，跑通红、蓝、黄目标识别、任务入队、协议传输、控制器状态和结果反馈。固件能够稳定交叉编译并生成可烧录产物，GitHub Actions 会重复运行 Python 测试和 ARM 固件构建。</p>
+<h2 id="section-18">已知限制</h2>
+<p>当前结果不能证明真实抓取精度。装机后必须重新测量连杆尺寸、配置舵机方向与零偏、完成摄像头四点标定、测量 FSR 空载与夹持值，并依次验证电源、急停、限位、单关节和全自动流程。</p>
+<h2 id="section-19">项目总结</h2>
+<p>这个项目的核心不是一次抓取动画，而是把视觉、坐标、通信、运动、安全和验证拆成清晰边界。软件测试和编译证据可以证明当前实现的一部分，实机验收仍必须由真实硬件完成。</p>
+<h2 id="section-20">GitHub 仓库链接</h2>
+<p><a href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter" target="_blank" rel="noreferrer">访问 stm32-vision-robot-arm-sorter</a></p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../remote-repo/index.html"><span>← 上一项</span><strong>remote-repo 远程仓库同步练习</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

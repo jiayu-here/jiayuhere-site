@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm | Jiayu Lab</title>
+  <meta name="description" content="Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.">
+  <meta name="keywords" content="OpenCV, STM32, Homography, Inverse Kinematics, UART">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm | Jiayu Lab">
+  <meta property="og:description" content="Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/blog/vision-robot-arm-coordinate-safety-boundaries/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/vision-robot-arm-coordinate-safety-boundaries/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a aria-current="page" href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../blog/vision-robot-arm-coordinate-safety-boundaries/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><h1>From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm</h1><p class="article-lead">Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.</p><div class="article-meta"><span>Embedded Systems and Computer Vision · 2026-07-15</span><span>4 min read</span><div class="tag-list"><span>OpenCV</span><span>STM32</span><span>Homography</span><span>Inverse Kinematics</span><span>UART</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Detecting an Object Is Only the Beginning</a><a href="#section-2">Boundary One: Color Detection Produces Candidates</a><a href="#section-3">Boundary Two: Pixels Are Not Millimeters</a><a href="#section-4">Boundary Three: Reachable Coordinates May Still Be Unsafe</a><a href="#section-5">Boundary Four: A Serial Write Is Not Reliable Delivery</a><a href="#section-6">Boundary Five: A Software Loop Is Not Hardware Acceptance</a><a href="#section-7">Building Traceable Evidence</a><a href="#section-8">Summary</a></aside><div class="prose"><h2 id="section-1">Detecting an Object Is Only the Beginning</h2>
+<p>A red object in a camera frame does not mean the arm knows how to grasp it safely. The full path crosses at least five boundaries: colored pixels to a target center, pixels to work-plane coordinates, Cartesian coordinates to joint angles, PC commands to firmware state, and software results to physical motion.</p>
+<p>Each boundary has independent failure modes. A final animation cannot reveal whether an error comes from lighting, calibration order, link dimensions, serial data or servo installation.</p>
+<h2 id="section-2">Boundary One: Color Detection Produces Candidates</h2>
+<p>A fixed-color sorter does not always need a trained neural network. HSV segmentation is explainable, low latency and reproducible, but it must handle lighting, reflections and red hue wrapping around zero.</p>
+<p>The project uses two hue ranges for red and one each for blue and yellow. Morphological opening removes isolated noise, closing fills small holes, contour area rejects tiny regions, and image moments produce the center.</p>
+<pre><code class="language-python">hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)</code></pre>
+<p>A detection is still only a candidate. Area thresholds, de-duplication, workspace checks and queue limits must run before a colored region becomes a pick task.</p>
+<h2 id="section-3">Boundary Two: Pixels Are Not Millimeters</h2>
+<p>Image center <code>(320, 240)</code> describes a location in a frame. The arm needs millimeters relative to its base. With a fixed overhead camera and one fixed table plane, a homography maps planar pixels into arm work coordinates.</p>
+<p>At least four non-collinear point pairs are required and their order must match. The mapping compensates translation, rotation, scale and moderate perspective, but it does not recover depth. Pick height must come from task configuration or another sensor.</p>
+<pre><code class="language-python">matrix, _ = cv2.findHomography(pixel_points, robot_points, cv2.RANSAC)
+robot_xy = cv2.perspectiveTransform(pixel_xy, matrix)</code></pre>
+<p>Calibration verification should use independent interior and edge points, record millimeter error and repeat whenever the camera, focus or work-plane height changes.</p>
+<h2 id="section-4">Boundary Three: Reachable Coordinates May Still Be Unsafe</h2>
+<p>Inverse kinematics converts <code>(x, y, z)</code> into base, shoulder, elbow and wrist angles. A conservative workspace check rejects clearly dangerous input first. The solver must then verify that a geometric solution exists and every servo angle stays within its allowed range.</p>
+<pre><code class="language-c">if (!kinematics_in_workspace(x_mm, y_mm, z_mm)) {
+    return false;
+}
+if (cosine_elbow &lt; -1.0f || cosine_elbow &gt; 1.0f) {
+    return false;
+}</code></pre>
+<p>Model link lengths, tool offset and zero positions must match the physical arm. Passing an equation test without hardware only proves consistency under the configured parameters, not real end-effector accuracy.</p>
+<h2 id="section-5">Boundary Four: A Serial Write Is Not Reliable Delivery</h2>
+<p>One serial read may contain part of a frame, several frames, prefix noise or corrupted bytes. A robust protocol needs a start marker, version, type, sequence, bounded length, payload and checksum. Its parser must discard bad data and resynchronize.</p>
+<pre><code class="language-text">AA 55 | version | type | sequence | length | payload | CRC16</code></pre>
+<p>Sequence numbers match commands with responses, payload lengths need a hard limit, and coordinates need range checks before encoding. While the arm is moving, a heartbeat or valid-frame timeout should force a safe state when communications stop.</p>
+<h2 id="section-6">Boundary Five: A Software Loop Is Not Hardware Acceptance</h2>
+<p>The simulator verifies detection, queueing, protocol, controller state and failure paths. Automated tests verify calibration, kinematics and framing. Cross-builds prove that firmware produces ELF, HEX, BIN and MAP artifacts. None of these prove servo power, link assembly, E-stop behavior, limits or grasp force.</p>
+<p>Hardware acceptance should proceed in order:</p>
+<ol>
+<li>Disconnect servo horns and verify the controller, supplies, common ground and E-stop input.</li>
+<li>Test direction, neutral point and safe range for one servo at a time.</li>
+<li>Measure the real links and update the kinematic parameters.</li>
+<li>Fix the camera and repeat four-point calibration.</li>
+<li>Measure unloaded and gripping FSR values and choose a threshold.</li>
+<li>Verify manual, then semi-automatic, and only then fully automatic sorting.</li>
+</ol>
+<h2 id="section-7">Building Traceable Evidence</h2>
+<p>Each boundary needs its own evidence: color-test frames, calibration points and errors, kinematic inputs and outputs, protocol vectors, firmware size reports, E-stop records and grasp statistics. One artifact cannot substitute for another.</p>
+<p>The current project retains 14 PC tests, a GUI smoke test, firmware cross-build outputs and resource reports. Physical-arm results remain explicitly pending.</p>
+<h2 id="section-8">Summary</h2>
+<p>The engineering value of a vision-guided arm comes from making each conversion boundary inspectable, rejectable and recoverable. A grasp becomes credible only after color, coordinates, motion, communications and safety have each been verified.</p>
+<p>[View the STM32 Vision-Guided Robotic Arm Sorter](../../projects/stm32-vision-robot-arm-sorter/)</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../rrt-rrtstar-reliable-planner/index.html"><span>← Previous article</span><strong>RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

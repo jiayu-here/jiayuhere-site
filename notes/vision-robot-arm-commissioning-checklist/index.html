@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>视觉机械臂标定、通信与实机验收清单 | Jiayu Lab</title>
+  <meta name="description" content="按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。">
+  <meta name="keywords" content="STM32, OpenCV, Calibration, FreeRTOS, Safety">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="视觉机械臂标定、通信与实机验收清单 | Jiayu Lab">
+  <meta property="og:description" content="按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/vision-robot-arm-commissioning-checklist/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/vision-robot-arm-commissioning-checklist/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>视觉机械臂标定、通信与实机验收清单</h1><p class="article-lead">按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</p><div class="article-meta"><span>嵌入式与控制 · 2026-07-15</span><span>约 6 分钟阅读</span><div class="tag-list"><span>STM32</span><span>OpenCV</span><span>Calibration</span><span>FreeRTOS</span><span>Safety</span></div></div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">使用目的</a><a href="#section-2">一、供电与接线前置检查</a><a href="#section-3">二、无硬件软件验收</a><a href="#section-4">三、视觉检测检查</a><a href="#section-5">四、四点标定检查</a><a href="#section-6">五、运动学与舵机参数</a><a href="#section-7">六、串口协议检查</a><a href="#section-8">七、FreeRTOS 与固件检查</a><a href="#section-9">八、FSR 抓取确认与重试</a><a href="#section-10">九、实机分阶段验收</a><a href="#section-11">十、验收记录应包含什么</a><a href="#section-12">复习总结</a></aside><div class="prose"><h2 id="section-1">使用目的</h2>
+<p>这份清单用于避免把“仿真能跑”“固件能编译”和“实机可安全运行”混为一谈。每完成一项，应保存对应数据、截图、日志或测量结果。</p>
+<h2 id="section-2">一、供电与接线前置检查</h2>
+<ul>
+<li>舵机使用独立稳压 5-6 V 大电流电源。</li>
+<li>禁止从 STM32F103 的 5 V 或 3.3 V 引脚直接给舵机供电。</li>
+<li>舵机电源、控制板和 USB 转 TTL 必须共地。</li>
+<li>ST-Link 的 SWDIO、SWCLK、GND 和 3.3 V 接线正确，BOOT0 保持 0。</li>
+<li>首次上电时按文档要求拆下舵盘或断开机械负载。</li>
+<li>实体急停输入能够在任何运行状态下停止动作。</li>
+<li>限位开关极性、默认电平和断线状态已经确认。</li>
+<li>FSR 分压电路输出不会超过 ADC 允许范围。</li>
+</ul>
+<h2 id="section-3">二、无硬件软件验收</h2>
+<ul>
+<li>Python 环境能够安装 OpenCV、NumPy、Pillow 和 pyserial。</li>
+<li>仿真器能够显示红、蓝、黄目标并完成队列处理。</li>
+<li>手动、半自动和全自动模式切换正常。</li>
+<li>14 项自动测试全部通过。</li>
+<li>GUI 冒烟测试没有启动或基本交互异常。</li>
+<li>固件通过 CMake/Ninja 与 ARM GNU Toolchain 交叉编译。</li>
+<li>ELF、HEX、BIN、MAP 和容量报告均已生成。</li>
+<li>Flash 与 RAM 使用量未超过 STM32F103C8T6 上限。</li>
+</ul>
+<h2 id="section-4">三、视觉检测检查</h2>
+<ul>
+<li>相机安装固定，运行中不会改变高度、角度或焦距。</li>
+<li>红色使用两个色相区间，避免遗漏 H 接近 0 或 179 的目标。</li>
+<li>不同灯光下检查 S/V 下限，避免反光和阴影造成误检。</li>
+<li>开运算能够去除小噪点，闭运算不会把相邻目标错误连接。</li>
+<li>最小轮廓面积与实际目标尺寸匹配。</li>
+<li>检测结果保存类别、像素中心、面积和边界框。</li>
+<li>目标去重规则不会把同一个物体重复加入队列。</li>
+</ul>
+<h2 id="section-5">四、四点标定检查</h2>
+<ul>
+<li>至少选择四个不共线的工作平面点。</li>
+<li>像素点和机械臂坐标点使用完全一致的顺序。</li>
+<li>标定点覆盖可用工作区，不集中在一个小区域。</li>
+<li>Homography 矩阵为有效 3x3 矩阵并保存到配置文件。</li>
+<li>使用未参与拟合的内部点和边缘点检查毫米误差。</li>
+<li>相机移动、焦距变化或工作面高度变化后重新标定。</li>
+<li>二维 Homography 只负责平面坐标，抓取高度单独配置。</li>
+</ul>
+<h2 id="section-6">五、运动学与舵机参数</h2>
+<ul>
+<li>实测上臂、前臂、底座高度和工具偏移，不直接使用示例参数。</li>
+<li>逐个确认底座、肩、肘、腕和夹爪的方向。</li>
+<li>记录每个舵机的机械中位、零偏和安全角度范围。</li>
+<li>工作空间边界避开基座自撞区和机械极限。</li>
+<li>不可达坐标、余弦定理解不存在和角度越界都必须返回失败。</li>
+<li>平滑插值的速度和步长不会引起剧烈冲击。</li>
+<li>单关节验证完成前不执行组合轨迹。</li>
+</ul>
+<h2 id="section-7">六、串口协议检查</h2>
+<ul>
+<li>PC 与固件使用相同的版本、消息类型和字段字节序。</li>
+<li>帧包含 <code>AA 55</code> 帧头、版本、类型、序号、长度、payload 和 CRC16。</li>
+<li>payload 长度存在明确上限，坐标编码前检查数值范围。</li>
+<li>测试完整帧、拆包、粘包、前缀噪声、坏 CRC 和未知类型。</li>
+<li>坏帧丢弃后，解析器能够重新找到下一帧头。</li>
+<li>命令序号与 ACK、STATUS 或 ERROR 响应可以对应。</li>
+<li>机械臂忙时通信超时能够进入急停或安全状态。</li>
+</ul>
+<h2 id="section-8">七、FreeRTOS 与固件检查</h2>
+<ul>
+<li>通信任务只做帧解析和命令处理，不在中断中执行复杂逻辑。</li>
+<li>20 ms 控制任务使用固定周期，不因执行时间累积漂移。</li>
+<li>传感器任务持续检查限位、FSR 和可选电压状态。</li>
+<li>遥测任务按固定周期输出状态，便于上位机判断调度器是否正常。</li>
+<li>任务栈单位按 <code>StackType_t</code> 理解，并记录剩余栈空间。</li>
+<li>5 路 PWM 频率为 50 Hz，脉宽范围与舵机规格一致。</li>
+<li>急停状态锁存后，需要明确的安全复位步骤才能继续动作。</li>
+</ul>
+<h2 id="section-9">八、FSR 抓取确认与重试</h2>
+<ul>
+<li>分别测量夹爪空载、轻触和稳定夹持的 ADC 值。</li>
+<li>阈值设置在空载和可靠夹持之间，并保留一定噪声余量。</li>
+<li>FSR 断线、短路或异常值不会被当作抓取成功。</li>
+<li>抓取失败最多执行规定次数的偏移重试。</li>
+<li>重试仍失败时上报错误，不无限循环。</li>
+<li>成功与失败计数能够通过状态帧读取。</li>
+</ul>
+<h2 id="section-10">九、实机分阶段验收</h2>
+<ol>
+<li>控制板、串口、LED 和急停。</li>
+<li>单个舵机的方向、中位和限位。</li>
+<li>多关节低速轨迹与工作空间边界。</li>
+<li>固定相机和四点标定。</li>
+<li>手动关节控制。</li>
+<li>半自动点击抓取。</li>
+<li>FSR 抓取确认和失败重试。</li>
+<li>全自动颜色分拣。</li>
+<li>连续运行、通信中断和急停恢复。</li>
+</ol>
+<h2 id="section-11">十、验收记录应包含什么</h2>
+<ul>
+<li>硬件版本、固件提交、上位机提交和配置文件版本。</li>
+<li>舵机型号、电源电压、最大电流和共地方式。</li>
+<li>连杆尺寸、零偏、角度范围、Homography 和 FSR 阈值。</li>
+<li>测试场景、目标数量、成功次数、失败原因和急停结果。</li>
+<li>Flash/RAM、任务栈、串口错误计数和最长连续运行时间。</li>
+<li>未通过项目、临时绕过措施和下一次复测条件。</li>
+</ul>
+<h2 id="section-12">复习总结</h2>
+<p>机械臂调试应从供电和单关节开始，再进入标定、组合运动和自动分拣。任何一步失败都应回到最近一个已验证边界，而不是同时修改视觉阈值、运动学参数和舵机零偏。</p>
+<p>[对应项目：STM32 视觉机械臂自动分拣系统](../../projects/stm32-vision-robot-arm-sorter/)</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../embedded-c-checklist/index.html"><span>← 上一项</span><strong>嵌入式 C 语言检查清单</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

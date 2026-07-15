@@ -5,8 +5,20 @@
     <link>https://www.jiayuhere.com/en/blog/</link>
     <description>Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://www.jiayuhere.com/en/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm</title>
+      <link>https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/</link>
+      <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/</guid>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.</description>
+      <category>OpenCV</category>
+      <category>STM32</category>
+      <category>Homography</category>
+      <category>Inverse Kinematics</category>
+      <category>UART</category>
+    </item>
     <item>
       <title>From Constellation to RTL: A Verifiable Order for Building a QPSK Link</title>
       <link>https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/</link>

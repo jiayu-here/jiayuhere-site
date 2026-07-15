@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STM32 Vision-Guided Robotic Arm Sorter | Jiayu Lab</title>
+  <meta name="description" content="A vision-guided sorter built with STM32F103, FreeRTOS, Python and OpenCV, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests.">
+  <meta name="keywords" content="STM32, FreeRTOS, OpenCV, Inverse Kinematics, UART">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="STM32 Vision-Guided Robotic Arm Sorter | Jiayu Lab">
+  <meta property="og:description" content="A vision-guided sorter built with STM32F103, FreeRTOS, Python and OpenCV, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a aria-current="page" href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../projects/stm32-vision-robot-arm-sorter/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Projects</a><h1>STM32 Vision-Guided Robotic Arm Sorter</h1><p class="article-lead">A vision-guided sorter built with STM32F103, FreeRTOS, Python and OpenCV, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests.</p><div class="article-meta"><span>Embedded Systems and Computer Vision · 2026-07 · Software loop and firmware build verified</span><span>6 min read</span><div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>OpenCV</span><span>Inverse Kinematics</span><span>UART</span></div></div><div class="button-row" aria-label="GitHub repository links">
+        <a class="button primary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter" target="_blank" rel="noreferrer">View source</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter#readme" target="_blank" rel="noreferrer">View README</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/commits" target="_blank" rel="noreferrer">Commits</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a class="button secondary-button" href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div></header>
+      <div class="article-layout container"><aside class="article-toc"><p>On this page</p><a href="#section-1">Project Overview</a><a href="#section-2">Project Goals</a><a href="#section-3">Verified Status</a><a href="#section-4">Technology</a><a href="#section-5">Hardware Environment</a><a href="#section-6">Software Environment</a><a href="#section-7">System Architecture</a><a href="#section-8">Functional Modules</a><a href="#section-9">Implementation Steps</a><a href="#section-10">Key Code</a><a href="#section-14">Debugging and Verification</a><a href="#section-15">Problems Encountered</a><a href="#section-16">Solutions</a><a href="#section-17">Final Result</a><a href="#section-18">Known Limits</a><a href="#section-19">Project Summary</a><a href="#section-20">GitHub Repository</a></aside><div class="prose"><h2 id="section-1">Project Overview</h2>
+<p>This is the public engineering edition of the robotic-arm project listed on the resume for 2023.05 - 2023.06. It combines STM32F103C8T6, FreeRTOS, Python and OpenCV. A camera detects red, blue and yellow objects, four-point hand-eye calibration maps image centers into the arm work plane, and a CRC16-protected serial protocol sends pick tasks to the controller.</p>
+<p>The public repository was packaged in 2026.07 with a hardware-free simulator, automated tests, a reproducible firmware build, wiring instructions and calibration documentation. The software loop and firmware cross-build are verified. No physical arm was available during development, so servo offsets, real link dimensions, camera calibration, FSR thresholds, electrical protection and physical grasp accuracy still require hardware acceptance.</p>
+<h2 id="section-2">Project Goals</h2>
+<ul>
+<li>Convert color-target pixel positions into arm work-plane coordinates.</li>
+<li>Provide manual joint control, semi-automatic click-to-pick and fully automatic sorting.</li>
+<li>Share a checked and recoverable binary serial protocol between the PC and firmware.</li>
+<li>Fit multi-servo motion, sensing, communications and telemetry into STM32F103 resources.</li>
+<li>Verify the complete software flow through simulation when no hardware is connected.</li>
+<li>Keep software verification, firmware compilation and physical acceptance as separate claims.</li>
+</ul>
+<h2 id="section-3">Verified Status</h2>
+<ul>
+<li>The Python application and simulator pass 14 automated tests and a GUI smoke test.</li>
+<li>Red, blue and yellow HSV detection passes tests on generated simulator frames.</li>
+<li>The STM32F103 firmware cross-build produces ELF, HEX, BIN, MAP and size reports.</li>
+<li>The linker reports 34,580 / 65,536 B Flash and 10,136 / 20,480 B RAM.</li>
+<li>The physical arm, electrical system and real grasp accuracy remain unverified.</li>
+</ul>
+<h2 id="section-4">Technology</h2>
+<p>Python, OpenCV, NumPy, Pillow, pyserial, C, STM32 HAL, FreeRTOS, UART, CRC16-CCITT, PWM, ADC, inverse kinematics, homography, CMake, Ninja and the ARM GNU Toolchain.</p>
+<h2 id="section-5">Hardware Environment</h2>
+<ul>
+<li>STM32F103C8T6 Blue Pill, ST-Link V2 and USB-to-TTL adapter.</li>
+<li>Five servos for base, shoulder, elbow, wrist and gripper.</li>
+<li>A separate regulated 5-6 V high-current servo supply with common ground.</li>
+<li>A USB camera fixed above the work plane.</li>
+<li>FSR pressure sensor, 10 kOhm divider, physical E-stop and optional limit switch.</li>
+</ul>
+<h2 id="section-6">Software Environment</h2>
+<ul>
+<li>Windows 10/11 and Python 3.11-3.13.</li>
+<li>OpenCV, NumPy, Pillow and pyserial for the PC application.</li>
+<li>CMake, Ninja and the ARM GNU Toolchain for the firmware build.</li>
+<li>STM32CubeProgrammer for SWD or UART flashing.</li>
+<li>STM32CubeMX for inspecting <code>robot_arm_f103.ioc</code>; CubeIDE is optional for browsing.</li>
+</ul>
+<h2 id="section-7">System Architecture</h2>
+<p>The PC application owns vision, calibration, task scheduling and interaction. The STM32 firmware owns safety checks, kinematics, servo trajectories, force feedback and telemetry. A binary frame carrying version, sequence and CRC16 connects the two boundaries.</p>
+<div class="system-flow" role="img" aria-label="System architecture：USB camera to OpenCV color detection to Four-point calibration to Queue and workspace checks to CRC16 serial protocol; STM32F103 and FreeRTOS to Inverse kinematics and smooth PWM to Four-axis arm and gripper to FSR confirmation to Telemetry"><div class="system-flow-row"><span class="system-flow-node">USB camera</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV color detection</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-point calibration</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Queue and workspace checks</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 serial protocol</span></div>
+<div class="system-flow-row"><span class="system-flow-node">STM32F103 and FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Inverse kinematics and smooth PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-axis arm and gripper</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Telemetry</span></div></div>
+<h2 id="section-8">Functional Modules</h2>
+<ul>
+<li><code>vision.py</code>: HSV segmentation, morphology, contour filtering and target centers.</li>
+<li><code>calibration.py</code>: four-point homography and pixel-to-millimeter conversion.</li>
+<li><code>scheduler.py</code>, <code>controller.py</code>: de-duplication, nearest-first priority and a 20-item queue.</li>
+<li><code>protocol.py</code>: frame encoding, CRC16 and recovery from splits, merged frames, noise and bad CRC.</li>
+<li><code>kinematics.c</code>: workspace checks and analytic base, shoulder and elbow inverse kinematics.</li>
+<li><code>app_tasks.c</code>: FreeRTOS communication, control, sensor and telemetry tasks.</li>
+<li><code>robot_control.c</code>, <code>servo_control.c</code>: joint limits, smooth interpolation, five 50 Hz PWM channels and E-stop.</li>
+<li><code>sensors.c</code>: FSR, limit input and optional voltage monitoring.</li>
+</ul>
+<h2 id="section-9">Implementation Steps</h2>
+<ol>
+<li>Detect red, blue and yellow objects with HSV ranges and contour filtering.</li>
+<li>Estimate a homography from at least four matching image and work-plane points.</li>
+<li>De-duplicate targets, prioritize them and reject out-of-workspace tasks on the PC.</li>
+<li>Send pick coordinates in sequenced CRC16-protected binary frames.</li>
+<li>Re-check coordinates, solve inverse kinematics and generate smooth joint motion in firmware.</li>
+<li>Confirm grasp force with the FSR, make up to two offset retries and report failures.</li>
+<li>Retain evidence through simulation, automated tests, a GUI smoke test and firmware cross-build.</li>
+</ol>
+<h2 id="section-10">Key Code</h2>
+<h3 id="section-11">Four-Point Calibration</h3>
+<p><code>calibration.py</code> uses a 3x3 homography for one fixed work plane. It does not claim depth recovery:</p>
+<pre><code class="language-python">matrix, mask = cv2.findHomography(
+    np.float32(pixel_points),
+    np.float32(robot_points),
+    cv2.RANSAC,
+)
+source = np.float32([[[pixel_x, pixel_y]]])
+robot_xy = cv2.perspectiveTransform(source, matrix)[0, 0]</code></pre>
+<h3 id="section-12">Recoverable Serial Frames</h3>
+<p>Frames use <code>AA 55 | version | type | seq | length | payload | crc</code>. The incremental parser retains unread bytes and recovers from partial frames, multiple frames, prefix noise and CRC failures.</p>
+<pre><code class="language-python">body = struct.pack(&quot;&lt;BBBH&quot;, VERSION, int(message_type), sequence, len(payload))
+frame = b&quot;\xAA\x55&quot; + body + payload
+frame += struct.pack(&quot;&lt;H&quot;, crc16_ccitt(body + payload))</code></pre>
+<h3 id="section-13">Firmware Kinematics Boundary</h3>
+<p>Firmware checks a conservative workspace before calculating an analytic solution and validating servo ranges. Unreachable coordinates fail instead of producing unsafe angles.</p>
+<pre><code class="language-c">if (solution == NULL || !kinematics_in_workspace(x_mm, y_mm, z_mm)) {
+    return false;
+}
+const float base = atan2f(y_mm, x_mm) * RAD_TO_DEG + 90.0f;</code></pre>
+<h2 id="section-14">Debugging and Verification</h2>
+<ul>
+<li>Generated frames test all three colors, area filtering, centers and overlays.</li>
+<li>Protocol tests cover complete, split, merged, noisy, bad-CRC and oversized frames.</li>
+<li>Python and C kinematics are checked with valid, boundary and unreachable coordinates.</li>
+<li>The hardware-free simulator checks queueing, pick states, object removal and failure paths.</li>
+<li>The firmware cross-build verifies Flash/RAM use and ELF/HEX/BIN/MAP artifacts.</li>
+</ul>
+<h2 id="section-15">Problems Encountered</h2>
+<ul>
+<li>Image pixels cannot be used directly as millimeter arm coordinates.</li>
+<li>Serial reads naturally split, merge or contain noisy and corrupt frames.</li>
+<li>Mathematically computed angles may violate the actual workspace or joint limits.</li>
+<li>Servo current, E-stop behavior, limits and force thresholds cannot be proven by simulation alone.</li>
+</ul>
+<h2 id="section-16">Solutions</h2>
+<p>Use a fixed camera and four-point homography; add version, sequence, length and CRC16 fields plus incremental resynchronization; check workspace and joint ranges on both sides; power servos separately and make E-stop, limits, FSR calibration and one-joint-at-a-time testing prerequisites for physical operation.</p>
+<h2 id="section-17">Final Result</h2>
+<p>Without hardware, the repository can run simulated red, blue and yellow detection, task queueing, protocol transfer, controller state and result feedback. The firmware builds reproducibly and creates flashable artifacts. GitHub Actions repeats the Python tests and ARM firmware build on every change.</p>
+<h2 id="section-18">Known Limits</h2>
+<p>The current result does not prove physical grasp accuracy. Hardware commissioning must measure real link dimensions, configure servo direction and zero offsets, perform four-point camera calibration, measure unloaded and gripping FSR values, and verify power, E-stop, limits, individual joints and automatic sorting in order.</p>
+<h2 id="section-19">Project Summary</h2>
+<p>The main achievement is not one successful animation. It is the explicit separation of vision, coordinates, communications, motion, safety and verification. Software and build evidence establish part of the result, while the physical arm still requires real acceptance testing.</p>
+<h2 id="section-20">GitHub Repository</h2>
+<p><a href="https://github.com/jiayu-here/stm32-vision-robot-arm-sorter" target="_blank" rel="noreferrer">Open stm32-vision-robot-arm-sorter</a></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../remote-repo/index.html"><span>← Previous item</span><strong>remote-repo Remote Synchronization Exercise</strong></a>
+
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260714s"></script>
+</body>
+</html>
