@@ -1,4 +1,4 @@
-const CACHE_NAME = "jiayuhere-20260715r";
+const CACHE_NAME = "jiayuhere-20260716a";
 const APP_SHELL = [
   "/",
   "/index.html",

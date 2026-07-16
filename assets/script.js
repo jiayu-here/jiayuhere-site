@@ -200,6 +200,17 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
   wrapper.append(button, pre);
 });
 
+document.querySelectorAll(".prose h2[id]").forEach((heading) => {
+  const sectionTitle = heading.textContent?.trim() || t("本节", "this section");
+  const anchor = document.createElement("a");
+  anchor.className = "section-anchor";
+  anchor.href = `#${heading.id}`;
+  anchor.setAttribute("aria-label", t(`链接至“${sectionTitle}”`, `Link to “${sectionTitle}”`));
+  anchor.title = t("链接至本节", "Link to this section");
+  anchor.innerHTML = '<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M6.5 2.5a3.5 3.5 0 0 1 5 5l-1.4 1.4-.9-.9 1.4-1.4a2.2 2.2 0 0 0-3.1-3.1L5.6 5.4l-.9-.9 1.8-1.8Zm3 6.8.9.9-1.8 1.8a3.5 3.5 0 0 1-5-5L5 5.6l.9.9-1.4 1.4a2.2 2.2 0 1 0 3.1 3.1l1.9-1.8ZM6 10.6l-.9-.9 5-5 .9.9-5 5Z"/></svg>';
+  heading.append(anchor);
+});
+
 const backToTop = document.createElement("button");
 backToTop.type = "button";
 backToTop.className = "back-to-top";
