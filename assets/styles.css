@@ -497,6 +497,27 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .section-anchor { opacity: 1; }
 }
 
+@media print {
+  @page { margin: 18mm; }
+  :root { color-scheme: light; --bg: #fff; --surface: #fff; --surface-soft: #f6f8fa; --ink: #111; --muted: #444; --line: #b6b6b6; --primary: #111; --primary-dark: #000; }
+  body, body::before { background: #fff !important; color: #111 !important; }
+  body::before, .site-header, .site-footer, .skip-link, .back-link, .article-toc, .article-pagination, .back-to-top, .section-anchor, .copy-code, .code-language, .article-header .button-row, .article-header > .button { display: none !important; }
+  .article-header { padding: 0 0 18pt; }
+  .article-header.container, .article-layout.container { width: 100%; max-width: none; }
+  .article-layout { display: block; padding: 0; }
+  .article-header h1 { max-width: none; font-size: 28pt; }
+  .article-lead, .article-meta { color: #333; }
+  .prose { max-width: none; color: #111; font-size: 11pt; line-height: 1.55; }
+  .prose h2 { margin: 24pt 0 10pt; padding-top: 0; border-top: 0; font-size: 18pt; break-after: avoid-page; }
+  .prose h3 { font-size: 14pt; break-after: avoid-page; }
+  .prose p, .prose li { orphans: 3; widows: 3; }
+  .prose pre, .prose blockquote, .system-flow { break-inside: avoid; }
+  .prose pre { overflow: visible; border: 1px solid #b6b6b6; background: #f6f8fa !important; color: #111 !important; white-space: pre-wrap; }
+  .prose code { background: #f6f8fa !important; color: #111 !important; }
+  .code-block pre { padding-top: 22px; }
+  .prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; font-weight: 400; overflow-wrap: anywhere; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
