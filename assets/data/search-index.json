@@ -164,6 +164,17 @@
     "url": "/projects/stm32-vision-robot-arm-sorter/"
   },
   {
+    "section": "projects",
+    "title": "jiayu-here",
+    "description": "GitHub profile README for Jiayu.",
+    "category": "仓库未标注主要语言",
+    "tags": [
+      "仓库未标注主要语言"
+    ],
+    "content": "项目简介 GitHub profile README for Jiayu. 项目目标 此页面由公开仓库状态自动生成。更完整的目标以仓库 README 和后续项目文档为准。 使用技术 GitHub 标注的主要语言或技术为 仓库未标注主要语言。 硬件环境 当前公开仓库元数据未记录专用硬件环境。 软件环境 当前公开仓库元数据未记录完整软件版本，请查看仓库 README。 系统架构 系统架构尚未在网站内容源中单独整理。 功能模块 功能模块以仓库当前目录和 README 为准。 实现步骤 实现步骤尚未在网站内容源中单独整理。 关键代码 关键代码请直接进入 GitHub 仓库查看。 调试过程 调试记录尚未在网站内容源中单独整理。 遇到的问题 仓库元数据未提供问题记录。 解决方案 仓库元数据未提供解决方案记录。 最终效果 该仓库当前为公开状态，因此自动出现在项目列表中。 项目总结 这是一份自动同步的基础项目档案，后续可补充为完整手写说明。 GitHub 仓库链接 访问 jiayu here",
+    "url": "/projects/jiayu-here/"
+  },
+  {
     "section": "articles",
     "title": "从星座图到 RTL：QPSK 链路的实现顺序",
     "description": "用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。",
