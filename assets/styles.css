@@ -497,6 +497,13 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .section-anchor { opacity: 1; }
 }
 
+@media (forced-colors: active) {
+  .brand { background: none; color: LinkText; -webkit-text-fill-color: currentColor; }
+  :focus-visible { outline-color: Highlight; }
+  .site-nav a[aria-current="page"] { border-bottom: 3px solid Highlight; box-shadow: none; }
+  .hero-social-link, .primary-button { border-color: ButtonText; }
+}
+
 @media print {
   @page { margin: 18mm; }
   :root { color-scheme: light; --bg: #fff; --surface: #fff; --surface-soft: #f6f8fa; --ink: #111; --muted: #444; --line: #b6b6b6; --primary: #111; --primary-dark: #000; }
