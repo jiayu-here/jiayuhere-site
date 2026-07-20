@@ -164,6 +164,17 @@
     "url": "/en/projects/stm32-vision-robot-arm-sorter/"
   },
   {
+    "section": "projects",
+    "title": "jiayu-here",
+    "description": "GitHub profile README for Jiayu.",
+    "category": "Primary language not specified",
+    "tags": [
+      "Primary language not specified"
+    ],
+    "content": "Project Overview GitHub profile README for Jiayu. Project Goal This page is generated from the public repository metadata. See the repository README and project files for the authoritative scope. Technology GitHub currently identifies Primary language not specified as the primary language or technology. Hardware Environment The public repository metadata does not describe dedicated hardware. Software Environment The complete software versions are not present in the repository metadata. See the README for current requirements. System Architecture A separate architecture description has not yet been authored for this website. Functional Modules The current directory structure and README in the repository are the source of truth. Implementation Implementation steps have not yet been documented separately on this website. Key Code Open the GitHub repository to inspect the source code directly. Debugging No debugging record is available from repository metadata. Problems and Solutions Repository metadata does not provide a problem and solution log. Current Result The repository is public, so it is automatically included in the project list. Summary This is an auto synced project record that can later be expanded with an authored case study. GitHub Repository Open jiayu here",
+    "url": "/en/projects/jiayu-here/"
+  },
+  {
     "section": "articles",
     "title": "From Constellation to RTL: A Verifiable Order for Building a QPSK Link",
     "description": "A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.",

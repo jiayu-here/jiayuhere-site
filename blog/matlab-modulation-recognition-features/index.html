@@ -49,7 +49,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</h1><p class="article-lead">从信号生成、SNR 注入、归一化、特征设计到混淆矩阵，整理调制识别实验的可靠流程。</p><div class="article-meta"><span>通信与算法 · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>SVM</span><span>Feature</span><span>SNR</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">先定义实验问题</a><a href="#section-2">数据生成要把变量分开</a><a href="#section-3">AWGN 功率必须从定义出发</a><a href="#section-4">归一化是为了去掉无关尺度</a><a href="#section-5">特征应覆盖幅度、相位和统计结构</a><a href="#section-6">为什么要保留基线模型</a><a href="#section-7">总准确率远远不够</a><a href="#section-8">画图时避免形成错误结论</a><a href="#section-9">建立可重复的实验记录</a><a href="#section-10">可以继续扩展的方向</a></aside><div class="prose"><h2 id="section-1">先定义实验问题</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">先定义实验问题</a><a href="#section-2">数据生成要把变量分开</a><a href="#section-3">AWGN 功率必须从定义出发</a><a href="#section-4">归一化是为了去掉无关尺度</a><a href="#section-5">特征应覆盖幅度、相位和统计结构</a><a href="#section-6">为什么要保留基线模型</a><a href="#section-7">总准确率远远不够</a><a href="#section-8">画图时避免形成错误结论</a><a href="#section-9">建立可重复的实验记录</a><a href="#section-10">可以继续扩展的方向</a></nav></details><div class="prose"><h2 id="section-1">先定义实验问题</h2>
 <p>数字调制识别不是把星座图交给分类器就结束。开始实验前应明确类别集合、每帧符号数、采样率、脉冲成形方式、载波和相位条件、SNR 范围，以及训练阶段能够使用哪些先验信息。</p>
 <p>如果训练集中的某一类总是使用更高功率、更长帧或固定随机种子，分类器可能学到数据生成规则，而不是调制方式本身。实验结果看起来很高，却不能推广到新的信号。</p>
 <h2 id="section-2">数据生成要把变量分开</h2>

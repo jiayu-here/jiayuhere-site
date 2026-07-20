@@ -49,7 +49,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>视觉机械臂标定、通信与实机验收清单</h1><p class="article-lead">按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</p><div class="article-meta"><span>嵌入式与控制 · 2026-07-15</span><span>约 6 分钟阅读</span><div class="tag-list"><span>STM32</span><span>OpenCV</span><span>Calibration</span><span>FreeRTOS</span><span>Safety</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">使用目的</a><a href="#section-2">一、供电与接线前置检查</a><a href="#section-3">二、无硬件软件验收</a><a href="#section-4">三、视觉检测检查</a><a href="#section-5">四、四点标定检查</a><a href="#section-6">五、运动学与舵机参数</a><a href="#section-7">六、串口协议检查</a><a href="#section-8">七、FreeRTOS 与固件检查</a><a href="#section-9">八、FSR 抓取确认与重试</a><a href="#section-10">九、实机分阶段验收</a><a href="#section-11">十、验收记录应包含什么</a><a href="#section-12">复习总结</a></aside><div class="prose"><h2 id="section-1">使用目的</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">使用目的</a><a href="#section-2">一、供电与接线前置检查</a><a href="#section-3">二、无硬件软件验收</a><a href="#section-4">三、视觉检测检查</a><a href="#section-5">四、四点标定检查</a><a href="#section-6">五、运动学与舵机参数</a><a href="#section-7">六、串口协议检查</a><a href="#section-8">七、FreeRTOS 与固件检查</a><a href="#section-9">八、FSR 抓取确认与重试</a><a href="#section-10">九、实机分阶段验收</a><a href="#section-11">十、验收记录应包含什么</a><a href="#section-12">复习总结</a></nav></details><div class="prose"><h2 id="section-1">使用目的</h2>
 <p>这份清单用于避免把“仿真能跑”“固件能编译”和“实机可安全运行”混为一谈。每完成一项，应保存对应数据、截图、日志或测量结果。</p>
 <h2 id="section-2">一、供电与接线前置检查</h2>
 <ul>

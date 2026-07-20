@@ -49,7 +49,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</h1><p class="article-lead">以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。</p><div class="article-meta"><span>嵌入式 · 2026-07-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>STM32</span><span>DS18B20</span><span>PT100</span><span>Non-blocking</span><span>Alarm</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">为什么阻塞式写法很快会失控</a><a href="#section-2">先明确模块边界</a><a href="#section-3">DS18B20 采样应拆成两个阶段</a><a href="#section-4">PT100 的换算要保留原始量</a><a href="#section-5">阈值先规范化再保存</a><a href="#section-6">报警逻辑要区分判断与输出</a><a href="#section-7">显示层只读取数据快照</a><a href="#section-8">推荐的上板调试顺序</a><a href="#section-9">验收时应该记录什么</a></aside><div class="prose"><h2 id="section-1">为什么阻塞式写法很快会失控</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">为什么阻塞式写法很快会失控</a><a href="#section-2">先明确模块边界</a><a href="#section-3">DS18B20 采样应拆成两个阶段</a><a href="#section-4">PT100 的换算要保留原始量</a><a href="#section-5">阈值先规范化再保存</a><a href="#section-6">报警逻辑要区分判断与输出</a><a href="#section-7">显示层只读取数据快照</a><a href="#section-8">推荐的上板调试顺序</a><a href="#section-9">验收时应该记录什么</a></nav></details><div class="prose"><h2 id="section-1">为什么阻塞式写法很快会失控</h2>
 <p>温度检测项目刚开始时，很容易把“读取传感器、等待转换、刷新屏幕、判断报警”全部写进一个循环。单个功能可能正常，但加入按键、串口、SD 卡和双路传感器后，任何一次长延时都会拖慢其他模块。常见现象包括按键偶尔失效、串口命令响应不及时、OLED 刷新卡顿，以及报警器节奏不稳定。</p>
 <p>解决问题的关键不是简单删除 <code>HAL_Delay()</code>，而是把每个模块改成“到时间才执行一步”的状态机。主循环或调度器只负责周期调用，各模块自己保存当前状态和上次执行时间。</p>
 <h2 id="section-2">先明确模块边界</h2>

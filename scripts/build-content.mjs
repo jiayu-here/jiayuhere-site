@@ -544,7 +544,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   const content = `
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
-      <div class="article-layout container"><aside class="article-toc"><p>${isEnglish ? "On this page" : "本页目录"}</p>${toc}</aside><div class="prose">${rendered.html}${pagination}</div></div>
+      <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);
   await mkdir(output, { recursive: true });

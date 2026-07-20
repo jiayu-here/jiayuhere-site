@@ -49,7 +49,7 @@
 <main id="main">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</h1><p class="article-lead">结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</p><div class="article-meta"><span>嵌入式与机器视觉 · 2026-07-15</span><span>约 5 分钟阅读</span><div class="tag-list"><span>OpenCV</span><span>STM32</span><span>Homography</span><span>Inverse Kinematics</span><span>UART</span></div></div></header>
-      <div class="article-layout container"><aside class="article-toc"><p>本页目录</p><a href="#section-1">为什么识别到目标还远远不够</a><a href="#section-2">边界一：颜色识别输出的是候选目标</a><a href="#section-3">边界二：像素坐标不是毫米坐标</a><a href="#section-4">边界三：坐标可达不代表关节安全</a><a href="#section-5">边界四：串口发送成功不等于命令可靠到达</a><a href="#section-6">边界五：软件闭环不能替代实机验收</a><a href="#section-7">如何建立可追溯的验证证据</a><a href="#section-8">总结</a></aside><div class="prose"><h2 id="section-1">为什么识别到目标还远远不够</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">为什么识别到目标还远远不够</a><a href="#section-2">边界一：颜色识别输出的是候选目标</a><a href="#section-3">边界二：像素坐标不是毫米坐标</a><a href="#section-4">边界三：坐标可达不代表关节安全</a><a href="#section-5">边界四：串口发送成功不等于命令可靠到达</a><a href="#section-6">边界五：软件闭环不能替代实机验收</a><a href="#section-7">如何建立可追溯的验证证据</a><a href="#section-8">总结</a></nav></details><div class="prose"><h2 id="section-1">为什么识别到目标还远远不够</h2>
 <p>摄像头画面中出现一个红色物体，并不等于机械臂已经知道如何安全抓取。完整链路至少要跨越五个边界：颜色像素到目标中心、像素坐标到工作平面坐标、笛卡尔坐标到关节角度、上位机命令到固件状态，以及软件结果到真实硬件动作。</p>
 <p>每个边界都可能产生独立错误。如果只看最终动画，就无法判断偏差来自灯光、标定点、连杆参数、串口数据还是舵机安装。</p>
 <h2 id="section-2">边界一：颜色识别输出的是候选目标</h2>

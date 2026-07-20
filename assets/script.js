@@ -29,6 +29,14 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
 
+const articleToc = document.querySelector(".article-toc");
+const compactArticleToc = window.matchMedia("(max-width: 980px)");
+const syncArticleToc = ({ matches }) => {
+  if (articleToc instanceof HTMLDetailsElement) articleToc.open = !matches;
+};
+syncArticleToc(compactArticleToc);
+compactArticleToc.addEventListener("change", syncArticleToc);
+
 const sectionLabels = isEnglish
   ? { projects: "Project", articles: "Article", notes: "Note" }
   : { projects: "项目", articles: "博客", notes: "笔记" };
