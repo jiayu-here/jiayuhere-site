@@ -4,6 +4,22 @@ const siteHeader = document.querySelector(".site-header");
 const isEnglish = document.documentElement.lang.toLowerCase().startsWith("en");
 const t = (chinese, english) => isEnglish ? english : chinese;
 
+const newTabHint = t("（在新标签页打开）", " (opens in new tab)");
+const markNewTabLinks = (root = document) => {
+  root.querySelectorAll('a[target="_blank"]:not([data-new-tab-hint])').forEach((link) => {
+    const ariaLabel = link.getAttribute("aria-label");
+    if (ariaLabel) link.setAttribute("aria-label", `${ariaLabel}${newTabHint}`);
+    else {
+      const hint = document.createElement("span");
+      hint.className = "visually-hidden";
+      hint.textContent = newTabHint;
+      link.append(hint);
+    }
+    link.dataset.newTabHint = "";
+  });
+};
+markNewTabLinks();
+
 const setNavOpen = (open) => {
   if (!navToggle || !siteNav) return;
   siteNav.classList.toggle("is-open", open);
@@ -569,7 +585,10 @@ document.querySelector("[data-markdown-form]")?.addEventListener("submit", (even
   const form = event.currentTarget;
   const result = form.querySelector("[data-markdown-result]");
   const markdown = form.querySelector("[name='markdown']")?.value || "";
-  if (result) result.innerHTML = renderMarkdownPreview(markdown) || `<p>${t("请输入 Markdown 内容。", "Enter Markdown content.")}</p>`;
+  if (result) {
+    result.innerHTML = renderMarkdownPreview(markdown) || `<p>${t("请输入 Markdown 内容。", "Enter Markdown content.")}</p>`;
+    markNewTabLinks(result);
+  }
 });
 
 const formulasZh = {

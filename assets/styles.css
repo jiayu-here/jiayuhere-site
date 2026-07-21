@@ -38,6 +38,7 @@ img { display: block; max-width: 100%; }
 button, input, textarea, select { font: inherit; }
 button { color: inherit; }
 [hidden], .is-hidden { display: none !important; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .container { width: var(--container); margin-inline: auto; }
 .skip-link {
