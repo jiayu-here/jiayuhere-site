@@ -94,6 +94,8 @@ const escapeXml = (value = "") => String(value)
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&apos;");
 
+const jsonForHtml = (value) => JSON.stringify(value, null, 2).replaceAll("<", "\\u003c");
+
 const plainText = (value = "") => String(value)
   .replace(/^---[\s\S]*?---/m, " ")
   .replace(/```[\s\S]*?```/g, " ")
@@ -438,12 +440,32 @@ const footer = (prefix, locale) => {
   <script src="${prefix}assets/script.js?v=20260714s"></script>`;
 };
 
-const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [] }) => {
+const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "" }) => {
   const isEnglish = locale === "en";
   const styleVersion = /^(projects|blog|notes|lab)\/$/.test(route) ? "20260715d" : "20260714s";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
+  const structuredData = blogPostingDate ? `  <script type="application/ld+json">
+${jsonForHtml({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  datePublished: blogPostingDate,
+  inLanguage: localeConfig[locale].lang,
+  image: "https://www.jiayuhere.com/assets/images/og.png",
+  author: {
+    "@type": "Person",
+    name: "JiaYu",
+    url: `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}about/`
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonical
+  }
+})}
+  </script>` : "";
   return `<!doctype html>
 <html lang="${localeConfig[locale].lang}">
 <head>
@@ -458,7 +480,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image">${structuredData ? `\n${structuredData}` : ""}
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
@@ -550,7 +572,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   await mkdir(output, { recursive: true });
   const prefix = isEnglish ? "../../../" : "../../";
   const route = `${config.output}/${item.meta.slug}/`;
-  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [] }));
+  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "" }));
 };
 
 const buildLabIndex = async (items, locale) => {
