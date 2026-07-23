@@ -2,7 +2,7 @@
 title: "Lecture 17：导数求导法则"
 slug: math-025
 description: "考研数学学习笔记：Lecture 17：导数求导法则。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2023-12-17
 tags: ["考研数学", "高等数学", "导数与微分"]
 ---

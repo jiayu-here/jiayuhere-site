@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 21：微分中值定理"
 slug: math-029
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-03-22
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

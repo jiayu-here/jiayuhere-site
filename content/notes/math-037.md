@@ -2,7 +2,7 @@
 title: "Lecture 29：换元积分法"
 slug: math-037
 description: "考研数学学习笔记：Lecture 29：换元积分法。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-01-17
 tags: ["考研数学", "高等数学", "不定积分"]
 ---

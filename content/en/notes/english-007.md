@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 4：被动语态"
 slug: english-007
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-04
 tags: ["Graduate Examination English", "Grammar"]
 ---

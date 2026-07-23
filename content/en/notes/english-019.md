@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 16：倒装句"
 slug: english-019
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-21
 tags: ["Graduate Examination English", "Grammar"]
 ---

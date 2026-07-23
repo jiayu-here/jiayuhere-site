@@ -2,7 +2,7 @@
 title: "Lecture 4：阅读真题 - 2007年"
 slug: english-032
 description: "考研英语学习笔记：Lecture 4：阅读真题 - 2007年。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 tags: ["考研英语", "英语阅读", "真题讲解 05 - 09"]
 ---
 

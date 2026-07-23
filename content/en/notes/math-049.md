@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则"
 slug: math-049
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-03
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

@@ -2,7 +2,7 @@
 title: "Lecture 11：向量与向量组的线性相关性"
 slug: math-080
 description: "考研数学学习笔记：Lecture 11：向量与向量组的线性相关性。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "向量组"]
 ---
 

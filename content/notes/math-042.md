@@ -2,7 +2,7 @@
 title: "Lecture 34：定积分的应用"
 slug: math-042
 description: "考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-01-24
 tags: ["考研数学", "高等数学", "定积分及反常积分"]
 ---

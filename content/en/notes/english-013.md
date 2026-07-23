@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 10：非谓语动词"
 slug: english-013
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-08
 tags: ["Graduate Examination English", "Grammar"]
 ---

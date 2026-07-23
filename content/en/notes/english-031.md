@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 3：阅读真题 - 2006年"
 slug: english-031
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Reading"]
 ---
 

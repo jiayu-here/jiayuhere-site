@@ -2,7 +2,7 @@
 title: "Lecture 1：阅读方法论"
 slug: english-029
 description: "考研英语学习笔记：Lecture 1：阅读方法论。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 tags: ["考研英语", "英语阅读", "真题串讲 96 - 03"]
 ---
 

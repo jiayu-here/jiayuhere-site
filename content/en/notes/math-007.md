@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 高等数学 - 公式合集"
 slug: math-007
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Lecture 17：强调句"
 slug: english-020
 description: "考研英语学习笔记：Lecture 17：强调句。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-03-24
 tags: ["考研英语", "英语语法", "长难句"]
 ---

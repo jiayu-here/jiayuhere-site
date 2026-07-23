@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法"
 slug: math-035
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-01-15
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

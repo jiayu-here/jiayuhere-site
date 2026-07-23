@@ -2,7 +2,7 @@
 title: "Lecture 37：可降阶方程与高阶线性微分方程"
 slug: math-045
 description: "考研数学学习笔记：Lecture 37：可降阶方程与高阶线性微分方程。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "高等数学", "微分方程"]
 ---
 

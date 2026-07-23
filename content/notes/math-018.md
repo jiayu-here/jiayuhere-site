@@ -2,7 +2,7 @@
 title: "Lecture 10：求极限"
 slug: math-018
 description: "考研数学学习笔记：Lecture 10：求极限。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-03-04
 tags: ["考研数学", "高等数学", "函数、极限、连续"]
 ---

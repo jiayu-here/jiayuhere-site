@@ -2,7 +2,7 @@
 title: "Lecture 10：非谓语动词"
 slug: english-013
 description: "考研英语学习笔记：Lecture 10：非谓语动词。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-03-08
 tags: ["考研英语", "英语语法", "简单句"]
 ---

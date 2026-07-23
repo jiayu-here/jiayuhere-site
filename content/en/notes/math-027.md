@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 19：隐函数与参数方程"
 slug: math-027
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-21
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

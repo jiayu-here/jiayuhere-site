@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 6：谓语动词的变化 - 考察攻略"
 slug: english-009
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-05
 tags: ["Graduate Examination English", "Grammar"]
 ---

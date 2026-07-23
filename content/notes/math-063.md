@@ -2,7 +2,7 @@
 title: "Lecture 55：曲面与空间曲线"
 slug: math-063
 description: "考研数学学习笔记：Lecture 55：曲面与空间曲线。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "高等数学", "向量代数与空间解析几何"]
 ---
 

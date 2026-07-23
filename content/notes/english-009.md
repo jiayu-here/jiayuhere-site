@@ -2,7 +2,7 @@
 title: "Lecture 6：谓语动词的变化 - 考察攻略"
 slug: english-009
 description: "考研英语学习笔记：Lecture 6：谓语动词的变化 - 考察攻略。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-03-05
 tags: ["考研英语", "英语语法", "简单句"]
 ---

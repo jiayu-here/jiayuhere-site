@@ -2,7 +2,7 @@
 title: "Lecture 2：谓语动词的时态"
 slug: english-005
 description: "考研英语学习笔记：Lecture 2：谓语动词的时态。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-02-29
 tags: ["考研英语", "英语语法", "简单句"]
 ---

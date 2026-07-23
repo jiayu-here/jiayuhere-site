@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 34：定积分的应用"
 slug: math-042
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-01-24
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

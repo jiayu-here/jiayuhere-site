@@ -2,7 +2,7 @@
 title: "Lecture 40：欧拉方程"
 slug: math-048
 description: "考研数学学习笔记：Lecture 40：欧拉方程。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "高等数学", "微分方程"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Lecture 8：介词短语"
 slug: english-011
 description: "考研英语学习笔记：Lecture 8：介词短语。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-03-07
 tags: ["考研英语", "英语语法", "简单句"]
 ---

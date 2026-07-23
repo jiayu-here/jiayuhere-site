@@ -2,7 +2,7 @@
 title: "01 简单句_总结"
 slug: english-001
 description: "考研英语学习笔记：01 简单句_总结。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 tags: ["考研英语", "英语语法", "知识点总结"]
 ---
 

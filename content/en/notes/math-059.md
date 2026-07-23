@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 51：函数展开成幂级数"
 slug: math-059
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-15
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

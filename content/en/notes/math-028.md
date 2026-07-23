@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 20：函数的微分"
 slug: math-028
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-22
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

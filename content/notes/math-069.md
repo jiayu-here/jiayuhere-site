@@ -2,7 +2,7 @@
 title: "Lecture 61：场论初步"
 slug: math-069
 description: "考研数学学习笔记：Lecture 61：场论初步。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 ---
 

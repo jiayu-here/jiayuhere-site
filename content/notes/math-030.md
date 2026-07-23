@@ -2,7 +2,7 @@
 title: "Lecture 22：洛必达法则"
 slug: math-030
 description: "考研数学学习笔记：Lecture 22：洛必达法则。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2023-12-27
 tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 ---

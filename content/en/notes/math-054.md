@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 47：三重积分"
 slug: math-054
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-09
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

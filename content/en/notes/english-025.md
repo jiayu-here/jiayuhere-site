@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 22：分裂结构"
 slug: english-025
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Grammar"]
 ---
 

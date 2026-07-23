@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性"
 slug: math-080
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

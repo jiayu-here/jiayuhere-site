@@ -2,7 +2,7 @@
 title: "Graduate Examination English: 03 长难句分析_总结"
 slug: english-003
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Grammar"]
 ---
 

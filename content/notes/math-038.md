@@ -2,7 +2,7 @@
 title: "Lecture 30：分部积分法"
 slug: math-038
 description: "考研数学学习笔记：Lecture 30：分部积分法。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-01-19
 tags: ["考研数学", "高等数学", "不定积分"]
 ---

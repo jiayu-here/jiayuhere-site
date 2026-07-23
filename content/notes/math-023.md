@@ -2,7 +2,7 @@
 title: "Lecture 15：闭区间上连续函数的性质"
 slug: math-023
 description: "考研数学学习笔记：Lecture 15：闭区间上连续函数的性质。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-03-11
 tags: ["考研数学", "高等数学", "函数、极限、连续"]
 ---

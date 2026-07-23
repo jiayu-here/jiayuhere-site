@@ -2,7 +2,7 @@
 title: "Lecture 40：多元复合函数的求导法则"
 slug: math-049
 description: "考研数学学习笔记：Lecture 40：多元复合函数的求导法则。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-03
 tags: ["考研数学", "高等数学", "多元函数微分学"]
 ---

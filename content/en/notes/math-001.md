@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 01 常用求极限方法"
 slug: math-001
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 40：欧拉方程"
 slug: math-048
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

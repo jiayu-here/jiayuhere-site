@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 23：正定二次型"
 slug: math-092
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

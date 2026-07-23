@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 48：对弧长的曲线积分"
 slug: math-065
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-11
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

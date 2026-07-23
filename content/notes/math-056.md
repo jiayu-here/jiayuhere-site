@@ -2,7 +2,7 @@
 title: "Lecture 48：正项级数"
 slug: math-056
 description: "考研数学学习笔记：Lecture 48：正项级数。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-13
 tags: ["考研数学", "高等数学", "无穷级数"]
 ---

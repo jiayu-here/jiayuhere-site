@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 30：分部积分法"
 slug: math-038
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-01-19
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

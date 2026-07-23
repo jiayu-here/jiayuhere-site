@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 24：函数的单调性与曲线的凹凸性"
 slug: math-032
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-01-13
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

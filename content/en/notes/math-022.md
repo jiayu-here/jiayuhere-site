@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 14：连续性的运算与性质"
 slug: math-022
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-03-11
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 06 线性代数 - 相似对角化"
 slug: math-006
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

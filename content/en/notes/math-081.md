@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 12：极大线性无关组与向量组的秩"
 slug: math-081
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

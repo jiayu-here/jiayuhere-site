@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 37：可降阶方程与高阶线性微分方程"
 slug: math-045
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

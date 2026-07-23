@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 04 三大中值定理"
 slug: math-004
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

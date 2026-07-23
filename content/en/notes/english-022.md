@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 19：断开长难句之连接词"
 slug: english-022
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Grammar"]
 ---
 

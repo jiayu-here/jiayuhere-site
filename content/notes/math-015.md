@@ -2,7 +2,7 @@
 title: "Lecture 7：极限存在准则"
 slug: math-015
 description: "考研数学学习笔记：Lecture 7：极限存在准则。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-03-01
 tags: ["考研数学", "高等数学", "函数、极限、连续"]
 ---

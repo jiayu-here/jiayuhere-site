@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 20：断开长难句之分析主谓"
 slug: english-023
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Grammar"]
 ---
 

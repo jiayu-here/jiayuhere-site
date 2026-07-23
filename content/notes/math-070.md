@@ -2,7 +2,7 @@
 title: "Lecture 1：课程引言"
 slug: math-070
 description: "考研数学学习笔记：Lecture 1：课程引言。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "行列式"]
 ---
 

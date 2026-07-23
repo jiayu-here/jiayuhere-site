@@ -2,7 +2,7 @@
 title: "Lecture 21：二次型的定义与矩阵表示"
 slug: math-090
 description: "考研数学学习笔记：Lecture 21：二次型的定义与矩阵表示。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "二次型"]
 ---
 

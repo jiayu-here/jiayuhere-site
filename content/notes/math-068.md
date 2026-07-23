@@ -2,7 +2,7 @@
 title: "Lecture 52：对坐标的曲面积分"
 slug: math-068
 description: "考研数学学习笔记：Lecture 52：对坐标的曲面积分。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-12
 tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 ---

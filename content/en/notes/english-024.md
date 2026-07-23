@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 21：简化长难句"
 slug: english-024
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-04-12
 tags: ["Graduate Examination English", "Grammar"]
 ---

@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 61：场论初步"
 slug: math-069
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

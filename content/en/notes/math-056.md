@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 48：正项级数"
 slug: math-056
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-13
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

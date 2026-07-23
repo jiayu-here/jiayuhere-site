@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 05 线性代数 - 特征值与特征向量"
 slug: math-005
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

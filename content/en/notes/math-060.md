@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 52：傅里叶级数"
 slug: math-060
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-05-16
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 15：闭区间上连续函数的性质"
 slug: math-023
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-03-11
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

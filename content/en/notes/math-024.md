@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 16：导数基本概念"
 slug: math-024
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-13
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

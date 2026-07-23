@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 17：导数求导法则"
 slug: math-025
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-17
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

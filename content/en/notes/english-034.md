@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 9：阅读真题 - 2009年"
 slug: english-034
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Reading"]
 ---
 

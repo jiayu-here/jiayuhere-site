@@ -2,7 +2,7 @@
 title: "Lecture 54：空间平面与直线"
 slug: math-062
 description: "考研数学学习笔记：Lecture 54：空间平面与直线。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "高等数学", "向量代数与空间解析几何"]
 ---
 

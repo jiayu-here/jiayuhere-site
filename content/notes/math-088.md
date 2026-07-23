@@ -2,7 +2,7 @@
 title: "Lecture 19：特征值与特征向量"
 slug: math-088
 description: "考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "特征值与特征向量"]
 ---
 

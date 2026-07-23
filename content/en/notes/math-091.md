@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 22：化二次型为标准型与规范型"
 slug: math-091
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Lecture 24：函数的单调性与曲线的凹凸性"
 slug: math-032
 description: "考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-01-13
 tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 ---

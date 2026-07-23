@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 54：空间平面与直线"
 slug: math-062
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

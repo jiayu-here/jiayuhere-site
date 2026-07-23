@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 29：换元积分法"
 slug: math-037
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-01-17
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

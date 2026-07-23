@@ -2,7 +2,7 @@
 title: "Lecture 20：相似"
 slug: math-089
 description: "考研数学学习笔记：Lecture 20：相似。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "特征值与特征向量"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 13：定语从句"
 slug: english-016
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-18
 tags: ["Graduate Examination English", "Grammar"]
 ---

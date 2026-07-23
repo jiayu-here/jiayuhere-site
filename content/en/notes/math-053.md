@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 45：二重积分的计算"
 slug: math-053
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-09
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

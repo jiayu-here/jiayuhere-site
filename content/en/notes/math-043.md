@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 35：微分方程的基本概念"
 slug: math-043
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-01
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

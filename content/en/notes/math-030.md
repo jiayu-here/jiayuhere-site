@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 22：洛必达法则"
 slug: math-030
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-27
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

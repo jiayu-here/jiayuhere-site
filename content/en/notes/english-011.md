@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 8：介词短语"
 slug: english-011
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-07
 tags: ["Graduate Examination English", "Grammar"]
 ---

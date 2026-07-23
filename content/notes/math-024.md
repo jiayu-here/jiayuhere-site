@@ -2,7 +2,7 @@
 title: "Lecture 16：导数基本概念"
 slug: math-024
 description: "考研数学学习笔记：Lecture 16：导数基本概念。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2023-12-13
 tags: ["考研数学", "高等数学", "导数与微分"]
 ---

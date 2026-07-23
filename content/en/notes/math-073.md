@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算"
 slug: math-073
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

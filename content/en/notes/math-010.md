@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 2：函数的概念及常见函数"
 slug: math-010
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-26
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

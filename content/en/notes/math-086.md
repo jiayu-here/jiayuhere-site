@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 17：两个方程组的公共解"
 slug: math-086
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

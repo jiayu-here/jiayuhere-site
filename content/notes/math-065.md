@@ -2,7 +2,7 @@
 title: "Lecture 48：对弧长的曲线积分"
 slug: math-065
 description: "考研数学学习笔记：Lecture 48：对弧长的曲线积分。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-11
 tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 ---

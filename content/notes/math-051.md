@@ -2,7 +2,7 @@
 title: "Lecture 43：多元函数的极值与最值"
 slug: math-051
 description: "考研数学学习笔记：Lecture 43：多元函数的极值与最值。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-07
 tags: ["考研数学", "高等数学", "多元函数微分学"]
 ---

@@ -2,7 +2,7 @@
 title: "Lecture 2：行列式的定义与性质"
 slug: math-071
 description: "考研数学学习笔记：Lecture 2：行列式的定义与性质。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "行列式"]
 ---
 

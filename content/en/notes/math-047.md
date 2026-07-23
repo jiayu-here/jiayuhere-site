@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 38：常系数非齐次线性微分方程"
 slug: math-047
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-02
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

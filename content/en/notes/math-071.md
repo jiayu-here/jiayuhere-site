@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 2：行列式的定义与性质"
 slug: math-071
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Linear Algebra"]
 ---
 

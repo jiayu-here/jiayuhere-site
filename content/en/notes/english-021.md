@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 18：断开长难句之标点"
 slug: english-021
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Grammar"]
 ---
 

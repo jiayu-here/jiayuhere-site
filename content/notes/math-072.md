@@ -2,7 +2,7 @@
 title: "Lecture 3：行列式的计算"
 slug: math-072
 description: "考研数学学习笔记：Lecture 3：行列式的计算。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "行列式"]
 ---
 

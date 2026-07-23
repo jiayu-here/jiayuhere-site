@@ -2,7 +2,7 @@
 title: "02 长难句_总结"
 slug: english-002
 description: "考研英语学习笔记：02 长难句_总结。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 tags: ["考研英语", "英语语法", "知识点总结"]
 ---
 

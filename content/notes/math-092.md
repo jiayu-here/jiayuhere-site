@@ -2,7 +2,7 @@
 title: "Lecture 23：正定二次型"
 slug: math-092
 description: "考研数学学习笔记：Lecture 23：正定二次型。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "二次型"]
 ---
 

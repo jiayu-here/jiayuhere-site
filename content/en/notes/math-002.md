@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: 02 导数求导法则"
 slug: math-002
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics"]
 ---
 

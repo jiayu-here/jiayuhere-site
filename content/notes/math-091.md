@@ -2,7 +2,7 @@
 title: "Lecture 22：化二次型为标准型与规范型"
 slug: math-091
 description: "考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "二次型"]
 ---
 

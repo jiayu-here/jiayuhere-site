@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 7：极限存在准则"
 slug: math-015
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-03-01
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

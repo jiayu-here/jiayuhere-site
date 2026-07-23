@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 18：高阶导数"
 slug: math-026
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2023-12-18
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

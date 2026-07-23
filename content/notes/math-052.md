@@ -2,7 +2,7 @@
 title: "Lecture 44：二重积分"
 slug: math-052
 description: "考研数学学习笔记：Lecture 44：二重积分。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-08
 tags: ["考研数学", "高等数学", "重积分"]
 ---

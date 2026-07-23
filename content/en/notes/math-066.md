@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 49：对坐标的曲线积分"
 slug: math-066
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-11
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

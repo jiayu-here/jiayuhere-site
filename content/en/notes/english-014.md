@@ -2,7 +2,7 @@
 title: "Graduate Examination English: Lecture 11：并列句"
 slug: english-014
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 date: 2024-03-12
 tags: ["Graduate Examination English", "Grammar"]
 ---

@@ -2,7 +2,7 @@
 title: "Lecture 37：常系数齐次线性微分方程"
 slug: math-046
 description: "考研数学学习笔记：Lecture 37：常系数齐次线性微分方程。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 date: 2024-02-01
 tags: ["考研数学", "高等数学", "微分方程"]
 ---

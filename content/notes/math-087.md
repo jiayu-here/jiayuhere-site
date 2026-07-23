@@ -2,7 +2,7 @@
 title: "Lecture 18：同解方程组"
 slug: math-087
 description: "考研数学学习笔记：Lecture 18：同解方程组。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "线性方程组"]
 ---
 

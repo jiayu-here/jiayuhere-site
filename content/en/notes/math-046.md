@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 37：常系数齐次线性微分方程"
 slug: math-046
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 date: 2024-02-01
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---

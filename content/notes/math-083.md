@@ -2,7 +2,7 @@
 title: "Lecture 14：向量空间"
 slug: math-083
 description: "考研数学学习笔记：Lecture 14：向量空间。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "向量组"]
 ---
 

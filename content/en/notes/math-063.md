@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 55：曲面与空间曲线"
 slug: math-063
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

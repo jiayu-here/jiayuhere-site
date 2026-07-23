@@ -2,7 +2,7 @@
 title: "Lecture 9：等价矩阵"
 slug: math-078
 description: "考研数学学习笔记：Lecture 9：等价矩阵。保留原始公式、图示与例题。"
-category: "考研数学"
+category: "数学"
 tags: ["考研数学", "线性代数", "矩阵"]
 ---
 

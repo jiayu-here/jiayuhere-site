@@ -2,7 +2,7 @@
 title: "Graduate Examination Mathematics: Lecture 53：向量代数"
 slug: math-061
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination Mathematics"
+category: "Mathematics"
 tags: ["Graduate Examination Mathematics", "Calculus"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Graduate Examination English: 真题 - 2012年：大作文"
 slug: english-037
 description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
-category: "Graduate Examination English"
+category: "English"
 tags: ["Graduate Examination English", "Writing"]
 ---
 

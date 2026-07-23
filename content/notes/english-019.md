@@ -2,7 +2,7 @@
 title: "Lecture 16：倒装句"
 slug: english-019
 description: "考研英语学习笔记：Lecture 16：倒装句。保留原始公式、图示与例题。"
-category: "考研英语"
+category: "英语"
 date: 2024-03-21
 tags: ["考研英语", "英语语法", "长难句"]
 ---
