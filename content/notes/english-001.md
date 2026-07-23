@@ -10,6 +10,10 @@ tags: ["考研英语", "英语语法", "知识点总结"]
 
 此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
 
+## 原始 Excalidraw 画布
+
+![01 简单句_总结的原始 Excalidraw 画布](/assets/notes/excalidraw-english-001.svg)
+
 ## 原图文字要点
 - 句子的补充成分
 - +

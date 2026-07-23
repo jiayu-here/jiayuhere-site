@@ -10,6 +10,10 @@ tags: ["考研英语", "英语阅读", "知识点总结"]
 
 此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
 
+## 原始 Excalidraw 画布
+
+![01 阅读方法论_总结的原始 Excalidraw 画布](/assets/notes/excalidraw-english-028.svg)
+
 ## 原图文字要点
 - 2. AA XXXX XX 定位2 XXX 标志 XXXXXXX
 - 3. XXX AA XXX 标志 XX XXXX 定位3

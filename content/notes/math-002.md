@@ -10,6 +10,10 @@ tags: ["考研数学", "数学总结", "图文总结"]
 
 此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
 
+## 原始 Excalidraw 画布
+
+![02 导数求导法则的原始 Excalidraw 画布](/assets/notes/excalidraw-math-002.svg)
+
 ## 原图文字要点
 - 方法一：有理运算法则
 - 方法二：反函数求导法则
