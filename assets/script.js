@@ -278,9 +278,14 @@ const updateContentList = () => {
 };
 
 filterButtons.forEach((button) => {
+  button.setAttribute("aria-pressed", String(button.classList.contains("is-active")));
   button.addEventListener("click", () => {
     activeFilter = button.dataset.filter || "all";
-    filterButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+    filterButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("is-active", isActive);
+      item.setAttribute("aria-pressed", String(isActive));
+    });
     updateContentList();
   });
 });

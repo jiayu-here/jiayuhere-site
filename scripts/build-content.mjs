@@ -526,7 +526,7 @@ const buildIndex = async (section, items, locale) => {
     : section === "projects" ? "搜索项目" : section === "articles" ? "搜索文章" : "搜索笔记";
   const controls = `<div class="content-controls compact-controls">
     <label class="search-box"><span>${searchLabel}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
-    <div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}</div>
+    <div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
   const content = `
