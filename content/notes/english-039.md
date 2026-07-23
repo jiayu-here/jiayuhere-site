@@ -1,0 +1,21 @@
+---
+title: "真题 - 2017年：大作文 - 负面"
+slug: english-039
+description: "考研英语学习笔记：真题 - 2017年：大作文 - 负面。保留原始公式、图示与例题。"
+category: "考研英语"
+tags: ["考研英语", "英语写作", "真题 - 2017年：大作文 - 负面.md"]
+---
+
+**真题**
+- ![Pasted image 20250409111330](/assets/notes/7966eb60fe4b-Pasted-image-20250409111330.png)
+
+**模板**
+```Text
+	These are two simple but enlightening and educational drawing.In the left one,there is a youngster, sitting leisurely in a sofa and showing off his large number of books, with no book in his hands. However, in the right cartoon, the guy has made up his mind to read 20 book in this year. Finally, several number of Chinese characters can be observed,which say 'having books' and 'reading books'
+
+    Such two scenarios above apparently can be associated with two totally distinct attitudes toward reading in reality. Admittedly,in the present-day soicety,a host of people purchase,possess and even store many book, but they read no book. This phenomenon is particularly worth concerning for the reason that books are regarded as the ornament. As a matter of fact, everyone is supposed to bear in mind that book should be read, rather than be boasted.
+
+    As a positive habit,reading books can bring us ample knowledge,inspire our passion for learning and help us broaden our horizons. In addition, it is reading that enables us accumulate not only knowledge but also confidence,optimism and courage to face any adversity.
+
+    As a youngster,I deem that society as a whole should foster a positive atmosphere to educate and encourage all citizens to not only buy books but alse be absorbed in reading.After all, books can be likened to the ladder for progress.
+```

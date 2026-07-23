@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 12：函数的连续性 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 12：函数的连续性。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 函数、极限、连续">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 12：函数的连续性 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 12：函数的连续性。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-020/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-020/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-020/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-020/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-020/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 12：函数的连续性</h1><p class="article-lead">考研数学学习笔记：Lecture 12：函数的连续性。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-03-11</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>函数、极限、连续</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">12.1 考察内容</a><a href="#section-2">12.2 连续的概念</a></nav></details><div class="prose"><h2 id="section-1">12.1 考察内容</h2>
+<ul>
+<li>内容</li>
+<li class="list-indent-1">1. 连续性的概念；</li>
+<li class="list-indent-1">2. 间断点及其分类；</li>
+<li class="list-indent-1">3. 连续性的运算与性质；</li>
+<li class="list-indent-1">4. 闭区间上连续函数的性质；</li>
+<li>题型</li>
+<li class="list-indent-1">题型一：讨论函数连续性及间断点的类型；</li>
+<li class="list-indent-1">题型二：有关闭区间上连续函数性质的证明题；</li>
+</ul>
+<h2 id="section-2">12.2 连续的概念</h2>
+<h5 id="section-3"><strong>定义</strong>： #连续性</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>定义 1：$\text{若 }\lim_{\Delta x\to0}\Delta y=\lim_{\Delta x\to0}[f(x_0+\Delta x)-f(x_0)]=0，则称y=f(x)在x_0点连续$ </blockquote>
+<blockquote>定义 2：设函数 $y=f(x)$ 在点 $x_{0}$ 的某个邻域内有定义，如果当 $x\to x_0$ 时，函数 $y=f(x)$ 的极限值存在，且等于 $x_{0}$ 处的函数值 $f(x_0)$ , 即 $\lim_{x\to x_0}f(x)=f(x_0)$, 则称函数 $y=f(x)$ 在点 $x_{0}$ 处连续.</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>等价形式：$\text{若 }\lim_{x\to x_0}f(x)=f(x_0)\text{ 则称 }y=f(x)\text{ 在点 }x_0\text{ 处连续}.$</li>
+<li>左右连续：</li>
+<li class="list-indent-1">1. 左连续： $\lim_{x\to x^-_0}f(x)=f(x_0)$ </li>
+<li class="list-indent-1">2. 右连续： $\lim_{x\to x^+_0}f(x)=f(x_0)$ </li>
+<li>$f(x)$ 连续的充分必要条件：$f(x)$ <strong>左连续且右连续</strong>，<strong>左右连续相等</strong>；</li>
+</ul>
+<p><strong>内连续与外连续</strong></p>
+<ul>
+<li>内连续：在  $(a,b)$ 中每一点都连续；</li>
+<li>外连续：在 $[a,b]$ 中每一点都连续，并且 a 点右连续，b 点左连续；</li>
+</ul>
+<p><strong>区间内连续</strong> </p>
+<ul>
+<li>一个函数在区间内连续 = 区间上所有点都连续 = <strong>所有的点的左右极限存在并相等，并且等于这一点的函数值</strong>；</li>
+</ul>
+<h3 id="section-4">题型： #讨论函数的连续性及间断点的类型</h3>
+<h4 id="section-5">PART 1：解题方法</h4>
+<ul>
+<li>讨论函数的连续性时，需要描述清楚，在哪些点不连续，因为什么所以在其他区间上连续；</li>
+</ul>
+<h4 id="section-6">PART 2：典型例题</h4>
+<p><strong>例题</strong>：$\text{已知 }f(x)=\begin{cases}(\cos x)^{1/x^2},x\neq0,\\a,&amp;x=0&amp;\end{cases}$，再 x=0 处连续，则求a；</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">因为在 x=0 处连续，因此这个点的极限值存在且相 等；</li>
+<li>解析</li>
+<li class="list-indent-1">$\lim_{x\to0}f(x)=\lim_{x\to0}(nx)^{\frac12}=\lim_{x\to0}[1+(ax-1)]^{\frac1{x^2}}=e^{-\frac12}=f(0)=0,$</li>
+<li>题型：#</li>
+</ul>
+<p><strong>例题</strong>：$f(x)=\lim_{n\to\infty}\frac{1+x}{1+x^{{2n}}}$，讨论函数的间断点；</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">首先分段，得到：$f(x)=\begin{cases}1+x&amp;|x|&lt;1\\0&amp;|x|&gt;1\\1&amp;x=1\\0&amp;x=-1\end{cases}$</li>
+<li class="list-indent-1">0 点连续，1 点不连续；</li>
+<li class="list-indent-1">所以：存在间断点 x=1；</li>
+<li>题型：#</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-019/index.html"><span>← 上一项</span><strong>Lecture 11：无穷小量阶的比较</strong></a>
+    <a class="article-pagination-next" href="../math-021/index.html"><span>下一项 →</span><strong>Lecture 13：间断点及其分类</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

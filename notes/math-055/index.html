@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 53：常数项级数 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 53：常数项级数。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 无穷级数">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 53：常数项级数 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 53：常数项级数。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-055/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-055/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-055/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-055/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-055/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 53：常数项级数</h1><p class="article-lead">考研数学学习笔记：Lecture 53：常数项级数。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-12</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>无穷级数</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">47.1 常数项级数基本概念</a><a href="#section-6">47.2 级数分类</a></nav></details><div class="prose"><p><strong>本章内容</strong></p>
+<ul>
+<li>第一节：常数项级数</li>
+<li>第二节：幂级数</li>
+<li>第三节：傅里叶级数</li>
+</ul>
+<p><strong>本节内容概要</strong></p>
+<ul>
+<li>(一) 级数的概念与性质</li>
+<li>(二) 级数的审敛准则</li>
+</ul>
+<p><strong>常考题型与典型例题</strong></p>
+<ul>
+<li>常数项级数敛散性的判定</li>
+</ul>
+<hr>
+<h2 id="section-1">47.1 常数项级数基本概念</h2>
+<h3 id="section-2">47.1.1 基础概念</h3>
+<h5 id="section-3"><strong>定义</strong>： #常数项级数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\sum_{n=1}^\infty u_n=u_1+u_2+\cdots+u_n+\cdots $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">常数项级数表示有无穷项，每一项都是常数；</li>
+<li class="list-indent-1">因为是无穷项，所以常数项级数就是<strong>有无穷项个常数</strong>的常数项级数；</li>
+<li class="list-indent-1">用 $u_{1}, u_{2},\cdots u_{n},\cdots$ 表示，$u_{n}$ 表示一般项；</li>
+<li class="list-indent-1">无穷项和，是使用有限项和（部分和）取极限而得到的；</li>
+<li>相加求和：</li>
+<li class="list-indent-1">$\sum_{i=1}^{\infty}u_{i}=u_{1}+u_{2}+\cdots+u_{n}$；</li>
+<li>部分和</li>
+<li class="list-indent-1">表示前 n 项的和；</li>
+<li class="list-indent-1">$S_{n}=u_{1}+u_{2}+\cdots+u_{n}$；</li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>： #常数项级数收敛</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $u_{1}, u_{2},\cdots u_{n},\cdots$ 表示常数项，$S_{n}=u_{1}+u_{2}+\cdots+u_{n}$ 表示前 <code>n</code> 项的和；</blockquote>
+<blockquote>若：</blockquote>
+<blockquote> $$\lim_{n\to+\infty}S_{n}=\sum_{n=1}^\infty u_n$$</blockquote>
+<blockquote>则当前常数项数列为收敛的，若是没有极限，则是为发散的；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>两个问题：</li>
+<li class="list-indent-1">敛散性 <code>-&gt;</code> 极限是否存在 <code>&lt;-</code> 这个问题更为核心；</li>
+<li class="list-indent-1">级数的值 <code>-&gt;</code> 极限的值；</li>
+</ul>
+<p><strong>等比数列分析</strong>：$a+aq+aq^{2}+aq^{3}+\cdots+aq^{n-1}...$ ，等比数列，a 不等于 0，求其收敛性质；</p>
+<ul>
+<li>当 q 不等于 1 时，$S_{n}=\frac{a(1-q^{n})}{1-q}$</li>
+<li class="list-indent-1">当 q 小于 1 时，此时其极限即为 0 -&gt; 收敛；</li>
+<li class="list-indent-1">当 q 大于 1 时，此时其极限不存在 -&gt; 发散；</li>
+<li>如果 q 等于 1</li>
+<li class="list-indent-1">若 <code>q=1</code>，则 $a+a+a+\cdots$，无穷个 a 相加为无限，因此发散；</li>
+<li class="list-indent-1">若 <code>q=-1</code>，则 $a-a+a-a+a-a+\cdots$</li>
+<li class="list-indent-2">奇数项 <code>-&gt;</code> 极限为 a；</li>
+<li class="list-indent-2">偶数项 <code>-&gt;</code> 极限为 0；</li>
+<li class="list-indent-2">所以极限不存在 <code>-&gt;</code> 发散；</li>
+</ul>
+<h3 id="section-5">47.1.2 级数的性质 </h3>
+<p><strong>基本性质</strong></p>
+<ul>
+<li>性质 1： $$如果\sum_{n=1}^{\infty}u_n 收敛于S，则\sum_{i=1}^{\infty}k u_n. 收敛于 kS$$</li>
+<li>性质 2：</li>
+<li class="list-indent-1">$$如果\sum_{n=1}^{\infty}H_{n}和\sum_{n=1}^{\infty}U_{n}分别收敛于 h 和 u，则\sum_{n=1}^{\infty}(H_{n}\pm U_{n})也收敛于h+u$$</li>
+<li class="list-indent-1">两个收敛的级数，相加或相减后仍然收敛；</li>
+<li class="list-indent-1">两个发散的级数，相加或相减后收敛性不确定；</li>
+<li class="list-indent-1">两个相加减后收敛的级数，原本的级数未必是收敛的；</li>
+<li class="list-indent-1">比如：</li>
+<li class="list-indent-2">$1+1+1+1...$ 和 $-1-1-1-1-1...$</li>
+<li class="list-indent-2">相加后：$(1-1)+(1-1)+(1-1)....$</li>
+<li>性质 3：</li>
+<li class="list-indent-1">在级数中去掉或加上<strong>有限项</strong>，敛散性不变，值可能会变化；</li>
+<li>性质 4：</li>
+<li class="list-indent-1">$$\sum u_n收敛，任意加括号后级数也收敛，且和不变$$</li>
+<li class="list-indent-1">比如：</li>
+<li class="list-indent-2">$u_{1}+u_{2}+u_{3}+u_{2}+u_{5}+u_{8}+u_{7}+u_{8}+......$</li>
+<li class="list-indent-2">$S_{1},S_{2},S_{3},S_{4},S_{5},S_{6},S_{7},S_{8}......$</li>
+<li class="list-indent-2">然后加括号：$(u_{1}+u_{2})+u_{3}+(u_{4}+u_{3})+(u_{6}+u_{7}+u_{8})+\cdots$</li>
+<li class="list-indent-2">括号的部分合并为：$v_{1}+v_{2}+v_{3}+v_{4}+\cdots$</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">1. <strong>加括号后收敛，原级数未必收敛</strong>；</li>
+<li class="list-indent-2">2. 加括号后发散的，原级数一定发散；</li>
+<li>性质 5：级数收敛的必要条件 </li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty u_n\text{ 收敛 }\longrightarrow\lim_{n\to\infty}u_n=0$$ </li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">$u_n$ 趋于 0，级数未必收敛.，所以是必要条件而非充要条件；</li>
+<li class="list-indent-2">比如调和级数为发散：$1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}+\cdots$；</li>
+</ul>
+<h2 id="section-6">47.2 级数分类</h2>
+<p><strong>分类</strong></p>
+<ul>
+<li>同号级数</li>
+<li class="list-indent-1">正项级数 <code>-&gt;</code> <a href="/notes/math-056/">Lecture 48：正项级数及其审敛准则</a></li>
+<li class="list-indent-1">负项级数：就是正项级数的基础上、加一个负号；</li>
+<li>变号级数：</li>
+<li class="list-indent-1">特殊的变号级数：交错级数 <code>-&gt;</code> <a href="/notes/math-057/">Lecture 49：交错级数与任意项级数</a></li>
+<li class="list-indent-1">一般的变号级数：任意项级数 <code>-&gt;</code> <a href="/notes/math-057/">Lecture 49：交错级数与任意项级数</a></li>
+</ul>
+<hr>
+<h3 id="section-7">题型： #常数项级数敛散性判定 </h3>
+<h4 id="section-8">PART 1：解题方法</h4>
+<p><strong>解题步骤</strong></p>
+<ul>
+<li>第一步：判断级数类型</li>
+<li class="list-indent-1">正项、交错、任意项</li>
+<li>第二步：根据级数，选择方法</li>
+<li class="list-indent-1">正项级数 <code>-&gt;</code> 用敛散性的五类判别法，做判定；</li>
+<li class="list-indent-1">交错级数 <code>-&gt;</code> 一个方法；</li>
+<li class="list-indent-1">任意项级数 <code>-&gt;</code> 一个方法；</li>
+<li>第三步：如果无法做出判定，此时可以使用定义和性质来进行判定</li>
+<li class="list-indent-1">定义和性质是适用于所有类型的级数的；</li>
+</ul>
+<p><strong>解题方法</strong></p>
+<ul>
+<li>考试的时候通常是考选择题，更建议使用直接法：找到对的选项，说明它对，而不是使用排除法、一个个找反例证明其他选项错；</li>
+<li>如何找：对当前选项，如果是错的，直接进入下一个；如果不清楚对错的，也先进入下一个，可能正确的就在后背；</li>
+</ul>
+<p><strong>常用结论</strong></p>
+<ul>
+<li>$$\sum_{n=1}^{+\infty}|b_{n|}收敛\rightarrow \sum_{n=1}^{+\infty}(b_{n})^{2}收敛$$</li>
+</ul>
+<h4 id="section-9">PART 2：典型例题</h4>
+<h4 id="section-10">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-054/index.html"><span>← 上一项</span><strong>Lecture 47：三重积分</strong></a>
+    <a class="article-pagination-next" href="../math-056/index.html"><span>下一项 →</span><strong>Lecture 48：正项级数</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

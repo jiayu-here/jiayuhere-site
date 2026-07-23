@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 14：向量空间 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 14：向量空间。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 向量组">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 14：向量空间 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 14：向量空间。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-083/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-083/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-083/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-083/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-083/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 14：向量空间</h1><p class="article-lead">考研数学学习笔记：Lecture 14：向量空间。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 4 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>向量组</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">14.1 基本概念 </a><a href="#section-3">14.2 基变换与坐标变换 </a></nav></details><div class="prose"><h2 id="section-1">14.1 基本概念 </h2>
+<h5 id="section-2"><strong>定义</strong>： #向量空间基本概念</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{若 }\xi_1,\xi_2,\cdots,\xi_n\text{ 是 }n\text{ 维向量空间 }\mathbb{R}^n\text{中的线性无关的有序向量组},\text{ 则任一向量 }\alpha\in\mathbb{R}^n\text{均可由}\xi_1,\xi_2,\cdots,\xi_n\text{线性表示,记为}$：$$a=a_{1}\xi_{1}+a_{2}\xi_{2}+\cdots+a_{n}\xi_{n}$$</blockquote>
+<blockquote>$\text{称有序向量组}\xi_1,\xi_2,\cdotp\cdotp\cdotp,\xi_n\text{是}\mathbf{R}^n\text{的一个基,基向量的个数 }n\text{ 称为向量空间的维数,而}\left[a_1,a_2,\cdotp\cdotp\cdotp,a_n\right]$ $([a_1,a_2,\cdots,a_n]^\mathrm{T})\text{称为向量}\alpha\text{在基}\xi_1,\xi_2,\cdots,\xi_n\text{下的坐标,或称为}\alpha\text{的坐标行(列)向量}.$</blockquote>
+<h2 id="section-3">14.2 基变换与坐标变换 </h2>
+<h5 id="section-4"><strong>定理</strong>： #基变换定理</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{若}\eta_1,\eta_2,\cdots,\eta_n\text{和}\xi_1,\xi_2,\cdots,\xi_n\text{是}\mathbb{R}^n\text{中的两个基,且有关系}$：</blockquote>
+<blockquote>$$[\eta_1,\eta_2,\cdots,\eta_n]=[\xi_1,\xi_2,\cdots,\xi_n]\begin{bmatrix}c_{11}&amp;c_{12}&amp;\cdots&amp;c_{1n}\\c_{21}&amp;c_{22}&amp;\cdots&amp;c_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\c_{n1}&amp;c_{n2}&amp;\cdots&amp;c_{nn}\end{bmatrix}=[\xi_1,\xi_2,\cdots,\xi_n]C,$$</blockquote>
+<blockquote>1. $\text{则}\left(*\right)\text{式称为由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\eta_n\text{的基变换公式;}$</blockquote>
+<blockquote>2. ${矩阵}C\text{称为由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\\ \eta_n\text{的过渡矩阵},C\text{的第}i\text{列即是}\eta_i\text{在基}\xi_1,\xi_2,\cdots,\xi_n\text{下的坐标},\text{且过渡矩阵}C\text{是可逆矩阵}$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>在方程中，可以将当前的坐标系的计算、转换为其他坐标系的计算；</li>
+</ul>
+<p><strong>概念</strong>：基坐标变换</p>
+<ul>
+<li>举例：</li>
+<li class="list-indent-1">可以理解为： $\begin{bmatrix}2&amp;&amp;-1\\1&amp;&amp;1\end{bmatrix}$ 矩阵将 <code>[1,0]</code> 和 <code>[0,1]</code> 基向量进行变换；</li>
+<li class="list-indent-1">即：变换后的向量仍旧是相同的线性组合，不过使用的是新的基向量；</li>
+<li class="list-indent-1">$\begin{bmatrix}2&amp;&amp;-1\\1&amp;&amp;1\end{bmatrix}\begin{bmatrix}-1\\2\end{bmatrix}=-1\begin{bmatrix}2\\1\end{bmatrix}+2\begin{bmatrix}-1\\1\end{bmatrix}=\begin{bmatrix}-4\\1\end{bmatrix}$</li>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/609bf8645698-Drawing-2024-06-29-19.34.16.excalidraw.png" alt="Drawing 2024-06-29 19.34.16.excalidraw" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-5"><strong>定理</strong>： #坐标变换定理 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设 $\alpha$ 在基 $\xi_1,\xi_2,\cdots,\xi_n$ 和基 $\eta_1,\eta_2,\cdots,\eta_n$ 下的坐标分别是 $x=[x_1,x_2,\cdots,x_n]^{\mathrm{T}},y=[y_1$, $y_{2},\cdots,y_{n}]^{T},即$：$$\alpha=\left[\xi_{1},\xi_{2},\cdots,\xi_{n}\right]x=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right]y$$</blockquote>
+<blockquote>$\text{又由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\eta_n\text{的过渡矩阵为}C,\text{即}$：</blockquote>
+<blockquote>$$[\eta_{1},\eta_{2},\cdots,\eta_{n}]=[\xi_{1},\xi_{2},\cdots,\xi_{n}]C,$$</blockquote>
+<blockquote>则：$$\alpha=[\xi_{1},\xi_{2},\cdots,\xi_{n}]x=[\eta_{1},\eta_{2},\cdots,\eta_{n}]y=[\xi_{1},\xi_{2},\cdots,\xi_{n}]Cy$$</blockquote>
+<blockquote>得到坐标变换公式：$x=Cy或y=C^{-1}x$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： #施式正交化</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：原本线性无关的向量，将其变成垂直的向量；</blockquote>
+<blockquote>$$\begin{cases}\beta_{1}=\alpha_{1}\\\beta_{2}=\alpha_{2}-\frac{(\alpha_{2},\beta_{1})}{(\beta_{1},\beta_{1})}\beta_{1}\end{cases}$$</blockquote>
+<p><strong>解释</strong></p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-082/index.html"><span>← 上一项</span><strong>Lecture 13：等价向量组</strong></a>
+    <a class="article-pagination-next" href="../math-084/index.html"><span>下一项 →</span><strong>Lecture 15：齐次线性方程组</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

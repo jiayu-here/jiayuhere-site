@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 52：对坐标的曲面积分 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 52：对坐标的曲面积分。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 多元积分学及其应用">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 52：对坐标的曲面积分 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 52：对坐标的曲面积分。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-068/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-068/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-068/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-068/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-068/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 52：对坐标的曲面积分</h1><p class="article-lead">考研数学学习笔记：Lecture 52：对坐标的曲面积分。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-12</span><span>约 4 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元积分学及其应用</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">60.1 有向曲面及曲面元素的投影</a><a href="#section-3">60.2 第二类曲面积分：对坐标的曲面积分</a><a href="#section-5">60.3 对坐标的曲面积分的计算</a><a href="#section-10">60.4 两类曲面积分的联系 </a></nav></details><div class="prose"><h2 id="section-1">60.1 有向曲面及曲面元素的投影</h2>
+<h3 id="section-2">60.1.1 基本曲面分类</h3>
+<p><strong>双侧曲面</strong></p>
+<ul>
+<li>有两侧</li>
+</ul>
+<p><strong>只有一侧</strong></p>
+<ul>
+<li>莫比乌斯带</li>
+</ul>
+<p><strong>指定了侧的曲面，称之为有向曲面，其方向用法向量指向表示</strong></p>
+<p><img class="note-image" src="/assets/notes/68f43fccddef-Pasted-image-20240212153621.png" alt="Pasted image 20240212153621" loading="lazy" decoding="async"></p>
+<ul>
+<li>$\text{设 }\Sigma\text{为有向曲面},\text{其面元 }\Delta S\text{ 在 }xOy\text{ 面上的投影记为}\left(\Delta S\right)_{xy}$</li>
+</ul>
+<h2 id="section-3">60.2 第二类曲面积分：对坐标的曲面积分</h2>
+<h5 id="section-4"><strong>定义</strong>： #第二类曲面积分</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\iint_{\Sigma}R(x,y,z)dxdy=\lim_{\lambda\to0}\sum_{i=1}^nR(\xi_i,\eta_i,\zeta_i)(\Delta S_i)_{xy}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意：第二类曲面积分有方向</li>
+<li>概念：什么是曲面的方向</li>
+<li class="list-indent-1">曲面的方向就是曲面侧向的方向，法向方向朝上、则侧朝上，法向方向朝下、则侧朝下；</li>
+<li>解释：</li>
+<li class="list-indent-1">一点的函数值 $R(\xi_i,\eta_i,\zeta_i)$ 乘以它在 <code>xy</code> 上的投影： $(\Delta S_i)_{xy}$</li>
+<li class="list-indent-1">如果是 $dxdy$ <code>-&gt;</code> 在 <code>xy</code> 上的投影；</li>
+<li class="list-indent-1">如果是 $dzdx$ <code>-&gt;</code> 在 <code>xz</code> 上的投影；</li>
+<li>性质：与积分曲面的方向有关</li>
+<li class="list-indent-1">改变曲面的方向，其值相反；</li>
+<li class="list-indent-1">$$\iint_{\Sigma}Pdydz+Qdzdx+Rdxdy=-\iint_{-\Sigma}Pdydz+Qdzdx+Rdxdy$$</li>
+</ul>
+<h2 id="section-5">60.3 对坐标的曲面积分的计算</h2>
+<h3 id="section-6">60.3.1 直接法</h3>
+<h5 id="section-7"><strong>定理</strong>： #第二类曲面积分的计算</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>1. $\text{设光滑曲面 }\Sigma:z=z(x,y),(x,y){\in}D_{xy}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：</blockquote>
+<blockquote>$$\iint_{\Sigma}R(x,y,z)\operatorname{d}x\operatorname{d}y=\pm\iint_{D_{xy}}R(x,y,z(x,y))\operatorname{d}x\operatorname{d}y$$</blockquote>
+<blockquote>2. $\text{设光滑曲面 }\Sigma:x=z(y,z),(y,z){\in}D_{yz}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：</blockquote>
+<blockquote>$$\iint_{\Sigma}P(x,y,z){\mathrm{d}y\mathrm{d}z}=\pm\iint_{D_{yz}}P[x(y,z),y,z]\mathrm{d}ydz$$</blockquote>
+<blockquote>3. $\text{设曲面: }\Sigma:y=y (z, x),\quad (z, x)\in D_{zx}$，则：$$$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>解释：</li>
+<li class="list-indent-1">把 <code>dxdy</code> 的二型面积分，化成了 <code>Dxy</code> 投影域上的面积分；</li>
+<li>正负号的选择：</li>
+<li class="list-indent-1">若是在 <code>xy</code> 上投影： </li>
+<li class="list-indent-2">上侧做积分 <code>-&gt;</code> 正号；</li>
+<li class="list-indent-2">下侧做积分 <code>-&gt;</code> 负号；</li>
+<li class="list-indent-1">若是在 <code>yz</code> 上投影： </li>
+<li class="list-indent-2"><code>yoz</code> 的前侧 <code>-&gt;</code> 正号；</li>
+<li class="list-indent-2"><code>yoz</code> 的后侧 <code>-&gt;</code> 负号；</li>
+<li class="list-indent-1">若是在 <code>xz</code> 上投影： </li>
+<li class="list-indent-2"><code>xoz</code> 的右侧 <code>-&gt;</code> 正号；</li>
+<li class="list-indent-2"><code>xoz</code> 的左侧 <code>-&gt;</code> 负号；</li>
+<li>注意： </li>
+<li class="list-indent-1">若是在 <code>z=f(x,y)</code> 时：</li>
+<li class="list-indent-1">若 <code>x</code> 为常数 <code>-&gt;</code> 投影域就是直线，此时积分就是等于 <code>0</code>；</li>
+<li class="list-indent-1">若 <code>y</code> 为常数 <code>-&gt;</code> 投影域也是直线，此时积分也是等于 <code>0</code>；</li>
+</ul>
+<h3 id="section-8">60.3.2 高斯公式 </h3>
+<h5 id="section-9"><strong>定理</strong>： #高斯公式 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\oint\oint_{\Sigma_{\text{外}}}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}zdx+R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)\mathrm{d}V$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">建立一个封闭曲面外侧的二型面积分，跟这个曲面所围成区域上空间体的三重积分的关系；</li>
+<li class="list-indent-1">实际上，它是跟曲线积分里边的格林公式是完全类似的结论；</li>
+<li class="list-indent-1">格林公式是建立一个平面封闭曲线的的线积分和这个封闭曲线所围成区域上二重积分的关系；</li>
+</ul>
+<p><strong>补充</strong>：补面用高斯公式</p>
+<ul>
+<li>曲面不封闭时，补一个面，使用高斯公式；</li>
+<li>然后用高斯公式计算的结果 <code>-</code> 补上的部分； </li>
+</ul>
+<h2 id="section-10">60.4 两类曲面积分的联系 </h2>
+<p><strong>概念</strong>：两类曲面积分的联系</p>
+<ul>
+<li>公式：$$\iint_{\Sigma}(P\cos\alpha+Q\cos\beta+R\cos\gamma)\mathrm{d}S=\iint_{\Sigma}(P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}z\mathrm{d}x+R\mathrm{d}x\mathrm{d}y)$$</li>
+<li>解释： </li>
+<li class="list-indent-1">右端是一个二型面积分；</li>
+<li class="list-indent-1">左端是一个一型面积分；</li>
+<li class="list-indent-1">$(\cos\alpha+\cos\beta+\cos\gamma)$ 是这一点上，曲面的法线向量的方向余弦；</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-067/index.html"><span>← 上一项</span><strong>Lecture 51：对面积的曲面积分</strong></a>
+    <a class="article-pagination-next" href="../math-069/index.html"><span>下一项 →</span><strong>Lecture 61：场论初步</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

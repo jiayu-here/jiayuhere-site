@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 15：齐次线性方程组 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 15：齐次线性方程组。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 线性方程组">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 15：齐次线性方程组 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 15：齐次线性方程组。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-084/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-084/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-084/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-084/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-084/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 15：齐次线性方程组</h1><p class="article-lead">考研数学学习笔记：Lecture 15：齐次线性方程组。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 10 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>线性方程组</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">15.1 知识结构</a><a href="#section-2">15.2 线性方程组</a><a href="#section-7">15.3 齐次线性方程组概念</a><a href="#section-14">15.4 求解方法与步骤 </a></nav></details><div class="prose"><h2 id="section-1">15.1 知识结构</h2>
+<p><strong>介绍</strong>：知识结构</p>
+<ul>
+<li>齐次线性方程组</li>
+<li class="list-indent-1">有解的条件</li>
+<li class="list-indent-1">解的性质</li>
+<li class="list-indent-1">基础解系和解的结构</li>
+<li class="list-indent-1">求解方法与步骤</li>
+<li>非齐次线性方程组</li>
+<li class="list-indent-1">有解的条件</li>
+<li class="list-indent-1">解的性质</li>
+<li class="list-indent-1">求解方法和步骤</li>
+<li>两个方程组的公共解</li>
+<li>同解方程组 </li>
+</ul>
+<h2 id="section-2">15.2 线性方程组</h2>
+<h3 id="section-3">15.2.1 概念引入</h3>
+<p><strong>概念</strong>：方程组与向量的关系 </p>
+<ul>
+<li>1. 本质上，线性方程组与向量组其实是一回事，方程组问题就是向量组问题，因为方程组和向量组是同一个问题的两种表现形式，其本质一样，所以解决方法也一样；</li>
+<li>2. 而方程组的解，就是描述列向量组中各向量之间数量关系的系数；</li>
+</ul>
+<p><strong>概念</strong>：线性方程组</p>
+<ul>
+<li>举例： </li>
+<li>$\begin{gathered}2 x+5 y+3 z =-3 \\4 x+0 y+8 z =0 \\1 x+3 y+0 z =2 \end{gathered}$</li>
+</ul>
+<p><strong>概念</strong>：从线性方程组到矩阵</p>
+<ul>
+<li>矩阵方程： </li>
+<li class="list-indent-1"><code>Ax=v</code></li>
+<li>意义： </li>
+<li class="list-indent-1">当前我们存在一个向量 <code>x</code>，我们可以通过 <code>A</code> 这个矩阵，在对 x 进行线性变换后、使得 x 和向量 <code>v</code> 重合；</li>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/76169b5c8dc8-Pasted-image-20240627210554.png" alt="Pasted image 20240627210554" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>分析</strong>：假设当前是二维矩阵 <code>A</code> </p>
+<ul>
+<li>情况一：矩阵 A 的行列式不为 <code>0</code> 时</li>
+<li class="list-indent-1">意义： </li>
+<li class="list-indent-2">此时空间并未被挤压为 <code>0</code> 面积的区域；</li>
+<li class="list-indent-2">在这种情况下，有且仅有一个向量 (在变换后)与 v 重合；</li>
+<li class="list-indent-2">这也就意味着：对于一个行列式不为 0 的方程组，几乎可以确定其存在的唯一解；</li>
+<li class="list-indent-1">总结： </li>
+<li class="list-indent-2">只要变换后不将解空间压缩到一个更低的维度上（即 A 的行列式不为 0），则 A 存在的逆变换，使得应用 <code>A</code> 变换再应用 <code>A</code> 逆变换之后，结果与恒等变换无异；</li>
+<li class="list-indent-2">此时求解方程：$$Ax=v\rightarrow A^{-1}A\vec{\mathbf{x}}=A^{-1}\vec{\mathbf{v}}\rightarrow x=A^{-1}v$$</li>
+<li>情况二：矩阵 A 的行列式为 <code>0</code> 时</li>
+<li class="list-indent-1">意义： </li>
+<li class="list-indent-2">此时不是矩阵没有逆变换，与这个方程组相关的变换将空间压缩到更低的维度上；</li>
+<li class="list-indent-2">当 $A\vec{\mathbf{x}}=\left[\begin{array}{cc}0\\0\end{array}\right]$ 时，零空间给出的就是这个向量方程所有可能的解；</li>
+<li>补充：关于逆矩阵</li>
+<li class="list-indent-1">$$\begin{array}{|c|c|c|}\hline A^{-1}A=&amp;\begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix}\\\hline\text{The transformation}\\\hline\text{that does nothing}\\\hline\text{“什么都不做”的变换}\\\hline\end{array}$$</li>
+</ul>
+<p>- </p>
+<h3 id="section-4">15.2.2 定义</h3>
+<h5 id="section-5"><strong>定义</strong>： #齐次方程 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：如果将函数的所有自变量乘以一个非零因子，此时因变量相当于原函数乘以这个非零因子的幂，则称此函数为齐次函数。即需满足关系: $$f\left(tx_{1},tx_{2},tx_{3},\cdots,tx_{n}\right)=t^{k}f\left(x_{1},x_{2},x_{3},\cdots,x_{n}\right),t\neq0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>举例：$$f(x,y)=\frac{x^{2}-2xy}{xy+3y^{2}}$$</li>
+<li class="list-indent-1">其是一个零次齐次方程； </li>
+</ul>
+<h5 id="section-6"><strong>定义</strong>： #非齐次线性方程组 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>非齐次线性方程组： $$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots+a_{mn}x_{n}=b_{m},\end{cases}$$</blockquote>
+<blockquote>该方程组的<strong>系数矩阵</strong>就是若干个列向量拼成的：$$A=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
+<blockquote>其<strong>增广矩阵</strong>就是系数矩阵再添加一个列向量拼成的：$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}&amp;b_{1}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}&amp;b_{2}\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}&amp;b_{m}\end{bmatrix}$$ </blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">该方程组的未知数就是向量组中各成员的系数；</li>
+<li class="list-indent-1">$x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}=\beta$</li>
+<li class="list-indent-1">其中：$a_{j}=\begin{bmatrix}a_{1j}\\a_{2j}\\\vdots\\a_{mj}\end{bmatrix},j=1,2,\cdots,n,\beta=\begin{bmatrix}b_{1}\\b_{2}\\\vdots\\b_{m}\end{bmatrix}$</li>
+<li>解释：</li>
+<li class="list-indent-1">所以从本质上说，方程组问题就是向量组问题，方程组和向量组是同一个问题的两种表现形式，其本质一样，所以解决方法也一样；</li>
+</ul>
+<h2 id="section-7">15.3 齐次线性方程组概念</h2>
+<h3 id="section-8">15.3.1 齐次线性方程组基本概念</h3>
+<h5 id="section-9"><strong>定义</strong>： #齐次线性方程组</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\\\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots+a_{mn}x_{n}=0\end{cases}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>向量形式： </li>
+<li class="list-indent-1">$x_{1}a_{1}+x_{2}a_{2}+\cdots+x_{n}a_{n}=0$</li>
+<li class="list-indent-1">即：全部都线性无关；</li>
+<li>其中： $a_{j}=\begin{bmatrix}a_{1j}\\a_{2j}\\\vdots\\a_{mj}\end{bmatrix},j=1,2,\cdots,n$</li>
+<li>其矩阵形式为：$A_{m\times n}x=0$</li>
+<li>其中： </li>
+<li class="list-indent-1">$A_{m\times n}=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix},x=\begin{bmatrix}x_{1}\\x_{2}\\\vdots\\x_{n}\end{bmatrix}$</li>
+</ul>
+<p><strong>概念</strong>：线性方程的解与向量的关系</p>
+<ul>
+<li>方程组的解，就是描述<strong>列向量组中各向量之间数量关系的系数</strong></li>
+</ul>
+<h3 id="section-10">15.3.2 有解的条件 </h3>
+<p><strong>概念</strong>：有解的条件</p>
+<ul>
+<li>前提： </li>
+<li class="list-indent-1">对方程组：$\\\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots+a_{mn}x_{n}=0\end{cases}$</li>
+<li>条件： </li>
+<li class="list-indent-1">情况 1</li>
+<li class="list-indent-2">描述： </li>
+<li class="list-indent-3">$$当r\left(A\right)=n\left(\alpha_{1},\alpha_{2},\cdots,\alpha_{n}\text{线性无关}\right)\text{时,方程组}\left(I\right)\text{有唯一零解}$$</li>
+<li class="list-indent-2">概念：</li>
+<li class="list-indent-3">当 $A$ 是 $A_{m*n}$ 时，其中的 $m$ 代表行数，可以小于 $m$；但 $n$ 代表列数，即 $n$ 个未知数就是 $n$ 个；</li>
+<li class="list-indent-2">解释：</li>
+<li class="list-indent-3">如果系数方程的列满秩，则系数方程只有唯一零解（唯一解）；</li>
+<li class="list-indent-3">即：当前方程组的 <code>S=n-r(A)=0</code>，<code>n</code> 代表列数，即多少个向量，而 <code>r(A)</code> 代表秩，<code>S</code> 代表加上<strong>秩代表的限制之后的自由度</strong>，当 <code>S=0</code> 时，满秩，因此唯一零解；</li>
+<li class="list-indent-1">情况 2 </li>
+<li class="list-indent-2">描述： </li>
+<li class="list-indent-3">$$\text{当}r(A)=r&lt;n\left(a_1,a_2,\cdots,a_n\text{线性相关}\right)\text{时,方程组}\left(I\right)\text{有非零解}\left(\text{无穷多解}\right),\text{且有}n-r\text{个线性无关解}$$ </li>
+<li class="list-indent-2">解释： </li>
+<li class="list-indent-3">可以用 <code>S=n-r(A)</code> 来计算受约束后的自由度；</li>
+<li class="list-indent-3"><code>n</code> 表示自由度；</li>
+<li class="list-indent-3"><code>r(A)</code> 表示真实的约束个数；</li>
+<li class="list-indent-3"><code>S</code> 代表受约束的自由度，即当前方程组的解空间；</li>
+<li class="list-indent-2">举例：比如假设 <code>n=5, r=3</code> ，当 <code>n-r=2</code> 时； </li>
+<li class="list-indent-3">表示：在一个五维的空间当中，有三个自变量的约束，因此只有两个自由的变量；</li>
+<li class="list-indent-3">这两个自由的维度构成了一个平面，这个平面就是其解空间；</li>
+<li>分析： </li>
+<li class="list-indent-1">考题主要靠第二种；</li>
+<li class="list-indent-1">即方程组一般是“胖胖呼呼方程组” <code>&lt;-</code> <code>m&lt;n</code></li>
+</ul>
+<h3 id="section-11">15.3.3 基础解系和解的结构 </h3>
+<h5 id="section-12"><strong>定义</strong>： #基础解系 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：基础解系：$\xi_{1},\xi_{2},\cdots,\xi_{n-r}$ 满足以下三个条件 <code>&lt;-</code> 对于 <code>r(A)&lt;n</code> 的情况：</blockquote>
+<blockquote>1. 是方程组 <code>AX=0</code> 的解；</blockquote>
+<blockquote>2. 线性无关；</blockquote>
+<blockquote>3. 方程组 <code>AX=0</code> 的任一解均可由 $\xi_{1},\xi_{2},\cdots,\xi_{n-r}$ 线性表示</blockquote>
+<blockquote>则称 $\xi_{1},\xi_{2},\cdots,\xi_{n-r}$ 位 <code>AX=0</code> 的基础解系；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>作用：基础解系代表受到真实约束后的解的空间（<code>S=n-r(A)</code>）；</li>
+</ul>
+<h5 id="section-13"><strong>定义</strong>： #通解 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\text{设}\quad\xi_1,\xi_2,\cdots,\xi_{n-r}\quad\text{是}Ax=0\text{ 的基础解系,则}\quad{k_1\xi_1+k_2\xi_2+\cdots+k_{n-r}\xi_{n-r}\quad\text{是方程组}Ax=0\text{ 的通解,}}其中k为任意常数.$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>基础解系的线性组合可以表达解空间中的所有向量，因此可以用 $k_1\xi_1+k_2\xi_2+\cdots+k_{n-r}\xi_{n-r}$ 表示； </li>
+<li>其中的系数就是其在坐标系中的坐标； </li>
+</ul>
+<h2 id="section-14">15.4 求解方法与步骤 </h2>
+<p><strong>步骤</strong>：齐次线性方程求解</p>
+<ul>
+<li>第一步：</li>
+<li class="list-indent-1">1.1 将系数矩阵 <code>A</code> 作初等行变换，化成行阶梯形矩阵 <code>B</code> </li>
+<li class="list-indent-2">补充：</li>
+<li class="list-indent-3">一定是初等行变换；</li>
+<li class="list-indent-3">或行最简阶梯形矩阵 <code>B</code>；</li>
+<li class="list-indent-2">概念： </li>
+<li class="list-indent-3">初等行变换将方程组化为同解方程组，故 <code>Ax=0</code> 和 <code>Bx=0</code> 同解，只需解 <code>Bx=0</code> 即可；</li>
+<li class="list-indent-2">名词： </li>
+<li class="list-indent-3"><strong>基础解系 = 线性无关解 = <code>S=n-r()</code></strong></li>
+<li class="list-indent-1">1.2 台阶数为 r，并记 <code>r(A)=r</code>；</li>
+<li class="list-indent-2">阶梯矩阵的台阶数就是约束的个数，即秩的大小；</li>
+<li class="list-indent-2">补充：阶梯型矩阵的 <code>行秩=列秩=秩</code>，但一般就直接按照列秩：数台阶数就可以求得；</li>
+<li class="list-indent-1">1.3 公式： </li>
+<li class="list-indent-2">$$A\xrightarrow{\text{初等行变换}}B=\begin{bmatrix}c_{11}&amp;c_{12}&amp;\cdots&amp;c_{1r}&amp;\cdots&amp;c_{1n}\\0&amp;c_{22}&amp;\cdots&amp;c_{2r}&amp;\cdots&amp;c_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;c_{rr}&amp;\cdots&amp;c_{m}\\0&amp;0&amp;\cdots&amp;0&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;0&amp;\cdots&amp;0\end{bmatrix}_{m\times n},$$</li>
+<li class="list-indent-2">其中 <code>m</code> 是原方程组中方程个数，<code>n</code> 是未知量个数；</li>
+<li>第二步： </li>
+<li class="list-indent-1">按列找出秩为 <code>r</code> 的子矩阵，剩余列位置的未知数设为自由变量；</li>
+<li class="list-indent-1">注意：按列找是 <code>r</code> 个，按行找肯定也是 <code>r</code> 个，但按列找更方便；</li>
+<li>第三步： </li>
+<li class="list-indent-1">按基础解系定义，求出 $\xi_{1},\xi_{2},\cdots,\xi_{n-r}$ ，并写出通解；</li>
+<li class="list-indent-1">补充： </li>
+<li class="list-indent-2"><code>S=2</code>，即两个向量时：可以定义一个 <code>(1,0)</code> 和一个 <code>(0,1)</code></li>
+<li class="list-indent-2"><code>S=1</code>，即一个向量时：只要不是零向量即可，可以选一个 <code>(1)</code></li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-083/index.html"><span>← 上一项</span><strong>Lecture 14：向量空间</strong></a>
+    <a class="article-pagination-next" href="../math-085/index.html"><span>下一项 →</span><strong>Lecture 16：非齐次线性方程组</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

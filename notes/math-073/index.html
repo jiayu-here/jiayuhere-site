@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 4：矩阵的定义及其基本运算 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 4：矩阵的定义及其基本运算。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 矩阵">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 4：矩阵的定义及其基本运算 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 4：矩阵的定义及其基本运算。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-073/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-073/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-073/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-073/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-073/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 4：矩阵的定义及其基本运算</h1><p class="article-lead">考研数学学习笔记：Lecture 4：矩阵的定义及其基本运算。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 19 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>矩阵</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 矩阵的本质</a><a href="#section-5">4.2 矩阵的定义</a><a href="#section-7">4.3 矩阵运算 </a><a href="#section-15">4.4 几种重要矩阵 </a><a href="#section-18">4.5 矩阵的复合变换</a></nav></details><div class="prose"><h2 id="section-1">4.1 矩阵的本质</h2>
+<h3 id="section-2">4.1.1 矩阵概念</h3>
+<p><strong>引入</strong>：矩阵的作用 <code>-&gt;</code> 表达系统信息；</p>
+<ul>
+<li>核心：任何一个矩阵，最后都可以用基向量来表示，矩阵中的信息都是可以用基向量表达出来的；</li>
+</ul>
+<p><strong>概念</strong>：什么是矩阵</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">列：</li>
+<li class="list-indent-2">代表变换的基向量的个数；</li>
+<li class="list-indent-1">行： </li>
+<li class="list-indent-2">代表变换后空间的维数；</li>
+<li>意义： </li>
+<li class="list-indent-1">从线性变换的角度，假设现在有一个三维方阵矩阵 $A_{3*3}$，此时 A 矩阵的三个列就代表了：在进行线性变换 <code>Ax=b</code> 当中，对三个基向量的变换；</li>
+<li>举例：如果当前是 <code>3*2</code> 的矩阵，即当前矩阵有三行、两列；</li>
+<li class="list-indent-1">两列：也就是有两个基向量，也就是一个二维的平面；</li>
+<li class="list-indent-1">三行：代表这两个基向量有 <code>[x,y,z]</code> 这三个维度；</li>
+<li class="list-indent-1">乘以三行两列，也就代表：</li>
+<li class="list-indent-2">将两个基向量映射到三维的空间中，因此变换构成了三维空间中的二维平面；</li>
+<li class="list-indent-2">当出现 <code>3<em>2</code> 的矩阵 $A_{3</em>2}$ 时，其表示将一个二维的图形映射到三维的空间中；因为 A 有两个基向量，并且这两个基向量现在是三维的 <code>[x,y,z]</code>；</li>
+<li>举例： 如果当前是 <code>2*3</code> 的矩阵，即当前矩阵有两行、三列</li>
+<li class="list-indent-1">当出现 <code>2<em>3</code> 的矩阵 $A_{3</em>2}$ 时，其表示将一个三维的图形映射到二维的空间中；因为 A 有三个基向量，并且这三个基向量现在是二维的 <code>[x,y]</code> 基向量；</li>
+</ul>
+<p><strong>概念</strong>：矩阵和行列式分别的乘积</p>
+<ul>
+<li>矩阵：表示系统信息的乘积，作用在每一个系统信息上</li>
+<li class="list-indent-1">$$\left.k\cdot A=\left(\begin{matrix}ka_{11}&amp;ka_{12}\\ka_{21}&amp;ka_{22}\end{matrix}\right.\right)$$</li>
+<li>行列式：表示对一个测度（比如一个平行四边形的某个维度）进行乘积</li>
+<li class="list-indent-1">$$k|A|=\left|\begin{matrix}ka_{11}&amp;ka_{12}\\a_{21}&amp;a_{22}\end{matrix}\right|$$</li>
+<li>公式：</li>
+<li class="list-indent-1">$$|kA|=k^{n}\cdot|A|$$</li>
+</ul>
+<p><strong>概念</strong>：矩阵信息表达中、数据和数据之间的关系</p>
+<ul>
+<li>引入：</li>
+<li class="list-indent-1">矩阵不一定是方形的，可能是 <code>1000<em>2</code> 或者 <code>2</em>1000</code>；</li>
+<li><code>Gram</code> 矩阵</li>
+<li class="list-indent-1">对于 $A=(\begin{matrix}a\\b\end{matrix})$ ，$A^T=(a\quad b)$ $A^{T}A=(ab)(\begin{matrix}a\\b\end{matrix})=\alpha^{T}\cdot\alpha=||\alpha||^{2}=||\alpha||^{2}*\cos 0$</li>
+<li>作用：</li>
+<li class="list-indent-1">如果只是给了你一个 $A=(\alpha_1\quad \alpha_2)$ 的矩阵，其实并不知道其中 $\alpha_1\quad \alpha_2$ 之间的关系；但是可以通过将 $A$ 乘以其转置矩阵的方式，得到其中更多的信息：</li>
+<li class="list-indent-1">$$A^{T}A=\left(\begin{matrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{matrix}\right)\left(\alpha_{1}\alpha_{2}\right)=\left.k\cdot A=\left(\begin{matrix}||\alpha_1||||\alpha_1||<em>\cos \theta_{11}&amp;||\alpha_1||||\alpha_2||</em>\cos \theta_{12}\\||\alpha_2||||\alpha_1||<em>\cos \theta_{21}&amp;||\alpha_2||||\alpha_2||</em>\cos \theta_{22}\end{matrix}\right.\right)$$</li>
+<li class="list-indent-1">在这里面可以得到数据之间的相似度；</li>
+<li>概念：</li>
+<li class="list-indent-1">矩阵不能运算，但是其若干<strong>行 (列) 向量之间</strong>可能存在着某种关系</li>
+</ul>
+<p><strong>重要观点 1</strong>：矩阵也是由若干行 (列) 向量拼成的 </p>
+<ul>
+<li>上面那个矩阵可以看作由三个行向量：$[1,2,3],[4,6,9],[2,4,6]$ 组成，也可以看作是三个列向量组成：$[1,6,2]^{\mathrm{T}},[2,7,4]^{\mathrm{T}}与[3,9,6]^{\mathrm{T}}$</li>
+</ul>
+<h5 id="section-3"><strong>定义</strong>： #矩阵的秩</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 $A$ 是 $m*n$ 矩阵，$A$ 中<strong>最高阶非零子式的阶数</strong>称为<strong>矩阵的秩</strong>，记为 $r(A)$ </blockquote>
+<blockquote>也可以这样定义：若存在 $k$ 阶子式不为零，而任意 $k+1$ 阶子式 (如果有的话) 全为零，则 $r(A)=k$，且：</blockquote>
+<blockquote>$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{可逆}$$</blockquote>
+<blockquote>即：矩阵秩的本质，就是组成该矩阵的线性无关的向量的个数</blockquote>
+<p><strong>概念</strong></p>
+<ul>
+<li>解释：</li>
+<li class="list-indent-1">如果一个向量，可以找到其基准向量、其所有内容可以使用基准向量表示出来；</li>
+<li class="list-indent-1">基准向量当中成员的个数，就是矩阵的秩；</li>
+<li>意义：</li>
+<li class="list-indent-1">比如秩为 1：</li>
+<li class="list-indent-1">这个矩阵所形成的一个世界是一维的；</li>
+<li class="list-indent-1">一维不仅是一个 <code>x</code> 轴；</li>
+</ul>
+<h3 id="section-4">4.1.2 矩阵和行列式区别 </h3>
+<p>1、行列式的本质是线性变换的放大率，而矩阵的本质就是个数表。</p>
+<p>2、行列式行数=列数，矩阵不一定（行数列数都等于n的叫n阶方阵），二者的表示方式亦有区别。</p>
+<p>3、行列式与矩阵的运算明显不同</p>
+<p>（1） 相等：只有两个同型的矩阵才有可能相等，并且要求对应元素都相等；而两个行列式相等不要求其对应元素都相等，甚至阶数还可以不一样，只要两个行列式作为两个数的值是相等即可。</p>
+<p>（2）加（减）法：两个矩阵相加（减）是将其对应元素相加（减），因此只有同型的矩阵才可以相加（减）；而两行列式作为两个数总是可以相加（减）的。</p>
+<p>（3）  数乘运算：一个数乘以矩阵是指该数乘以矩阵的每一个元素；而数乘行列式，只能用此数乘行列式的某一行或列，提取公因数也是如此。</p>
+<p>（4）  乘法：矩阵的乘法不满足交换律，所以，一般地，   AB≠BA。但是，如果 A与 B 都是 n 阶方阵，则有 |AB|=|A| |B|=|B| |A|=|BA|。</p>
+<h2 id="section-5">4.2 矩阵的定义</h2>
+<h5 id="section-6"><strong>定义</strong>： #矩阵 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{由}m\times n\text{ 个数}a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{排成的}m\text{行}n\text{列的矩形表格}$：</blockquote>
+<blockquote>$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
+<blockquote>其称为一个 $m\times n$ 矩阵，简记为 $A$ 或 $\left(a_{ij}\right)_{m\times n}\left(i=1,2,\cdotp\cdotp\cdotp,m;\: j=1,2,\cdotp\cdotp\cdotp,n\right).$ </blockquote>
+<blockquote>当 $m=n$ 时，称 $A$ 为 $n$ 阶方阵；</blockquote>
+<blockquote>两个矩阵 $A=\left(a_ij\right)_{mxn},\boldsymbol{B}=\left(b_{ij}\right)_{sxk}$，若 $m=s,n=k$,则称 $A$ 与 $\boldsymbol B$ 为同型矩阵.</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>补充：为什么要研究方阵</li>
+<li class="list-indent-1">实际情况中，使用矩阵时经常需要使用到非方阵，经常不是方形；</li>
+<li class="list-indent-1">但如果要使用逆矩阵等性质时，又必须要基于方阵来求；</li>
+<li class="list-indent-1">所以就需要经常使用 $AA^T$ 来得到非方阵矩阵的方阵形式；</li>
+<li>同型矩阵：</li>
+<li class="list-indent-1"><code>A</code> 和 <code>B</code> 的行和列数量相等；</li>
+</ul>
+<h2 id="section-7">4.3 矩阵运算 </h2>
+<p><strong>分析</strong>：如何计算矩阵</p>
+<ul>
+<li>1. 先看其是不是 <code>秩 1 矩阵</code> </li>
+<li>2. 如果不是 <code>秩 1 矩阵</code> ，此时可以考虑试算一下其平方或三次方；</li>
+<li class="list-indent-1">举例：$\left(\begin{matrix}0&amp;-1\\1&amp;0\end{matrix}\right)^4=\left(\begin{matrix}1&amp;0\\0&amp;1\end{matrix}\right)$ 即单位阵 <code>&lt;-</code> 经过四次运作，变成了单位阵；</li>
+<li>3. 如果按照矩阵可以分成合的分解，可以将矩阵进行分解</li>
+</ul>
+<h3 id="section-8">4.3.1 矩阵基本运算</h3>
+<p><strong>运算</strong>：相等</p>
+<ul>
+<li>$$A=(a_ij)_{m\times n}=B=(b_i)_{s\times k}\Leftrightarrow m=_S,n=k$$</li>
+<li>且 $a_{ij}=b_j(i=1,2,\cdots,m;j=1,2,\cdots,n)$,即 $A,B$ 是同型矩阵，且对应元素相等.</li>
+</ul>
+<p><strong>运算</strong>：加法</p>
+<ul>
+<li>两个矩阵是<strong>同型矩阵</strong>时，可以相加，即：</li>
+<li>$$C=A+B=\left(a_{ij}\right)_{m\times n}+\left(b_{ij}\right)_{m\times n}=\left(c_{ij}\right)_{m\times n}$$</li>
+<li>$\text{其中,}c_{ij}=a_{ij}+b_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n),\text{ 即对应元素相加}$</li>
+</ul>
+<p><strong>运算</strong>：数乘</p>
+<ul>
+<li>每一个元素都需要乘；</li>
+<li>$$\begin{aligned}kA=Ak=&amp;k\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}=\begin{bmatrix}ka_{11}&amp;ka_{12}&amp;\cdots&amp;ka_{1n}\\ka_{21}&amp;ka_{22}&amp;\cdots&amp;ka_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\ka_{m1}&amp;ka_{m2}&amp;\cdots&amp;ka_{mn}\end{bmatrix}\\&amp;=\left(ka_{ij}\right)_{m\times n}\end{aligned}$$</li>
+</ul>
+<p><strong>运算</strong>：运算律 - 数乘/加具有交换律、结合律、分配律</p>
+<ol>
+<li>$交换律：A+B=B+A;$</li>
+<li>$结合律：\left(A+B\right)+C=A+\left(B+C\right);$</li>
+<li>$分配律：k\left(A+B\right)=kA+kB,\left(k+l\right)A=kA+lA$</li>
+<li>$数和矩阵相乘的结合律：k\left(lA\right)=\left(kl\right)A=l\left(kA\right).$</li>
+</ol>
+<p>其中，<code>A，B，C</code> 是同型矩阵，k, l 是任意常数</p>
+<h3 id="section-9">4.3.2 矩阵乘法运算</h3>
+<h5 id="section-10"><strong>定理</strong>： #矩阵乘法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：矩阵的乘法设 $A$ 是 $m\times s$ 矩阵，$B$ 是 $s\times n$ 矩阵 (矩阵 $A$ 的列数必须与矩阵 $B$ 的行数相等 ), 则 $A$ , $B$ 可以相乘，乘积 $AB$ 是 $m\times n$ 矩阵，记 $C=AB=(c_ij)_{m\times n}$</blockquote>
+<blockquote>$C$ 的第 $i$ 行第 $j$ 列元素 $c_{ij}$ 是 $A$ 的第 $i$ 行的 <code>s</code> 个元素与 $B$ 的第 $j$ 列的 $s$ 个对应元素两两乘积之和，即：</blockquote>
+<blockquote>$$c_{ij}=\sum_{k=1}^{s}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}(i=1,2,\cdots,m;j=1,2,\cdots,n)$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>本质：</li>
+<li class="list-indent-1">两个矩阵相乘，实际上体现了一种运算：<strong>左边矩阵的每一行，乘以右边矩阵的每一列</strong>，而且<strong>每一行乘以每一列都是向量的内积</strong>（点积运算）</li>
+<li class="list-indent-1">内积的结果，可以体现两个向量的大小，还可以体现两个向量的夹角的余弦；</li>
+<li>计算：</li>
+<li class="list-indent-1">核心：<strong>左边的决定行，右边的决定列</strong>；</li>
+<li class="list-indent-1">是一种多行乘多列的类型，需要将 A 矩阵中的每一列乘以 B 中的每一行；</li>
+<li class="list-indent-1">因为是以 <code>A</code> 的列中每个乘以 <code>B</code> 中行的每个，因此 <code>A</code> 的列数需要和 <code>B</code> 的行数相等；</li>
+<li>即：矩阵的乘法得到的结果中的每个元素，都是内积的结果；</li>
+<li class="list-indent-1">$$\left(\alpha_{1}\alpha_{2}\right)^{T}\left(\alpha_{1}\alpha_{2}\right)=\left(\begin{matrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{matrix}\right)\left(\alpha_{1}\alpha_{2}\right)=\left.\left(\begin{matrix}(\alpha_{1},\alpha_{1})&amp;(\alpha_{1},\alpha_{2})\\(\alpha_{2},\alpha_{1})&amp;(\alpha_{2},\alpha_{2})\end{matrix}\right.\right)$$</li>
+<li>举例：</li>
+<li class="list-indent-1">1. 多行乘多列：$\begin{pmatrix}a_{1}\\a_{2}\\a_{3}\end{pmatrix}(b_{1}b_{2}b_{3})=\begin{pmatrix}a_{1}b_{1}&amp;a_{1}b_{2}&amp;a_{1}b_{3}\\a_{2}b_{1}&amp;a_{2}b_{2}&amp;a_{2}b_{3}\\a_{3}b_{1}&amp;a_{3}b_{2}&amp;a_{3}b_{3}\end{pmatrix}$</li>
+</ul>
+<p><strong>运算</strong>：乘法运算的运算律</p>
+<ul>
+<li>运算律：</li>
+<li class="list-indent-1">1. 结合律：满足</li>
+<li class="list-indent-1">2. 分配律：满足</li>
+<li class="list-indent-1">3. 数乘与矩阵乘积的结合律 <code>-&gt;</code> $(kA_{m\times s})B_{s\times n}=A_{m\times s}(kB_{s\times n})=k(A_{m\times s}B_{s\times n})$</li>
+<li>不能用的：<strong>不满足交换律</strong>、<strong>不能使用消去律</strong></li>
+<li class="list-indent-1">1. 矩阵的乘法一般情况下不满足交换律，即 <code>AB≠BA</code></li>
+<li class="list-indent-2">比如：<code>AB<em>C</code> 和 <code>BA</em>C</code> 是不一定相等的；</li>
+<li class="list-indent-1">2. $存在A\neq O,B\neq O,而AB=O的情况,故AB=O\nRightarrow A=O或B=O$</li>
+<li class="list-indent-1">3. $AB=AC\Rightarrow A(B-C)=O,此时即使有A\neq O,一般也得不出B=C$</li>
+</ul>
+<p><strong>运算</strong>：乘法运算的其他规律</p>
+<ul>
+<li>（1）$\begin{aligned}&amp;(A+B)^2=(A+B)(A+B)=A^2+AB+BA+B^2\neq A^2+2AB+B^2,\\&amp;(A-B)^2=A^2-AB-BA+B^2\neq A^2-2AB+B^2,\end{aligned}$</li>
+<li>（2）$\begin{aligned}&amp;(A+B)(A-B)=A^{2}+BA-AB-B^{2}\neq A^{2}-B^{2},\\&amp;(AB)^{m}=\overbrace{(AB)(AB)\cdots(AB)}^{m\uparrow}\neq A^{m}B^{m}.\end{aligned}$</li>
+<li>（3）重要：<code>A</code> 的多项式</li>
+<li class="list-indent-1">$若f\left(x\right)=a_{0}+a_{1}x+\cdotp\cdotp\cdotp+a_{m}x^{m},\text{则}：f(A)=a_0E+a_1A+\cdots+a_mA^m$</li>
+</ul>
+<h3 id="section-11">4.3.3 转置矩阵 </h3>
+<h5 id="section-12"><strong>定义</strong>： #转置矩阵</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{将 }m\times n\text{ 矩阵 }A=\left(a_{ij}\right)_{m\times n}\text{的行与列互换得到的}n\times m\text{矩阵,称为矩阵 }A\text{ 的转置矩阵}，记为A^T，即：$ </blockquote>
+<blockquote>$$A^{T}=\begin{bmatrix}a_{11}&amp;a_{21}&amp;\cdots&amp;a_{m1}\\a_{12}&amp;a_{22}&amp;\cdots&amp;a_{m2}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{1n}&amp;a_{2n}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>第 <code>n</code> 行写到第 <code>n</code> 列；</li>
+<li>$A^{T}A$：</li>
+<li class="list-indent-1">$$\left.A^{T}A=\left(\begin{matrix}a_{11}&amp;a_{21}\\a_{12}&amp;a_{22}\\a_{13}&amp;a_{23}\end{matrix}\right.\right)_{3<em>{2}}\left(\begin{matrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{22}&amp;a_{12}&amp;a_{23}\end{matrix}\right)_{{2}</em>{3}}$$</li>
+<li>假设 $\alpha_1=({a_{11},a_{21}})$ ，其他其次类推，则得到：</li>
+<li class="list-indent-1">$$\left.\left(\begin{matrix}(\alpha_{1},\alpha_{1})&amp;(\alpha_{1},\alpha_{2})&amp;(\alpha_{1},\alpha_{3})\\(\alpha_{2},\alpha_{1})&amp;(\alpha_{2},\alpha_{2})&amp;(\alpha_{2},\alpha_{3})\\(\alpha_{3},\alpha_{1})&amp;(\alpha_{3},\alpha_{2})&amp;(\alpha_{3},\alpha_{3})\end{matrix}\right.\right)$$</li>
+<li>这是一个格拉姆矩阵 <code>-&gt;</code> $A^{T}A$</li>
+</ul>
+<p><strong>运算</strong>：转置矩阵的运算律</p>
+<ul>
+<li>$${(1)}\left(A^{\mathrm{T}}\right)^{\mathrm{T}}=A;\quad{(2)}\left(kA\right)^{\mathrm{T}}=kA^{\mathrm{T}};\quad{(3)}\left(A+B\right)^{\mathrm{T}}=A^{\mathrm{T}}+B^{\mathrm{T}};\quad{(4)}\left(AB\right)^{\mathrm{T}}=B^{\mathrm{T}}A^{\mathrm{T}}$$</li>
+<li>重要：穿脱原则</li>
+<li class="list-indent-1">$(AB)^{\mathrm{T}}=B^{\mathrm{T}}A^{\mathrm{T}}$</li>
+<li class="list-indent-1">从左到右乘，等于从右到左写：$\left(ABC\right)^{T}=C^{T}B^{T}A^{T}$</li>
+</ul>
+<h3 id="section-13">4.3.4 方阵的行列式 </h3>
+<h5 id="section-14"><strong>定义</strong>： #方阵的行列式</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{当用}n\text{ 阶方阵}A\text{ 计算行列式时,记成}|A|$；</blockquote>
+<blockquote>1. $|kA|=k^{n}|A|\neq k|A|(n\geqslant2,k\neq0,1)$</blockquote>
+<blockquote>2. $\text{一般地,}\left|A+B\right|\neq\left|A\right|+\left|B\right|$</blockquote>
+<blockquote>3. 注意：$A\neq0\Rightarrow|A|\neq0$</blockquote>
+<blockquote>4. $A\neq B\Rightarrow\left|A\right|\neq\left|B\right|$ </blockquote>
+<blockquote>5. $\left|A^{\mathrm{T}}\right|=\left|A\right|$</blockquote>
+<blockquote>6. $\text{设}A,B\text{是同阶方阵,则}|AB|=|A||B|$</blockquote>
+<h2 id="section-15">4.4 几种重要矩阵 </h2>
+<h3 id="section-16">4.4.1 基本矩阵形式</h3>
+<p><strong>矩阵一</strong>：零矩阵 </p>
+<ul>
+<li>定义：每个元素均为零的矩阵，记为 $O$</li>
+</ul>
+<p><strong>矩阵二</strong>：单位矩阵</p>
+<ul>
+<li>定义：</li>
+<li class="list-indent-1">主对角线元素均为 <code>1</code>, 其余元素全为零的 <code>n</code> 阶方阵, 称为 <code>n</code> 阶单位矩阵，记成 $E$ 或 $I$</li>
+<li>注意：<code>E</code> 的写法</li>
+<li class="list-indent-1">如果是 $A_{3<em>2}$ 与 $B_{2</em>3}$</li>
+<li class="list-indent-1">此时：若要计算 <code>E-AB</code></li>
+<li class="list-indent-1">则 $E$ 要写成 $E_{3}$</li>
+<li class="list-indent-1">此时：若要计算 <code>E-BA</code></li>
+<li class="list-indent-1">则 $E$ 要写成 $E_{2}$</li>
+</ul>
+<p><strong>矩阵三</strong>：数量矩阵</p>
+<ul>
+<li>定义： </li>
+<li class="list-indent-1">数 <code>k</code> 和单位矩阵的乘积称为数量矩阵</li>
+<li>公式：</li>
+<li class="list-indent-1">$k\cdot E_{n}=\left.\left(\begin{matrix}k&amp;\\&amp;k&amp;\\&amp;&amp;k\end{matrix}\right.\right)$</li>
+<li>特征：</li>
+<li class="list-indent-1">数量矩阵和任何的矩阵相乘都是可以交换的：$k\cdot E\cdot A=A\cdot kE$</li>
+</ul>
+<p><strong>矩阵四</strong>：(重点) 对角矩阵 </p>
+<ul>
+<li>定义：  </li>
+<li class="list-indent-1">非主对角线元素均为零的矩阵称为对角矩阵；</li>
+<li class="list-indent-1">即：主对角线之外的元素皆为 <code>0</code> 的矩阵  </li>
+<li class="list-indent-1">这是矩阵的最简形式，大量的矩阵不能化成这个矩阵；</li>
+<li>公式：</li>
+<li class="list-indent-1">$A=\begin{pmatrix}\lambda_1&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n\end{pmatrix}$</li>
+</ul>
+<p><strong>矩阵五</strong>：上(下)三角矩阵</p>
+<ul>
+<li>定义： </li>
+<li class="list-indent-1">当 $i&gt;j$ 或 $i&lt;j$ 是，$a_{ij}=0$ 的矩阵称之为<strong>上三角矩阵</strong>或者<strong>下三角矩阵</strong>；</li>
+</ul>
+<p><strong>矩阵六</strong>：(重要) 对称矩阵 </p>
+<ul>
+<li>定义： </li>
+<li class="list-indent-1">$$\text{满足条件}A^\mathrm{T}=A\text{ 的矩阵}A\text{称为对称矩阵,}A^\mathrm{T}=A\Leftrightarrow a_{ij}=a_{ji}$$</li>
+<li>概念：</li>
+<li class="list-indent-1">如果一个矩阵转置之后还是它自己，则称其为对称矩阵；</li>
+<li class="list-indent-1">对称阵天生性质很多，适合进行数学上的分析； </li>
+<li>举例：</li>
+<li class="list-indent-1">$$\left(\begin{matrix}1&amp;-2&amp;1\\-2&amp;0&amp;3\\1&amp;3&amp;-1\end{matrix}\right)$$</li>
+<li>结论：</li>
+<li class="list-indent-1">$\left(A^{T}A\right)^{T}=A^{T}\left(A^{T}\right)^{T}=A^{T}A$</li>
+<li class="list-indent-1">所以：$A^{T}A$ 必定是一个对称矩阵。可以使用对称矩阵的形式；</li>
+</ul>
+<p><strong>矩阵七</strong>：反对称矩阵</p>
+<ul>
+<li>定义：  </li>
+<li class="list-indent-1">满足 $A^T=-A$ 的矩阵 $A$ 称之为反对称矩阵；</li>
+<li>公式：</li>
+<li class="list-indent-1">$A^{\mathrm{T}}=-A\Leftrightarrow\begin{cases}a_{ij}=-a_{ji},i\neq j,\\a_{ii}=0.\end{cases}$</li>
+<li>概念：</li>
+<li class="list-indent-1">反对称阵的主对角线一定都是零；</li>
+<li>举例： </li>
+<li class="list-indent-1">$\begin{pmatrix}0&amp;-2&amp;1\\2&amp;0&amp;3\\-1&amp;-3&amp;0\end{pmatrix}$</li>
+</ul>
+<p><strong>矩阵八</strong>：行矩阵</p>
+<ul>
+<li>只有一行元素的矩阵，也称行向量；</li>
+<li>实际上就是一行多列；</li>
+</ul>
+<p><strong>矩阵九</strong>：列矩阵</p>
+<ul>
+<li>只有一列元素的矩阵，也称列向量；</li>
+<li>实际上就是多行一列；</li>
+<li>补充： </li>
+<li class="list-indent-1">一般写向量，一般都是写成列向量；</li>
+<li class="list-indent-1">需要把向量写成转置，才能使行向量；</li>
+<li>补充：$\alpha^T\alpha$ 和 $\alpha\alpha^T$</li>
+<li class="list-indent-1">$\alpha^T\alpha$ ：<code>1<em>n</code> 和 <code>n</em>1</code> 相乘 <code>-&gt;</code> 得到 <code>1*1</code></li>
+<li class="list-indent-1">$\alpha\alpha^T$：<code>n<em>1</code> 和 <code>1</em>n</code> 相乘 <code>-&gt;</code> 得到 <code>n*n</code></li>
+</ul>
+<p><strong>补充</strong>：秩 1 方阵</p>
+<ul>
+<li>举例：</li>
+<li class="list-indent-1">已知 $\left(\begin{matrix}-1&amp;-1&amp;2\\2&amp;2&amp;-4\\1&amp;1&amp;-2\end{matrix}\right)$ 要找回到 $\left(\begin{matrix}-1\\2\\1\end{matrix}\right)\left(1\quad 1\quad -2\right)$，此时必须要其数值成比例；</li>
+<li class="list-indent-1">这种矩阵就是秩 <code>1</code> 矩阵；</li>
+<li class="list-indent-1">这个矩阵当中，另外两个向量都可以由 <code>(1.1,-2)</code> 这个向量乘以 <code>2</code> 和 <code>-1</code> 表示出来 <code>-&gt;</code> 即：其基准向量是一个； </li>
+<li class="list-indent-1">所以其是三维向量当中的一个子空间；</li>
+<li>注意：  </li>
+<li class="list-indent-1">并不是秩为 1 的矩阵就是秩 1 矩阵；</li>
+<li>性质： </li>
+<li class="list-indent-1">对于秩 1 方阵 A，其 $A^n=[tr(A)]^{n-1}$ </li>
+<li class="list-indent-1">比如： $A^3B=AAAB=[tr(A)]^2AB$</li>
+</ul>
+<p><strong>补充</strong>：矩阵的迹</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">矩阵的主对角线之和，称之为矩阵的迹；</li>
+<li>符号：</li>
+<li class="list-indent-1"><code>tr</code></li>
+</ul>
+<h3 id="section-17">4.4.2 分块矩阵 </h3>
+<p><strong>概念</strong>：矩阵的分块 </p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">用几条纵线和横线把一个矩阵分成若干小块，每一小块称为原矩阵的子块；</li>
+<li class="list-indent-1">把子块看作原矩阵的一个元素，就得到了分块矩阵；</li>
+<li class="list-indent-1">分块可以体现矩阵里面的一些规律，此时就可以利用这些分块、简化计算；</li>
+<li class="list-indent-2">比如：$C=\left(\begin{matrix}A&amp;O\\O&amp;B\end{matrix}\right)$</li>
+<li>按 <code>A</code> 进行按行分块： </li>
+<li class="list-indent-1">$$A=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\hline a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\\hline a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}=\begin{bmatrix}A_1\\A_2\\\vdots\\A_m\end{bmatrix}$$</li>
+<li>按 <code>B</code> 进行按列分块：</li>
+<li class="list-indent-1">$$B=\begin{bmatrix}b_{11}&amp;b_{12}&amp;\cdots&amp;b_{1n}\\b_{21}&amp;b_{22}&amp;\cdots&amp;b_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\b_{m1}&amp;b_{m2}&amp;\cdots&amp;b_{mn}\end{bmatrix}=\begin{bmatrix}B_1,B_2,\cdots,B_n\end{bmatrix}$$</li>
+</ul>
+<p><strong>运算</strong>：分块矩阵的基本运算（以 <code>2*2</code> 举例）</p>
+<ul>
+<li>加法：$\text{同型,且分法一致,则}\begin{bmatrix}A_1&amp;A_2\\A_3&amp;A_4\end{bmatrix}+\begin{bmatrix}B_1&amp;B_2\\B_3&amp;B_4\end{bmatrix}=\begin{bmatrix}A_1+B_1&amp;A_2+B_2\\A_3+B_3&amp;A_4+B_4\end{bmatrix}$</li>
+<li class="list-indent-1">注意：两个矩阵的切法必须一致，此时就等于每个元素对应相加；</li>
+<li>数乘：$k\begin{bmatrix}A&amp;B\\C&amp;D\end{bmatrix}=\begin{bmatrix}kA&amp;kB\\kC&amp;kD\end{bmatrix}$</li>
+<li>乘法：$\begin{bmatrix}A&amp;B\\C&amp;D\end{bmatrix}\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}=\begin{bmatrix}AX+BZ&amp;AY+BW\\CX+DZ&amp;CY+DW\end{bmatrix},\text{要可乘、可加}$</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">分块之后，将其当元素看，相当于两个 <code>2*2</code> 的矩阵相乘；</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">因为是矩阵运算，没有交换律，因此得到的结果，比如 $AX+BZ$，其顺序不能变化，不能写成 $XA+BZ$</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">对于乘法的运算要注意，分块相乘后，左边的矩阵仍在左边，右边的矩阵仍在右边；</li>
+<li class="list-indent-2">若 A, B 分别为 <code>m, n</code> 阶方阵，则分块对角矩阵的幂为；</li>
+<li class="list-indent-1">补充：</li>
+<li class="list-indent-2">$\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}^n=\begin{bmatrix}A^n&amp;O\\O&amp;B^n\end{bmatrix}$</li>
+</ul>
+<h2 id="section-18">4.5 矩阵的复合变换</h2>
+<p><strong>举例</strong>：矩阵的复合变换</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">矩阵需要从右往左读，因为函数写在变量左侧：<code>f(g(x))</code> </li>
+<li>举例： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/1f99802f5998-Pasted-image-20240626192119.png" alt="Pasted image 20240626192119" loading="lazy" decoding="async"></li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-072/index.html"><span>← 上一项</span><strong>Lecture 3：行列式的计算</strong></a>
+    <a class="article-pagination-next" href="../math-074/index.html"><span>下一项 →</span><strong>Lecture 5：矩阵的逆</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

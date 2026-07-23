@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>高等数学 - 思维导图 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：高等数学 - 思维导图。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 数学总结, 公式合集">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="高等数学 - 思维导图 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：高等数学 - 思维导图。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-008/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-008/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-008/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-008/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-008/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>高等数学 - 思维导图</h1><p class="article-lead">考研数学学习笔记：高等数学 - 思维导图。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 12 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>数学总结</span><span>公式合集</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">高等数学</a><a href="#section-2">微分学</a><a href="#section-5">积分学</a><a href="#section-8">微分方程</a><a href="#section-12">无穷级数</a><a href="#section-16">空间解析几何</a></nav></details><div class="prose"><h2 id="section-1">高等数学</h2>
+<h2 id="section-2">微分学</h2>
+<h3 id="section-3">一元函数微分学</h3>
+<ul>
+<li>函数</li>
+<li class="list-indent-2">函数的概念</li>
+<li class="list-indent-4">函数定义：</li>
+</ul>
+<p>                           如果对于每个数 $x\in D$ ，变量 $x$ 按照一定的法则总有一个确定的 $y$ 和它对应，则称 $x$ 是 $y$ 的函数，记为 $y=f(x)$；常称 x 为自变量，$y$ 为因变量，$D$ 为定义域.</p>
+<ul>
+<li class="list-indent-4">复合函数：</li>
+</ul>
+<p>                           设 $y=f(u)$ 的定义域为 $D_f，u=g(x)$ 的定义域为 $D_g$ 、值域为 $R_{s}$ ；若 $D_f\cap R_g\neq\phi,\text{则称函数}y=f[g(x)]$ 为函数 $y=f(u)$ 与 $u=g(x)$ 的复合函数. 它的定义域为 $\left\{x|x\in D_g,g(x)\in D_f\right\}$</p>
+<ul>
+<li class="list-indent-4">反函数：</li>
+</ul>
+<p>                           设函数 $y=f(x)$ 的定义域为 ${D}$, 值域为 $\underline{R}_{\underline{\nu}}$.若对任意 $y\in R_y$ ,有唯一确定的 $x\in D$ ,使得 $y=f(x)$,则记为 $x=f^{-1}(y)$ 称其为函数 $y=f(x)$ 的反函数</p>
+<ul>
+<li class="list-indent-2">函数的性质</li>
+<li class="list-indent-4">单调性</li>
+<li class="list-indent-4">奇偶性：</li>
+<li class="list-indent-5">常见奇函数：$\sin x,\tan x,\arcsin x,\arctan x,\ln\frac{1-x}{1+x},{\ln(x+\sqrt{1+x^2})},\frac{e^x-1}{e^x+1},$$f(-x)=-f(x)$</li>
+<li class="list-indent-5">常见偶函数：$x^2,|x|,\cos x,f(x)=f(-x)$</li>
+<li class="list-indent-4">周期性</li>
+<li class="list-indent-4">有界性</li>
+<li>极限</li>
+<li class="list-indent-2">极限的性质</li>
+<li class="list-indent-4">数列极限性质</li>
+<li class="list-indent-5">有界性：$\text{如果数列 }\left\{x_n\right\}\text{收敛,那么数列 }\left\{x_n\right\}\text{一定有界}$</li>
+<li class="list-indent-5">保号性；</li>
+<li class="list-indent-4">函数极限性质</li>
+<li class="list-indent-5">局部有界性：$\text{若 }\lim_{x\to x_0}f(x)\text{ 存在,则 }f(x)\text{ 在 }x_0\text{ 某去心邻域}$</li>
+<li class="list-indent-5">保号性</li>
+<li class="list-indent-2">函数极限</li>
+<li class="list-indent-4">函数趋向于无限值</li>
+<li class="list-indent-5">函数与无穷：</li>
+</ul>
+<p>                              $\lim_{x \to \infty}f(x) = A \Leftrightarrow \forall \xi &gt;0,\exists X&gt;0,\lvert x \rvert &gt;X \ \mbox{时有},\lvert f(x) - A\rvert &lt; \xi$</p>
+<ul>
+<li class="list-indent-5">函数趋向于负无穷：</li>
+</ul>
+<p>                               $\lim_{x\to-\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&lt;\boldsymbol{-X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</p>
+<ul>
+<li class="list-indent-5">函数趋向于正无穷：</li>
+</ul>
+<p>                               $\lim_{x\to+\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&gt;\boldsymbol{X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</p>
+<ul>
+<li class="list-indent-4">函数趋向于有限值</li>
+<li class="list-indent-5">${\lim_{x\to x_0}f(x)=A}$，$\forall\varepsilon&gt;0,\exists\delta&gt;0\text{,当 }0&lt;|x-x_0|&lt;\delta\text{ 时,恒有 }|f(x)-A|&lt;\varepsilon.$</li>
+<li class="list-indent-4">单侧极限</li>
+<li class="list-indent-5">左极限：$\lim_{x \to x_{0}^{-}}f(x) = A \Leftrightarrow\begin{cases} \hspace{1em} \forall \xi &gt;0,\exists \delta&gt;0,x_{0}-\delta &lt;x&lt;x_{0} \ \mbox{时有},\\ \hspace{1em} \lvert f(x) - A\rvert &lt; \xi \\ \end{cases}$</li>
+<li class="list-indent-5">右极限：$\lim_{x \to x_{0}^{+}}f(x) = A \Leftrightarrow\begin{cases} \hspace{1em} \forall \xi &gt;0,\exists \delta&gt;0,x_{0}&lt;x&lt;x_{0}+\delta \ \mbox{时有},\\ \hspace{1em} \lvert f(x) - A\rvert &lt; \xi \\ \end{cases}$</li>
+<li class="list-indent-5">极限与单侧极限关系：</li>
+</ul>
+<p>                             $\lim_{x\to x_0}f(x)=A\Leftrightarrow\lim_{x\to x_0^-}f(x)=\lim_{x\to x_0^+}f(x)=A$</p>
+<ul>
+<li class="list-indent-2">数列极限</li>
+<li class="list-indent-4">数列极限的定义：</li>
+</ul>
+<p>                          对 $\lim_{n\to\infty}x_n=a$ 而言：$\forall\varepsilon&gt;0,\exists N&gt;0,\text{ 当 }n&gt;N\text{ 时, 恒有 }|x_n-a|&lt;\varepsilon$</p>
+<ul>
+<li class="list-indent-4">数列极限存在准则：</li>
+</ul>
+<p>                          $\text{若存在 }N,\text{当 }n&gt;N\text{ 时, }x_n\leq y_n\leq z_n$，$\lim_{n\to\infty}x_n=\lim_{n\to\infty}z_n=a,\text{则}\lim_{n\to\infty}y_n=a$</p>
+<ul>
+<li class="list-indent-2">求极限</li>
+<li class="list-indent-4">求极限八种方法</li>
+<li class="list-indent-2">无穷大与无穷小</li>
+<li class="list-indent-4">无穷小</li>
+<li class="list-indent-5">无穷小的定义：若函数 $f(x)$ 当 $x\to x_0($ 或 $x\to\infty)$ 时的极限为零，则称 $f(x)$ 为 $x\to x_0($ 或 $x\to\infty)$ 时的无穷小量.</li>
+<li class="list-indent-5">无穷小的比较：</li>
+<li class="list-indent-5"><strong>同阶</strong>无穷小： $\alpha(x)和\beta(x)$ 相除结果为<strong>常数 C</strong>（C 不等于 0）；</li>
+<li class="list-indent-5"><strong>等价</strong>无穷小： $\alpha(x)和\beta(x)$ 相除结果为<strong>常数 1</strong>；</li>
+<li class="list-indent-5">高阶无穷小： $\alpha(x)和\beta(x)$ 相除结果为 0；可记为：$\alpha(x)=o(\beta(x))$</li>
+<li class="list-indent-5">低阶无穷小： $\alpha(x)和\beta(x)$ 相除结果为无穷；</li>
+<li class="list-indent-5">$\text{若}\lim\frac{\alpha (x)^{\color{red}{}}}{\left[\beta (x)\right]^{k}\color{red}}=C\neq 0,\text{称}$ α为β的 k 阶无穷小；</li>
+<li class="list-indent-5">无穷小的性质：</li>
+<li class="list-indent-5"><strong>性质 1：</strong> <strong>有限</strong>个无穷小的和仍然是无穷小；</li>
+<li class="list-indent-5"><strong>性质 2：</strong> <strong>有限</strong>个无穷小的积仍然是无穷小；</li>
+<li class="list-indent-5"><strong>性质 3：</strong> 无穷小量与<strong>有界量</strong>的<strong>积</strong>任然是无穷小；</li>
+<li class="list-indent-4">无穷大</li>
+<li class="list-indent-5">无穷大的定义：</li>
+</ul>
+<p>                            若函数 $f(x)$ 当 $x\to x_0($ 或 $x\to\infty)$ 时的极限无穷，则称 $f(x)$ 为 $x\to x_0($ 或 $x\to\infty)$ 时的无穷大量.</p>
+<ul>
+<li class="list-indent-5">无穷大的性质：</li>
+<li class="list-indent-5"><strong>性质 1：</strong> 有限个正无穷大的和是无穷大；</li>
+<li class="list-indent-5"><strong>性质 2：</strong> 有限个无穷大的<strong>积</strong>仍然是无穷大；</li>
+<li class="list-indent-5"><strong>性质 3：</strong> 无穷大量与有界变量的和仍然是无穷大量；</li>
+<li>连续</li>
+<li class="list-indent-2">连续的定义</li>
+<li class="list-indent-4">左连续</li>
+<li class="list-indent-4">右连续</li>
+<li class="list-indent-4">定义：</li>
+</ul>
+<p>                       设函数 $y=f(x)$ 在点 $x_{0}$ 的某个邻域内有定义，如果当 $x\to x_0$ 时，函数 $y=f(x)$ 的极限值存在，且等于 $x_{0}$ 处的函数值 $f(x_0)$ , 即 $\lim_{x\to x_0}f(x)=f(x_0)$, 则称函数 $y=f(x)$ 在点 $x_{0}$ 处连续.</p>
+<ul>
+<li class="list-indent-2">连续性的性质</li>
+<li class="list-indent-4">闭区间上连续性的函数性质：</li>
+<li class="list-indent-5">有界性：$\text{若 f(x) 在 [a,b]上连续,则 f(x) 在 [a,b]上有界。}$</li>
+<li class="list-indent-5">最值定理：若 $f(x)$ 在 $[a,b]$ 上连续，则 $f(x)$ 在 $[a,b]$ 上必有最大值和最小值；</li>
+<li class="list-indent-5">介值定理：若 $f(x)$ 在 $[a,b]$ 上连续，且 $f(a)\neq f(b)$,则对 $f(a)$ 与 $f(b)$ 中 $\text{之间任一数}\mathbf{C},\text{ 至少存在一个 }\xi\in(a,b),\text{ 使得 }f(\xi){=}C.$</li>
+<li class="list-indent-5">零点定理</li>
+<li class="list-indent-4">连续性的运算性质</li>
+<li class="list-indent-2">间断点</li>
+<li class="list-indent-4">间断点的定义：</li>
+<li class="list-indent-4">几类间断点</li>
+<li>导数</li>
+<li class="list-indent-2">导数的定义</li>
+<li class="list-indent-4">什么是导数</li>
+<li class="list-indent-4">左导数与右导数</li>
+<li class="list-indent-4">导函数的几何意义</li>
+<li class="list-indent-2">导数求导法则</li>
+<li class="list-indent-4">和差积商求导法则</li>
+<li class="list-indent-4">反函数求导法则</li>
+<li class="list-indent-4">复合函数求导法则</li>
+<li class="list-indent-4">求导常用结论</li>
+<li class="list-indent-4">对数求导法</li>
+<li class="list-indent-2">高阶导数</li>
+<li class="list-indent-4">高阶导数的定义</li>
+<li class="list-indent-4">常见求高阶导数公式</li>
+<li class="list-indent-2">隐函数</li>
+<li class="list-indent-2">参数方程</li>
+<li class="list-indent-2">导数应用</li>
+<li class="list-indent-4">函数单调性的判读</li>
+<li class="list-indent-4">凹凸性的判断</li>
+<li class="list-indent-4">拐点</li>
+<li class="list-indent-4">函数的极值与最值</li>
+<li class="list-indent-4">渐近线</li>
+<li class="list-indent-5">水平渐近线</li>
+<li class="list-indent-5">垂直渐近线</li>
+<li class="list-indent-5">新节点</li>
+<li>微分</li>
+<li class="list-indent-2">微分的定义：</li>
+<li class="list-indent-4">$\text{若 }f(x_0+\Delta x)-f(x_0)=A\Delta x+o(\Delta x)\text{ ，则称 }f(x)$ $在 x _0点可微；$</li>
+<li class="list-indent-2">可微、可导、连续之间关系</li>
+<li class="list-indent-4"><img class="note-image" src="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" alt="Pasted image 20240317192744" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">微分中值定理</li>
+<li class="list-indent-4">罗尔定理：</li>
+<li class="list-indent-5">若满足三个条件：</li>
+<li class="list-indent-5">1）$f$ 在 $[a,b]$ 上连续；</li>
+<li class="list-indent-5">2）$f$ 在 $(a,b)$ 内可导；</li>
+<li class="list-indent-5">3）f (a)=f (b)</li>
+<li class="list-indent-5">则可知：$\text{则 }\exists\xi\in(a,b)\text{,使 }f^{\prime}(\xi)=0$</li>
+<li class="list-indent-5">推导结论：有一点的切线，和 ab 两点的连线平行 <code>-&gt;</code> 拉格朗日定理；</li>
+<li class="list-indent-4">拉格朗日中值定理：</li>
+<li class="list-indent-5">若满足以下几个条件： 1）$f$ 在 $[a,b]$ 上连续 2）$f$ 在 ($a,b)$ 内可导；</li>
+<li class="list-indent-5">则：$\text{可得 }\exists\xi\in(a,b)\text{,使 }f(b)-f(a)=f^{\prime}(\xi)(b-a)$</li>
+<li class="list-indent-4">柯西中值定理：</li>
+<li class="list-indent-5">若满足以下条件：</li>
+<li class="list-indent-5">1）$f,F\text{ 在 }[a,b]\text{上连续};$</li>
+<li class="list-indent-5">2）$f,F\text{ 在 }(a,b)\text{ 内可导,且 }\forall x\in(a,b),F^{\prime}(x)\neq0$</li>
+<li class="list-indent-5">则：$\exists\xi\in(a,b)\text{ ,使 }\frac{f(b)-f(a)}{F(b)-F(a)}=\frac{f^{\prime}(\xi)}{F^{\prime}(\xi)}$</li>
+</ul>
+<h3 id="section-4">多元函数微分学</h3>
+<ul>
+<li>多元函数基本概念</li>
+<li class="list-indent-2">多元函数的极限</li>
+<li class="list-indent-2">多元函数的连续</li>
+<li class="list-indent-2">偏导数</li>
+<li class="list-indent-4">偏导数的定义</li>
+<li class="list-indent-4">偏导数的几何意义</li>
+<li class="list-indent-4">高阶偏导数</li>
+<li class="list-indent-2">全微分</li>
+<li class="list-indent-4">全微分的定义</li>
+<li class="list-indent-4">多元函数可微分的必要条件</li>
+<li class="list-indent-4">多元函数可微分的充分条件</li>
+<li class="list-indent-2">多元函数分析</li>
+<li class="list-indent-4">可微、可导、连续、偏导连续的判断</li>
+<li class="list-indent-4">可微、可导、连续、偏导连续之间关系</li>
+<li>多元函数微分法</li>
+<li class="list-indent-2">多元复合函数微分</li>
+<li class="list-indent-4">多元复合函数求导法则</li>
+<li class="list-indent-4">全微分形式不变性</li>
+<li class="list-indent-2">多元隐函数微分</li>
+<li class="list-indent-4">多元函数隐函数定义</li>
+<li class="list-indent-4">多元函数隐函数存在定理</li>
+<li>多元函数的极值与最值</li>
+<li class="list-indent-2">多元函数极值定义</li>
+<li class="list-indent-4">多元函数极值存在的必要条件</li>
+<li class="list-indent-2">无条件极值</li>
+<li class="list-indent-2">有条件极值</li>
+<li class="list-indent-4">拉格朗日乘数法</li>
+<li class="list-indent-4">条件极值定义</li>
+</ul>
+<h2 id="section-5">积分学</h2>
+<h3 id="section-6">一元函数积分学</h3>
+<ul>
+<li>不定积分</li>
+<li class="list-indent-2">不定积分的概念</li>
+<li class="list-indent-4">不定积分的定义：</li>
+</ul>
+<p>                      一个函数 $f(x)$ 的不定积分（或者说是原函数）是一个导数等于 $f(x)$ 的函数 $F(x)$ ，即 F′(x) = f (x)，或写成 $[F (x)+c]^{\prime}=f (x)$</p>
+<p>                      或者：$\int f(x)dx=F(x)+C$</p>
+<ul>
+<li class="list-indent-4">原函数存在性：</li>
+<li class="list-indent-2">不定积分基本性质</li>
+<li class="list-indent-4">$(\int f(x)\mathrm{d}x)^{\prime}=f(x)$</li>
+<li class="list-indent-4">$\mathrm{d}\int f(x)\mathrm{d}x=f(x)\mathrm{d}x$</li>
+<li class="list-indent-2">不定积分的计算</li>
+<li class="list-indent-4">基本公式</li>
+<li class="list-indent-4">第一类换元法</li>
+<li class="list-indent-4">第二类换元法</li>
+<li class="list-indent-4">分部积分法</li>
+<li>定积分</li>
+<li class="list-indent-2">定积分的概念</li>
+<li class="list-indent-4">定积分的定义：</li>
+</ul>
+<p>                      $f(x)$ 在 $[a,b]$ 上有界，在 $[a,b]$ 上任意插入分点，分成 n 个小区间 $\Delta x_{1}\Delta x_{2}\cdots\Delta x_{n}$ ，任取一点 i，有：$$\int_{a}^{b}f(x)dx=\lim_{λ\to0}\sum_{x=1}^{n}f(\xi_{i})\Delta x_{i}$$</p>
+<ul>
+<li class="list-indent-5">其中：$$\lambda=\max\{\Delta x_{1}\cdots\Delta x_{n}\}$$</li>
+<li class="list-indent-4">微积分基本定理</li>
+<li class="list-indent-2">定积分的计算</li>
+<li class="list-indent-4">牛顿-莱布尼茨公式</li>
+<li class="list-indent-4">定积分的换元法</li>
+<li class="list-indent-4">定积分的分部积分法</li>
+<li class="list-indent-4">定积分性质</li>
+<li class="list-indent-2">变上限积分</li>
+<li class="list-indent-4">方法一：公式计算</li>
+<li class="list-indent-4">方法二：提取x</li>
+<li class="list-indent-4">方法三：换元法</li>
+<li class="list-indent-2">反常积分</li>
+<li class="list-indent-4">反常积分的定义</li>
+<li class="list-indent-4">两类反常积分</li>
+<li class="list-indent-5">无穷区间上的反常积分</li>
+<li class="list-indent-5">无穷函数上的反常积分</li>
+<li class="list-indent-4">判断反常积分的敛散性</li>
+<li class="list-indent-5">方法一：定义法</li>
+<li class="list-indent-5">方法二：比较判别法</li>
+<li class="list-indent-5">方法三：P积分</li>
+<li class="list-indent-2">定积分的应用</li>
+<li class="list-indent-4">平面图形的面积</li>
+<li class="list-indent-4">旋转体的体积</li>
+<li class="list-indent-4">平面曲线的弧长</li>
+<li class="list-indent-4">旋转体侧面积</li>
+<li class="list-indent-4">新节点</li>
+</ul>
+<h3 id="section-7">多元函数积分学</h3>
+<ul>
+<li>重积分</li>
+<li class="list-indent-2">二重积分</li>
+<li class="list-indent-4">二重积分的定义</li>
+<li class="list-indent-4">二重积分的性质</li>
+<li class="list-indent-4">二重积分的计算</li>
+<li class="list-indent-5">基于直角坐标系的二重积分计算</li>
+<li class="list-indent-5">基于极坐标系的二重积分计算</li>
+<li class="list-indent-5">利用奇偶性、对称性</li>
+<li class="list-indent-2">三重积分</li>
+<li>线面积分</li>
+<li class="list-indent-2">线积分</li>
+<li class="list-indent-2">面积分</li>
+<li>积分应用</li>
+</ul>
+<h2 id="section-8">微分方程</h2>
+<h3 id="section-9">一阶微分方程</h3>
+<ul>
+<li>可分离变量</li>
+<li>一阶齐次方程</li>
+<li>一阶线性方程</li>
+</ul>
+<h3 id="section-10">二阶微分方程</h3>
+<ul>
+<li>二阶常系数齐次微分方程</li>
+<li>二阶常系数非齐次微分方程</li>
+</ul>
+<h3 id="section-11">高阶微分方程</h3>
+<ul>
+<li>可降阶线性微分方程</li>
+<li>高阶微分方程概念</li>
+</ul>
+<h2 id="section-12">无穷级数</h2>
+<h3 id="section-13">常数项级数</h3>
+<ul>
+<li>基础概念</li>
+<li class="list-indent-2">常数项级数的定义</li>
+<li class="list-indent-2">常数项级数收敛的定义：$\lim_{n\to+\infty}S_{n}=\sum_{n=1}^\infty u_n$</li>
+<li class="list-indent-2">级数基本性质</li>
+<li>同号级数</li>
+<li class="list-indent-2">正项级数</li>
+<li class="list-indent-4">正项级数收敛性：$\sum_{n=1}^\infty u_n\text{ 收敛}\Leftrightarrow s_n\text{ 上有界}$</li>
+<li class="list-indent-4">比较审敛法</li>
+<li class="list-indent-4">比较法的极限形式</li>
+<li class="list-indent-4">比值法</li>
+<li class="list-indent-4">根值法</li>
+<li class="list-indent-4">积分判别法</li>
+<li>变号级数</li>
+<li class="list-indent-2">交错级数</li>
+<li class="list-indent-4">交错级数定义：$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$</li>
+<li class="list-indent-4">莱布尼茨准则</li>
+<li class="list-indent-2">任意项级数</li>
+<li class="list-indent-4">绝对收敛与条件收敛概念</li>
+<li class="list-indent-4">任意项级数收敛性判断</li>
+</ul>
+<h3 id="section-14">幂级数</h3>
+<ul>
+<li>幂级数基础概念</li>
+<li class="list-indent-2">幂级数的定义</li>
+<li class="list-indent-4">$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots$</li>
+<li class="list-indent-2">幂级数的收敛性</li>
+<li class="list-indent-4">收敛点与发散点的概念</li>
+<li class="list-indent-4">阿贝尔定理</li>
+<li class="list-indent-4">收敛区间</li>
+<li class="list-indent-4">收敛域</li>
+<li class="list-indent-2">收敛半径</li>
+<li class="list-indent-4">收敛半径判断法一：极限比值</li>
+<li class="list-indent-4">收敛半径判断法二：基于根式</li>
+<li class="list-indent-2">幂级数的运算</li>
+<li class="list-indent-4">有理运算性质</li>
+<li class="list-indent-4">分析性质</li>
+<li>函数展开成幂级数</li>
+<li class="list-indent-2">基础概念</li>
+<li class="list-indent-4">函数的幂级数展开</li>
+<li class="list-indent-4">泰勒级数的收敛性</li>
+<li class="list-indent-2">函数展开为幂级数</li>
+<li class="list-indent-4">直接展开法</li>
+<li class="list-indent-4">间接展开法</li>
+<li class="list-indent-2">常见展开</li>
+</ul>
+<h3 id="section-15">傅里叶级数</h3>
+<ul>
+<li>傅里叶级数基础概念</li>
+<li class="list-indent-2">傅里叶系数</li>
+<li class="list-indent-2">傅里叶级数</li>
+<li class="list-indent-2">收敛性</li>
+<li class="list-indent-4">狄利克雷定理</li>
+<li>函数展开为傅里叶级数</li>
+<li class="list-indent-2">周期函数的展开：特殊情况</li>
+<li class="list-indent-2">周期函数的展开：一般情况</li>
+</ul>
+<h2 id="section-16">空间解析几何</h2>
+<h3 id="section-17">向量代数</h3>
+<h3 id="section-18">空间平面与直线</h3>
+<h3 id="section-19">曲面与空间曲线</h3>
+<h3 id="section-20">多元微分在几何中的应用</h3><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-007/index.html"><span>← 上一项</span><strong>高等数学 - 公式合集</strong></a>
+    <a class="article-pagination-next" href="../math-009/index.html"><span>下一项 →</span><strong>Lecture 1：课程大纲</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

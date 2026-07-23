@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 37：常系数齐次线性微分方程 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 37：常系数齐次线性微分方程。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 微分方程">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 37：常系数齐次线性微分方程 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 37：常系数齐次线性微分方程。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-046/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-046/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-046/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-046/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-046/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 37：常系数齐次线性微分方程</h1><p class="article-lead">考研数学学习笔记：Lecture 37：常系数齐次线性微分方程。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-01</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">38.1 二阶常系数齐次微分方程</a></nav></details><div class="prose"><h2 id="section-1">38.1 二阶常系数齐次微分方程</h2>
+<h5 id="section-2"><strong>定义</strong>： #二阶常系数齐次微分方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>1. 结构： $$y^{\prime\prime}+q +py^{\prime}+qy=0$$</blockquote>
+<blockquote>2. 特征方程：$$r^2+pr+q=0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>常系数与变系数：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">未知函数的系数，如果是常数的，就是常系数方程，否则就是变系数的（比如系数当中有 $p(x)$ 的）</li>
+<li class="list-indent-1">常系数：</li>
+<li class="list-indent-2">结构：</li>
+<li class="list-indent-3">$y^n+py^{\prime}+qy=0$</li>
+<li class="list-indent-1">变系数：</li>
+<li class="list-indent-2">结构：</li>
+<li class="list-indent-3">$y^n+p(x)y^{\prime}+q(x)y=0$</li>
+<li class="list-indent-2">解释：</li>
+<li class="list-indent-3">通解 $y=C_1y_1(x)+C_2y_2(x)$</li>
+<li class="list-indent-3">$y_1$ 和 $y_2$ 是线性无关的；</li>
+<li class="list-indent-3">$y_1/y_2$ 不等于常数；</li>
+<li>特征方程： </li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">特征方程的根和微分方程的解息息相关； </li>
+<li class="list-indent-1">若是三阶方程的单实根 $r_1$</li>
+<li class="list-indent-2">通解： $y=C_1e^{r_1x}$</li>
+<li class="list-indent-1">若是不等实根 $r_1\neq r_2$</li>
+<li class="list-indent-2">通解： $y=C_1e^{r_1x}+C_2e^{r_2x}$</li>
+<li class="list-indent-1">若是相等实根 $r_{1}=r_{2}=r$</li>
+<li class="list-indent-2">通解：$y=e^{rx}(C_1+C_2x)$</li>
+<li class="list-indent-1">若是共轭复根 $r_{1,2}=\alpha\pm i\beta$</li>
+<li class="list-indent-2">通解：$y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)$</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">以上通解都是针对二阶的情况；</li>
+<li>三阶：</li>
+<li class="list-indent-1">方法：</li>
+<li class="list-indent-2">根据根的类型，对每个根使用二阶时的求不同实根的方法，然后将它们相加；</li>
+<li class="list-indent-1">举例：$r^{3}-2r^{2}+r-2=0$ 时</li>
+<li class="list-indent-2">求特征方程：$r_1=2,r_{1,2}=\pm i$</li>
+<li class="list-indent-2">解 = 单实根 + 共轭复根 = $y=C_{1}e^{2x}+ C_{2}\cos x+C_{3}\sin x$</li>
+</ul>
+<p><strong>方法</strong></p>
+<ul>
+<li>第一步：写特征方程</li>
+<li>第二步：找出特征根</li>
+<li>第三步，根据根的方程，写出对应式子</li>
+<li class="list-indent-1">若是不等实根 </li>
+<li class="list-indent-2">通解： $y=C_1e^{r_1x}+C_2e^{r_2x}$</li>
+<li class="list-indent-1">若是相等实根 </li>
+<li class="list-indent-2">通解：$y=e^{rx}(C_1+C_2x)$</li>
+<li class="list-indent-1">若是共轭复根 </li>
+<li class="list-indent-2">通解：$y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-045/index.html"><span>← 上一项</span><strong>Lecture 37：可降阶方程与高阶线性微分方程</strong></a>
+    <a class="article-pagination-next" href="../math-047/index.html"><span>下一项 →</span><strong>Lecture 38：常系数非齐次线性微分方程</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

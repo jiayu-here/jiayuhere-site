@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 30：分部积分法 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 30：分部积分法。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 不定积分">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 30：分部积分法 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 30：分部积分法。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-038/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-038/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-038/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-038/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-038/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 30：分部积分法</h1><p class="article-lead">考研数学学习笔记：Lecture 30：分部积分法。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-01-19</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>不定积分</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 分部积分法</a><a href="#section-5">1.2 分部积分法总结</a></nav></details><div class="prose"><h2 id="section-1">1.1 分部积分法</h2>
+<h3 id="section-2">1.1.1 基本概念</h3>
+<h5 id="section-3"><strong>定义</strong>： #分布积分法</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 $u(x),\nu(x)$ 有连续一阶导数，则 $\int udv=uv-\int vdu$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>其中：有时候是 $udv$ 简单，有时候是 $vdu$ 简单</li>
+<li>v、u 的选取是其核心点；</li>
+</ul>
+<h3 id="section-4">1.1.2 例题</h3>
+<p><strong>例题</strong>：$\int xe^xdx$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">由于 $ex$ 的积分比较好求，所以需要考虑如何把 ex 放到 vdu 的位置上；</li>
+<li class="list-indent-1">但也可以考虑把 x 放到 vdu 的位置上，但是要更难做一些；</li>
+<li>解析</li>
+<li class="list-indent-1">$\int xe^xdx=\int x\operatorname{de}^x=xe^x-\int e^x\operatorname{dx}$</li>
+<li class="list-indent-1">$\int\mathrm{e}^{\mathrm{x}}\mathrm{d}\mathrm{x}=\times\mathrm{e}^{\mathrm{x}}-\mathrm{e}^{\mathrm{x}}+\mathrm{d}$</li>
+<li>题型： #分部积分法</li>
+</ul>
+<p><strong>例题</strong>：$\int x sin xdx$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">原式的等于： $-\int xdcosx=-\left[x\cos x-\int\cos dx\right]$</li>
+<li>题型： #分布积分法 </li>
+</ul>
+<p><strong>例题</strong>：$\int sec^3 xdx$</p>
+<ul>
+<li>分析</li>
+</ul>
+<p>	- </p>
+<ul>
+<li>解析</li>
+<li class="list-indent-1">原式： $\int\sec^{3}xdx=\int\sec xd\tan x=\sec xdx-\int\tan^{2}x\sin xdx$ $=\sec x\tan x-\int\sec^3xdx+\int\sec xdx$</li>
+<li class="list-indent-1">此时，由于原式的右边也出现了一个 sec 3 xdx 的负，所以可以将其放到右边去</li>
+<li class="list-indent-1">$\int sec^3x\mathrm{~d}x=\frac12\left[secxtanx+\ln|\sec x+\ln x|\right]+\mathrm{C}$</li>
+<li class="list-indent-2">其中的 1\2 是因为右边的 sec 移到左边去了；</li>
+<li>题型： #分部积分法 </li>
+</ul>
+<h2 id="section-5">1.2 分部积分法总结</h2>
+<p><strong>总结</strong></p>
+<ul>
+<li>概念：把之前求导时候的乘法公式过程，倒转过来，形成分布积分法；</li>
+</ul>
+<p><strong>何时用</strong></p>
+<ul>
+<li>适用于<strong>两类不同函数相乘</strong>；</li>
+<li>1. $\int xe^{x}dx$</li>
+<li>2. $\int x\sin xdx$</li>
+<li>3. $\int e^{x}\sin xdx$</li>
+</ul>
+<p><strong>如何用</strong></p>
+<ul>
+<li>八类典型分部积分规律；</li>
+<li>多项函数 × 指数|三角：</li>
+<li class="list-indent-1">1. $\int p_n(x)e^{ax}\operatorname{d}x$</li>
+<li class="list-indent-2">凑指数</li>
+<li class="list-indent-1">2. $\int p_n(x)\sin ax\operatorname{d}x$</li>
+<li class="list-indent-2">凑三角</li>
+<li class="list-indent-1">3. $\int p_n(x)\cos axdx$</li>
+<li class="list-indent-2">凑三角</li>
+<li>多项函数 × 对数|反三角：</li>
+<li class="list-indent-1">4. $\int P_n(x)\ln xdx$</li>
+<li class="list-indent-2">凑多项式</li>
+<li class="list-indent-1">5. $\int P_n(x)\arctan xdx$</li>
+<li class="list-indent-2">凑多项式</li>
+<li class="list-indent-1">6. $\int P_n(x)\arcsin xdx$</li>
+<li class="list-indent-2">凑多项式</li>
+<li>指数 × 三角</li>
+<li class="list-indent-1">7. $\int e^{\alpha x}\sin\beta xdx$</li>
+<li class="list-indent-2">凑谁都行</li>
+<li class="list-indent-1">8. $\int e^{\alpha x}\cos\beta xdx$</li>
+<li class="list-indent-2">凑谁都行</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-037/index.html"><span>← 上一项</span><strong>Lecture 29：换元积分法</strong></a>
+    <a class="article-pagination-next" href="../math-039/index.html"><span>下一项 →</span><strong>Lecture 31：定积分的基本概念</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

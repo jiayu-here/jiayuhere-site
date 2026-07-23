@@ -1,0 +1,24 @@
+---
+title: "真题 - 2017年：小作文 - 建议"
+slug: english-040
+description: "考研英语学习笔记：真题 - 2017年：小作文 - 建议。保留原始公式、图示与例题。"
+category: "考研英语"
+tags: ["考研英语", "英语写作", "真题 - 2017年：小作文 - 建议.md"]
+---
+
+**题目**
+- ![Pasted image 20250409111254](/assets/notes/4a7c66c9d43f-Pasted-image-20250409111254.png)
+
+**模板**
+```Text
+Dear Professor Cook,
+
+    It is so great to hear that you have arrived in Beijing, the capital of China.On behalf of Students` Union, I would like to extend a warm welcome for you arrived and I am writing for the purpose of recommendation a number of tourist for you.
+
+    Beijing is a modern city, but it is also characterized by its time-honored, profound and splendid history. Besides, I hear that you are keen on China`s history.Therefore, I deem that it is advisable for you to visit these sites in your spare time, including the Summer Palace, the Great Wall and the Forbidden City. These places will bring you opportunity to view the ancient architectures,  inspires your passion for Chinese historical and enhance you know China`s culture better.
+
+    In the end, I truly hope that you can enjoy a comfortable, wonderful and fruitful trip in China.if you have any further questions or concerns, please feel free to contact me.
+
+                                                                                       Yours sincerely,
+                                                                                                  Li Ming.
+```

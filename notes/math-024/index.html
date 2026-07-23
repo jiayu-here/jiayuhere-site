@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 16：导数基本概念 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 16：导数基本概念。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 导数与微分">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 16：导数基本概念 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 16：导数基本概念。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-024/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-024/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-024/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-024/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-024/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 16：导数基本概念</h1><p class="article-lead">考研数学学习笔记：Lecture 16：导数基本概念。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2023-12-13</span><span>约 10 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>导数与微分</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">本章常考题型与典型例题</a><a href="#section-2">1.1 导数的定义</a><a href="#section-8">1.2 导函数的定义与证明</a><a href="#section-11">1.3 常考题型</a><a href="#section-20">1.4 导数推导</a></nav></details><div class="prose"><h2 id="section-1">本章常考题型与典型例题</h2>
+<p><strong>考试内容</strong></p>
+<ul>
+<li>1. 导数与微分的概念（难点）</li>
+<li>2. 导数公式与求导法则（重点）</li>
+<li>3. 高阶导数（难点）</li>
+</ul>
+<p><strong>典型例题</strong></p>
+<ul>
+<li>题型一：导数定义 （难点）</li>
+<li>题型二：复合函数、隐函数、参数方程求导（重点） </li>
+<li>题型三：高阶导数 （难点）</li>
+<li>题型四：导数应用</li>
+</ul>
+<hr>
+<h2 id="section-2">1.1 导数的定义</h2>
+<h3 id="section-3">1.1.1 基本概念</h3>
+<p><strong>为什么需要导数</strong></p>
+<p>导数的本质对于一个点应变量增量与自变量增量的极限，这也就是反应了：在这个点，<strong>应变量随着自变量变化的速度</strong>；</p>
+<ul>
+<li>导数就是一个特殊的极限，其实质是一个平均变化率，当范围无穷小时，表达了这一点的变化率；</li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>： #什么是导数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\begin{aligned}\text{若 }&amp;\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}&amp;\text{存在，则称 }f(x)\text{ 在 }x_0\text{ 点可导}.\end{aligned}$</blockquote>
+<blockquote>另一种形式：$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
+<blockquote>形式一：$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</blockquote>
+<blockquote>形式二：$f^{\prime}(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>等价形式：</li>
+<li class="list-indent-1">因为 $x_0+\Delta x=x\quad\Delta x=x-x_0.$</li>
+<li class="list-indent-1">所以 $f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li class="list-indent-1">其他形式：$f^{\prime}(x_0)=y^{\prime}|_{x=x_0}=\frac{dy}{dx}|_{x=x_0}$</li>
+<li>注意：</li>
+<li class="list-indent-1">1. 一点的导数和 $f(x_0)$ 有关；</li>
+<li class="list-indent-1">2. $f(x_0)$ 是一个定点，$f(x)$ 是一个动点；</li>
+<li class="list-indent-1">3. 若极限不存在，则称 $f(x)$ 在 $x_{0}$ 处不可导； </li>
+<li class="list-indent-1">4. 若极限为无穷大，则称 $f(x)$ 在 $x_{0}$ 处导数为无穷大（导数为无穷，为不可导）.</li>
+</ul>
+<p><strong>什么是可导</strong></p>
+<ul>
+<li>$\frac{dy}{dx}=k$ 。也就是 $\Delta y$ 和 $\Delta x$ 的比值；</li>
+<li>若能求出值，就是可导，若不能，就是不可导。</li>
+</ul>
+<p><strong>推导</strong>：假设当前距离函数为 $d(s)=t^3$，当前导数为 $v(t)$，设 $t=3$</p>
+<ul>
+<li>对一点附近的变化率推导：$\begin{gathered}\text{Derivative}\\\frac{ds}{dt}(t)=\underbrace{\frac{s(t+dt)-s(t)}{dt}}_{dt\to0}\end{gathered}$</li>
+<li>假设在 $t=2$ 的点，求这一点的切线：$\begin{aligned}\frac{ds}{dt}(2)=\frac{\left(2+dt\right)^3-\left(2\right)^3}{dt}\end{aligned}$</li>
+<li>此时将 $(2+dt)^3$ 展开，得到：$\begin{aligned}\frac{2^3+3(2)^2dt+3(2)(dt)^2+(dt)^3-2^3}{dt}\end{aligned}$</li>
+<li>将其除以 $dt$ 后，得到：$3(2)^2+3(2)(dt)+(dt)^2$</li>
+<li>此时，当 $dt$ 趋向于无穷小时，得到： $\frac{ds}{dt}(2)=3(2)^2=12$</li>
+<li>如果将当中的 $t=2$ 变为一般式 $t=t$，则可得到：$\frac{ds}{dt}(t)=3(t)^2$</li>
+</ul>
+<h5 id="section-5"><strong>定义</strong>： #左导数与右导数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\begin{aligned}&amp;\text{ 左导数: }f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}\\&amp;\text{ 右导数: }{f_0^{\prime}(x_0)}=\lim_{\Delta x\to0^+}\frac{f(x_0+\Lambda x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}\end{aligned}$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>左导数的函数下面要加负号</li>
+<li>右导数的函数下面要加正号</li>
+</ul>
+<h5 id="section-6"><strong>定理</strong>： #左右导数与导数的关系</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $f^{\prime}(x_0)=a\Leftrightarrow f_-^{\prime}(x_0)=f_+^{\prime}(x_0)=a$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>左右导数的关系：可导 <code>&lt;--&gt;</code> <strong>左右导数存在且相等</strong>；</li>
+</ul>
+<h5 id="section-7"><strong>定义</strong>： #区间上可导</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：区间上可导 = 区间上的每一点都具有导数；</blockquote>
+<blockquote>1. $(a,b)$ ：区间上每一点可导；</blockquote>
+<blockquote>2. $[a,b]$  ：区间上每一点可导，并且 a 点右可导，b 点左可导；</blockquote>
+<h2 id="section-8">1.2 导函数的定义与证明</h2>
+<p><strong>区间上可导</strong></p>
+<p>在一个区间内每个点都有导数，称之为区间内可导；</p>
+<p>这个导数构成的函数，称之为函数的导函数；</p>
+<p><strong>导函数</strong> </p>
+<p>$f^{\prime}(x)\quad x\in I$</p>
+<h3 id="section-9">1.2.1 证明函数的导数</h3>
+<p><strong>题目：</strong>$\left(a^x\right)^{\prime}=a^x\ln a\left(a&gt;0,a\neq1\right)$</p>
+<ul>
+<li>证明过程：</li>
+<li class="list-indent-1">$\lim_{\Delta x\to0}\frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim_{\Delta x\to0}\frac{a^x\left[a^{\Delta x}-1\right]}{\Delta x}=a^x\ln a$</li>
+<li>其中，第二步的直接变成 lna 的步骤，因为有此等价极限：$\lim_{x\to0}\frac{a^x-1}{x}=\ln a$</li>
+</ul>
+<p><strong>题目</strong>：$(\sin x)^{\prime}=\cos x$</p>
+<ul>
+<li>证明过程：</li>
+<li class="list-indent-1">$\lim_{\Delta x\to0}\frac{\sin(x+\Delta x)-\sin x}{\Delta x}=\lim_{\Delta x\to0}\frac{2\sin\frac{\Delta x}{2}\cos\frac{2x+\Delta x}{2}}{4x}$</li>
+<li>因为 sinx~x，所以：</li>
+<li class="list-indent-1">$\operatorname*{lim}_{\Delta x\rightarrow0}\frac{2-\frac{\Delta x}{2}\sin\frac{2x+\Delta x}{2}}{\Delta x}=\cos x$</li>
+</ul>
+<h3 id="section-10">1.2.2 导函数的几何意义</h3>
+<p><strong>导函数与切线</strong></p>
+<ul>
+<li>定义：</li>
+<li class="list-indent-1">导数 $f^{\prime}(x_0)$ 在几何上，表示为曲线 $y=f(x)$ 在点 $\left(x_0,f(x_0)\right)\text{处切线的斜率}$</li>
+<li>切线与法线：</li>
+<li class="list-indent-1">切线方程：$y-y_{0}=f^{\prime}(x_{0})(x-x_{0})$</li>
+<li class="list-indent-1">法线方程：$y-y_0=-\frac1{f^{\prime}(x_0)}(x-x_0)$</li>
+<li>图示：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/8d18c940abd3-Pasted-image-20240314175211.png" alt="Pasted image 20240314175211" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>导数与切线</strong></p>
+<ul>
+<li>可导一定有切线；</li>
+<li>有切线不一定可导；</li>
+</ul>
+<h2 id="section-11">1.3 常考题型</h2>
+<h3 id="section-12">题型： #分段函数在分界点讨论可导性</h3>
+<p><strong>题型一</strong>：左右导数是否存在</p>
+<ul>
+<li>比如在分段函数当中，要求分析在某一点处的左右导数是否存在；</li>
+<li>方法：利用定义</li>
+<li>一点左导数存在： $f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li class="list-indent-1">带入 $x_0$ 点后，计算这一点极限，然后看其值是否等于导数值，导数值是否存在；</li>
+</ul>
+<p><strong>注意</strong>：分段函数，求导导数带值，需要带到点被定义的点，比如 x=1 是分界点，小于等于 1 和大于 1 当中，小于等于 1 的函数部分可以带值；</p>
+<h3 id="section-13">题型： #导数定义</h3>
+<h4 id="section-14">PART 1：解题方法</h4>
+<p><strong>特点</strong>：出现了类似于 $f^{\prime}(x_0)=-1$ 一点导数存在这种形式，经常考察的是一点的导数定义的题目；</p>
+<p><strong>核心思想</strong>：把当前导数凑成一下类似于导数定义的形式；</p>
+<ul>
+<li>形式：$f^{\prime}(x_{0})=\lim_{方框\to0}\frac{f(x_{0}+方框)-f(x_{0})}{方框}$</li>
+<li>除法当中的分子式是一个动、一个定，因此要凑成这种形式；</li>
+<li>补充：条件解析</li>
+<li class="list-indent-1">当出现 $x=0\text{ 处可导,且 }f(0)=0$ 时，要用到导数在 0 点的定义式；</li>
+</ul>
+<p><strong>类似题型</strong>：导数零点判定性问题</p>
+<ul>
+<li>举例：$\text{下列函数中,在 }x=\mathbf{0}\text{ 处不}\text{可导的是}$</li>
+<li>常用结论：设 $f(x)=A(x)x-a$，其中 $A(x)$ 在 x=a 处连续，则 $f(x)$ 在 x=a 处可导的充要条件为：$A(x)=0$</li>
+</ul>
+<p><strong>类似题型</strong>：有类似于导数的定义 $\lim_{方框\to0}\frac{f(x_{0}+方框)-f(x_{0})}{方框}$，此时问某点是否可导；</p>
+<ul>
+<li>解题：需要在<strong>方框趋向于 0 正以及 0 负, 并且方框不等于 0</strong>的情况下都可以存在，此时才可以推出这一点导数存在；</li>
+</ul>
+<h4 id="section-15">PART 2：典型例题</h4>
+<p><strong>例题</strong>：$\text{已知 }f^{\prime}(x_0)=-1,\text{则}\lim_{x\to0}\frac x{f(x_0-2x)-f(x_0-x)}=？$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">凑成导数定义的形式；</li>
+<li class="list-indent-1">也可以使用具体函数来带入求值（因为是填空题）；</li>
+<li>解析</li>
+<li class="list-indent-1">$\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0}-x)}{x}=\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0})}{-2x}\cdot\frac{-2x}{x}-\lim_{x\to0}\frac{f(x_{0}-x)-f(x_{0})}{-x}\cdot\frac{-x}{x}$</li>
+<li>题型： #导数定义 </li>
+</ul>
+<p><strong>例题</strong>：$\text{已知 }f(x)\text{ 在 }x=0\text{ 处可导,且 }f(0)=0,\text{则}\quad\lim_{x\to0}\frac{x^2f(x)-2f(x^3)}{x^3}$ =？</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li>题型：#</li>
+</ul>
+<h4 id="section-16">PART 3：知识点复盘</h4>
+<p><strong>注意</strong>：<code>导数存在 -&gt; 导数定义的极限存在</code> 和 <code>导数定义存在 -&gt; 导数存在</code> 这两个不是一个问题；</p>
+<ul>
+<li>导数存在 <code>-&gt;</code> 导数定义的极限存在：证明这个极限存在几个；</li>
+<li>导数定义存在 <code>-&gt;</code> 导数存在：需要证明在方框趋向于 0 正以及 0 负, 并且方框不等于 0 这三个情况下都存在，才可以证明导数存在；</li>
+</ul>
+<h3 id="section-17">题型： #导数应用</h3>
+<h4 id="section-18">PART 1：解题方法</h4>
+<p><strong>题型 1</strong>：导数的几何意义</p>
+<ul>
+<li>求切线的斜率：$k_{切}=\frac{dy}{dx}$</li>
+<li>求法线的斜率：$k_{法}=-\frac1{k_{切}}$</li>
+</ul>
+<p><strong>题型 2</strong>：相关变化率</p>
+<ul>
+<li>1. 建立相关量之间的关系；</li>
+<li>2. 式子两边对 t 求导；</li>
+</ul>
+<h4 id="section-19">PART 2：典型例题</h4>
+<p><strong>例题</strong>：$\left.\text{曲线 }\left\{\begin{aligned}x&amp;=\arctan t,\\y&amp;=\ln\sqrt{1+t^2},\end{aligned}\right.\text{ 上对应于 }{t=1}\right.$ 的点处的法线方程</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li>题型：#</li>
+</ul>
+<h2 id="section-20">1.4 导数推导</h2>
+<p><strong>距离与速度举例</strong></p>
+<ul>
+<li>s 为 $s(t)$</li>
+<li>距离与速度关系 </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/7e59f48dbce8-Pasted-image-20240324194344.png" alt="Pasted image 20240324194344" loading="lazy" decoding="async"></li>
+<li>变化量：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/f604f8755a5f-Pasted-image-20240324194646.png" alt="Pasted image 20240324194646" loading="lazy" decoding="async"></li>
+<li>对一点附近的变化率推导：$\begin{gathered}\text{Derivative}\\\frac{ds}{dt}(t)=\underbrace{\frac{s(t+dt)-s(t)}{dt}}_{dt\to0}\end{gathered}$</li>
+<li>假设在 $t=2$ 的点，求这一点的切线：$\begin{aligned}\frac{ds}{dt}(2)=\frac{\left(2+dt\right)^3-\left(2\right)^3}{dt}\end{aligned}$</li>
+<li>此时将 $(2+dt)^3$ 展开，得到：$\begin{aligned}\frac{2^3+3(2)^2dt+3(2)(dt)^2+(dt)^3-2^3}{dt}\end{aligned}$</li>
+<li>将其除以 $dt$ 后，得到：$3(2)^2+3(2)(dt)+(dt)^2$</li>
+<li>此时，当 $dt$ 趋向于无穷小时，得到： $\frac{ds}{dt}(2)=3(2)^2=12$</li>
+<li>如果将当中的 $t=2$ 变为一般式 $t=t$，则可得到：$\frac{ds}{dt}(t)=3(t)^2$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-023/index.html"><span>← 上一项</span><strong>Lecture 15：闭区间上连续函数的性质</strong></a>
+    <a class="article-pagination-next" href="../math-025/index.html"><span>下一项 →</span><strong>Lecture 17：导数求导法则</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

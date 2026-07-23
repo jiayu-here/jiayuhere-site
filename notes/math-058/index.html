@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 56：幂级数 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 56：幂级数。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 无穷级数">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 56：幂级数 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 56：幂级数。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-058/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-058/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-058/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-058/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-058/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 56：幂级数</h1><p class="article-lead">考研数学学习笔记：Lecture 56：幂级数。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-14</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>无穷级数</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">50.1 幂级数</a><a href="#section-11">50.2 幂级数的运算</a><a href="#section-14">50.3 常考题型</a></nav></details><div class="prose"><p><strong>本节内容概要</strong></p>
+<ul>
+<li>（一）收敛半径、收敛区间、收敛域</li>
+<li>（二）幂级数的性质</li>
+<li>（三）函数的幂级数展开</li>
+</ul>
+<p><strong>本节常考题型</strong></p>
+<ul>
+<li>题型一：求收敛半径、收敛区间及收敛域</li>
+<li>题型二：将函数展开为幂级数</li>
+<li>题型三：级数求和</li>
+<li class="list-indent-1">难点</li>
+<li class="list-indent-1">重点</li>
+</ul>
+<hr>
+<h2 id="section-1">50.1 幂级数</h2>
+<h3 id="section-2">50.1.1 基本概念</h3>
+<p><strong>数列</strong>：每一项只和 n 有关</p>
+<ul>
+<li>数列： $u_{1},u_{2},\cdots,u_{n}$</li>
+<li>无穷级数：$u_{1}+u_{2}+\cdots+u_{n}+\cdots$</li>
+</ul>
+<p><strong>函数列</strong>：每一项和 n 以及 $x$ 有关</p>
+<ul>
+<li>假设 x 在区间 $I$ 上；</li>
+<li>函数列： $u_{1}(x), u_{2}(x), u_{n}(x),\cdots$</li>
+<li>函数项无穷级数：$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ </li>
+</ul>
+<h5 id="section-3"><strong>定义</strong>： #幂级数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>常见形式： $$\sum_{n=0}^\infty a_nx^n=a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots $$</blockquote>
+<blockquote>一般形式：$$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">每一项都是 x 的正整数幂：幂级数： $a_{0}a_{1},a_{2}x^{2}\cdots a_{n}x^{n}\cdots$</li>
+<li class="list-indent-1">幂级数其实是函数项级数的最简单的一种，$x^{n}$ 就是 x 的函数，$a_n$ 就是一列数；</li>
+<li class="list-indent-1">$a_0,a_1,a_2...a_n$ 称之为系数；</li>
+<li>补充：</li>
+<li class="list-indent-1">一般研究常见形式，因为一般形式可以用 $x-x_0=t$ 化成常见形式；</li>
+</ul>
+<h3 id="section-4">50.1.2 收敛与发散</h3>
+<h5 id="section-5"><strong>定义</strong>： #收敛点与发散点</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<blockquote>1. 如果 $x_{0}\in I$ 时，$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ 收敛，则称 $x_o$ 为收敛点，如果是一段区间则称之为收敛域；</blockquote>
+<blockquote>2. 如果 $x_{0}\in I$ 时，$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ 发散，则称 $x_o$ 为发散点，如果是一段区间则称之为发散域；</blockquote>
+<blockquote>3. $S\left (x\right)=u\left (x\right)+u_{2\left (x\right)}+\cdots+u_{n}\left (x\right)+\cdots$ 称之为和函数，$\lim_{n\to\infty}S_n(x)=S\left(x\right)$；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>一般就是求两个问题：收敛域是什么？和函数是什么？</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>$1+x+x^{2}+x^{3}+\cdots+x^{n}+\cdots$</li>
+<li>此时：</li>
+<li class="list-indent-1">$|x|&lt;1\text{时，收敛城(-1,1)}\frac{a}{1-q}=\frac{1}{1-x}$</li>
+<li class="list-indent-1">$|\times|\geq1 时，发散域(-\infty,-1)|U[1,+\infty]$</li>
+</ul>
+<h5 id="section-6"><strong>定理</strong>： #阿贝尔定理 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： </blockquote>
+<blockquote>$$\sum_{n=0}^{+\infty}a_nx ，当x=x_0 时收敛,|x|&lt;|x_0|时幂级数绝对收敛$$</blockquote>
+<blockquote>$$\sum_{n=0}^{+\infty}a_nx ，当x=x_0 时发散,|x|&gt;|x_0|时幂级数发散$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>定理的作用：</li>
+<li class="list-indent-1">揭示了当前幂级数的收敛、发散的域的结构 <code>-&gt;</code> 将求收敛域的问题、转化成了求整个区间一般长度的问题 <code>-&gt;</code> 也就是求收敛半径 <code>R</code> ；</li>
+<li>绝对收敛：</li>
+<li class="list-indent-1">在 $|x|&lt;|x_0|$ 时，此时在这个区间内的点，也都收敛 <code>-&gt;</code> 离原点更近的点收敛；</li>
+<li>发散：</li>
+<li class="list-indent-1">在 $|x|&gt;|x_0|$ 时，此时在这个区间外的点，也都收敛 <code>-&gt;</code> 离原点更远的点发散；</li>
+<li>总结：</li>
+<li class="list-indent-1">1. 收敛点和发散点的分界点 <code>-&gt;</code> 就是<strong>收敛半径 R</strong></li>
+<li class="list-indent-1">2. 两个级数 $\sum_{n=0}^{+\infty}a_n{(x+2)}$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}$ ，如果它们的 $a_n$ 一样，则它们有共同的收敛半径 <code>R</code>； </li>
+<li>注意： </li>
+<li class="list-indent-1">收敛区间不需要关注端点；</li>
+<li class="list-indent-1">收敛域需要关注端点；</li>
+</ul>
+<p><strong>补充</strong>：收敛区间和收敛域</p>
+<ul>
+<li>收敛区间：</li>
+<li class="list-indent-1">$(-R,+R)$</li>
+<li>收敛域：</li>
+<li class="list-indent-1">包括端点在内：$\pm R$</li>
+<li class="list-indent-1">分别判断两个端点的值后，得到的区间；</li>
+</ul>
+<p><strong>补充</strong>：关于 $x$ 不等于 $x_0$ 时的收敛域</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">根据 <code>&lt;总结-1&gt;</code> 可知，$\sum_{n=0}^{+\infty}a_n{(x+2)}$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}$ 的收敛半径 R 一样；</li>
+<li>概念：</li>
+<li class="list-indent-1">收敛区间： </li>
+<li class="list-indent-2">对 $\sum_{n=0}^{+\infty}a_n{(x+2)}$ 而言，其中心在 <code>x=-2</code> 点，因此假设其收敛点在 <code>x=0</code> 处时，其收敛半径为 <code>0-(-2)=2</code> ，因此其收敛区间就是：</li>
+<li class="list-indent-2">$$收敛区间：(x_0-R,x_0+R)\rightarrow (-2-2,-2+2)\rightarrow (-4,0)$$</li>
+<li class="list-indent-1">端点收敛性不变性：</li>
+<li class="list-indent-2">因为两个级数的 $a_n$ 项相同，所以这两个级数的收敛域的两个端点同敛散性；</li>
+</ul>
+<h5 id="section-7"><strong>定理</strong>： #幂级数的收敛情况</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： 幂级数  $\sum_{n=0}^{+\infty}a_nx$ 的收敛性有且仅有三种可能：</blockquote>
+<blockquote>（1）对任何 x 属于 $(-\infty ,+\infty)$ 都收敛；</blockquote>
+<blockquote>（2）只在 $x=0$ 处收敛；</blockquote>
+<blockquote>（3）存在一个正数 <code>R</code> 当 $|x| &lt; R$ 时绝对收敛，当 $|x|&gt;R$ 时发散； </blockquote>
+<blockquote>注意：若幂级数 $\sum_{n=0}^{+\infty}a_nx$ 在点 $x=x_0$ 处条件收敛，则点 $x_0$ 必为该幂级数收敛区间 $(-R,R)$ 的一个端点；</blockquote>
+<h3 id="section-8">50.1.3 收敛半径 R</h3>
+<h5 id="section-9"><strong>定理</strong>： #收敛半径判断</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$若\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho，则 R = \frac{1}{{\rho}}$$</blockquote>
+<blockquote>即：此时有三种情况：$$R=\begin{cases}\frac{1}{\rho},&amp;\rho\neq0\\+\infty,&amp;\rho=0\\0,&amp;\rho=+\infty\end{cases}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意： </li>
+<li>1. 此定理只能单方向使用；</li>
+<li>2. 收敛区间是不管端点的，即 $(-R,R)$</li>
+</ul>
+<h5 id="section-10"><strong>定理</strong>： #收敛半径判断：基于根式</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\text{如果 }\lim_{n\to\infty}\sqrt[n]{|a_n|}=\rho,\text{则}\quad R=\frac1\rho $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>基于根值法推导而来；</li>
+</ul>
+<h2 id="section-11">50.2 幂级数的运算</h2>
+<h3 id="section-12">50.2.1 幂级数的运算性质</h3>
+<p><strong>性质</strong>：有理运算性质</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">设</li>
+<li class="list-indent-1">1.  $\sum_n^{\infty}a_nx^n$ 的收敛半径为 $R_1$</li>
+<li class="list-indent-1">2.  $\sum_n^{\infty}b_nx^n$ 的收敛半径为 $R_2$</li>
+<li class="list-indent-1">令 $R=\min\{R_1,R_2\}$，则当 $x\in(-R,R)$ 时：</li>
+<li>运算性质：</li>
+<li class="list-indent-1">（1）加法：$$\sum_{n=0}^\infty a_nx^n\pm\sum_{n=0}^\infty b_nx^n=\sum_{n=0}^\infty(a_n\pm b_n)x^n$$</li>
+<li class="list-indent-1">（2）乘法：$$(\sum_{n=0}^\infty a_nx^n)\cdot(\sum_{n=0}^\infty b_nx^n)=\sum_{n=0}^\infty c_nx^n$$ </li>
+<li class="list-indent-2">且：$c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$ </li>
+<li class="list-indent-1">（3）除法：$$\frac{\sum_{n=0}^\infty a_nx^n}{\sum_{n=0}^\infty b_nx^n}=\sum_{n=0}^\infty c_nx^n$$</li>
+</ul>
+<h3 id="section-13">50.2.2 幂级数的分析性质</h3>
+<p><strong>性质</strong>：逐项求导</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">若 $\sum_{n=0}^{+\infty}a_{n}x^{n}$ 的收敛半径是 <code>R</code>，和函数为 $S(x)$，则：</li>
+<li>分析性质：</li>
+<li class="list-indent-1">（1）连续性：</li>
+<li class="list-indent-2">$S(x)$ 在它的收敛域上 $I$ 是连续的；</li>
+<li class="list-indent-1">（2）可导性：</li>
+<li class="list-indent-2">$S(x)$ 在 $(-R,R)$ 上可导，且可以逐项求导，半径不变，即：</li>
+<li class="list-indent-3">$$S^{\prime}(x)=\left(\sum_{n=0}^\infty a_nx^n\right)^{\prime}=\sum_{n=0}^\infty(a_nx^n)^{\prime}=\sum_{n=0}^\infty na_nx^{n-1}$$</li>
+<li class="list-indent-2">注意：这里面级数求导之后，收敛半径没有变化，还是 R，并且通项当中还多了一个 $n$</li>
+<li class="list-indent-1">（3）可积性：</li>
+<li class="list-indent-2">若 $\sum_{n=0}^{\pm\infty}a_{n}x^{n}$ 的和函数 $S(x)$ 在 $I$ 上是可积的，且可以逐项积分，则：</li>
+<li class="list-indent-3">$$\int_{0}^{x}S(x)\operatorname{d}x=\int_{0}^{x}\sum_{n=0}^{\infty}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\int_{0}^{x}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\frac{1}{n+1}a_{n}x^{n+1}$$</li>
+<li class="list-indent-2">注意：逐项求积分后的幂级数，与原幂级数的收敛半径是相同的；</li>
+</ul>
+<h2 id="section-14">50.3 常考题型</h2>
+<hr>
+<h3 id="section-15">题型： #求收敛半径、收敛区间、收敛域 </h3>
+<h4 id="section-16">PART 1：解题方法</h4>
+<p><strong>题型</strong>：求收敛半径</p>
+<ul>
+<li>两种方法：</li>
+<li class="list-indent-1">方法一：使用收敛半径判定法</li>
+<li class="list-indent-1">方法二：使用收敛半径根值判定法</li>
+<li>注意：缺项时</li>
+<li class="list-indent-1">缺项：$x^{2n-1}$ ，不是 $x^n$</li>
+<li class="list-indent-1">缺项时不能直接使用公式，如果是 $x^{2n+b}$ ，则此时都需要将根值法算得的 <code>R</code> 开一个 $\frac{1}{2}$ 次方；</li>
+</ul>
+<p><strong>题型</strong>：求收敛区间</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">想要求得收敛区间，需要先求得收敛半径；</li>
+</ul>
+<p><strong>题型</strong>：求端点的收敛性</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">分别将端点的 $x=\pm x_0$ 代入进去，得到关于 n 的函数式，即：当前级数的通项。此时解题方法和常数项级数一致，根据其是正项、交错级数、任意项级数，选择方法，判定；</li>
+</ul>
+<p><strong>题型</strong>：判断任意一点的收敛性</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">先求出当前幂级数的收敛半径（经常要使用阿贝尔定理），然后根据收敛区间，判断任意一点是否在区间内，即可得到收敛性；</li>
+</ul>
+<h4 id="section-17">PART 2：典型例题</h4>
+<p><strong>例题</strong>：求 $\sum_{n=1}^\infty\frac{e^n-(-1)^n}{n^2}x^n$ </p>
+<h4 id="section-18">PART 3：知识点复盘</h4>
+<p><strong>知识点</strong>：当幂级数 $\sum_{n=0}^\infty na_nx^n$ 的 $a_n$ 旁边有 n 时</p>
+<ul>
+<li>知识点：根据幂级数的<strong>逐项求导后、收敛半径不变</strong>的性质，可知 $\sum_{n=0}^\infty na_nx^n$ 和 $\sum_{n=0}^\infty a_nx^n$ 的 R 不变；</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-057/index.html"><span>← 上一项</span><strong>Lecture 55：交错级数</strong></a>
+    <a class="article-pagination-next" href="../math-059/index.html"><span>下一项 →</span><strong>Lecture 51：函数展开成幂级数</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

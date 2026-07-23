@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 2：行列式的定义与性质 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 2：行列式的定义与性质。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 行列式">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 2：行列式的定义与性质 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 2：行列式的定义与性质。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-071/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-071/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-071/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-071/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-071/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 2：行列式的定义与性质</h1><p class="article-lead">考研数学学习笔记：Lecture 2：行列式的定义与性质。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 19 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>行列式</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">2.1 行列式基础概念</a><a href="#section-4">2.2 行列式的第一种定义</a><a href="#section-9">2.3 行列式的第二种定义</a><a href="#section-13">2.4 行列式的第三种定义</a><a href="#section-20">2.5 行列式的性质 </a><a href="#section-28">2.6 几个重要的行列式 </a></nav></details><div class="prose"><h2 id="section-1">2.1 行列式基础概念</h2>
+<h3 id="section-2">2.1.1 行列式的由来</h3>
+<p><strong>行列式的由来</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">矩阵：</li>
+<li class="list-indent-2">$$\left(\begin{matrix}a_{1}&amp;a_{2}\\b_{1}&amp;b_{2}\end{matrix}\right)=A$$</li>
+<li class="list-indent-1">行列式：</li>
+<li class="list-indent-2">$$\begin{vmatrix}\mathrm{a}&amp;\mathrm{b}\\\mathrm{c}&amp;\mathrm{d}\end{vmatrix}=|A|$$</li>
+<li>关系：</li>
+<li class="list-indent-1">行列式的概念由矩阵而来，矩阵是变换的一种<strong>性质</strong>；</li>
+<li class="list-indent-1">矩阵是在<strong>表达信息</strong>，只有作用在一个向量上时，才会产生对另一个向量的作用；</li>
+<li class="list-indent-1">行列式是把矩阵 <code>A</code> 放进来后，计算其某种性质、特点的测度；</li>
+</ul>
+<p><strong>补充</strong>：行列式的意义 - 二维时</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">行列式用于描述：一个矩阵在进行线性变换之后，这个线性变换对图像的面积改变的比例，称之为这个变换的行列式；</li>
+<li>举例： </li>
+<li class="list-indent-1">假设有一个二维的矩阵 A，如果矩阵 A 的行列式为 0，则表示将整个平面压缩到一条线、甚至是一个点上；</li>
+<li class="list-indent-1">此时如果有一个图形在接受矩阵 A 的线性变换，此图形在进行线性变换后、其面积变为 0；</li>
+<li>意义：</li>
+<li class="list-indent-1">这也就意味着：只需要检验一个矩阵的行列式是否为 <code>0</code>，我们就能了解这个矩阵所代表的变换是否将空间压缩到更小的维度上 <code>-&gt;</code> 当前矩阵中有线性相关的列向量；</li>
+<li>补充：定向</li>
+<li class="list-indent-1">当行列式的值为负数时，则其表示定向发生改变；</li>
+<li>补充：三维 </li>
+<li class="list-indent-1">如果是在三维时，此时行列式的值、就代表了线性变换后体积的改变比例；</li>
+<li class="list-indent-1">因此：如果三维矩阵的行列式等于 0，则此时矩阵的列必然线性相关；</li>
+</ul>
+<p><strong>概念</strong>：二阶行列式的计算</p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$|A|=|\begin{matrix}a&amp;b\\c&amp;d\end{matrix}|=ad-bc$$</li>
+<li>主对角线：</li>
+<li class="list-indent-1">从 <code>a-&gt;d</code> 是主对角线；</li>
+<li>副对角线：</li>
+<li class="list-indent-1">从 <code>d-&gt;c</code> 是副对角线；</li>
+<li>行列式的值：</li>
+<li class="list-indent-1">就是主对角线减去副对角线；</li>
+<li class="list-indent-1">其值的意义 <code>-&gt;</code> 行列式的值，实际上就是对行列式对应的面积的改变的度量；</li>
+</ul>
+<h3 id="section-3">2.1.2 行列式的知识结构</h3>
+<p><strong>知识结构</strong></p>
+<ul>
+<li>行列式的基础概念：</li>
+<li class="list-indent-1">本质定义</li>
+<li class="list-indent-1">性质</li>
+<li class="list-indent-1">逆序数法定义</li>
+<li class="list-indent-1">展开定理</li>
+<li>几个重要的行列式：<code>12+1</code></li>
+<li class="list-indent-1">主对角线行列式</li>
+<li class="list-indent-1">副对角线行列式</li>
+<li class="list-indent-1">拉普拉斯展开式</li>
+<li class="list-indent-1">范德蒙德行列式</li>
+<li>行列式的计算</li>
+<li class="list-indent-1">具体型</li>
+<li class="list-indent-2">化成基本型</li>
+<li class="list-indent-2">递推法</li>
+<li class="list-indent-2">行列式表示的函数和方程</li>
+<li class="list-indent-1">抽象型</li>
+<li class="list-indent-2">用性质</li>
+<li class="list-indent-2">用公式 $|AB|=|A||B|$</li>
+<li class="list-indent-3">补充：<code>AB不等于BA</code></li>
+<li class="list-indent-3">但 <code>|AB|</code> 面积的结果，等于 A 和 B 的行列式的面积值得相乘</li>
+<li class="list-indent-3">所以：<code>|AB|=|A||B|=|B||A|=|BA|</code></li>
+<li>余子式与代数余子式的计算</li>
+<li>克拉默法则</li>
+<li class="list-indent-1">不重要</li>
+</ul>
+<h2 id="section-4">2.2 行列式的第一种定义</h2>
+<h3 id="section-5">2.2.1 二阶行列式</h3>
+<p><strong>概念</strong>：二阶行列式的概念</p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">$$2 阶行列式D_2=\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}$$</li>
+<li>解释：</li>
+<li class="list-indent-1">其中 $a_{ij}$ 的第一个下标 $i$ 表示此元素所在的行数，第二个下标 $j$ 表示此元素所在的列数 <code>-&gt;</code> 定位置；</li>
+<li class="list-indent-2">$i=1,2,j=1,2$；</li>
+<li class="list-indent-1">于是此行列式中有四个元素；</li>
+<li>计算：</li>
+<li class="list-indent-1">$\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}$</li>
+<li>几何意义：</li>
+<li class="list-indent-1">计算：</li>
+<li class="list-indent-2">$S_D=l<em>m</em>\sin(\beta-\alpha)=a_{11}a_{22}-a_{12}a_{21}$</li>
+<li class="list-indent-1">意义：</li>
+<li class="list-indent-2">二阶行列式是一个平行四边形的面积值 <code>-&gt;</code> 体现测度；</li>
+<li class="list-indent-2"><code>2</code> 阶行列式是由<strong>两个 <code>2</code> 维向量组成</strong>的，其 (运算规则的) 结果为以这两个向量为邻边的平行四边形的面积, 这不仅得出了 2 阶行列式的计算规则，也能够清楚地看到其几何意义；</li>
+</ul>
+<h3 id="section-6">2.2.2 三阶行列式</h3>
+<p><strong>概念</strong>：三阶行列式</p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">$$\text{3阶行列式}D_{3}=\begin{vmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\end{vmatrix}$$</li>
+<li>解释：</li>
+<li class="list-indent-1"><code>3</code> 阶行列式是由三个 <code>3</code> 维向量 $a_1=[a_{11}, a_{12}, a_{13}]$, $a_2=[a_{21}, a_{22}, a_{23}]$, $a_3=[a_{31}, a_{32}, a_{33}]$ 组成；</li>
+<li class="list-indent-1">其 (运算规则的) 结果为<strong>以这三个向量为邻边的平行六面体的体积</strong>；</li>
+<li>计算：</li>
+<li class="list-indent-1">公式 $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\end{vmatrix}=(a_{11}a_{22}a_{33}+a_{13}a_{21}a_{32}+a_{12}a_{23}a_{31})-(a_{13}a_{22}a_{31}+a_{12}a_{21}a_{33}+a_{11}a_{23}a_{32})$$</li>
+<li class="list-indent-1">手算方法：</li>
+<li class="list-indent-2">画线法 <code>-&gt;</code> 画两条线。第一条是从 <code>a11-&gt;a22-&gt;a33</code>，然后基于此线画两个叉子 <code>a13-&gt;a21-&gt;a32</code> 与 <code>a12-&gt;a23-&gt;a31</code>；同理是第二条线，以 <code>a13-&gt;a22-&gt;a31</code> 然后画两个叉子；</li>
+</ul>
+<h3 id="section-7">2.2.3 n 阶行列式的本质定义</h3>
+<h5 id="section-8"><strong>定义</strong>： #n阶行列式</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{aligned}&amp;n\text{ 阶行列式 }D_n=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{nn}\end{vmatrix}\text{是由 }n\text{ 个 }n\text{ 维向量 }a_1=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots,a_{1n}\end{bmatrix},\cdots,a_{n}=[a_{n1},a_{n2},\cdots,a_{nn}]\text{组成的,其(运算规则的)结果是以这 }n\text{个向量为邻边的 }n\text{维图形的(有}\\&amp;\text{向)体积.}\end{aligned}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>行列式为 <code>0</code>，向量组线性相关行列式不为 <code>0</code>，向量组线性无关；</li>
+</ul>
+<h2 id="section-9">2.3 行列式的第二种定义</h2>
+<h3 id="section-10">2.3.1 排列和逆序</h3>
+<p><strong>概念</strong>：排列</p>
+<ul>
+<li>排列由 <code>n</code> 个数 <code>1,2,…, n</code> 组成的一个有序数组称为一个 <code>n</code> 级排列；</li>
+<li>如 <code>23145</code> 是一个 <code>5</code> 级排列，<code>41352</code> 也是一个 <code>5</code> 级排列，<code>n</code> 级排列共有 <code>n!</code> 个；</li>
+</ul>
+<p><strong>概念</strong>：逆序</p>
+<ul>
+<li>$\text{在一个}n\text{ 级排列 }i_1i_2\cdots i_s\cdots i_t\cdots i_n\text{中,若}i_s&gt;i_t\text{,且}i_s\text{排在}i_t\text{前面,则称这两个数构成一个逆序 }.$</li>
+</ul>
+<p><strong>概念</strong>：逆序数</p>
+<ul>
+<li>逆序数一个排列中，逆序的总数称为该排列的逆序数，记作 $\tau\left(i_{1}i_{2}\cdots i_{n}\right)$，如 $\tau(231546)=3$</li>
+<li>由小到大顺排的排列称为自然排序，如 <code>12345</code>，显然，自然排序的逆序数为 <code>0</code>；</li>
+</ul>
+<p><strong>概念</strong>：奇排列和偶排列</p>
+<ul>
+<li>该排列排列的逆序数为奇数时，该排列称为奇排列；</li>
+<li>排列的逆序数为偶数时，称为偶排列；</li>
+</ul>
+<h3 id="section-11">2.3.2 n 阶行列式的第二种定义</h3>
+<h5 id="section-12"><strong>定义</strong>： #n阶行列式：第二种定义</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{r(j_{1}j_{2}\cdots j_{n})}a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}.$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>解释：</li>
+<li class="list-indent-1">$\sum_{h_1,h_2,...h_n}$：</li>
+<li class="list-indent-2">表示对所有 $n$ 个列下标排列求和，故为 $n!$ 项之和；</li>
+<li class="list-indent-2">注意 <code>-&gt;</code> 行下标已经顺排，而列下标是任一个 $n$ 级排列； </li>
+<li class="list-indent-1">$(-1)^{\tau(j_1j_2\cdots j_n)}.$：</li>
+<li class="list-indent-2">每项的正、负号取决于 $(-1)^{\tau(j_1j_2\cdots j_n)}.$ </li>
+<li class="list-indent-2">即：正负取决于 $\tau(j_1j_2\cdots j_n)$ 的结果，对列的下标的排列计算其逆序数；</li>
+<li class="list-indent-2">当列下标为奇排列时，应附加负号；当列下标为偶排列时，应附加正号； </li>
+<li class="list-indent-1">$a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}$：</li>
+<li class="list-indent-2">每项由取自不同行、不同列的 $n$ 个元素的乘积组成</li>
+<li>意义：</li>
+<li class="list-indent-1">把 <code>n</code> 阶行列式，展开成 <code>n</code> 的阶乘个项 <code>-&gt;</code> 即表示 n 阶排列式，通用的计算规则；</li>
+<li>举例：</li>
+<li class="list-indent-1">题目：</li>
+<li class="list-indent-2">$请确定a_{12}a_{31}a_{54}a_{43}a_{25}这一展开项前的正、负号$</li>
+<li class="list-indent-1">分析：</li>
+<li class="list-indent-2">先把行排好 <code>-&gt;</code> $a_{12}a_{25}a_{31}a_{43}a_{54}$</li>
+<li class="list-indent-2">然后再看 $\tau(25134)=4$ </li>
+</ul>
+<h2 id="section-13">2.4 行列式的第三种定义</h2>
+<p><strong>核心思想</strong>：降阶</p>
+<h3 id="section-14">2.4.1 余子式 </h3>
+<h5 id="section-15"><strong>定义</strong>： #余子式</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：在 $n$ 阶行列式中，去掉元素 $a_{ij}$ 所在的第 $i$ 行、第 $j$ 列元素，由剩下的元素按原来的位置与顺序成的 $n-1$ 阶行列式称为元素 $a_{ij}$ 的余子式，记作 $M_{ij}$</blockquote>
+<blockquote>即：$$M_{ij}=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1,j-1}&amp;a_{1,j+1}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i-1,1}&amp;\cdots&amp;a_{i-1,j-1}&amp;a_{i-1,j+1}&amp;\cdots&amp;a_{i-1,n}\\a_{i+1,1}&amp;\cdots&amp;a_{i+1,j-1}&amp;a_{i+1,j+1}&amp;\cdots&amp;a_{i+1,n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,j-1}&amp;a_{n,j+1}&amp;\cdots&amp;a_{mn}\end{vmatrix}.$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>补充：</li>
+<li class="list-indent-1">子式：</li>
+<li class="list-indent-2">提到的所有子式，都是指的行列式；</li>
+<li class="list-indent-2">子式是原本的行列式的一部分；</li>
+<li class="list-indent-1">子矩阵：</li>
+<li class="list-indent-2">子矩阵就是就是矩阵；</li>
+<li>解释：</li>
+<li class="list-indent-1">把 $a_{ij}$ 所在的第 $i$ 行、第 $j$ 列元素的所有元素都去掉，得到的行列式就是 $(n-1)*(n-1)$ ，将其剩下的部分称之为子式，即<strong>余子式</strong>；</li>
+<li>举例： </li>
+<li class="list-indent-1">矩阵为 $\begin{vmatrix}1&amp;2&amp;1\\2&amp;5&amp;7\\-6&amp;4&amp;9\end{vmatrix}$ ，其 $A_{23}$ 的余子式 $M_{23}$ 为 $\left|\begin{matrix}1&amp;2\\-6&amp;4\end{matrix}\right|$ </li>
+</ul>
+<h3 id="section-16">2.4.2 代数余子式</h3>
+<h5 id="section-17"><strong>定义</strong>： #代数余子式</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{余子式 }M_{ij}\text{乘(}-1\text{)}^{i+j}\text{后称为}a_{ij}\text{ 的代数余子式,记作 }A_{ij}\text{,即}$：</blockquote>
+<blockquote>$$A_{ij}=(-1)^{i+j}M_{ij}\quad\quad 且显然还有 M_{ij}=(-1)^{i+j}A_{ij} $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：  </li>
+<li class="list-indent-1">在余子式的基础上，给它添上一个 $(-1)^{i+j}$ 的正负号； </li>
+<li>举例： </li>
+<li class="list-indent-1">$A_{23}=(-1)^{2+3}M_{23}$</li>
+</ul>
+<h3 id="section-18">2.4.3 行列式的展开公式</h3>
+<h5 id="section-19"><strong>定理</strong>： #行列式的展开定理</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：行列式的<strong>值</strong>等于行列式的<strong>某行 (列) 元素分别乘其相应的代数余子式</strong>后再求和，即：$$\left|A\right|=\begin{cases}a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\sum_{j=1}^{n}a_{ij}A_{ij}\left(i=1,2,\cdots,n\right),\\\\a_{1j}A_{1j}+a_{2j}A_{2j}+\cdots+a_{nj}A_{nj}=\sum_{i=1}^{n}a_{ij}A_{ij}\left(j=1,2,\cdots,n\right).\end{cases}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>举例： </li>
+<li class="list-indent-1">展开：</li>
+<li class="list-indent-2">对 $|A|_{3\times3}$ 按照第一行展开，得到 $|A|_{3\times3}=a_{11}A_{11}+a_{12}A_{12}+a_{13}A_{13}$</li>
+<li class="list-indent-1">分析：</li>
+<li class="list-indent-2">在上述例子中，将一个三阶的式子展开成了二阶，但代价是式子变成了三个；</li>
+<li class="list-indent-2">如果四阶时就是 $|A|_{4\times4}=a_{21}A_{21}+a_{22}A_{22}+a_{23}A_{3}+a_{24}A_{24}$</li>
+<li>目的：</li>
+<li class="list-indent-1">核心思想 <code>-&gt;</code> 降阶后求行列式的值；</li>
+<li class="list-indent-1">将 <code>n</code> 阶降成 <code>n</code> 个 <code>n-1</code> 阶</li>
+<li>展开原则：</li>
+<li class="list-indent-1">某一行（列）的为 <code>0</code> 的元素越多越好；</li>
+</ul>
+<h2 id="section-20">2.5 行列式的性质 </h2>
+<h3 id="section-21">2.5.1 性质一</h3>
+<p><strong>性质一</strong>：行列互换，其值不变，即 $|A|=|A^{\mathrm{T}}|$</p>
+<ul>
+<li>概念补充：</li>
+<li class="list-indent-1">转置矩阵：</li>
+<li class="list-indent-2">若 $|A|=|A^{\mathrm{T}}|$，则称 $A^{\mathrm{T}}$ 是 <code>A</code> 的<strong>转置矩阵</strong>；</li>
+<li class="list-indent-1">对称矩阵：</li>
+<li class="list-indent-2">在 $A^{\mathrm{T}}$ 是 <code>A</code> 的<strong>转置矩阵</strong>的基础上，如果 $A=A^{\mathrm{T}}$ ，则称其为对称矩阵；</li>
+<li>性质解释：</li>
+<li class="list-indent-1">$|A|=|A^{\mathrm{T}}|$ <code>-&gt;</code> 即使如果当前 $A^{\mathrm{T}}$ 和 <code>A</code> 不是对称矩阵时，它们的值（二阶行列式的几何上的面积）也是相同的；</li>
+<li>结论：</li>
+<li class="list-indent-1">对于行列式来讲，行和列地位等价 <code>-&gt;</code> <strong>能用在行上的性质，在列上都能用</strong>；</li>
+</ul>
+<h3 id="section-22">2.5.2 性质二</h3>
+<p><strong>性质二</strong>：行列式中某行（列）元素全为零，则行列式为零</p>
+<ul>
+<li>如果在行列式当中，有一行为 <code>0</code> <code>-&gt;</code> 意味着这个行列式已经被降了一维 <code>-&gt;</code> 因为测不到，所以测度为 <code>0</code>；</li>
+<li>同理，如果有某一列全为 0，则行列式为零；</li>
+</ul>
+<h3 id="section-23">2.5.3 性质三：倍乘</h3>
+<p><strong>性质三</strong>：行列式中某行（列）元素有公因子 <code>k(k≠0)</code>，则 <code>k</code> 可提到行列式外面，即：</p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\ldots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\ka_{i1}&amp;ka_{i2}&amp;\ldots&amp;ka_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\ldots&amp;a_{nn}\end{vmatrix}=k\begin{vmatrix}a_{11}&amp;a_{12}&amp;\ldots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}&amp;a_{i2}&amp;\ldots&amp;a_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\ldots&amp;a_{nn}\end{vmatrix}.$$</li>
+<li>解释：</li>
+<li class="list-indent-1">如果从几何上理解：如果是一个二阶行列式，乘以 <code>K</code> 代表其在<strong>某一个</strong>方向上乘以 <code>k</code>，而不是所有（这里的所有，其实就是两个方向）方向，只能延长某一个边 <code>-&gt;</code> 如果是对所有方向都乘以 <code>K</code>，则得到的结果将是平方；</li>
+<li class="list-indent-1">上述乘以提取 K 的过程中，等式从右到左的运算都称之为“<strong>倍乘</strong>”的性质；</li>
+<li>举例：</li>
+<li class="list-indent-1">可以把数乘到（提取）到<strong>某一行</strong>上</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=k\begin{vmatrix}a_{11}&amp;a_{12}\\\frac{a_{21}}{k}&amp;\frac{a_{22}}{k}\end{vmatrix}$$</li>
+<li>作用：</li>
+<li class="list-indent-1">将行列式中的分母去掉；</li>
+</ul>
+<h3 id="section-24">2.5.4 性质四</h3>
+<p><strong>性质四</strong>：行列式中某行（列）元素均是两个元素之和，则可拆成两个行列式之和，即：</p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}+b_{i1}&amp;a_{i2}+b_{i2}&amp;\cdots&amp;a_{in}+b_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}&amp;a_{i2}&amp;\cdots&amp;a_{m}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}+\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\b_{i1}&amp;b_{i2}&amp;\cdots&amp;b_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}$$</li>
+<li>解释：</li>
+<li class="list-indent-1">单行可拆 (加) 性；  </li>
+<li class="list-indent-1">等式从右到左是两个行列式的相加的运算。如果<strong>两个行列式的其他元素对应相等，只有一行（列）不同</strong>时，可以相加，相加时其他元素不变，不同元素的行（列）对应相加即可；</li>
+<li>补充：</li>
+<li class="list-indent-1">单行可加性 <code>-&gt;</code> 行列式中对应的行不一样、其他的每一行都完全一样 <code>-&gt;</code> 此时才可以加；</li>
+<li>举例：二阶行列式时</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_1&amp;a_2\\b_1&amp;b_2\end{vmatrix}+\begin{vmatrix}a_1&amp;a_2\\c_1&amp;c_2\end{vmatrix}=\begin{vmatrix}a_1&amp;a_2\\c_1+b_1&amp;c_2+b_2\end{vmatrix}$$</li>
+<li>注意：</li>
+<li class="list-indent-1">显然，由此性质可知：$|A|+|B|\neq|A+B|$</li>
+</ul>
+<h3 id="section-25">2.5.5 性质五：互换</h3>
+<p><strong>性质五</strong>：行列式中，两行（列）互换，行列式变号</p>
+<ul>
+<li>几何意义：</li>
+<li class="list-indent-1">比如在二阶行列式中，所画的平行四边形、两边顺序互换，得到的面积因此相反；</li>
+<li>注意：</li>
+<li class="list-indent-1">此性质被称之为“<strong>互换</strong>”性质；</li>
+<li class="list-indent-1">互换时，如果互换偶数次 <code>-&gt;</code> 值不变；换奇数次 <code>-&gt;</code> 值变号；</li>
+</ul>
+<h3 id="section-26">2.5.6 性质六</h3>
+<p><strong>性质六</strong>：行列式中的两行 (列) 元素相等或对应成比例，则行列式为零</p>
+<ul>
+<li>举例：  </li>
+<li class="list-indent-1">$$\vert\begin{matrix}1&amp;2\\2&amp;4\end{matrix}\vert=0$$</li>
+<li>解释：</li>
+<li class="list-indent-1">如果有两行元素完全相同或者成比例，则此行列式为零；</li>
+<li>几何含义：</li>
+<li class="list-indent-1">二阶行列式中，两向量平行；</li>
+<li>注意：</li>
+<li class="list-indent-1">负方向也可以平行；</li>
+</ul>
+<h3 id="section-27">2.5.7 性质七：倍加</h3>
+<p><strong>性质七</strong>：行列式中某行 (列)的 k 倍加到另一行 (列)，行列式不变</p>
+<ul>
+<li>举例： </li>
+<li class="list-indent-1">把 $\left|\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right|$ 中的 $|1\quad 2|$ 的 <code>-2</code> 倍加到 $|2\quad 3|$ 中</li>
+<li class="list-indent-1">即：<code>(1,2)*-2=(-2,-4)</code> 加到 $|2\quad 3|$ 中 <code>-&gt;</code> <code>|0，-1|</code> <code>-&gt;</code> 即得到 $\left|\begin{matrix}1&amp;2\\0&amp;-1\end{matrix}\right|$</li>
+<li class="list-indent-1">且 $\left|\begin{matrix}1&amp;2\\0&amp;-1\end{matrix}\right|$ =  $\left|\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right|$ </li>
+<li>解释： </li>
+<li class="list-indent-1">此性质称之为“<strong>倍加</strong>”性质 <code>-&gt;</code> 讲某一行倍乘之后，加到另一行上；</li>
+<li>作用：</li>
+<li class="list-indent-1">把行列式中的 <code>0</code> 化出来 <code>-&gt;</code> 即是为了化简；</li>
+</ul>
+<h2 id="section-28">2.6 几个重要的行列式 </h2>
+<h3 id="section-29">2.6.1 主对角线行列式 </h3>
+<h5 id="section-30"><strong>定义</strong>： #主对角线行列式 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\0&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\a_{21}&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\0&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\prod_{i=1}^na_{ii}.$$</blockquote>
+<p><strong>解释</strong>：上 (下)三角形行列式</p>
+<ul>
+<li>结果等于主对角线元素连乘；</li>
+</ul>
+<h3 id="section-31">2.6.2 副对角线行列式</h3>
+<h5 id="section-32"><strong>定义</strong>： #副对角线行列式 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{aligned}\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1,n-1}&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;0&amp;\cdots&amp;0&amp;0\end{vmatrix}&amp;=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;a_{2n}\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,n-1}&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;0&amp;0\end{vmatrix}\\&amp;=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}.\end{aligned}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>结果等于副对角线元素连乘再乘上逆序数；</li>
+</ul>
+<h3 id="section-33">2.6.3 拉普拉斯展开式</h3>
+<h5 id="section-34"><strong>定义</strong>： #拉普拉斯展开式 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{gathered}</blockquote>
+<p>设A为m阶矩阵,B为n阶矩阵,则 \\</p>
+<p>\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;C\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;O\\C&amp;B\end{vmatrix}=|A||B|, \\</p>
+<p> \\</p>
+<p>\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{C}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{C}\end{vmatrix}=(-1)^{mn}|\boldsymbol{A}||\boldsymbol{B}|. </p>
+<p>\end{gathered}$$</p>
+<p><strong>解释</strong></p>
+<ul>
+<li>分块阵的行列式：$\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}$ </li>
+<li class="list-indent-1">这里面的 <code>A、B、0</code> 都是矩阵；</li>
+<li class="list-indent-1">用若干条横线和若干条竖线，把一个矩阵分成若干个子矩阵，分出来的子矩阵就是原矩阵的分块，我们称这样的矩阵表达的方法叫做分块儿矩阵；</li>
+<li class="list-indent-1">比如：A 可以是一个三阶矩阵 $A_{3<em>3}$，B 可以是一个二阶矩阵 $B_{2</em>2}$ ，因此 $\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}$ 是一个五阶矩阵；</li>
+<li>分块阵的含义：</li>
+<li class="list-indent-1">把矩阵、从数的角度广义化；</li>
+<li>分析：</li>
+<li class="list-indent-1">$\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;C\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;O\\C&amp;B\end{vmatrix}=|A||B|$ <code>&lt;-</code> 它的结论可以理解成主对角线的结论；</li>
+<li class="list-indent-1">$\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{C}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{C}\end{vmatrix}=(-1)^{mn}|\boldsymbol{A}||\boldsymbol{B}|$ <code>&lt;-</code> 它的结论可以理解成副对角线的形式的结论，<code>mn</code> 就是换了多少次；</li>
+</ul>
+<h3 id="section-35">2.6.4 范德蒙德行列式 </h3>
+<h5 id="section-36"><strong>定义</strong>： #范德蒙德行列式</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{vmatrix}1&amp;1&amp;\cdots&amp;1\\x_1&amp;x_2&amp;\cdots&amp;x_n\\x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\\vdots&amp;\vdots&amp;&amp;\vdots\\x_1^{n-1}&amp;x_2^{n-1}&amp;\cdots&amp;x_n^{n-1}\end{vmatrix}=\prod_{1\leq i&lt;j\leq n}(x_j-x_i),n\geq2.$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>分析：三阶范德蒙德行列式 <code>-&gt;</code> $V_{3}=\begin{vmatrix}1&amp;1&amp;1\\x_{1}&amp;x_{2}&amp;x_{3}\\x_{1}^{2}&amp;x_{2}^{2}&amp;x_{3}^{2}\end{vmatrix}$</li>
+<li>计算方法：三阶时</li>
+<li class="list-indent-1">不管是几行，总是往当中第二行看；</li>
+<li class="list-indent-1">计算：${(x_{3}-x_{2})(x_{3}-x_{1}).}{(x_{2}-x_{1})}$  <em>//&quot;高年级欺负低年级&quot;</em></li>
+<li>注意：</li>
+<li class="list-indent-1">最后一行的次数是阶数减一，因为次数是从 0 开始数的；</li>
+<li>举例：  </li>
+<li class="list-indent-1">$\begin{vmatrix}1&amp;a&amp;a^{2}\\1&amp;b&amp;b^{2}\\1&amp;c&amp;c^{2}\end{vmatrix}=\begin{vmatrix}1&amp;1&amp;1\\a&amp;b&amp;c^{2}\\a^{2}&amp;b^{2}&amp;c^{2}\end{vmatrix}=$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-070/index.html"><span>← 上一项</span><strong>Lecture 1：课程引言</strong></a>
+    <a class="article-pagination-next" href="../math-072/index.html"><span>下一项 →</span><strong>Lecture 3：行列式的计算</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

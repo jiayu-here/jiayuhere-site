@@ -1,0 +1,24 @@
+---
+title: "真题 - 2018年：小作文 - 介绍"
+slug: english-042
+description: "考研英语学习笔记：真题 - 2018年：小作文 - 介绍。保留原始公式、图示与例题。"
+category: "考研英语"
+tags: ["考研英语", "英语写作", "真题 - 2018年：小作文 - 介绍.md"]
+---
+
+**真题**
+- ![Pasted image 20250409111403](/assets/notes/08bf7bacb16e-Pasted-image-20250409111403.png)
+
+**模板**
+```Text
+Dear Sir or Madam,
+
+    As the chairman of the Student Union at the university who is in charge of organizing the graduation ceremony, I am writing for the purpose of inviting you to take part in the ceremony.
+
+    First of all, we, as a student, are particularly grateful to you for your hard work in teaching. It is your tremendous work that brings us ample knowledge, inspires our passion for international cultures,and helps us broaden our horizons succeed in graduation. Therefore, We sincerely invite you to attend this ceremony and share the joyous atmosphere with us. Besides, this ceremony is scheduled to begin on June 26th in the Center of Students` Acivities and last for two hours.
+
+    Finally, on behalf of all graduates,I am looking forward to taking group photos with you and mark this significant moment.
+
+                                                                                         Your truly,
+                                                                                                   Li Ming
+```

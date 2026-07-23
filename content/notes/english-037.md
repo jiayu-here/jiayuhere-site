@@ -1,0 +1,19 @@
+---
+title: "真题 - 2012年：大作文"
+slug: english-037
+description: "考研英语学习笔记：真题 - 2012年：大作文。保留原始公式、图示与例题。"
+category: "考研英语"
+tags: ["考研英语", "英语写作", "真题 - 2012年：大作文.md"]
+---
+
+**真题**
+- ![Pasted image 20250409111219](/assets/notes/6b74fc9b2cae-Pasted-image-20250409111219.png)
+
+**模板**
+```Text
+	This is a simple but meaningful drawing.Inside this picture,there are two guys walking on the road with different feelings.In the left one, this guy feels so sad because of the bottle.However, in the right one, there is another guy positively facing the reality and glad to still have some water in.
+
+    Such a scene apparently can be associated with a host of different people when they face failure in reality. This phenomenon is particularly worth concerning for everyone may be meeting problems, but you can choose different view to deal with it. You can choose a positive view then you will find the good part you still have in it.Also you can choose a negative part then you will stop effort and fall down.
+
+    To my understanding, life, can be likened to a road with everlasting success and failure.Accordlingly,it is advisable for us to be more positive rather than negative.Only depend on endless try and never give up,we will have a meaningful trip of life.
+```

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 19：特征值与特征向量 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 特征值与特征向量">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 19：特征值与特征向量 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-088/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-088/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-088/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-088/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-088/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 19：特征值与特征向量</h1><p class="article-lead">考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 11 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>特征值与特征向量</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">19.1 特征值与特征向量定义</a><a href="#section-6">19.2 求法 </a><a href="#section-10">19.3 重要性质与结论 </a></nav></details><div class="prose"><h2 id="section-1">19.1 特征值与特征向量定义</h2>
+<h3 id="section-2">19.1.1 基本概念 </h3>
+<h5 id="section-3"><strong>定义</strong>： #特征值与特征向量 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $设A是n阶矩阵,\lambda 是一个数,若存在n维非零列向量\xi,使得：$</blockquote>
+<blockquote>$$A\xi=\lambda\xi$$</blockquote>
+<blockquote>则称：</blockquote>
+<blockquote>1. $\lambda$ 为特征值；</blockquote>
+<blockquote>2. $\xi$ 是 A 的对应于特征值 $\lambda$ 的特征向量；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>特征： </li>
+<li class="list-indent-1">反应 A 矩阵的某一个性质；</li>
+<li>解释：特征值</li>
+<li class="list-indent-1">比如 A 是一个矩阵时，当 A 作用到一个向量上时，其结果可以用一个数来表示（用一个数来对这个向量进行放缩），此时这个数就是特征值；</li>
+<li class="list-indent-1">在空间上，可以体现空间中的最值、相近等性质；</li>
+<li>概念： </li>
+<li class="list-indent-1"><code>n</code> 阶的矩阵，就会有 <code>n</code> 个特征值，通过看这一个数、就可以知道 <code>A</code> 矩阵的某些特性；</li>
+<li>解释：$\xi$</li>
+<li class="list-indent-1">$\xi$ 一定是不等于 0 的；</li>
+<li class="list-indent-1">因为如果 $\xi$ 等于 0，则表示当前矩阵只有唯一零解，即 <code>S=r(A)</code> ，此时将 A 作用在 $\xi$ 上是，体现不出来 A 的作用，因为矩阵作用在零向量上还是 0，因此在这里 $\xi$ 是非零向量；</li>
+<li class="list-indent-1">能体现出来效果，这样才能知道特征值的作用；</li>
+<li>含义： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="Pasted image 20240701195431" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>分析</strong>：对 $A\xi=\lambda\xi$ 进行分析</p>
+<ul>
+<li>步骤：</li>
+<li class="list-indent-1"><code>-&gt;</code> $\lambda\xi-A\xi=0$  // $\xi$ 为非零向量</li>
+<li class="list-indent-1"><code>-&gt;</code> $(\lambda E-A)\xi=0$ // 提取公因式</li>
+<li class="list-indent-1"><code>-&gt;</code> $(\lambda E-A)X=0$ </li>
+<li class="list-indent-2">// 把 $\xi$ 设置为是当前方程组的解；</li>
+<li class="list-indent-2">// 因为 <code>X</code> 是 $\xi$，而 $\xi$ 是非零向量，而当前式子等于 0 <code>-&gt;</code> 也就代表当前的方程是齐次方程；</li>
+<li class="list-indent-2">// 因为是齐次方程，所以当前矩阵 $\lambda E-A$ 是线性相关的 <code>&lt;-</code> 线性相关定理 4：<a href="/notes/math-080/">Lecture 11：向量与向量组的线性相关性</a>；</li>
+<li class="list-indent-2">// 因为 $\lambda E-A$ 是线性相关的，所以当前方程组 <code>S=n-r(A)&lt;n</code>，即方程的秩小于 n；</li>
+<li class="list-indent-2">// 根据 $n\text{个}n\text{维列向量}a_1,a_2,\cdots,a_n\text{线性相关}\Leftrightarrow\left|a_1,a_2,\cdots,a_n\right|=0$ ，所以得到 $|\lambda E-A|=0$ </li>
+<li class="list-indent-1"><code>-&gt;</code> $|\lambda E-A|=0$ </li>
+<li class="list-indent-2">// 这里可以求出 $\lambda_i(i=1,2,3...)$</li>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Drawing 2024-07-01 19.50.31.excalidraw" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>： #特征方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>$|\lambda E-A|$：称之为特征方程</li>
+</ul>
+<h3 id="section-5">19.1.2 几何解释 </h3>
+<p><strong>概念</strong>：特征值与特征向量的几何解释</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">在基向量被变换后，有一些解变换后以及变换前只对应于比例的变换，而角度位置未发生改变；</li>
+<li class="list-indent-1">用于描述特征向量的变换比例的值，称之为特征值；</li>
+<li class="list-indent-1">特征向量就是那些在变换后、依然停留在原本的直线上的向量；</li>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="Pasted image 20240701194822" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>概念</strong>：特征值为负值时</p>
+<ul>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="Pasted image 20240701195210" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-6">19.2 求法 </h2>
+<h3 id="section-7">19.2.1 求特征值与特征向量的方法</h3>
+<p><strong>方法</strong>：求特征值   </p>
+<ul>
+<li>第一步：写特征方程 $|\lambda E-A|$</li>
+<li class="list-indent-1">$A=\begin{bmatrix}2&amp;2&amp;-2\\2&amp;5&amp;-4\\-2&amp;-4&amp;5\end{bmatrix}$</li>
+<li class="list-indent-1">$|\lambda E-A|=\left|\begin{matrix}\lambda-2&amp;-2&amp;2\\-2&amp;\lambda-5&amp;4\\2&amp;4&amp;\lambda-5\end{matrix}\right|$</li>
+<li>第二步：计算特征方程的行列式，得到关于 $\lambda$ 的方程；</li>
+<li class="list-indent-1">最后肯定会得到一个类似于 $\lambda^3+a\lambda^2+b\lambda+c=0$ 的方程，然后化成求根的形式；</li>
+<li>第三步：求出几个特征根；</li>
+</ul>
+<p><strong>方法</strong>：求特征向量</p>
+<ul>
+<li>第一步：将求得的特征值带入到 $(\lambda E-A)=0$ 的 $\lambda$ 当中，得到 $\lambda E-A$ 的矩阵；</li>
+<li>第二步：求秩以及基础解系</li>
+<li class="list-indent-1">2.1 将得到的矩阵化为阶梯型矩阵，得到秩后，根据 <code>S=n-r(A)</code>，计算其基础解系（受约束自由变量的 <code>S</code> 个向量）；</li>
+<li class="list-indent-2">这 <code>S</code> 个解出来的向量，构成了解的空间，这个二维平面上的所有向量、都是当前代入得 $\lambda_i$ 对应得特征向量；</li>
+<li class="list-indent-2">除了零向量；</li>
+<li class="list-indent-1">2.2 如果不能根据化简得到阶梯型矩阵，还可以根据 <code>行列式=0</code> 对秩得限制、以及当前矩阵 $\lambda E-A$ 中无关项向量得个数，知道其当前得秩，并得到其极大无关组；</li>
+<li>第三步：根据第二步，得到当前 $\lambda=某个值$ 时，得到 $\xi=k_1\xi_1+k_2\xi_2$</li>
+<li class="list-indent-1">其中看 <code>k1</code>、<code>k2</code> 不能同时为 0；</li>
+<li>第四步：如果还有其他 $\lambda_i$，继续按照以上步骤求特征向量 $\xi$；</li>
+</ul>
+<h3 id="section-8">19.2.2 求根</h3>
+<p><strong>补充</strong>：找根方法</p>
+<ul>
+<li>如果在 $\lambda^3+a\lambda^2+b\lambda+c=0$ 当中没有常数项，则 $\lambda=0$ 肯定是它得根；</li>
+<li>如果 $\lambda^3+a\lambda^2+b\lambda+c=0$ 其中，$a+b+c=0$，则 $\lambda =1$ 肯定是它们得根： $(\lambda -1)$</li>
+<li>如果 $\lambda^3+a\lambda^2+b\lambda+c=0$ 中偶次项系数之和等于奇次项系数之和，则 $f(-1)=0$，所以 $-1$ 是它的根；  </li>
+</ul>
+<p><strong>方法</strong>：试根法 </p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">利用找根方法得到某一个根之和，使用多项式得带余除法，计算器二次项式；</li>
+<li>举例：</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+\lambda^{2}-2\lambda-8 \\
+\begin{aligned}\lambda-1\sqrt{\lambda^{3}-3\lambda^{2}-6\lambda+8}\\\frac{\lambda^{3}-\lambda^{2}}{-2\lambda^{2}-6\lambda}\end{aligned} \text{.}  \\
+\frac{-2\lambda^{2}+2\lambda}{-8\lambda+8} \\
+\frac{-8\lambda+8}{0}
+\end{aligned}
+$$</div>
+<h5 id="section-9"><strong>定理</strong>： #多项式求根</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设以下式子是系数 $a_i$ 都是整数的多项式： $$f\left(x\right)=1·x^{k}+a_{k-1}x^{k-1}+\cdots+a_{1}x+a_{0}$$ </blockquote>
+<blockquote>则 $f(x)=0$ 的有理根都是整数，且 $a_0$ 的因子；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>方程的解是 $a_0$ 的因子</li>
+<li>因此可以先框定它的因子，然后知道了因子后、就确定了它的范围；</li>
+</ul>
+<h2 id="section-10">19.3 重要性质与结论 </h2>
+<h3 id="section-11">19.3.1 特征值的性质与结论 </h3>
+<p><strong>概念</strong>：性质一</p>
+<ul>
+<li>$$\lambda_0是A的特征值&lt;=&gt;|\lambda_0 E-A|=0(建立方程求参数或证明行列式|\lambda_0 E-A|=0$$</li>
+<li>同理：$$\lambda_0\text{不是}A\text{ 的特征值}\Leftrightarrow|\lambda_0E-A|\neq0\text{(矩阵可逆,满秩)}$$</li>
+<li>补充： </li>
+<li class="list-indent-1">若 $|aA+bE|=0$（或者 $aA+bE$ 不可逆），<code>a</code> 不等于 0，则称 $-\frac{b}{a}$ 是 <code>A</code> 的特征值；</li>
+</ul>
+<p><strong>概念</strong>：性质二</p>
+<ul>
+<li>性质： </li>
+<li class="list-indent-1">若 $\lambda_1,\lambda_2,\cdots,\lambda_n\text{是}A\text{的}n\text{个特征值,则}$：</li>
+<li class="list-indent-1">$$\begin{cases}\left|A\right|=\lambda_{1}\lambda_{2}\cdots\lambda_{n},\\\mathrm{tr}\left(A\right)=\lambda_{1}+\lambda_{2}+\cdots+\lambda_{n}.\end{cases}$$</li>
+<li><strong>结论一</strong>：</li>
+<li class="list-indent-1">1. 有特征值为 <code>0</code> 的矩阵，其行列式一定为 <code>0</code></li>
+<li class="list-indent-1">2. $\lambda_{1}+\lambda_{2}+\cdots+\lambda_{n}$ 特征值的和，等于当前矩阵 <code>A</code> 的主对角线元素之和 <code>tr(A)</code></li>
+<li><strong>结论二</strong>：基于结论一和证明</li>
+<li class="list-indent-1">由式子（1）和式子（2）可得：</li>
+<li class="list-indent-1">$$\begin{cases}a_{11}+a_{22}+a_{33}=\lambda_{1}+\lambda_{2}+\lambda_{3},\\A_{11}+A_{22}+A_{33}=\lambda_{2}\lambda_{3}+\lambda_{1}\lambda_{3}+\lambda_{1}\lambda_{2},\\\left|A\right|=\lambda_{1}\lambda_{2}\lambda_{3}.\end{cases}$$</li>
+<li class="list-indent-1">且 <code>k</code> 阶主子式之和 = 任意 <code>k</code> 个特征值乘积之和；</li>
+<li>证明：三阶时，用行列式的性质、把 $|\lambda_0 E-A|$ 拆成了一个一元三次多项式；</li>
+<li class="list-indent-1">$$式子(1)\quad|\lambda_0 E-A|=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;-a_{13}\\-a_{21}&amp;\lambda-a_{22}&amp;-a_{23}\\-a_{31}&amp;-a_{32}&amp;\lambda-a_{33}\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;0-a_{12}&amp;0-a_{13}\\0-a_{21}&amp;\lambda-a_{22}&amp;0-a_{23}\\0-a_{31}&amp;0-a_{32}&amp;\lambda-a_{33}\end{vmatrix}=\lambda^{3}-\left(a_{11}+a_{22}+a_{33}\right)\lambda^{2}+\left(A_{11}+A_{22}+A_{33}\right)\lambda-\left|A\right|$$</li>
+<li class="list-indent-1">$$式子(2)\quad\left|\lambda E-A\right|=\left(\lambda-\lambda_1\right)\left(\lambda-\lambda_2\right)\left(\lambda-\lambda_3\right)=\lambda^3-(\lambda_1+\lambda_2+\lambda_3)\lambda^2+(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)\lambda-\lambda_1\lambda_2\lambda_3$$</li>
+<li>补充：主子式</li>
+<li class="list-indent-1">主子式一定是行列式，并且最左上方和最右下方的元素的<strong>下标</strong>一定是相同的 <code>&lt;-</code> 同行同列的；</li>
+<li class="list-indent-1">三维时，一共有三个主子式：$\begin{vmatrix}a_{22}&amp;a_{23}\\a_{32}&amp;a_{33}\end{vmatrix}=A_{11},\begin{vmatrix}a_{11}&amp;a_{13}\\a_{31}&amp;a_{33}\end{vmatrix}=A_{22},\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=A_{33}$</li>
+</ul>
+<h3 id="section-12">19.3.2 特征向量的性质与结论</h3>
+<p><strong>概念</strong>：性质一</p>
+<ul>
+<li>$$\xi\left(\neq\mathbf{0}\right)\text{是}A\text{ 的属于 }\lambda_0\text{ 的特征向量}\Leftrightarrow\xi\text{是}\left(\lambda_0E-A\right)x=\mathbf{0}\text{ 的非零解}$$</li>
+</ul>
+<p><strong>概念</strong>：结论一</p>
+<ul>
+<li><code>k</code> 重特征值 $\lambda$，至多只有 <code>k</code> 个线性无关的特征向量；</li>
+</ul>
+<p><strong>概念</strong>：结论二</p>
+<ul>
+<li>$若\xi_1,\xi_2$ 是 <code>A</code> 的属于不同特征值 $\lambda_1,\lambda_2$ 的特征向量，则 $\lambda_1,\lambda_2$ 线性无关；</li>
+</ul>
+<p><strong>总结</strong>：$\text{矩阵}A\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{线性无关}\\\lambda_{1}=\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{可能}\begin{cases}\text{线性相关}\\\text{线性无关}\end{cases}\end{cases}$</p>
+<p><strong>概念</strong>：结论三</p>
+<ul>
+<li>$\text{若}\xi_1,\xi,\text{是}A\text{ 的属于同一特征值}\lambda\text{的特征向量,则非零向量}k\xi_1+k_2\xi_2\text{仍是}A\text{ 的属于特征值}\lambda\text{的}$ 特征向量. (常考其中一个系数 (如 $k_2$)等于 <code>0</code> 的情形)；</li>
+</ul>
+<p><strong>概念</strong>：结论四</p>
+<ul>
+<li>$\text{若}\xi_1,\xi_2\text{是}A\text{ 的属于不同特征值}\lambda_1,\lambda_2\text{的特征向量,则当}k_1\neq0,k_2\neq0\text{时,}k_1\xi_1+k_2\xi_2\text{不是}A\text{ }$ 的任何特征值的特征向量. ( 常考 $k_1=k_2=1$ 的情形) </li>
+</ul>
+<p><strong>概念</strong>：结论五</p>
+<ul>
+<li>设 $\lambda_1,\lambda_2$ 是 A 的两个不同的特征值，$\xi$ 是对应于 $\lambda_1$ 的特征向量，则 $\xi$ 不是对应于 $\lambda_2$ 的特征向量（即一个特征向量不能属于两个不同的特征值）</li>
+</ul>
+<h3 id="section-13">19.3.3 常用矩阵的特征值与特征向量 </h3>
+<p><strong>总结</strong>：常用矩阵的特征值与特征向量</p>
+<ul>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="Pasted image 20240627205621" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>概念</strong>：矩阵为 $f(A)$ </p>
+<ul>
+<li>重要公式 - 当 <code>A</code> 是一个多项式等于 <code>0</code></li>
+<li>公式： </li>
+<li class="list-indent-1">$$A\xi=\lambda \xi \rightarrow f(A)\xi=f(\lambda)\xi$$</li>
+<li>证明： </li>
+<li class="list-indent-1">比如：$A^2\xi=\lambda A\xi=\lambda^2\xi$</li>
+<li>举例： </li>
+<li class="list-indent-1">当 $A^2-2A+3E$ 的 $\lambda$：$\lambda^2-2\lambda+3$</li>
+<li>注意： </li>
+<li class="list-indent-1">由 $A$ 的多项式，获得的关于 $\lambda$ 的方程，只是代表了在当前 A 的多项式条件下、$\lambda$ 可能的取值（满足什么关系、范围 ），而不代表当前特征方程的不同 $\lambda$；</li>
+</ul>
+<p><strong>概念</strong>：矩阵为 $A^*$</p>
+<ul>
+<li>公式： </li>
+<li class="list-indent-1">当矩阵为 $A^*$ 时，其特征值等于 $\frac{|A|}{\lambda}$；</li>
+<li class="list-indent-1">并且因为 $|A|=\lambda_1\lambda_2\lambda_3$，所以 $\frac{|A|}{\lambda}=\lambda_1\lambda_2或\lambda_1\lambda_3或\lambda_2\lambda_3$</li>
+</ul>
+<p><strong>补充</strong>：$P^{-1}AP$ 时，其特征值没发生变化 <code>-&gt;</code> 相似；但特征向量发生了变化：$P^{-1}\xi$； </p>
+<p><strong>概念</strong>：秩 1 矩阵的结论 </p>
+<ul>
+<li>当 <code>r(A)=1</code> 时，矩阵 $A_{n*n}$ 一定可以化为两个非零行列向量：$\alpha\beta^{T}$ 它们两者的乘积；</li>
+<li>并且：$\lambda_1=\lambda_2=\lambda_3=...=\lambda_{n-1}=0$</li>
+<li>并且：$\lambda_n=tr(A)=\beta^T\alpha$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-087/index.html"><span>← 上一项</span><strong>Lecture 18：同解方程组</strong></a>
+    <a class="article-pagination-next" href="../math-089/index.html"><span>下一项 →</span><strong>Lecture 20：相似</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

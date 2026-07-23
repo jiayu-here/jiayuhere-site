@@ -307,34 +307,6 @@
   },
   {
     "section": "notes",
-    "title": "Engineering Mathematics Map: Complex Numbers, Transforms and Probability",
-    "description": "A dependency-based map of complex numbers, calculus, linear algebra, transforms and probability, with their uses in communications and signal processing.",
-    "category": "Mathematics",
-    "tags": [
-      "Complex Numbers",
-      "Fourier Transform",
-      "Probability",
-      "Linear Algebra"
-    ],
-    "content": "Learning Goal Engineering mathematics is about selecting the right tool for a real problem. Complex numbers describe amplitude and phase, calculus describes continuous change, transforms reveal systems and spectra, and probability describes noise and uncertainty. A useful sequence is complex numbers and trigonometry, calculus, linear algebra, Fourier analysis, Laplace and Z transforms, probability and random processes. For every concept, be able to state its meaning, assumptions, engineering use and a way to verify it numerically. Complex Numbers, Euler's Formula and Phasors Write z = a + jb as two orthogonal components, or z = r·e^(jθ) as magnitude and phase. Phasors turn sinusoidal circuit differential equations into algebra. In digital communications, the real and imaginary parts are I and Q. z·z = |z|² measures squared magnitude, while multiplication by e^(jφ) rotates phase. Carrier phase correction is the inverse rotation. Calculus and Continuous Time Signals Derivatives represent change and integrals represent accumulation. Capacitors and inductors use differential relations; signal energy uses E = ∫|x(t)|²dt . Always track continuity, integration bounds, initial conditions, convergence and physical units. Convolution describes the output of a linear time invariant system: Each input contribution excites the impulse response, and all responses add to the output. Linear Algebra and Signal Space A vector can be a discrete signal, feature set or multi antenna sample. A matrix describes a linear relation between several inputs and outputs. Core ideas are norm, inner product, angle, orthogonality, rank, eigenvalues, projection, least squares and conditioning. Matched filters and correlation receivers project the received waveform onto known basis functions. Least squares estimates parameters from noisy data. In y = Hx + n , the rank of H limits independent streams, while poor conditioning amplifies noise during inversion. Fourier Series and Fourier Transform Fourier analysis decomposes a signal into sinusoidal or complex exponential components. Time and frequency domains are two views of the same data: time emphasizes transients and delays, while frequency emphasizes bandwidth, filters, harmonics and noise. Important properties: Time shift creates linear phase. Time convolution becomes frequency multiplication. Time multiplication becomes frequency convolution. Greater time concentration usually broadens the spectrum. Real signals have conjugate symmetric spectra. For an FFT, record sample rate, count, resolution and window. Δf = fs / N . Non bin centered tones leak into neighboring bins; windows reduce sidelobes but alter main lobe width and amplitude estimates. Laplace and Z Transforms Laplace analysis adds exponential growth or decay and is useful for continuous system stability and transients. Pole location determines stability, while zeros suppress parts of the response. The Z transform is the discrete time counterpart. Difference equations become transfer functions for digital filter analysis. A causal discrete system is typically stable when its poles lie inside the unit circle. Always connect region of convergence, pole zero position, causality, stability and initial conditions back to the original equation. Probability Foundations Probability models random bits, thermal noise, fading and error events. Expectation is a long run average and variance measures spread. Uncorrelated variables are not generally independent, although jointly Gaussian uncorrelated variables are independent. Gaussian models arise because many small independent effects add together. Q functions express Gaussian tail probabilities and appear in theoretical BER formulas. Bayes' rule updates a prior after an observation: Maximum likelihood chooses the symbol most likely to produce the observation; maximum a posteriori also incorporates prior symbol probability. Random Processes and Power Spectral Density A random process is a collection of possible waveforms. Stationarity means statistics do not depend on absolute time; ergodicity lets one sufficiently long record estimate ensemble statistics. Autocorrelation measures similarity to delayed self, and power spectral density is its Fourier transform. Ideal white noise has constant PSD and uncorrelated samples. Real systems are bandwidth limited, so filtering shapes noise and output power depends on spectral density and equivalent noise bandwidth. An End to End Analysis Path For noisy QPSK reception: 1. Use complex values for I/Q and carrier phase. 2. Use distributions for random bits and Gaussian noise. 3. Use convolution for transmit, channel and receive filters. 4. Use Fourier analysis for bandwidth and response. 5. Use inner products or correlation for detection. 6. Estimate simulated BER statistically and compare it with theory. Review Checklist Convert a sine wave to complex exponential form and explain magnitude and phase. Explain convolution as the output of an LTI system. Calculate FFT resolution from sample rate and length. Judge continuous or discrete stability from pole location. Distinguish expectation, variance, correlation and independence. Explain the autocorrelation–PSD relationship. Connect projection and least squares to matched filtering and detection. Split a communications simulation into deterministic computation and random statistics.",
-    "url": "/en/notes/engineering-math-map/"
-  },
-  {
-    "section": "notes",
-    "title": "A Long-Term System for Technical English",
-    "description": "A sustainable method for terminology, sentence patterns, close reading, project writing and periodic review.",
-    "category": "English",
-    "tags": [
-      "English",
-      "Vocabulary",
-      "Reading",
-      "Writing"
-    ],
-    "content": "Learning Goal Technical English is not a contest to memorize the most words. The goal is accurate reading of datasheets, official documentation and papers, plus clear, concise and verifiable descriptions of your own work. Progress through keyword recognition, complete sentence understanding, paragraph structure and independent technical writing. Practice input and output together so vocabulary lookup turns into usable language. Learn Terms in Collocations Ordinary words often have specialized meanings: drive can mean driving a pin or load, while assert can mean placing a digital signal in its active state. Record context rather than a Chinese gloss alone. Useful collocations include meet the timing requirement , sample the input signal , configure the peripheral , allocate a buffer , handle an interrupt , reduce power consumption , introduce measurement error and under normal operating conditions . Identify the Function of a Sentence Technical sentences define, instruct, explain cause, compare tradeoffs, state conditions, warn or conclude. Identifying that function is faster than translating word by word. Definition and Description Use structures such as X is defined as , X refers to , X is used to and X consists of . Cause and Result Separate symptom, cause and consequence: The sampling clock was unstable, which caused occasional frame errors. Comparison and Tradeoff State the improved metric and the cost: Although A is faster, it requires more memory. Avoid writing only that one option is “better.” Conditions and Limits Phrases such as valid only when , must not be operated above and unless otherwise specified carry requirements. must , shall , should and may do not have the same force. Decompose Long Sentences 1. Find the main subject and verb. 2. Mark clauses introduced by that , which , when or if . 3. Temporarily remove prepositional and parenthetical details. 4. Decide whether the sentence describes an action, condition or conclusion. 5. Restore parameters, ranges and exceptions. In When the enable signal is asserted, the controller, which is driven by the system clock, starts sampling the input after two clock cycles , the core is the controller starts sampling the input ; the remaining phrases give condition, clock context and delay. Read Datasheets by Task Do not always read page one to the end. Follow the current engineering question: 1. Functional block diagram. 2. Pin directions, multiplexing and active levels. 3. Absolute maximum ratings versus recommended operation. 4. Electrical and timing tables with min/typ/max units. 5. Timing diagrams and named edges. 6. Initialization, reset values and application examples. Use diagrams and tables to establish context before looking up every unknown word. Read Documentation and Papers Differently Official documentation emphasizes prerequisites, steps, parameters, return values and constraints. Papers emphasize the problem, related work, contribution, experimental setup and whether results support the claim. For a first pass, read title and abstract, figures, conclusion and introduction. Then inspect method and experiments. Notes should contain the core conclusion, terms and sentence patterns, your own explanation, project relevance and unresolved questions—not copied paragraphs. Structure an English README Prefer short active sentences. Summarize what was built, how it was implemented and how far it was verified. Replace words such as perfect or very advanced with test results, measurements and known limitations. Write Useful Commits and Debug Logs Good commit results include Add UART receive timeout handling , Fix QPSK reference bit alignment and Document FPGA pin assignments . Avoid update or fix bug without scope. Use a stable debug format: Weekly Routine Day 1: collect ten terms and real examples from current documentation. Day 2: closely read one datasheet section and decompose three long sentences. Day 3: explain one technical idea in under 100 English words. Day 4: revise a README or lab record. Day 5: review without Chinese definitions and write new examples. Weekend: rewrite an older note for greater accuracy and concision. Self Check Did I record collocations rather than translations alone? Can I identify the sentence core, condition and limit? Can I distinguish recommended values from absolute maximum ratings? Can I explain a module's input, processing and output? Does my project description include evidence and limitations? Did I avoid unsupported promotional language? Have I used each new term in my own sentence?",
-    "url": "/en/notes/technical-english-system/"
-  },
-  {
-    "section": "notes",
     "title": "Communication Theory Review Index",
     "description": "An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.",
     "category": "Engineering Courses",
@@ -375,5 +347,1689 @@
     ],
     "content": "Purpose Use this checklist to keep “simulation runs,” “firmware builds” and “physical operation is safe” as separate results. Save data, screenshots, logs or measurements for every completed item. 1. Power and Wiring Preconditions Power servos from a separate regulated 5 6 V high current supply. Never power servos from the STM32F103 5 V or 3.3 V pin. Join servo supply, controller and USB to TTL grounds. Verify ST Link SWDIO, SWCLK, GND and 3.3 V; keep BOOT0 at zero. Remove servo horns or mechanical load for the first powered checks where instructed. Verify that the physical E stop halts motion in every operating state. Confirm limit input polarity, idle level and disconnected behavior. Ensure the FSR divider cannot exceed the ADC input range. 2. Hardware Free Software Acceptance The Python environment installs OpenCV, NumPy, Pillow and pyserial. The simulator shows red, blue and yellow objects and processes the queue. Manual, semi automatic and fully automatic modes switch correctly. All 14 automated tests pass. The GUI smoke test starts and completes its basic interaction. CMake/Ninja and the ARM GNU Toolchain cross build the firmware. ELF, HEX, BIN, MAP and size reports are generated. Flash and RAM stay within STM32F103C8T6 limits. 3. Vision Detection The camera is mechanically fixed and cannot change height, angle or focus during operation. Red uses two hue ranges so values near both zero and 179 are covered. S/V limits are checked under actual lighting for reflections and shadows. Opening removes small noise without erasing targets; closing does not merge neighbors. Minimum contour area matches the real object size. Every detection retains class, pixel center, area and bounding box. De duplication prevents one object from entering the queue repeatedly. 4. Four Point Calibration Select at least four non collinear points on the work plane. Keep pixel and robot coordinate point order identical. Spread calibration points across the usable workspace. Validate and save the 3x3 homography matrix. Measure millimeter error at interior and edge points not used for fitting. Recalibrate after camera movement, focus changes or work plane height changes. Treat homography as a planar mapping; configure grasp height separately. 5. Kinematics and Servo Parameters Measure upper arm, forearm, base height and tool offset on the real arm. Verify direction for base, shoulder, elbow, wrist and gripper individually. Record mechanical center, zero offset and safe range for every servo. Exclude base collision and mechanical limit regions from the workspace. Reject unreachable coordinates, missing geometric solutions and out of range angles. Keep interpolation speed and steps low enough to avoid impact. Do not run combined trajectories before each joint passes individually. 6. Serial Protocol PC and firmware share version, message types, field layout and byte order. Frames include AA 55 , version, type, sequence, length, payload and CRC16. Payload length has a fixed maximum and coordinates are range checked before encoding. Test complete, split, merged, noisy, bad CRC and unknown type input. The parser resynchronizes after discarding corrupt data. Command sequence numbers match ACK, STATUS or ERROR responses. A communications timeout forces a safe or E stop state while the arm is moving. 7. FreeRTOS and Firmware Communication tasks parse frames outside the interrupt handler. The 20 ms control task uses a fixed period without cumulative drift. Sensor tasks monitor limits, FSR and optional voltage state. Telemetry reports status periodically so the PC can detect a live scheduler. Task stack sizes are interpreted in StackType t units and high water marks are recorded. Five PWM outputs run at 50 Hz with pulse limits matching the servos. An E stop remains latched until an explicit safe reset procedure completes. 8. FSR Grasp Confirmation and Retry Measure unloaded, light touch and stable grip ADC values. Place the threshold between unloaded and reliable grip values with noise margin. Do not treat disconnected, shorted or invalid FSR readings as success. Limit offset retries to the configured count. Report an error instead of retrying forever. Read completed and failed pick counts through status frames. 9. Staged Physical Acceptance 1. Controller, serial link, LED and E stop. 2. Direction, center and limits for one servo at a time. 3. Low speed multi joint motion and workspace boundaries. 4. Fixed camera and four point calibration. 5. Manual joint control. 6. Semi automatic click to pick. 7. FSR confirmation and failed grasp retry. 8. Fully automatic color sorting. 9. Endurance, communications loss and E stop recovery. 10. What to Record Hardware revision, firmware commit, PC commit and configuration version. Servo model, supply voltage, current capacity and grounding. Link dimensions, zero offsets, angle limits, homography and FSR threshold. Test scene, target count, successes, failure causes and E stop results. Flash/RAM, task stack, serial error counts and longest continuous run. Failed checks, temporary workarounds and conditions for retest. Review Summary Commission from power and one joint, then move to calibration, coordinated motion and automatic sorting. When a stage fails, return to the nearest verified boundary instead of changing vision thresholds, kinematic parameters and servo offsets at the same time. Related project: STM32 Vision Guided Robotic Arm Sorter",
     "url": "/en/notes/vision-robot-arm-commissioning-checklist/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 01 简单句_总结",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-001/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 02 长难句_总结",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-002/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 03 长难句分析_总结",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-003/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 1：语法 - 简单句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-004/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 2：谓语动词的时态",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-005/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 3：谓语动词的情态与语态",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-006/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 4：被动语态",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-007/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 5：否定与强调",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-008/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 6：谓语动词的变化 - 考察攻略",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-009/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 7：简单句的扩展",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-010/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 8：介词短语",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-011/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 9：同位语与插入语",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-012/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 10：非谓语动词",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-013/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 11：并列句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-014/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 12：名词性从句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-015/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 13：定语从句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-016/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 14：状语从句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-017/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 15：虚拟语句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-018/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 16：倒装句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-019/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 17：强调句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-020/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 18：断开长难句之标点",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-021/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 19：断开长难句之连接词",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-022/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 20：断开长难句之分析主谓",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-023/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 21：简化长难句",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-024/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 22：分裂结构",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-025/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 23：嵌套结构",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-026/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 24：平行结构",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Grammar"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-027/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 01 阅读方法论_总结",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-028/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 1：阅读方法论",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-029/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 2：阅读真题 - 2005年",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-030/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 3：阅读真题 - 2006年",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-031/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 4：阅读真题 - 2007年",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-032/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 5：阅读真题 - 2008年",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-033/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: Lecture 9：阅读真题 - 2009年",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Reading"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-034/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2011年：大作文",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-035/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2011年：小作文",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-036/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2012年：大作文",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-037/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2012年：小作文",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-038/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2017年：大作文 - 负面",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-039/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2017年：小作文 - 建议",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-040/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2018年：大作文 - 负面",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-041/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2018年：小作文 - 介绍",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-042/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2021年：大作文 - 负面",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-043/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2021年：小作文 - 建议",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-044/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2022年：大作文 - 负面",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-045/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2022年：小作文 - 邀请",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-046/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2023年：大作文 - 正面",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-047/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2023年：小作文 - 招聘",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-048/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination English: 真题 - 2024年：大作文 - 图表",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination English",
+    "tags": [
+      "Graduate Examination English",
+      "Writing"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/english-049/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 01 常用求极限方法",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-001/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 02 导数求导法则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-002/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 03 可导、连续、可微之间关系",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-003/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 04 三大中值定理",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-004/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 05 线性代数 - 特征值与特征向量",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-005/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 06 线性代数 - 相似对角化",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-006/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 高等数学 - 公式合集",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-007/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: 高等数学 - 思维导图",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-008/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 1：课程大纲",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-009/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 2：函数的概念及常见函数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-010/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 3：函数的性质",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-011/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 4：极限基础",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-012/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 5：函数极限的概念",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-013/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 6：函数极限的性质",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-014/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 7：极限存在准则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-015/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 8：无穷小与无穷大",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-016/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 9：极限的概念、性质与存在准则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-017/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 10：求极限",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-018/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 11：无穷小量阶的比较",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-019/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 12：函数的连续性",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-020/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 13：间断点及其分类",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-021/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 14：连续性的运算与性质",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-022/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 15：闭区间上连续函数的性质",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-023/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 16：导数基本概念",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-024/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 17：导数求导法则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-025/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 18：高阶导数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-026/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 19：隐函数与参数方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-027/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 20：函数的微分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-028/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 21：微分中值定理",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-029/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 22：洛必达法则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-030/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 23：泰勒公式",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-031/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 24：函数的单调性与曲线的凹凸性",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-032/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 25：函数的极值与最值",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-033/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 26：函数图形的绘制",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-034/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-035/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 28：不定积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-036/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 29：换元积分法",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-037/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 30：分部积分法",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-038/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 31：定积分的基本概念",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-039/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 32：定积分的计算",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-040/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 33：定积分的应用",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-041/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 34：定积分的应用",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-042/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 35：微分方程的基本概念",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-043/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 36：一阶线性微分方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-044/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 37：可降阶方程与高阶线性微分方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-045/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 37：常系数齐次线性微分方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-046/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 38：常系数非齐次线性微分方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-047/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 40：欧拉方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-048/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-049/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 41：隐函数求导",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-050/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-051/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 44：二重积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-052/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 45：二重积分的计算",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-053/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 47：三重积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-054/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 53：常数项级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-055/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 48：正项级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-056/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 55：交错级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-057/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 56：幂级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-058/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 51：函数展开成幂级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-059/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 52：傅里叶级数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-060/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 53：向量代数",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-061/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 54：空间平面与直线",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-062/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 55：曲面与空间曲线",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-063/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 56：多元微分在几何上的应用",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-064/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 48：对弧长的曲线积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-065/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 49：对坐标的曲线积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-066/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 51：对面积的曲面积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-067/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 52：对坐标的曲面积分",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-068/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 61：场论初步",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Calculus"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-069/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 1：课程引言",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-070/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 2：行列式的定义与性质",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-071/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 3：行列式的计算",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-072/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-073/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 5：矩阵的逆",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-074/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 6：伴随矩阵",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-075/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 7：初等变换与初等矩阵",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-076/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 8：矩阵方程",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-077/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 9：等价矩阵",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-078/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 10：矩阵的秩",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-079/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-080/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 12：极大线性无关组与向量组的秩",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-081/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 13：等价向量组",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-082/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 14：向量空间",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-083/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 15：齐次线性方程组",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-084/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 16：非齐次线性方程组",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-085/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 17：两个方程组的公共解",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-086/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 18：同解方程组",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-087/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 19：特征值与特征向量",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-088/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 20：相似",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-089/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 21：二次型的定义与矩阵表示",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-090/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 22：化二次型为标准型与规范型",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-091/"
+  },
+  {
+    "section": "notes",
+    "title": "Graduate Examination Mathematics: Lecture 23：正定二次型",
+    "description": "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.",
+    "category": "Graduate Examination Mathematics",
+    "tags": [
+      "Graduate Examination Mathematics",
+      "Linear Algebra"
+    ],
+    "content": "Original Chinese Note The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine translated. Read the original Chinese note",
+    "url": "/en/notes/math-092/"
   }
 ]

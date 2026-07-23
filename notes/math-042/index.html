@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 34：定积分的应用 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 定积分及反常积分">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 34：定积分的应用 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-042/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-042/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-042/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-042/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-042/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 34：定积分的应用</h1><p class="article-lead">考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-01-24</span><span>约 10 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>定积分及反常积分</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">常考题型与典型例题</a><a href="#section-2">1.1 概念引入</a><a href="#section-3">1.2 几何应用</a><a href="#section-18">1.3 物理应用 </a></nav></details><div class="prose"><h2 id="section-1">常考题型与典型例题</h2>
+<p><strong>常考内容</strong></p>
+<ul>
+<li>(一)几何应用</li>
+<li>(二)物理应用</li>
+</ul>
+<p><strong>常考题型与典型例题</strong></p>
+<ul>
+<li>题型一：几何应用</li>
+<li>题型二：物理应用</li>
+</ul>
+<h2 id="section-2">1.1 概念引入</h2>
+<p><strong>什么问题适合用定积分求解</strong></p>
+<ul>
+<li>1)非均匀连续分布在 $[a,b]$ </li>
+<li>2)所求量对区间有可加性</li>
+</ul>
+<p><strong>方法</strong></p>
+<ul>
+<li>先找范围</li>
+<li>找出微小范围内，它的微分的极小的值（近似值，找微元）</li>
+<li>进行积分，求 a-b 范围上函数的积分</li>
+</ul>
+<h2 id="section-3">1.2 几何应用</h2>
+<h3 id="section-4">1.2.1 平面图形的面积</h3>
+<h4 id="section-5">1.2.1.2 基本概念</h4>
+<p><strong>概念</strong></p>
+<ul>
+<li>情况一：平面坐标</li>
+<li class="list-indent-1">若平面域 $D$ 由曲线 $y=f(x),y=g(x)(f(x)\geq g(x))$, $x=a,\quad x=b\quad(a&lt;b)$ 所围成，则：</li>
+<li class="list-indent-1">$$S=\int_{a}^{b}[f(x)-g(x)]dx$$</li>
+<li class="list-indent-1">平面上求一个区域 D，</li>
+<li>情况二：极坐标</li>
+<li class="list-indent-1">若平面域 $D$ 由曲线 $\rho=\rho(\theta),\theta=\alpha,\theta=\beta(\alpha&lt;\beta)$ 所围成，则： </li>
+<li class="list-indent-1">$$S=\frac 12\int_\alpha^\beta\rho^2 (\theta)\mathrm{d}\theta$$</li>
+</ul>
+<p><strong>更一般的公式</strong></p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$S=\int\int_{D}^{S}1db$$</li>
+<li>例题：用二重积分，先 x 后 y</li>
+<li class="list-indent-1">$\text{设 }D\text{ 是由曲线 }xy+1=0\text{ 与直线 }$ $y+x=0及y=2围成的有界区域，则D的面积为$ </li>
+<li class="list-indent-1">求解：$\begin{aligned}S&amp;=\int_{0}^{1}db\\&amp;=\int_{1}^{2}dy\int_{0}^{-\frac{1}{y}}dx\end{aligned}=\int_{1}^{2}(y-\frac{1}{y})dy=(\frac{1}{2}y^{2}-2,y)|_{1}^{2}$</li>
+</ul>
+<h4 id="section-6">1.2.1.2 例题</h4>
+<p><strong>例题</strong>：求曲线 $y^2=x$ 与 $y=x^2$ 所围面积. </p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/97772b994909-Pasted-image-20240131142232.png" alt="Pasted image 20240131142232" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">可以对 x 积分</li>
+<li class="list-indent-1">也可以对 y 积分</li>
+<li>解析 1：对 x 积分</li>
+<li class="list-indent-1">第一步：找范围</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/fbaaef2d4558-Pasted-image-20240131142306.png" alt="Pasted image 20240131142306" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第二部：找微元</li>
+<li class="list-indent-2">x 和 x+dx</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/c6e80b9ce051-Pasted-image-20240131142332.png" alt="Pasted image 20240131142332" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第三步：积分</li>
+<li class="list-indent-2">从 0-1 积分</li>
+<li class="list-indent-2">$\delta=\int_{0}^{1}\left(dx-x^{2}\right)dx=\frac{2}{3}-\frac{1}{3}=\frac{1}{3}$</li>
+<li>题型： #定积分的几何应用</li>
+</ul>
+<p><strong>例题</strong>：$\text{求心形线 }\rho=a(1+\cos\theta)\left(a&gt;0\right)\text{所围面积}.$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">极坐标的题型；几何图形的坐标用极坐标给出；</li>
+<li class="list-indent-1">第一步：它的范围；是 <img class="note-image" src="/assets/notes/86669d54a8c5-Pasted-image-20240131150018.png" alt="Pasted image 20240131150018" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第二步：求它在微小的区间上，对应图形如何求出对应面积：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/f974e9ceede3-Pasted-image-20240131150049.png" alt="Pasted image 20240131150049" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">可以近似看出一个扇形；</li>
+<li class="list-indent-2">微元：</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/1b49a7ce912f-Pasted-image-20240131150113.png" alt="Pasted image 20240131150113" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第三步：求积分</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/5bc854126c2e-Pasted-image-20240131150129.png" alt="Pasted image 20240131150129" loading="lazy" decoding="async"></li>
+<li>解析</li>
+<li class="list-indent-1">第一步：确定范围</li>
+<li class="list-indent-2">可以先画图 -&gt; 画图需要先画一些<strong>特殊点</strong>；</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/1155e331d60d-Pasted-image-20240131150311.png" alt="Pasted image 20240131150311" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">因为 conx 的特点；</li>
+<li class="list-indent-2">确定范围：为 0 到 Π</li>
+<li class="list-indent-3">因为下面一半和上面一半一样，因此只需要求上面一半然后乘以 2 即可；</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/41f0e0225046-Pasted-image-20240131150353.png" alt="Pasted image 20240131150353" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/7fbcc9288c72-Pasted-image-20240131150416.png" alt="Pasted image 20240131150416" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第三步：求解定积分</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/39066e2f6ba6-Pasted-image-20240131150658.png" alt="Pasted image 20240131150658" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">因为直接求 conx 在 0 到 PI 上无法求出，但求 0 到二分之 PI 上很简单，因此进行定积分代换：</li>
+<li class="list-indent-3">设：</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/8ad073c39bbf-Pasted-image-20240131150652.png" alt="Pasted image 20240131150652" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">因此：</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/a8e6224f7fd8-Pasted-image-20240131150832.png" alt="Pasted image 20240131150832" loading="lazy" decoding="async"></li>
+<li>题型： #定积分的几何应用 </li>
+</ul>
+<h3 id="section-7">1.2.2 旋转体的体积</h3>
+<h4 id="section-8">1.2.2.1 基本概念</h4>
+<p><strong>图示</strong></p>
+<ul>
+<li>图示：绕 X 轴旋转</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/165df4bfaca3-Pasted-image-20240131151121.png" alt="Pasted image 20240131151121" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-9"><strong>定理</strong>： #定积分旋转体体积公式</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>1. 绕 X 轴旋转时： $$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$$</blockquote>
+<blockquote>2. 绕 Y 轴旋转时： $$V_y=2\pi\int_a^bxf(x)\operatorname{d}x$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>只能算其饶坐标轴算，不可以解决其他情况；</li>
+<li>第一步：带入原式中的公式</li>
+<li>第二步：把公式中的 y、x 都用和 t 相关的公式代入进去，化成和 t 相关的定积分</li>
+</ul>
+<p><strong>更一般的情况</strong></p>
+<ul>
+<li>情况： </li>
+<li class="list-indent-1">任意平面 $D$ 绕任意直线 $ax+b^y+c=0$</li>
+<li>二重积分公式：</li>
+<li class="list-indent-1">这个是更加一般化的公式，旋转体体积问题、这个公式什么时候都可以使用：</li>
+<li class="list-indent-1">$$V=2\pi\int\int_{D}r(x,y)db$$</li>
+<li>$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$ 和 $V_y=2\pi\int_a^bxf(x)\operatorname{d}x$ 是此公式的特例；</li>
+</ul>
+<p><strong>公式选择</strong></p>
+<ul>
+<li>如果是绕 X、Y 时，可以使用 $V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$ 和 $V_y=2\pi\int_a^bxf(x)\operatorname{d}x$</li>
+<li>如果是绕任意轴时，可以使用 $V=2\pi\int\int_{D}r(x,y)db$</li>
+</ul>
+<h4 id="section-10">1.2.2.2 例题</h4>
+<p><strong>例题</strong>：计算由 $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ 所围成的图形绕 X 轴旋转一周所形成的旋转体的体积；</p>
+<ul>
+<li>分析  </li>
+<li class="list-indent-1">椭圆的图形</li>
+<li class="list-indent-2">只需要计算上面的一半就可以了；</li>
+<li class="list-indent-2">不止，只需要计算四分之一部分就可以了；</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/e7d6f432590b-Pasted-image-20240131152357.png" alt="Pasted image 20240131152357" loading="lazy" decoding="async"></li>
+<li>解析</li>
+<li class="list-indent-1">由原式得 y 的公式：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/dee2746800cc-Pasted-image-20240131152437.png" alt="Pasted image 20240131152437" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">由体积公式可知：</li>
+<li class="list-indent-2">$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$</li>
+<li class="list-indent-1">且，因为只需要求四分之一</li>
+<li class="list-indent-2">因此只需要求 $[0,a]$ 范围上，它旋转的面积</li>
+<li class="list-indent-1">因此，带入可得：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/75f2ba96611f-Pasted-image-20240131152648.png" alt="Pasted image 20240131152648" loading="lazy" decoding="async"></li>
+<li>题型： #定积分的几何应用 </li>
+</ul>
+<p><strong>例题</strong>：计算由摆线 $\begin{cases}x=a(t-\sin t)\\y=a(1-\cos t)&amp;\end{cases}(0\leq t\leq2\pi)$ 与 X 图形分别绕 X 轴、Y 轴所称的旋转体的体积；</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">第一步：带入原式中的公式</li>
+<li class="list-indent-1">第二步：把公式中的 y、x 都用和 t 相关的公式代入进去，化成和 t 相关的定积分</li>
+<li>解析：求 X </li>
+<li class="list-indent-1">求求旋转体的体积公式可知：</li>
+<li class="list-indent-2">其中因为把 y 变成 y 和 x 的函数这一过程很麻烦，因此在下面的变化中，直接把 y 和 x 分别变成了和 t 的式子，带入：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/9020088aec14-Pasted-image-20240131153411.png" alt="Pasted image 20240131153411" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">继续求解，其中令 u=t/2</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/5a9bc9f40dc7-Pasted-image-20240131153609.png" alt="Pasted image 20240131153609" loading="lazy" decoding="async"></li>
+<li>题型： #定积分的几何应用 </li>
+</ul>
+<h3 id="section-11">1.2.3 平面曲线的弧长</h3>
+<h4 id="section-12">1.2.3.1 基本概念</h4>
+<h5 id="section-13"><strong>定义</strong>： #弧长</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$s_n=\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>$s_n=\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/c52e94b31be8-Pasted-image-20240131160512.png" alt="Pasted image 20240131160512" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">很多个小段线段的求和</li>
+<li>弧长的极限：$s=\lim_{\lambda\to0}s_n=\lim_{\lambda\to0}\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
+</ul>
+<h5 id="section-14"><strong>定理</strong>： #弧长的计算</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{aligned}</blockquote>
+<p>&amp;1)C:y=y(x),\quad a\leq x\leq b,\quad s=\int_a^b\sqrt{1+{y^{\prime}}^2}dx \\</p>
+<p>&amp;2)C:\begin{cases}x=x(t)\\y=y(t)\end{cases}\alpha\leq t\leq\beta.\quad s=\int_\alpha^\beta\sqrt{x^{\prime2}+y^{\prime2}}dt \\</p>
+<p>&amp;3)C:\rho=\rho(\theta),\alpha\leq\theta\leq\beta.\quad s=\int_{\alpha}^{\beta}\sqrt{\rho^{2}+{\rho^{\prime}}^{2}}d\theta </p>
+<p>\end{aligned}$$</p>
+<p><strong>解释</strong></p>
+<ul>
+<li>弧长都是弧微分积分</li>
+</ul>
+<h4 id="section-15">1.2.3.2 例题</h4>
+<p><strong>例题</strong>：$\text{计算旋轮线一拱}\quad x=a(t-\sin t),y=a(1-\cos t)\quad(0\leq t\leq2\pi)$ 的弧长</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">这种题是第二种形式：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/501c25b88d93-Pasted-image-20240131162204.png" alt="Pasted image 20240131162204" loading="lazy" decoding="async"></li>
+<li>解析</li>
+<li class="list-indent-1">将函数带入：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/469fee3793f5-Pasted-image-20240131162350.png" alt="Pasted image 20240131162350" loading="lazy" decoding="async"></li>
+<li>题型： #定积分的几何应用 </li>
+</ul>
+<h3 id="section-16">1.2.4 旋转体侧面积 </h3>
+<h5 id="section-17"><strong>定理</strong>： #旋转体侧面积计算</h5>
+<blockquote>1 $S=2\pi\int_{a}^{b}f(x)\sqrt{1+f^{\prime2}(x)}dx$</blockquote>
+<p><strong>解释</strong>  </p>
+<ul>
+<li>图示： </li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/e940c3c3ad8a-Pasted-image-20240415204510.png" alt="Pasted image 20240415204510" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-18">1.3 物理应用 </h2>
+<h3 id="section-19">1.3.1 变力做功 </h3>
+<p><strong>核心</strong></p>
+<ul>
+<li>不同深度的水，抽出去做的<strong>功 = 位移 × 力</strong> = 位移 × 密度 × $g$ × $dv$</li>
+<li>力 = 密度 × $g$ × $dv$</li>
+<li>对这个式子积分，即可得到功大小；</li>
+</ul>
+<p><strong>例题分析</strong>：一容器的内侧是由图中曲线绕 $y$ 轴旋转一周而成的曲面，该曲线由 $$x^{2}+y^{2}=2y(y\geq\frac{1}{2})\:\text{与}\:x^{2}+y^{2}=1(y\leq\frac{1}{2})$$ 连接而成，</p>
+<ul>
+<li>问题：(1) 求容器的容积； (II) 若将容器内盛满的水从容器顶部全部抽出，至少需要做多少功？</li>
+<li>图示：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/d83575448e89-Pasted-image-20240415213032.png" alt="Pasted image 20240415213032" loading="lazy" decoding="async"></li>
+<li>解析：第一问</li>
+<li class="list-indent-1">上下圆的体积一样，因此只需要算当中一个圆绕轴转的体积即可；</li>
+<li class="list-indent-1">求下半部分圆的面积微分：</li>
+<li class="list-indent-2">假设现在从 $y$ 到 $y+dy$ 切一个很薄的平面，此时此平面的长为 $x^2\pi$ ；</li>
+<li class="list-indent-2">将其乘以宽：$x^2{\pi}dy$，此时 $x^2{\pi}dy$ 代表的就是从 $y$ 到 $y+dy$ 的面积；</li>
+<li class="list-indent-1">然后将此微分在-1 到 1/2 范围上积分，得到面积：</li>
+<li class="list-indent-2">$\pi\int_{-1}^{\frac{1}{2}}x^{2}\operatorname{d}y$</li>
+<li class="list-indent-1">将此面积乘以 2，代换，得到：</li>
+<li class="list-indent-2">$V=2\pi\int_{-1}^{\frac{1}{2}}x^{2}\mathrm{d}y=2\pi\int_{-1}^{\frac{1}{2}}(1-y^{2})\mathrm{d}y=\frac{9\pi}{4}$</li>
+<li>解析：第二问 </li>
+<li class="list-indent-1">因为力的大小不变，因此 功 = 力 × 位移</li>
+<li class="list-indent-2">其中：力的大小不变，因此主要和当前位移下的面积有关（因为图形是个葫芦形）</li>
+<li class="list-indent-2">力又等于其体积，因此就是体积乘以其密度，加上乘以 g；</li>
+<li class="list-indent-1">位移：$2-y$</li>
+<li class="list-indent-1">$W=10^3\int_0^{\frac12}\pi(1-y^2)(2-y)g\operatorname{d}y+10^{3}\int_{\frac{1}{2}}^{2}\pi[2y-y^{2})](2-y)gdy)$</li>
+<li>核心：</li>
+<li class="list-indent-1">一个小薄层的水抽出去做的功，等于位移 × 力 = 位移 × g × 密度 × $dv$ </li>
+<li class="list-indent-1">g × 密度 × $dv$ = 力</li>
+</ul>
+<h3 id="section-20">1.3.2 压力问题 </h3>
+<p><strong>压强问题</strong></p>
+<ul>
+<li>公式：压强 $${p}=g\cdotρ\cdot h$$</li>
+<li>公式：压力 $$P=p\cdot A$$</li>
+<li class="list-indent-1">其中：p 为压强，A 为面积</li>
+</ul>
+<p><strong>例题分析</strong>：某闸门的形状与大小如图所示，其中 y 轴为对称轴，闸门的上部为矩形 ABCD, DC=2 m, 下部由二次抛物线与线段 4 B 所围成，当水面与闸门的上端相平时，欲使闸门矩形部分承受的水压力与闸门下部承受的水压力之比为5:4，闸门矩形部分的高 h 应为多少 ？</p>
+<ul>
+<li>图示：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/d92ee3235ee3-Pasted-image-20240415215603.png" alt="Pasted image 20240415215603" loading="lazy" decoding="async"></li>
+<li>分析：</li>
+<li class="list-indent-1">深度的微小变化：</li>
+<li class="list-indent-2">压强：p=gρ(h+1-y)</li>
+<li class="list-indent-2">压力：p=gρ(h+1-y) 2 dy</li>
+<li class="list-indent-1">式子：上半部分：</li>
+<li class="list-indent-2">$$P_1=2\int_1^{h+1}\rho g(h+1-y)\operatorname{d}y=2\rho g\biggl[(h+1)y-\frac{y^2}2\biggr]_1^{h+1}=\rho gh^2$$</li>
+<li class="list-indent-1">下半部分：</li>
+<li class="list-indent-2">$p=gp(h+1-y)$</li>
+<li class="list-indent-1">式子：下半部分：</li>
+<li class="list-indent-2">$$P_{2}=2\int_{0}^{1}\rho g(h+1-y)\sqrt{y}\mathrm{d}y=2\rho g\biggl[\frac{2}{3}(h+1)y^{\frac{3}{2}}-\frac{2}{5}y^{\frac{5}{2}}\biggr]_{0}^{1}$$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-041/index.html"><span>← 上一项</span><strong>Lecture 33：定积分的应用</strong></a>
+    <a class="article-pagination-next" href="../math-043/index.html"><span>下一项 →</span><strong>Lecture 35：微分方程的基本概念</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

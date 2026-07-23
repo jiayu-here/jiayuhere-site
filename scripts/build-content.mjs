@@ -276,9 +276,18 @@ const pruneOutputs = async (section, items, locale) => {
 };
 
 const inline = (value) => escapeHtml(value)
+  .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img class="note-image" src="$2" alt="$1" loading="lazy" decoding="async">')
+  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (match, label, href) => {
+    if (!/^(?:https?:\/\/|mailto:|\/|\.\.?\/|#)/.test(href)) return match;
+    const external = /^https?:\/\//.test(href);
+    return `<a href="${href}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${label}</a>`;
+  })
   .replace(/`([^`]+)`/g, "<code>$1</code>")
   .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-  .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+  .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/g, "<u>$1</u>")
+  .replace(/&lt;\/?font[^&]*?&gt;/g, "")
+  .replace(/==([^=]+)==/g, "<mark>$1</mark>")
+  .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
 
 const architectureDiagram = (lines, locale) => {
   const rows = lines
@@ -337,8 +346,10 @@ const markdownToHtml = (markdown, locale) => {
   const html = [];
   const headings = [];
   let inCode = false;
+  let inMath = false;
   let codeLanguage = "";
   let codeLines = [];
+  let mathLines = [];
   let listType = "";
   let headingIndex = 0;
 
@@ -347,7 +358,35 @@ const markdownToHtml = (markdown, locale) => {
     listType = "";
   };
 
+  const closeMath = () => {
+    html.push(`<div class="math-display">$$\n${escapeHtml(mathLines.join("\n"))}\n$$</div>`);
+    mathLines = [];
+    inMath = false;
+  };
+
   for (const line of lines) {
+    if (inMath) {
+      const displayMathEnd = line.match(/^([\s\S]*?)\$\$(.*)$/);
+      if (displayMathEnd) {
+        closeList();
+        if (displayMathEnd[1].trim()) mathLines.push(displayMathEnd[1].trimEnd());
+        closeMath();
+        const trailingText = displayMathEnd[2].trim();
+        if (trailingText) html.push(`<p>${inline(trailingText)}</p>`);
+      } else {
+        mathLines.push(line);
+      }
+      continue;
+    }
+
+    const displayMathStart = line.match(/^\s*(?:[-*+]\s+)?\$\$(.*)$/);
+    if (displayMathStart && !displayMathStart[1].includes("$$")) {
+      closeList();
+      inMath = true;
+      if (displayMathStart[1].trim()) mathLines.push(displayMathStart[1].trim());
+      continue;
+    }
+
     const fence = line.match(/^```([\w-]*)/);
     if (fence) {
       closeList();
@@ -370,19 +409,25 @@ const markdownToHtml = (markdown, locale) => {
       continue;
     }
 
-    const heading = line.match(/^(##|###)\s+(.+)$/);
+    const heading = line.match(/^(#{1,6})\s+(.+)$/);
     if (heading) {
       closeList();
       headingIndex += 1;
-      const level = heading[1].length;
+      const level = Math.min(6, Math.max(2, heading[1].length));
       const id = `section-${headingIndex}`;
       headings.push({ level, id, text: heading[2] });
       html.push(`<h${level} id="${id}">${inline(heading[2])}</h${level}>`);
       continue;
     }
 
-    const unordered = line.match(/^[-*]\s+(.+)$/);
-    const ordered = line.match(/^\d+\.\s+(.+)$/);
+    if (/^---\s*$/.test(line)) {
+      closeList();
+      html.push("<hr>");
+      continue;
+    }
+
+    const unordered = line.match(/^(\s*)[-*+]\s+(.+)$/);
+    const ordered = line.match(/^(\s*)\d+\.\s+(.+)$/);
     if (unordered || ordered) {
       const nextType = unordered ? "ul" : "ol";
       if (listType !== nextType) {
@@ -390,7 +435,9 @@ const markdownToHtml = (markdown, locale) => {
         listType = nextType;
         html.push(`<${listType}>`);
       }
-      html.push(`<li>${inline((unordered || ordered)[1])}</li>`);
+      const [, indentation, item] = unordered || ordered;
+      const depth = Math.min(5, Math.floor(indentation.replace(/\t/g, "  ").length / 2));
+      html.push(`<li${depth ? ` class="list-indent-${depth}"` : ""}>${inline(item)}</li>`);
       continue;
     }
 
@@ -405,6 +452,7 @@ const markdownToHtml = (markdown, locale) => {
 
   closeList();
   if (inCode) throw new Error("Unclosed code fence");
+  if (inMath) throw new Error("Unclosed display-math block");
   return { html: html.join("\n"), headings };
 };
 
@@ -440,9 +488,9 @@ const footer = (prefix, locale) => {
   <script src="${prefix}assets/script.js?v=20260714s"></script>`;
 };
 
-const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "" }) => {
+const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", usesMath = false }) => {
   const isEnglish = locale === "en";
-  const styleVersion = /^(projects|blog|notes|lab)\/$/.test(route) ? "20260715d" : "20260714s";
+  const styleVersion = "20260723b";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -489,6 +537,18 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="icon" href="${prefix}favicon.ico" sizes="any">
   <link rel="manifest" href="${prefix}site.webmanifest">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=${styleVersion}">
+${usesMath ? `  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>` : ""}
 </head>
 <body>
 ${nav(prefix, locale, route, active)}
@@ -572,7 +632,8 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   await mkdir(output, { recursive: true });
   const prefix = isEnglish ? "../../../" : "../../";
   const route = `${config.output}/${item.meta.slug}/`;
-  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "" }));
+  const usesMath = section === "notes" && /(^|[^\\])\$(?:\$|[^$])/.test(item.body);
+  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "", usesMath }));
 };
 
 const buildLabIndex = async (items, locale) => {

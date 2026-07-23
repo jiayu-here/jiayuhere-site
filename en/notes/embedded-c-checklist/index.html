@@ -27,7 +27,8 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260714s">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260723b">
+
 </head>
 <body>
 
@@ -67,7 +68,7 @@ state = (reg &gt;&gt; bit) &amp; 1U; /* read */</code></pre>
 <h2 id="section-5">Pointers and Object Lifetime</h2>
 <p>Pointers do not carry buffer length or lifetime. Accept data and length together:</p>
 <pre><code class="language-c">bool uart_send(const uint8_t *data, size_t length);</code></pre>
-<p>Never return the address of a local object. Long-lived systems often prefer static storage or fixed pools over fragmented dynamic allocation. <code>const uint8_t *p</code> protects pointed data through <code>p</code>; <code>uint8_t * const p</code> fixes the pointer; combining both fixes both.</p>
+<p>Never return the address of a local object. Long-lived systems often prefer static storage or fixed pools over fragmented dynamic allocation. <code>const uint8_t <em>p</code> protects pointed data through <code>p</code>; <code>uint8_t </em> const p</code> fixes the pointer; combining both fixes both.</p>
 <h2 id="section-6">Arrays, Strings and Buffers</h2>
 <p>An array parameter decays to a pointer, so pass length explicitly. Verify string termination and never trust external lengths before writing or parsing. Use bounded formatting and check its return value. Binary buffers may contain zero bytes and are not strings.</p>
 <h2 id="section-7">Endianness, Alignment and Layout</h2>

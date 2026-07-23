@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 10：矩阵的秩 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 10：矩阵的秩。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 矩阵">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 10：矩阵的秩 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 10：矩阵的秩。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-079/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-079/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-079/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-079/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-079/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 10：矩阵的秩</h1><p class="article-lead">考研数学学习笔记：Lecture 10：矩阵的秩。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 4 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>矩阵</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">10.1 秩的定义 </a><a href="#section-3">10.2 求矩阵的秩</a><a href="#section-4">10.3 有关秩的几个重要式子</a></nav></details><div class="prose"><h2 id="section-1">10.1 秩的定义 </h2>
+<h5 id="section-2"><strong>定义</strong>： #矩阵的秩 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 A 是 $m<em>n$ 的矩阵，若存在 k 阶子式不为零，且任意 <code>k+1</code> 阶子式（如果有的话）全为零，则 <code>r(A)=k</code>，且若 A 为 <code>n</em>n</code> 矩阵，则得到：$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{可逆}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>子式： </li>
+<li class="list-indent-1">子式一定是行列式；</li>
+<li><code>k</code> 阶子式： </li>
+<li class="list-indent-1">当矩阵为 $\left(\begin{matrix}1&amp;2&amp;3\\4&amp;5&amp;6\end{matrix}\right)$ 时，其 <code>k=2</code> 的二阶子式为 $\left|\begin{matrix}1&amp;3\\4&amp;6\end{matrix}\right|$</li>
+<li class="list-indent-1">其一共有三个二阶子式；</li>
+<li>意义：若存在 k 阶子式不为零，且任意 <code>k+1</code> 阶子式（如果有的话）全为零</li>
+<li class="list-indent-1">假设当前为 <code>k=2</code> 二阶情况下，此时其二阶子式因为表示行列式 <code>-&gt;</code> 面积；</li>
+<li class="list-indent-1">当其不为零时，向量之间互相都不能表示 <code>-&gt;</code> k 个线性无关向量；</li>
+<li>意义：<code>r(A)=k</code></li>
+<li class="list-indent-1">存在 <code>k</code> 个无关向量；</li>
+<li class="list-indent-1">任意 <code>k+1</code> 个向量都相关；</li>
+<li class="list-indent-1">此时 <code>r(A)=k</code> 就是组成矩阵线性无关的向量的个数；</li>
+</ul>
+<p><strong>补充</strong>：秩的几何含义</p>
+<ul>
+<li>意义： </li>
+<li class="list-indent-1">秩，代表经过 <code>A</code> 矩阵的变换后，变换后的空间的维数；</li>
+<li class="list-indent-1">变换后的基向量张成的空间，就是所有可能的变换结果 <code>-&gt;</code> 即：变换后的基向量，其所张成的空间的维数；</li>
+<li>举例： </li>
+<li class="list-indent-1">当出现 <code>3<em>2</code> 的矩阵 $A_{3</em>2}$ 时，其表示将一个二维的图形映射到三维的空间中；因为 A 有两个基向量，并且这两个基向量现在是三维的 <code>[x,y,z]</code>；</li>
+<li class="list-indent-1">当出现 <code>2<em>3</code> 的矩阵 $A_{3</em>2}$ 时，其表示将一个三维的图形映射到二维的空间中；因为 A 有三个基向量，并且这三个基向量现在是二维的 <code>[x,y]</code> 基向量；</li>
+</ul>
+<h2 id="section-3">10.2 求矩阵的秩</h2>
+<p><strong>方法</strong>：求矩阵的秩</p>
+<ul>
+<li>将 <code>A</code> 用初等行变换化为行阶梯形矩阵，其非零行数便为 <code>A</code> 的秩；</li>
+</ul>
+<p><strong>方法</strong>：求矩阵的秩 - 举例</p>
+<ul>
+<li>题目：若 $\begin{bmatrix}1&amp;2&amp;-1&amp;1\\2&amp;0&amp;t&amp;0\\0&amp;-4&amp;5&amp;-2\end{bmatrix}$ 的秩为 2，则求 <code>t</code></li>
+<li>分析： </li>
+<li class="list-indent-1">$A\rightarrow\left(\begin{matrix}1&amp;2&amp;-1&amp;1\\0&amp;-4&amp;t+2&amp;-2\\0&amp;-4&amp;5&amp;-2\end{matrix}\right)\rightarrow\left(\begin{matrix}1&amp;2&amp;-1\\0&amp;-4&amp;t+2&amp;-2\\0&amp;0&amp;3-t&amp;0\end{matrix}\right)$</li>
+<li class="list-indent-1">此时已经是一个行阶梯形矩阵了；</li>
+<li class="list-indent-1">并且因为矩阵秩是 2，所以下面的都是 0 行，所以 <code>3-t=0</code></li>
+<li class="list-indent-1">所以 <code>t=3</code></li>
+</ul>
+<h2 id="section-4">10.3 有关秩的几个重要式子</h2>
+<p><strong>概念</strong>：设 A 是 <code>m*n</code> 矩阵，<code>B</code> 是满足有关矩阵运算要求的矩阵，则：</p>
+<ul>
+<li>（1）${1}0\leqslant r(A)\leqslant\min\{m,n\}($ 由定义 )</li>
+<li class="list-indent-1">任何一个矩阵的秩最低为 0，并且 <code>r(a)=0</code> 则矩阵一定等于 <code>0</code>：<code>A=0</code></li>
+<li class="list-indent-1">并且 $r(A)\leqslant\min\{m,n\}$ <code>&lt;-</code> 因为行列式是方的，而矩阵的子式是行列式，所以必须为 <code>n*n</code> </li>
+<li>（2）${2}r(kA)=r(A)(k\neq0)($ 由定义 )</li>
+<li>（3）$r\left(AB\right)\leqslant\min\left\{r\left(A\right),r\left(B\right)\right\}$</li>
+<li class="list-indent-1">矩阵越乘，秩序=越多越的‘‘’’</li>
+<li>（4）$r(A+B)&lt;=r(A)+r(B)$</li>
+<li>（5）$r\left(A^{*}\right)=\begin{cases}n,&amp;r\left(A\right)=n,\\1,&amp;r\left(A\right)=n-1,\\0,&amp;r\left(A\right)&lt;n-1,\end{cases}$</li>
+<li>（6）设 A= <code>m*n</code> 的矩阵，<code>P、Q</code> 分别为 m 阶、n 阶的可逆矩阵，则：<code>r(A)=r(PA)=r(AQ)=r(PAQ)</code></li>
+<li class="list-indent-1">在过程当中，所有中间矩阵都是等价的：$r\left(\begin{matrix}E_{r}&amp;0\\0&amp;0\end{matrix}\right)$</li>
+<li>（7）若 $A_{m\times n}B_{m\times s}=O,则r\left(A\right)+r\left(B\right)\leqslant n$；</li>
+<li class="list-indent-1"><code>n</code> 为 <code>A</code> 的列数；</li>
+<li>（8）格拉姆矩阵：$r\left(A\right)=r\left(A^{T}\right)=r\left(A^{T}A\right)=r\left(AA^{T}\right)$</li>
+<li class="list-indent-1">$r\left(A^{T}A\right)=r\left(AA^{T}\right)$ 一定有解，并且一定是最佳近似解；</li>
+<li class="list-indent-1">对于任何一个矩阵，其转置的秩等于其 $r\left(A^{T}A\right)=r\left(AA^{T}\right)$；</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-078/index.html"><span>← 上一项</span><strong>Lecture 9：等价矩阵</strong></a>
+    <a class="article-pagination-next" href="../math-080/index.html"><span>下一项 →</span><strong>Lecture 11：向量与向量组的线性相关性</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

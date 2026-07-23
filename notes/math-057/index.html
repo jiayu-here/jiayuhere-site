@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 55：交错级数 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 55：交错级数。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 无穷级数">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 55：交错级数 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 55：交错级数。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-057/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-057/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-057/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-057/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-057/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 55：交错级数</h1><p class="article-lead">考研数学学习笔记：Lecture 55：交错级数。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-14</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>无穷级数</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">49.1 交错级数</a><a href="#section-6">49.2 任意项级数</a></nav></details><div class="prose"><h2 id="section-1">49.1 交错级数</h2>
+<h3 id="section-2">49.1.1 交错级数概念</h3>
+<h5 id="section-3"><strong>定义</strong>： #交错级数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>正负交错出现的级数：</li>
+<li class="list-indent-1">1. $u_{1}-u_{2}+u_{3}-u_{4}+u_{5}-u_{6}+\cdots$；</li>
+<li class="list-indent-1">2. $-u_{1}+u_{2}-u_{3}+u_{4}-u_{5}+u_{6}\cdots$；</li>
+<li class="list-indent-1">这种级数称之为交错级数；</li>
+<li>并且 $u_n &gt;=0$</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>如果项数是无穷项时，<strong>小括号不能随便加</strong>，<strong>顺序也不能随便换</strong>；</li>
+<li>比如：</li>
+<li class="list-indent-1">$1-1+1-1+1-1+1-1+1-1+1-1+1......$</li>
+<li class="list-indent-1">如果是奇数项 -&gt; 结果为 1；</li>
+<li class="list-indent-1">如果时偶数项 -&gt; 结果为 0；</li>
+<li>如果加括号</li>
+<li class="list-indent-1">$(1-1)+(1-1)+(1-1)+(1-1)+......$</li>
+<li class="list-indent-1">这样对无穷项加括号，可能会有问题，因为不清楚是奇数项还是偶数项；</li>
+</ul>
+<h3 id="section-4">49.1.2 交错级数判断方法</h3>
+<h5 id="section-5"><strong>定理</strong>： #莱布尼茨准则</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：当前有交错级数 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$，当：</blockquote>
+<blockquote>1）$u_{n}\geq u_{n+1}$：单调减</blockquote>
+<blockquote>2）$\lim_{n\to\infty}u_{n}=0$</blockquote>
+<blockquote>则可得到 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$ 级数收敛，<code>S</code> <code>&lt;=</code> $u_1$，且 $|r_{n}|\leq u_{n+1}$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意：</li>
+<li class="list-indent-1">要求：</li>
+<li class="list-indent-2">1）$u_{n}\geq u_{n+1}$：单调减</li>
+<li class="list-indent-2">2）$\lim_{n\to\infty}u_{n}=0$</li>
+<li class="list-indent-1">这两个要求是交错级数收敛的<strong>充分条件</strong>，也就是说这两个里面如果有一个不成立，也有可能交错级数收敛；</li>
+<li>前提：</li>
+<li class="list-indent-1">使用莱布尼茨定理之前，需要保证当前是交错级数；</li>
+<li class="list-indent-1">后一项比前一项越来越小；</li>
+<li class="list-indent-1">且 $u_n$ 是往 0 逼近的；</li>
+</ul>
+<p><strong>举例</strong>：关于莱布尼茨准则是充分条件</p>
+<ul>
+<li>$$\sum_{n=1}^\infty\frac{(-1)^{n-1}}{2^{n+(-1)^n}}\text{ 收敛,但 }u_n=\frac1{2^{n+(-1)^n}}\text{ 并不递减}.$$</li>
+</ul>
+<h2 id="section-6">49.2 任意项级数</h2>
+<h3 id="section-7">49.2.1 任意项级数概念</h3>
+<p><strong>任意项级数概念</strong></p>
+<ul>
+<li>特点： </li>
+<li class="list-indent-1">有正项、有负项；</li>
+<li class="list-indent-1">并且正项、负项都得是无限项；</li>
+<li>任意项： $u_{1}+u_{2}+u_{3}+u_{4}+\cdots$，并且 $u_n$ 的正负不知道；</li>
+<li>正项级数：$|u_{1}|+|u_{2}|+|u_{3}|+|u_{4}|+\cdots$ ，每项都取绝对值；</li>
+<li class="list-indent-1">这种为绝对值级数；</li>
+</ul>
+<h3 id="section-8">49.2.2 任意项级数判断方法</h3>
+<p><strong>原则</strong>：把新问题化成老问题 <code>-&gt;</code> 把一个变号的级数，化成一个正项级数 <code>-&gt;</code> 通项加一个绝对值 <code>-&gt;</code> 这个新的正项级数收敛时，任意项级数也收敛；</p>
+<h5 id="section-9"><strong>定义</strong>： #绝对收敛与条件收敛</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<blockquote>1. 绝对收敛：如果加了绝对值的 $\sum|u_{n}|$ 收敛，则称 $\sum u_n$ 收敛；</blockquote>
+<blockquote>2. 条件收敛：如果 $u_n$ 是收敛的，$\sum|u_{n}|$ 是发散的，则称 $\sum u_n$ 是条件收敛的； </blockquote>
+<blockquote>具体情况：</blockquote>
+<blockquote>(1) 若 $\sum^{\infty}_{n=1}=|a_n|$ 收敛，则 $\sum^{\infty}_{n=1}=a_n$ 必收敛，此时称 $\sum^{\infty}_{n=1}a_n$ 绝对收敛 </blockquote>
+<blockquote>(2) 若 $\sum^{\infty}_{n=1}=a_n$ 收敛，$\sum^{\infty}_{n=1}=|a_n|$ 发散，则称 $\sum^{\infty}_{n=1}a_n$ 条件收敛</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>绝对收敛    </li>
+<li class="list-indent-1">$\sum|u_{n}|$ 收敛</li>
+<li class="list-indent-1">$\sum u_n$   收敛</li>
+<li>条件收敛</li>
+<li class="list-indent-1">$\sum|u_{n}|$ 发散</li>
+<li class="list-indent-1">$\sum u_n$   收敛</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>$\sum(-1)^{n-1}\frac{1}{n}$：交错调节级数 -&gt; 收敛的；</li>
+<li>$\sum(-1)^{n}\frac{1}{n^{3}}$：是绝对收敛的；</li>
+</ul>
+<p><strong>基本结论</strong></p>
+<ul>
+<li>1. 绝对收敛的级数，一定收敛 <code>-&gt;</code> 即：$\sum^{\infty}_{n=1}|a_n|$ 收敛 <code>-&gt;</code> $\sum^{\infty}_{n=1}a_n$ 收敛；</li>
+<li>2. 条件收敛的级数的所有正项（或负项）构成的级数，一定发散 <code>-&gt;</code> $$\sum_{n=1}^\infty u_n\text{ 条件收敛 }\Rightarrow\sum_{n=1}^\infty\frac{u_n+|u_n|}2\text{ 和 }\sum_{n=1}^\infty\frac{u_n-|u_n|}2\text{ 发散}.$$</li>
+</ul>
+<h5 id="section-10"><strong>定理</strong>： #任意项级数的绝对收敛</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果每项都加绝对值 $\sum_{n=1}^{+\infty}|u_{n}|$ 以后，它是收敛的，则它原来的级数 $\sum_{n=1}^{+\infty}u_{n}$ 也是收敛的；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>更简单的理解：</li>
+<li class="list-indent-1">全是正数（加绝对值）的情况下都可以收敛，那他原本有正有负的情况下就更应该是收敛的；</li>
+</ul>
+<h5 id="section-11"><strong>定理</strong>： #任意项级数发散收敛判断</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ 是任意项级数，且 $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
+<blockquote>1）当 $l$ &lt; 1 时，$\sum u_n$ 绝对收敛；</blockquote>
+<blockquote>2）当 $L&gt;1(+\infty)$ 时，$\sum u_n$ 发散；</blockquote>
+<blockquote>3）当 L =1 时，无法判断；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果 L&gt;1，则原本的级数就是发散的；</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-056/index.html"><span>← 上一项</span><strong>Lecture 48：正项级数</strong></a>
+    <a class="article-pagination-next" href="../math-058/index.html"><span>下一项 →</span><strong>Lecture 56：幂级数</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

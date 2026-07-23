@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 51：函数展开成幂级数 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 51：函数展开成幂级数。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 无穷级数">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 51：函数展开成幂级数 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 51：函数展开成幂级数。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-059/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-059/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-059/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-059/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-059/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 51：函数展开成幂级数</h1><p class="article-lead">考研数学学习笔记：Lecture 51：函数展开成幂级数。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-15</span><span>约 6 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>无穷级数</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">51.1 函数展开成幂级数</a><a href="#section-7">51.2 常考题型</a></nav></details><div class="prose"><h2 id="section-1">51.1 函数展开成幂级数</h2>
+<h3 id="section-2">51.1.1 基本概念</h3>
+<p><strong>为什么需要展开成幂级数</strong></p>
+<ul>
+<li>原因：</li>
+<li class="list-indent-1">有些函数不是初等函数、不可以直接使用积分求出来它的值，比如 $e^{x^2}$ 其无法直接求出其原函数；</li>
+<li class="list-indent-1">此时可以考虑：将其展开成幂级数，因为幂级数的每一项都很简单，因此可以被处理；</li>
+<li>举例：比如需要求 $e^{0.2}$ 等于多少</li>
+<li class="list-indent-1">直接求很难算出来；</li>
+<li class="list-indent-1">但利用展开后的幂级数，计算出来就很简单： $e^{x}=1+x+\frac{x^{2}}{2!}+\frac{x^{3}}{3!}+\cdots+\frac{x^{n}}{n!}+$</li>
+<li class="list-indent-1">后续的项可以近似得到，一般就用个三项、四项就够了；</li>
+</ul>
+<h5 id="section-3"><strong>定理</strong>： #函数的幂级数展开</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>如果函数 $f(x)$ 在区间 $(x_0-R,x_0+R)$ 上，能展开为 $x-x_0$ 的幂级数 $f(x)=\sum_{n=0}^{+\infty} a_n(x-x_0)^n$ 则，其展开式是唯一的；</blockquote>
+<blockquote>并且称其为 $f(x)$ 在 $x=x_0$ 处的<strong>泰勒级数</strong>：$$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果 $\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$ 可以收敛于 $f(x)$，则称其可以展开；</li>
+</ul>
+<h5 id="section-4"><strong>定理</strong>： #泰勒级数的收敛性</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>设 $f(x)$ 在 $x=x_0$ 处任意阶可导，则：</blockquote>
+<blockquote>$$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n 在 (x_0-R,x_0+R) 上收敛于 f(x)\Leftrightarrow\lim_{n\to\infty} R_n(x)=0.$$</blockquote>
+<blockquote>其中：$$\begin{aligned}&amp;R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}\text{ 为 }f(x)\text{ 在 }x_0\text{ 处的泰勒公式}\\&amp;f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)\end{aligned}$$</blockquote>
+<blockquote>所以当 $R_n(x)$ <code>-&gt;</code> <code>0</code> 时，$f(x)$ 趋向于泰勒级数：$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$，即收敛于唯一的级数；</blockquote>
+<h3 id="section-5">51.1.2 常用幂级数展开式</h3>
+<p><strong>补充</strong>：几个常用的展开式</p>
+<ul>
+<li>直接展开法：</li>
+<li class="list-indent-1">（1）$$\frac1{1-x}=1+x+x^2+\cdots+x^n+\cdots =\sum^{\infty}\limits_{n=0}x^n\quad (-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">（2）$$\frac1{1+x}=\sum_{n=0}^\infty(-1)^nx^n,|x|&lt;1$$</li>
+<li class="list-indent-1">（3）$$\sin x=x-\frac{x^3}{3!}+\cdots+\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1} \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-2">注意：求和下标从 0 开始，<code>(-1)</code> 是指数是 <code>n</code>；</li>
+<li class="list-indent-1">（4） $$e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots \quad (-\infty&lt;x&lt;+\infty)=\sum^{\infty}\limits_{n=0}\frac{x^n}{n！}$$</li>
+<li>间接展开法：</li>
+<li class="list-indent-1">（1）<code>cosx</code> 的展开式，是由 <code>sinx</code> 的展开式逐项求导而的来的：$$\cos x=1-\frac{x^2}{2!}+\cdots+\frac{(-1)^{n-1}x^{2n}}{(2n)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}   \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-1">（2）<code>In(1+x)</code> 的展开式：$$\ln(1+x)=x-\frac{x^2}2+\cdots+\frac{(-1)^{n+1}x^n}n+\cdots=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^{n}\quad(-1&lt;x\leq1)$$</li>
+<li class="list-indent-1">（3）<code>(1+X)的α次方</code> 的展开式，也是间接得到的：$$\left(1+x\right)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n+\cdots \quad(-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">(4) $$\sum_{n=1}^{\infty}\frac{x^{n}}n=-\ln(1-x)\quad(-1\leq x&lt;1)$$</li>
+<li>注意： </li>
+<li class="list-indent-1">关于下标：除了 <code>In(1+x)</code> 是从 <code>n=1</code> 开始的，其他都是从 <code>n=0</code> 开始的； </li>
+<li class="list-indent-1">关于 $(-1)^{n}$ 和 $(-1)^{n+1}$：只有 <code>In(1+x)</code> 是 <code>n+1</code> ，其他都是从 <code>n</code>；</li>
+<li class="list-indent-1">关于阶乘：除了 <code>In(1+x)</code> 的分母是非阶乘，其他带分母的都是阶乘，并且阶乘部分和幂指部分一致；</li>
+<li class="list-indent-1">关于收敛域：三角函数和 $e^{x}$ 是负无穷到正无穷，其他都是 <code>-1</code> 到 <code>+1</code>，并且 <code>In(1+x)</code> 是小于等于 <code>+1</code>；</li>
+</ul>
+<h3 id="section-6">51.1.3 函数展开为幂级数的两种方法</h3>
+<p><strong>方法一</strong>：直接展开法</p>
+<ul>
+<li>第一步：算出这一点的 <code>n</code> 阶导数，代入进来，写出它的泰勒级数： $$f(x)\sim\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$</li>
+<li>第二步：$$考察\lim_{n\to\infty}R_n(x)=\lim_{n\to\infty}\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}=0 是否成立$$</li>
+</ul>
+<p><strong>方法二</strong>：间接展开法</p>
+<ul>
+<li>原理：</li>
+<li class="list-indent-1">根据函数展开为幂级数的唯一性，可知可以从某些已知函数展开式出发，利用幂级数的性质 (四则运算，逐项求导，逐项积分)及变量代换等方法，求得所给函数的展开式；</li>
+</ul>
+<h2 id="section-7">51.2 常考题型</h2>
+<hr>
+<h3 id="section-8">题型： #将函数展开为幂级数 </h3>
+<h4 id="section-9">PART 1：解题方法</h4>
+<p><strong>总结</strong></p>
+<ul>
+<li>1. 因为直接展开法十分复杂，一般先思考是否可以间接展开；</li>
+</ul>
+<p><strong>题型</strong>：将函数 $f(x)$ 展开为 $x=x_0$ 处的幂级数</p>
+<ul>
+<li>需要在使用间接展开的时候、将函数中的关于 <code>x</code> 的函数凑成 $x-x_0$ 的形式</li>
+<li>举例：求 $f(x)=sinx$ 在 $x=\frac{{\pi}}{4}$ 处展开为幂级数 <code>-&gt;</code> 转化：$$f(x)=sin[\frac{{\pi}}{4}+(x-\frac{{\pi}}{4})]=...$$</li>
+</ul>
+<h4 id="section-10">PART 2：典型例题</h4>
+<h4 id="section-11">PART 3：知识点复盘</h4>
+<p><strong>知识点</strong>：$\frac1{1-x}$ 和 $\frac1{1+x}$ 的活用</p>
+<ul>
+<li>为了可以使用以上两个幂级数的展开式，经常需要将式子变化成以下形式：</li>
+<li class="list-indent-1">$$\frac1{1-\fbox{fun(x)}}和\frac1{1+\fbox{fun(x)}}$$</li>
+<li>其中 $\fbox{fun (x)}$ 表示一个关于 <code>x</code> 的式子；</li>
+</ul>
+<hr>
+<h3 id="section-12">题型： #级数求和 </h3>
+<h4 id="section-13">PART 1：解题方法</h4>
+<p><strong>总结</strong>；展开式与求和式</p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">总结：</li>
+<li class="list-indent-2">求和和展开的理论式性质是一样的，只不过一个是往右用，一个是往左用；</li>
+<li class="list-indent-1">假设有： $$\frac{1}{{1-x}}=1+x+x^2+...$$</li>
+<li class="list-indent-1">展开式：</li>
+<li class="list-indent-2">$$\frac{1}{{1-x}}\rightarrow1+x+x^2+...$$</li>
+<li class="list-indent-1">求和式：</li>
+<li class="list-indent-2">$$S(x)=\frac{1}{{1-x}}\leftarrow1+x+x^2+...$$</li>
+<li>幂函数列 <code>-&gt;</code> 和函数：</li>
+<li class="list-indent-1">找已有的级数中、它的形式和哪个已有的展开式比较接近；</li>
+</ul>
+<h4 id="section-14">PART 2：典型例题</h4>
+<h4 id="section-15">PART 3：知识点复盘</h4>
+<p><strong>知识点</strong>：关于 <code>In</code> </p>
+<ul>
+<li>$$\sum_{n=1}^{\infty}\frac{x^{n}}n=-\ln(1-x)\left(-1\leq x&lt;1\right)$$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-058/index.html"><span>← 上一项</span><strong>Lecture 56：幂级数</strong></a>
+    <a class="article-pagination-next" href="../math-060/index.html"><span>下一项 →</span><strong>Lecture 52：傅里叶级数</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

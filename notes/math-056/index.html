@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 48：正项级数 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 48：正项级数。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 无穷级数">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 48：正项级数 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 48：正项级数。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-056/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-056/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-056/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-056/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-056/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 48：正项级数</h1><p class="article-lead">考研数学学习笔记：Lecture 48：正项级数。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-13</span><span>约 8 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>无穷级数</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">48.1 正项级数</a><a href="#section-5">48.2 比较审敛法</a><a href="#section-11">48.3 比值审敛法</a><a href="#section-16">48.4 积分判别法</a><a href="#section-18">48.5 例题</a></nav></details><div class="prose"><h2 id="section-1">48.1 正项级数</h2>
+<h3 id="section-2">48.1.1 正项级数的定义</h3>
+<h5 id="section-3"><strong>定理</strong>： #正项级数的收敛性</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：正项 $\sum u_n$ 收敛的充分必要条件是 ${S_n}$ 有界；</blockquote>
+<blockquote>即：$$\sum_{n=1}^\infty u_n\text{ 收敛}\Leftrightarrow s_n\text{ 上有界}$$</blockquote>
+<p><strong>正向级数的概念</strong></p>
+<ul>
+<li>$u_n$ 的每一项都大于 0；</li>
+<li>并且因为正向技术的每一项都是正的，所以和是递增的：</li>
+<li class="list-indent-1">$S_{1}\leq S_{2}\leq S_{3}\cdots$ <code>-&gt;</code> $\{S_{n}\}\geq0$</li>
+</ul>
+<p><strong>解释</strong></p>
+<ul>
+<li>但这个定理几乎没什么用 -&gt; 因为很难判断 $S_n$ 是否有界；</li>
+</ul>
+<h3 id="section-4">48.1.2 方法选择</h3>
+<p><strong>方法</strong></p>
+<ul>
+<li>方法分类：</li>
+<li class="list-indent-1">1. 比较审敛法 </li>
+<li class="list-indent-1">2. 比较法的极限形式 </li>
+<li class="list-indent-1">3. 比值法 </li>
+<li class="list-indent-1">4. 根值法</li>
+<li class="list-indent-1">5. 积分判别法 </li>
+<li>方法选择：</li>
+<li class="list-indent-1">第一类：方法 <code>1、2</code></li>
+<li class="list-indent-2">需要把当前的通项和其它已知通项进行比较；</li>
+<li class="list-indent-2">优点： </li>
+<li class="list-indent-3">适用范围更广泛；</li>
+<li class="list-indent-3">只要是方法 3、4 可以做出判定的，方法 1、2 都一定可以做出判定，只是可能做起来更不方便；</li>
+<li class="list-indent-2">缺点： </li>
+<li class="list-indent-3">使用起来不方便；</li>
+<li class="list-indent-1">第二类：方法 <code>3、4</code></li>
+<li class="list-indent-2">概念： </li>
+<li class="list-indent-3">只需要自己就可以进行判断；</li>
+<li class="list-indent-2">优点： </li>
+<li class="list-indent-3">使用起来方便，不需要其他级数，自己就可以判断；</li>
+<li class="list-indent-2">缺点： </li>
+<li class="list-indent-3">有些时候，级数很明显可以看出来时发散的，但却很难用方法证明出来；</li>
+<li class="list-indent-3">即：适用范围窄；</li>
+<li>解题步骤：</li>
+<li class="list-indent-1">1. 先观察是否可以直接看出来敛散性 <code>-&gt;</code> 规律； </li>
+<li class="list-indent-1">2. 在判断方法时，先考虑使用方法 <code>3、4</code>；</li>
+<li class="list-indent-1">3. 如果做不出判定，再考虑 <code>1、2</code>；</li>
+<li>规律： </li>
+<li class="list-indent-1">三巨头：$$a^n\quad n!\quad n^n$$</li>
+<li class="list-indent-1">如果这三巨头当中至少出现一个，通常就使用方法 <code>3、4</code>；</li>
+<li class="list-indent-1">如果三巨头一个都不出现，此时经常出现的就是 $n^p$ 或者 $In{n}$ 的形式，此时就使用方法 <code>1、2</code>；</li>
+</ul>
+<h2 id="section-5">48.2 比较审敛法</h2>
+<h3 id="section-6">48.2.1 比较审敛法定义</h3>
+<p><strong>从问题开始</strong></p>
+<ul>
+<li>1. 如何对不等式放缩？ <code>-&gt;</code> 应该是放、还是缩？</li>
+<li>2. 和谁来比？</li>
+<li>思路：</li>
+<li class="list-indent-1">用极限来改进的比较审敛法；</li>
+</ul>
+<h5 id="section-7"><strong>定理</strong>： #比较审敛法 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $\sum U_n$ 和 $\sum V_n$ 都是正项级数，且 $u_n&lt;v_n$：</blockquote>
+<blockquote>$$\sum_{n=1}^\infty\nu_n\text{ 收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛}$$</blockquote>
+<blockquote>$$\sum_{n=1}^\infty u_n\text{ 发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>总结：</li>
+<li class="list-indent-1">大的收敛，小的肯定收敛；</li>
+<li class="list-indent-1">小的发散，大的肯定发散；</li>
+<li class="list-indent-1">反过来都不行；</li>
+<li>使用方法：</li>
+<li class="list-indent-1">使用之前，先进行初步判断；</li>
+<li class="list-indent-1">如果初步判断其为收敛，则进行放大；</li>
+<li class="list-indent-1">如果初步判断其为发散，将进行缩小；</li>
+<li>使用前提：</li>
+<li class="list-indent-1">两个级数都是<strong>正项级数</strong>；</li>
+</ul>
+<p><strong>补充</strong></p>
+<ul>
+<li>第一种情况时</li>
+<li class="list-indent-1">如果 L 等于 0 <code>-&gt;</code> Un 是比 Vn 更高级的无穷小，Vn 趋向于 0 的速度更快；</li>
+<li class="list-indent-1">如果 L 大于零且小于正无穷（即为常数），则此时 Un 和 Vn 是同阶的无穷小；</li>
+<li class="list-indent-1">如果 L 等于正无穷 <code>-&gt;</code> 则 Un 无法判断，且 Un 是 Vn 的低阶无穷小；</li>
+<li>第二种情况时</li>
+<li class="list-indent-1">如果 L 大于 0 <code>-&gt;</code> Un 发散，Vn 也跟着发散；</li>
+<li class="list-indent-1">如果 Un 比 Vn 是正无穷，则发散性也一致，Un 是 Vn 的低阶无穷小；</li>
+<li class="list-indent-1">如果 L 等于 0 时 <code>-&gt;</code> 如果 Vn 是发散的，则 Un 也无法判断；</li>
+<li>问题：还是得和一个 $V_n$ 来和目标函数比较，进而判断其敛散性；</li>
+</ul>
+<p><strong>和谁比</strong></p>
+<ul>
+<li>核心问题：</li>
+<li class="list-indent-1">怎么找用于辅助判断的级数 <code>-&gt;</code> 两个常用级数；</li>
+</ul>
+<h3 id="section-8">48.2.2 比较法的极限形式</h3>
+<h5 id="section-9"><strong>定理</strong>： #比较法极限形式 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设 $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$</blockquote>
+<blockquote>若：</blockquote>
+<blockquote>1. $$若0&lt;l&lt;+\infty,\text{则}\sum_{n=1}^{\infty}u_{n}与\sum_{n=1}^{\infty}\nu_{n}{\text{同敛散}.}$$</blockquote>
+<blockquote>2. $$\text{若 }l=0\text{,则}\sum_{n=1}^\infty\nu_n\text{收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛,}\sum_{n=1}^\infty u_n\text{发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$</blockquote>
+<blockquote>3. $$\text{若 }l=+\infty,\text{则}\sum_{n=1}^\infty\nu_n\text{发散}\Rightarrow\sum_{n=1}^\infty u_n\text{ 发散. }\sum_{n=1}^\infty u_n\text{收敛}\Rightarrow\sum_{n=1}^\infty\nu_n\text{ 收敛}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：将两个通项比大小的问题，转化为了求<strong>两个通项之比的极限</strong>的问题；</li>
+</ul>
+<h3 id="section-10">48.2.3 两个常用级数</h3>
+<p><strong>常用级数一</strong>：P 级数</p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty\frac1{n^p}  \quad\quad\quad\quad\quad  P&gt;1时收敛，P&lt;=1时发散$$</li>
+<li>注意：</li>
+<li class="list-indent-1"><code>P=1</code> <code>-&gt;</code> 调和级数： $\sum\frac{1}{n}\quad 一定发散$ </li>
+<li class="list-indent-1">为什么 P=1 时是发散的？</li>
+<li>本质：</li>
+<li class="list-indent-1">收敛的本质：决定级数是否收敛的不在于求和项是否是无穷的，甚至不在于求和的大小，而是在于求和项中通项趋向于 0 的速度；</li>
+<li class="list-indent-1">通过速度比较并不能确定一个级数发散还是收敛，但是速度变化会带来本质的变化</li>
+</ul>
+<p><strong>常用级数二</strong>：等比级数</p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty aq^n\left(a&gt;0,q&gt;0\right)\quad q&lt;1\text{ 时收敛,当 }q\geq1\text{ 时发散}.$$</li>
+<li>概念：   </li>
+<li class="list-indent-1">等比级数是否收敛，只取决于其 <code>q</code> 的数值，即公比决定了其敛散性；</li>
+<li class="list-indent-1">即对于等比级数而言，如果公比 $\frac{u_{u+1}}{u_n}=q$ 存在，则其具有以上极限；</li>
+</ul>
+<p><strong>补充</strong>：调和级数的收敛性</p>
+<ul>
+<li>$$\sum_{n=1}^{\infty}\frac{1}{n}=1+\frac{1}{2}+\frac{1}{3}+\cdots+\underbrace{\frac{1}{n}+\frac{1}{n+1}+\cdots+\frac{1}{2n-1}}+\cdots$$</li>
+<li>$$\frac{1}{n}+\frac{1}{n+1}+\cdots+\frac{1}{2n-1}&gt;\underbrace{\frac1{2n}+\frac1{2n}+\cdots+\frac1{2n}}_{n\text{项}}=\frac n{2n}=\frac12$$</li>
+<li>调和级数的部分和，可以凑出一个与 <code>n</code> 无关的常数与 <code>n</code> 无关就意味着，无穷对它失去了意义，所以发散；</li>
+</ul>
+<h2 id="section-11">48.3 比值审敛法</h2>
+<h3 id="section-12">48.3.1 比值法</h3>
+<h5 id="section-13"><strong>定理</strong>： #比值审敛法 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $\sum U_n$ 是一个正项级数，则若 $$\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\rho$$</blockquote>
+<blockquote>如果 $\rho &lt;1$，则 $\sum U_n$ 收敛；</blockquote>
+<blockquote>如果 $\rho &gt;1$，则 $\sum U_n$ 发散；</blockquote>
+<blockquote>如果 $\rho =1$，则 $\sum U_n$ 无法判断，请使用其他方法；</blockquote>
+<p><strong>优缺点</strong></p>
+<ul>
+<li>优点：自己和自己比，不需要找其他的函数；</li>
+<li>缺点：如果 $\rho =1$，则方法失效；</li>
+</ul>
+<h3 id="section-14">48.3.2 根值法</h3>
+<h5 id="section-15"><strong>定理</strong>： #根值法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\text{设}\lim_{n\to\infty}\sqrt[n]{u_n}=\rho\text{,则}\sum_{n=1}^\infty u_n\begin{cases}\text{收敛},&amp;\rho&lt;1,\\\\\text{发散},&amp;\rho&gt;1,\\\\\text{不一定},&amp;\rho=1,\end{cases}$$</blockquote>
+<p><strong>解释</strong></p>
+<h2 id="section-16">48.4 积分判别法</h2>
+<h5 id="section-17"><strong>定理</strong>： #积分判别法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$设f(x)在[1,+\infty)上单调减，非负的连续函数，且 a_{n}=f(n)，则\sum_{n=1}^{\infty}a_{n}\text{ 与 }\int_{1}^{+\infty}f(x)dx同敛散性$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>用的比较少，因为条件很多；</li>
+</ul>
+<p><strong>例题</strong>：证明级数 $\sum_{i=1}^\infty\frac1{n^p}$ 当 $p&gt;1$ 时收敛，当 $p\leq1$ 时发散.</p>
+<ul>
+<li>解析</li>
+<li class="list-indent-1">设 $a_{n}=\frac{1}{n^{p}}=f(u),f(x)=\frac{1}{x^{p}}$</li>
+<li class="list-indent-1">所以得到积分：$\int_{1}^{+\infty}\frac{dx}{x^{p}}$</li>
+</ul>
+<h2 id="section-18">48.5 例题</h2>
+<p><strong>例题</strong>：$\sum\frac{1}{\sqrt{n(n+1)}}$ 求其发散性质</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">$因为：n(n+1)&lt;(n+1)^{2}$；</li>
+<li class="list-indent-1">所以： $\frac{1}{\sqrt{n(n+1)}}&gt;\frac{1}{\sqrt{(n+1)^{2}}}=\frac{1}{n+1}$</li>
+<li>题型： #正项级数 </li>
+</ul>
+<p><strong>例题</strong>：求 $\sum_{n=1}^{\infty}\sin\frac{1}{n}$ 的敛散性</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">首先：sin 1/n 一定是正的数；</li>
+<li>解析</li>
+<li class="list-indent-1">因为 $\lim_{n\to\infty}\frac{\sin{\frac{1}{n}}}{\frac{1}{n}}=1$，其极限为 0/0 型，最后结果为 1；</li>
+<li class="list-indent-1">所以 1&gt;0，所以 $\sin{\frac{1}{n}}$ 和 $\frac{1}{n}$ 是同阶的； </li>
+<li class="list-indent-1">因为 $\sum\frac{1}{n}发散 ，所以\sum\sin{\frac{1}{n}}发散$</li>
+<li>题型： #比较审敛法</li>
+</ul>
+<p><strong>例题</strong>：$1+\frac{1}{1}+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{(n-1)!}+\cdots$，证明它是收敛的；</p>
+<ul>
+<li>分析</li>
+<li>证明</li>
+<li class="list-indent-1">因为 $\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\lim_{n\to\infty}\frac{\frac{1}{n^{1}}}{\frac{1}{\left(n-n\right)!}}=\lim_{n\to\infty}\frac{1}{n}=0&lt;1$，所以其收敛；</li>
+</ul>
+<p>	- </p>
+<ul>
+<li>题型： #比值审敛法</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-055/index.html"><span>← 上一项</span><strong>Lecture 53：常数项级数</strong></a>
+    <a class="article-pagination-next" href="../math-057/index.html"><span>下一项 →</span><strong>Lecture 55：交错级数</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

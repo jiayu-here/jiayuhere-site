@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 54：空间平面与直线 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 54：空间平面与直线。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 向量代数与空间解析几何">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 54：空间平面与直线 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 54：空间平面与直线。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-062/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-062/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-062/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-062/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-062/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 54：空间平面与直线</h1><p class="article-lead">考研数学学习笔记：Lecture 54：空间平面与直线。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>向量代数与空间解析几何</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">54.1 平面与直线方程</a></nav></details><div class="prose"><h2 id="section-1">54.1 平面与直线方程</h2>
+<h3 id="section-2">54.1.1 平面方程</h3>
+<h5 id="section-3"><strong>定义</strong>： #平面方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<blockquote>$1\text{)一般式:}\quad Ax+By+Cz+D=0.\quad\mathbf{n}=\{A,B,C\}$</blockquote>
+<blockquote>$2\text{)点法式:}\quad A(x-x_0)+B(y-y_0)+C(z-z_0)=0$</blockquote>
+<blockquote>$3\text{)截距式:}\quad\frac xa+\frac yb+\frac zc=1$</blockquote>
+<h3 id="section-4">54.1.2 直线方程</h3>
+<h5 id="section-5"><strong>定义</strong>： #直线方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<blockquote>$$1)\text{一般式:}\quad\begin{cases}A_1x+B_1y+C_1z+D_1=0\\A_2x+B_2y+C_2z+D_2=0\end{cases}$$</blockquote>
+<blockquote>$$2)\text{对称式:}\quad\frac{x-x_0}l=\frac{y-y_0}m=\frac{z-z_0}n$$</blockquote>
+<blockquote>$$3)参数式：x=x_0+lt,y=y_0+mt,z=z_0+nt.$$</blockquote>
+<h3 id="section-6">54.2 距离关系</h3>
+<h3 id="section-7">54.2.1 平面与直线的位置关系</h3>
+<p><strong>核心</strong>：平面 <code>-&gt;</code> 看法线向量；直线 <code>-&gt;</code> 看方向向量</p>
+<h3 id="section-8">54.2.2 点到面的距离</h3>
+<p><strong>概念</strong>：点 $(x_0,y_0,z_0)$ 到平面 $Ax+By+Cy+D=0$ 的距离</p>
+<ul>
+<li>$$d=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$$</li>
+</ul>
+<h3 id="section-9">54.2.3 点到直线距离 </h3>
+<p><strong>概念</strong>：$\text{点 }({x_0,y_0,z_0})\text{ 到直线 }\frac{x-x_1}l=\frac{y-y_1}m=\frac{z-z_1}n$</p>
+<ul>
+<li>$$d=\frac{|\{x_1-x_0,y_1-y_0,z_1-z_0\}\times\{l,m,n\}|}{\sqrt{l^2+m^2+n^2}\quad J}$$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-061/index.html"><span>← 上一项</span><strong>Lecture 53：向量代数</strong></a>
+    <a class="article-pagination-next" href="../math-063/index.html"><span>下一项 →</span><strong>Lecture 55：曲面与空间曲线</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

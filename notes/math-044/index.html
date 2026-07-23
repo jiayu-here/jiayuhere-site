@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 36：一阶线性微分方程 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 36：一阶线性微分方程。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 微分方程">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 36：一阶线性微分方程 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 36：一阶线性微分方程。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-044/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-044/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-044/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-044/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-044/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 36：一阶线性微分方程</h1><p class="article-lead">考研数学学习笔记：Lecture 36：一阶线性微分方程。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-01</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 线性方程</a><a href="#section-4">1.2 伯努利方程</a><a href="#section-8">1.3 全微分方程</a></nav></details><div class="prose"><h2 id="section-1">1.1 线性方程</h2>
+<h5 id="section-2"><strong>定义</strong>： #线性方程 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：未知函数 $y=y(x)$ 和未知函数的导数 $y^{\prime}$ 都是一次的，因此称之为线性；</blockquote>
+<blockquote>标准形式：$$y^{\prime}+P(x)y=Q(x)$$</blockquote>
+<p><strong>补充</strong>：如果当式子中的 y 为两阶甚至三阶，但 x 只有一阶时，此时可以考虑将 x、y 对调，利用 $\frac{dx}{dy}$ 进行求解；</p>
+<h5 id="section-3"><strong>定理</strong>： #线性方程的通解公式</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$y=e^{-\int p(x)dx}\left[\int Q(x)e^{\int p(x)dx}dx+C\right]$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">必须得写成线性方程的标准形式后，才可以带入通解公式；</li>
+<li>注意：</li>
+<li class="list-indent-1">1. 对 $p(x)$ 以及 $Q(x)$ 的不定积分，不需要带任意常数 $C$； </li>
+<li class="list-indent-1">2. 对 $p(x)$ 位置，如果出现以下形式，不用加绝对值：$\int\frac{1}{x}dx=\ln x$；</li>
+<li>方法：</li>
+<li class="list-indent-1">第一步：将微分方程整理成线性方程的形式；</li>
+<li class="list-indent-1">第二步：带入通解公式，求出通解；</li>
+</ul>
+<h2 id="section-4">1.2 伯努利方程</h2>
+<h3 id="section-5">1.2.1 基本概念</h3>
+<h5 id="section-6"><strong>定理</strong>： #伯努利方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： 在线性微分方程的基础上，在 $Q(x)$ 的右边乘上 $y^{1-\alpha}=u)$：</blockquote>
+<blockquote>$$y^{\prime}+p (x) y=Q (x) y^{\alpha} \quad\quad\quad\quad\quad\quad(\alpha\neq1)\quad(y^{1-\alpha}=u)$$ </blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>求解：</li>
+<li class="list-indent-1">将 $y$ 设为 $y^{1-\alpha}=u$，使得方程变成一阶微分线性方程；</li>
+<li>方法：</li>
+<li class="list-indent-1">如果 $\alpha$ 等于 0，那就是线性方程；</li>
+<li class="list-indent-1">如果 $\alpha$ 等于 1，那就直接可以使用可分离变量；</li>
+<li class="list-indent-1">因此：当前的讨论，都是假设阿法及不等于 0，也不等于 1；</li>
+<li>思路：</li>
+<li class="list-indent-1">思考如何才能化成线性方程；</li>
+</ul>
+<p><strong>处理方法</strong></p>
+<ul>
+<li>已知：$y^{\prime}+p (x) y=Q (x) y^\alpha$</li>
+<li>第一步</li>
+<li class="list-indent-1">把 $y^\alpha$ 除到等式的左边来，和 y 相除，得到：</li>
+<li class="list-indent-1">$y^{1-\alpha}$</li>
+<li>第二步：设 z</li>
+<li class="list-indent-1">令 $y^{1-\alpha}=z$</li>
+<li>第三步</li>
+<li class="list-indent-1">化成线性方程</li>
+</ul>
+<h3 id="section-7">1.2.2 例题</h3>
+<p><strong>例题</strong>：$\frac{dy}{dx}+\frac yx=a(\ln x)y^2$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">先将 y 的平方除以过去：</li>
+<li class="list-indent-2">$\frac1{y^2}\frac{\mathrm{d}y}{\mathrm{d}x}+\frac1x\frac1y=a\ln x$</li>
+<li class="list-indent-2">$-\frac{1}{y^{2}}\frac{dy}{dx}=\frac{dt}{dx}$</li>
+<li class="list-indent-1">然后设 y 的负一次方为 z</li>
+<li class="list-indent-2">$-\frac{\mathrm{d}z}{\mathrm{d}x}+\frac1xz=\mathrm{alnx}$</li>
+<li class="list-indent-1">左右对 x 求导：</li>
+<li>题型： #伯努利方程</li>
+</ul>
+<h2 id="section-8">1.3 全微分方程</h2>
+<h3 id="section-9">1.3.1 基本概念</h3>
+<h5 id="section-10"><strong>定义</strong>： #全微分方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$dF(x,y)=P(x,y)dx+Q(x,y)dy=0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">如果 $P(x,y)dx+Q(x,y)dy=0$ 是某个函数 $F(x,y)$ 的微分，则成此方程为全微分方程；</li>
+<li>判断：</li>
+<li class="list-indent-1">如果两个分别对 $P(y)$ 和 $Q(x)$ 求出来的偏导数相等：</li>
+<li class="list-indent-2">$$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$$</li>
+<li class="list-indent-1">则当前方程为全微分方程；</li>
+<li>解法：</li>
+<li class="list-indent-1">1. 偏积分；</li>
+<li class="list-indent-1">2. 凑微分；</li>
+<li class="list-indent-1">3. 线积分；</li>
+</ul>
+<p><strong>解释</strong></p>
+<ul>
+<li>多元函数的微分，就是全微分；</li>
+<li class="list-indent-1">一元函数中的微分，只是考虑了 x 一个自变量导致的变化：</li>
+<li class="list-indent-2">$dy=A\Delta x$</li>
+<li class="list-indent-1">在二元函数中，则是要将 x、y 两个变量导致的变化都表示出来：</li>
+<li class="list-indent-2">$dz=Adx+Bdy$</li>
+<li>偏增量和全增量</li>
+<li class="list-indent-1">偏增量：$\begin{aligned}\Delta z_{x}=f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)\\\Delta z_{y}=f\left(x_{0},y_{0}+\Delta y\right)-f\left(x_0,y_{0}\right)\end{aligned}$</li>
+<li class="list-indent-1">全增量：$\Delta z=f(x_{0}+\Delta x,y_{0}+\Delta y)-f(x_{0},y_{0})$</li>
+</ul>
+<p><strong>全微分的两个问题</strong></p>
+<ul>
+<li>二元函数有两个自变量：x、y</li>
+<li>一元微分的定义，和二元微分的定义在概念上是十分类似的；</li>
+<li>微分的两个问题</li>
+<li class="list-indent-1">1. 是否可微分</li>
+<li class="list-indent-2">（一元微分）由于可微分就可导，因此可使用导数的性质进行判断；</li>
+<li class="list-indent-2">二元微分是否有这样的结论？</li>
+<li class="list-indent-1">2. 微分如何计算</li>
+<li class="list-indent-2">（一元微分）由于 $dy=f^{\prime}(x)dx$，所以可以用导数来求出 $dz=Adx$ 中的 A 的部分；</li>
+<li class="list-indent-2">把微分的计算归结为导数的计算</li>
+</ul>
+<h3 id="section-11">1.3.2 全微分的性质</h3>
+<h5 id="section-12"><strong>定理</strong>： #多元函数可微的必要条件</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果函数 $z=f(x,y)$ 在点 $(x,y)$ 处可微，则该函数在点 (x, y)的偏导数 $\frac{\partial z}{\partial x}$ 与 $\frac{\partial z}{\partial y}$ 必定存在，且：$dz=\frac{\partial z}{\partial x}\Delta x+\frac{\partial z}{\partial y}\Delta y$</blockquote>
+<blockquote>注意：其中 </blockquote>
+<blockquote>1.  $\frac{\partial z}{\partial x}$ 就是 $dz=Adx+Bdy$ 中的 A；</blockquote>
+<blockquote>2.  $\frac{\partial z}{\partial y}$ 就是 $dz=Adx+Bdy$ 中的 B；</blockquote><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-043/index.html"><span>← 上一项</span><strong>Lecture 35：微分方程的基本概念</strong></a>
+    <a class="article-pagination-next" href="../math-045/index.html"><span>下一项 →</span><strong>Lecture 37：可降阶方程与高阶线性微分方程</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

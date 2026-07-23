@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 40：多元复合函数的求导法则 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 40：多元复合函数的求导法则。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 多元函数微分学">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 40：多元复合函数的求导法则 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 40：多元复合函数的求导法则。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-049/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-049/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-049/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-049/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-049/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 40：多元复合函数的求导法则</h1><p class="article-lead">考研数学学习笔记：Lecture 40：多元复合函数的求导法则。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-03</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元函数微分学</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">41.1 多元函数的极限</a><a href="#section-5">41.2 多元函数的连续性</a><a href="#section-8">41.3 偏导数</a><a href="#section-17">41.4 多元函数的全微分 </a><a href="#section-21">41.5 连续、可偏导、可微之间关系</a><a href="#section-22">41.5 常考题型</a></nav></details><div class="prose"><p><strong>本章内容</strong></p>
+<ul>
+<li>（1）多元函数的基本概念</li>
+<li>（2）多元函数微分法</li>
+<li>（3）多元函数的极值与最值</li>
+</ul>
+<p><strong>本节内容概要</strong></p>
+<ul>
+<li>（一）多元函数的极限</li>
+<li>（二）多元函数连续性</li>
+<li>（三）偏导数 </li>
+<li>（四）全微分</li>
+<li>（五）连续、可微、可导关系</li>
+</ul>
+<p><strong>本节常考题型</strong></p>
+<ul>
+<li>讨论连续性、可导性、可微性</li>
+</ul>
+<hr>
+<h2 id="section-1">41.1 多元函数的极限</h2>
+<h3 id="section-2">41.1.1 多元函数极限的概念</h3>
+<h5 id="section-3"><strong>定义</strong>： #多元函数的极限</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\lim_{(x,y)\to(x_0,y_0)}f(x,y)=A$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>1. 多元函数极限的趋向性：</li>
+<li class="list-indent-1">一元里面，自变量只有一个，因此趋向于目标点、趋向的方式比较简单，只能沿着 X 轴；</li>
+<li class="list-indent-1">但在二元里面，自变量有两个，但 $(x,y)$ <code>-&gt;</code> $(x_0,y_0)$ 是以<strong>任意方式</strong></li>
+<li class="list-indent-1">必须保证在任何方向下，函数值都等于极限值（类似于一元极限中左右极限相等），此时才可以认为此重极限存在；</li>
+<li>2. 五大性质</li>
+<li class="list-indent-1">（1）局部有界性；</li>
+<li class="list-indent-1">（2）保号性；</li>
+<li class="list-indent-1">（3）有理运算法则；</li>
+<li class="list-indent-1">（4）极限与无穷小的关系；</li>
+<li class="list-indent-1">（5）夹逼性；</li>
+<li class="list-indent-1">注意：没有洛必达；</li>
+</ul>
+<h3 id="section-4">41.1.2 基本方法</h3>
+<p><strong>例题</strong>：求极限的值</p>
+<ul>
+<li>题目：求 $$\lim_{x\to0，y\to0}\frac{xy^{2}}{x^{2}+y^{2}}$$</li>
+<li>分析</li>
+<li class="list-indent-1">此极限是 0 比 0 型，但是不能使用洛必达；</li>
+<li class="list-indent-1">分母是二次，分子是三次</li>
+<li class="list-indent-1">对 <code>A/B</code> 类型：</li>
+<li class="list-indent-2">如果 A 的方次 &gt; B 的方次，一般是 0；</li>
+<li class="list-indent-2">如果 A 的方次 &lt; B 的方次，一般是无穷；</li>
+<li class="list-indent-2">如果 A 的方次 = B 的方次，一般是不存在；</li>
+<li class="list-indent-1">对此，初步判断次函数极限为 0；</li>
+<li class="list-indent-2">一元时：对 x 取绝对值，然后放缩 <code>-&gt;</code> 夹逼定理；</li>
+<li>解析</li>
+<li class="list-indent-1">方法一：</li>
+<li class="list-indent-2">$0\leq|\frac{xy^{2}}{x^{2}+y^{2}}|\leq|x|\rightarrow0$</li>
+<li class="list-indent-2">所以 $\lim_{x\to0，y\to0}\frac{xy^{2}}{x^{2}+y^{2}}=0$</li>
+<li class="list-indent-1">方法二：</li>
+<li class="list-indent-2">可以将分子的 x 提出来，x <code>-&gt;</code> 0；</li>
+<li class="list-indent-2">并且分子提出来后、剩下的其他部分根据有界性可知不大于 1，因此整个函数的极限值为 0；</li>
+</ul>
+<p><strong>例题</strong>：证极限不存在</p>
+<ul>
+<li>题目：求 $$\lim_{x\to0，y\to0}\frac{xy^{}}{x^{2}+y^{2}}$$ 证明其极限不存在</li>
+<li>分析</li>
+<li class="list-indent-1">分子是 2 次，分母是 2 次；</li>
+<li class="list-indent-1">如果有两个不同的路径点、求出来的极限不同，则此极限不存在；</li>
+<li class="list-indent-1">方法：将 <code>y</code> 限制在一条直线上；</li>
+<li>解析</li>
+<li class="list-indent-1">$$\lim_{x\to0，y=kx}\frac{xy^{}}{x^{2}+y^{2}} = \lim_{x\to0，y\to0}\frac{kx^{2}}{x^{2}+k^{2}x^{2}}=\frac{k}{1+k^2}$$</li>
+<li class="list-indent-1">因为 k 是直线的斜率，k 不是一个定值。当 k 取不同的斜率时，极限的函数值不一样；</li>
+<li class="list-indent-1">因此此极限不存在；</li>
+</ul>
+<h2 id="section-5">41.2 多元函数的连续性</h2>
+<p><strong>两个概念</strong></p>
+<ul>
+<li>1. 概念；</li>
+<li>2. 间断点；</li>
+<li>3. 性质；</li>
+</ul>
+<h5 id="section-6"><strong>定义</strong>： #多元函数连续的概念</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\lim_{(x,y)\to(x_0,y_0)}f(x,y)=f(x_0,y_0)$$</blockquote>
+<h5 id="section-7"><strong>定理</strong>： #多元连续函数的性质</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>性质 1：多元连续函数的和、差、积、商 (分母不为零)仍为连续函数； </blockquote>
+<blockquote>性质 2：多元连续函数的复合函数也是连续函数；</blockquote>
+<blockquote>性质 3：多元初等函数在其<strong>定义区域</strong>内连续；</blockquote>
+<blockquote>性质 4：最大值定理 <code>-&gt;</code> 有界闭区域 D 上的连续函数在区域 D 上必能取得最大值与最小值；</blockquote>
+<blockquote>性质 5：有界闭区域 D 上的连续函数在区域 D 上必能取得<strong>介于最大值与最小值之间的任何值</strong>；</blockquote>
+<h2 id="section-8">41.3 偏导数</h2>
+<h3 id="section-9">41.3.1 偏导数基础概念</h3>
+<h5 id="section-10"><strong>定义</strong>： #偏导数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：如果是对 $z=f(x,y)$ 函数，会有两个偏导数的定义：</blockquote>
+<blockquote>1. 对 X 的偏导数：对 X 偏导时，Y 固定在 $y_0$ 处（对 x 没有任何影响），$x在x。处有\Delta x$ 的增量，此时只有 x 一个变量，此时称： </blockquote>
+<blockquote>    $$\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$$ 为对 X 的偏导数；</blockquote>
+<blockquote>    记作：</blockquote>
+<blockquote>	    $\left.\frac{\partial z}{\partial x}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial x}\right|_{(x_{0},y_{0})},z_{_z}(x_{0},y_{0})或$ $f_{x}(x_{0},y_{0})$</blockquote>
+<blockquote>2. 对 Y 的偏导数：和 X 同理，</blockquote>
+<blockquote>    $$lim_{\Delta y\to0}\frac{f(x_{0},y_{0}+\Delta y)-f(x_{0},y_{0})}{\Delta y}$$</blockquote>
+<blockquote>    记为：</blockquote>
+<blockquote>	    $\left.\text{}\frac{\partial z}{\partial y}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial y}\right|_{(x_{0},y_{0})},z_{y}(x_{0},y_{0})\text{或}f_{y}(x_{0},y_{0}).$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>X 的偏导数：</li>
+<li class="list-indent-1">解释：</li>
+<li class="list-indent-2">本质上就是对 x 的一元函数导数，表示沿着 X 轴方向上、函数的变化率；</li>
+<li class="list-indent-1">其他形式：$$\frac{\partial f(x,y)}{\partial x}$$</li>
+<li>Y 的偏导数：</li>
+<li class="list-indent-1">解释：</li>
+<li class="list-indent-2">本质上就是对 y 的一元函数导数，表示沿着 Y 轴方向上、函数的变化率；</li>
+<li class="list-indent-1">其他形式： </li>
+<li class="list-indent-2">$$\frac{\partial f(x,y)}{\partial y}$$</li>
+<li>总结：本质上就是一元函数的导数；</li>
+</ul>
+<p><strong>方法</strong>：如何求对 x 或者 y 的偏导</p>
+<ul>
+<li>当 $z=f(x,y)$ 时，把 y 或者 x 视为常数，直接对 x 或者 y 求导；</li>
+<li>例：$z=x^{2}+3xy+y^{2}在(1.2)处$ 的偏导数；</li>
+<li class="list-indent-1">第一步：求出偏导后的函数</li>
+<li class="list-indent-2">对 x 求偏导：$\frac{\partial z}{\partial x}=2x+3y$</li>
+<li class="list-indent-2">对 y 求偏导：$$\frac{\partial z}{\partial y}=3x+2y$$</li>
+<li class="list-indent-1">第二步：将 $(1.2)$ 点带入对 x 求偏导或者对 y 求偏导后的函数： 2 x+3 y 或者 3 x+2 y，即可得到结果</li>
+</ul>
+<h3 id="section-11">41.3.2 判断偏导数是否存在</h3>
+<p><strong>题型</strong>：判断偏导数是否存在</p>
+<ul>
+<li>方法一：定义法</li>
+<li class="list-indent-1">利用偏导数的定义，将函数值分别带入 Y 的偏导和 X 的偏导，求代入后的函数的极限值，计算其极限是否存在；</li>
+<li>方法二：本质法</li>
+<li class="list-indent-1">因为偏导数本质上是一元函数的导数；</li>
+<li class="list-indent-1">所以可以直接将偏导数的 X 或 Y 当中一个数值带进去（值确定的那一个）</li>
+<li class="list-indent-1">比如求对 X 的偏导数，此时可以直接把 Y 的值带进去，求对 X 的一元函数导数极限；</li>
+</ul>
+<h3 id="section-12">41.3.3 偏导数的几何意义</h3>
+<h5 id="section-13"><strong>定义</strong>： #二元函数偏导数的几何意义</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： 曲面 $Z=f(x,y)$</blockquote>
+<blockquote>1.  $f_x(x_0,y_0)$ 代表的是在 $y=f(x)$ 这一直线上，$x_0$ 点对 $y=f(x)$ 的切线；</blockquote>
+<blockquote>2.  $f_y(x_0,y_0)$ 代表的是在 $x=f(y)$ 这一直线上，$x_0$ 点对 $x=f(y)$ 的切线； </blockquote>
+<h3 id="section-14">41.3.4 高阶偏导数 </h3>
+<h5 id="section-15"><strong>定义</strong>： #高阶偏导数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>$$\frac{\partial}{\partial x}\biggl(\frac{\partial z}{\partial x}\biggr)=\frac{\partial^{2}z}{\partial x^{2}}=f_{xx}^{\prime\prime}\quad\frac{\partial}{\partial y}\biggl(\frac{\partial z}{\partial x}\biggr)=\frac{\partial^{2}z}{\partial x\partial y}=f_{xy}^{\prime\prime}$$</blockquote>
+<blockquote>$$\frac{\partial}{\partial x}\Bigg(\frac{\partial z}{\partial y}\Bigg)=\frac{\partial^{2}z}{\partial y\partial x}=f_{yx}^{\prime\prime}\quad\frac{\partial}{\partial y}\Bigg(\frac{\partial z}{\partial y}\Bigg)=\frac{\partial^{2}z}{\partial y^{2}}=f_{yy}^{\prime\prime}$$ </blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>混合偏导数：</li>
+<li class="list-indent-1">$f_{xy}^{\prime\prime}$</li>
+<li class="list-indent-1">$f_{yx}^{\prime\prime}$</li>
+</ul>
+<h5 id="section-16"><strong>定理</strong>： #高阶偏导数定理</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果函数 $z=f(x,y)$ 的两个二阶混合偏导数 $\frac{\partial^2z}{\partial x\partial y}$ 及 $\frac{\partial^2z}{\partial y\partial x}$ 在区域 $D$ 内连续，则在该区域内：</blockquote>
+<blockquote>$$\frac{\partial^2z}{\partial x\partial y}=\frac{\partial^2z}{\partial y\partial x}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>先对 x 或者先对 y 时，极限值一样；</li>
+</ul>
+<h2 id="section-17">41.4 多元函数的全微分 </h2>
+<h5 id="section-18"><strong>定义</strong>： #多元函数的全微分 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： 若 $\Delta z=f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)=A\Delta x+B\Delta y+o(\rho)$，则称函数 $z=f(x,y)$ 在点 $(x_0,y_0)$ 处可微分；</blockquote>
+<blockquote>多元的微分：$$dz=A\Delta x+B\Delta y$$</blockquote>
+<h5 id="section-19"><strong>定理</strong>： #可微的必要条件 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\begin{aligned}&amp;\text{如果}z=f(x,y)\text{ 在点}\left(x_0,y_0\right)\text{处可微},\text{则在点}\left(x_0,y_0\right)\text{处}\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}\text{ 必定存在,即以下式子存在}\end{aligned}$：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>可微分 <code>-&gt;</code> 可导；</li>
+<li>可导 <code>-x&gt;</code> 可微分；</li>
+<li>一阶偏导数连续 <code>-&gt;</code> 可微分；</li>
+<li>可微分 <code>-x&gt;</code> 一阶偏导数连续；</li>
+</ul>
+<p><strong>方法</strong>：用定义判断可微分性（充要条件）</p>
+<ul>
+<li>（1）$$f_{x}(x_{0},y_{0})与 f_{y}(x_{0},y_{0})\text{ 是否都存在}$$</li>
+<li class="list-indent-1">如果有一个不存在，则肯定不可微分；</li>
+<li class="list-indent-1">如果两个都 存在，则进入到（2）进行判断；</li>
+<li>（2）$$\lim_{(\Delta x,\Delta y)\to(0,0)}\frac{\Delta z-[f_{x}(x_{0},y_{0})\Delta x+f_{y}(x_{0,}y_{0})\Delta y]}{\sqrt{\left(\Delta x\right)^{2}+\left(\Delta y\right)^{2}}}是否为零$$</li>
+<li class="list-indent-1">解释：</li>
+<li class="list-indent-2">根据 $\Delta z=f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)=A\Delta x+B\Delta y+o(\rho)$ 将 $f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)$ 放到左边去；</li>
+<li class="list-indent-2">看 $\Delta z-(f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0))$ 是否和 $o(\rho)$ 相除为 <code>0</code>；</li>
+<li class="list-indent-1">结论：</li>
+<li class="list-indent-2">以上极限存在、并且为 0  <code>-&gt;</code> 可微；</li>
+<li class="list-indent-2">如果不存在或不为 0 <code>-&gt;</code> 不可微；</li>
+<li class="list-indent-1">含义：</li>
+<li class="list-indent-2">以上公式的含义 <code>-&gt;</code> 因为一点的微分 $dz$ 其等于 $A\Delta x+B\Delta y+o(\rho)$，因此当这一点微分存在时，${dz-A\Delta x+B\Delta y}除以{o(\rho)}$ 是否为零，可以直到其微分是否存在；</li>
+</ul>
+<h5 id="section-20"><strong>定理</strong>： #可微的充分条件 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $z=f(x,y)$ 的偏导数 $\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}$ 在点 $(x_0,y_0)$ 处连续，则函数 $z=f(x,y)$ 在点 $(x_0,y_0)$ 处可微；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">两个偏导数在一点连续 <code>-&gt;</code> 作为二元函数在 x、y 分别趋向 $x_0、y_0$ 时偏导数存在；</li>
+<li>结论：</li>
+<li class="list-indent-1">两个偏导数连续 <code>-&gt;</code> 可微分；</li>
+</ul>
+<h2 id="section-21">41.5 连续、可偏导、可微之间关系</h2>
+<p><strong>一元函数</strong></p>
+<ul>
+<li>图示：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/562b68fb1e45-Pasted-image-20240504025921.png" alt="Pasted image 20240504025921" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>多元函数</strong></p>
+<ul>
+<li>1. 和一元相同点：</li>
+<li class="list-indent-1">（1）连续 <code>-x&gt;</code> 可导；</li>
+<li class="list-indent-1">（2）可微 <code>-&gt;</code> 可偏导；</li>
+<li class="list-indent-1">（3）可微 <code>-&gt;</code> 连续；</li>
+<li class="list-indent-1">（4）连续 <code>-x&gt;</code> 可导；</li>
+<li>2. 和一元不同点：</li>
+<li class="list-indent-1">原因：</li>
+<li class="list-indent-2">不一样的地方，都是<strong>可偏导导致出来的</strong>，为什么多元不行？</li>
+<li class="list-indent-2">可偏导实际上是 $f_x(x_0,y_0)$ 和 $f_y(x_0,y_0)$ 的偏导数； </li>
+<li class="list-indent-2">$f_x(x_0,y_0)$ <code>-&gt;</code> $f(x,y_0)$ 在 $y=y_0$ 这一条线上，函数发生变化，只和这一条线上的函数值有关； </li>
+<li class="list-indent-2">$f_y(x_0,y_0)$ <code>-&gt;</code> $f(x_0,y)$ 在 $x=x_0$ 这一条线上，函数发生变化，只和这一条线上的函数值有关；</li>
+<li class="list-indent-2">而连续 <code>-&gt;</code> 其是一个重极限，因为它要求、函数在任意方向的变化都是连续的，而偏导数只能决定在某一条线上、当前的导数是否存在，因此不能说明任意方向上是否连续；</li>
+<li class="list-indent-2">一元的可导为什么可以：因为一元当中，可导表示了这个区域内都是可导的，因此可导 <code>-&gt;</code> 可微且连续；</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">（1）可偏导 <code>-x&gt;</code> 连续；</li>
+<li class="list-indent-2">（2）可偏导 <code>-x&gt;</code> 可微；</li>
+<li>3. 和一元相比新的点：</li>
+<li class="list-indent-1">（1）偏导数连续 <code>-&gt;</code> 可微；</li>
+<li class="list-indent-1">（2）可微 <code>-x&gt;</code> 偏导数连续；</li>
+<li>图示：</li>
+<li class="list-indent-1">和</li>
+</ul>
+<h2 id="section-22">41.5 常考题型</h2>
+<hr>
+<h3 id="section-23">题型： #连续、偏导数、全微分及其之间关系</h3>
+<h4 id="section-24">PART 1：解题方法</h4>
+<p><strong>判断方法</strong></p>
+<ul>
+<li>判断是否可微：</li>
+<li class="list-indent-1">1. 定义法：</li>
+<li class="list-indent-2">第一步：判断 $f_{x}(x_{0},y_{0})与 f_{y}(x_{0},y_{0})\text{ 是否都存在}$；</li>
+<li class="list-indent-2">第二步：使用以下定义，判断其重极限是否存在；</li>
+<li class="list-indent-3">公式： $$\lim_{(\Delta x,\Delta y)\to(0,0)}\frac{\Delta z-[f_{x}(x_{0},y_{0})\Delta x+f_{y}(x_{0,}y_{0})\Delta y]}{\sqrt{\left(\Delta x\right)^{2}+\left(\Delta y\right)^{2}}}是否为零$$</li>
+<li>判断是否可导：</li>
+<li class="list-indent-1">1. 定义法：分别求对 x 的偏导、y 的偏导，使用偏导数定义、分析偏导数对应的一元函数导数是否存在；</li>
+<li class="list-indent-2">公式（X 偏导）：$$\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$$</li>
+<li class="list-indent-1">2. 先带后求：</li>
+<li>判断是否连续：</li>
+<li class="list-indent-1">1. 定义法：</li>
+<li class="list-indent-2">（1）证明连续：在某点的函数值是否等于其函数的极限值，如果等于、则连续；</li>
+<li class="list-indent-2">（2）证明不连续：同；</li>
+<li class="list-indent-1">2. 特殊 <code>y</code> 值法：</li>
+<li class="list-indent-2">用某一固定的 y 的函数带入函数当中，经常用于证明不连续；</li>
+<li class="list-indent-2">常用形式：</li>
+<li class="list-indent-3">$y=kx$ </li>
+<li class="list-indent-3">$y=0$</li>
+<li>判断偏导数是否连续：</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2">多元函数连续 <code>≠</code> 多元函数偏导数连续；</li>
+<li class="list-indent-2">偏导数是否连续，是指的 <strong>对 X 或对 Y 的偏导数</strong> 这个导函数是否连续；</li>
+<li class="list-indent-1">1. 定义法：利用对 X 或对 Y 的偏导数函数定义求解：</li>
+<li class="list-indent-2">如果以下公式不成立，则偏导数不连续；</li>
+<li class="list-indent-2">公式（对 X 的偏导数函数）：$$\lim_{x\to0,y\to0}f_{x}(x,y)=f_{x}(0,0)$$</li>
+</ul>
+<h4 id="section-25">PART 2：典型例题</h4>
+<p><strong>例题</strong>：二元函数 $$f(x,y)=\begin{cases}\frac{xy}{x^{2}+y^{2}},&amp;(x,y)\neq(0,0),\\0,&amp;(x,y)=(0,0)\end{cases}$$ 在点 $(0,0)$ 处连续、偏导数是否存在？</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">判断是否连续 <code>-&gt;</code> 这一点的函数值是否等于函数的极限值；</li>
+<li>解析</li>
+<li class="list-indent-1">判断连续：</li>
+<li class="list-indent-2">对 $\lim_{x\to0,y\to0}\frac{xy}{x^{2}+y^{2}}$ 用 $y=kx$ 带进去，得到证明其极限不存在 <code>-&gt;</code> 不连续；</li>
+<li class="list-indent-1">判断偏导数：</li>
+<li class="list-indent-2">求 x 的偏导：$f_{x}^{\prime}(0,0)=\lim_{x\to0}\frac{f(x,0)-f(0,0)}{x}=\lim_{x\to0}\frac{0-0}{x}$ <code>-&gt;</code> 偏导数为 0；</li>
+<li class="list-indent-2">求 y 的偏导：方法和对 x 求类似，得到的结果也是偏导数为 0；</li>
+<li class="list-indent-2">所以偏导数存在；</li>
+</ul>
+<h4 id="section-26">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-048/index.html"><span>← 上一项</span><strong>Lecture 40：欧拉方程</strong></a>
+    <a class="article-pagination-next" href="../math-050/index.html"><span>下一项 →</span><strong>Lecture 41：隐函数求导</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

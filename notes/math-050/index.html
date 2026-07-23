@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 41：隐函数求导 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 41：隐函数求导。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 多元函数微分学">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 41：隐函数求导 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 41：隐函数求导。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-050/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-050/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-050/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-050/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-050/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 41：隐函数求导</h1><p class="article-lead">考研数学学习笔记：Lecture 41：隐函数求导。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-07</span><span>约 14 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元函数微分学</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">42.1 引入</a><a href="#section-2">42.2 复合函数的微分法</a><a href="#section-8">42.3 隐函数的微分法</a><a href="#section-14">42.4 常考题型 </a></nav></details><div class="prose"><h2 id="section-1">42.1 引入</h2>
+<p><strong>和一元函数的关系</strong></p>
+<ul>
+<li>多元函数微分法和一元函数微分法的关系：</li>
+<li>一元函数微分法中的问题：</li>
+<li class="list-indent-1">（1）复合函数求导；</li>
+<li class="list-indent-1">（2）隐函数求导；</li>
+<li class="list-indent-1">（3）参数方程</li>
+<li class="list-indent-1">（4）高阶导数</li>
+<li class="list-indent-1">（5）对数求导；</li>
+<li>多元函数微分法中的问题：</li>
+<li class="list-indent-1">（1）复合函数微分法；</li>
+<li class="list-indent-1">（2）隐函数微分法；</li>
+</ul>
+<p><strong>考试内容概要</strong></p>
+<ul>
+<li>（一）复合函数微分法； </li>
+<li>（二）隐函数微分法；</li>
+</ul>
+<p><strong>常考题型与典型例题</strong></p>
+<ul>
+<li>题型一：复合函数的偏导数与全微分</li>
+<li>题型二：隐函数的偏导数与全微分</li>
+</ul>
+<h2 id="section-2">42.2 复合函数的微分法</h2>
+<h3 id="section-3">42.2.1 多元函数的复合函数求导法</h3>
+<p><strong>一元函数</strong></p>
+<ul>
+<li>当 $y=f(u),u=G(x)$ 可导 <code>-&gt;</code> $y=f(G (x))$ 可导；</li>
+<li>链式求导法：$y_{x}^{\prime}=y_{u}^{\prime}\cdot u_{x}^{\prime}$</li>
+</ul>
+<h5 id="section-4"><strong>定理</strong>： #多元复合函数的求导法则</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 x 及对 $y$ 的偏导数，函数 $z=f(u,\nu)$ 在对应点 $(u,\nu)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x, y)$ 处的两个偏导数存在，且有：</blockquote>
+<blockquote>$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial y}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>对内层函数：</li>
+<li class="list-indent-1">$u=u(x,y),\quad v=v(x,y)$ 要求的是<strong>偏导数存在</strong>；</li>
+<li>对外层函数：</li>
+<li class="list-indent-1">$z=f(u,\nu)$ 要求的是<strong>偏导数存在</strong>，并且要<strong>连续</strong>；</li>
+<li>原因：</li>
+<li class="list-indent-1">在多元里面，可导不可以推出可微；</li>
+</ul>
+<p><strong>原理</strong></p>
+<ul>
+<li>假设函数和变量的关系：</li>
+<li class="list-indent-1">z</li>
+<li class="list-indent-2">u</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li class="list-indent-2">v</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li>分析：</li>
+<li class="list-indent-1">由上述求导的树形图可知，其中共有 <code>x、y</code> 两个变量；</li>
+<li class="list-indent-1">对 <code>x</code> 自变量而言 <code>-&gt;</code> 其在 <code>u</code> 和 <code>v</code> 当中都存在 <code>-&gt;</code> 因此对 x 的求导：$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x}$ <code>-&gt;</code> 求导的结果为分别对 <code>u</code>、<code>v</code> 的复合函数求导的和；</li>
+<li class="list-indent-1">同理对 <code>y</code></li>
+</ul>
+<h3 id="section-5">42.2.2 全微分形式的不变性</h3>
+<h5 id="section-6"><strong>定理</strong>： #全微分形式的不变性</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设函数 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial\nu}\operatorname{d}\nu.$$</blockquote>
+<blockquote>即多元函数也具有微分形式的不变性；</blockquote>
+<blockquote>由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>一元时：</li>
+<li class="list-indent-1">无论当前是对 x 的导数 $dx$ ，还是对 u 的导数 $du$（即无论是自变量还是中间变量），当前都是<strong>对这个变量的导数乘以对这个变量的微分</strong>；</li>
+<li>多元时： </li>
+<li class="list-indent-1">因为 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，所以一定可微分；</li>
+<li class="list-indent-1">微分形式不变 <code>-&gt;</code> $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$</li>
+<li class="list-indent-1">带入</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/8b643ae6ba7c-Pasted-image-20240203172405.png" alt="Pasted image 20240203172405" loading="lazy" decoding="async"></li>
+<li>意义：</li>
+<li class="list-indent-1"><code>z</code> 作为其他变量的函数，其中出现的变量、不用管其是中间变量还是自变量，微分形式具有不变性；</li>
+</ul>
+<h3 id="section-7">42.2.3 例题</h3>
+<p><strong>情况 1：</strong>$\text{设 }z=f(u,v),u=\varphi(x),v=\psi(x)\text{ 均可微,则}$</p>
+<ul>
+<li>$\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial\nu}\frac{d\nu}{dx}$</li>
+<li>分析：</li>
+<li class="list-indent-1">因为 u、v 对 z 是偏导数，所以是偏微分 $\partial$</li>
+<li class="list-indent-1">因为如图所示的关系</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/92ddc96a14d2-Pasted-image-20240203161930.png" alt="Pasted image 20240203161930" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">所以 z 是对 x 的一元函数，所以 u 对 x 是直接求导；</li>
+</ul>
+<p><strong>情况 2：</strong>$\text{设 }w=f(u),u=\varphi(x,y,z)\text{ 均可微},$</p>
+<ul>
+<li>$\frac{\partial w}{\partial x}=\frac{dw}{du}\frac{\partial u}{\partial x},\frac{\partial w}{\partial y}=\frac{dw}{du}\frac{\partial u}{\partial y},\frac{\partial w}{\partial z}=\frac{dw}{du}\frac{\partial u}{\partial z}$</li>
+<li>分析</li>
+<li class="list-indent-1">w 是对 xyz 的三元函数</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/54531d7cbb60-Pasted-image-20240203162158.png" alt="Pasted image 20240203162158" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>情况 3：</strong>$\text{设 }u=f(x,y,z),z=\varphi(x,y)\text{ 均可微}$</p>
+<ul>
+<li>$\frac{\partial u}{\partial x}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial x},\frac{\partial u}{\partial y}=\frac{\partial f}{\partial y}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial y}$</li>
+<li class="list-indent-1">因为当中等式前面的 u 的含义和后背的 u 的含义不一样，所以在后背写成 f 以表示区分；</li>
+<li>分析</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/9ddf73daf50d-Pasted-image-20240203162504.png" alt="Pasted image 20240203162504" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>例题</strong>：$\text{设 }z=f(x+y,xy),\text{ 其中 }z=f(u,v)\text{ 可微,求 }\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">$dz=\frac{\partial f}{\partial u}du+\frac{\partial f}{\partial v}dv=\frac{\partial f}{\partial u}(dx+dy)+\frac{\partial f}{\partial V}(ydx+xdy)$</li>
+<li class="list-indent-1">由不变性可知</li>
+<li class="list-indent-1">= $\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy$</li>
+<li class="list-indent-1">然后因为是分别求 x、y，所以分开得：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/bf00984ae725-Pasted-image-20240203173251.png" alt="Pasted image 20240203173251" loading="lazy" decoding="async"></li>
+<li>题型： #多元复合函数的求导法则</li>
+</ul>
+<h2 id="section-8">42.3 隐函数的微分法</h2>
+<h3 id="section-9">42.3.1 多元函数隐函数基本概念</h3>
+<h5 id="section-10"><strong>定义</strong>： #多元函数隐函数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：由方程 $F(x, y)=0$ 确定的隐函数 $y=(x)$，得：$$y^{\prime}=-\frac{F_{x}^{\prime}}{F_{y}^{\prime}}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>什么是隐函数</li>
+<li class="list-indent-1">形如 $F(x, y)=0$ 的函数叫隐函数；</li>
+<li class="list-indent-1">将<strong>自变量和因变量放在同一个式子中，隐藏了二者之间的函类关系</strong>，因此称之为隐函数。</li>
+<li>什么是显函数</li>
+<li class="list-indent-1">显函数可以理解为：</li>
+<li class="list-indent-1">自变量和因变量的函数关系明显的函数，形如 $y=f(x)$ 对应隐函数概念； </li>
+</ul>
+<h5 id="section-11"><strong>定理</strong>： #隐函数存在定理</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： </blockquote>
+<blockquote>1. $F(x,y)$ 在点 $M_0(x_0,y_0)$ 邻域内连续可偏导；</blockquote>
+<blockquote>2. $F(x_0,y_0)=0$；</blockquote>
+<blockquote>3. $F_y\:\prime(x_0,y_0)\neq0$ </blockquote>
+<blockquote>则由函数 $F(x,y)$ 在 $M_{0}$ 邻域内唯一确定一个连续可导函数 $y=f(x)$ 使 $y_0=f(x_0)$</blockquote>
+<blockquote>则： $$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>更通俗的解释</li>
+<li class="list-indent-1">$F(x,y)=0,\text{若}x\text{为自变量},F(x,y)=0\Rightarrow y=y(x),\text{求}\frac{dy}{dx}$</li>
+<li class="list-indent-1">根据要求，x 是自变量，因此理论上可以将 y 变成 x 的一元函数，即将 y 直接看成 y (x)，进而同时两边对 x 求导：</li>
+<li class="list-indent-2">$F_{x}'+F_{y}'\frac{dy}{dx}=0\Longrightarrow\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$</li>
+<li>记忆</li>
+<li class="list-indent-1">1. 一定有负号；</li>
+<li class="list-indent-1">2. $\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$ 中的 x 和 y 是交错对应的；</li>
+</ul>
+<p><strong>证明</strong></p>
+<ul>
+<li>因为在隐函数 $F(x,y)$ 中：</li>
+<li class="list-indent-1">x 是对于 x 的函数：$x=x$</li>
+<li class="list-indent-1">y 是对于 x 的函数：$y=f(x)$</li>
+<li>所以当对 $F(x,y)=0$ 求导时，它们的求导链条为：$F&lt;_{y}^x&gt;x$</li>
+<li>所以分别对 x、y 求导后：$\frac{\partial F}{\partial x}+\frac{\partial E}{\partial y}\frac{dy}{dx}=0$</li>
+<li>转化位置，得到：$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$</li>
+</ul>
+<h5 id="section-12"><strong>定理</strong>： #多元隐函数存在定理</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $F(x,y,z)$ 在点 $M_{0}(x_{0},y_{0},z_{0})$ 邻域内连续可偏导，且 $F(x_{0},y_{0},z_{0})=0,F_{z}\:{\prime}(x_{0},y_{0},z_{0})\neq0$ 则由 $F(x,y,z)=0$ 在 $M_{0}$ 邻域内唯一确定一个连续可导函数 $z=\varphi(x,y)$ 且 $z_0=\varphi(x_0,y_0)$</blockquote>
+<blockquote>则：$$\frac{\partial z}{\partial x}=-\frac{F_{x}’}{F_{z}’},\frac{\partial z}{\partial y}=-\frac{F_{y}’}{F_{z}’}$$</blockquote>
+<h3 id="section-13">42.3.2 例题</h3>
+<p><strong>例题</strong>：$e^xy^3-x^2+2y=1,\text{求}\frac{dy}{dx},\frac{d^2y}{dx^2}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">$\text{依题目知,x为自变量,y为关于x的函数}$</li>
+<li>解析：求 $\frac{dy}{dx}$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;e^{x}y^{3}-x^{2}+2y=1 \\&amp;e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}-2x+2{\frac{dy}{dx}}=0 \\&amp;\frac{dy}{dx}=\frac{2x-e^{x}y^{3}}{e^{x}3y^{2}+2}\end{aligned}$$</li>
+<li>解析：求 $\frac{d^2y}{dx^2}$</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+&amp;\text{求}\frac{d^{2}y}{dx^{2}},\text{这里对}e^{x}y^{3}+e^{x}3y^{2}\frac{dy}{dx}-2x+2\frac{dy}{dx}=0\text{再对x求导} \\
+&amp;e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}6y({\frac{dy}{dx}})^{2}+e^{x}3y^{2}{\frac{d^{2}y}{dx^{2}}}-2+2{\frac{d^{2}y}{dx^{2}}}=0 \\
+&amp;\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}+e^{x}6y(\frac{dy}{dx})^{2}}{e^{x}3y^{2}+2} \\
+&amp;将{\frac{dy}{dx}}={\frac{2x-e^{x}y^{3}}{e^{x}3y^{2}+2}}{\text{代入}}
+\end{aligned}
+$$</div>
+<ul>
+<li>题型： #隐函数求导</li>
+</ul>
+<p><strong>例题</strong>：已知 $x^{2}+y^{2}-1=0$，当 $(0,1)$ 点处 XXXX，求一阶隐函数求导以及二阶隐函数求导；</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">注意是 $F(x,y)=0$</li>
+<li>解析：一阶</li>
+<li class="list-indent-1">设 $F(x,y)=x^{2}+y^{2}-1$</li>
+<li class="list-indent-1">可得：$F_{x}^{\prime}=2x，F_{y}^{\prime}=2y$</li>
+<li class="list-indent-1">所以：$F(0,1)=0，F_{y}^{\prime}(0,1)=2\neq0$</li>
+<li class="list-indent-1">带入公式：$\frac{dy}{dx}=-\frac{F_{x}^{\prime}}{Fy^{\prime}}=-\frac{2x}{2y}=-\frac{x}{y}$</li>
+<li>解析：二阶</li>
+<li class="list-indent-1">对 $-\frac{x}{y}$ 中的 $x$ 再求一次导；</li>
+<li class="list-indent-1">$\frac{d^{2}y}{dx^{2}}=-\frac{y-xy^{\prime}}{y^{2}}=-\frac{y+x\frac{x}{y}}{y^{2}}$</li>
+<li>题型： #隐函数求导 </li>
+</ul>
+<h2 id="section-14">42.4 常考题型 </h2>
+<hr>
+<h3 id="section-15">题型： #复合函数偏导数与全微分 </h3>
+<h4 id="section-16">PART 1：解题方法</h4>
+<p><strong>题型</strong>：对变上限积分多元复合函数求导</p>
+<ul>
+<li>（1）将变上限积分带入进去；</li>
+<li>（2）求导：</li>
+<li class="list-indent-1">如果对 X 求导，那就把 Y 当成常数。同理对 Y；</li>
+<li class="list-indent-1">根据 $(\int_a^xf(t)\mathrm{d}t)^{\prime}=f(x)$ 可知，求导就得到函数；</li>
+<li>补充：其他方法</li>
+<li class="list-indent-1">先带后求：带某个特殊值</li>
+</ul>
+<p><strong>题型</strong>：求全微分的值</p>
+<ul>
+<li>方法一：</li>
+<li class="list-indent-1">直接求微分；</li>
+<li class="list-indent-1">通常要使用<strong>复合函数求导法</strong>；</li>
+<li>方法二：</li>
+<li class="list-indent-1">分别求两个偏导，然后分别乘以 $dx,dy$ 相加，得到微分；</li>
+<li class="list-indent-1">公式：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y$$</li>
+</ul>
+<p><strong>题型</strong>：多元复合函数求高阶导数</p>
+<ul>
+<li>（1）先求一阶导数 $\frac{dy}{dx}$，并且先不带入复合函数</li>
+<li class="list-indent-1">比如当 $y=f(e^x,cosx)$ 时，$\frac{dy}{dx}=f_{1}^{\prime}e^{x}+f_{2}^{\prime}(-sinx)$</li>
+<li>（2）将复合函数以及目标点得值带入一阶导数，可以得到一阶导数的值；</li>
+<li>（3）再求二阶导数，注意对 $f_{1}^{\prime}$ 以及 $f_{2}^{\prime}$ 求导时的对象；</li>
+<li class="list-indent-1">因为 <code>f</code> 是关于 $e^x,cosx$ 两项得复合函数，所以对 $f_{1}^{\prime}$ 以及 $f_{2}^{\prime}$ 求导时、既要求对 $e^x$ 部分的导数，也要求对 $cosx$ 部分的导数：</li>
+<li class="list-indent-1">$$\frac{d^{2}y}{dx^{2}}=f_{11}^{\prime\prime}e^{2x}+f_{12}^{\prime\prime}(-e^{x}sinx)+f_{1}^{\prime}\cdot e^{x}+f_{22}^{\prime\prime}\sin^{2}x+f_{21}^{\prime\prime}(-e^{x}sinx)-f_{2}^{\prime}\cos x$$</li>
+</ul>
+<p><strong>题型</strong>：当题目中 x、y 等自变量之间关系比较复杂时，可以使用复合函数将其代换成简单函数，基于复合函数求导求目标结果</p>
+<ul>
+<li>举例：比如当 $z=f(x^y,y^x)$ 时，可以让 $u=x^y,v=y^x$，此时 $z=f(u,v)$，得到以下树形图：</li>
+<li>z</li>
+<li class="list-indent-1">u</li>
+<li class="list-indent-2">x</li>
+<li class="list-indent-2">y</li>
+<li class="list-indent-1">v</li>
+<li class="list-indent-2">x</li>
+<li class="list-indent-2">y</li>
+<li>此时假设求对 x 得偏导：$$\frac{\partial z}{\partial x}=\frac{\partial f}{\partial u}yx^{y-1}+\frac{\partial f}{\partial u}y^{x}luy$$</li>
+</ul>
+<h4 id="section-17">PART 2：典型例题</h4>
+<p><strong>例题</strong>：设 $z=\left(1+\frac{x}{y}\right)^{\frac{x}{y}},\text{则求：}dz|_{(1,1)}$</p>
+<ul>
+<li>方法一：直接求微分</li>
+<li class="list-indent-1">因为微分形式的不变性，所以 z 对 u 的微分 $z_{u}^{\prime}\mathrm{d}u$ 等于 z 对 x、y 的微分；</li>
+<li class="list-indent-1">$\frac{x}{y}=u,\quad z=(1+u)^{u},\quad\mathrm{d}z=z_{u}^{\prime}\mathrm{d}u$</li>
+<li class="list-indent-1">设 $z=e^{u\ln(1+u)},且du=d\frac{x}{y}$ </li>
+<li class="list-indent-1">得： $$\quad\mathrm{d}z=e^{u\ln(1+u)}\left[\ln(1+u)+\frac{u}{1+u}\right]\frac{ydx-xdy}{y^2}$$</li>
+<li class="list-indent-1">得到 $dz$ 得公式后，带入 z 得数值：$dz|_{(1,1)}=2\left[\ln 2+\frac{1}{2}\right](dx-dy)$</li>
+<li>方法二：利用两个偏导求微分</li>
+<li class="list-indent-1">先分别求 $z_x^{\prime}(1,1),\quad z_y^{\prime}(1,1)$，然后分别乘以 <code>dx、dy</code> ，得到微分；</li>
+<li class="list-indent-1">因为是具体点，可以先带后求；</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;z(x,1)=(1+x)^{x}=e^{x\ln(1+x)}\\&amp;z_{x}^{\prime}(x,1)=e^{x\ln(t+x)}\left[\ln(t+x)+\frac{x}{1+x}\right],\quad z_{x}^{\prime}(1,1)=2\left[\ln2+\frac{1}{2}\right]=1+2\ln2\end{aligned}$$</li>
+<li class="list-indent-1">同理对 <code>y</code> 求偏导</li>
+</ul>
+<p><strong>例题</strong>：设 $f(u,v)$ 具有二阶连续偏导数，函数 $g(x,y)=xy-f(x+y,x-y)$，求 $\frac{\partial^2g}{\partial x^2}+\frac{\partial^2g}{\partial x\partial y}+\frac{\partial^2g}{\partial y^2}$</p>
+<ul>
+<li>$\frac{\partial g}{\partial x}=y-f_{1}^{\prime}-f_{2}^{\prime}$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial X^{2}}=-\left[f_{11}^{\prime\prime}+f_{12}^{\prime\prime}\right]-\left[f_{11}^{\prime\prime}+f_{22}^{\prime\prime}\right]$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial x\partial y}=1-\left[f_{11}^{\prime\prime}-f_{12}^{\prime\prime}\right]-\left[f_{21}^{\prime\prime}-f_{22}^{\prime\prime}\right]$</li>
+<li>$\frac{\partial g}{\partial y}=x-f_{1}^{\prime}+f_{2}^{\prime}$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial y^{2}}=-\left[f_{11}^{\prime\prime}-f_{12}^{\prime\prime}\right]+\left[f_{21}^{\prime\prime}-f_{22}^{\prime\prime}\right]$</li>
+<li>所以求和为：$1-3f_{11}-f_{22}$ </li>
+</ul>
+<p><strong>例题</strong>：设函数 $f(u)$ 具有二阶连续导数，$z=f(e^x\cos y)$ 满足 $\frac{\partial^{2}z}{\partial x^{2}}+\frac{\partial^{2}z}{\partial y^{2}}=(4z+e^{x}\cos y)e^{2x}$，若 $f(0)=0,f^{\prime}(0)=0$，求 $f(u)$ 的表达式；</p>
+<ul>
+<li>分析</li>
+<li>解析 </li>
+<li>题型：#</li>
+</ul>
+<h4 id="section-18">PART 3：知识点复盘</h4>
+<hr>
+<h3 id="section-19">题型： #隐函数的偏导数与全微分</h3>
+<h4 id="section-20">PART 1：解题方法</h4>
+<p><strong>题型</strong>：隐函数求微分</p>
+<ul>
+<li>注：</li>
+<li class="list-indent-1">和显函数求微分一样，也是有两种方法</li>
+<li>什么是多元函数的隐函数：</li>
+<li class="list-indent-1">当前函数是 $z=z(x,y)$，此时 z 就类似于一元函数时的 y，是因变量。当函数式当中除了有 x、y 之外还有 z 时，就是隐函数；</li>
+<li>方法一： </li>
+<li class="list-indent-1">直接求微分； </li>
+<li class="list-indent-1">如果知道了 x、y 的值，需要先把 z 的值求出来，带进方程，然后再求；</li>
+<li>方法二：</li>
+<li class="list-indent-1">利用两个偏导求微分 </li>
+</ul>
+<p><strong>题型</strong>：隐函数求导</p>
+<ul>
+<li>方法一：带公式</li>
+<li class="list-indent-1">$$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$$</li>
+<li>方法二：两边求导</li>
+<li class="list-indent-1">同时对函数得两边求导，注意隐函数中 z 和 x、y 的复合关系；</li>
+<li>方法三：微分形式不变性</li>
+</ul>
+<p>	- </p>
+<ul>
+<li>注意：</li>
+<li class="list-indent-1">方法一中的 ${F_{x}'}$ 是对 x 求导，但是此时是将 $z=f(x, y)$ 中的 z、y 都看作常数；</li>
+<li class="list-indent-1">方法二中的对两边求导，当对 x 求导时、把 z 看成是 $z=f(x, y)$ 的函数</li>
+</ul>
+<p><strong>题型</strong>：复合函数和隐函数的综合题</p>
+<ul>
+<li>方法一：链式求导</li>
+<li class="list-indent-1">（1）画出求导的树形图；</li>
+<li class="list-indent-1">（2）根据树形图，确定求导的式子</li>
+<li class="list-indent-2">比如以下树形图：</li>
+<li class="list-indent-3">u</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-4">y</li>
+<li class="list-indent-5">x</li>
+<li class="list-indent-4">z</li>
+<li class="list-indent-5">x</li>
+<li class="list-indent-2">其对应的求导式子：$\frac{\operatorname{d}u}{\operatorname{d}x}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\frac{\operatorname{d}y}{\operatorname{d}x}+\frac{\partial f}{\partial z}\frac{\operatorname{d}z}{\operatorname{d}x}$</li>
+<li class="list-indent-1">（3）根据隐函数关系，求出其中 $\frac{\operatorname{d}y}{\operatorname{d}x}$ 以及 $\frac{\operatorname{d}z}{\operatorname{d}x}$</li>
+<li>方法二：全微分形式不变性</li>
+<li class="list-indent-1">比如以下树形图： </li>
+<li class="list-indent-2">u</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-3">z</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-1">不需要关系 u 和 xyz 是否是中间变量，因为 $u=f(x,y,z)$，所以根据微分形式不变性：</li>
+<li class="list-indent-1">$du=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy+\frac{\partial f}{\partial z}dz$</li>
+</ul>
+<h4 id="section-21">PART 2：典型例题</h4>
+<p><strong>例题</strong>：若函数 $z=z(x,y)$ 由方程 $e^{x+2y+3z}+xyz=1\quad\text{确定,则 }dz_{(0,0)}=$</p>
+<ul>
+<li>方法一：直接求微分 </li>
+<li class="list-indent-1">由 $x=0,y=0$ 可知 $z=0$</li>
+<li class="list-indent-1">对 $e^{x+2y+3z}+xyz=1$ 两端微分</li>
+<li class="list-indent-1">得到：$e^{x+2y+3z}(dx+2dy+3dz)+yzdx+xzdy+xydz=0$</li>
+<li class="list-indent-1">将 $x=0,y=0,z=0$ 代入上式得 $dx+2dy+3dz=0$</li>
+<li class="list-indent-1">最后得到 $dz|_{(0,0)}=-\frac{1}{2}(dx+2dy)$</li>
+<li>方法二：分别求偏导</li>
+<li class="list-indent-1">由 $x=0,y=0$ 可知 $z=0$</li>
+<li class="list-indent-1">得 $dz|_{(0,0)}=z_{x}(0,0)dx+z_{y}(0,0)dy$</li>
+<li class="list-indent-1">$\text{在 }e^{x+2y+3z}+xyz=1\text{ 中令 }y=0\text{ 得},e^{x+3z}=1,\text{两边对 }x\text{ 求导得}$</li>
+<li class="list-indent-2">$e^{x+3z}(1+3z_{x})=0$</li>
+<li class="list-indent-2">$z_{x}(0,0)=-\frac{1}{3}.$</li>
+<li class="list-indent-1">$\text{同理可得}\quad z_y(0,0)=-\frac23$</li>
+<li class="list-indent-1">得到 $dz|_{(0,0)}=-\frac{1}{2}(dx+2dy)$</li>
+</ul>
+<p><strong>例题</strong>：已知 $u+\mathbf{e}^{u}=xy,\text{求}\frac{\partial u}{\partial x},\frac{\partial u}{\partial y},\frac{\partial^{2}u}{\partial x\partial y}.$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">因为原式当中有 u、x、y，所以是隐函数，并且因为 u 是 x、y 的函数，所以还需要使用复合函数求导；</li>
+<li>解析</li>
+<li class="list-indent-1">方法一：两边求导</li>
+<li class="list-indent-2">对 $u+\mathbf{e}^{u}=xy$ 两端对 x 求偏导得：$(1+e^{u})\frac{\partial u}{\partial x}=y$</li>
+<li class="list-indent-3">右边为对 x 求偏导得结果；</li>
+<li class="list-indent-3">左边为对复合函数 u 求导得结果。因为是复合函数求导，所以需要乘以 $\frac{\partial u}{\partial x}$</li>
+<li class="list-indent-2">得到：$\frac{\partial u}{\partial x}=\frac y{1+e^x}$</li>
+<li class="list-indent-2">同理可得：$\frac{\partial u}{\partial y}=\frac x{1+e^u}$</li>
+<li class="list-indent-2">求 $$\frac{\partial^2u}{\partial x\partial y}=\frac{(1+e^u)-e^u\frac{\partial u}{\partial y}y}{\left(1+e^u\right)^2}$$</li>
+<li class="list-indent-1">方法二：带公式</li>
+<li class="list-indent-2">由公式得： $\frac{\partial y}{\partial x}=-\frac{F_{x}^{\prime}}{F_{x}^{\prime}}=-\frac{-y}{1+e^{u}}$</li>
+<li class="list-indent-2">由公式得：$\begin{aligned}\frac{\partial u}{\partial y}=-\frac{F_{y}^{\prime}}{F_{u}^{\prime}}&amp;=-\frac{-x}{1+e^{u}}\\&amp;=\frac{x}{1+e^{u}}\end{aligned}$</li>
+<li class="list-indent-1">方法三：微分形式不变性 </li>
+<li class="list-indent-2">$(1+e^{u})du=ydx+xdy$</li>
+<li class="list-indent-2">将 $1+e^{u}$ 除到右边去，可以得到 $du=Adx+Bdy$ 是形式</li>
+</ul>
+<h4 id="section-22">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-049/index.html"><span>← 上一项</span><strong>Lecture 40：多元复合函数的求导法则</strong></a>
+    <a class="article-pagination-next" href="../math-051/index.html"><span>下一项 →</span><strong>Lecture 43：多元函数的极值与最值</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

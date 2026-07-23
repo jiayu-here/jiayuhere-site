@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 29：换元积分法 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 29：换元积分法。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 不定积分">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 29：换元积分法 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 29：换元积分法。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-037/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-037/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-037/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-037/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-037/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 29：换元积分法</h1><p class="article-lead">考研数学学习笔记：Lecture 29：换元积分法。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-01-17</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>不定积分</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 第一类换元法</a><a href="#section-6">1.2 第二类换元法</a></nav></details><div class="prose"><h2 id="section-1">1.1 第一类换元法</h2>
+<p><strong>引入：从求导数开始</strong></p>
+<ul>
+<li>求导数的时候，最核心的方法是什么？</li>
+<li class="list-indent-1">1. 有理运算法则（加减乘除）；</li>
+<li class="list-indent-1">2. 复合函数求导法；</li>
+<li class="list-indent-2">隐函数求导法进而参数方程求导法都是前两者的结论；</li>
+<li>逆过程</li>
+<li class="list-indent-1">所以当考虑求导数的逆过程时，就可以考虑基于 1、2 两点的求其逆过程；</li>
+<li class="list-indent-1">复合函数 </li>
+<li class="list-indent-2">把复合函数求导法的过程倒过来 <code>-&gt;</code> <strong>换元积分法</strong>；</li>
+<li class="list-indent-1">有理运算法则</li>
+<li class="list-indent-2">倒过来 <code>-&gt;</code> 分项积分法；</li>
+<li class="list-indent-2">乘法 <code>-&gt;</code> <strong>分部积分法</strong>；</li>
+</ul>
+<h3 id="section-2">1.1.1 第一类换元法基本概念</h3>
+<h5 id="section-3"><strong>定理</strong>： #第一类换元法：凑微分法 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若 $\int f(u)\mathrm{d}u=F(u)+C$，$\text{则}\int f[\varphi(x)]\varphi^{\prime}(x)\operatorname{d}x=\int f[\varphi(x)]\operatorname{d}\varphi(x)=F[\varphi(x)]+C$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>常用情况：</li>
+<li class="list-indent-1">$\frac{dx}{\sqrt{x}}=2d\sqrt{x}$</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>比如：$\int e^x\mathrm{d}x=e^x+c$</li>
+<li>当前为 $\int xe^{x^2}dx=\frac12\int e^{x^2}(x^2)dx=\frac12\int e^{x^2}dx^2=\frac12e^{x^2}+c^2$</li>
+<li class="list-indent-1">为了想用上面 $\int e^x\mathrm{d}x=e^x+c$ 的结论，所以把它写成 $\frac12\int e^{x^2}dx^2$ 的形式；</li>
+<li class="list-indent-1">这个步骤就是凑微分；</li>
+</ul>
+<h3 id="section-4">1.1.2 例题</h3>
+<p><strong>例题</strong>：$\int(1+3x)^{100}dx$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">因为被积分对象是复合函数，因此可以先考虑如何将其转化为简单的、可以使用公式的形式：</li>
+<li class="list-indent-1">$\int u^{100}du=\frac1{101}u^{101}+c$</li>
+<li>解析</li>
+<li class="list-indent-1">$\int(1+3x)^{100}dx=\frac13\int(1+3x)^{100}d(1+3x)=\frac1{303}(1+3x)^{101}+C$</li>
+<li class="list-indent-1">凑了一个 $d$ 的 $1+3x$</li>
+<li>题型： #凑微分法 </li>
+</ul>
+<p><strong>例题</strong>：$\int\frac{dx}{a^2+x^2}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">因为</li>
+<li>解析</li>
+<li class="list-indent-1">$\int\frac{dx}{a^{2}+x^{2}}=\frac{1}{a}\int\frac{d\frac{x}{a}}{1+(\frac{x}{a})^{2}}=\frac{1}{a}\operatorname{arcc}t,\frac{x}{a}+C^{1}$</li>
+<li>题型： #凑微分法 </li>
+</ul>
+<p><strong>例题</strong>：$\int\frac{dx}{\sqrt{1-x^2-2x}}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">$17、\int\frac{dx}{\sqrt{1-x^2}}=\begin{cases}\arcsin x+C\\-\arccos x+C&amp;\end{cases}$</li>
+<li>解析</li>
+<li class="list-indent-1">$\int\frac{dx}{\sqrt{1-x^2-2x}}=\int\frac{d(x+1)}{\sqrt{2-(x+1)^2}}$ = $\arcsin\frac{x+1}{\sqrt{2}}+c$</li>
+<li>题型： #凑微分法 </li>
+</ul>
+<h3 id="section-5">1.1.3 凑微分形式总结 </h3>
+<p><strong>常见函数</strong></p>
+<ul>
+<li>1. $$\int f( ax+ b) dx= \frac 1a\int f( ax+ b)d( ax+ b)$$</li>
+<li>2. $$\int x^mf( ax^{m+ 1}+ b)dx=\frac 1{( m+ 1) a}\int f( ax^{m+ 1}+ b)d(ax^{m+1}+ b)\quad\quad\quad ( m\neq- 1) $$</li>
+<li>3. $$\int f( \sqrt {x}) \frac {\mathrm{d} x}{\sqrt {x}}= 2\int f( \sqrt {x})d( \sqrt x)$$</li>
+<li>4. $$\int f( e^x) \mathrm{e} ^xdx= \int f( \mathrm{e} ^x)d(\mathrm{e} ^x)$$</li>
+<li>5. $$\int f(\ln x)\:\frac{1}{x}\mathrm{d}x=\int f(\ln x)\mathrm{d}(\ln x)$$</li>
+</ul>
+<p><strong>常见三角函数凑微分</strong></p>
+<ul>
+<li>1. $$\int f(\sin x)\cos\:x\mathrm{d}x=\int f(\sin x)\mathrm{d}(\sin x)$$</li>
+<li>2. $${\int}f(\cos x)\sin x\mathrm{d}x=-{\int}f(\cos x)\mathrm{d}(\cos x)$$</li>
+<li>3. $$\int f(\tan x)\:\frac{1}{\cos^{2}x}\mathrm{d}x=\int f(\tan x)\mathrm{d}(\tan x)$$</li>
+<li>4. $${\int}f(\arcsin x)\:\frac{1}{\sqrt{1-x^2}}\mathrm{d}x=\int f(\arcsin x)\mathrm{d}(\arcsin x)$$</li>
+<li>5. $${\int}f(\arctan x)\:\frac1{1+x^2}\mathrm{d}x=\int f(\arctan x)\mathrm{d}(\arctan x)$$</li>
+</ul>
+<h2 id="section-6">1.2 第二类换元法</h2>
+<h3 id="section-7">1.2.1 第二类换元法基本概念 </h3>
+<h5 id="section-8"><strong>定理</strong>： #第二类换元法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }x=\varphi(t)\text{ 是单调的、可导的函数,并且 }\varphi^{\prime}(t)\neq0$ ，则 $\int f[\varphi(t)]\varphi^{\prime}(t)\mathrm{d}t=F(t)+C,$ </blockquote>
+<blockquote>公式：$\int f(x)\mathrm{d}x=\int f[\varphi(t)]\varphi^{\prime}(t)\mathrm{d}t=F(t)+C=F[\varphi^{-1}(x)]+C,$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">关键是变量代换的选取 <code>-&gt;</code> 把 x 带换掉了，带换成其他函数 <code>-&gt;</code> 做出结果后，还要用反函数带回去；</li>
+<li>举例：</li>
+<li class="list-indent-1">原函数：$\int\frac{x^2}{\sqrt{a^2-x^2}}dx$ <code>-&gt;</code> 把 x 代换：$x=a\sin t$ <code>-&gt;</code>  得到代换后函数：$\int\frac{a^2\sin^2t}{a\cos t}\cdot a\cos tdt$ <code>-&gt;</code> 求不定积分：$\frac{a^2}2(t-\frac12\sin2t)+C$ <code>-&gt;</code> 换回： $\frac{a^2}2\arcsin\frac xa-\frac x2\sqrt{a^2-x^2}+C$</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li>常见形式： </li>
+<li class="list-indent-1">以下三种形式：$$\begin{aligned}&amp;\sqrt{a^2-x^2} \\&amp;\sqrt{a^2+x^2} \\&amp;\sqrt{x^2-a^2}\end{aligned}$$</li>
+<li class="list-indent-1">分别可以使用以下三种形式的 x 来带入，进而消掉根号：$$\begin{aligned}x&amp;=a\sin t(a\cos t)\\\\x&amp;=a\tan t\\\\x&amp;=a\sec t\end{aligned}$$</li>
+<li>目的：把<strong>根号可以去掉</strong>；</li>
+</ul>
+<h3 id="section-9">1.2.2 例题</h3>
+<p><strong>例题</strong>：$\int\frac{dx}{\sqrt{a^2+x^2}}\quad(a&gt;0)$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">因为原式中有根号，因此当需要求其不定积分时，首先应该考虑如何消掉这个根号；</li>
+<li class="list-indent-1">此时可以想到用<strong>第二类换元法</strong>来把 a 以及 x 从根号中弄出来；</li>
+<li>解析</li>
+<li class="list-indent-1">可以设 $x=a*tant$</li>
+<li class="list-indent-1">此时先带入分母中，可知：分母变成 $a*sect$</li>
+<li class="list-indent-1">然后求 $dx$ <code>-&gt;</code> 求 $d(a*tant)$ </li>
+<li class="list-indent-1">然后：<img class="note-image" src="/assets/notes/9efbfcb1bb7e-Pasted-image-20240119002138.png" alt="Pasted image 20240119002138" loading="lazy" decoding="async"></li>
+<li>题型： #第二类换元法</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-036/index.html"><span>← 上一项</span><strong>Lecture 28：不定积分</strong></a>
+    <a class="article-pagination-next" href="../math-038/index.html"><span>下一项 →</span><strong>Lecture 30：分部积分法</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

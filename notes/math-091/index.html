@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 22：化二次型为标准型与规范型 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 二次型">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 22：化二次型为标准型与规范型 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-091/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-091/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-091/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-091/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-091/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 22：化二次型为标准型与规范型</h1><p class="article-lead">考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>二次型</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">22.1 惯性定理 </a><a href="#section-2">22.1 两种二次型方法区别</a></nav></details><div class="prose"><h2 id="section-1">22.1 惯性定理 </h2>
+<p><strong>概念</strong>：惯性定理</p>
+<ul>
+<li>无论选取什么样的可逆线性变换，将二次型化成标准形或规范形，其正项个数 <code>p</code>，负项个数 <code>q</code> 都是不变的；</li>
+<li>其中 <code>p</code> 称之为正惯性指数；</li>
+<li>其中 <code>q</code> 称之为负惯性指数；</li>
+<li>且：$若二次型的秩为r，则r=p+g，可逆线性变换不改变正、负惯性指数$</li>
+</ul>
+<p><strong>概念</strong>：两个二次型 (或实对称矩阵)合同的充要条件 </p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">两个二次型 (或实对称矩阵)合同的充要条件是有相同的正、负惯性指数, 或有相同的秩及正 (或负)惯性指数，或有相同的正、负特征值个数</li>
+<li>正交矩阵下：</li>
+<li class="list-indent-1">两个矩阵有相同的正、负特征值的个数；</li>
+</ul>
+<h2 id="section-2">22.1 两种二次型方法区别</h2>
+<p><strong>总结</strong>：两种方法的区别</p>
+<ul>
+<li>对于函数 $f=x^TAx$ 有两种变换：</li>
+<li>（1）配方法；</li>
+<li class="list-indent-1">可逆线性变换：$x=Cy$；</li>
+<li class="list-indent-1">对 C 的唯一要求，就是 C 可逆；</li>
+<li class="list-indent-1">通过 $x=Cy$ ，得到合同对角阵；</li>
+<li>（2）正交变换法</li>
+<li class="list-indent-1">也是要求可逆；</li>
+<li class="list-indent-1">这里面也是设置 $x=Qy$，但 Q 不仅仅可逆，而且 Q 的逆还等 Q 转置；</li>
+<li class="list-indent-1">所以：$f$ 通过 $x=Qy$ 得到的结果是 $Q^TAQ=Q^{-1}AQ=\Lambda$</li>
+<li>区别：相似和合同 </li>
+<li class="list-indent-1">当 <code>A</code> 是对称阵时；</li>
+<li class="list-indent-1">配方和正交都是可逆的；</li>
+<li class="list-indent-1">但配方法不一定满足逆等于转置；</li>
+<li class="list-indent-1">所以 $x=Cy$ 里面的 <code>C</code> 不一定是特征向量；</li>
+<li class="list-indent-1">正交配方法下更特殊，<code>C</code> 里面都是特征向量，$\Lambda$ 里面都是特征值； </li>
+<li>注意：相同点 </li>
+<li class="list-indent-1">它们的正负关系指数是相同的 <code>-&gt;</code> 无论用哪种方法，得到的系数的正负的个数都是一样的；</li>
+</ul>
+<p><strong>概念</strong>：合同矩阵与正负关系指数</p>
+<ul>
+<li>概念： </li>
+<li class="list-indent-1">并且合同变换当中，不变量也是正负关系指数；</li>
+<li class="list-indent-1">所以 <code>A</code> 合同于 <code>B</code> 的充要条件，就是 $p_A=p_B$ 且 $q_A=q_B$</li>
+<li>对称：</li>
+<li class="list-indent-1">并且对称的条件下，一定合同；</li>
+<li class="list-indent-1">因为两个矩阵对称下，相似时特征值完全一样 <code>-&gt;</code> 完全一样的正负关系指数；</li>
+<li class="list-indent-1">反过来，<strong>合同不一定相似</strong>；</li>
+<li>结论： </li>
+<li class="list-indent-1">1. 相似一定合同；</li>
+<li class="list-indent-1">2. 合同不一定相似；</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-090/index.html"><span>← 上一项</span><strong>Lecture 21：二次型的定义与矩阵表示</strong></a>
+    <a class="article-pagination-next" href="../math-092/index.html"><span>下一项 →</span><strong>Lecture 23：正定二次型</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

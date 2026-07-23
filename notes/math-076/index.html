@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 7：初等变换与初等矩阵 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 7：初等变换与初等矩阵。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 线性代数, 矩阵">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 7：初等变换与初等矩阵 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 7：初等变换与初等矩阵。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-076/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-076/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-076/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-076/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-076/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 7：初等变换与初等矩阵</h1><p class="article-lead">考研数学学习笔记：Lecture 7：初等变换与初等矩阵。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 13 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>矩阵</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">7.1 初等变换 </a><a href="#section-5">7.2 初等矩阵</a><a href="#section-13">7.3 初等矩阵的性质 </a><a href="#section-14">7.4 行阶梯形矩阵与行最简阶梯形矩阵</a><a href="#section-19">7 .5 用初等变换求逆矩阵 </a><a href="#section-21">7.6 简单分块矩阵的逆</a></nav></details><div class="prose"><h2 id="section-1">7.1 初等变换 </h2>
+<h3 id="section-2">7.1.1 定义 </h3>
+<h5 id="section-3"><strong>定义</strong>： #初等变换 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<p>&gt;(1)倍乘：一个非零常数乘矩阵的某一行 (列);</p>
+<p>  (2)互换：互换矩阵中某两行 (列)的位置;</p>
+<p>  (3)倍加：将矩阵的某一行 (列)的 k 倍加到另一行 (列).</p>
+<p>  以上三种变换称为矩阵的初等行 (列)变换，且分别称为倍乘、互换、倍加初等行 (列) 变换；</p>
+<p><strong>解释</strong></p>
+<ul>
+<li>这三种变换都被称之为 <strong>同解变换</strong> <code>&lt;-</code> 无论怎么变换，必须要保证是同解的；</li>
+</ul>
+<p><strong>本质</strong>：矩阵的秩不变，但行列式发生变化；</p>
+<h3 id="section-4">7.1.2 补充：线性变换的本质 </h3>
+<p><strong>概念</strong>：什么是变换</p>
+<ul>
+<li>解释： </li>
+<li class="list-indent-1">变换本质上是“函数”的一种花哨说法，接受一个向量，并输出一个向量变换的结果；</li>
+<li>变换：</li>
+<li class="list-indent-1">使用变换一词，是在暗示你基于“运动”的视角去思考；</li>
+</ul>
+<p><strong>概念</strong>：什么是线性的变换</p>
+<ul>
+<li>线性的变换需要具有以下两个性质： </li>
+<li class="list-indent-1">1. 直线再变换后依然维持为直线，不能有弯曲；</li>
+<li class="list-indent-1">2. 原点必须保持固定； </li>
+<li>什么是线性变换： </li>
+<li class="list-indent-1">线性变换是操作空间的一种手段，它它保持网格线平行且等距分布，并且保持原点不动，并且可以通过矩阵来描述清楚；</li>
+</ul>
+<p><strong>概念</strong>：如何描述变换后的向量空间</p>
+<ul>
+<li>只需要对基变量进行变换即可；</li>
+<li>因为：假设当前向量被两个基向量表示：</li>
+<li class="list-indent-1">$$\vec{\mathbf{v}}=-1\hat{i}+2\hat{j}$$</li>
+<li class="list-indent-1">此时即使对基向量进行变换，以上的线性关系依然不会发生变换；</li>
+<li class="list-indent-1">因此可以只根据变换后的 <code>i</code> 帽和 <code>j</code> 帽就推断出变换后的 <code>v</code>；</li>
+<li class="list-indent-1">其中 i 是两个坐标的数值构成的二维向量，j 是另一个两个坐标的数值构成的二维向量；</li>
+<li>引入矩阵： </li>
+<li class="list-indent-1">把基向量 <code>i</code> 和基向量 <code>j</code> 合在一起，就构成了一个 <code>2*2</code> 矩阵：</li>
+</ul>
+<p><strong>概念</strong>：矩阵的意义</p>
+<ul>
+<li>意义： </li>
+<li class="list-indent-1">给定了一个任意的初始向量，可以通过两个基，进行线性变换、得到其线性变换后的结果；</li>
+<li class="list-indent-1">$$\begin{aligned}\begin{bmatrix}3&amp;2\\-2&amp;1\end{bmatrix}&amp;\underbrace{{\left[\begin{array}{c}5\\7\end{array}\right]}}\\&amp;\text{Any ol' vector}\\&amp;\text{任意初始向量}\end{aligned}$$</li>
+<li>举例： </li>
+<li class="list-indent-1">$$\begin{aligned}\begin{bmatrix}3&amp;2\\-2&amp;1\end{bmatrix}{{\left[\begin{array}{c}5\\7\end{array}\right]}}\end{aligned}=5\bigg[\begin{array}{c}3\\-2\end{array}\bigg]+7\bigg[\begin{array}{c}2\\1\end{array}\bigg]\leftarrow等同于缩放基向量再相加$$</li>
+<li>公式：二维</li>
+<li class="list-indent-1">$$\left.\left[\begin{array}{cc}a&amp;b\\c&amp;d\end{array}\right.\right]\left[\begin{array}{c}x\\y\end{array}\right]=x\left[\begin{array}{c}a\\c\end{array}\right]+y\left[\begin{array}{c}b\\d\end{array}\right]=\left[\begin{array}{c}ax+by\\cx+dy\end{array}\right]$$</li>
+</ul>
+<h2 id="section-5">7.2 初等矩阵</h2>
+<h3 id="section-6">7.2.1 初等矩阵的定义 </h3>
+<h5 id="section-7"><strong>定义</strong>： #初等矩阵的定义</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：由单位矩阵经过一次初等变换得到的矩阵称为<strong>初等矩阵</strong>. 以 3 阶矩阵为例：$E_{2}\left(k\right)=\left[\begin{matrix}1&amp;0&amp;0\\0&amp;k&amp;0\\0&amp;0&amp;1\end{matrix}\right]$</blockquote>
+<blockquote>E 的第 <code>2</code> 行 (或第 2 列)乘 <code>k</code> 倍，称为倍乘初等矩阵；</blockquote>
+<blockquote></blockquote>
+<blockquote>定义：$E_i(k)(k\neq 0)$ 表示单位矩阵正的第 $i$ 行 (或者第 $j$ 列)乘以非零常数 $k$ 所得的初等矩阵</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>补充：单位矩阵的作用</li>
+<li class="list-indent-1">单位矩阵的特点，是作用在任何矩阵上时、其没有任何实质的作用；</li>
+<li class="list-indent-1">即： <code>EA=A</code></li>
+<li>注意：</li>
+<li class="list-indent-1">变换一定是行列都可以变换的；</li>
+<li>概念：</li>
+<li class="list-indent-1">左乘：在向量的左边进行变换 <code>-&gt;</code> 左读行变换；</li>
+<li class="list-indent-1">右乘：在向量的右边进行变换 <code>-&gt;</code> 右读列变换；</li>
+<li class="list-indent-2">对研究对象相对在其右边；<code>(x)g</code></li>
+<li>作用：</li>
+<li class="list-indent-1">用一个初等矩阵变化一个向量组时， </li>
+</ul>
+<h5 id="section-8"><strong>定理</strong>： #左行右列定理 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：对 <code>n</code> 阶矩阵 <code>A</code> 进行初等行变换，相当于在矩阵 A 的左边乘相应的初等矩阵；</blockquote>
+<blockquote>同样，对 <code>A</code> 进行初等变换，相当于在矩阵 <code>A</code> 的右边乘以相对应的初等矩阵；</blockquote>
+<p><strong>解释</strong></p>
+<h3 id="section-9">7.2.2 互换初等矩阵 </h3>
+<h5 id="section-10"><strong>定义</strong>： #互换初等矩阵</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $E_{12}=\begin{bmatrix}0&amp;1&amp;0\\1&amp;0&amp;0\\0&amp;0&amp;1\end{bmatrix}$，E 的第 1、2 行（或 1、2 列）互换，称为互换初等矩阵；</blockquote>
+<blockquote>定义：$$E_{ij}\text{表示单位矩阵}E\text{交换第}i\text{ 行与第}j\text{行}(\text{或交换第}i\text{列与第}j\text{列})\text{所得的初等矩阵}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">做行变换：放到左边去</li>
+<li class="list-indent-2">$\left.\left(\begin{matrix}0&amp;1\\1&amp;0\end{matrix}\right.\right)\left(\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right)=\left(\begin{matrix}3&amp;4\\1&amp;2\end{matrix}\right)$</li>
+<li class="list-indent-1">做列变换：放到右边去</li>
+<li class="list-indent-2">$\left.\left(\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right.\right)\left(\begin{matrix}0&amp;1\\1&amp;0\end{matrix}\right)=\left(\begin{matrix}2&amp;1\\4&amp;3\end{matrix}\right)$</li>
+<li>举例：</li>
+<li class="list-indent-1">$$\begin{pmatrix}1&amp;2&amp;-4\\2&amp;3&amp;2\\-1&amp;-2&amp;0\end{pmatrix}\begin{pmatrix}1&amp;0&amp;0\\0&amp;0&amp;1\\0&amp;1&amp;0\end{pmatrix}=\begin{pmatrix}1&amp;-4&amp;2\\2&amp;3&amp;3\\-1&amp;0&amp;-2\end{pmatrix}$$</li>
+<li class="list-indent-1">因为初等矩阵在右边，所以是进行列变换；</li>
+<li class="list-indent-1">因为初等矩阵的第二列和第三列互换，所以 $\begin{pmatrix}1&amp;2&amp;-4\\2&amp;3&amp;2\\-1&amp;-2&amp;0\end{pmatrix}$ 的第二列、第三列互换；</li>
+</ul>
+<h3 id="section-11">7.2.3 倍加初等矩阵 </h3>
+<h5 id="section-12"><strong>定义</strong>： #倍加初等矩阵</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $E_{31}\left(k\right)=\left[\begin{matrix}1&amp;0&amp;0\\0&amp;1&amp;0\\k&amp;0&amp;1\end{matrix}\right]$，E 的第 1 行的 k 倍加到第 3 行 (或第 3 列的 k 倍加到第 1 列)，称为倍加初等矩阵；</blockquote>
+<blockquote>定义：$E_{ij}(k)$ 表示单位矩阵 $E$ 的第 $j$ 行的 $k$ 倍加到第 $i$ 行 (或第 $i$ 列的 $k$ 倍加到第 $j$ 列)所得的初等矩阵；</blockquote>
+<p><strong>解释</strong></p>
+<h2 id="section-13">7.3 初等矩阵的性质 </h2>
+<p><strong>性质一</strong>：初等矩阵的转置依然是初等矩阵</p>
+<ul>
+<li>$E_{ij}^{T}=E_{ij}$</li>
+<li>$E_{i}^{T}\left(k\right)=E_{i}\left(k\right)$</li>
+<li>$E_{ij}^{T}\left(k\right)=E_{ji}\left(k\right)$</li>
+</ul>
+<p><strong>性质二</strong>：行列式、逆矩阵与初等矩阵 </p>
+<ul>
+<li>因为 $\left|E_{i}\left(k\right)\right|=k\neq0,\left|E_{ij}\right|=-1\neq0,\left|E_{ij}\left(k\right)\right|=1\neq0$</li>
+<li>故初等矩阵都是可逆矩阵，且 $\left[E_{i}\left(k\right)\right]^{-1}=E_{i}\left(\frac{1}{k}\right),E_{ij}^{-1}=E_{ij},\left[E_{ij}\left(k\right)\right]^{-1}=E_{ij}\left(-k\right)$ 其逆矩阵仍是同一类型的初等矩阵；</li>
+</ul>
+<p><strong>性质三</strong>：若 <code>A</code> 是可逆矩阵，则 <code>A</code> 可以表示成有限个初等矩阵的乘积，即 $A=P_{1}P_{2}\cdots P_{s},\text{其中}P_{1},P_{2},\cdots,$ $P_s$ 是初等矩阵；</p>
+<ul>
+<li>若 A 是可逆矩阵，则 A 矩阵肯定可以分解成若干个初等矩阵的乘积；</li>
+<li>所以说：初等矩阵其实就是多个矩阵的复合，比如 $A\alpha=p_{1}p_{2}\cdots p_{s}\alpha$ ；</li>
+<li>若 $A=P_{1}P_{2}\cdots P_{s}$ ，两边都是乘以 P 的逆矩阵，则右边就是 <code>E</code>；</li>
+<li class="list-indent-1">得到：$P_{S}^{-1}\cdots P_{2}^{-1}P_{1}^{-1}A=P_{S}^{-1}\cdots P_{2}^{-1}P_{1}^{-1}P_{1}P_{2}\cdots P_{S}$ </li>
+<li class="list-indent-1">得到：$\theta_{5}\cdots\theta_{2}\theta_{1}E=A^{-1}$</li>
+<li>公式：</li>
+<li class="list-indent-1">$\begin{aligned}Q_{5}\cdots Q_{2}Q_{1}\cdot A=E\\Q_{5}\cdots Q_{2}Q_{1}E=A^{-1}\end{aligned}$</li>
+<li>结论：</li>
+<li class="list-indent-1">$(A|E)\xrightarrow{行}(E|A^{-1})$</li>
+<li class="list-indent-1">给 A 拼上一个 E，进行行变换，得到的就是 A 逆矩阵；</li>
+</ul>
+<p><strong>性质四</strong>：对 <code>n</code> 阶矩阵 <code>A</code> 进行初等行变换，相当于在矩阵 <code>A</code> 的左边乘相应的初等矩阵；同样，对 <code>A</code> 进行初等列变换，相当于在矩阵 <code>A</code> 的右边乘相应的初等矩阵； </p>
+<h2 id="section-14">7.4 行阶梯形矩阵与行最简阶梯形矩阵</h2>
+<h3 id="section-15">7.4.1 行阶梯形矩阵</h3>
+<h5 id="section-16"><strong>定义</strong>： #行阶梯形矩阵 </h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：具有如下特征的矩阵称为行阶梯形矩阵：</blockquote>
+<blockquote>① 若有零行 (即元素全为零的行)，则零行全都位于非零行的下方；</blockquote>
+<blockquote>② 各非零行左起第一个非零元素的列指标由上至下是严格增大的 <code>-&gt;</code> 解；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>目标：</li>
+<li>概念：</li>
+<li class="list-indent-1">将方程组进行变换，但进行的都是同解变换；</li>
+<li class="list-indent-1">因为下面一行比上面一行的零的数量肯定更多 <code>-&gt;</code> 下面一行的自变量的数量更小；</li>
+<li>举例：</li>
+<li class="list-indent-1">$$\rightarrow\begin{bmatrix}1&amp;1&amp;0&amp;-3&amp;-1\\0&amp;-2&amp;2&amp;2&amp;1\\0&amp;0&amp;0&amp;3&amp;-1\\0&amp;0&amp;0&amp;0&amp;0\end{bmatrix}=B$$</li>
+<li>台脚：</li>
+<li class="list-indent-1">每个台阶的最左边的元素称之为台脚 <code>-&gt;</code> 将其化成最简形式；</li>
+</ul>
+<p><strong>举例</strong>：求齐次线性方程组的通解：$\begin{cases}x_{1}+x_{2}-3x_{4}-x_{5}=0,\\x_{1}-x_{2}+2x_{3}-x_{4}=0,\\4x_{1}-2x_{2}+6x_{3}+3x_{4}-4x_{5}=0,\\2x_{1}+4x_{2}-2x_{3}+4x_{4}-7x_{5}=0\end{cases}$</p>
+<h3 id="section-17">7.4.2 行最简阶梯型梯形矩阵</h3>
+<h5 id="section-18"><strong>定义</strong>： #行最简阶梯型梯形矩阵</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：一个行阶梯形矩阵称为行最简阶梯形矩阵，如果其非零行的第一个非零元素为 <code>1</code>，并且这些非零元素所在列的其他元素均为 <code>0</code>；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>和行列式的区别：$其非零行的第一个非零元素为1$</li>
+<li>特征：</li>
+<li class="list-indent-1">1. 若有零行，全在下方；</li>
+<li class="list-indent-1">2. 各非零行左起第一个非零元素的列指标由上至下是严格增大的</li>
+<li class="list-indent-1">3. 台脚处的元素必须是 <code>1</code>；</li>
+<li class="list-indent-1">4. 台脚正上方的元素必须都是 <code>0</code>；</li>
+<li>作用：</li>
+<li class="list-indent-1">服务于解方程组；</li>
+<li class="list-indent-1">一般化成行阶梯形矩阵就可以了；</li>
+</ul>
+<p><strong>补充</strong>：对于任何非零矩阵 <code>A</code>，总可以经过有限次初等行变换把它化为行阶梯形矩阵和行最简阶梯形矩阵；</p>
+<ul>
+<li>单位矩阵是最标准的行阶梯形矩阵；</li>
+<li>线性方程组总是可以进行消元代入；</li>
+<li>一般化为行阶梯形矩阵就可以了；</li>
+</ul>
+<h2 id="section-19">7 .5 用初等变换求逆矩阵 </h2>
+<h5 id="section-20"><strong>定理</strong>： #用初等变换求逆矩阵</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\begin{bmatrix}A\vdots E\end{bmatrix}\xrightarrow{\text{初等行变换}}\begin{bmatrix}E\vdots A^{-1}\end{bmatrix},\\\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow{\text{初等列变换}}\begin{bmatrix}E\\A^{-1}\end{bmatrix}.$$</blockquote>
+<p><strong>例题</strong>：当 $A=\begin{bmatrix}0&amp;2&amp;-1\\1&amp;1&amp;2\\-1&amp;-1&amp;-1\end{bmatrix}$，求 $A^{-1}$ </p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">$\left.\left(A|E\right)=\left(\begin{matrix}0&amp;2&amp;-1&amp;1&amp;0&amp;0\\1&amp;1&amp;2&amp;0&amp;1&amp;0\\-1&amp;-1&amp;-1&amp;-1&amp;0&amp;0&amp;1\end{matrix}\right.\right)$</li>
+<li class="list-indent-1">然后 A、E 矩阵各自都第一行、第二行互换位置</li>
+<li class="list-indent-1">然后第一行加到第三行：$\left.\left(\begin{matrix}1&amp;1&amp;2&amp;1&amp;0\\0&amp;2&amp;-1&amp;1&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0&amp;1&amp;1\end{matrix}\right.\right)-&gt;\begin{bmatrix}1&amp;1&amp;0&amp;-3&amp;-1\\0&amp;1&amp;-1&amp;-1&amp;-\frac{1}{2}\\0&amp;0&amp;0&amp;1&amp;-\frac{1}{3}\\0&amp;0&amp;0&amp;0&amp;0\end{bmatrix}$</li>
+<li class="list-indent-1">最后拼成 $(E|A^{-1})$ 的形式</li>
+<li>解析</li>
+</ul>
+<h2 id="section-21">7.6 简单分块矩阵的逆</h2>
+<h5 id="section-22"><strong>定义</strong>： #简单分块矩阵的逆</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}^{-1}=\begin{bmatrix}A^{-1}&amp;O\\O&amp;B^{-1}\end{bmatrix},\begin{bmatrix}O&amp;A\\B&amp;O\end{bmatrix}^{-1}=\begin{bmatrix}O&amp;B^{-1}\\A^{-1}&amp;O\end{bmatrix}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意： </li>
+<li class="list-indent-1">$\begin{bmatrix}O&amp;A\\B&amp;O\end{bmatrix}^{-1}$ 求逆矩阵后，要对调； </li>
+<li>证明：       </li>
+<li class="list-indent-1">$\left.\left(\begin{matrix}0&amp;A\\B&amp;0\end{matrix}\right.\right)\left(\begin{matrix}0&amp;B^{-1}\\A^{-1}&amp;0.\end{matrix}\right)=E$</li>
+</ul>
+<p><strong>补充</strong>：求副对角线上分块矩阵的，可推广如下</p>
+<ul>
+<li>主对角线时，不用反过来写，副对角线的需要反过来写：</li>
+<li>$$A=\begin{bmatrix}&amp;&amp;&amp;A_{1}\\&amp;&amp;A_{2}\\&amp;&amp;\cdots\\A_{s}\end{bmatrix}\xrightarrow{\text{ }}A_{i}(i=1,2,\cdots,s)可逆，则A可逆，且\rightarrow A^{-1}=\begin{bmatrix}&amp;&amp;&amp;&amp;A_s^{-1}\\&amp;&amp;&amp;\ddots\\&amp;&amp;A_2^{-1}&amp;&amp;\\A_1^{-1}&amp;&amp;&amp;&amp;\end{bmatrix}$$</li>
+</ul>
+<p><strong>补充</strong>：分块三角阵</p>
+<ul>
+<li>举例：$\text{已知}A=\begin{bmatrix}B&amp;O\\D&amp;C\end{bmatrix},\text{ 其中 }B\text{ 是}r\times r\text{ 可逆矩阵, }C\text{是}s\times s\text{ 可逆矩阵,证明}A\text{ 可逆,并求}A^{-1}$</li>
+<li class="list-indent-1">$|A|=|\begin{matrix}B&amp;0\\D&amp;C\end{matrix}|=|B||C|\neq0$</li>
+<li class="list-indent-1">定义法：$\begin{pmatrix}B&amp;0\\D&amp;C\end{pmatrix}\begin{pmatrix}X&amp;Y\\Z&amp;W\end{pmatrix}=\begin{pmatrix}E&amp;0\\0&amp;E\end{pmatrix}$</li>
+<li>结论：</li>
+<li class="list-indent-1">得到 A 的逆矩阵： $\begin{pmatrix}B&amp;0\\D&amp;C\end{pmatrix}$ 的逆矩阵：$\left(\begin{matrix}B^{-1}&amp;0\\-C^{-1}DB^{-1}&amp;C^{-1}\end{matrix}\right)$</li>
+<li>补充： </li>
+<li class="list-indent-1">右上三角也类似，右上角是 $B^{-1}DC^{-1}$ </li>
+<li class="list-indent-1">右下三角也类似，其 <code>B</code> 和 <code>C</code> 要换位置后取逆，然后左上角是 $C^{-1}DB^{-1}$ </li>
+<li class="list-indent-1">左下三角也类似，其 <code>B</code> 和 <code>C</code> 要换位置后取逆，然后右下角是 $B^{-1}DC^{-1}$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-075/index.html"><span>← 上一项</span><strong>Lecture 6：伴随矩阵</strong></a>
+    <a class="article-pagination-next" href="../math-077/index.html"><span>下一项 →</span><strong>Lecture 8：矩阵方程</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

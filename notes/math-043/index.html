@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 35：微分方程的基本概念 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 35：微分方程的基本概念。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 微分方程">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 35：微分方程的基本概念 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 35：微分方程的基本概念。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-043/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-043/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-043/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-043/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-043/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 35：微分方程的基本概念</h1><p class="article-lead">考研数学学习笔记：Lecture 35：微分方程的基本概念。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-01</span><span>约 13 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">本章常考题型与典型例题</a><a href="#section-2">1.1 什么是微分方程</a><a href="#section-9">1.2 可分离变量的微分方程</a><a href="#section-11">1.3 齐次方程</a><a href="#section-13">1.4 常考题型</a></nav></details><div class="prose"><h2 id="section-1">本章常考题型与典型例题</h2>
+<p><strong>考试内容</strong></p>
+<ul>
+<li>(一)常微分方程的基本概念</li>
+<li>(二)一阶微分方程</li>
+<li>(三)可降阶的高阶方程 (数三不要求)</li>
+<li>(四)高阶线性微分方程</li>
+<li>(五)差分方程 (仅数三要求)</li>
+</ul>
+<p><strong>常考题型</strong></p>
+<ul>
+<li>题型一：微分方程求解</li>
+<li>题型二：综合题</li>
+<li>题型三：应用题</li>
+</ul>
+<h2 id="section-2">1.1 什么是微分方程</h2>
+<h5 id="section-3"><strong>定义</strong>： #微分方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：含有未知函数<strong>导数</strong>或者<strong>微分</strong>的方程，就称之为微分方程；</blockquote>
+<blockquote>微分方程是一种用来描述<strong>函数与其导数之间关系</strong>的数学方程。</blockquote>
+<blockquote>1. 它的解不是数，而是<strong>符合方程关系的函数</strong> </blockquote>
+<blockquote>2. 微分方程的起源约在十七世纪末，为了解决自然科学发展中遇到物理及天文学问题而产生；</blockquote>
+<blockquote>3. 一般的表示未知函数、未知函数的导数与自变量之间的关系的方程叫做微分方程；</blockquote>
+<blockquote>4. 未知函数是一元函数的叫<strong>常微分方程</strong>，未知函数是多元函数的叫做<strong>偏微分方程</strong>；</blockquote>
+<blockquote>5. 微分方程是伴随着微积分学一起发展起来的；</blockquote>
+<blockquote>6. 微分方程包含未知函数及其导数的方程，未知函数导数的最高阶数称为该微分方程的阶； </blockquote>
+<p><strong>基础概念</strong></p>
+<ul>
+<li>微分方程：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">含有未知函数导数或微分的方程</li>
+<li class="list-indent-1">举例： </li>
+<li class="list-indent-2">$y^{\prime}=y+x,y^{\prime\prime}+y^{3}=x,y^{\prime\prime}=e^{x}$</li>
+<li>阶：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">含有未知函数<strong>导数</strong>的<strong>最高阶数</strong>；</li>
+<li class="list-indent-1">举例： </li>
+<li class="list-indent-2">微分方程为 n 阶时：$F(x,y,y^{\prime},y^{(n)})=0$</li>
+<li>解：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">若将函数代入微分方程, 使方程成为恒等式, 则该函数称为微分方程的解。 </li>
+<li class="list-indent-2">$\begin{gathered}\text{设：}y=y (x)\text{在区间 I 上连续且有} \text{直到 }n\text{ 阶的导数, 使 }F[x,y (x), y^{\prime}(x),\cdotp\cdotp\cdotp, y^{(n)}(x)]\equiv 0,\text{则称 }y=y (x)\text{为该微分方程在区间 }I\text{ 上的一个解}. \end{gathered}$</li>
+<li class="list-indent-1">举例： </li>
+<li class="list-indent-2">若当前的微分方程为 $y^{\prime\prime}=e^{x}$</li>
+<li class="list-indent-2">则当前方程的解为：</li>
+<li class="list-indent-3">1. 此方程 $y=e^{x}$ 为微分方程的解；</li>
+<li class="list-indent-3">2. 此方程 $y=e^{x}+c_{1}x+c_{2}$ 也为微分方程的解；</li>
+<li>通解：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">如果微分方程的解<strong>含有任意的常数</strong>，并且含任意独立的（无法合并）常数的<strong>个数等于微分方程的阶</strong>，则称之为方程的通解； </li>
+<li class="list-indent-2">即：通解代表着解的集合，独立常数的个数需要等于微分方程的阶数；</li>
+<li class="list-indent-1">举例：</li>
+<li class="list-indent-2">如果有二阶导数的微分方程</li>
+<li class="list-indent-2">$y^{\prime\prime}=3 ; y^{\prime}=3x+c_{1}$</li>
+<li class="list-indent-2">此时，y 的函数必须要有两个常数：$y=\frac{3}{2}x^{2}+C_{1}x+C_{2}$</li>
+<li>特解：</li>
+<li class="list-indent-1">概念：</li>
+<li class="list-indent-2">不含有任意常数的微分方程的解，称之为微分方程的特解；</li>
+<li class="list-indent-1">补充：</li>
+<li class="list-indent-2">通解里面定住任意常数；</li>
+<li class="list-indent-2">想求特解，需要先求出通解。然后在给定的约束条件（初始条件）下，解出对应的特解；</li>
+<li>初始条件：</li>
+<li class="list-indent-1">确定定解的条件；</li>
+<li>积分曲线：</li>
+<li class="list-indent-1">解对应的曲线，称之为微分方程的积分曲线；</li>
+</ul>
+<p><strong>微分方程的作用</strong></p>
+<ul>
+<li>图示：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/bbe8e2cb591e-Pasted-image-20240422161204.png" alt="Pasted image 20240422161204" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>： #一阶方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：一阶方程的一般形式：$y^\prime=f(x,y)$</blockquote>
+<h5 id="section-5"><strong>定义</strong>： #二阶以及高阶方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<blockquote>1. 二阶微分方程：表达式中的最高阶导数是二阶导数；</blockquote>
+<blockquote>2. 高阶微分方程：包含三阶导数四阶导数或更高阶导数的方程；</blockquote>
+<blockquote>	二阶微分方程一般形式：$$y^{\prime}=f(x,y,y^{\prime})$$</blockquote>
+<h5 id="section-6"><strong>定义</strong>： #常微分方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：函数的自变量只有一个；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>引入：</li>
+<li class="list-indent-1">物理学上：最常用的常微分方式中的变量，就是时间；</li>
+<li>举例：研究小球往上抛出去后，其位置变化；</li>
+<li class="list-indent-1">当前的微分方程：二阶导数</li>
+<li class="list-indent-2">小球的重力加速度</li>
+<li class="list-indent-3">$$\ddot{y}(t)=-g$$</li>
+<li class="list-indent-1">知道<strong>一阶导数</strong>：</li>
+<li class="list-indent-2">知道向下的分量为重力加速度 $-g$，因此 $\ddot{y}(t)=-g$，还可以将其和速度的关系描述出来：$$\frac{d(-gt+v_0)}{dt}(t)=-g$$</li>
+<li class="list-indent-2">但只知道这个还无法确定原函数，还需要为其增加初始状态，来进行约束；</li>
+<li class="list-indent-1">加上<strong>初始条件 1</strong>：</li>
+<li class="list-indent-2">在 $v_0$ 的速度基础上，进行的向下 g 作用：$\dot{y}(t)=-gt+v_0$</li>
+<li class="list-indent-2">问题：还是不知道原函数 $$\frac{d(????)}{dt}(t)=-gt+v_0$$</li>
+<li class="list-indent-1">知道<strong>原函数</strong>：</li>
+<li class="list-indent-2">$$\frac{d(-(1/2)gt^{2}+v_{0}t)}{dt}(t)=-gt+v_{0}$$</li>
+<li class="list-indent-1">加上<strong>初始条件 2</strong>：</li>
+<li class="list-indent-2">当物体的初始的位置为 $y_0$ 时，且其关系为：$$\frac{d(-(1/2)gt^{2}+v_{0}t+y_{0})}{dt}(t)=-gt+v_{0}$$</li>
+<li class="list-indent-1">得到<strong>微分方程的解</strong>：</li>
+<li class="list-indent-2">$y(t)=-(1/2)gt^2+v_0t+y_0$</li>
+</ul>
+<h5 id="section-7"><strong>定义</strong>： #偏微分方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：函数的自变量有多个；</blockquote>
+<blockquote>基于偏导数写出来的微分方程，因此被称之为偏微分方程；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>偏导数：</li>
+<li class="list-indent-1">以为当前有两个变量，它们各自的导数式，为偏导数：</li>
+<li class="list-indent-1">$$\frac{dT}{dt}(x,t)\quad\frac{dT}{dx}(x,t)$$</li>
+<li class="list-indent-1">为了和常微分方程中的求导数的 d 微分进行区分，在这使用新的符号：</li>
+<li class="list-indent-1">$$\frac{\partial T}{\partial t}(x,t)\quad\frac{\partial T}{\partial x}(x,t)$$</li>
+<li>举例：热传导方程</li>
+<li class="list-indent-1">公式：</li>
+<li class="list-indent-2">$\frac{\partial T}{\partial t}=\alpha\nabla^2T$</li>
+<li class="list-indent-1">对应的偏微分方程：</li>
+<li class="list-indent-2">因为是基于偏导数写出来的微分方程，因此被称之为偏微分方程；</li>
+<li class="list-indent-2">$$\frac{\partial T}{\partial t}(x,t)=\alpha\cdot\frac{\partial^2T}{\partial x^2}(x,t)$$</li>
+<li class="list-indent-1">图示：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/703f10079fac-Pasted-image-20240422162747.png" alt="Pasted image 20240422162747" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-8"><strong>定义</strong>： #偏导数</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：如果是对 $z=f(x,y)$ 函数，会有两个偏导数的定义：</blockquote>
+<blockquote>1. 对 X 的偏导数：对 X 偏导时，Y 固定在 $y_0$ 处（对 x 没有任何影响），$x在x。处有\Delta x$ 的增量，此时只有 x 一个变量，此时称： </blockquote>
+<blockquote>    $\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$ 为对 X 的偏导数；</blockquote>
+<blockquote>    记作：$\left.\frac{\partial z}{\partial x}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial x}\right|_{(x_{0},y_{0})},z_{_z}(x_{0},y_{0})或$ $f_{x}(x_{0},y_{0})$</blockquote>
+<blockquote>2. 对 Y 的偏导数：和 X 同理，</blockquote>
+<blockquote>    $lim_{\Delta y\to0}\frac{f(x_{0},y_{0}+\Delta y)-f(x_{0},y_{0})}{\Delta y}$；</blockquote>
+<blockquote>    记为：$\left.\text{}\frac{\partial z}{\partial y}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial y}\right|_{(x_{0},y_{0})},z_{y}(x_{0},y_{0})\text{或}f_{y}(x_{0},y_{0}).$</blockquote>
+<p><strong>方法</strong>：如何求对 x 或者 y 的偏导</p>
+<ul>
+<li>当 $z=f(x,y)$ 时，把 y 或者 x 视为常数，直接对 x 或者 y 求导；</li>
+<li>例：$z=x^{2}+3xy+y^{2}在(1.2)处$ 的偏导数；</li>
+<li class="list-indent-1">第一步：求出偏导后的函数</li>
+<li class="list-indent-2">对 x 求偏导：$\frac{\partial z}{\partial x}=2x+3y$</li>
+<li class="list-indent-2">对 y 求偏导：$$\frac{\partial z}{\partial y}=3x+2y$$</li>
+<li class="list-indent-1">第二步：将 $(1.2)$ 点带入对 x 求偏导或者对 y 求偏导后的函数： 2 x+3 y 或者 3 x+2 y，即可得到结果</li>
+</ul>
+<p><strong>二元函数偏导</strong></p>
+<ul>
+<li>一元函数中</li>
+<li class="list-indent-1">可导 -&gt; 连续</li>
+<li class="list-indent-1">可导是一个很强的条件</li>
+<li>二元函数中</li>
+<li class="list-indent-1">二元函数对 x 的偏导存在的前提 &lt;- 在 y= $y_0$ 这一条直线上，它是连续的；</li>
+<li class="list-indent-1">对二元函数来说，偏导存在，在 $(x_0,y_0)$ 未必连续；</li>
+</ul>
+<h2 id="section-9">1.2 可分离变量的微分方程</h2>
+<h5 id="section-10"><strong>定义</strong>： #可分离变量的方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： </blockquote>
+<blockquote>形式：$$y^{\prime}=f(x)g(y)$$</blockquote>
+<blockquote>解释：$\frac{dy}{dx}=f(x)g(y)$ <code>-&gt;</code> $\frac{dy}{g(y)}=f(x)dx$ 可以把 $g(y)$ 和 $dy$ 、$f(x)$ 个 $dx$ 分离到等式的两边 <code>-&gt;</code> 可分离变量的微分方程；</blockquote>
+<blockquote>可分离变量的解：两边积分 $$\int\frac{dy}{g(y)}=\int f(x)dx$$</blockquote>
+<p><strong>例题</strong>：$\text{微分方程 }y^{\prime}=\frac{y(1-x)}x\text{ 的通解是}$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">$$\frac{dy}{dx}=\frac{y(y-x)}{x}\quad\quad\quad\quad\\\int\frac{dy}{y}=\int\frac{1-x}{x}dx\quad\quad\quad\quad\\\ln|y|=\ln|x|-x+c_{1}$$</li>
+<li class="list-indent-1">$$|y|=e^{2|x|-x+c_{1}}=e^{c_{1}}|x|e^{-x}\\y=\pm e^{2}xe^{-x}=Cxe^{-x}$$</li>
+<li>题型：#</li>
+</ul>
+<p><strong>例题</strong>：$\frac{dy}{dx}=2xy$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">求积分</li>
+<li class="list-indent-2">$\int\frac{dy}{y}=fxdx$</li>
+<li class="list-indent-1">得到：</li>
+<li class="list-indent-2">$\ln|y|=x^{2}+c$</li>
+<li class="list-indent-1">所以：</li>
+<li class="list-indent-2">$|y|=e^{x^{2}+c}$</li>
+<li class="list-indent-1">最终：</li>
+<li class="list-indent-2">$y=\pm e^{x^{2}}；e^{c^{2}}=\pm C_{1}e^{x^{2}}$</li>
+<li>题型： #可分离变量</li>
+</ul>
+<h2 id="section-11">1.3 齐次方程</h2>
+<h5 id="section-12"><strong>定义</strong>： #齐次方程</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：简化后的方程中<strong>所有非零项的指数相等</strong>：$$\frac{dy}{dx}=\varphi(\frac{y}{x})$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">右端是关于 xy 的二元函数，但可以写成 $\frac{y}{x}$ 的二元函数；</li>
+<li>齐次：</li>
+<li class="list-indent-1">右端作为一个二元函数，是一个<strong>零次、齐次函数</strong>；</li>
+<li class="list-indent-1">即：dy 比 dx 是函数，且<strong>关于 x，y 次数相等</strong></li>
+</ul>
+<p><strong>方法</strong>：三板斧</p>
+<ul>
+<li>第零步：整理成齐次方程的形式，左边只有 $\frac{dy}{dx}$，即 $\frac{dy}{dx}=\varphi(\frac{y}{x})$；</li>
+<li>第一步：写下 $u=\frac{y}{x}$</li>
+<li>第二步：因为 $y=xu$，所以对 y 求导后，可以得到 $\frac{dy}{dx}=u+x\frac{du}{dx}$ ，即得到了 $y^{\prime}=\frac{dy}{dx}=u+x\frac{du}{dx}=u+xu^{\prime}$ 的表达式；</li>
+<li>第三步：带会原函数，得到 $u+x\frac{du}{dx}=\varphi(\frac{y}{x})$，这个方程是可分离变量；</li>
+<li class="list-indent-1">即：把其变成可分离变量，求解；</li>
+</ul>
+<p><strong>例题</strong>：$\text{求微分方程 }x^2y^{\prime}+xy=y^2\text{ 满足初始条件}y(1)=1的特解$</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">原方程为齐次方程 $y^{\prime}=(\frac{y}{x})^{2}-\frac{y}{x}$</li>
+<li class="list-indent-1">$\text{令 }u=\frac yx\text{,则}$</li>
+<li class="list-indent-1">$xu^{\prime}+u=u^2-u,\quad xu^{\prime}=u^2-2u.$ </li>
+<li class="list-indent-1">此时可以分离变量：$\frac{du}{u^{2}-2u}=\frac1xdx$ </li>
+<li class="list-indent-1">$\frac12[\ln|u-2|-\ln|u|]=\ln|x|+C_1,\frac{u-2}u=Cx^2$</li>
+<li class="list-indent-1">$\frac{y-2x}y=Cx^2$</li>
+<li class="list-indent-1">由 $y(1)=1$,得 $C=-1$ ,即得所求的特解为$$\frac{y-2x}y=-x^2,\quad\text{即 }y=\frac{2x}{1+x^2}$$</li>
+<li>题型：#</li>
+</ul>
+<p><strong>例题</strong>：$y^{2}+x^{2}\frac{dy}{dx}=xy\frac{dy}{dx}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-1">1. 先对函数处理，处理成函数满足 y/x 的形式；</li>
+<li class="list-indent-1">2. 如何判断是否是齐次方程 -&gt; x 和 y 的次数比较对称；</li>
+<li>解析</li>
+<li class="list-indent-1">首先整理一下：</li>
+<li class="list-indent-2">$\frac{dy}{dx}=\frac{y^{2}}{xy-x^{2}}$</li>
+<li class="list-indent-1">然后分子分母都除以 x 的平方；</li>
+<li class="list-indent-2">$\frac{\left(\frac{y}{x}\right)^{2}}{\frac{y}{x}-1}$</li>
+<li class="list-indent-1">然后使用三板斧解题</li>
+<li class="list-indent-2">$x\frac{du}{dx}=\frac{u^{2}}{u-1}-u$</li>
+<li class="list-indent-1">然后</li>
+<li class="list-indent-2">$\frac{u-1}{u}du=\frac{dx}{x}$</li>
+<li>题型： #齐次方程 </li>
+</ul>
+<h2 id="section-13">1.4 常考题型</h2>
+<h3 id="section-14">题型： #微分方程求解</h3>
+<h4 id="section-15">PART 1：解题方法</h4>
+<p><strong>核心</strong>：判断类型，选择方法</p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">如果是求特解的题目，先求通解；</li>
+<li class="list-indent-1">求通解之前，先判断当前微分方程的类型；</li>
+</ul>
+<p><strong>总结</strong>：微分方程类型判断方法</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">1. 判断类型，并且判断类型时一般是导数的形式（即非微分的形式，没有 $dy$、$dx$ 这些）</li>
+<li class="list-indent-1">2. 如果什么形式都判断不出来 <code>-&gt;</code> </li>
+<li class="list-indent-2">方法一： $x、y$ 两者<strong>对调</strong>；</li>
+<li class="list-indent-2">方法二：变量代换；</li>
+<li class="list-indent-1">3. 确定阶数：确定当且是多少阶；</li>
+<li class="list-indent-1">4. 凑微分核心方法：分组凑微分 <code>-&gt;</code> 单独好凑的，单独来凑微分。不好凑的，几个式子放在一起；</li>
+</ul>
+<p><strong>总结</strong>：常见形式</p>
+<ul>
+<li>一元方程：</li>
+<li class="list-indent-1">一阶方程： </li>
+<li class="list-indent-2">（A）齐次方程：</li>
+<li class="list-indent-3">形式：$$\frac{dy}{dx}=\varphi(\frac{y}{x})$$</li>
+<li class="list-indent-3">方法：令 $u=\frac yx$，变量代换、带进去整理 <code>-&gt;</code> 转变成可分离变量；</li>
+<li class="list-indent-2">（B）线性方程：</li>
+<li class="list-indent-3">形式：$$y^{\prime}+P(x)y=Q(x)$$</li>
+<li class="list-indent-3">方法：整理成标准形式，然后带通解公式 $$y=e^{-\int p(x)dx}\left[\int Q(x)e^{\int p(x)dx}dx+C\right]$$ <code>-&gt;</code> <a href="/notes/math-044/">Lecture 36：一阶线性微分方程</a></li>
+<li class="list-indent-2">（C）伯努利方程：</li>
+<li class="list-indent-3">形式：$$y^{\prime}+p (x) y=Q (x) y^{\alpha} \quad\quad\quad\quad\quad\quad(\alpha\neq1)\quad(y^{1-\alpha}=u)$$</li>
+<li class="list-indent-3">方法：</li>
+<li class="list-indent-1">二阶方程：判断系数</li>
+<li class="list-indent-2">常系数：</li>
+<li class="list-indent-3">（D）二阶常系数齐次方程：</li>
+<li class="list-indent-4">形式： $$y^n+py^{\prime}+qy=0$$</li>
+<li class="list-indent-4">方法：写特征方程，找特征根 <code>-&gt;</code> <a href="/notes/math-046/">Lecture 38：常系数齐次线性微分方程</a></li>
+<li class="list-indent-3">（E）二阶常系数非齐次方程： </li>
+<li class="list-indent-4">形式：$$y^{\prime\prime}+py^{\prime}+qy=f(x)$$</li>
+<li class="list-indent-4">方法：将不齐次的方程，转化为两个部分，即<strong>非齐次通解 = 齐次的通解 + 非齐次的特解</strong>； <code>-&gt;</code> <a href="/notes/math-047/">Lecture 39：常系数非齐次线性微分方程</a></li>
+<li class="list-indent-2">变系数：</li>
+<li class="list-indent-3">（F）可降阶方程：有 x 有 y</li>
+<li class="list-indent-4">形式：$$y^{\prime\prime}=f(x,y^{\prime})$$</li>
+<li class="list-indent-4">方法：${y^{\prime}=P,y^{\prime\prime}=\frac{dP}{dx}}$，得到： $\frac{dp}{dx}=f(x,p)$ 关于 p、x 的一阶方程，然后进行分离变量</li>
+<li class="list-indent-3">（G）可降阶方程：只有 y</li>
+<li class="list-indent-4">形式：$$y&quot;=f(y,y^{\prime})$$</li>
+<li class="list-indent-4">方法：设： $y^{\prime}=P$、$y^{\prime\prime}=\frac{dp}{dy}P$ <code>-&gt;</code> 变成只有 y、p，没有 x 的一阶方程，然后使用分离变量法；</li>
+<li>多元方程：</li>
+<li class="list-indent-1">（G）多元函数：</li>
+<li class="list-indent-2">形式：</li>
+<li class="list-indent-3">多元函数中，每个函数都被 x、或被 y 积分 $$d\bar{f}(x,y)=P(x,y)dx+Q(x,y)dy=0.$$</li>
+<li class="list-indent-2">方法：分组凑微分  </li>
+</ul>
+<p><strong>题型</strong>：题型及其方法整理</p>
+<ul>
+<li>1. 求特解问题：</li>
+<li class="list-indent-1">（1）求通解</li>
+<li class="list-indent-1">（2）求常数</li>
+<li class="list-indent-1">（3）得到特解</li>
+<li>2. 求微分方程的反问题：知道一个特解，求微分的方程；</li>
+<li class="list-indent-1">分析：特解 = 通解把某个条件定下来 </li>
+<li class="list-indent-1">比如：二阶常系数非齐次方程中：通解+特解=函数 <code>-&gt;</code> $y=C_{1}y_{1}+C_{2}y_{2}+y^{\star}$</li>
+<li class="list-indent-1">方法：先从解，找两个线性无关的解 <code>-&gt;</code> 两个特征根 <code>-&gt;</code> 齐次微分方程；  </li>
+</ul>
+<hr>
+<h3 id="section-16">题型： #微分方程综合题</h3>
+<h4 id="section-17">PART 1：解题方法</h4>
+<p><strong>方法</strong>：解微分方程综合体</p>
+<ul>
+<li>（1）分析：是微分方程和什么内容的综合题；</li>
+<li>（2）不同题型使用不同内容对应的常用方法；</li>
+</ul>
+<h4 id="section-18">PART 2：典型例题</h4>
+<h4 id="section-19">PART 3：知识点复盘</h4>
+<hr>
+<h3 id="section-20">题型： #微分方程应用题</h3>
+<h4 id="section-21">PART 1：解题方法</h4>
+<p><strong>题型</strong>：几何应用题 </p>
+<ul>
+<li>方法：  </li>
+<li class="list-indent-1">（1）画出当前图像的草图，草图需要画出主要特征；</li>
+<li class="list-indent-1">（2）利用题中给的关系式，建立微分方程； </li>
+<li class="list-indent-1">（3）解微分方程；</li>
+</ul>
+<h4 id="section-22">PART 2：典型例题</h4>
+<h4 id="section-23">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-042/index.html"><span>← 上一项</span><strong>Lecture 34：定积分的应用</strong></a>
+    <a class="article-pagination-next" href="../math-044/index.html"><span>下一项 →</span><strong>Lecture 36：一阶线性微分方程</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

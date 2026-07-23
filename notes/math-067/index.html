@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 51：对面积的曲面积分 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 51：对面积的曲面积分。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 多元积分学及其应用">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 51：对面积的曲面积分 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 51：对面积的曲面积分。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-067/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-067/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-067/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-067/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-067/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 51：对面积的曲面积分</h1><p class="article-lead">考研数学学习笔记：Lecture 51：对面积的曲面积分。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-12</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元积分学及其应用</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">59.1 第一类曲面积分：对面积的曲面积分</a><a href="#section-3">59.2 对面积的曲面积分的计算</a><a href="#section-8">59.3 常考题型 </a></nav></details><div class="prose"><h2 id="section-1">59.1 第一类曲面积分：对面积的曲面积分</h2>
+<p><strong>引例</strong>：已知曲面构件具有连续面密度ρ(x, y, z)，求其质量 M；</p>
+<ul>
+<li>图示</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/ad52d081b939-Pasted-image-20240212143059.png" alt="Pasted image 20240212143059" loading="lazy" decoding="async"></li>
+<li>用每一个小面积上的密度乘以其面积，然后全部求和，得到完整的质量：$M=\lim_{\lambda\to0}\sum_{k=1}^n\rho(\xi_k,\eta_k,\zeta_k){\Delta S_k}$</li>
+</ul>
+<h5 id="section-2"><strong>定义</strong>： #第一类曲面积分</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{设}\sum\text{为光滑曲面},f(x,y,z)\text{ 是定义在}\sum\text{上的一}\text{个有界函数,若对}\Sigma\text{ 做任意分割和局部区域任意取点},$ 可以得到</blockquote>
+<blockquote>乘积和式极限：$\lim_{\lambda\to0}\sum_{k=1}^nf\left(\xi_k,\eta_k,\zeta_k\right)\Delta S_k$ 都存在，则称此极限为函数 $f(x,y,z)$ 在曲面 $\Sigma$ 上对面积的曲面积分；</blockquote>
+<blockquote>记作：$$\iint_{\Sigma}f(x,y,z)dS=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i},\zeta_{i})\Delta S_{i}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">$ds$ 相当于小曲面的面积；</li>
+<li class="list-indent-1">$f(x,y,z)$ 相当于曲面的密度；</li>
+<li class="list-indent-1">$f(x,\gamma,z)\operatorname{d}S$ 表示求一小块的质量；</li>
+<li class="list-indent-1">$\iint_{\Sigma}f(x,\gamma,z)\operatorname{d}S$ 表示对整个面上，每个小块求和极限；</li>
+<li class="list-indent-1">$\Sigma$ 称之为积分曲面；</li>
+<li>解释：</li>
+<li class="list-indent-1">每个点的函数值，乘以这个点的小区域的面积，求和、取极限，得到对面积的面积分 <code>-&gt;</code> 和曲面的方向没关系，因为面积和方向无关系；</li>
+<li>性质：</li>
+<li class="list-indent-1">1. 积分曲面无关性：$$\iint_{\Sigma}f(x,y,z)dS=\iint_{-\Sigma}f(x,y,z)dS$$</li>
+<li class="list-indent-1">2. 曲面积分存在性：$若 f(x,y,z)\text{在光滑曲面}\sum\text{ 上连续}$，则对面积的曲面积分存在；</li>
+<li class="list-indent-1">3. 对积分域的可加性：若 $\sum$ 是分片光滑的，则有：$\iint_{\Sigma}f(x,y,z)\operatorname{d}S=\iint_{\Sigma_{1}}f(x,y,z)\operatorname{d}S+\iint_{\Sigma_{2}}f(x,y,z)\operatorname{d}S$</li>
+<li class="list-indent-1">4. 对积分的线性性质：$$\begin{aligned}\iint_{\Sigma}[k_1f(x,y,z)\pm k_2g(x,y,z)]&amp;\operatorname{d}S=k_1\iint_{\Sigma}f(x,y,z)\operatorname{d}S\pm k_2\iint_{\Sigma}g(x,y,z)\operatorname{d}S\end{aligned}$$</li>
+</ul>
+<h2 id="section-3">59.2 对面积的曲面积分的计算</h2>
+<h3 id="section-4">59.2.1 直接法</h3>
+<h5 id="section-5"><strong>定理</strong>： #第一类曲面积分的计算</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>有光滑曲面，其 $\Sigma:z=z(x,y),(x,y)\in D_{xy}，f(x,y,z)\text{ 在 }\sum\text{上连续}$</blockquote>
+<blockquote>则曲面积分 $\iint_{\Sigma}f(x,y,z)dS\text{存在},\text{且有}$：</blockquote>
+<blockquote>$$\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y,z(x,y))\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}\mathrm{d}x\mathrm{d}y$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>本质：</li>
+<li class="list-indent-1">把<strong>难求的曲面面积，投影成一个对 x、y 上的平面二重积分</strong>来完成计算；</li>
+<li class="list-indent-1">即把曲面 $\sum$ 投影到 $D_{xy}$ 上，化成 <code>D</code> 上的一个二重积分；；</li>
+<li class="list-indent-1">${\text{若曲面由方程 }x}=x(y,z){\text{或 }\operatorname*{y}}=y(z,x)\text{ 给出,也可类似地把对面积的面积分化为相应}\text{的二重积分}$；</li>
+<li>转化：</li>
+<li class="list-indent-1">将 z 用关于 xy 的式子带进去，得到二重积分；</li>
+<li>注意：</li>
+<li class="list-indent-1">当出现类似 $x^2+y^2=1$ 这种中心轴为 <code>z</code> 轴的形式，则无法直接做；</li>
+<li class="list-indent-1">此时应该使用 $y=y(x,z)$ <code>-&gt;</code> $\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y=y(x,z),z)\sqrt{1+{z_x}^2(x,z)+{z_z}^2(x,z)}\mathrm{d}x\mathrm{d}z$</li>
+<li class="list-indent-1">同理对于 $x=x(y,z)$ 的形式；</li>
+</ul>
+<h3 id="section-6">59.2.2 奇偶性与对称性</h3>
+<h5 id="section-7"><strong>定理</strong>： #第一类曲面积分的奇偶性    </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若曲面 $\sum$ 关于 $xoy$ 对称，则：</blockquote>
+<blockquote>$$\iint_{\Sigma}f(x,y,z)\mathrm{d}S=\begin{cases}2\iint_{\sum_{z&gt;0}} f(x,y,z)\mathrm{d}S,&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
+<p><strong>知识点</strong>：对称性</p>
+<ul>
+<li>$x^2+y^2+z^2=1$ 具有很好的对称性；</li>
+<li>所以可以利用对称性简化计算： $\iint_{\Sigma}(x^2+y^2)ds=(\frac{2}{3})\iint (x^2+y^2+z^2)ds=(\frac{2}{3})\iint 1ds=\frac{2}{3}4\pi$</li>
+</ul>
+<h2 id="section-8">59.3 常考题型 </h2>
+<hr>
+<h3 id="section-9">题型： #第一类面积分的计算 </h3>
+<h4 id="section-10">PART 1：解题方法</h4>
+<h4 id="section-11">PART 2：典型例题</h4>
+<p><strong>例题</strong>：$\Sigma=\{(x,y,z)\mid x+y+z=1,x\geq0,y\geq0,z\geq0\}，则\iint_\Sigma y^2dS$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">图示：</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/8258fee82319-Pasted-image-20240523230436.png" alt="Pasted image 20240523230436" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">可以将其化成再 <code>Dxy</code> 上的投影域上的二重积分；</li>
+<li class="list-indent-1">因为 $ds=\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}dxdy$</li>
+</ul>
+<h4 id="section-12">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-066/index.html"><span>← 上一项</span><strong>Lecture 49：对坐标的曲线积分</strong></a>
+    <a class="article-pagination-next" href="../math-068/index.html"><span>下一项 →</span><strong>Lecture 52：对坐标的曲面积分</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 13：间断点及其分类 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 13：间断点及其分类。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 函数、极限、连续">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 13：间断点及其分类 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 13：间断点及其分类。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-021/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-021/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-021/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-021/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-021/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 13：间断点及其分类</h1><p class="article-lead">考研数学学习笔记：Lecture 13：间断点及其分类。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-03-11</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>函数、极限、连续</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">13.1 间断点及其分类</a></nav></details><div class="prose"><h2 id="section-1">13.1 间断点及其分类</h2>
+<h3 id="section-2">13.1.1 定义</h3>
+<h5 id="section-3"><strong>定义</strong>： #间断点</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：若 f (x)在 $x_0$ 的某去心邻域有定义，但在 $x_0$ 处不连续，则称 $x_0为f(x)$ 的间断点；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>1.  F (x) 在 $x_0$ 的某去心邻域需要有定义；</li>
+<li>2. 满足第一条的前提下，在 $x_0$ 不连续，则为间断点；</li>
+</ul>
+<p><strong>间断点的分类</strong></p>
+<ul>
+<li>1. 第一类间断点：左, 右极限均存在；</li>
+<li class="list-indent-1">可去间断点：且左极限=右极限；</li>
+<li class="list-indent-1">跳跃间断点：左极限不等于右极限；</li>
+<li>2. 第二类间断点：左、右极限中<strong>至少有</strong>一个不存在；</li>
+<li class="list-indent-1">无穷间断点：比如 $1/x$ 中，当 x=0 时；</li>
+<li class="list-indent-1">振荡间断点：比如在 x 趋向于 0 时，$sin1/x$ 为振荡间断点；</li>
+<li class="list-indent-1">无穷和震荡是第二类当中常见的两种，但是不一定只有这两种，也可能既不是无穷、也不是震荡；</li>
+</ul>
+<p><strong>常见的需要分左右极限求极限的情况</strong></p>
+<ul>
+<li>1. 分段函数分界点；</li>
+<li>2. <code>E</code> 无穷：$e^{\infty}$；</li>
+<li>3. <code>Arctan</code> 无穷；</li>
+</ul>
+<h3 id="section-4">13.1.2 例题</h3>
+<p><strong>例题</strong>：$\text{设函数 }f(x)=\frac{\ln|x|}{|x-1|}\sin x\text{,则 }f(x)$ 有？</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">1. 先找没有定义的点；</li>
+<li class="list-indent-2">x=1</li>
+<li class="list-indent-2">x=0</li>
+<li class="list-indent-1">2. 判断类型</li>
+<li class="list-indent-2">左右极限如果有区别，就分左右极限；</li>
+<li class="list-indent-2">左右极限如果没有区别，就不用分左右极限；</li>
+<li>解析</li>
+<li class="list-indent-1">当 x=0 时，$\lim_{x\to0}f(x)=\lim_{x\to0}x\ln|x|=\lim_{x\to0}\frac{\ln|x|}{\frac{1}{x}}=\lim_{x\to0}\frac{\frac{1}{x}}{-\frac{1}{x}}=0$，所以为可去间断点；</li>
+<li class="list-indent-1">当 x=1 时，$\lim_{x\to1}f(x)=\sin|\lim_{x\to1}\frac{\ln x}{|x-1|}$，因为 Inx ~ x-1，所以等价代换，所以得到极限当中的部分为 $\frac{x-1}{|x-1|}$，所以需要分为 x 趋向于 1 正和 1 负，所以为跳跃间断点；</li>
+<li>题型： #间断点</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-020/index.html"><span>← 上一项</span><strong>Lecture 12：函数的连续性</strong></a>
+    <a class="article-pagination-next" href="../math-022/index.html"><span>下一项 →</span><strong>Lecture 14：连续性的运算与性质</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

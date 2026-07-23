@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 24：函数的单调性与曲线的凹凸性 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 微分中值定理与导数应用">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 24：函数的单调性与曲线的凹凸性 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-032/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-032/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-032/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-032/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-032/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 24：函数的单调性与曲线的凹凸性</h1><p class="article-lead">考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-01-13</span><span>约 6 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分中值定理与导数应用</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 函数单调性的判断方法</a><a href="#section-5">1.2 曲线的凹凸性和拐点</a><a href="#section-12">1.3 相关题型</a></nav></details><div class="prose"><h2 id="section-1">1.1 函数单调性的判断方法</h2>
+<h3 id="section-2">1.1.1 单调增减的几何意义</h3>
+<p><strong>单调增和单调减</strong></p>
+<ul>
+<li>导数和单调增减的关系</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/4e2a62d3de45-Pasted-image-20240113174945.png" alt="Pasted image 20240113174945" loading="lazy" decoding="async"></li>
+</ul>
+<h5 id="section-3"><strong>定理</strong>：单调增减与导数</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设函数 }f(x)\text{ 在区间 }[a,b]\text{ 上连续},\text{ 在 }(a,b)\text{ 内可导,则}$</blockquote>
+<blockquote>1）$\text{如果在(}a,b)\text{ 内 }f^{\prime}(x)\geq0,\text{ 且等号只在有限个点上成立}$，则 $f(x)$ 在 $[a,b]$ 上单调增加</blockquote>
+<blockquote>2）$\text{如果在(}a,b)\text{ 内 }f^{\prime}(x){\leq}0,\text{ 且等号只在有限个点上成立,}$ 则 $\text{则 }f(x)\text{ 在 }[a,b]\text{ 上单调减少}$</blockquote>
+<blockquote></blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意：此条件 <code>等号只在有限个点上成立</code> ，即导数等于零的位置点是有限个，</li>
+</ul>
+<h3 id="section-4">1.1.2 例题</h3>
+<p><strong>例题</strong>：$\text{确定 }f(x)=e^x-x-1\text{ 的增减区间}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">题型：利用单调增减性的定理，分析增减区间；</li>
+<li class="list-indent-1">分析过程：$f^{\prime}(x)=e^x_{-1}=0\Rightarrow\mathrm{x=0}$</li>
+<li>解析</li>
+<li class="list-indent-1">解答过程：</li>
+<li class="list-indent-2">$(-\infty, 0), f (x)&lt;0\Rightarrow f (x)\downarrow$</li>
+<li class="list-indent-2">$(0,+\infty) f^{\prime}(x)&gt;0 \Rightarrow f(x)$</li>
+</ul>
+<p><strong>例题</strong>：$\text{试证 }x&gt;0\text{ 时,}x-\frac{x^3}6&lt;\sin x&lt;x$</p>
+<ul>
+<li>题型</li>
+<li class="list-indent-1">#使用单调性证明不等式</li>
+<li>解析</li>
+<li class="list-indent-1">先分析 $sinx$ 和 $x$ 的关系</li>
+<li class="list-indent-1">$\begin{aligned}&amp;f(x)=X-h^{\prime}x,\quad f(0)=0\\&amp;f^{\prime}(x)=1-\cos x\geqslant0\quad,\quad f(x)\quad[0,a]\quad1\to(0,+\infty)\end{aligned}$</li>
+<li class="list-indent-1">同理为右边不等式的关系；</li>
+</ul>
+<h2 id="section-5">1.2 曲线的凹凸性和拐点</h2>
+<h3 id="section-6">1.2.1 凹凸性的基本概念</h3>
+<h5 id="section-7"><strong>定义</strong>：凹凸的定义</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{设函数}f(x)\text{在区间 }I\text{ 上连续, 如果对}$$I$ 上任意两点 $x_1,x_2$ </blockquote>
+<blockquote>1）如果恒有 $f(\frac{x_1+x_2}2)&lt;\frac{f(x_1)+f(x_2)}2$，$则称   f(x)\text{ 在 }I\text{ 上的图形是凹的}$</blockquote>
+<blockquote>2）如果恒有 $f(\frac{x_1+x_2}2)&gt;\frac{f(x_1)+f(x_2)}2$，则称 $f(x)$ 在 $I$ 上的图形是凸的</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>中点：$\frac{x_1+x_2}2$</li>
+<li>几何意义</li>
+<li class="list-indent-1">凹</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/ff516b6bdb93-Pasted-image-20240113182849.png" alt="Pasted image 20240113182849" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">其斜率在增加，即一阶导数在增加 -&gt; 二阶导数大于零；</li>
+<li class="list-indent-1">凸</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/9a5688f060e1-Pasted-image-20240113182901.png" alt="Pasted image 20240113182901" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">其斜率在减少，即一阶导数在减少 -&gt; 二阶导数小于零；</li>
+</ul>
+<h5 id="section-8"><strong>定理</strong>：凹凸性判定</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设函数}f(x)\text{ 在区间 }[a,b]\text{ 上连续},\text{ 在 }(a,b)\text{ 内二阶可导},$</blockquote>
+<blockquote>1）$\text{若在 }(a,b)\text{ 内 }f^{\prime\prime}(x)\text{&gt;0, 则 }f(x)\text{ 在 }[a,b]\text{ 上的图形是凹的}$；</blockquote>
+<blockquote>2）$\text{若在 }(a,b)\text{ 内 }f^{\prime\prime}(x)&lt;0,\text{ 则 }f(x)\text{ 在 }[a,b]\text{ 上的图形是凸的}$</blockquote>
+<p><strong>总结</strong></p>
+<ul>
+<li>用一阶导数的正负 <code>-&gt;</code> 判断函数的单调性；</li>
+<li>用二阶导数的正负 <code>-&gt;</code> 判断函数的凹凸性；</li>
+</ul>
+<h3 id="section-9">1.2.2 拐点的基础概念</h3>
+<h5 id="section-10"><strong>定义</strong>：拐点</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：连续曲线上，凹凸性质发生变化的分界点</blockquote>
+<p><strong>拐点可能取值</strong></p>
+<ul>
+<li>1. ${f^{\prime\prime}(x_0)=0}$；</li>
+<li>2. 二阶导数不存在的点；</li>
+</ul>
+<h3 id="section-11">1.2.2 例题</h3>
+<p><strong>例题</strong>：$\text{判定曲线 }y=x^3\text{ 的凹凸性}$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">分析过程：</li>
+<li>解析</li>
+<li class="list-indent-1">解答过程：</li>
+<li class="list-indent-1">$y^{\prime}=3x^{2},y^{\prime\prime}=6x$</li>
+<li class="list-indent-1">$\begin{aligned}(-无限,0),y^{\prime\prime}&lt;0,&amp;\text{凸}\\(0,+无限),&amp;y^{\prime\prime}&gt;0\end{aligned}$</li>
+<li>推导结论</li>
+<li class="list-indent-1">在函数的一点位置，函数的凹凸性发生变化，则称这一点为拐点</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/48abac8b1ee4-Pasted-image-20240113184015.png" alt="Pasted image 20240113184015" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">即：<strong>拐点为二阶导数等于零的点</strong>；</li>
+</ul>
+<p><strong>例题</strong>：$h(x)=\sqrt[3]{x}$，求它的凹凸区间以及拐点；</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">找拐点可以在这些位置：</li>
+<li class="list-indent-2">${f^{\prime\prime}(x_0)=0}$</li>
+<li class="list-indent-2">或者是二阶导数不存在的点；</li>
+<li>解析</li>
+<li class="list-indent-1">$\begin{aligned}h^{\prime}(x)&amp;=\frac{1}{3}x^{-\frac{2}{3}}\\h^{\prime\prime}(x)&amp;=-\frac{2}{9}x^{-\frac{5}{3}}=-\frac{2}{9x^{\frac{5}{3}}}\quad h^{\prime\prime}(0)\text{不存在}\end{aligned}$</li>
+<li class="list-indent-1">$\begin{aligned}&amp;\color{red}{(-\infty,0)},\quad\color{red}{f^{\prime\prime}(x)&gt;0},\quad\color{red}{\boxed4}\\&amp;\color{red}{(0,+\infty)}\quad\color{red}{f^{\prime\prime}(x)&lt;0},\quad\color{red}{\boxed4}\end{aligned}$</li>
+<li>题型</li>
+<li class="list-indent-1">#求拐点的方法</li>
+</ul>
+<h2 id="section-12">1.3 相关题型</h2>
+<h3 id="section-13">题型： #确定曲线的凹向和拐点</h3>
+<h4 id="section-14">PART 1：解题方法</h4>
+<p><strong>拐点可能的取值点</strong></p>
+<ul>
+<li>1. 二阶导数等于 0 的点；</li>
+<li>2. 二阶导数不存在的点；</li>
+<li>然后逐个判断这些等于 0 或者不存在的点，其拐点是否存在，得到所有拐点的取值；</li>
+</ul>
+<p><strong>判断可能的拐点是否存在</strong></p>
+<ul>
+<li>凹凸性质发生变化的分界点；</li>
+</ul>
+<h4 id="section-15">PART 2：典型例题</h4>
+<h4 id="section-16">PART 3：知识点复盘</h4>
+<h3 id="section-17">题型： #方程的根</h3>
+<h4 id="section-18">PART 1：解题方法</h4>
+<p><strong>方程根的问题</strong></p>
+<ul>
+<li>一、存在性问题：即函数有零点，$f(x)=0$</li>
+<li class="list-indent-1">1. 连续函数的零点定理：$f(x)在[a,b]$ 区间上连续，并且两端点异号 <code>-&gt;</code> $f(a)·f(b)&lt;0$ <code>-&gt;</code> 方程有根；</li>
+<li class="list-indent-1">2. 罗尔定理：一点导数等于 0 <code>-&gt;</code> 至少有一个根；</li>
+<li>二、根的个数</li>
+<li class="list-indent-1">使用函数的单调性定理；</li>
+</ul>
+<h3 id="section-19">题型： #不等式的证明</h3>
+<h4 id="section-20">PART 1：解题方法</h4>
+<p><strong>拉格朗日中值定理</strong></p>
+<ul>
+<li>可以用于证明不等式。但是使用时，需要具有两个函数的差；</li>
+<li>典型场景：$sin(a)-sin(b)&lt;a-b$</li>
+</ul>
+<p><strong>利用单调性+求导证明不等式</strong></p>
+<ul>
+<li>将不等式放到等号一边，变成 $一坨&gt;0$，然后利用求导得到单调性，证明不等式；</li>
+</ul>
+<h4 id="section-21">PART 2：典型例题</h4>
+<p><strong>例题</strong>：证明： $\frac x{1+x}&lt;\ln(1+x)&lt;x.(x&gt;0)$</p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-031/index.html"><span>← 上一项</span><strong>Lecture 23：泰勒公式</strong></a>
+    <a class="article-pagination-next" href="../math-033/index.html"><span>下一项 →</span><strong>Lecture 25：函数的极值与最值</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

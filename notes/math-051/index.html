@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 43：多元函数的极值与最值 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：Lecture 43：多元函数的极值与最值。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 高等数学, 多元函数微分学">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lecture 43：多元函数的极值与最值 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：Lecture 43：多元函数的极值与最值。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-051/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-051/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-051/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-051/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-051/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 43：多元函数的极值与最值</h1><p class="article-lead">考研数学学习笔记：Lecture 43：多元函数的极值与最值。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学 · 2024-02-07</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元函数微分学</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">43.1 多元函数的无条件极值</a><a href="#section-8">43.2 多元函数的条件极值：拉格朗日乘数法</a><a href="#section-13">43.3 多元函数的最大最小值</a><a href="#section-16">43.3 常考题型 </a></nav></details><div class="prose"><p><strong>本节内容概要</strong></p>
+<ul>
+<li>（一）无约束极值</li>
+<li>（二）条件极值与拉格朗日乘数法</li>
+<li>（三）最大、最小值</li>
+</ul>
+<p><strong>本节常考题型</strong></p>
+<ul>
+<li>题型一：求极值（无条件）</li>
+<li>题型二：求最大最小值</li>
+<li>题型三：最大最小值的应用题</li>
+</ul>
+<hr>
+<h2 id="section-1">43.1 多元函数的无条件极值</h2>
+<h3 id="section-2">43.1.1 基本概念</h3>
+<h5 id="section-3"><strong>定义</strong>： #多元函数的极值</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：在一个邻域中，多元函数的最大值或者最小值；</blockquote>
+<blockquote>若在点 $(x_0,y_0)$ 的某邻域中恒成立不等式：$$f(x,y)\leq f(x_0,y_0)\quad(f(x,y)\geq f(x_0,y_0))$$</blockquote>
+<blockquote>则称 f 在点 $(x_0,y_0)$ 取得极大值 (极小值)，点 $(x_0,y_0)$ 称为 <code>f</code> 的极大值点 (极小值点)；</blockquote>
+<blockquote>极大值与极小值统称为极值，极大值点与极小值点统称为极值点；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>举例</li>
+<li>$z=3x^{2}+4y^{2}在(0.0)$ 处为极小值；</li>
+<li>$z=-\sqrt{x^{2}+y^{2}}在\quad(0.0)$ 处为最大值</li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>： #多元函数的驻点</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：多元函数的偏导数等于 0 的点，称之为多元函数的驻点；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>$f_{x}^{\prime}=0.f_{y}^{\prime}=0$ 同时存在的点，称之为驻点；</li>
+</ul>
+<h5 id="section-5"><strong>定理</strong>： #多元函数极值存在的必要条件</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $z=f(x,y)$ 在点 $(x_0,y_0)$ 有偏导数，并且在 $(x_0,y_0)$ 处取得极值，则有：$$f_{x}^{\prime}(x_{0},y_{0})=0，f_{y}^{\prime}(x_{0},y_{0})=0$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>必要条件：</li>
+<li class="list-indent-1">一点的两个一阶偏导数必须等于零，这是取得极值的必要条件，但<strong>不是充分条件</strong>；</li>
+<li class="list-indent-1">缩小范围；</li>
+<li>驻点和极值点的关系：</li>
+<li class="list-indent-1">一般情况下：</li>
+<li class="list-indent-2">概念：</li>
+<li class="list-indent-3">驻点不一定都是极值点；极值点也都不一定是驻点 <code>&lt;-</code> 比如 $|x|+|y|$；</li>
+<li class="list-indent-2">结论：</li>
+<li class="list-indent-3">两种情况：可能的极值点</li>
+<li class="list-indent-3">（1）驻点 <code>&lt;-</code> 主要是这种情况；</li>
+<li class="list-indent-3">（2）$f_x$ 和 $f_y$ 都不存在</li>
+<li class="list-indent-3">（3）$f_x$ 不存在，$f_y=0$</li>
+<li class="list-indent-3">（4）$f_y$ 不存在，$f_x=0$</li>
+<li class="list-indent-1">可导的前提：</li>
+<li class="list-indent-2">概念：</li>
+<li class="list-indent-3">如果 $z=f(x,y)$ 可导的前提下，极值点一定是驻点； </li>
+<li class="list-indent-2">结论：</li>
+<li class="list-indent-3">极值点只需要找驻点；</li>
+</ul>
+<p>- </p>
+<h5 id="section-6"><strong>定理</strong>： #极值的充分条件 </h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：<strong>多元函数的驻点极值性判断</strong></blockquote>
+<blockquote>当 $z=f(x,y)$ 在点 $P_0(x_0,y_0)$ 的某邻域内有二阶连续偏导数，又 $f_x^{\prime}(x_0,y_{0})=f_y^{\prime}(x_0,y_{0})=0$ 时，$A=f_{xx}^{\prime\prime}(x_{0},y_{0})\quad\quad B=f_{xy}^{\prime\prime}(x_{0},y_{0})\quad\quad C=f_{yy}^{\prime\prime}(x_{0},y_{0})$；</blockquote>
+<blockquote>1. 如果是 $AC-B^{2}&gt;0$，则有极值</blockquote>
+<blockquote>	1. A&lt;0，是极大值；</blockquote>
+<blockquote>	2. A&gt;0，是极小值；</blockquote>
+<blockquote>2. 如果是 $AC-B^{2}&lt;0$，则无极值</blockquote>
+<blockquote>3. 如果是 $AC-B^{2}=0$，则只能用定义判断</blockquote>
+<p><strong>解释</strong>：总结</p>
+<ul>
+<li>找到驻点后，只需要是不是极值，只需要使用这一个充分条件判断方法即可</li>
+</ul>
+<h3 id="section-7">43.1.2 例题</h3>
+<p><strong>例题</strong>：求 $f(x,y)=x^{3}-y^{3}+3x^{2}+3y^{2}-9x$ 的极值；</p>
+<ul>
+<li>分析</li>
+<li>解析</li>
+<li class="list-indent-1">分别求偏导：</li>
+<li class="list-indent-2">$f_{x}^{\prime}=3x^{2}+6x-9$</li>
+<li class="list-indent-2">$f_{y}^{\prime}=-3y^{2}+6y$</li>
+<li class="list-indent-1">得到</li>
+<li class="list-indent-2">$\begin{cases}x^{2}+2x-3=0\\-y^{2}+2y=0\end{cases}$</li>
+<li class="list-indent-1">化简</li>
+<li class="list-indent-2">$(x+3)(x-1)=0$ 时，$x=-3或1$；</li>
+<li class="list-indent-2">$y(y-2)=0$ 时，$y=0或2$；</li>
+<li class="list-indent-1">排列组合，得到驻点</li>
+<li class="list-indent-2">$(1,0),(1,2),(-3,0),(-3,2)$</li>
+<li class="list-indent-1">求 A、B、C</li>
+<li class="list-indent-2">$f_{xx}^{\prime\prime}=6x+6$</li>
+<li class="list-indent-2">$f_{xy}^{\prime\prime}=0$</li>
+<li class="list-indent-2">$f_{yy}^{\prime\prime}=-6y+6$</li>
+<li class="list-indent-1">当 (1,0)点时：</li>
+<li class="list-indent-2">$A=12.B=0.C=6$</li>
+<li class="list-indent-2">所以 $AC-B^{2}=72&gt;0$</li>
+<li class="list-indent-2">所以是极小值点，即带入 $(1,0)$ 后得到的结果-5，为极小值点；</li>
+<li class="list-indent-1">其他的同理</li>
+<li>题型： #多元函数的极值 </li>
+</ul>
+<h2 id="section-8">43.2 多元函数的条件极值：拉格朗日乘数法</h2>
+<h3 id="section-9">43.2.1 基本概念</h3>
+<p><strong>无条件极值与条件极值</strong></p>
+<ul>
+<li>无条件</li>
+<li class="list-indent-1">举例：找全校最高的人</li>
+<li>有条件</li>
+<li class="list-indent-1">举例：找全校最高的、山东的、双子座的同学；</li>
+<li>加多条件越多，最值就越小</li>
+</ul>
+<h5 id="section-10"><strong>定义</strong>： #条件极值</h5>
+<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：已知 $z=f(x,y)$，其极值在 $\varphi(x,y)=0$ 的条件之下，求其极值为条件极值；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>和无约束极值的区别：</li>
+<li class="list-indent-1">无约束极值：在定义域内上的极值，即在定义域内、局部的最高或者最低点；</li>
+<li class="list-indent-1">有约束极值：有约束的内容 $\varphi (x, y)=0$ 在几何上通常是一条线，即在一条曲线上、局部最低和局部最高；</li>
+<li>举例： </li>
+<li class="list-indent-1">在 $z=f(x,y)$ 中： $z=f(x,\varphi(x))$</li>
+<li class="list-indent-1">其中用 z 对 x 求导：$\frac{dz}{dx}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\cdot\frac{dy}{dx}$ </li>
+<li class="list-indent-1">写出 $\frac{dz}{dx}\vert_{x=x_{0}}=f^{\prime}(x_{0},y)+f^{\prime}(x_{0},y)\frac{dy}{dx}\vert_{x=x_{0}}=0$</li>
+</ul>
+<h5 id="section-11"><strong>定理</strong>： #拉格朗日乘数法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<blockquote>（1）单个约束条件时：令 $F(x,y,\lambda)=f(x,y)+\lambda\varphi(x,y)$</blockquote>
+<blockquote>	 则取到极值的必要条件为：$$\begin{cases}F_x=f_x^{\prime}(x,y)+\lambda\varphi_x^{\prime}(x,y)=0,\\F_y=f_y^{\prime}(x,y)+\lambda\varphi_y^{\prime}(x,y)=0,\\F_\lambda=\varphi(x,y)=0,\end{cases}$$</blockquote>
+<blockquote> （2）多个约束条件时：$f(x,y,z)\text{ 在条件 }\varphi(x,y,z)=0,\psi(x,y,z)=0$ 条件下的条件极值</blockquote>
+<blockquote>	  令 $F(x,y,z,\lambda,\mu)=f(x,y,z)+\lambda\varphi(x,y,z)+\mu\psi(x,y,z)$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>解释：</li>
+<li class="list-indent-1">$\lambda$ 是一个参数</li>
+<li>意义：</li>
+<li class="list-indent-1">将二元函数在约束前提下的取得条件极值的必要条件，转化为大 <code>F</code> 这样一个三元函数的无条件极值的必要条件问题 <code>-&gt;</code> 对三个偏导数等于 0；</li>
+<li>注意：</li>
+<li class="list-indent-1">这个约束条件解出来的点，得到的点是可能取得的极值点，而不是一定；</li>
+</ul>
+<h5 id="section-12"><strong>定理</strong>： #n元拉格朗日乘数法</h5>
+<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：以上方法可推广到对于 $n$ 元函数在 $m$ 个约束条件下的极值问题，</blockquote>
+<blockquote>如求 $u=f(x,y,z)$ 在条件 $\varphi(x,y,z)=0,\psi(x,y,z)=0$ 下的极值，可构造拉格朗日函数：$$F(x,y,z,\lambda,\mu)=f(x,y,z)+\lambda\varphi(x,y,z)+\mu\psi(x,y,z).$$ 对 $F$ 的 $x,y,z,\lambda,\mu$ 分别求偏导数，并构造方程组：$$\begin{aligned}&amp;f_{x}^{\prime}(x,y,z)+\lambda\varphi_{x}^{\prime}(x,y,z)+\mu\psi_{x}^{\prime}(x,y,z)=0,\\&amp;f_{y}^{\prime}(x,y,z)+\lambda\varphi_{y}^{\prime}(x,y,z)+\mu\psi_{y}^{\prime}(x,y,z)=0,\\&amp;f_{z}^{\prime}(x,y,z)+\lambda\varphi_{z}^{\prime}(x,y,z)+\mu\psi_{z}^{\prime}(x,y,z)=0,\\&amp;\varphi(x,y,z)=0,\\&amp;\psi(x,y,z)=0.\end{aligned}$$解出 $x,y,z,\lambda$ 及 $\mu$,则其中 ($x,y,z)$ 就是<strong>可能的极值点</strong>.</blockquote>
+<h2 id="section-13">43.3 多元函数的最大最小值</h2>
+<h3 id="section-14">43.3.1 基本概念</h3>
+<p><strong>总结</strong>：求连续函数 <code>f(x, y)</code> 在有界闭域 <code>D</code> 上的最大最小值</p>
+<ul>
+<li>第一步：求 <code>f(x, y)</code> 在 <code>D</code> 内部可能的极值点；</li>
+<li class="list-indent-1">（1）驻点；</li>
+<li class="list-indent-1">（2）两个一阶偏导数，至少有一个不存在的点</li>
+<li>第二步：求 <code>f(x, y)</code> 在 <code>D</code> 的<strong>边界</strong>上的最大最小值；</li>
+<li class="list-indent-1">求边界上的最大最小 <code>-&gt;</code> 其实就是求一个条件极值；</li>
+<li>第三步：比较各个极值；</li>
+</ul>
+<h3 id="section-15">44.3.2 条件最值问题</h3>
+<h2 id="section-16">43.3 常考题型 </h2>
+<hr>
+<h3 id="section-17">题型： #求极值</h3>
+<h4 id="section-18">PART 1：解题方法</h4>
+<p><strong>题型</strong>：知道函数的全微分，判断极值</p>
+<ul>
+<li>求解指导：</li>
+<li class="list-indent-1">一般先使用方法三或方法一；</li>
+<li>方法一：极值的充分条件</li>
+<li class="list-indent-1">利用极值的充分条件。先利用全微分，知道对 <code>x</code> 以及对 <code>y</code> 的偏导数，然后使用偏导数，分别求 <code>A、B、C</code> 的值，利用公式判断；</li>
+<li>方法二：偏积分</li>
+<li class="list-indent-1">核心：知道全微分 <code>-&gt;</code> 使用偏积分求函数；</li>
+<li class="list-indent-1">举例：当二元函数 $z=f(x,y)$ 的全微分为 $dz = xdx + ydy$ 时，可以求其偏微分</li>
+<li class="list-indent-2">$z_{x}=x\quad\quad z=\int xdx=\frac{1}{2}x^{2}+q(y)$</li>
+<li class="list-indent-2">$z_{y}=y \quad\quad z_{y}=q^{\prime}(y)=y,q(y)=\frac{1}{2}y^{2}+c$</li>
+<li class="list-indent-2">所以 $z=\frac{1}{2}(x^{2}+y^{2})+c$</li>
+<li>方法三：凑微分</li>
+<li class="list-indent-1">核心：知道全微分 <code>-&gt;</code> 使用微分概念凑微分 <code>-&gt;</code> 得到原函数；</li>
+<li class="list-indent-1">举例：$dz=xdx+ydy=d(\frac{1}{2}x^2)+d(\frac{1}{2}y^{2})=d(\frac{1}{2}(x^{2}+y^{2}))$</li>
+<li class="list-indent-2">因为微分相等，因此两者只能相差常数，所以 $z=\frac{1}{2}(x^{2}+y^{2})+c$</li>
+</ul>
+<p><strong>题型</strong>：知道函数形式，求极值点</p>
+<ul>
+<li>（1.1）没给可能的极值点：</li>
+<li class="list-indent-1">对函数的 x、y 分别求偏导，令其偏导等于 0，找出可能的驻点（如果没给出可能的极值点）</li>
+<li>（1.2）给了可能的极值点：</li>
+<li class="list-indent-1">利用必要条件判断 <code>-&gt;</code> 判断是否是驻点：</li>
+<li class="list-indent-1">极值点存在的必要条件 <code>-&gt;</code> $f_{x}^{\prime}(x_{0},y_{0})=0，f_{y}^{\prime}(x_{0},y_{0})=0$</li>
+<li>（2）充分条件判断：利用 ABC 公式判断</li>
+<li>注意：</li>
+<li class="list-indent-1">如果计算 ABC 很麻烦时，可以“先代后求” <code>-&gt;</code> 对 Y 求时，先把 X 带入进去，同理对 X 时；</li>
+</ul>
+<h4 id="section-19">PART 2：典型例题</h4>
+<h4 id="section-20">PART 3：知识点复盘</h4>
+<hr>
+<h3 id="section-21">题型： #条件极值与拉格朗日乘数法</h3>
+<h4 id="section-22">PART 1：解题方法</h4>
+<p><strong>题型</strong>：条件最值问题</p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">使用拉格朗日乘数法，把函数所有可能取得的极值点先找来，然后不需要判定、把所有可能的极值点做一个比较，得到最值；</li>
+<li>解题步骤：</li>
+<li class="list-indent-1">（1）构造拉格朗日函数；</li>
+<li class="list-indent-1">（2）求偏导；</li>
+<li class="list-indent-1">（3）找驻点；</li>
+<li class="list-indent-2">得到几个等于 0 的等式，根据等式求解 x、y 可能的取值；</li>
+<li class="list-indent-1">（4）对每个点比较，判断最大值和最小值； </li>
+</ul>
+<p><strong>题型</strong>：已知全微分，求最值</p>
+<ul>
+<li>方法： </li>
+<li>（1）先根据全微分，求出原函数；</li>
+<li class="list-indent-1">两种方法 <code>-&gt;</code> 偏积分、凑微分；</li>
+<li>（2）求出区域的最值点；</li>
+<li class="list-indent-1">1. 区域内部的可能极值点；</li>
+<li class="list-indent-1">2. 边界曲线上的最大最小值；</li>
+<li class="list-indent-2">方法一： </li>
+<li class="list-indent-3">利用条件，将条件极值化成无约束极值；</li>
+<li class="list-indent-2">方法二： </li>
+<li class="list-indent-3">一般方法，是拉格朗日乘数法；</li>
+<li class="list-indent-2">方法三： </li>
+<li class="list-indent-3">参数方程</li>
+<li class="list-indent-1">3. 把边界上的最大最小值，和区域内部可能的极值进行比较；</li>
+</ul>
+<h4 id="section-23">PART 2：典型例题</h4>
+<h4 id="section-24">PART 3：知识点复盘</h4><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-050/index.html"><span>← 上一项</span><strong>Lecture 41：隐函数求导</strong></a>
+    <a class="article-pagination-next" href="../math-052/index.html"><span>下一项 →</span><strong>Lecture 44：二重积分</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>

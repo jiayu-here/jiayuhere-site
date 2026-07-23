@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05 线性代数 - 特征值与特征向量 | Jiayu Lab</title>
+  <meta name="description" content="考研数学学习笔记：05 线性代数 - 特征值与特征向量。保留原始公式、图示与例题。">
+  <meta name="keywords" content="考研数学, 数学总结, 图文总结">
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="05 线性代数 - 特征值与特征向量 | Jiayu Lab">
+  <meta property="og:description" content="考研数学学习笔记：05 线性代数 - 特征值与特征向量。保留原始公式、图示与例题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-005/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-005/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-005/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-005/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-005/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>05 线性代数 - 特征值与特征向量</h1><p class="article-lead">考研数学学习笔记：05 线性代数 - 特征值与特征向量。保留原始公式、图示与例题。</p><div class="article-meta"><span>考研数学</span><span>约 1 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>数学总结</span><span>图文总结</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">图文总结</a><a href="#section-2">原图文字要点</a><a href="#section-3">原图素材</a></nav></details><div class="prose"><h2 id="section-1">图文总结</h2>
+<p>此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。</p>
+<h2 id="section-2">原图文字要点</h2>
+<ul>
+<li>不同的特征值</li>
+<li>不同的特征值</li>
+<li>在这个例子中，特征值为1时，行列式的值为0，此时AX=0成立</li>
+<li>成立</li>
+</ul>
+<h2 id="section-3">原图素材</h2>
+<p><img class="note-image" src="/assets/notes/1428da2193c3-Pasted-Image-20240701195656_100.png" alt="Pasted Image 20240701195656_100" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/11f927e5b581-Pasted-Image-20240701195747_090.png" alt="Pasted Image 20240701195747_090" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/cca86a16fabb-Pasted-Image-20240701195830_589.png" alt="Pasted Image 20240701195830_589" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/afb7d39ad70d-Pasted-Image-20240701195847_099.png" alt="Pasted Image 20240701195847_099" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/a22491d4b3f9-Pasted-Image-20240701200004_112.png" alt="Pasted Image 20240701200004_112" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/ae60f5ce5d34-Pasted-Image-20240701200049_122.png" alt="Pasted Image 20240701200049_122" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/c6f75c4cf557-Pasted-Image-20240701200234_128.png" alt="Pasted Image 20240701200234_128" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/e31f45686bd0-Pasted-Image-20240701200250_137.png" alt="Pasted Image 20240701200250_137" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/34177b9fa551-Pasted-Image-20240701200406_142.png" alt="Pasted Image 20240701200406_142" loading="lazy" decoding="async"></p>
+<p><img class="note-image" src="/assets/notes/2e22dec0d29e-Pasted-Image-20240701200751_444.png" alt="Pasted Image 20240701200751_444" loading="lazy" decoding="async"></p><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-004/index.html"><span>← 上一项</span><strong>04 三大中值定理</strong></a>
+    <a class="article-pagination-next" href="../math-006/index.html"><span>下一项 →</span><strong>06 线性代数 - 相似对角化</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260714s"></script>
+</body>
+</html>
