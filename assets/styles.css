@@ -296,6 +296,8 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .notes-major-header > span, .notes-course-header > span, .notes-chapter-header > span { color: var(--muted); font-size: 13px; font-weight: 800; white-space: nowrap; }
 .notes-course-list, .notes-chapter-list { display: grid; gap: 30px; }
 .notes-course-section { display: grid; gap: 20px; }
+.notes-writing-course .notes-chapter-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+.notes-writing-course .content-grid { grid-template-columns: minmax(0, 1fr); }
 .notes-course-header, .notes-chapter-header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .notes-course-header { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .notes-course-header h3 { font-size: 24px; }
@@ -502,6 +504,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .section { padding: 62px 0; }
   .section-heading h2 { font-size: 34px; }
   .module-grid, .skills-grid, .project-grid, .content-grid, .tool-grid, .resource-grid { grid-template-columns: 1fr; }
+  .notes-writing-course .notes-chapter-list { grid-template-columns: 1fr; }
   .module-card { min-height: 160px; }
   .module-number { margin-bottom: 24px; }
   .panel, .contact-strip { padding: 24px; }

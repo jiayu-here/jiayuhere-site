@@ -261,7 +261,7 @@ const noteDetails = notesIndex ? Array.from(notesIndex.querySelectorAll("[data-n
 const resultStatus = document.querySelector("[data-result-status]");
 const emptyState = document.querySelector("[data-empty-state]");
 let activeFilter = "all";
-const noteIndexStateKey = "jiayuhere-notes-index-state-v1";
+const noteIndexStateKey = `jiayuhere-notes-index-state-v1-${document.documentElement.lang}`;
 let savedNoteIndexState = null;
 
 if (notesIndex) {
