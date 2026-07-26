@@ -8,20 +8,12 @@ tags: ["考研数学", "数学总结", "图文总结"]
 
 ## 图文总结
 
-此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
+此笔记原本由 Obsidian Excalidraw 图组成。网页仅保留原始 Excalidraw 画布及素材，方便按原始布局查看。
 
 ## 原始 Excalidraw 画布
 
 ![04 三大中值定理的原始 Excalidraw 画布](/assets/notes/excalidraw-math-004.svg)
 
-## 原图文字要点
-- 罗尔定理
-- 拉格朗日中值定理
-- 推导
-- 特例
-- 拉格朗日中值定理
-- 特例
-- 推导
 
 ## 原图素材
 ![Pasted Image 20240322225232_154](/assets/notes/db3f636b6c6d-Pasted-Image-20240322225232_154.png)

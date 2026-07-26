@@ -256,11 +256,24 @@ const contentCards = searchInput
   ? Array.from(document.querySelectorAll("[data-content-card], .tool-grid > .tool-card, .resource-grid > .resource-group, .timeline > .timeline-item"))
   : Array.from(document.querySelectorAll("[data-content-card]"));
 const noteGroups = Array.from(document.querySelectorAll("[data-note-group]"));
+const notesIndex = document.querySelector("[data-notes-index]");
+const noteDetails = notesIndex ? Array.from(notesIndex.querySelectorAll("[data-note-details]")) : [];
 const resultStatus = document.querySelector("[data-result-status]");
 const emptyState = document.querySelector("[data-empty-state]");
 let activeFilter = "all";
+const noteIndexStateKey = "jiayuhere-notes-index-state-v1";
+let savedNoteIndexState = null;
 
-const updateContentList = () => {
+if (notesIndex) {
+  try {
+    savedNoteIndexState = JSON.parse(sessionStorage.getItem(noteIndexStateKey) || "null");
+    if (savedNoteIndexState) sessionStorage.removeItem(noteIndexStateKey);
+  } catch {
+    savedNoteIndexState = null;
+  }
+}
+
+const updateContentList = ({ expandMatchingNoteGroups = false } = {}) => {
   if (!contentCards.length) return;
   const query = searchInput?.value.trim().toLowerCase() || "";
   let visibleCount = 0;
@@ -279,6 +292,13 @@ const updateContentList = () => {
     group.hidden = !hasVisibleCard;
   });
 
+  if (expandMatchingNoteGroups) {
+    noteDetails.forEach((group) => {
+      const hasVisibleCard = Array.from(group.querySelectorAll("[data-content-card]")).some((card) => !card.classList.contains("is-hidden"));
+      if (hasVisibleCard) group.open = true;
+    });
+  }
+
   if (resultStatus) resultStatus.textContent = t(`找到 ${visibleCount} 项内容。`, `${visibleCount} item${visibleCount === 1 ? "" : "s"} shown.`);
   if (emptyState) emptyState.hidden = visibleCount > 0;
 };
@@ -292,11 +312,52 @@ filterButtons.forEach((button) => {
       item.classList.toggle("is-active", isActive);
       item.setAttribute("aria-pressed", String(isActive));
     });
-    updateContentList();
+    updateContentList({ expandMatchingNoteGroups: true });
   });
 });
-searchInput?.addEventListener("input", updateContentList);
+searchInput?.addEventListener("input", () => updateContentList({ expandMatchingNoteGroups: true }));
+
+if (savedNoteIndexState) {
+  const storedFilter = filterButtons.some((button) => button.dataset.filter === savedNoteIndexState.filter) ? savedNoteIndexState.filter : "all";
+  activeFilter = storedFilter;
+  if (searchInput && typeof savedNoteIndexState.query === "string") searchInput.value = savedNoteIndexState.query;
+  filterButtons.forEach((button) => {
+    const isActive = button.dataset.filter === activeFilter;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+  const openById = new Map(Array.isArray(savedNoteIndexState.details) ? savedNoteIndexState.details.map((detail) => [detail.id, detail.open]) : []);
+  noteDetails.forEach((detail) => {
+    if (openById.has(detail.dataset.noteGroupId)) detail.open = Boolean(openById.get(detail.dataset.noteGroupId));
+  });
+}
+
 updateContentList();
+
+if (savedNoteIndexState && Number.isFinite(savedNoteIndexState.scrollY)) {
+  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: Math.max(0, savedNoteIndexState.scrollY), behavior: "auto" })));
+}
+
+const saveNoteIndexState = () => {
+  if (!notesIndex) return;
+  try {
+    sessionStorage.setItem(noteIndexStateKey, JSON.stringify({
+      filter: activeFilter,
+      query: searchInput?.value || "",
+      scrollY: window.scrollY,
+      details: noteDetails.map((detail) => ({ id: detail.dataset.noteGroupId, open: detail.open }))
+    }));
+  } catch {
+    // Browsers that disable session storage still retain the normal back-link behavior.
+  }
+};
+
+notesIndex?.querySelectorAll("[data-content-card] a[href]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    saveNoteIndexState();
+  });
+});
 
 document.querySelectorAll(".tool-card").forEach((card, index) => {
   const form = card.querySelector(".tool-form");

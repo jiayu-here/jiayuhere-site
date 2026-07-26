@@ -8,7 +8,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 ---
 
 ## 4.1 什么是语态
-**分为两周**
+**分为两种**
 - 主动语态
 	- 主语主动发出动作；
 	- *I eat apples*
@@ -39,7 +39,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 - 最后：*Unfortunately, these critics are forgotten.* 
 
 **注意：** 英语当中的被动，翻译成中文时，**可以翻译成主动、也可以翻译成被动**，而且有时即使意思是**被**，但也不一定要加**被**字；
-- 教室打扫完了 = 教师被打扫完了（这个**被**不需要加）；
+- 教室打扫完了 = 教室被打扫完了（这个**被**不需要加）；
 
 ### 4.1.2 被动语态与时态结合
 **常见的八种时态都有对应的被动语态**
@@ -71,7 +71,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 - 情态动词 + be done = 被动语态与情态结合；
 
 **举例**
-- *In the internet age, at least in theory, this fraction <u>can be muchreduced</u>.*
+- *In the internet age, at least in theory, this fraction <u>can be much reduced</u>.*
 - *Those first few days should be spent looking for work*
 	- 最初的几天应该被消耗在寻找工作上；
 

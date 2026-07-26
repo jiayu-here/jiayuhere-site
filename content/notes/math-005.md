@@ -8,17 +8,12 @@ tags: ["考研数学", "数学总结", "图文总结"]
 
 ## 图文总结
 
-此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
+此笔记原本由 Obsidian Excalidraw 图组成。网页仅保留原始 Excalidraw 画布及素材，方便按原始布局查看。
 
 ## 原始 Excalidraw 画布
 
 ![05 线性代数 - 特征值与特征向量的原始 Excalidraw 画布](/assets/notes/excalidraw-math-005.svg)
 
-## 原图文字要点
-- 不同的特征值
-- 不同的特征值
-- 在这个例子中，特征值为1时，行列式的值为0，此时AX=0成立
-- 成立
 
 ## 原图素材
 ![Pasted Image 20240701195656_100](/assets/notes/1428da2193c3-Pasted-Image-20240701195656_100.png)

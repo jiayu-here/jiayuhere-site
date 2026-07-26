@@ -283,6 +283,12 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .empty-state { padding: 40px; text-align: center; color: var(--muted); }
 .notes-major-list { display: grid; gap: 54px; }
 .notes-major-section { display: grid; gap: 28px; }
+.notes-major-header, .notes-course-header, .notes-chapter-header { position: relative; padding-right: 28px; cursor: pointer; list-style: none; }
+.notes-major-header::-webkit-details-marker, .notes-course-header::-webkit-details-marker, .notes-chapter-header::-webkit-details-marker { display: none; }
+.notes-major-header::marker, .notes-course-header::marker, .notes-chapter-header::marker { content: ""; }
+.notes-major-header::after, .notes-course-header::after, .notes-chapter-header::after { content: ""; position: absolute; top: 50%; right: 3px; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-65%) rotate(45deg); transition: transform .18s ease; }
+.notes-major-section:not([open]) > .notes-major-header::after, .notes-course-section:not([open]) > .notes-course-header::after, .notes-chapter-section:not([open]) > .notes-chapter-header::after { transform: translateY(-50%) rotate(135deg); }
+.notes-major-header:focus-visible, .notes-course-header:focus-visible, .notes-chapter-header:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 5px; border-radius: 8px; }
 .notes-major-header { display: grid; grid-template-columns: 1fr auto; gap: 8px 18px; align-items: end; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
 .notes-major-header p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 12px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
 .notes-major-header h2, .notes-course-header h3, .notes-chapter-header h4 { margin: 0; }

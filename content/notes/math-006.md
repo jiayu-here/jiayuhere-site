@@ -8,17 +8,12 @@ tags: ["考研数学", "数学总结", "图文总结"]
 
 ## 图文总结
 
-此笔记原本由 Obsidian Excalidraw 图组成。网页保留原图中的文字要点与全部嵌入图像；原始 Excalidraw 布局未改写为文字推导。
+此笔记原本由 Obsidian Excalidraw 图组成。网页仅保留原始 Excalidraw 画布及素材，方便按原始布局查看。
 
 ## 原始 Excalidraw 画布
 
 ![06 线性代数 - 相似对角化的原始 Excalidraw 画布](/assets/notes/excalidraw-math-006.svg)
 
-## 原图文字要点
-- 所有基向量都是特征向量
-- 特征值
-- 计算简单
-- 选出几个特征向量，作为基变换矩阵
 
 ## 原图素材
 ![Pasted Image 20240701201436_871](/assets/notes/79df697f5c61-Pasted-Image-20240701201436_871.png)

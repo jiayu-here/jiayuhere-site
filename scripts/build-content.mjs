@@ -613,6 +613,7 @@ const buildNoteIndex = async (items) => {
     if (leftIndex !== -1 || rightIndex !== -1) return (leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex) - (rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex);
     return left.localeCompare(right, "zh-CN");
   });
+  const noteGroupId = (...parts) => `notes-${parts.map((part) => encodeURIComponent(part).replace(/%/g, "-")).join("-")}`;
   const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], ["数学", "英语"]);
   const controls = `<div class="content-controls compact-controls">
     <label class="search-box"><span>搜索笔记</span><input type="search" data-content-search placeholder="输入标题、标签或关键词"></label>
@@ -625,28 +626,28 @@ const buildNoteIndex = async (items) => {
       const chapters = courses.get(course);
       const chapterContent = [...chapters.keys()].map((chapter) => {
         const entries = chapters.get(chapter);
-        return `<section class="notes-chapter-section" data-note-group>
-          <header class="notes-chapter-header"><h4>${escapeHtml(chapter)}</h4><span>${entries.length} 篇</span></header>
+        return `<details class="notes-chapter-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course, chapter)}" open>
+          <summary class="notes-chapter-header"><h4>${escapeHtml(chapter)}</h4><span>${entries.length} 篇</span></summary>
           <div class="content-grid">${entries.map(({ item, hierarchy: itemHierarchy }) => cardFor(item, "notes", "zh", prefix, itemHierarchy)).join("")}</div>
-        </section>`;
+        </details>`;
       }).join("");
       const count = [...chapters.values()].reduce((total, entries) => total + entries.length, 0);
-      return `<section class="notes-course-section" data-note-group>
-        <header class="notes-course-header"><h3>${escapeHtml(course)}</h3><span>${count} 篇</span></header>
+      return `<details class="notes-course-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course)}" open>
+        <summary class="notes-course-header"><h3>${escapeHtml(course)}</h3><span>${count} 篇</span></summary>
         <div class="notes-chapter-list">${chapterContent}</div>
-      </section>`;
+      </details>`;
     }).join("");
     const count = [...courses.values()].reduce((total, chapters) => total + [...chapters.values()].reduce((chapterTotal, entries) => chapterTotal + entries.length, 0), 0);
-    return `<section class="notes-major-section" data-note-group>
-      <header class="notes-major-header"><p>学习笔记大类</p><h2>${escapeHtml(major)}</h2><span>${count} 篇</span></header>
+    return `<details class="notes-major-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major)}" open>
+      <summary class="notes-major-header"><p>学习笔记大类</p><h2>${escapeHtml(major)}</h2><span>${count} 篇</span></summary>
       <div class="notes-course-list">${courseContent}</div>
-    </section>`;
+    </details>`;
   }).join("");
   const content = `
     <section class="page-hero compact-hero index-hero">
       <div class="container"><h1>学习笔记</h1><p>数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。</p></div>
     </section>
-    <section class="section container content-index-section">${controls}<div class="notes-major-list">${hierarchy}</div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section>`;
+    <section class="section container content-index-section">${controls}<div class="notes-major-list" data-notes-index>${hierarchy}</div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section>`;
   const output = path.join(root, "notes");
   await mkdir(output, { recursive: true });
   await writeFile(path.join(output, "index.html"), page({ prefix, locale: "zh", route, active: "notes", title: "学习笔记", description: "数学与英语学习笔记" , content }));
@@ -703,7 +704,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" && locale === "zh" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
       <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);
