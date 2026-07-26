@@ -101,7 +101,7 @@ tags: ["考研英语", "英语语法", "长难句分析"]
 
 ### 24.2.4 句子的平行并列 
 **举例**
-- *the problem is not merely that people do bad science, but that aoour current sustem of career advancement positively encourages it.*
+- *The problem is not merely that people do bad science, but that our current system of career advancement positively encourages it.*
 	- 并列连词：not merely ... But...
 	- 图示：![Pasted image 20240416222413](/assets/notes/55c5d7b0b1f0-Pasted-image-20240416222413.png)
 - *The behavioral sciences have been slow to change partly becausethe explanatory items often seem to be directly observed andpartly because other kinds of explanations have been hard to find.*

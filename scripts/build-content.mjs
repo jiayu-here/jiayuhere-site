@@ -485,12 +485,12 @@ const footer = (prefix, locale) => {
     <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260714s"></script>`;
+  <script src="${prefix}assets/script.js?v=20260726a"></script>`;
 };
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", usesMath = false }) => {
   const isEnglish = locale === "en";
-  const styleVersion = "20260723b";
+  const styleVersion = "20260726a";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -560,22 +560,100 @@ ${footer(prefix, locale)}
 
 const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
 
-const cardFor = (item, section, locale, prefix) => {
+const noteHierarchyFor = (item) => {
+  const tags = item.meta.tags || [];
+  if (item.meta.category === "数学") {
+    if (tags[0] === "考研数学") return { major: "数学", course: tags[1] || "未分类", chapter: tags[2] || "未分类" };
+    return { major: "数学", course: "工程数学", chapter: "复数、傅里叶变换、概率与线性代数" };
+  }
+  if (item.meta.category === "英语") {
+    return { major: "英语", course: tags[1] || "未分类", chapter: tags[2] || "未分类" };
+  }
+  return { major: "其他学习笔记", course: item.meta.category || "未分类", chapter: "其他" };
+};
+
+const cardFor = (item, section, locale, prefix, noteHierarchy) => {
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
   const targetFolder = section === "articles" ? "blog" : section;
   const href = `${routeFromRoot(prefix, locale, `${targetFolder}/${escapeHtml(item.meta.slug)}/index.html`)}`;
   const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || [])].join(" ");
+  const categoryLabel = noteHierarchy ? `${noteHierarchy.course} · ${noteHierarchy.chapter}` : (item.meta.category || config.label);
+  const headingTag = noteHierarchy ? "h5" : "h2";
   return `<article class="content-card" data-content-card data-category="${escapeHtml(item.meta.category || (isEnglish ? "All" : "全部"))}" data-search="${escapeHtml(searchText.toLowerCase())}">
-    <div class="card-topline"><span>${escapeHtml(item.meta.category || config.label)}</span><span>${escapeHtml(item.meta.status || item.meta.date || (isEnglish ? "Ongoing" : "持续更新"))}</span></div>
-    <h2><a href="${href}">${escapeHtml(item.meta.title)}</a></h2>
+    <div class="card-topline"><span>${escapeHtml(categoryLabel)}</span><span>${escapeHtml(item.meta.status || item.meta.date || (isEnglish ? "Ongoing" : "持续更新"))}</span></div>
+    <${headingTag}><a href="${href}">${escapeHtml(item.meta.title)}</a></${headingTag}>
     <p>${escapeHtml(item.meta.description)}</p>
     ${tagList(item.meta.tags || [])}
     <a class="text-link" href="${href}">${isEnglish ? "View details" : "查看详情"} <span aria-hidden="true">→</span></a>
   </article>`;
 };
 
+const buildNoteIndex = async (items) => {
+  const prefix = "../";
+  const route = "notes/";
+  const groupOrder = ["数学", "英语", "其他学习笔记"];
+  const courseOrder = {
+    数学: ["数学总结", "高等数学", "线性代数", "工程数学"],
+    英语: ["英语语法", "英语阅读", "英语写作"]
+  };
+  const groups = new Map();
+  for (const item of items) {
+    const hierarchy = noteHierarchyFor(item);
+    if (!groups.has(hierarchy.major)) groups.set(hierarchy.major, new Map());
+    const courses = groups.get(hierarchy.major);
+    if (!courses.has(hierarchy.course)) courses.set(hierarchy.course, new Map());
+    const chapters = courses.get(hierarchy.course);
+    if (!chapters.has(hierarchy.chapter)) chapters.set(hierarchy.chapter, []);
+    chapters.get(hierarchy.chapter).push({ item, hierarchy });
+  }
+  const sortNames = (names, order = []) => [...names].sort((left, right) => {
+    const leftIndex = order.indexOf(left);
+    const rightIndex = order.indexOf(right);
+    if (leftIndex !== -1 || rightIndex !== -1) return (leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex) - (rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex);
+    return left.localeCompare(right, "zh-CN");
+  });
+  const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], ["数学", "英语"]);
+  const controls = `<div class="content-controls compact-controls">
+    <label class="search-box"><span>搜索笔记</span><input type="search" data-content-search placeholder="输入标题、标签或关键词"></label>
+    <div class="filter-row" role="group" aria-label="笔记大类"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">全部</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div>
+    <p class="result-status" data-result-status aria-live="polite"></p>
+  </div>`;
+  const hierarchy = sortNames(groups.keys(), groupOrder).map((major) => {
+    const courses = groups.get(major);
+    const courseContent = sortNames(courses.keys(), courseOrder[major] || []).map((course) => {
+      const chapters = courses.get(course);
+      const chapterContent = [...chapters.keys()].map((chapter) => {
+        const entries = chapters.get(chapter);
+        return `<section class="notes-chapter-section" data-note-group>
+          <header class="notes-chapter-header"><h4>${escapeHtml(chapter)}</h4><span>${entries.length} 篇</span></header>
+          <div class="content-grid">${entries.map(({ item, hierarchy: itemHierarchy }) => cardFor(item, "notes", "zh", prefix, itemHierarchy)).join("")}</div>
+        </section>`;
+      }).join("");
+      const count = [...chapters.values()].reduce((total, entries) => total + entries.length, 0);
+      return `<section class="notes-course-section" data-note-group>
+        <header class="notes-course-header"><h3>${escapeHtml(course)}</h3><span>${count} 篇</span></header>
+        <div class="notes-chapter-list">${chapterContent}</div>
+      </section>`;
+    }).join("");
+    const count = [...courses.values()].reduce((total, chapters) => total + [...chapters.values()].reduce((chapterTotal, entries) => chapterTotal + entries.length, 0), 0);
+    return `<section class="notes-major-section" data-note-group>
+      <header class="notes-major-header"><p>学习笔记大类</p><h2>${escapeHtml(major)}</h2><span>${count} 篇</span></header>
+      <div class="notes-course-list">${courseContent}</div>
+    </section>`;
+  }).join("");
+  const content = `
+    <section class="page-hero compact-hero index-hero">
+      <div class="container"><h1>学习笔记</h1><p>数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。</p></div>
+    </section>
+    <section class="section container content-index-section">${controls}<div class="notes-major-list">${hierarchy}</div><p class="empty-state" data-empty-state hidden>暂时没有匹配的内容。</p></section>`;
+  const output = path.join(root, "notes");
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({ prefix, locale: "zh", route, active: "notes", title: "学习笔记", description: "数学与英语学习笔记" , content }));
+};
+
 const buildIndex = async (section, items, locale) => {
+  if (section === "notes" && locale === "zh") return buildNoteIndex(items);
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
   const prefix = isEnglish ? "../../" : "../";

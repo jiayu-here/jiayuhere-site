@@ -15,13 +15,13 @@ tags: ["考研英语", "英语语法", "简单句"]
 **实义动词 -> 否定**
 - 构成：did/do/does + not + 动词**原形**
 	- 过去的事情：did
-		- 注意：如果是过去时的动作转化为否定，动词要变为原型，然后再加 did ；
+		- 注意：如果是过去时的动作转化为否定，动词要变为原形，然后再加 did；
 	- 现在的事情：do
 	- 现在的事情，并且是第三人称单数：does
 - 举例
 	- 例一：
 		- *She likes music.*
-		- *She dose not like music*
+		- *She does not like music.*
 	- 例二：
 		- *American professors <u>did not possess </u>one.*
 	- 例三：
@@ -36,13 +36,13 @@ tags: ["考研英语", "英语语法", "简单句"]
 
 **举例**
 - *With other audiences you <u>mustn't</u> attempt to cut in with humor….*
-	- 情态动词后背直接加 not ；
+	- 情态动词后面直接加 not；
 - *... Average height…. <u>hasn't</u> really changed since 1960.*
 	- 完成时态中的 has 直接加 not； 
 
-**多个单词帮助构成动词，放在第一个后背**
-- *Such cooperation is likely to be stable only when each animalfeels it <u>is not being</u> cheated*
-- 放在 is 后背，而不是 being； 
+**多个单词帮助构成动词时，将 not 放在第一个词后面**
+- *Such cooperation is likely to be stable only when each animal feels it <u>is not being</u> cheated.*
+- 放在 is 后面，而不是 being；
 
 
 ## 5.2 强调

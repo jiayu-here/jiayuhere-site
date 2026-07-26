@@ -96,7 +96,7 @@ $1、\int adx=ax+C\:,\:a$ 是常数
 $2、\int x^{a}dx=\frac{x^{a+1}}{a+1}+C$ ,其中 a 为常数，且 $a\neq-1$
 $3、\int\frac{1}{x}dx=\ln|x|+C$
 $4、\int e^{x}dx=e^{x}+C$ 
-$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C$ ,其中 $a>0\:,\:目a\neq1$
+$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C$，其中 $a>0$ 且 $a\neq1$。
 $6、\int\sin xdx=-\cos x+C$
 7、$\int\cos xdx=\sin x+C$ 
 $8、\int\sec^{2}xdx=\tan x+C$ 
@@ -168,7 +168,7 @@ $20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$
 
 **2. 三角有理式积分**
 - 积分：$\int R(\sin x,\cos x)\mathrm{d}x$
-- 解释：表示 $sinx$ 和 $conx$ 经过有理运算得到；
+- 解释：表示 $\sin x$ 和 $\cos x$ 经过有理运算得到；
 - 一般方法：万能代换
 	- 令 $\tan\frac x2=t$
 	- $\int R(\sin x,\cos x)\operatorname{d}x=\int R(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2})\frac2{1+t^2}dt$
@@ -230,8 +230,8 @@ $20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$
 
 **例题**：$\text{计算 }\int\frac{x^2}{\sqrt{a^2-x^2}}dx(a>0).$
 - 分析
-	- 总结：当 $x=a*sint 时，此时 sint*cost=\frac{x}{a} * \sqrt{1-\frac{x^{2}}{a^{2}}}$
-	- 其中 $\frac{x}{a}$ 为 sint ，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 为使用 $\sin^{2}\alpha+\cos^{2}\alpha=1$ 公式计算得到的结果
+	- 总结：当 $x=a\sin t$ 时，$\sin t\cos t=\frac{x}{a}\sqrt{1-\frac{x^{2}}{a^{2}}}$。
+	- 其中 $\frac{x}{a}$ 为 $\sin t$，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 由 $\sin^{2}t+\cos^{2}t=1$ 得到。
 - 解析
 - 题型：#
 
@@ -243,5 +243,5 @@ $20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$
 - 题型：#
 #### PART 3：知识点复盘
 总结：
-- 当 $x=a*sint 时，此时 sint*cost=\frac{x}{a} * \sqrt{1-\frac{x^{2}}{a^{2}}}$
-- 其中 $\frac{x}{a}$ 为 sint ，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 为使用 $\sin^{2}\alpha+\cos^{2}\alpha=1$ 公式计算得到的结果
+- 当 $x=a\sin t$ 时，$\sin t\cos t=\frac{x}{a}\sqrt{1-\frac{x^{2}}{a^{2}}}$。
+- 其中 $\frac{x}{a}$ 为 $\sin t$，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 由 $\sin^{2}t+\cos^{2}t=1$ 得到。

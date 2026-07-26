@@ -22,7 +22,7 @@ tags: ["考研数学", "数学总结", "公式合集"]
     - 函数的性质
         - 单调性
         - 奇偶性：
-            - 常见奇函数：$\sin x,\tan x,\arcsin x,\arctan x,\ln\frac{1-x}{1+x},{\ln(x+\sqrt{1+x^2})},\frac{e^x-1}{e^x+1},$$f(-x)=-f(x)$
+            - 常见奇函数：$\sin x,\tan x,\arcsin x,\arctan x,\ln\frac{1-x}{1+x},{\ln(x+\sqrt{1+x^2})},\frac{e^x-1}{e^x+1},f(-x)=-f(x)$
             - 常见偶函数：$x^2,|x|,\cos x,f(x)=f(-x)$
         - 周期性
         - 有界性
@@ -189,8 +189,8 @@ tags: ["考研数学", "数学总结", "公式合集"]
 - 定积分
     - 定积分的概念
         - 定积分的定义：
-                      $f(x)$ 在 $[a,b]$ 上有界，在 $[a,b]$ 上任意插入分点，分成 n 个小区间 $\Delta x_{1}\Delta x_{2}\cdots\Delta x_{n}$ ，任取一点 i，有：$$\int_{a}^{b}f(x)dx=\lim_{λ\to0}\sum_{x=1}^{n}f(\xi_{i})\Delta x_{i}$$
-            - 其中：$$\lambda=\max\{\Delta x_{1}\cdots\Delta x_{n}\}$$
+                      $f(x)$ 在 $[a,b]$ 上有界，在 $[a,b]$ 上任意插入分点，分成 n 个小区间 $\Delta x_{1}\Delta x_{2}\cdots\Delta x_{n}$，任取一点 $\xi_i$，有：$\int_{a}^{b}f(x)\,dx=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i})\Delta x_{i}$。
+            - 其中：$\lambda=\max\{\Delta x_{1},\cdots,\Delta x_{n}\}$。
         - 微积分基本定理
     - 定积分的计算
         - 牛顿-莱布尼茨公式

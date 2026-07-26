@@ -101,7 +101,7 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 - $f(x_0+\Delta x)-f(x_0)=f^{\prime}[x_0+\theta\Delta x]\Delta x\quad(0<\theta<1)$
 - 近似描述：$\Delta y\approx f^{\prime}(x_0)\Delta x$
 
-**推论 2**：$\text{设 }f(x)\text{ 在区间 }I\text{ 上连续,在 }I\text{ 内可导,则在}$$I\text{ 上 }f(x)\equiv C\Leftrightarrow f^{\prime}(x)\equiv0$
+**推论 2**：$\text{设 }f(x)\text{ 在区间 }I\text{ 上连续，在 }I\text{ 内可导，则在 }I\text{ 上 }f(x)\equiv C\Leftrightarrow f^{\prime}(x)\equiv0$。
 - 左推导右是很明显的；
 - 关键在于右怎么推左；
 

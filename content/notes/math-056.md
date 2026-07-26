@@ -175,7 +175,7 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 - 解析
 	- 因为 $\lim_{n\to\infty}\frac{\sin{\frac{1}{n}}}{\frac{1}{n}}=1$，其极限为 0/0 型，最后结果为 1；
 	- 所以 1>0，所以 $\sin{\frac{1}{n}}$ 和 $\frac{1}{n}$ 是同阶的； 
-	- 因为 $\sum\frac{1}{n}发散 ，所以\sum\sin{\frac{1}{n}}发散$
+	- 因为 $\sin\frac{1}{n}\sim\frac{1}{n}$，且 $\sum\frac{1}{n}$ 发散，所以 $\sum\sin\frac{1}{n}$ 发散。
 - 题型： #比较审敛法
 
 **例题**：$1+\frac{1}{1}+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{(n-1)!}+\cdots$，证明它是收敛的；

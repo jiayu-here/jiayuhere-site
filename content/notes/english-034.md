@@ -24,9 +24,9 @@ tags: ["考研英语", "英语阅读", "真题讲解 05 - 09"]
 - 
 
 ## 阅读总结
-- 阅读文章中 `it is seem ...` 中，`seem` 后背往往跟的是作者不赞成的观点；
+- 阅读文章中 `it seems ...` 中，`seem` 后面往往跟的是作者不赞成的观点；
 - 代词的指代原则：就近指代；
-- 题干问特点、特征时，找文章中的形容词 `<-` `AG：The importence of education in poor countries ...`；
+- 题干问特点、特征时，找文章中的形容词 `<-` `AG：The importance of education in poor countries ...`；
 
 ## 单词总结
 **文章**：`TEXT 1`

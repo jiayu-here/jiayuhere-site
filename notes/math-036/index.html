@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260726a">
   <script>
     window.MathJax = {
       tex: {
@@ -157,7 +157,7 @@
 <p>$2、\int x^{a}dx=\frac{x^{a+1}}{a+1}+C$ ,其中 a 为常数，且 $a\neq-1$</p>
 <p>$3、\int\frac{1}{x}dx=\ln|x|+C$</p>
 <p>$4、\int e^{x}dx=e^{x}+C$ </p>
-<p>$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C$ ,其中 $a&gt;0\:,\:目a\neq1$</p>
+<p>$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C$，其中 $a&gt;0$ 且 $a\neq1$。</p>
 <p>$6、\int\sin xdx=-\cos x+C$</p>
 <p>7、$\int\cos xdx=\sin x+C$ </p>
 <p>$8、\int\sec^{2}xdx=\tan x+C$ </p>
@@ -235,7 +235,7 @@
 <p><strong>2. 三角有理式积分</strong></p>
 <ul>
 <li>积分：$\int R(\sin x,\cos x)\mathrm{d}x$</li>
-<li>解释：表示 $sinx$ 和 $conx$ 经过有理运算得到；</li>
+<li>解释：表示 $\sin x$ 和 $\cos x$ 经过有理运算得到；</li>
 <li>一般方法：万能代换</li>
 <li class="list-indent-1">令 $\tan\frac x2=t$</li>
 <li class="list-indent-1">$\int R(\sin x,\cos x)\operatorname{d}x=\int R(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2})\frac2{1+t^2}dt$</li>
@@ -304,8 +304,8 @@
 <p><strong>例题</strong>：$\text{计算 }\int\frac{x^2}{\sqrt{a^2-x^2}}dx(a&gt;0).$</p>
 <ul>
 <li>分析</li>
-<li class="list-indent-1">总结：当 $x=a<em>sint 时，此时 sint</em>cost=\frac{x}{a} * \sqrt{1-\frac{x^{2}}{a^{2}}}$</li>
-<li class="list-indent-1">其中 $\frac{x}{a}$ 为 sint ，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 为使用 $\sin^{2}\alpha+\cos^{2}\alpha=1$ 公式计算得到的结果</li>
+<li class="list-indent-1">总结：当 $x=a\sin t$ 时，$\sin t\cos t=\frac{x}{a}\sqrt{1-\frac{x^{2}}{a^{2}}}$。</li>
+<li class="list-indent-1">其中 $\frac{x}{a}$ 为 $\sin t$，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 由 $\sin^{2}t+\cos^{2}t=1$ 得到。</li>
 <li>解析</li>
 <li>题型：#</li>
 </ul>
@@ -320,8 +320,8 @@
 <h4 id="section-16">PART 3：知识点复盘</h4>
 <p>总结：</p>
 <ul>
-<li>当 $x=a<em>sint 时，此时 sint</em>cost=\frac{x}{a} * \sqrt{1-\frac{x^{2}}{a^{2}}}$</li>
-<li>其中 $\frac{x}{a}$ 为 sint ，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 为使用 $\sin^{2}\alpha+\cos^{2}\alpha=1$ 公式计算得到的结果</li>
+<li>当 $x=a\sin t$ 时，$\sin t\cos t=\frac{x}{a}\sqrt{1-\frac{x^{2}}{a^{2}}}$。</li>
+<li>其中 $\frac{x}{a}$ 为 $\sin t$，$\sqrt{1-\frac{x^{2}}{a^{2}}}$ 由 $\sin^{2}t+\cos^{2}t=1$ 得到。</li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-035/index.html"><span>← 上一项</span><strong>Lecture 27：不定积分 换元积分法</strong></a>
     <a class="article-pagination-next" href="../math-037/index.html"><span>下一项 →</span><strong>Lecture 29：换元积分法</strong></a>
@@ -333,6 +333,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714s"></script>
+  <script src="../../assets/script.js?v=20260726a"></script>
 </body>
 </html>

@@ -68,8 +68,8 @@ tags: ["考研英语", "英语语法", "简单句"]
 	- 非谓语动词可以放前面；
 	- 非谓语动词可以放后面：当非谓语动词作主语太长时，此时可以将其放到后背，然后使用**形式主语 It** 来代指主语；
 - 举例：
-	- 放前面：*<u>to anticipate every imaqinable driving situation</u> is a difficult Programming problem.*
-	- 放后面：*<u>It</u> is a difficult Programming problem <u>to anticipate every imaqinable driving situation</u>.
+	- 放前面：*<u>to anticipate every imaginable driving situation</u> is a difficult programming problem.*
+	- 放后面：*<u>It</u> is a difficult programming problem <u>to anticipate every imaginable driving situation</u>.*
 	- 放前面：*<u>To do</u> so is important.*
 	- 放后面：*<u>It</u> is important <u>to do so</u>.*
 - 常用形式：
@@ -94,7 +94,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 **位置二：介宾**：位于介词之后；
 - 使用：只有 Doing 可以做**介宾**；
 - 举例：
-	- *The framers of the Constitution envisioned law as <u>having authoritu apart from politics</u>.*
+	- *The framers of the Constitution envisioned law as <u>having authority apart from politics</u>.*
 		- as：介词，后背只能接宾语 Doing ；
 	- *<u>Thinking</u> is essentially a process of <u>making connections in the Brain</u>.*
 		- of：介词，后背是 Doing 的词组；

@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260723b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260726a">
   <script>
     window.MathJax = {
       tex: {
@@ -60,7 +60,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 35：微分方程的基本概念</h1><p class="article-lead">考研数学学习笔记：Lecture 35：微分方程的基本概念。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-01</span><span>约 13 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回学习笔记</a><h1>Lecture 35：微分方程的基本概念</h1><p class="article-lead">考研数学学习笔记：Lecture 35：微分方程的基本概念。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-01</span><span>约 14 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">本章常考题型与典型例题</a><a href="#section-2">1.1 什么是微分方程</a><a href="#section-9">1.2 可分离变量的微分方程</a><a href="#section-11">1.3 齐次方程</a><a href="#section-13">1.4 常考题型</a></nav></details><div class="prose"><h2 id="section-1">本章常考题型与典型例题</h2>
 <p><strong>考试内容</strong></p>
 <ul>
@@ -137,7 +137,7 @@
 <blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
 <blockquote>1. 二阶微分方程：表达式中的最高阶导数是二阶导数；</blockquote>
 <blockquote>2. 高阶微分方程：包含三阶导数四阶导数或更高阶导数的方程；</blockquote>
-<blockquote>	二阶微分方程一般形式：$$y^{\prime}=f(x,y,y^{\prime})$$</blockquote>
+<blockquote>	二阶微分方程一般形式：$y^{\prime\prime}=f(x,y,y^{\prime})$</blockquote>
 <h5 id="section-6"><strong>定义</strong>： #常微分方程</h5>
 <blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：函数的自变量只有一个；</blockquote>
 <p><strong>解释</strong></p>
@@ -149,15 +149,15 @@
 <li class="list-indent-2">小球的重力加速度</li>
 <li class="list-indent-3">$$\ddot{y}(t)=-g$$</li>
 <li class="list-indent-1">知道<strong>一阶导数</strong>：</li>
-<li class="list-indent-2">知道向下的分量为重力加速度 $-g$，因此 $\ddot{y}(t)=-g$，还可以将其和速度的关系描述出来：$$\frac{d(-gt+v_0)}{dt}(t)=-g$$</li>
+<li class="list-indent-2">知道向下的分量为重力加速度 $-g$，因此 $\ddot{y}(t)=-g$，还可以将其和速度的关系描述出来：$\frac{d}{dt}(-gt+v_0)=-g$。</li>
 <li class="list-indent-2">但只知道这个还无法确定原函数，还需要为其增加初始状态，来进行约束；</li>
 <li class="list-indent-1">加上<strong>初始条件 1</strong>：</li>
 <li class="list-indent-2">在 $v_0$ 的速度基础上，进行的向下 g 作用：$\dot{y}(t)=-gt+v_0$</li>
-<li class="list-indent-2">问题：还是不知道原函数 $$\frac{d(????)}{dt}(t)=-gt+v_0$$</li>
+<li class="list-indent-2">问题：仍不知道原函数的具体形式，只能写成 $\frac{d\,y(t)}{dt}=-gt+v_0$。</li>
 <li class="list-indent-1">知道<strong>原函数</strong>：</li>
-<li class="list-indent-2">$$\frac{d(-(1/2)gt^{2}+v_{0}t)}{dt}(t)=-gt+v_{0}$$</li>
+<li class="list-indent-2">$\frac{d}{dt}\left(-\frac{1}{2}gt^{2}+v_{0}t\right)=-gt+v_{0}$。</li>
 <li class="list-indent-1">加上<strong>初始条件 2</strong>：</li>
-<li class="list-indent-2">当物体的初始的位置为 $y_0$ 时，且其关系为：$$\frac{d(-(1/2)gt^{2}+v_{0}t+y_{0})}{dt}(t)=-gt+v_{0}$$</li>
+<li class="list-indent-2">当物体的初始位置为 $y_0$ 时，且其关系为：$\frac{d}{dt}\left(-\frac{1}{2}gt^{2}+v_{0}t+y_{0}\right)=-gt+v_{0}$。</li>
 <li class="list-indent-1">得到<strong>微分方程的解</strong>：</li>
 <li class="list-indent-2">$y(t)=-(1/2)gt^2+v_0t+y_0$</li>
 </ul>
@@ -379,6 +379,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260714s"></script>
+  <script src="../../assets/script.js?v=20260726a"></script>
 </body>
 </html>

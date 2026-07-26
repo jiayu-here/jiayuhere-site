@@ -53,14 +53,14 @@ tags: ["考研英语", "英语语法", "长难句"]
 	- 3. 即：**宾语从句总是陈述句**；
 - 1. 陈述句改为从句
 	- 将陈述句前面加 that，直接放到主句后背；
-	- *Dr. Worm acknowledges （that）<u>these fiqures are conservative</u>.*
+	- *Dr. Worm acknowledges （that）<u>these figures are conservative</u>.*
 		- that：虽然可以省略，但是不推荐省略掉；
 	- *We believe （that）<u>consumers should have more control</u>.*
 - 2. 疑问句改为从句
 	- 将疑问句中开头的谓语动词往后放，或者和文中的谓语动词合并，然后加在主句后背；
-	- *We suddenly can't remember <u>where we put the keus just a moment ago</u>.*
+	- *We suddenly can't remember <u>where we put the keys just a moment ago</u>.*
 - 3. 一般疑问句改为从句
-	- 把一般疑问句加入到主句后，前面加是否（if、**weather**），推荐加 weather； 
+	- 把一般疑问句加入到主句后，前面加是否（if、**whether**），推荐加 whether；
 	- 一般疑问：Are other clients going to abandon me, too?
 		- 回答一般只有是、或者不是；
 	- 改完后：*I don't know <u>if other clients are going to abandon me, too</u>….*

@@ -52,7 +52,7 @@ tags: ["考研英语", "英语语法", "长难句分析"]
 	- 有标点；有连接词 When ；
 	- 第一次断开：
 		- When the court **deals** with social policy decisions；一个谓语动词，已经断开完成；
-		- The law it shapes is inescapably political.. ；两个谓语动词：shapes 和 is ，还需要继续断开；
+		- The law it shapes is inescapably political.；两个谓语动词：shapes 和 is，还需要继续断开；
 	- 第二次断开：分析主谓 
 		- the law it shapes is inescapably political…
 		- 结构：主主谓谓

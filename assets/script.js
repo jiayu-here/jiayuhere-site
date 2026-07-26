@@ -255,6 +255,7 @@ const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
 const contentCards = searchInput
   ? Array.from(document.querySelectorAll("[data-content-card], .tool-grid > .tool-card, .resource-grid > .resource-group, .timeline > .timeline-item"))
   : Array.from(document.querySelectorAll("[data-content-card]"));
+const noteGroups = Array.from(document.querySelectorAll("[data-note-group]"));
 const resultStatus = document.querySelector("[data-result-status]");
 const emptyState = document.querySelector("[data-empty-state]");
 let activeFilter = "all";
@@ -271,6 +272,11 @@ const updateContentList = () => {
     const visible = matchesFilter && matchesQuery;
     card.classList.toggle("is-hidden", !visible);
     if (visible) visibleCount += 1;
+  });
+
+  noteGroups.forEach((group) => {
+    const hasVisibleCard = Array.from(group.querySelectorAll("[data-content-card]")).some((card) => !card.classList.contains("is-hidden"));
+    group.hidden = !hasVisibleCard;
   });
 
   if (resultStatus) resultStatus.textContent = t(`找到 ${visibleCount} 项内容。`, `${visibleCount} item${visibleCount === 1 ? "" : "s"} shown.`);

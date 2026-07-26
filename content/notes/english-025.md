@@ -71,26 +71,27 @@ tags: ["考研英语", "英语语法", "长难句分析"]
 - **翻译成前面、后面都可以**，一般可以翻译成前面比较顺；
 
 **举例**
-- *Peter Hardy, who sympathies with the views of the energy sector, is resisting proposed changes to science standards forpre-teen pupils.*
-	- 插入部分： who sympathies with the views of the energy sector
+
+- *Peter Hardy, who sympathizes with the views of the energy sector, is resisting proposed changes to science standards for pre-teen pupils.*
+	- 插入部分：who sympathizes with the views of the energy sector
 	- 断开：
-		- Peter Hardy…is resisting proposed changes to sciencestandafds for pre-teen pupils.
-		- who sumpathies with the views of the enerqy sector
-- *Yet these creatures are members of the biotic community and<u>, if itsstability depends on its integrity, </u>they are entitled to continuance.*
+		- Peter Hardy…is resisting proposed changes to science standards for pre-teen pupils.
+		- who sympathizes with the views of the energy sector
+- *Yet these creatures are members of the biotic community and<u>, if its stability depends on its integrity, </u>they are entitled to continuance.*
 	- Yet these creatures are members of the biotic community
 	- and… they are entitled to continuance.
-	- if itsstability depends on its integrity 
-- *Branch points out that, even if a growing number of officialguidelines and textbooks reflect scientific consensus on climatechange, unofficial educational materials that convey more biasedperspectives are being distributed to teachers.*
+	- if its stability depends on its integrity
+- *Branch points out that, even if a growing number of official guidelines and textbooks reflect scientific consensus on climate change, unofficial educational materials that convey more biased perspectives are being distributed to teachers.*
 	- Branch points out
-	- that … unofficial educational materials … are being distributedto teachers.
+	- that … unofficial educational materials … are being distributed to teachers.
 	- that convey more biased perspectives
-	- ,even if a growing number of official guidelines and textbooksreflect scientific consensus on climate change.
+	- even if a growing number of official guidelines and textbooks reflect scientific consensus on climate change.
 
 ## 22.3 从句后移式分裂结构
 
 **举例**
-- *Contrary to the descriptions on record, no systematic evidence was found <u>that</u> levels of productivity were related to changes inlighting.*
-	- 从句：levels of productivity were related to changes inlighting `->` 解释说明前面的 evidence `->` 从句被后移到了 was found 后背；
+- *Contrary to the descriptions on record, no systematic evidence was found <u>that</u> levels of productivity were related to changes in lighting.*
+	- 从句：levels of productivity were related to changes in lighting `->` 解释说明前面的 evidence `->` 从句被后移到了 was found 后面；
 	- 移回来之后：
 		- *Contrary to the descriptions on record, no systematic **evidence that levels of productivity were related to changes in lighting** was found.*
 - *In 2005, IBM <u>noted</u> in a court filing <u>that it had been issued more Than 300 business method patents</u>...*
