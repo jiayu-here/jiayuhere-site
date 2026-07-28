@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -90,7 +90,7 @@
 <li class="list-indent-1">分子分母这么多项，结果主要取决于最大的数（最高次数）；</li>
 <li class="list-indent-1">注意 x 是趋向于无穷。</li>
 <li class="list-indent-1">当 x 趋向于 0 时，此时函数的值应该取决于最小的数（最低次数）；</li>
-<li>$\lim_{{n\to\infty}}x^n=\begin{cases}\begin{array}{c}\mathbf{0},&amp;|x|&lt;1,\\\infty,&amp;{|x|&gt;1}\\1,&amp;{x=1}.\end{array}\\\text{不存在,}&amp;x=-1.&amp;\end{cases}$</li>
+<li>$\lim_{{n\to\infty}}x^n=\begin{cases}0,&amp;|x|&lt;1,\\1,&amp;x=1,\\+\infty,&amp;x&gt;1,\\\text{不存在},&amp;x\leq-1.\end{cases}$</li>
 <li>$\lim_{n\to\infty}e^{{nx}}=\begin{cases}0,&amp;x&lt;0,\\+\infty,&amp;x&gt;0\\1,&amp;x=0.&amp;\end{cases}$</li>
 </ul>
 <p><strong>1 的无穷大次方</strong></p>
@@ -195,18 +195,18 @@ $$</div>
 <li class="list-indent-1">思路：将 0 或者无穷当中一个放到上面 OR 下面；</li>
 <li>$1^\infty;\quad\infty^0;\quad0^0$：</li>
 <li class="list-indent-1">思路：这三种都得改写成 0 乘以无穷大；</li>
-<li class="list-indent-1">方法： $[f(x)]^{g(x)}=e^{g(x)f(x)}$  -&gt; 改写成 e 的形式；</li>
-<li class="list-indent-1">核心：求 e 上面的相乘部分的无限；</li>
+<li class="list-indent-1">方法： $[f(x)]^{g(x)}=e^{g(x)\ln f(x)}$  -&gt; 改写成 e 的形式；</li>
+<li class="list-indent-1">核心：求指数部分 $g(x)\ln f(x)$ 的极限；</li>
 </ul>
 <p><strong>总结</strong></p>
 <ul>
-<li>1. 如果条件是函数 f (x) 二阶可导，则使用洛必达法则最多用到一阶导数；</li>
+<li>1. 如果条件只保证函数二阶可导，则在其余条件都满足时，洛必达法则最多可连续使用两次；</li>
 <li>2. N 阶可导 -&gt; n-1 阶可导可以使用；</li>
 <li>3. 如果遇到抽象函数求极限，可以考虑使用导数的定义来计算；</li>
 </ul>
 <h3 id="section-9">10.1.5 方法 5：使用泰勒公式求极限</h3>
 <h5 id="section-10"><strong>定理</strong>：泰勒定理-带 Peano 余项</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： </blockquote>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
 <blockquote>1. 带有 Peano 余项的泰勒公式： $\text{设}f(x)\text{ 在 }x_0\text{ 处 }n\text{ 阶可微,则}$ $f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$</blockquote>
 <blockquote>	意义：把一个一般函数，写成一个一般多项式+余项</blockquote>
 <blockquote>	其中：$$P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$$</blockquote>
@@ -249,7 +249,7 @@ $$</div>
 <li>解析</li>
 <li class="list-indent-1">$\frac{\frac{1}{2}n(n+1)}{n^{2}+n+n}\leq[原式]\leq\frac{\frac{1}{2}n(n+1)}{n^{2}+n+1}$</li>
 <li class="list-indent-1">前后都趋向于 1/2，所以原式=1/2；</li>
-<li>题型： #夹逼原理</li>
+<li>题型： <span class="note-tag">夹逼原理</span></li>
 </ul>
 <p> <strong>例题</strong>：$\lim_{n\to\infty}\sqrt[n]{a_1^n+{a_2}^n+\cdots+{a_m}^n},\quad\text{其中 }a_i&gt;0,(i=1,2,\cdots m)$</p>
 <ul>
@@ -259,7 +259,7 @@ $$</div>
 <li>解析</li>
 <li class="list-indent-1">最大项当中，因为 m 是一个定值，因此最后就是收敛为 a； </li>
 <li class="list-indent-1">$\sqrt[n]{a^{n}}\leq\sqrt[n]{a_{1}^{n}+a_{1}^{n}+\cdots+a_{m}^{n}}\leq\sqrt[n]{ma_{0}^{n}}$</li>
-<li>题型： #夹逼原理 </li>
+<li>题型： <span class="note-tag">夹逼原理</span> </li>
 </ul>
 <p><strong>方法</strong>： 遇到在根号当中有限项时，只需要找当中最能影响当前总数字大小的项，其极限就是夹逼原理放缩的数值；</p>
 <ul>
@@ -288,7 +288,7 @@ $$</div>
 <li class="list-indent-2">$\lim_{n\to\infty}x_{n}=a.$</li>
 <li class="list-indent-2">$a=\frac12{\left(a+\frac1a\right)}$</li>
 <li class="list-indent-2">$\lim_{n\to\infty}x_n=\mathbf{1}.$</li>
-<li>题型： #单调有界准则 </li>
+<li>题型： <span class="note-tag">单调有界准则</span> </li>
 </ul>
 <p><strong>概念</strong>：单调有界准则使用场合</p>
 <ul>
@@ -314,7 +314,7 @@ $$</div>
 <li class="list-indent-2">因此变化的部分变成 x： $\int_{0}^{1}\frac{1}{1+x}dx$</li>
 <li class="list-indent-1">1. 哪里变，哪里就是变量；</li>
 <li class="list-indent-1">2. X 变化的范围就是区间的范围； </li>
-<li>题型： #定积分定义求极限</li>
+<li>题型： <span class="note-tag">定积分定义求极限</span></li>
 </ul>
 <p><strong>总结：</strong> n 项和问题</p>
 <ul>
@@ -334,6 +334,6 @@ $$</div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

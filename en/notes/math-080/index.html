@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 11: Linear Dependence of Vectors and Vector Sets | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 11: Linear Dependence of Vectors and Vector Sets. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Vector Sets">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 11: Linear Dependence of Vectors and Vector Sets | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 11: Linear Dependence of Vectors and Vector Sets. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-080/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,223 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-080/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-079/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 10：矩阵的秩</strong></a>
-    <a class="article-pagination-next" href="../math-081/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 12：极大线性无关组与向量组的秩</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 11: Linear Dependence of Vectors and Vector Sets</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics study notes: Lecture 11: Linear Dependence of Vectors and Vector Sets. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>6 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Vector Sets</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">11.1 Vectors and Spans</a><a href="#section-6">11.2 Inner Products and Orthogonality</a><a href="#section-12">11.3 Linear Combinations, Dependence, and Independence</a><a href="#section-19">11.4 Criteria and Useful Theorems</a></nav></details><div class="prose"><h2 id="section-1">11.1 Vectors and Spans</h2>
+<h3 id="section-2">11.1.1 Vectors</h3>
+<h5 id="section-3"><strong>Definition</strong>: <span class="note-tag">vector</span></h5>
+<p>An $n$-dimensional row vector is an ordered array</p>
+<div class="math-display">$$
+\alpha=\begin{bmatrix}a_1&amp;a_2&amp;\cdots&amp;a_n\end{bmatrix},
+$$</div>
+<p>and the corresponding column vector is</p>
+<div class="math-display">$$
+\alpha^{\mathrm T}
+=\begin{bmatrix}a_1&amp;a_2&amp;\cdots&amp;a_n\end{bmatrix}^{\mathrm T}.
+$$</div>
+<p>The scalar $a_i$ is the $i$th component of the vector. Two vectors are equal if and only if all corresponding components are equal.</p>
+<p>For vectors $\alpha=(a_1,\ldots,a_n)$ and $\beta=(b_1,\ldots,b_n)$,</p>
+<div class="math-display">$$
+\alpha+\beta=(a_1+b_1,\ldots,a_n+b_n),
+\qquad
+k\alpha=(ka_1,\ldots,ka_n).
+$$</div>
+<p>The rows or columns of a matrix can be viewed as a vector set. For example, the columns</p>
+<div class="math-display">$$
+\alpha_1=
+\begin{bmatrix}1\\2\\3\end{bmatrix},
+\qquad
+\alpha_2=
+\begin{bmatrix}6\\7\\9\end{bmatrix},
+\qquad
+\alpha_3=
+\begin{bmatrix}2\\4\\6\end{bmatrix}
+$$</div>
+<p>satisfy $\alpha_3=2\alpha_1$, so $\alpha_3$ contributes no new independent direction.</p>
+<h3 id="section-4">11.1.2 Span</h3>
+<h5 id="section-5"><strong>Definition</strong>: <span class="note-tag">span</span></h5>
+<p>The span of vectors $\alpha_1,\ldots,\alpha_m$ is the set of all their linear combinations:</p>
+<div class="math-display">$$
+\operatorname{span}\{\alpha_1,\ldots,\alpha_m\}
+=
+\left\{
+k_1\alpha_1+\cdots+k_m\alpha_m
+:
+k_1,\ldots,k_m\in\mathbb R
+\right\}.
+$$</div>
+<ul>
+<li>One nonzero vector spans a line through the origin.</li>
+<li>Two linearly independent vectors in $\mathbb R^3$ span a plane through the origin.</li>
+<li>Three linearly independent vectors in $\mathbb R^3$ span all of $\mathbb R^3$.</li>
+</ul>
+<ul>
+<li>Original illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/ea032cb9a6dc-Pasted-image-20240625184520.png" alt="Span of two vectors in three-dimensional space" loading="lazy" decoding="async"></li>
+</ul>
+<p>Coordinates depend on the chosen basis, but the geometric vector itself does not.</p>
+<h2 id="section-6">11.2 Inner Products and Orthogonality</h2>
+<h3 id="section-7">11.2.1 Inner Product and Norm</h3>
+<h5 id="section-8"><strong>Definition</strong>: <span class="note-tag">inner-product</span></h5>
+<p>For $\alpha,\beta\in\mathbb R^n$,</p>
+<div class="math-display">$$
+\langle\alpha,\beta\rangle
+=\alpha^{\mathrm T}\beta
+=\sum_{i=1}^{n}a_i b_i
+=\|\alpha\|\,\|\beta\|\cos\theta.
+$$</div>
+<p>The Euclidean norm is</p>
+<div class="math-display">$$
+\|\alpha\|
+=\sqrt{\langle\alpha,\alpha\rangle}
+=\sqrt{\sum_{i=1}^{n}a_i^2}.
+$$</div>
+<p>A vector with norm $1$ is a unit vector.</p>
+<h3 id="section-9">11.2.2 Orthogonal Vectors and Orthogonal Matrices</h3>
+<h5 id="section-10"><strong>Definition</strong>: <span class="note-tag">orthogonal-vectors</span></h5>
+<p>Vectors $\alpha$ and $\beta$ are orthogonal if</p>
+<div class="math-display">$$
+\langle\alpha,\beta\rangle=\alpha^{\mathrm T}\beta=0.
+$$</div>
+<p>An ordered vector set $\alpha_1,\ldots,\alpha_s$ is orthonormal if</p>
+<div class="math-display">$$
+\alpha_i^{\mathrm T}\alpha_j
+=
+\begin{cases}
+1,&amp;i=j,\\
+0,&amp;i\ne j.
+\end{cases}
+$$</div>
+<h5 id="section-11"><strong>Definition</strong>: <span class="note-tag">orthogonal-matrix</span></h5>
+<p>An $n\times n$ matrix $A$ is orthogonal if</p>
+<div class="math-display">$$
+A^{\mathrm T}A=I_n.
+$$</div>
+<p>Equivalently,</p>
+<div class="math-display">$$
+A^{-1}=A^{\mathrm T},
+$$</div>
+<p>and the rows and columns of $A$ are orthonormal sets. Orthogonal transformations preserve inner products, lengths, and angles.</p>
+<p>A planar rotation is represented by</p>
+<div class="math-display">$$
+Q=
+\begin{bmatrix}
+\cos\theta&amp;-\sin\theta\\
+\sin\theta&amp;\cos\theta
+\end{bmatrix}.
+$$</div>
+<h2 id="section-12">11.3 Linear Combinations, Dependence, and Independence</h2>
+<h3 id="section-13">11.3.1 Linear Representation</h3>
+<h5 id="section-14"><strong>Definition</strong>: <span class="note-tag">linear-combination</span></h5>
+<p>An expression</p>
+<div class="math-display">$$
+k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m
+$$</div>
+<p>is a linear combination of $\alpha_1,\ldots,\alpha_m$.</p>
+<p>A vector $\beta$ is linearly representable by $\alpha_1,\ldots,\alpha_m$ if scalars $k_1,\ldots,k_m$ exist such that</p>
+<div class="math-display">$$
+\beta=k_1\alpha_1+\cdots+k_m\alpha_m.
+$$</div>
+<p>This is equivalent to $\beta\in\operatorname{span}\{\alpha_1,\ldots,\alpha_m\}$.</p>
+<h3 id="section-15">11.3.2 Linear Dependence</h3>
+<h5 id="section-16"><strong>Definition</strong>: <span class="note-tag">linear-dependence</span></h5>
+<p>The vector set $\alpha_1,\ldots,\alpha_m$ is linearly dependent if scalars $k_1,\ldots,k_m$, not all zero, satisfy</p>
+<div class="math-display">$$
+k_1\alpha_1+\cdots+k_m\alpha_m=0.
+$$</div>
+<p>Equivalently, at least one vector in the set can be expressed as a linear combination of the others.</p>
+<ul>
+<li>Any vector set containing the zero vector is linearly dependent.</li>
+<li>Any vector set containing two proportional vectors is linearly dependent.</li>
+</ul>
+<h3 id="section-17">11.3.3 Linear Independence</h3>
+<h5 id="section-18"><strong>Definition</strong>: <span class="note-tag">linear-independence</span></h5>
+<p>The vector set $\alpha_1,\ldots,\alpha_m$ is linearly independent if</p>
+<div class="math-display">$$
+k_1\alpha_1+\cdots+k_m\alpha_m=0
+$$</div>
+<p>implies</p>
+<div class="math-display">$$
+k_1=k_2=\cdots=k_m=0.
+$$</div>
+<p>A single nonzero vector is linearly independent. Two vectors are linearly independent if and only if neither is a scalar multiple of the other.</p>
+<h2 id="section-19">11.4 Criteria and Useful Theorems</h2>
+<h3 id="section-20">11.4.1 Removing or Adding a Vector</h3>
+<h5 id="section-21"><strong>Theorem</strong>: <span class="note-tag">dependence-criterion</span></h5>
+<p>For a set containing at least two vectors, the following are equivalent:</p>
+<ol>
+<li>the set is linearly dependent;</li>
+<li>at least one vector is a linear combination of the remaining vectors.</li>
+</ol>
+<h5 id="section-22"><strong>Theorem</strong>: <span class="note-tag">unique-representation</span></h5>
+<p>If $\alpha_1,\ldots,\alpha_m$ is linearly independent but $\alpha_1,\ldots,\alpha_m,\beta$ is linearly dependent, then</p>
+<div class="math-display">$$
+\beta=k_1\alpha_1+\cdots+k_m\alpha_m
+$$</div>
+<p>for a unique set of coefficients $k_1,\ldots,k_m$.</p>
+<h3 id="section-23">11.4.2 Comparing the Sizes of Vector Sets</h3>
+<h5 id="section-24"><strong>Theorem</strong>: <span class="note-tag">dimension-bound</span></h5>
+<p>If each of the $t$ vectors $\beta_1,\ldots,\beta_t$ can be represented by $\alpha_1,\ldots,\alpha_s$ and $t&gt;s$, then $\beta_1,\ldots,\beta_t$ is linearly dependent.</p>
+<p>Equivalently, if $\beta_1,\ldots,\beta_t$ is linearly independent and lies in the span of $\alpha_1,\ldots,\alpha_s$, then $t\le s$.</p>
+<h3 id="section-25">11.4.3 Dependence, Homogeneous Systems, and Rank</h3>
+<p>Let</p>
+<div class="math-display">$$
+A=
+\begin{bmatrix}
+\alpha_1&amp;\alpha_2&amp;\cdots&amp;\alpha_m
+\end{bmatrix}.
+$$</div>
+<p>Then</p>
+<div class="math-display">$$
+Ax
+=
+\begin{bmatrix}
+\alpha_1&amp;\alpha_2&amp;\cdots&amp;\alpha_m
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2\\\vdots\\x_m
+\end{bmatrix}
+=x_1\alpha_1+\cdots+x_m\alpha_m.
+$$</div>
+<p>Therefore,</p>
+<div class="math-display">$$
+\alpha_1,\ldots,\alpha_m
+\text{ are linearly dependent}
+\iff
+Ax=0
+\text{ has a nonzero solution}
+\iff
+\operatorname{rank}(A)&lt;m.
+$$</div>
+<p>If the number of unknowns exceeds the number of equations in a homogeneous system, then the system has a nonzero solution. For $n$ vectors in $\mathbb R^n$,</p>
+<div class="math-display">$$
+\alpha_1,\ldots,\alpha_n
+\text{ are linearly independent}
+\iff
+\det\begin{bmatrix}\alpha_1&amp;\cdots&amp;\alpha_n\end{bmatrix}\ne0.
+$$</div>
+<h3 id="section-26">11.4.4 Linear Representability and Rank</h3>
+<p>The vector $\beta$ is linearly representable by $\alpha_1,\ldots,\alpha_s$ if and only if</p>
+<div class="math-display">$$
+\begin{bmatrix}\alpha_1&amp;\cdots&amp;\alpha_s\end{bmatrix}x=\beta
+$$</div>
+<p>is consistent. By the rank criterion,</p>
+<div class="math-display">$$
+\operatorname{rank}
+\begin{bmatrix}\alpha_1&amp;\cdots&amp;\alpha_s\end{bmatrix}
+=
+\operatorname{rank}
+\begin{bmatrix}\alpha_1&amp;\cdots&amp;\alpha_s&amp;\beta\end{bmatrix}.
+$$</div>
+<h3 id="section-27">11.4.5 Subsets, Supersets, and Coordinate Extensions</h3>
+<ul>
+<li>If a subset of a vector set is linearly dependent, the whole set is linearly dependent.</li>
+<li>Every subset of a linearly independent set is linearly independent.</li>
+<li>If linearly independent $n$-dimensional vectors are extended by appending the same number of additional components to each vector, the resulting higher-dimensional vectors remain linearly independent.</li>
+<li>If a vector set is linearly dependent, deleting the same components from every vector leaves a linearly dependent set.</li>
+</ul>
+<p>These statements are often summarized as follows: dependence passes to supersets, independence passes to subsets, coordinate extension preserves independence, and coordinate deletion preserves dependence.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-079/index.html"><span>← Previous item</span><strong>Lecture 10: Rank of a matrix</strong></a>
+    <a class="article-pagination-next" href="../math-081/index.html"><span>Next item →</span><strong>Lecture 12: Maximal Linearly Independent Sets and Rank</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +285,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

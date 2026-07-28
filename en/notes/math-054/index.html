@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 47：三重积分 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 47: Triple Integral | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 47: Triple Integrals. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multiple Integrals">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 47：三重积分 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 47: Triple Integral | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 47: Triple Integrals. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-054/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,108 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 47：三重积分</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-09</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-054/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-053/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 45：二重积分的计算</strong></a>
-    <a class="article-pagination-next" href="../math-055/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 53：常数项级数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 47: Triple Integral</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 47: Triple Integrals. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-09</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multiple Integrals</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">46.1 Triple Integral</a><a href="#section-4">46.2 Cylindrical Coordinates</a><a href="#section-7">46.3 Calculating Triple Integrals with Spherical Coordinates</a><a href="#section-10">46.4 Properties of Triple Integrals</a><a href="#section-13">46.5 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">46.1 Triple Integral</h2>
+<h3 id="section-2">46.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Triplepoints</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\lim_{\lambda\to0}\sum_{k=1}^{n}f(\xi_{k},\eta_{k},\xi_{k})\Delta\nu_{k}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">A ternary function integrating into a spatial field $\Omega$;</li>
+<li class="list-indent-1">$\Delta\nu_{k}$ is the volume of the geometric solid in the k-th region;</li>
+<li>Core:</li>
+<li class="list-indent-1">The core of the triple integral section is the calculation of the triple integral;</li>
+<li class="list-indent-1">The core of triple integral calculations is to convert them into definite integrals or double integrals;</li>
+</ul>
+<h3 id="section-3">46.1.2 Basic Calculation Methods</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationoftherectangularcoordinateoftripleintegrals</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>1. First one, then two: $$\iiint_{\Omega}f(x,y,z)\mathrm{dv}=\iint_{D_{xy}}d\sigma\int_{z_{1}(x,y)}^{z_{2}(x,y)}f(x,y,z)dz$$</blockquote>
+<blockquote>2. Two first, one later: $$\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\int_{c_{1}}^{c_{2}}dz\iint_{D_{c}}f(x,y,z)dxdy$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>First one, then two:</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">First, take definite integrals on <code>z</code>;</li>
+<li class="list-indent-2">Double integration on <code>xy</code>;</li>
+<li class="list-indent-1">Limiting method:</li>
+<li class="list-indent-2">Draw a projection surface $D_{xy}$ of the current set on the <code>xy</code> axis, and draw a ray upward on this projection plane passing through the geometric solid;</li>
+<li class="list-indent-2">The lower part of the point is the lower limit of the points $z=z_1(x,y)$, and the upper part of the part is the upper limit of the points $z=z_2(x,y)$;</li>
+<li>Two before one:</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">First, perform the double integral on <code>xy</code>;</li>
+<li class="list-indent-2">Taking definite integrals on <code>z</code>;</li>
+<li class="list-indent-1">Limiting method:</li>
+<li class="list-indent-2">When projecting a geometric solid onto the <code>z</code> axis, the upper and lower bounds of <code>z</code> are its maximum and minimum values projected onto the <code>z</code> axis;</li>
+</ul>
+<h2 id="section-4">46.2 Cylindrical Coordinates</h2>
+<h3 id="section-5">46.2.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Cylindricalcoordinates</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{cases}x=r\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\theta,&amp;\quad0\leq\theta\leq2\pi,\\z=z,&amp;\quad-\infty&lt;z&lt;+\infty.\end{cases}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1"><code>r</code>: The distance from the point to the <code>z</code> axis;</li>
+<li class="list-indent-1"><code>z</code>: height on the z-axis;</li>
+<li class="list-indent-1"><code> angle </code>: Limit the angle of the current line segment;</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" alt="Pasted image 20240521035217" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-6">46.2.2 Methods for Calculating Cylindrical Coordinates</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Cylindricalcoordinatecalculationmethod</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>Volume micro yuan: $dv=\rho d\rho d\theta dz$</blockquote>
+<blockquote>Calculation: $$\iiint_\Omega f(x,y,z)d\nu=\iiint_{\Omega}f(\rho\cos\theta,\rho\sin\theta,z)r\operatorname{d}r\operatorname{d}\theta\operatorname{d}z$$</blockquote>
+<p><strong>Supplement</strong>: Scope of application for cylindrical coordinates</p>
+<ul>
+<li>Function angle:</li>
+<li class="list-indent-1">If the integrand can be written as $g(x)*f(\sqrt{x^2+y^2})$ <code>-&gt;</code> cylindrical coordinates are suitable;</li>
+<li>Regional Perspective:</li>
+<li class="list-indent-1">Cylindrical coordinates such as <code>z</code>-axis cylinders, eccentric cylinders, and cones <code>-&gt;</code> are suitable for cylindrical coordinates;</li>
+</ul>
+<h2 id="section-7">46.3 Calculating Triple Integrals with Spherical Coordinates</h2>
+<h3 id="section-8">46.3.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Sphericalcoordinates</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{cases}x=r\sin\varphi\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\varphi\sin\theta,&amp;\quad0\leq\varphi\leq\pi,\\z=r\cos\varphi,&amp;\quad0\leq\theta\leq2\pi.\end{cases}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Illustration:</li>
+<li><img class="note-image" src="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" alt="Pasted image 20240521040109" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-9">46.3.2 Methods for Calculating Spherical Coordinates</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Methodsforcalculatingsphericalcoordinates</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>Volume micro yuan: $dv=r^{2}\sin\varphi drd\varphi d\theta$</blockquote>
+<blockquote>Calculation: $$\iiint_{\Omega}f(x,y,z)d\nu =\iiint_\Omega f (r\sin\varphi\cos\theta, r\sin\varphi\sin\theta, r\cos\varphi) r^2\sin\varphi\operatorname{d}r\operatorname{d}\varphi\operatorname{d}\theta$$</blockquote>
+<p><strong>Supplement</strong>: Scope of application for spherical coordinates</p>
+<ul>
+<li>Function angle:</li>
+<li class="list-indent-1">If the integrand can be written as $f(\sqrt{x^2+y^2+z^2})$ <code>-&gt;</code> spherical coordinates are suitable;</li>
+<li>Regional Perspective:</li>
+<li class="list-indent-1">Spherical spheres, spheres, hemispheroids, and curved pyramids centered at the origin <code>-&gt;</code> suitable for spherical coordinates;</li>
+</ul>
+<h2 id="section-10">46.4 Properties of Triple Integrals</h2>
+<h3 id="section-11">46.4.1 Parity</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Paritycalculationoftripleintegrals</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\text{ Like a division domain }\Omega\text{ About }xoy\text{ Coordinate face-to-face symmetry },\,\text{ then }\iiint_{\Omega}f(x,y,z)\mathrm{d}V=\begin{cases}2\iiint f(x,y,z)\mathrm{d}V&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<h3 id="section-12">46.4.2 Symmetry</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Symmetryoftripleintegrals</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<h2 id="section-13">46.5 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-14">Question Type: <span class="note-tag">Calculationoftripleintegrals</span></h3>
+<h4 id="section-15">PART 1: Problem-solving methods</h4>
+<h4 id="section-16">PART 2: Typical Example Problems</h4>
+<h4 id="section-17">PART 3: Key Points Review</h4>
+<p><strong>Key Point</strong>: Suitable for situations where two comes first, then one</p>
+<ul>
+<li>1. The integrand function is simply a single-variable function about <code>z</code>;</li>
+<li>2. When using <code>z=z</code> to truncate the area of a geometric solid, the formula for this area is easy to calculate (for example, $x^2+y^2&lt;1-z^2$);</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-053/index.html"><span>← Previous item</span><strong>Lecture 45: Calculation of Double Integrals</strong></a>
+    <a class="article-pagination-next" href="../math-055/index.html"><span>Next item →</span><strong>Lecture 53: Series of Constants</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +170,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

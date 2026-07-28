@@ -40,16 +40,16 @@ tags: ["考研数学", "线性代数", "矩阵"]
 - 引入：
 	- 矩阵不一定是方形的，可能是 `1000*2` 或者 `2*1000`；
 - `Gram` 矩阵
-	- 对于 $A=(\begin{matrix}a\\b\end{matrix})$ ，$A^T=(a\quad b)$ $A^{T}A=(ab)(\begin{matrix}a\\b\end{matrix})=\alpha^{T}\cdot\alpha=||\alpha||^{2}=||\alpha||^{2}*\cos 0$
+	- 对于 $A=\begin{pmatrix}a\\b\end{pmatrix}$，有 $A^TA=a^2+b^2=\|A\|^2$。
 - 作用：
 	- 如果只是给了你一个 $A=(\alpha_1\quad \alpha_2)$ 的矩阵，其实并不知道其中 $\alpha_1\quad \alpha_2$ 之间的关系；但是可以通过将 $A$ 乘以其转置矩阵的方式，得到其中更多的信息：
-	- $$A^{T}A=\left(\begin{matrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{matrix}\right)\left(\alpha_{1}\alpha_{2}\right)=\left.k\cdot A=\left(\begin{matrix}||\alpha_1||||\alpha_1||*\cos \theta_{11}&||\alpha_1||||\alpha_2||*\cos \theta_{12}\\||\alpha_2||||\alpha_1||*\cos \theta_{21}&||\alpha_2||||\alpha_2||*\cos \theta_{22}\end{matrix}\right.\right)$$
+	- $$A^{T}A=\begin{pmatrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{pmatrix}\begin{pmatrix}\alpha_{1}&\alpha_{2}\end{pmatrix}=\begin{pmatrix}\|\alpha_1\|^2&\|\alpha_1\|\|\alpha_2\|\cos\theta_{12}\\\|\alpha_2\|\|\alpha_1\|\cos\theta_{21}&\|\alpha_2\|^2\end{pmatrix}$$
 	- 在这里面可以得到数据之间的相似度；
 - 概念：
-	- 矩阵不能运算，但是其若干**行 (列) 向量之间**可能存在着某种关系
+	- 矩阵由若干行（列）向量组成，这些向量之间可能存在某种关系
 
 **重要观点 1**：矩阵也是由若干行 (列) 向量拼成的 
-- 上面那个矩阵可以看作由三个行向量：$[1,2,3],[4,6,9],[2,4,6]$ 组成，也可以看作是三个列向量组成：$[1,6,2]^{\mathrm{T}},[2,7,4]^{\mathrm{T}}与[3,9,6]^{\mathrm{T}}$
+- 矩阵 $\begin{pmatrix}1&2&3\\4&6&9\\2&4&6\end{pmatrix}$ 可以看作由三个行向量 $[1,2,3],[4,6,9],[2,4,6]$ 组成，也可以看作由三个列向量 $[1,4,2]^{\mathrm{T}},[2,6,4]^{\mathrm{T}},[3,9,6]^{\mathrm{T}}$ 组成。
 
 ##### **定义**： #矩阵的秩
 > <font color="#ccc1d9">描述：</font>设 $A$ 是 $m*n$ 矩阵，$A$ 中**最高阶非零子式的阶数**称为**矩阵的秩**，记为 $r(A)$ 

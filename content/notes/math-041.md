@@ -78,7 +78,7 @@ tags: ["考研数学", "高等数学", "定积分及反常积分"]
 **例题**：求  $\int_{-\infty}^{+\infty}\frac{dx}{1+x^{2}}$ 
 - 分析
 - 解析
-	- 原式 $=andanx|_{-\infty}^{+\infty}$ $=\frac{\pi}{2}-(-\frac{\pi}{2})=\pi$
+	- 原式 $=\arctan x\big|_{-\infty}^{+\infty}=\frac{\pi}{2}-(-\frac{\pi}{2})=\pi$
 - 题型： #反常积分 
 
 
@@ -98,8 +98,8 @@ tags: ["考研数学", "高等数学", "定积分及反常积分"]
 
 ##### **定理**： #比较判别法的极限形式
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> 
-> 比较判别法： $$\text{设 }f (x), g (x)\text{ 在 }(a, b]\text{ 非负连续},\lim_{x\to a^1}\frac{f (x)}{g (x)}=\lambda\text{ ,则}$$
-> $$\text{1)当}{\lambda>0}_{a}\text{时,}\int_{a}^{b}f(x)dx\text{与}\int_{a}^{b}g(x)dx{\text{同敛散};}_{a}\\\text{2)当}\lambda=0\text{ 时,}\int_{a}^{b}g(x)dx\text{收敛}\Rightarrow\int_{a}^{b}f(x)dx^{1}\text{收敛};\\\text{3)当}\lambda=+\infty\text{时,}\int_{a}^{b}g(x)dx\text{发散}\Rightarrow\int_{a}^{b}f(x)dx\text{发散}.$$
+> 比较判别法： $$\text{设 }f (x), g (x)\text{ 在 }(a, b]\text{ 非负连续},\lim_{x\to a^+}\frac{f (x)}{g (x)}=\lambda\text{ ,则}$$
+> $$\begin{aligned}&1)\ \lambda>0\text{ 时，}\int_{a}^{b}f(x)\,dx\text{ 与 }\int_{a}^{b}g(x)\,dx\text{ 同敛散};\\&2)\ \lambda=0\text{ 时，}\int_{a}^{b}g(x)\,dx\text{ 收敛}\Rightarrow\int_{a}^{b}f(x)\,dx\text{ 收敛};\\&3)\ \lambda=+\infty\text{ 时，}\int_{a}^{b}g(x)\,dx\text{ 发散}\Rightarrow\int_{a}^{b}f(x)\,dx\text{ 发散}.\end{aligned}$$
 > 常用结论：$$\int_a^b\frac1{\left(x-a\right)^P}dx,\int_a^b\frac1{\left(b-x\right)^P}dx\quad\begin{cases}{P}<1&\text{收敛}\\P\geq1&\text{发散}\end{cases}$$
 
 

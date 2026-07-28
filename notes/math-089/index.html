@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,8 +63,8 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 20：相似</h1><p class="article-lead">考研数学学习笔记：Lecture 20：相似。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学</span><span>约 13 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>特征值与特征向量</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">20.1 矩阵相似 </a><a href="#section-7">20.2 矩阵的相似对角化</a><a href="#section-12">20.3 实对称矩阵的相似对角化 </a></nav></details><div class="prose"><h2 id="section-1">20.1 矩阵相似 </h2>
 <h3 id="section-2">20.1.1 相似矩阵的定义</h3>
-<h5 id="section-3"><strong>定义</strong>： #矩阵相似 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 A, B 是两个 <code>n</code> 阶方阵，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=B$，则称 <code>A</code> 相似于 <code>B</code>，记成 <code>A~B</code></blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">矩阵相似</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>设 A, B 是两个 <code>n</code> 阶方阵，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=B$，则称 <code>A</code> 相似于 <code>B</code>，记成 <code>A~B</code></blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念： </li>
@@ -123,11 +123,11 @@ $$</div>
 </ul>
 <p><strong>概念</strong>：结论三</p>
 <ul>
-<li>$$若A\sim B,且A可逆,则A^<em>\sim B^</em>$$</li>
+<li>$$若A\sim B,则A^<em>\sim B^</em>$$</li>
 </ul>
 <p><strong>概念</strong>：结论四</p>
 <ul>
-<li>$$若A\sim B,且A可逆,则A^T\sim B^T$$</li>
+<li>$$若A\sim B,则A^T\sim B^T$$</li>
 </ul>
 <p><strong>概念</strong>：结论五</p>
 <ul>
@@ -160,8 +160,8 @@ $$</div>
 </ul>
 <h2 id="section-7">20.2 矩阵的相似对角化</h2>
 <h3 id="section-8">20.2.1 基础概念 </h3>
-<h5 id="section-9"><strong>定义</strong>： #矩阵的相似对角化</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： 设 <code>n</code> 阶矩阵 <code>A</code>，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=\Lambda$，则其中的 $\Lambda$ 是对角矩阵，并且称 <code>A</code> 可相似对角化，记作 $A\sim\Lambda$，并称 $\Lambda$ 为 <code>A</code> 的相似标准型；</blockquote>
+<h5 id="section-9"><strong>定义</strong>： <span class="note-tag">矩阵的相似对角化</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> 设 <code>n</code> 阶矩阵 <code>A</code>，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=\Lambda$，则其中的 $\Lambda$ 是对角矩阵，并且称 <code>A</code> 可相似对角化，记作 $A\sim\Lambda$，并称 $\Lambda$ 为 <code>A</code> 的相似标准型；</blockquote>
 <blockquote><code>A</code> 可以相似对角化、最本质的定义是：<code>A</code> 有 <code>n</code> 个线性无关的特征向量； </blockquote>
 <p><strong>概念</strong>：图形解释</p>
 <ul>
@@ -221,23 +221,23 @@ $$</div>
 <p><strong>方法</strong>：由特征值、特征向量反求 $A$ </p>
 <ul>
 <li>方法： </li>
-<li class="list-indent-1">$\text{若有可逆矩阵}P\text{,使得}P^{-1}AP=A\text{,则}A=PAP^{-1}\text{,这是反求}A\text{ 的一个基本思路 }.$</li>
+<li class="list-indent-1">$\text{若有可逆矩阵 }P\text{，使得 }P^{-1}AP=\Lambda\text{，则 }A=P\Lambda P^{-1}\text{，这是反求 }A\text{ 的一个基本思路。}$</li>
 <li>举例： </li>
 <li class="list-indent-1"><code>-&gt;</code> $(\xi_{1},\xi_{2})^{-1}A(\xi_{1},\xi_{2})=(\begin{matrix}\lambda_{1}&amp;0\\0&amp;\lambda_{2}\end{matrix})$</li>
 <li class="list-indent-1"><code>-&gt;</code> $A=(\xi_{1},\xi_{2})(\begin{matrix}\lambda_{1}&amp;0\\0&amp;\lambda_{2}\end{matrix})(\xi_{1},\xi_{2})^{-1}$</li>
 </ul>
 <p><strong>方法</strong>：求 $A^k$ 和 $f(A)$</p>
 <ul>
-<li><code>-&gt;</code> $$P^{-1}A^kP=A^k, A^k=PA^kP^{-1}=P\begin{bmatrix}\lambda_1^k&amp;&amp;&amp;&amp;\\&amp;\lambda_2^k&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n^k\end{bmatrix}P^{-1}$$</li>
-<li><code>-&gt;</code> $$P^{-1}f(A)P=f(A), f(A)=Pf(A)P^{-1}=P\begin{bmatrix}f(\lambda_1)&amp;&amp;&amp;\\&amp;f(\lambda_2)&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;f(\lambda_n)\end{bmatrix}P^{-1}.$$</li>
+<li class="list-indent-1"><code>-&gt;</code> $$P^{-1}A^kP=\Lambda^k,\quad A^k=P\Lambda^kP^{-1}=P\begin{bmatrix}\lambda_1^k&amp;&amp;&amp;\\&amp;\lambda_2^k&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n^k\end{bmatrix}P^{-1}$$</li>
+<li class="list-indent-1"><code>-&gt;</code> $$P^{-1}f(A)P=f(\Lambda),\quad f(A)=Pf(\Lambda)P^{-1}=P\begin{bmatrix}f(\lambda_1)&amp;&amp;&amp;\\&amp;f(\lambda_2)&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;f(\lambda_n)\end{bmatrix}P^{-1}.$$</li>
 </ul>
 <p><strong>补充</strong>：在可逆矩阵中使用不可逆矩阵的性质</p>
 <ul>
-<li>若 $|A|=0\rightarrow|0·E+A=0|\rightarrow\lambda_1=0\quad(至少一个)\rightarrow A不可逆$</li>
-<li class="list-indent-1">$|A^{*}|\rightarrow |A|^{n-1}$ 这个是由 $A^{-1}$ 存在而推出来的；</li>
+<li>若 $|A|=0$，则 $\lambda=0$ 是 $A$ 的特征值，因此 $A$ 不可逆；</li>
+<li class="list-indent-1">对任意 $n$ 阶方阵都有 $|A^{*}|=|A|^{n-1}$；</li>
 <li>其他： </li>
-<li class="list-indent-1">$|A^{*}|=|A|^{n-1}$ 的前提是 <code>A</code> 可逆；</li>
-<li class="list-indent-1">的前提是 A 可逆；$\left(AB\right)^{<em>}=B^{</em>}A^{*}$ 的前提是 <code>A,B</code> 可逆； </li>
+<li class="list-indent-1">$|A^{*}|=|A|^{n-1}$ 对任意 $n$ 阶方阵成立；</li>
+<li class="list-indent-1">$\left(AB\right)^{<em>}=B^{</em>}A^{*}$ 对同阶方阵成立；</li>
 <li>不可逆时： </li>
 <li class="list-indent-1">假设 A 有三重根，一个特征值 <code>1</code>；</li>
 <li class="list-indent-1">如果现在在 A 前面加上 E：<code>+E+A</code>；</li>
@@ -258,15 +258,15 @@ $$</div>
 </ul>
 <h2 id="section-12">20.3 实对称矩阵的相似对角化 </h2>
 <h3 id="section-13">20.3.1 实对称矩阵 </h3>
-<h5 id="section-14"><strong>定义</strong>： #实对称矩阵</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：若 $A^T=A$ ，则 A 为对称矩阵。如果组成 A 的元素都是实数，则 A 为实对称矩阵；</blockquote>
+<h5 id="section-14"><strong>定义</strong>： <span class="note-tag">实对称矩阵</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>若 $A^T=A$ ，则 A 为对称矩阵。如果组成 A 的元素都是实数，则 A 为实对称矩阵；</blockquote>
 <blockquote>（1）<code>A</code> 是实对称矩阵，则 A 的特征值是实数，特征向量是实向量 (不用证明)；</blockquote>
-<blockquote>（2）实对称矩阵 <code>A</code> 的属于不同特征值的特征向量相互正交，即：$A\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1}\perp\xi_{2},\\\lambda_{1}=\lambda_{2}\xrightarrow{可能}\begin{cases}\xi_{1}\perp\xi_{2},\\\xi_{1}与\xi_{2}无关\end{cases}\end{cases}$</blockquote>
+<blockquote>（2）实对称矩阵 <code>A</code> 中，属于不同特征值的特征向量相互正交，即：$\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1}\perp\xi_{2}$。对于重特征值，可以在对应的特征子空间内选取一组标准正交基；</blockquote>
 <blockquote>（3）对于任意的 n 阶实对称矩阵 A，存在 n 阶正交矩阵 Q，使得：$Q^{\mathrm{T}}AQ=Q^{-1}AQ=\begin{bmatrix}\lambda_1&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$ ，这里 $\lambda_i$ 是 A 的全部特征值； </blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>解释（2）：</li>
-<li class="list-indent-1">对于实对称矩阵，无论其特征值是否相等，$\xi$ 都是线性无关 <code>-&gt;</code> <strong>因此实对称矩阵，一定可以相似对角化</strong>；</li>
+<li class="list-indent-1">实对称矩阵存在一组由单位特征向量组成的标准正交基，因此一定可以用正交矩阵相似对角化；</li>
 <li>解释（3）： </li>
 <li class="list-indent-1">回顾：A 有 n 个线性无关 <code>-&gt;</code> A~$\Lambda$ <code>-&gt;</code>  $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$</li>
 <li class="list-indent-1">对称矩阵因为无条件就可以得到 $A\sim\Lambda$，因此就一定可以得到 $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$ 这种局面；</li>
@@ -275,12 +275,12 @@ $$</div>
 <li class="list-indent-1">$Q^T=Q^{-1}$</li>
 <li class="list-indent-1">$Q^TQ=E$</li>
 <li class="list-indent-1"><code>Q</code> 由标准正交基组成 <code>&lt;-</code> 可以通过正交化、单位化，来得到正交矩阵；</li>
-<li class="list-indent-1">不存在正交阵使得 $Q^TAQ=\Lambda$ </li>
+<li class="list-indent-1">对实对称矩阵 $A$，存在正交矩阵 $Q$ 使得 $Q^TAQ=\Lambda$；</li>
 </ul>
 <h3 id="section-15">20.3.2 实对称矩阵相似对角化基本步骤 </h3>
 <p><strong>方法</strong>：若 A 为 n 阶实对称矩阵，则其用正交矩阵 Q 相似对角化的基本步骤如下：</p>
 <ul>
-<li>$$\begin{aligned}&amp;\left(1\right)\text{求}A\text{的特征值}\lambda_1,\lambda_2,\cdots,\lambda_n.\\&amp;\left(2\right)\text{求}A\text{的对应于特征值}\lambda_1,\lambda_2,\cdots,\lambda_n\text{的特征向量}\xi_1,\xi_2,\cdots,\xi_n.\\&amp;\left(3\right)\text{将}\xi_{1},\xi_{2},\cdots,\xi_{n}\text{正交化(若需要的话)、单位化为}\eta_{1},\eta_{2},\cdots,\eta_{n}.\\&amp;\left(4\right)\text{令}Q=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right],\text{则}Q\text{为正交矩阵,且}Q^{-1}AQ=Q^{\mathrm{T}}AQ=A\end{aligned}$$</li>
+<li>$$\begin{aligned}&amp;\left(1\right)\text{求}A\text{的特征值}\lambda_1,\lambda_2,\cdots,\lambda_n.\\&amp;\left(2\right)\text{求}A\text{的对应于特征值}\lambda_1,\lambda_2,\cdots,\lambda_n\text{的特征向量}\xi_1,\xi_2,\cdots,\xi_n.\\&amp;\left(3\right)\text{将}\xi_{1},\xi_{2},\cdots,\xi_{n}\text{正交化(若需要的话)、单位化为}\eta_{1},\eta_{2},\cdots,\eta_{n}.\\&amp;\left(4\right)\text{令}Q=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right],\text{则}Q\text{为正交矩阵,且}Q^{-1}AQ=Q^{\mathrm{T}}AQ=\Lambda.\end{aligned}$$</li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-088/index.html"><span>← 上一项</span><strong>Lecture 19：特征值与特征向量</strong></a>
     <a class="article-pagination-next" href="../math-090/index.html"><span>下一项 →</span><strong>Lecture 21：二次型的定义与矩阵表示</strong></a>
@@ -292,6 +292,6 @@ $$</div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

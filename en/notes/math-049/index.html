@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 40: Differentiation Rules for Multivariable Composite Functions | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 40: Differentiation Rules for Multivariable Composite Functions. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multivariable Differential Calculus">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 40: Differentiation Rules for Multivariable Composite Functions | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 40: Differentiation Rules for Multivariable Composite Functions. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-049/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,275 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-03</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-049/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-048/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 40：欧拉方程</strong></a>
-    <a class="article-pagination-next" href="../math-050/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 41：隐函数求导</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 40: Differentiation Rules for Multivariable Composite Functions</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 40: Differentiation Rules for Multivariable Composite Functions. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-03</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Differential Calculus</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">41.1 Limits of Multivariable Functions</a><a href="#section-4">41.2 Continuity of Multivariable Functions</a><a href="#section-5">41.3 Partial Derivatives</a><a href="#section-10">41.4 Total Differential of Multivariable Functions</a><a href="#section-11">41.5 Relationships among Continuous, Partial Derivatives, and Differentiables</a><a href="#section-12">41.5 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Chapter Content</strong></p>
+<ul>
+<li>(1) Basic concepts of multivariable functions</li>
+<li>(2) Multivariable Differential Method</li>
+<li>(3) Extrema and extrema of multivariable functions</li>
+</ul>
+<p><strong>Section Overview</strong></p>
+<ul>
+<li>(1) Limits of multivariable functions</li>
+<li>(2) Continuity of multivariable functions</li>
+<li>(3) Partial derivative</li>
+<li>(4) Total differential</li>
+<li>(5) Continuous, differentiable, and differentiable relationships</li>
+</ul>
+<p><strong>Frequently Tested Question Types in This Section</strong></p>
+<ul>
+<li>Discuss continuity, differentiability, and differentiability</li>
+</ul>
+<hr>
+<h2 id="section-1">41.1 Limits of Multivariable Functions</h2>
+<h3 id="section-2">41.1.1 Concept of Multivariable Function Limits</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thelimitofmultivariablefunctions</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\lim_{(x,y)\to(x_0,y_0)}f(x,y)=A$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>1. Trends in the limits of multivariable functions:</li>
+<li class="list-indent-1">In a single variable, there is only one independent variable, so the approach to the target point and the method is relatively simple, only along the X-axis;</li>
+<li class="list-indent-1">But in binary variables, there are two independent variables, but $(x,y)$ <code>-&gt;</code> $(x_0,y_0)$ is in<strong>arbitrary ways</strong></li>
+<li class="list-indent-1">It must be ensured that in any direction, the function value equals the limit value (similar to the left and right limits in a single-variable limit; only then can this multi-limit be considered to exist;</li>
+<li>2. Five major characteristics</li>
+<li class="list-indent-1">(1) Local bounding;</li>
+<li class="list-indent-1">(2) Number retention;</li>
+<li class="list-indent-1">(3) Rational operation rules;</li>
+<li class="list-indent-1">(4) The relationship between limits and infinitesimals;</li>
+<li class="list-indent-1">(5) Compression;</li>
+<li class="list-indent-1">Note: L'Hôpital's rule is not available for general multivariable limits.</li>
+</ul>
+<h3 id="section-3">41.1.2 Basic Methods</h3>
+<p><strong>Example</strong>: Find the value of the limit</p>
+<ul>
+<li>Question: Find $$\lim_{x\to0,\,y\to0}\frac{xy^{2}}{x^{2}+y^{2}}.$$</li>
+<li>Analysis</li>
+<li class="list-indent-1">This limit has the indeterminate form $0/0$, but L'Hôpital's rule does not apply to a two-variable limit.</li>
+<li class="list-indent-1">The denominator is quadratic, and the numerator is cubic</li>
+<li class="list-indent-1">For <code>A/B</code> type:</li>
+<li class="list-indent-2">If the power of A &gt; the power of B, it is generally 0;</li>
+<li class="list-indent-2">If the power of A &lt; the power of B, it is generally infinite;</li>
+<li class="list-indent-2">If the power of A = the power of B, it generally does not exist;</li>
+<li class="list-indent-1">In this regard, the preliminary judgment is that the limit of the subfunction is 0;</li>
+<li class="list-indent-2">When in a single element: take the absolute value of x, then expand the <code>-&gt;</code> squeeze theorem;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Method One:</li>
+<li class="list-indent-2">$0\leq|\frac{xy^{2}}{x^{2}+y^{2}}|\leq|x|\rightarrow0$</li>
+<li class="list-indent-2">So $\lim_{x\to0,\,y\to0}\frac{xy^{2}}{x^{2}+y^{2}}=0$</li>
+<li class="list-indent-1">Method Two:</li>
+<li class="list-indent-2">You can take the x of the numerator, where x <code>-&gt;</code> 0;</li>
+<li class="list-indent-2">After the numerator is presented, the remaining parts are not greater than 1 according to their boundedness, so the limit of the entire function is 0;</li>
+</ul>
+<p><strong>Example Question</strong>: Proving that limits do not exist</p>
+<ul>
+<li>Question: Find $$\lim_{x\to0,\,y\to0}\frac{xy^{}}{x^{2}+y^{2}}$$ Prove that its limit does not exist</li>
+<li>Analysis</li>
+<li class="list-indent-1">The numerator is 2 times, the denominator is 2 times;</li>
+<li class="list-indent-1">If there are two different pathpoints and the obtained limit differs, then this limit does not exist;</li>
+<li class="list-indent-1">Method: Confine <code>y</code> to a single straight line;</li>
+<li>Analysis</li>
+<li class="list-indent-1">$$\lim_{x\to0,\,y=kx}\frac{xy^{}}{x^{2}+y^{2}} = \lim_{x\to0,\,y\to0}\frac{kx^{2}}{x^{2}+k^{2}x^{2}}=\frac{k}{1+k^2}$$</li>
+<li class="list-indent-1">Because k is the slope of a straight line, k is not a fixed value. When k takes different slopes, the function values of the limit are different;</li>
+<li class="list-indent-1">Therefore, this limit does not exist;</li>
+</ul>
+<h2 id="section-4">41.2 Continuity of Multivariable Functions</h2>
+<p><strong>Two Concepts</strong></p>
+<ul>
+<li>1. Concept;</li>
+<li>2. Discontinuity;</li>
+<li>3. Nature;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Theconceptofcontinuousmultivariablefunctions</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\lim_{(x,y)\to(x_0,y_0)}f(x,y)=f(x_0,y_0)$$</blockquote>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Propertiesofmultivariablecontinuousfunctions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>Property 1: The sum, difference, product, and quotient of multivariable continuous functions (with nonzero denominator) are still continuous functions;</blockquote>
+<blockquote>Property 2: The composite function of a multivariable continuous function is also a continuous function;</blockquote>
+<blockquote>Property 3: Multivariable elementary functions are continuous within their<strong>definition region</strong>;</blockquote>
+<blockquote>Property 4: Maximum Theorem <code>-&gt;</code> A continuous function on a bounded closed region D must find its maximum and minimum values on region D;</blockquote>
+<blockquote>Property 5: A continuous function on a bounded closed region D must obtain any value between the maximum and minimum values on region D;</blockquote>
+<h2 id="section-5">41.3 Partial Derivatives</h2>
+<h3 id="section-6">41.3.1 Basic Concepts of Partial Derivatives</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Partialderivative</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> for $z=f(x,y)$ functions, there are two partial derivatives defined:</blockquote>
+<blockquote>1. Partial derivative of X: When partial derivative of X, Y is fixed at$y_0$at (has no effect on x), $x$exist$x.$everywhere$\Delta x$The increment of, at this time there is only one variable x, which is called:</blockquote>
+<blockquote>$$\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$$ is the partial derivative with respect to X;</blockquote>
+<blockquote>Recorded as:</blockquote>
+<blockquote>	    $\left.\frac{\partial z}{\partial x}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial x}\right|_{(x_{0},y_{0})},z_{_z}(x_{0},y_{0})\text{ or }$ $f_{x}(x_{0},y_{0})$</blockquote>
+<blockquote>2. Partial derivative with respect to Y: The same applies to X,</blockquote>
+<blockquote>    $$lim_{\Delta y\to0}\frac{f(x_{0},y_{0}+\Delta y)-f(x_{0},y_{0})}{\Delta y}$$</blockquote>
+<blockquote>Recorded as:</blockquote>
+<blockquote>	    $\left.\text{}\frac{\partial z}{\partial y}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial y}\right|_{(x_{0},y_{0})},z_{y}(x_{0},y_{0})\text{ or }f_{y}(x_{0},y_{0}).$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Partial derivative of X:</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">Essentially, it is the derivative of a function of x in one variable, representing the rate of change of the function along the X-axis;</li>
+<li class="list-indent-1">Other forms: $$\frac{\partial f(x,y)}{\partial x}$$</li>
+<li>Partial derivative of Y:</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">Essentially, it is the derivative of a function of y, representing the rate of change of the function along the Y-axis;</li>
+<li class="list-indent-1">Other forms:</li>
+<li class="list-indent-2">$$\frac{\partial f(x,y)}{\partial y}$$</li>
+<li>Summary: Essentially, it is the derivative of a single-variable function;</li>
+</ul>
+<p><strong>Method</strong>: How to find the partial derivative of x or y</p>
+<ul>
+<li>When $z=f(x,y)$, treat y or x as a constant and take the derivative directly from x or y;</li>
+<li>Example: partial derivative of $z=x^{2}+3xy+y^{2}$ at $(1.2)$;</li>
+<li class="list-indent-1">Step 1: Calculate the partial derivative function</li>
+<li class="list-indent-2">Taking partial derivative with respect to x: $\frac{\partial z}{\partial x}=2x+3y$</li>
+<li class="list-indent-2">Finding partial derivative with respect to y: $$\frac{\partial z}{\partial y}=3x+2y$$</li>
+<li class="list-indent-1">Step 2: Subtract $(1.2)$ point into the function after finding the partial derivative with respect to x or to y: 2x + 3 y or 3 x + 2 y to get the result</li>
+</ul>
+<h3 id="section-7">41.3.2 Determining the Existence of a Partial Derivative</h3>
+<p><strong>Question Type</strong>: Determine whether partial derivatives exist</p>
+<ul>
+<li>Method 1: Definition method</li>
+<li class="list-indent-1">Using the definition of partial derivatives, substitute the function values into the partial derivative of Y and the partial derivative of X, find the limit value of the substituted function, and calculate whether this limit exists;</li>
+<li>Method Two: Essential Method</li>
+<li class="list-indent-1">Because the partial derivative is essentially the derivative of a function in one variable;</li>
+<li class="list-indent-1">So you can directly substitute one value of the partial derivative X or Y (the one with the fixed value)</li>
+<li class="list-indent-1">For example, to find the partial derivative of X, you can directly substitute the value of Y into it to find the limit of the derivative of the function of X;</li>
+</ul>
+<h3 id="section-8">41.3.3 Geometric Meaning of Partial Derivatives</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thegeometricmeaningofpartialderivativesofabinaryfunction</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> Surface $Z=f(x,y)$</blockquote>
+<blockquote>1. $f_x(x_0,y_0)$ represents the tangent line to $y=f(x)$ on the $y=f(x)$ line, $x_0$;</blockquote>
+<blockquote>2. $f_y(x_0,y_0)$ represents the tangent line to $x=f(y)$ on the $x=f(y)$ line, $x_0$;</blockquote>
+<h3 id="section-9">41.3.4 Higher-Order Partial Derivatives</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Higherorderpartialderivatives</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>$$\frac{\partial}{\partial x}\biggl(\frac{\partial z}{\partial x}\biggr)=\frac{\partial^{2}z}{\partial x^{2}}=f_{xx}^{\prime\prime}\quad\frac{\partial}{\partial y}\biggl(\frac{\partial z}{\partial x}\biggr)=\frac{\partial^{2}z}{\partial x\partial y}=f_{xy}^{\prime\prime}$$</blockquote>
+<blockquote>$$\frac{\partial}{\partial x}\Bigg(\frac{\partial z}{\partial y}\Bigg)=\frac{\partial^{2}z}{\partial y\partial x}=f_{yx}^{\prime\prime}\quad\frac{\partial}{\partial y}\Bigg(\frac{\partial z}{\partial y}\Bigg)=\frac{\partial^{2}z}{\partial y^{2}}=f_{yy}^{\prime\prime}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Mixed partial derivative:</li>
+<li class="list-indent-1">$f_{xy}^{\prime\prime}$</li>
+<li class="list-indent-1">$f_{yx}^{\prime\prime}$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Higherorderpartialderivativetheorem</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> if the two second-order mixed partial derivatives $\frac{\partial^2z}{\partial x\partial y}$ and $\frac{\partial^2z}{\partial y\partial x}$ of function $z=f(x,y)$ are continuous within region $D$, then within that region:</blockquote>
+<blockquote>$$\frac{\partial^2z}{\partial x\partial y}=\frac{\partial^2z}{\partial y\partial x}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>When first x or y is applied first, the limit value is the same;</li>
+</ul>
+<h2 id="section-10">41.4 Total Differential of Multivariable Functions</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Totaldifferentialofmultivariablefunctions</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> If $\Delta z=f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)=A\Delta x+B\Delta y+o(\rho)$, then the function $z=f(x,y)$ is differentiable at point $(x_0,y_0)$;</blockquote>
+<blockquote>Multivariate differential: $$dz=A\Delta x+B\Delta y$$</blockquote>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Differentiablenecessaryconditions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> If $z=f(x,y)$ is differentiable at $(x_0,y_0)$, then both partial derivatives exist there and $\mathrm{d}z=\frac{\partial z}{\partial x}\mathrm{d}x+\frac{\partial z}{\partial y}\mathrm{d}y$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Differentiable <code>-&gt;</code> Differentiable;</li>
+<li>Differentiable <code>-x&gt;</code> Differentiable;</li>
+<li>First-order partial derivative continuous <code>-&gt;</code> differentiable;</li>
+<li>Differentiable <code>-x&gt;</code> First partial derivative continuous;</li>
+</ul>
+<p><strong>Method</strong>: Use definitions to determine differentiability (sufficient condition)</p>
+<ul>
+<li>(1) Whether $f_{x}(x_{0},  y_{0})$ and $f_{y}(x_{0},  y_{0})$ both exist</li>
+<li class="list-indent-1">If there is none, then it is certainly non-differentiable;</li>
+<li class="list-indent-1">If both exist, proceed to (2) for judgment;</li>
+<li>（2）$$\lim_{(\Delta x,\Delta y)\to(0,0)}\frac{\Delta z-[f_{x}(x_{0},y_{0})\Delta x+f_{y}(x_{0,}y_{0})\Delta y]}{\sqrt{\left(\Delta x\right)^{2}+\left(\Delta y\right)^{2}}}\text{ Is it zero? }$$</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">According to $\Delta z=f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)=A\Delta x+B\Delta y+o(\rho)$, place $f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)$ on the left side;</li>
+<li class="list-indent-2">See if $\Delta z-(f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0))$ is <code>0</code> when divided by $o(\rho)$;</li>
+<li class="list-indent-1">Conclusion:</li>
+<li class="list-indent-2">The above limits exist and are 0 <code>-&gt;</code> differentiable;</li>
+<li class="list-indent-2">If it does not exist or is not 0 <code>-&gt;</code> is not differentiable;</li>
+<li class="list-indent-1">Meaning:</li>
+<li class="list-indent-2">The meaning of the above formula <code>-&gt;</code> Because the differential of a point $dz$ equals $A\Delta x+B\Delta y+o(\rho)$, so when the differential of this point exists, whether ${dz-A\Delta x+B\Delta y}\text{ Divide by }{o(\rho)}$ is zero can be seen until its derivative exists;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Sufficientconditionsfordifferentiability</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> If the partial derivative $\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}$ of $z=f(x,y)$ is continuous at point $(x_0,y_0)$, then function $z=f(x,y)$ is differentiable at point $(x_0,y_0)$;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Two partial derivatives are <code>-&gt;</code> continuously, as a binary function, the partial derivative exists when x and y approach $x_0、y_0$ respectively;</li>
+<li>Conclusion:</li>
+<li class="list-indent-1">Two partial derivatives <code>-&gt;</code> consecutive differentiable;</li>
+</ul>
+<h2 id="section-11">41.5 Relationships among Continuous, Partial Derivatives, and Differentiables</h2>
+<p><strong>Single-variable Function</strong></p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/562b68fb1e45-Pasted-image-20240504025921.png" alt="Pasted image 20240504025921" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Multivariate Functions</strong></p>
+<ul>
+<li>1. Similarities with the single dollar:</li>
+<li class="list-indent-1">(1) Continuously <code>-x&gt;</code> differentiable;</li>
+<li class="list-indent-1">(2) Differentiable <code>-&gt;</code> Deviable;</li>
+<li class="list-indent-1">(3) Differentiable <code>-&gt;</code> continuous;</li>
+<li class="list-indent-1">(4) Continuous <code>-x&gt;</code> differentiable;</li>
+<li>2. Differences from the single yuan:</li>
+<li class="list-indent-1">Cause:</li>
+<li class="list-indent-2">The differences are all caused by<strong>derivative</strong>, so why can't diversity be allowed?</li>
+<li class="list-indent-2">A partial differentiable is actually the partial derivative of $f_x(x_0,y_0)$ and $f_y(x_0,y_0)$;</li>
+<li class="list-indent-2">$f_x(x_0,y_0)$ <code>-&gt;</code> $f(x,y_0)$ On the $y=y_0$ line, the function changes only depending on the function value on that line;</li>
+<li class="list-indent-2">$f_y(x_0,y_0)$ <code>-&gt;</code> $f(x_0,y)$ On the $x=x_0$ line, the function changes only depending on the function value on that line;</li>
+<li class="list-indent-2">Continuity <code>-&gt;</code> is a heavy limit because it requires that the function is continuous in any direction, while the partial derivative can only determine whether the current derivative exists on a certain line, so it cannot indicate whether it is continuous in any direction;</li>
+<li class="list-indent-2">Why is differentiable in a single variable: Because in a single variable, the differentiable means that every region is differentiable, so the differentiable <code>-&gt;</code> is differentiable and continuous;</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">(1) Deflectable <code>-x&gt;</code> continuity;</li>
+<li class="list-indent-2">(2) Partially differentiable <code>-x&gt;</code> differentiable;</li>
+<li>3. New points compared to the One Yuan:</li>
+<li class="list-indent-1">(1) Partial derivatives are continuous <code>-&gt;</code> differentiable;</li>
+<li class="list-indent-1">(2) Differentiable <code>-x&gt;</code> Partial Derivatives Continuous;</li>
+<li>Illustration:</li>
+<li class="list-indent-1">And</li>
+</ul>
+<h2 id="section-12">41.5 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-13">Question Type: <span class="note-tag">Continuous</span>. Partial Derivatives, Total Derivatives and Their Relationships</h3>
+<h4 id="section-14">PART 1: Problem-solving methods</h4>
+<p><strong>How to Judge</strong></p>
+<ul>
+<li>Determining whether differentiable:</li>
+<li class="list-indent-1">1. Definition:</li>
+<li class="list-indent-2">Step 1: Determine whether $f_{x}(x_{0},  y_{0})$ and $f_{y}(x_{0},  y_{0})$ both exist;</li>
+<li class="list-indent-2">Step 2: Use the following definitions to determine whether a double limit exists;</li>
+<li class="list-indent-3">Formula: $$\lim_{(\Delta x,\Delta y)\to(0,0)}\frac{\Delta z-[f_{x}(x_{0},y_{0})\Delta x+f_{y}(x_{0,}y_{0})\Delta y]}{\sqrt{\left(\Delta x\right)^{2}+\left(\Delta y\right)^{2}}}\text{ Is it zero? }$$</li>
+<li>Determining whether it is differentiable:</li>
+<li class="list-indent-1">1. Definition method: Find the partial derivative of x and y separately, use partial derivatives to define and analyze whether the univariate function derivative corresponding to the partial derivative exists;</li>
+<li class="list-indent-2">Formula (X partial derivative): $$\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$$</li>
+<li class="list-indent-1">2. Bring first, ask later:</li>
+<li>Determining continuity:</li>
+<li class="list-indent-1">1. Definition:</li>
+<li class="list-indent-2">(1) Prove continuity: Whether the function value at a certain point equals the limit value of that function; if equal, then continuous;</li>
+<li class="list-indent-2">(2) Proving discontinuity: same;</li>
+<li class="list-indent-1">2. Special <code>y</code> Value Method:</li>
+<li class="list-indent-2">Substitute a fixed y function into a function, often used to prove discontinuity;</li>
+<li class="list-indent-2">Common Forms:</li>
+<li class="list-indent-3">$y=kx$</li>
+<li class="list-indent-3">$y=0$</li>
+<li>Determining whether the partial derivative is continuous:</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">Multivariable function continuous <code>≠</code> Multivariable function partial derivative continuous;</li>
+<li class="list-indent-2">Whether the partial derivative is continuous refers to whether the<strong>partial derivative of the derivative with respect to X or Y</strong>is continuous;</li>
+<li class="list-indent-1">1. Definition method: Use partial derivative functions with respect to X or Y to solve:</li>
+<li class="list-indent-2">If the following formula does not hold, the partial derivative is discontinuous;</li>
+<li class="list-indent-2">Formula (partial derivative function with respect to X): $$\lim_{x\to0,y\to0}f_{x}(x,y)=f_{x}(0,0)$$</li>
+</ul>
+<h4 id="section-15">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: Does the binary function $$f(x,y)=\begin{cases}\frac{xy}{x^{2}+y^{2}},&amp;(x,y)\neq(0,0),\\0,&amp;(x,y)=(0,0)\end{cases}$$ have continuous or partial derivatives at point $(0,0)$?</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Determine whether the function value at this point is continuous <code>-&gt;</code> equal to the function's limit;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Determining continuity:</li>
+<li class="list-indent-2">substitute $y=kx$ for $\lim_{x\to0,y\to0}\frac{xy}{x^{2}+y^{2}}$ to prove that its limit does not exist <code>-&gt;</code> discontinuity;</li>
+<li class="list-indent-1">Determining partial derivatives:</li>
+<li class="list-indent-2">Find the partial derivative of x: $f_{x}^{\prime}(0,0)=\lim_{x\to0}\frac{f(x,0)-f(0,0)}{x}=\lim_{x\to0}\frac{0-0}{x}$ <code>-&gt;</code> the partial derivative is 0;</li>
+<li class="list-indent-2">Finding the partial derivative of y: The method is similar to finding x, and the result is also zero partial derivative;</li>
+<li class="list-indent-2">Therefore, partial derivatives exist;</li>
+</ul>
+<h4 id="section-16">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-048/index.html"><span>← Previous item</span><strong>Lecture 40: Euler’s Equation</strong></a>
+    <a class="article-pagination-next" href="../math-050/index.html"><span>Next item →</span><strong>Lecture 41: Differentiation of Implicit Functions</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +337,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

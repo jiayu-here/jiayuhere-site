@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 25：函数的极值与最值 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 25: Local and Absolute Extrema of Functions | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 25: Local and Absolute Extrema of Functions. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Mean Value Theorems and Applications of Derivatives">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 25：函数的极值与最值 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 25: Local and Absolute Extrema of Functions | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 25: Local and Absolute Extrema of Functions. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-033/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,157 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 25：函数的极值与最值</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-14</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-033/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-032/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 24：函数的单调性与曲线的凹凸性</strong></a>
-    <a class="article-pagination-next" href="../math-034/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 26：函数图形的绘制</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 25: Local and Absolute Extrema of Functions</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 25: Local and Absolute Extrema of Functions. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-01-14</span><span>8 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 Extremum of the Function</a><a href="#section-4">1.2 Maximum and Minimum Values</a><a href="#section-5">1.3 Related Question Types</a></nav></details><div class="prose"><h2 id="section-1">1.1 Extremum of the Function</h2>
+<h3 id="section-2">1.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Theextremumofthefunction</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> if $\exists\delta&gt;0$, make it</blockquote>
+<blockquote>1) $\forall x\in U(x_0,\delta)$ always has $f(x)\geq f(x_0)$, then $f(x)$ is said to take the minimum value at $x_{0}$.</blockquote>
+<blockquote>2) $\forall x\in U(x_0,  \delta)$ always has $f(x)\leq f(x_0)$, then it is said that $f(x)$ takes the maximum value in $x_0$</blockquote>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Extremaisanecessarycondition</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> If $f(x)$ is differentiable at $x_0$ and extremum is obtained at $x_0$, then $f^{\prime}(x_0)=0$</blockquote>
+<p><strong>Significance</strong></p>
+<ul>
+<li>For differentiable functions, this theorem narrows down the range of possible extremum points of the function;</li>
+<li>1. For differentiable functions, only the stationary point needs to be considered;</li>
+<li>2. For non-differentiable points, just look at stationary points and non-existent points;</li>
+</ul>
+<p><strong>The Relationship Between Extremals and Stations</strong></p>
+<ul>
+<li>Location:</li>
+<li class="list-indent-1">The point of the derivative equal to zero is called the<strong>stationary point of the function</strong>;</li>
+<li class="list-indent-1">Take the extreme value at $x_0$, whose derivative is zero;</li>
+<li>The relationship between stationary points and extreme points</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/894b82fc68db-Pasted-image-20240114161815.png" alt="Pasted image 20240114161815" loading="lazy" decoding="async"></li>
+<li>For differentiable functions, the extremum is the stationary point;</li>
+</ul>
+<p><strong>Corollary 1</strong>: Possible extrema points of a general function</p>
+<ul>
+<li>1. Points where the derivative equals 0;</li>
+<li>2. Points where the derivative does not exist;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thefirstsufficientconditionforextremevalues</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> Let $f$ be continuous at $x_0$ and differentiable in a punctured neighborhood of $x_0$.</blockquote>
+<blockquote>1. If $f'(x)\geq0$ for $x&lt;x_0$ and $f'(x)\leq0$ for $x&gt;x_0$, then $f$ has a local maximum at $x_0$.</blockquote>
+<blockquote>2. If $f'(x)\leq0$ for $x&lt;x_0$ and $f'(x)\geq0$ for $x&gt;x_0$, then $f$ has a local minimum at $x_0$.</blockquote>
+<blockquote>3. If $f'$ has the same sign on both sides of $x_0$, then $f$ has no local extremum there.</blockquote>
+<p><strong>Significance</strong></p>
+<ul>
+<li>Determine whether a point is truly an extreme point;</li>
+<li>How to use:</li>
+<li class="list-indent-1">From the necessary condition (theorem) of <code> extremum </code> <code>-&gt;</code> several possible extremum points <code>-&gt;</code> <code> the first sufficient condition (theorem) for extremums </code> <code>-&gt;</code> the true extremum point;</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Geometry</li>
+<li class="list-indent-1">Cases 1 and 2 respectively: <img class="note-image" src="/assets/notes/aeb6b52d15a5-Pasted-image-20240114162335.png" alt="Pasted image 20240114162335" loading="lazy" decoding="async"></li>
+<li>Advantages</li>
+<li class="list-indent-1">It can analyze points where the derivative equals 0, and points where the derivative does not exist;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thesecondsufficientconditionfortheextremum</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $\text{ Let }\quad f^{\prime}(x_0)=0,f^{\prime\prime}(x_0)\neq0$</blockquote>
+<blockquote>1) When $f^{\prime\prime}(x_0)&lt;0$, $f(x)$ take the maximum value at $x_{0}$</blockquote>
+<blockquote>2) When $f^{\prime\prime}(x_0)&gt;0,\quad f(x)$ takes the minimum value at $x_{0}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Meaning:</li>
+<li class="list-indent-1">Determine whether a point has reached an extreme value by using the value of the<strong>second derivative</strong>of a point whose derivative equals 0;</li>
+<li>Limitations:</li>
+<li class="list-indent-1">Unable to analyze points where the derivative does not exist;</li>
+</ul>
+<h3 id="section-3">1.1.2 Example Problems</h3>
+<p><strong>Example Question</strong>: $\text{ Find the inverse of }f(x)=x^3-3x^2-9x+5\text{ Extremes }$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">From the form, the<strong>function is a differentiable function -&gt; The extremum of the differentiable function can only be taken at the stationary position of</strong>;</li>
+<li class="list-indent-1">But a stationary point is not necessarily an extreme point; You need to use sufficient conditions to determine whether a point with zero first derivative of -&gt; changes its sign (positive or negative);</li>
+<li>Analysis</li>
+<li class="list-indent-1">Using the first sufficient condition</li>
+<li class="list-indent-2">$f(x)=3x^{2}-6x-9=3\left(x_{-2}^{2}x-3\right)=3(x-3)(x+1)=0\Longrightarrow x_{1}=-1,x_{2}=3$</li>
+<li class="list-indent-2">At $x=-1$, the function derivative ranges from positive to &gt;, so it is the maximum point;</li>
+<li class="list-indent-2">At $x=3$, the function derivative ranges from negative to &gt;, so it is the minimum value;</li>
+<li class="list-indent-1">Use the second sufficient condition</li>
+<li class="list-indent-2">$\begin{aligned}f^{\prime\prime}(x)=6x-6,\quad f^{\prime\prime}(-1)=-12&lt;0,\quad \text{ Extremely large }\\f^{\prime\prime}(3)=12&gt;0\quad \text{ Very small }\end{aligned}$</li>
+<li>Question Type: <span class="note-tag">Theextremumofthefunction</span></li>
+</ul>
+<h2 id="section-4">1.2 Maximum and Minimum Values</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Themaximumandminimumvaluesofthecontinuousfunction</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> Find the absolute extremum of continuous function $f(x)$ on $[a,  b]$</blockquote>
+<blockquote>0) Establishing the objective function (for word problems)</blockquote>
+<blockquote>1) Find the station, non-differentiable, and endpoint $x_1,x_2,x_3 ...$ of $f(x)$ within $(a,b)$;</blockquote>
+<blockquote>2) Find the function values for each point</blockquote>
+<blockquote>3) Compare the calculated value with the endpoint; the larger value is the maximum, the smaller is the minimum</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>If the continuous function f(x) has only a unique extremum point in <code>(a,b)</code> <code>-&gt;</code> If it is maximal, it is a maximum; If it is small, it is a minimum;</li>
+</ul>
+<p><strong>Supplement</strong>: Word problems for maximum-minimum values</p>
+<ul>
+<li>Step 1: Create the objective function $y=f(x)$</li>
+<li>Convert into general questions</li>
+</ul>
+<p><strong>Example</strong>: $\text{Find the maximum and minimum values of }f(x)=2x^3-3x^2\text{ on }[-1,2].$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Since it is a polynomial, there are no points where the derivative does not exist, so only points where the derivative equals zero are needed;</li>
+<li>Analysis</li>
+<li class="list-indent-1">$f^{\prime}(x)=6x^2-6x=6x(x-1)=0\Longrightarrow x_1=0,x_2=1$</li>
+<li class="list-indent-1">Find the value of the stationary point</li>
+<li class="list-indent-2">$f(0)=0,f(1)=-1$</li>
+<li class="list-indent-1">Find the value of the endpoint</li>
+<li class="list-indent-2">$f(-1)=-5,f(2)=4$</li>
+<li class="list-indent-1">Therefore, x = -1 is the minimum point, and x = 2 is the maximum point</li>
+<li>Question Type: <span class="note-tag">Themaximumandminimumvaluesofthecontinuousfunction</span></li>
+</ul>
+<h2 id="section-5">1.3 Related Question Types</h2>
+<h3 id="section-6">Question Type: <span class="note-tag">Findtheextremumandextremaofthefunction</span></h3>
+<h4 id="section-7">PART 1: Problem-solving methods</h4>
+<p><strong>Core</strong>: Composed of the necessary conditions (theorem) for <code> extremums </code> <code>-&gt;</code> several possible extremum points, <code>-&gt;</code> <code> first sufficient condition (theorem)</code> <code>-&gt;</code> true extremum points;</p>
+<p><strong>Possible Extremes</strong></p>
+<ul>
+<li>1. Points where the derivative equals 0;</li>
+<li>2. Points where the derivative does not exist;</li>
+</ul>
+<p><strong>Determining whether a possible extreme point is truly an extreme point</strong></p>
+<ul>
+<li>When the derivative exists: the first sufficient condition of the extreme value can be used. <code>-&gt;</code> Whether the left and right limits of the derivative change in signs. <code>-&gt;</code> When the derivative changes from positive to negative: maximum + from negative to positive: minimum;</li>
+<li>The derivative does not exist:</li>
+<li class="list-indent-1">1. When the function is continuous: you can use the first sufficient condition for the extreme value + continuous derivative <code>-&gt;</code> You can derive whether the point where the derivative does not exist is an extremum <code>-&gt;</code> When the derivative changes from positive to negative: maximum + from negative to positive: minimum value;</li>
+<li class="list-indent-1">2. Unclear whether the function is continuous: use the first sufficient condition of the extremum + determine if this point is continuous (whether the left and right limits are equal) <code>-&gt;</code> If continuous <code>-&gt;</code> derivative changes from positive to negative: maximum + derivative from negative to positive: minimum;</li>
+<li>Or use the second sufficient condition for the extremum <code>-&gt;</code> The second derivative is not zero;</li>
+</ul>
+<p><strong>Supplement</strong>: About the derivatives of functions and the left-right derivatives</p>
+<ul>
+<li>If one of the left and right derivatives of the derivative does not exist, then this derivative does not exist;</li>
+<li>And if one of the left and right derivatives has already been determined, then the other half does not need to be discussed;</li>
+</ul>
+<p><strong>Finding Derivatives Based on Function Formulas</strong></p>
+<ul>
+<li>1. Analyze the function and see if there are points where the derivative does not exist. <code>-&gt;</code> Usually, the boundary points and zero points around the piecewise function may be points where the derivative does not exist;</li>
+<li>2. After removing the nonexistent points, derivative is taken from the function;</li>
+</ul>
+<p><strong>Application Problems for Maximum/Minimum</strong>: First, establish a goal, then solve it using methods to find maximum/minimum.</p>
+<ul>
+<li>Note: Objective functions are usually not unique; consider whether there are simpler objective functions;</li>
+</ul>
+<h4 id="section-8">PART 2: Typical Example Problems</h4>
+<p><strong>Example</strong>: Given that $f(x)$ is continuous in a neighborhood of $x=0$ and $f(0)=0,\lim_{x\to0}\frac{f(x)}{1-\cos x}=2$, then at point $x=0$ $f(x)$ __</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">Direct Method:</li>
+<li class="list-indent-2">Since $\lim_{x\to0}\frac{f(x)}{1-\cos x}=2$ and $1-\cos x$ is greater than 0 <code>-&gt;</code> near $x=0$, so near 0, $f(x)&gt;0$;</li>
+<li class="list-indent-2">Because at 0 o'clock, $f(0)=0$, and near 0 again, $f(x)&gt;0$;</li>
+<li class="list-indent-2">Therefore, it can be known that $f(0)=0$ is the smallest point near point 0, so the minimum value is obtained;</li>
+<li class="list-indent-1">Elimination method:</li>
+<li class="list-indent-2">substitute specific functions and analyze;</li>
+<li class="list-indent-2">Let $f(x)=x^2$, at which point it meets all the conditions of the question;</li>
+<li class="list-indent-2">From this, $f(x)=x^2$ finds its minimum value at point 0, and the limit exists, is differentiable, and its derivative equals 0;</li>
+<li>Question Type: #</li>
+</ul>
+<h4 id="section-9">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-032/index.html"><span>← Previous item</span><strong>Lecture 24: Monotonicity, Convexity, and Inflection Points</strong></a>
+    <a class="article-pagination-next" href="../math-034/index.html"><span>Next item →</span><strong>Lecture 26: Drawing Function Graphs</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +219,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

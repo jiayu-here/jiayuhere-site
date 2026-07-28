@@ -285,7 +285,12 @@ const inline = (value) => escapeHtml(value)
   .replace(/`([^`]+)`/g, "<code>$1</code>")
   .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
   .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/g, "<u>$1</u>")
-  .replace(/&lt;\/?font[^&]*?&gt;/g, "")
+  .replace(/&lt;font\s+color=(?:&quot;|&#39;)(#[0-9a-f]{3,8})(?:&quot;|&#39;)\s*&gt;/gi, '<span style="color:$1">')
+  .replace(/&lt;\/font\s*&gt;/gi, "</span>")
+  .replace(/&lt;font\b[\s\S]*?&gt;/gi, "")
+  .replace(/&lt;span\s+style=(?:&quot;|&#39;)background:(#[0-9a-f]{3,8})(?:&quot;|&#39;)\s*&gt;/gi, '<mark style="background:$1">')
+  .replace(/&lt;\/span\s*&gt;/gi, "</mark>")
+  .replace(/(^|[\s（(：:,，;；、])(?<!color:)(?<!background:)#([\p{L}\p{N}_/-]+)/gu, '$1<span class="note-tag">$2</span>')
   .replace(/==([^=]+)==/g, "<mark>$1</mark>")
   .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
 
@@ -485,12 +490,12 @@ const footer = (prefix, locale) => {
     <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260726a"></script>`;
+  <script src="${prefix}assets/script.js?v=20260728a"></script>`;
 };
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", usesMath = false }) => {
   const isEnglish = locale === "en";
-  const styleVersion = "20260726b";
+  const styleVersion = "20260728a";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -560,16 +565,20 @@ ${footer(prefix, locale)}
 
 const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
 
-const noteHierarchyFor = (item) => {
+const noteHierarchyFor = (item, locale = "zh") => {
   const tags = item.meta.tags || [];
-  if (item.meta.category === "数学") {
-    if (tags[0] === "考研数学") return { major: "数学", course: tags[1] || "未分类", chapter: tags[2] || "未分类" };
-    return { major: "数学", course: "工程数学", chapter: "复数、傅里叶变换、概率与线性代数" };
+  const isEnglish = locale === "en";
+  const labels = isEnglish
+    ? { mathematics: "Mathematics", english: "English", other: "Other Study Notes", engineering: "Engineering Mathematics", unclassified: "Unclassified", engineeringChapter: "Complex Numbers, Fourier Transforms, Probability and Linear Algebra", mathTag: "Graduate Entrance Examination Mathematics" }
+    : { mathematics: "数学", english: "英语", other: "其他学习笔记", engineering: "工程数学", unclassified: "未分类", engineeringChapter: "复数、傅里叶变换、概率与线性代数", mathTag: "考研数学" };
+  if (item.meta.category === labels.mathematics) {
+    if (tags[0] === labels.mathTag || tags[0] === "Postgraduate Mathematics") return { major: labels.mathematics, course: tags[1] || labels.unclassified, chapter: tags[2] || labels.unclassified };
+    return { major: labels.mathematics, course: labels.engineering, chapter: labels.engineeringChapter };
   }
-  if (item.meta.category === "英语") {
-    return { major: "英语", course: tags[1] || "未分类", chapter: tags[2] || "未分类" };
+  if (item.meta.category === labels.english) {
+    return { major: labels.english, course: tags[1] || labels.unclassified, chapter: tags[2] || labels.unclassified };
   }
-  return { major: "其他学习笔记", course: item.meta.category || "未分类", chapter: "其他" };
+  return { major: labels.other, course: item.meta.category || labels.unclassified, chapter: isEnglish ? "Other" : "其他" };
 };
 
 const cardFor = (item, section, locale, prefix, noteHierarchy) => {
@@ -593,15 +602,18 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   const isEnglish = locale === "en";
   const prefix = isEnglish ? "../../" : "../";
   const route = "notes/";
-  const groupOrder = ["数学", "英语", "其他学习笔记"];
-  const courseOrder = {
+  const groupOrder = isEnglish ? ["Mathematics", "English", "Other Study Notes"] : ["数学", "英语", "其他学习笔记"];
+  const courseOrder = isEnglish ? {
+    Mathematics: ["Mathematics Summary", "Advanced Mathematics", "Linear Algebra", "Engineering Mathematics"],
+    English: ["English Grammar", "English Reading", "English Writing"]
+  } : {
     数学: ["数学总结", "高等数学", "线性代数", "工程数学"],
     英语: ["英语语法", "英语阅读", "英语写作"]
   };
   const groups = new Map();
-  const hierarchyBySlug = new Map(hierarchyItems.map((item) => [item.meta.slug, noteHierarchyFor(item)]));
+  const hierarchyBySlug = new Map(hierarchyItems.map((item) => [item.meta.slug, noteHierarchyFor(item, locale)]));
   for (const item of items) {
-    const hierarchy = hierarchyBySlug.get(item.meta.slug) || noteHierarchyFor(item);
+    const hierarchy = hierarchyBySlug.get(item.meta.slug) || noteHierarchyFor(item, locale);
     if (!groups.has(hierarchy.major)) groups.set(hierarchy.major, new Map());
     const courses = groups.get(hierarchy.major);
     if (!courses.has(hierarchy.course)) courses.set(hierarchy.course, new Map());
@@ -634,7 +646,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
         </details>`;
       }).join("");
       const count = [...chapters.values()].reduce((total, entries) => total + entries.length, 0);
-      const courseClass = course === "英语写作" ? " notes-writing-course" : "";
+      const courseClass = course === "英语写作" || course === "English Writing" ? " notes-writing-course" : "";
       return `<details class="notes-course-section${courseClass}" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course)}" open>
         <summary class="notes-course-header"><h3>${escapeHtml(course)}</h3><span>${count} ${isEnglish ? "items" : "篇"}</span></summary>
         <div class="notes-chapter-list">${chapterContent}</div>
@@ -648,7 +660,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   }).join("");
   const content = `
     <section class="page-hero compact-hero index-hero">
-      <div class="container"><h1>${isEnglish ? "Learning Notes" : "学习笔记"}</h1><p>${isEnglish ? "Mathematics and English notes follow their original course and chapter structure. Original Chinese notes remain unmodified." : "数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。"}</p></div>
+      <div class="container"><h1>${isEnglish ? "Learning Notes" : "学习笔记"}</h1><p>${isEnglish ? "Mathematics and English notes are grouped by course and chapter, making it easy to move from the knowledge framework to each note." : "数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。"}</p></div>
     </section>
     <section class="section container content-index-section">${controls}<div class="notes-major-list" data-notes-index>${hierarchy}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching notes." : "暂时没有匹配的内容。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, "notes");
@@ -656,8 +668,8 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: "notes", title: isEnglish ? "Learning Notes" : "学习笔记", description: isEnglish ? "Mathematics and English learning notes" : "数学与英语学习笔记", content }));
 };
 
-const buildIndex = async (section, items, locale, hierarchyItems = items) => {
-  if (section === "notes") return buildNoteIndex(items, locale, hierarchyItems);
+const buildIndex = async (section, items, locale) => {
+  if (section === "notes") return buildNoteIndex(items, locale);
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
   const prefix = isEnglish ? "../../" : "../";
@@ -707,7 +719,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" && locale === "zh" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
       <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);
@@ -889,7 +901,7 @@ const build = async () => {
       }
       sectionCounts[section] = items.length;
       if (section === "articles") articleItems = items;
-      await buildIndex(section, items, locale, authoredContent.zh[section]);
+      await buildIndex(section, items, locale);
     }
     await buildLabIndex(authoredLogs[locale], locale);
     contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.date || "")).filter(Boolean));

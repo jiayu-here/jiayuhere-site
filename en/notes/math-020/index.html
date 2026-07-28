@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 12：函数的连续性 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 12: Continuity of functions | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 12: Continuity of Functions. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Functions, Limits, and Continuity">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 12：函数的连续性 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 12: Continuity of functions | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 12: Continuity of Functions. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-020/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,65 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 12：函数的连续性</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-03-11</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-020/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-019/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 11：无穷小量阶的比较</strong></a>
-    <a class="article-pagination-next" href="../math-021/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 13：间断点及其分类</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 12: Continuity of functions</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 12: Continuity of Functions. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-03-11</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Functions</span><span>Limits</span><span>and Continuity</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">12.1 Assessment Content</a><a href="#section-2">12.2 The Concept of Continuity</a></nav></details><div class="prose"><h2 id="section-1">12.1 Assessment Content</h2>
+<ul>
+<li>Content</li>
+<li class="list-indent-1">1. The concept of continuity;</li>
+<li class="list-indent-1">2. Breaks and their classification;</li>
+<li class="list-indent-1">3. Operations and properties of continuity;</li>
+<li class="list-indent-1">4. Properties of continuous functions on closed intervals;</li>
+<li>Question type</li>
+<li class="list-indent-1">Question Type 1: Discuss the types of function continuity and discontinuity;</li>
+<li class="list-indent-1">Problem Type 2: Proof problems with properties of continuous functions on closed intervals;</li>
+</ul>
+<h2 id="section-2">12.2 The Concept of Continuity</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Continuity</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>Definition 1: $y=f(x)$ is continuous at $x_0$ if $\lim_{\Delta x\to0}[f(x_0+\Delta x)-f(x_0)]=0$.</blockquote>
+<blockquote>Definition 2: $y=f(x)$ is continuous at $x_0$ if $\lim_{x\to x_0}f(x)=f(x_0)$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Equivalent form: $y=f(x)$ is continuous at $x_0$ iff $\lim_{x\to x_0}f(x)=f(x_0)$.</li>
+<li>Left and right continuous:</li>
+<li class="list-indent-1">1. Left continuous: $\lim_{x\to x^-_0}f(x)=f(x_0)$</li>
+<li class="list-indent-1">2. Right continuous: $\lim_{x\to x^+_0}f(x)=f(x_0)$</li>
+<li>$f(x)$ Sufficient and necessary conditions for continuity: $f(x)$<strong>Left continuous and right continuous</strong>,<strong>left and right continuous are equal</strong>;</li>
+</ul>
+<p><strong>Inner and Outer Continuities</strong></p>
+<ul>
+<li>Inner continuous: every point in $(a,b)$ is continuous;</li>
+<li>Outer continuous: Every point in $[a,b]$ is continuous, and point a is continuous to the right and point b to the left;</li>
+</ul>
+<p><strong>Continuous within the range</strong></p>
+<ul>
+<li>A function is continuous within an interval = all points on the interval are continuous =<strong>The left and right limits of all points exist and are equal, and the function value equals this point</strong>;</li>
+</ul>
+<h3 id="section-3">Question Type: <span class="note-tag">Discussthecontinuityoffunctionsandtypesofdiscontinuities</span></h3>
+<h4 id="section-4">PART 1: Problem-solving methods</h4>
+<ul>
+<li>When discussing the continuity of functions, it is necessary to clearly describe which points are discontinuous and why they are continuous on other intervals;</li>
+</ul>
+<h4 id="section-5">PART 2: Typical Example Problems</h4>
+<p><strong>Example Problem</strong>: $\text{ Known }f(x)=\begin{cases}(\cos x)^{1/x^2},x\neq0,\\a,&amp;x=0&amp;\end{cases}$, then continue at x=0, then find a;</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Because it is continuous at x=0, the limit value of this point exists and is equal;</li>
+<li>Analysis</li>
+<li class="list-indent-1">$\lim_{x\to0}f(x)=\lim_{x\to0}(nx)^{\frac12}=\lim_{x\to0}[1+(ax-1)]^{\frac1{x^2}}=e^{-\frac12}=f(0)=0,$</li>
+<li>Question Type: #</li>
+</ul>
+<p><strong>Example Question</strong>: $f(x)=\lim_{n\to\infty}\frac{1+x}{1+x^{{2n}}}$, discuss the breakpoint of the function;</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">First, segment it to get: $f(x)=\begin{cases}1+x&amp;|x|&lt;1\\0&amp;|x|&gt;1\\1&amp;x=1\\0&amp;x=-1\end{cases}$</li>
+<li class="list-indent-1">0 points continuous, 1 point discontinuous;</li>
+<li class="list-indent-1">Therefore: there exists a discontinuity point x=1;</li>
+<li>Question Type: #</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-019/index.html"><span>← Previous item</span><strong>Lecture 11: Comparing Orders of Infinitesimals</strong></a>
+    <a class="article-pagination-next" href="../math-021/index.html"><span>Next item →</span><strong>Lecture 13: Points of Discontinuity and Their Classification</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +127,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 5：矩阵的逆 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 5: Inverse Matrices | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 5: Inverse Matrices. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Matrices">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 5：矩阵的逆 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 5: Inverse Matrices | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 5: Inverse Matrices. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-074/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,55 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 5：矩阵的逆</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-074/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-073/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算</strong></a>
-    <a class="article-pagination-next" href="../math-075/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 6：伴随矩阵</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 5: Inverse Matrices</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 5: Inverse Matrices. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Matrices</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">5.1 Definition of Inverse Matrices</a><a href="#section-2">5.2 Properties and Important Formulas of Inverse Matrices</a><a href="#section-3">5.3 Using the Definition Method to Find the Inverse of an Invertible Matricus</a></nav></details><div class="prose"><h2 id="section-1">5.1 Definition of Inverse Matrices</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Inversematrix</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span><code>A</code> and <code>B</code> are <code>n</code>-order square matrices, <code>E</code> are <code>n</code>-order identity matrices; If <code>AB=BA=E</code>, then <code>A</code> is called an invertible matrix, and <code>B</code> is called the inverse of <code>A</code>, and the inverse is unique, denoted as $A^{-1}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The product of a matrix and its inverse matrix equals the identity matrix;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thenecessaryandsufficientconditionfortheinversematrix</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span>A A sufficient and necessary condition for reversibility is that $|A|$ is not equal to <code>0</code>;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>If the measure of the matrix is not equal to <code>0</code>, then there is an inverse matrix;</li>
+<li>Because $a^{-1}=\frac{1}{a}$ and the denominator cannot be zero, the necessary and sufficient condition for the inverse matrix is that the measure is not zero;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">andopposedeachother</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> first stage: $$A^{-1}A=E$$</blockquote>
+<p><strong>Explanation</strong></p>
+<h2 id="section-2">5.2 Properties and Important Formulas of Inverse Matrices</h2>
+<p><strong>Properties</strong>: Properties of inverse matrices</p>
+<ul>
+<li>1. $(A^{-1})^{-1}=A$</li>
+<li>2. If k is not equal to 0, then $(kA)^{-1}=\frac{1}{k}A^{-1}$</li>
+<li class="list-indent-1">When transposing matrices: $(kA)^T=kA^T$</li>
+<li class="list-indent-1">When transposing matrices: $|kA|=k^n|A|$</li>
+<li>3. <code>AB</code> is also invertible, and $(AB)^{-1}=B^{-1}A^{-1}$</li>
+<li>4. $A^{\mathrm{T}}$ is also invertible, and $(A^{\mathrm{T}})^{-1}=(A^{-1})^{\mathrm{T}}$.</li>
+<li>5. $\left|A^{-1}\right|=|A|^{-1}$</li>
+<li class="list-indent-1">Because: $|A^{-1}A|=|E|\rightarrow|E|=|A^{-1}||A|$ that is: $|A^{-1}|$ and $|A|$ are reciprocals of each other;</li>
+</ul>
+<p><strong>Note</strong>: $A+B$ need not be invertible, and in general $\left(A+B\right)^{-1}\neq A^{-1}+B^{-1}$.</p>
+<ul>
+<li>$\left(A+B\right)^{T}=A^{T}+B^{T}$</li>
+<li>$\vert A+B\vert$ is not equal to $\vert A\vert+\vert B\vert$</li>
+</ul>
+<p><strong>Supplement</strong>: Inverse matrix and block matrix conclusions</p>
+<ul>
+<li>$$\left.\left(\begin{matrix}a&amp;0\\0&amp;b\end{matrix}\right.\right)^{-1}=\left(\begin{matrix}a&amp;-1&amp;0\\0&amp;b^{-1}\end{matrix}\right)\left(\begin{matrix}A&amp;0\\0&amp;B\end{matrix}\right)^{-1}=\left(\begin{matrix}A&amp;-1&amp;0\\0&amp;B^{-1}\end{matrix}\right)\\\left(\begin{matrix}0&amp;a\\b&amp;0\end{matrix}\right)^{-1}=\left(\begin{matrix}0&amp;b^{-1}\\a^{-1}&amp;0\end{matrix}\right)\left(\begin{matrix}0&amp;A\\B&amp;0\end{matrix}\right)^{-1}=\left(\begin{matrix}0&amp;B^{-1}\\A^{-1}&amp;0\end{matrix}\right)$$</li>
+</ul>
+<h2 id="section-3">5.3 Using the Definition Method to Find the Inverse of an Invertible Matricus</h2>
+<h3 id="section-4">5.3.1 Method One: Definition Method</h3>
+<p><strong>Method</strong>: Define and solve it, that is, find a matrix <code>B</code> such that <code>AB=E</code>, then <code>A</code> is invertible and $A^{-1}=B$</p>
+<h3 id="section-5">5.3.2 Method 2: Multiplication Method</h3>
+<p><strong>Method</strong>: Divide <code>A</code> into the product of several invertible matrices. Since the product of two invertible matrices is still invertible, that is, if <code>A=BC</code>, where <code>B、C</code> are invertible, then <code>A</code> is invertible, and:</p>
+<ul>
+<li>$$A^{-1}=(BC)^{-1}=C^{-1}B^{-1}$$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-073/index.html"><span>← Previous item</span><strong>Lecture 4: Definition of Matrices and Their Basic Operations</strong></a>
+    <a class="article-pagination-next" href="../math-075/index.html"><span>Next item →</span><strong>Lecture 6: Adjugate Matrices</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +117,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

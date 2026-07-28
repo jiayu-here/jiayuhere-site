@@ -225,8 +225,8 @@ tags: ["考研数学", "线性代数", "向量组"]
 		- 1. **线性相关有非零解**；
 		- 2. 当线性相关时，这些向量拼不成 `n` 维空间，即空间维度小于 `m` 的，即 $r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)<m$
 - 补充： 
-	- $r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)<m$ 中的数使其真实的约束个数；
-	- 两个约束也就意味着两个自由度；
+	- $r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)$ 是独立约束的个数；
+	- 若有 $m$ 个未知系数，则自由度为 $m-r$；
 
 **补充**：方程组的未知数个数问题 
 - （1）如果 `n<m`：即方程个数小于未知数个数, 则齐次线性方程组 `(*)` 求解时必有**自由未知量**；

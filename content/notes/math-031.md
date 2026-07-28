@@ -53,7 +53,7 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 	- 可以保证误差，在 x 0 趋向于 0 时，误差为零；
 
 **推论 1**：零点的泰勒公式
-$\begin{gathered}\text{若 }x_0=0\text{ , 则} \\F (x)=f (0)+f^{\prime}(0) x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1} \\上式称为  f (x)\text{ 的 Maclaurin 公式} \end{gathered}$
+$\begin{gathered}\text{若 }x_0=0\text{，则}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0<\theta<1.\\\text{上式称为 }f(x)\text{ 的 Maclaurin 公式。}\end{gathered}$
 
 **推论 2**：几个初等函数的 Maclaurin 公式
 - $e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\frac{x^{n+1}}{(n+1)!}e^{\theta x}\quad\quad x\in(-\infty,+\infty)$

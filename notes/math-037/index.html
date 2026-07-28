@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -77,8 +77,8 @@
 <li class="list-indent-2">乘法 <code>-&gt;</code> <strong>分部积分法</strong>；</li>
 </ul>
 <h3 id="section-2">1.1.1 第一类换元法基本概念</h3>
-<h5 id="section-3"><strong>定理</strong>： #第一类换元法：凑微分法 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若 $\int f(u)\mathrm{d}u=F(u)+C$，$\text{则}\int f[\varphi(x)]\varphi^{\prime}(x)\operatorname{d}x=\int f[\varphi(x)]\operatorname{d}\varphi(x)=F[\varphi(x)]+C$</blockquote>
+<h5 id="section-3"><strong>定理</strong>： <span class="note-tag">第一类换元法</span>：凑微分法 </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若 $\int f(u)\mathrm{d}u=F(u)+C$，$\text{则}\int f[\varphi(x)]\varphi^{\prime}(x)\operatorname{d}x=\int f[\varphi(x)]\operatorname{d}\varphi(x)=F[\varphi(x)]+C$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>常用情况：</li>
@@ -100,7 +100,7 @@
 <li>解析</li>
 <li class="list-indent-1">$\int(1+3x)^{100}dx=\frac13\int(1+3x)^{100}d(1+3x)=\frac1{303}(1+3x)^{101}+C$</li>
 <li class="list-indent-1">凑了一个 $d$ 的 $1+3x$</li>
-<li>题型： #凑微分法 </li>
+<li>题型： <span class="note-tag">凑微分法</span> </li>
 </ul>
 <p><strong>例题</strong>：$\int\frac{dx}{a^2+x^2}$</p>
 <ul>
@@ -108,7 +108,7 @@
 <li class="list-indent-1">因为</li>
 <li>解析</li>
 <li class="list-indent-1">$\int\frac{dx}{a^{2}+x^{2}}=\frac{1}{a}\int\frac{d\frac{x}{a}}{1+(\frac{x}{a})^{2}}=\frac{1}{a}\operatorname{arcc}t,\frac{x}{a}+C^{1}$</li>
-<li>题型： #凑微分法 </li>
+<li>题型： <span class="note-tag">凑微分法</span> </li>
 </ul>
 <p><strong>例题</strong>：$\int\frac{dx}{\sqrt{1-x^2-2x}}$</p>
 <ul>
@@ -116,7 +116,7 @@
 <li class="list-indent-1">$17、\int\frac{dx}{\sqrt{1-x^2}}=\begin{cases}\arcsin x+C\\-\arccos x+C&amp;\end{cases}$</li>
 <li>解析</li>
 <li class="list-indent-1">$\int\frac{dx}{\sqrt{1-x^2-2x}}=\int\frac{d(x+1)}{\sqrt{2-(x+1)^2}}$ = $\arcsin\frac{x+1}{\sqrt{2}}+c$</li>
-<li>题型： #凑微分法 </li>
+<li>题型： <span class="note-tag">凑微分法</span> </li>
 </ul>
 <h3 id="section-5">1.1.3 凑微分形式总结 </h3>
 <p><strong>常见函数</strong></p>
@@ -137,8 +137,8 @@
 </ul>
 <h2 id="section-6">1.2 第二类换元法</h2>
 <h3 id="section-7">1.2.1 第二类换元法基本概念 </h3>
-<h5 id="section-8"><strong>定理</strong>： #第二类换元法</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }x=\varphi(t)\text{ 是单调的、可导的函数,并且 }\varphi^{\prime}(t)\neq0$ ，则 $\int f[\varphi(t)]\varphi^{\prime}(t)\mathrm{d}t=F(t)+C,$ </blockquote>
+<h5 id="section-8"><strong>定理</strong>： <span class="note-tag">第二类换元法</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{设 }x=\varphi(t)\text{ 是单调的、可导的函数,并且 }\varphi^{\prime}(t)\neq0$ ，则 $\int f[\varphi(t)]\varphi^{\prime}(t)\mathrm{d}t=F(t)+C,$ </blockquote>
 <blockquote>公式：$\int f(x)\mathrm{d}x=\int f[\varphi(t)]\varphi^{\prime}(t)\mathrm{d}t=F(t)+C=F[\varphi^{-1}(x)]+C,$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -165,7 +165,7 @@
 <li class="list-indent-1">此时先带入分母中，可知：分母变成 $a*sect$</li>
 <li class="list-indent-1">然后求 $dx$ <code>-&gt;</code> 求 $d(a*tant)$ </li>
 <li class="list-indent-1">然后：<img class="note-image" src="/assets/notes/9efbfcb1bb7e-Pasted-image-20240119002138.png" alt="Pasted image 20240119002138" loading="lazy" decoding="async"></li>
-<li>题型： #第二类换元法</li>
+<li>题型： <span class="note-tag">第二类换元法</span></li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-036/index.html"><span>← 上一项</span><strong>Lecture 28：不定积分</strong></a>
     <a class="article-pagination-next" href="../math-038/index.html"><span>下一项 →</span><strong>Lecture 30：分部积分法</strong></a>
@@ -177,6 +177,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

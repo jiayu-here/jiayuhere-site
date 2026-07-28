@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -62,8 +62,8 @@
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 10：矩阵的秩</h1><p class="article-lead">考研数学学习笔记：Lecture 10：矩阵的秩。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学</span><span>约 4 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>矩阵</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">10.1 秩的定义 </a><a href="#section-3">10.2 求矩阵的秩</a><a href="#section-4">10.3 有关秩的几个重要式子</a></nav></details><div class="prose"><h2 id="section-1">10.1 秩的定义 </h2>
-<h5 id="section-2"><strong>定义</strong>： #矩阵的秩 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 A 是 $m<em>n$ 的矩阵，若存在 k 阶子式不为零，且任意 <code>k+1</code> 阶子式（如果有的话）全为零，则 <code>r(A)=k</code>，且若 A 为 <code>n</em>n</code> 矩阵，则得到：$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{可逆}$$</blockquote>
+<h5 id="section-2"><strong>定义</strong>： <span class="note-tag">矩阵的秩</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>设 A 是 $m<em>n$ 的矩阵，若存在 k 阶子式不为零，且任意 <code>k+1</code> 阶子式（如果有的话）全为零，则 <code>r(A)=k</code>，且若 A 为 <code>n</em>n</code> 矩阵，则得到：$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{可逆}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>子式： </li>
@@ -105,21 +105,21 @@
 <h2 id="section-4">10.3 有关秩的几个重要式子</h2>
 <p><strong>概念</strong>：设 A 是 <code>m*n</code> 矩阵，<code>B</code> 是满足有关矩阵运算要求的矩阵，则：</p>
 <ul>
-<li>（1）${1}0\leqslant r(A)\leqslant\min\{m,n\}($ 由定义 )</li>
-<li class="list-indent-1">任何一个矩阵的秩最低为 0，并且 <code>r(a)=0</code> 则矩阵一定等于 <code>0</code>：<code>A=0</code></li>
-<li class="list-indent-1">并且 $r(A)\leqslant\min\{m,n\}$ <code>&lt;-</code> 因为行列式是方的，而矩阵的子式是行列式，所以必须为 <code>n*n</code> </li>
-<li>（2）${2}r(kA)=r(A)(k\neq0)($ 由定义 )</li>
+<li>（1）$0\leqslant r(A)\leqslant\min\{m,n\}$（由定义）</li>
+<li class="list-indent-1">任何矩阵的秩最低为 0，并且 $r(A)=0$ 当且仅当 $A=O$；</li>
+<li class="list-indent-1">$r(A)\leqslant\min\{m,n\}$，因为矩阵的非零子式阶数不会超过行数或列数；</li>
+<li>（2）$r(kA)=r(A)\quad(k\neq0)$（由定义）</li>
 <li>（3）$r\left(AB\right)\leqslant\min\left\{r\left(A\right),r\left(B\right)\right\}$</li>
-<li class="list-indent-1">矩阵越乘，秩序=越多越的‘‘’’</li>
-<li>（4）$r(A+B)&lt;=r(A)+r(B)$</li>
+<li class="list-indent-1">矩阵相乘不会增加秩；</li>
+<li>（4）$r(A+B)\leq r(A)+r(B)$</li>
 <li>（5）$r\left(A^{*}\right)=\begin{cases}n,&amp;r\left(A\right)=n,\\1,&amp;r\left(A\right)=n-1,\\0,&amp;r\left(A\right)&lt;n-1,\end{cases}$</li>
 <li>（6）设 A= <code>m*n</code> 的矩阵，<code>P、Q</code> 分别为 m 阶、n 阶的可逆矩阵，则：<code>r(A)=r(PA)=r(AQ)=r(PAQ)</code></li>
 <li class="list-indent-1">在过程当中，所有中间矩阵都是等价的：$r\left(\begin{matrix}E_{r}&amp;0\\0&amp;0\end{matrix}\right)$</li>
-<li>（7）若 $A_{m\times n}B_{m\times s}=O,则r\left(A\right)+r\left(B\right)\leqslant n$；</li>
+<li>（7）若 $A_{m\times n}B_{n\times s}=O$，则 $r\left(A\right)+r\left(B\right)\leqslant n$；</li>
 <li class="list-indent-1"><code>n</code> 为 <code>A</code> 的列数；</li>
 <li>（8）格拉姆矩阵：$r\left(A\right)=r\left(A^{T}\right)=r\left(A^{T}A\right)=r\left(AA^{T}\right)$</li>
-<li class="list-indent-1">$r\left(A^{T}A\right)=r\left(AA^{T}\right)$ 一定有解，并且一定是最佳近似解；</li>
-<li class="list-indent-1">对于任何一个矩阵，其转置的秩等于其 $r\left(A^{T}A\right)=r\left(AA^{T}\right)$；</li>
+<li class="list-indent-1">格拉姆矩阵 $A^TA$ 与 $AA^T$ 的秩都等于 $A$ 的秩；</li>
+<li class="list-indent-1">对任意矩阵，都有 $r(A)=r(A^T)$；</li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-078/index.html"><span>← 上一项</span><strong>Lecture 9：等价矩阵</strong></a>
     <a class="article-pagination-next" href="../math-080/index.html"><span>下一项 →</span><strong>Lecture 11：向量与向量组的线性相关性</strong></a>
@@ -131,6 +131,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

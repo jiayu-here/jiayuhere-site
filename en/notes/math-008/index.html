@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: 高等数学 - 思维导图 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics">
+  <title>Advanced Mathematics - Mind Map | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Mind Map. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Mathematics Summary, Formula Collection">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: 高等数学 - 思维导图 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Advanced Mathematics - Mind Map | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Mind Map. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-008/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,347 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: 高等数学 - 思维导图</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-008/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-007/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: 高等数学 - 公式合集</strong></a>
-    <a class="article-pagination-next" href="../math-009/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 1：课程大纲</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Advanced Mathematics - Mind Map</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Mind Map. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics</span><span>12 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Advanced Mathematics</a><a href="#section-2">Differentiation</a><a href="#section-5">Integral Calculus</a><a href="#section-8">Differential Equations</a><a href="#section-12">Infinite Series</a><a href="#section-16">Analytic Geometry in Space</a></nav></details><div class="prose"><h2 id="section-1">Advanced Mathematics</h2>
+<h2 id="section-2">Differentiation</h2>
+<h3 id="section-3">Differential Calculus of Single-variable Functions</h3>
+<ul>
+<li>Function</li>
+<li class="list-indent-2">The concept of functions</li>
+<li class="list-indent-4">Function definition:</li>
+</ul>
+<p>                           If for each number $x\in D$, the variable $x$ always corresponds to a certain $y$ according to certain rules, then $x$ is called a function of $y$, denoted as $y=f(x)$; x is often called the independent variable, $y$ the dependent variable, and $D$ domain.</p>
+<ul>
+<li class="list-indent-4">Composite function:</li>
+</ul>
+<p>                           Suppose the domain of $y=f(u)$ is $D_f, u=g(x)$, the domain is $D_g$, and the value domain is $R_{s}$; if $D_f\cap R_g\neq\phi, $, then the function $y=f[g(x)]$ is called the composite function of functions $y=f(u)$ and $u=g(x)$. Its domain is $\left\{x|x\in D_g, g(x)\in D_f\right\}$</p>
+<ul>
+<li class="list-indent-4">Inverse function:</li>
+</ul>
+<p>                           Let the domain of function $y=f(x)$ be ${D}$, and the range be $\underline{R}_{\underline{\nu}}$. If for any $y\in R_y$, there exists a unique and determined $x\in D$ such that $y=f(x)$, then it is denoted as $x=f^{-1}(y)$, and called the inverse of function $y=f(x)$</p>
+<ul>
+<li class="list-indent-2">The properties of functions</li>
+<li class="list-indent-4">Monotonicity</li>
+<li class="list-indent-4">Parity:</li>
+<li class="list-indent-5">Common odd functions: $\sin x,\tan x,\arcsin x,\arctan x,\ln\frac{1-x}{1+x},{\ln(x+\sqrt{1+x^2})},\frac{e^x-1}{e^x+1},f(-x)=-f(x)$</li>
+<li class="list-indent-5">Common even functions: $x^2,|x|,\cos x,f(x)=f(-x)$</li>
+<li class="list-indent-4">Periodicity</li>
+<li class="list-indent-4">Boundedness</li>
+<li>Limit</li>
+<li class="list-indent-2">The nature of limits</li>
+<li class="list-indent-4">Properties of the limit of sequences</li>
+<li class="list-indent-5">Boundedness: $\text{ If the sequence is }\left\{x_n\right\}\text{ Convergence, then the sequence }\left\{x_n\right\}\text{ There must be boundaries }$</li>
+<li class="list-indent-5">Number preservation;</li>
+<li class="list-indent-4">Limit properties of functions</li>
+<li class="list-indent-5">Local boundedness: if $\lim_{x\to x_0}f(x)$ exists, then $f(x)$ is in a punctured neighborhood of $x_0$</li>
+<li class="list-indent-5">Number preservation</li>
+<li class="list-indent-2">Function limit</li>
+<li class="list-indent-4">Functions tend toward infinite values</li>
+<li class="list-indent-5">Functions and infinity:</li>
+</ul>
+<p>                              $\lim_{x\to\infty}f(x)=A$ iff, for every $\varepsilon&gt;0$, there is an $X&gt;0$ such that $|x|&gt;X$ implies $|f(x)-A|&lt;\varepsilon$.</p>
+<ul>
+<li class="list-indent-5">The function tends toward negative infinity:</li>
+</ul>
+<p>                               $\lim_{x\to-\infty}f(x)=A$ iff, for every $\varepsilon&gt;0$, there is an $X&gt;0$ such that $x&lt;-X$ implies $|f(x)-A|&lt;\varepsilon$.</p>
+<ul>
+<li class="list-indent-5">The function tends toward positive infinity:</li>
+</ul>
+<p>                               $\lim_{x\to+\infty}f(x)=A$ iff, for every $\varepsilon&gt;0$, there is an $X&gt;0$ such that $x&gt;X$ implies $|f(x)-A|&lt;\varepsilon$.</p>
+<ul>
+<li class="list-indent-4">The function tends toward finite values</li>
+<li class="list-indent-5">$\lim_{x\to x_0}f(x)=A$ iff, for every $\varepsilon&gt;0$, there is a $\delta&gt;0$ such that $0&lt;|x-x_0|&lt;\delta$ implies $|f(x)-A|&lt;\varepsilon$.</li>
+<li class="list-indent-4">Unilateral limit</li>
+<li class="list-indent-5">left limit: $\lim_{x \to x_{0}^{-}}f(x) = A \Leftrightarrow \begin{cases} \hspace{1em} \forall \xi &gt;0, \exists \delta&gt;0, x_{0}-\delta &lt;x&lt;x_{0} \ \mbox{whenever}, \\ \hspace{1em} \lvert f(x) - A\rvert &lt; \xi \\ \end{cases}$</li>
+<li class="list-indent-5">Right limit: $\lim_{x \to x_{0}^{+}}f(x) = A \Leftrightarrow \begin{cases} \hspace{1em} \forall \xi &gt;0, \exists \delta&gt;0, x_{0}&lt;x&lt;x_{0}+\delta \ \mbox{whenever}, \\ \hspace{1em} \lvert f(x) - A\rvert &lt; \xi \\ \end{cases}$</li>
+<li class="list-indent-5">Relationship between limit and unilateral limit:</li>
+</ul>
+<p>                             $\lim_{x\to x_0}f(x)=A\Leftrightarrow\lim_{x\to x_0^-}f(x)=\lim_{x\to x_0^+}f(x)=A$</p>
+<ul>
+<li class="list-indent-2">Limit of the sequence</li>
+<li class="list-indent-4">Definition of sequence limits:</li>
+</ul>
+<p>                          $\lim_{n\to\infty}x_n=a$ iff, for every $\varepsilon&gt;0$, there is an $N$ such that $n&gt;N$ implies $|x_n-a|&lt;\varepsilon$.</p>
+<ul>
+<li class="list-indent-4">Criteria for the existence of sequence limits:</li>
+</ul>
+<p>                          If there is $N, $ when $n&gt;N$, $x_n\leq y_n\leq z_n$, $\lim_{n\to\infty}x_n=\lim_{n\to\infty}z_n=a, $ then $\lim_{n\to\infty}y_n=a$</p>
+<ul>
+<li class="list-indent-2">Find the limit</li>
+<li class="list-indent-4">Eight methods for finding limits</li>
+<li class="list-indent-2">Infinity and infinitesimal</li>
+<li class="list-indent-4">Infinitesimal</li>
+<li class="list-indent-5">Definition of infinitesimal: If the function $f(x)$ has zero limit at $x\to x_0($ or $x\to\infty)$, then $f(x)$ is called an infinitesimal at $x\to x_0($ or $x\to\infty)$.</li>
+<li class="list-indent-5">Comparison of infinitesimals:</li>
+</ul>
+<p>                -<strong>Iso-order</strong>infinitesimal: $\alpha(x)\text{ and }\beta(x)$ The result of division is<strong>constant C</strong>(C is not equal to 0);</p>
+<p>                -<strong>Equivalent</strong>infinitesimal: $\alpha(x)\text{ and }\beta(x)$ divide by<strong>constant 1</strong>;</p>
+<ul>
+<li class="list-indent-5">Higher-order infinitesimal: $\alpha(x)\text{ and }\beta(x)$ divide by 0; can be denoted as: $\alpha(x)=o(\beta(x))$</li>
+<li class="list-indent-5">Low-order infinitesimals: $\alpha(x)\text{ and }\beta(x)$ divide by the opposite order is infinite;</li>
+<li class="list-indent-5">$\text{ If }\lim\frac{\alpha (x)^{\color{red}{}}}{\left[\beta (x)\right]^{k}\color{red}}=C\neq 0,\text{ Said }$ α is the k-th order infinitesimal of β;</li>
+<li class="list-indent-5">Properties of infinitesimals:</li>
+</ul>
+<p>                -<strong>Property 1:</strong><strong>The sum of infinitesimals</strong>is still infinitesimal;</p>
+<p>                -<strong>Property 2:</strong><strong>The product of finite</strong>infinitesimals is still infinitesimal;</p>
+<p>                -<strong>Property 3:</strong>The product of infinitesimals and<strong>bounded quantities</strong>is infinitesimal;</p>
+<ul>
+<li class="list-indent-4">Infinity</li>
+<li class="list-indent-5">Definition of infinity:</li>
+</ul>
+<p>                            If the function $f(x)$ infinite at $x\to x_0($ or $x\to\infty)$, then $f(x)$ is called an infinite quantity at $x\to x_0($ or $x\to\infty)$.</p>
+<ul>
+<li class="list-indent-5">Properties of infinity:</li>
+</ul>
+<p>                -<strong>Property 1:</strong>The sum of finite positive infinity is infinity;</p>
+<p>                -<strong>Property 2:</strong>The<strong>product</strong>of finite infinity is still infinite;</p>
+<p>                -<strong>Property 3:</strong>The sum of infinite quantities and bounded variables remains infinitely large;</p>
+<ul>
+<li>Continuous</li>
+<li class="list-indent-2">Definition of continuity</li>
+<li class="list-indent-4">Left continuous</li>
+<li class="list-indent-4">Right continuous</li>
+<li class="list-indent-4">Definition:</li>
+</ul>
+<p>                       Let function $y=f(x)$ be defined in a neighborhood of point $x_{0}$. If when $x\to x_0$, the limit of function $y=f(x)$ exists and equals the value of function $f(x_0)$ at $x_{0}$, i.e., $\lim_{x\to x_0}f(x)=f(x_0)$, then function $y=f(x)$ is said to be continuous at point $x_{0}$.</p>
+<ul>
+<li class="list-indent-2">The nature of continuity</li>
+<li class="list-indent-4">Properties of continuity functions on closed intervals:</li>
+<li class="list-indent-5">Boundedness: $\text{ If f(x) is continuous on [a,b], then f(x) is bounded on [a,b]. }$</li>
+<li class="list-indent-5">Maximum value theorem: If $f(x)$ is continuous on $[a,b]$, then $f(x)$ must have a maximum and minimum value on $[a,b]$;</li>
+<li class="list-indent-5">Intermediate Value Theorem: If $f(x)$ is continuity on $[a, b]$, and $f(a)\neq f(b)$, then for any number $\mathbf{C}, $ between $f(a)$ and $f(b)$ there is at least one $\xi\in(a,  b), $ such that $f(\xi){=}C.$</li>
+<li class="list-indent-5">Zero point theorem</li>
+<li class="list-indent-4">The computational properties of continuity</li>
+<li class="list-indent-2">Breakpoints</li>
+<li class="list-indent-4">Definition of discontinuity points:</li>
+<li class="list-indent-4">Several types of discontinuities</li>
+<li>Derivative</li>
+<li class="list-indent-2">Definition of derivatives</li>
+<li class="list-indent-4">What is a derivative?</li>
+<li class="list-indent-4">Left derivative and right derivative</li>
+<li class="list-indent-4">The geometric meaning of the derivative</li>
+<li class="list-indent-2">The rule for derivative differentiation</li>
+<li class="list-indent-4">Differentiation rule for sum and product quotient</li>
+<li class="list-indent-4">The rule for differentiating inverse functions</li>
+<li class="list-indent-4">Derivative rule of composite functions</li>
+<li class="list-indent-4">Derivative of commonly used conclusions</li>
+<li class="list-indent-4">Logarithmic differentiation method</li>
+<li class="list-indent-2">Higher-order derivatives</li>
+<li class="list-indent-4">Definition of higher-order derivatives</li>
+<li class="list-indent-4">Common formulas for finding higher-order derivatives</li>
+<li class="list-indent-2">Implicit function</li>
+<li class="list-indent-2">Parametric equations</li>
+<li class="list-indent-2">Derivative application</li>
+<li class="list-indent-4">Interpreting the monotonicity of functions</li>
+<li class="list-indent-4">Judgment of convexity</li>
+<li class="list-indent-4">Inflection points</li>
+<li class="list-indent-4">Extrema and extrema of a function</li>
+<li class="list-indent-4">Asymptote</li>
+<li class="list-indent-5">Horizontal asymptote</li>
+<li class="list-indent-5">Vertical asymptote</li>
+<li>Differential</li>
+<li class="list-indent-2">Definition of differential:</li>
+<li class="list-indent-4">$f(x)$ is said to be differentiable at $x _0$ if $f(x_0+\Delta x)-f(x_0)=A\Delta x+o(\Delta x); $</li>
+<li class="list-indent-2">Relationships among differentiable, differentiable, and continuity</li>
+<li class="list-indent-4"><img class="note-image" src="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" alt="Pasted image 20240317192744" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">Mean value theorem for differential calculation</li>
+<li class="list-indent-4">Rolle's Theorem:</li>
+<li class="list-indent-5">If three conditions are met:</li>
+<li class="list-indent-5">1) $f$ continuous on $[a,b]$;</li>
+<li class="list-indent-5">2)$f$ is differentiable within $(a, b)$;</li>
+<li class="list-indent-5">3）f (a)=f (b)</li>
+<li class="list-indent-5">So, it can be known: $\text{ then }\exists\xi\in(a,b)\text{ , to use }f^{\prime}(\xi)=0$</li>
+<li class="list-indent-5">Derivation conclusion: There is a tangent line at a point parallel to the line connecting points ab <code>-&gt;</code> Lagrange theorem;</li>
+<li class="list-indent-4">Lagrange mean value theorem:</li>
+<li class="list-indent-5">If the following conditions are met: 1) $f$ is continuously on $[a,b]$ 2) $f$ is differentiable within ($a,b)$;</li>
+<li class="list-indent-5">Therefore, there exists $\xi\in(a,b)$ such that $f(b)-f(a)=f^{\prime}(\xi)(b-a)$;</li>
+<li class="list-indent-4">Cauchy Mean Value Theorem:</li>
+<li class="list-indent-5">If the following conditions are met:</li>
+<li class="list-indent-5">1) $f,  F$ on $[a,  b]$ continuity $; $</li>
+<li class="list-indent-5">2) $f,  F$ is differentiable within $(a,  b)$, and $\forall x\in(a,  b),  F^{\prime}(x)\neq0$</li>
+<li class="list-indent-5">Therefore, there exists $\xi\in(a,b)$ such that $\frac{f(b)-f(a)}{F(b)-F(a)}=\frac{f^{\prime}(\xi)}{F^{\prime}(\xi)}$;</li>
+</ul>
+<h3 id="section-4">Multivariable Differential Calculus</h3>
+<ul>
+<li>Basic concepts of multivariable functions</li>
+<li class="list-indent-2">Limits of multivariable functions</li>
+<li class="list-indent-2">Continuity of multivariable functions</li>
+<li class="list-indent-2">Partial derivative</li>
+<li class="list-indent-4">Definition of partial derivatives</li>
+<li class="list-indent-4">The geometric meaning of partial derivatives</li>
+<li class="list-indent-4">Higher-order partial derivative</li>
+<li class="list-indent-2">Total derivative</li>
+<li class="list-indent-4">Definition of the total differential</li>
+<li class="list-indent-4">A necessary condition for differentiability of multivariable functions</li>
+<li class="list-indent-4">Sufficient condition for differentiability of multivariable functions</li>
+<li class="list-indent-2">Multivariable function analysis</li>
+<li class="list-indent-4">Judgments of differentiable, differentiable, continuous, and partially diverging continuous</li>
+<li class="list-indent-4">The relationship among differentiable, differentiable, continuous, and partially differentiated continuity</li>
+<li>Multivariable function differentiation</li>
+<li class="list-indent-2">Multivariable Composite Function Differential</li>
+<li class="list-indent-4">Differentiation rule for multivariable composite functions</li>
+<li class="list-indent-4">Full-differential form invariance</li>
+<li class="list-indent-2">Multivariable implicit function differential</li>
+<li class="list-indent-4">Multivariable function implicit function definition</li>
+<li class="list-indent-4">The existence theorem of implicit functions in multivariable functions</li>
+<li>Extrema and extrema of multivariable functions</li>
+<li class="list-indent-2">Definition of extremum of multivariable functions</li>
+<li class="list-indent-4">The necessary condition for the existence of extremals in multivariable functions</li>
+<li class="list-indent-2">Unconditional extremum</li>
+<li class="list-indent-2">Conditional extremums</li>
+<li class="list-indent-4">Lagrange multiplier method</li>
+<li class="list-indent-4">Definition of conditional extremums</li>
+</ul>
+<h2 id="section-5">Integral Calculus</h2>
+<h3 id="section-6">Integral Calculus of Single-Variable Functions</h3>
+<ul>
+<li>Indefinite integral</li>
+<li class="list-indent-2">The concept of indefinite integrals</li>
+<li class="list-indent-4">Definition of indefinite integrals:</li>
+</ul>
+<p>                      An antiderivative of a function $f(x)$ is a function $F(x)$ whose derivative equals $f(x)$, that is, $F'(x)=f(x)$. The indefinite integral is the family $F(x)+C$.</p>
+<p>                      Or: $\int f(x)dx=F(x)+C$</p>
+<ul>
+<li class="list-indent-4">Existence of antiderivatives:</li>
+<li class="list-indent-2">Basic properties of indefinite integrals</li>
+<li class="list-indent-4">$(\int f(x)\mathrm{d}x)^{\prime}=f(x)$</li>
+<li class="list-indent-4">$\mathrm{d}\int f(x)\mathrm{d}x=f(x)\mathrm{d}x$</li>
+<li class="list-indent-2">Calculation of indefinite integrals</li>
+<li class="list-indent-4">Basic formula</li>
+<li class="list-indent-4">First type of substitution method</li>
+<li class="list-indent-4">The second type of substitution method</li>
+<li class="list-indent-4">Integration by parts</li>
+<li>Definite integral</li>
+<li class="list-indent-2">The concept of definite integrals</li>
+<li class="list-indent-4">Definition of definite integrals:</li>
+</ul>
+<p>                      $f(x)$ is bounded on $[a,b]$, arbitrarily insert a node on $[a,b]$, divide it into n small intervals $\Delta x_{1}\Delta x_{2}\cdots\Delta x_{n}$, and take any point $\xi_i$, resulting in: $\int_{a}^{b}f(x)\,dx=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i})\Delta x_{i}$.</p>
+<ul>
+<li class="list-indent-5">Where: $\lambda=\max\{\Delta x_{1},\cdots,\Delta x_{n}\}$.</li>
+<li class="list-indent-4">Fundamental theorems of calculus</li>
+<li class="list-indent-2">Calculation of definite integrals</li>
+<li class="list-indent-4">Newton-Leibniz formula</li>
+<li class="list-indent-4">Substitution of definite integrals</li>
+<li class="list-indent-4">Integral by Parts of Definite Integrals</li>
+<li class="list-indent-4">Properties of definite integrals</li>
+<li class="list-indent-2">Limit the points</li>
+<li class="list-indent-4">Method 1: Formula calculation</li>
+<li class="list-indent-4">Method 2: Extract x</li>
+<li class="list-indent-4">Method 3: Substitution method</li>
+<li class="list-indent-2">Improper integral</li>
+<li class="list-indent-4">Definition of improper integrals</li>
+<li class="list-indent-4">Two types of improper integrals</li>
+<li class="list-indent-5">Improper integrals over an infinite interval</li>
+<li class="list-indent-5">Improper integrals on infinite functions</li>
+<li class="list-indent-4">Determine the divergence of improper integrals</li>
+<li class="list-indent-5">Method 1: Definition method</li>
+<li class="list-indent-5">Method 2: Comparative Discrimination</li>
+<li class="list-indent-5">Method 3: P integration</li>
+<li class="list-indent-2">Application of definite integrals</li>
+<li class="list-indent-4">Area of a plane figure</li>
+<li class="list-indent-4">The volume of a rotating body</li>
+<li class="list-indent-4">The arc length of a plane curve</li>
+<li class="list-indent-4">Lateral area of a rotating body</li>
+</ul>
+<h3 id="section-7">Multivariable Function Integral Calculus</h3>
+<ul>
+<li>Multiintegrals</li>
+<li class="list-indent-2">Double integral</li>
+<li class="list-indent-4">Definition of double integrals</li>
+<li class="list-indent-4">Properties of double integrals</li>
+<li class="list-indent-4">Calculation of double integrals</li>
+<li class="list-indent-5">Double integral calculation based on the Cartesian coordinate system</li>
+<li class="list-indent-5">Double integral calculation based on polar coordinate systems</li>
+<li class="list-indent-5">Utilizing parity and symmetry</li>
+<li class="list-indent-2">Triple integral</li>
+<li>Linear area division</li>
+<li class="list-indent-2">Line integration</li>
+<li class="list-indent-2">By area</li>
+<li>Points application</li>
+</ul>
+<h2 id="section-8">Differential Equations</h2>
+<h3 id="section-9">First-Order Differential Equations</h3>
+<ul>
+<li>Separable variables</li>
+<li>First-order homogeneous equation</li>
+<li>First-order linear equation</li>
+</ul>
+<h3 id="section-10">Second-Order Differential Equations</h3>
+<ul>
+<li>Second-order homogeneous differential equations with constant coefficients</li>
+<li>Second-order constant coefficient nonhomogeneous differential equation</li>
+</ul>
+<h3 id="section-11">Higher-Order Differential Equations</h3>
+<ul>
+<li>Reduced-order linear differential equations</li>
+<li>Concept of higher-order differential equations</li>
+</ul>
+<h2 id="section-12">Infinite Series</h2>
+<h3 id="section-13">Series of Constant Terms</h3>
+<ul>
+<li>Basic concepts</li>
+<li class="list-indent-2">Definition of a series of constant terms</li>
+<li class="list-indent-2">Definition of convergence of series of constant terms: $\lim_{n\to+\infty}S_{n}=\sum_{n=1}^\infty u_n$</li>
+<li class="list-indent-2">Basic properties of series</li>
+<li>Constant-sign series</li>
+<li class="list-indent-2">Positive term series</li>
+<li class="list-indent-4">Convergence of a positive-term series: $\sum_{n=1}^\infty u_n\text{ converges }\Leftrightarrow \{s_n\}\text{ is bounded above}$</li>
+<li class="list-indent-4">Comparison test</li>
+<li class="list-indent-4">Limit comparison test</li>
+<li class="list-indent-4">Ratio method</li>
+<li class="list-indent-4">Root test</li>
+<li class="list-indent-4">Integral test</li>
+<li>Sign-changing series</li>
+<li class="list-indent-2">Alternating series</li>
+<li class="list-indent-4">Definition of alternating series: $\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$</li>
+<li class="list-indent-4">Leibniz test</li>
+<li class="list-indent-2">General series</li>
+<li class="list-indent-4">Concepts of absolute convergence and conditional convergence</li>
+<li class="list-indent-4">Convergence tests for general series</li>
+</ul>
+<h3 id="section-14">Power series</h3>
+<ul>
+<li>Basic concepts of power series</li>
+<li class="list-indent-2">Definition of a power series</li>
+<li class="list-indent-4">$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots$</li>
+<li class="list-indent-2">Convergence of power series</li>
+<li class="list-indent-4">The concepts of convergence points and divergence points</li>
+<li class="list-indent-4">Abel's theorem</li>
+<li class="list-indent-4">Convergence interval</li>
+<li class="list-indent-4">Convergence domain</li>
+<li class="list-indent-2">Radius of convergence</li>
+<li class="list-indent-4">Radius of Convergence Determination Method One: Limit Ratio</li>
+<li class="list-indent-4">Radius of Convergence Determination Method 2: Based on radicals</li>
+<li class="list-indent-2">Operations on power series</li>
+<li class="list-indent-4">Properties of rational operations</li>
+<li class="list-indent-4">Analytical nature</li>
+<li>The function is expanded into a power series</li>
+<li class="list-indent-2">Basic concepts</li>
+<li class="list-indent-4">The power series expansion of a function</li>
+<li class="list-indent-4">Convergence of Taylor's series</li>
+<li class="list-indent-2">The function expansion is a power series</li>
+<li class="list-indent-4">Direct expansion method</li>
+<li class="list-indent-4">Indirect development method</li>
+<li class="list-indent-2">Common Development</li>
+</ul>
+<h3 id="section-15">Fourier series</h3>
+<ul>
+<li>Basic concepts of Fourier series</li>
+<li class="list-indent-2">Fourier coefficient</li>
+<li class="list-indent-2">Fourier series</li>
+<li class="list-indent-2">Convergence</li>
+<li class="list-indent-4">Dirichlet theorem</li>
+<li>The function expansion is a Fourier series</li>
+<li class="list-indent-2">Expansion of periodic functions: special cases</li>
+<li class="list-indent-2">Expansion of periodic functions: general case</li>
+</ul>
+<h2 id="section-16">Analytic Geometry in Space</h2>
+<h3 id="section-17">Vector Algebra</h3>
+<h3 id="section-18">Spatial Planes and Straight Lines</h3>
+<h3 id="section-19">Surface and Spatial Curves</h3>
+<h3 id="section-20">Applications of Multivariable Differentials in Geometry</h3><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-007/index.html"><span>← Previous item</span><strong>Advanced Mathematics - Collection of Formulas</strong></a>
+    <a class="article-pagination-next" href="../math-009/index.html"><span>Next item →</span><strong>Lecture 1: Course Outline</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +409,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

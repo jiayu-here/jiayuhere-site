@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 55：交错级数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 55: Alternating Series | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 55: Alternating Series. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Infinite Series">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 55：交错级数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 55: Alternating Series | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 55: Alternating Series. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-057/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,109 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 55：交错级数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-14</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-057/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-056/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 48：正项级数</strong></a>
-    <a class="article-pagination-next" href="../math-058/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 56：幂级数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 55: Alternating Series</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 55: Alternating Series. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-14</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">49.1 alternating series</a><a href="#section-4">49.2 Arbitrary Term Series</a></nav></details><div class="prose"><h2 id="section-1">49.1 alternating series</h2>
+<h3 id="section-2">49.1.1 Concept of alternating series</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Alternatingseries</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Series with alternating positive and negative occurrences:</li>
+<li class="list-indent-1">1. $u_{1}-u_{2}+u_{3}-u_{4}+u_{5}-u_{6}+\cdots$；</li>
+<li class="list-indent-1">2. $-u_{1}+u_{2}-u_{3}+u_{4}-u_{5}+u_{6}\cdots$；</li>
+<li class="list-indent-1">This series is called an alternating series;</li>
+<li>And $u_n &gt;=0$</li>
+</ul>
+<p><strong>Note</strong></p>
+<ul>
+<li>If the number of terms is infinite,<strong>parentheses cannot be arbitrarily added, and</strong>order cannot be arbitrarily changed**;</li>
+<li>For example:</li>
+<li class="list-indent-1">$1-1+1-1+1-1+1-1+1-1+1-1+1......$</li>
+<li class="list-indent-1">If it is an odd term -&gt;, the result is 1;</li>
+<li class="list-indent-1">If the even term -&gt; is 0;</li>
+<li>If you add parentheses</li>
+<li class="list-indent-1">$(1-1)+(1-1)+(1-1)+(1-1)+......$</li>
+<li class="list-indent-1">Adding parentheses to the infinite term like this may cause problems because it is unclear whether it is an odd or even term;</li>
+</ul>
+<h3 id="section-3">49.1.2 Methods for Determining alternating series</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Leibnizprinciple</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> currently has an alternating series $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$, when:</blockquote>
+<blockquote>1) $u_{n}\geq u_{n+1}$: Monotonous subtraction</blockquote>
+<blockquote>2）$\lim_{n\to\infty}u_{n}=0$</blockquote>
+<blockquote>then $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$ series converges, <code>S</code> <code>&lt;=</code> $u_1$, and $|r_{n}|\leq u_{n+1}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">Requirements:</li>
+<li class="list-indent-2">1) $u_{n}\geq u_{n+1}$: Monotonous subtraction</li>
+<li class="list-indent-2">2）$\lim_{n\to\infty}u_{n}=0$</li>
+<li class="list-indent-1">These two requirements are<strong>sufficient conditions</strong>for the convergence of an alternate series, meaning if either of these does not hold, the convergence of an alternate series is also possible;</li>
+<li>Premise:</li>
+<li class="list-indent-1">Before using Leibniz's theorem, it must be ensured that the current is an alternating series;</li>
+<li class="list-indent-1">The latter is smaller than the former;</li>
+<li class="list-indent-1">And $u_n$ approaches zero;</li>
+</ul>
+<p><strong>Example</strong>: The Leibniz criterion is a sufficient condition</p>
+<ul>
+<li>$$\sum_{n=1}^\infty\frac{(-1)^{n-1}}{2^{n+(-1)^n}}\text{ Convergence, but }u_n=\frac1{2^{n+(-1)^n}}\text{ and did not decrease in number }.$$</li>
+</ul>
+<h2 id="section-4">49.2 Arbitrary Term Series</h2>
+<h3 id="section-5">49.2.1 Concept of Arbitrary Term Series</h3>
+<p><strong>Concept of Arbitrary Term Series</strong></p>
+<ul>
+<li>Features:</li>
+<li class="list-indent-1">There are positive terms and negative terms;</li>
+<li class="list-indent-1">And both positive and negative terms must be infinite;</li>
+<li>Any term: $u_{1}+u_{2}+u_{3}+u_{4}+\cdots$, and the positive or negative of $u_n$ is unknown;</li>
+<li>Positive term series: $|u_{1}|+|u_{2}|+|u_{3}|+|u_{4}|+\cdots$, each term takes an absolute value;</li>
+<li class="list-indent-1">This is an absolute series;</li>
+</ul>
+<h3 id="section-6">49.2.2 Method for Determining Arbitrary Term Series</h3>
+<p><strong>Principle</strong>: Convert new problems into old problems <code>-&gt;</code> Convert a variant series into a positive term series <code>-&gt;</code> Add an absolute value to the general term <code>-&gt;</code> When this new positive term series converges, any term series also converges;</p>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Absoluteconvergenceandconditionalconvergence</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1. Absolute convergence: If the absolute value of $\sum|u_{n}|$ converges, it is called $\sum u_n$ convergence;</blockquote>
+<blockquote>2. Conditional convergence: If $u_n$ is convergent and $\sum|u_{n}|$ divergent, then $\sum u_n$ is called conditionally convergent;</blockquote>
+<blockquote>Details:</blockquote>
+<blockquote>(1) If $\sum^{\infty}_{n=1}=|a_n|$ converges, then $\sum^{\infty}_{n=1}=a_n$ must converge; in this case, $\sum^{\infty}_{n=1}a_n$ is called absolute convergence</blockquote>
+<blockquote>(2) If $\sum^{\infty}_{n=1}=a_n$ converges and $\sum^{\infty}_{n=1}=|a_n|$ diverges, then it is called conditional convergence $\sum^{\infty}_{n=1}a_n$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Absolute convergence</li>
+<li class="list-indent-1">$\sum|u_{n}|$ Convergence</li>
+<li class="list-indent-1">$\sum u_n$ Convergence</li>
+<li>Conditional convergence</li>
+<li class="list-indent-1">$\sum|u_{n}|$ divergence</li>
+<li class="list-indent-1">$\sum u_n$ Convergence</li>
+</ul>
+<p><strong>Examples</strong></p>
+<ul>
+<li>$\sum(-1)^{n-1}\frac{1}{n}$: Interleaved adjustment series -&gt; convergent;</li>
+<li>$\sum(-1)^{n}\frac{1}{n^{3}}$: It is absolutely convergent;</li>
+</ul>
+<p><strong>Key Conclusions</strong></p>
+<ul>
+<li>1. A series of absolute convergence must converge <code>-&gt;</code> that is: $\sum^{\infty}_{n=1}|a_n|$ converges <code>-&gt;</code> $\sum^{\infty}_{n=1}a_n$ converges;</li>
+<li>2. A series formed by all positive (or negative) terms of conditionally convergent series must diverge <code>-&gt;</code> $$\sum_{n=1}^\infty u_n\text{ Conditional convergence }\Rightarrow\sum_{n=1}^\infty\frac{u_n+|u_n|}2\text{ and }\sum_{n=1}^\infty\frac{u_n-|u_n|}2\text{ Diverges }.$$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Absoluteconvergenceofanytermseries</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if each term is summed with absolute value $\sum_{n=1}^{+\infty}|u_{n}|$, it converges, then its original series $\sum_{n=1}^{+\infty}u_{n}$ is also convergent;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Simpler understanding:</li>
+<li class="list-indent-1">If all numbers are positive (plus absolute value), it should converge even more;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Judgmentfordivergenceandconvergenceofanytermseries</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ is an arbitrary series and $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
+<blockquote>1) When $l$ &lt; 1, $\sum u_n$ converges absolutely;</blockquote>
+<blockquote>2) When $L&gt;1(+\infty)$, $\sum u_n$ diverges;</blockquote>
+<blockquote>3) When L = 1, it cannot be determined;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>If L&gt;1, then the original series is divergent;</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-056/index.html"><span>← Previous item</span><strong>Lecture 48: Series of Positive Terms</strong></a>
+    <a class="article-pagination-next" href="../math-058/index.html"><span>Next item →</span><strong>Lecture 56: Power Series</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +171,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

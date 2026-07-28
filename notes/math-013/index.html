@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,8 +63,8 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 5：函数极限的概念</h1><p class="article-lead">考研数学学习笔记：Lecture 5：函数极限的概念。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-29</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>函数、极限、连续</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">5.1 函数的极限</a><a href="#section-9">5.2 单侧极限</a></nav></details><div class="prose"><h2 id="section-1">5.1 函数的极限</h2>
 <h3 id="section-2">5.1.1 情况 1：自变量趋向于无穷大</h3>
-<h5 id="section-3"><strong>定义</strong>： #函数趋向于正无穷</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\lim_{x\to+\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&gt;\boldsymbol{X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">函数趋向于正无穷</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\lim_{x\to+\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&gt;\boldsymbol{X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>函数在 x 趋向于正无穷时的极限，和函数趋向于无穷的关系：</li>
@@ -75,16 +75,16 @@
 <li>由<strong>函数极限可以推导出数列极限</strong>的值，数列极限不能反过来证明函数极限的值；</li>
 <li>数列极限就是函数极限的特殊值：函数极限从 0 开始取正数，然后趋向于无穷（趋向于正无穷）；</li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>： #函数趋向于负无穷</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\lim_{x\to-\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&lt;\boldsymbol{-X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</blockquote>
-<h5 id="section-5"><strong>定义</strong>： #函数趋向于无穷</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\lim_{x \to \infty}f(x) = A \Leftrightarrow \forall \xi &gt;0,\exists X&gt;0,\lvert x \rvert &gt;X \ \mbox{时有},\lvert f(x) - A\rvert &lt; \xi$</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">函数趋向于负无穷</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\lim_{x\to-\infty}f(x)=A$： $\forall\boldsymbol{\varepsilon}&gt;\boldsymbol{0},\exists\boldsymbol{X}&gt;\boldsymbol{0},\boldsymbol{当}x&lt;\boldsymbol{-X}\text{时,恒有}|f(x)-A|&lt;\varepsilon.$</blockquote>
+<h5 id="section-5"><strong>定义</strong>： <span class="note-tag">函数趋向于无穷</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\lim_{x \to \infty}f(x) = A \Leftrightarrow \forall \xi &gt;0,\exists X&gt;0,\lvert x \rvert &gt;X \ \mbox{时有},\lvert f(x) - A\rvert &lt; \xi$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>意思是：x 的绝对值趋向于无穷；</li>
 </ul>
-<h5 id="section-6"><strong>定理</strong>： #函数无穷与正负无穷的关系</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\boxed{\lim_{x \to \infty}f (x)=A\begin{cases} \lim\limits_{x \to +\infty}f (x)=A\\ \lim\limits_{x \to -\infty}f (x)=A\\ \end{cases}}$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">函数无穷与正负无穷的关系</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\boxed{\lim_{x \to \infty}f (x)=A\begin{cases} \lim\limits_{x \to +\infty}f (x)=A\\ \lim\limits_{x \to -\infty}f (x)=A\\ \end{cases}}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>只有 $f(x)$ 的正负无穷相等时，才可以证明 $\lim_{x \to \infty}f (x)$ 存在；</li>
@@ -93,8 +93,8 @@
 <li class="list-indent-1">在函数极限中，x 趋向于无穷 = x 的绝对值趋向于无穷；</li>
 </ul>
 <h3 id="section-7">5.1.2 情况 2：自变量趋向于有限值</h3>
-<h5 id="section-8"><strong>定义</strong>： #自变量趋向于有限值的极限</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： ${\lim_{x\to x_0}f(x)=A}$，$\forall\varepsilon&gt;0,\exists\delta&gt;0\text{,当 }0&lt;|x-x_0|&lt;\delta\text{ 时,恒有 }|f(x)-A|&lt;\varepsilon.$</blockquote>
+<h5 id="section-8"><strong>定义</strong>： <span class="note-tag">自变量趋向于有限值的极限</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> ${\lim_{x\to x_0}f(x)=A}$，$\forall\varepsilon&gt;0,\exists\delta&gt;0\text{,当 }0&lt;|x-x_0|&lt;\delta\text{ 时,恒有 }|f(x)-A|&lt;\varepsilon.$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>x 趋向于靠近 $x_0$ 附近的邻域：$A-\varepsilon&lt;f (x)&lt;A+\varepsilon$；</li>
@@ -110,8 +110,8 @@
 </ul>
 <h2 id="section-9">5.2 单侧极限</h2>
 <h3 id="section-10">5.2.1 左右极限</h3>
-<h5 id="section-11"><strong>定义</strong>： #左极限与右极限</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：  1. 左极限： $\lim_{x\to x_0^-}f(x)=f(x_0^-)=f(x_0-0)$；2. 右极限：$\lim_{x\to x_0^+}f(x)=f({x_0}^+)=f(x_0+0)$</blockquote>
+<h5 id="section-11"><strong>定义</strong>： <span class="note-tag">左极限与右极限</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>  1. 左极限： $\lim_{x\to x_0^-}f(x)=f(x_0^-)=f(x_0-0)$；2. 右极限：$\lim_{x\to x_0^+}f(x)=f({x_0}^+)=f(x_0+0)$</blockquote>
 <ul>
 <li>左极限 </li>
 </ul>
@@ -125,8 +125,8 @@ $$</div>
 \lim_{x \to x_{0}^{+}}f(x) = A \Leftrightarrow\begin{cases} \hspace{1em} \forall \xi &gt;0,\exists \delta&gt;0,x_{0}&lt;x&lt;x_{0}+\delta \ \mbox{时有},\\ \hspace{1em} \lvert f(x) - A\rvert &lt; \xi \\ \end{cases}
 $$</div>
 <p><img class="note-image" src="/assets/notes/69c7585bfb13-Pasted-image-20240302002004.png" alt="Pasted image 20240302002004" loading="lazy" decoding="async"></p>
-<h5 id="section-12"><strong>定理</strong>： #极限与单侧极限的关系</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\lim_{x\to x_0}f(x)=A\Leftrightarrow\lim_{x\to x_0^-}f(x)=\lim_{x\to x_0^+}f(x)=A$</blockquote>
+<h5 id="section-12"><strong>定理</strong>： <span class="note-tag">极限与单侧极限的关系</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\lim_{x\to x_0}f(x)=A\Leftrightarrow\lim_{x\to x_0^-}f(x)=\lim_{x\to x_0^+}f(x)=A$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>极限存在 = 左右极限都存在；</li>
@@ -171,6 +171,6 @@ $$</div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

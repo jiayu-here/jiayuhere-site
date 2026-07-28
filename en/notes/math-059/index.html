@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 51：函数展开成幂级数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 51: Expanding Functions into Power Series | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 51: Expanding Functions into Power Series. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Infinite Series">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 51：函数展开成幂级数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 51: Expanding Functions into Power Series | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 51: Expanding Functions into Power Series. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-059/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,106 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 51：函数展开成幂级数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-15</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-059/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-058/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 56：幂级数</strong></a>
-    <a class="article-pagination-next" href="../math-060/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 52：傅里叶级数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 51: Expanding Functions into Power Series</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics study notes: Lecture 51: Expanding Functions into Power Series. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-15</span><span>4 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">51.1 Expanding Functions into Power Series</a><a href="#section-7">51.2 Common Question Types</a></nav></details><div class="prose"><h2 id="section-1">51.1 Expanding Functions into Power Series</h2>
+<h3 id="section-2">51.1.1 Taylor Series</h3>
+<p><strong>Why use a power-series expansion?</strong></p>
+<ul>
+<li>Some functions have no elementary antiderivative; $e^{x^2}$ is a standard example. After expansion, the series can be differentiated or integrated term by term within its interval of convergence.</li>
+<li>A power series is also useful for numerical approximation. For example,</li>
+</ul>
+<div class="math-display">$$
+e^{0.2}=1+0.2+\frac{0.2^2}{2!}+\frac{0.2^3}{3!}+\cdots.
+$$</div>
+<p>Keeping finitely many terms gives an approximation at the required accuracy.</p>
+<h5 id="section-3"><strong>Theorem</strong>: <span class="note-tag">power-series-expansion</span></h5>
+<p>If $f(x)$ can be represented on $(x_0-R,x_0+R)$ by a power series in $x-x_0$, that representation is unique and must be the Taylor series of $f$ about $x_0$:</p>
+<div class="math-display">$$
+f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n.
+$$</div>
+<h5 id="section-4"><strong>Theorem</strong>: <span class="note-tag">Taylor-series-convergence</span></h5>
+<p>Suppose that $f$ has the required derivatives in a neighborhood of $x_0$. Taylor's formula is</p>
+<div class="math-display">$$
+f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x).
+$$</div>
+<p>With the Lagrange remainder,</p>
+<div class="math-display">$$
+R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1},
+$$</div>
+<p>where $\xi$ lies between $x$ and $x_0$. At a given $x$, the Taylor series converges to $f(x)$ if and only if $\lim_{n\to\infty}R_n(x)=0$.</p>
+<h3 id="section-5">51.1.2 Common Power-Series Expansions</h3>
+<div class="math-display">$$
+\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\qquad |x|&lt;1.
+$$</div>
+<div class="math-display">$$
+\frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^n x^n,\qquad |x|&lt;1.
+$$</div>
+<div class="math-display">$$
+e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!},\qquad x\in\mathbb R.
+$$</div>
+<div class="math-display">$$
+\sin x=\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n+1}}{(2n+1)!},\qquad x\in\mathbb R.
+$$</div>
+<div class="math-display">$$
+\cos x=\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n}}{(2n)!},\qquad x\in\mathbb R.
+$$</div>
+<div class="math-display">$$
+\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^n,\qquad -1&lt;x\le1.
+$$</div>
+<div class="math-display">$$
+(1+x)^\alpha
+=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\cdots,\qquad |x|&lt;1.
+$$</div>
+<div class="math-display">$$
+\sum_{n=1}^{\infty}\frac{x^n}{n}=-\ln(1-x),\qquad -1\le x&lt;1.
+$$</div>
+<p>Endpoint convergence must be checked separately; it cannot be inferred from the open interval alone.</p>
+<h3 id="section-6">51.1.3 Two Expansion Methods</h3>
+<p><strong>Method 1: Direct expansion</strong></p>
+<ol>
+<li>Compute $f^{(n)}(x_0)$ and write the formal Taylor series</li>
+</ol>
+<div class="math-display">$$
+\sum_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n.
+$$</div>
+<ol>
+<li>Verify that $\lim_{n\to\infty}R_n(x)=0$ and determine the interval of convergence.</li>
+</ol>
+<p><strong>Method 2: Indirect expansion</strong></p>
+<p>Start from a known expansion and use algebraic operations, term-by-term differentiation, term-by-term integration, or substitution. Track the resulting interval of convergence and check its endpoints after every transformation.</p>
+<h2 id="section-7">51.2 Common Question Types</h2>
+<h3 id="section-8">Question Type 1: <span class="note-tag">expanding-a-function</span></h3>
+<ul>
+<li>Try indirect expansion first, because repeated differentiation is often cumbersome.</li>
+<li>For an expansion about $x=x_0$, rewrite the expression in terms of $x-x_0$.</li>
+<li>For example, to expand $\sin x$ about $x_0=\frac{\pi}{4}$, let $u=x-\frac{\pi}{4}$:</li>
+</ul>
+<div class="math-display">$$
+\sin x
+=\sin\left(\frac{\pi}{4}+u\right)
+=\frac{\sqrt2}{2}\left(\cos u+\sin u\right),
+$$</div>
+<p>then substitute the Maclaurin series for $\cos u$ and $\sin u$.</p>
+<p><strong>Useful transformations</strong></p>
+<p>To apply the geometric series, rewrite an expression in the form</p>
+<div class="math-display">$$
+\frac{1}{1-u(x)}
+\quad\text{or}\quad
+\frac{1}{1+u(x)},
+$$</div>
+<p>and first verify that $|u(x)|&lt;1$.</p>
+<h3 id="section-9">Question Type 2: <span class="note-tag">summing-a-series</span></h3>
+<p>A known expansion can be read in reverse to evaluate a series. For example,</p>
+<div class="math-display">$$
+\frac{1}{1-x}=1+x+x^2+\cdots,\qquad |x|&lt;1,
+$$</div>
+<p>and</p>
+<div class="math-display">$$
+\sum_{n=1}^{\infty}\frac{x^n}{n}=-\ln(1-x),\qquad -1\le x&lt;1.
+$$</div>
+<p>Typically, differentiate or integrate the target series term by term until it matches a known expansion, then use an initial value to determine the constant of integration.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-058/index.html"><span>← Previous item</span><strong>Lecture 56: Power Series</strong></a>
+    <a class="article-pagination-next" href="../math-060/index.html"><span>Next item →</span><strong>Lecture 52: Fourier series</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +168,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -21,8 +21,8 @@ tags: ["考研数学", "线性代数", "线性方程组"]
 ### 16.1.2 非齐次线性方程组 
 **概念**：有解的条件 
 - 若 $r\left(A\right)\neq r\left(\left[A,b\right]\right)\quad\left(\boldsymbol{b}\text{ 不能由 }\alpha_{1},\alpha_{2},\cdots,\alpha_{n}\text{线性表示 }\right)\quad$，则方程组 (II)无解；
-	- `->` 增加了一个向量组 `b`（列）后，使得矩阵升了一维，即标识向量组 `b` 和 `A` 中其他向量组线性无关；
-	- `->` b 不在 `A` 的解空间当中；
+	- `->` 增加列向量 `b` 后矩阵的秩增大，说明 `b` 不能由 `A` 的列向量线性表示；
+	- `->` `b` 不在 `A` 的列空间中；
 	- `->` 所以加了 `b` 之后方程组无解；
 - 若 $r\left(A\right)=r\left(\left[A,b\right]\right)=n\quad\left(\text{即}a_{1},a_{2},\cdots,a_{n}\text{线性无关，}a_{1},a_{2},\cdots,a_{n},b\text{线性相关 }\right)\quad$，则方程组 (II)有唯一解；
 	- `->` 列数，即向量组个数等于秩数，因此方程组满秩；

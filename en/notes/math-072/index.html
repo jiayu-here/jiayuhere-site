@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 3：行列式的计算 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 3: Calculation of Determinants | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 3: Calculation of Determinants. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Determinants">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 3：行列式的计算 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 3: Calculation of Determinants | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 3: Calculation of Determinants. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-072/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,201 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 3：行列式的计算</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-072/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-071/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 2：行列式的定义与性质</strong></a>
-    <a class="article-pagination-next" href="../math-073/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 3: Calculation of Determinants</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 3: Calculation of Determinants. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics</span><span>13 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Determinants</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">3.1 Calculation of Concrete Determinants</a><a href="#section-9">3.2 Calculation of Abstract Determinants</a><a href="#section-13">3.3 Kramer's Law</a></nav></details><div class="prose"><p><strong>Category</strong>: Based on the perspective of the exam question</p>
+<ul>
+<li>1. Regular determinants:</li>
+<li class="list-indent-1"><code>n</code> order, <code>n</code> is very likely because it follows a pattern, so it can be solved, and can be solved using formulas;</li>
+<li>2. Irregular determinants:</li>
+<li class="list-indent-1">All are mainly three-tier, with occasional fourth-tier ones;</li>
+<li class="list-indent-1">Use properties and transform them into <code>12+1</code> types;</li>
+</ul>
+<h2 id="section-1">3.1 Calculation of Concrete Determinants</h2>
+<p><strong>Methods</strong>: Three methods</p>
+<ul>
+<li>Geometry: Almost impossible</li>
+<li>Properties: Properties 1-7</li>
+<li>Inverse ordinal method: generally used to study a specific term</li>
+<li>Expansion formula:</li>
+<li class="list-indent-1">Preparation:</li>
+<li class="list-indent-2"><code>-&gt;</code> Use properties, expand determinants as much as possible to 0s;</li>
+<li class="list-indent-2"><code>-&gt;</code> Use properties to make the determinant<strong>into the basic form</strong>, then you can write the answer directly</li>
+<li class="list-indent-3">Approach to finding the basics: 1. Find a trade with similar differences 2. Find patterns;</li>
+<li class="list-indent-1">Expand</li>
+<li>Induction/Recursion method;</li>
+</ul>
+<h3 id="section-2">3.1.1 Convert to the basic type</h3>
+<h4 id="section-3">3.1.1.1 The shape of the claw is equal to the sum of the rows</h4>
+<p><strong>Approach</strong>: Convert determinants into basic forms</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">If the form is met, use the method directly (e.g., the claw-shaped determinant form)</li>
+<li class="list-indent-1">If the format does not match, then replace it with a row with similar differences;</li>
+</ul>
+<p><strong>Concept</strong>: Claw-shaped determinant</p>
+<ul>
+<li>Transformation <code>-&gt;</code> Similar to trigonometric determinants;</li>
+<li>Approach: Use diagonal entries to eliminate the other entries in each row or column;</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Apply Property 7: add a multiple of one row or column to another to eliminate entries and reduce the determinant to triangular form;</li>
+</ul>
+<h5 id="section-4"><strong>Definition</strong>: <span class="note-tag">DeterminantWithEqualRowSums</span></h5>
+<blockquote><span style="color:#ccc1d9">Description:</span> $$D_n=\begin{vmatrix}a&amp;b&amp;b&amp;\cdots&amp;b\\b&amp;a&amp;b&amp;\cdots&amp;b\\b&amp;b&amp;a&amp;\cdots&amp;b\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\b&amp;b&amp;b&amp;\cdots&amp;a\end{vmatrix}\quad\quad\quad\quad D_{n}=(a+(n-1)b)\begin{vmatrix}1&amp;b&amp;b\cdots b\\1&amp;a&amp;b\cdots b\\\vdots&amp;\vdots&amp;\vdots\\1&amp;b&amp;b\cdots a\end{vmatrix}=[a+(n-1)b](a-b)^{n-1}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Proof process:</li>
+<li class="list-indent-1">Step 1: Since the row sum is equal, add all columns to the first column;</li>
+<li class="list-indent-1">Step 2: Factor out the common factor <code>[a+(n-1)b]</code>;</li>
+<li class="list-indent-1">Step 3: Add <code>-1</code> times the first row to each remaining row;</li>
+<li class="list-indent-1">Step 4: Calculate the result to obtain $D_n=[a+(n-1)b](a-b)^{n-1}$</li>
+</ul>
+<p><strong>Supplement One</strong></p>
+<ul>
+<li>Determinant:</li>
+<li class="list-indent-1">When $a=0$ and $b=1$:</li>
+<li class="list-indent-2">$$\begin{vmatrix}0&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;0&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;0&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;0\end{vmatrix}_{n\times n}=(n-1)(-1)^{n-1}$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">The main diagonal entries are 0 and all other entries are 1. Set <code>a=0</code> and <code>b=1</code> in the equal-row-sum determinant formula, then substitute them into $[a+(n-1)b](a-b)^{n-1}$;</li>
+</ul>
+<p><strong>Supplementary Two</strong></p>
+<ul>
+<li>Determinant:</li>
+<li class="list-indent-1">When $a=2$ and $b=1$:</li>
+<li class="list-indent-2">$$\begin{vmatrix}2&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;2&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;2&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;2\end{vmatrix}=n+1$$</li>
+</ul>
+<p><strong>Supplementary Three</strong>: When $a$ is on the anti-diagonal</p>
+<ul>
+<li>Determinant:</li>
+<li class="list-indent-1">$$G_n=\begin{vmatrix}b&amp;b&amp;\cdots&amp;b&amp;a\\b&amp;b&amp;\cdots&amp;a&amp;b\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\b&amp;a&amp;\cdots&amp;b&amp;b\\a&amp;b&amp;\cdots&amp;b&amp;b\end{vmatrix}=(-1)^{\frac{n(n-1)}2}\begin{vmatrix}a&amp;b&amp;\cdots&amp;b&amp;b\\b&amp;a&amp;\cdots&amp;b&amp;b\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\b&amp;b&amp;\cdots&amp;a&amp;b\\b&amp;b&amp;\cdots&amp;b&amp;a\end{vmatrix}=\left(-1\right)^{\frac{n\left(n-1\right)}{2}}\left[a+\left(n-1\right)b\right]\left(a-b\right)^{n-1}$$</li>
+</ul>
+<h4 id="section-5">3.1.1.2 Type X</h4>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Determinant:</li>
+<li class="list-indent-1">$$D_4=\begin{vmatrix}a_1&amp;0&amp;0&amp;b_1\\0&amp;a_2&amp;b_2&amp;0\\0&amp;b_3&amp;a_3&amp;0\\b_4&amp;0&amp;0&amp;a_4\end{vmatrix}=(a_{1}a_{4}-b_{1}b_{4})(a_{2}a_{3}-b_{2}b_{3}).$$</li>
+<li>Analysis:</li>
+<li class="list-indent-1">First interchange rows and columns to group the zeros together, then apply Laplace expansion.</li>
+</ul>
+<h4 id="section-6">3.1.1.3 Vandermonde Type</h4>
+<p><strong>Examples</strong></p>
+<ul>
+<li>$$\begin{vmatrix}a&amp;b&amp;c\\a^{2}&amp;b^{2}&amp;c^{2}\\b+c&amp;a+c&amp;a+b\end{vmatrix}=\left(a+b+c\right)\left|\begin{matrix}1&amp;1&amp;1\\a&amp;b&amp;c\\a^{2}&amp;b^{2}&amp;c^{2}\end{matrix}\right|=\left(a+b+c\right)\left(c-a\right)\left(c-b\right)\left(b-a\right)$$</li>
+<li>Apply determinant properties to transform it into Vandermonde form.</li>
+</ul>
+<h3 id="section-7">3.1.2 Recurrence Method</h3>
+<p><strong>Concepts</strong>: Recurrence and induction</p>
+<ul>
+<li>Relationships:</li>
+<li class="list-indent-1">Recursion and induction are two different approaches;</li>
+<li class="list-indent-1">The recurrence method starts from order n and pushes downward to <code>n-1</code> and <code>n-2</code></li>
+<li class="list-indent-1">Induction starts from order <code>1</code> to find patterns, then pushes up to <code>n-1</code> and <code>n</code></li>
+<li>Basic Approach:</li>
+<li class="list-indent-1">1. The distribution patterns of elements are the same;</li>
+<li class="list-indent-1">2. $D_{n-1}$ One step less than $D_n$;</li>
+</ul>
+<p><strong>Example</strong>: Wide diagonal determinant</p>
+<ul>
+<li>Determinant: Recursion</li>
+<li class="list-indent-1">$$D_4=\begin{vmatrix}1-a&amp;a&amp;0&amp;0\\-1&amp;1-a&amp;a&amp;0\\0&amp;-1&amp;1-a&amp;a\\0&amp;0&amp;-1&amp;1-a\end{vmatrix}=(-1)^{4+1}\cdot(-a)\cdot a^{3}+D_{3}=a^{4}+\left(-a^{3}\right)+D_{2}=a^{4}+(-a^{3})+a^{2}+D_{1}=a^{4}-a^{3}+a^{2}-a+1$$</li>
+<li>Analysis:</li>
+<li class="list-indent-1">Where the above $D_4$ is the calculation of the coprime formula;</li>
+<li class="list-indent-1">The inductive method can also be used above</li>
+</ul>
+<h3 id="section-8">3.1.3 Functions and Equations Represented by Determinants</h3>
+<p><strong>Supplement</strong>: The determinant element $a_{ij}$ in these questions is often not a specific numerical value but a function containing $x$ or $\lambda$, which may bring new difficulties and troubles beyond calculation to examinees, naturally providing new perspectives for question setters, so it is important to pay attention to research on such problems;</p>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Problem: $\text{Let }f\left(x\right)=\begin{vmatrix}1&amp;0&amp;x\\1&amp;2&amp;x^{2}\\1&amp;3&amp;x^{3}\end{vmatrix}.\text{ Find }f\left(x+1\right)-f\left(x\right).$</li>
+<li>Solution: $f(x+1)-f(x)=\left|\begin{matrix}1&amp;0&amp;x+1\\1&amp;2&amp;(x+1)^{2}\\1&amp;3&amp;(x+1)^{3}\end{matrix}\right|-\left|\begin{matrix}1&amp;0&amp;x\\1&amp;2&amp;x^{2}\\1&amp;3&amp;x^{3}\end{matrix}\right|=\left.\left|\begin{matrix}1&amp;0&amp;1\\1&amp;2&amp;2x+1\\1&amp;3&amp;3x^{2}+3x+1\end{matrix}\right.\right|=\left|\begin{matrix}1&amp;0&amp;0\\1&amp;2&amp;0\\1&amp;3&amp;3x^{2}\end{matrix}\right|=6x^2$</li>
+</ul>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Title: $\text{ Establish the equation }\begin{vmatrix}\lambda-1&amp;-2&amp;3\\1&amp;\lambda-4&amp;3\\-1&amp;a&amp;\lambda-5\end{vmatrix}=0\text{ There are double roots, find the parameters }a\text{ The value }$</li>
+<li>Analysis: This is an expression about $f(\lambda)$, and since there is a $\lambda$ on the main diagonal, there must be a cube of $\lambda$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Find the determinant: $f\left(\lambda\right)=\left|\begin{matrix}\lambda-2&amp;-\lambda+2&amp;0\\1&amp;\lambda-4&amp;3\\-1&amp;a&amp;\lambda-5\end{matrix}\right|=\begin{vmatrix}\lambda-2&amp;0&amp;0\\1&amp;\lambda-3&amp;3\\-1&amp;a-1&amp;\lambda-5\end{vmatrix}=\left(\lambda-2\right)\left|\begin{matrix}\lambda-3&amp;3\\a-1&amp;\lambda-5\end{matrix}\right|=(\lambda-2)(\lambda^{2}-8\lambda+18-3a)=0$</li>
+<li class="list-indent-1">Discussion of double roots: in $(\lambda-2)(\lambda^{2}-8\lambda+18-3a)=0$ types</li>
+<li class="list-indent-2">1. If $\lambda =2$ is a double root: $(\lambda^{2}-8\lambda+18-3a)|_{\lambda=2}=0$ <code>-&gt;</code> $4-16+18-39=0$, then <code>a=2</code></li>
+<li class="list-indent-2">2. If $\lambda =2$ is not a double root: discuss $\Delta=0$, find $a=\frac{2}{3}$, so $\lambda =4$</li>
+</ul>
+<h2 id="section-9">3.2 Calculation of Abstract Determinants</h2>
+<p><strong>Core</strong>: Method</p>
+<ul>
+<li>1. Use nature;</li>
+<li>2. $|AB|=|A||B|$ with the formula</li>
+<li class="list-indent-1">First, use <code>B</code> to transform <code>C</code>, then use <code>A</code> to transform <code>BC</code>: <code>ABC</code></li>
+<li class="list-indent-1">Its result equals the result of the two measures of the change respectively</li>
+</ul>
+<h3 id="section-10">3.2.1 Abstract Type: General Method - Combining Properties</h3>
+<p><strong>Example</strong>: $\text{Given the fourth-order determinants }|\alpha_{1},\alpha_{2},\alpha_{3},\beta|=a\text{ and }|\beta+\gamma,\alpha_{2},\alpha_{3},\alpha_{1}|=b,\text{ find }|\alpha_{2}+\alpha_{3},\alpha_{1},\alpha_{3},\gamma|.$</p>
+<ul>
+<li>Analysis: What is abstract type? The elements are abstract symbols, but their specific values are unknown;</li>
+<li>Solution strategy:</li>
+<li class="list-indent-1">Express the target columns in terms of the given abstract column vectors.</li>
+<li class="list-indent-1">Apply the linearity and alternating properties of determinants.</li>
+</ul>
+<h3 id="section-11">3.2.2 Abstraction: Point Accumulation Method</h3>
+<p><strong>Core</strong>: Multiply the matrix of two squares, and the determinant equals $|AB|=|A||B|$</p>
+<p><strong>Example Question</strong>: $\text{ Let }\alpha_1,\alpha_2,\alpha_3\text{ All are as follows }3\text{ Dimension vector },\text{ Known }$:$A=[\alpha_{1},\alpha_{2},\alpha_{3}],B=[\alpha_{1}-\alpha_{2}+2\alpha_{3},2\alpha_{1}+3\alpha_{2}-5\alpha_{3},\alpha_{1}+2\alpha_{2}-\alpha_{3}],\text{ and }|A|=2,\text{ then }|B-A|=$</p>
+<ul>
+<li>Key Points</li>
+<li class="list-indent-1">Although $\alpha_1$ is a three-dimensional vector, as long as it is represented by the symbol $\alpha_1$, it exists as a whole <code>-&gt;</code> Essentially, it is a block matrix. As long as a matrix is split into a block matrix, the block matrix is treated as an element;</li>
+<li class="list-indent-1">Conclusion: The block matrix is treated as an element for calculation;</li>
+<li>Analysis</li>
+<li class="list-indent-1">$B-A=(-\alpha_{2}+2\alpha_{3},2\alpha_{1}+2\alpha_{2}-5\alpha_{3},\alpha_{1}+2\alpha_{2}-2\alpha_{3})$</li>
+<li class="list-indent-2">$(\alpha_{1},\alpha_{2},\alpha_{3})\left(\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right) \leftarrow (\alpha_{1},\alpha_{2},\alpha_{3})\left(\begin{matrix}0\\-1\\2\end{matrix}\right)\left(\begin{matrix}2\\2\\-5\end{matrix}\right)\left(\begin{matrix}1\\2\\-2\end{matrix}\right)$</li>
+<li class="list-indent-1">Where $(\alpha_{1},\alpha_{2},\alpha_{3})$ is the benchmark, so calculate its benchmark-based representation:</li>
+<li class="list-indent-2">$0\alpha_{1}-\alpha_{2}+2\alpha_{3}=[\alpha_{1},\alpha_{2},\alpha_{3}]\begin{bmatrix}0\\-1\\2\end{bmatrix},2\alpha_{1}+2\alpha_{2}-5\alpha_{3}=[\alpha_{1},\alpha_{2},\alpha_{3}]\begin{bmatrix}2\\2\\-5\end{bmatrix},a_{1}+2a_{2}-2a_{3}=\left[a_{1},a_{2},a_{3}\right]\left[\begin{matrix}1\\2\\-2\end{matrix}\right]$</li>
+<li class="list-indent-1">Get: $B-A=(-\alpha_{2}+2\alpha_{3},2\alpha_{1}+2\alpha_{2}-5\alpha_{3},\alpha_{1}+2\alpha_{2}-2\alpha_{3})$ d The calculation result is: $(\alpha_{1},\alpha_{2},\alpha_{3})\left(\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right)$</li>
+<li class="list-indent-2">So $|B-A|=|A|\left|\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right|$</li>
+<li class="list-indent-1">Calculation result: $|B-A|=|A|\left|\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right|=2*5=10$</li>
+</ul>
+<h3 id="section-12">3.2.3 Linear Combinatorial Calculations of Residual and Algebraic Coenzyme Expressions</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Linearcombinatorialcalculationofcoconexpressionsandalgebraiccoenzymeexpressions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>by $a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\begin{vmatrix}<em>\\a_{i1}&amp;a_{i2}&amp;\cdots&amp;a_{in}\\</em>&amp;\end{vmatrix}$</blockquote>
+<blockquote>then $k_{1}A_{i1}+k_{2}A_{i2}+\cdots+k_{n}A_{in}=\begin{vmatrix}&amp;&amp;<em>&amp;&amp;\\k_{1}&amp;&amp;k_{2}&amp;\cdots&amp;k_{n}\\&amp;&amp;</em>&amp;&amp;\end{vmatrix}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Explanation:</li>
+<li class="list-indent-1">Expanded method:</li>
+<li class="list-indent-2">Essentially a degraded operation;</li>
+<li class="list-indent-2">Any calculation of a determinant can be expanded for a particular row (column): $|a_{i_{1}}\cdots a_{i_{n}}|=a_{i_{1}}A_{i_{1}}+\cdots+a_{i_{n}}A_{i_{n}}$</li>
+<li class="list-indent-1">Linear combinations of algebraic coenzymes:</li>
+<li class="list-indent-2">Essentially, it is the inverse process of the expansion method;</li>
+<li class="list-indent-2">Example: $A_{{11}}-2A_{{12}}+A_{{13}}=M_{11}+2M_{12}+M_{13}$</li>
+<li class="list-indent-3">Because $M_{ij}=(-1)^{i+j}A_{j}$</li>
+<li>Method:</li>
+<li class="list-indent-1">Core:</li>
+<li class="list-indent-2">Large <code>A</code> paired with small <code>a</code>, reverse expansion form;</li>
+<li class="list-indent-2">Large <code>A</code> paired with small <code>k</code>, <code>k</code> eat small <code>a</code>;</li>
+<li class="list-indent-1">Example: Given $|A|=\begin{vmatrix}1&amp;-2&amp;1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{vmatrix}$, find $A_{11}-2A_{12}+A_{13}$</li>
+<li class="list-indent-2">From <code>A</code> knows: expand by line 1: $|A|=1\cdot A_{11}+(-2)A_{12}+1A_{13}=1$</li>
+</ul>
+<h2 id="section-13">3.3 Kramer's Law</h2>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">KramersLaw</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> a system of nonhomogeneous linear equations <code>n</code> unknowns (this is the premise) for an equation: $$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=b_{n},\end{cases}$$</blockquote>
+<blockquote>If the determinant of the coefficient is $$D=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}\neq0$$, then the system has the only solution to the right, and the solution is: $x_{i}=\frac{D_{i}}{D},i=1,2,\cdots,n$, where $D_i\text{ It is derived from the constant term }b_1,b_2,\cdots,b_n\text{ Replace }D\text{ and passed the imperial examination }i\text{ The determinant obtained from the column element }$</blockquote>
+<p>&gt;</p>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Requirements:</li>
+<li class="list-indent-1">It must be a square matrix, and it has requirements for coefficients, so it's hard to use;</li>
+<li>Example:</li>
+<li class="list-indent-1">$\begin{cases}x_{1}-2x_{2}+x_{3}=1\\x_{1}+0x_{2}+0x_{3}=2\\0x_{1}+x_{2}+0x_{3}=5\end{cases}$</li>
+<li class="list-indent-1">If the determinant:$|A|=|\begin{smallmatrix}1&amp;-2&amp;1\\0&amp;0&amp;0\\1&amp;0\end{smallmatrix}|\neq0$ is not equal to <code>0</code>, then its solution is $x_{i}=\frac{D_{i}}{D},i=1,2,\cdots,n$</li>
+<li class="list-indent-1">Then $x_{1}=\frac{D_{1}}{D}=\frac{\left|\begin{matrix}1&amp;-2&amp;1\\2&amp;0&amp;0\\5&amp;1&amp;0\end{matrix}\right|}{1}$ (replace the first column with a free term, the second and third columns remain unchanged)</li>
+<li class="list-indent-1">Calculate $x_2$ Similarly, replace the second column with a free term; Similarly, the third column;</li>
+<li class="list-indent-1">So $x_1x_2x_3$ are 2, 5, and 9 respectively</li>
+<li>Function:</li>
+<li class="list-indent-1">Kramer's Law provides a procedural solution;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">HomogeneoustimeKramersrule</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: When </span></span> is in sync: $$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=0,\end{cases}$$</blockquote>
+<blockquote>$\text{ If }D\neq0,\text{ then the system of homogeneous equations has only zero solutions };\text{ If }D=0,\text{ then the system of homogeneous equations has nonzero solutions }$</blockquote>
+<p><strong>Explanation</strong></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-071/index.html"><span>← Previous item</span><strong>Lecture 2: Definition and properties of determinants</strong></a>
+    <a class="article-pagination-next" href="../math-073/index.html"><span>Next item →</span><strong>Lecture 4: Definition of Matrices and Their Basic Operations</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +263,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -53,7 +53,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 
 **举例**
 - *<u>On a cold winter's day</u>, few culinary pleasures can match it.*
-- *<u>In March 1997</u> ,he lost $72,186.*
+- *<u>In March 1997</u>, he lost \$72,186.*
 	- 在很大一个时间之内；
 - *<u>Since the days</u> of Aristotle, a search for universal principles has characterized the scientific enterprise.*
 	- 自从亚里士多德之后；

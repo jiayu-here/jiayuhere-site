@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 26：函数图形的绘制 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 26: Drawing Function Graphs | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 26: Drawing Function Graphs. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Mean Value Theorems and Applications of Derivatives">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 26：函数图形的绘制 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 26: Drawing Function Graphs | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 26: Drawing Function Graphs. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-034/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,105 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 26：函数图形的绘制</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-15</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-034/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-033/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 25：函数的极值与最值</strong></a>
-    <a class="article-pagination-next" href="../math-035/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 26: Drawing Function Graphs</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 26: Drawing Function Graphs. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-01-15</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 Steps to Describe Function Graphs</a></nav></details><div class="prose"><h2 id="section-1">1.1 Steps to Describe Function Graphs</h2>
+<p><strong>Specific Steps</strong></p>
+<ul>
+<li>1. Determine the domain of function $y= f(x)$, and consider its parity and periodicity;</li>
+<li>2. Find the first and second derivatives, and find the points where the first and second derivatives are 0 or if they do not exist <code>-&gt;</code> Find extremals, inflection points, intervals of increase and decrease, and concave-convex intervals;</li>
+<li>3. Lists distinguish increases and decreases and concave-convex intervals to find extremes and inflection points;</li>
+<li>4. Find the asymptote;</li>
+<li>5. Identify key points and sketch the graph.</li>
+</ul>
+<h3 id="section-2">1.1.1 Basic Concepts of Asymptotes</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Theasymptoteofthecurve</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1) Horizontal asymptote: if $\lim_{x\to+\infty}f(x)=A$ or $\lim_{x\to-\infty}f(x)=A$, then $y=A$ is a horizontal asymptote of $y=f(x)$ in the corresponding direction.</blockquote>
+<blockquote>2) Vertical asymptote: if $\lim_{x\to x_0^-}f(x)=\pm\infty$ or $\lim_{x\to x_0^+}f(x)=\pm\infty$, then $x=x_0$ is a vertical asymptote.</blockquote>
+<blockquote>3) Oblique asymptote: if</blockquote>
+<blockquote>$$a=\lim_{x\to\pm\infty}\frac{f(x)}x,\qquad b=\lim_{x\to\pm\infty}(f(x)-ax)$$</blockquote>
+<blockquote>are finite, then $y=ax+b$ is an oblique asymptote in that direction.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>When d `<code>-&gt;</code>` 0, it is called the asymptote;</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/09a0ceae69f0-Pasted-image-20240115194536.png" alt="Pasted image 20240115194536" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-3">1.1.2 Example Problems</h3>
+<p><strong>Example Problem</strong>: Find the asymptote of curve $y=\frac{(x-1)e^x}{e^x-1}$;</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">First, analyze whether there is a horizontal asymptote;</li>
+<li class="list-indent-1">Then analyze whether there are vertical asymptotes;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Level</li>
+<li class="list-indent-2">When x<code>-&gt;</code> -infinity, the ex on the numerator approaches zero, and the denominator is also infinite times 0, making it difficult to determine;</li>
+<li class="list-indent-2">$\operatorname<em>{lim}_{x\rightarrow\infty}xe^{x}=\operatorname</em>{lim}_{x\rightarrow\infty}\frac{x}{e^{-x}}=\operatorname*{lim}_{x\rightarrow\infty}\frac{1}{-e^{-x}}$</li>
+<li class="list-indent-1">Vertical</li>
+<li class="list-indent-2">Because: $\lim_{x\to 0}y=\infty$</li>
+<li class="list-indent-2">Therefore, $x=0$ is its vertical asymptote;</li>
+<li class="list-indent-1">Slanting</li>
+<li class="list-indent-2">$\lim_{x\to\infty}\frac{y}{x}=\lim_{x\to\infty}\frac{(x-1)e^{x}}{x(e^{x}-1)}=\lim_{x\to+\infty}\frac{1-\frac{1}{x}}{1-\frac{1}{x}}=1=a$</li>
+<li class="list-indent-2">Oblique asymptote is $y=x-1$;</li>
+<li>Question Type: <span class="note-tag">Findtheasymptote</span></li>
+</ul>
+<p><strong>Example</strong>: Let $y=\frac{x^3+4}{x^2}$. Find (1) its intervals of increase and decrease and its extrema; (2) its intervals of concavity and inflection points; (3) its asymptotes; and (4) sketch its graph.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Solve in the order in which the figures are drawn;</li>
+<li>Analysis</li>
+<li class="list-indent-1">1. Find the domain:</li>
+<li class="list-indent-2">$\text{Domain: }(-\infty,0)\cup(0,+\infty).\text{ When }x=-\sqrt[3]{4},\ y=0.$</li>
+<li class="list-indent-1">2. Find critical points and points where the derivative is undefined:</li>
+<li class="list-indent-2">$y^{\prime}=1-\frac8{x^3}$, so the critical point is $x=2$.</li>
+<li class="list-indent-2">$y^{\prime}(0)$ is undefined, but $x=0$ is not in the domain.</li>
+<li class="list-indent-2">The function is increasing on $(-\infty,0)$ and $(2,+\infty)$, decreasing on $(0,2)$, and has a local minimum $y=3$ at $x=2$.</li>
+<li class="list-indent-1">3. Determine concavity:</li>
+<li class="list-indent-2">$y^{\prime\prime}=\frac{24}{x^4}&gt;0$</li>
+<li class="list-indent-2">The graph is concave upward on both $(-\infty,0)$ and $(0,+\infty)$ and has no inflection point.</li>
+<li class="list-indent-1">4. Find the asymptote;</li>
+<li class="list-indent-2">It has no horizontal asymptote</li>
+<li class="list-indent-2">There are vertical asymptotes</li>
+<li class="list-indent-3">$\lim_{x\to0}\frac{x^3+4}{x^2}=+\infty\quad\color{red}{x=0}$</li>
+<li class="list-indent-2">Oblique asymptote</li>
+<li class="list-indent-3">$\lim_{x\to\infty}\frac yx=\lim_{x\to\infty}\frac{x^3+4}{x^3}=1=a,\quad\lim_{x\to\infty}(y-ax)=\lim_{x\to\infty}\frac4{x^2}=0=b$</li>
+<li class="list-indent-3">Therefore, the oblique asymptote is $y=x$.</li>
+<li class="list-indent-1">5. Drawing</li>
+<li class="list-indent-2">1. Start by drawing an asymptote</li>
+<li class="list-indent-2">2. Starting from $-\infty$, reach the asymptote line, add or remove the change points, then keep moving toward x<code>-&gt;</code> $\infty$; Draw all the images;</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/17085ce4a882-Pasted-image-20240115201603.png" alt="Pasted image 20240115201603" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Functiongraphdrawing</span></li>
+</ul>
+<h3 id="section-4">Question Type: <span class="note-tag">Findtheasymptote</span></h3>
+<h4 id="section-5">PART 1: Problem-solving methods</h4>
+<p><strong>Determining if a curve has an asymptote</strong></p>
+<ul>
+<li>1. Determine the horizontal asymptote <code>-&gt;</code> When x <code>-&gt;</code> is infinite, y tends toward a finite value;</li>
+<li>2. Determine the vertical asymptote <code>-&gt;</code> When x <code>-&gt;</code> a certain point (finite value), y approaches infinity;</li>
+<li>3. Determine the oblique asymptote</li>
+<li class="list-indent-1"><code>-&gt;</code> $\lim_{x\to\infty}\frac{f(x)}x=a$ Finite value;</li>
+<li class="list-indent-1"><code>-&gt;</code> $\lim_{x\to\infty}(f(x)-ax)=b$ exist</li>
+<li class="list-indent-1">At this time, there is an oblique asymptote;</li>
+</ul>
+<p><strong>Quick Assessment Method</strong></p>
+<ul>
+<li>Inference:</li>
+<li class="list-indent-1">The relationship between oblique asymptotes and functions: When x <code>-&gt;</code> is infinite, the distance between $y=f(x)$ and $y=ax+b$ approaches zero;</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/b3f664326b6a-Pasted-image-20240326174937.png" alt="Pasted image 20240326174937" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">When x <code>-&gt;</code> is infinite, when the infinitesimal α(x) <code>-&gt;</code> 0 in $y=ax+b+α(x)$, then this equals the oblique asymptote $y=ax+b$, so the oblique asymptote exists;</li>
+<li>Summary</li>
+<li class="list-indent-1">When the function is of $y=ax+b+α(x)$, where α(x) <code>-&gt;</code> 0, then the function has an oblique asymptote;</li>
+</ul>
+<h4 id="section-6">PART 2: Typical Example Problems</h4>
+<h4 id="section-7">PART 3: Key Points Review</h4>
+<p><strong>Note</strong>: When calculating the number of asymptote lines and considering horizontal asymptotes, besides considering x <code>-&gt;</code> negative infinity, you also need to consider x <code>-&gt;</code> positive infinity;</p>
+<p><strong>Note</strong>: When analyzing intervals (such as concave-convex, increment/subtraction), be sure to pay attention to the current defined range of the function and whether there are any defined points;</p>
+<ul>
+<li>1. Zero cannot be used as the denominator;</li>
+<li>2. Pay attention to the scope of $Inx$;</li>
+<li>3. Pay attention to the scope of $e^x$;</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-033/index.html"><span>← Previous item</span><strong>Lecture 25: Local and Absolute Extrema of Functions</strong></a>
+    <a class="article-pagination-next" href="../math-035/index.html"><span>Next item →</span><strong>Lecture 27: Indefinite Integrals and Integration by Substitution</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +167,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

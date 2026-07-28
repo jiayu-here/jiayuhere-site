@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 34：定积分的应用 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 34: Application of Definite Integrals | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 34: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Definite and Improper Integrals">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 34：定积分的应用 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 34: Application of Definite Integrals | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 34: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-042/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,258 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 34：定积分的应用</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-24</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-042/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-041/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 33：定积分的应用</strong></a>
-    <a class="article-pagination-next" href="../math-043/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 35：微分方程的基本概念</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 34: Application of Definite Integrals</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 34: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-01-24</span><span>10 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Definite and Improper Integrals</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Example Questions</a><a href="#section-2">1.1 Concept Introduction</a><a href="#section-3">1.2 Geometric applications</a><a href="#section-14">1.3 Physical Applications</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Example Questions</h2>
+<p><strong>Frequently Tested Contents</strong></p>
+<ul>
+<li>(1) Geometric applications</li>
+<li>(2) Physical applications</li>
+</ul>
+<p><strong>Common Question Types and Typical Examples</strong></p>
+<ul>
+<li>Problem Type 1: Geometric Applications</li>
+<li>Question Type 2: Physics Applications</li>
+</ul>
+<h2 id="section-2">1.1 Concept Introduction</h2>
+<p><strong>What Problems Are Suitable to Be Solved Using Definite Integrals</strong></p>
+<ul>
+<li>1) Non-uniform continuous distribution in $[a,b]$</li>
+<li>2) The quantity to be obtained is additive to the interval</li>
+</ul>
+<p><strong>Method</strong></p>
+<ul>
+<li>First, find the scope</li>
+<li>Find the smallest value of its derivative within a tiny range (approximate value, find the differential element)</li>
+<li>Perform the integral and find the integral of the function on the range a to b</li>
+</ul>
+<h2 id="section-3">1.2 Geometric applications</h2>
+<h3 id="section-4">1.2.1 Area of Plane Figures</h3>
+<h4 id="section-5">1.2.1.2 Basic Concepts</h4>
+<p><strong>Concept</strong></p>
+<ul>
+<li>Scenario 1: Plane coordinates</li>
+<li class="list-indent-1">If the plane field $D$ is enclosed by curves $y=f(x),y=g(x)(f(x)\geq g(x))$ and $x=a,\quad x=b\quad(a&lt;b)$, then:</li>
+<li class="list-indent-1">$$S=\int_{a}^{b}[f(x)-g(x)]dx$$</li>
+<li class="list-indent-1">Find a region D on the plane,</li>
+<li>Scenario 2: Polar coordinates</li>
+<li class="list-indent-1">If the plane field $D$ is enclosed by curve $\rho=\rho(\theta),\theta=\alpha,\theta=\beta(\alpha&lt;\beta)$, then:</li>
+<li class="list-indent-1">$$S=\frac 12\int_\alpha^\beta\rho^2 (\theta)\mathrm{d}\theta$$</li>
+</ul>
+<p><strong>More General Formulas</strong></p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">$$S=\int\int_{D}^{S}1db$$</li>
+<li>Example: Using double integrals, x first, then y</li>
+<li class="list-indent-1">$\text{ Let }D\text{ It is based on curves }xy+1=0\text{ and a straight line }$ $y+x=0\text{ and }y=2\text{ The bounded area enclosed is }D\text{ The area of is }$</li>
+<li class="list-indent-1">Solution: $\begin{aligned}S&amp;=\int_{0}^{1}db\\&amp;=\int_{1}^{2}dy\int_{0}^{-\frac{1}{y}}dx\end{aligned}=\int_{1}^{2}(y-\frac{1}{y})dy=(\frac{1}{2}y^{2}-2,y)|_{1}^{2}$</li>
+</ul>
+<h4 id="section-6">1.2.1.2 Example problems</h4>
+<p><strong>Example Problem</strong>: Find the area enclosed by curves $y^2=x$ and $y=x^2$.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/97772b994909-Pasted-image-20240131142232.png" alt="Pasted image 20240131142232" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Can be performed on x points</li>
+<li class="list-indent-1">It can also be integrated with y</li>
+<li>Analysis 1: Integral with x</li>
+<li class="list-indent-1">Step 1: Find the scope</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/fbaaef2d4558-Pasted-image-20240131142306.png" alt="Pasted image 20240131142306" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Part Two: Searching for Weiyuan</li>
+<li class="list-indent-2">x and x+dx</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/c6e80b9ce051-Pasted-image-20240131142332.png" alt="Pasted image 20240131142332" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Step 3: Points</li>
+<li class="list-indent-2">Score from 0-1</li>
+<li class="list-indent-2">$\delta=\int_{0}^{1}\left(dx-x^{2}\right)dx=\frac{2}{3}-\frac{1}{3}=\frac{1}{3}$</li>
+<li>Question Type: <span class="note-tag">Geometricapplicationsofdefiniteintegrals</span></li>
+</ul>
+<p><strong>Example Question</strong>: $\text{ Find the cardioid line }\rho=a(1+\cos\theta)\left(a&gt;0\right)\text{ The surrounding area }.$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Polar coordinate question types; Geometric shapes are given using polar coordinates;</li>
+<li class="list-indent-1">Step 1: Its range; It is <img class="note-image" src="/assets/notes/86669d54a8c5-Pasted-image-20240131150018.png" alt="Pasted image 20240131150018" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Step 2: Find the corresponding area for the corresponding figure over a tiny interval:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/f974e9ceede3-Pasted-image-20240131150049.png" alt="Pasted image 20240131150049" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">A sector shape can be approximated;</li>
+<li class="list-indent-2">Micro Yuan:</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/1b49a7ce912f-Pasted-image-20240131150113.png" alt="Pasted image 20240131150113" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Step 3: Find the integral</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/5bc854126c2e-Pasted-image-20240131150129.png" alt="Pasted image 20240131150129" loading="lazy" decoding="async"></li>
+<li>Analysis</li>
+<li class="list-indent-1">Step one: Define the scope</li>
+<li class="list-indent-2">You can draw the drawing first - &gt; When drawing, you need to draw some<strong>special points</strong>first;</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/1155e331d60d-Pasted-image-20240131150311.png" alt="Pasted image 20240131150311" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">Because of the characteristics of conx;</li>
+<li class="list-indent-2">Determine the range: from 0 to π</li>
+<li class="list-indent-3">Since the bottom half is the same as the top half, just Find the top half and multiply by 2;</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/41f0e0225046-Pasted-image-20240131150353.png" alt="Pasted image 20240131150353" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/7fbcc9288c72-Pasted-image-20240131150416.png" alt="Pasted image 20240131150416" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Step 3: Solve the definite integral</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/39066e2f6ba6-Pasted-image-20240131150658.png" alt="Pasted image 20240131150658" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">Since directly finding conx from 0 to PI cannot be found, but finding 0 to half PI is simple, a definite integral substitution is performed:</li>
+<li class="list-indent-3">Establishment:</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/8ad073c39bbf-Pasted-image-20240131150652.png" alt="Pasted image 20240131150652" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">Therefore:</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/a8e6224f7fd8-Pasted-image-20240131150832.png" alt="Pasted image 20240131150832" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Geometricapplicationsofdefiniteintegrals</span></li>
+</ul>
+<h3 id="section-7">1.2.2 Volume of a Rotating Body</h3>
+<h4 id="section-8">1.2.2.1 Basic Concepts</h4>
+<p><strong>Illustration</strong></p>
+<ul>
+<li>Illustration: Rotate around the X-axis</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/165df4bfaca3-Pasted-image-20240131151121.png" alt="Pasted image 20240131151121" loading="lazy" decoding="async"></li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Formulaforthevolumeofasolidrotatingbodywithdefiniteintegrals</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>1. When rotating around the X-axis: $$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$$</blockquote>
+<blockquote>2. When rotating around the Y-axis: $$V_y=2\pi\int_a^bxf(x)\operatorname{d}x$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Can only calculate its coordinate axes and cannot solve other problems;</li>
+<li>Step 1: Substitute into the formula from the original expression</li>
+<li>Step 2: Substitute both y and x into the formula using formulas related to t to convert them into definite integrals related to t</li>
+</ul>
+<p><strong>More General Cases</strong></p>
+<ul>
+<li>Situation:</li>
+<li class="list-indent-1">Any plane $D$ $ax+b^y+c=0$ around any line</li>
+<li>Double integral formula:</li>
+<li class="list-indent-1">This is a more general formula. For the volume problem of a solid of revolution, this formula can be used at any time:</li>
+<li class="list-indent-1">$$V=2\pi\int\int_{D}r(x,y)db$$</li>
+<li>$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$ and $V_y=2\pi\int_a^bxf(x)\operatorname{d}x$ are special cases of this formula;</li>
+</ul>
+<p><strong>Formula Selection</strong></p>
+<ul>
+<li>If winding around X or Y, you can use $V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$ and $V_y=2\pi\int_a^bxf(x)\operatorname{d}x$</li>
+<li>If you are traveling around any axis, you can use $V=2\pi\int\int_{D}r(x,y)db$</li>
+</ul>
+<h4 id="section-9">1.2.2.2 Example problems</h4>
+<p><strong>Examples</strong>: Calculate the volume of a body of revolution formed by the shape enclosed by $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ rotating once around the X-axis;</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Shapes of ovals</li>
+<li class="list-indent-2">You only need to calculate half of the above;</li>
+<li class="list-indent-2">Not only that, you only need to calculate a quarter of the amount;</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/e7d6f432590b-Pasted-image-20240131152357.png" alt="Pasted image 20240131152357" loading="lazy" decoding="async"></li>
+<li>Analysis</li>
+<li class="list-indent-1">The formula for y derived from the original expression:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/dee2746800cc-Pasted-image-20240131152437.png" alt="Pasted image 20240131152437" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">According to the volume formula:</li>
+<li class="list-indent-2">$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$</li>
+<li class="list-indent-1">And, because only a quarter is required</li>
+<li class="list-indent-2">Therefore, only the $[0,a]$ range of the area it rotates is required</li>
+<li class="list-indent-1">Therefore, substituting in:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/75f2ba96611f-Pasted-image-20240131152648.png" alt="Pasted image 20240131152648" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Geometricapplicationsofdefiniteintegrals</span></li>
+</ul>
+<p><strong>Examples</strong>: Calculate the volume of the solid of revolution measured by cycloidal lines $\begin{cases}x=a(t-\sin t)\\y=a(1-\cos t)&amp;\end{cases}(0\leq t\leq2\pi)$ and X figures around the X-axis and Y-axis respectively;</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Step 1: Substitute into the formula from the original expression</li>
+<li class="list-indent-1">Step 2: Substitute both y and x into the formula using formulas related to t to convert them into definite integrals related to t</li>
+<li>Analysis: Find X</li>
+<li class="list-indent-1">Finding the volume formula for a solid of revolution shows:</li>
+<li class="list-indent-2">Since the process of turning y into a function of y and x is troublesome, in the following changes, y and x are directly converted into expressions of t and t, and the following changes are taken in:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/9020088aec14-Pasted-image-20240131153411.png" alt="Pasted image 20240131153411" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Continue solving by letting u = t/2</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/5a9bc9f40dc7-Pasted-image-20240131153609.png" alt="Pasted image 20240131153609" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Geometricapplicationsofdefiniteintegrals</span></li>
+</ul>
+<h3 id="section-10">1.2.3 Arc Length of Plane Curves</h3>
+<h4 id="section-11">1.2.3.1 Basic Concepts</h4>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Arclength</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$s_n=\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>$s_n=\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/c52e94b31be8-Pasted-image-20240131160512.png" alt="Pasted image 20240131160512" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Summing many small segments</li>
+<li>Arc length limit: $s=\lim_{\lambda\to0}s_n=\lim_{\lambda\to0}\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationofarclength</span></p>
+<blockquote><span style="color:#ccc1d9">Description: </span> $$\begin{aligned}</blockquote>
+<p>&amp;1)C:y=y(x),\quad a\leq x\leq b,\quad s=\int_a^b\sqrt{1+{y^{\prime}}^2}dx \\</p>
+<p>&amp;2)C:\begin{cases}x=x(t)\\y=y(t)\end{cases}\alpha\leq t\leq\beta.\quad s=\int_\alpha^\beta\sqrt{x^{\prime2}+y^{\prime2}}dt \\</p>
+<p>&amp;3)C:\rho=\rho(\theta),\alpha\leq\theta\leq\beta.\quad s=\int_{\alpha}^{\beta}\sqrt{\rho^{2}+{\rho^{\prime}}^{2}}d\theta</p>
+<p>\end{aligned}$$</p>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Arc lengths are all arc differential integrals</li>
+</ul>
+<h4 id="section-12">1.2.3.2 Example Problems</h4>
+<p><strong>Example</strong>: $\text{ Calculate the arch of the cycloidal line }\quad x=a(t-\sin t),y=a(1-\cos t)\quad(0\leq t\leq2\pi)$ arc length</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">This type of question is the second form:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/501c25b88d93-Pasted-image-20240131162204.png" alt="Pasted image 20240131162204" loading="lazy" decoding="async"></li>
+<li>Analysis</li>
+<li class="list-indent-1">Bring the function in:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/469fee3793f5-Pasted-image-20240131162350.png" alt="Pasted image 20240131162350" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Geometricapplicationsofdefiniteintegrals</span></li>
+</ul>
+<h3 id="section-13">1.2.4 Lateral Area of a Rotating Body</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationofthesideareaofarotatingbody</span></p>
+<blockquote>1 $S=2\pi\int_{a}^{b}f(x)\sqrt{1+f^{\prime2}(x)}dx$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/e940c3c3ad8a-Pasted-image-20240415204510.png" alt="Pasted image 20240415204510" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-14">1.3 Physical Applications</h2>
+<h3 id="section-15">1.3.1 Work Done by a Variable Force</h3>
+<p><strong>Core</strong></p>
+<ul>
+<li>For water at different depths, the work done by the pump = displacement × force = displacement × density × $g$ × $dv$</li>
+<li>Force = density × $g$ × $dv$</li>
+<li>Integrating this expression gives the total work.</li>
+</ul>
+<p><strong>Example Analysis</strong>: The inner surface of a container is formed by rotating the curve in the figure once around the $y$-axis. The curve consists of $$x^{2}+y^{2}=2y\quad(y\geq\frac{1}{2})\qquad\text{and}\qquad x^{2}+y^{2}=1\quad(y\leq\frac{1}{2}).$$</p>
+<ul>
+<li>Questions: (1) Find the volume of the container; (II) If you want to pump all the water from the top of the container, how much work is required at least?</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/d83575448e89-Pasted-image-20240415213032.png" alt="Pasted image 20240415213032" loading="lazy" decoding="async"></li>
+<li>Explanation: First question</li>
+<li class="list-indent-1">The volumes of the upper and lower circles are the same, so only one circle needs to be calculated by its rotation around its axis;</li>
+<li class="list-indent-1">Find the area differential of the lower half of the circle:</li>
+<li class="list-indent-2">Slice a thin disk from $y$ to $y+dy$. Its cross-sectional area is $\pi x^2$;</li>
+<li class="list-indent-2">Multiplying by the thickness $dy$ gives the volume element $\pi x^2\,dy$;</li>
+<li class="list-indent-1">Integrate this volume element from $-1$ to $\frac12$:</li>
+<li class="list-indent-2">$\pi\int_{-1}^{\frac{1}{2}}x^{2}\operatorname{d}y$</li>
+<li class="list-indent-1">Multiply by 2 and substitute $x^2=1-y^2$:</li>
+<li class="list-indent-2">$V=2\pi\int_{-1}^{\frac{1}{2}}x^{2}\mathrm{d}y=2\pi\int_{-1}^{\frac{1}{2}}(1-y^{2})\mathrm{d}y=\frac{9\pi}{4}$</li>
+<li>Explanation: Second question</li>
+<li class="list-indent-1">Since the magnitude of the force does not change, work = force × displacement</li>
+<li class="list-indent-2">The weight of each thin layer varies with its volume, so the work must be integrated over the height;</li>
+<li class="list-indent-2">The weight of a layer equals its volume times the density times $g$;</li>
+<li class="list-indent-1">Displacement: $2-y$</li>
+<li class="list-indent-1">$W=10^3\int_0^{\frac12}\pi(1-y^2)(2-y)g\,\operatorname{d}y+10^{3}\int_{\frac{1}{2}}^{2}\pi(2y-y^{2})(2-y)g\,\operatorname{d}y$</li>
+<li>Core:</li>
+<li class="list-indent-1">The work done by a thin layer of water is equal to displacement × force = displacement × g × density × $dv$</li>
+<li class="list-indent-1">g × density × $dv$ = force</li>
+</ul>
+<h3 id="section-16">1.3.2 Stress Issues</h3>
+<p><strong>Pressure Issues</strong></p>
+<ul>
+<li>Formula: Pressure $${p}=g\cdotρ\cdot h$$</li>
+<li>Formula: Pressure $$P=p\cdot A$$</li>
+<li class="list-indent-1">Where: p is the pressure, A is the area</li>
+</ul>
+<p><strong>Example Analysis</strong>: The shape and size of a certain gate are shown in the figure, where the y-axis is the axis of symmetry, the upper part of the gate is rectangular ABCD, DC=2 m, and the lower part is enclosed by a secondary parabola and segment 4B. When the water surface is level with the upper end of the gate, to make the ratio of the water pressure on the rectangular part of the gate to the water pressure on the lower part of the gate 5:4, what should the height h of the rectangular part of the gate be?</p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/d92ee3235ee3-Pasted-image-20240415215603.png" alt="Pasted image 20240415215603" loading="lazy" decoding="async"></li>
+<li>Analysis:</li>
+<li class="list-indent-1">Subtle changes in depth:</li>
+<li class="list-indent-2">Pressure: p = gρ(h + 1 - y)</li>
+<li class="list-indent-2">Pressure: p = gρ(h + 1 - y) 2 dy</li>
+<li class="list-indent-1">Equation: upper part:</li>
+<li class="list-indent-2">$$P_1=2\int_1^{h+1}\rho g(h+1-y)\operatorname{d}y=2\rho g\biggl[(h+1)y-\frac{y^2}2\biggr]_1^{h+1}=\rho gh^2$$</li>
+<li class="list-indent-1">Second half:</li>
+<li class="list-indent-2">$p=gp(h+1-y)$</li>
+<li class="list-indent-1">Formula: Lower part:</li>
+<li class="list-indent-2">$$P_{2}=2\int_{0}^{1}\rho g(h+1-y)\sqrt{y}\mathrm{d}y=2\rho g\biggl[\frac{2}{3}(h+1)y^{\frac{3}{2}}-\frac{2}{5}y^{\frac{5}{2}}\biggr]_{0}^{1}$$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-041/index.html"><span>← Previous item</span><strong>Lecture 33: Applications of Definite Integrals</strong></a>
+    <a class="article-pagination-next" href="../math-043/index.html"><span>Next item →</span><strong>Lecture 35: Basic Concepts of Differential Equations</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +320,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

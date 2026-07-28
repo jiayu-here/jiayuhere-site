@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -60,141 +60,138 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 24：函数的单调性与曲线的凹凸性</h1><p class="article-lead">考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-01-13</span><span>约 6 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分中值定理与导数应用</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 函数单调性的判断方法</a><a href="#section-5">1.2 曲线的凹凸性和拐点</a><a href="#section-12">1.3 相关题型</a></nav></details><div class="prose"><h2 id="section-1">1.1 函数单调性的判断方法</h2>
-<h3 id="section-2">1.1.1 单调增减的几何意义</h3>
-<p><strong>单调增和单调减</strong></p>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 24：函数的单调性与曲线的凹凸性</h1><p class="article-lead">考研数学学习笔记：Lecture 24：函数的单调性与曲线的凹凸性。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-01-13</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分中值定理与导数应用</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 函数单调性的判断</a><a href="#section-5">1.2 曲线的凹凸性与拐点</a><a href="#section-12">1.3 相关题型</a></nav></details><div class="prose"><h2 id="section-1">1.1 函数单调性的判断</h2>
+<h3 id="section-2">1.1.1 导数与单调性</h3>
 <ul>
-<li>导数和单调增减的关系</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/4e2a62d3de45-Pasted-image-20240113174945.png" alt="Pasted image 20240113174945" loading="lazy" decoding="async"></li>
+<li>几何示意：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/4e2a62d3de45-Pasted-image-20240113174945.png" alt="导数与函数单调性的关系" loading="lazy" decoding="async"></li>
 </ul>
-<h5 id="section-3"><strong>定理</strong>：单调增减与导数</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设函数 }f(x)\text{ 在区间 }[a,b]\text{ 上连续},\text{ 在 }(a,b)\text{ 内可导,则}$</blockquote>
-<blockquote>1）$\text{如果在(}a,b)\text{ 内 }f^{\prime}(x)\geq0,\text{ 且等号只在有限个点上成立}$，则 $f(x)$ 在 $[a,b]$ 上单调增加</blockquote>
-<blockquote>2）$\text{如果在(}a,b)\text{ 内 }f^{\prime}(x){\leq}0,\text{ 且等号只在有限个点上成立,}$ 则 $\text{则 }f(x)\text{ 在 }[a,b]\text{ 上单调减少}$</blockquote>
-<blockquote></blockquote>
-<p><strong>解释</strong></p>
-<ul>
-<li>注意：此条件 <code>等号只在有限个点上成立</code> ，即导数等于零的位置点是有限个，</li>
-</ul>
+<h5 id="section-3"><strong>定理</strong>： <span class="note-tag">导数与单调性</span></h5>
+<p>设函数 $f$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导。</p>
+<ol>
+<li>若 $f'(x)\ge0$，则 $f$ 在 $[a,b]$ 上单调不减。</li>
+<li>若 $f'(x)\le0$，则 $f$ 在 $[a,b]$ 上单调不增。</li>
+<li>若 $f'(x)&gt;0$，则 $f$ 严格单调增加；若 $f'(x)&lt;0$，则 $f$ 严格单调减少。</li>
+</ol>
+<p>当 $f'(x)\ge0$ 且导数为零的点只有有限个时，也可以推出 $f$ 严格单调增加；对应的递减结论同理。更一般地，只要 $f'$ 不在任何子区间上恒为零，就可以排除函数在该子区间上为常数。</p>
 <h3 id="section-4">1.1.2 例题</h3>
-<p><strong>例题</strong>：$\text{确定 }f(x)=e^x-x-1\text{ 的增减区间}$</p>
+<p><strong>例 1：确定 $f(x)=e^x-x-1$ 的单调区间</strong></p>
+<div class="math-display">$$
+f'(x)=e^x-1.
+$$</div>
 <ul>
-<li>分析</li>
-<li class="list-indent-1">题型：利用单调增减性的定理，分析增减区间；</li>
-<li class="list-indent-1">分析过程：$f^{\prime}(x)=e^x_{-1}=0\Rightarrow\mathrm{x=0}$</li>
-<li>解析</li>
-<li class="list-indent-1">解答过程：</li>
-<li class="list-indent-2">$(-\infty, 0), f (x)&lt;0\Rightarrow f (x)\downarrow$</li>
-<li class="list-indent-2">$(0,+\infty) f^{\prime}(x)&gt;0 \Rightarrow f(x)$</li>
+<li>当 $x&lt;0$ 时，$f'(x)&lt;0$，所以 $f$ 在 $(-\infty,0)$ 上严格递减。</li>
+<li>当 $x&gt;0$ 时，$f'(x)&gt;0$，所以 $f$ 在 $(0,+\infty)$ 上严格递增。</li>
 </ul>
-<p><strong>例题</strong>：$\text{试证 }x&gt;0\text{ 时,}x-\frac{x^3}6&lt;\sin x&lt;x$</p>
+<p><strong>例 2：证明当 $x&gt;0$ 时，$x-\frac{x^3}{6}&lt;\sin x&lt;x$</strong></p>
 <ul>
-<li>题型</li>
-<li class="list-indent-1">#使用单调性证明不等式</li>
-<li>解析</li>
-<li class="list-indent-1">先分析 $sinx$ 和 $x$ 的关系</li>
-<li class="list-indent-1">$\begin{aligned}&amp;f(x)=X-h^{\prime}x,\quad f(0)=0\\&amp;f^{\prime}(x)=1-\cos x\geqslant0\quad,\quad f(x)\quad[0,a]\quad1\to(0,+\infty)\end{aligned}$</li>
-<li class="list-indent-1">同理为右边不等式的关系；</li>
+<li>令 $F(x)=x-\sin x$。有 $F(0)=0$，且 $F'(x)=1-\cos x\ge0$，因此 $x&gt;0$ 时 $F(x)&gt;0$，即 $\sin x&lt;x$。</li>
+<li>令 $G(x)=\sin x-x+\frac{x^3}{6}$。有 $G(0)=G'(0)=G''(0)=0$，且</li>
 </ul>
-<h2 id="section-5">1.2 曲线的凹凸性和拐点</h2>
-<h3 id="section-6">1.2.1 凹凸性的基本概念</h3>
-<h5 id="section-7"><strong>定义</strong>：凹凸的定义</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{设函数 }f(x)\text{ 在区间 }I\text{ 上连续。如果对 }I\text{ 上任意两点 }x_1,x_2$</blockquote>
-<blockquote>1）如果恒有 $f(\frac{x_1+x_2}2)&lt;\frac{f(x_1)+f(x_2)}2$，$则称   f(x)\text{ 在 }I\text{ 上的图形是凹的}$</blockquote>
-<blockquote>2）如果恒有 $f(\frac{x_1+x_2}2)&gt;\frac{f(x_1)+f(x_2)}2$，则称 $f(x)$ 在 $I$ 上的图形是凸的</blockquote>
-<p><strong>解释</strong></p>
+<div class="math-display">$$
+G'''(x)=1-\cos x\ge0.
+$$</div>
+<p>依次利用单调性可得 $G''(x)&gt;0$、$G'(x)&gt;0$、$G(x)&gt;0$，所以 $x-\frac{x^3}{6}&lt;\sin x$。</p>
+<h2 id="section-5">1.2 曲线的凹凸性与拐点</h2>
+<h3 id="section-6">1.2.1 凹凸性的定义与判定</h3>
+<h5 id="section-7"><strong>定义</strong>： <span class="note-tag">凹凸性</span></h5>
+<p>设函数 $f$ 在区间 $I$ 上连续。对任意不同的 $x_1,x_2\in I$：</p>
+<ol>
+<li>若</li>
+</ol>
+<div class="math-display">$$
+f\left(\frac{x_1+x_2}{2}\right)
+&lt;
+\frac{f(x_1)+f(x_2)}{2},
+$$</div>
+<p>则按本笔记所用的中文教材术语，称曲线在 $I$ 上是凹的。</p>
+<ol>
+<li>若上述不等号反向，则称曲线在 $I$ 上是凸的。</li>
+</ol>
+<p><strong>几何意义</strong></p>
 <ul>
-<li>中点：$\frac{x_1+x_2}2$</li>
-<li>几何意义</li>
-<li class="list-indent-1">凹</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/ff516b6bdb93-Pasted-image-20240113182849.png" alt="Pasted image 20240113182849" loading="lazy" decoding="async"></li>
-<li class="list-indent-2">其斜率在增加，即一阶导数在增加 -&gt; 二阶导数大于零；</li>
-<li class="list-indent-1">凸</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/9a5688f060e1-Pasted-image-20240113182901.png" alt="Pasted image 20240113182901" loading="lazy" decoding="async"></li>
-<li class="list-indent-2">其斜率在减少，即一阶导数在减少 -&gt; 二阶导数小于零；</li>
+<li>凹：弦位于曲线上方，斜率递增。</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/ff516b6bdb93-Pasted-image-20240113182849.png" alt="凹曲线示意图" loading="lazy" decoding="async"></li>
+<li>凸：弦位于曲线下方，斜率递减。</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/9a5688f060e1-Pasted-image-20240113182901.png" alt="凸曲线示意图" loading="lazy" decoding="async"></li>
 </ul>
-<h5 id="section-8"><strong>定理</strong>：凹凸性判定</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设函数}f(x)\text{ 在区间 }[a,b]\text{ 上连续},\text{ 在 }(a,b)\text{ 内二阶可导},$</blockquote>
-<blockquote>1）$\text{若在 }(a,b)\text{ 内 }f^{\prime\prime}(x)\text{&gt;0, 则 }f(x)\text{ 在 }[a,b]\text{ 上的图形是凹的}$；</blockquote>
-<blockquote>2）$\text{若在 }(a,b)\text{ 内 }f^{\prime\prime}(x)&lt;0,\text{ 则 }f(x)\text{ 在 }[a,b]\text{ 上的图形是凸的}$</blockquote>
-<p><strong>总结</strong></p>
+<h5 id="section-8"><strong>定理</strong>： <span class="note-tag">二阶导数判定</span></h5>
+<p>设 $f$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内二阶可导。</p>
 <ul>
-<li>用一阶导数的正负 <code>-&gt;</code> 判断函数的单调性；</li>
-<li>用二阶导数的正负 <code>-&gt;</code> 判断函数的凹凸性；</li>
+<li>若 $f''(x)&gt;0$，则曲线在该区间上是凹的。</li>
+<li>若 $f''(x)&lt;0$，则曲线在该区间上是凸的。</li>
 </ul>
-<h3 id="section-9">1.2.2 拐点的基础概念</h3>
-<h5 id="section-10"><strong>定义</strong>：拐点</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：连续曲线上，凹凸性质发生变化的分界点</blockquote>
-<p><strong>拐点可能取值</strong></p>
+<p>一阶导数的符号判断单调性，二阶导数的符号判断凹凸性。</p>
+<h3 id="section-9">1.2.2 拐点</h3>
+<h5 id="section-10"><strong>定义</strong>： <span class="note-tag">拐点</span></h5>
+<p>连续曲线上凹凸性发生改变的点称为拐点。</p>
+<p>求拐点时，先找候选横坐标：</p>
+<ol>
+<li>$f''(x_0)=0$；</li>
+<li>$f''(x_0)$ 不存在，但函数在 $x_0$ 处连续。</li>
+</ol>
+<p>候选点不一定是拐点；还必须检查 $x_0$ 两侧的凹凸性是否发生改变。</p>
+<h3 id="section-11">1.2.3 例题</h3>
+<p><strong>例 1：判断 $y=x^3$ 的凹凸性</strong></p>
+<div class="math-display">$$
+y'=3x^2,\qquad y''=6x.
+$$</div>
 <ul>
-<li>1. ${f^{\prime\prime}(x_0)=0}$；</li>
-<li>2. 二阶导数不存在的点；</li>
+<li>在 $(-\infty,0)$ 上，$y''&lt;0$，曲线为凸。</li>
+<li>在 $(0,+\infty)$ 上，$y''&gt;0$，曲线为凹。</li>
+<li>凹凸性在 $x=0$ 两侧改变，所以 $(0,0)$ 是拐点。</li>
 </ul>
-<h3 id="section-11">1.2.2 例题</h3>
-<p><strong>例题</strong>：$\text{判定曲线 }y=x^3\text{ 的凹凸性}$</p>
 <ul>
-<li>分析</li>
-<li class="list-indent-1">分析过程：</li>
-<li>解析</li>
-<li class="list-indent-1">解答过程：</li>
-<li class="list-indent-1">$y^{\prime}=3x^{2},y^{\prime\prime}=6x$</li>
-<li class="list-indent-1">$\begin{aligned}(-无限,0),y^{\prime\prime}&lt;0,&amp;\text{凸}\\(0,+无限),&amp;y^{\prime\prime}&gt;0\end{aligned}$</li>
-<li>推导结论</li>
-<li class="list-indent-1">在函数的一点位置，函数的凹凸性发生变化，则称这一点为拐点</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/48abac8b1ee4-Pasted-image-20240113184015.png" alt="Pasted image 20240113184015" loading="lazy" decoding="async"></li>
-<li class="list-indent-1">即：<strong>拐点为二阶导数等于零的点</strong>；</li>
+<li>原始示意图：</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/48abac8b1ee4-Pasted-image-20240113184015.png" alt="三次函数拐点示意图" loading="lazy" decoding="async"></li>
 </ul>
-<p><strong>例题</strong>：$h(x)=\sqrt[3]{x}$，求它的凹凸区间以及拐点；</p>
+<p><strong>例 2：求 $h(x)=\sqrt[3]{x}$ 的凹凸区间与拐点</strong></p>
+<p>对 $x\ne0$，</p>
+<div class="math-display">$$
+\begin{aligned}
+h'(x)&amp;=\frac{1}{3}x^{-2/3},\\
+h''(x)&amp;=-\frac{2}{9}x^{-5/3}
+=-\frac{2}{9x^{5/3}}.
+\end{aligned}
+$$</div>
 <ul>
-<li>分析</li>
-<li class="list-indent-1">找拐点可以在这些位置：</li>
-<li class="list-indent-2">${f^{\prime\prime}(x_0)=0}$</li>
-<li class="list-indent-2">或者是二阶导数不存在的点；</li>
-<li>解析</li>
-<li class="list-indent-1">$\begin{aligned}h^{\prime}(x)&amp;=\frac{1}{3}x^{-\frac{2}{3}}\\h^{\prime\prime}(x)&amp;=-\frac{2}{9}x^{-\frac{5}{3}}=-\frac{2}{9x^{\frac{5}{3}}}\quad h^{\prime\prime}(0)\text{不存在}\end{aligned}$</li>
-<li class="list-indent-1">$\begin{aligned}&amp;\color{red}{(-\infty,0)},\quad\color{red}{f^{\prime\prime}(x)&gt;0},\quad\color{red}{\boxed4}\\&amp;\color{red}{(0,+\infty)}\quad\color{red}{f^{\prime\prime}(x)&lt;0},\quad\color{red}{\boxed4}\end{aligned}$</li>
-<li>题型</li>
-<li class="list-indent-1">#求拐点的方法</li>
+<li>当 $x&lt;0$ 时，$h''(x)&gt;0$，曲线为凹。</li>
+<li>当 $x&gt;0$ 时，$h''(x)&lt;0$，曲线为凸。</li>
+<li>$h''(0)$ 不存在，但 $h$ 在 $0$ 处连续，且凹凸性在两侧改变，所以 $(0,0)$ 是拐点。</li>
 </ul>
 <h2 id="section-12">1.3 相关题型</h2>
-<h3 id="section-13">题型： #确定曲线的凹向和拐点</h3>
-<h4 id="section-14">PART 1：解题方法</h4>
-<p><strong>拐点可能的取值点</strong></p>
+<h3 id="section-13">题型一： <span class="note-tag">确定凹凸区间与拐点</span></h3>
+<ol>
+<li>求 $f''(x)$。</li>
+<li>找出 $f''(x)=0$ 或 $f''(x)$ 不存在的候选点。</li>
+<li>按候选点划分区间，判断每个区间内 $f''$ 的符号。</li>
+<li>只有当凹凸性在候选点两侧改变时，该点才是拐点。</li>
+</ol>
+<h3 id="section-14">题型二： <span class="note-tag">方程根的个数</span></h3>
 <ul>
-<li>1. 二阶导数等于 0 的点；</li>
-<li>2. 二阶导数不存在的点；</li>
-<li>然后逐个判断这些等于 0 或者不存在的点，其拐点是否存在，得到所有拐点的取值；</li>
+<li>存在性：若 $f$ 在 $[a,b]$ 上连续且 $f(a)f(b)&lt;0$，则介值定理保证 $(a,b)$ 内至少有一个零点。</li>
+<li>唯一性：若 $f$ 在区间上严格单调，则该区间内至多有一个零点。</li>
+<li>估计根的个数时，可结合罗尔定理：若 $f$ 有两个不同零点，则 $f'$ 在两者之间至少有一个零点。</li>
 </ul>
-<p><strong>判断可能的拐点是否存在</strong></p>
+<h3 id="section-15">题型三： <span class="note-tag">证明不等式</span></h3>
 <ul>
-<li>凹凸性质发生变化的分界点；</li>
+<li>把不等式移到一边，构造辅助函数，再利用导数判断其单调性。</li>
+<li>拉格朗日中值定理适合处理函数值之差。</li>
 </ul>
-<h4 id="section-15">PART 2：典型例题</h4>
-<h4 id="section-16">PART 3：知识点复盘</h4>
-<h3 id="section-17">题型： #方程的根</h3>
-<h4 id="section-18">PART 1：解题方法</h4>
-<p><strong>方程根的问题</strong></p>
-<ul>
-<li>一、存在性问题：即函数有零点，$f(x)=0$</li>
-<li class="list-indent-1">1. 连续函数的零点定理：$f(x)在[a,b]$ 区间上连续，并且两端点异号 <code>-&gt;</code> $f(a)·f(b)&lt;0$ <code>-&gt;</code> 方程有根；</li>
-<li class="list-indent-1">2. 罗尔定理：一点导数等于 0 <code>-&gt;</code> 至少有一个根；</li>
-<li>二、根的个数</li>
-<li class="list-indent-1">使用函数的单调性定理；</li>
-</ul>
-<h3 id="section-19">题型： #不等式的证明</h3>
-<h4 id="section-20">PART 1：解题方法</h4>
-<p><strong>拉格朗日中值定理</strong></p>
-<ul>
-<li>可以用于证明不等式。但是使用时，需要具有两个函数的差；</li>
-<li>典型场景：$sin(a)-sin(b)&lt;a-b$</li>
-</ul>
-<p><strong>利用单调性+求导证明不等式</strong></p>
-<ul>
-<li>将不等式放到等号一边，变成 $一坨&gt;0$，然后利用求导得到单调性，证明不等式；</li>
-</ul>
-<h4 id="section-21">PART 2：典型例题</h4>
-<p><strong>例题</strong>：证明： $\frac x{1+x}&lt;\ln(1+x)&lt;x.(x&gt;0)$</p><nav class="article-pagination" aria-label="相邻内容">
+<p>例如对 $x&gt;0$，证明</p>
+<div class="math-display">$$
+\frac{x}{1+x}&lt;\ln(1+x)&lt;x.
+$$</div>
+<p>令 $F(x)=\ln(1+x)-\frac{x}{1+x}$，则</p>
+<div class="math-display">$$
+F'(x)=\frac{x}{(1+x)^2}&gt;0,\qquad F(0)=0,
+$$</div>
+<p>所以 $F(x)&gt;0$。再令 $G(x)=x-\ln(1+x)$，则</p>
+<div class="math-display">$$
+G'(x)=\frac{x}{1+x}&gt;0,\qquad G(0)=0,
+$$</div>
+<p>所以 $G(x)&gt;0$，结论成立。</p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-031/index.html"><span>← 上一项</span><strong>Lecture 23：泰勒公式</strong></a>
     <a class="article-pagination-next" href="../math-033/index.html"><span>下一项 →</span><strong>Lecture 25：函数的极值与最值</strong></a>
   </nav></div></div>
@@ -205,6 +202,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

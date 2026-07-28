@@ -52,16 +52,17 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 	- 2. 找为 0 以及不存在的点 
 		- $y^{\prime}=1-\frac8{x^3}\text{ ,故驻点为 }x=2$
 		- $y^{\prime}(0)$ 不存在
-		- 所以 $所以，$ (-\infty, 0)$ 及 $(2,+\infty)$ 为增区间，(0,2) 为减区间，$x=2$ 为极小点，极小值为 $y=3$ $
+		- 所以 $(-\infty,0)$ 及 $(2,+\infty)$ 为增区间，$(0,2)$ 为减区间，$x=2$ 为极小点，极小值为 $y=3$
 	- 3. 求凹凸区间
 		- $y^{\prime\prime}=\frac{24}{x^4}>0$
-		- $(-\infty,0)\left(0,+\infty\right)$ 均为凹区间，无拐点；
+		- $(-\infty,0)$ 与 $(0,+\infty)$ 均为凹区间，无拐点；
 	- 4. 求渐近线； 
 		- 其没有水平渐近线
 		- 有垂直渐近线
 			- $\lim_{x\to0}\frac{x^3+4}{x^2}=+\infty\quad\color{red}{x=0}$
 		- 斜渐近线 
-			- $\lim_{x\to\infty}\frac yx=\lim_{x\to\infty}\frac{x^2+4}{x^3}=1=a\quad\lim_{x\to\infty}(y-ax)=\lim_{x\to\infty}\left(\frac{x^3+4}{x^2}-x\right)=0=b$
+			- $\lim_{x\to\infty}\frac yx=\lim_{x\to\infty}\frac{x^3+4}{x^3}=1=a,\quad\lim_{x\to\infty}(y-ax)=\lim_{x\to\infty}\frac4{x^2}=0=b$
+			- 因此斜渐近线为 $y=x$。
 	- 5. 画图
 		- 1. 先画渐近线
 		- 2. 从 $-\infty$ 开始，到达渐近线、增减更改的点，然后一直往 x`->` $\infty$ 走；画出全部图像；

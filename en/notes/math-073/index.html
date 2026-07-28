@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 4: Definition of Matrices and Their Basic Operations | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 4: Definition of Matrices and Their Basic Operations. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Matrices">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 4: Definition of Matrices and Their Basic Operations | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 4: Definition of Matrices and Their Basic Operations. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-073/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,337 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 4：矩阵的定义及其基本运算</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-073/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-072/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 3：行列式的计算</strong></a>
-    <a class="article-pagination-next" href="../math-074/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 5：矩阵的逆</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 4: Definition of Matrices and Their Basic Operations</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 4: Definition of Matrices and Their Basic Operations. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics</span><span>19 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Matrices</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">4.1 The Nature of Matrices</a><a href="#section-4">4.2 Definition of Matrices</a><a href="#section-5">4.3 Matrix Operations</a><a href="#section-10">4.4 Several Important Matrices</a><a href="#section-13">4.5 Composite Transformations of Matrices</a></nav></details><div class="prose"><h2 id="section-1">4.1 The Nature of Matrices</h2>
+<h3 id="section-2">4.1.1 Matrix Concept</h3>
+<p><strong>Introduction</strong>: The role of matrices <code>-&gt;</code> Expressing system information;</p>
+<ul>
+<li>Core: Any matrix can ultimately be represented by a basis vector, and the information in the matrix can be expressed using a basis vector;</li>
+</ul>
+<p><strong>Concept</strong>: What is a matrix?</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Column:</li>
+<li class="list-indent-2">Represents the number of basis vectors to be transformed;</li>
+<li class="list-indent-1">Line:</li>
+<li class="list-indent-2">Represents the dimension of the transformed space;</li>
+<li>Meaning:</li>
+<li class="list-indent-1">From the perspective of linear transformations, suppose there is a three-dimensional square matrix $A_{3*3}$. The three columns of matrix A represent the transformations of the three basis vectors in linear transformation <code>Ax=b</code>;</li>
+<li>Example: If the current matrix is <code>3*2</code>, meaning the current matrix has three rows and two columns;</li>
+<li class="list-indent-1">Two columns: that is, there are two basis vectors, which is a two-dimensional plane;</li>
+<li class="list-indent-1">Three lines: represent these two basis vectors having <code>[x,y,z]</code> and these three dimensions;</li>
+<li class="list-indent-1">Multiply by three rows and two columns, which means:</li>
+<li class="list-indent-2">Mapping two basis vectors into three-dimensional space, thus the transformation forms a two-dimensional plane in three-dimensional space;</li>
+<li class="list-indent-2">When a matrix $A_{3<em>2}$ appears with <code>3</em>2</code>, it means mapping a two-dimensional figure into three-dimensional space; Because A has two basis vectors, and these two basis vectors are now three-dimensional <code>[x,y,z]</code>;</li>
+<li>Example: If the current matrix is <code>2*3</code>, meaning the current matrix has two rows and three columns</li>
+<li class="list-indent-1">When a matrix $A_{3<em>2}$ appears with <code>2</em>3</code>, it means mapping a three-dimensional figure into a two-dimensional space; Because A has three basis vectors, and these three basis vectors are now two-dimensional <code>[x,y]</code> basis vectors;</li>
+</ul>
+<p><strong>Concept</strong>: The product of matrices and determinants</p>
+<ul>
+<li>Matrix: represents the product of system information, acting on each piece of system information</li>
+<li class="list-indent-1">$$\left.k\cdot A=\left(\begin{matrix}ka_{11}&amp;ka_{12}\\ka_{21}&amp;ka_{22}\end{matrix}\right.\right)$$</li>
+<li>Determinant: Represents the product of a measure (for example, a dimension of a parallelogram).</li>
+<li class="list-indent-1">$$k|A|=\left|\begin{matrix}ka_{11}&amp;ka_{12}\\a_{21}&amp;a_{22}\end{matrix}\right|$$</li>
+<li>Formula:</li>
+<li class="list-indent-1">$$|kA|=k^{n}\cdot|A|$$</li>
+</ul>
+<p><strong>Concept</strong>: The relationships between data in matrix information representation</p>
+<ul>
+<li>Introduction:</li>
+<li class="list-indent-1">The matrix is not necessarily square; it can be <code>1000<em>2</code> or <code>2</em>1000</code>;</li>
+<li><code>Gram</code> matrix</li>
+<li class="list-indent-1">For $A=\begin{pmatrix}a\\b\end{pmatrix}$, $A^TA=a^2+b^2=\|A\|^2$.</li>
+<li>Function:</li>
+<li class="list-indent-1">If $A=(\alpha_1\ \alpha_2)$, then $A^TA$ records the pairwise inner products of its columns:</li>
+<li class="list-indent-1">$$A^{T}A=\begin{pmatrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{pmatrix}\begin{pmatrix}\alpha_{1}&amp;\alpha_{2}\end{pmatrix}=\begin{pmatrix}\|\alpha_1\|^2&amp;\|\alpha_1\|\|\alpha_2\|\cos\theta_{12}\\\|\alpha_2\|\|\alpha_1\|\cos\theta_{21}&amp;\|\alpha_2\|^2\end{pmatrix}$$</li>
+<li class="list-indent-1">Here, the similarity between data can be obtained;</li>
+<li>Concept:</li>
+<li class="list-indent-1">A matrix is built from row and column vectors, and those vectors may satisfy important relationships.</li>
+</ul>
+<p><strong>Key Point 1</strong>: A matrix is also composed of several rows (columns) of vectors</p>
+<ul>
+<li>The matrix $\begin{pmatrix}1&amp;2&amp;3\\4&amp;6&amp;9\\2&amp;4&amp;6\end{pmatrix}$ consists of the row vectors $[1,2,3],[4,6,9],[2,4,6]$, or equivalently the column vectors $[1,4,2]^{\mathrm{T}},[2,6,4]^{\mathrm{T}},[3,9,6]^{\mathrm{T}}$.</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Rankofthematrix</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span> Let $A$ be an $m\times n$ matrix. The largest order of any nonzero minor of $A$ is called the rank of $A$, denoted by $r(A)$.</blockquote>
+<blockquote>Equivalently, if at least one minor of order $k$ is nonzero and every minor of order $k+1$ is zero, then $r(A)=k$. For a square matrix:</blockquote>
+<blockquote>$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{ is invertible}.$$</blockquote>
+<blockquote>That is: the essence of a matrix rank is the number of linearly independent vectors that make up the matrix</blockquote>
+<p><strong>Concept</strong></p>
+<ul>
+<li>Explanation:</li>
+<li class="list-indent-1">If a vector is used, its reference vector can be found, and all its contents can be represented using the reference vector;</li>
+<li class="list-indent-1">The number of members in a reference vector is the rank of the matrix;</li>
+<li>Meaning:</li>
+<li class="list-indent-1">For example, rank 1:</li>
+<li class="list-indent-1">The world formed by this matrix is one-dimensional;</li>
+<li class="list-indent-1">One-dimensionality is not just a <code>x</code> axis;</li>
+</ul>
+<h3 id="section-3">4.1.2 Differences Between Matrices and Determinants</h3>
+<ol>
+<li>The essence of a determinant is the magnification of a linear transformation, while the essence of a matrix is a list of numbers.</li>
+<li>Determinant number of rows = number of columns, and matrices are not necessarily (if the number of rows and columns equals n, it is called an n-th-order square matrix), and the way they are represented also differs.</li>
+<li>The operations of determinants and matrices are clearly different</li>
+</ol>
+<p>(1) Equality: Only two matrices of the same type can be equal, and their corresponding elements must be equal; For two determinants to be equal, their corresponding elements do not necessarily have to be equal; in fact, their orders can differ, as long as the values of two determinants as two numbers are equal.</p>
+<p>(2) Addition (or subtraction): Adding (subtracting) two matrices means adding (or subtracting) their corresponding elements, so only matrices of the same type can be added (or subtracted); And two determinants can always be added (subtracted) as two numbers.</p>
+<p>(3) Multiplication operation: Multiplying a number by a matrix means multiplying that number by each element of the matrix; Multiplying a number by the determinant can only be multiplied by a row or column of the determinant, and the same applies to extracting common factors.</p>
+<p>(4) Multiplication: Multiplication of matrices does not satisfy the commutative law, so generally, AB ≠ BA. However, if both A and B are n-dimensional square matrices, then we have | AB|=| A| | B|=| B| | A|=|BA|。</p>
+<h2 id="section-4">4.2 Definition of Matrices</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Matrix</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> $\text{ From }m\times n\text{ Quantity }a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{ Arranged together }m\text{ Alright }n\text{ Rectangular table of columns }$:</blockquote>
+<blockquote>$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
+<blockquote>It is called a $m\times n$ matrix, abbreviated as $A$ or $\left(a_{ij}\right)_{m\times n}\left(i=1,2,\cdotp\cdotp\cdotp,m;\: j=1,2,\cdotp\cdotp\cdotp,n\right).$</blockquote>
+<blockquote>When $m=n$, $A$ is called a $n$-order square;</blockquote>
+<blockquote>Two matrices $A=\left(a_ij\right)_{mxn},\boldsymbol{B}=\left(b_{ij}\right)_{sxk}$, if $m=s,n=k$, then $A$ and $\boldsymbol B$ are called isomorphic matrices.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Supplement: Why study the phalanx</li>
+<li class="list-indent-1">In practice, when using matrices, it is often necessary to use non-square matrices, which are often not squares;</li>
+<li class="list-indent-1">However, if properties like inverse matrices are to be used, they must be calculated based on the square matrix;</li>
+<li class="list-indent-1">Therefore, $AA^T$ is frequently used to obtain the form of a non-matrix matrix;</li>
+<li>Isomorphic matrices:</li>
+<li class="list-indent-1">The number of rows and columns in <code>A</code> and <code>B</code> is equal;</li>
+</ul>
+<h2 id="section-5">4.3 Matrix Operations</h2>
+<p><strong>Analysis</strong>: How to calculate the matrix</p>
+<ul>
+<li>1. First, let's see if it is a <code>-rank 1 matrix </code></li>
+<li>2. If the <code> rank 1 matrix is not </code>, you can consider calculating its square or cube;</li>
+<li class="list-indent-1">Example: $\left(\begin{matrix}0&amp;-1\\1&amp;0\end{matrix}\right)^4=\left(\begin{matrix}1&amp;0\\0&amp;1\end{matrix}\right)$ Unit Formation <code>&lt;-</code> After four operations, it becomes a unit Matrix;</li>
+<li>3. If the matrix can be divided into a decomposition of the unit, then the matrix can be decomposed</li>
+</ul>
+<h3 id="section-6">4.3.1 Basic Operations of Matrices</h3>
+<p><strong>Operation</strong>: Equal</p>
+<ul>
+<li>$$A=(a_ij)_{m\times n}=B=(b_i)_{s\times k}\Leftrightarrow m=_S,n=k$$</li>
+<li>and $a_{ij}=b_j(i=1,2,\cdots,m;j=1,2,\cdots,n)$, i.e., $A,B$ is a homomorphic matrix with equal elements.</li>
+</ul>
+<p><strong>Operations</strong>: Addition</p>
+<ul>
+<li>When two matrices are<strong>isomorphic matrices</strong>, they can be added, that is:</li>
+<li>$$C=A+B=\left(a_{ij}\right)_{m\times n}+\left(b_{ij}\right)_{m\times n}=\left(c_{ij}\right)_{m\times n}$$</li>
+<li>$\text{ Among them, }c_{ij}=a_{ij}+b_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n),\text{ That is, the sum of the corresponding elements }$</li>
+</ul>
+<p><strong>Operations</strong>: Multiplication of numbers</p>
+<ul>
+<li>Every element needs to be multiplied;</li>
+<li>$$\begin{aligned}kA=Ak=&amp;k\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}=\begin{bmatrix}ka_{11}&amp;ka_{12}&amp;\cdots&amp;ka_{1n}\\ka_{21}&amp;ka_{22}&amp;\cdots&amp;ka_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\ka_{m1}&amp;ka_{m2}&amp;\cdots&amp;ka_{mn}\end{bmatrix}\\&amp;=\left(ka_{ij}\right)_{m\times n}\end{aligned}$$</li>
+</ul>
+<p><strong>Operations</strong>: Laws of operations - Multiplication/addition have commutative laws, associative laws, and distributive laws</p>
+<ol>
+<li>$\text{ Commutative law }:\,A+B=B+A;$</li>
+<li>$\text{ Associative law }:\,\left(A+B\right)+C=A+\left(B+C\right);$</li>
+<li>$\text{ Distribution law }:\,k\left(A+B\right)=kA+kB,\left(k+l\right)A=kA+lA$</li>
+<li>$\text{ The associative law of multiplication between numbers and matrices }:\,k\left(lA\right)=\left(kl\right)A=l\left(kA\right).$</li>
+</ol>
+<p>Here, <code>A，B，C</code> is a homomorphic matrix, and k and l are arbitrary constants</p>
+<h3 id="section-7">4.3.2 Matrix Multiplication</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Matrixmultiplication</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: Multiplication of </span></span> matrix Let $A$ be $m\times s$ matrix, $B$ be $s\times n$ matrix (the number of columns in matrix $A$ must equal the number of rows in matrix $B$), then $A$ and $B$ can be multiplied, and the product $AB$ is the $m\times n$ matrix, denoted as $C=AB=(c_ij)_{m\times n}$</blockquote>
+<p>The element $c_{ij}$ of the $i$-th row and column $j$ of &gt; $C$ is the sum of the <code>s</code> elements in the $i$ row of $A$ and the $s$ pairwise elements in the $j$ column of $B$, that is:</p>
+<blockquote>$$c_{ij}=\sum_{k=1}^{s}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}(i=1,2,\cdots,m;j=1,2,\cdots,n)$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Essence:</li>
+<li class="list-indent-1">Multiplying two matrices actually manifests an operation:<strong>Each row of the left matrix multiplied by every column of the right matrix</strong>, and<strong>each row multiplied by each column is the inner product of the vector</strong>(dot product operation)</li>
+<li class="list-indent-1">The result of the inner product can reflect the magnitude of two vectors and the cosine of the angle between them;</li>
+<li>Calculation:</li>
+<li class="list-indent-1">Core:<strong>Decision row on the left, decision column on the right</strong>;</li>
+<li class="list-indent-1">This is a multiplying type of multiplying multiple rows by columns, where each column in matrix A is multiplied by every row in B;</li>
+<li class="list-indent-1">Since it is calculated by multiplying each column in <code>A</code> by every row in <code>B</code>, the number of columns in <code>A</code> must be equal to the number of rows in <code>B</code>;</li>
+<li>That is: every element in the result of matrix multiplication is the result of the inner product;</li>
+<li class="list-indent-1">$$\left(\alpha_{1}\alpha_{2}\right)^{T}\left(\alpha_{1}\alpha_{2}\right)=\left(\begin{matrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\end{matrix}\right)\left(\alpha_{1}\alpha_{2}\right)=\left.\left(\begin{matrix}(\alpha_{1},\alpha_{1})&amp;(\alpha_{1},\alpha_{2})\\(\alpha_{2},\alpha_{1})&amp;(\alpha_{2},\alpha_{2})\end{matrix}\right.\right)$$</li>
+<li>Example:</li>
+<li class="list-indent-1">1. Many traveling and many rows: $\begin{pmatrix}a_{1}\\a_{2}\\a_{3}\end{pmatrix}(b_{1}b_{2}b_{3})=\begin{pmatrix}a_{1}b_{1}&amp;a_{1}b_{2}&amp;a_{1}b_{3}\\a_{2}b_{1}&amp;a_{2}b_{2}&amp;a_{2}b_{3}\\a_{3}b_{1}&amp;a_{3}b_{2}&amp;a_{3}b_{3}\end{pmatrix}$</li>
+</ul>
+<p><strong>Operations</strong>: The operational law of multiplication</p>
+<ul>
+<li>Arithmetic Laws:</li>
+<li class="list-indent-1">1. Associative law: to be satisfied</li>
+<li class="list-indent-1">2. Distributive law: to satisfy or satisfy the situation</li>
+<li class="list-indent-1">3. The associative law of multiplication and matrix product <code>-&gt;</code> $(kA_{m\times s})B_{s\times n}=A_{m\times s}(kB_{s\times n})=k(A_{m\times s}B_{s\times n})$</li>
+<li>Cannot be used:<strong>Does not satisfy the commutative law</strong>,<strong>Cancellation law cannot be used</strong></li>
+<li class="list-indent-1">1. Multiplication of matrices generally does not satisfy the commutative law, i.e., <code>AB≠BA</code></li>
+<li class="list-indent-2">For example: <code>AB<em>C</code> and <code>BA</em>C</code> are not necessarily equal;</li>
+<li class="list-indent-1">2. There is $A\neq O,  B\neq O, $ and $AB=O, $ therefore $AB=O\nRightarrow A=O$ or $B=O$</li>
+<li class="list-indent-1">3. $AB=AC\Rightarrow A(B-C)=O,\text{ Even if there are such things at this moment, }A\neq O,\text{ Generally, you can't get it out of it }B=C$</li>
+</ul>
+<p><strong>Operations</strong>: Other rules of multiplication</p>
+<ul>
+<li>（1）$\begin{aligned}&amp;(A+B)^2=(A+B)(A+B)=A^2+AB+BA+B^2\neq A^2+2AB+B^2,\\&amp;(A-B)^2=A^2-AB-BA+B^2\neq A^2-2AB+B^2,\end{aligned}$</li>
+<li>（2）$\begin{aligned}&amp;(A+B)(A-B)=A^{2}+BA-AB-B^{2}\neq A^{2}-B^{2},\\&amp;(AB)^{m}=\overbrace{(AB)(AB)\cdots(AB)}^{m\uparrow}\neq A^{m}B^{m}.\end{aligned}$</li>
+<li>(3) Important: <code>A</code> polynomial</li>
+<li class="list-indent-1">$\text{ If }f\left(x\right)=a_{0}+a_{1}x+\cdotp\cdotp\cdotp+a_{m}x^{m},\text{ then }:\,f(A)=a_0E+a_1A+\cdots+a_mA^m$</li>
+</ul>
+<h3 id="section-8">4.3.3 Transpose Matrices</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Transposethematrix</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\text{ General }m\times n\text{ Matrix }A=\left(a_{ij}\right)_{m\times n}\text{ The interchangeable row and column of }n\times m\text{ A matrix is called a matrix }A\text{ transpose matrix },\,\text{ Recorded as }A^T,\,\text{ That is }:\,$</blockquote>
+<blockquote>$$A^{T}=\begin{bmatrix}a_{11}&amp;a_{21}&amp;\cdots&amp;a_{m1}\\a_{12}&amp;a_{22}&amp;\cdots&amp;a_{m2}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{1n}&amp;a_{2n}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Write from line <code>n</code> to column <code>n</code>;</li>
+<li>$A^{T}A$：</li>
+<li class="list-indent-1">$$\left.A^{T}A=\left(\begin{matrix}a_{11}&amp;a_{21}\\a_{12}&amp;a_{22}\\a_{13}&amp;a_{23}\end{matrix}\right.\right)_{3<em>{2}}\left(\begin{matrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{22}&amp;a_{12}&amp;a_{23}\end{matrix}\right)_{{2}</em>{3}}$$</li>
+<li>Assume $\alpha_1=({a_{11},a_{21}})$, and other analogies, we get:</li>
+<li class="list-indent-1">$$\left.\left(\begin{matrix}(\alpha_{1},\alpha_{1})&amp;(\alpha_{1},\alpha_{2})&amp;(\alpha_{1},\alpha_{3})\\(\alpha_{2},\alpha_{1})&amp;(\alpha_{2},\alpha_{2})&amp;(\alpha_{2},\alpha_{3})\\(\alpha_{3},\alpha_{1})&amp;(\alpha_{3},\alpha_{2})&amp;(\alpha_{3},\alpha_{3})\end{matrix}\right.\right)$$</li>
+<li>This is a Gram matrix <code>-&gt;</code> $A^{T}A$</li>
+</ul>
+<p><strong>Operations</strong>: The operational law of transpose matrices</p>
+<ul>
+<li>$${(1)}\left(A^{\mathrm{T}}\right)^{\mathrm{T}}=A;\quad{(2)}\left(kA\right)^{\mathrm{T}}=kA^{\mathrm{T}};\quad{(3)}\left(A+B\right)^{\mathrm{T}}=A^{\mathrm{T}}+B^{\mathrm{T}};\quad{(4)}\left(AB\right)^{\mathrm{T}}=B^{\mathrm{T}}A^{\mathrm{T}}$$</li>
+<li>Important: Principle of putting on and taking off</li>
+<li class="list-indent-1">$(AB)^{\mathrm{T}}=B^{\mathrm{T}}A^{\mathrm{T}}$</li>
+<li class="list-indent-1">Multiply from left to right, which equals writing from right to left: $\left(ABC\right)^{T}=C^{T}B^{T}A^{T}$</li>
+</ul>
+<h3 id="section-9">4.3.4 Determinant of a Phalanx</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Determinantofaphalanx</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\text{ and should be employed }n\text{ The steps formed a square formation }A\text{ When calculating the determinant, denote as }|A|$;</blockquote>
+<blockquote>1. $|kA|=k^{n}|A|\neq k|A|(n\geqslant2,k\neq0,1)$</blockquote>
+<blockquote>2. $\text{ Generally, }\left|A+B\right|\neq\left|A\right|+\left|B\right|$</blockquote>
+<blockquote>3. Note: $A\neq0\Rightarrow|A|\neq0$</blockquote>
+<blockquote>4. $A\neq B\Rightarrow\left|A\right|\neq\left|B\right|$</blockquote>
+<blockquote>5. $\left|A^{\mathrm{T}}\right|=\left|A\right|$</blockquote>
+<blockquote>6. $\text{ Let }A,B\text{ This is a formation of the same rank, then }|AB|=|A||B|$</blockquote>
+<h2 id="section-10">4.4 Several Important Matrices</h2>
+<h3 id="section-11">4.4.1 Basic Matrix Form</h3>
+<p><strong>Matrix One</strong>: Zero Matrix</p>
+<ul>
+<li>Definition: A matrix where each element is zero, denoted as $O$</li>
+</ul>
+<p><strong>Matrix 2</strong>: Identity matrix</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">A <code>n</code>-order square matrix where all main diagonal elements are <code>1</code> and all other elements are zero is called an <code>n</code>-order identity matrix, denoted as $E$ or $I$</li>
+<li>Note: The way <code>E</code> is written</li>
+<li class="list-indent-1">If it is $A_{3<em>2}$ and $B_{2</em>3}$</li>
+<li class="list-indent-1">At this point: To calculate <code>E-AB</code></li>
+<li class="list-indent-1">Then $E$ should be written as $E_{3}$</li>
+<li class="list-indent-1">At this point: To calculate <code>E-BA</code></li>
+<li class="list-indent-1">Then $E$ should be written as $E_{2}$</li>
+</ul>
+<p><strong>Matrix Three</strong>: scalar matrix</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">The product of the number <code>k</code> and the identity matrix is called the scalar matrix</li>
+<li>Formula:</li>
+<li class="list-indent-1">$k\cdot E_{n}=\left.\left(\begin{matrix}k&amp;\\&amp;k&amp;\\&amp;&amp;k\end{matrix}\right.\right)$</li>
+<li>Features:</li>
+<li class="list-indent-1">scalar matrices are commutative with any matrix multiplication: $k\cdot E\cdot A=A\cdot kE$</li>
+</ul>
+<p><strong>Matrix Four</strong>:(Key Point) Diagonal Matrix</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">A matrix where all non-principal diagonal elements are zero is called a diagonal matrix;</li>
+<li class="list-indent-1">That is: a matrix where all elements outside the main diagonal are <code>0</code></li>
+<li class="list-indent-1">This is the simplified form of a matrix; a large number of matrices cannot be converted into this matrix;</li>
+<li>Formula:</li>
+<li class="list-indent-1">$A=\begin{pmatrix}\lambda_1&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n\end{pmatrix}$</li>
+</ul>
+<p><strong>Matrix 5</strong>: Upper (lower) triangular matrix</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">When $i&gt;j$ or $i&lt;j$ is, the matrix of $a_{ij}=0$ is called the<strong>upper triangular matrix</strong>or<strong>lower triangular matrix</strong>;</li>
+</ul>
+<p><strong>Matrix Six</strong>:(important) Symmetric matrices</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">$$\text{ Conditions are met }A^\mathrm{T}=A\text{ The matrix }A\text{ This is called a symmetric matrix, }A^\mathrm{T}=A\Leftrightarrow a_{ij}=a_{ji}$$</li>
+<li>Concept:</li>
+<li class="list-indent-1">If a matrix is transposed and still itself after transposing, it is called a symmetric matrix;</li>
+<li class="list-indent-1">Symmetry arrays have many inherent properties and are suitable for mathematical analysis;</li>
+<li>Example:</li>
+<li class="list-indent-1">$$\left(\begin{matrix}1&amp;-2&amp;1\\-2&amp;0&amp;3\\1&amp;3&amp;-1\end{matrix}\right)$$</li>
+<li>Conclusion:</li>
+<li class="list-indent-1">$\left(A^{T}A\right)^{T}=A^{T}\left(A^{T}\right)^{T}=A^{T}A$</li>
+<li class="list-indent-1">Therefore: $A^{T}A$ must be a symmetric matrix. The form of a symmetric matrix can be used;</li>
+</ul>
+<p><strong>Matrix Seven</strong>: Antisymmetric matrix</p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">A matrix satisfying $A^T=-A$ $A$ called an antisymmetric matrix;</li>
+<li>Formula:</li>
+<li class="list-indent-1">$A^{\mathrm{T}}=-A\Leftrightarrow\begin{cases}a_{ij}=-a_{ji},i\neq j,\\a_{ii}=0.\end{cases}$</li>
+<li>Concept:</li>
+<li class="list-indent-1">The principal diagonal of the antisymmetric matrix must always be zero;</li>
+<li>Example:</li>
+<li class="list-indent-1">$\begin{pmatrix}0&amp;-2&amp;1\\2&amp;0&amp;3\\-1&amp;-3&amp;0\end{pmatrix}$</li>
+</ul>
+<p><strong>Matrix 8</strong>: Row matrix</p>
+<ul>
+<li>A matrix with only one row of elements, also called a row vector;</li>
+<li>In reality, it's a row with multiple columns;</li>
+</ul>
+<p><strong>Matrix Nine</strong>: Column matrix</p>
+<ul>
+<li>A matrix with only one column of elements, also called a column vector;</li>
+<li>In fact, it is one column with multiple rows;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">Generally, write vectors, usually as column vectors;</li>
+<li class="list-indent-1">You need to write the vector as a transpose to make the row vector work;</li>
+<li>Supplements: $\alpha^T\alpha$ and $\alpha\alpha^T$</li>
+<li class="list-indent-1">$\alpha^T\alpha$: Multiply <code>1<em>n</code> and <code>n</em>1</code> <code>-&gt;</code> to get <code>1*1</code></li>
+<li class="list-indent-1">$\alpha\alpha^T$: Multiply <code>n<em>1</code> and <code>1</em>n</code> <code>-&gt;</code> to get <code>n*n</code></li>
+</ul>
+<p><strong>Supplement</strong>: Rank 1 Phalanx</p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">Given $\left(\begin{matrix}-1&amp;-1&amp;2\\2&amp;2&amp;-4\\1&amp;1&amp;-2\end{matrix}\right)$ to retrieve $\left(\begin{matrix}-1\\2\\1\end{matrix}\right)\left(1\quad 1\quad -2\right)$, its values must be proportional;</li>
+<li class="list-indent-1">This type of matrix is called a rank <code>1</code> matrix;</li>
+<li class="list-indent-1">In this matrix, the other two vectors can be represented by multiplying <code>(1.1,-2)</code> by <code>2</code> and <code>-1</code> <code>-&gt;</code> that is: its reference vector is one;</li>
+<li class="list-indent-1">Therefore, it is a subspace within a three-dimensional vector;</li>
+<li>Note:</li>
+<li class="list-indent-1">A matrix of rank 1 does not necessarily mean a rank 1 matrix;</li>
+<li>Nature:</li>
+<li class="list-indent-1">For rank 1 matrix A, its $A^n=[tr(A)]^{n-1}$</li>
+<li class="list-indent-1">For example: $A^3B=AAAB=[tr(A)]^2AB$</li>
+</ul>
+<p><strong>Additional Supplement</strong>: Matrix traces</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">The sum of the principal diagonals of a matrix is called the trace of the matrix;</li>
+<li>Symbol:</li>
+<li class="list-indent-1"><code>tr</code></li>
+</ul>
+<h3 id="section-12">4.4.2 Block Matrices</h3>
+<p><strong>Concept</strong>: Segmentation of the matrix</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Using several vertical and horizontal lines to divide a matrix into several small pieces, each small piece called a subblock of the matrix;</li>
+<li class="list-indent-1">Treat the subblock as an element of the original matrix to obtain the block matrix;</li>
+<li class="list-indent-1">Block partitioning can reflect certain patterns within the matrix, allowing you to use these blocks to simplify calculations;</li>
+<li class="list-indent-2">For example: $C=\left(\begin{matrix}A&amp;O\\O&amp;B\end{matrix}\right)$</li>
+<li>Block by line according to <code>A</code>:</li>
+<li class="list-indent-1">$$A=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\hline a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\\hline a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}=\begin{bmatrix}A_1\\A_2\\\vdots\\A_m\end{bmatrix}$$</li>
+<li>Segment by column according to <code>B</code>:</li>
+<li class="list-indent-1">$$B=\begin{bmatrix}b_{11}&amp;b_{12}&amp;\cdots&amp;b_{1n}\\b_{21}&amp;b_{22}&amp;\cdots&amp;b_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\b_{m1}&amp;b_{m2}&amp;\cdots&amp;b_{mn}\end{bmatrix}=\begin{bmatrix}B_1,B_2,\cdots,B_n\end{bmatrix}$$</li>
+</ul>
+<p><strong>Operations</strong>: Basic operations of block matrices (with <code>2*2</code> as an example)</p>
+<ul>
+<li>Addition: $\text{ If the type is the same and the division method is consistent, then }\begin{bmatrix}A_1&amp;A_2\\A_3&amp;A_4\end{bmatrix}+\begin{bmatrix}B_1&amp;B_2\\B_3&amp;B_4\end{bmatrix}=\begin{bmatrix}A_1+B_1&amp;A_2+B_2\\A_3+B_3&amp;A_4+B_4\end{bmatrix}$</li>
+<li class="list-indent-1">Note: The tangent of two matrices must be consistent, which equals the sum of each element;</li>
+<li>Multiplication: $k\begin{bmatrix}A&amp;B\\C&amp;D\end{bmatrix}=\begin{bmatrix}kA&amp;kB\\kC&amp;kD\end{bmatrix}$</li>
+<li>Multiplication: $\begin{bmatrix}A&amp;B\\C&amp;D\end{bmatrix}\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}=\begin{bmatrix}AX+BZ&amp;AY+BW\\CX+DZ&amp;CY+DW\end{bmatrix},\text{ It must be multiplier and can be added }$</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">After chunking, treat it as an element, equivalent to multiplying two <code>2*2</code> matrices;</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">Because it is a matrix operation without commutative laws, the resulting result, such as $AX+BZ$, cannot change its order and cannot be written as $XA+BZ$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">For multiplication operations, note that after multiplying blocks, the matrix on the left remains on the left, and the matrix on the right remains on the right;</li>
+<li class="list-indent-2">If A and B are <code>m, n</code>-order square matrices respectively, then the power of the block diagonal matrix is:</li>
+<li class="list-indent-1">Supplement:</li>
+<li class="list-indent-2">$\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}^n=\begin{bmatrix}A^n&amp;O\\O&amp;B^n\end{bmatrix}$</li>
+</ul>
+<h2 id="section-13">4.5 Composite Transformations of Matrices</h2>
+<p><strong>Example</strong>: Composite transformation of a matrix</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">The matrix needs to be read from right to left because the function is written to the left of the variable: <code>f(g(x))</code></li>
+<li>Example:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/1f99802f5998-Pasted-image-20240626192119.png" alt="Pasted image 20240626192119" loading="lazy" decoding="async"></li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-072/index.html"><span>← Previous item</span><strong>Lecture 3: Calculation of Determinants</strong></a>
+    <a class="article-pagination-next" href="../math-074/index.html"><span>Next item →</span><strong>Lecture 5: Inverse Matrices</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +399,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

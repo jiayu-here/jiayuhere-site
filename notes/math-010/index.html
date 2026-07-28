@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,8 +63,8 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 2：函数的概念及常见函数</h1><p class="article-lead">考研数学学习笔记：Lecture 2：函数的概念及常见函数。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-26</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>函数、极限、连续</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">2.1 函数的基本概念</a><a href="#section-5">2.2 其他常见函数</a><a href="#section-11">2.3 初等函数</a><a href="#section-15">2.4 常考题型</a></nav></details><div class="prose"><h2 id="section-1">2.1 函数的基本概念</h2>
 <h3 id="section-2">2.1.1 函数的定义</h3>
-<h5 id="section-3"><strong>定义</strong>： #函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：如果对于每个数 $x\in D$ ，变量 $x$ 按照一定的法则总有一个确定的 $y$ 和它对应，则称 $x$ 是 $y$ 的函数，记为 $y=f(x)$；常称 x 为自变量，$y$ 为因变量，$D$ 为定义域.</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>如果对于每个数 $x\in D$，按照一定的法则都有唯一确定的 $y$ 与之对应，则称 $y$ 是 $x$ 的函数，记为 $y=f(x)$；通常称 $x$ 为自变量，$y$ 为因变量，$D$ 为定义域。</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>基本概念</li>
@@ -81,18 +81,18 @@
 <h3 id="section-4">2.1.2 其他函数类型</h3>
 <p><strong>取整函数</strong></p>
 <ul>
-<li>设 $x$ 为任意实数，不超过 x 的最大整数称为的整数部分，记为 $[x].$ </li>
+<li>设 $x$ 为任意实数，不超过 $x$ 的最大整数称为 $x$ 的整数部分，记为 $[x]$。</li>
 <li>函数 $y=[x]$ 称为取整函数；</li>
 </ul>
 <h2 id="section-5">2.2 其他常见函数</h2>
 <h3 id="section-6">2.2.1 复合函数</h3>
-<h5 id="section-7"><strong>定义</strong>： #复合函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设 $y=f(u)$ 的定义域为 $D_f，u=g(x)$ 的定义域为 $D_g$ 、值域为 $R_{s}$ ；若 $D_f\cap R_g\neq\phi,\text{则称函数}y=f[g(x)]$ 为函数 $y=f(u)$ 与 $u=g(x)$ 的复合函数. 它的定义域为 $\left\{x|x\in D_g,g(x)\in D_f\right\}$；</blockquote>
+<h5 id="section-7"><strong>定义</strong>： <span class="note-tag">复合函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>设 $y=f(u)$ 的定义域为 $D_f$，$u=g(x)$ 的定义域为 $D_g$、值域为 $R_g$。若 $D_f\cap R_g\neq\varnothing$，则称函数 $y=f[g(x)]$ 为函数 $y=f(u)$ 与 $u=g(x)$ 的复合函数。它的定义域为 $\left\{x\mid x\in D_g,\ g(x)\in D_f\right\}$。</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>g：内层函数</li>
 <li>f：外层函数</li>
-<li>核心：$D_f\cap R_g\neq\phi$</li>
+<li>核心：$D_f\cap R_g\neq\varnothing$</li>
 </ul>
 <p><strong>方法：判断两个函数是否复合</strong></p>
 <ul>
@@ -101,28 +101,28 @@
 <p><strong>易错点</strong>：注意复合函数中的值域与定义域 </p>
 <ul>
 <li>概念： </li>
-<li class="list-indent-1">内层函数的<strong>值域</strong>，是复合函数的<strong>定义域</strong></li>
+<li class="list-indent-1">复合函数的定义域是 $\left\{x\mid x\in D_g,\ g(x)\in D_f\right\}$。</li>
 <li>易错点：</li>
 <li class="list-indent-1">把内层函数的定义域当成复合函数的定义域；</li>
 </ul>
 <h3 id="section-8">2.2.2 反函数</h3>
-<h5 id="section-9"><strong>定义</strong>： #反函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：设函数 $y=f(x)$ 的定义域为 ${D}$, 值域为 $\underline{R}_{\underline{\nu}}$.若对任意 $y\in R_y$ ,有唯一确定的 $x\in D$ ,使得 $y=f(x)$,则记为 $x=f^{-1}(y)$ 称其为函数 $y=f(x)$ 的反函数；</blockquote>
+<h5 id="section-9"><strong>定义</strong>： <span class="note-tag">反函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>设函数 $y=f(x)$ 的定义域为 $D$，值域为 $R_f$。若对任意 $y\in R_f$，都有唯一确定的 $x\in D$ 使得 $y=f(x)$，则由 $x=f^{-1}(y)$ 所确定的函数称为 $y=f(x)$ 的反函数。</blockquote>
 <p><strong>解释</strong></p>
 <ul>
-<li>普通函数：多个 x 可以对应成一个 y；</li>
-<li>反函数：一个 x 只能对应成一个 y；</li>
+<li>普通函数允许多个不同的 $x$ 对应同一个 $y$；</li>
+<li>原函数存在反函数的条件是它在定义域上为一一映射，即不同的 $x$ 对应不同的 $y$；</li>
 <li>概念：</li>
 <li class="list-indent-1">1. $\text{有时也将}\quad y=f(x)\text{ 的反函数 }x=f^{-1}(y)\text{ 写成 }y=f^{-1}(x)$</li>
-<li class="list-indent-1">2. $\text{在同一直角坐标系中,}y=f(x)\text{ 和 }x=f^{-1}(y)\text{ 的图形重和}$；</li>
+<li class="list-indent-1">2. $\text{在同一直角坐标系中，}y=f(x)\text{ 和 }x=f^{-1}(y)\text{ 的图形重合}$；</li>
 <li class="list-indent-1">3. $y=f(x)\text{ 和 }y=f^{-1}(x)\text{ 的图形关于直线 }y=x\text{ 对称}$；</li>
 </ul>
 <p><strong>方法：是否有反函数</strong></p>
 <ul>
 <li>核心：</li>
 <li class="list-indent-1">1. 对任意 $y\in R_y$ 是否有唯一确定的 $x\in D$；</li>
-<li class="list-indent-1">2. 单调函数一定有反函数；</li>
-<li class="list-indent-1">3. 反函数不一定是单调函数；</li>
+<li class="list-indent-1">2. 区间上的严格单调函数一定有反函数；</li>
+<li class="list-indent-1">3. 区间上的严格单调函数与其反函数具有相同的单调性；</li>
 <li>比如：</li>
 <li class="list-indent-1">$y=x^3$ 有反函数，而 $y=x^2$ 没有；</li>
 <li>结论：</li>
@@ -139,32 +139,32 @@
 <h3 id="section-10">2.2.3 反函数和复合函数结合</h3>
 <p><strong>两者结合</strong>：</p>
 <ul>
-<li>情况一： $f^{-1}[f(x)]=x$</li>
+<li>情况一：当 $x\in D$ 时，$f^{-1}[f(x)]=x$</li>
 <li class="list-indent-1">普通函数传入到当前函数的反函数当中</li>
-<li>情况二： $f[f^{-1}(x)]=x$</li>
+<li>情况二：当 $x\in R_f$ 时，$f[f^{-1}(x)]=x$</li>
 </ul>
 <h2 id="section-11">2.3 初等函数</h2>
 <h3 id="section-12">2.3.1 基本初等函数定义</h3>
-<h5 id="section-13"><strong>定义</strong>： #基本初等函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：将幂函数、指数、对数、三角函数、反三角函数统称为基本初等函数；</blockquote>
+<h5 id="section-13"><strong>定义</strong>： <span class="note-tag">基本初等函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>将幂函数、指数、对数、三角函数、反三角函数统称为基本初等函数；</blockquote>
 <blockquote></blockquote>
 <p><strong>解释</strong></p>
 <p><img class="note-image" src="/assets/notes/195bf45ba27a-Pasted-image-20240226231300.png" alt="Pasted image 20240226231300" loading="lazy" decoding="async"></p>
-<h5 id="section-14"><strong>定义</strong>： #初等函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：由</blockquote>
+<h5 id="section-14"><strong>定义</strong>： <span class="note-tag">初等函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>由</blockquote>
 <blockquote>1. 常数和五类基本初等函数构成；</blockquote>
 <blockquote>2. 进行的加减乘除以及复合</blockquote>
 <blockquote>3. 所得到的用一个解析式表达的函数</blockquote>
 <blockquote>称之为初等函数；</blockquote>
 <h2 id="section-15">2.4 常考题型</h2>
-<h3 id="section-16">题型： #复合函数</h3>
+<h3 id="section-16">题型： <span class="note-tag">复合函数</span></h3>
 <h4 id="section-17">PART 1：解题方法</h4>
 <p><strong>考法：如果是分段函数的复合</strong></p>
 <ul>
 <li>1. 依然是内层带入到外层；</li>
 <li>2. 如果是分段时，需要根据内函数的分段（<strong>内函数的函数值，落到了外函数的哪个部分</strong>），分段的将内函数带入到对应的外函数中；</li>
 </ul>
-<p><strong>考法：如果是已知复核后的函数以及外层函数，要求内层函数</strong></p>
+<p><strong>考法：如果已知复合函数以及外层函数，要求内层函数</strong></p>
 <ul>
 <li>1. 将复合函数的结果=外层函数套进内层函数后得到的函数；</li>
 </ul>
@@ -180,6 +180,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

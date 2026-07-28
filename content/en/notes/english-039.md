@@ -1,13 +1,21 @@
 ---
-title: "Graduate Examination English: 真题 - 2017年：大作文 - 负面"
+title: "2017 Past Paper: Essay — Negative Trend"
 slug: english-039
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 2017 Past Paper: Essay — Negative Trend. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Writing"]
+tags: ["Graduate Entrance Examination English","English Writing","2017 Past Paper: Essay — Negative Trend"]
 ---
 
-## Original Chinese Note
+**past-paper question**
+- ![Pasted image 20250409111330](/assets/notes/7966eb60fe4b-Pasted-image-20250409111330.png)
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Templates**
+```Text
+These two simple but enlightening drawings depict sharply different attitudes toward reading. In the first, a young man sits comfortably on a sofa and boasts about owning many books, although he is not reading any of them. In the second, another young man has made a concrete plan to read twenty books during the year. The captions contrast "owning books" with "reading books."
 
-[Read the original Chinese note](/notes/english-039/)
+The drawings reflect a common problem in modern society. Many people purchase and display books but seldom read them. Treating books merely as decorations defeats their real purpose: books should be read, understood, and used as a source of knowledge.
+
+Reading regularly broadens our horizons, deepens our understanding, and strengthens the confidence and courage with which we face difficulties. It also encourages independent thought and lifelong learning.
+
+Society should therefore foster a culture that values sustained reading rather than the mere possession of books. Individuals, too, should set realistic reading goals and act on them. After all, books are a ladder of human progress.
+```

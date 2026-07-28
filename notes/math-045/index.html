@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -66,15 +66,15 @@
 <ul>
 <li>核心：</li>
 <li class="list-indent-1">大部分是不可以降阶的，在 1.2 小节当中的大部分只是理论上有解，但没有通用方法求解；</li>
-<li class="list-indent-1">可以用通用方法降阶、求解的两种类型：$y^{\prime\prime}=f(x,y^{\prime})$ 和 $y&quot;=f(y,y^{\prime})$</li>
+<li class="list-indent-1">可以用通用方法降阶、求解的两种类型：$y^{\prime\prime}=f(x,y^{\prime})$ 和 $y^{\prime\prime}=f(y,y^{\prime})$</li>
 <li class="list-indent-1">判断所属的可降阶类型，进行对应的代换，然后使用<strong>分离变量法</strong>；</li>
 <li>注意：</li>
-<li class="list-indent-1">求高阶微分  方程定解时，每出来一个常数 <code>C</code>，就定一个常数；</li>
+<li class="list-indent-1">求高阶微分方程的定解时，每次积分都会产生一个常数，再用初始条件或边界条件逐一确定；</li>
 </ul>
 <p><strong>常见可降阶形式</strong></p>
 <ul>
 <li>1. $y^{\prime\prime}=f(x)$；</li>
-<li class="list-indent-1">举例：$y^{\prime\prime}=e^{x},\quad y^{\prime}=e^{x}+e_{1}\quad y=e^{x}+C_{1}x+C_{2}$</li>
+<li class="list-indent-1">举例：$y^{\prime\prime}=e^{x},\quad y^{\prime}=e^{x}+C_{1},\quad y=e^{x}+C_{1}x+C_{2}$</li>
 <li>2. $y^{\prime\prime}=f(x,y^{\prime})$</li>
 <li class="list-indent-1">方法：</li>
 <li class="list-indent-2">令： ${y^{\prime}=P,y^{\prime\prime}=\frac{dP}{dx}}$</li>
@@ -107,8 +107,8 @@
 <li>二阶线性非齐次微分方程：</li>
 <li class="list-indent-1">$$y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f(x)$$</li>
 </ul>
-<h5 id="section-3"><strong>定理</strong>： #二阶线性齐次微分方程的解</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果以 $y_1(x)$ 和 $y_2(x)$ 是二阶线性齐次微分方程的两个线性无关的的特解，那么：$$y=C_{1}y_{1}(x)+C_{2}y_{2}(x)$$</blockquote>
+<h5 id="section-3"><strong>定理</strong>： <span class="note-tag">二阶线性齐次微分方程的解</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果以 $y_1(x)$ 和 $y_2(x)$ 是二阶线性齐次微分方程的两个线性无关的的特解，那么：$$y=C_{1}y_{1}(x)+C_{2}y_{2}(x)$$</blockquote>
 <blockquote>是二阶线性齐次微分方程的通解；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -118,19 +118,19 @@
 <ul>
 <li>如果 $\frac{y_{1}(x)}{y_{2}(x)}$ 不等于 C，则线性无关；</li>
 </ul>
-<h5 id="section-4"><strong>定理</strong>： #二阶线性非齐次微分方程的解</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $y^*$ 是二阶线性<strong>非齐次</strong>微分方程的一个特解，$y_1(x)$ 和 $y_2(x)$ 是二阶线性<strong>齐次</strong>微分方程的两个线性无关的特解，则：</blockquote>
+<h5 id="section-4"><strong>定理</strong>： <span class="note-tag">二阶线性非齐次微分方程的解</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果 $y^*$ 是二阶线性<strong>非齐次</strong>微分方程的一个特解，$y_1(x)$ 和 $y_2(x)$ 是对应二阶线性<strong>齐次</strong>微分方程的两个线性无关解，则：</blockquote>
 <blockquote>$$y=C_{1}y_{1}(x)+C_{2}y_{2}(x)+y^{*}(x)$$</blockquote>
 <blockquote>是非齐次微分方程的通解；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>$$齐次通解+非齐次特解=非齐次通解$$</li>
 </ul>
-<h5 id="section-5"><strong>定理</strong>： #非齐次微分方程与齐次微分方程的解</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $y^<em>_1(x)$ 和 $y^</em>_2(x)$ 是非齐次微分方程的两个特解，则 $y(x)=$ $y^<em>_1(x)$ + $y^</em>_2(x)$  是<strong>齐次</strong>微分方程的解；</blockquote>
-<h5 id="section-6"><strong>定理</strong>： #非齐次微分方程的解关于非齐次项的叠加性</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：如果 $y^<em>_1(x)$ 和 $y^</em>_2(x)$ 分别是方程 $y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_{1}(x)\quad\quad y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_{2}(x)$ 的特解，则：</blockquote>
-<blockquote>$$\dot{y_1}(x)+\dot{y_2}(x)$$ 是方程 $y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_1(x)+f_2(x)$ 的一个特解；</blockquote><nav class="article-pagination" aria-label="相邻内容">
+<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">非齐次微分方程与齐次微分方程的解</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果 $y^<em>_1(x)$ 和 $y^</em>_2(x)$ 是同一个非齐次微分方程的两个特解，则 $y^<em>_1(x)-y^</em>_2(x)$ 是对应<strong>齐次</strong>微分方程的解；</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">非齐次微分方程的解关于非齐次项的叠加性</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果 $y^<em>_1(x)$ 和 $y^</em>_2(x)$ 分别是方程 $y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_{1}(x)\quad\quad y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_{2}(x)$ 的特解，则：</blockquote>
+<blockquote>$$y^<em>_1(x)+y^</em>_2(x)$$ 是方程 $y^{\prime\prime}+p(x)y^{\prime}+q(x)y=f_1(x)+f_2(x)$ 的一个特解；</blockquote><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-044/index.html"><span>← 上一项</span><strong>Lecture 36：一阶线性微分方程</strong></a>
     <a class="article-pagination-next" href="../math-046/index.html"><span>下一项 →</span><strong>Lecture 37：常系数齐次线性微分方程</strong></a>
   </nav></div></div>
@@ -141,6 +141,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -76,8 +76,8 @@
 <li class="list-indent-2">直接算不方便 <code>-&gt;</code> 补线格林 </li>
 </ul>
 <h3 id="section-2">58.1.1 基本概念</h3>
-<p> ##### <strong>定义</strong>： #第二类曲线积分 </p>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
+<p> ##### <strong>定义</strong>： <span class="note-tag">第二类曲线积分</span> </p>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>把曲线任意划分成 n 个小端，每一个有方向的小弧段在 x 轴上的投影乘以</li>
@@ -88,8 +88,8 @@
 </ul>
 <h2 id="section-3">58.2 计算方法</h2>
 <h3 id="section-4">58.2.1 方法一：直接法</h3>
-<h5 id="section-5"><strong>定理</strong>： #第二类曲线积分的计算</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
+<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">第二类曲线积分的计算</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念：</li>
@@ -103,14 +103,14 @@
 <li>在一个平面闭区域 <code>D</code> 的二重积分上，是否可以只求边界曲线 <code>L</code> 上值得相差，而不计算曲面上的所有点的值；</li>
 <li>这个作用由格林公式达成；</li>
 </ul>
-<h5 id="section-7"><strong>定义</strong>： #单连通区域 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：假设在 <code>D</code> 平面区域内，<code>D</code> 内任意一闭曲线围成的部分都居于 <code>D</code>；否则则称之为复连通区域；</blockquote>
+<h5 id="section-7"><strong>定义</strong>： <span class="note-tag">单连通区域</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>假设在 <code>D</code> 平面区域内，<code>D</code> 内任意一闭曲线围成的部分都居于 <code>D</code>；否则则称之为复连通区域；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li><strong>无洞无眼</strong>；</li>
 </ul>
-<h5 id="section-8"><strong>定理</strong>： #格林公式</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：闭区域 <code>D</code> 上由分段光滑的曲线 <code>L</code> 围成的，$P(x,y)、Q(x,y)$ 在 <code>D</code> 上有一阶连续偏导；则：</blockquote>
+<h5 id="section-8"><strong>定理</strong>： <span class="note-tag">格林公式</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>闭区域 <code>D</code> 上由分段光滑的曲线 <code>L</code> 围成的，$P(x,y)、Q(x,y)$ 在 <code>D</code> 上有一阶连续偏导；则：</blockquote>
 <blockquote>    $$\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}\sigma =\oint_{L}Pdx+Qdy$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -124,28 +124,28 @@
 <ul>
 <li>因为格林公式只能使用在封闭区域，因此当需要在非封闭区域使用时，可以进行补线，将非封闭区域补线为封闭区域，然后对封闭区域使用格林公式后再减去补线的部分，得到结果；</li>
 </ul>
-<h5 id="section-9"><strong>定理</strong>： #利用线积分与路径无关</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： </blockquote>
+<h5 id="section-9"><strong>定理</strong>： <span class="note-tag">利用线积分与路径无关</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
 <blockquote>$\text{i)判定:}\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} (区域D单连通))$</blockquote>
 <blockquote>$ii)计算:$</blockquote>
 <blockquote>	(a)改换路径：先改成更简单的（一般是沿着坐标轴的）的路径</blockquote>
 <blockquote>	(b)利用原函数：$\int_{(x_{1},y_{1})}^{(x_{2},y_{2})}P\mathrm{d}x+Q\mathrm{d}y=F(x_{2},y_{2})-F(x_{1},y_{1})$</blockquote>
 <blockquote>	求原函数的方法：1. 偏积分；2. 凑微分；</blockquote>
 <h2 id="section-10">28.3 两类线积分的联系</h2>
-<h5 id="section-11"><strong>定理</strong>： #两类线积分的联系</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
+<h5 id="section-11"><strong>定理</strong>： <span class="note-tag">两类线积分的联系</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
 <h2 id="section-12">28.4 计算方法：空间</h2>
 <h3 id="section-13">28.4.1 直接法</h3>
-<h5 id="section-14"><strong>定理</strong>： #第二类曲面积分的空间计算 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $设L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
+<h5 id="section-14"><strong>定理</strong>： <span class="note-tag">第二类曲面积分的空间计算</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $设L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
 <blockquote>$$\int_{L}P(x,y,z)dx+Q(x,y,z)dy+R(x,y,z)dz\\=\int_{a}^{\beta}\{P[x(t),y(t),z(t)]x^{\prime}(t)+Q[x(t),y(t),z(t)]y^{\prime}(t)+\\R[x(t),y(t),z(t)]z^{\prime}(t)\}dt$$</blockquote>
 <p><strong>举例</strong>：$\text{设 }L\text{ 是柱面 }x^2+y^2=1\text{ 与平面 }y+z=0的交线，从z轴正向往z轴负向看去为逆时针方向，则曲线积分\int_{L}z\operatorname{d}x+y\operatorname{d}z$</p>
 <ul>
 <li>设 $x=\cos t,y=\sin t,z=-\sin t$，代入得到定积分：$I=\int_{0}^{2x}(\sin^{2}t-\sin t\cos t)dt$</li>
 </ul>
 <h3 id="section-15">28.4.2 斯罗克斯公式</h3>
-<h5 id="section-16"><strong>定理</strong>： #斯托克斯公式 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Pasted image 20240521214413" loading="lazy" decoding="async"></blockquote>
+<h5 id="section-16"><strong>定理</strong>： <span class="note-tag">斯托克斯公式</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Pasted image 20240521214413" loading="lazy" decoding="async"></blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>平面时：选第一种</li>
@@ -161,6 +161,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -83,8 +83,8 @@
 <ul>
 <li>导数就是一个特殊的极限，其实质是一个平均变化率，当范围无穷小时，表达了这一点的变化率；</li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>： #什么是导数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\begin{aligned}\text{若 }&amp;\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}&amp;\text{存在，则称 }f(x)\text{ 在 }x_0\text{ 点可导}.\end{aligned}$</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">什么是导数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\begin{aligned}\text{若 }&amp;\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}&amp;\text{存在，则称 }f(x)\text{ 在 }x_0\text{ 点可导}.\end{aligned}$</blockquote>
 <blockquote>另一种形式：$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
 <blockquote>形式一：$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</blockquote>
 <blockquote>形式二：$f^{\prime}(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
@@ -114,21 +114,21 @@
 <li>此时，当 $dt$ 趋向于无穷小时，得到： $\frac{ds}{dt}(2)=3(2)^2=12$</li>
 <li>如果将当中的 $t=2$ 变为一般式 $t=t$，则可得到：$\frac{ds}{dt}(t)=3(t)^2$</li>
 </ul>
-<h5 id="section-5"><strong>定义</strong>： #左导数与右导数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\begin{aligned}&amp;\text{ 左导数: }f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}\\&amp;\text{ 右导数: }{f_0^{\prime}(x_0)}=\lim_{\Delta x\to0^+}\frac{f(x_0+\Lambda x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}\end{aligned}$</blockquote>
+<h5 id="section-5"><strong>定义</strong>： <span class="note-tag">左导数与右导数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\begin{aligned}&amp;\text{ 左导数: }f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}\\&amp;\text{ 右导数: }{f_0^{\prime}(x_0)}=\lim_{\Delta x\to0^+}\frac{f(x_0+\Lambda x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}\end{aligned}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>左导数的函数下面要加负号</li>
 <li>右导数的函数下面要加正号</li>
 </ul>
-<h5 id="section-6"><strong>定理</strong>： #左右导数与导数的关系</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $f^{\prime}(x_0)=a\Leftrightarrow f_-^{\prime}(x_0)=f_+^{\prime}(x_0)=a$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">左右导数与导数的关系</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $f^{\prime}(x_0)=a\Leftrightarrow f_-^{\prime}(x_0)=f_+^{\prime}(x_0)=a$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>左右导数的关系：可导 <code>&lt;--&gt;</code> <strong>左右导数存在且相等</strong>；</li>
 </ul>
-<h5 id="section-7"><strong>定义</strong>： #区间上可导</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：区间上可导 = 区间上的每一点都具有导数；</blockquote>
+<h5 id="section-7"><strong>定义</strong>： <span class="note-tag">区间上可导</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>区间上可导 = 区间上的每一点都具有导数；</blockquote>
 <blockquote>1. $(a,b)$ ：区间上每一点可导；</blockquote>
 <blockquote>2. $[a,b]$  ：区间上每一点可导，并且 a 点右可导，b 点左可导；</blockquote>
 <h2 id="section-8">1.2 导函数的定义与证明</h2>
@@ -168,7 +168,7 @@
 <li>有切线不一定可导；</li>
 </ul>
 <h2 id="section-11">1.3 常考题型</h2>
-<h3 id="section-12">题型： #分段函数在分界点讨论可导性</h3>
+<h3 id="section-12">题型： <span class="note-tag">分段函数在分界点讨论可导性</span></h3>
 <p><strong>题型一</strong>：左右导数是否存在</p>
 <ul>
 <li>比如在分段函数当中，要求分析在某一点处的左右导数是否存在；</li>
@@ -177,7 +177,7 @@
 <li class="list-indent-1">带入 $x_0$ 点后，计算这一点极限，然后看其值是否等于导数值，导数值是否存在；</li>
 </ul>
 <p><strong>注意</strong>：分段函数，求导导数带值，需要带到点被定义的点，比如 x=1 是分界点，小于等于 1 和大于 1 当中，小于等于 1 的函数部分可以带值；</p>
-<h3 id="section-13">题型： #导数定义</h3>
+<h3 id="section-13">题型： <span class="note-tag">导数定义</span></h3>
 <h4 id="section-14">PART 1：解题方法</h4>
 <p><strong>特点</strong>：出现了类似于 $f^{\prime}(x_0)=-1$ 一点导数存在这种形式，经常考察的是一点的导数定义的题目；</p>
 <p><strong>核心思想</strong>：把当前导数凑成一下类似于导数定义的形式；</p>
@@ -194,7 +194,7 @@
 </ul>
 <p><strong>类似题型</strong>：有类似于导数的定义 $\lim_{方框\to0}\frac{f(x_{0}+方框)-f(x_{0})}{方框}$，此时问某点是否可导；</p>
 <ul>
-<li>解题：需要在<strong>方框趋向于 0 正以及 0 负, 并且方框不等于 0</strong>的情况下都可以存在，此时才可以推出这一点导数存在；</li>
+<li>解题：将方框记为 $h$。需要验证 $h\to0^+$ 与 $h\to0^-$ 时的差商极限都存在且相等，才能推出该点的导数存在；</li>
 </ul>
 <h4 id="section-15">PART 2：典型例题</h4>
 <p><strong>例题</strong>：$\text{已知 }f^{\prime}(x_0)=-1,\text{则}\lim_{x\to0}\frac x{f(x_0-2x)-f(x_0-x)}=？$</p>
@@ -204,7 +204,7 @@
 <li class="list-indent-1">也可以使用具体函数来带入求值（因为是填空题）；</li>
 <li>解析</li>
 <li class="list-indent-1">$\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0}-x)}{x}=\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0})}{-2x}\cdot\frac{-2x}{x}-\lim_{x\to0}\frac{f(x_{0}-x)-f(x_{0})}{-x}\cdot\frac{-x}{x}$</li>
-<li>题型： #导数定义 </li>
+<li>题型： <span class="note-tag">导数定义</span> </li>
 </ul>
 <p><strong>例题</strong>：$\text{已知 }f(x)\text{ 在 }x=0\text{ 处可导,且 }f(0)=0,\text{则}\quad\lim_{x\to0}\frac{x^2f(x)-2f(x^3)}{x^3}$ =？</p>
 <ul>
@@ -213,12 +213,12 @@
 <li>题型：#</li>
 </ul>
 <h4 id="section-16">PART 3：知识点复盘</h4>
-<p><strong>注意</strong>：<code>导数存在 -&gt; 导数定义的极限存在</code> 和 <code>导数定义存在 -&gt; 导数存在</code> 这两个不是一个问题；</p>
+<p><strong>注意</strong>：某点导数存在，当且仅当该点差商的双侧极限存在；</p>
 <ul>
-<li>导数存在 <code>-&gt;</code> 导数定义的极限存在：证明这个极限存在几个；</li>
-<li>导数定义存在 <code>-&gt;</code> 导数存在：需要证明在方框趋向于 0 正以及 0 负, 并且方框不等于 0 这三个情况下都存在，才可以证明导数存在；</li>
+<li>已知导数存在，可以直接使用导数定义中的极限；</li>
+<li>要证明导数存在，可以证明差商的双侧极限存在，或证明左右差商极限都存在且相等；</li>
 </ul>
-<h3 id="section-17">题型： #导数应用</h3>
+<h3 id="section-17">题型： <span class="note-tag">导数应用</span></h3>
 <h4 id="section-18">PART 1：解题方法</h4>
 <p><strong>题型 1</strong>：导数的几何意义</p>
 <ul>
@@ -262,6 +262,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

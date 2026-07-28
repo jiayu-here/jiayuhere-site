@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -77,8 +77,8 @@
 <li>$\text{设 }\Sigma\text{为有向曲面},\text{其面元 }\Delta S\text{ 在 }xOy\text{ 面上的投影记为}\left(\Delta S\right)_{xy}$</li>
 </ul>
 <h2 id="section-3">60.2 第二类曲面积分：对坐标的曲面积分</h2>
-<h5 id="section-4"><strong>定义</strong>： #第二类曲面积分</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\iint_{\Sigma}R(x,y,z)dxdy=\lim_{\lambda\to0}\sum_{i=1}^nR(\xi_i,\eta_i,\zeta_i)(\Delta S_i)_{xy}$$</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">第二类曲面积分</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\iint_{\Sigma}R(x,y,z)dxdy=\lim_{\lambda\to0}\sum_{i=1}^nR(\xi_i,\eta_i,\zeta_i)(\Delta S_i)_{xy}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>注意：第二类曲面积分有方向</li>
@@ -90,17 +90,18 @@
 <li class="list-indent-1">如果是 $dzdx$ <code>-&gt;</code> 在 <code>xz</code> 上的投影；</li>
 <li>性质：与积分曲面的方向有关</li>
 <li class="list-indent-1">改变曲面的方向，其值相反；</li>
-<li class="list-indent-1">$$\iint_{\Sigma}Pdydz+Qdzdx+Rdxdy=-\iint_{-\Sigma}Pdydz+Qdzdx+Rdxdy$$</li>
+<li class="list-indent-1">$$\iint_{-\Sigma}(P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy)=-\iint_{\Sigma}(P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy)$$</li>
 </ul>
 <h2 id="section-5">60.3 对坐标的曲面积分的计算</h2>
 <h3 id="section-6">60.3.1 直接法</h3>
-<h5 id="section-7"><strong>定理</strong>： #第二类曲面积分的计算</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<h5 id="section-7"><strong>定理</strong>： <span class="note-tag">第二类曲面积分的计算</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
 <blockquote>1. $\text{设光滑曲面 }\Sigma:z=z(x,y),(x,y){\in}D_{xy}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：</blockquote>
 <blockquote>$$\iint_{\Sigma}R(x,y,z)\operatorname{d}x\operatorname{d}y=\pm\iint_{D_{xy}}R(x,y,z(x,y))\operatorname{d}x\operatorname{d}y$$</blockquote>
-<blockquote>2. $\text{设光滑曲面 }\Sigma:x=z(y,z),(y,z){\in}D_{yz}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：</blockquote>
+<blockquote>2. $\text{设光滑曲面 }\Sigma:x=x(y,z),(y,z){\in}D_{yz}\text{，且 }P(x,y,z)\text{ 是 }\Sigma\text{ 上的连续函数，则}$：</blockquote>
 <blockquote>$$\iint_{\Sigma}P(x,y,z){\mathrm{d}y\mathrm{d}z}=\pm\iint_{D_{yz}}P[x(y,z),y,z]\mathrm{d}ydz$$</blockquote>
-<blockquote>3. $\text{设曲面: }\Sigma:y=y (z, x),\quad (z, x)\in D_{zx}$，则：$$$$</blockquote>
+<blockquote>3. $\text{设曲面 }\Sigma:y=y(z,x),\quad(z,x)\in D_{zx}\text{，则}$：</blockquote>
+<blockquote>$$\iint_{\Sigma}Q\,dz\,dx=\pm\iint_{D_{zx}}Q(x,y(z,x),z)\,dz\,dx$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>解释：</li>
@@ -121,8 +122,8 @@
 <li class="list-indent-1">若 <code>y</code> 为常数 <code>-&gt;</code> 投影域也是直线，此时积分也是等于 <code>0</code>；</li>
 </ul>
 <h3 id="section-8">60.3.2 高斯公式 </h3>
-<h5 id="section-9"><strong>定理</strong>： #高斯公式 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\oint\oint_{\Sigma_{\text{外}}}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}zdx+R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)\mathrm{d}V$$</blockquote>
+<h5 id="section-9"><strong>定理</strong>： <span class="note-tag">高斯公式</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\oint\oint_{\Sigma_{\text{外}}}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}zdx+R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)\mathrm{d}V$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念： </li>
@@ -154,6 +155,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

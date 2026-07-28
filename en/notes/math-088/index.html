@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 19：特征值与特征向量 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 19: Eigenvalues and eigenvectors | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Eigenvalues and Eigenvectors">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 19：特征值与特征向量 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 19: Eigenvalues and eigenvectors | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-088/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,211 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 19：特征值与特征向量</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-088/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-087/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 18：同解方程组</strong></a>
-    <a class="article-pagination-next" href="../math-089/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 20：相似</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 19: Eigenvalues and eigenvectors</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics</span><span>11 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Eigenvalues and Eigenvectors</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">19.1 Definition of Eigenvalues and Eigenvectors</a><a href="#section-4">19.2 Calculation method</a><a href="#section-7">19.3 Significant Nature and Conclusion</a></nav></details><div class="prose"><h2 id="section-1">19.1 Definition of Eigenvalues and Eigenvectors</h2>
+<h3 id="section-2">19.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Eigenvaluesandeigenvectors</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> Let $A$ be the $n$ order matrix $,  \lambda$ be a number $, $ If there is a $n$ dimensional non-zero column vector $\xi, $ such that $: $</blockquote>
+<blockquote>$$A\xi=\lambda\xi$$</blockquote>
+<blockquote>is called:</blockquote>
+<blockquote>1. $\lambda$ is the eigenvalue;</blockquote>
+<blockquote>2. $\xi$ is the eigenvector of A corresponding to the eigenvalue $\lambda$;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Features:</li>
+<li class="list-indent-1">React to a property of matrix A;</li>
+<li>Explanation: eigenvalue</li>
+<li class="list-indent-1">For example, when A is a matrix, when A acts on a vector, its result can be represented by a number (scaling the vector with a number), and this number is the eigenvalue;</li>
+<li class="list-indent-1">Spatially, it can reflect properties such as extremes and similarities within space;</li>
+<li>Concept:</li>
+<li class="list-indent-1">A matrix of <code>n</code> order will have <code>n</code> eigenvalues. By looking at this number, one can know certain characteristics of the <code>A</code> matrix;</li>
+<li>Explanation: $\xi$</li>
+<li class="list-indent-1">$\xi$ must not be zero;</li>
+<li class="list-indent-1">Because if $\xi$ equals 0, it means the current matrix has only a unique zero solution, i.e., <code>S=r(A)</code>. Acting A on $\xi$ does not reflect A's effect, because the matrix is still zero on the zero vector, so here $\xi$ is a nonzero vector;</li>
+<li class="list-indent-1">Demonstrate the effect, so you can understand the role of eigenvalues;</li>
+<li>Meaning:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="Pasted image 20240701195431" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Analysis</strong>: Analyze the $A\xi=\lambda\xi$</p>
+<ul>
+<li>Steps:</li>
+<li class="list-indent-1"><code>-&gt;</code> $\lambda\xi-A\xi=0$ // $\xi$ is a nonzero vector</li>
+<li class="list-indent-1"><code>-&gt;</code> $(\lambda E-A)\xi=0$ // Extract the common factor</li>
+<li class="list-indent-1"><code>-&gt;</code> $(\lambda E-A)X=0$</li>
+<li class="list-indent-2">// Set $\xi$ to be the solution to the current system of equations;</li>
+<li class="list-indent-2">// Because <code>X</code> is $\xi$, $\xi$ is a nonzero vector, and the current expression equals 0 <code>-&gt;</code> means the current equation is homogeneous;</li>
+<li class="list-indent-2">// Because this homogeneous system has a nonzero solution, the columns of $\lambda E-A$ are linearly dependent <code>&lt;-</code> Theorem 4 on linear dependence: <a href="/en/notes/math-080/">Lecture 11: Linear Dependence of Vectors and Vector Sets</a>;</li>
+<li class="list-indent-2">// Therefore, $r(\lambda E-A)&lt;n$: the rank of the matrix is less than $n$;</li>
+<li class="list-indent-2">// For $n$ column vectors $a_1,a_2,\cdots,a_n$ in $\mathbb{R}^n$, linear dependence is equivalent to $\left|a_1,a_2,\cdots,a_n\right|=0$. Hence $|\lambda E-A|=0$</li>
+<li class="list-indent-1"><code>-&gt;</code> $|\lambda E-A|=0$</li>
+<li class="list-indent-2">// Here you can find $\lambda_i(i=1,2,3...)$</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Drawing 2024-07-01 19.50.31.excalidraw" loading="lazy" decoding="async"></li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Characteristicequations</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>$|\lambda E-A|$: called the characteristic equation</li>
+</ul>
+<h3 id="section-3">19.1.2 Geometric Explanation</h3>
+<p><strong>Concepts</strong>: Geometric explanation of eigenvalues and eigenvectors</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">After the basis vector is transformed, some transformations correspond only to proportional transformations after and before the solution, while the angular position remains unchanged;</li>
+<li class="list-indent-1">The value used to describe the transformation ratio of an eigenvector, called an eigenvalue;</li>
+<li class="list-indent-1">Eigenvectors are those vectors that remain on the original line after transformation;</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="Pasted image 20240701194822" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Concept</strong>: When the eigenvalue is negative</p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="Pasted image 20240701195210" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-4">19.2 Calculation method</h2>
+<h3 id="section-5">19.2.1 Methods for Finding Eigenvalues and Eigenvectors</h3>
+<p><strong>Method</strong>: Find eigenvalues</p>
+<ul>
+<li>Step 1: Write the characteristic equation $|\lambda E-A|$</li>
+<li class="list-indent-1">$A=\begin{bmatrix}2&amp;2&amp;-2\\2&amp;5&amp;-4\\-2&amp;-4&amp;5\end{bmatrix}$</li>
+<li class="list-indent-1">$|\lambda E-A|=\left|\begin{matrix}\lambda-2&amp;-2&amp;2\\-2&amp;\lambda-5&amp;4\\2&amp;4&amp;\lambda-5\end{matrix}\right|$</li>
+<li>Step 2: Calculate the determinant of the characteristic equation to obtain the equation about $\lambda$;</li>
+<li class="list-indent-1">In the end, you will definitely get an equation similar to $\lambda^3+a\lambda^2+b\lambda+c=0$, which can then be transformed into a form that finds roots;</li>
+<li>Step 3: Find all eigenvalues (the roots of the characteristic polynomial);</li>
+</ul>
+<p><strong>Method</strong>: Find eigenvectors</p>
+<ul>
+<li>Step 1: For each eigenvalue $\lambda$, substitute it into $(\lambda E-A)x=0$;</li>
+<li>Step 2: Row-reduce $\lambda E-A$ and find a basis for its null space;</li>
+<li class="list-indent-1">The eigenspace dimension is $S=n-r(\lambda E-A)$;</li>
+<li class="list-indent-2">These <code>S</code> vectors solved form the space of understanding. All vectors on this two-dimensional plane are eigenvectors corresponding to the current substituted $\lambda_i$;</li>
+<li class="list-indent-2">Except for the zero vector;</li>
+<li class="list-indent-1">2.2 If simplification does not allow for a stepped matrix, you can also determine the current rank by using the <code> determinant = 0</code> for the restriction on rank and the number of irrelevant term vectors in the current matrix $\lambda E-A$, to determine its current rank and obtain its maximally independent group;</li>
+<li>Step 3: According to step two, when you get the current $\lambda=\text{ A certain value }$, you get $\xi=k_1\xi_1+k_2\xi_2$</li>
+<li class="list-indent-1">Viewing <code>k1</code> and <code>k2</code> cannot be 0 at the same time;</li>
+<li>Step 4: If there are other $\lambda_i$, continue using the above steps to find the eigenvector $\xi$;</li>
+</ul>
+<h3 id="section-6">19.2.2 Finding the Root</h3>
+<p><strong>Supplement</strong>: Method to find roots</p>
+<ul>
+<li>If there are no constant terms in $\lambda^3+a\lambda^2+b\lambda+c=0$, then $\lambda=0$ is definitely rooted;</li>
+<li>If $\lambda^3+a\lambda^2+b\lambda+c=0$ among them, $a+b+c=0$, then $\lambda =1$ is definitely their root: $(\lambda -1)$</li>
+<li>If the sum of the even-degree terms in $\lambda^3+a\lambda^2+b\lambda+c=0$ equals the sum of odd-degree terms, then $f(-1)=0$, so $-1$ is its root;</li>
+</ul>
+<p><strong>Method</strong>: Root testing method</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Using the root-finding method to obtain the sum of a given root, using polynomials to obtain codivision with co-division, and using a calculator for quadratic terms;</li>
+<li>Example:</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+\lambda^{2}-2\lambda-8 \\
+\begin{aligned}\lambda-1\sqrt{\lambda^{3}-3\lambda^{2}-6\lambda+8}\\\frac{\lambda^{3}-\lambda^{2}}{-2\lambda^{2}-6\lambda}\end{aligned} \text{.}  \\
+\frac{-2\lambda^{2}+2\lambda}{-8\lambda+8} \\
+\frac{-8\lambda+8}{0}
+\end{aligned}
+$$</div>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">PolynomialRoots</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> let the following formula be a polynomial with coefficients $a_i$ both integers: $$f\left(x\right)=1·x^{k}+a_{k-1}x^{k-1}+\cdots+a_{1}x+a_{0}$$</blockquote>
+<blockquote>then the rational roots of $f(x)=0$ are integers, and $a_0$ factor of.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The solution to the equation is a factor of $a_0$</li>
+<li>Therefore, its factors can be framed first, and once the factors are known, their range is determined;</li>
+</ul>
+<h2 id="section-7">19.3 Significant Nature and Conclusion</h2>
+<h3 id="section-8">19.3.1 Properties and Conclusions of Eigenvalues</h3>
+<p><strong>Concept</strong>: Property one</p>
+<ul>
+<li>$$\lambda_0\text{ is an eigenvalue of }A\Leftrightarrow|\lambda_0 E-A|=0.$$</li>
+<li>Similarly, $$\lambda_0\text{ is not an eigenvalue of }A\Leftrightarrow|\lambda_0E-A|\neq0,$$ in which case $\lambda_0E-A$ is invertible and has full rank.</li>
+<li>Supplement:</li>
+<li class="list-indent-1">If $|aA+bE|=0$ (equivalently, $aA+bE$ is singular) and $a\neq0$, then $-\frac{b}{a}$ is an eigenvalue of $A$.</li>
+</ul>
+<p><strong>Concept</strong>: Property two</p>
+<ul>
+<li>Nature:</li>
+<li class="list-indent-1">If $\lambda_1,\lambda_2,\ldots,\lambda_n$ are the $n$ eigenvalues of $A$, counted with algebraic multiplicity, then:</li>
+<li class="list-indent-1">$$\begin{cases}\left|A\right|=\lambda_{1}\lambda_{2}\cdots\lambda_{n},\\\mathrm{tr}\left(A\right)=\lambda_{1}+\lambda_{2}+\cdots+\lambda_{n}.\end{cases}$$</li>
+</ul>
+<p>-<strong>Conclusion 1</strong>:</p>
+<ul>
+<li class="list-indent-1">1. There is a matrix with eigenvalue <code>0</code>, whose determinant must be <code>0</code></li>
+<li class="list-indent-1">2. $\lambda_{1}+\lambda_{2}+\cdots+\lambda_{n}$ The sum of eigenvalues equals the sum of the main diagonal elements of the current matrix <code>A</code> <code>tr(A)</code></li>
+</ul>
+<p>-<strong>Conclusion Two</strong>: Based on Conclusions One and Proof</p>
+<ul>
+<li class="list-indent-1">From equations (1) and (2), we get:</li>
+<li class="list-indent-1">$$\begin{cases}a_{11}+a_{22}+a_{33}=\lambda_{1}+\lambda_{2}+\lambda_{3},\\A_{11}+A_{22}+A_{33}=\lambda_{2}\lambda_{3}+\lambda_{1}\lambda_{3}+\lambda_{1}\lambda_{2},\\\left|A\right|=\lambda_{1}\lambda_{2}\lambda_{3}.\end{cases}$$</li>
+<li class="list-indent-1">More generally, the sum of the principal minors of order $k$ equals the $k$th elementary symmetric sum of the eigenvalues.</li>
+<li>Proof for order $3$: expand the characteristic polynomial $|\lambda E-A|$ in two ways.</li>
+<li class="list-indent-1">$$\text{Equation (1)}\quad|\lambda E-A|=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;-a_{13}\\-a_{21}&amp;\lambda-a_{22}&amp;-a_{23}\\-a_{31}&amp;-a_{32}&amp;\lambda-a_{33}\end{vmatrix}=\lambda^{3}-\left(a_{11}+a_{22}+a_{33}\right)\lambda^{2}+\left(A_{11}+A_{22}+A_{33}\right)\lambda-\left|A\right|$$</li>
+<li class="list-indent-1">$$\text{Equation (2)}\quad\left|\lambda E-A\right|=\left(\lambda-\lambda_1\right)\left(\lambda-\lambda_2\right)\left(\lambda-\lambda_3\right)=\lambda^3-(\lambda_1+\lambda_2+\lambda_3)\lambda^2+(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)\lambda-\lambda_1\lambda_2\lambda_3$$</li>
+<li>Supplement: Principal minors</li>
+<li class="list-indent-1">A principal minor uses the same index set for its selected rows and columns.</li>
+<li class="list-indent-1">For a $3\times3$ matrix, the three principal minors of order $2$ are $\begin{vmatrix}a_{22}&amp;a_{23}\\a_{32}&amp;a_{33}\end{vmatrix}=A_{11},\begin{vmatrix}a_{11}&amp;a_{13}\\a_{31}&amp;a_{33}\end{vmatrix}=A_{22},\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=A_{33}$.</li>
+</ul>
+<h3 id="section-9">19.3.2 Properties and Conclusions of Eigenvectors</h3>
+<p><strong>Concept</strong>: Property One</p>
+<ul>
+<li>A nonzero vector $\xi$ is an eigenvector of $A$ associated with $\lambda_0$ if and only if $\xi$ is a nonzero solution of $(\lambda_0E-A)x=\mathbf{0}$;</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion One</p>
+<ul>
+<li>An eigenvalue $\lambda$ of algebraic multiplicity <code>k</code> has at most <code>k</code> linearly independent eigenvectors;</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion two</p>
+<ul>
+<li>If $\xi_1,\xi_2$ are eigenvectors of <code>A</code> associated with distinct eigenvalues $\lambda_1,\lambda_2$, then $\xi_1,\xi_2$ are linearly independent;</li>
+</ul>
+<p><strong>Summary</strong>: $\text{For matrix }A,\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{ are linearly independent},\\\lambda_{1}=\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{ may be linearly dependent or linearly independent}.\end{cases}$</p>
+<p><strong>Concept</strong>: Conclusion three</p>
+<ul>
+<li>If $\xi_1,\xi_2$ are eigenvectors of $A$ associated with the same eigenvalue $\lambda$ and $k_1\xi_1+k_2\xi_2\neq0$, then $k_1\xi_1+k_2\xi_2$ is also an eigenvector associated with $\lambda$ (a common special case has one coefficient, such as $k_2$, equal to <code>0</code>);</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion Four</p>
+<ul>
+<li>If $\xi_1,\xi_2$ are eigenvectors of $A$ associated with distinct eigenvalues $\lambda_1,\lambda_2$ and $k_1,k_2\neq0$, then $k_1\xi_1+k_2\xi_2$ is not an eigenvector of $A$ (a common special case is $k_1=k_2=1$);</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion Five</p>
+<ul>
+<li>Let $\lambda_1,\lambda_2$ be distinct eigenvalues of $A$. If $\xi$ is an eigenvector associated with $\lambda_1$, then it cannot also be an eigenvector associated with $\lambda_2$;</li>
+</ul>
+<h3 id="section-10">19.3.3 Common Eigenvalues and Eigenvectors of Matrices</h3>
+<p><strong>Summary</strong>: Eigenvalues and eigenvectors of commonly used matrices</p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="Pasted image 20240627205621" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Concept</strong>: The matrix is $f(A)$</p>
+<ul>
+<li>Important formula - When <code>A</code> is a polynomial equal to <code>0</code></li>
+<li>Formula:</li>
+<li class="list-indent-1">$$A\xi=\lambda \xi \rightarrow f(A)\xi=f(\lambda)\xi$$</li>
+<li>Proof:</li>
+<li class="list-indent-1">For example: $A^2\xi=\lambda A\xi=\lambda^2\xi$</li>
+<li>Example:</li>
+<li class="list-indent-1">When $A^2-2A+3E$ $\lambda$: $\lambda^2-2\lambda+3$</li>
+<li>Note:</li>
+<li class="list-indent-1">The equation obtained from the polynomial of $A$ about $\lambda$ only represents the possible values of $\lambda$ under the current polynomial conditions of A (what relation or range they satisfy), and does not represent the different $\lambda$ of the current characteristic equation;</li>
+</ul>
+<p><strong>Concept</strong>: The matrix is $A^*$</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">When the matrix is $A^*$, its eigenvalue equals $\frac{|A|}{\lambda}$;</li>
+<li class="list-indent-1">And since $|A|=\lambda_1\lambda_2\lambda_3$, so $\frac{|A|}{\lambda}=\lambda_1\lambda_2\text{ or }\lambda_1\lambda_3\text{ or }\lambda_2\lambda_3$</li>
+</ul>
+<p><strong>Supplement</strong>: $P^{-1}AP$, its eigenvalues do not change <code>-&gt;</code> similar; but the eigenvectors change: $P^{-1}\xi$;</p>
+<p><strong>Concept</strong>: The conclusion of a rank 1 matrix</p>
+<ul>
+<li>When <code>r(A)=1</code>, matrix $A_{n*n}$ can definitely be reduced to two nonzero determinants: $\alpha\beta^{T}$ product of the two;</li>
+<li>And: $\lambda_1=\lambda_2=\lambda_3=...=\lambda_{n-1}=0$</li>
+<li>And: $\lambda_n=tr(A)=\beta^T\alpha$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-087/index.html"><span>← Previous item</span><strong>Lecture 18: Equivalent Systems of Linear Equations</strong></a>
+    <a class="article-pagination-next" href="../math-089/index.html"><span>Next item →</span><strong>Lecture 20: Similar Matrices</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +273,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

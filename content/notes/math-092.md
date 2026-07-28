@@ -22,7 +22,7 @@ tags: ["考研数学", "线性代数", "二次型"]
 > $\Leftrightarrow$ 对任意 $x\neq0$,有 $x^\mathrm{T}Ax>0(定义)$  
 > $\Leftrightarrow f$ 的正惯性指数 $p=n$
 > $\Leftrightarrow$ 存在可逆矩阵 $D$,使 $A=D^TD$
-> $\Leftrightarrow A=E$
+> $\Leftrightarrow A\cong E$
 > $\Leftrightarrow A$ 的特征值 $\lambda_i>0\left(i=1,2,\cdots,n\right)$
 > $\Leftrightarrow A$ 的全部顺序主子式均大于 $0$
 

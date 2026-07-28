@@ -1,13 +1,19 @@
 ---
-title: "Graduate Examination English: 03 长难句分析_总结"
+title: "03 Complex-Sentence Analysis — Summary"
 slug: english-003
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 03 Complex-Sentence Analysis — Summary. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Grammar"]
+tags: ["Graduate Entrance Examination English","English Grammar","Topic Summaries"]
 ---
 
-## Original Chinese Note
+## Illustrated summary
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+This note was originally created as an Obsidian Excalidraw canvas. The webpage preserves only the original canvas and source images so that the visual layout remains intact.
 
-[Read the original Chinese note](/notes/english-003/)
+## Original Excalidraw Canvas
+
+![Original Excalidraw canvas for 03 Complex Sentence Analysis — Summary](/assets/notes/excalidraw-english-003.svg)
+
+
+## Original image material
+![Pasted Image 20240422040948_615](/assets/notes/87d1960a3397-Pasted-Image-20240422040948_615.png)

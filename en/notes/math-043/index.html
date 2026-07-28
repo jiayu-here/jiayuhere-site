@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 35：微分方程的基本概念 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 35: Basic Concepts of Differential Equations | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 35: Basic Concepts of Differential Equations. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Differential Equations">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 35：微分方程的基本概念 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 35: Basic Concepts of Differential Equations | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 35: Basic Concepts of Differential Equations. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-043/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,324 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 35：微分方程的基本概念</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-01</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-043/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-042/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 34：定积分的应用</strong></a>
-    <a class="article-pagination-next" href="../math-044/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 36：一阶线性微分方程</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 35: Basic Concepts of Differential Equations</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 35: Basic Concepts of Differential Equations. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-01</span><span>14 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Differential Equations</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Examples in This Chapter</a><a href="#section-2">1.1 What is a Differential Equation?</a><a href="#section-3">1.2 Differential Equations of Separable Variables</a><a href="#section-4">1.3 Homogeneous Equations</a><a href="#section-5">1.4 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Examples in This Chapter</h2>
+<p><strong>Exam Content</strong></p>
+<ul>
+<li>(1) Basic concepts of ordinary differential equations</li>
+<li>(2) First-order differential equations</li>
+<li>(3) Higher-order equations that can be reduced (not required in Math III)</li>
+<li>(4) Higher-order linear differential equations</li>
+<li>(5) Difference Equations (only the requirement for Mathematics III)</li>
+</ul>
+<p><strong>Frequently Tested Question Types</strong></p>
+<ul>
+<li>Problem Type 1: Solving differential equations</li>
+<li>Question Type 2: Comprehensive questions</li>
+<li>Question Type 3: Word Problems</li>
+</ul>
+<h2 id="section-2">1.1 What is a Differential Equation?</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Differentialequations</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> equations containing unknown functions<strong>derivatives</strong>or<strong>differentials</strong>are called differential equations;</blockquote>
+<blockquote>A differential equation is a mathematical equation used to describe the relationship between a<strong>function and its derivative</strong>.</blockquote>
+<blockquote>1. Its solution is not a number, but a<strong>function that fits the equations</strong></blockquote>
+<blockquote>2. The origin of differential equations dates back to the late 17th century, created to solve physical and astronomical problems encountered in the development of natural sciences;</blockquote>
+<blockquote>3. A general equation representing the relationship between unknown functions, derivatives of unknown functions, and independent variables is called differential equations;</blockquote>
+<blockquote>4. If the unknown function is a single-variable function, it is called a<strong>ordinary differential equation</strong>; if the unknown function is a multivariable function, it is called a<strong>partial differential equation</strong>;</blockquote>
+<blockquote>5. Differential equations developed alongside calculus;</blockquote>
+<blockquote>6. A differential equation contains equations of unknown functions and their derivatives; the highest order of the derivative of an unknown function is called the order of the differential equation;</blockquote>
+<p><strong>Basic Concepts</strong></p>
+<ul>
+<li>Differential Equations:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">Equations containing unknown derivatives or differentials</li>
+<li class="list-indent-1">Example:</li>
+<li class="list-indent-2">$y^{\prime}=y+x,y^{\prime\prime}+y^{3}=x,y^{\prime\prime}=e^{x}$</li>
+<li>Rank:</li>
+<li class="list-indent-1">Concept:</li>
+</ul>
+<p>		-<strong>Highest order</strong>containing the unknown function<strong>derivative</strong>;</p>
+<ul>
+<li class="list-indent-1">Example:</li>
+<li class="list-indent-2">When the differential equation is of order n: $F(x,y,y^{\prime},y^{(n)})=0$</li>
+<li>Solution:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">If a function is substituted into a differential equation to make it an identity, then the function is called the solution to the differential equation.</li>
+<li class="list-indent-2">Suppose: $y=y (x)$ is continuous on the interval I and has derivatives up to the $n$ order, so that $F[x,  y (x),  y^{\prime}(x),  \cdotp\cdotp\cdotp,  y^{(n)}(x)]\equiv 0, $ is called $y=y (x)$. The differential equation is in the interval A solution to $I.$</li>
+<li class="list-indent-1">Example:</li>
+<li class="list-indent-2">If the current differential equation is $y^{\prime\prime}=e^{x}$</li>
+<li class="list-indent-2">Then the solution to the current equation is:</li>
+<li class="list-indent-3">1. This equation $y=e^{x}$ is the solution to the differential equation;</li>
+<li class="list-indent-3">2. This equation $y=e^{x}+c_{1}x+c_{2}$ is also a solution to the differential equation;</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">If the solution to a differential equation contains any constant<strong>, and the number of</strong>independent (non-combinable) constants equals the order of the differential equation, it is called a general solution to the equation;</li>
+<li class="list-indent-2">That is: the general solution represents the set of solutions, and the number of independent constants must equal the order of the differential equation;</li>
+<li class="list-indent-1">Example:</li>
+<li class="list-indent-2">If there is a differential equation with a second-order derivative</li>
+<li class="list-indent-2">$y^{\prime\prime}=3 ; y^{\prime}=3x+c_{1}$</li>
+<li class="list-indent-2">At this point, the function of y must have two constants: $y=\frac{3}{2}x^{2}+C_{1}x+C_{2}$</li>
+<li>Particular Solutions:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">A solution containing no arbitrary constants is called a particular solution of the differential equation;</li>
+<li class="list-indent-1">Supplement:</li>
+<li class="list-indent-2">Assigning values to the arbitrary constants in the general solution produces a particular solution;</li>
+<li class="list-indent-2">To find the solution satisfying given initial conditions, first obtain the general solution and then determine its constants from those conditions;</li>
+<li>Initial Conditions:</li>
+<li class="list-indent-1">Conditions used to determine a unique solution;</li>
+<li>Integral Curve:</li>
+<li class="list-indent-1">The graph of a solution is called an integral curve of the differential equation;</li>
+</ul>
+<p><strong>The Role of Differential Equations</strong></p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/bbe8e2cb591e-Pasted-image-20240422161204.png" alt="Pasted image 20240422161204" loading="lazy" decoding="async"></li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Firstorderequation</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> general form of first-order equations: $y^\prime=f(x,y)$</blockquote>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Secondorderandhigherorderequations</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1. Second-order differential equation: the highest derivative in an expression is the second-order derivative;</blockquote>
+<blockquote>2. Higher-order differential equations: equations containing third-order derivatives, fourth-order derivatives, or higher-order derivatives;</blockquote>
+<blockquote>General form of a second-order differential equation: $y^{\prime\prime}=f(x,y,y^{\prime})$</blockquote>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Ordinarydifferentialequations</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> function has only one independent variable;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Introduction:</li>
+<li class="list-indent-1">In physics: the most commonly used variable in ordinary differential modes is time;</li>
+<li>Example: Study the change in the position of a small ball after it is thrown upward;</li>
+<li class="list-indent-1">Current differential equation: second-order derivative</li>
+<li class="list-indent-2">Gravitational acceleration of the ball</li>
+<li class="list-indent-3">$$\ddot{y}(t)=-g$$</li>
+<li class="list-indent-1">Know<strong>First-Order Derivatives</strong>:</li>
+<li class="list-indent-2">Knowing that the downward component is gravitational acceleration $-g$, thus $\ddot{y}(t)=-g$, its relationship with velocity can also be described: $\frac{d}{dt}(-gt+v_0)=-g$.</li>
+<li class="list-indent-2">Acceleration alone does not determine the velocity; an initial condition is needed.</li>
+<li class="list-indent-1">Add<strong>Initial Condition 1</strong>:</li>
+<li class="list-indent-2">Based on the speed of $v_0$, the downward g action is performed by $\dot{y}(t)=-gt+v_0$</li>
+<li class="list-indent-2">The position is still undetermined; at this stage we only know $\frac{d\,y(t)}{dt}=-gt+v_0$.</li>
+<li class="list-indent-1">Find an <strong>antiderivative</strong>:</li>
+<li class="list-indent-2">$\frac{d}{dt}\left(-\frac{1}{2}gt^{2}+v_{0}t\right)=-gt+v_{0}$。</li>
+<li class="list-indent-1">Add<strong>Initial Condition 2</strong>:</li>
+<li class="list-indent-2">When the initial position of an object is $y_0$ and its relationship is: $\frac{d}{dt}\left(-\frac{1}{2}gt^{2}+v_{0}t+y_{0}\right)=-gt+v_{0}$.</li>
+<li class="list-indent-1">Obtain the solution of the<strong>differential equation</strong>:</li>
+<li class="list-indent-2">$y(t)=-(1/2)gt^2+v_0t+y_0$</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Partialdifferentialequations</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> function has multiple independent variables;</blockquote>
+<blockquote>Differential equations written based on partial derivatives, hence called partial differential equations;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Partial derivative:</li>
+<li class="list-indent-1">Consider that there are currently two variables, each with their respective derivative formulas, which is the partial derivative:</li>
+<li class="list-indent-1">$$\frac{dT}{dt}(x,t)\quad\frac{dT}{dx}(x,t)$$</li>
+<li class="list-indent-1">To distinguish it from the d derivative of ordinary differential equations, a new notation is used here:</li>
+<li class="list-indent-1">$$\frac{\partial T}{\partial t}(x,t)\quad\frac{\partial T}{\partial x}(x,t)$$</li>
+<li>Example: Heat conduction equation</li>
+<li class="list-indent-1">Formula:</li>
+<li class="list-indent-2">$\frac{\partial T}{\partial t}=\alpha\nabla^2T$</li>
+<li class="list-indent-1">Corresponding partial differential equation:</li>
+<li class="list-indent-2">Because it is a differential equation written based on partial derivatives, it is called a partial differential equation;</li>
+<li class="list-indent-2">$$\frac{\partial T}{\partial t}(x,t)=\alpha\cdot\frac{\partial^2T}{\partial x^2}(x,t)$$</li>
+<li class="list-indent-1">Illustration:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/703f10079fac-Pasted-image-20240422162747.png" alt="Pasted image 20240422162747" loading="lazy" decoding="async"></li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Partialderivative</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> for $z=f(x,y)$ functions, there are two partial derivatives defined:</blockquote>
+<blockquote>1. Partial derivative of X: When partial derivative of X, Y is fixed at$y_0$at (has no effect on x), $x$exist$x.$everywhere$\Delta x$The increment of, at this time there is only one variable x, which is called:</blockquote>
+<blockquote>$\lim_{\Delta x\to0}\frac{f\left(x_{0}+\Delta x,y_{0}\right)-f\left(x_{0},y_{0}\right)}{\Delta x}$ is the partial derivative with respect to X;</blockquote>
+<blockquote>Written as: $\left.\frac{\partial z}{\partial x}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial x}\right|_{(x_{0},y_{0})},z_{_z}(x_{0},y_{0})\text{ or }$ $f_{x}(x_{0},y_{0})$</blockquote>
+<blockquote>2. Partial derivative with respect to Y: The same applies to X,</blockquote>
+<blockquote>    $lim_{\Delta y\to0}\frac{f(x_{0},y_{0}+\Delta y)-f(x_{0},y_{0})}{\Delta y}$；</blockquote>
+<blockquote>Written as: $\left.\text{}\frac{\partial z}{\partial y}\right|_{(x_{0},y_{0})},\left.\frac{\partial f}{\partial y}\right|_{(x_{0},y_{0})},z_{y}(x_{0},y_{0})\text{ or }f_{y}(x_{0},y_{0}).$</blockquote>
+<p><strong>Method</strong>: How to find the partial derivative of x or y</p>
+<ul>
+<li>When $z=f(x,y)$, treat y or x as a constant and take the derivative directly from x or y;</li>
+<li>Example: partial derivative of $z=x^{2}+3xy+y^{2}$ at $(1.2)$;</li>
+<li class="list-indent-1">Step 1: Calculate the partial derivative function</li>
+<li class="list-indent-2">Taking partial derivative with respect to x: $\frac{\partial z}{\partial x}=2x+3y$</li>
+<li class="list-indent-2">Finding partial derivative with respect to y: $$\frac{\partial z}{\partial y}=3x+2y$$</li>
+<li class="list-indent-1">Step 2: Subtract $(1.2)$ point into the function after finding the partial derivative with respect to x or to y: 2x + 3 y or 3 x + 2 y to get the result</li>
+</ul>
+<p><strong>Partial Derivation of Binary Functions</strong></p>
+<ul>
+<li>In a single-variable function</li>
+<li class="list-indent-1">differentiable -&gt; continuity</li>
+<li class="list-indent-1">Differentiability is a very strong condition</li>
+<li>In a binary function</li>
+<li class="list-indent-1">The premise for the partial derivation of a function of two variables with respect to x &lt; - On the line y = $y_0$, it is continuous;</li>
+<li class="list-indent-1">For a binary function, partial derivatives exist and may not be continuous at $(x_0,y_0)$;</li>
+</ul>
+<h2 id="section-3">1.2 Differential Equations of Separable Variables</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Equationsofseparablevariables</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>Form: $$y^{\prime}=f(x)g(y)$$</blockquote>
+<blockquote>Explanation: $\frac{dy}{dx}=f(x)g(y)$ <code>-&gt;</code> $\frac{dy}{g(y)}=f(x)dx$ can separate $g(y)$ and $dy$, $f(x)$ $dx$ to both sides of an equation <code>-&gt;</code> differential equations of separable variables;</blockquote>
+<blockquote>Solutions of separable variables: Integral of both sides $$\int\frac{dy}{g(y)}=\int f(x)dx$$</blockquote>
+<p><strong>Example Question</strong>: Find the general solution of $y^{\prime}=\dfrac{y(1-x)}x$.</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+</ul>
+<div class="math-display">$$
+\frac{dy}{y}=\frac{1-x}{x}\,dx,\qquad
+	  \ln|y|=\ln|x|-x+C_1.
+$$</div>
+<ul>
+<li class="list-indent-1">Hence $$y=Cxe^{-x},\qquad x\neq0.$$</li>
+<li>Question Type: #</li>
+</ul>
+<p><strong>Example Question</strong>: $\frac{dy}{dx}=2xy$</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">Finding the integral</li>
+<li class="list-indent-2">$\int\frac{dy}{y}=\int 2x\,dx$</li>
+<li class="list-indent-1">Obtained:</li>
+<li class="list-indent-2">$\ln|y|=x^{2}+c$</li>
+<li class="list-indent-1">So:</li>
+<li class="list-indent-2">$|y|=e^{x^{2}+c}$</li>
+<li class="list-indent-1">Ultimate:</li>
+<li class="list-indent-2">$y=Ce^{x^{2}}$</li>
+<li>Question Type: <span class="note-tag">Separablevariables</span></li>
+</ul>
+<h2 id="section-4">1.3 Homogeneous Equations</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Generateorderequations</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> simplified equation,<strong>all nonzero terms have equal exponents</strong>: $$\frac{dy}{dx}=\varphi(\frac{y}{x})$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">The right end is a binary function about xy, but it can be written as a $\frac{y}{x}$ binary function;</li>
+<li>Qici:</li>
+<li class="list-indent-1">The right side acts as a binary function, which is a<strong>zero-degree and homogeneous function</strong>;</li>
+<li class="list-indent-1">That is: dy is a function compared to dx, and<strong>the number of degrees x and y is equal</strong></li>
+</ul>
+<p><strong>Method</strong>: Three key strategies</p>
+<ul>
+<li>Step zero: Organize into homogeneous equations with only $\frac{dy}{dx}$ on the left, i.e., $\frac{dy}{dx}=\varphi(\frac{y}{x})$;</li>
+<li>Step one: Write down the $u=\frac{y}{x}$</li>
+<li>Step 2: Since $y=xu$, after taking the derivative of y, we get $\frac{dy}{dx}=u+x\frac{du}{dx}$, which is the expression for $y^{\prime}=\frac{dy}{dx}=u+x\frac{du}{dx}=u+xu^{\prime}$;</li>
+<li>Step 3: Substitute into the original differential equation to obtain $u+x\frac{du}{dx}=\varphi(u)$, which is separable.</li>
+<li class="list-indent-1">That is, convert it into a separable differential equation and solve.</li>
+</ul>
+<p><strong>Example</strong>: $\text{Find the solution of }x^2y^{\prime}+xy=y^2\text{ satisfying the initial condition }y(1)=1.$</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">The original equation is homogeneous equation $y^{\prime}=(\frac{y}{x})^{2}-\frac{y}{x}$</li>
+<li class="list-indent-1">$\text{Let }u=\frac yx\text{; then}$</li>
+<li class="list-indent-1">$xu^{\prime}+u=u^2-u,\quad xu^{\prime}=u^2-2u.$</li>
+<li class="list-indent-1">At this point, you can separate the variable: $\frac{du}{u^{2}-2u}=\frac1xdx$</li>
+<li class="list-indent-1">$\frac12[\ln|u-2|-\ln|u|]=\ln|x|+C_1,\frac{u-2}u=Cx^2$</li>
+<li class="list-indent-1">$\frac{y-2x}y=Cx^2$</li>
+<li class="list-indent-1">From $y(1)=1$, we get $C=-1$, which gives the specific solution to be $$\frac{y-2x}y=-x^2,\quad\text{ That is }y=\frac{2x}{1+x^2}$$</li>
+<li>Question Type: #</li>
+</ul>
+<p><strong>Example Question</strong>: $y^{2}+x^{2}\frac{dy}{dx}=xy\frac{dy}{dx}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-1">1. First, process the function so that it satisfies y/x;</li>
+<li class="list-indent-1">2. How to determine whether the homogeneous equations -&gt; x and y are more symmetric in their degrees?</li>
+<li>Analysis</li>
+<li class="list-indent-1">First, let's summarize:</li>
+<li class="list-indent-2">$\frac{dy}{dx}=\frac{y^{2}}{xy-x^{2}}$</li>
+<li class="list-indent-1">Then divide all numerators and denominators by the square of x;</li>
+<li class="list-indent-2">$\frac{\left(\frac{y}{x}\right)^{2}}{\frac{y}{x}-1}$</li>
+<li class="list-indent-1">Then use three key methods to solve the problem</li>
+<li class="list-indent-2">$x\frac{du}{dx}=\frac{u^{2}}{u-1}-u$</li>
+<li class="list-indent-1">Then</li>
+<li class="list-indent-2">$\frac{u-1}{u}du=\frac{dx}{x}$</li>
+<li>Question Type: <span class="note-tag">Generateorderequations</span></li>
+</ul>
+<h2 id="section-5">1.4 Frequently Tested Question Types</h2>
+<h3 id="section-6">Question Type: <span class="note-tag">Solvedifferentialequations</span></h3>
+<h4 id="section-7">PART 1: Problem-solving methods</h4>
+<p><strong>Core Points</strong>: Identify types and select methods</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">If the problem requires a particular solution satisfying given conditions, first find the general solution;</li>
+<li class="list-indent-1">Before finding a general solution, first determine the type of the current differential equation;</li>
+</ul>
+<p><strong>Summary</strong>: Methods for determining the type of differential equation</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">1. Determining type, and when determining type, it is usually in the form of a derivative (i.e., non-differential, without $dy$, $dx$, etc.)</li>
+<li class="list-indent-1">2. If you can't judge any form, <code>-&gt;</code></li>
+<li class="list-indent-2">Method 1: $x、y$ Swap the two;</li>
+<li class="list-indent-2">Method 2: Variable substitution;</li>
+<li class="list-indent-1">3. Determine the order: determine if and to what degree;</li>
+<li class="list-indent-1">4. Core method for combining differentials: grouped differentials <code>-&gt;</code> Easy to assemble on a single basis, use it separately. Hard to assemble, put several expressions together;</li>
+</ul>
+<p><strong>Summary</strong>: Common form</p>
+<ul>
+<li>Equation in one variable:</li>
+<li class="list-indent-1">First-order equation:</li>
+<li class="list-indent-2">(A) Homogeneous equation:</li>
+<li class="list-indent-3">Format: $$\frac{dy}{dx}=\varphi(\frac{y}{x})$$</li>
+<li class="list-indent-3">Method: Let $u=\frac yx$, substitute, and simplify <code>-&gt;</code> reduce the equation to separable form;</li>
+<li class="list-indent-2">(B) Linear equation:</li>
+<li class="list-indent-3">Format: $$y^{\prime}+P(x)y=Q(x)$$</li>
+<li class="list-indent-3">Method: Write it in standard form, then use the general-solution formula $$y=e^{-\int p(x)dx}\left[\int Q(x)e^{\int p(x)dx}dx+C\right]$$ <code>-&gt;</code> <a href="/en/notes/math-044/">Lecture 36: First-order Linear Differential Equations</a></li>
+<li class="list-indent-2">(C) Bernoulli Equation:</li>
+<li class="list-indent-3">Format: $$y^{\prime}+p (x) y=Q (x) y^{\alpha} \quad\quad\quad\quad\quad\quad(\alpha\neq1)\quad(y^{1-\alpha}=u)$$</li>
+<li class="list-indent-3">Method:</li>
+<li class="list-indent-1">Second-order equations: classify them by their coefficients</li>
+<li class="list-indent-2">Constant coefficients:</li>
+<li class="list-indent-3">(D) Second-order homogeneous equation with constant coefficients:</li>
+<li class="list-indent-4">Form: $$y^{\prime\prime}+py^{\prime}+qy=0$$</li>
+<li class="list-indent-4">Method: Write the characteristic equation and find its roots <code>-&gt;</code> <a href="/en/notes/math-046/">Lecture 38: Homogeneous Linear Differential Equations with Constant Coefficients</a></li>
+<li class="list-indent-3">(E) Second-order constant coefficient nonhomogeneous equation:</li>
+<li class="list-indent-4">Format: $$y^{\prime\prime}+py^{\prime}+qy=f(x)$$</li>
+<li class="list-indent-4">Method: Split the solution into two parts: <strong>general solution of the nonhomogeneous equation = general solution of the corresponding homogeneous equation + one particular solution of the nonhomogeneous equation</strong>; <code>-&gt;</code> <a href="/en/notes/math-047/">Lecture 39: Nonhomogeneous Linear Differential Equations with Constant Coefficients</a></li>
+<li class="list-indent-2">Variable coefficients:</li>
+<li class="list-indent-3">(F) Order-reducible equations involving $x$ and $y$</li>
+<li class="list-indent-4">Format: $$y^{\prime\prime}=f(x,y^{\prime})$$</li>
+<li class="list-indent-4">Method: Set $y^{\prime}=p$ and $y^{\prime\prime}=\frac{dp}{dx}$ to obtain the first-order equation $\frac{dp}{dx}=f(x,p)$, then separate variables when possible;</li>
+<li class="list-indent-3">(G) Order-reducible equation involving $y$ but not $x$</li>
+<li class="list-indent-4">Form: $$y^{\prime\prime}=f(y,y^{\prime})$$</li>
+<li class="list-indent-4">Method: Set $y^{\prime}=p(y)$, so $y^{\prime\prime}=p\frac{dp}{dy}$; this gives a first-order equation in $y$ and $p$;</li>
+<li>Differential Forms in Two Variables:</li>
+<li class="list-indent-1">(H) Equation in differential form:</li>
+<li class="list-indent-2">Form: $$P(x,y)\,dx+Q(x,y)\,dy=0$$</li>
+<li class="list-indent-2">Method: Regroup terms or test for exactness, then integrate with respect to $x$ or $y$ as appropriate;</li>
+</ul>
+<p><strong>Question Types</strong>: Summary of question types and methods</p>
+<ul>
+<li>1. Finding a particular solution:</li>
+<li class="list-indent-1">(1) Find a general solution</li>
+<li class="list-indent-1">(2) Find the constant</li>
+<li class="list-indent-1">(3) Obtain a particular solution</li>
+<li>2. Inverse problem: derive a differential equation from a given family of solutions;</li>
+<li class="list-indent-1">Analysis: In a second-order constant-coefficient nonhomogeneous equation,</li>
+<li class="list-indent-2"><strong>nonhomogeneous general solution = homogeneous general solution + one particular solution</strong>;</li>
+<li class="list-indent-2">$y=C_{1}y_{1}+C_{2}y_{2}+y^{\star}$;</li>
+<li class="list-indent-1">Method: Identify the two linearly independent homogeneous components $y_1,y_2$, recover the characteristic roots and homogeneous operator, and then use $y^\star$ to determine the nonhomogeneous term;</li>
+</ul>
+<hr>
+<h3 id="section-8">Question Type: <span class="note-tag">ComprehensiveDifferentialEquationProblems</span></h3>
+<h4 id="section-9">PART 1: Problem-solving methods</h4>
+<p><strong>Method</strong>: Solve the differential equation complex</p>
+<ul>
+<li>(1) Analysis: This is a comprehensive question about differential equations and what content it covers;</li>
+<li>(2) Different question types use common methods corresponding to different contents;</li>
+</ul>
+<h4 id="section-10">PART 2: Typical Example Problems</h4>
+<h4 id="section-11">PART 3: Key Points Review</h4>
+<hr>
+<h3 id="section-12">Question Type: <span class="note-tag">Differentialequationapplicationproblems</span></h3>
+<h4 id="section-13">PART 1: Problem-solving methods</h4>
+<p><strong>Question Type</strong>: Geometry word problems</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">(1) Sketch the current image, which needs to highlight the main features;</li>
+<li class="list-indent-1">(2) Use the relationship given in the problem to establish a differential equation;</li>
+<li class="list-indent-1">(3) Solving differential equations;</li>
+</ul>
+<h4 id="section-14">PART 2: Typical Example Problems</h4>
+<h4 id="section-15">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-042/index.html"><span>← Previous item</span><strong>Lecture 34: Application of Definite Integrals</strong></a>
+    <a class="article-pagination-next" href="../math-044/index.html"><span>Next item →</span><strong>Lecture 36: First-Order Linear Differential Equations</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +386,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -57,24 +57,25 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 		- 可以选择用等价代换；
 	- 此时使用等价代换。得到最后结果为 1/12；
 
-**例题**：$\text{求}\lim_{x\to+\infty}\frac{\log_ax}{x^\alpha}\text{ 与 }\lim_{x\to+\infty}\frac{x^\alpha}{a^x}.(\alpha>1,\alpha,\beta>0)$
+**例题**：$\text{求}\lim_{x\to+\infty}\frac{\log_ax}{x^\alpha}\text{ 与 }\lim_{x\to+\infty}\frac{x^\alpha}{a^x}.\ (a>1,\alpha>0)$
 - 分析
 	- 此例题为**无穷比无穷型**；
 	- 也可以正常使用洛必达；
 - 解析
-	- 1. 原式= $\lim_{x\to\infty}\frac{\frac{1}{x\log a}}{x^{α-1}}=\frac{1}{x\log a}\lim_{x\to\infty}\frac{1}{x^{α}}$
-	- 2. 原式= $\lim_{x\to+\infty}\frac{αx^{α-1}}{a^{x}\log a}$
-		- 因为当前式子依然是趋向于无穷，因此依然可以使用洛必达法则，使用 $α-2$ 次
+	- 1. 对第一式使用一次洛必达法则：$\lim_{x\to\infty}\frac{\frac{1}{x\ln a}}{\alpha x^{\alpha-1}}=\lim_{x\to\infty}\frac{1}{\alpha\ln a\,x^\alpha}=0$
+	- 2. 第二式可写成 $\lim_{x\to+\infty}\frac{x^\alpha}{e^{x\ln a}}=0$；若使用洛必达法则，可重复求导直到分子幂次降到 0 以下。
 - 结论
-	- 当 x 趋向于无穷时，增长速度：$\log_{a}x\ll x^{\alpha}\ll a^{\alpha}$
+	- 当 x 趋向于无穷时，增长速度：$\log_{a}x\ll x^{\alpha}\ll a^{x}$
 
 **例题**：$\text{求}\lim_{x\to0}[\frac1{\ln(1+x)}-\frac1x]$
 - 分析
-	- 此题行为**无穷减去无穷**的提醒，但是可以通过分母同分，将其转化为
-	- 无穷比无穷型，然后使用洛必达
+	- 此题是 $\infty-\infty$ 型，通分后转化为 $\frac00$ 型，再使用洛必达法则。
 - 解析
-	- $\operatorname*{lim}_{x\rightarrow0}\frac{x-\ln(1+x)}{x\ln(1+x)}$ 此时从无穷减去无穷变成无穷比无穷
-	- $\lim_{x\to0}\frac{x-\ln(x+x)}{x^2}=\lim_{x\to0}\frac{1-\frac1{1+x}}{2x}=\lim_{x\to0}\frac{\frac1x}{2x}=\lim_{x\to0}\frac{\frac1{1+x}}{2}=\frac12$
+	- $\lim_{x\to0}\frac{x-\ln(1+x)}{x\ln(1+x)}$
+	- 连续使用两次洛必达法则：
+	  $$\lim_{x\to0}\frac{1-\frac1{1+x}}{\ln(1+x)+\frac{x}{1+x}}
+	  =\lim_{x\to0}\frac{\frac1{(1+x)^2}}{\frac1{1+x}+\frac1{(1+x)^2}}
+	  =\frac12.$$
 - 结论
 	- **无穷减无穷**的题目，如果有分母，可以考虑同分为**无穷比无穷**型；
 

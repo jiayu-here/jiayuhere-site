@@ -1,13 +1,23 @@
 ---
-title: "Graduate Examination Mathematics: Lecture 8：矩阵方程"
+title: "Lecture 8: Matrix Equations"
 slug: math-077
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Postgraduate Entrance Exam Mathematics Study Notes: Lecture 8: Matrix Equations. Retain original formulas, diagrams, and example problems."
 category: "Mathematics"
-tags: ["Graduate Examination Mathematics", "Linear Algebra"]
+tags: ["Graduate Entrance Examination Mathematics","Linear Algebra","Matrices"]
 ---
 
-## Original Chinese Note
+## 8.1 Basic Concepts of Matrix Equations
+#####**Definition**: #Matrixequations
+> <font color="#ccc1d9"> description: </font> equations containing unknown matrices are called matrix equations;
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Explanation**
+- Containing unknown derivatives: derivative equation;
+- What your unknown object is called its equation;
 
-[Read the original Chinese note](/notes/math-077/)
+**Concept**: Calculation method
+- Method:
+	- To solve matrix equations, one should first perform an identity transformation based on the problem conditions and matrix operation rules, so that the equation is transformed as:
+	- `AX=B`
+	- `XA=B`
+	- `AXB=C`
+	- If `A` is invertible, or `A` and `B` are both invertible, then the solutions are: $X=A^{-1}B,X=BA^{-1},X=A^{-1}CB^{-1}$

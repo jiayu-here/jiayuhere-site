@@ -11,11 +11,11 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 ### 48.1.1 正项级数的定义
 ##### **定理**： #正项级数的收敛性
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>正项 $\sum u_n$ 收敛的充分必要条件是 ${S_n}$ 有界；
-> 即：$$\sum_{n=1}^\infty u_n\text{ 收敛}\Leftrightarrow s_n\text{ 上有界}$$
+> 即：$$\sum_{n=1}^\infty u_n\text{ 收敛}\Leftrightarrow S_n\text{ 上有界}$$
 
-**正向级数的概念**
+**正项级数的概念**
 - $u_n$ 的每一项都大于 0；
-- 并且因为正向技术的每一项都是正的，所以和是递增的：
+- 并且因为正项级数的每一项都是正的，所以部分和数列是递增的：
 	- $S_{1}\leq S_{2}\leq S_{3}\cdots$ `->` $\{S_{n}\}\geq0$
 
 **解释**
@@ -44,7 +44,7 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 		- 优点： 
 			- 使用起来方便，不需要其他级数，自己就可以判断；
 		- 缺点： 
-			- 有些时候，级数很明显可以看出来时发散的，但却很难用方法证明出来；
+			- 有些时候，级数很明显可以看出是发散的，但却很难用这些方法证明；
 			- 即：适用范围窄；
 - 解题步骤：
 	- 1. 先观察是否可以直接看出来敛散性 `->` 规律； 
@@ -53,7 +53,7 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 - 规律： 
 	- 三巨头：$$a^n\quad n!\quad n^n$$
 	- 如果这三巨头当中至少出现一个，通常就使用方法 `3、4`；
-	- 如果三巨头一个都不出现，此时经常出现的就是 $n^p$ 或者 $In{n}$ 的形式，此时就使用方法 `1、2`；
+	- 如果三巨头一个都不出现，此时经常出现的就是 $n^p$ 或者 $\ln n$ 的形式，此时就使用方法 `1、2`；
 
 ## 48.2 比较审敛法
 ### 48.2.1 比较审敛法定义
@@ -65,8 +65,8 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 
 ##### **定理**： #比较审敛法 
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>如果 $\sum U_n$ 和 $\sum V_n$ 都是正项级数，且 $u_n<v_n$：
-> $$\sum_{n=1}^\infty\nu_n\text{ 收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛}$$
-> $$\sum_{n=1}^\infty u_n\text{ 发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$
+> $$\sum_{n=1}^\infty v_n\text{ 收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛}$$
+> $$\sum_{n=1}^\infty u_n\text{ 发散 }\Rightarrow\sum_{n=1}^\infty v_n\text{发散}$$
 
 **解释**
 - 总结：
@@ -81,15 +81,14 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 	- 两个级数都是**正项级数**；
 
 **补充**
-- 第一种情况时
-	- 如果 L 等于 0 `->` Un 是比 Vn 更高级的无穷小，Vn 趋向于 0 的速度更快；
-	- 如果 L 大于零且小于正无穷（即为常数），则此时 Un 和 Vn 是同阶的无穷小；
-	- 如果 L 等于正无穷 `->` 则 Un 无法判断，且 Un 是 Vn 的低阶无穷小；
-- 第二种情况时
-	- 如果 L 大于 0 `->` Un 发散，Vn 也跟着发散；
-	- 如果 Un 比 Vn 是正无穷，则发散性也一致，Un 是 Vn 的低阶无穷小；
-	- 如果 L 等于 0 时 `->` 如果 Vn 是发散的，则 Un 也无法判断；
-- 问题：还是得和一个 $V_n$ 来和目标函数比较，进而判断其敛散性；
+- 如果 $0<L<+\infty$，则 $\sum u_n$ 与 $\sum v_n$ 同敛散；
+- 如果 $L=0$，则 $u_n$ 比 $v_n$ 高阶：
+	- $\sum v_n$ 收敛可以推出 $\sum u_n$ 收敛；
+	- $\sum v_n$ 发散时，不能据此判断 $\sum u_n$；
+- 如果 $L=+\infty$，则 $u_n$ 比 $v_n$ 低阶：
+	- $\sum v_n$ 发散可以推出 $\sum u_n$ 发散；
+	- $\sum v_n$ 收敛时，不能据此判断 $\sum u_n$；
+- 因此仍需选取合适的比较级数 $\sum v_n$，再判断目标级数的敛散性；
 
 **和谁比**
 - 核心问题：
@@ -100,9 +99,9 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 ##### **定理**： #比较法极限形式 
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设 $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$
 > 若：
-> 1. $$若0<l<+\infty,\text{则}\sum_{n=1}^{\infty}u_{n}与\sum_{n=1}^{\infty}\nu_{n}{\text{同敛散}.}$$
-> 2. $$\text{若 }l=0\text{,则}\sum_{n=1}^\infty\nu_n\text{收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛,}\sum_{n=1}^\infty u_n\text{发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$
-> 3. $$\text{若 }l=+\infty,\text{则}\sum_{n=1}^\infty\nu_n\text{发散}\Rightarrow\sum_{n=1}^\infty u_n\text{ 发散. }\sum_{n=1}^\infty u_n\text{收敛}\Rightarrow\sum_{n=1}^\infty\nu_n\text{ 收敛}$$
+> 1. $$若0<l<+\infty,\text{则}\sum_{n=1}^{\infty}u_{n}与\sum_{n=1}^{\infty}v_{n}{\text{同敛散}.}$$
+> 2. $$\text{若 }l=0\text{,则}\sum_{n=1}^\infty v_n\text{收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛,}\sum_{n=1}^\infty u_n\text{发散 }\Rightarrow\sum_{n=1}^\infty v_n\text{发散}$$
+> 3. $$\text{若 }l=+\infty,\text{则}\sum_{n=1}^\infty v_n\text{发散}\Rightarrow\sum_{n=1}^\infty u_n\text{ 发散. }\sum_{n=1}^\infty u_n\text{收敛}\Rightarrow\sum_{n=1}^\infty v_n\text{ 收敛}$$
 
 **解释**
 - 概念：将两个通项比大小的问题，转化为了求**两个通项之比的极限**的问题；

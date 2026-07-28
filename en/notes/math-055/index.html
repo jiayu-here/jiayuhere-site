@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 53：常数项级数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 53: Series of Constants | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 53: Series of Constants. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Infinite Series">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 53：常数项级数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 53: Series of Constants | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 53: Series of Constants. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-055/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,130 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 53：常数项级数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-12</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-055/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-054/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 47：三重积分</strong></a>
-    <a class="article-pagination-next" href="../math-056/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 48：正项级数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 53: Series of Constants</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 53: Series of Constants. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-12</span><span>2 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">47.1 Basic Concepts of Series with Constant Terms</a><a href="#section-4">47.2 Series Classification</a></nav></details><div class="prose"><p><strong>Chapter Content</strong></p>
+<ul>
+<li>Section 1: Series of Constant Terms</li>
+<li>Section 2: Power series</li>
+<li>Section 3: Fourier series</li>
+</ul>
+<p><strong>Section Overview</strong></p>
+<ul>
+<li>(1) The concept and properties of series</li>
+<li>(2) Convergence criterion for series</li>
+</ul>
+<p><strong>Common Question Types and Typical Examples</strong></p>
+<ul>
+<li>Determining the convergence and divergence of series of constant terms</li>
+</ul>
+<hr>
+<h2 id="section-1">47.1 Basic Concepts of Series with Constant Terms</h2>
+<h3 id="section-2">47.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Constanttermseries</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\sum_{n=1}^\infty u_n=u_1+u_2+\cdots+u_n+\cdots $$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">series of constants indicates infinite terms, each of which is constant;</li>
+<li class="list-indent-1">Because it is an infinite term, a series of constant terms is a series of constant terms with**constants with infinite terms;</li>
+<li class="list-indent-1">Indicated by $u_{1}, u_{2},\cdots u_{n},\cdots$, $u_{n}$ by general terms;</li>
+<li class="list-indent-1">The sum of infinite terms is obtained by taking the limit of the sum of finite terms (partial sum);</li>
+<li>Sum of Sums:</li>
+<li class="list-indent-1">$\sum_{i=1}^{\infty}u_{i}=u_{1}+u_{2}+\cdots+u_{n}$；</li>
+<li>Partial and Harmonious</li>
+<li class="list-indent-1">Represents the sum of the first n terms;</li>
+<li class="list-indent-1">$S_{n}=u_{1}+u_{2}+\cdots+u_{n}$；</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Convergenceofseriesofconstantterms</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $u_{1}, u_{2},\cdots u_{n},\cdots$ represents the constant term, $S_{n}=u_{1}+u_{2}+\cdots+u_{n}$ represents the sum of the first <code>n</code> terms;</blockquote>
+<blockquote>If:</blockquote>
+<blockquote> $$\lim_{n\to+\infty}S_{n}=\sum_{n=1}^\infty u_n$$</blockquote>
+<blockquote>then the current constant sequence is convergent; if there is no limit, it is divergent;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Two questions:</li>
+<li class="list-indent-1">Whether the convergence and divergence <code>-&gt;</code> limit exists <code>&lt;-</code> is a more central issue;</li>
+<li class="list-indent-1">Value of the series <code>-&gt;</code> value of the limit;</li>
+</ul>
+<p><strong>Geometric Sequence Analysis</strong>: $a+aq+aq^{2}+aq^{3}+\cdots+aq^{n-1}...$, a geometric sequence, where a is not equal to 0, find its convergence property;</p>
+<ul>
+<li>When q is not equal to 1, $S_{n}=\frac{a(1-q^{n})}{1-q}$</li>
+<li class="list-indent-1">When q is less than 1, its limit is 0 - &gt; convergence;</li>
+<li class="list-indent-1">When q is greater than 1, its limit does not exist at -&gt; divergence;</li>
+<li>If q equals 1</li>
+<li class="list-indent-1">If <code>q=1</code>, then $a+a+a+\cdots$, infinite A sums up to be infinite, so it diverges;</li>
+<li class="list-indent-1">If <code>q=-1</code>, then $a-a+a-a+a-a+\cdots$</li>
+<li class="list-indent-2">Odd term <code>-&gt;</code> limit is a;</li>
+<li class="list-indent-2">Even term <code>-&gt;</code> limit 0;</li>
+<li class="list-indent-2">So there is no limit <code>-&gt;</code> divergence;</li>
+</ul>
+<h3 id="section-3">47.1.2 Properties of Series</h3>
+<p><strong>Basic Properties</strong></p>
+<ul>
+<li>Property 1: If $\sum_{n=1}^{\infty}u_n=S$, then $\sum_{n=1}^{\infty}k u_n=kS$.</li>
+<li>Property 2:</li>
+<li class="list-indent-1">If $\sum_{n=1}^{\infty}H_n=h$ and $\sum_{n=1}^{\infty}U_n=u$, then $\sum_{n=1}^{\infty}(H_n\pm U_n)=h\pm u$.</li>
+<li class="list-indent-1">Two series of convergence that still converge after addition or subtraction;</li>
+<li class="list-indent-1">Two divergent series, whose convergence is uncertain after addition or subtraction;</li>
+<li class="list-indent-1">Two series that converge after addition or subtraction may not be convergent in their original series;</li>
+<li class="list-indent-1">For example:</li>
+<li class="list-indent-2">$1+1+1+1...$ and $-1-1-1-1-1...$</li>
+<li class="list-indent-2">After adding: $(1-1)+(1-1)+(1-1)....$</li>
+<li>Nature 3:</li>
+<li class="list-indent-1">Remove or add<strong>finite terms</strong>to the series; the convergence and divergence remain unchanged, but the value may change;</li>
+<li>Property 4:</li>
+<li class="list-indent-1">$$\sum u_n\text{ Convergence, any series after adding parentheses also converges, and the sum remains unchanged }$$</li>
+<li class="list-indent-1">For example:</li>
+<li class="list-indent-2">$u_{1}+u_{2}+u_{3}+u_{2}+u_{5}+u_{8}+u_{7}+u_{8}+......$</li>
+<li class="list-indent-2">$S_{1},S_{2},S_{3},S_{4},S_{5},S_{6},S_{7},S_{8}......$</li>
+<li class="list-indent-2">Then add parentheses: $(u_{1}+u_{2})+u_{3}+(u_{4}+u_{3})+(u_{6}+u_{7}+u_{8})+\cdots$</li>
+<li class="list-indent-2">The parentheses are merged to form $v_{1}+v_{2}+v_{3}+v_{4}+\cdots$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">1.<strong>After adding parentheses, convergence, the original series may not converge</strong>;</li>
+<li class="list-indent-2">2. If the parentheses diverge after the extension, the original series must diverge;</li>
+<li>Property 5: A necessary condition for series convergence</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty u_n\text{ Convergence }\longrightarrow\lim_{n\to\infty}u_n=0$$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">$u_n$ Approaches zero, and the series may not converge, so it is a necessary condition rather than a necessary condition;</li>
+<li class="list-indent-2">For example, the harmonic series diverges: $1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}+\cdots$;</li>
+</ul>
+<h2 id="section-4">47.2 Series Classification</h2>
+<p><strong>Category</strong></p>
+<ul>
+<li>Constant-sign series</li>
+<li class="list-indent-1">Positive-term series <code>-&gt;</code> <a href="/en/notes/math-056/">Lecture 48: Positive-term Series and Their Convergence Tests</a></li>
+<li class="list-indent-1">Negative-term series: the negative of a positive-term series;</li>
+<li>Sign-changing series:</li>
+<li class="list-indent-1">A special case: alternating series <code>-&gt;</code> <a href="/en/notes/math-057/">Lecture 49: Alternating Series and General Series</a></li>
+<li class="list-indent-1">The general case: series of arbitrary terms <code>-&gt;</code> <a href="/en/notes/math-057/">Lecture 49: Alternating Series and General Series</a></li>
+</ul>
+<hr>
+<h3 id="section-5">Question Type: <span class="note-tag">ConvergenceAndDivergenceOfConstantTermSeries</span></h3>
+<h4 id="section-6">PART 1: Problem-solving methods</h4>
+<p><strong>Problem-Solving Steps</strong></p>
+<ul>
+<li>Step 1: Determine the type of series</li>
+<li class="list-indent-1">Positive, interleaved, arbitrary terms</li>
+<li>Step 2: Choose the method based on the number of levels</li>
+<li class="list-indent-1">Series of positive terms <code>-&gt;</code> Five types of criteria for convergence and dispersion are used for judgment;</li>
+<li class="list-indent-1">alternating series <code>-&gt;</code> a method;</li>
+<li class="list-indent-1">Any term series <code>-&gt;</code> one method;</li>
+<li>Step 3: If a determination cannot be made, you can use definitions and properties to make a judgment</li>
+<li class="list-indent-1">Definitions and properties apply to all types of series;</li>
+</ul>
+<p><strong>Problem-Solving Methods</strong></p>
+<ul>
+<li>Exams usually include multiple-choice questions, so it's better to use direct methods: find the correct option and prove it's correct, rather than using elimination and finding counterexamples one by one to prove other options are wrong;</li>
+<li>How to find: For the current option, if it's wrong, go straight to the next one; If you're unsure about the correct or false option, go to the next option first—the correct one might be right at the back;</li>
+</ul>
+<p><strong>Common Conclusions</strong></p>
+<ul>
+<li>$$\sum_{n=1}^{+\infty}|b_{n|}\text{ Convergence }\rightarrow \sum_{n=1}^{+\infty}(b_{n})^{2}\text{ Convergence }$$</li>
+</ul>
+<h4 id="section-7">PART 2: Typical Example Problems</h4>
+<h4 id="section-8">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-054/index.html"><span>← Previous item</span><strong>Lecture 47: Triple Integral</strong></a>
+    <a class="article-pagination-next" href="../math-056/index.html"><span>Next item →</span><strong>Lecture 48: Series of Positive Terms</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +192,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

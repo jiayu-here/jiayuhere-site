@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -83,7 +83,7 @@
 <li>当然这种放慢镜头的办法不是每次都灵的。如果因为技术原因慢镜头在冲线前后不能放（函数不存在一个可导的邻域），或者放了慢镜头后因为什么原因分辨不出来（洛必达完了极限反而不存在）或者他们中间摔倒了根本没有冲线（不是0比0或者无穷比无穷），那么再去放慢镜头也对知道比赛结果无济于事。</li>
 </ul>
 <h5 id="section-3"><strong>定理</strong>：洛必达法则</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若满足以下条件：</blockquote>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若满足以下条件：</blockquote>
 <blockquote>1）$\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0;$     </blockquote>
 <blockquote>2）$f(x)\text{ 和 }g(x)\text{在 }\overset{\circ}{\operatorname*{U}}(x_0,\delta)\text{ 内可导,且 }g^{\prime}(x)\neq0;$</blockquote>
 <blockquote>3）$\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}\text{ 存在(或 }\infty)$</blockquote>
@@ -117,26 +117,31 @@
 <li class="list-indent-2">可以选择用等价代换；</li>
 <li class="list-indent-1">此时使用等价代换。得到最后结果为 1/12；</li>
 </ul>
-<p><strong>例题</strong>：$\text{求}\lim_{x\to+\infty}\frac{\log_ax}{x^\alpha}\text{ 与 }\lim_{x\to+\infty}\frac{x^\alpha}{a^x}.(\alpha&gt;1,\alpha,\beta&gt;0)$</p>
+<p><strong>例题</strong>：$\text{求}\lim_{x\to+\infty}\frac{\log_ax}{x^\alpha}\text{ 与 }\lim_{x\to+\infty}\frac{x^\alpha}{a^x}.\ (a&gt;1,\alpha&gt;0)$</p>
 <ul>
 <li>分析</li>
 <li class="list-indent-1">此例题为<strong>无穷比无穷型</strong>；</li>
 <li class="list-indent-1">也可以正常使用洛必达；</li>
 <li>解析</li>
-<li class="list-indent-1">1. 原式= $\lim_{x\to\infty}\frac{\frac{1}{x\log a}}{x^{α-1}}=\frac{1}{x\log a}\lim_{x\to\infty}\frac{1}{x^{α}}$</li>
-<li class="list-indent-1">2. 原式= $\lim_{x\to+\infty}\frac{αx^{α-1}}{a^{x}\log a}$</li>
-<li class="list-indent-2">因为当前式子依然是趋向于无穷，因此依然可以使用洛必达法则，使用 $α-2$ 次</li>
+<li class="list-indent-1">1. 对第一式使用一次洛必达法则：$\lim_{x\to\infty}\frac{\frac{1}{x\ln a}}{\alpha x^{\alpha-1}}=\lim_{x\to\infty}\frac{1}{\alpha\ln a\,x^\alpha}=0$</li>
+<li class="list-indent-1">2. 第二式可写成 $\lim_{x\to+\infty}\frac{x^\alpha}{e^{x\ln a}}=0$；若使用洛必达法则，可重复求导直到分子幂次降到 0 以下。</li>
 <li>结论</li>
-<li class="list-indent-1">当 x 趋向于无穷时，增长速度：$\log_{a}x\ll x^{\alpha}\ll a^{\alpha}$</li>
+<li class="list-indent-1">当 x 趋向于无穷时，增长速度：$\log_{a}x\ll x^{\alpha}\ll a^{x}$</li>
 </ul>
 <p><strong>例题</strong>：$\text{求}\lim_{x\to0}[\frac1{\ln(1+x)}-\frac1x]$</p>
 <ul>
 <li>分析</li>
-<li class="list-indent-1">此题行为<strong>无穷减去无穷</strong>的提醒，但是可以通过分母同分，将其转化为</li>
-<li class="list-indent-1">无穷比无穷型，然后使用洛必达</li>
+<li class="list-indent-1">此题是 $\infty-\infty$ 型，通分后转化为 $\frac00$ 型，再使用洛必达法则。</li>
 <li>解析</li>
-<li class="list-indent-1">$\operatorname*{lim}_{x\rightarrow0}\frac{x-\ln(1+x)}{x\ln(1+x)}$ 此时从无穷减去无穷变成无穷比无穷</li>
-<li class="list-indent-1">$\lim_{x\to0}\frac{x-\ln(x+x)}{x^2}=\lim_{x\to0}\frac{1-\frac1{1+x}}{2x}=\lim_{x\to0}\frac{\frac1x}{2x}=\lim_{x\to0}\frac{\frac1{1+x}}{2}=\frac12$</li>
+<li class="list-indent-1">$\lim_{x\to0}\frac{x-\ln(1+x)}{x\ln(1+x)}$</li>
+<li class="list-indent-1">连续使用两次洛必达法则：</li>
+</ul>
+<div class="math-display">$$
+\lim_{x\to0}\frac{1-\frac1{1+x}}{\ln(1+x)+\frac{x}{1+x}}
+	  =\lim_{x\to0}\frac{\frac1{(1+x)^2}}{\frac1{1+x}+\frac1{(1+x)^2}}
+	  =\frac12.
+$$</div>
+<ul>
 <li>结论</li>
 <li class="list-indent-1"><strong>无穷减无穷</strong>的题目，如果有分母，可以考虑同分为<strong>无穷比无穷</strong>型；</li>
 </ul>
@@ -187,6 +192,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

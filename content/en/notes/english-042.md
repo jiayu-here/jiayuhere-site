@@ -1,13 +1,24 @@
 ---
-title: "Graduate Examination English: 真题 - 2018年：小作文 - 介绍"
+title: "2018 Past Paper: Practical Writing — Introduction"
 slug: english-042
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 2018 Past Paper: Practical Writing — Introduction. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Writing"]
+tags: ["Graduate Entrance Examination English","English Writing","2018 Past Paper: Practical Writing — Introduction"]
 ---
 
-## Original Chinese Note
+**past-paper question**
+- ![Pasted image 20250409111403](/assets/notes/08bf7bacb16e-Pasted-image-20250409111403.png)
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Templates**
+```Text
+Dear Sir or Madam,
 
-[Read the original Chinese note](/notes/english-042/)
+As the chair of the university's Students' Union and a member of the team organizing the graduation ceremony, I am writing to invite you to attend the event.
+
+All of us are deeply grateful for your dedication to teaching. Your work has given us valuable knowledge, inspired our interest in other cultures, and helped us broaden our horizons. We would be honored if you could join us and share this joyful occasion. The ceremony is scheduled to begin on June 26 at the Student Activity Center and will last for approximately two hours.
+
+On behalf of all the graduates, I sincerely hope that you can attend. We would also be delighted to take a group photograph with you to commemorate this important moment.
+
+Yours sincerely,
+Li Ming
+```

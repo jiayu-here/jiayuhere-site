@@ -61,10 +61,10 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 - $$若A\sim B,且A可逆,则A^{-1}\sim B^{-1},f\left(A^{-1}\right)\sim f\left(B^{-1}\right)\left(\text{其中}f\left(x\right)\text{是多项式}\right)$$
 
 **概念**：结论三
-- $$若A\sim B,且A可逆,则A^*\sim B^*$$
+- $$若A\sim B,则A^*\sim B^*$$
 
 **概念**：结论四
-- $$若A\sim B,且A可逆,则A^T\sim B^T$$
+- $$若A\sim B,则A^T\sim B^T$$
 
 **概念**：结论五
 - $$若A\sim C,B\sim D,则\begin{bmatrix}A&O\\O&B\end{bmatrix}\sim\begin{bmatrix}C&O\\O&D\end{bmatrix}$$
@@ -145,21 +145,21 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 
 **方法**：由特征值、特征向量反求 $A$ 
 - 方法： 
-	- $\text{若有可逆矩阵}P\text{,使得}P^{-1}AP=A\text{,则}A=PAP^{-1}\text{,这是反求}A\text{ 的一个基本思路 }.$
+	- $\text{若有可逆矩阵 }P\text{，使得 }P^{-1}AP=\Lambda\text{，则 }A=P\Lambda P^{-1}\text{，这是反求 }A\text{ 的一个基本思路。}$
 - 举例： 
 	- `->` $(\xi_{1},\xi_{2})^{-1}A(\xi_{1},\xi_{2})=(\begin{matrix}\lambda_{1}&0\\0&\lambda_{2}\end{matrix})$
 	- `->` $A=(\xi_{1},\xi_{2})(\begin{matrix}\lambda_{1}&0\\0&\lambda_{2}\end{matrix})(\xi_{1},\xi_{2})^{-1}$
 
 **方法**：求 $A^k$ 和 $f(A)$
-- `->` $$P^{-1}A^kP=A^k, A^k=PA^kP^{-1}=P\begin{bmatrix}\lambda_1^k&&&&\\&\lambda_2^k&&&\\&&\ddots&&\\&&&\lambda_n^k\end{bmatrix}P^{-1}$$
-- `->` $$P^{-1}f(A)P=f(A), f(A)=Pf(A)P^{-1}=P\begin{bmatrix}f(\lambda_1)&&&\\&f(\lambda_2)&&\\&&\ddots&\\&&&f(\lambda_n)\end{bmatrix}P^{-1}.$$
+	- `->` $$P^{-1}A^kP=\Lambda^k,\quad A^k=P\Lambda^kP^{-1}=P\begin{bmatrix}\lambda_1^k&&&\\&\lambda_2^k&&\\&&\ddots&\\&&&\lambda_n^k\end{bmatrix}P^{-1}$$
+	- `->` $$P^{-1}f(A)P=f(\Lambda),\quad f(A)=Pf(\Lambda)P^{-1}=P\begin{bmatrix}f(\lambda_1)&&&\\&f(\lambda_2)&&\\&&\ddots&\\&&&f(\lambda_n)\end{bmatrix}P^{-1}.$$
 
 **补充**：在可逆矩阵中使用不可逆矩阵的性质
-- 若 $|A|=0\rightarrow|0·E+A=0|\rightarrow\lambda_1=0\quad(至少一个)\rightarrow A不可逆$
-	- $|A^{*}|\rightarrow |A|^{n-1}$ 这个是由 $A^{-1}$ 存在而推出来的；
+- 若 $|A|=0$，则 $\lambda=0$ 是 $A$ 的特征值，因此 $A$ 不可逆；
+	- 对任意 $n$ 阶方阵都有 $|A^{*}|=|A|^{n-1}$；
 - 其他： 
-	- $|A^{*}|=|A|^{n-1}$ 的前提是 `A` 可逆；
-	- 的前提是 A 可逆；$\left(AB\right)^{*}=B^{*}A^{*}$ 的前提是 `A,B` 可逆； 
+	- $|A^{*}|=|A|^{n-1}$ 对任意 $n$ 阶方阵成立；
+	- $\left(AB\right)^{*}=B^{*}A^{*}$ 对同阶方阵成立；
 - 不可逆时： 
 	- 假设 A 有三重根，一个特征值 `1`；
 	- 如果现在在 A 前面加上 E：`+E+A`；
@@ -183,12 +183,12 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 ##### **定义**： #实对称矩阵
 > <font color="#ccc1d9">描述：</font>若 $A^T=A$ ，则 A 为对称矩阵。如果组成 A 的元素都是实数，则 A 为实对称矩阵；
 > （1）`A` 是实对称矩阵，则 A 的特征值是实数，特征向量是实向量 (不用证明)；
-> （2）实对称矩阵 `A` 的属于不同特征值的特征向量相互正交，即：$A\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1}\perp\xi_{2},\\\lambda_{1}=\lambda_{2}\xrightarrow{可能}\begin{cases}\xi_{1}\perp\xi_{2},\\\xi_{1}与\xi_{2}无关\end{cases}\end{cases}$
+> （2）实对称矩阵 `A` 中，属于不同特征值的特征向量相互正交，即：$\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1}\perp\xi_{2}$。对于重特征值，可以在对应的特征子空间内选取一组标准正交基；
 > （3）对于任意的 n 阶实对称矩阵 A，存在 n 阶正交矩阵 Q，使得：$Q^{\mathrm{T}}AQ=Q^{-1}AQ=\begin{bmatrix}\lambda_1&&&\\&\lambda_2&&\\&&\ddots&\\&&&\lambda_n\end{bmatrix}$ ，这里 $\lambda_i$ 是 A 的全部特征值； 
 
 **解释**
 - 解释（2）：
-	- 对于实对称矩阵，无论其特征值是否相等，$\xi$ 都是线性无关 `->` **因此实对称矩阵，一定可以相似对角化**；
+	- 实对称矩阵存在一组由单位特征向量组成的标准正交基，因此一定可以用正交矩阵相似对角化；
 - 解释（3）： 
 	- 回顾：A 有 n 个线性无关 `->` A~$\Lambda$ `->`  $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&&&&\\&\lambda_2&&&\\&&\ddots&&\\&&&\lambda_n\end{bmatrix}$
 	- 对称矩阵因为无条件就可以得到 $A\sim\Lambda$，因此就一定可以得到 $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&&&&\\&\lambda_2&&&\\&&\ddots&&\\&&&\lambda_n\end{bmatrix}$ 这种局面；
@@ -197,8 +197,8 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 	- $Q^T=Q^{-1}$
 	- $Q^TQ=E$
 	- `Q` 由标准正交基组成 `<-` 可以通过正交化、单位化，来得到正交矩阵；
-	- 不存在正交阵使得 $Q^TAQ=\Lambda$ 
+	- 对实对称矩阵 $A$，存在正交矩阵 $Q$ 使得 $Q^TAQ=\Lambda$；
 
 ### 20.3.2 实对称矩阵相似对角化基本步骤 
 **方法**：若 A 为 n 阶实对称矩阵，则其用正交矩阵 Q 相似对角化的基本步骤如下：
-- $$\begin{aligned}&\left(1\right)\text{求}A\text{的特征值}\lambda_1,\lambda_2,\cdots,\lambda_n.\\&\left(2\right)\text{求}A\text{的对应于特征值}\lambda_1,\lambda_2,\cdots,\lambda_n\text{的特征向量}\xi_1,\xi_2,\cdots,\xi_n.\\&\left(3\right)\text{将}\xi_{1},\xi_{2},\cdots,\xi_{n}\text{正交化(若需要的话)、单位化为}\eta_{1},\eta_{2},\cdots,\eta_{n}.\\&\left(4\right)\text{令}Q=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right],\text{则}Q\text{为正交矩阵,且}Q^{-1}AQ=Q^{\mathrm{T}}AQ=A\end{aligned}$$
+- $$\begin{aligned}&\left(1\right)\text{求}A\text{的特征值}\lambda_1,\lambda_2,\cdots,\lambda_n.\\&\left(2\right)\text{求}A\text{的对应于特征值}\lambda_1,\lambda_2,\cdots,\lambda_n\text{的特征向量}\xi_1,\xi_2,\cdots,\xi_n.\\&\left(3\right)\text{将}\xi_{1},\xi_{2},\cdots,\xi_{n}\text{正交化(若需要的话)、单位化为}\eta_{1},\eta_{2},\cdots,\eta_{n}.\\&\left(4\right)\text{令}Q=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right],\text{则}Q\text{为正交矩阵,且}Q^{-1}AQ=Q^{\mathrm{T}}AQ=\Lambda.\end{aligned}$$

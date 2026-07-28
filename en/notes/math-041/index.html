@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 33：定积分的应用 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 33: Applications of Definite Integrals | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 33: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Definite and Improper Integrals">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 33：定积分的应用 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 33: Applications of Definite Integrals | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 33: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-041/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,190 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 33：定积分的应用</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-24</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-041/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-040/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 32：定积分的计算</strong></a>
-    <a class="article-pagination-next" href="../math-042/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 34：定积分的应用</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 33: Applications of Definite Integrals</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 33: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-01-24</span><span>8 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Definite and Improper Integrals</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Example Questions</a><a href="#section-2">1.1 Improper integrals of infinity</a><a href="#section-7">1.2 Improper integrals of unbounded functions</a><a href="#section-12">1.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Example Questions</h2>
+<p><strong>Frequently Tested Contents</strong></p>
+<ul>
+<li>(1) Improper integrals over an infinite interval</li>
+<li>(2) Improper integrals of unbounded functions</li>
+</ul>
+<p><strong>Common Question Types and Typical Examples</strong></p>
+<ul>
+<li>Problem Type 1: Convergence and Divergence of Improper Integrals</li>
+<li>Problem Type 2: Calculation of Improper Integrals</li>
+</ul>
+<h2 id="section-2">1.1 Improper integrals of infinity</h2>
+<h3 id="section-3">1.1.1 Basic Concepts</h3>
+<p><strong>Introduction</strong></p>
+<ul>
+<li>Basic conditions for definite integrals: $[a,b]$ is finite, and $f(x)$ is bounded;</li>
+<li>When an integral from $a$ to infinity is needed: $\int_{a}^{+\infty}f(x)dx$</li>
+<li>At this point, you can first set a $b$, then let b approach its limit;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Anomalousintegral</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> integral with infinite intervals or unbounded integrands is called improper integral; also known as generalized integral;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>When it approaches infinity, if the limit has value, then it is called integral convergence;</li>
+</ul>
+<p><strong>Both the upper and lower realms are infinite</strong></p>
+<ul>
+<li>Find: All values from negative infinity to positive infinity:</li>
+<li class="list-indent-1">$\int_{-\infty}^{+\infty}f(x)dx=\int_{-\infty}^{0}f(x)dx+\int_{0}^{+\infty}f(x)dx$</li>
+<li class="list-indent-1">Both limits must exist and converge; only then does the improper integral of the current upper and lower bounds converge;</li>
+</ul>
+<p><strong>Corollary: Generalized Newton-Leibniz Formula</strong></p>
+<ul>
+<li>$\int_{-\infty}^{+\infty}f(x)dx=F(x)|_{-\infty}^{+\infty}$</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Improperintegralsoveraninfiniteinterval</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1. Definition 1: $$\int_{a}^{+\infty}f(x)dx=\lim_{t\to+\infty}\int_{a}^{t}f(x)dx$$ If this limit exists, then the improper integral is called convergent; Conversely, it is divergent;</blockquote>
+<blockquote>2. Definition 2: $$\int_{-\infty}^{b}f(x)dx=\lim_{t\to-\infty}\int_{t}^{b}f(x)dx$$ Same logic as definition one;</blockquote>
+<blockquote>3. Definition 3: $$\int_{-\infty}^{+\infty}f(x)dx=\int_{-\infty}^{0}f(x)dx+\int_{0}^{+\infty}f(x)dx$$ If both converge, then converge; Otherwise, divergence;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Integral on an infinite interval, defined using the limit of the integral over a finite interval;</li>
+<li>Convergence can be evaluated;</li>
+</ul>
+<h3 id="section-4">1.1.2 Calculation Methods</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">ComparativeDiscrimination</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> used to determine the divergence of improper integrals;</blockquote>
+<blockquote>Suppose $f (x),  g (x)$ continuity on $[a,  +\infty)$, and $0\leq f (x)\leq g (x)$, then</blockquote>
+<blockquote>$$1)\int_{a}^{+\infty}g(x)dx\text{ Convergence }\Rightarrow\int_{a}^{+\infty}f(x)dx\text{ Convergence }$$</blockquote>
+<blockquote>$$2) \int_{a}^{+\infty}f(x)dx\text{ Diverges }\Rightarrow\int_{a}^{+\infty}g(x)dx\text{ Diverges }$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Large convergence, small convergence; Large divergence, small divergence not necessarily divergence;</li>
+<li>Small things diverge, big ones definitely diverge; Small things converge, big ones don't necessarily converge;</li>
+</ul>
+<p><strong>Supplement: Preliminary Judgment on Zoom in and Out</strong></p>
+<ul>
+<li>The number of times to observe the variable x in the function, for example, in $\frac{\sqrt{x}}{1+x^2}$ where the denominator x is $3/2$, and convergence;</li>
+</ul>
+<p><strong>Usage Examples</strong></p>
+<ul>
+<li>Example question: $\int_1^{+\infty}\frac{\sqrt{x}}{1+x^2}dx.$</li>
+<li>Since $1+x^2&gt;x^2$, $\frac{\sqrt{x}}{1+x^{2}}&lt;\frac{\sqrt{x}}{x^{2}}=\frac{1}{x^{3/2}}$;</li>
+<li>Because the comparison integral has exponent $P=\frac32&gt;1$, $\int_1^{+\infty}\frac{\sqrt{x}}{1+x^2}\,dx$ converges;</li>
+</ul>
+<h5 id="section-5"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote>Let $f,g$ be nonnegative and continuous on $[a,+\infty)$, and suppose $\lim_{x\to+\infty}\frac{f(x)}{g(x)}=\lambda$. Then:</blockquote>
+<blockquote>1. If $\lambda&gt;0$, then $\int_a^\infty f(x)\,dx$ and $\int_a^\infty g(x)\,dx$ have the same convergence behavior.</blockquote>
+<blockquote>2. If $\lambda=0$ and $\int_a^\infty g(x)\,dx$ converges, then $\int_a^\infty f(x)\,dx$ converges.</blockquote>
+<blockquote>3. If $\lambda=\infty$ and $\int_a^\infty g(x)\,dx$ diverges, then $\int_a^\infty f(x)\,dx$ diverges.</blockquote>
+<blockquote>Common result: $$\int_{a}^{+\infty}\frac{1}{x^{P}}\,dx\begin{cases}\text{converges},&amp;P&gt;1,\\\text{diverges},&amp;P\leq1,\end{cases}\qquad(a&gt;0).$$</blockquote>
+<h3 id="section-6">1.1.3 Example Problems</h3>
+<p><strong>Example Question</strong>: Find $\int_{-\infty}^{+\infty}\frac{dx}{1+x^{2}}$</p>
+<ul>
+<li>Solution:</li>
+<li class="list-indent-1">$\arctan x\big|_{-\infty}^{+\infty}=\frac{\pi}{2}-(-\frac{\pi}{2})=\pi$;</li>
+<li>Question Type: <span class="note-tag">ImproperIntegral</span></li>
+</ul>
+<h2 id="section-7">1.2 Improper integrals of unbounded functions</h2>
+<h3 id="section-8">1.2.1 Basic Concepts</h3>
+<h5 id="section-9"><strong>Definition</strong>: <span class="note-tag">ImproperIntegralsOfUnboundedFunctions</span></h5>
+<blockquote><span style="color:#ccc1d9">Description:</span></blockquote>
+<blockquote>1. If $f(x)$ is unbounded in every right-hand neighborhood of $a$, then $a$ is a singular point and $$\int_a^bf(x)\,dx=\lim_{t\to a^+}\int_t^bf(x)\,dx;$$</blockquote>
+<blockquote>2. If $b$ is a singular point, then $$\int_{a}^{b}f(x)\,dx=\lim_{t\to b^{-}}\int_{a}^{t}f(x)\,dx;$$</blockquote>
+<blockquote>3. If $c$ is a singular point with $a&lt;c&lt;b$, then both sides must converge and $$\int_{a}^{b}f(x)\,dx=\int_{a}^{c}f(x)\,dx+\int_{c}^{b}f(x)\,dx.$$</blockquote>
+<h5 id="section-10"><strong>Theorem</strong>: <span class="note-tag">ComparisonTest</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote>Let $f,g$ be continuous on $(a,b]$ and satisfy $0\leq f(x)\leq g(x)$. Then:</blockquote>
+<blockquote>$$\int_{a}^{b}g(x)\,dx\text{ converges }\Rightarrow\int_{a}^{b}f(x)\,dx\text{ converges};$$</blockquote>
+<blockquote>$$\int_{a}^{b}f(x)\,dx\text{ diverges }\Rightarrow\int_{a}^{b}g(x)\,dx\text{ diverges}.$$</blockquote>
+<h5 id="section-11"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote>Let $f,g$ be nonnegative and continuous on $(a,b]$, and suppose $\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lambda$. Then</blockquote>
+<blockquote>$$\begin{aligned}&amp;1)\ \lambda&gt;0:\ \int_a^b f(x)\,dx\text{ and }\int_a^b g(x)\,dx\text{ have the same convergence behavior};\\&amp;2)\ \lambda=0:\ \int_a^b g(x)\,dx\text{ convergent}\Rightarrow\int_a^b f(x)\,dx\text{ convergent};\\&amp;3)\ \lambda=+\infty:\ \int_a^b g(x)\,dx\text{ divergent}\Rightarrow\int_a^b f(x)\,dx\text{ divergent}.\end{aligned}$$</blockquote>
+<blockquote>Common result: $$\int_a^b\frac{dx}{(x-a)^P},\quad\int_a^b\frac{dx}{(b-x)^P}\quad\begin{cases}\text{converge},&amp;P&lt;1,\\\text{diverge},&amp;P\geq1.\end{cases}$$</blockquote>
+<p><strong>Concept Introduction</strong></p>
+<ul>
+<li>Assume the current function is $y=1/x$, then the current requirement is to integrate the function from 0 to 1;</li>
+<li class="list-indent-1">At point 0, since the limit is undefined, this point is also called a defect point;</li>
+<li>The imperfect integral of this unbounded function is also called the improper integral;</li>
+</ul>
+<p><strong>The Deceptive Nature of Flawed Points</strong></p>
+<ul>
+<li>Only looking at the upper and lower limits of the definite integral cannot determine whether the current integral is a flawed integral;</li>
+<li>You need to check the current conditions for the function to see if they are met;</li>
+</ul>
+<h2 id="section-12">1.3 Frequently Tested Question Types</h2>
+<h3 id="section-13">Question Type: <span class="note-tag">Convergenceofimproperintegrals</span></h3>
+<h4 id="section-14">PART 1: Problem-solving methods</h4>
+<p><strong>Methods for Determining Convergence and Divergence</strong></p>
+<ul>
+<li>1. Definition method;</li>
+<li class="list-indent-1">Based on the current integrand, find its antiderivative, find its limit on the integrand interval, and see if the limit value converges;</li>
+<li>2. Comparative discriminant;</li>
+<li class="list-indent-1">Comparative law;</li>
+<li class="list-indent-1">The limit form of the comparative method;</li>
+<li>3. P Integral;</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">The infinite impermanent integral converges at <code>-&gt;</code> $P&gt;1$ and diverges at $P&lt;1$</li>
+<li class="list-indent-2">The improper integral of an unbounded function converges at <code>-&gt;</code> $P&lt;1$ and diverges at $P&gt;1$</li>
+<li>Use whichever is most convenient;</li>
+</ul>
+<p><strong>Note</strong>: When it comes to $\mathrm{e}^{\infty}$, pay attention to dividing it into left and right sections;</p>
+<h4 id="section-15">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: $\int_{2}^{+\infty}\frac{1}{\sqrt{x}}dx$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Method 1: Use definitions</li>
+<li class="list-indent-1">Method 2: Use a P-series</li>
+<li>Analysis</li>
+<li class="list-indent-1">Method One:</li>
+<li class="list-indent-2">$\int_{2}^{+\infty}\frac{1}{\sqrt{x}}dx$ Find the antiderivative -&gt; which is 2√x at 2 times. At this point, directly find its limit;</li>
+<li class="list-indent-1">Method Two:</li>
+<li class="list-indent-2">Since the radical x is half of the P series, it diverges;</li>
+<li>Question Type: <span class="note-tag">Convergenceanddivergenceofimproperintegrals</span></li>
+</ul>
+<p><strong>Example Question</strong>: $\text{ Anomalous integral }\int_{0}^{+\infty}\frac1{x^a(1+x)^b}dx{\text{ To converge means to contract }}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">$\int_{0}^{+\infty}\frac{1}{x^{a}(i+x)^{b}}dx=\int_{0}^{1}\frac{1}{x^{a}(i+x)^{b}}dx+\int_{1}^{ts}\frac{1}{x^{a}(i+x)^{b}}dx$</li>
+<li class="list-indent-1">Both need to converge;</li>
+<li class="list-indent-1">Analysis of the left side:</li>
+<li class="list-indent-2">Use the comparative method: $\lim_{x\to0^{+}}\frac{\frac{1}{x^{a}(x+x)^{b}}}{\frac{1}{x^{a}}}=1$</li>
+<li class="list-indent-2">Therefore, the convergence and divergence with the P integral <code>-&gt;</code> $a&lt;1$</li>
+<li class="list-indent-1">Analysis of the right side:</li>
+<li class="list-indent-2">$\frac1{x^{a+b}(1+\frac1x)^b}$</li>
+<li class="list-indent-2">Because it approaches infinity, 1+1/x equals 1, so only $a+b$ is needed</li>
+<li class="list-indent-2">Limit form using the comparative method: $\lim_{x\to\infty}\frac{\frac1{x^{a}(x)^{b}}}{\frac1{x^{a+b}}}$ <code>-&gt;</code> $a+b&gt;1$</li>
+<li>Analysis</li>
+<li>Question Type: #</li>
+</ul>
+<h4 id="section-16">PART 3: Key Points Review</h4>
+<h3 id="section-17">Question Type: <span class="note-tag">Calculationofimproperintegrals</span></h3>
+<h4 id="section-18">PART 1: Problem-solving methods</h4>
+<p><strong>What is the Calculation of Improper Integrals</strong></p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">Calculate a definite integral + calculate a limit;</li>
+<li>Method:</li>
+<li class="list-indent-1">Method 1: Substitution method</li>
+<li class="list-indent-1">Method 2: Partial Method</li>
+</ul>
+<h4 id="section-19">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: $\int_{2}^{+\infty}\frac{\mathrm{d}x}{(x+7)\sqrt{x-2}}=$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Solution 1: Substitution method</li>
+<li class="list-indent-2">Ling $\sqrt{k-2}=t,\quad x-2=t^{2}$</li>
+<li class="list-indent-2">So: $\int_{0}^{+\infty}\frac{2t}{t(t^{2}+9)}dt=2\int_{0}^{+\infty}\frac{dt}{9+t^{2}}$</li>
+<li class="list-indent-2">$=\frac{2}{3}\arctan\frac{\pi}{3}|_{0}^{+\infty}=\frac{2}{3}\left[\frac{\pi}{2}-0\right]$</li>
+<li class="list-indent-1">Solution Two: Completing the differential</li>
+<li class="list-indent-2">Original expression = $\int_{2}^{+\infty}\frac{2d\sqrt{x-2}}{9+(\sqrt{x-2})^{2}}$</li>
+</ul>
+<p>		-</p>
+<ul>
+<li>Analysis</li>
+<li>Question Type: #</li>
+</ul>
+<h4 id="section-20">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-040/index.html"><span>← Previous item</span><strong>Lecture 32: Calculation of definite integrals</strong></a>
+    <a class="article-pagination-next" href="../math-042/index.html"><span>Next item →</span><strong>Lecture 34: Application of Definite Integrals</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +252,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

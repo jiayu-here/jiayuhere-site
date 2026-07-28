@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -92,15 +92,15 @@
 <li>当 $y=f(u),u=G(x)$ 可导 <code>-&gt;</code> $y=f(G (x))$ 可导；</li>
 <li>链式求导法：$y_{x}^{\prime}=y_{u}^{\prime}\cdot u_{x}^{\prime}$</li>
 </ul>
-<h5 id="section-4"><strong>定理</strong>： #多元复合函数的求导法则</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 x 及对 $y$ 的偏导数，函数 $z=f(u,\nu)$ 在对应点 $(u,\nu)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x, y)$ 处的两个偏导数存在，且有：</blockquote>
-<blockquote>$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial y}$$</blockquote>
+<h5 id="section-4"><strong>定理</strong>： <span class="note-tag">多元复合函数的求导法则</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 $x$ 及对 $y$ 的偏导数，函数 $z=f(u,v)$ 在对应点 $(u,v)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x,y)$ 处的两个偏导数存在，且有：</blockquote>
+<blockquote>$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>对内层函数：</li>
 <li class="list-indent-1">$u=u(x,y),\quad v=v(x,y)$ 要求的是<strong>偏导数存在</strong>；</li>
 <li>对外层函数：</li>
-<li class="list-indent-1">$z=f(u,\nu)$ 要求的是<strong>偏导数存在</strong>，并且要<strong>连续</strong>；</li>
+<li class="list-indent-1">$z=f(u,v)$ 要求的是<strong>偏导数存在</strong>，并且要<strong>连续</strong>；</li>
 <li>原因：</li>
 <li class="list-indent-1">在多元里面，可导不可以推出可微；</li>
 </ul>
@@ -116,21 +116,21 @@
 <li class="list-indent-3">y</li>
 <li>分析：</li>
 <li class="list-indent-1">由上述求导的树形图可知，其中共有 <code>x、y</code> 两个变量；</li>
-<li class="list-indent-1">对 <code>x</code> 自变量而言 <code>-&gt;</code> 其在 <code>u</code> 和 <code>v</code> 当中都存在 <code>-&gt;</code> 因此对 x 的求导：$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x}$ <code>-&gt;</code> 求导的结果为分别对 <code>u</code>、<code>v</code> 的复合函数求导的和；</li>
+<li class="list-indent-1">对 <code>x</code> 自变量而言 <code>-&gt;</code> 其在 <code>u</code> 和 <code>v</code> 当中都存在 <code>-&gt;</code> 因此对 x 的求导：$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$ <code>-&gt;</code> 求导的结果为分别对 <code>u</code>、<code>v</code> 的复合函数求导的和；</li>
 <li class="list-indent-1">同理对 <code>y</code></li>
 </ul>
 <h3 id="section-5">42.2.2 全微分形式的不变性</h3>
-<h5 id="section-6"><strong>定理</strong>： #全微分形式的不变性</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设函数 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial\nu}\operatorname{d}\nu.$$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">全微分形式的不变性</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>设函数 $z=f(u,v),\quad u=u(x,y)$ 及 $v=v(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial v}\operatorname{d}v.$$</blockquote>
 <blockquote>即多元函数也具有微分形式的不变性；</blockquote>
-<blockquote>由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$$</blockquote>
+<blockquote>由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>一元时：</li>
 <li class="list-indent-1">无论当前是对 x 的导数 $dx$ ，还是对 u 的导数 $du$（即无论是自变量还是中间变量），当前都是<strong>对这个变量的导数乘以对这个变量的微分</strong>；</li>
 <li>多元时： </li>
 <li class="list-indent-1">因为 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，所以一定可微分；</li>
-<li class="list-indent-1">微分形式不变 <code>-&gt;</code> $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$</li>
+<li class="list-indent-1">微分形式不变 <code>-&gt;</code> $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$</li>
 <li class="list-indent-1">带入</li>
 <li class="list-indent-2"><img class="note-image" src="/assets/notes/8b643ae6ba7c-Pasted-image-20240203172405.png" alt="Pasted image 20240203172405" loading="lazy" decoding="async"></li>
 <li>意义：</li>
@@ -139,7 +139,7 @@
 <h3 id="section-7">42.2.3 例题</h3>
 <p><strong>情况 1：</strong>$\text{设 }z=f(u,v),u=\varphi(x),v=\psi(x)\text{ 均可微,则}$</p>
 <ul>
-<li>$\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial\nu}\frac{d\nu}{dx}$</li>
+<li>$\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial v}\frac{dv}{dx}$</li>
 <li>分析：</li>
 <li class="list-indent-1">因为 u、v 对 z 是偏导数，所以是偏微分 $\partial$</li>
 <li class="list-indent-1">因为如图所示的关系</li>
@@ -169,12 +169,12 @@
 <li class="list-indent-1">= $\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy$</li>
 <li class="list-indent-1">然后因为是分别求 x、y，所以分开得：</li>
 <li class="list-indent-1"><img class="note-image" src="/assets/notes/bf00984ae725-Pasted-image-20240203173251.png" alt="Pasted image 20240203173251" loading="lazy" decoding="async"></li>
-<li>题型： #多元复合函数的求导法则</li>
+<li>题型： <span class="note-tag">多元复合函数的求导法则</span></li>
 </ul>
 <h2 id="section-8">42.3 隐函数的微分法</h2>
 <h3 id="section-9">42.3.1 多元函数隐函数基本概念</h3>
-<h5 id="section-10"><strong>定义</strong>： #多元函数隐函数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：由方程 $F(x, y)=0$ 确定的隐函数 $y=(x)$，得：$$y^{\prime}=-\frac{F_{x}^{\prime}}{F_{y}^{\prime}}$$</blockquote>
+<h5 id="section-10"><strong>定义</strong>： <span class="note-tag">多元函数隐函数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>由方程 $F(x, y)=0$ 确定的隐函数 $y=(x)$，得：$$y^{\prime}=-\frac{F_{x}^{\prime}}{F_{y}^{\prime}}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>什么是隐函数</li>
@@ -184,8 +184,8 @@
 <li class="list-indent-1">显函数可以理解为：</li>
 <li class="list-indent-1">自变量和因变量的函数关系明显的函数，形如 $y=f(x)$ 对应隐函数概念； </li>
 </ul>
-<h5 id="section-11"><strong>定理</strong>： #隐函数存在定理</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： </blockquote>
+<h5 id="section-11"><strong>定理</strong>： <span class="note-tag">隐函数存在定理</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
 <blockquote>1. $F(x,y)$ 在点 $M_0(x_0,y_0)$ 邻域内连续可偏导；</blockquote>
 <blockquote>2. $F(x_0,y_0)=0$；</blockquote>
 <blockquote>3. $F_y\:\prime(x_0,y_0)\neq0$ </blockquote>
@@ -207,11 +207,11 @@
 <li class="list-indent-1">x 是对于 x 的函数：$x=x$</li>
 <li class="list-indent-1">y 是对于 x 的函数：$y=f(x)$</li>
 <li>所以当对 $F(x,y)=0$ 求导时，它们的求导链条为：$F&lt;_{y}^x&gt;x$</li>
-<li>所以分别对 x、y 求导后：$\frac{\partial F}{\partial x}+\frac{\partial E}{\partial y}\frac{dy}{dx}=0$</li>
+<li>所以分别对 x、y 求导后：$\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y}\frac{dy}{dx}=0$</li>
 <li>转化位置，得到：$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$</li>
 </ul>
-<h5 id="section-12"><strong>定理</strong>： #多元隐函数存在定理</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $F(x,y,z)$ 在点 $M_{0}(x_{0},y_{0},z_{0})$ 邻域内连续可偏导，且 $F(x_{0},y_{0},z_{0})=0,F_{z}\:{\prime}(x_{0},y_{0},z_{0})\neq0$ 则由 $F(x,y,z)=0$ 在 $M_{0}$ 邻域内唯一确定一个连续可导函数 $z=\varphi(x,y)$ 且 $z_0=\varphi(x_0,y_0)$</blockquote>
+<h5 id="section-12"><strong>定理</strong>： <span class="note-tag">多元隐函数存在定理</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $F(x,y,z)$ 在点 $M_{0}(x_{0},y_{0},z_{0})$ 邻域内连续可偏导，且 $F(x_{0},y_{0},z_{0})=0,F_{z}\:{\prime}(x_{0},y_{0},z_{0})\neq0$ 则由 $F(x,y,z)=0$ 在 $M_{0}$ 邻域内唯一确定一个连续可导函数 $z=\varphi(x,y)$ 且 $z_0=\varphi(x_0,y_0)$</blockquote>
 <blockquote>则：$$\frac{\partial z}{\partial x}=-\frac{F_{x}’}{F_{z}’},\frac{\partial z}{\partial y}=-\frac{F_{y}’}{F_{z}’}$$</blockquote>
 <h3 id="section-13">42.3.2 例题</h3>
 <p><strong>例题</strong>：$e^xy^3-x^2+2y=1,\text{求}\frac{dy}{dx},\frac{d^2y}{dx^2}$</p>
@@ -226,14 +226,14 @@
 \begin{aligned}
 &amp;\text{求}\frac{d^{2}y}{dx^{2}},\text{这里对}e^{x}y^{3}+e^{x}3y^{2}\frac{dy}{dx}-2x+2\frac{dy}{dx}=0\text{再对x求导} \\
 &amp;e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}6y({\frac{dy}{dx}})^{2}+e^{x}3y^{2}{\frac{d^{2}y}{dx^{2}}}-2+2{\frac{d^{2}y}{dx^{2}}}=0 \\
-&amp;\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}+e^{x}6y(\frac{dy}{dx})^{2}}{e^{x}3y^{2}+2} \\
+&amp;\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}-6e^{x}y(\frac{dy}{dx})^{2}}{3e^{x}y^{2}+2} \\
 &amp;将{\frac{dy}{dx}}={\frac{2x-e^{x}y^{3}}{e^{x}3y^{2}+2}}{\text{代入}}
 \end{aligned}
 $$</div>
 <ul>
-<li>题型： #隐函数求导</li>
+<li>题型： <span class="note-tag">隐函数求导</span></li>
 </ul>
-<p><strong>例题</strong>：已知 $x^{2}+y^{2}-1=0$，当 $(0,1)$ 点处 XXXX，求一阶隐函数求导以及二阶隐函数求导；</p>
+<p><strong>例题</strong>：已知 $x^{2}+y^{2}-1=0$，求隐函数在 $(0,1)$ 点处的一阶导数和二阶导数；</p>
 <ul>
 <li>分析</li>
 <li class="list-indent-1">注意是 $F(x,y)=0$</li>
@@ -245,11 +245,11 @@ $$</div>
 <li>解析：二阶</li>
 <li class="list-indent-1">对 $-\frac{x}{y}$ 中的 $x$ 再求一次导；</li>
 <li class="list-indent-1">$\frac{d^{2}y}{dx^{2}}=-\frac{y-xy^{\prime}}{y^{2}}=-\frac{y+x\frac{x}{y}}{y^{2}}$</li>
-<li>题型： #隐函数求导 </li>
+<li>题型： <span class="note-tag">隐函数求导</span> </li>
 </ul>
 <h2 id="section-14">42.4 常考题型 </h2>
 <hr>
-<h3 id="section-15">题型： #复合函数偏导数与全微分 </h3>
+<h3 id="section-15">题型： <span class="note-tag">复合函数偏导数与全微分</span> </h3>
 <h4 id="section-16">PART 1：解题方法</h4>
 <p><strong>题型</strong>：对变上限积分多元复合函数求导</p>
 <ul>
@@ -322,7 +322,7 @@ $$</div>
 </ul>
 <h4 id="section-18">PART 3：知识点复盘</h4>
 <hr>
-<h3 id="section-19">题型： #隐函数的偏导数与全微分</h3>
+<h3 id="section-19">题型： <span class="note-tag">隐函数的偏导数与全微分</span></h3>
 <h4 id="section-20">PART 1：解题方法</h4>
 <p><strong>题型</strong>：隐函数求微分</p>
 <ul>
@@ -423,6 +423,6 @@ $$</div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

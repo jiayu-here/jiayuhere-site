@@ -1,13 +1,23 @@
 ---
-title: "Graduate Examination English: 真题 - 2012年：小作文"
+title: "2012 Past Paper: Practical Writing"
 slug: english-038
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 2012 Past Paper: Practical Writing. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Writing"]
+tags: ["Graduate Entrance Examination English","English Writing","2012 Past Paper: Practical Writing"]
 ---
 
-## Original Chinese Note
+**past-paper question**
+- ![Pasted image 20250409111134](/assets/notes/31e1a6f0266f-Pasted-image-20250409111134.png)
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Templates**
+```Text
+Dear international students,
 
-[Read the original Chinese note](/notes/english-038/)
+We are delighted that you will be visiting our university. On behalf of the Students' Union, I would like to extend a warm welcome and offer several suggestions for your time on campus.
+
+To begin with, you are welcome to join the sports activities held on the playground, including friendly football matches with our students. These activities will give you an opportunity to make friends and communicate with people from different cultural backgrounds. In addition, the university will organize lectures and campus tours through which you can learn about our history and academic life.
+
+If you have any questions or need assistance, please feel free to contact us. We hope you will have an enjoyable and rewarding visit.
+
+The Students' Union
+```

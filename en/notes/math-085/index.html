@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 16：非齐次线性方程组 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 16: Systems of Nonhomogeneous Linear Equations | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Systems of Nonhomogeneous Linear Equations. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Systems of Linear Equations">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 16：非齐次线性方程组 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 16: Systems of Nonhomogeneous Linear Equations | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Systems of Nonhomogeneous Linear Equations. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-085/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,68 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 16：非齐次线性方程组</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-085/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-084/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 15：齐次线性方程组</strong></a>
-    <a class="article-pagination-next" href="../math-086/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 17：两个方程组的公共解</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 16: Systems of Nonhomogeneous Linear Equations</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Systems of Nonhomogeneous Linear Equations. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics</span><span>4 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Systems of Linear Equations</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">16.1 Systems of Nonhomogeneous Linear Equations</a><a href="#section-4">16.2 Solution Methods and Steps</a></nav></details><div class="prose"><h2 id="section-1">16.1 Systems of Nonhomogeneous Linear Equations</h2>
+<h3 id="section-2">16.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Nonhomogeneouslinearequations</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{m1}x_{1}+a_{m2}x_{2}+\cdots+a_{mn}x_{n}=b_{m}\end{cases}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">It is called <code>m</code> equations and <code>n</code> systems of nonhomogeneous linear equations with unknown values;</li>
+<li class="list-indent-1">Therefore, we also get an extra column, which is the augmented matrix;</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Basically, it's turning $x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}=0$ into $x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}=b$</li>
+</ul>
+<h3 id="section-3">16.1.2 Systems of Nonhomogeneous Linear Equations</h3>
+<p><strong>Concept</strong>: Conditions for solutions</p>
+<ul>
+<li>If $r(A)\neq r([A,b])$, equivalently $\boldsymbol{b}$ cannot be represented as a linear combination of the columns $\alpha_1,\alpha_2,\cdots,\alpha_n$, then system (II) has no solution;</li>
+<li class="list-indent-1"><code>-&gt;</code> Adding the column vector <code>b</code> increases the rank, so <code>b</code> is not in the column space of <code>A</code>;</li>
+<li class="list-indent-1"><code>-&gt;</code> Therefore, <code>Ax=b</code> is inconsistent;</li>
+<li>If $r(A)=r([A,b])=n$, the columns $a_1,a_2,\cdots,a_n$ are linearly independent while $a_1,a_2,\cdots,a_n,b$ are linearly dependent, and system (II) has a unique solution;</li>
+<li class="list-indent-1"><code>-&gt;</code> The rank equals the number of unknowns, so the coefficient matrix has full column rank;</li>
+<li class="list-indent-1"><code>-&gt;</code> No free variables remain, so the solution is unique;</li>
+<li>If $r\left(A\right)=r\left(\left[A,b\right]\right)=r&lt;n\quad$, then system (II) has infinitely many solutions.</li>
+<li class="list-indent-1"><code>-&gt;</code> Degrees of freedom &gt; the number of true constraints, so there are infinitely many solutions;</li>
+</ul>
+<p><strong>Concept</strong>: The property of solutions</p>
+<ul>
+<li>Let $\eta_1,\eta_2,\eta$ be solutions of the nonhomogeneous system $Ax=b$, and let $\xi$ be a solution of the corresponding homogeneous system $Ax=0$;</li>
+<li>(1) $\eta_1-\eta_2$ is a solution of <code>Ax=0</code> <code>-&gt;</code> the difference of any two solutions of the nonhomogeneous system is a solution of the homogeneous system;</li>
+<li>(2) $k\xi+\eta$ is a solution of <code>Ax=b</code> for any scalar $k$;</li>
+</ul>
+<h2 id="section-4">16.2 Solution Methods and Steps</h2>
+<p><strong>Method</strong>: Method for solving nonhomogeneous linear equations</p>
+<ul>
+<li>Step 1:</li>
+<li class="list-indent-1">Write the derived system <code>Ax=0</code> of <code>Ax=b</code> and find the general solution of <code>Ax=0</code>: $k_{1}\xi_{1}+k_{2}\xi_{2}+\cdots+k_{n-r}\xi_{n-r}$</li>
+<li class="list-indent-1">That is: first, as with homogeneous linear equations, find its general solution;</li>
+<li>Step 2:</li>
+<li class="list-indent-1">Find a particular solution $\eta$ for <code>Ax=b</code></li>
+<li class="list-indent-1">That is, find one particular solution of the current nonhomogeneous system;</li>
+<li class="list-indent-1">Note: This particular solution is not unique;</li>
+<li>Step 3:</li>
+<li class="list-indent-1">The general solution of $Ax=b$ is $k_{1}\xi_{1}+k_{2}\xi_{2}+\cdots+k_{n-r}\xi_{n-r}+\eta$, where $k_{1},k_{2},\cdots,k_{n-r}$ are arbitrary constants;</li>
+<li class="list-indent-1"><code>general solution of a nonhomogeneous system = general solution of the corresponding homogeneous system + one particular solution of the nonhomogeneous system</code>;</li>
+</ul>
+<p><strong>Supplement</strong>: Conditions for solutions of nonhomogeneous systems <code>-&gt;</code> Matrix rank</p>
+<ul>
+<li>Premise: Matrix $A_{m*n}$</li>
+<li>Full row rank: <code>m=r(A)</code></li>
+<li class="list-indent-1">If $A$ has full row rank, its column space is all of $\mathbb{R}^m$, so $Ax=b$ is consistent for every $b\in\mathbb{R}^m$;</li>
+<li>Listed as full rank: <code>n=r(A)</code></li>
+<li class="list-indent-1">If it is a homogeneous equation: the number of unknown variables equals the number of proper constraints;</li>
+<li class="list-indent-1">But in nonhomogeneous degrees, since it is <code>r(A)=r(A|b)=n</code>, it is not necessarily so;</li>
+<li>The condition for a system of equations to have infinitely many solutions: <code>r(A)=r(A|b)&lt;n</code></li>
+</ul>
+<p><strong>Conclusion</strong>: Regarding the solution to $A^{T}Ax=A^{T}b$</p>
+<ul>
+<li>If $A^{T}x=b$ has no solution <code>-&gt;</code> $A^{T}Ax=A^{T}b$ find the best approximate solution;</li>
+</ul>
+<p><strong>Conclusion</strong>: $r(A)=r(A^T)=r(AA^T)=r(A^TA)$</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-084/index.html"><span>← Previous item</span><strong>Lecture 15: Homogeneous Systems of Linear Equations</strong></a>
+    <a class="article-pagination-next" href="../math-086/index.html"><span>Next item →</span><strong>Lecture 17: Common Solutions of Two Systems of Equations</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +130,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -46,18 +46,18 @@ tags: ["考研数学", "线性代数", "矩阵"]
 
 ## 10.3 有关秩的几个重要式子
 **概念**：设 A 是 `m*n` 矩阵，`B` 是满足有关矩阵运算要求的矩阵，则：
-- （1）${1}0\leqslant r(A)\leqslant\min\{m,n\}($ 由定义 )
-	- 任何一个矩阵的秩最低为 0，并且 `r(a)=0` 则矩阵一定等于 `0`：`A=0`
-	- 并且 $r(A)\leqslant\min\{m,n\}$ `<-` 因为行列式是方的，而矩阵的子式是行列式，所以必须为 `n*n` 
-- （2）${2}r(kA)=r(A)(k\neq0)($ 由定义 )
+- （1）$0\leqslant r(A)\leqslant\min\{m,n\}$（由定义）
+	- 任何矩阵的秩最低为 0，并且 $r(A)=0$ 当且仅当 $A=O$；
+	- $r(A)\leqslant\min\{m,n\}$，因为矩阵的非零子式阶数不会超过行数或列数；
+- （2）$r(kA)=r(A)\quad(k\neq0)$（由定义）
 - （3）$r\left(AB\right)\leqslant\min\left\{r\left(A\right),r\left(B\right)\right\}$
-	- 矩阵越乘，秩序=越多越的‘‘’’
-- （4）$r(A+B)<=r(A)+r(B)$
+	- 矩阵相乘不会增加秩；
+- （4）$r(A+B)\leq r(A)+r(B)$
 - （5）$r\left(A^{*}\right)=\begin{cases}n,&r\left(A\right)=n,\\1,&r\left(A\right)=n-1,\\0,&r\left(A\right)<n-1,\end{cases}$
 - （6）设 A= `m*n` 的矩阵，`P、Q` 分别为 m 阶、n 阶的可逆矩阵，则：`r(A)=r(PA)=r(AQ)=r(PAQ)`
 	- 在过程当中，所有中间矩阵都是等价的：$r\left(\begin{matrix}E_{r}&0\\0&0\end{matrix}\right)$
-- （7）若 $A_{m\times n}B_{m\times s}=O,则r\left(A\right)+r\left(B\right)\leqslant n$；
+- （7）若 $A_{m\times n}B_{n\times s}=O$，则 $r\left(A\right)+r\left(B\right)\leqslant n$；
 	- `n` 为 `A` 的列数；
 - （8）格拉姆矩阵：$r\left(A\right)=r\left(A^{T}\right)=r\left(A^{T}A\right)=r\left(AA^{T}\right)$
-	- $r\left(A^{T}A\right)=r\left(AA^{T}\right)$ 一定有解，并且一定是最佳近似解；
-	- 对于任何一个矩阵，其转置的秩等于其 $r\left(A^{T}A\right)=r\left(AA^{T}\right)$；
+	- 格拉姆矩阵 $A^TA$ 与 $AA^T$ 的秩都等于 $A$ 的秩；
+	- 对任意矩阵，都有 $r(A)=r(A^T)$；

@@ -37,7 +37,7 @@ $(y^{\prime})^{\prime}=y^2=\frac{d^2y}{dx^2}\quad\quad y^{m}\quad\quad y^{(4)}\q
 	- $(u\pm v)^{(n)}=u^{(n)}\pm v^{(n)}$
 - 乘法
 	- 莱布尼茨公式
-	- ${(u\nu)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$
+	- ${(uv)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$
 
 **例题**：$\text{设 }f(x)=\frac1{x^2-1}\text{,求 }f^{(n)}(x)$
 思路：无法直接使用加法或者乘法公式，因此需要将分母分解因式，将其拆分：

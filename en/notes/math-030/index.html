@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 22：洛必达法则 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 22: L’Hôpital’s Rule | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 22: L’Hôpital’s Rule. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Mean Value Theorems and Applications of Derivatives">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 22：洛必达法则 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 22: L’Hôpital’s Rule | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 22: L’Hôpital’s Rule. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-030/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,130 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 22：洛必达法则</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2023-12-27</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-030/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-029/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 21：微分中值定理</strong></a>
-    <a class="article-pagination-next" href="../math-031/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 23：泰勒公式</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 22: L’Hôpital’s Rule</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 22: L’Hôpital’s Rule. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2023-12-27</span><span>7 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What Is L'Hôpital's Rule?</a><a href="#section-4">1.2 Situations Where L'Hôpital's Rule Is Used</a></nav></details><div class="prose"><h2 id="section-1">1.1 What Is L'Hôpital's Rule?</h2>
+<h3 id="section-2">1.1.1 Basic Concepts of L'Hôpital's Rule</h3>
+<p><strong>Why L'Hôpital's Rule Is Needed</strong></p>
+<p>-<strong>Using derivatives to calculate limits with indeterminate forms</strong>, mainly used for calculating indeterminate forms in fractional form;</p>
+<ul>
+<li class="list-indent-1">Informally, L'Hôpital's rule allows certain limits of the forms $0/0$ and $\infty/\infty$ to be evaluated through $\lim_{x\to x_0}\frac{f(x)}{g(x)}=\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$, provided the rule's hypotheses are satisfied.</li>
+<li>Its main advantage is that it can reduce certain quotient limits to simpler limits involving derivatives.</li>
+</ul>
+<p><strong>More Accessible Explanation</strong></p>
+<p>Simply put, the essence of finding a limit is to compare the numerator and denominator with the order—to see who is faster.</p>
+<p>Just like the numerator and denominator race toward zero or infinity on the track, we observers want to figure them out</p>
+<ol>
+<li>Who won? (Is the limit greater than one or less than one?) ）</li>
+<li>Did they cross the finish line at the same time, or did the leader reach the finish line several lengths ahead? (Same level or higher rank?) How much difference is there between crossing the line at the same time? (If they cross the line at the same level, what is the actual limit?) ）</li>
+</ol>
+<ul>
+<li>The problem is</li>
+<li class="list-indent-1">Our visual judgment is limited: we know only how two quantities behave near a point. L'Hôpital's rule says that, under specific hypotheses, comparing their derivatives can reveal the limiting ratio of the original quantities.</li>
+<li class="list-indent-1">Each time you calculate the direction, the camera is half as slow; as it slows down, the process of crossing the finish line becomes increasingly clear;</li>
+<li class="list-indent-1">This slow-motion analogy has limits: L'Hôpital's rule cannot be used if the functions are not differentiable in the required punctured neighborhood, if the derivative ratio has no usable limit, or if the original expression is not of type $0/0$ or $\infty/\infty$.</li>
+</ul>
+<p>#####<strong>Theorem</strong>: L'Hôpital's Rule</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if the following conditions are met:</blockquote>
+<blockquote>1）$\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0;$</blockquote>
+<blockquote>2) $f(x)$ and $g(x)$ are differentiable within $\overset{\circ}{\operatorname*{U}}(x_0,  \delta)$, and $g^{\prime}(x)\neq0; $</blockquote>
+<blockquote>3) $\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$ exists (or $\infty)$</blockquote>
+<blockquote>If the above conditions are met, then: $\lim_{x\to x_0}\frac{f(x)}{g(x)}=\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>In short, it's the limit of the 0/0 type;</li>
+</ul>
+<p><strong>Proof</strong>: Use Cauchy's mean value theorem</p>
+<ul>
+<li>$\lim_{x\to x_{0}}\frac{f(x)}{f(x)}=\lim_{x\to x_{0}}\frac{f(x)-f(x_{0})}{g(x)-g(x_{0})}=\lim_{x\to x_{0}}\frac{f^{\prime}(\xi)}{g(\xi)}$</li>
+<li>Therefore, it equals $\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$</li>
+</ul>
+<p><strong>Inference 1</strong>: Some secondary conclusions</p>
+<ul>
+<li>$x-\sin x\sim\frac{1}{6}x^{3}$</li>
+<li>${\tan-x\sim\frac13x^3}$</li>
+</ul>
+<p><strong>Corollary 2</strong>: When x approaches infinity, the growth rate is: $\log_{a}x\ll x^{\alpha}\ll a^{\alpha}$</p>
+<h3 id="section-3">1.1.2 Example Problems</h3>
+<p><strong>Example Question</strong>: $\text{ Find the limit }\lim_{x\to0}\frac{x^2+2\cos x-2}{\left(e^x-1\right)^2\ln(1+x^2)}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">When the original expression is complex, the first consideration should be how to simplify it;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Because $\begin{aligned}&amp;\mathrm{e^x-1\sim x}\\&amp;{\ln(1+x^2)\sim x^2}\end{aligned}$</li>
+<li class="list-indent-1">So the original expression = $\lim_{x\to x_0}\frac{x^{2}+2\cos x-2}{x^{4}}$</li>
+<li class="list-indent-1">Differentiate the numerator and denominator to obtain $\operatorname<em>{lim}_{x\rightarrow0}\frac{2x-2\sin x}{4x^{3}}=\frac{1}{2}\operatorname</em>{lim}_{x\rightarrow0}\frac{x-\sin x}{x^{3}}$.</li>
+<li class="list-indent-1">At this point:</li>
+<li class="list-indent-2">You can use L'Hôpital's rule.</li>
+<li class="list-indent-2">You can choose to substitute with equivalent value;</li>
+<li class="list-indent-1">Use equivalent substitution at this point. The final result is 1/12;</li>
+</ul>
+<p><strong>Example</strong>: $\text{Find }\lim_{x\to+\infty}\frac{\log_ax}{x^\alpha}\text{ and }\lim_{x\to+\infty}\frac{x^\alpha}{a^x}.\ (a&gt;1,\alpha&gt;0)$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Both limits compare logarithmic, polynomial, and exponential growth rates.</li>
+<li class="list-indent-1">L'Hôpital's rule can be applied.</li>
+<li>Analysis</li>
+<li class="list-indent-1">1. Applying L'Hôpital's rule once to the first limit gives $\lim_{x\to\infty}\frac{\frac{1}{x\ln a}}{\alpha x^{\alpha-1}}=\lim_{x\to\infty}\frac{1}{\alpha\ln a\,x^\alpha}=0$.</li>
+<li class="list-indent-1">2. Rewrite the second limit as $\lim_{x\to+\infty}\frac{x^\alpha}{e^{x\ln a}}=0$. If using L'Hôpital's rule, differentiate repeatedly until the power in the numerator is negative.</li>
+<li>Conclusion</li>
+<li class="list-indent-1">As $x\to\infty$, the growth rates satisfy $\log_{a}x\ll x^{\alpha}\ll a^{x}$.</li>
+</ul>
+<p><strong>Example</strong>: $\text{Find }\lim_{x\to0}\left[\frac1{\ln(1+x)}-\frac1x\right].$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">This is an $\infty-\infty$ indeterminate form. Combining the terms produces a $\frac00$ form to which L'Hôpital's rule applies.</li>
+<li>Analysis</li>
+<li class="list-indent-1">$\lim_{x\to0}\frac{x-\ln(1+x)}{x\ln(1+x)}$</li>
+<li class="list-indent-1">Applying L'Hôpital's rule twice gives</li>
+</ul>
+<div class="math-display">$$
+\lim_{x\to0}\frac{1-\frac1{1+x}}{\ln(1+x)+\frac{x}{1+x}}
+	  =\lim_{x\to0}\frac{\frac1{(1+x)^2}}{\frac1{1+x}+\frac1{(1+x)^2}}
+	  =\frac12.
+$$</div>
+<ul>
+<li>Conclusion</li>
+<li class="list-indent-1">For<strong>infinity minus infinity</strong>problems, if there is a denominator, you can consider dividing by<strong>infinity by infinity</strong>type;</li>
+</ul>
+<p><strong>Example Question</strong>: $\lim_{x\to0^+}(x)^{\sin x}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Analysis process: Since the problem is<strong>zero to the power of zero</strong>, at this point</li>
+<li class="list-indent-1">Transform into an exponential function<strong>with base e</strong>, then only count the exponent part and find the exponent's limit;</li>
+</ul>
+<p>	-</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Solution process: Derived from the original expression = $\lim_{x\to0^+}e^{\sin x\ln x}$</li>
+<li class="list-indent-1">Then find the exponent limit: $\lim_{x\to0^+}\sin x\ln x$, then use equivalent substitution to change sinx~x;</li>
+<li class="list-indent-2">$\lim_{x\to0^{+}}x\ln x=\lim_{x\to0^{+}}\frac{\log x}{\frac{1}{x}}=\lim_{x\to0^{+}}\frac{\frac{1}{x}}{-\frac{1}{x^{2}}}=0$</li>
+<li>Conclusion</li>
+<li class="list-indent-1">1.<strong>Zero to the power of zero</strong>(including 1 to the power of infinite), convert it into<strong>exponential function with base e</strong>, find the limit of the exponent part;</li>
+<li class="list-indent-1">2.<strong>0 × infinity</strong>type, converts the 0 part into a denominator, then inverts it to become a denominator, making infinity a comparison to infinity;</li>
+</ul>
+<h2 id="section-4">1.2 Situations Where L'Hôpital's Rule Is Used</h2>
+<h3 id="section-5">1.2.1 Usage Scenarios</h3>
+<p><strong>Usage Analysis</strong>: $\frac00;\quad\frac\infty\infty;\quad0\cdot\infty;\quad\infty-\infty;\quad1^\infty;\quad\infty^0;\quad0^0$;</p>
+<ul>
+<li>The forms $\frac00$ and $\frac\infty\infty$ can be handled directly when the other hypotheses of L'Hôpital's rule hold.</li>
+<li>The forms $0\cdot\infty$, $\infty-\infty$, $1^\infty$, $\infty^0$, and $0^0$ must first be transformed into a quotient of type $\frac00$ or $\frac\infty\infty$.</li>
+</ul>
+<p><strong>Conversion Rules</strong>:</p>
+<ul>
+<li>$\mathbf{0}\cdot\infty\quad\Leftarrow\begin{cases}\mathbf{1}^{\infty}\\\infty^{0}\\\mathbf{0}^{0}&amp;\end{cases}$</li>
+<li>$\frac00,\frac\infty\infty\quad\Leftarrow\begin{cases}0\cdot\infty&amp;\Leftarrow\begin{cases}1^\infty\\\infty^0\\0^0&amp;\end{cases}&amp;\end{cases}$</li>
+<li><img class="note-image" src="/assets/notes/b5abe1b07464-Pasted-image-20240111174212.png" alt="Pasted image 20240111174212" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-6">1.2.2 Notes</h3>
+<ul>
+<li>1. It needs to be simplified first</li>
+<li class="list-indent-1">By using equivalent substitution, it is replaced with a simpler form;</li>
+<li>2. Note Condition 3</li>
+<li class="list-indent-1">$\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$ exists (or $\infty)$</li>
+<li class="list-indent-1">For example, $\lim_{x\to+\infty}\frac{1-\cos x}{1+\cos x}$ does not exist because the expression oscillates and is unbounded near points where $1+\cos x=0$; L'Hôpital's rule does not apply.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-029/index.html"><span>← Previous item</span><strong>Lecture 21: Differential Mean Value Theorems</strong></a>
+    <a class="article-pagination-next" href="../math-031/index.html"><span>Next item →</span><strong>Lecture 23: Taylor's Formula</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +192,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 19：隐函数与参数方程 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 19: Implicit Functions and Parametric Equations | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Implicit Functions and Parametric Equations. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Derivatives and Differentials">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 19：隐函数与参数方程 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 19: Implicit Functions and Parametric Equations | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Implicit Functions and Parametric Equations. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-027/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,125 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 19：隐函数与参数方程</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2023-12-21</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-027/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-026/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 18：高阶导数</strong></a>
-    <a class="article-pagination-next" href="../math-028/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 20：函数的微分</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 19: Implicit Functions and Parametric Equations</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Implicit Functions and Parametric Equations. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2023-12-21</span><span>6 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Derivatives and Differentials</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 Derivative of implicit functions</a><a href="#section-4">1.2 Parameter Equations Determine Function Derivatives</a><a href="#section-7">1.3 Rate of Change</a></nav></details><div class="prose"><h2 id="section-1">1.1 Derivative of implicit functions</h2>
+<h3 id="section-2">1.1.1 Basic Concepts of Implicit Functions</h3>
+<p><strong>Manifest Functions</strong></p>
+<p>y can be expressed entirely using an expression of x;</p>
+<p><strong>Implicit Functions</strong></p>
+<ul>
+<li>Implicit function: $3y+x+1=0$</li>
+<li class="list-indent-1">Explicit Functionalization (Manifestation): $y=-\frac{x+1}3$</li>
+<li class="list-indent-1">But not all implicit functions are easy to manifest</li>
+<li>Difficult-to-manifest implicit function: $y-x-\varepsilon\sin y=0\quad(0&lt;\varepsilon&lt;1)$</li>
+</ul>
+<p><strong>General Form</strong></p>
+<p>General form of implicit functions (expressed as binary functions): $F(x,y)=0\Rightarrow y=f(x)$</p>
+<p><strong>Methods for Differentiating Implicit Functions</strong></p>
+<p>The implicit function becomes the following form:</p>
+<ul>
+<li>$F(x,f(x))\equiv0$</li>
+<li>Derivative of x on both sides, then the derivative part is proposed to obtain the equation of the derivative;</li>
+</ul>
+<p><strong>Common Errors</strong>: Implicit function differentiation calculation</p>
+<ul>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/951c440ea700-Pasted-image-20240706152937.png" alt="Pasted image 20240706152937" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-3">1.1.2 Example Problems</h3>
+<p><strong>Example</strong>: $\text{Find the derivative of the implicit function }y=f(x)\text{ defined by }y^5+2y-x=0.$</p>
+<ul>
+<li>Since it is a plus sign, the three terms are differentiated separately: $5y^4y^{\prime}+2y^{\prime}-1=0$</li>
+<li>Isolating $y^\prime$ gives $y^\prime=\frac1{5y^4+2}$.</li>
+</ul>
+<p><strong>Example</strong>: $\text{Let }y=f(x)\text{ be defined by }y=1+xe^y.\text{ Find }y^{\prime\prime}(0).$</p>
+<p>First substitute $x=0$ into the original equation to obtain $y(0)=1$.</p>
+<p>Differentiate both sides to obtain the first derivative:</p>
+<ul>
+<li>$y^{\prime}=e^{y}+xe^{y}y^{\prime}$</li>
+</ul>
+<p>At $x=0$ and $y=1$, this gives $y^{\prime}(0)=e$.</p>
+<p>Differentiate again: $y^{\prime\prime}=e^{y}y^{\prime}+e^{y}y^{\prime}+x(e^{y}y^{\prime})^{\prime}$.</p>
+<p>Therefore, $y^{\prime\prime}(0)=e^{2}+e^{2}=2e^{2}$.</p>
+<p><strong>Example</strong>: $\text{Let }y=(1+x^2)^{\sin x}.\text{ Find }y^{\prime}.$</p>
+<ul>
+<li>This is a variable-base, variable-exponent function, so take logarithms on both sides:</li>
+<li class="list-indent-1">$\ln y=\sin x\ln(1+x^2)$</li>
+<li>Differentiating gives $\frac{y^{\prime}}y=\cos x\ln(1+x^2)+\frac{2x\sin x}{1+x^2}$.</li>
+<li>Therefore, $y^{\prime}=(1+x^{2})^{\sin x}\left[\cos x\ln(1+x^2)+\frac{2x\sin x}{1+x^{2}}\right]$.</li>
+</ul>
+<p><strong>Problem-solving method</strong>: Logarithmic differentiation method</p>
+<p><span class="note-tag">Logarithmicdifferentiationmethod</span></p>
+<ul>
+<li>For a variable-base, variable-exponent function, take logarithms on both sides before differentiating.</li>
+</ul>
+<h2 id="section-4">1.2 Parameter Equations Determine Function Derivatives</h2>
+<h3 id="section-5">1.2.1 Basic Concepts</h3>
+<p>Plane curves can be represented by parametric equations; This may involve the differentiation of parametric equations;</p>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thefirstderivativeoftheparametricequation</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> $$\text{If }x=\varphi(t)\text{ and }y=\psi(t)\text{ are differentiable on }(\alpha,\beta)\text{ and }\varphi^{\prime}(t)\neq0,\text{ then }\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Because: $\varphi^{\prime}(t)\neq0$, so there are derivatives, so</li>
+<li class="list-indent-1">${t=\varphi^{-1}(x)}$</li>
+<li class="list-indent-1">${y=\psi(t)}$</li>
+<li>$\frac{dy}{dx}=\frac{dy}{dt}\frac{dt}{dx}$</li>
+<li>Ultimately: $\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}$</li>
+<li class="list-indent-1">Analysis: Derivative of y with respect to x, the result is the derivative of y with respect to t, divided by the derivative of x with respect to t;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thesecondderivativeoftheparametricequation</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\frac{d^{2}y}{dx^{2}}=\frac{\psi^{\prime\prime}(t)\varphi^{\prime}(t)-\varphi^{\prime\prime}(t)\psi^{\prime}(t)}{\varphi^{\prime3}(t)}$$</blockquote>
+<p><strong>Analysis</strong>: Find the second derivative with the t formula</p>
+<ul>
+<li>Note: When calculating the second derivative, follow these steps and do not skip steps</li>
+<li>Find the diagram:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/94aee05bf7b1-Pasted-image-20240319215159.png" alt="Pasted image 20240319215159" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-6">1.2.2 Example Problems</h3>
+<p><strong>Example</strong>: $\text{Let }\quad\begin{cases}y=\ln(1+t^2)\\x=\arctan t.&amp;\end{cases}\quad\text{Find }\quad y^{\prime},y^{\prime\prime}.$</p>
+<p>Step 1: Find the first derivative - &gt; $\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\frac{2t}{1+t^{2}}}{\frac{1}{1+t^{2}}}=2t$</p>
+<p>Then the second derivative is required, so<strong>the left and right simultaneously need to derive from x</strong>(note that x is not t).</p>
+<ul>
+<li>$\frac{d^2y}{dx^2}=\color{red}{2\cdot\frac{dt}{dx}}$ = $\frac{2}{\frac{1}{1+t^{2}}}=2(1+t^{2})$</li>
+<li class="list-indent-1">Note that the right side also takes the differentiation with respect to x</li>
+</ul>
+<p><strong>Example Question</strong>: Given the parameter equation of the cycloid (cycloid) is $x=a(t-\sin t)$ $y=a(1-\cos t)$, find the tangent equation and normal equation of the cycloid at $t=\frac\pi2$;</p>
+<p>Since it is a tangent line, it is necessary to derive the slope at this point -&gt; slope is the rate of change;</p>
+<ul>
+<li>Calculating the slope: $k=\frac{dy}{dx}=\frac{a\sin t}{a(1-\cos t)}\Bigg|_{t=\frac{\pi}{2}}=1$</li>
+<li>Then: $x_0=a\left(\frac\pi2-i\right),\quad y_0=a.$</li>
+<li>Obtain tangents and normals;</li>
+</ul>
+<h2 id="section-7">1.3 Rate of Change</h2>
+<h3 id="section-8">1.3.1 Basic Concepts</h3>
+<p><strong>Rate of Change - Basic Concepts</strong></p>
+<p>Known: $x=x(t)\quad y=y(t)\quad F(x,y)=0$</p>
+<p>It indicates that x and t are related, y is related to t, and x and y satisfy a certain relationship;</p>
+<p>If you know the rate of change relationship between x and y and t, then you need to find the other rate of change with t, that is, find the rate of change;</p>
+<p><strong>General Method</strong></p>
+<ul>
+<li>1. Establish $F(x,y)=0$: that is, the relationship between two related quantities,</li>
+<li>2. Derivative of both sides of the equation with respect to t;</li>
+</ul>
+<h3 id="section-9">1.3.2 Example Problems</h3>
+<p><strong>Example Question</strong>: Suppose an inverted conical container has a base circle diameter of 10 cm and a height of 5 cm. Now, adding water to the container at 3 cm per second, calculate the rate at which the water level rises at t = 1 second;</p>
+<ol>
+<li>Step one: Establish the relationship between two related quantities: the volume and height of the water</li>
+</ol>
+<ul>
+<li class="list-indent-1">$V(t)=\frac\pi3h^2(t)h(t)=\frac\pi3h^3(t)$</li>
+</ul>
+<ol>
+<li>Derivative of both sides of the equation with respect to t:</li>
+</ol>
+<ul>
+<li class="list-indent-1">$V^{\prime}(t)=\pi h^2(t)\frac{dh}{dt}$</li>
+<li class="list-indent-1">The derivative of V(t) is 3 cm per second, so it is 3;</li>
+<li class="list-indent-1">$3=\pi h(1)\frac{\mathrm{d}h}{\mathrm{d}t}$</li>
+<li>3. The result: $h(1)=\sqrt{\frac{9}{\pi}}$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-026/index.html"><span>← Previous item</span><strong>Lecture 18: Higher-Order Derivatives</strong></a>
+    <a class="article-pagination-next" href="../math-028/index.html"><span>Next item →</span><strong>Lecture 20: Differentials of Functions</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +187,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

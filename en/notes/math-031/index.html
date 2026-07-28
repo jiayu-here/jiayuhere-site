@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 23：泰勒公式 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 23: Taylor's Formula | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 23: Taylor's Formula. Original formulas, illustrations, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Mean Value Theorems and Applications of Derivatives">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 23：泰勒公式 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 23: Taylor's Formula | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 23: Taylor's Formula. Original formulas, illustrations, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-031/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,127 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 23：泰勒公式</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-12</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-031/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-030/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 22：洛必达法则</strong></a>
-    <a class="article-pagination-next" href="../math-032/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 24：函数的单调性与曲线的凹凸性</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 23: Taylor's Formula</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 23: Taylor's Formula. Original formulas, illustrations, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2024-01-12</span><span>6 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What is Taylor's Formula?</a><a href="#section-3">1.2 Content Summary</a><a href="#section-6">1.3 Example Problems</a></nav></details><div class="prose"><p>The role of Taylor's formula: establishing the relationship between higher-order derivatives and functions, using higher-order derivatives to study functions;</p>
+<h2 id="section-1">1.1 What is Taylor's Formula?</h2>
+<ul>
+<li>Popular Science Article: <a href="https://www.zhihu.com/question/21149770" target="_blank" rel="noreferrer">(99+ private messages / 85 messages) How to explain Taylor's formula in simple terms? - Zhihu (zhihu.com)</a></li>
+</ul>
+<p><strong>What is Taylor's Formula</strong></p>
+<ul>
+<li>Essence: This is about using polynomial functions to approximate smooth functions</li>
+<li>Explanation: Complex equations are approximated using a series of simple, computable equations. For example, turning the area of an irregular figure into the area of a series of (many) squares and then adding them together;</li>
+</ul>
+<h3 id="section-2">1.1.1 Definition of Taylor's Formula</h3>
+<p>#####<strong>Theorem</strong>: Taylor's Theorem - with the remainder of Peano</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> Taylor's formula with Peano remainder: Suppose $f(x)$ is differentiable in $n$ order at $x_0$, then $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Meaning:</li>
+<li class="list-indent-1">Write a general function as a <code> general polynomial + remainder </code>;</li>
+<li>Additional items:</li>
+<li class="list-indent-1">$$P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$$</li>
+<li>$f(x)$ n Taylor polynomials at $x_{0}$:</li>
+<li class="list-indent-1">$$R_n(x)=o((x-x_0)^n)$$</li>
+<li>Disadvantages:</li>
+<li class="list-indent-1">1. Only qualitative descriptions of the remaining items can be given, not quantitative analysis;</li>
+<li class="list-indent-1">2. It can only be used when x0 is approaching; it cannot be used from a distance;</li>
+</ul>
+<p><strong>Additional Information</strong></p>
+<ul>
+<li>First, the relationship between functions and differentials</li>
+<li class="list-indent-1">If $f(x)$ is differentiable at $x_0$, then $\Delta y\approx dy$</li>
+<li class="list-indent-1">$f(x)\approx f(x_0)+f^{\prime}(x_0)(x-x_0)$</li>
+<li>At this point, it is approximately equal to, because geometrically, $f^{\prime}(x_0)(x-x_0)$ actually uses a straight line to simulate the value of the curve;</li>
+<li>Therefore, a single differentiation can be performed using higher-order infinitesimals to further approximate the value of the curve, i.e., the value of f(x).</li>
+<li class="list-indent-1">$f(x)=f(x_0)+f^{\prime}(x_0)(x-x_0)+o(x-x_0)$</li>
+<li>If $f(x)$ is n-th differentiable at $x_0$, does there exist an n-th degree polynomial $P_n(x)=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\cdots+a_n(x-x_0)^n$ such that:</li>
+<li class="list-indent-1">$f(x)=P_n(x)+o((x-x_0)^n)$</li>
+<li>Therefore, we get $a_0=f(x_0),\quad a_k=\frac{f^{(k)}(x_0)}{k!}\quad k=1,2\cdots n$</li>
+<li>So: $P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: Taylor's Formula - Lagrange</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> Let $f(x)$ be in the interval $I$ and $n+1$ order is differentiable $,  x_0\in I, $ then $\forall x\in I,  \exists\xi\in I\quad(\xi$ is between $x_0$ and $x$), making $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}\big(x-x_0\big)^k+\frac{f^{(n+1)}(\xi)}{(n+1)!}\big(x-x_0\big)^{n+1}$$</blockquote>
+<blockquote>Taylor's formula with Lagrangian remainders:</blockquote>
+<blockquote>$$R_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})^{n+1}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Provides the specific expression for the remaining terms</li>
+<li>Quantitative analysis can be performed under given conditions;</li>
+<li class="list-indent-1">It guarantees error, with zero as x0 approaches zero;</li>
+</ul>
+<p><strong>Corollary 1</strong>: Taylor's formula for zero</p>
+<p>$\begin{gathered}\text{If }x_0=0,\text{ then}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0&lt;\theta&lt;1.\\\text{This is the Maclaurin formula for }f(x).\end{gathered}$</p>
+<p><strong>Corollary 2</strong>: Maclaurin formulas for several elementary functions</p>
+<ul>
+<li>$e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\frac{x^{n+1}}{(n+1)!}e^{\theta x}\quad\quad x\in(-\infty,+\infty)$</li>
+<li class="list-indent-1">Because the derivative of e is still itself, so for each order of derivative, use 1 to substitute;</li>
+<li>$\sin x=x-\frac{x^3}{3!}+\cdots+\left(-1\right)^{m-1}\frac{x^{2m-1}}{\left(2m-1\right)!}+\left(-1\right)^m\frac{\cos\theta x}{\left(2m+1\right)!}x^{2m+1}$</li>
+<li>$\begin{aligned}(1+x)^\alpha&amp;=1+cx+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n\\&amp;+\frac{\alpha(\alpha-1)\cdots(\alpha-n)(1+\beta x)^{x-n-1}}{(n+1)!}x^{n+1}\quad x\in(-1,+\infty)\end{aligned}$</li>
+</ul>
+<h2 id="section-3">1.2 Content Summary</h2>
+<h3 id="section-4">1.2.1 Commonalities</h3>
+<p><strong>Commonalities</strong></p>
+<ul>
+<li>1. Use simple polynomial functions to approximate general functions;</li>
+<li>2. Functions are associated with higher-order derivatives;</li>
+<li>Conclusion:</li>
+<li class="list-indent-1">1. When the problem requires<strong>studying higher-order derivatives</strong>, Taylor's formula is often used;</li>
+<li class="list-indent-1">2. If the study is a local property <code>-&gt;</code> Taylor's formula for the remaining Peano terms;</li>
+<li class="list-indent-1">3. If the study is global properties <code>-&gt;</code> the Taylor formula for the remaining Lagrange</li>
+</ul>
+<p><strong>Core</strong>: Both Taylor formulas write f(x) as<strong>one polynomial + one remainder</strong>;</p>
+<ul>
+<li>Peano Remaining Terms</li>
+<li class="list-indent-1">$R_n(x)=o((x-x_0)^n)$</li>
+<li>Lagrange remainder</li>
+<li class="list-indent-1">$R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$</li>
+</ul>
+<p><strong>Essence</strong>: Use polynomials to approximate the value of f(x) <code>-&gt;</code> Use known point information to represent unknown points;</p>
+<ul>
+<li>Why? Because solving polynomials is simple</li>
+</ul>
+<h3 id="section-5">1.2.2 Analysis of the Use of Two Taylor Formulas</h3>
+<p><strong>Differences</strong></p>
+<ul>
+<li>Other items differ</li>
+</ul>
+<p><strong>Peano</strong>: Qualitative, local description <code>-&gt;</code> Study the local morphology of functions using the Peano formula</p>
+<ul>
+<li>1. Study the limits of the function approaching a point;</li>
+<li>2. Study the extremum of the function;</li>
+</ul>
+<p><strong>Lagrange</strong>: A quantitative, overall description</p>
+<ul>
+<li>1. Study maximum/minimum;</li>
+<li>2. Proving inequalities <code>-&gt;</code> studying an interval;</li>
+</ul>
+<p><strong>Supplement</strong>: A special case of Taylor's theorem when it comes to Lagrange's mean value theorem;</p>
+<ul>
+<li>The four major mean value theorems:</li>
+<li class="list-indent-1">The first three establish the relationship between $f(x)$ and the first derivative;</li>
+<li class="list-indent-1">Taylor's Theorem: Study the relationship between $f(x)$ and higher-order derivatives</li>
+<li>Commonality: Studying the relationship between functions and derivatives, laying the foundation for<strong>using derivatives to study functions</strong>;</li>
+</ul>
+<h2 id="section-6">1.3 Example Problems</h2>
+<p><strong>Example Question</strong>: $\text{ Find the limit }\lim_{x\to0}\frac{\cos x-e^{-\frac{x^2}2}}{x^4}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">The expression has type $0/0$, but L'Hôpital's rule is not the intended method here.</li>
+<li class="list-indent-1">So you can consider using Taylor</li>
+<li class="list-indent-1">Since it is a limit, local Taylor's formula is used</li>
+<li class="list-indent-1">Since x is to the fourth power, write it as four terms;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Solution process:</li>
+<li class="list-indent-1">$cos x=1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\left(x^4\right)$</li>
+<li class="list-indent-1">Because:</li>
+<li class="list-indent-2">$\mathbb{e}^x=1+x+\frac{\mathbb{x}}{2_1^2}$</li>
+<li class="list-indent-2">De: $e^{-\frac{X^{2}}{2}}=1-\frac{X^{2}}{2}+\frac{1}{2!}\left(-\frac{X^{2}}{2}\right)^{2}+o(X^{4})$</li>
+<li class="list-indent-1">Therefore, we have the original expression =</li>
+<li class="list-indent-2">$\operatorname*{lim}_{x\rightarrow0}\frac{-\frac{1}{12}x^{4}+0(x^{4})}{x^{4}}=-\frac{1}{12}$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-030/index.html"><span>← Previous item</span><strong>Lecture 22: L’Hôpital’s Rule</strong></a>
+    <a class="article-pagination-next" href="../math-032/index.html"><span>Next item →</span><strong>Lecture 24: Monotonicity, Convexity, and Inflection Points</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +189,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

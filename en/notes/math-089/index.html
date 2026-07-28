@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 20：相似 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 20: Similar Matrices | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 20: Similar Matrices. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Eigenvalues and Eigenvectors">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 20：相似 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 20: Similar Matrices | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 20: Similar Matrices. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-089/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,234 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 20：相似</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-089/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-088/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 19：特征值与特征向量</strong></a>
-    <a class="article-pagination-next" href="../math-090/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 21：二次型的定义与矩阵表示</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 20: Similar Matrices</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 20: Similar Matrices. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>12 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Eigenvalues and Eigenvectors</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">20.1 Matrix Similarity</a><a href="#section-6">20.2 Similar Diagonalization of Matrices</a><a href="#section-10">20.3 Similar Diagonalization of Real Symmetric Matrices</a></nav></details><div class="prose"><h2 id="section-1">20.1 Matrix Similarity</h2>
+<h3 id="section-2">20.1.1 Definition of Similarity Matrices</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thematrixissimilar</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> let A and B be two <code>n</code>-order square matrices. If there exists a <code>n</code>-order invertible matrix <code>P</code> such that $P^{-1}AP=B$, then <code>A</code> is similar to <code>B</code> and denoted as <code>A~B</code></blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">If all are assumed to be matrix;</li>
+<li class="list-indent-2">Equivalence matrix: <code>PAQ=B</code> `<code>&lt;-</code>` Isomorphic matrices: P and Q are unrelated;</li>
+<li class="list-indent-2">Similarity matrix: $P^{-1}AP=B$ <code>&lt;-</code> Equivalence matrix: P and P inverse, the effect produced by their pincer interaction yields <code>B</code>;</li>
+<li class="list-indent-1"><code>-&gt;</code> Therefore, similar matrices must also be equivalent</li>
+<li>Formula:</li>
+<li class="list-indent-1"><code>A~A</code>: Reflexivity</li>
+<li class="list-indent-1">If <code>A~A</code>, then <code>B~A</code>: symmetry</li>
+<li class="list-indent-1">If <code>A~B,B~C</code>, then <code>A~C</code>: transitivity <code>-&gt;</code> proves <code>A~C</code>. You can first find A to B, then B to C, thus obtaining A to C;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">Every matrix has an ideal matrix and its similarity <code>&lt;-&gt;</code> transitivity;</li>
+</ul>
+<p><strong>Supplement</strong>: Similarity matrices and $A^{-1}MA$</p>
+<ul>
+<li>Meaning:</li>
+<li class="list-indent-1">$A^{-1}MA$ Expressions imply mathematical transfer effects;</li>
+<li class="list-indent-1">The middle matrix represents a transformation you have seen, while the two outer matrices represent the transformation, i.e., the transformation on the viewpoint;</li>
+<li class="list-indent-1">The matrix product still represents<strong>the same transformation</strong>, but from the perspective of others <code>-&gt;</code> matrices <code>A</code> and <code>B</code> are similar, but the basis vectors differ;</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/a600160ec314-Pasted-image-20240629194927.png" alt="Pasted image 20240629194927" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-3">20.1.2 Properties of Similar Matrices</h3>
+<p><strong>Concept</strong>: The six main properties of the similarity matrix</p>
+<div class="math-display">$$
+\begin{aligned}
+&amp;{1}.\quad\left|A\right|=\left|B\right| \\
+&amp;{2}.\quad r\left(A\right)=r\left(B\right). \\
+&amp;{3}.\quad tr\left(A\right)=tr\left(B\right). \\
+&amp;{4}.\quad\lambda_{A}=\lambda_{B}\left(or\left|\lambda E-A\right|=\left|\lambda E-B\right|\right). \\
+&amp;{5}.\quad r\left(\lambda E-A\right)=r\left(\lambda E-B\right). \\
+&amp;{6}.\quad \text{For every order, }A\text{ and }B\text{ have the same sum of principal minors.}
+\end{aligned}
+$$</div>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">The above six conditions are necessary for matrix similarity; if either is not met, the two matrices are not similar;</li>
+<li class="list-indent-1">However, even if <code>1~6</code> holds, it cannot be said that <code>A</code> is similar to <code>B</code>;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">Under similarity transformations, the sum of the principal minors of each order is invariant.</li>
+<li class="list-indent-1">Example:</li>
+<li class="list-indent-2">For $A=\begin{bmatrix}1&amp;1&amp;0\\0&amp;1&amp;1\\1&amp;0&amp;1\end{bmatrix}$, the sum of the second-order principal minors is $1+1+1=3$.</li>
+<li class="list-indent-2">For $B=\begin{bmatrix}1&amp;1&amp;-1\\0&amp;1&amp;0\\1&amp;0&amp;1\end{bmatrix}$, the sum of the second-order principal minors is $1+2+1=4$.</li>
+<li class="list-indent-2">Therefore, A and B are not similar;</li>
+</ul>
+<h3 id="section-4">20.1.3 Important Conclusions of the Similarity Matrices</h3>
+<p><strong>Concept</strong>: Conclusion One</p>
+<ul>
+<li>$$\text{ If }A\sim B,\text{ then }A^{k}\sim B^{k},f\left(A\right)\sim f\left(B\right)\left(\text{ where }f\left(x\right)\text{ is a polynomial }\right)$$</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion two</p>
+<ul>
+<li>$$\text{If }A\sim B\text{ and }A\text{ is invertible, then }A^{-1}\sim B^{-1}\text{ and }f\left(A^{-1}\right)\sim f\left(B^{-1}\right),\text{ where }f\text{ is a polynomial}.$$</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion three</p>
+<ul>
+<li>$$\text{If }A\sim B,\text{ then }A^<em>\sim B^</em>.$$</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion Four</p>
+<ul>
+<li>$$\text{If }A\sim B,\text{ then }A^T\sim B^T.$$</li>
+</ul>
+<p><strong>Concept</strong>: Conclusion Five</p>
+<ul>
+<li>$$\text{ If }A\sim C,B\sim D,\text{ then }\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}\sim\begin{bmatrix}C&amp;O\\O&amp;D\end{bmatrix}$$</li>
+</ul>
+<p><strong>Analysis</strong>: Conclusion <code>1~3</code></p>
+<ul>
+<li>Because the means from A <code>-&gt;</code> B are consistent in <code>1~3</code>, their combinations are: $aA^{*}+bA^{-1}+cf\left(A\right)$ plus $P^{-1}$ and $P$:</li>
+<li>$$P^{-1}(aA^{<em>}+bA^{-1}+cf\left(A\right))P=aB^{</em>}+bB^{-1}+cf\left(B\right)$$</li>
+</ul>
+<p><strong>Analysis</strong>: Conclusion <code>4</code></p>
+<ul>
+<li>$A\sim B, $ then there is an invertible matrix $P, $ such that $P^{-1}AP=B, $ takes the transpose on both sides $, $ has $P^TA^T(P^{-1})^T=B^T$</li>
+<li>$P^{T}A^{T}\left(P^{T}\right)^{-1}=B^{T}$, so $A^{T}\sim B^{T}$. The similarity transformation used here differs from those in conclusions (1)–(3).</li>
+</ul>
+<h3 id="section-5">20.1.4 Identification and Proof of Similarity Between Two Matrices</h3>
+<p><strong>Method</strong>: Definition method</p>
+<ul>
+<li>If there is an invertible matrix $P, $ such that $P^{-1}AP=B, $ then $A\sim B.$</li>
+</ul>
+<p><strong>Method</strong>: Utilize transitivity</p>
+<ul>
+<li>If <code>A~V</code> and <code>V~B</code>, then <code>A~B</code></li>
+</ul>
+<p><strong>Method</strong>: Nature of use</p>
+<ul>
+<li>The nature of use can only deny the similarity between A and B, but cannot prove their similarity;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">Under conditions A~B, properties can be used to find parameters in reverse, but as mentioned earlier, all properties are only necessary conditions for A~B</li>
+</ul>
+<h2 id="section-6">20.2 Similar Diagonalization of Matrices</h2>
+<h3 id="section-7">20.2.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Similardiagonalizationofmatrices</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> Let <code>A</code> <code>n</code> order matrix. If there exists a <code>P</code> of <code>n</code> invertible matrix such that $P^{-1}AP=\Lambda$, then $\Lambda$ is a diagonal matrix, and <code>A</code> is called similarly diagonalizable as $A\sim\Lambda$, and $\Lambda$ is called the <code>A</code> similarity canonical form;</blockquote>
+<blockquote><code>A</code> The most essential definition is: <code>A</code> There are <code>n</code> linearly independent eigenvectors;</blockquote>
+<p><strong>Concept</strong>: Graphic explanation</p>
+<ul>
+<li><img class="note-image" src="/assets/notes/89c3106988b6-Pasted-image-20240701202326.png" alt="Pasted image 20240701202326" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Concept</strong>: Conditions for Similar Diagonalization - Conclusion One</p>
+<ul>
+<li><code>-&gt;</code> Suppose: A can be similarly diagonalized</li>
+<li><code>-&gt;</code> There exists an invertible matrix P such that $P^{-1}AP=\Lambda$</li>
+<li><code>-&gt;</code> There exists an invertible matrix $P=(\xi_1,\xi_2)$ such that $AP=P\Lambda$</li>
+<li><code>-&gt;</code> There exists an invertible matrix $P=(\xi_1,\xi_2)$ such that $A(\xi_1,\xi_2)=(\xi_1,\xi_2)\Lambda$</li>
+<li><code>-&gt;</code> There exists an invertible matrix $P=(\xi_1,\xi_2)$ such that $(A\xi_1,A\xi_2)=(\lambda\xi_1,\lambda\xi_2)$</li>
+<li><code>-&gt;</code> There exists an invertible matrix $P=(\xi_1,\xi_2)$ such that $A\xi_i=\lambda\xi_i$</li>
+<li><code>-&gt;</code> So we get eigenvalues and eigenvectors: $A\xi_i=\lambda\xi_i$</li>
+<li><code>-&gt;</code> The column vectors that make up P are eigenvectors</li>
+<li><code>-&gt;</code> Conclusion:</li>
+<li class="list-indent-1">1. <code>A</code> There are <code>n</code> linearly independent eigenvectors;</li>
+<li class="list-indent-1">2. $P=[\xi_1, \xi_2, \cdots, \xi_n]$</li>
+<li class="list-indent-1">3. $\Lambda=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$</li>
+<li class="list-indent-1">4. $$P^{-1}AP=\Lambda \quad\quad\rightarrow\quad\quad [\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$$</li>
+<li>This is a necessary condition;</li>
+</ul>
+<p><strong>Concept</strong>: Conditions for Similar Diagonalization - Conclusion Two</p>
+<ul>
+<li>Conclusion: If the <code>n</code>-order matrix <code>A</code> can be similarly diagonalized $\rightarrow$ $A$ corresponds to each $k_i$ eigenvalues with $k_i$ linearly independent eigenvectors;</li>
+<li>This is a necessary condition;</li>
+</ul>
+<p><strong>Concept</strong>: Conditions for similar diagonalization - Conclusion Three</p>
+<ul>
+<li>Conclusion: If the <code>n</code>-order matrix <code>A</code> has n different eigenvalues, $\rightarrow$ A can be similarly diagonalized;</li>
+<li><code>-&gt;</code> All are single roots with inherent linear independence, so similar diagonalization is possible;</li>
+<li>This is a sufficient condition</li>
+</ul>
+<p><strong>Concept</strong>: Conditions for similar diagonalization - Conclusion Four</p>
+<ul>
+<li>Conclusion: If the <code>n</code>-order matrix <code>A</code> is a real symmetric matrix $\rightarrow$ A can be similarly diagonalized;</li>
+<li>This is a sufficient condition</li>
+</ul>
+<p><strong>Concept</strong>: Other similar important conclusions</p>
+<ul>
+<li>Conclusion - If $A\sim\Lambda$, then every column in $P$ is an eigenvector of the <code>A</code> matrix, and these eigenvectors must be linearly independent;</li>
+<li>Conclusion - If $A\xi_i=\lambda_i\xi_i$, $\xi_i(i=1,2,3)$ constitutes $\Lambda$, then $A\sim\Lambda$</li>
+<li>Conclusion: Self-produced and self-sold</li>
+<li class="list-indent-1">Given a matrix A satisfying $\lambda$ and $\xi$, and n linearly independent eigenvectors, then $P^{-1}AP=\Lambda$ and $P=(\xi_1,\xi_2...\xi_n)$</li>
+</ul>
+<h3 id="section-8">20.2.2 Solving Similar Diagonalization</h3>
+<p><strong>Method</strong>: Based on $P^{-1}AP=\Lambda$, find <code>P</code> steps</p>
+<ul>
+<li>Steps:</li>
+<li class="list-indent-1">1. Because $|\lambda E-A|=0$, write the determinant $|\lambda E-A|$ and find the $\lambda_1,\lambda_2,\lambda_3,...\lambda_i$ of $A$</li>
+<li class="list-indent-1">2. Find the stepped matrix of <code>A</code> for the corresponding $\lambda_1,\lambda_2,\lambda_3,...\lambda_i$, and from this find the eigenvector $\xi_1,\xi_2...\xi_i$ of <code>A</code></li>
+<li class="list-indent-1">3. Based on the properties of eigenvectors and eigenvalues, determine whether the current eigenvector is <code>n</code> linearly independent vectors. If so, combine the solved $\xi_i$ to get $P$:</li>
+<li class="list-indent-2">$P^{-1}AP=\Lambda=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$</li>
+<li>Note:</li>
+<li class="list-indent-1">The eigenvector $\boldsymbol{\xi}_i$ in the $i$th column of $P$ must correspond to the eigenvalue $\lambda_i$ in $\Lambda$. The matrix $P$ is not unique.</li>
+</ul>
+<p><strong>Method</strong>: Derive $A$ from eigenvalues and eigenvectors</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">If an invertible matrix $P$ satisfies $P^{-1}AP=\Lambda$, then $A=P\Lambda P^{-1}$. This is the basic reconstruction formula.</li>
+<li>Example:</li>
+<li class="list-indent-1"><code>-&gt;</code> $(\xi_{1},\xi_{2})^{-1}A(\xi_{1},\xi_{2})=(\begin{matrix}\lambda_{1}&amp;0\\0&amp;\lambda_{2}\end{matrix})$</li>
+<li class="list-indent-1"><code>-&gt;</code> $A=(\xi_{1},\xi_{2})(\begin{matrix}\lambda_{1}&amp;0\\0&amp;\lambda_{2}\end{matrix})(\xi_{1},\xi_{2})^{-1}$</li>
+</ul>
+<p><strong>Method</strong>: Find $A^k$ and $f(A)$</p>
+<ul>
+<li class="list-indent-1">$$P^{-1}A^kP=\Lambda^k,\qquad A^k=P\Lambda^kP^{-1}=P\begin{bmatrix}\lambda_1^k&amp;&amp;&amp;\\&amp;\lambda_2^k&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n^k\end{bmatrix}P^{-1}$$</li>
+<li class="list-indent-1">$$P^{-1}f(A)P=f(\Lambda),\qquad f(A)=Pf(\Lambda)P^{-1}=P\begin{bmatrix}f(\lambda_1)&amp;&amp;&amp;\\&amp;f(\lambda_2)&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;f(\lambda_n)\end{bmatrix}P^{-1}.$$</li>
+</ul>
+<p><strong>Supplement</strong>: Properties that remain valid for singular matrices</p>
+<ul>
+<li>If $|A|=0$, then $0$ is an eigenvalue of $A$, so $A$ is singular.</li>
+<li class="list-indent-1">For every $n\times n$ matrix, $|A^*|=|A|^{n-1}$.</li>
+<li>Others:</li>
+<li class="list-indent-1">$|A^{*}|=|A|^{n-1}$ holds for every $n\times n$ matrix.</li>
+<li class="list-indent-1">$\left(AB\right)^{<em>}=B^{</em>}A^{*}$ holds for square matrices $A$ and $B$ of the same order.</li>
+<li>When $A$ is singular:</li>
+<li class="list-indent-1">Suppose A has triple roots, and a eigenvalue <code>1</code>;</li>
+<li class="list-indent-1">If you now add E:<code>+E+A</code> before A;</li>
+<li class="list-indent-1">So: $|(tE+A)^{*}|=|tE+A|^{n-1}.$</li>
+<li class="list-indent-1">When $t\rightarrow 0^+$, the original eigenvalues of t are not <code>0</code>; they are all continuous functions <code>-&gt;</code> $|A^{*}|=|A|^{n-1}$ t with respect to t;</li>
+<li>That is: $|A^{*}|=|A|^{n-1}$ holds for both inversibility and irreversibility;</li>
+</ul>
+<h3 id="section-9">20.2.3 Example</h3>
+<p><strong>Example Question</strong>: Which of the following options cannot resemble a diagonal matrix:</p>
+<ul>
+<li>Title:</li>
+<li class="list-indent-1">$$\begin{aligned}\left(A\right)A=&amp;\begin{bmatrix}0&amp;0&amp;1\\0&amp;1&amp;0\\1&amp;0&amp;0\end{bmatrix}&amp;(\mathbf{B}) \boldsymbol{B}=&amp;\begin{bmatrix}1&amp;1&amp;1\\0&amp;2&amp;2\\0&amp;0&amp;3\end{bmatrix}\\(\mathbf{C})\boldsymbol{C}=&amp;\begin{bmatrix}1&amp;-2&amp;1\\2&amp;-4&amp;2\\1&amp;-2&amp;1\end{bmatrix}&amp;(\mathbf{D})\boldsymbol{D}=&amp;\begin{bmatrix}2&amp;-1&amp;2\\5&amp;-3&amp;3\\-1&amp;0&amp;-2\end{bmatrix}\end{aligned}$$</li>
+<li>Analysis</li>
+<li class="list-indent-1">A is clearly symmetric, so A is similar to a diagonal matrix;</li>
+<li class="list-indent-1">B has a clear step and exactly three distinct eigenvalues, so if the three single roots correspond to eigenvalues, they must be similarly diagonalized;</li>
+<li class="list-indent-1">C is a rank-one matrix, so for a double heel and a single root, you need to determine the number of eigenvectors corresponding to them separately. The number of repetitions in option C equals the number of linearly independent eigenvectors, so C is similar to a diagonal matrix;</li>
+<li>Analysis</li>
+</ul>
+<h2 id="section-10">20.3 Similar Diagonalization of Real Symmetric Matrices</h2>
+<h3 id="section-11">20.3.1 Real Symmetric Matrices</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Realsymmetricmatrix</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> if $A^T=A$, then A is a symmetric matrix. If all elements in A are real numbers, then A is a real symmetric matrix;</blockquote>
+<blockquote>(1) <code>A</code> is a real symmetric matrix, then the eigenvalues of A are real numbers, and the eigenvectors are real vectors (no proof needed);</blockquote>
+<blockquote>(2) Eigenvectors of a real symmetric matrix that correspond to distinct eigenvalues are orthogonal: $\lambda_1\neq\lambda_2\Rightarrow\xi_1\perp\xi_2$. For a repeated eigenvalue, an orthonormal basis can be chosen within its eigenspace.</blockquote>
+<blockquote>(3) For any n-th order real symmetric matrix A, there exists an n-th order orthogonal matrix Q such that $Q^{\mathrm{T}}AQ=Q^{-1}AQ=\begin{bmatrix}\lambda_1&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$, where $\lambda_i$ are all eigenvalues of A;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Explanation (2):</li>
+<li class="list-indent-1">Every real symmetric matrix has an orthonormal basis of eigenvectors and is therefore orthogonally diagonalizable.</li>
+<li>Explanation (3):</li>
+<li class="list-indent-1">Review: A has n linearly independent <code>-&gt;</code> A~$\Lambda$ <code>-&gt;</code> $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$</li>
+<li class="list-indent-1">Since a symmetric matrix can unconditionally yield $A\sim\Lambda$, it can always form a $[\xi_1, \xi_2, \cdots, \xi_n]^{-1}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$ situation;</li>
+<li class="list-indent-1">And the symmetric matrix can also yield a $[\xi_1, \xi_2, \cdots, \xi_n]^{T}A[\xi_1, \xi_2, \cdots, \xi_n]=\begin{bmatrix}\lambda_1&amp;&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;&amp;\\&amp;&amp;\ddots&amp;&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$ situation;</li>
+<li>Supplement: orthogonal matrix</li>
+<li class="list-indent-1">$Q^T=Q^{-1}$</li>
+<li class="list-indent-1">$Q^TQ=E$</li>
+<li class="list-indent-1"><code>Q</code> is formed from an orthonormal basis; obtain it by orthogonalizing and normalizing the eigenvectors when necessary;</li>
+<li class="list-indent-1">For every real symmetric matrix $A$, there exists an orthogonal matrix $Q$ such that $Q^TAQ=\Lambda$;</li>
+</ul>
+<h3 id="section-12">20.3.2 Orthogonal Diagonalization of a Real Symmetric Matrix</h3>
+<p><strong>Method</strong>: If $A$ is an $n\times n$ real symmetric matrix:</p>
+<ul>
+<li>1. Find the eigenvalues $\lambda_1,\lambda_2,\cdots,\lambda_n$ of $A$;</li>
+<li>2. Find corresponding eigenvectors $\xi_1,\xi_2,\cdots,\xi_n$;</li>
+<li>3. Within each repeated-eigenvalue eigenspace, orthogonalize if necessary and normalize the eigenvectors to obtain $\eta_1,\eta_2,\cdots,\eta_n$;</li>
+<li>4. Set $Q=[\eta_1,\eta_2,\cdots,\eta_n]$. Then $Q$ is orthogonal and</li>
+<li class="list-indent-1">$$Q^{-1}AQ=Q^{\mathrm{T}}AQ=\Lambda.$$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-088/index.html"><span>← Previous item</span><strong>Lecture 19: Eigenvalues and eigenvectors</strong></a>
+    <a class="article-pagination-next" href="../math-090/index.html"><span>Next item →</span><strong>Lecture 21: Definition and Matrix Representation of Quadratic Forms</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +296,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

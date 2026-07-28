@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 44：二重积分 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 44: Double Integrals | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 44: Double Integrals. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multiple Integrals">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 44：二重积分 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 44: Double Integrals | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 44: Double Integrals. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-052/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,124 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 44：二重积分</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-08</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-052/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-051/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值</strong></a>
-    <a class="article-pagination-next" href="../math-053/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 45：二重积分的计算</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 44: Double Integrals</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 44: Double Integrals. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-08</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multiple Integrals</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">44.0 polar coordinates basics</a><a href="#section-2">44.1 Basic concepts of double integrals</a><a href="#section-5">44.2 Properties of double integrals</a></nav></details><div class="prose"><p><strong>Summary of this section</strong></p>
+<ul>
+<li>(1) Concept and properties of double integrals</li>
+<li>(2) Double integral calculation</li>
+</ul>
+<p><strong>Common problem types in this section</strong></p>
+<ul>
+<li>problem type 1: Cumulative integral exchange sequence and calculation</li>
+<li>problem type 2: Double integral calculation</li>
+</ul>
+<hr>
+<h2 id="section-1">44.0 polar coordinates basics</h2>
+<p><strong>Basic Concept</strong></p>
+<ul>
+<li>Concept:</li>
+</ul>
+<p>	-<strong>Coordinate system describing position in terms of angles and lengths</strong>;</p>
+<ul>
+<li>Conversion:</li>
+<li class="list-indent-1">$$x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan2}(y,x).$$</li>
+<li class="list-indent-1">The polar and Cartesian systems are assumed to share the same origin and positive $x$-axis.</li>
+<li>diagram:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/577fe472c3ac-Pasted-image-20240509172033.png" alt="Pasted image 20240509172033" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-2">44.1 Basic concepts of double integrals</h2>
+<h3 id="section-3">44.1.1 Concept introduction</h3>
+<p><strong>Volume Under a Surface</strong></p>
+<ul>
+<li>For a solid bounded above by $z=f(x,y)$ and below by a region $D$, the volume is obtained from</li>
+</ul>
+<p>  $$\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_i,\eta_i)\Delta\sigma_i.$$</p>
+<ul>
+<li>Here $\Delta\sigma_i$ is the area of the $i$th subregion, $f(\xi_i,\eta_i)$ is the corresponding height, and $\lambda$ is the maximum diameter of the subregions.</li>
+</ul>
+<p>#####<strong>Definition</strong>: # double integral</p>
+<blockquote><span style="color:#ccc1d9">Description:</span> Let $f(x,y)$ be bounded on a region $D$. Partition $D$ into subregions $\Delta\sigma_i$ and choose $(\xi_i,\eta_i)$ in each one. If the following limit exists and is independent of the partition and sample points, it is the double integral:</blockquote>
+<blockquote>$$\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_i,\eta_i)\Delta\sigma_i=\iint_D f(x,y)\,d\sigma.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Interval</li>
+<li class="list-indent-1">The integration area of a single integral is an interval, such as $(3, 6)$;</li>
+<li class="list-indent-1">The integration region of a double integral is a graph, so it is usually represented by a region D;</li>
+<li>NOTE:</li>
+<li class="list-indent-1">The integration area is not equal to the definition domain, the integration area is the area where integration is required;</li>
+<li>Area element</li>
+<li class="list-indent-1">$d\sigma$ is the area element;</li>
+</ul>
+<h3 id="section-4">44.1.2 Area element of Cartesian coordinates system</h3>
+<p><strong>Geometric significance of double integrals</strong>: Area element</p>
+<ul>
+<li>divide horizontally and vertically;</li>
+<li>$\sigma_{i}=\Delta x_{i}\cdot\Delta y_{j}$</li>
+<li>Formula: $\int\int_{D}f(x, y)dxdy$</li>
+</ul>
+<h2 id="section-5">44.2 Properties of double integrals</h2>
+<h3 id="section-6">44.2.1 Inequality properties</h3>
+<p><strong>Double integral</strong>: Property 1</p>
+<ul>
+<li>If on D, $f(x, y)\leq g(x, y)$, then there is an inequality:</li>
+<li>$$\int\int_Df(x, y)d\sigma\leq\int\int_Dg(x, y)d\sigma $$</li>
+</ul>
+<p><strong>Double integral</strong>: Property 2</p>
+<ul>
+<li>If there is $m\leq f(x, y)\leq M$ on $D$, then:</li>
+<li>$$mS\leq\iint_Df(x, y)\mathrm{d}\sigma\leq MS$$</li>
+<li>where: S is the area of region D</li>
+</ul>
+<p><strong>Double integral</strong>: Property three</p>
+<ul>
+<li>The absolute value of the integral, the integral is less than the absolute value</li>
+<li>$$\left|\iint_Df(x, y)\mathrm{d}\sigma\right|\leq\iint_D\left|f(x, y)\right|\mathrm{d}\sigma.$$</li>
+</ul>
+<h3 id="section-7">44.2.2 Mean value theorem</h3>
+<p>#####<strong>Theorem</strong>: # Mean value theorem of double integrals</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> Suppose the function $f(x, y)$ is continuous on the closed area D, S is the area of the area D, then there is at least one $(\xi, \eta)$ on D, such that: $$\iint_Df(x, y)\mathrm{d}\sigma=f(\xi, \eta)\cdot S$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The integral of a function is equal to the function value $f(\xi, \eta)$ at a point on the region D multiplied by the area of the integration domain;</li>
+</ul>
+<h3 id="section-8">44.2.3 Other properties</h3>
+<ol>
+<li>The constant factor of the integrand can be mentioned outside the double integral, that is</li>
+</ol>
+<div class="math-display">$$
+\int\int_Dkf(x, y)d\sigma=k\int\int_Df(x, y)d\sigma
+$$</div>
+<ol>
+<li>The double integral of the sum (or difference) of a function is equal to the sum (or difference) of the double integral of each function, that is</li>
+</ol>
+<div class="math-display">$$
+\int\int_D[f(x, y)\pm g(x, y)]d\sigma=\int\int_Df(x, y)d\sigma+\int\int_Dg(x, y)d\sigma
+$$</div>
+<ol>
+<li>If on D, f (x, y)=A, A is a constant, then σ is the area of D, then</li>
+</ol>
+<div class="math-display">$$
+\sigma=\int\int_DA\cdot d\sigma=A\int\int_Dd\sigma
+$$</div>
+<ol>
+<li>If the closed area D is divided into a finite number of partially closed areas by lines and curves, then the double integral on D is equal to the double integral on each partial area. The sum of double integrals of</li>
+</ol>
+<p> , for example, D is divided into two closed regions D 1 and D2, then</p>
+<div class="math-display">$$
+\int\int_Df(x, y)d\sigma=\int\int_{D_1}f(x, y)d\sigma+\int\int_{D_2}f(x, y)d\sigma
+$$</div>
+<ul>
+<li>Geometric meaning: Originally, a geometric cylinder could be calculated by a double integral. Now one cylinder is divided into two cylinders, and then double integrals are calculated respectively. The sum is the complete volume;</li>
+</ul>
+<ol>
+<li>If the value of $f(x, y)$ in area D is always equal to 1, then its double integral is</li>
+</ol>
+<div class="math-display">$$
+\int_{D}\left(1)  d\sigma=\sigma\times1\right.
+$$</div>
+<p>is the double integral of 1, which is the area of the function;</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-051/index.html"><span>← Previous item</span><strong>Lecture 43: Local and Absolute Extrema of Multivariable Functions</strong></a>
+    <a class="article-pagination-next" href="../math-053/index.html"><span>Next item →</span><strong>Lecture 45: Calculation of Double Integrals</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +186,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

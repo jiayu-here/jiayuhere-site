@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,15 +63,15 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 48：对弧长的曲线积分</h1><p class="article-lead">考研数学学习笔记：Lecture 48：对弧长的曲线积分。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-11</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>多元积分学及其应用</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">57.1 对弧长的曲线积分</a><a href="#section-5">57.2 曲线积分的计算</a></nav></details><div class="prose"><h2 id="section-1">57.1 对弧长的曲线积分</h2>
 <h3 id="section-2">57.1.1 基本概念</h3>
-<h5 id="section-3"><strong>定义</strong>： #平面上对弧长的线积分</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">平面上对弧长的线积分</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>一个二元函数，沿着一个二维的曲线段的积分；</li>
 <li>把曲线分成 n 个小端，将曲线的函数值乘以小弧段的长度，将每一段求和、取极限，如果这个极限存在，则线积分存在；</li>
 </ul>
-<h5 id="section-4"><strong>定理</strong>： #线积分的性质</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
+<h5 id="section-4"><strong>定理</strong>： <span class="note-tag">线积分的性质</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>含义：线积分和路径的方向无关；</li>
@@ -85,31 +85,31 @@
 </ul>
 <h2 id="section-5">57.2 曲线积分的计算</h2>
 <h3 id="section-6">57.2.1 基本法</h3>
-<h5 id="section-7"><strong>定理</strong>： #第一类曲线积分的计算：直接法</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：假设 L 的参数方程为 $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$，则： $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
+<h5 id="section-7"><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：直接法</h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>假设 L 的参数方程为 $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$，则： $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>注意：</li>
 <li class="list-indent-1"><code>ds</code> 是曲线的弧微分；</li>
 <li class="list-indent-1">上下限是弧长从小到大；</li>
 </ul>
-<h5 id="section-8"><strong>定理</strong>： #第一类曲线积分的计算：直角方程</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{若 }C:y=y(x),\quad a\leq x\leq b$，则：</blockquote>
+<h5 id="section-8"><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：直角方程</h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }C:y=y(x),\quad a\leq x\leq b$，则：</blockquote>
 <blockquote>$$\int_{}f(x,y)\mathrm{d}s=\int_{a}^{b}f(x,y(x))\sqrt{1+y'^2(x)}\mathrm{d}x$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>相当于把 <code>x</code> 看作为参数；</li>
 </ul>
-<h5 id="section-9"><strong>定理</strong>： #第一类曲线积分的计算：极坐标方程</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{若 }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$，则：</blockquote>
+<h5 id="section-9"><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：极坐标方程</h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$，则：</blockquote>
 <blockquote>$$\int_{C}f(x,y)ds=\int_{\alpha}^{\beta}f(\rho(\theta)\cos\theta,\rho(\theta)\sin\theta)\sqrt{\rho^{2}(\theta)+\rho^{\prime2}(\theta)}d\theta $$</blockquote>
 <p><strong>解释</strong></p>
 <h3 id="section-10">57.2.2 奇偶性与对称性</h3>
-<h5 id="section-11"><strong>定理</strong>： #积分曲线的奇偶性</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
+<h5 id="section-11"><strong>定理</strong>： <span class="note-tag">积分曲线的奇偶性</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
 <p><strong>解释</strong></p>
-<h5 id="section-12"><strong>定理</strong>： #对称性</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：一般情况：$\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
+<h5 id="section-12"><strong>定理</strong>： <span class="note-tag">对称性</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>一般情况：$\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
 <blockquote>特别：$\int_Cf(x)ds=\int_Cf(y)ds$</blockquote><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-064/index.html"><span>← 上一项</span><strong>Lecture 56：多元微分在几何上的应用</strong></a>
     <a class="article-pagination-next" href="../math-066/index.html"><span>下一项 →</span><strong>Lecture 49：对坐标的曲线积分</strong></a>
@@ -121,6 +121,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

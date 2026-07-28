@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 23：正定二次型 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 23: Positive-Definite Quadratic Forms | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 23: Positive-Definite Quadratic Forms. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Quadratic Forms">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 23：正定二次型 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 23: Positive-Definite Quadratic Forms | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 23: Positive-Definite Quadratic Forms. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-092/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,11 +60,56 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 23：正定二次型</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-092/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-091/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 22：化二次型为标准型与规范型</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 23: Positive-Definite Quadratic Forms</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 23: Positive-Definite Quadratic Forms. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Quadratic Forms</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">23.1 Positive Definite Quadratic Forms</a><a href="#section-3">23.2 Judgment and Definite Determination</a></nav></details><div class="prose"><h2 id="section-1">23.1 Positive Definite Quadratic Forms</h2>
+<h3 id="section-2">23.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Positivedefinitequadraticform</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $n$ element quadratic form $f(x_1,  x_2,  \cdots,  x_n)=x^TAx.$ If there is $x^TAx&gt;0, $ for any $x=[x_1,  x_2,  \cdots,  x_n]^T\neq0, $, then $f$ is called a positive-definite quadratic form</blockquote>
+<blockquote>The corresponding matrix of the quadratic form $A$ is called a positive definite matrix;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Explanation: Geometric understanding</li>
+<li class="list-indent-1">For example, in the binary case, in a two-dimensional coordinate system, the positive definite is the projection;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Sufficientconditionsforpositivedefinitequadraticforms</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>The $n$-variable quadratic form $f=x^\mathrm{T}Ax$ is positive definite</blockquote>
+<blockquote>$\Leftrightarrow x^\mathrm{T}Ax&gt;0$ for every $x\neq0$ (definition)</blockquote>
+<blockquote>$\Leftrightarrow$ the positive index of inertia is $p=n$</blockquote>
+<blockquote>$\Leftrightarrow$ there exists an invertible matrix $D$ such that $A=D^TD$</blockquote>
+<blockquote>$\Leftrightarrow A\cong E$</blockquote>
+<blockquote>$\Leftrightarrow$ every eigenvalue $\lambda_i$ of $A$ is positive</blockquote>
+<blockquote>$\Leftrightarrow$ every leading principal minor of $A$ is positive.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Leading principal minor:</li>
+<li class="list-indent-1">It is a principal minor formed by the first $k$ rows and first $k$ columns.</li>
+<li class="list-indent-1">Its top-left entry is $a_{11}$ and its bottom-right entry is $a_{kk}$.</li>
+<li class="list-indent-1">$$\begin{vmatrix}A_{k}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1k}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2k}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{k1}&amp;a_{k2}&amp;\cdots&amp;a_{kk}\end{vmatrix}$$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Necessaryconditionsforquadraticpositivedefinitetypes</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\begin{aligned}&amp;\left(1\right)a_{ii}&gt;0\left(i=1,2,\cdots,n\right).\\&amp;\left(2\right)\left|A\right|&gt;0 .\end{aligned}$$</blockquote>
+<h2 id="section-3">23.2 Judgment and Definite Determination</h2>
+<p><strong>Summary</strong>: Methods for determining true positive</p>
+<ul>
+<li>Method 1: Sylvester's criterion — all leading principal minors of $A$ are positive.</li>
+<li class="list-indent-1">If this holds, the matrix is positive definite.</li>
+<li>Method 2: All eigenvalues of $A$ are positive.</li>
+<li>Method 3: Complete the square and check whether all coefficients in the standard form are positive.</li>
+<li>Method 4: Definition method</li>
+<li class="list-indent-1">First write $f=(x_1+x_2)^2+(x_1+x_3)^2+(x_2+x_3)^2$. This is a sum-of-squares representation, but it may come from a noninvertible change of variables and therefore is not by itself a valid diagonalization by congruence.</li>
+<li class="list-indent-1">Since it is a sum of squares, $f=0$ if and only if $\begin{cases}x_{1}+x_{2}=0\\x_{1}+x_{3}=0\\x_{2}+x_{3}=0.\end{cases}$</li>
+<li class="list-indent-1">Its determinant is $\left|\begin{matrix}1&amp;1&amp;0\\1&amp;0&amp;1\\0&amp;1&amp;1\end{matrix}\right|$</li>
+<li class="list-indent-1">Hence $x_1=x_2=x_3=0$.</li>
+<li class="list-indent-1">So, by definition: $f&gt;0\Leftrightarrow\left(\begin{matrix}x_{1}\\x_{2}\\x_{3}\end{matrix}\right)\neq0$</li>
+</ul>
+<p><strong>Summary</strong>: Steps to prove the sufficiency of positive definite quadratic forms</p>
+<ul>
+<li>(1) First, explain $A^T=A$</li>
+<li>(2) Sufficient conditions for reuse;</li>
+<li class="list-indent-1">Note: <code>q=0</code> cannot be pushed out <code>p=n</code></li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-091/index.html"><span>← Previous item</span><strong>Lecture 22: Reducing Quadratic Forms to Standard and Canonical Forms</strong></a>
 
   </nav></div></div>
     </article></main>
@@ -63,6 +119,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

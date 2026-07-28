@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 48：正项级数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 48: Series of Positive Terms | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 48: Series of Positive Terms. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Infinite Series">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 48：正项级数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 48: Series of Positive Terms | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 48: Series of Positive Terms. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-056/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,197 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 48：正项级数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-13</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-056/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-055/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 53：常数项级数</strong></a>
-    <a class="article-pagination-next" href="../math-057/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 55：交错级数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 48: Series of Positive Terms</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 48: Series of Positive Terms. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-13</span><span>8 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">48.1 positive-term series</a><a href="#section-4">48.2 comparison test</a><a href="#section-8">48.3 ratio test</a><a href="#section-11">48.4 integral test</a><a href="#section-12">48.5 Example questions</a></nav></details><div class="prose"><h2 id="section-1">48.1 positive-term series</h2>
+<h3 id="section-2">48.1.1 Definition of positive-term series</h3>
+<p>#####<strong>Theorem</strong>: # convergence of a positive-term series</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> positive term $\sum u_n$ The necessary and sufficient condition for convergence is that ${S_n}$ is bounded;</blockquote>
+<blockquote>That is: $\sum_{n=1}^\infty u_n$ converges $\Leftrightarrow S_n$ is bounded on</blockquote>
+<p><strong>Concept of positive-term series</strong></p>
+<ul>
+<li>Each item of $u_n$ is greater than 0;</li>
+<li>And because each term of the positive-term series is positive, the sequence of partial sums is increasing:</li>
+<li class="list-indent-1">$S_{1}\leq S_{2}\leq S_{3}\cdots$ <code>-&gt;</code> $\{S_{n}\}\geq0$</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>But this theorem is almost useless -&gt; because it is difficult to tell whether $S_n$ is bounded;</li>
+</ul>
+<h3 id="section-3">48.1.2 Method selection</h3>
+<p><strong>Method</strong></p>
+<ul>
+<li>Method classification:</li>
+<li class="list-indent-1">1. comparison test</li>
+<li class="list-indent-1">2. limit comparison test</li>
+<li class="list-indent-1">3.ratio test</li>
+</ul>
+<p>	-4. root test</p>
+<ul>
+<li class="list-indent-1">5. integral test</li>
+<li>Method selection:</li>
+<li class="list-indent-1">Category 1: Method <code>1, 2</code></li>
+<li class="list-indent-2">Need to compare the current general term with other known general terms;</li>
+<li class="list-indent-2">Advantages:</li>
+<li class="list-indent-3">Wider scope of application;</li>
+<li class="list-indent-3">As long as methods 3 and 4 can make a judgment, methods 1 and 2 can definitely make a judgment, but it may be more inconvenient to do;</li>
+<li class="list-indent-2">Disadvantages:</li>
+<li class="list-indent-3">Inconvenient to use;</li>
+<li class="list-indent-1">Category 2: Method <code>3, 4</code></li>
+<li class="list-indent-2">Concept:</li>
+<li class="list-indent-3">Just judge for yourself;</li>
+<li class="list-indent-2">Advantages:</li>
+<li class="list-indent-3">It is easy to use, no other series is needed, you can judge by yourself;</li>
+<li class="list-indent-2">Disadvantages:</li>
+<li class="list-indent-3">Sometimes, it is obvious that a series is divergent, but it is difficult to prove using these methods;</li>
+<li class="list-indent-3">ie: Narrow scope of application;</li>
+<li>Problem solving steps:</li>
+<li class="list-indent-1">1. First observe whether the convergence or divergence pattern of <code>-&gt;</code> can be seen directly;</li>
+<li class="list-indent-1">2. When judging the method, first consider the method <code>3, 4</code>;</li>
+<li class="list-indent-1">3. If you cannot make a decision, consider <code>1, 2</code>;</li>
+<li>Rules:</li>
+<li class="list-indent-1">Big Three: $$a^n\quad n!\quad n^n$$</li>
+<li class="list-indent-1">If at least one of the three giants is present, the method <code>3, 4</code> is usually used;</li>
+<li class="list-indent-1">If none of the Big Three appears, the form of $n^p$ or $\ln n$ often appears. In this case, use the method <code>1, 2</code>;</li>
+</ul>
+<h2 id="section-4">48.2 comparison test</h2>
+<h3 id="section-5">48.2.1 comparison test definition</h3>
+<p><strong>START WITH QUESTION</strong></p>
+<ul>
+<li>1. How to scale inequalities? Should <code>-&gt;</code> scale or shrink?</li>
+<li>2. Who to compare with?</li>
+<li>Idea:</li>
+<li class="list-indent-1">Improved comparison test using limit;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: # comparison test</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> if $\sum U_n$ and $\sum V_n$ are both positive-term series, and $u_n&lt;v_n$:</blockquote>
+<blockquote>$\sum_{n=1}^\infty v_n$ convergence $\Rightarrow\sum_{n=1}^\infty u_n$ convergence</blockquote>
+<blockquote>$\sum_{n=1}^\infty u_n$ diverge $\Rightarrow\sum_{n=1}^\infty v_n$ diverge</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Summary:</li>
+<li class="list-indent-1">Large ones converge, small ones definitely converge;</li>
+<li class="list-indent-1">Small divergence, large divergence for sure;</li>
+<li class="list-indent-1">Neither the other way around;</li>
+<li>How to use:</li>
+<li class="list-indent-1">Make a preliminary judgment before use;</li>
+<li class="list-indent-1">If it is initially judged to be convergent, then amplify;</li>
+<li class="list-indent-1">If it is initially judged to be divergent, it will be reduced;</li>
+<li>Prerequisites for use:</li>
+<li class="list-indent-1">Both series are<strong>positive-term series</strong>;</li>
+</ul>
+<p><strong>Supplement</strong></p>
+<ul>
+<li>If $0&lt;L&lt;+\infty$, then $\sum u_n$ and $\sum v_n$ converge;</li>
+<li>If $L=0$, then $u_n$ is higher order than $v_n$:</li>
+<li class="list-indent-1">$\sum v_n$ convergence can be derived from $\sum u_n$ convergence;</li>
+<li class="list-indent-1">When $\sum v_n$ diverges, $\sum u_n$ cannot be judged based on this;</li>
+<li>If $L=+\infty$, then $u_n$ is lower order than $v_n$:</li>
+<li class="list-indent-1">$\sum v_n$ divergence can be derived from $\sum u_n$ divergence;</li>
+<li class="list-indent-1">When $\sum v_n$ converges, $\sum u_n$ cannot be judged based on this;</li>
+<li>Therefore, it is still necessary to select the appropriate comparison series $\sum v_n$, and then determine the convergence or divergence of the target series;</li>
+</ul>
+<p><strong>Compare with whom</strong></p>
+<ul>
+<li>Core Question:</li>
+<li class="list-indent-1">How to find the series used to assist judgment <code>-&gt;</code> two commonly used series;</li>
+</ul>
+<h3 id="section-6">48.2.2 limit comparison test</h3>
+<p>#####<strong>Theorem</strong>: # limit comparison test</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> set $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$</blockquote>
+<blockquote>if:</blockquote>
+<blockquote>1. If $0&lt;l&lt;\infty$, then $\sum_{n=1}^{\infty}u_n$ and $\sum_{n=1}^{\infty}v_n$ have the same convergence behavior.</blockquote>
+<blockquote>2. If $l=0$, then convergence of $\sum_{n=1}^{\infty}v_n$ implies convergence of $\sum_{n=1}^{\infty}u_n$; equivalently, divergence of $\sum u_n$ implies divergence of $\sum v_n$.</blockquote>
+<blockquote>3. If $l=\infty$, then divergence of $\sum_{n=1}^{\infty}v_n$ implies divergence of $\sum_{n=1}^{\infty}u_n$; equivalently, convergence of $\sum u_n$ implies convergence of $\sum v_n$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept: Transform the problem of the ratio of two general terms into the problem of finding the limit of the ratio of two general terms;</li>
+</ul>
+<h3 id="section-7">48.2.3 Two commonly used series</h3>
+<p><strong>Commonly used series 1</strong>: P series</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">The $p$-series $\sum_{n=1}^{\infty}\frac1{n^p}$ converges for $p&gt;1$ and diverges for $p\leq1$.</li>
+<li>NOTE:</li>
+<li class="list-indent-1"><code>P=1</code> <code>-&gt;</code> Harmonic series: $\sum\frac{1}{n}\quad$ must diverge</li>
+<li class="list-indent-1">Why is it divergent when P=1?</li>
+<li>Essence:</li>
+<li class="list-indent-1">The nature of convergence: What determines whether a series converges is not whether the summation term is infinite, or even the size of the summation, but the speed at which the general term in the summation term tends to 0;</li>
+<li class="list-indent-1">Speed comparison cannot determine whether a series diverges or converges, but speed changes will bring about essential changes.</li>
+</ul>
+<p><strong>Commonly used series 2</strong>: geometric series</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">The geometric series $\sum_{n=1}^{\infty}aq^n$ with $a&gt;0$ and $q&gt;0$ converges for $q&lt;1$ and diverges for $q\geq1$.</li>
+<li>Concept:</li>
+<li class="list-indent-1">Whether a geometric series converges or not depends only on the value of its <code>q</code>, that is, the common ratio determines its convergence or divergence;</li>
+<li class="list-indent-1">That is, for geometric series, if the common ratio $\frac{u_{u+1}}{u_n}=q$ exists, it has the above limit;</li>
+</ul>
+<p><strong>Supplement</strong>: Convergence of harmonic series</p>
+<ul>
+<li>$$\sum_{n=1}^{\infty}\frac{1}{n}=1+\frac{1}{2}+\frac{1}{3}+\cdots+\underbrace{\frac{1}{n}+\frac{1}{n+1}+\cdots+\frac{1}{2n-1}}+\cdots$$</li>
+<li>$\frac{1}{n}+\frac{1}{n+1}+\cdots+\frac{1}{2n-1}&gt;\underbrace{\frac1{2n}+\frac1{2n}+\cdots+\frac1{2n}}_{n$ items $=\frac n{2n}=\frac12$</li>
+<li>The partial sum of the harmonic series can be used to create a constant that has nothing to do with <code>n</code>. Having nothing to do with <code>n</code> means that infinity has lost its meaning to it, so it diverges;</li>
+</ul>
+<h2 id="section-8">48.3 ratio test</h2>
+<h3 id="section-9">48.3.1 ratio test</h3>
+<p>#####<strong>Theorem</strong>: # ratio test</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> If $\sum U_n$ is a positive-term series, then if $$\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\rho$$</blockquote>
+<blockquote>if $\rho &lt;1$, then $\sum U_n$ converges;</blockquote>
+<blockquote>IF $\rho &gt;1$, then $\sum U_n$ diverges;</blockquote>
+<blockquote>If $\rho =1$, then $\sum U_n$ cannot be determined, please use other methods;</blockquote>
+<p><strong>Advantages and Disadvantages</strong></p>
+<ul>
+<li>Advantages: Compare yourself with yourself, no need to find other functions;</li>
+<li>Disadvantage: If $\rho =1$, the method fails;</li>
+</ul>
+<h3 id="section-10">48.3.2 root test</h3>
+<p>#####<strong>Theorem</strong>: # root test</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> If $\lim_{n\to\infty}\sqrt[n]{u_n}=\rho$, then $\sum_{n=1}^\infty u_n \begin{cases}\text{convergent}, &amp;\rho&lt;1, \\\\\text{divergent}, &amp;\rho&gt;1, \\\\\text{inconclusive}, &amp;\rho=1, \end{cases}$</blockquote>
+<p><strong>Explanation</strong></p>
+<h2 id="section-11">48.4 integral test</h2>
+<p>#####<strong>Theorem</strong>: # integral test</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> If $f$ is nonnegative, continuous, and decreasing on $[1,\infty)$, and $a_n=f(n)$, then $\sum_{n=1}^{\infty}a_n$ and $\int_1^\infty f(x)\,dx$ have the same convergence behavior.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>rarely used because there are many conditions;</li>
+</ul>
+<p><strong>Example</strong>: Prove that the series $\sum_{i=1}^\infty\frac1{n^p}$ converges when $p&gt;1$ and diverges when $p\leq1$.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Set $a_{n}=\frac{1}{n^{p}}=f(u), f(x)=\frac{1}{x^{p}}$</li>
+<li class="list-indent-1">So get points: $\int_{1}^{+\infty}\frac{dx}{x^{p}}$</li>
+</ul>
+<h2 id="section-12">48.5 Example questions</h2>
+<p><strong>Example</strong>: $\sum\frac{1}{\sqrt{n(n+1)}}$ Find its divergence property</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">BECAUSE $:  n(n+1)&lt;(n+1)^{2}$;</li>
+<li class="list-indent-1">SO: $\frac{1}{\sqrt{n(n+1)}}&gt;\frac{1}{\sqrt{(n+1)^{2}}}=\frac{1}{n+1}$</li>
+<li>problem type: # positive-term series</li>
+</ul>
+<p><strong>Example</strong>: Find the convergence or divergence of $\sum_{n=1}^{\infty}\sin\frac{1}{n}$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">First of all: sin 1/n must be a positive number;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Because $\lim_{n\to\infty}\frac{\sin{\frac{1}{n}}}{\frac{1}{n}}=1$, its limit is of type 0/0, the final result is 1;</li>
+<li class="list-indent-1">so 1&gt;0, so $\sin{\frac{1}{n}}$ and $\frac{1}{n}$ are of the same order;</li>
+<li class="list-indent-1">Because $\sin\frac{1}{n}\sim\frac{1}{n}$, and $\sum\frac{1}{n}$ diverge, so $\sum\sin\frac{1}{n}$ diverges.</li>
+<li>problem type: # comparison test</li>
+</ul>
+<p><strong>Example</strong>: $1+\frac{1}{1}+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{(n-1)!}+\cdots$, prove that it is convergent;</p>
+<ul>
+<li>Analysis</li>
+<li>Proof</li>
+<li class="list-indent-1">it converges because of $\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\lim_{n\to\infty}\frac{\frac{1}{n^{1}}}{\frac{1}{\left(n-n\right)!}}=\lim_{n\to\infty}\frac{1}{n}=0&lt;1$;</li>
+</ul>
+<p>	-</p>
+<ul>
+<li>problem type: # ratio test</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-055/index.html"><span>← Previous item</span><strong>Lecture 53: Series of Constants</strong></a>
+    <a class="article-pagination-next" href="../math-057/index.html"><span>Next item →</span><strong>Lecture 55: Alternating Series</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +259,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -9,20 +9,20 @@ tags: ["考研数学", "高等数学", "导数与微分"]
 
 ## 1.1 和差积商求导法则
 **有理运算法则**
-设 $u(x),\nu(x)$ 都可导，则
+设 $u(x),v(x)$ 都可导，则
 - $(u\pm v)^{\prime}=u^{\prime}\pm v^{\prime}$
 - $(uv)^{\prime}=u^{\prime}v+uv^{\prime}$
-- $(\frac\mu\nu)^{\prime}=\frac{\mu^{\prime}\nu-\nu^{\prime}\mu}{\nu^2}\quad(\nu\neq0)$
+- $(\frac uv)^{\prime}=\frac{u^{\prime}v-v^{\prime}u}{v^2}\quad(v\neq0)$
 
 ## 1.2 反函数的求导法则
 **定理 2：**
 设区间 $I$ 上严格单调且连续的函数 $x=f(y)$ 在 $y$ 处可导，且 $f^{\prime}(y)\neq0$,则它的反函数 $y=f^{-1}(x)$ 在对应点可导。
-- 则：$(f^{-1})^{\prime}(x)=\frac1{f^{\prime}(y)}\quad\frac{dy}{dx}=\frac1{dx}$
+- 则：$(f^{-1})^{\prime}(x)=\frac1{f^{\prime}(y)}\quad\frac{dy}{dx}=\frac1{dx/dy}$
 - 含义
 	- 函数和反函数是两个函数，但是是同一条曲线；
-	- 因此**当函数连续且单调时，可以知其反函数也同样可导**；
+	- 因此，当函数严格单调且连续、在对应点可导并且导数不为零时，反函数在对应点也可导；
 
-**例题：**$\text{求}\quad y=\arcsin\quad x\quad(x\in[-1,1])\text{ 导数}$
+**例题：**求 $y=\arcsin x\quad(x\in[-1,1])$ 的导数
 反函数：$x=\sin y\quad y\in\left[-\frac\pi2,\frac\pi2\right]$
 函数的导数：$\frac{dy}{dx}=(\arctan x)^{\prime}=\frac{1}{\log}=\frac{1}{\sqrt{1-\sin^{2}y}}=\frac{1}{\sqrt{1-x^{2}}}$
 
@@ -48,10 +48,10 @@ tags: ["考研数学", "高等数学", "导数与微分"]
 - 基本
 	- $\begin{aligned}&\quad(C)^{\prime}=0\quad&\quad(x^\alpha)^{\prime}=\alpha x^{\alpha-1}\\&\quad(a^x)^{\prime}=a^x\ln a\quad&\quad(e^x)^{\prime}=e^x\\&\quad(\log_ax)^{\prime}=\frac1{x\ln a}\quad&\quad(\ln|x|)^{\prime}=\frac1x\end{aligned}$
 - 三角函数
-	- $(\sin x)^{\prime}=\cos x\quad\quad\quad\quad\quad(\sin x)^{\prime}=-\cos x$
+	- $(\sin x)^{\prime}=\cos x\quad\quad\quad\quad\quad(\cos x)^{\prime}=-\sin x$
 	- $\begin{aligned}(\tan x)^{\prime}&=\sec^2x&(\cot x)^{\prime}&=-\csc^2x\\\\(\sec x)^{\prime}&=\sec x\tan x&(\csc x)^{\prime}&=-\csc x\cot x\end{aligned}$
 - 反函数导数
-	- $\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\arctan x)^{\prime}=-\frac1{1+x^2}\end{aligned}$
+	- $\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\operatorname{arccot}x)^{\prime}=-\frac1{1+x^2}\end{aligned}$
 
 ## 1.5 对数求导法 
 **例题引入**
@@ -59,7 +59,7 @@ tags: ["考研数学", "高等数学", "导数与微分"]
 - 幂指函数；
 - 对数求导法：
 	- 先取对数：$\ln y=x\ln(1+\sin x)$
-	- 两边同时求导：$\frac{y^{\prime}}{y}=\ln(s+\sin x)+\frac{xCosx}{1+\sin x}$
+	- 两边同时求导：$\frac{y^{\prime}}{y}=\ln(1+\sin x)+\frac{x\cos x}{1+\sin x}$
 	- 提出 $y^{\prime}$，得到导函数
 	- 带入 x=Π；
 

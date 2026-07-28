@@ -35,14 +35,14 @@ tags: ["考研数学", "高等数学", "多元函数微分学"]
 - 链式求导法：$y_{x}^{\prime}=y_{u}^{\prime}\cdot u_{x}^{\prime}$
 
 ##### **定理**： #多元复合函数的求导法则
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 x 及对 $y$ 的偏导数，函数 $z=f(u,\nu)$ 在对应点 $(u,\nu)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x, y)$ 处的两个偏导数存在，且有：
-> $$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial y}$$
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 $x$ 及对 $y$ 的偏导数，函数 $z=f(u,v)$ 在对应点 $(u,v)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x,y)$ 处的两个偏导数存在，且有：
+> $$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$
 
 **解释**
 - 对内层函数：
 	- $u=u(x,y),\quad v=v(x,y)$ 要求的是**偏导数存在**；
 - 对外层函数：
-	- $z=f(u,\nu)$ 要求的是**偏导数存在**，并且要**连续**；
+	- $z=f(u,v)$ 要求的是**偏导数存在**，并且要**连续**；
 - 原因：
 	- 在多元里面，可导不可以推出可微；
 
@@ -57,22 +57,22 @@ tags: ["考研数学", "高等数学", "多元函数微分学"]
 			- y
 - 分析：
 	- 由上述求导的树形图可知，其中共有 `x、y` 两个变量；
-	- 对 `x` 自变量而言 `->` 其在 `u` 和 `v` 当中都存在 `->` 因此对 x 的求导：$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x}$ `->` 求导的结果为分别对 `u`、`v` 的复合函数求导的和；
+	- 对 `x` 自变量而言 `->` 其在 `u` 和 `v` 当中都存在 `->` 因此对 x 的求导：$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$ `->` 求导的结果为分别对 `u`、`v` 的复合函数求导的和；
 	- 同理对 `y`
 
 ### 42.2.2 全微分形式的不变性
 
 ##### **定理**： #全微分形式的不变性
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设函数 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial\nu}\operatorname{d}\nu.$$
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设函数 $z=f(u,v),\quad u=u(x,y)$ 及 $v=v(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：$$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial v}\operatorname{d}v.$$
 > 即多元函数也具有微分形式的不变性；
-> 由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$$
+> 由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$
 
 **解释**
 - 一元时：
 	- 无论当前是对 x 的导数 $dx$ ，还是对 u 的导数 $du$（即无论是自变量还是中间变量），当前都是**对这个变量的导数乘以对这个变量的微分**；
 - 多元时： 
 	- 因为 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，所以一定可微分；
-	- 微分形式不变 `->` $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$
+	- 微分形式不变 `->` $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$
 	- 带入
 		- ![Pasted image 20240203172405](/assets/notes/8b643ae6ba7c-Pasted-image-20240203172405.png)
 - 意义：
@@ -81,7 +81,7 @@ tags: ["考研数学", "高等数学", "多元函数微分学"]
 
 ### 42.2.3 例题
 **情况 1：**$\text{设 }z=f(u,v),u=\varphi(x),v=\psi(x)\text{ 均可微,则}$
-- $\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial\nu}\frac{d\nu}{dx}$
+- $\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial v}\frac{dv}{dx}$
 - 分析：
 	- 因为 u、v 对 z 是偏导数，所以是偏微分 $\partial$
 	- 因为如图所示的关系
@@ -145,7 +145,7 @@ tags: ["考研数学", "高等数学", "多元函数微分学"]
 	- x 是对于 x 的函数：$x=x$
 	- y 是对于 x 的函数：$y=f(x)$
 - 所以当对 $F(x,y)=0$ 求导时，它们的求导链条为：$F<_{y}^x>x$
-- 所以分别对 x、y 求导后：$\frac{\partial F}{\partial x}+\frac{\partial E}{\partial y}\frac{dy}{dx}=0$
+- 所以分别对 x、y 求导后：$\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y}\frac{dy}{dx}=0$
 - 转化位置，得到：$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$
 
 ##### **定理**： #多元隐函数存在定理
@@ -163,13 +163,13 @@ tags: ["考研数学", "高等数学", "多元函数微分学"]
 \begin{aligned}
 &\text{求}\frac{d^{2}y}{dx^{2}},\text{这里对}e^{x}y^{3}+e^{x}3y^{2}\frac{dy}{dx}-2x+2\frac{dy}{dx}=0\text{再对x求导} \\
 &e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}6y({\frac{dy}{dx}})^{2}+e^{x}3y^{2}{\frac{d^{2}y}{dx^{2}}}-2+2{\frac{d^{2}y}{dx^{2}}}=0 \\
-&\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}+e^{x}6y(\frac{dy}{dx})^{2}}{e^{x}3y^{2}+2} \\
+&\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}-6e^{x}y(\frac{dy}{dx})^{2}}{3e^{x}y^{2}+2} \\
 &将{\frac{dy}{dx}}={\frac{2x-e^{x}y^{3}}{e^{x}3y^{2}+2}}{\text{代入}}
 \end{aligned}
 $$
 - 题型： #隐函数求导
 
-**例题**：已知 $x^{2}+y^{2}-1=0$，当 $(0,1)$ 点处 XXXX，求一阶隐函数求导以及二阶隐函数求导；
+**例题**：已知 $x^{2}+y^{2}-1=0$，求隐函数在 $(0,1)$ 点处的一阶导数和二阶导数；
 - 分析
 	- 注意是 $F(x,y)=0$
 - 解析：一阶

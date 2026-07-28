@@ -20,7 +20,7 @@ tags: ["考研英语", "英语语法", "简单句"]
 **举例**
 - *<u>The</u> roughly <u>20 million</u> inhabitants of these nations lookedhopefully to the future.*
 	- 限定词：The ... 20 million 修饰了 inhabitants；
-- *<u>More than two dozen</u> companies sell DNA tests directly to thepublic, ranging in price from <u>a few hundred</u> dollars to more than$2,500.*
+- *<u>More than two dozen</u> companies sell DNA tests directly to the public, ranging in price from <u>a few hundred</u> dollars to more than \$2,500.*
 	- 限定词：
 		- More than two dozen 限定 companies（以数词的形式进行限定）
 		- a few hundred 限定 dollars  (以数词的形式进行限定)

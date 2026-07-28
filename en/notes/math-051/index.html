@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 43: Local and Absolute Extrema of Multivariable Functions | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 43: Local and Absolute Extrema of Multivariable Functions. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multivariable Differential Calculus">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 43: Local and Absolute Extrema of Multivariable Functions | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 43: Local and Absolute Extrema of Multivariable Functions. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-051/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,221 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-07</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-051/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-050/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 41：隐函数求导</strong></a>
-    <a class="article-pagination-next" href="../math-052/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 44：二重积分</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 43: Local and Absolute Extrema of Multivariable Functions</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 43: Local and Absolute Extrema of Multivariable Functions. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-07</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Differential Calculus</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">43.1 Unconditional Extrema of Multivariable Functions</a><a href="#section-4">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</a><a href="#section-6">43.3 Maximum/Minimum Values of Multivariable Functions</a><a href="#section-9">43.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
+<ul>
+<li>(1) Unconstrained extremum</li>
+<li>(2) Conditional Extrema and Lagrange Multiplier Method</li>
+<li>(3) Maximum and minimum values</li>
+</ul>
+<p><strong>Frequently Tested Question Types in This Section</strong></p>
+<ul>
+<li>Problem Type 1: Find Extrema (Unconditional)</li>
+<li>Problem Type 2: Find the maximum and minimum values</li>
+<li>Question Type 3: Word problems with maximum and minimum values</li>
+</ul>
+<hr>
+<h2 id="section-1">43.1 Unconditional Extrema of Multivariable Functions</h2>
+<h3 id="section-2">43.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Extremumofmultivariablefunctions</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> the maximum or minimum value of a multivariable function in a neighborhood;</blockquote>
+<blockquote>If in a neighborhood of point $(x_0,y_0)$, the inequality always holds: $$f(x,y)\leq f(x_0,y_0)\quad(f(x,y)\geq f(x_0,y_0))$$</blockquote>
+<blockquote>Then $f$ has a local maximum (minimum) at $(x_0,y_0)$, and $(x_0,y_0)$ is called a local maximum (minimum) point.</blockquote>
+<blockquote>The maximum and minimum are collectively called extremums, and the maximum and minimum points are collectively called extremum points;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Give an example</li>
+<li>$z=3x^{2}+4y^{2}$ is minimal at $(0.0)$;</li>
+<li>$z=-\sqrt{x^{2}+y^{2}}$ is maximum at $\quad(0.0)$</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thestationarypointofamultivariablefunction</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> point where the partial derivative of a multivariable function equals 0 is called the stationary point of the multivariable function;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>$f_{x}^{\prime}=0.f_{y}^{\prime}=0$ Points that exist simultaneously are called stationary points;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thenecessaryconditionfortheexistenceofextremainmultivariablefunctions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if $z=f(x,y)$ has a partial derivative at point $(x_0,y_0)$ and takes an extremum at $(x_0,y_0)$, then we have: $$f_{x}^{\prime}(x_{0},y_{0})=0,\,f_{y}^{\prime}(x_{0},y_{0})=0$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Requirements:</li>
+<li class="list-indent-1">The two first-order partial derivatives of a point must be zero; this is a necessary condition for obtaining an extremum, but<strong>not a sufficient condition</strong>;</li>
+<li class="list-indent-1">Narrow the scope;</li>
+<li>The relationship between stationary points and extrema points:</li>
+<li class="list-indent-1">Generally:</li>
+<li class="list-indent-2">Concept:</li>
+<li class="list-indent-3">Not all stationary points are necessarily extremal; Extremal points are not necessarily stationary points <code>&lt;-</code> For example, $|x|+|y|$;</li>
+<li class="list-indent-2">Conclusion:</li>
+<li class="list-indent-3">Two scenarios: possible extreme points</li>
+<li class="list-indent-3">(1) Stationary <code>&lt;-</code> Mainly this situation;</li>
+<li class="list-indent-3">(2) Neither $f_x$ nor $f_y$ exists</li>
+<li class="list-indent-3">(3)$f_x$ Nonexistent, $f_y=0$</li>
+<li class="list-indent-3">(4)$f_y$ Nonexistent, $f_x=0$</li>
+<li class="list-indent-1">Premises of differentiability:</li>
+<li class="list-indent-2">Concept:</li>
+<li class="list-indent-3">If $z=f(x,y)$ is differentiable, the extremum must be a stationary point;</li>
+<li class="list-indent-2">Conclusion:</li>
+<li class="list-indent-3">Extremes only need to find stationary points;</li>
+</ul>
+<p>-</p>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Sufficientconditionsforextremes</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span><strong>Determination of Standpoint Extremity of Multivariable Functions</strong></blockquote>
+<blockquote>When $z=f(x,y)$ has a second-order continuous partial derivative in a neighborhood of point $P_0(x_0,y_0)$, and $f_x^{\prime}(x_0,y_{0})=f_y^{\prime}(x_0,y_{0})=0$, $A=f_{xx}^{\prime\prime}(x_{0},y_{0})\quad\quad B=f_{xy}^{\prime\prime}(x_{0},y_{0})\quad\quad C=f_{yy}^{\prime\prime}(x_{0},y_{0})$;</blockquote>
+<blockquote>1. If it is $AC-B^{2}&gt;0$, then there are extremes</blockquote>
+<blockquote>	1. A&lt;0 is the maximum;</blockquote>
+<blockquote>	2. A&gt;0 is the minimum value;</blockquote>
+<blockquote>2. If it is $AC-B^{2}&lt;0$, then there is no extreme value</blockquote>
+<blockquote>3. If it is $AC-B^{2}=0$, then it can only be determined by definition</blockquote>
+<p><strong>Explanation</strong>: Summary</p>
+<ul>
+<li>After finding the stationary point, you only need to use this sufficient conditional determination method to determine whether it is an extremum</li>
+</ul>
+<h3 id="section-3">43.1.2 Example Problems</h3>
+<p><strong>Example</strong>: Find the extremum of $f(x,y)=x^{3}-y^{3}+3x^{2}+3y^{2}-9x$;</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">Finding the partial derivative separately:</li>
+<li class="list-indent-2">$f_{x}^{\prime}=3x^{2}+6x-9$</li>
+<li class="list-indent-2">$f_{y}^{\prime}=-3y^{2}+6y$</li>
+<li class="list-indent-1">Gain</li>
+<li class="list-indent-2">$\begin{cases}x^{2}+2x-3=0\\-y^{2}+2y=0\end{cases}$</li>
+<li class="list-indent-1">Simplify</li>
+<li class="list-indent-2">$(x+3)(x-1)=0$ hour, $x=-3\text{ or }1$;</li>
+<li class="list-indent-2">$y(y-2)=0$ hour, $y=0\text{ or }2$;</li>
+<li class="list-indent-1">Permutations and combinations to obtain stationary points</li>
+<li class="list-indent-2">$(1,0),(1,2),(-3,0),(-3,2)$</li>
+<li class="list-indent-1">Find A, B, C</li>
+<li class="list-indent-2">$f_{xx}^{\prime\prime}=6x+6$</li>
+<li class="list-indent-2">$f_{xy}^{\prime\prime}=0$</li>
+<li class="list-indent-2">$f_{yy}^{\prime\prime}=-6y+6$</li>
+<li class="list-indent-1">When (1,0) point:</li>
+<li class="list-indent-2">$A=12.B=0.C=6$</li>
+<li class="list-indent-2">So $AC-B^{2}=72&gt;0$</li>
+<li class="list-indent-2">Therefore, it is the minimum value, that is, after substituting $(1,0)$, the result is -5, which is the minimum value;</li>
+<li class="list-indent-1">Other analogies</li>
+<li>Question Type: <span class="note-tag">Extremumofmultivariablefunctions</span></li>
+</ul>
+<h2 id="section-4">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</h2>
+<h3 id="section-5">43.2.1 Basic Concepts</h3>
+<p><strong>Unconditional Extrema and Conditional Extremum</strong></p>
+<ul>
+<li>Unconditional</li>
+<li class="list-indent-1">Example: Find the tallest person in the entire school</li>
+<li>Conditional</li>
+<li class="list-indent-1">Example: Find the tallest student in the school, from Shandong, Gemini;</li>
+<li>The more conditions you add, the smaller the maximum value</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Conditionextremes</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> given $z=f(x,y)$, its extremum is under the condition of $\varphi(x,y)=0$, find its extremum as the conditional extremum;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Difference from unconstrained extremums:</li>
+<li class="list-indent-1">Unconstrained extremum: an extreme value within the domain, i.e., the highest or lowest point within the domain or locally;</li>
+<li class="list-indent-1">Constrained extrema: The content of constraints $\varphi (x, y)=0$ is usually a line geometrically, i.e., on a curve, local minimum and local maximum;</li>
+<li>Example:</li>
+<li class="list-indent-1">In $z=f(x,y)$: $z=f(x,\varphi(x))$</li>
+<li class="list-indent-1">Here, derivative from z to x: $\frac{dz}{dx}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\cdot\frac{dy}{dx}$</li>
+<li class="list-indent-1">Write out $\frac{dz}{dx}\vert_{x=x_{0}}=f^{\prime}(x_{0},y)+f^{\prime}(x_{0},y)\frac{dy}{dx}\vert_{x=x_{0}}=0$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Lagrangemultipliermethod</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>(1) For a single constraint: let $F(x,y,\lambda)=f(x,y)+\lambda\varphi(x,y)$</blockquote>
+<blockquote>then the necessary condition to obtain the extremum is: $$\begin{cases}F_x=f_x^{\prime}(x,y)+\lambda\varphi_x^{\prime}(x,y)=0,\\F_y=f_y^{\prime}(x,y)+\lambda\varphi_y^{\prime}(x,y)=0,\\F_\lambda=\varphi(x,y)=0,\end{cases}$$</blockquote>
+<blockquote>(2) When multiple constraints are present: the extreme value of the condition under $f(x,y,z)\text{ In terms of conditions }\varphi(x,y,z)=0,\psi(x,y,z)=0$ conditions</blockquote>
+<blockquote>Order $F(x,y,z,\lambda,\mu)=f(x,y,z)+\lambda\varphi(x,y,z)+\mu\psi(x,y,z)$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Explanation:</li>
+<li class="list-indent-1">$\lambda$ is a parameter</li>
+<li>Meaning:</li>
+<li class="list-indent-1">Transform the necessary condition for obtaining conditional extrema of a binary function under constraints into a large <code>F</code> Problem of the necessary condition for unconditional extrema of such a ternary function <code>-&gt;</code> For three partial derivatives, equal to 0;</li>
+<li>Note:</li>
+<li class="list-indent-1">The point obtained by solving this constraint is the possible extremum, not a definite one;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">nMeta-Lagrange</span> multiplier method</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> the above methods can be generalized to the extremum problem of $n$-element functions under $m$ constraints,</blockquote>
+<blockquote>To find the extremum of $u=f(x,y,z)$ under condition $\varphi(x,y,z)=0,\psi(x,y,z)=0$, construct the Lagrange function: $$F(x,y,z,\lambda,\mu)=f(x,y,z)+\lambda\varphi(x,y,z)+\mu\psi(x,y,z).$$ find the partial derivatives for $x,y,z,\lambda,\mu$ of $F$ and construct a system of equations: $$\begin{aligned}&amp;f_{x}^{\prime}(x,y,z)+\lambda\varphi_{x}^{\prime}(x,y,z)+\mu\psi_{x}^{\prime}(x,y,z)=0,\\&amp;f_{y}^{\prime}(x,y,z)+\lambda\varphi_{y}^{\prime}(x,y,z)+\mu\psi_{y}^{\prime}(x,y,z)=0,\\&amp;f_{z}^{\prime}(x,y,z)+\lambda\varphi_{z}^{\prime}(x,y,z)+\mu\psi_{z}^{\prime}(x,y,z)=0,\\&amp;\varphi(x,y,z)=0,\\&amp;\psi(x,y,z)=0.\end{aligned}$$ solve for $x,y,z,\lambda$ and $\mu$, then ($x,y,z)$ is the<strong>possible extreme point</strong>.</blockquote>
+<h2 id="section-6">43.3 Maximum/Minimum Values of Multivariable Functions</h2>
+<h3 id="section-7">43.3.1 Basic Concepts</h3>
+<p><strong>Summary</strong>: Find the maximum and minimum values of the continuous function <code>f(x, y)</code> on a bounded closed domain <code>D</code></p>
+<ul>
+<li>Step 1: Find the possible extremum points of <code>f(x, y)</code> within <code>D</code>;</li>
+<li class="list-indent-1">(1) Stationing point;</li>
+<li class="list-indent-1">(2) Two first-order partial derivatives, at least one point that does not exist</li>
+<li>Step 2: Find the maximum and minimum values of <code>f(x, y)</code> on the<strong>boundary</strong>of <code>D</code>;</li>
+<li class="list-indent-1">Find the maximum and minimum <code>-&gt;</code> on the boundary. This is essentially finding a conditional extremum;</li>
+<li>Step 3: Compare the extremes;</li>
+</ul>
+<h3 id="section-8">44.3.2 Conditional Maximum Problem</h3>
+<h2 id="section-9">43.3 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-10">Question Type: <span class="note-tag">Findtheextremum</span></h3>
+<h4 id="section-11">PART 1: Problem-solving methods</h4>
+<p><strong>Problem Type</strong>: Know the total differential of a function and determine the extremum</p>
+<ul>
+<li>Solution Guidance:</li>
+<li class="list-indent-1">Usually, Method Three or Method One is used first;</li>
+<li>Method 1: Sufficient conditions for extremes</li>
+<li class="list-indent-1">Use sufficient conditions for extreme values. First, use the full differential to know the partial derivatives for <code>x</code> and <code>y</code>, then use the partial derivatives to find the values of <code>A、B、C</code> and judge using formulas;</li>
+<li>Method 2: Partial integration</li>
+<li class="list-indent-1">Core: Know the total differential <code>-&gt;</code> Use partial integrals to find the function;</li>
+<li class="list-indent-1">Example: When the total derivative of a binary function $z=f(x,y)$ is $dz = xdx + ydy$, its partial derivative can be found</li>
+<li class="list-indent-2">$z_{x}=x\quad\quad z=\int xdx=\frac{1}{2}x^{2}+q(y)$</li>
+<li class="list-indent-2">$z_{y}=y \quad\quad z_{y}=q^{\prime}(y)=y,q(y)=\frac{1}{2}y^{2}+c$</li>
+<li class="list-indent-2">So $z=\frac{1}{2}(x^{2}+y^{2})+c$</li>
+<li>Method 3: Derivative Derivation</li>
+<li class="list-indent-1">Core: Given a total differential, reconstruct its potential function.</li>
+<li class="list-indent-1">Example: $dz=xdx+ydy=d(\frac{1}{2}x^2)+d(\frac{1}{2}y^{2})=d(\frac{1}{2}(x^{2}+y^{2}))$</li>
+<li class="list-indent-2">Since the differentials are equal, the two can only differ by constant, so $z=\frac{1}{2}(x^{2}+y^{2})+c$</li>
+</ul>
+<p><strong>Problem Type</strong>: Know the form of the function and find the extrema point</p>
+<ul>
+<li>(1.1) No possible extreme points provided:</li>
+<li class="list-indent-1">Compute the partial derivatives of the function x and y respectively so that the partial derivative equals 0, and find possible stationary points (if no possible extrema points are given)</li>
+<li>(1.2) Given possible extreme points:</li>
+<li class="list-indent-1">Use necessary conditions to determine <code>-&gt;</code> determine whether it is a stationary point:</li>
+<li class="list-indent-1">Necessary conditions for the existence of extreme points <code>-&gt;</code> $f_{x}^{\prime}(x_{0},y_{0})=0,\,f_{y}^{\prime}(x_{0},y_{0})=0$</li>
+<li>(2) Sufficient condition judgment: Use the ABC formula to judge</li>
+<li>Note:</li>
+<li class="list-indent-1">If calculating ABC is troublesome, you can use &quot;substitution first, then calculate&quot;<code>-&gt;</code> When finding Y, first substitute X; similarly, when calculating X;</li>
+</ul>
+<h4 id="section-12">PART 2: Typical Example Problems</h4>
+<h4 id="section-13">PART 3: Key Points Review</h4>
+<hr>
+<h3 id="section-14">Question Type: <span class="note-tag">ConditionalextremumandLagrangemultipliermethod</span></h3>
+<h4 id="section-15">PART 1: Problem-solving methods</h4>
+<p><strong>Question Type</strong>: Conditional maximum-value problems</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Using the Lagrange multiplier method, first find all possible extrema points of the function, then compare all possible extrema points without determination to obtain the maximum;</li>
+<li>Steps to solve the problem:</li>
+<li class="list-indent-1">(1) Construct the Lagrange function;</li>
+<li class="list-indent-1">(2) Find partial derivatives;</li>
+<li class="list-indent-1">(3) Find a station;</li>
+<li class="list-indent-2">Obtain several equations equal to 0, and use them to solve for possible values of x and y;</li>
+<li class="list-indent-1">(4) Compare each point to determine the maximum and minimum values;</li>
+</ul>
+<p><strong>Problem Type</strong>: Given the full differential, find the maximum</p>
+<ul>
+<li>Method:</li>
+<li>(1) First, recover the potential function from the total differential.</li>
+<li class="list-indent-1">Two methods <code>-&gt;</code> partial integral, derivative;</li>
+<li>(2) Find the minimum point of the region;</li>
+<li class="list-indent-1">1. Possible extreme points within the region;</li>
+<li class="list-indent-1">2. The maximum and minimum values on the boundary curve;</li>
+<li class="list-indent-2">Method One:</li>
+<li class="list-indent-3">Using conditions, convert extremes into unconstrained extremums;</li>
+<li class="list-indent-2">Method Two:</li>
+<li class="list-indent-3">The general method is the Lagrange multiplier method;</li>
+<li class="list-indent-2">Method 3:</li>
+<li class="list-indent-3">Parametric equations</li>
+<li class="list-indent-1">3. Compare the maximum and minimum values on the boundary with possible extremes within the region;</li>
+</ul>
+<h4 id="section-16">PART 2: Typical Example Problems</h4>
+<h4 id="section-17">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-050/index.html"><span>← Previous item</span><strong>Lecture 41: Differentiation of Implicit Functions</strong></a>
+    <a class="article-pagination-next" href="../math-052/index.html"><span>Next item →</span><strong>Lecture 44: Double Integrals</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +283,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

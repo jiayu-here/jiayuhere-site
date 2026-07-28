@@ -12,7 +12,7 @@ tags: ["考研数学", "高等数学", "向量代数与空间解析几何"]
 > $$1\text{)几何表示: }\mathbf{a}\cdot\mathbf{b}=\mid\mathbf{a}\mid\mid\mathbf{b}\mid\cos\alpha $$
 > $$2\text{)代数表示:}\quad\mathbf{a}\cdot\mathbf{b}=\mathbf{a}_xb_x+\mathbf{a}_yb_y+\mathbf{a}_zb_z$$
 > $$3\text{)运算规律:}\quad 交换律：\mathbf{a}\cdot\mathbf{b}=\mathbf{b}\cdot\mathbf{a} \quad \text{分配律: }\mathbf{a\cdot(b+c)=a\cdot b+a\cdot c}$$
-> $$4\text{)几何应用:}\quad 求模：|\mathbf{a}|=\sqrt{\mathbf{a}\cdot\mathbf{a}}\cdot\mathbf{a} \quad \text{求夹角: }\cos\alpha=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\quad \text{判定两向量垂直:}\mathbf{a\perp b\Leftrightarrow a\cdot b=0}$$
+> $$4\text{)几何应用:}\quad 求模：|\mathbf{a}|=\sqrt{\mathbf{a}\cdot\mathbf{a}} \quad \text{求夹角: }\cos\alpha=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\quad \text{判定两向量垂直:}\mathbf{a\perp b\Leftrightarrow a\cdot b=0}$$
 
 ## 53.2 向量积
 ##### **定理**： #向量代数的向量积

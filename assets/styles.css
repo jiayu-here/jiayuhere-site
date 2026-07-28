@@ -339,6 +339,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .prose blockquote { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--primary); background: var(--surface-soft); color: #57606a; }
 .prose a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 3px; }
 .prose mark { padding: 0 .16em; border-radius: 3px; background: #fff8c5; color: inherit; }
+.prose .note-tag { display: inline-block; padding: .05em .45em; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: inherit; font-size: .92em; line-height: 1.45; }
 .prose .note-image { width: auto; max-height: 920px; margin: 24px auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: var(--shadow); }
 .prose .math-display { overflow-x: auto; margin: 24px 0; padding: 12px 0; text-align: center; }
 .system-flow { display: grid; gap: 14px; margin: 26px 0; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-soft); }

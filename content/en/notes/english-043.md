@@ -1,13 +1,21 @@
 ---
-title: "Graduate Examination English: 真题 - 2021年：大作文 - 负面"
+title: "2021 Past Paper: Essay — Negative Trend"
 slug: english-043
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 2021 Past Paper: Essay — Negative Trend. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Writing"]
+tags: ["Graduate Entrance Examination English","English Writing","2021 Past Paper: Essay — Negative Trend"]
 ---
 
-## Original Chinese Note
+**past-paper question**
+- ![Pasted image 20250409111832](/assets/notes/e7bcfe63ef71-Pasted-image-20250409111832.png)
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Templates**
+```Text
+This is a simple but enlightening drawing. A disappointed boy says, "I want to learn traditional opera, but many of my classmates think it is boring." His father encourages him by replying, "What matters is that you are genuinely interested in it."
 
-[Read the original Chinese note](/notes/english-043/)
+The scene highlights the importance of remaining committed to one's interests and dreams. Successful people often display confidence, optimism, and independent judgment. In reality, however, many young people are easily influenced by others' opinions and may abandon goals that genuinely matter to them.
+
+This tendency deserves attention because excessive concern about other people's comments can weaken motivation and obstruct long-term growth. Listening to advice is useful, but it should not replace thoughtful personal judgment.
+
+Young people should therefore pursue worthwhile interests with persistence. Genuine enthusiasm can provide the strength to overcome difficulties and move steadily toward a goal. Ultimately, sustained effort—not passing criticism—is what creates the possibility of success. After all, interest is often the best teacher.
+```

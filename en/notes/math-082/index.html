@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 13：等价向量组 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 13: Equivalent Sets of Vectors | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 13: Equivalent Sets of Vectors. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Vector Sets">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 13：等价向量组 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 13: Equivalent Sets of Vectors | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 13: Equivalent Sets of Vectors. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-082/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,26 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 13：等价向量组</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-082/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-081/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 12：极大线性无关组与向量组的秩</strong></a>
-    <a class="article-pagination-next" href="../math-083/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 14：向量空间</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 13: Equivalent Sets of Vectors</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 13: Equivalent Sets of Vectors. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Vector Sets</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">13.1 Basic Concepts</a></nav></details><div class="prose"><h2 id="section-1">13.1 Basic Concepts</h2>
+<p><strong>Concept One</strong>: Vector set equivalence and matrix equivalence are two different concepts;</p>
+<ul>
+<li>Matrix equivalence must be isomorphic, so the number of rows and columns must be equal;</li>
+<li>Vector sets are equivalent, but the number of vectors can be different;</li>
+</ul>
+<p><strong>Concept 2</strong>: If $A$ and $B$ have the same dimensions, then $A\cong B\Leftrightarrow r(A)=r(B)\Leftrightarrow PAQ=B$, where $P$ and $Q$ are invertible matrices of suitable sizes.</p>
+<ul>
+<li>Convert a matrix of equal rank into all matrices in its simplest form, which are equivalent;</li>
+</ul>
+<p><strong>Concept 3</strong>: For two sets of vectors in the same vector space:</p>
+<ul>
+<li>$\{\alpha_{1},\alpha_{2},\cdots,\alpha_{s}\}\cong\{\beta_{1},\beta_{2},\cdots,\beta_{t}\}$</li>
+<li>$\Leftrightarrow$ each vector set can be linearly represented by the other.</li>
+<li>$\Leftrightarrow$ the two sets have the same rank and one set can be linearly represented by the other.</li>
+<li>$\Leftrightarrow r\left(\alpha_{1},\alpha_{2},\cdots,\alpha_{s}\right)=r\left(\beta_{1},\beta_{2},\cdots,\beta_{t}\right)=r\left(\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta_{1},\beta_{2},\cdots,\beta_{t}\right)$.</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-081/index.html"><span>← Previous item</span><strong>Lecture 12: Maximal Linearly Independent Sets and Rank</strong></a>
+    <a class="article-pagination-next" href="../math-083/index.html"><span>Next item →</span><strong>Lecture 14: Vector Spaces</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +88,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

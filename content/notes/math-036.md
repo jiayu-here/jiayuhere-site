@@ -129,18 +129,18 @@ $20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$
 	- $$\cos2\alpha=2\cos^2\alpha-1=1-2\sin^2\alpha$$
 	- $$\tan2\alpha=\frac{2\tan\alpha}{1-\tan^2\alpha}=\frac{2\cot\alpha}{\cot^2\alpha-1}=\frac{2}{\cot\alpha-\tan\alpha}$$
 - 降次公式：
-	- $$\cos^{2}\alpha=\frac{1+\cos2\alpha}{2},\sin^{2}\alpha=\frac{1-\cos2\alpha}{2},tan^2\alpha=\frac{1-cos2\alpha}{1+cos2\alpha}$$
+	- $$\cos^{2}\alpha=\frac{1+\cos2\alpha}{2},\sin^{2}\alpha=\frac{1-\cos2\alpha}{2},\tan^2\alpha=\frac{1-\cos2\alpha}{1+\cos2\alpha}$$
 - 反三角函数：
-	- $$x=a\sin t { 时}，t=\arcsin\frac xa.$$
-	- $$\text{x=a sect}时,t=\mathrm{arc}\cos\frac{a}{x}$$
+	- $$x=a\sin t\text{ 时，}t=\arcsin\frac xa.$$
+	- $$x=a\sec t\text{ 时，}t=\arccos\frac{a}{x}.$$
 
 **三角函数求导合集**
 - 正弦、余弦：
-	- $$(\sin x)^{\prime}=\cos x、(\sin x)^{\prime}=-\cos x$$
+	- $$(\sin x)^{\prime}=\cos x,\qquad(\cos x)^{\prime}=-\sin x$$
 - tan、cot、sec、csc： 
 	- $$\begin{aligned}(\tan x)^{\prime}&=\sec^2x&(\cot x)^{\prime}&=-\csc^2x\\\\(\sec x)^{\prime}&=\sec x\tan x&(\csc x)^{\prime}&=-\csc x\cot x\end{aligned}$$
 - 反三角函数：
-	- $$\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(arccot x)^{\prime}=-\frac1{1+x^2}\end{aligned}$$
+	- $$\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\operatorname{arccot}x)^{\prime}=-\frac1{1+x^2}\end{aligned}$$
 
 **常见三角函数积分**
 - 和求导一一对应：

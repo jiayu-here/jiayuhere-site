@@ -37,8 +37,8 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 	- `->` $(\lambda E-A)X=0$ 
 		- // 把 $\xi$ 设置为是当前方程组的解；
 		- // 因为 `X` 是 $\xi$，而 $\xi$ 是非零向量，而当前式子等于 0 `->` 也就代表当前的方程是齐次方程；
-		- // 因为是齐次方程，所以当前矩阵 $\lambda E-A$ 是线性相关的 `<-` 线性相关定理 4：[Lecture 11：向量与向量组的线性相关性](/notes/math-080/)；
-		- // 因为 $\lambda E-A$ 是线性相关的，所以当前方程组 `S=n-r(A)<n`，即方程的秩小于 n；
+		- // 齐次方程有非零解，所以矩阵 $\lambda E-A$ 的列向量线性相关 `<-` 线性相关定理 4：[Lecture 11：向量与向量组的线性相关性](/notes/math-080/)；
+		- // 因此 $r(\lambda E-A)<n$，即该矩阵的秩小于 $n$；
 		- // 根据 $n\text{个}n\text{维列向量}a_1,a_2,\cdots,a_n\text{线性相关}\Leftrightarrow\left|a_1,a_2,\cdots,a_n\right|=0$ ，所以得到 $|\lambda E-A|=0$ 
 	- `->` $|\lambda E-A|=0$ 
 		- // 这里可以求出 $\lambda_i(i=1,2,3...)$
@@ -113,10 +113,10 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 ## 19.3 重要性质与结论 
 ### 19.3.1 特征值的性质与结论 
 **概念**：性质一
-- $$\lambda_0是A的特征值<=>|\lambda_0 E-A|=0(建立方程求参数或证明行列式|\lambda_0 E-A|=0$$
+- $$\lambda_0\text{ 是 }A\text{ 的特征值}\Leftrightarrow|\lambda_0 E-A|=0$$
 - 同理：$$\lambda_0\text{不是}A\text{ 的特征值}\Leftrightarrow|\lambda_0E-A|\neq0\text{(矩阵可逆,满秩)}$$
 - 补充： 
-	- 若 $|aA+bE|=0$（或者 $aA+bE$ 不可逆），`a` 不等于 0，则称 $-\frac{b}{a}$ 是 `A` 的特征值；
+	- 若 $|aA+bE|=0$（或者 $aA+bE$ 不可逆），且 $a\neq0$，则 $-\frac{b}{a}$ 是 `A` 的特征值；
 
 **概念**：性质二
 - 性质： 
@@ -144,12 +144,12 @@ tags: ["考研数学", "线性代数", "特征值与特征向量"]
 - `k` 重特征值 $\lambda$，至多只有 `k` 个线性无关的特征向量；
 
 **概念**：结论二
-- $若\xi_1,\xi_2$ 是 `A` 的属于不同特征值 $\lambda_1,\lambda_2$ 的特征向量，则 $\lambda_1,\lambda_2$ 线性无关；
+- 若 $\xi_1,\xi_2$ 是 `A` 的属于不同特征值 $\lambda_1,\lambda_2$ 的特征向量，则 $\xi_1,\xi_2$ 线性无关；
 
 **总结**：$\text{矩阵}A\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{线性无关}\\\lambda_{1}=\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{可能}\begin{cases}\text{线性相关}\\\text{线性无关}\end{cases}\end{cases}$
 
 **概念**：结论三
-- $\text{若}\xi_1,\xi,\text{是}A\text{ 的属于同一特征值}\lambda\text{的特征向量,则非零向量}k\xi_1+k_2\xi_2\text{仍是}A\text{ 的属于特征值}\lambda\text{的}$ 特征向量. (常考其中一个系数 (如 $k_2$)等于 `0` 的情形)；
+- 若 $\xi_1,\xi_2$ 是 $A$ 的属于同一特征值 $\lambda$ 的特征向量，且 $k_1\xi_1+k_2\xi_2\neq0$，则 $k_1\xi_1+k_2\xi_2$ 仍是 $A$ 的属于特征值 $\lambda$ 的特征向量（常考其中一个系数如 $k_2$ 等于 `0` 的情形）；
 
 **概念**：结论四
 - $\text{若}\xi_1,\xi_2\text{是}A\text{ 的属于不同特征值}\lambda_1,\lambda_2\text{的特征向量,则当}k_1\neq0,k_2\neq0\text{时,}k_1\xi_1+k_2\xi_2\text{不是}A\text{ }$ 的任何特征值的特征向量. ( 常考 $k_1=k_2=1$ 的情形) 

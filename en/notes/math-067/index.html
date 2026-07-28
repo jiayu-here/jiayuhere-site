@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 51：对面积的曲面积分 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 51: Surface Integrals with Respect to Area | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 51: Surface Integrals with Respect to Area. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multivariable Integral Calculus and Applications">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 51：对面积的曲面积分 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 51: Surface Integrals with Respect to Area | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 51: Surface Integrals with Respect to Area. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-067/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,79 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 51：对面积的曲面积分</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-12</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-067/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-066/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 49：对坐标的曲线积分</strong></a>
-    <a class="article-pagination-next" href="../math-068/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 52：对坐标的曲面积分</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 51: Surface Integrals with Respect to Area</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 51: Surface Integrals with Respect to Area. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-12</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Integral Calculus and Applications</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</a><a href="#section-2">59.2 Calculation of Area Partitions for Curvatures</a><a href="#section-5">59.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</h2>
+<p><strong>Example</strong>: Given that a curved surface component has a continuous surface density ρ(x, y, z), find its mass M;</p>
+<ul>
+<li>Illustration</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/ad52d081b939-Pasted-image-20240212143059.png" alt="Pasted image 20240212143059" loading="lazy" decoding="async"></li>
+<li>Multiply the density on each small area by its area, then sum them all to get the complete mass: $M=\lim_{\lambda\to0}\sum_{k=1}^n\rho(\xi_k,\eta_k,\zeta_k){\Delta S_k}$</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thefirstcategoryistheareaofcurves</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\text{ Let }\sum\text{ It is a smooth curved surface },f(x,y,z)\text{ It is defined as }\sum\text{ The first one }\text{ If }\Sigma\text{ Perform arbitrary segmentation and arbitrary local area point selection },$ can be obtained</blockquote>
+<blockquote>Product sum limit: $\lim_{\lambda\to0}\sum_{k=1}^nf\left(\xi_k,\eta_k,\zeta_k\right)\Delta S_k$ exists in both cases, then this limit is called the function $f(x,y,z)$ the area component of the surface $\Sigma$ over the surface;</blockquote>
+<blockquote>Written as: $$\iint_{\Sigma}f(x,y,z)dS=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i},\zeta_{i})\Delta S_{i}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">$ds$ Area equivalent to a small curved surface;</li>
+<li class="list-indent-1">$f(x,y,z)$ Density equivalent to the surface of the surface;</li>
+<li class="list-indent-1">$f(x,\gamma,z)\operatorname{d}S$ represents the mass of a small piece;</li>
+<li class="list-indent-1">$\iint_{\Sigma}f(x,\gamma,z)\operatorname{d}S$ represents the sum limit for each small piece on the entire face;</li>
+<li class="list-indent-1">$\Sigma$ Called the integration surface;</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Multiply the function value of each point by the area of the small region at that point, sum and take the limit to get the area fraction of the area. <code>-&gt;</code> is unrelated to the direction of the surface, because area and direction are unrelated;</li>
+<li>Nature:</li>
+<li class="list-indent-1">1. Integration surface independence: $$\iint_{\Sigma}f(x,y,z)dS=\iint_{-\Sigma}f(x,y,z)dS$$</li>
+<li class="list-indent-1">2. Existence of the surface part of the surface area: $\text{ If } f(x,y,z)\text{ On smooth curved surfaces }\sum\text{ Continuous on the upper stage }$, then the area component of the area of curvature exists;</li>
+<li class="list-indent-1">3. Additivity to the integration domain: If $\sum$ is smooth in shards, then $\iint_{\Sigma}f(x,y,z)\operatorname{d}S=\iint_{\Sigma_{1}}f(x,y,z)\operatorname{d}S+\iint_{\Sigma_{2}}f(x,y,z)\operatorname{d}S$</li>
+<li class="list-indent-1">4. Linear properties of integration: $$\begin{aligned}\iint_{\Sigma}[k_1f(x,y,z)\pm k_2g(x,y,z)]&amp;\operatorname{d}S=k_1\iint_{\Sigma}f(x,y,z)\operatorname{d}S\pm k_2\iint_{\Sigma}g(x,y,z)\operatorname{d}S\end{aligned}$$</li>
+</ul>
+<h2 id="section-2">59.2 Calculation of Area Partitions for Curvatures</h2>
+<h3 id="section-3">59.2.1 Direct Method</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationofthefirsttypeofcurvedareaanalysis</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>There are smooth surfaces with $\Sigma:  z=z(x,  y),  (x,  y)\in D_{xy},  f(x,  y,  z)$ continuity on $\sum$</blockquote>
+<blockquote>Then surface integral $\iint_{\Sigma}f(x,  y,  z)dS$ exists $, $ and has:</blockquote>
+<blockquote>$$\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y,z(x,y))\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}\mathrm{d}x\mathrm{d}y$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Essence:</li>
+<li class="list-indent-1">Project the hard-to-find surface area onto a plane double integral on x and y to complete the calculation;</li>
+<li class="list-indent-1">That is, project the surface $\sum$ onto $D_{xy}$ and convert it into a double integral on <code>D</code>;</li>
+<li class="list-indent-1">${\text{ If a surface is defined by the equation }x}=x(y,z){\text{ or }\operatorname*{y}}=y(z,x)\text{ Given , it can similarly differentiate the area of a given area into corresponding parts }\text{ The double integral }$；</li>
+<li>Conversion:</li>
+<li class="list-indent-1">Substitute z with the expression about xy to get the double integral;</li>
+<li>Note:</li>
+<li class="list-indent-1">When a form like $x^2+y^2=1$ appears, where the central axis is the <code>z</code> axis, it cannot be done directly;</li>
+<li class="list-indent-1">At this point, $y=y(x,z)$ <code>-&gt;</code> $\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y=y(x,z),z)\sqrt{1+{z_x}^2(x,z)+{z_z}^2(x,z)}\mathrm{d}x\mathrm{d}z$ should be used</li>
+<li class="list-indent-1">Similarly, for $x=x(y,z)$ form;</li>
+</ul>
+<h3 id="section-4">59.2.2 Parity and Symmetry</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Theparityofthefirsttypeofsurfacefraction</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> if the surface $\sum$ is symmetric about $xoy$, then:</blockquote>
+<blockquote>$$\iint_{\Sigma}f(x,y,z)\mathrm{d}S=\begin{cases}2\iint_{\sum_{z&gt;0}} f(x,y,z)\mathrm{d}S,&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
+<p><strong>Key Point</strong>: Symmetry</p>
+<ul>
+<li>$x^2+y^2+z^2=1$ Good symmetry;</li>
+<li>Therefore, symmetry can be used to simplify the calculation: $\iint_{\Sigma}(x^2+y^2)ds=(\frac{2}{3})\iint (x^2+y^2+z^2)ds=(\frac{2}{3})\iint 1ds=\frac{2}{3}4\pi$</li>
+</ul>
+<h2 id="section-5">59.3 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-6">Question Type: <span class="note-tag">Calculationofthefirstcategoryofareapoints</span></h3>
+<h4 id="section-7">PART 1: Problem-solving methods</h4>
+<h4 id="section-8">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: $\Sigma=\{(x,y,z)\mid x+y+z=1,x\geq0,y\geq0,z\geq0\},\,\text{ then }\iint_\Sigma y^2dS$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Illustration:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/8258fee82319-Pasted-image-20240523230436.png" alt="Pasted image 20240523230436" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">It can be converted into a double integral over the projection domain on <code>Dxy</code>;</li>
+<li class="list-indent-1">Because $ds=\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}dxdy$</li>
+</ul>
+<h4 id="section-9">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-066/index.html"><span>← Previous item</span><strong>Lecture 49: Line Integrals with Respect to Coordinates</strong></a>
+    <a class="article-pagination-next" href="../math-068/index.html"><span>Next item →</span><strong>Lecture 52: Surface Integrals with Respect to Coordinates</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +141,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

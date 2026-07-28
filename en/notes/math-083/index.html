@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 14：向量空间 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 14: Vector Spaces | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 14: Vector Spaces. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Vector Sets">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 14：向量空间 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 14: Vector Spaces | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics study notes: Lecture 14: Vector Spaces. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-083/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,113 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 14：向量空间</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-083/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-082/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 13：等价向量组</strong></a>
-    <a class="article-pagination-next" href="../math-084/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 15：齐次线性方程组</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 14: Vector Spaces</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics study notes: Lecture 14: Vector Spaces. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Vector Sets</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">14.1 Bases, Dimension, and Coordinates</a><a href="#section-3">14.2 Changes of Basis and Coordinates</a><a href="#section-6">14.3 Gram-Schmidt Orthogonalization</a></nav></details><div class="prose"><h2 id="section-1">14.1 Bases, Dimension, and Coordinates</h2>
+<h5 id="section-2"><strong>Definition</strong>: <span class="note-tag">basis</span></h5>
+<p>If the ordered vectors $\xi_1,\xi_2,\ldots,\xi_n$ are linearly independent in $\mathbb R^n$, they form a basis of $\mathbb R^n$. Every vector $\alpha\in\mathbb R^n$ has a unique representation</p>
+<div class="math-display">$$
+\alpha=a_1\xi_1+a_2\xi_2+\cdots+a_n\xi_n.
+$$</div>
+<p>The column vector</p>
+<div class="math-display">$$
+x=
+\begin{bmatrix}
+a_1\\a_2\\\vdots\\a_n
+\end{bmatrix}
+$$</div>
+<p>is the coordinate vector of $\alpha$ relative to the basis $\xi_1,\ldots,\xi_n$. The number $n$ of basis vectors is the dimension of the vector space.</p>
+<h2 id="section-3">14.2 Changes of Basis and Coordinates</h2>
+<h5 id="section-4"><strong>Theorem</strong>: <span class="note-tag">change-of-basis</span></h5>
+<p>Let</p>
+<div class="math-display">$$
+\mathcal B_\xi=(\xi_1,\ldots,\xi_n),
+\qquad
+\mathcal B_\eta=(\eta_1,\ldots,\eta_n)
+$$</div>
+<p>be two bases of $\mathbb R^n$. If</p>
+<div class="math-display">$$
+\begin{bmatrix}
+\eta_1&amp;\eta_2&amp;\cdots&amp;\eta_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+\xi_1&amp;\xi_2&amp;\cdots&amp;\xi_n
+\end{bmatrix}C,
+$$</div>
+<p>then $C$ is the transition matrix from $\mathcal B_\xi$ to $\mathcal B_\eta$. Its $i$th column is the coordinate vector of $\eta_i$ relative to the old basis $\mathcal B_\xi$. Because both ordered sets are bases, $C$ is invertible.</p>
+<h5 id="section-5"><strong>Theorem</strong>: <span class="note-tag">coordinate-transformation</span></h5>
+<p>If the same vector $\alpha$ has coordinate vectors $x$ and $y$ relative to the two bases, then</p>
+<div class="math-display">$$
+\alpha
+=
+\begin{bmatrix}\xi_1&amp;\cdots&amp;\xi_n\end{bmatrix}x
+=
+\begin{bmatrix}\eta_1&amp;\cdots&amp;\eta_n\end{bmatrix}y.
+$$</div>
+<p>Using the change-of-basis equation gives</p>
+<div class="math-display">$$
+x=Cy,
+\qquad
+y=C^{-1}x.
+$$</div>
+<p>Thus $C$ converts new-basis coordinates $y$ to old-basis coordinates $x$, while $C^{-1}$ performs the reverse conversion.</p>
+<p><strong>Two-dimensional example</strong></p>
+<p>Let</p>
+<div class="math-display">$$
+C=
+\begin{bmatrix}
+2&amp;-1\\
+1&amp;1
+\end{bmatrix},
+\qquad
+y=
+\begin{bmatrix}
+-1\\2
+\end{bmatrix}.
+$$</div>
+<p>Then</p>
+<div class="math-display">$$
+x=Cy
+=-1
+\begin{bmatrix}
+2\\1
+\end{bmatrix}
++2
+\begin{bmatrix}
+-1\\1
+\end{bmatrix}
+=
+\begin{bmatrix}
+-4\\1
+\end{bmatrix}.
+$$</div>
+<ul>
+<li>Original illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/609bf8645698-Drawing-2024-06-29-19.34.16.excalidraw.png" alt="Change-of-basis diagram" loading="lazy" decoding="async"></li>
+</ul>
+<h2 id="section-6">14.3 Gram-Schmidt Orthogonalization</h2>
+<h5 id="section-7"><strong>Theorem</strong>: <span class="note-tag">Gram-Schmidt-process</span></h5>
+<p>Given linearly independent vectors $\alpha_1,\ldots,\alpha_m$, define</p>
+<div class="math-display">$$
+\beta_1=\alpha_1,
+$$</div>
+<p>and, for $k=2,\ldots,m$,</p>
+<div class="math-display">$$
+\beta_k
+=
+\alpha_k
+-\sum_{j=1}^{k-1}
+\frac{\langle\alpha_k,\beta_j\rangle}
+{\langle\beta_j,\beta_j\rangle}
+\beta_j.
+$$</div>
+<p>The vectors $\beta_1,\ldots,\beta_m$ are mutually orthogonal and span the same subspace as the original vectors. Normalizing them,</p>
+<div class="math-display">$$
+e_k=\frac{\beta_k}{\|\beta_k\|},
+$$</div>
+<p>produces an orthonormal set.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-082/index.html"><span>← Previous item</span><strong>Lecture 13: Equivalent Sets of Vectors</strong></a>
+    <a class="article-pagination-next" href="../math-084/index.html"><span>Next item →</span><strong>Lecture 15: Homogeneous Systems of Linear Equations</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +175,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,27 +98,29 @@
 <li>解释：</li>
 <li class="list-indent-1">适用性质七：倍加的性质，将主或者副对角线上的元素，通过倍加的方式，消掉竖（横）的爪子上的数，进而化成三角行列式；</li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>： #行和相等的行列式</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$D_n=\begin{vmatrix}a&amp;b&amp;b&amp;\cdots&amp;b\\b&amp;a&amp;b&amp;\cdots&amp;b\\b&amp;b&amp;a&amp;\cdots&amp;b\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\b&amp;b&amp;b&amp;\cdots&amp;a\end{vmatrix}\quad\quad\quad\quad D_{n}=(a+(n-1)b)\begin{vmatrix}1&amp;b&amp;b\cdots b\\1&amp;a&amp;b\cdots b\\\vdots&amp;\vdots&amp;\vdots\\1&amp;b&amp;b\cdots a\end{vmatrix}=[a+(n-b)b](a-b)^{n-1}$$</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">行和相等的行列式</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$D_n=\begin{vmatrix}a&amp;b&amp;b&amp;\cdots&amp;b\\b&amp;a&amp;b&amp;\cdots&amp;b\\b&amp;b&amp;a&amp;\cdots&amp;b\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\b&amp;b&amp;b&amp;\cdots&amp;a\end{vmatrix}\quad\quad\quad\quad D_{n}=(a+(n-1)b)\begin{vmatrix}1&amp;b&amp;b\cdots b\\1&amp;a&amp;b\cdots b\\\vdots&amp;\vdots&amp;\vdots\\1&amp;b&amp;b\cdots a\end{vmatrix}=[a+(n-1)b](a-b)^{n-1}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>证明过程：</li>
 <li class="list-indent-1">第一步：因为行和相等，所以把所有列都加到第一列；</li>
 <li class="list-indent-1">第二步：提出公因式部分 <code>[a+(n-1)b]</code></li>
-<li class="list-indent-1">第三步：将每列加 <code>-1</code> 倍至每列；</li>
+<li class="list-indent-1">第三步：将第一行的 <code>-1</code> 倍依次加到其余各行；</li>
 <li class="list-indent-1">第四步：计算结果，得到 $D_n=[a+(n-1)b](a-b)^{n-1}$</li>
 </ul>
 <p><strong>补充一</strong></p>
 <ul>
 <li>行列式：</li>
-<li class="list-indent-1">$$当a=0,b=1时,\begin{vmatrix}0&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;0&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;0&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;0\end{vmatrix}_{n\times n}=(n-1)(-1)^{n-1}$$</li>
+<li class="list-indent-1">当 $a=0,b=1$ 时：</li>
+<li class="list-indent-2">$$\begin{vmatrix}0&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;0&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;0&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;0\end{vmatrix}_{n\times n}=(n-1)(-1)^{n-1}$$</li>
 <li>解释：</li>
-<li class="list-indent-1">主对角线都是 0，其他都是 1 <code>&lt;-</code> 把 <code>行和相等的行列式</code> 中的 <code>a</code> 取为 0，<code>b</code> 取为 1 ，代入 $[a+(n-b)b](a-b)^{n-1}$ 即可算出；</li>
+<li class="list-indent-1">主对角线都是 0，其他元素都是 1 <code>&lt;-</code> 在“行和相等的行列式”公式中令 <code>a=0</code>、<code>b=1</code>，代入 $[a+(n-1)b](a-b)^{n-1}$ 即可算出；</li>
 </ul>
 <p><strong>补充二</strong></p>
 <ul>
 <li>行列式： </li>
-<li class="list-indent-1">$$当a=2,b=1时,\begin{vmatrix}2&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;2&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;2&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;2\end{vmatrix}=n+1.$$</li>
+<li class="list-indent-1">当 $a=2,b=1$ 时：</li>
+<li class="list-indent-2">$$\begin{vmatrix}2&amp;1&amp;1&amp;\cdots&amp;1\\1&amp;2&amp;1&amp;\cdots&amp;1\\1&amp;1&amp;2&amp;\cdots&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\1&amp;1&amp;1&amp;\cdots&amp;2\end{vmatrix}=n+1.$$</li>
 </ul>
 <p><strong>补充三</strong>：当 a 在副对角线时</p>
 <ul>
@@ -163,7 +165,7 @@
 <p><strong>举例</strong></p>
 <ul>
 <li>题目：$设f\left(x\right)=\begin{vmatrix}1&amp;0&amp;x\\1&amp;2&amp;x^{2}\\1&amp;3&amp;x^{3}\end{vmatrix},求f\left(x+1\right)-f\left(x\right)$ </li>
-<li>分析：$f(x+1)-f(x)=\left|\begin{matrix}1&amp;0&amp;x+1\\1&amp;2&amp;(x+1)^{2}\\1&amp;3&amp;(x+1)^{3}\end{matrix}\right|-\left|\begin{matrix}1&amp;0&amp;x\\1&amp;2&amp;x^{4}\\1&amp;3&amp;x^{3}\end{matrix}\right|=\left.\left|\begin{matrix}1&amp;0&amp;1\\1&amp;2&amp;2x+1\\1&amp;3&amp;3x^{2}+3x+1\end{matrix}\right.\right|=\left|\begin{matrix}1&amp;0&amp;0\\1&amp;2&amp;0\\1&amp;3&amp;3x^{2}\end{matrix}\right|=6x^2$</li>
+<li>分析：$f(x+1)-f(x)=\left|\begin{matrix}1&amp;0&amp;x+1\\1&amp;2&amp;(x+1)^{2}\\1&amp;3&amp;(x+1)^{3}\end{matrix}\right|-\left|\begin{matrix}1&amp;0&amp;x\\1&amp;2&amp;x^{2}\\1&amp;3&amp;x^{3}\end{matrix}\right|=\left.\left|\begin{matrix}1&amp;0&amp;1\\1&amp;2&amp;2x+1\\1&amp;3&amp;3x^{2}+3x+1\end{matrix}\right.\right|=\left|\begin{matrix}1&amp;0&amp;0\\1&amp;2&amp;0\\1&amp;3&amp;3x^{2}\end{matrix}\right|=6x^2$</li>
 </ul>
 <p><strong>举例</strong></p>
 <ul>
@@ -208,8 +210,8 @@
 <li class="list-indent-1">计算结果： $|B-A|=|A|\left|\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right|=2*5=10$</li>
 </ul>
 <h3 id="section-12">3.2.3 余子式和代数余子式的线性组合计算</h3>
-<h5 id="section-13"><strong>定理</strong>： #余子式和代数余子式的线性组合计算</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<h5 id="section-13"><strong>定理</strong>： <span class="note-tag">余子式和代数余子式的线性组合计算</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
 <blockquote>由 $a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\begin{vmatrix}<em>\\a_{i1}&amp;a_{i2}&amp;\cdots&amp;a_{in}\\</em>&amp;\end{vmatrix}$</blockquote>
 <blockquote>则 $k_{1}A_{i1}+k_{2}A_{i2}+\cdots+k_{n}A_{in}=\begin{vmatrix}&amp;&amp;<em>&amp;&amp;\\k_{1}&amp;&amp;k_{2}&amp;\cdots&amp;k_{n}\\&amp;&amp;</em>&amp;&amp;\end{vmatrix}$</blockquote>
 <p><strong>解释</strong></p>
@@ -230,8 +232,8 @@
 <li class="list-indent-2">由 <code>A</code> 知道：按第一行展开：$|A|=1\cdot A_{11}+(-2)A_{12}+1A_{13}=1$</li>
 </ul>
 <h2 id="section-14">3.3 克拉默法则 </h2>
-<h5 id="section-15"><strong>定理</strong>： #克拉默法则 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：对个方程 <code>n</code> 个未知数 (这是前提)的非齐次线性方程组：$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=b_{n},\end{cases}$$</blockquote>
+<h5 id="section-15"><strong>定理</strong>： <span class="note-tag">克拉默法则</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>对个方程 <code>n</code> 个未知数 (这是前提)的非齐次线性方程组：$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=b_{n},\end{cases}$$</blockquote>
 <blockquote>若系数行列式 $$D=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}\neq0$$ 则方程组右唯一解，且解为：$x_{i}=\frac{D_{i}}{D},i=1,2,\cdots,n$，其中 $D_i\text{是由常数项}b_1,b_2,\cdots,b_n\text{替换}D\text{ 中第 }i\text{列元素得到的行列式}$</blockquote>
 <blockquote></blockquote>
 <p><strong>解释</strong></p>
@@ -247,8 +249,8 @@
 <li>作用：</li>
 <li class="list-indent-1">克拉默法则提供了一个流程化的解法；</li>
 </ul>
-<h5 id="section-16"><strong>定理</strong>： #齐次时克拉默法则</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：齐次时：$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=0,\end{cases}$$</blockquote>
+<h5 id="section-16"><strong>定理</strong>： <span class="note-tag">齐次时克拉默法则</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>齐次时：$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=0,\end{cases}$$</blockquote>
 <blockquote>$若D\neq0,则齐次方程组只有零解;若D=0,则齐次方程组有非零解$ </blockquote>
 <p><strong>解释</strong></p><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-071/index.html"><span>← 上一项</span><strong>Lecture 2：行列式的定义与性质</strong></a>
@@ -261,6 +263,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

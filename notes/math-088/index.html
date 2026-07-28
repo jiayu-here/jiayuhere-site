@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,8 +63,8 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 19：特征值与特征向量</h1><p class="article-lead">考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学</span><span>约 11 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>特征值与特征向量</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">19.1 特征值与特征向量定义</a><a href="#section-6">19.2 求法 </a><a href="#section-10">19.3 重要性质与结论 </a></nav></details><div class="prose"><h2 id="section-1">19.1 特征值与特征向量定义</h2>
 <h3 id="section-2">19.1.1 基本概念 </h3>
-<h5 id="section-3"><strong>定义</strong>： #特征值与特征向量 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $设A是n阶矩阵,\lambda 是一个数,若存在n维非零列向量\xi,使得：$</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">特征值与特征向量</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $设A是n阶矩阵,\lambda 是一个数,若存在n维非零列向量\xi,使得：$</blockquote>
 <blockquote>$$A\xi=\lambda\xi$$</blockquote>
 <blockquote>则称：</blockquote>
 <blockquote>1. $\lambda$ 为特征值；</blockquote>
@@ -93,16 +93,16 @@
 <li class="list-indent-1"><code>-&gt;</code> $(\lambda E-A)X=0$ </li>
 <li class="list-indent-2">// 把 $\xi$ 设置为是当前方程组的解；</li>
 <li class="list-indent-2">// 因为 <code>X</code> 是 $\xi$，而 $\xi$ 是非零向量，而当前式子等于 0 <code>-&gt;</code> 也就代表当前的方程是齐次方程；</li>
-<li class="list-indent-2">// 因为是齐次方程，所以当前矩阵 $\lambda E-A$ 是线性相关的 <code>&lt;-</code> 线性相关定理 4：<a href="/notes/math-080/">Lecture 11：向量与向量组的线性相关性</a>；</li>
-<li class="list-indent-2">// 因为 $\lambda E-A$ 是线性相关的，所以当前方程组 <code>S=n-r(A)&lt;n</code>，即方程的秩小于 n；</li>
+<li class="list-indent-2">// 齐次方程有非零解，所以矩阵 $\lambda E-A$ 的列向量线性相关 <code>&lt;-</code> 线性相关定理 4：<a href="/notes/math-080/">Lecture 11：向量与向量组的线性相关性</a>；</li>
+<li class="list-indent-2">// 因此 $r(\lambda E-A)&lt;n$，即该矩阵的秩小于 $n$；</li>
 <li class="list-indent-2">// 根据 $n\text{个}n\text{维列向量}a_1,a_2,\cdots,a_n\text{线性相关}\Leftrightarrow\left|a_1,a_2,\cdots,a_n\right|=0$ ，所以得到 $|\lambda E-A|=0$ </li>
 <li class="list-indent-1"><code>-&gt;</code> $|\lambda E-A|=0$ </li>
 <li class="list-indent-2">// 这里可以求出 $\lambda_i(i=1,2,3...)$</li>
 <li>图示： </li>
 <li class="list-indent-1"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Drawing 2024-07-01 19.50.31.excalidraw" loading="lazy" decoding="async"></li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>： #特征方程</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">特征方程</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>$|\lambda E-A|$：称之为特征方程</li>
@@ -166,8 +166,8 @@
 \frac{-8\lambda+8}{0}
 \end{aligned}
 $$</div>
-<h5 id="section-9"><strong>定理</strong>： #多项式求根</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设以下式子是系数 $a_i$ 都是整数的多项式： $$f\left(x\right)=1·x^{k}+a_{k-1}x^{k-1}+\cdots+a_{1}x+a_{0}$$ </blockquote>
+<h5 id="section-9"><strong>定理</strong>： <span class="note-tag">多项式求根</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>设以下式子是系数 $a_i$ 都是整数的多项式： $$f\left(x\right)=1·x^{k}+a_{k-1}x^{k-1}+\cdots+a_{1}x+a_{0}$$ </blockquote>
 <blockquote>则 $f(x)=0$ 的有理根都是整数，且 $a_0$ 的因子；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -178,10 +178,10 @@ $$</div>
 <h3 id="section-11">19.3.1 特征值的性质与结论 </h3>
 <p><strong>概念</strong>：性质一</p>
 <ul>
-<li>$$\lambda_0是A的特征值&lt;=&gt;|\lambda_0 E-A|=0(建立方程求参数或证明行列式|\lambda_0 E-A|=0$$</li>
+<li>$$\lambda_0\text{ 是 }A\text{ 的特征值}\Leftrightarrow|\lambda_0 E-A|=0$$</li>
 <li>同理：$$\lambda_0\text{不是}A\text{ 的特征值}\Leftrightarrow|\lambda_0E-A|\neq0\text{(矩阵可逆,满秩)}$$</li>
 <li>补充： </li>
-<li class="list-indent-1">若 $|aA+bE|=0$（或者 $aA+bE$ 不可逆），<code>a</code> 不等于 0，则称 $-\frac{b}{a}$ 是 <code>A</code> 的特征值；</li>
+<li class="list-indent-1">若 $|aA+bE|=0$（或者 $aA+bE$ 不可逆），且 $a\neq0$，则 $-\frac{b}{a}$ 是 <code>A</code> 的特征值；</li>
 </ul>
 <p><strong>概念</strong>：性质二</p>
 <ul>
@@ -213,12 +213,12 @@ $$</div>
 </ul>
 <p><strong>概念</strong>：结论二</p>
 <ul>
-<li>$若\xi_1,\xi_2$ 是 <code>A</code> 的属于不同特征值 $\lambda_1,\lambda_2$ 的特征向量，则 $\lambda_1,\lambda_2$ 线性无关；</li>
+<li>若 $\xi_1,\xi_2$ 是 <code>A</code> 的属于不同特征值 $\lambda_1,\lambda_2$ 的特征向量，则 $\xi_1,\xi_2$ 线性无关；</li>
 </ul>
 <p><strong>总结</strong>：$\text{矩阵}A\begin{cases}\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{线性无关}\\\lambda_{1}=\lambda_{2}\Rightarrow\xi_{1},\xi_{2}\text{可能}\begin{cases}\text{线性相关}\\\text{线性无关}\end{cases}\end{cases}$</p>
 <p><strong>概念</strong>：结论三</p>
 <ul>
-<li>$\text{若}\xi_1,\xi,\text{是}A\text{ 的属于同一特征值}\lambda\text{的特征向量,则非零向量}k\xi_1+k_2\xi_2\text{仍是}A\text{ 的属于特征值}\lambda\text{的}$ 特征向量. (常考其中一个系数 (如 $k_2$)等于 <code>0</code> 的情形)；</li>
+<li>若 $\xi_1,\xi_2$ 是 $A$ 的属于同一特征值 $\lambda$ 的特征向量，且 $k_1\xi_1+k_2\xi_2\neq0$，则 $k_1\xi_1+k_2\xi_2$ 仍是 $A$ 的属于特征值 $\lambda$ 的特征向量（常考其中一个系数如 $k_2$ 等于 <code>0</code> 的情形）；</li>
 </ul>
 <p><strong>概念</strong>：结论四</p>
 <ul>
@@ -269,6 +269,6 @@ $$</div>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -69,8 +69,8 @@
 <li><code>-&gt;</code> 最简形式：一般都是表示新的向量和之前的向量系数相同 <code>&lt;-</code> 行变换； </li>
 <li><code>-&gt;</code> 向量组之间的关系：$(\beta_1,\beta_2...\beta_n)$ 和 $(\alpha_1,\alpha_2,\alpha_3...\alpha_n)$</li>
 </ul>
-<h5 id="section-3"><strong>定义</strong>： #向量 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">向量</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
 <blockquote>矩阵中的若干个行 (列) 都是向量，它们之间存在着某种联系，这种联系说到底就是线性无关的向量个数 (独立信息的个数)的问题，也就是在若干个向量组成的向量组中，其中某几个就足够代表这个向量组了，其他的向量都可以由这几个向量线性表示出来；</blockquote>
 <blockquote>比如，向量组 $[1,2,3]$, $[6,7,9]$ 与 $[2,4,6]$, 有三个成员，可是 $[2,4,6]$ 这个向量可以由 $[1,2,3]$ 这个向量的 2 倍来表示，于是 $[2,4,6]$ 这个向量就是“多余”的，不是独立的信息</blockquote>
 <blockquote>极大线性无关组是向量组的“代表”，而矩阵就是由向量组拼成的，所以<strong>矩阵的秩、向量组的秩都反映了“代表”中向量的个数，本质完全相同</strong>；</blockquote>
@@ -89,8 +89,8 @@
 <li>目标： </li>
 <li class="list-indent-1">搞清楚向量与向量之间的关系：<strong>线性无关、线性独立</strong>；</li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>： #n维向量</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $n\text{ 个数构成的一个有序数组}\left[a_1,a_2,\cdots,a_n\right]\text{称为一个}n\text{ 维向量},\text{记成}\alpha=\left[a_1,a_2,\cdots,a_n\right]$；</blockquote>
+<h5 id="section-4"><strong>定义</strong>： <span class="note-tag">n维向量</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $n\text{ 个数构成的一个有序数组}\left[a_1,a_2,\cdots,a_n\right]\text{称为一个}n\text{ 维向量},\text{记成}\alpha=\left[a_1,a_2,\cdots,a_n\right]$；</blockquote>
 <blockquote>并称 $\alpha\text{为}n\text{维行向量},\alpha^{\mathrm{T}}=[a_1,a_2,\cdots,a_n]^{\mathrm{T}}\text{称为}n\text{维列向量,其中}a_i\text{称为向量}\alpha(\text{或}\alpha^{\mathrm{T}})\text{的第}i\text{个分量}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -99,8 +99,8 @@
 <li>并且 <code>n</code> 在小于三时、是完全可以理解的；</li>
 <li>当 n 大于 <code>3</code> 之后，此时就需要现在空间当中先定义距离、面积等内容，比如利用点积来计算；</li>
 </ul>
-<h5 id="section-5"><strong>定义</strong>： #向量的基本运算 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<h5 id="section-5"><strong>定义</strong>： <span class="note-tag">向量的基本运算</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
 <blockquote>1. 相等：向量的相等就是矩阵的相等，对应元素全部相同；</blockquote>
 <blockquote>2. 加法：$a+\beta=\left[a_1+b_1,a_2+b_2,\cdots,a_n+b_n\right]$</blockquote>
 <blockquote>3. 数乘：$ka=\begin{bmatrix}ka_1,ka_2,\cdots,ka_n\end{bmatrix}$</blockquote>
@@ -125,8 +125,8 @@
 </ul>
 <h2 id="section-7">11.2 向量的内积与正交 </h2>
 <h3 id="section-8">11.2.1 向量的内积 </h3>
-<h5 id="section-9"><strong>定义</strong>： #向量的内积 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $$\alpha^{\mathrm{T}}\beta=\sum_{i=1}^{n}a_{i}b_{i}=a_{1}b_{1}+a_{2}b_{2}+\cdots+a_{n}b_{n}=||\alpha||||\beta||cos_{角度}$$</blockquote>
+<h5 id="section-9"><strong>定义</strong>： <span class="note-tag">向量的内积</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\alpha^{\mathrm{T}}\beta=\sum_{i=1}^{n}a_{i}b_{i}=a_{1}b_{1}+a_{2}b_{2}+\cdots+a_{n}b_{n}=||\alpha||||\beta||cos_{角度}$$</blockquote>
 <blockquote>$\text{为向量}\alpha,\beta\text{的内积, 记作}\left (\alpha,\beta\right),\text{即}\left (\alpha,\beta\right)=\alpha^{\mathrm{T}}\beta$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -138,8 +138,8 @@
 <li class="list-indent-1">$\left.A^{T}A=\left(\begin{matrix}\alpha^{T}\\\beta^{T}\end{matrix}\right.\right)({\alpha}{\beta})=\left(\begin{matrix}{\alpha^{T}\cdot\alpha}&amp;{\alpha^{T}\beta}\\{\beta^{T}\alpha}&amp;{\beta^{T}\beta}\\\end{matrix}\right)=\begin{pmatrix}||\alpha||^{2}&amp;||\alpha||||\beta||\cdot\cos\theta&amp;\\||\alpha||||&amp;||\beta||^{2}\end{pmatrix}$</li>
 </ul>
 <h3 id="section-10">11.2.2 向量的正交 </h3>
-<h5 id="section-11"><strong>定义</strong>： #正交</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：位置关系里面的特殊关系：当 $\alpha^T\beta=0$ 时，称向量 $\alpha,\beta$ 是正交向量；</blockquote>
+<h5 id="section-11"><strong>定义</strong>： <span class="note-tag">正交</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>位置关系里面的特殊关系：当 $\alpha^T\beta=0$ 时，称向量 $\alpha,\beta$ 是正交向量；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>为什么叫正交而不是垂直：因为垂直是三维或者二维中的概念；</li>
@@ -153,11 +153,11 @@
 <ul>
 <li>$$A^{T}A=(\begin{matrix}1&amp;0\\0&amp;1\end{matrix})=E$$</li>
 </ul>
-<h5 id="section-12"><strong>定义</strong>： #标准正交向量组</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：若列向量组 $a_1,a_2,\cdots,a_s$ 满足：$$\alpha_i^\mathrm{T}\alpha_j=\begin{cases}0,&amp;i\neq j,\\1,&amp;i=j,\end{cases}$$</blockquote>
+<h5 id="section-12"><strong>定义</strong>： <span class="note-tag">标准正交向量组</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>若列向量组 $a_1,a_2,\cdots,a_s$ 满足：$$\alpha_i^\mathrm{T}\alpha_j=\begin{cases}0,&amp;i\neq j,\\1,&amp;i=j,\end{cases}$$</blockquote>
 <blockquote>则称 $a_1,a_2,\cdots,a_s$ 为标准或单位正交向量组，也叫规范正交基；</blockquote>
-<h5 id="section-13"><strong>定义</strong>： #正交矩阵 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $设A是n阶方阵，满足A^TA=E，则称A是正交矩阵$；</blockquote>
+<h5 id="section-13"><strong>定义</strong>： <span class="note-tag">正交矩阵</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $设A是n阶方阵，满足A^TA=E，则称A是正交矩阵$；</blockquote>
 <blockquote>$A\text{ 是正交矩阵}\Leftrightarrow A^\top A=E\Leftrightarrow A^\top=A^-\Leftrightarrow A\text{ 的行 }(\text{列 })\text{ 向量组是规范正交基}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -183,8 +183,8 @@
 </ul>
 <h2 id="section-14">11.3 线性相关与线性无关 </h2>
 <h3 id="section-15">11.3.1 线性组合 </h3>
-<h5 id="section-16"><strong>定义</strong>： #线性组合 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：对 <code>m</code> 个 <code>n</code> 维向量和 <code>m</code> 个数，线性组合：$$k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m$$</blockquote>
+<h5 id="section-16"><strong>定义</strong>： <span class="note-tag">线性组合</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>对 <code>m</code> 个 <code>n</code> 维向量和 <code>m</code> 个数，线性组合：$$k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>作用： </li>
@@ -192,8 +192,8 @@
 <li class="list-indent-1">若 <code>k</code> 任意取值，则可以用 $k_1\alpha_1+k_2\alpha_2$ 来表示空间中的所有点；</li>
 </ul>
 <h3 id="section-17">11.3.2 线性表示 </h3>
-<h5 id="section-18"><strong>定义</strong>： #线性表示 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{向量}\beta\text{能表示成向量组}\alpha_1,\alpha_2,\cdots,\alpha_m\text{的线性组合,即存在}m\text{ 个数}k_1,k_2,\cdots,k_m\text{,使得}：$</blockquote>
+<h5 id="section-18"><strong>定义</strong>： <span class="note-tag">线性表示</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\text{向量}\beta\text{能表示成向量组}\alpha_1,\alpha_2,\cdots,\alpha_m\text{的线性组合,即存在}m\text{ 个数}k_1,k_2,\cdots,k_m\text{,使得}：$</blockquote>
 <blockquote>$$\beta=k_1\alpha_1+k_2\alpha_2+\cdotp\cdotp\cdotp+k_m\alpha_m$$</blockquote>
 <blockquote>则称向量 $\beta$ 可被向量组线性表示；</blockquote>
 <p><strong>解释</strong></p>
@@ -201,8 +201,8 @@
 <li>如果 $\beta$ 可以被 <code>m</code> 个空间中数表示，也表示 $\beta$ 是存在于这个空间当中；</li>
 </ul>
 <h3 id="section-19">11.3.3 线性相关与线性无关 </h3>
-<h5 id="section-20"><strong>定义</strong>： #线性相关 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $对于m个n维向量a_1,a_2,\cdots,a_m,若存在一组不全为零的数k_1,k_2,\cdots,k_m,使得$：</blockquote>
+<h5 id="section-20"><strong>定义</strong>： <span class="note-tag">线性相关</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $对于m个n维向量a_1,a_2,\cdots,a_m,若存在一组不全为零的数k_1,k_2,\cdots,k_m,使得$：</blockquote>
 <blockquote>$$k_1\alpha_1+k_2\alpha_2+\cdotp\cdotp\cdotp+k_m\alpha_m=0$$</blockquote>
 <blockquote>则称向量线性相关；</blockquote>
 <blockquote>含有零向量或有成比例的向量的向量组必线性相关；</blockquote>
@@ -221,8 +221,8 @@
 <li class="list-indent-1">第二个：成比例的向量；</li>
 <li class="list-indent-2">如果一个向量组里面有成比例的向量 <code>-&gt;</code> 多余的向量；</li>
 </ul>
-<h5 id="section-21"><strong>定义</strong>： #线性无关 </h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：不存在任何一个向量可以被其他向量表示；</blockquote>
+<h5 id="section-21"><strong>定义</strong>： <span class="note-tag">线性无关</span> </h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>不存在任何一个向量可以被其他向量表示；</blockquote>
 <blockquote>$\text{只有当 }k_1=k_2=\cdots=k_m=0\text{时,才有 }k_1a_1+k_2a_2+\cdots+k_ma_m=0成立，则称向量线性无关；$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -238,30 +238,30 @@
 <li class="list-indent-1">单个非零向量、两个不成比例的向量均线性无关；</li>
 </ul>
 <h2 id="section-22">11.4 判别线性相关性的定理</h2>
-<h5 id="section-23"><strong>定理</strong>： #线性相关定理一</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：向量组 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}(n\geqslant2)$ 线性相关的<strong>充要条件</strong>是：向量组中至少有一个向量可由其余的 <code>n-1</code> 个向量线性表示；</blockquote>
+<h5 id="section-23"><strong>定理</strong>： <span class="note-tag">线性相关定理一</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>向量组 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}(n\geqslant2)$ 线性相关的<strong>充要条件</strong>是：向量组中至少有一个向量可由其余的 <code>n-1</code> 个向量线性表示；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>三个三维向量，组成的是三维空间；</li>
 <li>一个三维的非零的向量，它组成的是三维空间里的一维子空间；</li>
 <li>两个线性无关的非零三维向量，组成的是三维空间中的二维平面；</li>
 </ul>
-<h5 id="section-24"><strong>定理</strong>： #线性相关定理二 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ 线性无关，而 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n},\beta$ 线性相关，则称 $\beta$ 可以被线性表示，且表示法唯一；</blockquote>
+<h5 id="section-24"><strong>定理</strong>： <span class="note-tag">线性相关定理二</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ 线性无关，而 $\alpha_{1},\alpha_{2},\cdots,\alpha_{n},\beta$ 线性相关，则称 $\beta$ 可以被线性表示，且表示法唯一；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>举例：$\beta=\left(\begin{matrix}2\\3\end{matrix}\right)=2\left(\begin{matrix}1\\0\end{matrix}\right)+3\left(\begin{matrix}0\\1\end{matrix}\right)$</li>
 </ul>
-<h5 id="section-25"><strong>定理</strong>： #线性相关定理三 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若向量组 $\beta_1,\beta_2...\beta_t$ 可以被 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性表示，且 $t&gt;s$，则 $\beta_1,\beta_2...\beta_t$ 线性相关；</blockquote>
+<h5 id="section-25"><strong>定理</strong>： <span class="note-tag">线性相关定理三</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若向量组 $\beta_1,\beta_2...\beta_t$ 可以被 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性表示，且 $t&gt;s$，则 $\beta_1,\beta_2...\beta_t$ 线性相关；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>核心：<strong>以少表多，多的相关</strong></li>
 <li>不管 $\alpha$ 是线性相关还是线性无关，$\beta$ 都是线性相关的；</li>
 </ul>
 <p><strong>概念</strong>：$\text{如果向量组}\beta_1,\beta_2,\cdots,\beta_t\text{可由向量组}\alpha_1,\alpha_2,\cdots,\alpha_s\text{线性表示,且}\beta_1,\beta_2,\cdots,\beta_t\text{线性无关}，则：t&lt;=s$ </p>
-<h5 id="section-26"><strong>定理</strong>： #线性相关定理四 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：设 <code>m</code> 个向量 $\alpha_{1},\alpha_{2},\cdots,\alpha_{m}$，其中：$$\begin{aligned}&amp;\alpha_{1}=[a_{11},a_{21},\cdots,a_{n1}]^{\mathrm{T}},\\&amp;\alpha_{2}=[a_{12},a_{22},\cdots,a_{n2}]^{\mathrm{T}},\\&amp;\cdots\cdots\\&amp;\alpha_{m}=[a_{1m},a_{2m},\cdots,a_{nm}]^{\mathrm{T}}.\end{aligned}$$</blockquote>
+<h5 id="section-26"><strong>定理</strong>： <span class="note-tag">线性相关定理四</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>设 <code>m</code> 个向量 $\alpha_{1},\alpha_{2},\cdots,\alpha_{m}$，其中：$$\begin{aligned}&amp;\alpha_{1}=[a_{11},a_{21},\cdots,a_{n1}]^{\mathrm{T}},\\&amp;\alpha_{2}=[a_{12},a_{22},\cdots,a_{n2}]^{\mathrm{T}},\\&amp;\cdots\cdots\\&amp;\alpha_{m}=[a_{1m},a_{2m},\cdots,a_{nm}]^{\mathrm{T}}.\end{aligned}$$</blockquote>
 <blockquote>方程组的形式为：$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1m}x_{m}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2m}x_{m}=0,\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nm}x_{m}=0.\end{cases}$$</blockquote>
 <blockquote>则：$\text{向量组 }\alpha_1,\alpha_2,\cdots,\alpha_m\text{线性相关}\Leftrightarrow\text{齐次线性方程组}$</blockquote>
 <blockquote>即：$$\begin{bmatrix}\alpha_1,\alpha_2,\cdots,\alpha_m\end{bmatrix}\begin{bmatrix}x_1\\x_2\\\vdots\\x_m\end{bmatrix}=x_1\alpha_1+x_2\alpha_2+\cdots+x_m\alpha_m=0$$</blockquote>
@@ -283,8 +283,8 @@
 <li class="list-indent-2">1. <strong>线性相关有非零解</strong>；</li>
 <li class="list-indent-2">2. 当线性相关时，这些向量拼不成 <code>n</code> 维空间，即空间维度小于 <code>m</code> 的，即 $r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)&lt;m$</li>
 <li>补充： </li>
-<li class="list-indent-1">$r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)&lt;m$ 中的数使其真实的约束个数；</li>
-<li class="list-indent-1">两个约束也就意味着两个自由度；</li>
+<li class="list-indent-1">$r(\boldsymbol{\alpha}_1,\boldsymbol{\alpha}_2,\cdots,\boldsymbol{\alpha}_m)$ 是独立约束的个数；</li>
+<li class="list-indent-1">若有 $m$ 个未知系数，则自由度为 $m-r$；</li>
 </ul>
 <p><strong>补充</strong>：方程组的未知数个数问题 </p>
 <ul>
@@ -297,8 +297,8 @@
 <li class="list-indent-1">此时可以将其化成“方方正正的方程组”；</li>
 <li class="list-indent-1">也有可能变成“胖乎乎方程组”；</li>
 </ul>
-<h5 id="section-27"><strong>定理</strong>： #线性相关定理五</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{向量}\beta\text{可由向量组}a_1,a_2,\cdots,a_s\text{线性表示}$ </blockquote>
+<h5 id="section-27"><strong>定理</strong>： <span class="note-tag">线性相关定理五</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{向量}\beta\text{可由向量组}a_1,a_2,\cdots,a_s\text{线性表示}$ </blockquote>
 <blockquote>$\Leftrightarrow$ 非齐次线性方程组：$\left[a_1,a_2,\cdots,a_s\right]\begin{bmatrix}x_1\\x_2\\...s\\x_s\end{bmatrix}=x_1\alpha_1+x_2\alpha_2+\cdots+x_s\alpha_s=\beta$ 有解 </blockquote>
 <blockquote>$\Leftrightarrow r([\alpha_{1},\alpha_{2},\cdots,\alpha_{s}])=r([\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta])$；</blockquote>
 <blockquote>反之：$\text{向量}\beta\text{不能由向量组}a_1,a_2,\cdots,a_s\text{线性表示},则\left[a_1,a_2,\cdots,a_s\right]\begin{bmatrix}x_1\\x_2\\...s\\x_s\end{bmatrix}=x_1\alpha_1+x_2\alpha_2+\cdots+x_s\alpha_s=\beta无解$</blockquote>
@@ -310,15 +310,15 @@
 <li class="list-indent-1">系数阵：$r([\alpha_{1},\alpha_{2},\cdots,\alpha_{s}])$</li>
 <li class="list-indent-1">增广阵：$r([\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta])$</li>
 </ul>
-<h5 id="section-28"><strong>定理</strong>： #线性相关定理六 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若向量组 $a_1,a_2,\cdots,a_n$ 中有一部分向量线性相关，则整个向量组也线性相关；</blockquote>
+<h5 id="section-28"><strong>定理</strong>： <span class="note-tag">线性相关定理六</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若向量组 $a_1,a_2,\cdots,a_n$ 中有一部分向量线性相关，则整个向量组也线性相关；</blockquote>
 <blockquote>其逆否命题：$\text{如果}a_1,a_2,\cdots,a_m\text{线性无关},\text{则其任一部分向量组都线性无关}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>部分相关，整体必相关；</li>
 </ul>
-<h5 id="section-29"><strong>定理</strong>： #线性相关定理七 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若一组 n 维向量 $a_1,a_2,\cdots,a_s$ 线性无关，那么把这些向量各任意添加 m 各分量所得到的新向量 <code>(n+m)维</code> 组 $a_{1}^{<em>},a_{2}^{</em>},\cdots,a_{s}^{*}$ 也是线性无关的； </blockquote>
+<h5 id="section-29"><strong>定理</strong>： <span class="note-tag">线性相关定理七</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若一组 n 维向量 $a_1,a_2,\cdots,a_s$ 线性无关，那么把这些向量各任意添加 m 各分量所得到的新向量 <code>(n+m)维</code> 组 $a_{1}^{<em>},a_{2}^{</em>},\cdots,a_{s}^{*}$ 也是线性无关的； </blockquote>
 <blockquote>逆否命题：若一组 n 维向量 $a_1,a_2,\cdots,a_s$ 线性相关，那么把这些向量各任意去掉相同的若干个分量所得到的新向量组是线性相关的； </blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -343,6 +343,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

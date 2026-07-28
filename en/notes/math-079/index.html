@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 10：矩阵的秩 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 10: Rank of a matrix | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Rank of Matrices. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Matrices">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 10：矩阵的秩 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 10: Rank of a matrix | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Rank of Matrices. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-079/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,67 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 10：矩阵的秩</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-079/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-078/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 9：等价矩阵</strong></a>
-    <a class="article-pagination-next" href="../math-080/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 11：向量与向量组的线性相关性</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 10: Rank of a matrix</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Rank of Matrices. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics</span><span>4 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Matrices</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">10.1 Definition of rank</a><a href="#section-2">10.2 Finding the Rank of a Matrix</a><a href="#section-3">10.3 Several Important Expressions Related to Rank</a></nav></details><div class="prose"><h2 id="section-1">10.1 Definition of rank</h2>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Rankofthematrix</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span> Let $A$ be an $m\times n$ matrix. If at least one minor of order $k$ is nonzero and every minor of order $k+1$ is zero, then $r(A)=k$. For an $n\times n$ matrix: $$r\left(A\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{ is invertible}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Minor:</li>
+<li class="list-indent-1">A minor is a determinant formed by selecting the same number of rows and columns.</li>
+<li>Minor of order $k$:</li>
+<li class="list-indent-1">For $\left(\begin{matrix}1&amp;2&amp;3\\4&amp;5&amp;6\end{matrix}\right)$, one minor of order $2$ is $\left|\begin{matrix}1&amp;3\\4&amp;6\end{matrix}\right|$.</li>
+<li class="list-indent-1">This matrix has three minors of order $2$.</li>
+<li>Meaning: if at least one minor of order $k$ is nonzero and every minor of order $k+1$ is zero, then the largest linearly independent set of rows or columns has size $k$.</li>
+<li>Meaning: <code>r(A)=k</code></li>
+<li class="list-indent-1">There are <code>k</code> linearly independent row vectors and <code>k</code> linearly independent column vectors.</li>
+<li class="list-indent-1">Any <code>k+1</code> vectors are related;</li>
+<li class="list-indent-1">At this point, <code>r(A)=k</code> is the number of linearly independent vectors that make up the matrix;</li>
+</ul>
+<p><strong>Supplement</strong>: The geometric meaning of rank</p>
+<ul>
+<li>Meaning:</li>
+<li class="list-indent-1">Rank, representing the dimension of the transformed space after the transformation of the <code>A</code> matrix;</li>
+<li class="list-indent-1">The space stretched by the transformed basis vector is the total possible transformation result <code>-&gt;</code> That is: the dimension of the transformed basis vector and the space it stretches;</li>
+<li>Example:</li>
+<li class="list-indent-1">When a matrix $A_{3<em>2}$ appears with <code>3</em>2</code>, it means mapping a two-dimensional figure into three-dimensional space; Because A has two basis vectors, and these two basis vectors are now three-dimensional <code>[x,y,z]</code>;</li>
+<li class="list-indent-1">When a matrix $A_{3<em>2}$ appears with <code>2</em>3</code>, it means mapping a three-dimensional figure into a two-dimensional space; Because A has three basis vectors, and these three basis vectors are now two-dimensional <code>[x,y]</code> basis vectors;</li>
+</ul>
+<h2 id="section-2">10.2 Finding the Rank of a Matrix</h2>
+<p><strong>Method</strong>: Find the rank of the matrix</p>
+<ul>
+<li>Transform <code>A</code> into a row-stepped matrix using elementary row transformations, where the number of nonzero rows is the rank of <code>A</code>;</li>
+</ul>
+<p><strong>Method</strong>: Find the rank of the matrix - Example</p>
+<ul>
+<li>Question: If $\begin{bmatrix}1&amp;2&amp;-1&amp;1\\2&amp;0&amp;t&amp;0\\0&amp;-4&amp;5&amp;-2\end{bmatrix}$ has rank 2, find <code>t</code></li>
+<li>Analysis:</li>
+<li class="list-indent-1">$A\rightarrow\left(\begin{matrix}1&amp;2&amp;-1&amp;1\\0&amp;-4&amp;t+2&amp;-2\\0&amp;-4&amp;5&amp;-2\end{matrix}\right)\rightarrow\left(\begin{matrix}1&amp;2&amp;-1\\0&amp;-4&amp;t+2&amp;-2\\0&amp;0&amp;3-t&amp;0\end{matrix}\right)$</li>
+<li class="list-indent-1">At this point, it is already a rowed ladder matrix;</li>
+<li class="list-indent-1">And since the matrix rank is 2, all the following rows are 0, so <code>3-t=0</code></li>
+<li class="list-indent-1">So <code>t=3</code></li>
+</ul>
+<h2 id="section-3">10.3 Several Important Expressions Related to Rank</h2>
+<p><strong>Concept</strong>: Let A be a <code>m*n</code> matrix, and <code>B</code> a matrix that satisfies the requirements for matrix operations, then:</p>
+<ul>
+<li>(1) $0\leq r(A)\leq\min\{m,n\}$ (by definition).</li>
+<li class="list-indent-1">Every matrix has nonnegative rank, and $r(A)=0$ iff $A=O$.</li>
+<li class="list-indent-1">The order of a nonzero minor cannot exceed either the number of rows or the number of columns, so $r(A)\leq\min\{m,n\}$.</li>
+<li>(2) $r(kA)=r(A)$ for $k\neq0$.</li>
+<li>(3) $r(AB)\leq\min\{r(A),r(B)\}$.</li>
+<li class="list-indent-1">Matrix multiplication cannot increase rank.</li>
+<li>(4) $r(A+B)\leq r(A)+r(B)$.</li>
+<li>（5）$r\left(A^{*}\right)=\begin{cases}n,&amp;r\left(A\right)=n,\\1,&amp;r\left(A\right)=n-1,\\0,&amp;r\left(A\right)&lt;n-1,\end{cases}$</li>
+<li>(6) Let A = <code>m*n</code> a matrix, <code>P、Q</code> be m-th and n-order invertible matrices respectively, then <code>r(A)=r(PA)=r(AQ)=r(PAQ)</code></li>
+<li class="list-indent-1">In the process, all intermediate matrices are equivalent: $r\left(\begin{matrix}E_{r}&amp;0\\0&amp;0\end{matrix}\right)$</li>
+<li>(7) If $A_{m\times n}B_{n\times s}=O$, then $r(A)+r(B)\leq n$.</li>
+<li class="list-indent-1"><code>n</code> is the number of columns in <code>A</code>;</li>
+<li>(8) Gram matrix: $r\left(A\right)=r\left(A^{T}\right)=r\left(A^{T}A\right)=r\left(AA^{T}\right)$</li>
+<li class="list-indent-1">$r\left(A^{T}A\right)=r\left(AA^{T}\right)$ must have a solution, and it must be the best approximate solution;</li>
+<li class="list-indent-1">For any matrix, the transpose rank equals its $r\left(A^{T}A\right)=r\left(AA^{T}\right)$;</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-078/index.html"><span>← Previous item</span><strong>Lecture 9: Equivalent Matrices</strong></a>
+    <a class="article-pagination-next" href="../math-080/index.html"><span>Next item →</span><strong>Lecture 11: Linear Dependence of Vectors and Vector Sets</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +129,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

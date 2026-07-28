@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 10：求极限 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 10: Finding Limits | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Finding Limits. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Functions, Limits, and Continuity">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 10：求极限 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 10: Finding Limits | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Finding Limits. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-018/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,272 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 10：求极限</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-03-04</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-018/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-017/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 9：极限的概念、性质与存在准则</strong></a>
-    <a class="article-pagination-next" href="../math-019/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 11：无穷小量阶的比较</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 10: Finding Limits</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 10: Finding Limits. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-03-04</span><span>13 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Functions</span><span>Limits</span><span>and Continuity</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">10.1 Common Methods for Finding Limits</a><a href="#section-13">10.2 Summary of Limit Finding Methods</a></nav></details><div class="prose"><h2 id="section-1">10.1 Common Methods for Finding Limits</h2>
+<p><strong>Common Methods: Eight Types</strong></p>
+<h3 id="section-2">10.1.1 Method 1: Use the basic limit to find the limit</h3>
+<p><strong>Common Basic Limits</strong></p>
+<ul>
+<li>$\lim_{x\to0}\frac{\sin x}x=1;$</li>
+</ul>
+<p><strong>Power Exponents and Square Roots</strong></p>
+<ul>
+<li>$\lim_{x\to0}(1+x)^{\frac1x}=e;$</li>
+<li class="list-indent-1">is of type $1^\infty$, and the power base inside the parentheses is greater than 0;</li>
+<li class="list-indent-1">$\lim_{x\to0}(1+\frac{1}{x})^{x}$ does not exist, because when x approaches 0, it can also tend toward 0 negative;</li>
+<li>$\lim_{x\to0^+}(1+\frac{1}{x})^{x}=1$</li>
+<li>$\lim_{x\to\infty}(1+\frac1x)^x=e;$</li>
+<li class="list-indent-1">is of type $1^\infty$, and the base of the parentheses is greater than 0</li>
+<li class="list-indent-1">$\lim_{x\to\infty}(1+x)^{\frac{1}{x}}$</li>
+<li>$\lim_{x\to+\infty}(1+x)^{\frac{1}{x}}=1$</li>
+<li>$\lim_{x\to0}\frac{a^x-1}x=\ln a;$</li>
+<li>$\lim_{n\to\infty}\sqrt[n]{n}=1.$</li>
+<li class="list-indent-1">Note that here it is n, so it tends toward positive infinity;</li>
+<li>$\lim_{n\to\infty}\sqrt[n]{a}=1,(a&gt;0).$</li>
+<li class="list-indent-1">Note that here it is n, so it tends toward positive infinity;</li>
+</ul>
+<p><strong>Piecewise Functions</strong></p>
+<ul>
+<li>$\left.\lim_{{x\to\infty}}\frac{a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0}{{b}_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0}=\left|\begin{array}{ll}\frac{a_n}{b_m},&amp;n=m,\\0,&amp;n&lt;m,\\\infty,&amp;n&gt;m.\end{array}\right.\right.$</li>
+<li class="list-indent-1">With so many numerator and denominator, the result mainly depends on the largest number (highest degree);</li>
+<li class="list-indent-1">Note that x tends toward infinity.</li>
+<li class="list-indent-1">When x approaches 0, the value of the function should depend on the smallest number (minimum degree);</li>
+<li>$\lim_{{n\to\infty}}x^n=\begin{cases}0,&amp;|x|&lt;1,\\1,&amp;x=1,\\+\infty,&amp;x&gt;1,\\\text{does not exist},&amp;x\leq-1.\end{cases}$</li>
+<li>$\lim_{n\to\infty}e^{{nx}}=\begin{cases}0,&amp;x&lt;0,\\+\infty,&amp;x&gt;0\\1,&amp;x=0.&amp;\end{cases}$</li>
+</ul>
+<p><strong>1 to the power of infinity</strong></p>
+<ul>
+<li>For $1^{\infty}$, its result is infinitive, which does not necessarily equal 1;</li>
+<li>$\text{ If }\lim\alpha(x)=0,\lim\beta(x)=\infty,\text{ and }\lim\alpha(x)\beta(x)=A.\text{ then }\lim(1+\alpha(x))^{\beta(x)}=e^A$</li>
+<li class="list-indent-1">That is, the core is at $\lim\alpha(x)\beta(x)=A$, check if it holds;</li>
+<li>The method trilogy</li>
+<li class="list-indent-1">1. Written in standard form: $\text{ Original form }=\mathbf{lim}[1+\alpha(x)]^{\beta(x)}$;</li>
+<li class="list-indent-1">2. Find the limit: $\lim\alpha(x)\beta(x)=A;$</li>
+<li class="list-indent-1">3. Write the result: $\text{ Original form }=e^A.$</li>
+<li>Example problem</li>
+<li class="list-indent-1">Title: $\lim_{x\to\infty}\left(\frac{x^2}{(x-a)(x+b)}\right)^x$</li>
+<li class="list-indent-1">$\lim_{x\to\infty}\left(\frac{x^2}{(x-a)(x+b)}\right)^x=\lim_{x\to\infty}\left(\frac{x_.}{x-a}\right)^x\left(\frac x{x+b}\right)^x=e^a\cdot e^{-b}=e^{a-b}$</li>
+</ul>
+<h4 id="section-3">Problem Type: Problem-solving technique - arbitrary constants</h4>
+<h5 id="section-4">PART 1: Questions</h5>
+<ul>
+<li>When a multiple-choice question contains<strong>parameters that can take any value</strong>, consider giving the constant a special specific value. Substituting it can eliminate certain expressions without changing the original meaning;</li>
+</ul>
+<h5 id="section-5">PART 2: Typical Example Problems</h5>
+<ul>
+<li>In $\lim_{x\to\infty}\left(\frac{x^2}{(x-a)(x+b)}\right)^x$, a can be set to 0;</li>
+</ul>
+<h3 id="section-6">10.1.2 Method 2: Use equivalent infinitesimal substitution to find limits</h3>
+<p><strong>Principle of Equivalent Substitution</strong></p>
+<ul>
+<li>1. Multiplication and division relationships can be swapped</li>
+<li class="list-indent-1">$\text{ If }\alpha\sim\alpha_1,\beta\sim\beta_1,\text{ then }\lim\frac\alpha\beta=\lim\frac{\alpha_1}\beta=\mathbf{lim}\frac\alpha{\beta_1}=\mathbf{lim}\frac{\alpha_1}{\beta_1}$</li>
+<li>2. Addition and subtraction relationships can be swapped under<strong>certain conditions</strong></li>
+<li class="list-indent-1">Subtraction</li>
+<li class="list-indent-2">$\text{ If }\alpha{\sim}\alpha_1,\beta{\sim}\beta_1,\text{ and }\lim\frac{\alpha_1}{\beta_1}=A\neq1.\text{ then }\alpha{-}\beta{\sim}\alpha_1{-}\beta_1$</li>
+<li class="list-indent-2">Conditions for subtractive exchange:<strong>The two subtraction terms are not equal</strong>, A is not equal to 1;</li>
+<li class="list-indent-2">For example: $sin2x - tanx$ ~ $2x - x$</li>
+<li class="list-indent-1">Addition</li>
+<li class="list-indent-2">$\text{ If }\alpha{\sim}\alpha_1,\beta{\sim}\beta_1,\text{ and }\lim\frac{\alpha_1}{\beta_1}=A\neq-1.\text{ then }\alpha{-}\beta{\sim}\alpha_1{+}\beta_1$</li>
+<li class="list-indent-2">Subtractive substitution condition: Two additive terms are not equal, A is not equal to -1;</li>
+</ul>
+<p><strong>Common Equivalent Infinitesimals</strong></p>
+<ul>
+<li>When x approaches 0;</li>
+<li>${(1+x)^\alpha-1}\sim{\alpha x}$</li>
+<li>$e^{x}-1\sim x$</li>
+<li class="list-indent-1">Power refers to the substitution of a function;</li>
+<li>$x\sim\sin x\sim\tan x\sim\arcsin x\sim\arctan x\sim\ln(1+x)\thicksim e^x-1;$</li>
+<li class="list-indent-1">Note: For this function, you need to ensure that x tends toward 0 when using it;</li>
+<li class="list-indent-1">Variant: $\ln q(x)\sim q(x)-1,q(x)\to1$</li>
+<li>$a^x-1\sim x\ln a,\quad{(1+x)^\alpha-1\sim\alpha x},\quad1-\cos x\sim\frac12x^2$</li>
+</ul>
+<p><strong>Advanced Equivalent Infinitesimal</strong></p>
+<ul>
+<li>$x-\sin x\sim\frac16x^3$，$\tan x-x\sim\frac13x^3$</li>
+<li>$\arcsin x-x\sim\frac16x^3\quad x-\arctan x\sim\frac13x^3$</li>
+<li>$x-\ln(1+x)\sim\frac12x^2$</li>
+</ul>
+<h3 id="section-7">10.1.3 Method 3: Use rational algorithms to calculate limits</h3>
+<p><strong>What is the Rational Operation Rule</strong></p>
+<ul>
+<li>The addition, subtraction, multiplication, and division of limits can be calculated separately, provided<strong>the limit of each split part must exist</strong>;</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+\text{If }{\lim f(x)=A}, \quad\mathrm{lim~g(x)=B}, \text{ Then}:
+&amp;\lim(f(x)\pm g(x))=\lim f(x)\pm\lim g(x) \\
+&amp;\lim(f(x)\cdot g(x))=\lim f(x)\cdot\lim g(x) \\
+&amp;\lim\left(\frac{f(x)}{g(x)}\right)=\frac{\lim f(x)}{\lim g(x)}\quad(B\neq0)
+\end{aligned}
+$$</div>
+<p><strong>Prerequisites for Existence</strong></p>
+<ul>
+<li>1. Existence +/- Nonexistence = Nonexistence;</li>
+<li>2. Not existent +/- Not existent = Not necessarily;</li>
+<li>3. Exist ×/÷ Not exist = Not necessarily;</li>
+<li class="list-indent-1">Can exist, can not exist;</li>
+<li>4. Not existing ×/÷ Not existing = Not necessarily so;</li>
+<li class="list-indent-1">For example: $(-1)^{n}\cdot(-1)^{n}=1$, when two of them are individual, they do not exist, but when multiplied by combination, they exist;</li>
+</ul>
+<p><strong>Rational Operation Rules: Common Conclusions</strong></p>
+<ul>
+<li>1. $\lim f(x)=A\neq0\Rightarrow\lim f(x)g(x)=A\lim g(x);$</li>
+<li class="list-indent-1">The limit of a nonzero factor can be determined first;</li>
+<li>2. $\lim\frac{f(x)}{g(x)}$ exists, $\lim g(x)=0\Rightarrow\lim f(x)=0; $</li>
+<li>3. $\lim\frac{f(x)}{g(x)}=A\neq0,\lim f(x)=0\Rightarrow\lim g(x)=0;$</li>
+</ul>
+<h3 id="section-8">10.1.4 Method 4: Use L'Hôpital's Rule to Find Limits</h3>
+<p><strong>Usage Requirements</strong></p>
+<ul>
+<li>1. $\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0\left(\infty\right);$</li>
+<li>2. $f$ and $g$ are differentiable in a punctured neighborhood of $x_0$, and $g'(x)\neq0$.</li>
+<li class="list-indent-1">L'Hôpital's rule follows from Cauchy's mean value theorem, so these hypotheses are essential.</li>
+<li>3. $\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}$ exists (or );</li>
+<li>Conditions met: $\lim_{x\to x_0}\frac{f(x)}{g(x)}=\lim_{x\to x_0}\frac{f^{\prime}(x)}{g^{\prime}(x)}.$</li>
+<li class="list-indent-1">Note: To determine whether this equality holds true, you need to check whether it exists on the right side of the equation;</li>
+</ul>
+<p><strong>Usage Environment</strong></p>
+<ul>
+<li>$\frac00;\quad\frac\infty\infty,\quad0\cdot\infty;\quad\infty-\infty;\quad1^\infty;\quad\infty^0;\quad0^0$</li>
+<li>In fact, they are all derived from $\frac00;\quad\frac\infty\infty$:</li>
+<li>Problem-solving approach:</li>
+<li class="list-indent-1">$\frac00,\frac\infty\infty\quad\Leftarrow\begin{cases}\quad ∞-∞\\0\cdot\infty\quad\Leftarrow\begin{cases}1^\infty\\\infty^0\\0^0&amp;\end{cases}&amp;\end{cases}$</li>
+<li>$0\cdot\infty\quad$</li>
+<li class="list-indent-1">Approach: Place either 0 or infinity on top OR below;</li>
+<li>$1^\infty;\quad\infty^0;\quad0^0$：</li>
+<li class="list-indent-1">Approach: All three should be rewritten as 0 times infinity;</li>
+<li class="list-indent-1">Method: $[f(x)]^{g(x)}=e^{g(x)\ln f(x)}$; rewrite the expression as an exponential.</li>
+<li class="list-indent-1">Core: Find the limit of the exponent $g(x)\ln f(x)$.</li>
+</ul>
+<p><strong>Summary</strong></p>
+<ul>
+<li>1. If the assumptions guarantee only two derivatives of $f$, L'Hôpital's rule can be applied at most twice, provided all of its hypotheses remain satisfied.</li>
+<li>2. N-order differentiable -&gt; n-1 order differentiable can be used;</li>
+<li>3. If you encounter abstract functions to find limits, you can consider using the definition of derivatives for calculation;</li>
+</ul>
+<h3 id="section-9">10.1.5 Method 5: Use Taylor's Formula to Find Limits</h3>
+<p>#####<strong>Theorem</strong>: Taylor's Theorem—with the remaining Peano terms</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>1. Taylor's formula with Peano remainder: Suppose $f(x)$ is differentiable of $n$ order at $x_0$, then $f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$</blockquote>
+<blockquote>Meaning: Write a general function as a general polynomial + remainder</blockquote>
+<blockquote>Where: $$P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$$</blockquote>
+<blockquote>$f(x)$ n Taylor polynomials at $x_{0}$</blockquote>
+<blockquote>	$$R_n(x)=o((x-x_0)^n)$$</blockquote>
+<blockquote>Disadvantages:</blockquote>
+<p> &gt; 1. Only qualitative descriptions of the remaining items can be given, not quantitative analysis;</p>
+<blockquote>2. It can only be used when x0 is approaching; it cannot be used from a distance;</blockquote>
+<p><strong>Common Taylor Formulas</strong></p>
+<ul>
+<li>$$\mathrm{e^x=\sum_{n=0}^\infty\frac1{n!}x^n=1+x+\frac1{2!}x^2+\cdots\in(-\infty,+\infty)}$$</li>
+<li>$$\sin\mathrm{x=\sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)!}x^{2n+1}=x-\frac1{3!}x^3+\frac1{5!}x^5+\cdots,x\in(-\infty,+\infty)}$$</li>
+<li>$$\cos\mathrm{x=\sum_{n=0}^\infty\frac{(-1)^n}{(2n)!}x^{2n}=1-\frac1{2!}x^2+\frac1{4!}x^4+\cdots,x\in(-\infty,+\infty)}$$</li>
+<li>$$\mathrm{ln(1+x)=\sum_{n=0}^\infty\frac{(-1)^n}{n+1}x^{n+1}=x-\frac12x^2+\frac13x^3+\cdots,x\in(-1,1]}$$</li>
+<li>$$\begin{aligned}&amp;\frac1{1-\mathrm{x}}=\sum_{\mathrm{n=0}}^\infty\mathrm{x^n}=1+\mathrm{x+x^2+x^3+\cdots,x\in(-1,1)}\\&amp;\frac1{1+\mathrm{x}}=\sum_{\mathrm{n=0}}^\infty(-1)^\mathrm{n}\mathrm{x}^\mathrm{n}=1-\mathrm{x}+\mathrm{x}^2-\mathrm{x}^3+\cdots,\mathrm{x}\in(-1,1)\end{aligned}$$</li>
+<li>$$\mathrm{(1+x)^a=1+\sum_{n=1}^\infty\frac{a(a-1)\cdots(a-n+1)}{n!}x^n=1+ax+\frac{a(a-1)}{2!}x^2+\cdots,x\in(-1,1)}$$</li>
+</ul>
+<p><strong>$\frac{0}{0}$ Common Methods</strong></p>
+<ul>
+<li>Equivalent substitution;</li>
+<li>L'Hôpital's rule;</li>
+<li>Taylor's formula;</li>
+</ul>
+<p><strong>How many times is Taylor's Formula used</strong></p>
+<ul>
+<li>1.  $\frac{f(x)}{g(x)}.$</li>
+<li class="list-indent-1">How to use:</li>
+<li class="list-indent-2">1. Using Taylor expansion, the expansion has the same power index above and below the order;</li>
+<li class="list-indent-3">For example: the top and bottom are to the fourth power, and the bottom and top are also expanded to the fourth power;</li>
+<li class="list-indent-2">2. Organize terms, organize terms of the same order together;</li>
+<li>2. $f(x)-\text{ or }+g(x)$</li>
+<li class="list-indent-1">Write about a power exponent of a certain degree and find the lowest degree term to subtract them;</li>
+</ul>
+<h3 id="section-10">10.1.6 Method 6: Use the squeeze principle to find limits</h3>
+<p><strong>Example Question</strong>: $\lim_{n\to\infty}\left[\frac1{n^2+n+1}+\frac2{n^2+n+2}+\cdots+\frac n{n^2+n+n}\right]$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Reduction: All denominators are reduced to the largest denominator;</li>
+<li class="list-indent-1">Enlargement: Convert all denominators to the smallest denominator;</li>
+<li>Analysis</li>
+<li class="list-indent-1">$\frac{\frac{1}{2}n(n+1)}{n^{2}+n+n}\leq[\text{ Original form }]\leq\frac{\frac{1}{2}n(n+1)}{n^{2}+n+1}$</li>
+<li class="list-indent-1">Both before and after tend to be 1/2, so the original expression = 1/2;</li>
+<li>Question Type: <span class="note-tag">Principleofsqueezing</span></li>
+</ul>
+<p><strong>Example Question</strong>: $\lim_{n\to\infty}\sqrt[n]{a_1^n+{a_2}^n+\cdots+{a_m}^n},\quad\text{ where }a_i&gt;0,(i=1,2,\cdots m)$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Shrink the largest term to: $\sqrt[u]{ma^{n}}$ the largest term among all current terms</li>
+<li class="list-indent-1">How to shrink the smallest term to a result that is also a? Keep only one $a^n$ item: $\sqrt[n]{a^{n}}$</li>
+<li>Analysis</li>
+<li class="list-indent-1">In the largest term, since m is a constant, it ultimately converges to a;</li>
+<li class="list-indent-1">$\sqrt[n]{a^{n}}\leq\sqrt[n]{a_{1}^{n}+a_{1}^{n}+\cdots+a_{m}^{n}}\leq\sqrt[n]{ma_{0}^{n}}$</li>
+<li>Question Type: <span class="note-tag">Principleofsqueezing</span></li>
+</ul>
+<p><strong>Method</strong>: When encountering a finite term in the square root, just find the term that most affects the current total number size, with its limit being the scaling value of the squeeze principle;</p>
+<ul>
+<li>Example: $\lim_{n\to\infty}\sqrt[n]{1^n+x^n+(\frac{x^2}2)^n},{(x&gt;0).}$</li>
+<li>There are three of these in total. Find the one with the largest base: $\max\{1,x,\frac{x^2}2\}$</li>
+<li>When x approaches infinity, $\frac{x^2}2$ has the greatest influence;</li>
+</ul>
+<h3 id="section-11">10.1.7 Method 7: Use the monotone bounded criterion to find limits</h3>
+<p><strong>Method</strong></p>
+<ul>
+<li>Generally divided into two steps:</li>
+<li>1. Proving the existence of <code>-&gt;</code> monotonic bounded criterion;</li>
+<li>2. Take the limits on both sides of the equation;</li>
+</ul>
+<p><strong>Example Question</strong>: $\text{ Let }x_1&gt;0,x_{n+1}=\frac12\Bigg(x_n+\frac1{x_n}\Bigg),n=1,2,\cdots.\text{ Find the limit }\lim_{n\to\infty}x_n$</p>
+<ul>
+<li>Analysis:</li>
+<li class="list-indent-1">Inequality conclusion: $2ab\leq a^{2}+b^{2}$</li>
+<li>Analysis</li>
+<li class="list-indent-1">Step 1: Prove the existence of limits</li>
+<li class="list-indent-2">Since x 1&gt;0, $x_n&gt;0$;</li>
+<li class="list-indent-2">$x_{n+1}=\frac12\left(x_n+\frac1{x_n}\right)=\frac12\left[(\sqrt{x_n})^2+(\frac1{\sqrt{x_n}})^2\right]\geq\frac12\cdot2\sqrt{x_n}\cdot\frac1{\sqrt{x_n}}=1$</li>
+<li class="list-indent-2">$x_{n+1}-x_{n}=\frac{1}{2}\Bigg(\frac{1}{x_{n}}-x_{n}\Bigg)=\frac{1}{2}\cdot\frac{1-x_{n}^{2}}{x_{n}}\leq0$</li>
+<li class="list-indent-2">Because $x_{n+1}-x_{n}&lt;0$ is monotonically decreasing and the function has a lower bound, so the limit exists;</li>
+<li class="list-indent-1">Step 2: Take the limits on both sides of the equation and find the limit</li>
+<li class="list-indent-2">$\lim_{n\to\infty}x_{n}=a.$</li>
+<li class="list-indent-2">$a=\frac12{\left(a+\frac1a\right)}$</li>
+<li class="list-indent-2">$\lim_{n\to\infty}x_n=\mathbf{1}.$</li>
+<li>Question Type: <span class="note-tag">Monotonyandboundedcriteria</span></li>
+</ul>
+<p><strong>Concept</strong>: Monotonic bounded criterion used in various scenarios</p>
+<ul>
+<li>Mostly used to find recurrence relations $x_{n+1}=f(x_n)$</li>
+</ul>
+<h3 id="section-12">10.1.8 Method 8: Use definite integrals to find limits</h3>
+<p><strong>Concept of Definite Integrals</strong></p>
+<ul>
+<li>Definite integrals sum all terms within an interval (for example, from a to b);</li>
+<li class="list-indent-1">Intervals are divided and taken according to patterns;</li>
+<li>N equal divisions between a and b -&gt; Each part is $\frac{b-a}{n}$;</li>
+</ul>
+<p><strong>Example Question</strong>: $\text{ Find the limit }\lim_{n\to\infty}\left[\frac1{n+1}+\frac1{n+2}+\cdots+\frac1{n+n}\right]$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">This question is very difficult to extract using the squeezing principle;</li>
+<li class="list-indent-1">Definite integrals are also &quot;Japanese limits&quot;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Step 1: Extract 1/n (Cute Factor~)</li>
+<li class="list-indent-2">Original form: $=\lim_{n\to\infty}{\frac1n}{\left[\frac1{1+\frac1n}+\frac1{1+\frac2n}+\cdots+\frac1{1+\frac nn}\right]}$;</li>
+<li class="list-indent-1">Step 2: Find the changing part -&gt; Which is the integrand</li>
+<li class="list-indent-2">The changing part is the position of the function x, and the range of change is the range of finding definite integrals (from $\frac1n$ to n, where n values range from 0 to 1);</li>
+<li class="list-indent-2">Thus, the changed part becomes x: $\int_{0}^{1}\frac{1}{1+x}dx$</li>
+<li class="list-indent-1">1. Where there is change, there is variable;</li>
+<li class="list-indent-1">2. The range of change in X is the range of the interval;</li>
+<li>Question Type: <span class="note-tag">Definiteintegralsdefinethelimittofindthelimit</span></li>
+</ul>
+<p><strong>Summary:</strong>n items and questions</p>
+<ul>
+<li>There are two solutions:</li>
+<li>1. Principle of compression;</li>
+<li>2. Definition of definite integrals;</li>
+</ul>
+<h2 id="section-13">10.2 Summary of Limit Finding Methods</h2>
+<p><img class="note-image" src="/assets/notes/8a35b5f297fc-Pasted-image-20240324233237.png" alt="Pasted image 20240324233237" loading="lazy" decoding="async"></p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-017/index.html"><span>← Previous item</span><strong>Lecture 9: Limits — Concepts, Properties, and Existence Criteria</strong></a>
+    <a class="article-pagination-next" href="../math-019/index.html"><span>Next item →</span><strong>Lecture 11: Comparing Orders of Infinitesimals</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +334,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

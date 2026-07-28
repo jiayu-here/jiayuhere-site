@@ -20,7 +20,7 @@ tags: ["考研数学", "高等数学", "重积分"]
 - 概念：
 	- **用角度和长度描述位置的坐标系**；
 - 转换：
-	- $$\left\{\begin{array}{c}x=r\mathrm{cos}\theta\\y=r\mathrm{sin}\theta\end{array}\right.\Leftrightarrow\left\{\begin{array}{c}r=\sqrt{x^2+y^2}\\\theta=\arcsin\frac yr=\arcsin\frac y{x^2+y^2}\end{array}\right.$$
+	- $$x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan2}(y,x).$$
 	- 注意：上述转换方法仅限于二者圆点相同，且极坐标参考系与直角坐标的 𝑥 轴方向相同的情况；
 - 图示：
 	- ![Pasted image 20240509172033](/assets/notes/577fe472c3ac-Pasted-image-20240509172033.png)
@@ -28,12 +28,12 @@ tags: ["考研数学", "高等数学", "重积分"]
 ## 44.1 二重积分基本概念
 ### 44.1.1 概念引入
 **曲面顶柱体的体积**
-- 在一个曲面顶柱体当中，当 $\lim_{\lambda\to0}\sum_{i=1}^{n}\Delta\sigma_{i}f\left(\xi_{i},y\right)$ 时，其为曲面柱体的二重积分；
-- 其中：$\sigma_{i}$ 为底面积，$f\left(\xi_{i},y\right)$ 为高，$lambda$ 为每一个小区间上，几何图形的直径；
+- 在一个曲顶柱体当中，体积由 $\lim_{\lambda\to0}\sum_{i=1}^{n}f\left(\xi_i,\eta_i\right)\Delta\sigma_i$ 给出；
+- 其中：$\Delta\sigma_i$ 为第 $i$ 个小区域的面积，$f\left(\xi_i,\eta_i\right)$ 为对应的高，$\lambda$ 为各小区域直径的最大值；
 
 ##### **定义**： #二重积分
-> <font color="#ccc1d9">描述：</font>如果 $f(x,y)$ 是区域 D 上的有界函数，将区域 D 任意的分成 n 个区域：$\sigma_{1}$ 、$\sigma_{2}$.... $\sigma_{n}$，每个 $\sigma_{n}$ 上任取一点 $(\xi_{i},\eta_{i})$，做 $f(\xi,\eta_{i})\Delta\sigma_{i}$ ，当 $\lambda\to0$ 时：
-> 称下式为二重积分： $$\lim_{\lambda\to0}\sum_{i=1}^{n}\Delta\sigma_{i}f\left(\xi_{i},y\right)=\int\int_{D}f(x,y)d\sigma $$
+> <font color="#ccc1d9">描述：</font>如果 $f(x,y)$ 是区域 $D$ 上的有界函数，将 $D$ 分成若干小区域 $\Delta\sigma_i$，并在每个小区域内任取一点 $(\xi_i,\eta_i)$。若下列极限存在且与分割方式和取点方式无关，则称其为二重积分：
+> $$\lim_{\lambda\to0}\sum_{i=1}^{n}f\left(\xi_i,\eta_i\right)\Delta\sigma_i=\iint_D f(x,y)\,d\sigma.$$
 
 **解释**
 - 区间

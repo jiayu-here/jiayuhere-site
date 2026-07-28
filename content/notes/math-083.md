@@ -6,40 +6,138 @@ category: "数学"
 tags: ["考研数学", "线性代数", "向量组"]
 ---
 
-## 14.1 基本概念 
-##### **定义**： #向量空间基本概念
-> <font color="#ccc1d9">描述：</font> $\text{若 }\xi_1,\xi_2,\cdots,\xi_n\text{ 是 }n\text{ 维向量空间 }\mathbb{R}^n\text{中的线性无关的有序向量组},\text{ 则任一向量 }\alpha\in\mathbb{R}^n\text{均可由}\xi_1,\xi_2,\cdots,\xi_n\text{线性表示,记为}$：$$a=a_{1}\xi_{1}+a_{2}\xi_{2}+\cdots+a_{n}\xi_{n}$$
-> $\text{称有序向量组}\xi_1,\xi_2,\cdotp\cdotp\cdotp,\xi_n\text{是}\mathbf{R}^n\text{的一个基,基向量的个数 }n\text{ 称为向量空间的维数,而}\left[a_1,a_2,\cdotp\cdotp\cdotp,a_n\right]$ $([a_1,a_2,\cdots,a_n]^\mathrm{T})\text{称为向量}\alpha\text{在基}\xi_1,\xi_2,\cdots,\xi_n\text{下的坐标,或称为}\alpha\text{的坐标行(列)向量}.$
+## 14.1 基、维数与坐标
 
+##### **定义**： #向量空间的基
 
-## 14.2 基变换与坐标变换 
-##### **定理**： #基变换定理
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> $\text{若}\eta_1,\eta_2,\cdots,\eta_n\text{和}\xi_1,\xi_2,\cdots,\xi_n\text{是}\mathbb{R}^n\text{中的两个基,且有关系}$：
-> $$[\eta_1,\eta_2,\cdots,\eta_n]=[\xi_1,\xi_2,\cdots,\xi_n]\begin{bmatrix}c_{11}&c_{12}&\cdots&c_{1n}\\c_{21}&c_{22}&\cdots&c_{2n}\\\vdots&\vdots&&\vdots\\c_{n1}&c_{n2}&\cdots&c_{nn}\end{bmatrix}=[\xi_1,\xi_2,\cdots,\xi_n]C,$$
-> 1. $\text{则}\left(*\right)\text{式称为由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\eta_n\text{的基变换公式;}$
-> 2. ${矩阵}C\text{称为由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\\ \eta_n\text{的过渡矩阵},C\text{的第}i\text{列即是}\eta_i\text{在基}\xi_1,\xi_2,\cdots,\xi_n\text{下的坐标},\text{且过渡矩阵}C\text{是可逆矩阵}$
+若有序向量组 $\xi_1,\xi_2,\ldots,\xi_n$ 在 $\mathbb R^n$ 中线性无关，则它构成 $\mathbb R^n$ 的一组基。任意向量 $\alpha\in\mathbb R^n$ 都能唯一表示为
 
-**解释**
-- 在方程中，可以将当前的坐标系的计算、转换为其他坐标系的计算；
+$$
+\alpha=a_1\xi_1+a_2\xi_2+\cdots+a_n\xi_n.
+$$
 
-**概念**：基坐标变换
-- 举例：
-	- 可以理解为： $\begin{bmatrix}2&&-1\\1&&1\end{bmatrix}$ 矩阵将 `[1,0]` 和 `[0,1]` 基向量进行变换；
-	- 即：变换后的向量仍旧是相同的线性组合，不过使用的是新的基向量；
-	- $\begin{bmatrix}2&&-1\\1&&1\end{bmatrix}\begin{bmatrix}-1\\2\end{bmatrix}=-1\begin{bmatrix}2\\1\end{bmatrix}+2\begin{bmatrix}-1\\1\end{bmatrix}=\begin{bmatrix}-4\\1\end{bmatrix}$
-- 图示： 
-	- ![Drawing 2024-06-29 19.34.16.excalidraw](/assets/notes/609bf8645698-Drawing-2024-06-29-19.34.16.excalidraw.png)
+向量
 
-##### **定理**： #坐标变换定理 
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>设 $\alpha$ 在基 $\xi_1,\xi_2,\cdots,\xi_n$ 和基 $\eta_1,\eta_2,\cdots,\eta_n$ 下的坐标分别是 $x=[x_1,x_2,\cdots,x_n]^{\mathrm{T}},y=[y_1$, $y_{2},\cdots,y_{n}]^{T},即$：$$\alpha=\left[\xi_{1},\xi_{2},\cdots,\xi_{n}\right]x=\left[\eta_{1},\eta_{2},\cdots,\eta_{n}\right]y$$
-> $\text{又由基}\xi_1,\xi_2,\cdots,\xi_n\text{到基}\eta_1,\eta_2,\cdots,\eta_n\text{的过渡矩阵为}C,\text{即}$：
-> $$[\eta_{1},\eta_{2},\cdots,\eta_{n}]=[\xi_{1},\xi_{2},\cdots,\xi_{n}]C,$$
-> 则：$$\alpha=[\xi_{1},\xi_{2},\cdots,\xi_{n}]x=[\eta_{1},\eta_{2},\cdots,\eta_{n}]y=[\xi_{1},\xi_{2},\cdots,\xi_{n}]Cy$$
-> 得到坐标变换公式：$x=Cy或y=C^{-1}x$
+$$
+x=
+\begin{bmatrix}
+a_1\\a_2\\\vdots\\a_n
+\end{bmatrix}
+$$
 
+称为 $\alpha$ 在基 $\xi_1,\ldots,\xi_n$ 下的坐标列向量。基向量的个数 $n$ 称为向量空间的维数。
 
-##### **定理**： #施式正交化
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>原本线性无关的向量，将其变成垂直的向量；
-> $$\begin{cases}\beta_{1}=\alpha_{1}\\\beta_{2}=\alpha_{2}-\frac{(\alpha_{2},\beta_{1})}{(\beta_{1},\beta_{1})}\beta_{1}\end{cases}$$
+## 14.2 基变换与坐标变换
 
-**解释**
+##### **定理**： #基变换
+
+设
+
+$$
+\mathcal B_\xi=(\xi_1,\ldots,\xi_n),
+\qquad
+\mathcal B_\eta=(\eta_1,\ldots,\eta_n)
+$$
+
+是 $\mathbb R^n$ 的两组基。若
+
+$$
+\begin{bmatrix}
+\eta_1&\eta_2&\cdots&\eta_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+\xi_1&\xi_2&\cdots&\xi_n
+\end{bmatrix}C,
+$$
+
+则 $C$ 称为从基 $\mathcal B_\xi$ 到基 $\mathcal B_\eta$ 的过渡矩阵。$C$ 的第 $i$ 列就是 $\eta_i$ 在旧基 $\mathcal B_\xi$ 下的坐标。由于两组向量都是基，$C$ 必可逆。
+
+##### **定理**： #坐标变换
+
+若同一向量 $\alpha$ 在两组基下的坐标分别为 $x$ 和 $y$，则
+
+$$
+\alpha
+=
+\begin{bmatrix}\xi_1&\cdots&\xi_n\end{bmatrix}x
+=
+\begin{bmatrix}\eta_1&\cdots&\eta_n\end{bmatrix}y.
+$$
+
+结合基变换公式可得
+
+$$
+x=Cy,
+\qquad
+y=C^{-1}x.
+$$
+
+这说明：从新基坐标 $y$ 转换到旧基坐标 $x$ 时左乘 $C$；反向转换时左乘 $C^{-1}$。
+
+**二维示例**
+
+取
+
+$$
+C=
+\begin{bmatrix}
+2&-1\\
+1&1
+\end{bmatrix},
+\qquad
+y=
+\begin{bmatrix}
+-1\\2
+\end{bmatrix}.
+$$
+
+则
+
+$$
+x=Cy
+=-1
+\begin{bmatrix}
+2\\1
+\end{bmatrix}
++2
+\begin{bmatrix}
+-1\\1
+\end{bmatrix}
+=
+\begin{bmatrix}
+-4\\1
+\end{bmatrix}.
+$$
+
+- 原始图示：
+  - ![基变换示意图](/assets/notes/609bf8645698-Drawing-2024-06-29-19.34.16.excalidraw.png)
+
+## 14.3 施密特正交化
+
+##### **定理**： #施密特正交化
+
+给定线性无关向量 $\alpha_1,\ldots,\alpha_m$，依次定义
+
+$$
+\beta_1=\alpha_1,
+$$
+
+$$
+\beta_k
+=
+\alpha_k
+-\sum_{j=1}^{k-1}
+\frac{\langle\alpha_k,\beta_j\rangle}
+{\langle\beta_j,\beta_j\rangle}
+\beta_j,
+\qquad k=2,\ldots,m.
+$$
+
+则 $\beta_1,\ldots,\beta_m$ 两两正交，并且与原向量组张成同一个子空间。再令
+
+$$
+e_k=\frac{\beta_k}{\|\beta_k\|},
+$$
+
+即可得到一组标准正交向量。

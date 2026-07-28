@@ -15,7 +15,7 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 > 2） $\forall x\in U(x_0,\delta)\text{ 恒有 }f(x)\leq f(x_0)\text{,则称 }f(x)\text{ 在 }x_0\text{取极大值}$
 
 ##### **定理**： #极值的必要条件
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> $\text{若 }f(x)\text{ 在 }x_0\text{ 处何导,且在 }x_0\text{ 处取得极值,则}$ $f^{\prime}(x_0)=0$
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> $\text{若 }f(x)\text{ 在 }x_0\text{ 处可导,且在 }x_0\text{ 处取得极值,则}$ $f^{\prime}(x_0)=0$
 
 **意义**
 - 对于可导函数，通过这个定理，缩小了函数**可能的极值点**的范围；
@@ -35,7 +35,7 @@ tags: ["考研数学", "高等数学", "微分中值定理与导数应用"]
 - 2. 导数不存在的点；
 
 ##### **定理**： #极值第一充分条件
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> $\text{设 }f(x)\text{ 在 }U(x_0,\delta)\text{内可导,且 }f^{\prime}(x_0)=0\text{(或}f(x)\text{在 }x_0\text{ 处连续})$
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> 设 $f(x)$ 在 $x_0$ 处连续，并在 $x_0$ 的某个去心邻域内可导：
 > 1）若 $x<x_0$ 时，$f^{\prime}(x)\geq0;x>x_0$ 时，$f^{\prime}(x)\leq0$, 则 $f$ 在 $x_{0}$ 处取极大值
 > 2）若 $x<x_0$ 时，$f^{\prime}(x)\leq0;x>x_0$ 时，$f^{\prime}(x)\geq0$, 则 $f$ 在 $x_{0}$ 处取极小值.
 > 3）$\text{若}f^{\prime}(x)\text{ 在 }x_0\text{ 的两侧不变号,则 }f\text{ 在 }x_0\text{ 无极值}$

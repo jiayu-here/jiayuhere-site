@@ -26,7 +26,7 @@ tags: ["考研数学", "数学总结", "公式合集"]
 		- 在 $\left[-\frac\pi2,\frac\pi2\right]$ 时，由反函数 $f[f^{-1}(x)]=x$ 可知：$\sin(\arcsin x)\equiv x$
 	- 举例：利用恒等变换平移 x：
 		- 求 $\arcsin (\sin x),x\in(\frac{3}{4}\pi,\pi)$
-		- 构造 $\sin x = \sin(\pi-x)$，将区间移动至 $(\frac{1}{4}\pi,0)$，此时才可以使用复合函数
+		- 构造 $\sin x = \sin(\pi-x)$，将区间移动至 $(0,\frac{\pi}{4})$，此时才可以使用复合函数
 		- 得到 $$\arcsin (\sin x)=\arcsin(\sin(\pi-x))=\pi-x, x\in (\frac{3}{4}\pi,\pi)$$
 - `arcsinx`：
 	- 值域：$\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$
@@ -47,7 +47,7 @@ tags: ["考研数学", "数学总结", "公式合集"]
 	- 公式：
 		- $$\begin{aligned}&\sin\left(x\pm y\right)=\sin x\cos y\pm\cos x\sin y\\&\cos\left(x\pm y\right)=\cos x\cos y\mp\sin x\sin y\\&\tan\left(x\pm y\right)=\frac{\tan x\pm\tan y}{1\mp\tan x\tan y}.\end{aligned}$$
 	- 常用结论：
-		- $$\sin x+\cos x=\sin(x+\frac{{\pi}}{4})$$
+		- $$\sin x+\cos x=\sqrt{2}\sin(x+\frac{{\pi}}{4})$$
 		- $$\sin(n\pi+\alpha)=(-1)^n\sin\alpha$$
 	- 诱导公式： 
 		- ![Pasted image 20240825180254](/assets/notes/924c00b9f3ce-Pasted-image-20240825180254.png)
@@ -70,14 +70,14 @@ tags: ["考研数学", "数学总结", "公式合集"]
 \end{aligned}$$
 - 降次与升次 
 	- 降次公式：
-		- $$\cos^{2}\alpha=\frac{1+\cos2\alpha}{2},\sin^{2}\alpha=\frac{1-\cos2\alpha}{2},tan^2\alpha=\frac{1-cos2\alpha}{1+cos2\alpha}$$
+		- $$\cos^{2}\alpha=\frac{1+\cos2\alpha}{2},\sin^{2}\alpha=\frac{1-\cos2\alpha}{2},\tan^2\alpha=\frac{1-\cos2\alpha}{1+\cos2\alpha}$$
 	- 升次公式： 
 		- $$1+\cos2\alpha=2\cos^2\alpha,1-\cos2\alpha=2\sin^2\alpha, 1\pm\sin2\alpha=\left(\sin\alpha\pm\cos\alpha\right)^2$$
 	- $\cos x$ 的消 $1$ 特性：
 		- 举例：$$1-\cos x=1-(\cos 2*\frac{x}{2})=1-(1-2\sin^2 \frac{x}{2})=2\sin^2 \frac{x}{2}$$
 - 反三角函数：
-	- $$x=a\sin t { 时}，t=\arcsin\frac xa.$$
-	- $$\text{x=a sect}时,t=\mathrm{arc}\cos\frac{a}{x}$$
+	- $$x=a\sin t\text{ 时，}t=\arcsin\frac xa.$$
+	- $$x=a\sec t\text{ 时，}t=\arccos\frac{a}{x}.$$
 
 **三角函数求导合集**
 - 正弦、余弦：
@@ -85,13 +85,13 @@ tags: ["考研数学", "数学总结", "公式合集"]
 - `tan、cot、sec、csc`： 
 	- $$\begin{aligned}(\tan x)^{\prime}&=\sec^2x&(\cot x)^{\prime}&=-\csc^2x\\\\(\sec x)^{\prime}&=\sec x\tan x&(\csc x)^{\prime}&=-\csc x\cot x\end{aligned}$$
 - 反三角函数：
-	- $$\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(arccot x)^{\prime}=-\frac1{1+x^2}\end{aligned}$$
+	- $$\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\operatorname{arccot}x)^{\prime}=-\frac1{1+x^2}\end{aligned}$$
 
 ### 0.1.2 极坐标
 **极坐标基础概念**
 - 转换：
-	- $$\left\{\begin{array}{c}x=r\mathrm{cos}\theta\\y=r\mathrm{sin}\theta\end{array}\right.\Leftrightarrow\left\{\begin{array}{c}r=\sqrt{x^2+y^2}\\\theta=\arcsin\frac yr=\arcsin\frac y{x^2+y^2}\end{array}\right.$$
-	- 注意：上述转换方法仅限于二者圆点相同，且极坐标参考系与直角坐标的 𝑥 轴方向相同的情况；
+	- $$\left\{\begin{array}{c}x=r\cos\theta\\y=r\sin\theta\end{array}\right.\Leftrightarrow\left\{\begin{array}{c}r=\sqrt{x^2+y^2}\\\theta=\operatorname{atan2}(y,x)\end{array}\right.$$
+	- 注意：上述转换方法仅限于二者原点相同，且极坐标参考系与直角坐标的 $x$ 轴方向相同的情况；
 
 **极坐标常见函数形式**
 - 射线 `y=kx` ，其极坐标方程：$\theta=\theta_0$
@@ -122,7 +122,7 @@ $$
 &\text{圆:} \left\{\begin{array}{l}x=r\cos t\\y=r\sin t\end{array}\right. \\
 &\text{椭圆:}\begin{cases}x=a\cos t\\y=b\sin t&\end{cases} \\
 &\text{双曲线:}\left\{\begin{array}{l}x=a\sec t\\y=b\tan t\end{array}\right. \\
-&\text{一} \text{抛物线:}\left\{\begin{array}{l}x=2ct\\y=t^2\end{array}\right. \\
+&\text{抛物线:}\left\{\begin{array}{l}x=2ct\\y=t^2\end{array}\right. \\
 &\text{螺线:} \left\{\begin{matrix}x=t\cos lt\\y=t\sin lt\end{matrix}\right. \\
 &\text{摆线:} \left\{\begin{array}{l}x=r\cdot(t-\sin t)\\y=r\cdot(1-\cos t)\end{array}\right. 
 \end{aligned}
@@ -183,10 +183,10 @@ a^{0}=1\left(a\neq0\right) \quad\quad\quad\quad a^{r}\cdot a^{s}=a^{r+s} \\
 - 分子有理化：
 	- 将分子分母同乘以其分子中根式的共轭根式；
 	- 举例：$$f(x)=\frac{\sqrt{x+1}-\sqrt{x-1}}{x}=\frac{(\sqrt{x+1}-\sqrt{x-1})*(\sqrt{x+1}+\sqrt{x-1})}{x(\sqrt{x+1}+\sqrt{x-1})}=\frac{2}{x\cdot(\sqrt{x+1}+\sqrt{x-1})}$$
-	- 其中 $\sqrt{x+1}+\sqrt{x-1}$ 是 $\sqrt{x+1}+\sqrt{x-1}$ 的共轭根式；
+	- 其中 $\sqrt{x+1}+\sqrt{x-1}$ 是 $\sqrt{x+1}-\sqrt{x-1}$ 的共轭根式；
 - 分母有理化： 
 	- 方法同分子有理化，将分子分母同乘其分母的共轭根式；
-- 分子分母有理化： 
+- 分子、分母同时有理化：
 	- 分子、分母先同乘分子的根式的共轭根式，然后再同乘分母的共轭根式；
 
 **裂项**
@@ -199,7 +199,7 @@ a^{0}=1\left(a\neq0\right) \quad\quad\quad\quad a^{r}\cdot a^{s}=a^{r+s} \\
 	- $$已知\frac{x}{x^2-5x+6}=\frac{x}{(x-2)(x-3)}，设\frac{A}{x-2}+\frac{B}{x-3}$$
 	- 通分，得到：$$\frac{\text{A}(x-3)+\text{B}(x-2)}{(x-2)(x-3)}=\frac{(\text{A+B})x-3\text{A}-2\text{B}}{(x-2)(x-3)}$$
 	- 对比系数 `x`，得到：$$\left.\left\{\begin{array}{c}\left(1\right)\mathrm{A}+\mathrm{B}=1\\\left(2\right)\mathrm{3A}+2\mathrm{B}=0\end{array}\right.\right.$$
-	- 可得：`B=3, 则 A=2`，即：$$\frac{2}{x-2}+\frac{3}{x-3}$$
+	- 可得：`B=3, A=-2`，即：$$-\frac{2}{x-2}+\frac{3}{x-3}$$
 - 举例 2：
 	- ![Pasted image 20241127124659](/assets/notes/f8815d9b615d-Pasted-image-20241127124659.png)
 
@@ -250,14 +250,14 @@ a^{0}=1\left(a\neq0\right) \quad\quad\quad\quad a^{r}\cdot a^{s}=a^{r+s} \\
 - 标准形式：$$(x-a)^2+(y-b)^2=R^2$$
 - 周长：$$2\pi R$$
 - 面积：$$\pi R^2$$ 
-- 圆的表面积：$$S=4\pi R^2$$
-- 圆的体积公式：$$\frac{4}{3}\pi R^3$$
+- 球的表面积：$$S=4\pi R^2$$
+- 球的体积公式：$$\frac{4}{3}\pi R^3$$
 
 **圆锥的体积**
 - S 为圆锥的底面积，H 为圆锥的高，则：
-- $$S_{圆锥}=\frac{1}{3}SH$$
+- $$V_{圆锥}=\frac{1}{3}SH$$
 - 若圆锥底面的半径为 R，则：
-- $$S_{圆锥}=\frac{\pi}{3} R^2H$$
+- $$V_{圆锥}=\frac{\pi}{3}R^2H$$
 
 **椭圆及其面积**
 - 椭圆方程： $$\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$$
@@ -268,7 +268,7 @@ a^{0}=1\left(a\neq0\right) \quad\quad\quad\quad a^{r}\cdot a^{s}=a^{r+s} \\
 
 ### 0.2.3 三角形面积
 **概念**：三角形的两个面积公式
-- 设 `x、y、z` 是三角形的两个边，并且 `y` 为三角形的底边，`h` 为三角形的高，三角形的周长为 `2p`
+- 设 `x、y、z` 是三角形的三条边，并且 `y` 为底边，`h` 为对应的高，三角形的周长为 `2p`
 - $$S=\sqrt{p(p-x)(p-y)(p-z)}=\frac12yh$$
 
 ### 0.2.4 体积
@@ -432,7 +432,7 @@ a^{0}=1\left(a\neq0\right) \quad\quad\quad\quad a^{r}\cdot a^{s}=a^{r+s} \\
 	- 分子分母这么多项，结果主要取决于最大的数（最高次数）；
 	- 注意 x 是趋向于无穷。
 	- 当 x 趋向于 0 时，此时函数的值应该取决于最小的数（最低次数）；
-- $\lim_{{n\to\infty}}x^n=\begin{cases}\begin{array}{c}\mathbf{0},&|x|<1,\\\infty,&{|x|>1}\\1,&{x=1}.\end{array}\\\text{不存在,}&x=-1.&\end{cases}$
+- $\lim_{{n\to\infty}}x^n=\begin{cases}0,&|x|<1,\\1,&x=1,\\+\infty,&x>1,\\\text{不存在},&x\leq-1.\end{cases}$
 - $\lim_{n\to\infty}e^{{nx}}=\begin{cases}0,&x<0,\\+\infty,&x>0\\1,&x=0.&\end{cases}$
 
  **1 的无穷大次方**
@@ -515,7 +515,7 @@ $$
 		- 思路：将 0 或者无穷当中一个放到上面（分子）`OR` 下面（分母）；
 	- $1^\infty;\quad\infty^0;\quad0^0$：
 		- 思路：这三种都得改写成 0 乘以无穷大；
-		- 方法： $[f(x)]^{g(x)}=e^{g(x)f(x)}$  -> 改写成 e 的形式；
+		- 方法： $[f(x)]^{g(x)}=e^{g(x)\ln f(x)}$  -> 改写成 e 的形式；
 		- 核心：求 e 上面的相乘部分的无限；
 
 ### 1.3.5 泰勒公式
@@ -601,7 +601,7 @@ $$
 	- $(\sin x)^{\prime}=\cos x\quad\quad\quad\quad\quad(\cos x)^{\prime}=-\sin x$
 	- $\begin{aligned}(\tan x)^{\prime}&=\sec^2x&(\cot x)^{\prime}&=-\csc^2x\\\\(\sec x)^{\prime}&=\sec x\tan x&(\csc x)^{\prime}&=-\csc x\cot x\end{aligned}$
 - 反函数导数
-	- $\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\arctan x)^{\prime}=-\frac1{1+x^2}\end{aligned}$
+	- $\begin{aligned}&(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&&(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&(\arctan x)^{\prime}=\frac1{1+x^2}&&(\operatorname{arccot}x)^{\prime}=-\frac1{1+x^2}\end{aligned}$
 
 ### 2.2.5 方法五：对数求导法 
 **例题**：$\text{设}y=\left(1+\sin x\right)^{x},\text{则}\mathrm{d}y|_{x=\pi}=$
@@ -609,7 +609,7 @@ $$
 	- 这是幂指函数型，可以使用对数求导法；
 - 解析
 	- 先取对数：$\ln y=x\ln(1+\sin x)$
-	- 两边同时求导：$\frac{y^{\prime}}{y}=\ln(s+\sin x)+\frac{xCosx}{1+\sin x}$
+	- 两边同时求导：$\frac{y^{\prime}}{y}=\ln(1+\sin x)+\frac{x\cos x}{1+\sin x}$
 	- 提出 $y^{\prime}$，得到导函数
 	- 带入 x=Π；
 
@@ -633,7 +633,7 @@ $$
 	- $(u\pm v)^{(n)}=u^{(n)}\pm v^{(n)}$
 - 乘法
 	- 莱布尼茨公式
-	- ${(u\nu)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$
+	- ${(uv)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$
 
 ## 2.4 微分
 **微分定义**
@@ -653,7 +653,7 @@ $$
 - $$\text{用}n+1\text{阶导数表示的余项叫拉格朗日余项, 用}o\left (x^n\right)\text{或者}o\left (\left (x-x_0\right)^n\right)\text{表示的是Peano 余项 }$$
 
 **公式**：带 `Peano` 余项的泰勒公式 - 零点的泰勒展开
-- $$\begin{gathered}\text{若 }x_0=0\text{ , 则} \\F (x)=f (0)+f^{\prime}(0) x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1} \\上式称为  f (x)\text{ 的 Maclaurin 公式} \end{gathered}$$
+- $$\begin{gathered}\text{若 }x_0=0\text{，则}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0<\theta<1.\\\text{上式称为 }f(x)\text{ 的 Maclaurin 公式。}\end{gathered}$$
 
 
 **公式**：带有 `拉格朗日余项` 的泰勒公式  
@@ -750,7 +750,7 @@ $$1、\int adx=ax+C\:,\:a是常数$$
 $$2、\int x^{a}dx=\frac{x^{a+1}}{a+1}+C，其中 a 为常数，且 a\neq-1$$ 
 $$3、\int\frac{1}{x}dx=\ln|x|+C$$
 $$4、\int e^{x}dx=e^{x}+C$$ 
-$$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C;其中a>0\:,\:目a\neq1$$
+$$5、\int a^{x}dx=\frac{1}{\ln a}a^{x}+C;其中a>0\:,\:且a\neq1$$
 $$6、\int\sin xdx=-\cos x+C$$
 $$7、\int\cos xdx=\sin x+C$$ 
 $$8、\int\sec^{2}xdx=\tan x+C$$ 
@@ -1063,18 +1063,16 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 		- 如果是情况二：
 			- 根据 $\alpha+i\beta$ 是方程的几重根，判断 $k$ 的取值
 				- $\alpha$ 来自 $e^{\alpha x}$ 中，$\beta$ 来自 $P_{l}^{(1)}(x)\cos\beta x+P_{n}^{(2)}(x)\sin\beta x$ 的三角函数中；
-			- 如果是单根，这个 $x^{k}$ 里面的 $k$ 就是 $1$ 次方，如果是双根，这个里面的 $k$ 就是 $2$ 次方；
+			- 如果 $\alpha+i\beta$ 不是特征根，则 $k=0$；如果是单根，则 $k=1$；如果是二重根，则 $k=2$；
 			- 注意： 
-				- 如果 $r_{1,2}=\pm 1$，此时表示是一个特征根，因为两个特征根一样；
-				- 所以如果解出 $\alpha+i\beta=\pm 1$ ，则此时表示的是一重根，而不是两重根；
+				- 如果 $r_{1,2}=\pm 1$，表示 $1$ 和 $-1$ 两个不同的单根，不能把符号 $\pm$ 误认为二重根；
 - 5. 确定系数与任意常数
 	- （1）确定非齐次项待定特解的系数
 		- 在前面设好了 $y^{*}$ 的各个成分后，因为此时 $y^{*}$ 当中还有待定系数，此时将设好的函数代换原方程，比较两端同次幂的系数，然后得到 $y^{*}$ 的结果；
 		- 假如当前方程式是 $y^{\prime\prime}+y=\sin x$，此时就需要将 $y({*})$ 和 $y^{\prime\prime}(*)$ 代入原方程中，然后比较两端同次幂的系数，然后得到 $y^{*}$ 中各个系数的结果；
-	- （2）确定齐次项通解的任意常数 $C_1$ 和 $C_2$
-		- 在原方程式中，找出两个方程的特解，比如求出 $f(0)=0$、$f^{\prime}{0}=1$；
-		- 将其代入齐次方程的通解式中、解出任意常数；
-		- 注意：非齐次的特解在定出系数后，也需要带入到齐次方程的通解式当中，帮助定出任意常数；
+	- （2）确定通解中的任意常数 $C_1$ 和 $C_2$
+		- 根据题目给出的两个初始条件或边界条件，例如 $f(0)=0$、$f^{\prime}(0)=1$；
+		- 将条件代入完整通解 $y=y_h+y_p$，解出任意常数；
 - 6. 若是三阶及其以上的微分方程，按照以下方法合并
 	- ![Pasted image 20240815124753](/assets/notes/2de21b80bc72-Pasted-image-20240815124753.png)
 - 7. 如果需要求出整个方程的特解，则可以将限制条件代入到通解式当中，定出其中的常数 $C_1$，$C_2$，得到微分方程的特解；
@@ -1171,14 +1169,14 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 - （2）隐函数微分法；
 
 **定理**：多元复合函数求导法则
-- 设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 x 及对 $y$ 的偏导数，函数 $z=f(u,\nu)$ 在对应点 $(u,\nu)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x, y)$ 处的两个偏导数存在，且有：
-- $$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial y}$$
+- 设 $u=u(x,y),\quad v=v(x,y)$ 在点 $(x,y)$ 处有对 $x$ 及对 $y$ 的偏导数，函数 $z=f(u,v)$ 在对应点 $(u,v)$ 处有连续偏导数，则 $z=f[u(x,y),v(x,y)]$ 在点 $(x,y)$ 处的两个偏导数存在，且有：
+- $$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$
 
 **定理**：全微分形式不变性
 - 设函数 $z=f(u,v),\quad u=u(x,v)$ 及 $\nu=\nu(x,y)$ 都有连续的一阶偏导数，则复合函数 $z=f[u(x,y),v(x,y)]$ 的全微分不变性：
-	- $$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial\nu}\operatorname{d}\nu.$$
+	- $$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y=\frac{\partial z}{\partial u}\operatorname{d}u+\frac{\partial z}{\partial v}\operatorname{d}v.$$
 - 多元函数也具有微分形式的不变性； 
-	- 由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial\nu}\frac{\partial\nu}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial\nu}{\partial y}$$
+	- 由此推导而来：$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\quad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$
 
 **定义**：多元函数隐函数
 - 由方程 $F(x, y)=0$ 确定的隐函数 $y=(x)$，得：
@@ -1339,8 +1337,8 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 - 则当前常数项数列为收敛的，若是没有极限，则是为发散的；
 
 **性质**
-- 1. $如果\sum_{n=1}^{\infty}u_n 收敛于S，则\sum_{i=1}^{\infty}k u_n. 收敛于 kS$
-- 2. $如果\sum_{n=1}^{\infty}H_{n}和\sum_{n=1}^{\infty}U_{n}分别收敛于 h 和 u，则\sum_{n=1}^{\infty}(H_{n}\pm U_{n})也收敛于h+u$
+- 1. 若 $\sum_{n=1}^{\infty}u_n$ 收敛于 $S$，则 $\sum_{n=1}^{\infty}k u_n$ 收敛于 $kS$。
+- 2. 若 $\sum_{n=1}^{\infty}H_n$ 和 $\sum_{n=1}^{\infty}U_n$ 分别收敛于 $h$ 和 $u$，则 $\sum_{n=1}^{\infty}(H_n\pm U_n)$ 收敛于 $h\pm u$。
 - 3.  在级数中去掉或加上**有限项**，敛散性不变，值可能会变化；
 - 4. $\sum u_n收敛，任意加括号后级数也收敛，且和不变$
 - 5. 级数收敛的必要条件：$\sum_{n=1}^\infty u_n\text{ 收敛 }\longrightarrow\lim_{n\to\infty}u_n=0$
@@ -1411,7 +1409,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 **方法二**：比较法的极限形式 
 - 设 $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$
 - 若：
-	- 1. $$若0<l<+\infty,\text{则}\sum_{n=1}^{\infty}u_{n}与\sum_{n=1}^{\infty}\nu_{n}{\text{同敛散}.}$$
+	- 1. $$\text{若 }0<l<+\infty,\text{则 }\sum_{n=1}^{\infty}u_{n}\text{ 与 }\sum_{n=1}^{\infty}\nu_{n}\text{ 同敛散}.$$
 	- 2. $$\text{若 }l=0\text{,则}\sum_{n=1}^\infty\nu_n\text{收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛,}\sum_{n=1}^\infty u_n\text{发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$
 	- 3. $$\text{若 }l=+\infty,\text{则}\sum_{n=1}^\infty\nu_n\text{发散}\Rightarrow\sum_{n=1}^\infty u_n\text{ 发散. }\sum_{n=1}^\infty u_n\text{收敛}\Rightarrow\sum_{n=1}^\infty\nu_n\text{ 收敛}$$
 
@@ -1540,7 +1538,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 
 **解释**
 - 概念：
-	- 每一项都是 `x` 的正整数幂：幂级数： $a_{0}a_{1},a_{2}x^{2}\cdots a_{n}x^{n}\cdots$
+	- 每一项都是 `x` 的非负整数幂：幂级数： $a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{n}x^{n}+\cdots$
 	- 幂级数其实是函数项级数的最简单的一种，$x^{n}$ 就是 x 的函数，$a_n$ 就是一列数；
 	- $a_0,a_1,a_2...a_n$ 称之为系数；
 - 补充：
@@ -1558,14 +1556,14 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 **举例**
 - $1+x+x^{2}+x^{3}+\cdots+x^{n}+\cdots$
 - 此时：
-	- $|x|<1\text{时，收敛城(-1,1)}\frac{a}{1-q}=\frac{1}{1-x}$
-	- $|\times|\geq1 时，发散域(-\infty,-1)|U[1,+\infty]$
+	- 当 $|x|<1$ 时，收敛域为 $(-1,1)$，且 $\frac{a}{1-q}=\frac{1}{1-x}$；
+	- 当 $|x|\geq1$ 时，发散域为 $(-\infty,-1]\cup[1,+\infty)$。
 
 ### 9.2.2 幂级数展开
 **定理**： #阿贝尔定理 
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> 
-> $$\sum_{n=0}^{+\infty}a_nx ，当x=x_0 时收敛,|x|<|x_0|时幂级数绝对收敛$$
-> $$\sum_{n=0}^{+\infty}a_nx ，当x=x_0 时发散,|x|>|x_0|时幂级数发散$$
+> $$\sum_{n=0}^{+\infty}a_nx^n ，当x=x_0 时收敛,|x|<|x_0|时幂级数绝对收敛$$
+> $$\sum_{n=0}^{+\infty}a_nx^n ，当x=x_0 时发散,|x|>|x_0|时幂级数发散$$
 
 **解释**
 - 定理的作用：
@@ -1573,10 +1571,10 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 - 绝对收敛：
 	- 在 $|x|<|x_0|$ 时，此时在这个区间内的点，也都收敛 `->` 离原点更近的点收敛；
 - 发散：
-	- 在 $|x|>|x_0|$ 时，此时在这个区间外的点，也都收敛 `->` 离原点更远的点发散；
+	- 在 $|x|>|x_0|$ 时，此时在这个区间外的点都发散 `->` 离原点更远的点发散；
 - 总结：
 	- 1. 收敛点和发散点的分界点 `->` 就是**收敛半径 R**
-	- 2. 两个级数 $\sum_{n=0}^{+\infty}a_n{(x+2)}$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}$ ，如果它们的 $a_n$ 一样，则它们有共同的收敛半径 `R`； 
+	- 2. 两个级数 $\sum_{n=0}^{+\infty}a_n{(x+2)}^n$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}^n$，如果它们的 $a_n$ 一样，则它们有共同的收敛半径 `R`；
 - 注意： 
 	- 收敛区间不需要关注端点；
 	- 收敛域需要关注端点；
@@ -1590,7 +1588,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 
 **补充**：关于 $x$ 不等于 $x_0$ 时的收敛域
 - 前提：
-	- 根据 `<总结-1>` 可知，$\sum_{n=0}^{+\infty}a_n{(x+2)}$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}$ 的收敛半径 `R` 一样；
+	- 根据 `<总结-1>` 可知，$\sum_{n=0}^{+\infty}a_n{(x+2)}^n$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}^n$ 的收敛半径 `R` 一样；
 - 概念：
 	- 收敛区间： 
 		- 对 $\sum_{n=0}^{+\infty}a_n{(x+2)}$ 而言，其中心在 `x=-2` 点，因此假设其收敛点在 `x=0` 处时，其收敛半径为 `0-(-2)=2` ，因此其收敛区间就是：
@@ -1599,11 +1597,11 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 		- 因为两个级数的 $a_n$ 项相同，所以这两个级数的收敛域的两个端点同敛散性；
 
 **定理**： #幂级数的收敛情况
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> 幂级数  $\sum_{n=0}^{+\infty}a_nx$ 的收敛性有且仅有三种可能：
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> 幂级数  $\sum_{n=0}^{+\infty}a_nx^n$ 的收敛性有且仅有三种可能：
 > （1）对任何 x 属于 $(-\infty ,+\infty)$ 都收敛；
 > （2）只在 $x=0$ 处收敛；
 > （3）存在一个正数 `R` 当 $|x| < R$ 时绝对收敛，当 $|x|>R$ 时发散； 
-> 注意：若幂级数 $\sum_{n=0}^{+\infty}a_nx$ 在点 $x=x_0$ 处条件收敛，则点 $x_0$ 必为该幂级数收敛区间 $(-R,R)$ 的一个端点；
+> 注意：若幂级数 $\sum_{n=0}^{+\infty}a_nx^n$ 在点 $x=x_0$ 处条件收敛，则点 $x_0$ 必为该幂级数收敛区间 $(-R,R)$ 的一个端点；
 
 **定理**： #收敛半径判断
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font> $$若\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho，则 R = \frac{1}{{\rho}}$$
@@ -1747,7 +1745,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 
 **概念介绍**：周期为 $2\pi$ 的函数展开
 - （1）在 $[-\pi,+\pi]$ 上展开：一般展开
-	- $$a_{n}=\frac1\pi\int_{-\pi}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac1\pi\int_{-\pi}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
+	- $$\begin{aligned}a_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx&&(n=0,1,2,\ldots),\\b_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx&&(n=1,2,\ldots).\end{aligned}$$
 - （2）在 $[-\pi,+\pi]$ 的展开：奇偶函数的展开
 	- 1. $f(x)$ 为奇函数：
 		- $$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
@@ -1783,7 +1781,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 > $$1\text{)几何表示: }\mathbf{a}\cdot\mathbf{b}=\mid\mathbf{a}\mid\mid\mathbf{b}\mid\cos\alpha $$
 > $$2\text{)代数表示:}\quad\mathbf{a}\cdot\mathbf{b}=\mathbf{a}_xb_x+\mathbf{a}_yb_y+\mathbf{a}_zb_z$$
 > $$3\text{)运算规律:}\quad 交换律：\mathbf{a}\cdot\mathbf{b}=\mathbf{b}\cdot\mathbf{a} \quad \text{分配律: }\mathbf{a\cdot(b+c)=a\cdot b+a\cdot c}$$
-> $$4\text{)几何应用:}\quad 求模：|\mathbf{a}|=\sqrt{\mathbf{a}\cdot\mathbf{a}}\cdot\mathbf{a} \quad \text{求夹角: }\cos\alpha=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\quad \text{判定两向量垂直:}\mathbf{a\perp b\Leftrightarrow a\cdot b=0}$$
+> $$4\text{)几何应用:}\quad 求模：|\mathbf{a}|=\sqrt{\mathbf{a}\cdot\mathbf{a}} \quad \text{求夹角: }\cos\alpha=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\quad \text{判定两向量垂直:}\mathbf{a\perp b\Leftrightarrow a\cdot b=0}$$
 
 ### 10.1.2 向量积
 **定理**： #向量代数的向量积
@@ -1861,7 +1859,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 **曲面一**：`旋转面` `->` 一条平面曲线绕平面上一条直线旋转
 - 设 $L$ 是 $yoz$ 平面上一条曲线，其方程是：$\begin{cases}f({y},z)=0\\x=0\end{cases}$
 - （1）$L\text{ 绕 }(y)\text{轴旋转所得旋转面方程为}\quad f(y,\pm\sqrt{x^2+z^2})=0.$
-- （2）$L绕 z 轴旋转所得旋转面方程为：$
+- （2）$L\text{ 绕 }z\text{ 轴旋转所得旋转面方程为}\quad f(\pm\sqrt{x^2+y^2},z)=0.$
 
 **曲面二**：柱面 `->` 平行于定直线并沿定曲线移动的直线 L 形成的轨迹;
 - $准线为\Gamma:\begin{cases}f(x,y)=0\\z=0\end{cases}，母线平行于z轴的柱面方程为f(x,y)=0$ 
@@ -1959,7 +1957,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 ### 11.2.2 计算方法
 **方法一：直接法**
 **定理**： #第二类曲线积分的计算
-> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$
+> <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[P(\varphi(t),\psi(t))\varphi^{\prime}(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$
 
 **解释**
 - 概念：
@@ -2101,9 +2099,10 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>
 > 1. $\text{设光滑曲面 }\Sigma:z=z(x,y),(x,y){\in}D_{xy}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：
 > $$\iint_{\Sigma}R(x,y,z)\operatorname{d}x\operatorname{d}y=\pm\iint_{D_{xy}}R(x,y,z(x,y))\operatorname{d}x\operatorname{d}y$$
-> 2. $\text{设光滑曲面 }\Sigma:x=z(y,z),(y,z){\in}D_{yz}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：
+> 2. $\text{设光滑曲面 }\Sigma:x=x(y,z),(y,z){\in}D_{yz}\text{，且 }P(x,y,z)\text{ 是 }\Sigma\text{ 上的连续函数，则}$：
 > $$\iint_{\Sigma}P(x,y,z){\mathrm{d}y\mathrm{d}z}=\pm\iint_{D_{yz}}P[x(y,z),y,z]\mathrm{d}ydz$$
-> 3. $\text{设曲面: }\Sigma:y=y (z, x),\quad (z, x)\in D_{zx}$，则：$$$$
+> 3. $\text{设曲面 }\Sigma:y=y(z,x),\quad(z,x)\in D_{zx}\text{，则}$：
+> $$\iint_{\Sigma}Q\,dz\,dx=\pm\iint_{D_{zx}}Q(x,y(z,x),z)\,dz\,dx$$
 
 **解释**
 - 解释：
@@ -2143,7 +2142,7 @@ $$20、\int\frac{dx}{\sqrt{x^2-a^2}}=\ln\left|x+\sqrt{x^2-a^2}\right.|+C$$
 - 解释： 
 	- 右端是一个二型面积分；
 	- 左端是一个一型面积分；
-	- $(\cos\alpha+\cos\beta+\cos\gamma)$ 是这一点上，曲面的法线向量的方向余弦；
+	- $(\cos\alpha,\cos\beta,\cos\gamma)$ 是曲面在该点的法向量的三个方向余弦；
 
 # Chapter 12：行列式与矩阵
 ![Pasted image 20241028005929](/assets/notes/c9ecce3933b2-Pasted-image-20241028005929.png)

@@ -1,13 +1,24 @@
 ---
-title: "Graduate Examination English: 真题 - 2011年：小作文"
+title: "2011 Past Paper: Practical Writing"
 slug: english-036
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination English study notes: 2011 Past Paper: Practical Writing. Original examples, diagrams, and exercises are retained."
 category: "English"
-tags: ["Graduate Examination English", "Writing"]
+tags: ["Graduate Entrance Examination English","English Writing","2011 Past Paper: Practical Writing"]
 ---
 
-## Original Chinese Note
+**past-paper question**
+- ![Pasted image 20250409111008](/assets/notes/c32417e18a2c-Pasted-image-20250409111008.png)
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Templates**
+```Text
+Dear Xiao Wang,
 
-[Read the original Chinese note](/notes/english-036/)
+I often think fondly of the days when we studied together at school. Today, I am writing to recommend one of my favorite films to you.
+
+The film is called "Begin Again." It tells the story of people who continue pursuing their musical dreams despite setbacks. Their persistence eventually gives them the courage to rebuild their lives. I recommend this film because its story can renew our enthusiasm for life and strengthen our confidence when we face difficulties.
+
+I sincerely hope that you will enjoy the film. I look forward to hearing what you think of it.
+
+Yours sincerely,
+Li Ming
+```

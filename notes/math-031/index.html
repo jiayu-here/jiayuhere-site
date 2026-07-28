@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -73,7 +73,7 @@
 </ul>
 <h3 id="section-2">1.1.1 泰勒公式定义</h3>
 <h5 id="section-3"><strong>定理</strong>：泰勒定理 - 带 Peano 余项</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： 带有 Peano 余项的泰勒公式： $\text{设}f(x)\text{ 在 }x_0\text{ 处 }n\text{ 阶可微,则}$ $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</blockquote>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> 带有 Peano 余项的泰勒公式： $\text{设}f(x)\text{ 在 }x_0\text{ 处 }n\text{ 阶可微,则}$ $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>意义：</li>
@@ -100,7 +100,7 @@
 <li>所以：$P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$</li>
 </ul>
 <h5 id="section-4"><strong>定理</strong>：泰勒公式 - Lagrange</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }f(x)\text{ 在区间 }I\text{ 中 }n+1\text{ 阶可导},$ $x_0\in I,\text{ 则 }\forall x\in I,\exists\xi\in I\quad(\xi\text{ 在 }x_0\text{ 与 }x\text{ 之间),使}$ $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}\big(x-x_0\big)^k+\frac{f^{(n+1)}(\xi)}{(n+1)!}\big(x-x_0\big)^{n+1}$$ </blockquote>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{设 }f(x)\text{ 在区间 }I\text{ 中 }n+1\text{ 阶可导},$ $x_0\in I,\text{ 则 }\forall x\in I,\exists\xi\in I\quad(\xi\text{ 在 }x_0\text{ 与 }x\text{ 之间),使}$ $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}\big(x-x_0\big)^k+\frac{f^{(n+1)}(\xi)}{(n+1)!}\big(x-x_0\big)^{n+1}$$ </blockquote>
 <blockquote>带有拉格朗日余项的泰勒公式：</blockquote>
 <blockquote>$$R_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})^{n+1}$$</blockquote>
 <p><strong>解释</strong></p>
@@ -110,7 +110,7 @@
 <li class="list-indent-1">可以保证误差，在 x 0 趋向于 0 时，误差为零；</li>
 </ul>
 <p><strong>推论 1</strong>：零点的泰勒公式</p>
-<p>$\begin{gathered}\text{若 }x_0=0\text{ , 则} \\F (x)=f (0)+f^{\prime}(0) x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1} \\上式称为  f (x)\text{ 的 Maclaurin 公式} \end{gathered}$</p>
+<p>$\begin{gathered}\text{若 }x_0=0\text{，则}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0&lt;\theta&lt;1.\\\text{上式称为 }f(x)\text{ 的 Maclaurin 公式。}\end{gathered}$</p>
 <p><strong>推论 2</strong>：几个初等函数的 Maclaurin 公式</p>
 <ul>
 <li>$e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\frac{x^{n+1}}{(n+1)!}e^{\theta x}\quad\quad x\in(-\infty,+\infty)$</li>
@@ -189,6 +189,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

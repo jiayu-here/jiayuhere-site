@@ -34,19 +34,17 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 
 **概念**：周期为 $2\pi$ 的函数展开 
 - 用函数表达周期为 $2\pi$ 的函数  
-	- $$f(x) = \sum_{n=0}^{\infty}a_{n}\cos nx + \sum_{n=0}^{\infty}b_{n}\sin x$$
-	- 把 `n=0` 拿出来：$$=a_{0}\cos 0x+\sum_{n=1}^{\infty}a_{n}\sin x+b_{0}\sin 0x+\sum_{n=1}^{\infty}b_{n}\sin nx$$
-	- 即得到 $$a_{0} + \sum_{n=1}^{\infty}a_{n}\cos nx+\sum_{n=1}^{\infty} b_{n}\sin nx$$
+	- $$f(x)\sim\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n\cos nx+b_n\sin nx\right)$$
 	- 且 $$a_{0} = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x) dx$$
 - 求系数： 
 	- ![Pasted image 20240904144914](/assets/notes/c4dce0bdb8b9-Pasted-image-20240904144914.png)
-	- $$a_{n}=\frac{1}{\pi}\int_{-\bar{n}}^{\pi}f(x)\cos nx dx$$
+	- $$a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx$$
 
 
 ## 52.1 傅里叶系数与傅里叶级数 
 ### 52.1.1 基本概念
 ##### **定义**： #傅里叶系数
-> <font color="#ccc1d9">描述：</font> $$a_{n}=\frac1\pi\int_{-\pi}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac1\pi\int_{-\pi}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
+> <font color="#ccc1d9">描述：</font> $$\begin{aligned}a_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx&&(n=0,1,2,\ldots),\\b_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx&&(n=1,2,\ldots).\end{aligned}$$
 
 **解释**
 - 可以利用上述公式，来求给定 n 式的系数；
@@ -103,13 +101,13 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 ### 52.2.1 周期函数的展开：特殊情况
 **概念介绍**：周期为 $2\pi$ 的函数展开
 - （1）在 $[-\pi,+\pi]$ 上展开：一般展开
-	- $$a_{n}=\frac1\pi\int_{-\pi}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac1\pi\int_{-\pi}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
+	- $$\begin{aligned}a_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx&&(n=0,1,2,\ldots),\\b_n&=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx&&(n=1,2,\ldots).\end{aligned}$$
 - （2）在 $[-\pi,+\pi]$ 的展开：奇偶函数的展开
 	- 1. $f(x)$ 为奇函数：
-		- $$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
+		- $$a_n=0,\qquad b_n=\frac2\pi\int_0^\pi f(x)\sin nx\,dx\quad(n=1,2,\ldots).$$
 		- 解释：因为 $\cos x$ 是偶函数，并且在 $a_n$ 中，所以当 $f(x)$ 为奇函数时，`奇函数*偶函数=奇函数`，所以 $a_n$ 变为 0，$b_n$ 变为两倍。其他情况同理；
 	- 2. $f(x)$ 为偶函数：
-		- $$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$
+		- $$a_n=\frac2\pi\int_0^\pi f(x)\cos nx\,dx\quad(n=0,1,2,\ldots),\qquad b_n=0.$$
 - （3）在 $[0,+\pi]$ 上展开：展开为正弦或余弦
 	- 分析：
 		- 这种是在半个周期上的展开，所以在分析时，需要做**延拓**；
@@ -117,9 +115,9 @@ tags: ["考研数学", "高等数学", "无穷级数"]
 		- 在展开为正弦时，理论上需要做奇延拓，但实际上直接使用奇函数的展开式即可；
 		- 同理偶延拓；
 	- 1. 展开为正弦：
-		- $$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$
+		- $$a_n=0,\qquad b_n=\frac2\pi\int_0^\pi f(x)\sin nx\,dx\quad(n=1,2,\ldots).$$
 	- 2. 展开为余弦：
-		- $$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$
+		- $$a_n=\frac2\pi\int_0^\pi f(x)\cos nx\,dx\quad(n=0,1,2,\ldots),\qquad b_n=0.$$
 
 ### 52.2.2 周期函数的展开：一般情况 
 **概念介绍**：周期为 $2l$ 的函数展开

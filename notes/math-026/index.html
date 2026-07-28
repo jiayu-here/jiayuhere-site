@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -64,8 +64,8 @@
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 多阶导数的定义</a><a href="#section-3">1.2 常见求 n 阶导数</a><a href="#section-6">1.3 常考题型</a></nav></details><div class="prose"><h2 id="section-1">1.1 多阶导数的定义</h2>
 <p><strong>多阶导数的表示方法</strong></p>
 <p>$(y^{\prime})^{\prime}=y^2=\frac{d^2y}{dx^2}\quad\quad y^{m}\quad\quad y^{(4)}\quad\quad y^{(n)}=\frac{d^ny}{dx^n}$</p>
-<h5 id="section-2"><strong>定义</strong>： #高阶导数</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： 具体点上，n 阶导数的定义：</blockquote>
+<h5 id="section-2"><strong>定义</strong>： <span class="note-tag">高阶导数</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> 具体点上，n 阶导数的定义：</blockquote>
 <blockquote>定义 1：$f^{(n)}(x_0)=\lim_{\Delta x\to0}\frac{f^{(n-1)}(x_0+\Delta x)-f^{(n-1)}(x_0)}{\Delta x}$</blockquote>
 <blockquote>定义 2：$f^{(n)}(x_0)=\lim_{x\to x_0}\frac{f^{(n-1)}(x)-f^{(n-1)}(x_0)}{x-x_0}$</blockquote>
 <p><strong>解释</strong></p>
@@ -91,7 +91,7 @@
 <li class="list-indent-1">$(u\pm v)^{(n)}=u^{(n)}\pm v^{(n)}$</li>
 <li>乘法</li>
 <li class="list-indent-1">莱布尼茨公式</li>
-<li class="list-indent-1">${(u\nu)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$</li>
+<li class="list-indent-1">${(uv)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$</li>
 </ul>
 <p><strong>例题</strong>：$\text{设 }f(x)=\frac1{x^2-1}\text{,求 }f^{(n)}(x)$</p>
 <p>思路：无法直接使用加法或者乘法公式，因此需要将分母分解因式，将其拆分：</p>
@@ -111,7 +111,7 @@
 <li>此时可以将 u=3 x，然后利用复合函数求导法则，提出其中 u 导致的复合的部分，然后带入原本的高阶导数求导公式；</li>
 </ul>
 <h2 id="section-6">1.3 常考题型</h2>
-<h3 id="section-7">题型： #高阶导数求导</h3>
+<h3 id="section-7">题型： <span class="note-tag">高阶导数求导</span></h3>
 <h4 id="section-8">PART 1：解题方法</h4>
 <p><strong>基本思路</strong></p>
 <ul>
@@ -132,7 +132,7 @@
 <li class="list-indent-2">然后带入 0 点到 n 阶的导数；</li>
 <li class="list-indent-1">方法二：用泰勒 </li>
 <li class="list-indent-2">$f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots$</li>
-<li>题型： #高阶导数求导</li>
+<li>题型： <span class="note-tag">高阶导数求导</span></li>
 </ul><nav class="article-pagination" aria-label="相邻内容">
     <a href="../math-025/index.html"><span>← 上一项</span><strong>Lecture 17：导数求导法则</strong></a>
     <a class="article-pagination-next" href="../math-027/index.html"><span>下一项 →</span><strong>Lecture 19：隐函数与参数方程</strong></a>
@@ -144,6 +144,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

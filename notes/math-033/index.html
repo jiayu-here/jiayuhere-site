@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,12 +63,12 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 25：函数的极值与最值</h1><p class="article-lead">考研数学学习笔记：Lecture 25：函数的极值与最值。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-01-14</span><span>约 7 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分中值定理与导数应用</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 函数的极值</a><a href="#section-8">1.2 最大值与最小值</a><a href="#section-10">1.3 相关题型</a></nav></details><div class="prose"><h2 id="section-1">1.1 函数的极值</h2>
 <h3 id="section-2">1.1.1 基本概念</h3>
-<h5 id="section-3"><strong>定义</strong>： #函数的极值</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：若 $\exists\delta&gt;0$,使得</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">函数的极值</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span>若 $\exists\delta&gt;0$,使得</blockquote>
 <blockquote>1） $\forall x\in U(x_0,\delta)$ 恒有 $f(x)\geq f(x_0)$, 则称 $f(x)$ 在 $x_{0}$ 取极小值。</blockquote>
 <blockquote>2） $\forall x\in U(x_0,\delta)\text{ 恒有 }f(x)\leq f(x_0)\text{,则称 }f(x)\text{ 在 }x_0\text{取极大值}$</blockquote>
-<h5 id="section-4"><strong>定理</strong>： #极值的必要条件</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{若 }f(x)\text{ 在 }x_0\text{ 处何导,且在 }x_0\text{ 处取得极值,则}$ $f^{\prime}(x_0)=0$</blockquote>
+<h5 id="section-4"><strong>定理</strong>： <span class="note-tag">极值的必要条件</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }f(x)\text{ 在 }x_0\text{ 处可导,且在 }x_0\text{ 处取得极值,则}$ $f^{\prime}(x_0)=0$</blockquote>
 <p><strong>意义</strong></p>
 <ul>
 <li>对于可导函数，通过这个定理，缩小了函数<strong>可能的极值点</strong>的范围；</li>
@@ -89,8 +89,8 @@
 <li>1. 导数等于 0 的点；</li>
 <li>2. 导数不存在的点；</li>
 </ul>
-<h5 id="section-5"><strong>定理</strong>： #极值第一充分条件</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }f(x)\text{ 在 }U(x_0,\delta)\text{内可导,且 }f^{\prime}(x_0)=0\text{(或}f(x)\text{在 }x_0\text{ 处连续})$</blockquote>
+<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">极值第一充分条件</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> 设 $f(x)$ 在 $x_0$ 处连续，并在 $x_0$ 的某个去心邻域内可导：</blockquote>
 <blockquote>1）若 $x&lt;x_0$ 时，$f^{\prime}(x)\geq0;x&gt;x_0$ 时，$f^{\prime}(x)\leq0$, 则 $f$ 在 $x_{0}$ 处取极大值</blockquote>
 <blockquote>2）若 $x&lt;x_0$ 时，$f^{\prime}(x)\leq0;x&gt;x_0$ 时，$f^{\prime}(x)\geq0$, 则 $f$ 在 $x_{0}$ 处取极小值.</blockquote>
 <blockquote>3）$\text{若}f^{\prime}(x)\text{ 在 }x_0\text{ 的两侧不变号,则 }f\text{ 在 }x_0\text{ 无极值}$</blockquote>
@@ -107,8 +107,8 @@
 <li>优势</li>
 <li class="list-indent-1">既可以分析导数等于 0 的点，还可以分析导数不存在的点；</li>
 </ul>
-<h5 id="section-6"><strong>定理</strong>： #极值第二充分条件 </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设}\quad f^{\prime}(x_0)=0,f^{\prime\prime}(x_0)\neq0$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">极值第二充分条件</span> </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{设}\quad f^{\prime}(x_0)=0,f^{\prime\prime}(x_0)\neq0$</blockquote>
 <blockquote>1）当 $f^{\prime\prime}(x_0)&lt;0$, $f(x)$ 在 $x_{0}$ 处取极大值</blockquote>
 <blockquote>2）当 $f^{\prime\prime}(x_0)&gt;0,\quad f(x)$在 $x_{0}$ 处取极小值</blockquote>
 <p><strong>解释</strong></p>
@@ -131,11 +131,11 @@
 <li class="list-indent-2">$x=3$ 处，函数导数从负-&gt; 正，所以为极小值点； </li>
 <li class="list-indent-1">用第二充分条件</li>
 <li class="list-indent-2">$\begin{aligned}f^{\prime\prime}(x)=6x-6,\quad f^{\prime\prime}(-1)=-12&lt;0,\quad 极大\\f^{\prime\prime}(3)=12&gt;0\quad 极小\end{aligned}$</li>
-<li>题型： #函数的极值</li>
+<li>题型： <span class="note-tag">函数的极值</span></li>
 </ul>
 <h2 id="section-8">1.2 最大值与最小值</h2>
-<h5 id="section-9"><strong>定义</strong>： #连续函数最大值与最小值</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{求连续函数 }f(x)\text{ 在 }[a,b]\text{ 上的最值}$</blockquote>
+<h5 id="section-9"><strong>定义</strong>： <span class="note-tag">连续函数最大值与最小值</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\text{求连续函数 }f(x)\text{ 在 }[a,b]\text{ 上的最值}$</blockquote>
 <blockquote>0）建立目标函数（应用题时）</blockquote>
 <blockquote>1）求出 $f(x)$ 在 $(a,b)$ 内的驻点、不可导的点以及端点 $x_1,x_2,x_3 ...$ ；</blockquote>
 <blockquote>2）求出各点的函数值</blockquote>
@@ -160,10 +160,10 @@
 <li class="list-indent-1">求端点的值</li>
 <li class="list-indent-2">$f(-1)=-5,f(2)=4$</li>
 <li class="list-indent-1">所以 x=-1 为最小点，x=2 为最大点</li>
-<li>题型： #连续函数最大值与最小值 </li>
+<li>题型： <span class="note-tag">连续函数最大值与最小值</span> </li>
 </ul>
 <h2 id="section-10">1.3 相关题型</h2>
-<h3 id="section-11">题型： #求函数的极值和最值</h3>
+<h3 id="section-11">题型： <span class="note-tag">求函数的极值和最值</span></h3>
 <h4 id="section-12">PART 1：解题方法</h4>
 <p><strong>核心</strong>：由 <code>极值的必要条件(定理)</code> <code>-&gt;</code> 若干可能的极值点 <code>-&gt;</code> <code>极值第一充分条件(定理)</code> <code>-&gt;</code> 真正的极值点；</p>
 <p><strong>可能的极值点</strong></p>
@@ -219,6 +219,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

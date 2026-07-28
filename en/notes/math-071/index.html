@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 2：行列式的定义与性质 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Linear Algebra">
+  <title>Lecture 2: Definition and properties of determinants | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Definition and Properties of Determinants. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Determinants">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 2：行列式的定义与性质 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 2: Definition and properties of determinants | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Definition and Properties of Determinants. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-071/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,339 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 2：行列式的定义与性质</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Linear Algebra</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-071/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-070/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 1：课程引言</strong></a>
-    <a class="article-pagination-next" href="../math-072/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 3：行列式的计算</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 2: Definition and properties of determinants</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Definition and Properties of Determinants. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics</span><span>18 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Determinants</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">2.1 Basic Concepts of Determinants</a><a href="#section-4">2.2 The first definition of determinants</a><a href="#section-8">2.3 The second definition of the determinant</a><a href="#section-11">2.4 The third definition of determinants</a><a href="#section-15">2.5 Properties of Determinants</a><a href="#section-23">2.6 Several Important Determinants</a></nav></details><div class="prose"><h2 id="section-1">2.1 Basic Concepts of Determinants</h2>
+<h3 id="section-2">2.1.1 Origin of Determinants</h3>
+<p><strong>Origin of Determinants</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Matrix:</li>
+<li class="list-indent-2">$$\left(\begin{matrix}a_{1}&amp;a_{2}\\b_{1}&amp;b_{2}\end{matrix}\right)=A$$</li>
+<li class="list-indent-1">Determinant:</li>
+<li class="list-indent-2">$$\begin{vmatrix}\mathrm{a}&amp;\mathrm{b}\\\mathrm{c}&amp;\mathrm{d}\end{vmatrix}=|A|$$</li>
+<li>Relationships:</li>
+<li class="list-indent-1">The concept of determinants comes from matrices, which are a<strong>property</strong>of transformations;</li>
+<li class="list-indent-1">A matrix is used to<strong>express information</strong>; only when acting on one vector will it act on another;</li>
+<li class="list-indent-1">A determinant is a measure of a certain property or feature by placing matrix <code>A</code> in;</li>
+</ul>
+<p><strong>Supplement</strong>: The meaning of a determinant in two dimensions</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">The determinant gives the signed area-scaling factor of the linear transformation represented by a matrix;</li>
+<li>Example:</li>
+<li class="list-indent-1">For a two-dimensional matrix $A$, $\det(A)=0$ means that the transformation compresses the plane into a line or a point;</li>
+<li class="list-indent-1">Consequently, any planar figure transformed by $A$ has area 0;</li>
+<li>Meaning:</li>
+<li class="list-indent-1">Thus, checking whether the determinant is <code>0</code> tells us whether the transformation collapses the space into a lower dimension; equivalently, the matrix columns are linearly dependent;</li>
+<li>Supplement: Orientation</li>
+<li class="list-indent-1">A negative determinant reverses orientation;</li>
+<li>Supplement: Three dimensions</li>
+<li class="list-indent-1">In three dimensions, the absolute value of the determinant is the volume-scaling factor of the linear transformation;</li>
+<li class="list-indent-1">Therefore, if the determinant of a $3\times3$ matrix is 0, its columns are linearly dependent;</li>
+</ul>
+<p><strong>Concept</strong>: Calculation of second-order determinants</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">$$|A|=|\begin{matrix}a&amp;b\\c&amp;d\end{matrix}|=ad-bc$$</li>
+<li>Main Diagonal:</li>
+<li class="list-indent-1">From <code>a-&gt;d</code> is the main diagonal;</li>
+<li>Subdiagonal:</li>
+<li class="list-indent-1">From <code>b-&gt;c</code> is the secondary diagonal;</li>
+<li>The value of the determinant:</li>
+<li class="list-indent-1">It is the product of the main-diagonal entries minus the product of the secondary-diagonal entries;</li>
+<li class="list-indent-1">Geometrically, its absolute value measures the area-scaling factor of the corresponding linear transformation;</li>
+</ul>
+<h3 id="section-3">2.1.2 Determinant Knowledge Structure</h3>
+<p><strong>Knowledge Structure</strong></p>
+<ul>
+<li>Basic concepts of determinants:</li>
+<li class="list-indent-1">Essential definition</li>
+<li class="list-indent-1">Properties</li>
+<li class="list-indent-1">Definition using inversion counts</li>
+<li class="list-indent-1">Expansion theorem</li>
+<li>Several important determinants: <code>12+1</code></li>
+<li class="list-indent-1">Main diagonal determinant</li>
+<li class="list-indent-1">Determinant of the subdiagonal</li>
+<li class="list-indent-1">Laplace expansion</li>
+<li class="list-indent-1">Vandermonde determinant</li>
+<li>Calculation of determinants</li>
+<li class="list-indent-1">Concrete type</li>
+<li class="list-indent-2">Transform into the basic type</li>
+<li class="list-indent-2">Recurrence method</li>
+<li class="list-indent-2">Functions and equations represented by determinants</li>
+<li class="list-indent-1">Abstract type</li>
+<li class="list-indent-2">Apply determinant properties</li>
+<li class="list-indent-2">$|AB|=|A||B|$ using the formula</li>
+<li class="list-indent-3">Supplement: <code>AB does not equal BA</code></li>
+<li class="list-indent-3">But <code>|AB|</code> result of the area equals the areas of the determinants A and B, and it is worth multiplying</li>
+<li class="list-indent-3">So: <code>|AB|=|A||B|=|B||A|=|BA|</code></li>
+<li>Calculation of cotons and algebraic coders</li>
+<li>Kramer's Law</li>
+<li class="list-indent-1">Not important</li>
+</ul>
+<h2 id="section-4">2.2 The first definition of determinants</h2>
+<h3 id="section-5">2.2.1 Second-Order Determinant</h3>
+<p><strong>Concept</strong>: The concept of second-order determinants</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">$$2 \text{ The steps and rows are arranged in order }D_2=\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">The first subscript of $a_{ij}$ $i$ indicates the number of rows where the element is located, and the second indication $j$ indicates the number of columns <code>-&gt;</code> the fixed position;</li>
+<li class="list-indent-2">$i=1,2,j=1,2$；</li>
+<li class="list-indent-1">Thus, there are four elements in this determinant;</li>
+<li>Calculation:</li>
+<li class="list-indent-1">$\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}$</li>
+<li>Geometric meaning:</li>
+<li class="list-indent-1">Calculation:</li>
+<li class="list-indent-2">$S_D=l<em>m</em>\sin(\beta-\alpha)=a_{11}a_{22}-a_{12}a_{21}$</li>
+<li class="list-indent-1">Meaning:</li>
+<li class="list-indent-2">The second-order determinant is the area value of a parallelogram <code>-&gt;</code> reflects the measure;</li>
+<li class="list-indent-2"><code>2</code> A determinant consists of<strong>two <code>2</code>-dimensional vectors</strong>, and its (according to the operation rules) result is the area of a parallelogram with these two vectors as adjacent sides. This not only derives the calculation rules for the second-order determinant, but also clearly shows its geometric meaning;</li>
+</ul>
+<h3 id="section-6">2.2.2 Third-Order Determinant</h3>
+<p><strong>Concept</strong>: Third-order determinant</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">$$\text{ 3rd order determinant }D_{3}=\begin{vmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\end{vmatrix}$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1"><code>3</code>-order determinant consists of three <code>3</code>-dimensional vectors $a_1=[a_{11}, a_{12}, a_{13}]$, $a_2=[a_{21}, a_{22}, a_{23}]$, and $a_3=[a_{31}, a_{32}, a_{33}]$;</li>
+<li class="list-indent-1">Its (operation rules) result is<strong>the volume of a parallelepiped with these three vectors as adjacent sides</strong>;</li>
+<li>Calculation:</li>
+<li class="list-indent-1">Formula $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\end{vmatrix}=(a_{11}a_{22}a_{33}+a_{13}a_{21}a_{32}+a_{12}a_{23}a_{31})-(a_{13}a_{22}a_{31}+a_{12}a_{21}a_{33}+a_{11}a_{23}a_{32})$$</li>
+<li class="list-indent-1">Manual Calculation Method:</li>
+<li class="list-indent-2">Line drawing method <code>-&gt;</code> draw two lines. The first line starts from <code>a11-&gt;a22-&gt;a33</code>, then based on this line, draw two forks: <code>a13-&gt;a21-&gt;a32</code> and <code>a12-&gt;a23-&gt;a31</code>; Similarly, the second line uses <code>a13-&gt;a22-&gt;a31</code> and then draws two crosses;</li>
+</ul>
+<h3 id="section-7">2.2.3 Essential Definition of an N-Order Determinant</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">nThe</span> steps and rows are arranged in order</p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{aligned}&amp;n\text{ The steps and rows are arranged in order }D_n=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{nn}\end{vmatrix}\text{ It was because of this }n\text{ Piece }n\text{ Dimension vector }a_1=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots,a_{1n}\end{bmatrix},\cdots,a_{n}=[a_{n1},a_{n2},\cdots,a_{nn}]\text{ , and its (operation rule) result is given by this }n\text{ The vectors are adjacent sides }n\text{ Dimensional graphical (yes }\\&amp;\text{ Volume. }\end{aligned}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The determinant is <code>0</code>, the set of vectors is linearly dependent, the determinant is not <code>0</code>, the set of vectors is linearly independent;</li>
+</ul>
+<h2 id="section-8">2.3 The second definition of the determinant</h2>
+<h3 id="section-9">2.3.1 Permutations and Inversions</h3>
+<p><strong>Concept</strong>: Permutation</p>
+<ul>
+<li>An ordered arrangement of the numbers <code>1,2,…,n</code> is called a permutation of order $n$.</li>
+<li>For example, <code>23145</code> and <code>41352</code> are permutations of order $5$. There are $n!$ permutations of order $n$.</li>
+</ul>
+<p><strong>Concept</strong>: Inversion</p>
+<ul>
+<li>In a permutation $i_1i_2\cdots i_s\cdots i_t\cdots i_n$, if $s&lt;t$ but $i_s&gt;i_t$, then the pair $(i_s,i_t)$ is called an inversion.</li>
+</ul>
+<p><strong>Concept</strong>: Inversion number</p>
+<ul>
+<li>The total number of inversions in a permutation is its inversion number, denoted by $\tau\left(i_{1}i_{2}\cdots i_{n}\right)$. For example, $\tau(231546)=3$.</li>
+<li>The natural order <code>12345</code> has inversion number <code>0</code>.</li>
+</ul>
+<p><strong>Concept</strong>: Odd-permutation and even-permutation</p>
+<ul>
+<li>If the reverse order of the permutation is odd, it is called an odd permutation;</li>
+<li>When the reverse order of the permutation is even, it is called an even permutation;</li>
+</ul>
+<h3 id="section-10">2.3.2 The second definition of an n-th-order determinant</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">nThe</span> steps and rows are arranged in order: The second definition</p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{r(j_{1}j_{2}\cdots j_{n})}a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Explanation:</li>
+<li class="list-indent-1">$\sum_{h_1,h_2,...h_n}$：</li>
+<li class="list-indent-2">Represents the sum of all $n$ columns arranged by index, thus summing $n!$ terms;</li>
+<li class="list-indent-2">Note that <code>-&gt;</code> row indexes are arranged in order, while column indexes are arranged in any $n$ level;</li>
+<li class="list-indent-1">$(-1)^{\tau(j_1j_2\cdots j_n)}.$：</li>
+<li class="list-indent-2">The positive and negative signs for each item depend on $(-1)^{\tau(j_1j_2\cdots j_n)}.$</li>
+<li class="list-indent-2">That is: the positive or negative depends on the result of $\tau(j_1j_2\cdots j_n)$, and the reverse order of the column's indices is calculated by permutation;</li>
+<li class="list-indent-2">When column indices are arranged odd, a negative sign should be appended; When column indices are even, a positive sign should be appended;</li>
+<li class="list-indent-1">$a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}$：</li>
+<li class="list-indent-2">Each term consists of the product of $n$ elements taken from different rows and columns</li>
+<li>Meaning:</li>
+<li class="list-indent-1">Expand the <code>n</code>-order determinant into <code>n</code> factorial term <code>-&gt;</code> represent the nth-order permutation, a general calculation rule;</li>
+<li>Example:</li>
+<li class="list-indent-1">Title:</li>
+<li class="list-indent-2">$\text{ Please confirm }a_{12}a_{31}a_{54}a_{43}a_{25}\text{ The positive and negative signs before this expansion item }$</li>
+<li class="list-indent-1">Analysis:</li>
+<li class="list-indent-2">First, arrange the rows <code>-&gt;</code> $a_{12}a_{25}a_{31}a_{43}a_{54}$</li>
+<li class="list-indent-2">Then look at the $\tau(25134)=4$</li>
+</ul>
+<h2 id="section-11">2.4 The third definition of determinants</h2>
+<p><strong>Core Idea</strong>: Downgrade</p>
+<h3 id="section-12">2.4.1 Minors</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Minor</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span> In a determinant of order $n$, delete row $i$ and column $j$ containing $a_{ij}$. The determinant of order $n-1$ formed by the remaining elements is the minor of $a_{ij}$, denoted by $M_{ij}$.</blockquote>
+<blockquote>That is: $$M_{ij}=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1,j-1}&amp;a_{1,j+1}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i-1,1}&amp;\cdots&amp;a_{i-1,j-1}&amp;a_{i-1,j+1}&amp;\cdots&amp;a_{i-1,n}\\a_{i+1,1}&amp;\cdots&amp;a_{i+1,j-1}&amp;a_{i+1,j+1}&amp;\cdots&amp;a_{i+1,n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,j-1}&amp;a_{n,j+1}&amp;\cdots&amp;a_{nn}\end{vmatrix}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Supplement:</li>
+<li class="list-indent-1">Minor:</li>
+<li class="list-indent-2">A minor is itself a determinant formed from selected rows and columns of the original matrix or determinant.</li>
+<li class="list-indent-1">Submatrix:</li>
+<li class="list-indent-2">A submatrix is a matrix;</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Deleting row $i$ and column $j$ leaves an $(n-1)\times(n-1)$ determinant, namely the minor $M_{ij}$.</li>
+<li>Example:</li>
+<li class="list-indent-1">For $\begin{vmatrix}1&amp;2&amp;1\\2&amp;5&amp;7\\-6&amp;4&amp;9\end{vmatrix}$, the minor of the entry in row $2$, column $3$ is $M_{23}=\left|\begin{matrix}1&amp;2\\-6&amp;4\end{matrix}\right|$.</li>
+</ul>
+<h3 id="section-13">2.4.2 Cofactors</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Cofactor</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span> Multiplying the minor $M_{ij}$ by $(-1)^{i+j}$ gives the cofactor of $a_{ij}$, denoted by $A_{ij}$:</blockquote>
+<blockquote>$$A_{ij}=(-1)^{i+j}M_{ij},\qquad M_{ij}=(-1)^{i+j}A_{ij}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">A cofactor is a minor with the sign factor $(-1)^{i+j}$.</li>
+<li>Example:</li>
+<li class="list-indent-1">$A_{23}=(-1)^{2+3}M_{23}$</li>
+</ul>
+<h3 id="section-14">2.4.3 Determinant Expansion Formula</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Theexpansiontheoremofdeterminants</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> the value of a determinant equals the value of a certain row (column) element of the determinant, multiply it by its corresponding algebraic coefficient expression, then sum, i.e., $$\left|A\right|=\begin{cases}a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\sum_{j=1}^{n}a_{ij}A_{ij}\left(i=1,2,\cdots,n\right),\\\\a_{1j}A_{1j}+a_{2j}A_{2j}+\cdots+a_{nj}A_{nj}=\sum_{i=1}^{n}a_{ij}A_{ij}\left(j=1,2,\cdots,n\right).\end{cases}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">Expand:</li>
+<li class="list-indent-2">For $|A|_{3\times3}$, expand according to the first line to get $|A|_{3\times3}=a_{11}A_{11}+a_{12}A_{12}+a_{13}A_{13}$</li>
+<li class="list-indent-1">Analysis:</li>
+<li class="list-indent-2">In the example above, a third-order expression is expanded into second-order, but the trade-off is that the expression becomes three;</li>
+<li class="list-indent-2">If at fourth order it is $|A|_{4\times4}=a_{21}A_{21}+a_{22}A_{22}+a_{23}A_{3}+a_{24}A_{24}$</li>
+<li>Purpose:</li>
+<li class="list-indent-1">Core Idea <code>-&gt;</code> Find the value of the determinant after descending the order;</li>
+<li class="list-indent-1">Downgrade <code>n</code> steps into <code>n</code> <code>n-1</code> steps</li>
+<li>Principles of Development:</li>
+<li class="list-indent-1">The more elements in a row (column) of <code>0</code>, the better;</li>
+</ul>
+<h2 id="section-15">2.5 Properties of Determinants</h2>
+<h3 id="section-16">2.5.1 Property One</h3>
+<p><strong>Property One</strong>: Row and column swaps, with the value unchanged, i.e., $|A|=|A^{\mathrm{T}}|$</p>
+<ul>
+<li>Concept Supplement:</li>
+<li class="list-indent-1">Transpose Matrix:</li>
+<li class="list-indent-2">If $|A|=|A^{\mathrm{T}}|$, then $A^{\mathrm{T}}$ is called the<strong>transpose matrix</strong>of <code>A</code>;</li>
+<li class="list-indent-1">Symmetric Matrices:</li>
+<li class="list-indent-2">On the basis of $A^{\mathrm{T}}$ is a<strong>transpose matrix</strong>of <code>A</code>, if $A=A^{\mathrm{T}}$, then it is called a symmetric matrix;</li>
+<li>Nature Explanation:</li>
+<li class="list-indent-1">$|A|=|A^{\mathrm{T}}|$ <code>-&gt;</code> Even if the current $A^{\mathrm{T}}$ and <code>A</code> are not symmetric matrices, their values (the geometric area of the second-order determinant) are the same;</li>
+<li>Conclusion:</li>
+<li class="list-indent-1">For determinants, the status of rows and columns is equivalent <code>-&gt;</code><strong>can be used for properties on rows, and both can be used with</strong>on columns;</li>
+</ul>
+<h3 id="section-17">2.5.2 Property Two</h3>
+<p><strong>Property Two</strong>: If all elements in a determinant are zero, then the determinant is zero</p>
+<ul>
+<li>If in the determinant there is a row <code>0</code> <code>-&gt;</code> means the determinant has been reduced by one dimension <code>-&gt;</code> Because it cannot be measured, the measure is <code>0</code>;</li>
+<li>Similarly, if a column is all zero, then the determinant is zero;</li>
+</ul>
+<h3 id="section-18">2.5.3 Property Three: Multiplication</h3>
+<p><strong>Property three</strong>: If a row (column) element in determinant has a common factor <code>k(k≠0)</code>, then <code>k</code> can be factored out of the determinant, that is:</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\ldots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\ka_{i1}&amp;ka_{i2}&amp;\ldots&amp;ka_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\ldots&amp;a_{nn}\end{vmatrix}=k\begin{vmatrix}a_{11}&amp;a_{12}&amp;\ldots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}&amp;a_{i2}&amp;\ldots&amp;a_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\ldots&amp;a_{nn}\end{vmatrix}.$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">If understood geometrically: if a second-order determinant is multiplied by <code>K</code>, it means it multiplies by <code>k</code> in a certain direction, not all (here, all of which are actually two directions), and can only extend one side <code>-&gt;</code> If multiplied by <code>K</code> for all directions, the result is squared;</li>
+<li class="list-indent-1">In the process of extracting K by multiplying above, operations from right to left of the equation are called &quot;<strong>multiplication</strong>&quot; properties;</li>
+<li>Example:</li>
+<li class="list-indent-1">You can multiply (extract) the number onto a certain line</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}\\a_{21}&amp;a_{22}\end{vmatrix}=k\begin{vmatrix}a_{11}&amp;a_{12}\\\frac{a_{21}}{k}&amp;\frac{a_{22}}{k}\end{vmatrix}$$</li>
+<li>Function:</li>
+<li class="list-indent-1">Remove the denominator from the determinant;</li>
+</ul>
+<h3 id="section-19">2.5.4 Property Four</h3>
+<p><strong>Property 4</strong>: If a certain row (column) element in a determinant is the sum of two elements, it can be split into the sum of two determinants, that is:</p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}+b_{i1}&amp;a_{i2}+b_{i2}&amp;\cdots&amp;a_{in}+b_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i1}&amp;a_{i2}&amp;\cdots&amp;a_{m}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}+\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\b_{i1}&amp;b_{i2}&amp;\cdots&amp;b_{in}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">Single-row detachable (add-on) capability;</li>
+<li class="list-indent-1">The equation from right to left is the sum of two determinants. If<strong>the other elements of two determinants correspond to equal and only one row (column) is different</strong>, you can add them. When adding, the other elements remain unchanged, and the rows (columns) of different elements are added accordingly;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">Additivity for single lines <code>-&gt;</code> Different rows in the determinant, but every other line is exactly the same <code>-&gt;</code> Only then can additions be made;</li>
+<li>Example: When using a second-order determinant</li>
+<li class="list-indent-1">$$\begin{vmatrix}a_1&amp;a_2\\b_1&amp;b_2\end{vmatrix}+\begin{vmatrix}a_1&amp;a_2\\c_1&amp;c_2\end{vmatrix}=\begin{vmatrix}a_1&amp;a_2\\c_1+b_1&amp;c_2+b_2\end{vmatrix}$$</li>
+<li>Note:</li>
+<li class="list-indent-1">Obviously, by this property we know: $|A|+|B|\neq|A+B|$</li>
+</ul>
+<h3 id="section-20">2.5.5 Property Five: Interchange</h3>
+<p><strong>Property Five</strong>: In a determinant, two rows (or columns) are swapped, and the determinant is changed</p>
+<ul>
+<li>Geometric meaning:</li>
+<li class="list-indent-1">For example, in a second-order determinant, if the parallelogram drawn and the sides are swapped in order, the resulting area is thus reversed;</li>
+<li>Note:</li>
+<li class="list-indent-1">This property is called the &quot;<strong>swap</strong>&quot; property;</li>
+<li class="list-indent-1">When swapping, if the value of <code>-&gt;</code> remains unchanged after even swaps; If the value changes <code>-&gt;</code> odd times;</li>
+</ul>
+<h3 id="section-21">2.5.6 Property Six</h3>
+<p><strong>Property 6</strong>: If two rows (columns) in a determinant are equal or proportional, then the determinant is zero</p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">$$\vert\begin{matrix}1&amp;2\\2&amp;4\end{matrix}\vert=0$$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">If two rows of elements are exactly the same or proportional, then the determinant is zero;</li>
+<li>Geometric Meaning:</li>
+<li class="list-indent-1">In a second-order determinant, the two vectors are parallel;</li>
+<li>Note:</li>
+<li class="list-indent-1">The negative direction can also be parallel;</li>
+</ul>
+<h3 id="section-22">2.5.7 Property Seven: Multiplication</h3>
+<p><strong>Property 7</strong>: In a determinant, the k multiplied by one row (column) to another row (column) remains unchanged</p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">Multiply the <code>-2</code> of the $|1\quad 2|$ in the $\left|\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right|$ into the $|2\quad 3|$</li>
+<li class="list-indent-1">That is: <code>(1,2)*-2=(-2,-4)</code> is added to $|2\quad 3|$ <code>-&gt;</code> <code>|0，-1|</code> <code>-&gt;</code> to get $\left|\begin{matrix}1&amp;2\\0&amp;-1\end{matrix}\right|$</li>
+<li class="list-indent-1">and $\left|\begin{matrix}1&amp;2\\0&amp;-1\end{matrix}\right|$ = $\left|\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right|$</li>
+<li>Explanation:</li>
+<li class="list-indent-1">This property is called the &quot;<strong>multiplication</strong>&quot; property <code>-&gt;</code> It involves multiplying one line and then adding it to another line;</li>
+<li>Function:</li>
+<li class="list-indent-1">Transform the <code>0</code> in the determinant into <code>-&gt;</code> to simplify it;</li>
+</ul>
+<h2 id="section-23">2.6 Several Important Determinants</h2>
+<h3 id="section-24">2.6.1 Main Diagonal Determinant</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Maindiagonaldeterminant</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\0&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\a_{21}&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\0&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\prod_{i=1}^na_{ii}.$$</blockquote>
+<p><strong>Explanation</strong>: The determinant of the upper (lower) triangle</p>
+<ul>
+<li>The result equals the product of the main diagonal elements;</li>
+</ul>
+<h3 id="section-25">2.6.2 Determinant of the Paradiagonal</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Thedeterminantofthesubdiagonal</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{aligned}\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1,n-1}&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;0&amp;\cdots&amp;0&amp;0\end{vmatrix}&amp;=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;a_{2n}\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,n-1}&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;0&amp;0\end{vmatrix}\\&amp;=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}.\end{aligned}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The result equals the subdiagonal elements multiplied by the inverse ordinal;</li>
+</ul>
+<h3 id="section-26">2.6.3 Laplace Expansion</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">LaplaceExpandableStyle</span></p>
+<blockquote><span style="color:#ccc1d9">Description: </span> $$\begin{gathered}</blockquote>
+<p>Suppose A is an m-order matrix and B is an n-order matrix, then \\</p>
+<p>\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;C\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;O\\C&amp;B\end{vmatrix}=|A||B|, \\</p>
+<p> \\</p>
+<p>\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{C}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{C}\end{vmatrix}=(-1)^{mn}|\boldsymbol{A}||\boldsymbol{B}|.</p>
+<p>\end{gathered}$$</p>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Determinant of a block matrix: $\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}$</li>
+<li class="list-indent-1">All <code>A、B、0</code> here are matrices;</li>
+<li class="list-indent-1">Using several horizontal lines and several vertical lines, divide a matrix into several submatrices. The resulting sub-matrices are chunks of the original matrix. We call this method of matrix representation called a chunking matrix;</li>
+<li class="list-indent-1">For example: A can be a third-order matrix $A_{3<em>3}$, B can be a second-order matrix $B_{2</em>2}$, so $\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}$ is a fifth-order matrix;</li>
+<li>Meaning of block matrix:</li>
+<li class="list-indent-1">Generalize the matrix from a numerical perspective;</li>
+<li>Analysis:</li>
+<li class="list-indent-1">$\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;C\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;O\\C&amp;B\end{vmatrix}=|A||B|$ <code>&lt;-</code> Its conclusion can be understood as the main diagonal conclusion;</li>
+<li class="list-indent-1">$\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{C}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{O}\end{vmatrix}=\begin{vmatrix}\boldsymbol{O}&amp;\boldsymbol{A}\\\boldsymbol{B}&amp;\boldsymbol{C}\end{vmatrix}=(-1)^{mn}|\boldsymbol{A}||\boldsymbol{B}|$ <code>&lt;-</code> Its conclusion can be understood as a conclusion in the form of a subdiagonal, <code>mn</code> is how many times it has changed;</li>
+</ul>
+<h3 id="section-27">2.6.4 Vandermonde Determinant</h3>
+<h5 id="section-28"><strong>Definition</strong>: <span class="note-tag">VandermondeDeterminant</span></h5>
+<blockquote><span style="color:#ccc1d9">Description:</span> $$\begin{vmatrix}1&amp;1&amp;\cdots&amp;1\\x_1&amp;x_2&amp;\cdots&amp;x_n\\x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\\vdots&amp;\vdots&amp;&amp;\vdots\\x_1^{n-1}&amp;x_2^{n-1}&amp;\cdots&amp;x_n^{n-1}\end{vmatrix}=\prod_{1\leq i&lt;j\leq n}(x_j-x_i),n\geq2.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Analysis: A third-order Vandermonde determinant is $V_{3}=\begin{vmatrix}1&amp;1&amp;1\\x_{1}&amp;x_{2}&amp;x_{3}\\x_{1}^{2}&amp;x_{2}^{2}&amp;x_{3}^{2}\end{vmatrix}$;</li>
+<li>Calculation for the third-order case:</li>
+<li class="list-indent-1">Form all differences $x_j-x_i$ with $j&gt;i$;</li>
+<li class="list-indent-1">$V_3=(x_{2}-x_{1})(x_{3}-x_{1})(x_{3}-x_{2})$.</li>
+<li>Note:</li>
+<li class="list-indent-1">The last row has a frequency minus one, because the number starts from zero;</li>
+<li>Example:</li>
+<li class="list-indent-1">$\begin{vmatrix}1&amp;a&amp;a^{2}\\1&amp;b&amp;b^{2}\\1&amp;c&amp;c^{2}\end{vmatrix}=\begin{vmatrix}1&amp;1&amp;1\\a&amp;b&amp;c^{2}\\a^{2}&amp;b^{2}&amp;c^{2}\end{vmatrix}=$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-070/index.html"><span>← Previous item</span><strong>Lecture 1: Course Introduction</strong></a>
+    <a class="article-pagination-next" href="../math-072/index.html"><span>Next item →</span><strong>Lecture 3: Calculation of Determinants</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +401,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

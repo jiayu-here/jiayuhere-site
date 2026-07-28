@@ -40,24 +40,26 @@ tags: ["考研数学", "线性代数", "行列式"]
 	- 适用性质七：倍加的性质，将主或者副对角线上的元素，通过倍加的方式，消掉竖（横）的爪子上的数，进而化成三角行列式；
 
 ##### **定义**： #行和相等的行列式
-> <font color="#ccc1d9">描述：</font> $$D_n=\begin{vmatrix}a&b&b&\cdots&b\\b&a&b&\cdots&b\\b&b&a&\cdots&b\\\vdots&\vdots&\vdots&&\vdots\\b&b&b&\cdots&a\end{vmatrix}\quad\quad\quad\quad D_{n}=(a+(n-1)b)\begin{vmatrix}1&b&b\cdots b\\1&a&b\cdots b\\\vdots&\vdots&\vdots\\1&b&b\cdots a\end{vmatrix}=[a+(n-b)b](a-b)^{n-1}$$
+> <font color="#ccc1d9">描述：</font> $$D_n=\begin{vmatrix}a&b&b&\cdots&b\\b&a&b&\cdots&b\\b&b&a&\cdots&b\\\vdots&\vdots&\vdots&&\vdots\\b&b&b&\cdots&a\end{vmatrix}\quad\quad\quad\quad D_{n}=(a+(n-1)b)\begin{vmatrix}1&b&b\cdots b\\1&a&b\cdots b\\\vdots&\vdots&\vdots\\1&b&b\cdots a\end{vmatrix}=[a+(n-1)b](a-b)^{n-1}$$
 
 **解释**
 - 证明过程：
 	- 第一步：因为行和相等，所以把所有列都加到第一列；
 	- 第二步：提出公因式部分 `[a+(n-1)b]`
-	- 第三步：将每列加 `-1` 倍至每列；
+	- 第三步：将第一行的 `-1` 倍依次加到其余各行；
 	- 第四步：计算结果，得到 $D_n=[a+(n-1)b](a-b)^{n-1}$
 
 **补充一**
 - 行列式：
-	- $$当a=0,b=1时,\begin{vmatrix}0&1&1&\cdots&1\\1&0&1&\cdots&1\\1&1&0&\cdots&1\\\vdots&\vdots&\vdots&&\vdots\\1&1&1&\cdots&0\end{vmatrix}_{n\times n}=(n-1)(-1)^{n-1}$$
+	- 当 $a=0,b=1$ 时：
+		- $$\begin{vmatrix}0&1&1&\cdots&1\\1&0&1&\cdots&1\\1&1&0&\cdots&1\\\vdots&\vdots&\vdots&&\vdots\\1&1&1&\cdots&0\end{vmatrix}_{n\times n}=(n-1)(-1)^{n-1}$$
 - 解释：
-	- 主对角线都是 0，其他都是 1 `<-` 把 `行和相等的行列式` 中的 `a` 取为 0，`b` 取为 1 ，代入 $[a+(n-b)b](a-b)^{n-1}$ 即可算出；
+	- 主对角线都是 0，其他元素都是 1 `<-` 在“行和相等的行列式”公式中令 `a=0`、`b=1`，代入 $[a+(n-1)b](a-b)^{n-1}$ 即可算出；
 
 **补充二**
 - 行列式： 
-	- $$当a=2,b=1时,\begin{vmatrix}2&1&1&\cdots&1\\1&2&1&\cdots&1\\1&1&2&\cdots&1\\\vdots&\vdots&\vdots&&\vdots\\1&1&1&\cdots&2\end{vmatrix}=n+1.$$
+	- 当 $a=2,b=1$ 时：
+		- $$\begin{vmatrix}2&1&1&\cdots&1\\1&2&1&\cdots&1\\1&1&2&\cdots&1\\\vdots&\vdots&\vdots&&\vdots\\1&1&1&\cdots&2\end{vmatrix}=n+1.$$
 
 **补充三**：当 a 在副对角线时
 - 行列式： 
@@ -97,7 +99,7 @@ tags: ["考研数学", "线性代数", "行列式"]
 
 **举例**
 - 题目：$设f\left(x\right)=\begin{vmatrix}1&0&x\\1&2&x^{2}\\1&3&x^{3}\end{vmatrix},求f\left(x+1\right)-f\left(x\right)$ 
-- 分析：$f(x+1)-f(x)=\left|\begin{matrix}1&0&x+1\\1&2&(x+1)^{2}\\1&3&(x+1)^{3}\end{matrix}\right|-\left|\begin{matrix}1&0&x\\1&2&x^{4}\\1&3&x^{3}\end{matrix}\right|=\left.\left|\begin{matrix}1&0&1\\1&2&2x+1\\1&3&3x^{2}+3x+1\end{matrix}\right.\right|=\left|\begin{matrix}1&0&0\\1&2&0\\1&3&3x^{2}\end{matrix}\right|=6x^2$
+- 分析：$f(x+1)-f(x)=\left|\begin{matrix}1&0&x+1\\1&2&(x+1)^{2}\\1&3&(x+1)^{3}\end{matrix}\right|-\left|\begin{matrix}1&0&x\\1&2&x^{2}\\1&3&x^{3}\end{matrix}\right|=\left.\left|\begin{matrix}1&0&1\\1&2&2x+1\\1&3&3x^{2}+3x+1\end{matrix}\right.\right|=\left|\begin{matrix}1&0&0\\1&2&0\\1&3&3x^{2}\end{matrix}\right|=6x^2$
 
 **举例**
 - 题目：$设方程\begin{vmatrix}\lambda-1&-2&3\\1&\lambda-4&3\\-1&a&\lambda-5\end{vmatrix}=0有二重根，求参数a的值$

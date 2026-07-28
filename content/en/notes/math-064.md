@@ -1,13 +1,17 @@
 ---
-title: "Graduate Examination Mathematics: Lecture 56：多元微分在几何上的应用"
+title: "Lecture 56: Geometric Applications of Multivariable Differentials"
 slug: math-064
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination Mathematics study notes: Lecture 56: Geometric Applications of Multivariable Differentials. Original formulas, diagrams, and examples are retained."
 category: "Mathematics"
-tags: ["Graduate Examination Mathematics", "Calculus"]
+tags: ["Graduate Entrance Examination Mathematics","Advanced Mathematics","Vector Algebra and Analytic Geometry in Space"]
 ---
 
-## Original Chinese Note
+## 56.1 Tangent Plane and Normal of Surfaces
+**Concept One**: Surface $F(x,y,z)=0$, normal vector: $n=({F_x,F_y,F_z})$
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Concept 2**: Surface $z=F(x,y)$, normal vector: $n=({F_x,F_y,-1})$
 
-[Read the original Chinese note](/notes/math-064/)
+## 56.2 Tangents to Curves and Normal Planes
+**Concept**
+- Formula: $$1)\text{ Curve }\begin{cases}x=x(t)\\y=y(t)\\z=z(t)\end{cases}\quad\text{ Tangent vector: }\quad\tau=\{x'(t_0),y'(t_0),z'(t_0)\}$$
+- Formula: $$2)\text{ Curve }\begin{cases}F(x,y,z)=0\\G(x,y,z)=0&\end{cases}\text{ Tangent vector: }\quad\mathbf{\tau}=\mathbf{n}_1\times\mathbf{n}_2$$

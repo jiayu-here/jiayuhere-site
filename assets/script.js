@@ -335,7 +335,7 @@ if (savedNoteIndexState) {
 updateContentList();
 
 if (savedNoteIndexState && Number.isFinite(savedNoteIndexState.scrollY)) {
-  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: Math.max(0, savedNoteIndexState.scrollY), behavior: "auto" })));
+  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: Math.max(0, savedNoteIndexState.scrollY), behavior: "instant" })));
 }
 
 const saveNoteIndexState = () => {

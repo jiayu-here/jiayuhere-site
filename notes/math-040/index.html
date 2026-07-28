@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -83,8 +83,8 @@
 <li>答案：可以，前提是 $f(x)$ 在 $[a,b]$ 上连续；</li>
 </ul>
 <h3 id="section-3">1.1.2 积分上限的函数及其导数</h3>
-<h5 id="section-4"><strong>定理</strong>： #积分上限的函数：微积分基本定理</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{若 }f(x)\text{在 }[a,b]\text{ 上连续，则：}\int_a^xf(t)\mathrm{d}t\text{ 在 }[a,b]$ 上可导，且有 $$(\int_a^xf(t)\mathrm{d}t)^{\prime}=f(x)$$</blockquote>
+<h5 id="section-4"><strong>定理</strong>： <span class="note-tag">积分上限的函数</span>：微积分基本定理</h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }f(x)\text{在 }[a,b]\text{ 上连续，则：}\int_a^xf(t)\mathrm{d}t\text{ 在 }[a,b]$ 上可导，且有 $$(\int_a^xf(t)\mathrm{d}t)^{\prime}=f(x)$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念：</li>
@@ -96,13 +96,13 @@
 <li>结论：</li>
 <li class="list-indent-1">$$(\int_{\varphi(x)}^{\psi(x)}f(t)dt)^{\prime}=f(\psi(x))\psi^{\prime}(x)-f(\varphi(x))\varphi^{\prime}(x)$$</li>
 </ul>
-<h5 id="section-5"><strong>定理</strong>： #积分上限函数的奇偶性</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">积分上限函数的奇偶性</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
 <blockquote>1. 若 f (x)是奇函数，则 $\int_0^xf(t)dt$ 是偶函数；</blockquote>
 <blockquote>2. 若 f (x)是偶函数，则 $\int_0^xf(t)dt$ 是奇函数；</blockquote>
 <p><strong>解释</strong></p>
-<h5 id="section-6"><strong>定理</strong>： #定积分的原函数</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }f(\mathrm{x})\text{在}\left[a,b\right]\text{ 上连续，则}\int_a^xf(t)\mathrm{d}t\text{ 是}f(\mathrm{x})\text{ 在 }\left[a,b\right]$ 上的一个原函数；</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">定积分的原函数</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{设 }f(\mathrm{x})\text{在}\left[a,b\right]\text{ 上连续，则}\int_a^xf(t)\mathrm{d}t\text{ 是}f(\mathrm{x})\text{ 在 }\left[a,b\right]$ 上的一个原函数；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>当被积函数 $f(x)$ 是一个连续函数时，其变上限的积分、作为上限的函数，是 $f(x)$ 在这一点上的原函数；</li>
@@ -124,7 +124,7 @@
 <li class="list-indent-1">其中 $u=x的平方$</li>
 <li class="list-indent-1">注意：不能直接对 x 的平方求导，要把它看作是一个复合函数求导：</li>
 <li class="list-indent-1">$\bar{\Phi}_{x}^{\prime}(x)=\bar{\Phi}_{u}^{\prime}\cdot U_{x}^{\prime}=e^{-u^2}\cdot2x=e^{-x^4}\cdot2x.$</li>
-<li>题型： #定积分的原函数 </li>
+<li>题型： <span class="note-tag">定积分的原函数</span> </li>
 </ul>
 <p><strong>例题</strong>：当函数的上下限都变时： $g(x)=\int_{\sin x}^{x^2}e^{-t^2}dt\quad$，求其导函数；</p>
 <ul>
@@ -133,12 +133,12 @@
 <li class="list-indent-1">分开求解，相加；</li>
 <li>解析</li>
 <li class="list-indent-1">${\int_0^{x^2}e^{-t^2}dt+\int_{sinx}^0e^{-t^2}dt}$</li>
-<li>题型： #定积分的原函数</li>
+<li>题型： <span class="note-tag">定积分的原函数</span></li>
 </ul>
 <h2 id="section-8">1.2 计算方法</h2>
 <h3 id="section-9">1.2.1 牛顿-莱布尼茨公式</h3>
-<h5 id="section-10"><strong>定理</strong>： #牛顿莱布尼茨公式</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $\text{设 }F(x)\text{ 为连续函数 }f(x)$ $\text{在 }[a,b]\text{ 上的一个原函数,则}$：$\int_{a}^{b}f(x)dx=F(b)-F(a)$，也称之为微积分基本公式；</blockquote>
+<h5 id="section-10"><strong>定理</strong>： <span class="note-tag">牛顿莱布尼茨公式</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{设 }F(x)\text{ 为连续函数 }f(x)$ $\text{在 }[a,b]\text{ 上的一个原函数,则}$：$\int_{a}^{b}f(x)dx=F(b)-F(a)$，也称之为微积分基本公式；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>把求解定积分的问题，转变成了找原函数的问题；</li>
@@ -151,15 +151,15 @@
 <li class="list-indent-1"><img class="note-image" src="/assets/notes/29cd39e280a4-Pasted-image-20240123145622.png" alt="Pasted image 20240123145622" loading="lazy" decoding="async"></li>
 </ul>
 <h3 id="section-11">1.2.2 换元法</h3>
-<h5 id="section-12"><strong>定理</strong>： #定积分的换元法</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{a}^{b}f(x)\operatorname{d}x=\int_{\alpha}^{\beta}f(\varphi(t))\varphi^{\prime}(t)\operatorname{d}t$$</blockquote>
+<h5 id="section-12"><strong>定理</strong>： <span class="note-tag">定积分的换元法</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{a}^{b}f(x)\operatorname{d}x=\int_{\alpha}^{\beta}f(\varphi(t))\varphi^{\prime}(t)\operatorname{d}t$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>注意：被积函数和上下限都要换元；</li>
 </ul>
 <h3 id="section-13">1.2.3 分部积分法</h3>
-<h5 id="section-14"><strong>定理</strong>： #定积分的分部积分法</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\int_{a}^{b}u\operatorname{d}v=uv\bigg|_{a}^{b}-\int_{a}^{b}v\operatorname{d}u$$</blockquote>
+<h5 id="section-14"><strong>定理</strong>： <span class="note-tag">定积分的分部积分法</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{a}^{b}u\operatorname{d}v=uv\bigg|_{a}^{b}-\int_{a}^{b}v\operatorname{d}u$$</blockquote>
 <h3 id="section-15">1.2.4 其他方法</h3>
 <p><strong>方法一：利用奇偶性，周期性</strong> </p>
 <ul>
@@ -176,10 +176,10 @@
 <li>分析</li>
 <li>解析</li>
 <li class="list-indent-1">$\int_{0}^{\pi}\sin xdx=\left(-cosx\right)\int_{0}^{\pi}=1-(-1)=2.$</li>
-<li>题型： #牛顿莱布尼茨公式 </li>
+<li>题型： <span class="note-tag">牛顿莱布尼茨公式</span> </li>
 </ul>
 <h2 id="section-17">1.3 常考题型</h2>
-<h3 id="section-18">题型： #定积分的计算</h3>
+<h3 id="section-18">题型： <span class="note-tag">定积分的计算</span></h3>
 <h4 id="section-19">PART 1：解题方法</h4>
 <p><strong>五类常用方法</strong></p>
 <ul>
@@ -205,7 +205,7 @@
 </ul>
 <h4 id="section-20">PART 2：典型例题</h4>
 <h4 id="section-21">PART 3：知识点复盘</h4>
-<h3 id="section-22">题型： #变上限定积分</h3>
+<h3 id="section-22">题型： <span class="note-tag">变上限定积分</span></h3>
 <h4 id="section-23">PART 1：解题方法</h4>
 <p><strong>核心公式</strong></p>
 <ul>
@@ -252,6 +252,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

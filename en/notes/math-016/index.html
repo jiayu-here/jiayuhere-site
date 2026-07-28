@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 8：无穷小与无穷大 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 8: Infinitesimals and Infinite Quantities | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 8: Infinitesimals and Infinite Quantities. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Functions, Limits, and Continuity">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 8：无穷小与无穷大 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 8: Infinitesimals and Infinite Quantities | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 8: Infinitesimals and Infinite Quantities. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-016/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,67 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 8：无穷小与无穷大</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-03-01</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-016/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-015/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 7：极限存在准则</strong></a>
-    <a class="article-pagination-next" href="../math-017/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 9：极限的概念、性质与存在准则</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 8: Infinitesimals and Infinite Quantities</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 8: Infinitesimals and Infinite Quantities. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-03-01</span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Functions</span><span>Limits</span><span>and Continuity</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">8.1 Infinitesimal</a><a href="#section-5">8.2 Infinity</a><a href="#section-10">8.3 The Relationship Between Infinity and Infinitesimal</a></nav></details><div class="prose"><h2 id="section-1">8.1 Infinitesimal</h2>
+<h3 id="section-2">8.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">infinitelysmall</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> if the function $f(x)$ has zero limit at $x\to x_0($ or $x\to\infty)$, then $f(x)$ is called an infinitesimal at $x\to x_0($ or $x\to\infty)$.</blockquote>
+<h3 id="section-3">8.1.2 Comparison of infinitesimals</h3>
+<p>-<strong>Iso-order</strong>infinitesimal: $\alpha(x)\text{ and }\beta(x)$ The result of division is<strong>constant C</strong>(C is not equal to 0);</p>
+<p>-<strong>Equivalent</strong>infinitesimal: $\alpha(x)\text{ and }\beta(x)$ divide by<strong>constant 1</strong>;</p>
+<ul>
+<li>Higher-order infinitesimal: $\alpha(x)\text{ and }\beta(x)$ divide by 0; can be denoted as: $\alpha(x)=o(\beta(x))$</li>
+<li>Low-order infinitesimals: $\alpha(x)\text{ and }\beta(x)$ divide by the opposite order is infinite;</li>
+<li>$\text{ If }\lim\frac{\alpha (x)^{\color{red}{}}}{\left[\beta (x)\right]^{k}\color{red}}=C\neq 0,\text{ Said }$ α is the k-th order infinitesimal of β;</li>
+</ul>
+<h3 id="section-4">8.1.3 Properties of infinitesimals</h3>
+<p>-<strong>Property 1:</strong><strong>The sum of infinitesimals</strong>is still infinitesimal;</p>
+<p>-<strong>Property 2:</strong><strong>The product of finite</strong>infinitesimals is still infinitesimal;</p>
+<p>-<strong>Property 3:</strong>The product of infinitesimals and<strong>bounded quantities</strong>is infinitesimal;</p>
+<h2 id="section-5">8.2 Infinity</h2>
+<h3 id="section-6">8.2.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">infinitelylarge</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> if the function $f(x)$ has an infinite limit at $x\to x_0($ or $x\to\infty)$, then $f(x)$ is called an infinite quantity at $x\to x_0($ or $x\to\infty)$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>For every $M&gt;0$, there is a $\delta&gt;0$ such that $0&lt;|x-x_0|&lt;\delta$ implies $|f(x)|&gt;M$.</li>
+</ul>
+<h3 id="section-7">8.2.2 Comparison of Common Infinity</h3>
+<p><strong>Concept</strong>: Function limit</p>
+<ul>
+<li>When x approaches infinity:</li>
+<li>$$\ln^{\alpha}x&lt;&lt;x^{\beta}&lt;&lt;a^{x}$$</li>
+<li>Among them, $\alpha&gt;0,\beta&gt;0,a&gt;1$</li>
+<li>Example:</li>
+<li class="list-indent-1">So $\lim_{x\to+\infty}\frac{\ln x}{x}=0$;</li>
+</ul>
+<p><strong>Concept</strong>: Sequence limits</p>
+<ul>
+<li>Sequence limit: $n\to\infty$</li>
+<li>$$\ln^\alpha n&lt;&lt;n^\beta&lt;&lt;a^n&lt;&lt;n!&lt;&lt;n^n$$</li>
+<li>Where $\alpha&gt;0,\beta&gt;0,a&gt;1$;</li>
+</ul>
+<h3 id="section-8">8.2.3 Properties of Infinity</h3>
+<p>-<strong>Property 1:</strong>The sum of finite positive infinity is infinity;</p>
+<p>-<strong>Property 2:</strong>The<strong>product</strong>of finite infinity is still infinite;</p>
+<p>-<strong>Property 3:</strong>The sum of infinite quantities and<strong>bounded variables</strong>remains infinitely large;</p>
+<h3 id="section-9">8.2.4 Infinite Quantity and Unbounded Variables</h3>
+<ul>
+<li>1. A sequence $\{x_n\}$ tends to infinity in magnitude if, for every $M&gt;0$, there is an $N$ such that $n&gt;N$ implies $|x_n|&gt;M$.</li>
+<li class="list-indent-1">$|x_n|$ All values after N are very large;</li>
+<li>2. $\text{ Sequence }\left\{x_n\right\}\text{ It is an unbounded variable }$：$\forall\boldsymbol{M}&gt;\boldsymbol{0},\exists N&gt;\boldsymbol{0},\text{ Envoy }|x_N|&gt;\boldsymbol{M}$</li>
+<li class="list-indent-1">$|x_n|$ There exists a value at n greater than M, but not necessarily many terms are greater than M;</li>
+<li class="list-indent-1">Example: $x_n=\begin{cases}n,&amp;n\text{ which is an odd number }\\\mathbf{0},&amp;n\text{ and the number is even }\\\end{cases}$ is an unbounded variable, but not infinite;</li>
+<li>1 can be inferred from 2, 2 cannot be deduced from 1;</li>
+<li>$\text{ Infinite and vast }\Rightarrow\textbf{ \text{ Unbounded variable }}$</li>
+</ul>
+<h2 id="section-10">8.3 The Relationship Between Infinity and Infinitesimal</h2>
+<ul>
+<li>In the same limiting process, if $f(x)$ is infinite, then $1 / f(x)$ is infinitesimal;</li>
+<li>In the same limiting process, if $f(x)$ is infinitesimal and $f(x)$ is not zero, then $1 / f(x)$ is infinite;</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-015/index.html"><span>← Previous item</span><strong>Lecture 7: Criteria for the Existence of a Limit</strong></a>
+    <a class="article-pagination-next" href="../math-017/index.html"><span>Next item →</span><strong>Lecture 9: Limits — Concepts, Properties, and Existence Criteria</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +129,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

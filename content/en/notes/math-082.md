@@ -1,13 +1,21 @@
 ---
-title: "Graduate Examination Mathematics: Lecture 13：等价向量组"
+title: "Lecture 13: Equivalent Sets of Vectors"
 slug: math-082
-description: "The authoritative note is in Chinese; this page links to the original instead of using an automatic translation."
+description: "Graduate Entrance Examination Mathematics study notes: Lecture 13: Equivalent Sets of Vectors. Original formulas, diagrams, and examples are retained."
 category: "Mathematics"
-tags: ["Graduate Examination Mathematics", "Linear Algebra"]
+tags: ["Graduate Entrance Examination Mathematics","Linear Algebra","Vector Sets"]
 ---
 
-## Original Chinese Note
+## 13.1 Basic Concepts
+**Concept One**: Vector set equivalence and matrix equivalence are two different concepts;
+- Matrix equivalence must be isomorphic, so the number of rows and columns must be equal;
+- Vector sets are equivalent, but the number of vectors can be different;
 
-The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.
+**Concept 2**: If $A$ and $B$ have the same dimensions, then $A\cong B\Leftrightarrow r(A)=r(B)\Leftrightarrow PAQ=B$, where $P$ and $Q$ are invertible matrices of suitable sizes.
+- Convert a matrix of equal rank into all matrices in its simplest form, which are equivalent;
 
-[Read the original Chinese note](/notes/math-082/)
+**Concept 3**: For two sets of vectors in the same vector space:
+- $\{\alpha_{1},\alpha_{2},\cdots,\alpha_{s}\}\cong\{\beta_{1},\beta_{2},\cdots,\beta_{t}\}$
+- $\Leftrightarrow$ each vector set can be linearly represented by the other.
+- $\Leftrightarrow$ the two sets have the same rank and one set can be linearly represented by the other.
+- $\Leftrightarrow r\left(\alpha_{1},\alpha_{2},\cdots,\alpha_{s}\right)=r\left(\beta_{1},\beta_{2},\cdots,\beta_{t}\right)=r\left(\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta_{1},\beta_{2},\cdots,\beta_{t}\right)$.

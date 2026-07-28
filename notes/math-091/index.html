@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -60,19 +60,19 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 22：化二次型为标准型与规范型</h1><p class="article-lead">考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学</span><span>约 3 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>二次型</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 22：化二次型为标准型与规范型</h1><p class="article-lead">考研数学学习笔记：Lecture 22：化二次型为标准型与规范型。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学</span><span>约 2 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>线性代数</span><span>二次型</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">22.1 惯性定理 </a><a href="#section-2">22.1 两种二次型方法区别</a></nav></details><div class="prose"><h2 id="section-1">22.1 惯性定理 </h2>
 <p><strong>概念</strong>：惯性定理</p>
 <ul>
 <li>无论选取什么样的可逆线性变换，将二次型化成标准形或规范形，其正项个数 <code>p</code>，负项个数 <code>q</code> 都是不变的；</li>
 <li>其中 <code>p</code> 称之为正惯性指数；</li>
 <li>其中 <code>q</code> 称之为负惯性指数；</li>
-<li>且：$若二次型的秩为r，则r=p+g，可逆线性变换不改变正、负惯性指数$</li>
+<li>且：若二次型的秩为 $r$，则 $r=p+q$；可逆线性变换不改变正、负惯性指数。</li>
 </ul>
 <p><strong>概念</strong>：两个二次型 (或实对称矩阵)合同的充要条件 </p>
 <ul>
 <li>概念： </li>
-<li class="list-indent-1">两个二次型 (或实对称矩阵)合同的充要条件是有相同的正、负惯性指数, 或有相同的秩及正 (或负)惯性指数，或有相同的正、负特征值个数</li>
+<li class="list-indent-1">两个二次型 (或实对称矩阵) 合同的充要条件是有相同的正、负惯性指数；等价地，它们有相同的秩及相同的正惯性指数 (或负惯性指数)。</li>
 <li>正交矩阵下：</li>
 <li class="list-indent-1">两个矩阵有相同的正、负特征值的个数；</li>
 </ul>
@@ -95,16 +95,17 @@
 <li class="list-indent-1">所以 $x=Cy$ 里面的 <code>C</code> 不一定是特征向量；</li>
 <li class="list-indent-1">正交配方法下更特殊，<code>C</code> 里面都是特征向量，$\Lambda$ 里面都是特征值； </li>
 <li>注意：相同点 </li>
-<li class="list-indent-1">它们的正负关系指数是相同的 <code>-&gt;</code> 无论用哪种方法，得到的系数的正负的个数都是一样的；</li>
+<li class="list-indent-1">它们的正、负惯性指数相同 <code>-&gt;</code> 无论用哪种方法，得到的正系数和负系数的个数都相同；</li>
 </ul>
-<p><strong>概念</strong>：合同矩阵与正负关系指数</p>
+<p><strong>概念</strong>：合同矩阵与正、负惯性指数</p>
 <ul>
 <li>概念： </li>
-<li class="list-indent-1">并且合同变换当中，不变量也是正负关系指数；</li>
+<li class="list-indent-1">合同变换中的不变量是正、负惯性指数；</li>
 <li class="list-indent-1">所以 <code>A</code> 合同于 <code>B</code> 的充要条件，就是 $p_A=p_B$ 且 $q_A=q_B$</li>
-<li>对称：</li>
-<li class="list-indent-1">并且对称的条件下，一定合同；</li>
-<li class="list-indent-1">因为两个矩阵对称下，相似时特征值完全一样 <code>-&gt;</code> 完全一样的正负关系指数；</li>
+<li>实对称矩阵：</li>
+<li class="list-indent-1">两个实对称矩阵若相似，则特征值相同，因此正、负惯性指数相同，从而合同；</li>
+</ul>
+<ul>
 <li class="list-indent-1">反过来，<strong>合同不一定相似</strong>；</li>
 <li>结论： </li>
 <li class="list-indent-1">1. 相似一定合同；</li>
@@ -120,6 +121,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

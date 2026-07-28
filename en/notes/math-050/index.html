@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 41：隐函数求导 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 41: Differentiation of Implicit Functions | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 41: Differentiation of Implicit Functions. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multivariable Differential Calculus">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 41：隐函数求导 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 41: Differentiation of Implicit Functions | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 41: Differentiation of Implicit Functions. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-050/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,361 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 41：隐函数求导</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-07</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-050/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-049/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 40：多元复合函数的求导法则</strong></a>
-    <a class="article-pagination-next" href="../math-051/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 43：多元函数的极值与最值</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 41: Differentiation of Implicit Functions</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 41: Differentiation of Implicit Functions. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-07</span><span>14 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Differential Calculus</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">42.1 Introduction</a><a href="#section-2">42.2 Differentiation of Composite Functions</a><a href="#section-6">42.3 Differentiation of implicit functions</a><a href="#section-9">42.4 Common Question Types</a></nav></details><div class="prose"><h2 id="section-1">42.1 Introduction</h2>
+<p><strong>Relationship with Single-Variable Functions</strong></p>
+<ul>
+<li>Relationship between differentiation of multivariable functions and differentiation of single-variable functions:</li>
+<li>Problems in differentiation of single-variable functions:</li>
+<li class="list-indent-1">(1) Derivative of composite functions;</li>
+<li class="list-indent-1">(2) Finding the differentiation of implicit functions;</li>
+<li class="list-indent-1">(3) Parametric equation</li>
+<li class="list-indent-1">(4) Higher-order derivatives</li>
+<li class="list-indent-1">(5) Logarithmic differentiation;</li>
+<li>Problems in multivariable function differentiation:</li>
+<li class="list-indent-1">(1) Differential method for composite functions;</li>
+<li class="list-indent-1">(2) Implicit function differentiation;</li>
+</ul>
+<p><strong>Exam Content Overview</strong></p>
+<ul>
+<li>(1) Differential method for composite functions;</li>
+<li>(2) Implicit function differentiation;</li>
+</ul>
+<p><strong>Common Question Types and Typical Examples</strong></p>
+<ul>
+<li>Problem Type 1: Partial derivatives and total differentials of composite functions</li>
+<li>Problem Type 2: Partial derivatives and total differentials of implicit functions</li>
+</ul>
+<h2 id="section-2">42.2 Differentiation of Composite Functions</h2>
+<h3 id="section-3">42.2.1 Method for Differentiating Composite Functions of Multivariable Functions</h3>
+<p><strong>Single-variable Function</strong></p>
+<ul>
+<li>When $y=f(u), u=G(x)$ is differentiable <code>-&gt;</code> $y=f(G (x))$ is differentiable;</li>
+<li>Chain differentiation method: $y_{x}^{\prime}=y_{u}^{\prime}\cdot u_{x}^{\prime}$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Differentiationrulesformultivariablecompositefunctions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> Let $u=u(x,y)$ and $v=v(x,y)$ have first-order partial derivatives, and let $z=f(u,v)$ have continuous first-order partial derivatives. Then $z=f(u(x,y),v(x,y))$ has:</blockquote>
+<blockquote>$$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\qquad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>For inner sheaf functions:</li>
+<li class="list-indent-1">$u=u(x,y),\quad v=v(x,y)$ The requirement is<strong>the existence of a partial derivative</strong>;</li>
+<li>For outer layer functions:</li>
+<li class="list-indent-1">$z=f(u,v)$ must have continuous first-order partial derivatives.</li>
+<li>Cause:</li>
+<li class="list-indent-1">In diversity, differentiability cannot be derived from differentiability;</li>
+</ul>
+<p><strong>Principle</strong></p>
+<ul>
+<li>Assume the relationship between functions and variables:</li>
+<li class="list-indent-1">z</li>
+<li class="list-indent-2">u</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li class="list-indent-2">v</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li>Analysis:</li>
+<li class="list-indent-1">From the tree-derived diagram above, there are <code>x、y</code> two variables;</li>
+<li class="list-indent-1">For the variable $x$, both $u$ and $v$ depend on $x$, so $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$.</li>
+<li class="list-indent-1">Similarly, for <code>y</code></li>
+</ul>
+<h3 id="section-4">42.2.2 Invariance of Fully Differential Forms</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Invarianceofthefullydifferentialform</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> If $z=f(u,v)$, $u=u(x,y)$, and $v=v(x,y)$ have continuous first-order partial derivatives, then the total differential is invariant: $$\mathrm{d}z=\frac{\partial z}{\partial x}\mathrm{d}x+\frac{\partial z}{\partial y}\mathrm{d}y=\frac{\partial z}{\partial u}\mathrm{d}u+\frac{\partial z}{\partial v}\mathrm{d}v.$$</blockquote>
+<blockquote>That is, multivariable functions also possess invariance in differential form;</blockquote>
+<blockquote>Therefore: $$\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x},\qquad\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>One Yuan Hour:</li>
+<li class="list-indent-1">Whether the current derivative $dx$ x or u is $du$ (i.e., whether independent or intermediate), the current is<strong>the derivative of this variable multiplied by the derivative of that variable</strong>;</li>
+<li>When there are multiple types:</li>
+<li class="list-indent-1">Since $z=f(u,v),\quad u=u(x,v)$ and $\nu=\nu(x,y)$ have continuous first-order partial derivatives, they are always differentiable;</li>
+<li class="list-indent-1">Differential-form invariance gives $\frac{\partial z}{\partial x}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial x}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$ and $\frac{\partial z}{\partial y}=\frac{\partial z}{\partial u}\frac{\partial u}{\partial y}+\frac{\partial z}{\partial v}\frac{\partial v}{\partial y}$.</li>
+<li class="list-indent-1">substitute</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/8b643ae6ba7c-Pasted-image-20240203172405.png" alt="Pasted image 20240203172405" loading="lazy" decoding="async"></li>
+<li>Meaning:</li>
+<li class="list-indent-1"><code>z</code> As a function of other variables, the variables appearing there are invariant variables, regardless of whether they are intermediate or independent variables; the differential form is invariant;</li>
+</ul>
+<h3 id="section-5">42.2.3 Example Problems</h3>
+<p><strong>Scenario 1:</strong>$\text{ Let }z=f(u,v),u=\varphi(x),v=\psi(x)\text{ The equinox can be subminicious, then }$</p>
+<ul>
+<li>$\frac{dz}{dx}=\frac{\partial z}{\partial u}\frac{du}{dx}+\frac{\partial z}{\partial v}\frac{dv}{dx}$</li>
+<li>Analysis:</li>
+<li class="list-indent-1">Since u and v are partial derivatives with respect to z, they are partial differential $\partial$</li>
+<li class="list-indent-1">Because of the relationship shown in the diagram</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/92ddc96a14d2-Pasted-image-20240203161930.png" alt="Pasted image 20240203161930" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Therefore, z is a monovariate function with respect to x, so u is a direct derivative with respect to x;</li>
+</ul>
+<p><strong>Situation 2:</strong>$\text{ Let }w=f(u),u=\varphi(x,y,z)\text{ All can be subtracted },$</p>
+<ul>
+<li>$\frac{\partial w}{\partial x}=\frac{dw}{du}\frac{\partial u}{\partial x},\frac{\partial w}{\partial y}=\frac{dw}{du}\frac{\partial u}{\partial y},\frac{\partial w}{\partial z}=\frac{dw}{du}\frac{\partial u}{\partial z}$</li>
+<li>Analysis</li>
+<li class="list-indent-1">w is a ternary function with respect to xyz</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/54531d7cbb60-Pasted-image-20240203162158.png" alt="Pasted image 20240203162158" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Situation 3:</strong>$\text{ Let }u=f(x,y,z),z=\varphi(x,y)\text{ All can be subtracted }$</p>
+<ul>
+<li>$\frac{\partial u}{\partial x}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial x},\frac{\partial u}{\partial y}=\frac{\partial f}{\partial y}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial y}$</li>
+<li class="list-indent-1">Because the meaning of the u before and after the middle equality differs, the letter f is written at the end to indicate distinction;</li>
+<li>Analysis</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/9ddf73daf50d-Pasted-image-20240203162504.png" alt="Pasted image 20240203162504" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Example Question</strong>: $\text{ Let }z=f(x+y,xy),\text{ where }z=f(u,v)\text{ It can be subtracted, to seek }\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}$</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li class="list-indent-1">$dz=\frac{\partial f}{\partial u}du+\frac{\partial f}{\partial v}dv=\frac{\partial f}{\partial u}(dx+dy)+\frac{\partial f}{\partial V}(ydx+xdy)$</li>
+<li class="list-indent-1">From invariance, it can be inferred</li>
+<li class="list-indent-1">= $\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy$</li>
+<li class="list-indent-1">Then, since x and y are found separately, the results are:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/bf00984ae725-Pasted-image-20240203173251.png" alt="Pasted image 20240203173251" loading="lazy" decoding="async"></li>
+<li>Question Type: <span class="note-tag">Differentiationrulesformultivariablecompositefunctions</span></li>
+</ul>
+<h2 id="section-6">42.3 Differentiation of implicit functions</h2>
+<h3 id="section-7">42.3.1 Basic Concepts of Multivariable Functions and Implicit Functions</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Multivariablefunctionsandimplicitfunctions</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> the implicit function $y=(x)$ determined by Equation $F(x, y)=0$, we get: $$y^{\prime}=-\frac{F_{x}^{\prime}}{F_{y}^{\prime}}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>What is an implicit function?</li>
+<li class="list-indent-1">A function of the form $F(x, y)=0$ is called an implicit function;</li>
+<li class="list-indent-1">Placing the independent variable and the dependent variable in the same expression hides the function-class relationship between them, hence called implicit functions.</li>
+<li>What is an apparent function?</li>
+<li class="list-indent-1">An explicit function can be understood as:</li>
+<li class="list-indent-1">Functions with a clear relationship between the independent and dependent variables, such as $y=f(x)$ corresponding to the concept of implicit functions;</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Theexistencetheoremofimplicitfunctions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>1. $F(x,y)$ Continuously partial differentiable within the neighborhood of point $M_0(x_0,y_0)$;</blockquote>
+<blockquote>2. $F(x_0,y_0)=0$；</blockquote>
+<blockquote>3. $F_y\:\prime(x_0,y_0)\neq0$</blockquote>
+<blockquote>then the function $F(x,y)$ uniquely determines a continuous differentiable function $y=f(x)$ in the $M_{0}$ neighborhood to $y_0=f(x_0)$</blockquote>
+<blockquote>Rule: $$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>More straightforward explanations</li>
+<li class="list-indent-1">$F(x,y)=0.\text{ If }x\text{ is the independent variable, then }y=y(x).\text{ Find }\frac{dy}{dx}.$</li>
+<li class="list-indent-1">According to the requirements, x is an independent variable, so theoretically y can be transformed into a function of x, i.e., y directly regarded as y(x), and then derivative from both sides of x:</li>
+<li class="list-indent-2">$F_{x}'+F_{y}'\frac{dy}{dx}=0\Longrightarrow\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$</li>
+<li>Memory</li>
+<li class="list-indent-1">1. There must be a negative sign;</li>
+<li class="list-indent-1">2. In $\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$, x and y correspond interlacing;</li>
+</ul>
+<p><strong>Proof</strong></p>
+<ul>
+<li>Because in implicit function $F(x,y)$:</li>
+<li class="list-indent-1">x is a function for x: $x=x$</li>
+<li class="list-indent-1">y is the function for x: $y=f(x)$</li>
+<li>Therefore, when differentiating $F(x,y)=0$, their derivative chain is: $F&lt;_{y}^x&gt;x$</li>
+<li>Applying the chain rule gives $\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y}\frac{dy}{dx}=0$.</li>
+<li>Transform the position to get: $\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Thereexistsatheoremformultivariableimplicitfunctions</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> If $F$ has continuous first-order partial derivatives near $M_0(x_0,y_0,z_0)$, $F(x_0,y_0,z_0)=0$, and $F_z^{\prime}(x_0,y_0,z_0)\neq0$, then $F(x,y,z)=0$ uniquely defines a continuously differentiable function $z=\varphi(x,y)$ near $M_0$, with $z_0=\varphi(x_0,y_0)$.</blockquote>
+<blockquote>Therefore, $$\frac{\partial z}{\partial x}=-\frac{F_{x}^{\prime}}{F_{z}^{\prime}},\qquad\frac{\partial z}{\partial y}=-\frac{F_{y}^{\prime}}{F_{z}^{\prime}}.$$</blockquote>
+<h3 id="section-8">42.3.2 Example Problems</h3>
+<p><strong>Example</strong>: $e^xy^3-x^2+2y=1.\text{ Find }\frac{dy}{dx}\text{ and }\frac{d^2y}{dx^2}.$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">$\text{ According to the problem, x is the independent variable, and y is a function with respect to x }$</li>
+<li>Analysis: Find $\frac{dy}{dx}$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;e^{x}y^{3}-x^{2}+2y=1 \\&amp;e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}-2x+2{\frac{dy}{dx}}=0 \\&amp;\frac{dy}{dx}=\frac{2x-e^{x}y^{3}}{e^{x}3y^{2}+2}\end{aligned}$$</li>
+<li>Analysis: Find $\frac{d^2y}{dx^2}$</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+&amp;\text{To find }\frac{d^{2}y}{dx^{2}},\text{ differentiate }e^{x}y^{3}+3e^{x}y^{2}\frac{dy}{dx}-2x+2\frac{dy}{dx}=0\text{ once more with respect to }x: \\
+&amp;e^{x}y^{3}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}3y^{2}{\frac{dy}{dx}}+e^{x}6y({\frac{dy}{dx}})^{2}+e^{x}3y^{2}{\frac{d^{2}y}{dx^{2}}}-2+2{\frac{d^{2}y}{dx^{2}}}=0 \\
+&amp;\frac{d^{2}y}{dx^{2}}=\frac{2-e^{x}y^{3}-6e^{x}y^{2}\frac{dy}{dx}-6e^{x}y(\frac{dy}{dx})^{2}}{3e^{x}y^{2}+2} \\
+&amp;\text{Finally, substitute }\frac{dy}{dx}=\frac{2x-e^{x}y^{3}}{3e^{x}y^{2}+2}.
+\end{aligned}
+$$</div>
+<ul>
+<li>Question Type: <span class="note-tag">ImplicitDifferentiation</span></li>
+</ul>
+<p><strong>Example</strong>: Given $x^{2}+y^{2}-1=0$, find the first and second derivatives of the implicit function at $(0,1)$.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Note that it is $F(x,y)=0$</li>
+<li>Explanation: First level</li>
+<li class="list-indent-1">Set $F(x,y)=x^{2}+y^{2}-1$</li>
+<li class="list-indent-1">Can get: $F_{x}^{\prime}=2x,\,F_{y}^{\prime}=2y$</li>
+<li class="list-indent-1">So: $F(0,1)=0,\,F_{y}^{\prime}(0,1)=2\neq0$</li>
+<li class="list-indent-1">Substitute formula: $\frac{dy}{dx}=-\frac{F_{x}^{\prime}}{Fy^{\prime}}=-\frac{2x}{2y}=-\frac{x}{y}$</li>
+<li>Explanation: Second order</li>
+<li class="list-indent-1">Find the derivative again for $x$ in $-\frac{x}{y}$;</li>
+<li class="list-indent-1">$\frac{d^{2}y}{dx^{2}}=-\frac{y-xy^{\prime}}{y^{2}}=-\frac{y+x\frac{x}{y}}{y^{2}}$</li>
+<li>Question Type: <span class="note-tag">FindingtheRadicalFunctionforImplicitFunctions</span></li>
+</ul>
+<h2 id="section-9">42.4 Common Question Types</h2>
+<hr>
+<h3 id="section-10">Question Type: <span class="note-tag">Partialderivativesofcompositefunctionsandtotaldifferentiation</span></h3>
+<h4 id="section-11">PART 1: Problem-solving methods</h4>
+<p><strong>Problem Type</strong>: Derivative of multivariable composite functions with respect to the upper integral of variables</p>
+<ul>
+<li>(1) Carry in the variable limit points;</li>
+<li>(2) Differentiation:</li>
+<li class="list-indent-1">If you take the derivative from X, then treat Y as a constant. Similarly, for Y;</li>
+<li class="list-indent-1">According to $(\int_a^xf(t)\mathrm{d}t)^{\prime}=f(x)$, differentiating yields the function;</li>
+<li>Supplement: Other methods</li>
+<li class="list-indent-1">Fill in before calculating: Carry a special value</li>
+</ul>
+<p><strong>Problem Type</strong>: Find the value of the complete differential</p>
+<ul>
+<li>Method One:</li>
+<li class="list-indent-1">Directly find differentiation;</li>
+<li class="list-indent-1">Usually,<strong>composite function differentiation method</strong>is used;</li>
+<li>Method Two:</li>
+<li class="list-indent-1">Find the two partial derivatives separately, then multiply them by $dx,dy$ and add them to obtain the differential;</li>
+<li class="list-indent-1">Formula: $$\mathbf{d}z=\frac{\partial z}{\partial x}\mathbf{d}x+\frac{\partial z}{\partial y}\mathbf{d}y$$</li>
+</ul>
+<p><strong>Problem Type</strong>: Find higher-order derivatives using multivariable composite functions</p>
+<ul>
+<li>(1) First find the first derivative $\frac{dy}{dx}$, and do not substitute the composite function</li>
+<li class="list-indent-1">For example, when $y=f(e^x,cosx)$, $\frac{dy}{dx}=f_{1}^{\prime}e^{x}+f_{2}^{\prime}(-sinx)$</li>
+<li>(2) Subtract the composite function and the value of the target point into the first derivative to obtain the value of the first derivative;</li>
+<li>(3) Next, find the second derivative, paying attention to the object when taking the differentiation for $f_{1}^{\prime}$ and $f_{2}^{\prime}$;</li>
+<li class="list-indent-1">Since <code>f</code> is a composite function with respect to $e^x,cosx$, when taking derivatives for $f_{1}^{\prime}$ and $f_{2}^{\prime}$, you must take derivatives for both the $e^x$ and $cosx$ parts:</li>
+<li class="list-indent-1">$$\frac{d^{2}y}{dx^{2}}=f_{11}^{\prime\prime}e^{2x}+f_{12}^{\prime\prime}(-e^{x}sinx)+f_{1}^{\prime}\cdot e^{x}+f_{22}^{\prime\prime}\sin^{2}x+f_{21}^{\prime\prime}(-e^{x}sinx)-f_{2}^{\prime}\cos x$$</li>
+</ul>
+<p><strong>Question Type</strong>: When the relationships between independent variables such as x and y in the problem are relatively complex, composite functions can be used to replace them with simple functions, and the derivative is derived from the composite function to find the target result</p>
+<ul>
+<li>Example: For example, when $z=f(x^y,y^x)$, you can let $u=x^y,v=y^x$, and at this point, $z=f(u,v)$, you get the following tree diagram:</li>
+<li>z</li>
+<li class="list-indent-1">u</li>
+<li class="list-indent-2">x</li>
+<li class="list-indent-2">y</li>
+<li class="list-indent-1">v</li>
+<li class="list-indent-2">x</li>
+<li class="list-indent-2">y</li>
+<li>At this point, suppose the partial derivative for x is $$\frac{\partial z}{\partial x}=\frac{\partial f}{\partial u}yx^{y-1}+\frac{\partial f}{\partial u}y^{x}luy$$</li>
+</ul>
+<h4 id="section-12">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: Let $z=\left(1+\frac{x}{y}\right)^{\frac{x}{y}},\text{ Then find: }dz|_{(1,1)}$</p>
+<ul>
+<li>Method 1: Directly find the differential</li>
+<li class="list-indent-1">Because of the invariance of differential forms, the differential of z with respect to u $z_{u}^{\prime}\mathrm{d}u$ equals the differential of z with respect to x and y;</li>
+<li class="list-indent-1">$\frac{x}{y}=u,\quad z=(1+u)^{u},\quad\mathrm{d}z=z_{u}^{\prime}\mathrm{d}u$</li>
+<li class="list-indent-1">Set $z=e^{u\ln(1+u)},\text{ and }du=d\frac{x}{y}$</li>
+<li class="list-indent-1">De: $$\quad\mathrm{d}z=e^{u\ln(1+u)}\left[\ln(1+u)+\frac{u}{1+u}\right]\frac{ydx-xdy}{y^2}$$</li>
+<li class="list-indent-1">After obtaining the formula for $dz$, substitute the value of z to get the value of $dz|_{(1,1)}=2\left[\ln 2+\frac{1}{2}\right](dx-dy)$</li>
+<li>Method 2: Use two partial derivatives to find differentiation</li>
+<li class="list-indent-1">First, find $z_x^{\prime}(1,1),\quad z_y^{\prime}(1,1)$ separately, then multiply by <code>dx、dy</code> to obtain the differential;</li>
+<li class="list-indent-1">Since it's a specific point, you can apply first and then calculate;</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;z(x,1)=(1+x)^{x}=e^{x\ln(1+x)}\\&amp;z_{x}^{\prime}(x,1)=e^{x\ln(t+x)}\left[\ln(t+x)+\frac{x}{1+x}\right],\quad z_{x}^{\prime}(1,1)=2\left[\ln2+\frac{1}{2}\right]=1+2\ln2\end{aligned}$$</li>
+<li class="list-indent-1">Similarly, find partial derivative with respect to <code>y</code></li>
+</ul>
+<p><strong>Example Question</strong>: Let $f(u,v)$ have a second-order continuous partial derivative, the function $g(x,y)=xy-f(x+y,x-y)$, find $\frac{\partial^2g}{\partial x^2}+\frac{\partial^2g}{\partial x\partial y}+\frac{\partial^2g}{\partial y^2}$</p>
+<ul>
+<li>$\frac{\partial g}{\partial x}=y-f_{1}^{\prime}-f_{2}^{\prime}$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial X^{2}}=-\left[f_{11}^{\prime\prime}+f_{12}^{\prime\prime}\right]-\left[f_{11}^{\prime\prime}+f_{22}^{\prime\prime}\right]$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial x\partial y}=1-\left[f_{11}^{\prime\prime}-f_{12}^{\prime\prime}\right]-\left[f_{21}^{\prime\prime}-f_{22}^{\prime\prime}\right]$</li>
+<li>$\frac{\partial g}{\partial y}=x-f_{1}^{\prime}+f_{2}^{\prime}$</li>
+<li class="list-indent-1">$\frac{\partial^{2}g}{\partial y^{2}}=-\left[f_{11}^{\prime\prime}-f_{12}^{\prime\prime}\right]+\left[f_{21}^{\prime\prime}-f_{22}^{\prime\prime}\right]$</li>
+<li>So the sum is: $1-3f_{11}-f_{22}$</li>
+</ul>
+<p><strong>Example</strong>: Let function $f(u)$ have a second-order continuous derivative, $z=f(e^x\cos y)$ satisfy $\frac{\partial^{2}z}{\partial x^{2}}+\frac{\partial^{2}z}{\partial y^{2}}=(4z+e^{x}\cos y)e^{2x}$, if $f(0)=0,f^{\prime}(0)=0$, find the expression of $f(u)$;</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li>Question Type: #</li>
+</ul>
+<h4 id="section-13">PART 3: Key Points Review</h4>
+<hr>
+<h3 id="section-14">Question Type: <span class="note-tag">Partialderivativesandtotaldifferentialsofimplicitfunctions</span></h3>
+<h4 id="section-15">PART 1: Problem-solving methods</h4>
+<p><strong>Problem Type</strong>: Finding Differentiation with Implicit Functions</p>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">Just like finding differentiation with explicit functions, there are also two methods</li>
+<li>What is the implicit function of a multivariable function:</li>
+<li class="list-indent-1">The current function is $z=z(x,y)$, so z is similar to y in the case of a single-variable function, and is the dependent variable. When the function expression contains z in addition to x and y, it is an implicit function;</li>
+<li>Method One:</li>
+<li class="list-indent-1">Directly find differentiation;</li>
+<li class="list-indent-1">If you know the values of x and y, you need to first find the value of z, substitute it into the equation, and then calculate;</li>
+<li>Method Two:</li>
+<li class="list-indent-1">Use two partial derivations to find the differential</li>
+</ul>
+<p><strong>Problem Type</strong>: Differentiating implicit functions</p>
+<ul>
+<li>Method 1: Bring formulas</li>
+<li class="list-indent-1">$$\frac{dy}{dx}=-\frac{F_{x}'}{F_{y}'}$$</li>
+<li>Method 2: Derivative from both sides</li>
+<li class="list-indent-1">At the same time, take differentiations from both sides of the function, paying attention to the complex relationship between z and x, y in implicit functions;</li>
+<li>Method 3: Invariance of differential forms</li>
+</ul>
+<p>	-</p>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">In Method 1, ${F_{x}'}$ is the derivative of x, but in this case, both z and y in $z=f(x, y)$ are treated as constants;</li>
+<li class="list-indent-1">In method two, when deriving with respect to both sides, when differentiating with x, treat z as a function of $z=f(x, y)$</li>
+</ul>
+<p><strong>Question Type</strong>: Comprehensive questions on composite and implicit functions</p>
+<ul>
+<li>Method 1: Chain differentiation</li>
+<li class="list-indent-1">(1) Draw the derivative tree diagram;</li>
+<li class="list-indent-1">(2) Based on the tree diagram, determine the expression for differentiation</li>
+<li class="list-indent-2">For example, the following tree diagram:</li>
+<li class="list-indent-3">u</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-4">y</li>
+<li class="list-indent-5">x</li>
+<li class="list-indent-4">z</li>
+<li class="list-indent-5">x</li>
+<li class="list-indent-2">Its corresponding differentiative formula: $\frac{\operatorname{d}u}{\operatorname{d}x}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\frac{\operatorname{d}y}{\operatorname{d}x}+\frac{\partial f}{\partial z}\frac{\operatorname{d}z}{\operatorname{d}x}$</li>
+<li class="list-indent-1">(3) Based on implicit function relationships, find $\frac{\operatorname{d}y}{\operatorname{d}x}$ and $\frac{\operatorname{d}z}{\operatorname{d}x}$</li>
+<li>Method 2: Full-differential form invariance</li>
+<li class="list-indent-1">For example, the following tree diagram:</li>
+<li class="list-indent-2">u</li>
+<li class="list-indent-3">x</li>
+<li class="list-indent-3">y</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-3">z</li>
+<li class="list-indent-4">x</li>
+<li class="list-indent-1">It does not need to be related whether u and xyz are intermediate variables, because $u=f(x,y,z)$, so according to the invariance of differential forms:</li>
+<li class="list-indent-1">$du=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy+\frac{\partial f}{\partial z}dz$</li>
+</ul>
+<h4 id="section-16">PART 2: Typical Example Problems</h4>
+<p><strong>Example</strong>: If the function $z=z(x,y)$ is $e^{x+2y+3z}+xyz=1\quad\text{ Confirm, then }dz_{(0,0)}=$ by the equation</p>
+<ul>
+<li>Method 1: Directly find the differential</li>
+<li class="list-indent-1">From $x=0,y=0$, it can be known that $z=0$</li>
+<li class="list-indent-1">Derivative of both ends of $e^{x+2y+3z}+xyz=1$</li>
+<li class="list-indent-1">Get: $e^{x+2y+3z}(dx+2dy+3dz)+yzdx+xzdy+xydz=0$</li>
+<li class="list-indent-1">Substitute $x=0,y=0,z=0$ into the above equation to get $dx+2dy+3dz=0$</li>
+<li class="list-indent-1">Finally, you get $dz|_{(0,0)}=-\frac{1}{2}(dx+2dy)$</li>
+<li>Method 2: Find the partial derivative separately</li>
+<li class="list-indent-1">From $x=0,y=0$, it can be known that $z=0$</li>
+<li class="list-indent-1">Got $dz|_{(0,0)}=z_{x}(0,0)dx+z_{y}(0,0)dy$</li>
+<li class="list-indent-1">$y=0$ in $e^{x+2y+3z}+xyz=1$ gets $,  e^{x+3z}=1, $ differentiates on both sides $x$ gets</li>
+<li class="list-indent-2">$e^{x+3z}(1+3z_{x})=0$</li>
+<li class="list-indent-2">$z_{x}(0,0)=-\frac{1}{3}.$</li>
+<li class="list-indent-1">$\text{ The same logic can be applied }\quad z_y(0,0)=-\frac23$</li>
+<li class="list-indent-1">Get $dz|_{(0,0)}=-\frac{1}{2}(dx+2dy)$</li>
+</ul>
+<p><strong>Example</strong>: Given $u+\mathbf{e}^{u}=xy$, find $\frac{\partial u}{\partial x}$, $\frac{\partial u}{\partial y}$, and $\frac{\partial^{2}u}{\partial x\partial y}$.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Because the original expression contains u, x, y, it is an implicit function, and since u is a function of x and y, a composite function is also needed to take the derivative;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Method 1: Differentiating both sides</li>
+<li class="list-indent-2">For $u+\mathbf{e}^{u}=xy$ and to both ends of x, find the partial derivative to get: $(1+e^{u})\frac{\partial u}{\partial x}=y$</li>
+<li class="list-indent-3">The right side shows the partial derivative result for x;</li>
+<li class="list-indent-3">The left side shows the derivative result of the composite function u. Since it is a composite function derivative, multiplying by $\frac{\partial u}{\partial x}$ is required</li>
+<li class="list-indent-2">Get: $\frac{\partial u}{\partial x}=\frac y{1+e^x}$</li>
+<li class="list-indent-2">Similarly, we get: $\frac{\partial u}{\partial y}=\frac x{1+e^u}$</li>
+<li class="list-indent-2">Find $$\frac{\partial^2u}{\partial x\partial y}=\frac{(1+e^u)-e^u\frac{\partial u}{\partial y}y}{\left(1+e^u\right)^2}$$</li>
+<li class="list-indent-1">Method 2: Formula with the formula</li>
+<li class="list-indent-2">Obtained by the formula: $\frac{\partial y}{\partial x}=-\frac{F_{x}^{\prime}}{F_{x}^{\prime}}=-\frac{-y}{1+e^{u}}$</li>
+<li class="list-indent-2">By the formula: $\begin{aligned}\frac{\partial u}{\partial y}=-\frac{F_{y}^{\prime}}{F_{u}^{\prime}}&amp;=-\frac{-x}{1+e^{u}}\\&amp;=\frac{x}{1+e^{u}}\end{aligned}$</li>
+<li class="list-indent-1">Method 3: Invariance of differential forms</li>
+<li class="list-indent-2">$(1+e^{u})du=ydx+xdy$</li>
+<li class="list-indent-2">Divide $1+e^{u}$ to the right, and you get $du=Adx+Bdy$ is the form</li>
+</ul>
+<h4 id="section-17">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-049/index.html"><span>← Previous item</span><strong>Lecture 40: Differentiation Rules for Multivariable Composite Functions</strong></a>
+    <a class="article-pagination-next" href="../math-051/index.html"><span>Next item →</span><strong>Lecture 43: Local and Absolute Extrema of Multivariable Functions</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +423,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

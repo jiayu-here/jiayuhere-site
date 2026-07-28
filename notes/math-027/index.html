@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -95,7 +95,7 @@
 <p>先把 x = 0 带到原方程，求出 0 点时候的 y 的值，得到当时 y 等于 1；</p>
 <p>然后对两边求导，得到一阶导数：</p>
 <ul>
-<li>$y^{\prime}=\mathrm{e}^{y}+\mathrm{x}{e}^{y}{y}$</li>
+<li>$y^{\prime}=e^{y}+xe^{y}y^{\prime}$</li>
 </ul>
 <p>然后得知一阶导数在 y=1 时，其导数值为 e；</p>
 <p>然后的二阶导数、再带入：$y^{\prime\prime}=e^{y}y^{\prime}+e^{y}y^{\prime}+x(e^{y}y^{\prime})^{\prime}$</p>
@@ -103,31 +103,31 @@
 <p><strong>例题</strong>：$\text{设 }y=(1+x^2)^{\sin x}\text{ 求 }y^{\prime}$</p>
 <ul>
 <li>第一步：观测到是幂指类型函数，因此两边取 ln：</li>
-<li class="list-indent-1">$\ln y=\sin\ln(1+\mathrm{x}^2)$</li>
+<li class="list-indent-1">$\ln y=\sin x\ln(1+x^2)$</li>
 <li>然后：$\frac{y^{\prime}}y=\left[\cos x ln(1+x^2)+\frac{2x\sin x}{1+x^2}\right]$</li>
-<li>得到结果：$y^{\prime}=(1+x^{2})^{4x}\left[4x\ln(1+x)+\frac{2x\sin x}{1+x^{2}}\right]$</li>
+<li>得到结果：$y^{\prime}=(1+x^{2})^{\sin x}\left[\cos x\ln(1+x^2)+\frac{2x\sin x}{1+x^{2}}\right]$</li>
 </ul>
 <p><strong>解题方法</strong>：对数求导法</p>
-<p>#对数求导法</p>
+<p><span class="note-tag">对数求导法</span></p>
 <ul>
 <li>当观测到函数类型幂指类型的函数时，两边可以同时取对数；</li>
 </ul>
 <h2 id="section-4">1.2 参数方程确定函数导数</h2>
 <h3 id="section-5">1.2.1 基本概念</h3>
 <p>平面曲线可以用参数方程表示；其中就可能牵扯到参数方程的求导；</p>
-<h5 id="section-6"><strong>定理</strong>： #参数方程一阶导数</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\text{设 }x=\varphi(t),y=\psi(t)\text{ 在(}\alpha,\beta)\text{上可导},\varphi^{\prime}(t)\neq0\text{,则}\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}$$</blockquote>
+<h5 id="section-6"><strong>定理</strong>： <span class="note-tag">参数方程一阶导数</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\text{设 }x=\varphi(t),y=\psi(t)\text{ 在(}\alpha,\beta)\text{上可导},\varphi^{\prime}(t)\neq0\text{,则}\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>因为： $\varphi^{\prime}(t)\neq0$，所以有导数，所以</li>
 <li class="list-indent-1">${t=\varphi^{-1}(x)}$</li>
 <li class="list-indent-1">${y=\psi(t)}$</li>
-<li>$\frac{dy}{dx}=\frac{dy}{dt}\frac{dx}{dx}$</li>
+<li>$\frac{dy}{dx}=\frac{dy}{dt}\frac{dt}{dx}$</li>
 <li>最终得到：$\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}$</li>
 <li class="list-indent-1">解析：y 对 x 求导，结果就是 y 对 t 的导数，除上 x 对 t 的导数；</li>
 </ul>
-<h5 id="section-7"><strong>定理</strong>： #参数方程二阶导数</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述： $$\frac{d^{2}y}{dx^{2}}=\frac{\psi^{\prime\prime}(t)\varphi^{\prime}(t)-\varphi^{\prime\prime}(t)\psi^{\prime}(t)}{\varphi^{\prime3}(t)}$$</blockquote>
+<h5 id="section-7"><strong>定理</strong>： <span class="note-tag">参数方程二阶导数</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\frac{d^{2}y}{dx^{2}}=\frac{\psi^{\prime\prime}(t)\varphi^{\prime}(t)-\varphi^{\prime\prime}(t)\psi^{\prime}(t)}{\varphi^{\prime3}(t)}$$</blockquote>
 <p><strong>分析</strong>：求带 t 式子的二阶导数</p>
 <ul>
 <li>注意：求二阶导数时，要遵循以下步骤，不能跳步</li>
@@ -187,6 +187,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

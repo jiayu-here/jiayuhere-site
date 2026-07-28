@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 27: Indefinite Integrals and Integration by Substitution | Jiayu Lab</title>
+  <meta name="description" content="Graduate Entrance Examination Mathematics study notes: Lecture 27: Indefinite Integrals and Integration by Substitution. Original formulas, diagrams, and examples are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Mean Value Theorems and Applications of Derivatives">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 27: Indefinite Integrals and Integration by Substitution | Jiayu Lab">
+  <meta property="og:description" content="Graduate Entrance Examination Mathematics study notes: Lecture 27: Indefinite Integrals and Integration by Substitution. Original formulas, diagrams, and examples are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-035/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,38 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 27：不定积分 换元积分法</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-01-15</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-035/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-034/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 26：函数图形的绘制</strong></a>
-    <a class="article-pagination-next" href="../math-036/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 28：不定积分</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 27: Indefinite Integrals and Integration by Substitution</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 27: Indefinite Integrals and Integration by Substitution. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span>Mathematics · 2024-01-15</span><span>2 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 Basic Concepts of Curvature</a><a href="#section-2">1.2 Common Situations of Curvature</a></nav></details><div class="prose"><h2 id="section-1">1.1 Basic Concepts of Curvature</h2>
+<p><strong>What is Curvature</strong></p>
+<ul>
+<li>Literal meaning: Using limits to describe the degree of curvature at a certain point of a curve;</li>
+<li class="list-indent-1">Related to the point where it is located;</li>
+<li>Essence: describes the change in tangent angle between a curve at different points;</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/7a9cc4a537b7-Pasted-image-20240115203921.png" alt="Pasted image 20240115203921" loading="lazy" decoding="async"></li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Curvature</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: The absolute value of the ratio of the tangent angle $\Delta\alpha$ of </span> arc $MM^{\prime}$ to the arc length $\Delta s$ is called the average curvature of the arc, denoted as: $\overline{K}=\begin{vmatrix}\frac{\Delta\alpha}{\Delta s}\end{vmatrix}$</blockquote>
+<blockquote>When $M^{\prime}$ tends toward M along the curve L, if the limit of the average curvature of arc $\overline{MM^{\prime}}$ exists, this limit is called the curvature of the curve L at point M, denoted as K, that is:</blockquote>
+<blockquote> $K=\lim_{M^{'}\rightarrow M}\left|\frac{\Delta\alpha}{\Delta s}\right|\text{ or }K=\lim_{\Delta s\rightarrow0}\left|\frac{\Delta\alpha}{\Delta s}\right|=\left|\frac{d\alpha}{ds}\right|$</blockquote>
+<blockquote>is: $K=\frac{|y^{\prime\prime}|}{(1+{y^{\prime}}^2)^{\frac32}}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Using limits to describe the degree of curvature at a certain point in a curve;</li>
+<li>Curvature: $$K=\frac{|y^{\prime\prime}|}{(1+{y^{\prime}}^2)^{\frac32}}$$</li>
+<li>Radius of curvature: $$R=\frac1K$$</li>
+</ul>
+<h2 id="section-2">1.2 Common Situations of Curvature</h2>
+<p><strong>Straight Line</strong></p>
+<ul>
+<li>The curvature of a straight line is 0;</li>
+<li>Because the change in slope angle is 0;</li>
+</ul>
+<p><strong>Circle</strong></p>
+<ul>
+<li>The curvature of a circle is: 1 / radius</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-034/index.html"><span>← Previous item</span><strong>Lecture 26: Drawing Function Graphs</strong></a>
+    <a class="article-pagination-next" href="../math-036/index.html"><span>Next item →</span><strong>Lecture 28: Indefinite integrals</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +100,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

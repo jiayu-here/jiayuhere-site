@@ -38,16 +38,16 @@ y 可以用 x 一个解析式全部表达出来；
 **例题**：$\text{设 }y=f(x)\text{ 由 }y=1+xe^y\text{ 所确定,求 }y^{\prime\prime}(0)$
 先把 x = 0 带到原方程，求出 0 点时候的 y 的值，得到当时 y 等于 1；
 然后对两边求导，得到一阶导数：
-- $y^{\prime}=\mathrm{e}^{y}+\mathrm{x}{e}^{y}{y}$
+- $y^{\prime}=e^{y}+xe^{y}y^{\prime}$
 然后得知一阶导数在 y=1 时，其导数值为 e；
 然后的二阶导数、再带入：$y^{\prime\prime}=e^{y}y^{\prime}+e^{y}y^{\prime}+x(e^{y}y^{\prime})^{\prime}$
 最后得到结果：$y^{\prime\prime}(0)=e^{2}+e^{2}+0,\quad y^{\prime\prime}(0)=2e^{2}$
 
 **例题**：$\text{设 }y=(1+x^2)^{\sin x}\text{ 求 }y^{\prime}$
 - 第一步：观测到是幂指类型函数，因此两边取 ln：
-	- $\ln y=\sin\ln(1+\mathrm{x}^2)$
+	- $\ln y=\sin x\ln(1+x^2)$
 - 然后：$\frac{y^{\prime}}y=\left[\cos x ln(1+x^2)+\frac{2x\sin x}{1+x^2}\right]$
-- 得到结果：$y^{\prime}=(1+x^{2})^{4x}\left[4x\ln(1+x)+\frac{2x\sin x}{1+x^{2}}\right]$
+- 得到结果：$y^{\prime}=(1+x^{2})^{\sin x}\left[\cos x\ln(1+x^2)+\frac{2x\sin x}{1+x^{2}}\right]$
 
 **解题方法**：对数求导法
 #对数求导法
@@ -64,7 +64,7 @@ y 可以用 x 一个解析式全部表达出来；
 - 因为： $\varphi^{\prime}(t)\neq0$，所以有导数，所以
 	- ${t=\varphi^{-1}(x)}$
 	- ${y=\psi(t)}$
-- $\frac{dy}{dx}=\frac{dy}{dt}\frac{dx}{dx}$
+- $\frac{dy}{dx}=\frac{dy}{dt}\frac{dt}{dx}$
 - 最终得到：$\frac{dy}{dx}=\frac{\psi^{\prime}(t)}{\varphi^{\prime}(t)}$
 	- 解析：y 对 x 求导，结果就是 y 对 t 的导数，除上 x 对 t 的导数；
 

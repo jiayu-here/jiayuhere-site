@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 45：二重积分的计算 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 45: Calculation of Double Integrals | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multiple Integrals">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 45：二重积分的计算 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 45: Calculation of Double Integrals | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-053/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,167 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 45：二重积分的计算</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-09</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-053/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-052/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 44：二重积分</strong></a>
-    <a class="article-pagination-next" href="../math-054/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 47：三重积分</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 45: Calculation of Double Integrals</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-02-09</span><span>7 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multiple Integrals</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">45.1 Calculation of Double Integrals</a><a href="#section-2">45.2 Calculation Using Cartesian Coordinate System</a><a href="#section-3">45.3 Calculation Using Polar Coordinates</a><a href="#section-4">45.4 Calculation Using Symmetry and Parity</a><a href="#section-7">45.5 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">45.1 Calculation of Double Integrals</h2>
+<p><strong>Core Idea</strong>: Transform a double integral into the calculation of a definite integral in one variable, simplifying the calculation method;</p>
+<p><strong>Method Selection</strong></p>
+<ul>
+<li>Choose methods based on the following:</li>
+<li>1. integrand;</li>
+<li>2. Scoring area;</li>
+</ul>
+<p><strong>Suitable for polar coordinates</strong></p>
+<ul>
+<li>(1) Integrands suitable for polar coordinates calculations</li>
+<li class="list-indent-1">Formula:</li>
+<li class="list-indent-2">$$f(x^2+y^2),f(\sqrt{x^2+y^2}),f(\frac yx),f(\frac xy)$$</li>
+<li class="list-indent-1">Cause:</li>
+<li class="list-indent-2">$\sqrt{x^2+y^2}$ is more complex in the Cartesian coordinate system, but represents <code>ρ</code> in polar coordinates</li>
+<li class="list-indent-2">$\frac yx$ In polar coordinates, it represents an angle</li>
+<li>(2) Integration fields suitable for polar coordinates</li>
+<li class="list-indent-1">$$x^{2}+y^{2}\leq R^{2};\quad\quad\quad r^{2}\leq x^{2}+y^{2}\leq R^{2};\quad\quad\quad\\x^{2}+y^{2}\leq2ax;\quad\quad\quad x^{2}+y^{2}\leq2by;$$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">When the center is not at the origin, $x-x_0$ can be set to $\rho\sin\theta$, and similarly, $y-y_0$</li>
+<li>If (1) and (2) have a conflict, (1) takes precedence</li>
+</ul>
+<h2 id="section-2">45.2 Calculation Using Cartesian Coordinate System</h2>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Doubleintegrationcalculationbasedonrectangularcoordinatesystem</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>(1) First <code>Y</code> Later <code>X</code>: $$\int\int_D{f(x,y)d\sigma = \int_{a}^{b}[\int_{y_{1}(x)}^{y_{2}(x)}f(x,y)dy]dx}$$</blockquote>
+<blockquote>Area: $\begin{aligned}\varphi_1(x)&amp;\leq y\leq\varphi_2(x)\cdot\\a&amp;\leq x\leq b\end{aligned}$</blockquote>
+<blockquote>$\varphi_1(x)\leq y\leq\varphi_2(x)$ represents the range of x values, which is the function of x with respect to y, and $\varphi_1(x)$ is the actual value of y equal to.</blockquote>
+<blockquote>(2) First <code>X</code> Later <code>Y</code>: $$\iint_Df(x,y)\mathrm{d}\sigma=\int_c^ddy\int_{\psi_1(y)}^{\psi_2(y)}f(x,y)dx$$</blockquote>
+<blockquote>Area: $\begin{aligned}\Psi(y)&amp;\leq X\leq\Psi_2(y)\\c&amp;\leq y\leq d\end{aligned}$</blockquote>
+<p><strong>Method</strong>: Set the points limit;</p>
+<ul>
+<li>When Y comes first, then X:</li>
+<li class="list-indent-1"><code>dy</code> upper and lower integral limits <code>-&gt;</code><strong>Draw a ray from bottom to top</strong>, with the lower end of the ray being the <code>dy</code> lower limit of integration and the upper end of the ray being the upper limit of the integral of dy;</li>
+<li class="list-indent-1"><code>dx</code> upper and lower limits of integration <code>-&gt;</code> Observe the graph to see the range of x values;</li>
+<li>When X comes first, then Y:</li>
+<li class="list-indent-1">The upper and lower limits of <code>dx</code> integration <code>-&gt;</code><strong>Draw a ray from left to right</strong>, with the left end of the ray as the <code>dx</code> lower limit and the upper end as the <code>dx</code> lower limit;</li>
+<li class="list-indent-1"><code>dy</code> upper and lower limits of integration <code>-&gt;</code> Observe the image and see the<strong>range</strong>of <code>y</code>;</li>
+</ul>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Both can be used; choose whichever is more convenient for calculation;</li>
+<li>First <code>Y</code> <code>X</code>:</li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">$\int_{a}^{b}[\int_{y_{1}(x)}^{y_{2}(x)}f(x,y)dy]dx$ or $\int_a^b\mathbf{d}x\int_{y_1(x)}^{y_2(x)}f(x,y)\operatorname{d}y.$</li>
+<li class="list-indent-1">Reasoning:</li>
+<li class="list-indent-2">1. First, find the cross-sectional area: $S(x)=\int_{y_1(x)}^{y_2(x)}f(x,y)\mathsf{d}y.$</li>
+<li class="list-indent-2">2. Then, for the curved edge body area, solve: $V=\int_a^bS(x)\operatorname{d}x$</li>
+<li class="list-indent-2">3. Merging the two: $\int_{a}^{b}[\int_{y_{1}(x)}^{y_{2}(x)}f(x,y)dy]dx$</li>
+<li class="list-indent-1">Illustration:</li>
+<li class="list-indent-2">2D:</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/cc5c4223a429-Pasted-image-20240209014016.png" alt="Pasted image 20240209014016" loading="lazy" decoding="async"></li>
+<li class="list-indent-2">3D:</li>
+<li class="list-indent-3"><img class="note-image" src="/assets/notes/09f953820fd4-Pasted-image-20240209014221.png" alt="Pasted image 20240209014221" loading="lazy" decoding="async"></li>
+<li>First <code>X</code> <code>Y</code>:</li>
+<li class="list-indent-1">Premise: $(\sigma)=\{(x,y)\mid x_1(y)\leq x\leq x_2(y),c\leq y\leq d\}$</li>
+<li class="list-indent-1">Illustration:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/ae3eee53b8b5-Pasted-image-20240209015118.png" alt="Pasted image 20240209015118" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Convert to two single-invariant integrals with x before y;</li>
+<li class="list-indent-1">Formula: $\begin{aligned}\iint_{(\sigma)}f(x,y)\operatorname{d}\sigma&amp;=\int_c^d[\int_{x_1(y)}^{x_2(y)}f(x,y)dx]\operatorname{d}y\\\\&amp;=\int_c^d\operatorname{d}\left.y\right]_{x_1(y)}^{x_2(y)}f(x,y)\operatorname{d}x.\end{aligned}$</li>
+<li>Non-X and non-Y regions</li>
+<li class="list-indent-1">Illustration</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/ba644f067fd4-Pasted-image-20240209015436.png" alt="Pasted image 20240209015436" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">Concept:</li>
+<li class="list-indent-2">A complex double integral of a non-X and non-Y figure;</li>
+<li class="list-indent-1">Method:</li>
+<li class="list-indent-2">Can<strong>be converted by partitioning to: sum of multiple X-types and multiple Y-types</strong>;</li>
+</ul>
+<h2 id="section-3">45.3 Calculation Using Polar Coordinates</h2>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Doubleintegralcalculationbasedonpolarcoordinates</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span>$$\text{ First }\rho\text{ Afterwards }\theta\quad\iint_Df (x, y)\mathrm{d}\sigma=\int_\alpha^\beta d\theta\int_{\varphi_1 (\theta)}^{\varphi_2 (\theta)}f (\rho\cos\theta,\rho\sin\theta)\rho d\rho$$</blockquote>
+<blockquote>Area: $\begin{aligned}\varphi_1(0)&amp;\leq p\leq\varphi_2(0)\\\alpha&amp;\leq\theta\leq\beta.\end{aligned}$</blockquote>
+<p>&gt;</p>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">When integrating with $\rho$, $\theta$ in the expression can be regarded as a constant. Similarly, when integrating with $\theta$;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">The contents of a function can be divided into two integrals for calculation;</li>
+<li class="list-indent-1">$\iint_D\frac{x\sin (\pi\sqrt{x^2+y^2})}{x+y}dxdy=\int_0^{\frac\pi 2}\frac{\cos\theta}{\cos\theta+\sin\theta}d\theta\cdot\int_1^2\rho\sin (\pi\rho) d\rho$</li>
+<li class="list-indent-1">$\Delta\sigma=\frac12[(\rho+\Delta\rho)^2\Delta\theta-\rho^2\Delta\theta]$ = $\rho\Delta\rho\Delta\theta+\frac12(\Lambda\rho)^2\Delta\theta.$</li>
+</ul>
+<h2 id="section-4">45.4 Calculation Using Symmetry and Parity</h2>
+<h3 id="section-5">45.4.1 Parity</h3>
+<p><strong>Concepts</strong>: When <code>Y</code> is symmetrical, look at <code>X</code>; when about <code>X</code>, look at <code>Y</code>;</p>
+<p><strong>Property One</strong>: If the integral <code>D</code> relation <code>Y</code> axial, then the function is evenly <code>X</code>:</p>
+<ul>
+<li>If the function with respect to <code>X</code> is even, it doubles; If the function with respect to <code>X</code> is odd, it is <code>0</code>;</li>
+<li>$$\iint\limits_{D}f(x,y)d\sigma=\begin{cases}2\iint\limits_{D_{x\geq0}}f(x,y)\mathrm{d}\sigma;&amp;f(-x,y)=f(x,y)\\0;&amp;f(-x,y)=-f(x,y)\end{cases}$$</li>
+</ul>
+<p><strong>Property Two</strong>: If the integral <code>D</code> relation <code>X</code> axiosymmetric, then the function has parity with respect to <code>Y</code>:</p>
+<ul>
+<li>$$\iint\limits_{D}f(x,y)d\sigma=\begin{cases}2\iint\limits_{D_{y_{z_0}}}f(x,y)\mathrm{d}\sigma&amp;f(x,-y)=f(x,y)\\0&amp;f(x,-y)=-f(x,y)\end{cases}$$</li>
+</ul>
+<h3 id="section-6">45.4.2 Symmetry</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Variablesymmetryofdoubleintegrals</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\text{ If }D\text{ About }y=x\text{ Symmetric, then }\quad\iint_Df(x,y)\mathrm{d}\sigma=\iint_Df(y,x)\mathrm{d}\sigma $$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The integration field is the same, where the independent variable is swapped;</li>
+<li>Because the point of $(x,y)$ symmetric about <code>y=x</code> is $(y,x)$</li>
+</ul>
+<p><strong>Inference</strong>: A more generalized conclusion</p>
+<ul>
+<li>$$\int\int_{D(x,y)} f(x,y)\mathrm{d}x\mathrm{d}y=\int\int_{D(u,v)} f(u,v)\mathrm{d}u\mathrm{d}v=\int\int_{D(y,x)} f(y,x)\mathrm{d}y\mathrm{d}x$$</li>
+</ul>
+<h2 id="section-7">45.5 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-8">Question Type: <span class="note-tag">Cumulativepointsexchangeorderorcalculation</span></h3>
+<h4 id="section-9">PART 1: Problem-solving methods</h4>
+<p><strong>Problem-solving steps</strong>: Example $\text{ Exchange cumulative points }\int_0^1dx\int_{x^2}^{2-x}f(x,y)dy\text{ The order }$</p>
+<ul>
+<li>Step 1: Draw the domain</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/2e7722fbd717-Pasted-image-20240508210257.png" alt="Pasted image 20240508210257" loading="lazy" decoding="async"></li>
+<li>Step 2: After drawing the domain, define the domain in another order</li>
+<li class="list-indent-1">Swap order and reline:</li>
+<li class="list-indent-1">$$\int_0^1dy\int_0^{\sqrt{y}}f(x,y)dx+\int_1^2dy\int_0^{2-y}f(x,y)dx$$</li>
+<li>Additional note: If it's hard to calculate after swapping order, consider using polar coordinates;</li>
+</ul>
+<p><strong>Question Type</strong>: Cumulative integrals in polar coordinates</p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">$$\int_{0}^{\frac{\pi}{2}}\mathrm{d}\theta\int_{0}^{\cos\theta}f(\rho\cos\theta,\rho\sin\theta)\rho\mathrm{d}\rho $$</li>
+<li>Steps:</li>
+<li class="list-indent-1">(1) Drawing area;</li>
+<li class="list-indent-1">(2) Draw the limit, convert the polar coordinate equation into a rectangular coordinate equation;</li>
+</ul>
+<p><strong>Question Type</strong>: Calculate cumulative points</p>
+<p>-</p>
+<h4 id="section-10">PART 2: Typical Example Problems</h4>
+<h4 id="section-11">PART 3: Key Points Review</h4>
+<hr>
+<h3 id="section-12">Question Type: <span class="note-tag">Calculationofdoubleintegrals</span></h3>
+<h4 id="section-13">PART 1: Problem-solving methods</h4>
+<p><strong>Question Type</strong>: Calculation of double integrals</p>
+<ul>
+<li>First, draw the graph based on the function of D</li>
+<li>First, observe the form and analyze:</li>
+<li class="list-indent-1">1. Can parity, symmetry, <code>-&gt;</code> simplify the integral to be used;</li>
+<li class="list-indent-1">2. Observe the formula, whether Cartesian or polar coordinate systems are appropriate;</li>
+<li>Calculation:</li>
+<li class="list-indent-1">Using the rules for calculating double integrals, calculating;</li>
+</ul>
+<p><strong>Question Type</strong>: Double Integrals and Inequalities</p>
+<ul>
+<li>Basic idea: The integrand of the integrand is larger;</li>
+</ul>
+<h4 id="section-14">PART 2: Typical Example Problems</h4>
+<p><strong>Example</strong>: Let $D=\{(x,y)|x^2+y^2\leq1\}$, then $\iint_D(x^2-y)dxdy=$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Directly calculating the double integral of $x^2-y$ is difficult to compute, so consider analyzing parity and symmetry;</li>
+<li>Analysis</li>
+<li class="list-indent-1">From parity, it can be inferred: $\int\int ydxdy=0$</li>
+<li class="list-indent-1">From symmetry, it can be inferred: $\text{ Original form }=\int\int y^2dxdy=\int\int x^2dxdy=\frac{1}{2}\int\int(x^{2}+y^{2})db$</li>
+</ul>
+<h4 id="section-15">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-052/index.html"><span>← Previous item</span><strong>Lecture 44: Double Integrals</strong></a>
+    <a class="article-pagination-next" href="../math-054/index.html"><span>Next item →</span><strong>Lecture 47: Triple Integral</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +229,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 	- 如果是 $dzdx$ `->` 在 `xz` 上的投影；
 - 性质：与积分曲面的方向有关
 	- 改变曲面的方向，其值相反；
-	- $$\iint_{\Sigma}Pdydz+Qdzdx+Rdxdy=-\iint_{-\Sigma}Pdydz+Qdzdx+Rdxdy$$
+	- $$\iint_{-\Sigma}(P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy)=-\iint_{\Sigma}(P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy)$$
 
 ## 60.3 对坐标的曲面积分的计算
 ### 60.3.1 直接法
@@ -41,9 +41,10 @@ tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 > <font color="#8db3e2"><font color="#c6d9f0">描述：</font></font>
 > 1. $\text{设光滑曲面 }\Sigma:z=z(x,y),(x,y){\in}D_{xy}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：
 > $$\iint_{\Sigma}R(x,y,z)\operatorname{d}x\operatorname{d}y=\pm\iint_{D_{xy}}R(x,y,z(x,y))\operatorname{d}x\operatorname{d}y$$
-> 2. $\text{设光滑曲面 }\Sigma:x=z(y,z),(y,z){\in}D_{yz}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：
+> 2. $\text{设光滑曲面 }\Sigma:x=x(y,z),(y,z){\in}D_{yz}\text{，且 }P(x,y,z)\text{ 是 }\Sigma\text{ 上的连续函数，则}$：
 > $$\iint_{\Sigma}P(x,y,z){\mathrm{d}y\mathrm{d}z}=\pm\iint_{D_{yz}}P[x(y,z),y,z]\mathrm{d}ydz$$
-> 3. $\text{设曲面: }\Sigma:y=y (z, x),\quad (z, x)\in D_{zx}$，则：$$$$
+> 3. $\text{设曲面 }\Sigma:y=y(z,x),\quad(z,x)\in D_{zx}\text{，则}$：
+> $$\iint_{\Sigma}Q\,dz\,dx=\pm\iint_{D_{zx}}Q(x,y(z,x),z)\,dz\,dx$$
 
 **解释**
 - 解释：

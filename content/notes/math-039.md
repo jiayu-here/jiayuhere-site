@@ -38,14 +38,14 @@ tags: ["考研数学", "高等数学", "定积分及反常积分"]
 	- 定积分是一种特殊的极限；
 	- 定积分的存在性问题 `->` 极限的可积性问题；
 - 分段：
-	- $\lambda=\max[-x_1,-2x_2,\ldots,-2x_n\}$ （即λ是最大的区间长度） 
+	- $\lambda=\max\{\Delta x_1,\Delta x_2,\ldots,\Delta x_n\}$（即 $\lambda$ 是最大的子区间长度）
 	- 如果当 λ→0 时，积分和的极限存在，则这个极限叫做函数 f (x) 在区间 $[a, b]$ 的定积分，记为 $\int_a^bf(x)dx$，并称函数 f (x)在区间 $[a, b]$ 上可积；
 - 注意：
 	- 1.  $\lambda\to0\text{ 与 }n\to\infty\text{ 不等价}$；
 	- 2. $\int_a^bf(x)dx\text{ 仅与 }f(x)\text{和 }[a,b]\text{有关}$；
 	- 3. $\text{极限 }\lim_{\lambda\to0}\sum_{i=1}^nf(\xi_i)\Delta x_i\text{ 与 }\xi_i\text{ 的取法和区间 }[a,b]\text{ 的分法无关}$
 		- 因为和分法无关，因为等分最简单，所以使用等分；
-		- $$\int_{0}^{1}f(x)\operatorname{d}x=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{\iota})\Delta x_{i}=\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^{n}f(\frac{i}{n})$$
+		- $$\int_{0}^{1}f(x)\operatorname{d}x=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_i)\Delta x_{i}=\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^{n}f(\frac{i}{n})$$
 		- 这样就可以把求一个和式的极限，变成求其定积分；
 		- 其中：$\frac{1}{n}$ 称之为**可爱因子**；
 	- 4. 定积分求出来的是一个具体的数，且只和被积分函数以及积分区间有关，与积分变量无关；

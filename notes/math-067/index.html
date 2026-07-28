@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -68,8 +68,8 @@
 <li class="list-indent-1"><img class="note-image" src="/assets/notes/ad52d081b939-Pasted-image-20240212143059.png" alt="Pasted image 20240212143059" loading="lazy" decoding="async"></li>
 <li>用每一个小面积上的密度乘以其面积，然后全部求和，得到完整的质量：$M=\lim_{\lambda\to0}\sum_{k=1}^n\rho(\xi_k,\eta_k,\zeta_k){\Delta S_k}$</li>
 </ul>
-<h5 id="section-2"><strong>定义</strong>： #第一类曲面积分</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述： $\text{设}\sum\text{为光滑曲面},f(x,y,z)\text{ 是定义在}\sum\text{上的一}\text{个有界函数,若对}\Sigma\text{ 做任意分割和局部区域任意取点},$ 可以得到</blockquote>
+<h5 id="section-2"><strong>定义</strong>： <span class="note-tag">第一类曲面积分</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span> $\text{设}\sum\text{为光滑曲面},f(x,y,z)\text{ 是定义在}\sum\text{上的一}\text{个有界函数,若对}\Sigma\text{ 做任意分割和局部区域任意取点},$ 可以得到</blockquote>
 <blockquote>乘积和式极限：$\lim_{\lambda\to0}\sum_{k=1}^nf\left(\xi_k,\eta_k,\zeta_k\right)\Delta S_k$ 都存在，则称此极限为函数 $f(x,y,z)$ 在曲面 $\Sigma$ 上对面积的曲面积分；</blockquote>
 <blockquote>记作：$$\iint_{\Sigma}f(x,y,z)dS=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i},\zeta_{i})\Delta S_{i}$$</blockquote>
 <p><strong>解释</strong></p>
@@ -90,8 +90,8 @@
 </ul>
 <h2 id="section-3">59.2 对面积的曲面积分的计算</h2>
 <h3 id="section-4">59.2.1 直接法</h3>
-<h5 id="section-5"><strong>定理</strong>： #第一类曲面积分的计算</h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：</blockquote>
+<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">第一类曲面积分的计算</span></h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
 <blockquote>有光滑曲面，其 $\Sigma:z=z(x,y),(x,y)\in D_{xy}，f(x,y,z)\text{ 在 }\sum\text{上连续}$</blockquote>
 <blockquote>则曲面积分 $\iint_{\Sigma}f(x,y,z)dS\text{存在},\text{且有}$：</blockquote>
 <blockquote>$$\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y,z(x,y))\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}\mathrm{d}x\mathrm{d}y$$</blockquote>
@@ -109,8 +109,8 @@
 <li class="list-indent-1">同理对于 $x=x(y,z)$ 的形式；</li>
 </ul>
 <h3 id="section-6">59.2.2 奇偶性与对称性</h3>
-<h5 id="section-7"><strong>定理</strong>： #第一类曲面积分的奇偶性    </h5>
-<blockquote>&lt;font color=&quot;#8db3e2&quot;&gt;&lt;font color=&quot;#c6d9f0&quot;&gt;描述：若曲面 $\sum$ 关于 $xoy$ 对称，则：</blockquote>
+<h5 id="section-7"><strong>定理</strong>： <span class="note-tag">第一类曲面积分的奇偶性</span>    </h5>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若曲面 $\sum$ 关于 $xoy$ 对称，则：</blockquote>
 <blockquote>$$\iint_{\Sigma}f(x,y,z)\mathrm{d}S=\begin{cases}2\iint_{\sum_{z&gt;0}} f(x,y,z)\mathrm{d}S,&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
 <p><strong>知识点</strong>：对称性</p>
 <ul>
@@ -119,7 +119,7 @@
 </ul>
 <h2 id="section-8">59.3 常考题型 </h2>
 <hr>
-<h3 id="section-9">题型： #第一类面积分的计算 </h3>
+<h3 id="section-9">题型： <span class="note-tag">第一类面积分的计算</span> </h3>
 <h4 id="section-10">PART 1：解题方法</h4>
 <h4 id="section-11">PART 2：典型例题</h4>
 <p><strong>例题</strong>：$\Sigma=\{(x,y,z)\mid x+y+z=1,x\geq0,y\geq0,z\geq0\}，则\iint_\Sigma y^2dS$</p>
@@ -141,6 +141,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

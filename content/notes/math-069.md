@@ -40,14 +40,14 @@ tags: ["考研数学", "高等数学", "多元积分学及其应用"]
 ## 61.3 散度与旋度
 ##### **定义**： #散度 
 > <font color="#ccc1d9">描述：</font>设有向量场 $A(x,y,z)=({P,Q,R})$ ，则：
-> $$\mathbf{divA}=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$$
+> $$\operatorname{div}\mathbf{A}=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$$
 
 **解释**
 - 散度是一个数；
 
 ##### **定义**： #旋度
 > <font color="#ccc1d9">描述：</font> 设有向量场 $A(x,y,z)=({P,Q,R})$ ，则：
-> $$\mathbf{rotA}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\\frac\partial{\partial x}&\frac\partial{\partial y}&\frac\partial{\partial z}\\P&Q&R\end{vmatrix}$$
+> $$\operatorname{rot}\mathbf{A}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R\end{vmatrix}$$
 
 **解释**
 - 旋度是一个向量；

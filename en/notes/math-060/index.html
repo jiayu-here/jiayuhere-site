@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 52：傅里叶级数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 52: Fourier series | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 52: Fourier Series. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Infinite Series">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 52：傅里叶级数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 52: Fourier series | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 52: Fourier Series. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-060/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,194 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 52：傅里叶级数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-05-16</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-060/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-059/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 51：函数展开成幂级数</strong></a>
-    <a class="article-pagination-next" href="../math-061/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 53：向量代数</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 52: Fourier series</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 52: Fourier Series. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2024-05-16</span><span>2 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">52.0 Basics</a><a href="#section-3">52.1 Fourier Coefficients and Fourier Series</a><a href="#section-6">52.2 Function Expansion as a Fourier Series</a><a href="#section-9">52.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
+<ul>
+<li>(1) Fourier coefficients and Fourier series</li>
+<li>(2) Convergence Theorem</li>
+<li>(3) The function expansion is a Fourier series</li>
+</ul>
+<p><strong>Common Question Types and Typical Examples</strong></p>
+<ul>
+<li>Problem Type 1: Questions about the convergence theorem</li>
+<li>Problem Type 2: Expand a function into a Fourier series</li>
+</ul>
+<hr>
+<h2 id="section-1">52.0 Basics</h2>
+<h4 id="section-2">Orthogonality of Trigonometric Functions</h4>
+<p><strong>Concept</strong>: Orthogonality of trigonometric functions</p>
+<ul>
+<li>Concept: A set of trigonometric functions</li>
+<li class="list-indent-1">$(0,1,\sin x,\cos x,\sin 2x,\cos 2x...)$</li>
+<li>Orthogonality:</li>
+<li class="list-indent-1">The inner product of two functions, when the integral is 0, denote that the two functions are orthogonal</li>
+<li>Orthogonality of trigonometric functions:</li>
+</ul>
+<p>	From the trigonometric function system, take two different functions with range $[-\pi,\pi]$ and perform the inner product, resulting in an integral of 0;</p>
+<ul>
+<li>Example:</li>
+<li class="list-indent-1">Different times:</li>
+<li class="list-indent-2">$$\int_{-\pi}^{\pi}\sin nx \cos mx \mathrm{d}x =0\quad n\neq m$$</li>
+<li class="list-indent-2">$$\int_{-\pi}^{\pi}\sin nx\sin mxdx=0\quad n\neq m$$</li>
+<li class="list-indent-1">When Equal:</li>
+<li class="list-indent-2">$$\int_{-\pi}^{\pi}\cos nx·\cos nx dx=\pi $$</li>
+</ul>
+<p><strong>Concept</strong>: Fourier expansion of a $2\pi$-periodic function</p>
+<ul>
+<li>The Fourier series has the form</li>
+</ul>
+<p>  $$f(x)\sim\frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n\cos nx+b_n\sin nx\right).$$</p>
+<ul>
+<li>In particular,</li>
+</ul>
+<p>  $$a_0=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\,dx.$$</p>
+<ul>
+<li>Calculating the coefficient:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/c4dce0bdb8b9-Pasted-image-20240904144914.png" alt="Pasted image 20240904144914" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">$$a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx.$$</li>
+</ul>
+<h2 id="section-3">52.1 Fourier Coefficients and Fourier Series</h2>
+<h3 id="section-4">52.1.1 Basic Concepts</h3>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Fouriercoefficient</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span></blockquote>
+<blockquote>$$\begin{aligned}</blockquote>
+<blockquote>a_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx &amp;&amp;(n=0,1,2,\ldots),\\</blockquote>
+<blockquote>b_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx &amp;&amp;(n=1,2,\ldots).</blockquote>
+<blockquote>\end{aligned}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The above formula can be used to find the coefficients of a given n expression;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Fourierseries</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span><code>f</code> Fourier series of $$f(x)\sim\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Whether the above expression can be expanded depends on whether the <code>~</code> in the above expression can be written as an equal sign;</li>
+<li class="list-indent-1">Whether it can be expanded requires the use of the convergence theorem;</li>
+<li>Explanation:</li>
+<li class="list-indent-1"><code>~</code></li>
+<li class="list-indent-2">Means that, except for certain finite points (discontinuities, endpoints), all other points satisfy the properties specified in the formula;</li>
+<li class="list-indent-1">$\frac{a_0}2$</li>
+<li class="list-indent-2">In the fluctuation, represents the DC component;</li>
+<li class="list-indent-1">$(a_n\cos nx+b_n\sin nx)$：</li>
+<li class="list-indent-2">In fluctuation, represents the AC component;</li>
+<li class="list-indent-2">Note: The expansion of even functions only has cosine terms, while those of odd functions only have sine terms;</li>
+<li>Function:</li>
+<li class="list-indent-1">For example:</li>
+<li class="list-indent-2">Originally, a signal representing high or low levels can now be approximated using a <code>sinx</code>;</li>
+<li class="list-indent-2">Adding one <code>sinx</code> gives <code>1 harmonic</code>, adding three <code>sinx</code> gives <code>3 harmonic</code>; as you add more and more, the value becomes closer to harmonics;</li>
+<li class="list-indent-1">Summary:</li>
+<li class="list-indent-2">This example demonstrates the role of Fourier series: using the series expansion of a period to approximate a periodic quantity:</li>
+<li class="list-indent-1">Illustration:</li>
+<li class="list-indent-2"><img class="note-image" src="/assets/notes/d2912afd0177-Pasted-image-20240517001116.png" alt="Pasted image 20240517001116" loading="lazy" decoding="async"></li>
+</ul>
+<h3 id="section-5">52.1.2 Convergence Theorem</h3>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Dirichlettheorem</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> Suppose $f$ is piecewise smooth on $[-\pi,\pi]$, with only finitely many discontinuities of the first kind and finitely many extrema. Then its Fourier series converges at every point, with:</blockquote>
+<blockquote>$$1)\quad S(x)=f(x)\qquad\text{at every continuity point of }f.$$</blockquote>
+<blockquote>$$2)\quad S(x)=\frac{f(x^-)+f(x^+)}2\qquad\text{at every discontinuity point of }f.$$</blockquote>
+<blockquote>$$3)\quad S(x)=\frac{f((-\pi)^+)+f(\pi^-)}2\quad\text{ when }x=\pm\pi.$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Core:</li>
+<li class="list-indent-2">This theorem reveals the prerequisites for Fourier series to expand: except for convergence to<strong>endpoints</strong>and<strong>a finite number of discontinuities</strong>, all others are convergent<strong>continuous</strong>functions $f(x)$ <code>-&gt;</code> almost everywhere converge to <code>f(x)</code>;</li>
+<li class="list-indent-1">Explanation:</li>
+<li class="list-indent-2">(1) <code>-&gt;</code> When consecutive points, the expanded series converges to function <code>f(x)</code>;</li>
+<li class="list-indent-2">(2) When <code>-&gt;</code> is a discontinuous point, the expanded series converges to the average of the left and right function values of the discontinuous point;</li>
+<li class="list-indent-2">(3) <code>-&gt;</code> When the left and right endpoints are unfolded, the expanded series converges to the average of the two endpoints;</li>
+<li>Function:</li>
+<li class="list-indent-1">Lower requirements for expanding the function into a Fourier series;</li>
+<li class="list-indent-1">In power series, functions need to be differentiable and integrable, while in Fourier series, only continuous functions are needed <code>-&gt;</code> for broader applicability;</li>
+<li>Comparison of applicable scopes:</li>
+<li class="list-indent-1">Fourier series <code>-&gt;</code> mainly used to study periodic quantities, such as wave theory in engineering;</li>
+<li class="list-indent-1">Power series <code>-&gt;</code> Mainly used for numerical calculations, such as in calculus;</li>
+</ul>
+<h2 id="section-6">52.2 Function Expansion as a Fourier Series</h2>
+<p><strong>Purpose</strong>: To study the coefficients when the function is expanded to a Fourier series</p>
+<h3 id="section-7">52.2.1 Expansion of Periodic Functions: Special Cases</h3>
+<p><strong>Concept Introduction</strong>: Expansion of a function with period $2\pi$</p>
+<ul>
+<li>(1) Expand on $[-\pi,+\pi]$: Expand generally</li>
+</ul>
+<div class="math-display">$$
+\begin{aligned}
+	  a_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx &amp;&amp;(n=0,1,2,\ldots),\\
+	  b_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx &amp;&amp;(n=1,2,\ldots).
+	  \end{aligned}
+$$</div>
+<ul>
+<li>(2) Expansion on $[-\pi,+\pi]$: Expansion of parity functions</li>
+<li class="list-indent-1">1. $f(x)$ is an odd function:</li>
+<li class="list-indent-2">$$a_n=0,\qquad b_n=\frac2\pi\int_0^\pi f(x)\sin nx\,dx\quad(n=1,2,\ldots).$$</li>
+<li class="list-indent-2">Explanation: Because $\cos x$ is an even function and is in $a_n$, when $f(x)$ is an odd function, <code> odd function * even function = odd function </code>, so $a_n$ becomes 0 and $b_n$ becomes doubled. The same applies in other cases;</li>
+<li class="list-indent-1">2. $f(x)$ is an even function:</li>
+<li class="list-indent-2">$$a_n=\frac2\pi\int_0^\pi f(x)\cos nx\,dx\quad(n=0,1,2,\ldots),\qquad b_n=0.$$</li>
+<li>(3) Expand on $[0,+\pi]$: Expand to be a sine or cosine</li>
+<li class="list-indent-1">Analysis:</li>
+<li class="list-indent-2">This is an expansion over half a cycle, so<strong>extension extension</strong>needs to be done during analysis;</li>
+<li class="list-indent-2">Odd function expansion: only the sine term. Because if only $[0,+\pi]$ is given, then if an odd function expansion is needed on $[-\pi,+\pi]$, only the sine term <code>-&gt;</code><strong>odd extension</strong>;</li>
+<li class="list-indent-2">When expanding to sine levels, theoretically an odd extension is required, but in practice, the expansion of odd functions can be used directly;</li>
+<li class="list-indent-2">Analogy even extension extension;</li>
+<li class="list-indent-1">1. Expanded to sine:</li>
+<li class="list-indent-2">$$a_n=0,\qquad b_n=\frac2\pi\int_0^\pi f(x)\sin nx\,dx\quad(n=1,2,\ldots).$$</li>
+<li class="list-indent-1">2. Expanded to cosine:</li>
+<li class="list-indent-2">$$a_n=\frac2\pi\int_0^\pi f(x)\cos nx\,dx\quad(n=0,1,2,\ldots),\qquad b_n=0.$$</li>
+</ul>
+<h3 id="section-8">52.2.2 Expansion of Periodic Functions: General Case</h3>
+<p><strong>Concept Introduction</strong>: Expansion of a function with period $2l$</p>
+<ul>
+<li>(1) Expand on $[-l,+l]$</li>
+<li class="list-indent-1">$$a_n=\frac1l\int_{-l}^lf(x)\cos\frac{n\pi x}l\mathrm{d}x\quad\quad n=0,1,2\cdots\quad\quad \\b_n=\frac1l\int_{-l}^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li>(2) Expand on $[-l,+l]$: parity functions</li>
+<li class="list-indent-1">$$\text{i)}f(x)\text{ is an odd function }.\quad\quad \\a_n=0,n=0,1,2\cdots\quad\quad \\b_n=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ii)}f(x)\text{ is an even function }.\\&amp;{a_n}=\frac2l\int_0^lf(x)\cos\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li>(3) Expand on $[0,l]$: Expand to be a sine or cosine</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ i) Expand to a sine }\\&amp;a_{n}=0,&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ ii) Expand to a cosine. }\\&amp;a_{n}=\frac{2}{l}\int_{0}^{l}f(x)\cos\frac{n\pi x}{l}\mathrm{d}x&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;n=1,2\cdots\end{aligned}$$</li>
+</ul>
+<h2 id="section-9">52.3 Frequently Tested Question Types</h2>
+<hr>
+<h3 id="section-10">Question Type: <span class="note-tag">DirichletConvergenceTheorem</span></h3>
+<h4 id="section-11">PART 1: Problem-solving methods</h4>
+<p><strong>Problem Type</strong>: Given the functions of $b_n$ and $S(x)$, find the values to which $S(x)$ converges at a certain point</p>
+<ul>
+<li>Concept: Since we need to find the position of the sum function to converge, we first need to use the convergence theorem to determine whether the conditions for the convergence theorem are satisfied;</li>
+<li>Note: If on $(0,l)$ or $(0,\pi)$, pay attention to whether to extend it;</li>
+</ul>
+<h4 id="section-12">PART 2: Typical Example Problems</h4>
+<h4 id="section-13">PART 3: Key Points Review</h4>
+<hr>
+<h3 id="section-14">Question Type: <span class="note-tag">ExpandthefunctionintoaFourierseries</span></h3>
+<h4 id="section-15">PART 1: Problem-solving methods</h4>
+<p><strong>Key Point</strong>: Develop the steps for Fourier series</p>
+<ul>
+<li>1. Find $a_0$, calculate the coefficient, and write its Fourier series: $\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$;</li>
+<li>2. Using the convergence theorem, determine where Fourier series can be equated with the original function, and where it cannot converge;</li>
+</ul>
+<h4 id="section-16">PART 2: Typical Example Problems</h4>
+<p><strong>Example</strong>: Expand $f(x)=x-1$ <code>(x&lt;=x&lt;=2)</code> into a cosine series with period <code>4</code>;</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Because <code>T=4</code> <code>-&gt;</code> $l=2$</li>
+<li>Analysis</li>
+<li class="list-indent-1">Step 1: Write out the Fourier series</li>
+<li class="list-indent-2">$$a_0=\frac22\int_0^2(x-1)dx=0$$</li>
+<li class="list-indent-2">$$a_n=\frac22\int_0^2(x-1)\cos\frac{n\pi x}2dx=\frac2{n\pi}\int_0^2(x-1)d\sin\frac{n\pi x}2=-\frac2{n\pi}\int_0^2\sin\frac{n\pi x}2dx \left.=\frac4{n^2\pi^2}[\left(-1\right)^n-1]=\left\{\begin{matrix}0,&amp;n=2k,\\-\frac8{\left(2k-1\right)^2\pi^2},&amp;n=2k-1\end{matrix}\right.\right.(k=1,2,\cdots).$$</li>
+<li class="list-indent-2">$$f(x)=-\frac8{\pi^2}\sum_{n=1}^\infty\frac1{\left(2n-1\right)^2}\cos\frac{(2n-1)\pi x}2$$</li>
+<li>Note:</li>
+<li class="list-indent-1">Using the convergence theorem, it is performed on the $(-l,+l)$ function after extension;</li>
+</ul>
+<h4 id="section-17">PART 3: Key Points Review</h4>
+<p><strong>Key Point</strong>: Three methods to find the sum of series of constant terms <code>-&gt;</code>;</p>
+<ul>
+<li>(1) Definition of series of constant terms;</li>
+<li>(2) Power series;</li>
+<li>(3) Fourier series;</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-059/index.html"><span>← Previous item</span><strong>Lecture 51: Expanding Functions into Power Series</strong></a>
+    <a class="article-pagination-next" href="../math-061/index.html"><span>Next item →</span><strong>Lecture 53: Vector Algebra</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +256,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

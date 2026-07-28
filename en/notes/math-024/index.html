@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 16：导数基本概念 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 16: Basic Concepts of Derivatives | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Basic Concepts of Derivatives. Retain original formulas, diagrams, and example problems.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Derivatives and Differentials">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 16：导数基本概念 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 16: Basic Concepts of Derivatives | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Basic Concepts of Derivatives. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-024/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,200 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 16：导数基本概念</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2023-12-13</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-024/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-023/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 15：闭区间上连续函数的性质</strong></a>
-    <a class="article-pagination-next" href="../math-025/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 17：导数求导法则</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 16: Basic Concepts of Derivatives</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 16: Basic Concepts of Derivatives. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span>Mathematics · 2023-12-13</span><span>10 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Derivatives and Differentials</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Examples in This Chapter</a><a href="#section-2">1.1 Definition of Derivatives</a><a href="#section-4">1.2 Definition and Proof of Derivatives</a><a href="#section-7">1.3 Frequently Tested Question Types</a><a href="#section-16">1.4 Derivative Derivatives</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Examples in This Chapter</h2>
+<p><strong>Exam Content</strong></p>
+<ul>
+<li>1. Concepts of Derivatives and Differentials (Difficult Points)</li>
+<li>2. Derivative formulas and differentiation rules (Key Points)</li>
+<li>3. Higher-Order Derivatives (Difficult Point)</li>
+</ul>
+<p><strong>Typical Example Problems</strong></p>
+<ul>
+<li>Problem Type 1: Definition of Derivatives (Difficult Point)</li>
+<li>Problem Type 2: Composite Functions, Implicit Functions, and Differentiation of Parametric Equations (Key Focus)</li>
+<li>Problem Type 3: Advanced Derivatives (Difficult Point)</li>
+<li>Problem Type 4: Derivative Applications</li>
+</ul>
+<hr>
+<h2 id="section-2">1.1 Definition of Derivatives</h2>
+<h3 id="section-3">1.1.1 Basic Concepts</h3>
+<p><strong>Why Derivatives Are Needed</strong></p>
+<p>At a point, the derivative is the limit of the ratio between the change in the dependent variable and the change in the independent variable. It describes <strong>the instantaneous rate at which the dependent variable changes with the independent variable</strong>.</p>
+<ul>
+<li>A derivative is a special limit of average rates of change as the interval approaches zero.</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Whatisaderivative</span></p>
+<blockquote><span style="color:#ccc1d9">Description:</span> If $\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$ exists, then $f$ is differentiable at $x_0$.</blockquote>
+<blockquote>Another form: $f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
+<blockquote>Form One: $f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</blockquote>
+<blockquote>Form 2: $f^{\prime}(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Equivalent form:</li>
+<li class="list-indent-1">Because $x_0+\Delta x=x\quad\Delta x=x-x_0.$</li>
+<li class="list-indent-1">So $f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li class="list-indent-1">Other forms: $f^{\prime}(x_0)=y^{\prime}|_{x=x_0}=\frac{dy}{dx}|_{x=x_0}$</li>
+<li>Note:</li>
+<li class="list-indent-1">1. The derivative of a point is related to $f(x_0)$;</li>
+<li class="list-indent-1">2. $f(x_0)$ is a fixed point, $f(x)$ is a moving point;</li>
+<li class="list-indent-1">3. If the limit does not exist, then $f(x)$ is said to be non-differentiable at $x_{0}$;</li>
+<li class="list-indent-1">4. If the limit is infinite, then $f(x)$ is called the derivative at $x_{0}$ that the derivative is infinite (the derivative is infinite and is non-differentiable).</li>
+</ul>
+<p><strong>What is differentiability</strong></p>
+<ul>
+<li>$\frac{dy}{dx}=k$ 。 That is, the ratio of $\Delta y$ to $\Delta x$;</li>
+<li>If the value can be found, it is differentiable; if not, it is non-differentiable.</li>
+</ul>
+<p><strong>Derivation</strong>: Suppose the current distance function is $d(s)=t^3$, the current derivative is $v(t)$, let $t=3$</p>
+<ul>
+<li>Derivation of rate of change near a point: $\begin{gathered}\text{Derivative}\\\frac{ds}{dt}(t)=\underbrace{\frac{s(t+dt)-s(t)}{dt}}_{dt\to0}\end{gathered}$</li>
+<li>Suppose at point $t=2$, find the tangent at this point: $\begin{aligned}\frac{ds}{dt}(2)=\frac{\left(2+dt\right)^3-\left(2\right)^3}{dt}\end{aligned}$</li>
+<li>Now expand $(2+dt)^3$ to get: $\begin{aligned}\frac{2^3+3(2)^2dt+3(2)(dt)^2+(dt)^3-2^3}{dt}\end{aligned}$</li>
+<li>Dividing it by $dt$ gives the $3(2)^2+3(2)(dt)+(dt)^2$</li>
+<li>At this point, as $dt$ approaches infinite hours, we get: $\frac{ds}{dt}(2)=3(2)^2=12$</li>
+<li>If $t=2$ in it is changed to a general expression $t=t$, we get: $\frac{ds}{dt}(t)=3(t)^2$</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Leftderivativeandrightderivative</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $\begin{aligned}&amp;\text{ Left derivative: }f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}\\&amp;\text{ Right derivative: }{f_0^{\prime}(x_0)}=\lim_{\Delta x\to0^+}\frac{f(x_0+\Lambda x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}\end{aligned}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The function of the left derivative should be marked with a minus sign below</li>
+<li>For the function of the right derivative, add a positive sign below it</li>
+</ul>
+<p>#####<strong>Theorem</strong>: <span class="note-tag">Therelationshipbetweenleftrightderivativesandderivatives</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $f^{\prime}(x_0)=a\Leftrightarrow f_-^{\prime}(x_0)=f_+^{\prime}(x_0)=a$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The relationship between the left and right derivatives: differentiable <code>&lt;--&gt;</code><strong>The left and right derivatives exist and are equal</strong>;</li>
+</ul>
+<p>#####<strong>Definition</strong>: <span class="note-tag">Theintervalcanbeguided</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> differentiable on the interval = every point on the interval has a derivative;</blockquote>
+<blockquote>1. $(a,b)$: Every point on the interval is differentiable;</blockquote>
+<blockquote>2. $[a,b]$: Every point on the interval is differentiable, and point a is differentiable to the right and point b to the left;</blockquote>
+<h2 id="section-4">1.2 Definition and Proof of Derivatives</h2>
+<p><strong>Guided on the Interval</strong></p>
+<p>Each point within an interval has a derivative, which is called in-interval differentiable;</p>
+<p>The function formed by this derivative is called the derivative of the function;</p>
+<p><strong>Derivative Functions</strong></p>
+<p>$f^{\prime}(x)\quad x\in I$</p>
+<h3 id="section-5">1.2.1 Prove the derivative of a function</h3>
+<p><strong>Title:</strong>$\left(a^x\right)^{\prime}=a^x\ln a\left(a&gt;0,a\neq1\right)$</p>
+<ul>
+<li>Proof process:</li>
+<li class="list-indent-1">$\lim_{\Delta x\to0}\frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim_{\Delta x\to0}\frac{a^x\left[a^{\Delta x}-1\right]}{\Delta x}=a^x\ln a$</li>
+<li>Here, step two directly becomes a step of LNA because there is an equivalent limit: $\lim_{x\to0}\frac{a^x-1}{x}=\ln a$</li>
+</ul>
+<p><strong>Question</strong>: $(\sin x)^{\prime}=\cos x$</p>
+<ul>
+<li>Proof process:</li>
+<li class="list-indent-1">$\lim_{\Delta x\to0}\frac{\sin(x+\Delta x)-\sin x}{\Delta x}=\lim_{\Delta x\to0}\frac{2\sin\frac{\Delta x}{2}\cos\frac{2x+\Delta x}{2}}{4x}$</li>
+<li>Because sinx~x, so:</li>
+<li class="list-indent-1">$\operatorname*{lim}_{\Delta x\rightarrow0}\frac{2-\frac{\Delta x}{2}\sin\frac{2x+\Delta x}{2}}{\Delta x}=\cos x$</li>
+</ul>
+<h3 id="section-6">1.2.2 Geometric Meaning of Derivatives</h3>
+<p><strong>Derivative Functions and Tangents</strong></p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">derivative $f^{\prime}(x_0)$ Geometrically, expressed as the slope of the tangent line to the curve $y=f(x)$ at the point $\left(x_0,  f(x_0)\right)$</li>
+<li>Tangents and Normals:</li>
+<li class="list-indent-1">Tangent equation: $y-y_{0}=f^{\prime}(x_{0})(x-x_{0})$</li>
+<li class="list-indent-1">Normal equation: $y-y_0=-\frac1{f^{\prime}(x_0)}(x-x_0)$</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/8d18c940abd3-Pasted-image-20240314175211.png" alt="Pasted image 20240314175211" loading="lazy" decoding="async"></li>
+</ul>
+<p><strong>Derivatives and Tangents</strong></p>
+<ul>
+<li>differentiability must have tangents;</li>
+<li>Having tangents does not necessarily mean differentiability;</li>
+</ul>
+<h2 id="section-7">1.3 Frequently Tested Question Types</h2>
+<h3 id="section-8">Question Type: <span class="note-tag">Piecewisefunctionsdiscussdifferentiabilityattheboundarypoint</span></h3>
+<p><strong>Question Type 1</strong>: Does the left-right derivative exist?</p>
+<ul>
+<li>For example, in piecewise functions, analyze whether left and right derivatives exist at a certain point;</li>
+<li>Method: Use definitions</li>
+<li>A point left derivative exists: $f_0^{\prime}(x_0)=\lim_{\Delta x\to0^-}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li class="list-indent-1">After substituting $x_0$ points, calculate the limit of this point, then check whether its value equals the derivative and whether the derivative value exists;</li>
+</ul>
+<p><strong>Note</strong>: For piecewise functions, when finding the derivative with value, you need to bring the value to the point where the point is defined. For example, x = 1 is the dividing point. Among the values less than or equal to 1 and greater than 1, the part of the function less than or equal to 1 can be carried in the value;</p>
+<h3 id="section-9">Question Type: <span class="note-tag">Definitionofderivatives</span></h3>
+<h4 id="section-10">PART 1: Problem-solving methods</h4>
+<p><strong>Features</strong>: Similar forms such as $f^{\prime}(x_0)=-1$ point derivative exist, which often test the definition of a point derivative;</p>
+<p><strong>Core Idea</strong>: Rounding the current derivative into a form similar to the definition of a derivative;</p>
+<ul>
+<li>Form: $f'(x_0)=\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}$.</li>
+<li>The numerator in division has one dynamic and one definite, so this form must be formed;</li>
+<li>Supplement: Condition analysis</li>
+<li class="list-indent-1">When $x=0$ is differentiable and $f(0)=0$ appears, the definition of derivative at 0 point must be used;</li>
+</ul>
+<p><strong>Similar Question Type</strong>: Derivative zero deciding problem</p>
+<ul>
+<li>Example: $\text{ Among the following functions, }x=\mathbf{0}\text{ Could it be settled? }\text{ What can be derivated is: }$</li>
+<li>Common conclusion: Let $f(x)=A(x)x-a$, where $A(x)$ is continuous at x=a, then the necessary and sufficient condition for $f(x)$ to be differentiable at x=a is: $A(x)=0$</li>
+</ul>
+<p><strong>Related problem type</strong>: An expression such as $\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}$ is used to test differentiability at a point.</p>
+<ul>
+<li>Method: write the increment as $h$. The derivative exists only if the difference-quotient limits as $h\to0^+$ and $h\to0^-$ both exist and are equal.</li>
+</ul>
+<h4 id="section-11">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: $\text{ Known }f^{\prime}(x_0)=-1,\text{ then }\lim_{x\to0}\frac x{f(x_0-2x)-f(x_0-x)}=？$</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">Form the form of the derivative definition;</li>
+<li class="list-indent-1">You can also use concrete functions to substitute the evaluation (since it's a fill-in-the-blank question);</li>
+<li>Analysis</li>
+<li class="list-indent-1">$\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0}-x)}{x}=\lim_{x\to0}\frac{f(x_{0}-2x)-f(x_{0})}{-2x}\cdot\frac{-2x}{x}-\lim_{x\to0}\frac{f(x_{0}-x)-f(x_{0})}{-x}\cdot\frac{-x}{x}$</li>
+<li>Question Type: <span class="note-tag">Definitionofderivatives</span></li>
+</ul>
+<p><strong>Example</strong>: It is known that $f(x)$ is differentiable at $x=0$, and $f(0)=0, $ then $\quad\lim_{x\to0}\frac{x^2f(x)-2f(x^3)}{x^3}$ =?</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li>Question Type: #</li>
+</ul>
+<h4 id="section-12">PART 3: Key Points Review</h4>
+<p><strong>Note</strong>: A derivative exists at a point iff the corresponding two-sided difference-quotient limit exists.</p>
+<ul>
+<li>If the derivative is known to exist, the limit in the derivative definition may be used directly.</li>
+<li>To prove differentiability, prove that the two-sided difference-quotient limit exists, or that the left and right limits both exist and are equal.</li>
+</ul>
+<h3 id="section-13">Question Type: <span class="note-tag">Derivativeapplication</span></h3>
+<h4 id="section-14">PART 1: Problem-solving methods</h4>
+<p><strong>Question Type 1</strong>: The geometric meaning of derivatives</p>
+<ul>
+<li>Find the slope of the tangent: $k_{\text{ Tch }}=\frac{dy}{dx}$</li>
+<li>Find the slope of the normal: $k_{\text{ Law }}=-\frac1{k_{\text{ Tch }}}$</li>
+</ul>
+<p><strong>Question Type 2</strong>: Correlation Change Rate</p>
+<ul>
+<li>1. Establishing relationships between related quantities;</li>
+<li>2. Derivative of both sides of the equation with respect to t;</li>
+</ul>
+<h4 id="section-15">PART 2: Typical Example Problems</h4>
+<p><strong>Example Question</strong>: The normal equation at the point of $\left.\text{ Curve }\left\{\begin{aligned}x&amp;=\arctan t,\\y&amp;=\ln\sqrt{1+t^2},\end{aligned}\right.\text{ The above corresponds }{t=1}\right.$</p>
+<ul>
+<li>Analysis</li>
+<li>Analysis</li>
+<li>Question Type: #</li>
+</ul>
+<h2 id="section-16">1.4 Derivative Derivatives</h2>
+<p><strong>Examples of Distance and Speed</strong></p>
+<ul>
+<li>s is $s(t)$</li>
+<li>Distance and speed relationship</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/7e59f48dbce8-Pasted-image-20240324194344.png" alt="Pasted image 20240324194344" loading="lazy" decoding="async"></li>
+<li>Amount of change:</li>
+<li class="list-indent-1"><img class="note-image" src="/assets/notes/f604f8755a5f-Pasted-image-20240324194646.png" alt="Pasted image 20240324194646" loading="lazy" decoding="async"></li>
+<li>Derivation of rate of change near a point: $\begin{gathered}\text{Derivative}\\\frac{ds}{dt}(t)=\underbrace{\frac{s(t+dt)-s(t)}{dt}}_{dt\to0}\end{gathered}$</li>
+<li>Suppose at point $t=2$, find the tangent at this point: $\begin{aligned}\frac{ds}{dt}(2)=\frac{\left(2+dt\right)^3-\left(2\right)^3}{dt}\end{aligned}$</li>
+<li>Now expand $(2+dt)^3$ to get: $\begin{aligned}\frac{2^3+3(2)^2dt+3(2)(dt)^2+(dt)^3-2^3}{dt}\end{aligned}$</li>
+<li>Dividing it by $dt$ gives the $3(2)^2+3(2)(dt)+(dt)^2$</li>
+<li>At this point, as $dt$ approaches infinite hours, we get: $\frac{ds}{dt}(2)=3(2)^2=12$</li>
+<li>If $t=2$ in it is changed to a general expression $t=t$, we get: $\frac{ds}{dt}(t)=3(t)^2$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-023/index.html"><span>← Previous item</span><strong>Lecture 15: Properties of continuous functions on closed intervals</strong></a>
+    <a class="article-pagination-next" href="../math-025/index.html"><span>Next item →</span><strong>Lecture 17: Differentiation Rules</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +262,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

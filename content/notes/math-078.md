@@ -6,25 +6,46 @@ category: "数学"
 tags: ["考研数学", "线性代数", "矩阵"]
 ---
 
-## 9.1 等价矩阵和矩阵的等价标准型
+## 9.1 等价矩阵
+
 ##### **定义**： #等价矩阵
-> <font color="#ccc1d9">描述：</font> $$\begin{aligned}&\text{设}A,B\text{ 均是}m\times n\text{矩阵,若存在可逆矩阵}P_{mon},Q_{mon},\text{ 使得 }PAQ=B\text{,则称 }A,B\text{ 是等价矩阵,记作}\\&A\cong B.\end{aligned}$$
 
-**解释**
+设 $A,B$ 都是 $m\times n$ 矩阵。若存在 $m$ 阶可逆矩阵 $P$ 和 $n$ 阶可逆矩阵 $Q$，使
 
-##### **定义**： #矩阵的等价标准型
-> <font color="#ccc1d9">描述：</font> 
-> 1.  $A\text{ 是一个 }m\times n\text{ 矩阵,则}A\text{ 等价于形如}\begin{bmatrix}E_r&0\\0&0\end{bmatrix}\text{的矩阵}(E_r\text{ 中的 }r\text{ 恰是}r(A))\text{,后者称为}A\text{ 的等价标准型}$
-> 2. $\text{等价标准形是唯一的,即若 }r(A)=r\text{,则存在可逆矩阵}P,Q\text{,使得:}PAQ=\begin{bmatrix}E_r&0\\0&0\end{bmatrix}$
+$$
+PAQ=B,
+$$
 
-**解释**
-- 意义：
-	- 虽然一个 `m*n` 型的矩阵不能变成标准的单位阵，但是可以通过行变换和列变换、将其变成一个分块的、某个块的单位阵，其他阵则是 `0`；
-	- 最简单的形式：$PAQ=\begin{bmatrix}E_r&0\\0&0\end{bmatrix}$
-- 解释： 
-	- 其中的 `r` 是 `A` 矩阵的秩 `->` 吧 $E_r$ 扩展到了不同阶时的情况 `->` $PAQ=\begin{bmatrix}E_r&0\\0&0\end{bmatrix}$ 是等价标准型；
-	- `P`：若干次初等行变换；
-	- `Q`：若干次初等列变换；
-	- `PAQ=B`：化成最简型之前的任意一个过程的状态，最终都会走向 $PAQ=\begin{bmatrix}E_r&0\\0&0\end{bmatrix}$；
-- 概念：什么是 `AB` 等价
-	- 这两个矩阵、最终的归宿是一样的，它们最终都能化成最终的一样的最简标准型 `<->` 等价标准型一样；
+则称 $A$ 与 $B$ 等价，记作 $A\sim B$。
+
+左乘可逆矩阵对应有限次初等行变换，右乘可逆矩阵对应有限次初等列变换。因此，矩阵等价也可以表述为：一个矩阵能够通过有限次初等行、列变换化为另一个矩阵。
+
+## 9.2 等价标准形
+
+##### **定义**： #矩阵的等价标准形
+
+若 $\operatorname{rank}(A)=r$，则存在可逆矩阵 $P,Q$，使
+
+$$
+PAQ=
+\begin{bmatrix}
+I_r&0\\
+0&0
+\end{bmatrix}.
+$$
+
+右侧矩阵称为 $A$ 的等价标准形，其中 $I_r$ 是 $r$ 阶单位矩阵。零块的具体尺寸由 $A$ 的行数 $m$ 与列数 $n$ 决定。
+
+**结论**
+
+- 每个 $m\times n$ 矩阵都等价于上述标准形。
+- 等价标准形由矩阵的阶数和秩唯一确定。
+- 两个同型矩阵等价，当且仅当它们的秩相同：
+
+$$
+A\sim B
+\iff
+\operatorname{rank}(A)=\operatorname{rank}(B).
+$$
+
+- 矩阵化为等价标准形时，$P$ 记录行变换，$Q$ 记录列变换。

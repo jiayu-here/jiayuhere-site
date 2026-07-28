@@ -10,14 +10,14 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graduate Examination Mathematics: Lecture 2：函数的概念及常见函数 | Jiayu Lab</title>
-  <meta name="description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
-  <meta name="keywords" content="Graduate Examination Mathematics, Calculus">
+  <title>Lecture 2: Concepts of functions and common functions | Jiayu Lab</title>
+  <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Concepts of Functions and Common Functions. Original formulas, diagrams, and example problems are retained.">
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Functions, Limits, and Continuity">
   <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Graduate Examination Mathematics: Lecture 2：函数的概念及常见函数 | Jiayu Lab">
-  <meta property="og:description" content="The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.">
+  <meta property="og:title" content="Lecture 2: Concepts of functions and common functions | Jiayu Lab">
+  <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Concepts of Functions and Common Functions. Original formulas, diagrams, and example problems are retained.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-010/">
@@ -27,8 +27,19 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260726b">
-
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260728a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -49,12 +60,118 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Learning Notes</a><h1>Graduate Examination Mathematics: Lecture 2：函数的概念及常见函数</h1><p class="article-lead">The authoritative note is in Chinese; this page links to the original instead of using an automatic translation.</p><div class="article-meta"><span>Mathematics · 2024-02-26</span><span>1 min read</span><div class="tag-list"><span>Graduate Examination Mathematics</span><span>Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Original Chinese Note</a></nav></details><div class="prose"><h2 id="section-1">Original Chinese Note</h2>
-<p>The authoritative note is written in Chinese to preserve its formulas, examples, diagrams and original terminology. It is linked here rather than machine-translated.</p>
-<p><a href="/notes/math-010/">Read the original Chinese note</a></p><nav class="article-pagination" aria-label="Adjacent content">
-    <a href="../math-009/index.html"><span>← Previous item</span><strong>Graduate Examination Mathematics: Lecture 1：课程大纲</strong></a>
-    <a class="article-pagination-next" href="../math-011/index.html"><span>Next item →</span><strong>Graduate Examination Mathematics: Lecture 3：函数的性质</strong></a>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 2: Concepts of functions and common functions</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 2: Concepts of Functions and Common Functions. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics · 2024-02-26</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Functions</span><span>Limits</span><span>and Continuity</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">2.1 Basic concepts of functions</a><a href="#section-4">2.2 Other common functions</a><a href="#section-8">2.3 elementary functions</a><a href="#section-10">2.4 common problem types</a></nav></details><div class="prose"><h2 id="section-1">2.1 Basic concepts of functions</h2>
+<h3 id="section-2">2.1.1 Definition of function</h3>
+<p>#####<strong>Definition</strong>: # function</p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> If for each number $x\in D$, there is a unique $y$ corresponding to it according to certain rules, then $y$ is called a function of $x$, recorded as $y=f(x)$; $x$ is usually called an independent variable, $y$ is the dependent variable, $D$ is the domain.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Basic concepts</li>
+<li class="list-indent-1">Domain: $D_f=D.$</li>
+<li class="list-indent-1">Value range: $R_f=f(D)=\{y|y=f(x), x\in D\}$</li>
+<li>Two basic elements of functions:</li>
+<li class="list-indent-1">Domain</li>
+<li class="list-indent-1">Corresponding rules</li>
+<li>As long as two elements are met, two functions can be said to be the same, regardless of the symbol used for the domain;</li>
+<li>NOTE:</li>
+<li class="list-indent-1">One $x$ can only correspond to one $y$</li>
+<li class="list-indent-1">For example, $y^2=x$ is not a function, because one $x$ corresponds to two $y.$</li>
+</ul>
+<h3 id="section-3">2.1.2 Other function types</h3>
+<p><strong>Rounding function</strong></p>
+<ul>
+<li>Let $x$ be any real number, the largest integer not exceeding $x$ is called the integer part of $x$, denoted as $[x]$.</li>
+<li>Function $y=[x]$ is called a rounding function;</li>
+</ul>
+<h2 id="section-4">2.2 Other common functions</h2>
+<h3 id="section-5">2.2.1 composite function</h3>
+<p>#####<strong>Definition</strong>: # composite function</p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> Let the domain of $y=f(u)$ be $D_f$, the domain of $u=g(x)$ be $D_g$, and the value domain be $R_g$. If $D_f\cap R_g\neq\varnothing$, then the function $y=f[g(x)]$ is called the functions $y=f(u)$ and $u=g(x)$ The composite function. Its domain is $\left\{x\mid x\in D_g, \ g(x)\in D_f\right\}$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>g: inner function</li>
+<li>f: outer function</li>
+<li>Core: $D_f\cap R_g\neq\varnothing$</li>
+</ul>
+<p><strong>Method: Determine whether two functions are composite</strong></p>
+<ul>
+<li>The intersection of the value domain of the inner function and the domain of the outer function must be a non-empty set; otherwise it is not a composite function;</li>
+</ul>
+<p><strong>Error-prone points</strong>: Pay attention to the value range and domain in composite function</p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">The domain of composite function is $\left\{x\mid x\in D_g, \ g(x)\in D_f\right\}$.</li>
+<li>Common mistakes:</li>
+<li class="list-indent-1">Treat the domain of the inner function as the domain of the composite function;</li>
+</ul>
+<h3 id="section-6">2.2.2 inverse function</h3>
+<p>#####<strong>Definition</strong>: # inverse function</p>
+<blockquote><span style="color:#ccc1d9"> description: </span> Let the domain of function $y=f(x)$ be $D$ and the value range be $R_f$. If for any $y\in R_f$, there is a unique $x\in D$ such that $y=f(x)$, then the function determined by $x=f^{-1}(y)$ is called $y=f(x)$ The inverse function.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Ordinary functions allow multiple different $x$ to correspond to the same $y$;</li>
+<li>The condition for the existence of antiderivative inverse function is that it has a one-to-one mapping in the domain, that is, different $x$ corresponds to different $y$;</li>
+<li>Concept:</li>
+<li class="list-indent-1">1. The inverse function $x=f^{-1}(y)$ of $y=f(x)$ is often written as $y=f^{-1}(x)$.</li>
+<li class="list-indent-1">2. In the same Cartesian coordinate system, the graphs of $y=f(x)$ and $x=f^{-1}(y)$ coincide.</li>
+<li class="list-indent-1">3. The graphs of $y=f(x)$ and $y=f^{-1}(x)$ are symmetric about the line $y=x$.</li>
+</ul>
+<p><strong>Method: Is there an inverse function</strong></p>
+<ul>
+<li>Core:</li>
+<li class="list-indent-1">1. Is there a unique $x\in D$ for any $y\in R_y$;</li>
+<li class="list-indent-1">2. A strictly monotonic function on an interval must have an inverse function;</li>
+<li class="list-indent-1">3. A strictly monotonic function on an interval has the same monotonicity as its inverse function;</li>
+<li>For example:</li>
+<li class="list-indent-1">$y=x^3$ has inverse function, but $y=x^2$ does not;</li>
+<li>Conclusion:</li>
+<li class="list-indent-1">for $\forall x_{1}\neq x_{2}\in D\Rightarrow f(x_{1})\neq f(x_{2})$</li>
+<li class="list-indent-1">that is, the f function should be a one-to-one mapping;</li>
+</ul>
+<p><strong>Method: Find the inverse function of a function</strong></p>
+<ul>
+<li>Example: find the inverse of $y=\sinh x=\frac{e^x-e^{-x}}{2}$.</li>
+<li>Specific steps:</li>
+<li class="list-indent-1">1. Find the inverse solution;</li>
+<li class="list-indent-1">2. Reverse functions y, x;</li>
+</ul>
+<h3 id="section-7">2.2.3 Combination of inverse function and composite function</h3>
+<p><strong>Combination of both</strong>:</p>
+<ul>
+<li>Case 1: When $x\in D$, $f^{-1}[f(x)]=x$</li>
+<li class="list-indent-1">Ordinary functions are passed into the inverse function of the current function</li>
+<li>Case 2: When $x\in R_f$, $f[f^{-1}(x)]=x$</li>
+</ul>
+<h2 id="section-8">2.3 elementary functions</h2>
+<h3 id="section-9">2.3.1 basic elementary functions definition</h3>
+<p>#####<strong>Definition</strong>: # basic elementary functions</p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> collectively refers to power functions, exponentials, logarithms, trigonometric functions, and inverse trigonometric functions as basic elementary functions;</blockquote>
+<p>&gt;</p>
+<p><strong>Explanation</strong></p>
+<p><img class="note-image" src="/assets/notes/195bf45ba27a-Pasted-image-20240226231300.png" alt="Pasted image 20240226231300" loading="lazy" decoding="async"></p>
+<p>#####<strong>Definition</strong>: # elementary functions</p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> by</blockquote>
+<blockquote>1. Composed of constants and five categories of basic elementary functions;</blockquote>
+<blockquote>2. Addition, subtraction, multiplication, division and compounding</blockquote>
+<blockquote>3. The resulting function expressed by an analytical expression</blockquote>
+<blockquote>Call it elementary functions;</blockquote>
+<h2 id="section-10">2.4 common problem types</h2>
+<h3 id="section-11">problem type: # composite function</h3>
+<h4 id="section-12">PART 1: solution method</h4>
+<p><strong>Test method: If it is a composite of piecewise functions</strong></p>
+<ul>
+<li>1. The inner layer is still brought into the outer layer;</li>
+<li>2. If it is segmented, the inner function needs to be brought into the corresponding outer function segmentally according to the segmentation of the inner function (<strong>the function value of the inner function falls into which part of the outer function</strong>);</li>
+</ul>
+<p><strong>Test method: If composite function and outer function are known, inner function is required</strong></p>
+<ul>
+<li>1. The result of composite function = the function obtained by inserting the outer function into the inner function;</li>
+</ul>
+<h4 id="section-13">PART 2: representative examples</h4>
+<p><strong>Example</strong>: Let $g(x)=\begin{cases}2-x,&amp;x\leq0,\\x+2,&amp;x&gt;0,\end{cases}$ and $f(x)=\begin{cases}x^2,&amp;x&lt;0,\\-x,&amp;x\geq0.\end{cases}$ Find $g(f(x))$.</p><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-009/index.html"><span>← Previous item</span><strong>Lecture 1: Course Outline</strong></a>
+    <a class="article-pagination-next" href="../math-011/index.html"><span>Next item →</span><strong>Lecture 3: Properties of functions</strong></a>
   </nav></div></div>
     </article></main>
 
@@ -63,6 +180,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260726a"></script>
+  <script src="../../../assets/script.js?v=20260728a"></script>
 </body>
 </html>

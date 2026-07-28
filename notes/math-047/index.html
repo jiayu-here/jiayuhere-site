@@ -27,7 +27,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260726b">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260728a">
   <script>
     window.MathJax = {
       tex: {
@@ -63,8 +63,8 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 38：常系数非齐次线性微分方程</h1><p class="article-lead">考研数学学习笔记：Lecture 38：常系数非齐次线性微分方程。保留原始公式、图示与例题。</p><div class="article-meta"><span>数学 · 2024-02-02</span><span>约 7 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>微分方程</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 非齐次微分方程</a></nav></details><div class="prose"><h2 id="section-1">1.1 非齐次微分方程</h2>
 <h3 id="section-2">1.1.1 基本概念</h3>
-<h5 id="section-3"><strong>定义</strong>： #常系数非齐次线性微分方程</h5>
-<blockquote>&lt;font color=&quot;#ccc1d9&quot;&gt;描述：</blockquote>
+<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">常系数非齐次线性微分方程</span></h5>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
 <blockquote>1. 形式：$$y^{\prime\prime}+py^{\prime}+qy=f(x)$$</blockquote>
 <blockquote>2. 两种非齐次项：</blockquote>
 <blockquote>	1. $$f(x)=e^{\lambda x}P_m(x)$$</blockquote>
@@ -79,7 +79,7 @@
 <li>三种待定特解：</li>
 <li class="list-indent-1">情况 1：若非齐次项是 $f(x)=e^{\lambda x}P_{m}(x)$</li>
 <li class="list-indent-2">待定特解为：$y^{*}=x^{k}Q_{m}(x)e^{\lambda x}$</li>
-<li class="list-indent-1">情况 2：若非齐次项是 $f(x)=e^{\alpha}[P_l(x)\cos\beta x+Q_n(x)\sin\beta x]$</li>
+<li class="list-indent-1">情况 2：若非齐次项是 $f(x)=e^{\alpha x}[P_l(x)\cos\beta x+Q_n(x)\sin\beta x]$</li>
 <li class="list-indent-2">即非齐次项是 $指数×多项式×三角$；</li>
 <li class="list-indent-2">$y^{*}=x^{k}e^{\alpha x}\bigl[R_{m}^{(1)}(x)\cos\beta x+R_{m}^{(2)}(x)\sin\beta x\bigr].\quad m=\max\{l,n\}$</li>
 <li class="list-indent-1">情况 3：若非齐次项既有情况 1、也有情况 2</li>
@@ -133,15 +133,13 @@
 <li class="list-indent-3">根据 $\alpha+i\beta$ 是方程的几重根，判断 $k$ 的取值</li>
 <li class="list-indent-4">$\alpha$ 来自 $e^{\alpha x}$ 中，$\beta$ 来自 $P_{l}^{(1)}(x)\cos\beta x+P_{n}^{(2)}(x)\sin\beta x$ 的三角函数中；</li>
 <li class="list-indent-3">如果是单根，这个 $x^{k}$ 里面的 $k$ 就是 $1$ 次方，如果是双根，这个里面的 $k$ 就是 $2$ 次方；</li>
-<li class="list-indent-3">注意： </li>
-<li class="list-indent-4">如果 $r_{1,2}=\pm 1$，此时表示是一个特征根，因为两个特征根一样；</li>
-<li class="list-indent-4">所以如果解出 $\alpha+i\beta=\pm 1$ ，则此时表示的是一重根，而不是两重根；</li>
+<li class="list-indent-3">注意：若 $\beta\neq0$，则 $\alpha\pm i\beta$ 是一对共轭复根；$k$ 取其中任一根在特征方程中的重数；</li>
 <li>5. 确定系数与任意常数</li>
 <li class="list-indent-1">（1）确定非齐次项待定特解的系数</li>
 <li class="list-indent-2">在前面设好了 $y^{<em>}$ 的各个成分后，因为此时 $y^{</em>}$ 当中还有待定系数，此时将设好的函数代换原方程，比较两端同次幂的系数，然后得到 $y^{*}$ 的结果；</li>
 <li class="list-indent-2">假如当前方程式是 $y^{\prime\prime}+y=\sin x$，此时就需要将 $y({<em>})$ 和 $y^{\prime\prime}(</em>)$ 代入原方程中，然后比较两端同次幂的系数，然后得到 $y^{*}$ 中各个系数的结果；</li>
 <li class="list-indent-1">（2）确定齐次项通解的任意常数 $C_1$ 和 $C_2$</li>
-<li class="list-indent-2">在原方程式中，找出两个方程的特解，比如求出 $f(0)=0$、$f^{\prime}{0}=1$；</li>
+<li class="list-indent-2">根据题目给出的两个初始条件，例如 $y(0)=0$、$y^{\prime}(0)=1$；</li>
 <li class="list-indent-2">将其代入齐次方程的通解式中、解出任意常数；</li>
 <li class="list-indent-2">注意：非齐次的特解在定出系数后，也需要带入到齐次方程的通解式当中，帮助定出任意常数；</li>
 <li>6. 若是三阶及其以上的微分方程，按照以下方法合并</li>
@@ -173,6 +171,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260726a"></script>
+  <script src="../../assets/script.js?v=20260728a"></script>
 </body>
 </html>
