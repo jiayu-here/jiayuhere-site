@@ -45,6 +45,27 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
 
+const heroRainbow = document.querySelector("[data-hero-rainbow]");
+if (heroRainbow && window.matchMedia("(hover: hover) and (pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const hero = heroRainbow.closest(".hero");
+  let heroRainbowFrame;
+  const setHeroRainbowPosition = (x, y) => {
+    window.cancelAnimationFrame(heroRainbowFrame);
+    heroRainbowFrame = window.requestAnimationFrame(() => {
+      heroRainbow.style.setProperty("--hero-pointer-x", x.toFixed(3));
+      heroRainbow.style.setProperty("--hero-pointer-y", y.toFixed(3));
+    });
+  };
+  hero?.addEventListener("pointermove", (event) => {
+    const bounds = hero.getBoundingClientRect();
+    setHeroRainbowPosition(
+      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+      ((event.clientY - bounds.top) / bounds.height) * 2 - 1
+    );
+  });
+  hero?.addEventListener("pointerleave", () => setHeroRainbowPosition(0, 0));
+}
+
 const articleToc = document.querySelector(".article-toc");
 const compactArticleToc = window.matchMedia("(max-width: 980px)");
 const syncArticleToc = ({ matches }) => {

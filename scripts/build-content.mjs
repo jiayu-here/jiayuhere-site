@@ -4,7 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260729f";
+const assetVersion = "20260729g";
 const lightThemeColor = "#f7f8fb";
 const githubUser = "jiayu-here";
 const excludedRepositories = new Set(["jiayuhere-site"]);
@@ -688,7 +688,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" hreflang="en" href="${english}">
   <link rel="alternate" hreflang="x-default" href="${chinese}">
   <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
-  <link rel="icon" href="${prefix}favicon.ico" sizes="any">
+  <link rel="icon" href="${prefix}favicon.ico?v=${assetVersion}" sizes="any">
   <link rel="manifest" href="${prefix}site.webmanifest">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=${assetVersion}">
 ${usesMath ? `  <script>
@@ -809,6 +809,7 @@ const ensureSharedPageShell = (html, url) => {
   if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
   return html
     .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)
+    .replace(/favicon\.ico(?:\?v=[^"]+)?/g, `favicon.ico?v=${assetVersion}`)
     .replace(/assets\/styles\.css\?v=[^"]+/g, `assets/styles.css?v=${assetVersion}`)
     .replace(/assets\/script\.js\?v=[^"]+/g, `assets/script.js?v=${assetVersion}`);
 };

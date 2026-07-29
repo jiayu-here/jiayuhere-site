@@ -27,8 +27,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="feed.xml">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="stylesheet" href="assets/styles.css?v=20260729f">
+  <link rel="icon" href="favicon.ico?v=20260729g" sizes="any">
+  <link rel="stylesheet" href="assets/styles.css?v=20260729g">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -63,8 +63,12 @@
 
   <main id="main">
     <section class="hero">
+      <aside class="hero-personality" aria-label="性格档案">
+        <div class="personality-type"><span>性格测试</span><strong>INTJ</strong></div>
+        <p>浪漫主义情怀和理性思维的结合，理想主义和现实主义的交织，一个有点文青病的理性工科男。</p>
+      </aside>
       <div class="container hero-grid">
-        <div>
+        <div class="hero-content">
           <div class="availability">持续学习与工程实践中</div>
           <h1>你好，我是 JiaYu。<span class="hero-statement">把工程做完，也把过程<span class="hero-accent">写清楚。</span></span></h1>
           <p class="hero-copy">这里是我的个人主页、技术博客、项目作品集、学习知识库和工具箱。长期记录通信、数字信号处理、嵌入式、FPGA 与计算机技术的学习和实践。</p>
@@ -91,15 +95,36 @@
                 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.6 4h5.1a4.3 4.3 0 0 1 4.3 4.3v.8c0 .5.4.9.9.9h.7c.8 0 1.4.6 1.4 1.4v4.1A4.5 4.5 0 0 1 15.5 20h-7A4.5 4.5 0 0 1 4 15.5v-7A4.5 4.5 0 0 1 7.6 4Zm.9 4.1a1.1 1.1 0 0 0 0 2.2h4.8a1.1 1.1 0 0 0 0-2.2H8.5Zm0 5.6a1.1 1.1 0 0 0 0 2.2h7a1.1 1.1 0 0 0 0-2.2h-7Z"/></svg>
               </a>
               <a class="hero-social-link douyin" href="https://v.douyin.com/lisWB6e9ImQ/" target="_blank" rel="noreferrer" aria-label="抖音" title="抖音">
-                <img src="assets/icons/douyin.svg" width="21" height="21" alt="">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg>
               </a>
             </nav>
           </div>
         </div>
-        <aside class="hero-personality" aria-label="性格档案">
-          <div class="personality-type"><span>性格测试</span><strong>INTJ</strong></div>
-          <p>浪漫主义情怀和理性思维的结合，理想主义和现实主义的交织，一个有点文青病的理性工科男。</p>
-        </aside>
+        <div class="hero-visual" data-hero-rainbow aria-hidden="true">
+          <svg class="hero-rainbow" viewBox="0 0 420 420" focusable="false">
+            <defs>
+              <linearGradient id="hero-rainbow-gradient" x1="38" y1="78" x2="386" y2="330" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#1d4ed8"/>
+                <stop offset=".38" stop-color="#4338ca"/>
+                <stop offset=".7" stop-color="#c026d3"/>
+                <stop offset="1" stop-color="#ff2d6f"/>
+              </linearGradient>
+            </defs>
+            <path class="hero-rainbow-blob" d="M49 68C132 4 277 5 365 73c82 63 68 192 5 268-70 84-220 91-306 25C-23 300-30 129 49 68Z"/>
+            <g class="hero-rainbow-layer hero-rainbow-layer-back">
+              <path class="hero-rainbow-ribbon" d="M34 116C135 30 303 35 390 119"/>
+              <path class="hero-rainbow-dashes" pathLength="100" d="M34 116C135 30 303 35 390 119" stroke="url(#hero-rainbow-gradient)"/>
+            </g>
+            <g class="hero-rainbow-layer hero-rainbow-layer-middle">
+              <path class="hero-rainbow-ribbon" d="M25 225c108-98 284-96 378 3"/>
+              <path class="hero-rainbow-dashes" pathLength="100" d="M25 225c108-98 284-96 378 3" stroke="url(#hero-rainbow-gradient)"/>
+            </g>
+            <g class="hero-rainbow-layer hero-rainbow-layer-front">
+              <path class="hero-rainbow-ribbon" d="M55 326c99-83 242-81 318-9"/>
+              <path class="hero-rainbow-dashes" pathLength="100" d="M55 326c99-83 242-81 318-9" stroke="url(#hero-rainbow-gradient)"/>
+            </g>
+          </svg>
+        </div>
       </div>
     </section>
 
@@ -134,6 +159,6 @@
     <div class="footer-links"><a href="privacy/index.html">隐私说明</a><a href="about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="feed.xml">RSS</a><a href="sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="assets/script.js?v=20260729f"></script>
+  <script src="assets/script.js?v=20260729g"></script>
 </body>
 </html>
