@@ -42,6 +42,14 @@ jobs:
             blog en/blog \
             notes en/notes \
             lab en/lab \
+            about en/about \
+            resume en/resume \
+            toolbox en/toolbox \
+            resources en/resources \
+            contact en/contact \
+            wechat en/wechat \
+            privacy en/privacy \
+            offline en/offline \
             assets/data/search-index.json assets/data/search-index.en.json \
             feed.xml rss.xml en/feed.xml en/rss.xml \
             sitemap.xml

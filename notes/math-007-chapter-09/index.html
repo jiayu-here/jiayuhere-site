@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 9：无穷级数 — 高等数学 - 公式合集 | Jiayu Lab</title>
+  <meta name="description" content="高等数学 - 公式合集中的Chapter 9：无穷级数，拆分为独立章节以便查阅并减少单页图片负载。">
+
+  <meta name="keywords" content="考研数学, 数学总结, 公式合集">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 9：无穷级数 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta property="og:description" content="高等数学 - 公式合集中的Chapter 9：无穷级数，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 9：无穷级数 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta name="twitter:description" content="高等数学 - 公式合集中的Chapter 9：无穷级数，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-007-chapter-09/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Chapter 9：无穷级数 — 高等数学 - 公式合集</h1><p class="article-lead">高等数学 - 公式合集中的Chapter 9：无穷级数，拆分为独立章节以便查阅并减少单页图片负载。</p><div class="article-meta"><span>数学</span><span>约 26 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>数学总结</span><span>公式合集</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">Chapter 9：无穷级数 </a><a href="#section-2">9.1 常数项级数 </a><a href="#section-7">9.2 幂级数</a><a href="#section-11">9.3 傅里叶级数 </a></nav></details><div class="prose"><h2 id="section-1">Chapter 9：无穷级数 </h2>
+<h2 id="section-2">9.1 常数项级数 </h2>
+<p><strong>解题步骤</strong></p>
+<ul>
+<li>第一步：判断级数类型</li>
+<li class="list-indent-1">正项、交错、任意项</li>
+<li>第二步：根据级数，选择方法</li>
+<li class="list-indent-1">正项级数 <code>-&gt;</code> 用敛散性的五类判别法，做判定；</li>
+<li class="list-indent-1">交错级数 <code>-&gt;</code> 一个方法；</li>
+<li class="list-indent-1">任意项级数 <code>-&gt;</code> 一个方法；</li>
+<li>第三步：如果无法做出判定，此时可以使用定义和性质来进行判定</li>
+<li class="list-indent-1">定义和性质是适用于所有类型的级数的；</li>
+</ul>
+<h3 id="section-3">9.1.1 基本概念 </h3>
+<p><strong>定义</strong>：常数项级数收敛</p>
+<ul>
+<li>$u_{1}, u_{2},\cdots u_{n},\cdots$ 表示常数项，$S_{n}=u_{1}+u_{2}+\cdots+u_{n}$ 表示前 <code>n</code> 项的和；</li>
+<li>若：$$\lim_{n\to+\infty}S_{n}=\sum_{n=1}^\infty u_n$$</li>
+<li>则当前常数项数列为收敛的，若是没有极限，则是为发散的；</li>
+</ul>
+<p><strong>性质</strong></p>
+<ul>
+<li>1. 若 $\sum_{n=1}^{\infty}u_n$ 收敛于 $S$，则 $\sum_{n=1}^{\infty}k u_n$ 收敛于 $kS$。</li>
+<li>2. 若 $\sum_{n=1}^{\infty}H_n$ 和 $\sum_{n=1}^{\infty}U_n$ 分别收敛于 $h$ 和 $u$，则 $\sum_{n=1}^{\infty}(H_n\pm U_n)$ 收敛于 $h\pm u$。</li>
+<li>3.  在级数中去掉或加上<strong>有限项</strong>，敛散性不变，值可能会变化；</li>
+<li>4. $\sum u_n收敛，任意加括号后级数也收敛，且和不变$</li>
+<li>5. 级数收敛的必要条件：$\sum_{n=1}^\infty u_n\text{ 收敛 }\longrightarrow\lim_{n\to\infty}u_n=0$</li>
+</ul>
+<p><strong>常用结论</strong></p>
+<ul>
+<li>$$\sum_{n=1}^{+\infty}|b_{n|}收敛\rightarrow \sum_{n=1}^{+\infty}(b_{n})^{2}收敛$$</li>
+</ul>
+<h3 id="section-4">9.1.2 正项级数 </h3>
+<p><strong>定义</strong>：正项级数的收敛性</p>
+<ul>
+<li>正项 $\sum u_n$ 收敛的充分必要条件是 ${S_n}$ 有界；</li>
+<li>$$\sum_{n=1}^\infty u_n\text{ 收敛}\Leftrightarrow s_n\text{ 上有界}$$</li>
+</ul>
+<p><strong>方法</strong>：正项级数的五类方法</p>
+<ul>
+<li>方法分类：</li>
+<li class="list-indent-1">1. 比较审敛法 </li>
+<li class="list-indent-1">2. 比较法的极限形式 </li>
+<li class="list-indent-1">3. 比值法 </li>
+<li class="list-indent-1">4. 根值法</li>
+<li class="list-indent-1">5. 积分判别法 </li>
+<li>方法选择：</li>
+<li class="list-indent-1">第一类：方法 <code>1、2</code></li>
+<li class="list-indent-2">需要把当前的通项和其它已知通项进行比较；</li>
+<li class="list-indent-2">优点： </li>
+<li class="list-indent-3">适用范围更广泛；</li>
+<li class="list-indent-3">只要是方法 3、4 可以做出判定的，方法 <code>1、2</code> 都一定可以做出判定，只是可能做起来更不方便；</li>
+<li class="list-indent-2">缺点： </li>
+<li class="list-indent-3">使用起来不方便；</li>
+<li class="list-indent-1">第二类：方法 <code>3、4</code></li>
+<li class="list-indent-2">概念： </li>
+<li class="list-indent-3">只需要自己就可以进行判断；</li>
+<li class="list-indent-2">优点： </li>
+<li class="list-indent-3">使用起来方便，不需要其他级数，自己就可以判断；</li>
+<li class="list-indent-2">缺点： </li>
+<li class="list-indent-3">有些时候，级数很明显可以看出来时发散的，但却很难用方法证明出来；</li>
+<li class="list-indent-3">即：适用范围窄；</li>
+<li>解题步骤：</li>
+<li class="list-indent-1">1. 先观察是否可以直接看出来敛散性 <code>-&gt;</code> 规律； </li>
+<li class="list-indent-1">2. 在判断方法时，先考虑使用方法 <code>3、4</code>；</li>
+<li class="list-indent-1">3. 如果做不出判定，再考虑 <code>1、2</code>；</li>
+<li>规律： </li>
+<li class="list-indent-1">三巨头：$$a^n\quad n!\quad n^n$$</li>
+<li class="list-indent-1">如果这三巨头当中至少出现一个，通常就使用方法 <code>3、4</code>；</li>
+<li class="list-indent-1">如果三巨头一个都不出现，此时经常出现的就是 $n^p$ 或者 $In{n}$ 的形式，此时就使用方法 <code>1、2</code>；</li>
+</ul>
+<p><strong>方法一</strong>：比较审敛法</p>
+<ul>
+<li>如果 $\sum U_n$ 和 $\sum V_n$ 都是正项级数，且 $u_n&lt;v_n$：</li>
+<li>$$\sum_{n=1}^\infty\nu_n\text{ 收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛}$$</li>
+<li>$$\sum_{n=1}^\infty u_n\text{ 发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$</li>
+<li>总结：</li>
+<li class="list-indent-1">大的收敛，小的肯定收敛；</li>
+<li class="list-indent-1">小的发散，大的肯定发散；</li>
+<li class="list-indent-1">反过来都不行；</li>
+<li>使用方法：</li>
+<li class="list-indent-1">使用之前，先进行初步判断；</li>
+<li class="list-indent-1">如果初步判断其为收敛，则进行放大；</li>
+<li class="list-indent-1">如果初步判断其为发散，将进行缩小；</li>
+<li>常用级数一： </li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty\frac1{n^p}  \quad\quad\quad\quad\quad  P&gt;1时收敛，P&lt;=1时发散$$ </li>
+<li class="list-indent-1">注意：</li>
+<li class="list-indent-2"><code>P=1</code> <code>-&gt;</code> 调和级数： $\sum\frac{1}{n}\quad 一定发散$ </li>
+<li class="list-indent-2">为什么 <code>P=1</code> 时是发散的?</li>
+<li class="list-indent-1">收敛的本质：</li>
+<li class="list-indent-2">决定级数是否收敛的不在于求和项是否是无穷的，甚至不在于求和的大小，而是在于求和项中通项趋向于 0 的速度；</li>
+<li class="list-indent-2">通过速度比较并不能确定一个级数发散还是收敛，但是速度变化会带来本质的变化；</li>
+<li>常用级数二：</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty aq^n\left(a&gt;0,q&gt;0\right)\quad q&lt;1\text{ 时收敛,当 }q\geq1\text{ 时发散}.$$</li>
+<li class="list-indent-1">等比级数是否收敛，只取决于其 <code>q</code> 的数值，即公比决定了其敛散性；</li>
+</ul>
+<p><strong>方法二</strong>：比较法的极限形式 </p>
+<ul>
+<li>设 $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$</li>
+<li>若：</li>
+<li class="list-indent-1">1. $$\text{若 }0&lt;l&lt;+\infty,\text{则 }\sum_{n=1}^{\infty}u_{n}\text{ 与 }\sum_{n=1}^{\infty}\nu_{n}\text{ 同敛散}.$$</li>
+<li class="list-indent-1">2. $$\text{若 }l=0\text{,则}\sum_{n=1}^\infty\nu_n\text{收敛 }\Rightarrow\sum_{n=1}^\infty u_n\text{ 收敛,}\sum_{n=1}^\infty u_n\text{发散 }\Rightarrow\sum_{n=1}^\infty\nu_n\text{发散}$$</li>
+<li class="list-indent-1">3. $$\text{若 }l=+\infty,\text{则}\sum_{n=1}^\infty\nu_n\text{发散}\Rightarrow\sum_{n=1}^\infty u_n\text{ 发散. }\sum_{n=1}^\infty u_n\text{收敛}\Rightarrow\sum_{n=1}^\infty\nu_n\text{ 收敛}$$</li>
+</ul>
+<p><strong>方法三</strong>：比值审敛法</p>
+<ul>
+<li>如果 $\sum U_n$ 是一个正项级数，则若 $$\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\rho$$</li>
+<li>如果 $\rho &lt;1$，则 $\sum U_n$ 收敛；</li>
+<li>如果 $\rho &gt;1$，则 $\sum U_n$ 发散；</li>
+<li>如果 $\rho =1$，则 $\sum U_n$ 无法判断，请使用其他方法；</li>
+</ul>
+<p><strong>方法四</strong>：根值法</p>
+<ul>
+<li>$$\text{设}\lim_{n\to\infty}\sqrt[n]{u_n}=\rho\text{,则}\sum_{n=1}^\infty u_n\begin{cases}\text{收敛},&amp;\rho&lt;1,\\\\\text{发散},&amp;\rho&gt;1,\\\\\text{不一定},&amp;\rho=1,\end{cases}$$</li>
+</ul>
+<p><strong>方法五</strong>：积分判别法</p>
+<ul>
+<li>$$设f(x)在[1,+\infty)上单调减，非负的连续函数，且 a_{n}=f(n)，则\sum_{n=1}^{\infty}a_{n}\text{ 与 }\int_{1}^{+\infty}f(x)dx同敛散性$$</li>
+<li><strong>例题</strong>：</li>
+<li class="list-indent-1">证明： </li>
+<li class="list-indent-2">级数 $\sum_{i=1}^\infty\frac1{n^p}$ 当 $p&gt;1$ 时收敛，当 $p\leq1$ 时发散；</li>
+<li class="list-indent-1">解析</li>
+<li class="list-indent-2">设 $a_{n}=\frac{1}{n^{p}}=f(u),f(x)=\frac{1}{x^{p}}$</li>
+<li class="list-indent-2">所以得到积分：$\int_{1}^{+\infty}\frac{dx}{x^{p}}$</li>
+</ul>
+<h3 id="section-5">9.1.3 交错级数 </h3>
+<p><strong>定义</strong>：交错级数 </p>
+<ul>
+<li>$$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</li>
+<li>$u_{1}-u_{2}+u_{3}-u_{4}+u_{5}-u_{6}+\cdots$；</li>
+<li>$-u_{1}+u_{2}-u_{3}+u_{4}-u_{5}+u_{6}\cdots$；</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>如果项数是无穷项时，<strong>小括号不能随便加</strong>，<strong>顺序也不能随便换</strong>；</li>
+<li>比如：</li>
+<li class="list-indent-1">$1-1+1-1+1-1+1-1+1-1+1-1+1......$</li>
+<li class="list-indent-1">如果是奇数项 -&gt; 结果为 1；</li>
+<li class="list-indent-1">如果时偶数项 -&gt; 结果为 0；</li>
+<li>如果加括号</li>
+<li class="list-indent-1">$(1-1)+(1-1)+(1-1)+(1-1)+......$</li>
+<li class="list-indent-1">这样对无穷项加括号，可能会有问题，因为不清楚是奇数项还是偶数项；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">莱布尼茨准则</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>当前有交错级数 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$，当：</blockquote>
+<blockquote>1）$u_{n}\geq u_{n+1}$：单调减</blockquote>
+<blockquote>2）$\lim_{n\to\infty}u_{n}=0$</blockquote>
+<blockquote>则可得到 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$ 级数收敛，<code>S</code> <code>&lt;=</code> $u_1$，且 $|r_{n}|\leq u_{n+1}$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意：</li>
+<li class="list-indent-1">要求：</li>
+<li class="list-indent-2">1）$u_{n}\geq u_{n+1}$：单调减</li>
+<li class="list-indent-2">2）$\lim_{n\to\infty}u_{n}=0$</li>
+<li class="list-indent-1">这两个要求是交错级数收敛的<strong>充分条件</strong>，也就是说这两个里面如果有一个不成立，也有可能交错级数收敛；</li>
+<li>前提：</li>
+<li class="list-indent-1">使用莱布尼茨定理之前，需要保证当前是交错级数；</li>
+<li class="list-indent-1">后一项比前一项越来越小；</li>
+<li class="list-indent-1">且 $u_n$ 是往 0 逼近的；</li>
+</ul>
+<h3 id="section-6">9.1.4 任意项级数 </h3>
+<p><strong>任意项级数概念</strong></p>
+<ul>
+<li>特点： </li>
+<li class="list-indent-1">有正项、有负项；</li>
+<li class="list-indent-1">并且正项、负项都得是无限项；</li>
+<li>任意项： $u_{1}+u_{2}+u_{3}+u_{4}+\cdots$，并且 $u_n$ 的正负不知道；</li>
+<li>正项级数：$|u_{1}|+|u_{2}|+|u_{3}|+|u_{4}|+\cdots$ ，每项都取绝对值；</li>
+<li class="list-indent-1">这种为绝对值级数；</li>
+</ul>
+<p><strong>判断方法</strong></p>
+<ul>
+<li><strong>原则</strong>：把新问题化成老问题 <code>-&gt;</code> 把一个变号的级数，化成一个正项级数 <code>-&gt;</code> 通项加一个绝对值 <code>-&gt;</code> 这个新的正项级数收敛时，任意项级数也收敛；</li>
+</ul>
+<p><strong>定义</strong>： <span class="note-tag">绝对收敛与条件收敛</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote>1. 绝对收敛：如果加了绝对值的 $\sum|u_{n}|$ 收敛，则称 $\sum u_n$ 收敛；</blockquote>
+<blockquote>2. 条件收敛：如果 $u_n$ 是收敛的，$\sum|u_{n}|$ 是发散的，则称 $\sum u_n$ 是条件收敛的； </blockquote>
+<blockquote>具体情况：</blockquote>
+<blockquote>(1) 若 $\sum^{\infty}_{n=1}=|a_n|$ 收敛，则 $\sum^{\infty}_{n=1}=a_n$ 必收敛，此时称 $\sum^{\infty}_{n=1}a_n$ 绝对收敛 </blockquote>
+<blockquote>(2) 若 $\sum^{\infty}_{n=1}=a_n$ 收敛，$\sum^{\infty}_{n=1}=|a_n|$ 发散，则称 $\sum^{\infty}_{n=1}a_n$ 条件收敛</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>绝对收敛    </li>
+<li class="list-indent-1">$\sum|u_{n}|$ 收敛</li>
+<li class="list-indent-1">$\sum u_n$   收敛</li>
+<li>条件收敛</li>
+<li class="list-indent-1">$\sum|u_{n}|$ 发散</li>
+<li class="list-indent-1">$\sum u_n$   收敛</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>$\sum(-1)^{n-1}\frac{1}{n}$：交错调节级数 -&gt; 收敛的；</li>
+<li>$\sum(-1)^{n}\frac{1}{n^{3}}$：是绝对收敛的；</li>
+</ul>
+<p><strong>基本结论</strong></p>
+<ul>
+<li>1. 绝对收敛的级数，一定收敛 <code>-&gt;</code> 即：$\sum^{\infty}_{n=1}|a_n|$ 收敛 <code>-&gt;</code> $\sum^{\infty}_{n=1}a_n$ 收敛；</li>
+<li>2. 条件收敛的级数的所有正项（或负项）构成的级数，一定发散 <code>-&gt;</code> $$\sum_{n=1}^\infty u_n\text{ 条件收敛 }\Rightarrow\sum_{n=1}^\infty\frac{u_n+|u_n|}2\text{ 和 }\sum_{n=1}^\infty\frac{u_n-|u_n|}2\text{ 发散}.$$</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">任意项级数的绝对收敛</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果每项都加绝对值 $\sum_{n=1}^{+\infty}|u_{n}|$ 以后，它是收敛的，则它原来的级数 $\sum_{n=1}^{+\infty}u_{n}$ 也是收敛的；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>更简单的理解：</li>
+<li class="list-indent-1">全是正数（加绝对值）的情况下都可以收敛，那他原本有正有负的情况下就更应该是收敛的；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">任意项级数发散收敛判断</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果 $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ 是任意项级数，且 $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
+<blockquote>1）当 $l$ &lt; 1 时，$\sum u_n$ 绝对收敛；</blockquote>
+<blockquote>2）当 $L&gt;1(+\infty)$ 时，$\sum u_n$ 发散；</blockquote>
+<blockquote>3）当 L =1 时，无法判断；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果 L&gt;1，则原本的级数就是发散的；</li>
+</ul>
+<h2 id="section-7">9.2 幂级数</h2>
+<h3 id="section-8">9.2.1 幂级数基本概念</h3>
+<p><strong>数列</strong>：每一项只和 n 有关</p>
+<ul>
+<li>数列： $u_{1},u_{2},\cdots,u_{n}$</li>
+<li>无穷级数：$u_{1}+u_{2}+\cdots+u_{n}+\cdots$</li>
+</ul>
+<p><strong>函数列</strong>：每一项和 n 以及 $x$ 有关</p>
+<ul>
+<li>假设 x 在区间 $I$ 上；</li>
+<li>函数列： $u_{1}(x), u_{2}(x), u_{n}(x),\cdots$</li>
+<li>函数项无穷级数：$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ </li>
+</ul>
+<p><strong>定义</strong>： <span class="note-tag">幂级数</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span> </blockquote>
+<blockquote>常见形式： $$\sum_{n=0}^\infty a_nx^n=a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots $$</blockquote>
+<blockquote>一般形式：$$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">每一项都是 <code>x</code> 的非负整数幂：幂级数： $a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{n}x^{n}+\cdots$</li>
+<li class="list-indent-1">幂级数其实是函数项级数的最简单的一种，$x^{n}$ 就是 x 的函数，$a_n$ 就是一列数；</li>
+<li class="list-indent-1">$a_0,a_1,a_2...a_n$ 称之为系数；</li>
+<li>补充：</li>
+<li class="list-indent-1">一般研究常见形式，因为一般形式可以用 $x-x_0=t$ 化成常见形式；</li>
+</ul>
+<p><strong>定义</strong>： <span class="note-tag">收敛点与发散点</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote>1. 如果 $x_{0}\in I$ 时，$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ 收敛，则称 $x_o$ 为收敛点，如果是一段区间则称之为收敛域；</blockquote>
+<blockquote>2. 如果 $x_{0}\in I$ 时，$u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ 发散，则称 $x_o$ 为发散点，如果是一段区间则称之为发散域；</blockquote>
+<blockquote>3. $S\left (x\right)=u\left (x\right)+u_{2\left (x\right)}+\cdots+u_{n}\left (x\right)+\cdots$ 称之为和函数，$\lim_{n\to\infty}S_n(x)=S\left(x\right)$；</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>一般就是求两个问题：收敛域是什么？和函数是什么？</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>$1+x+x^{2}+x^{3}+\cdots+x^{n}+\cdots$</li>
+<li>此时：</li>
+<li class="list-indent-1">当 $|x|&lt;1$ 时，收敛域为 $(-1,1)$，且 $\frac{a}{1-q}=\frac{1}{1-x}$；</li>
+<li class="list-indent-1">当 $|x|\geq1$ 时，发散域为 $(-\infty,-1]\cup[1,+\infty)$。</li>
+</ul>
+<h3 id="section-9">9.2.2 幂级数展开</h3>
+<p><strong>定理</strong>： <span class="note-tag">阿贝尔定理</span> </p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
+<blockquote>$$\sum_{n=0}^{+\infty}a_nx^n ，当x=x_0 时收敛,|x|&lt;|x_0|时幂级数绝对收敛$$</blockquote>
+<blockquote>$$\sum_{n=0}^{+\infty}a_nx^n ，当x=x_0 时发散,|x|&gt;|x_0|时幂级数发散$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>定理的作用：</li>
+<li class="list-indent-1">揭示了当前幂级数的收敛、发散的域的结构 <code>-&gt;</code> 将求收敛域的问题、转化成了求整个区间一般长度的问题 <code>-&gt;</code> 也就是求收敛半径 <code>R</code> ；</li>
+<li>绝对收敛：</li>
+<li class="list-indent-1">在 $|x|&lt;|x_0|$ 时，此时在这个区间内的点，也都收敛 <code>-&gt;</code> 离原点更近的点收敛；</li>
+<li>发散：</li>
+<li class="list-indent-1">在 $|x|&gt;|x_0|$ 时，此时在这个区间外的点都发散 <code>-&gt;</code> 离原点更远的点发散；</li>
+<li>总结：</li>
+<li class="list-indent-1">1. 收敛点和发散点的分界点 <code>-&gt;</code> 就是<strong>收敛半径 R</strong></li>
+<li class="list-indent-1">2. 两个级数 $\sum_{n=0}^{+\infty}a_n{(x+2)}^n$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}^n$，如果它们的 $a_n$ 一样，则它们有共同的收敛半径 <code>R</code>；</li>
+<li>注意： </li>
+<li class="list-indent-1">收敛区间不需要关注端点；</li>
+<li class="list-indent-1">收敛域需要关注端点；</li>
+</ul>
+<p><strong>补充</strong>：收敛区间和收敛域</p>
+<ul>
+<li>收敛区间：</li>
+<li class="list-indent-1">$(-R,+R)$</li>
+<li>收敛域：</li>
+<li class="list-indent-1">包括端点在内：$\pm R$</li>
+<li class="list-indent-1">分别判断两个端点的值后，得到的区间；</li>
+</ul>
+<p><strong>补充</strong>：关于 $x$ 不等于 $x_0$ 时的收敛域</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">根据 <code>&lt;总结-1&gt;</code> 可知，$\sum_{n=0}^{+\infty}a_n{(x+2)}^n$ 和 $\sum_{n=0}^{+\infty}a_n{(x-3)}^n$ 的收敛半径 <code>R</code> 一样；</li>
+<li>概念：</li>
+<li class="list-indent-1">收敛区间： </li>
+<li class="list-indent-2">对 $\sum_{n=0}^{+\infty}a_n{(x+2)}$ 而言，其中心在 <code>x=-2</code> 点，因此假设其收敛点在 <code>x=0</code> 处时，其收敛半径为 <code>0-(-2)=2</code> ，因此其收敛区间就是：</li>
+<li class="list-indent-2">$$收敛区间：(x_0-R,x_0+R)\rightarrow (-2-2,-2+2)\rightarrow (-4,0)$$</li>
+<li class="list-indent-1">端点收敛性不变性：</li>
+<li class="list-indent-2">因为两个级数的 $a_n$ 项相同，所以这两个级数的收敛域的两个端点同敛散性；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">幂级数的收敛情况</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> 幂级数  $\sum_{n=0}^{+\infty}a_nx^n$ 的收敛性有且仅有三种可能：</blockquote>
+<blockquote>（1）对任何 x 属于 $(-\infty ,+\infty)$ 都收敛；</blockquote>
+<blockquote>（2）只在 $x=0$ 处收敛；</blockquote>
+<blockquote>（3）存在一个正数 <code>R</code> 当 $|x| &lt; R$ 时绝对收敛，当 $|x|&gt;R$ 时发散； </blockquote>
+<blockquote>注意：若幂级数 $\sum_{n=0}^{+\infty}a_nx^n$ 在点 $x=x_0$ 处条件收敛，则点 $x_0$ 必为该幂级数收敛区间 $(-R,R)$ 的一个端点；</blockquote>
+<p><strong>定理</strong>： <span class="note-tag">收敛半径判断</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$若\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho，则 R = \frac{1}{{\rho}}$$</blockquote>
+<blockquote>即：此时有三种情况：$$R=\begin{cases}\frac{1}{\rho},&amp;\rho\neq0\\+\infty,&amp;\rho=0\\0,&amp;\rho=+\infty\end{cases}$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>注意： </li>
+<li>1. 此定理只能单方向使用；</li>
+<li>2. 收敛区间是不管端点的，即 $(-R,R)$</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">收敛半径判断</span>：基于根式</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\text{如果 }\lim_{n\to\infty}\sqrt[n]{|a_n|}=\rho,\text{则}\quad R=\frac1\rho $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>基于根值法推导而来；</li>
+</ul>
+<p><strong>性质</strong>：幂级数的有理运算性质</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">设</li>
+<li class="list-indent-1">1.  $\sum_n^{\infty}a_nx^n$ 的收敛半径为 $R_1$</li>
+<li class="list-indent-1">2.  $\sum_n^{\infty}b_nx^n$ 的收敛半径为 $R_2$</li>
+<li class="list-indent-1">令 $R=\min\{R_1,R_2\}$，则当 $x\in(-R,R)$ 时：</li>
+<li>运算性质：</li>
+<li class="list-indent-1">（1）加法：$$\sum_{n=0}^\infty a_nx^n\pm\sum_{n=0}^\infty b_nx^n=\sum_{n=0}^\infty(a_n\pm b_n)x^n$$</li>
+<li class="list-indent-1">（2）乘法：$$(\sum_{n=0}^\infty a_nx^n)\cdot(\sum_{n=0}^\infty b_nx^n)=\sum_{n=0}^\infty c_nx^n$$ </li>
+<li class="list-indent-2">且：$c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$ </li>
+<li class="list-indent-1">（3）除法：$$\frac{\sum_{n=0}^\infty a_nx^n}{\sum_{n=0}^\infty b_nx^n}=\sum_{n=0}^\infty c_nx^n$$</li>
+</ul>
+<p><strong>性质</strong>：幂级数的分析性质</p>
+<ul>
+<li>前提：</li>
+<li class="list-indent-1">若 $\sum_{n=0}^{+\infty}a_{n}x^{n}$ 的收敛半径是 <code>R</code>，和函数为 $S(x)$，则：</li>
+<li>分析性质：</li>
+<li class="list-indent-1">（1）连续性：</li>
+<li class="list-indent-2">$S(x)$ 在它的收敛域上 $I$ 是连续的；</li>
+<li class="list-indent-1">（2）可导性：</li>
+<li class="list-indent-2">$S(x)$ 在 $(-R,R)$ 上可导，且可以逐项求导，半径不变，即：</li>
+<li class="list-indent-3">$$S^{\prime}(x)=\left(\sum_{n=0}^\infty a_nx^n\right)^{\prime}=\sum_{n=0}^\infty(a_nx^n)^{\prime}=\sum_{n=0}^\infty na_nx^{n-1}$$</li>
+<li class="list-indent-2">注意：这里面级数求导之后，收敛半径没有变化，还是 R，并且通项当中还多了一个 $n$</li>
+<li class="list-indent-1">（3）可积性：</li>
+<li class="list-indent-2">若 $\sum_{n=0}^{\pm\infty}a_{n}x^{n}$ 的和函数 $S(x)$ 在 $I$ 上是可积的，且可以逐项积分，则：</li>
+<li class="list-indent-3">$$\int_{0}^{x}S(x)\operatorname{d}x=\int_{0}^{x}\sum_{n=0}^{\infty}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\int_{0}^{x}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\frac{1}{n+1}a_{n}x^{n+1}$$</li>
+<li class="list-indent-2">注意：逐项求积分后的幂级数，与原幂级数的收敛半径是相同的；</li>
+</ul>
+<p><strong>题型</strong>：求收敛半径</p>
+<ul>
+<li>两种方法：</li>
+<li class="list-indent-1">方法一：使用收敛半径判定法</li>
+<li class="list-indent-1">方法二：使用收敛半径根值判定法</li>
+<li>注意：缺项时</li>
+<li class="list-indent-1">缺项：$x^{2n-1}$ ，不是 $x^n$</li>
+<li class="list-indent-1">缺项时不能直接使用公式，如果是 $x^{2n+b}$ ，则此时都需要将根值法算得的 <code>R</code> 开一个 $\frac{1}{2}$ 次方；</li>
+</ul>
+<p><strong>题型</strong>：求收敛区间</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">想要求得收敛区间，需要先求得收敛半径；</li>
+</ul>
+<p><strong>题型</strong>：求端点的收敛性</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">分别将端点的 $x=\pm x_0$ 代入进去，得到关于 n 的函数式，即：当前级数的通项。此时解题方法和常数项级数一致，根据其是正项、交错级数、任意项级数，选择方法，判定；</li>
+</ul>
+<p><strong>题型</strong>：判断任意一点的收敛性</p>
+<ul>
+<li>方法：</li>
+<li class="list-indent-1">先求出当前幂级数的收敛半径（经常要使用阿贝尔定理），然后根据收敛区间，判断任意一点是否在区间内，即可得到收敛性；</li>
+</ul>
+<h3 id="section-10">9.2.3 函数展开成幂级数 </h3>
+<p><strong>为什么需要展开成幂级数</strong></p>
+<ul>
+<li>原因：</li>
+<li class="list-indent-1">有些函数不是初等函数、不可以直接使用积分求出来它的值，比如 $e^{x^2}$ 其无法直接求出其原函数；</li>
+<li class="list-indent-1">此时可以考虑：将其展开成幂级数，因为幂级数的每一项都很简单，因此可以被处理；</li>
+<li>举例：比如需要求 $e^{0.2}$ 等于多少</li>
+<li class="list-indent-1">直接求很难算出来；</li>
+<li class="list-indent-1">但利用展开后的幂级数，计算出来就很简单： $e^{x}=1+x+\frac{x^{2}}{2!}+\frac{x^{3}}{3!}+\cdots+\frac{x^{n}}{n!}+$</li>
+<li class="list-indent-1">后续的项可以近似得到，一般就用个三项、四项就够了；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">函数的幂级数展开</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote>如果函数 $f(x)$ 在区间 $(x_0-R,x_0+R)$ 上，能展开为 $x-x_0$ 的幂级数 $f(x)=\sum_{n=0}^{+\infty} a_n(x-x_0)^n$ 则，其展开式是唯一的；</blockquote>
+<blockquote>并且称其为 $f(x)$ 在 $x=x_0$ 处的<strong>泰勒级数</strong>：$$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果 $\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$ 可以收敛于 $f(x)$，则称其可以展开；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">泰勒级数的收敛性</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote>设 $f(x)$ 在 $x=x_0$ 处任意阶可导，则：</blockquote>
+<blockquote>$$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n 在 (x_0-R,x_0+R) 上收敛于 f(x)\Leftrightarrow\lim_{n\to\infty} R_n(x)=0.$$</blockquote>
+<blockquote>其中：$$\begin{aligned}&amp;R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}\text{ 为 }f(x)\text{ 在 }x_0\text{ 处的泰勒公式}\\&amp;f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)\end{aligned}$$</blockquote>
+<blockquote>所以当 $R_n(x)$ <code>-&gt;</code> <code>0</code> 时，$f(x)$ 趋向于泰勒级数：$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$，即收敛于唯一的级数；</blockquote>
+<p><strong>补充</strong>：几个常用的展开式</p>
+<ul>
+<li>直接展开法：</li>
+<li class="list-indent-1">（1）$$\frac1{1-x}=1+x+x^2+\cdots+x^n+\cdots =\sum^{\infty}\limits_{n=0}x^n\quad (-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">（2）$$\frac1{1+x}=\sum_{n=0}^\infty(-1)^nx^n,|x|&lt;1$$</li>
+<li class="list-indent-1">（3）$$\sin x=x-\frac{x^3}{3!}+\cdots+\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1} \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-2">注意：求和下标从 0 开始，<code>(-1)</code> 是指数是 <code>n</code>；</li>
+<li class="list-indent-1">（4） $$e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots \quad (-\infty&lt;x&lt;+\infty)=\sum^{\infty}\limits_{n=0}\frac{x^n}{n！}$$</li>
+<li>间接展开法：</li>
+<li class="list-indent-1">（1）<code>cosx</code> 的展开式，是由 <code>sinx</code> 的展开式逐项求导而的来的：$$\cos x=1-\frac{x^2}{2!}+\cdots+\frac{(-1)^{n-1}x^{2n}}{(2n)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}   \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-1">（2）<code>In(1+x)</code> 的展开式：$$\ln(1+x)=x-\frac{x^2}2+\cdots+\frac{(-1)^{n+1}x^n}n+\cdots=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^{n}\quad(-1&lt;x\leq1)$$</li>
+<li class="list-indent-1">（3）<code>(1+X)的α次方</code> 的展开式，也是间接得到的：$$\left(1+x\right)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n+\cdots \quad(-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">(4) $$\sum_{n=1}^{\infty}\frac{x^{n}}n=-\ln(1-x)\quad(-1\leq x&lt;1)$$</li>
+<li>注意： </li>
+<li class="list-indent-1">关于下标：除了 <code>In(1+x)</code> 是从 <code>n=1</code> 开始的，其他都是从 <code>n=0</code> 开始的； </li>
+<li class="list-indent-1">关于 $(-1)^{n}$ 和 $(-1)^{n+1}$：只有 <code>In(1+x)</code> 是 <code>n+1</code> ，其他都是从 <code>n</code>；</li>
+<li class="list-indent-1">关于阶乘：除了 <code>In(1+x)</code> 的分母是非阶乘，其他带分母的都是阶乘，并且阶乘部分和幂指部分一致；</li>
+<li class="list-indent-1">关于收敛域：三角函数和 $e^{x}$ 是负无穷到正无穷，其他都是 <code>-1</code> 到 <code>+1</code>，并且 <code>In(1+x)</code> 是小于等于 <code>+1</code>；</li>
+</ul>
+<h2 id="section-11">9.3 傅里叶级数 </h2>
+<p><strong>定义</strong>： <span class="note-tag">傅里叶系数</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$a_{n}=\frac1\pi\int_{-\pi}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac1\pi\int_{-\pi}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>可以利用上述公式，来求给定 n 式的系数；</li>
+</ul>
+<p><strong>定义</strong>： <span class="note-tag">傅里叶级数</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span> <code>f</code> 的傅里叶级数：$$f(x)\sim\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>概念：</li>
+<li class="list-indent-1">以上式子是否能展开、取决于上述式子中的 <code>~</code> 是否能写成等号；</li>
+<li class="list-indent-1">而其是否能展开、需要使用收敛定理来判断；</li>
+<li>解释：</li>
+<li class="list-indent-1"><code>~</code></li>
+<li class="list-indent-2">意味着除开某些有限点外（间断点、端点），其他点都符合公式中的性质；</li>
+<li class="list-indent-1">$\frac{a_0}2$</li>
+<li class="list-indent-2">在波动当中，表示直流分量；</li>
+<li class="list-indent-1">$(a_n\cos nx+b_n\sin nx)$：</li>
+<li class="list-indent-2">在波动当中，表示交流分量；</li>
+<li class="list-indent-2">注意：偶函数展开式只有余弦项，奇函数展开式只有正弦项；</li>
+</ul>
+<p><strong>定理</strong>： <span class="note-tag">狄利克雷定理</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> 设 $f(x)$ 在 $[-\pi,\pi]$ 上连续或有有限个第一类间断点，且只有有限个极值点，则 $f(x)$ 的傅里叶级数在 $[-π,π]$ 上处处收敛，且收敛于： </blockquote>
+<blockquote>$$1)\quad S(x)=f(x)\quad\text{当}x\text{ 为 }f(x)\text{ 的连续点}.$$</blockquote>
+<blockquote>$$2)\quad S(x)=\frac{f(x^-)+f(x^+)}2\quad\text{当 }x\text{ 为 }f(x)\text{ 的间断点}.$$</blockquote>
+<blockquote>$$3)\quad S(x)=\frac{f((-\pi)^+)+f(\pi^-)}2\quad\text{当 }x=\pm\pi.$$</blockquote>
+<p><strong>概念介绍</strong>：周期为 $2\pi$ 的函数展开</p>
+<ul>
+<li>（1）在 $[-\pi,+\pi]$ 上展开：一般展开</li>
+<li class="list-indent-1">$$\begin{aligned}a_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx&amp;&amp;(n=0,1,2,\ldots),\\b_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx&amp;&amp;(n=1,2,\ldots).\end{aligned}$$</li>
+<li>（2）在 $[-\pi,+\pi]$ 的展开：奇偶函数的展开</li>
+<li class="list-indent-1">1. $f(x)$ 为奇函数：</li>
+<li class="list-indent-2">$$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-2">解释：因为 $cosx$ 是偶函数，并且在 $a_n$ 中，所以当 $f(x)$ 为奇函数时，<code>奇函数*偶函数=奇函数</code>，所以 $a_n$ 变为 0，$b_n$ 变为两倍。其他情况同理；</li>
+<li class="list-indent-1">2. $f(x)$ 为偶函数：</li>
+<li class="list-indent-2">$$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$</li>
+<li>（3）在 $[0,+\pi]$ 上展开：展开为正弦或余弦</li>
+<li class="list-indent-1">分析：</li>
+<li class="list-indent-2">这种是在半个周期上的展开，所以在分析时，需要做<strong>延拓</strong>；</li>
+<li class="list-indent-2">奇函数展开：只有正弦项。因为如果只给了 $[0,+\pi]$ ，则如果需要在 $[-\pi,+\pi]$ 上做奇函数展开、只有正弦项 <code>-&gt;</code> <strong>奇延拓</strong>；</li>
+<li class="list-indent-2">在展开为正弦时，理论上需要做奇延拓，但实际上直接使用奇函数的展开式即可；</li>
+<li class="list-indent-2">同理偶延拓；</li>
+<li class="list-indent-1">1. 展开为正弦：</li>
+<li class="list-indent-2">$$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-1">2. 展开为余弦：</li>
+<li class="list-indent-2">$$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$</li>
+</ul>
+<p><strong>概念介绍</strong>：周期为 $2l$ 的函数展开</p>
+<ul>
+<li>（1）在 $[-l,+l]$ 上展开</li>
+<li class="list-indent-1">$$a_n=\frac1l\int_{-l}^lf(x)\cos\frac{n\pi x}l\mathrm{d}x\quad\quad n=0,1,2\cdots\quad\quad \\b_n=\frac1l\int_{-l}^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li>（2）在 $[-l,+l]$ 上展开：奇偶函数</li>
+<li class="list-indent-1">$$\text{i)}f(x)\text{ 为奇函数}.\quad\quad \\a_n=0,n=0,1,2\cdots\quad\quad \\b_n=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ii)}f(x)\text{ 为偶函数}.\\&amp;{a_n}=\frac2l\int_0^lf(x)\cos\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li>（3）在 $[0,l]$ 上展开：展开为正弦或余弦</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{i)展为正弦}\\&amp;a_{n}=0,&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ii)展为余弦.}\\&amp;a_{n}=\frac{2}{l}\int_{0}^{l}f(x)\cos\frac{n\pi x}{l}\mathrm{d}x&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;n=1,2\cdots\end{aligned}$$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-007-chapter-08/index.html"><span>← 上一项</span><strong>Chapter 8：重积分 — 高等数学 - 公式合集</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-10/index.html"><span>下一项 →</span><strong>Chapter 10：向量代数与空间几何 — 高等数学 - 公式合集</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

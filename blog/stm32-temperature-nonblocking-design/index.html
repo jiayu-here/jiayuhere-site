@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STM32 温度检测如何避免阻塞：从采样状态机到报警任务 | Jiayu Lab</title>
   <meta name="description" content="以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。">
+
   <meta name="keywords" content="STM32, DS18B20, PT100, Non-blocking, Alarm">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="STM32 温度检测如何避免阻塞：从采样状态机到报警任务 | Jiayu Lab">
   <meta property="og:description" content="以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/blog/stm32-temperature-nonblocking-design/">
+  <meta property="og:locale" content="zh_CN">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="STM32 温度检测如何避免阻塞：从采样状态机到报警任务 | Jiayu Lab">
+  <meta name="twitter:description" content="以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -27,6 +34,7 @@
   "headline": "STM32 温度检测如何避免阻塞：从采样状态机到报警任务",
   "description": "以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。",
   "datePublished": "2026-07-14",
+  "dateModified": "2026-07-14",
   "inLanguage": "zh-CN",
   "image": "https://www.jiayuhere.com/assets/images/og.png",
   "author": {
@@ -47,7 +55,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
 
 </head>
 <body>
@@ -175,9 +183,9 @@ void DS18B20_Task(void)
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
-    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260728a"></script>
+  <script src="../../assets/script.js?v=20260729f"></script>
 </body>
 </html>

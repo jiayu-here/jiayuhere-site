@@ -2,9 +2,14 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
+const siteUrl = "https://www.jiayuhere.com";
+const socialImageUrl = `${siteUrl}/assets/images/og.png`;
+const assetVersion = "20260729f";
+const lightThemeColor = "#f7f8fb";
 const githubUser = "jiayu-here";
 const excludedRepositories = new Set(["jiayuhere-site"]);
 const googleAnalyticsId = "G-V2VWFFLH85";
+const noteImageManifest = new Map();
 const googleAnalyticsTag = `  <script async src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -42,6 +47,7 @@ const localeConfig = {
       switchText: "EN",
       footer: "把工程实践、学习过程和可复用的方法整理成长期资产。",
       about: "关于我",
+      privacy: "隐私说明",
       sitemap: "站点地图"
     }
   },
@@ -65,6 +71,7 @@ const localeConfig = {
       switchText: "中文",
       footer: "Turning engineering practice, learning and reusable methods into long-term assets.",
       about: "About",
+      privacy: "Privacy",
       sitemap: "Sitemap"
     }
   }
@@ -109,6 +116,49 @@ const readingMinutes = (value) => {
   const chineseCharacters = (text.match(/[\u3400-\u9fff]/g) || []).length;
   const latinWords = (text.replace(/[\u3400-\u9fff]/g, " ").match(/[A-Za-z0-9]+/g) || []).length;
   return Math.max(1, Math.ceil(chineseCharacters / 300 + latinWords / 200));
+};
+
+const normalizeLastmod = (value, fallback = "2026-07-29") => {
+  const date = String(value || "");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
+  if (/^\d{4}-\d{2}$/.test(date)) return `${date}-01`;
+  if (/^\d{4}$/.test(date)) return `${date}-01-01`;
+  return fallback;
+};
+
+const loadNoteImageManifest = async () => {
+  const sourceDir = path.join(root, "assets/notes");
+  const previewDir = path.join(root, "assets/note-previews");
+  const sourceFiles = (await readdir(sourceDir)).filter((file) => /\.(?:png|svg)$/i.test(file));
+  const previewFiles = new Set(await readdir(previewDir).catch((error) => {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  }));
+
+  for (const file of sourceFiles) {
+    const sourcePath = path.join(sourceDir, file);
+    const buffer = await readFile(sourcePath);
+    let width = 0;
+    let height = 0;
+    if (/\.png$/i.test(file) && buffer.length >= 24 && buffer.toString("ascii", 1, 4) === "PNG") {
+      width = buffer.readUInt32BE(16);
+      height = buffer.readUInt32BE(20);
+    } else if (/\.svg$/i.test(file)) {
+      const source = buffer.toString("utf8");
+      const widthMatch = source.match(/\bwidth=["']([\d.]+)(?:px)?["']/i);
+      const heightMatch = source.match(/\bheight=["']([\d.]+)(?:px)?["']/i);
+      const viewBoxMatch = source.match(/\bviewBox=["'][\d.-]+\s+[\d.-]+\s+([\d.]+)\s+([\d.]+)["']/i);
+      width = Number(widthMatch?.[1] || viewBoxMatch?.[1] || 0);
+      height = Number(heightMatch?.[1] || viewBoxMatch?.[2] || 0);
+    }
+
+    const previewName = file.replace(/\.png$/i, ".webp");
+    noteImageManifest.set(`/assets/notes/${file}`, {
+      width: Math.round(width),
+      height: Math.round(height),
+      preview: previewFiles.has(previewName) ? `/assets/note-previews/${previewName}` : ""
+    });
+  }
 };
 
 const parseInlineList = (value) => {
@@ -297,8 +347,32 @@ const pruneOutputs = async (section, items, locale) => {
   }
 };
 
-const inline = (value) => escapeHtml(value)
-  .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img class="note-image" src="$2" alt="$1" loading="lazy" decoding="async">')
+const renderNoteImage = ({ alt, src, locale, heading }) => {
+  const image = noteImageManifest.get(src);
+  const filenameAlt = /^(?:Pasted\s+Image|Drawing)\b/i.test(alt) || /\.(?:png|jpe?g|gif|webp|svg)$/i.test(alt);
+  const contextualAlt = filenameAlt
+    ? locale === "en"
+      ? `Study-note illustration: ${heading || "related topic"}`
+      : `学习笔记插图：${heading || "相关内容"}`
+    : alt;
+  const dimensions = image?.width && image?.height ? ` width="${image.width}" height="${image.height}"` : "";
+  const img = `<img class="note-image" src="${escapeHtml(src)}" alt="${escapeHtml(contextualAlt)}"${dimensions} loading="lazy" decoding="async">`;
+  const picture = image?.preview
+    ? `<picture><source srcset="${escapeHtml(image.preview)}" type="image/webp">${img}</picture>`
+    : img;
+  const openLabel = locale === "en"
+    ? `Open original image: ${contextualAlt || "study-note illustration"}`
+    : `打开原图：${contextualAlt || "学习笔记插图"}`;
+  return `<a class="note-image-link" href="${escapeHtml(src)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(openLabel)}">${picture}</a>`;
+};
+
+const inline = (value, locale = "zh", { heading = "" } = {}) => {
+  const images = [];
+  const withPlaceholders = String(value).replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (match, alt, src) => {
+    const index = images.push(renderNoteImage({ alt, src, locale, heading })) - 1;
+    return `@@NOTE_IMAGE_${index}@@`;
+  });
+  let rendered = escapeHtml(withPlaceholders)
   .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (match, label, href) => {
     if (!/^(?:https?:\/\/|mailto:|\/|\.\.?\/|#)/.test(href)) return match;
     const external = /^https?:\/\//.test(href);
@@ -315,6 +389,9 @@ const inline = (value) => escapeHtml(value)
   .replace(/(^|[\s（(：:,，;；、])(?<!color:)(?<!background:)#([\p{L}\p{N}_/-]+)/gu, '$1<span class="note-tag">$2</span>')
   .replace(/==([^=]+)==/g, "<mark>$1</mark>")
   .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
+  rendered = rendered.replace(/@@NOTE_IMAGE_(\d+)@@/g, (match, index) => images[Number(index)] || match);
+  return rendered;
+};
 
 const architectureDiagram = (lines, locale) => {
   const rows = lines
@@ -379,6 +456,7 @@ const markdownToHtml = (markdown, locale) => {
   let mathLines = [];
   let listType = "";
   let headingIndex = 0;
+  let currentHeading = "";
 
   const closeList = () => {
     if (listType) html.push(`</${listType}>`);
@@ -399,9 +477,9 @@ const markdownToHtml = (markdown, locale) => {
         if (displayMathEnd[1].trim()) mathLines.push(displayMathEnd[1].trimEnd());
         closeMath();
         const trailingText = displayMathEnd[2].trim();
-        if (trailingText) html.push(`<p>${inline(trailingText)}</p>`);
+        if (trailingText) html.push(`<p>${inline(trailingText, locale, { heading: currentHeading })}</p>`);
       } else {
-        mathLines.push(line);
+        mathLines.push(line.trimEnd());
       }
       continue;
     }
@@ -443,7 +521,8 @@ const markdownToHtml = (markdown, locale) => {
       const level = Math.min(6, Math.max(2, heading[1].length));
       const id = `section-${headingIndex}`;
       headings.push({ level, id, text: heading[2] });
-      html.push(`<h${level} id="${id}">${inline(heading[2])}</h${level}>`);
+      currentHeading = plainText(heading[2]);
+      html.push(`<h${level} id="${id}">${inline(heading[2], locale, { heading: currentHeading })}</h${level}>`);
       continue;
     }
 
@@ -464,16 +543,16 @@ const markdownToHtml = (markdown, locale) => {
       }
       const [, indentation, item] = unordered || ordered;
       const depth = Math.min(5, Math.floor(indentation.replace(/\t/g, "  ").length / 2));
-      html.push(`<li${depth ? ` class="list-indent-${depth}"` : ""}>${inline(item)}</li>`);
+      html.push(`<li${depth ? ` class="list-indent-${depth}"` : ""}>${inline(item, locale, { heading: currentHeading })}</li>`);
       continue;
     }
 
     closeList();
     if (!line.trim()) continue;
     if (line.startsWith("> ")) {
-      html.push(`<blockquote>${inline(line.slice(2))}</blockquote>`);
+      html.push(`<blockquote>${inline(line.slice(2), locale, { heading: currentHeading })}</blockquote>`);
     } else {
-      html.push(`<p>${inline(line)}</p>`);
+      html.push(`<p>${inline(line, locale, { heading: currentHeading })}</p>`);
     }
   }
 
@@ -482,6 +561,47 @@ const markdownToHtml = (markdown, locale) => {
   if (inMath) throw new Error("Unclosed display-math block");
   return { html: html.join("\n"), headings };
 };
+
+const expandSplitNotes = (items, locale) => items.flatMap((item) => {
+  if (item.meta.split !== "chapters") return [item];
+  const chapterMatches = [...item.body.matchAll(/^#\s+Chapter\s+(\d+)\s*[：:]\s*(.+)$/gm)];
+  if (!chapterMatches.length) throw new Error(`Split note has no chapter headings: ${item.meta.slug}`);
+
+  const parts = chapterMatches.map((match, index) => {
+    const next = chapterMatches[index + 1];
+    const number = match[1].padStart(2, "0");
+    const chapterTitle = `Chapter ${match[1]}${locale === "en" ? ": " : "："}${match[2].trim()}`;
+    const slug = `${item.meta.slug}-chapter-${number}`;
+    return {
+      ...item,
+      meta: {
+        ...item.meta,
+        title: `${chapterTitle} — ${item.meta.title}`,
+        slug,
+        description: locale === "en"
+          ? `${chapterTitle} from the formula collection, kept as a focused chapter for faster reading and image loading.`
+          : `${item.meta.title}中的${chapterTitle}，拆分为独立章节以便查阅并减少单页图片负载。`,
+        parentSlug: item.meta.slug
+      },
+      body: item.body.slice(match.index, next?.index ?? item.body.length).trim()
+    };
+  });
+
+  const introduction = item.body.slice(0, chapterMatches[0].index).trim();
+  const navigationTitle = locale === "en" ? "Chapter navigation" : "章节导航";
+  const navigation = parts.map((part) => `- [${part.meta.title.replace(` — ${item.meta.title}`, "")}](../${part.meta.slug}/)`).join("\n");
+  const overview = {
+    ...item,
+    meta: {
+      ...item.meta,
+      description: locale === "en"
+        ? "An index to the advanced-mathematics formula collection, split by chapter for faster loading while preserving the original source."
+        : "高等数学公式合集索引；在保留原始 Markdown 的同时按章节生成页面，便于查找并降低单页负载。"
+    },
+    body: [introduction, `## ${navigationTitle}`, navigation].filter(Boolean).join("\n\n")
+  };
+  return [overview, ...parts];
+});
 
 const nav = (prefix, locale, route, active = "") => {
   const strings = localeConfig[locale].strings;
@@ -509,18 +629,17 @@ const footer = (prefix, locale) => {
   return `
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">Jiayu Lab</a><p>${strings.footer}</p></div>
-    <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
+    <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="${prefix}assets/script.js?v=20260728a"></script>`;
+  <script src="${prefix}assets/script.js?v=${assetVersion}"></script>`;
 };
 
-const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", usesMath = false }) => {
+const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", modifiedDate = "", usesMath = false, robots = "" }) => {
   const isEnglish = locale === "en";
-  const styleVersion = "20260729e";
-  const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
-  const chinese = `https://www.jiayuhere.com/${route}`;
-  const english = `https://www.jiayuhere.com/en/${route}`;
+  const canonical = `${siteUrl}/${localeConfig[locale].routeRoot}${route}`;
+  const chinese = `${siteUrl}/${route}`;
+  const english = `${siteUrl}/en/${route}`;
   const structuredData = blogPostingDate ? `  <script type="application/ld+json">
 ${jsonForHtml({
   "@context": "https://schema.org",
@@ -528,8 +647,9 @@ ${jsonForHtml({
   headline: title,
   description,
   datePublished: blogPostingDate,
+  dateModified: modifiedDate || blogPostingDate,
   inLanguage: localeConfig[locale].lang,
-  image: "https://www.jiayuhere.com/assets/images/og.png",
+  image: socialImageUrl,
   author: {
     "@type": "Person",
     name: "JiaYu",
@@ -548,14 +668,21 @@ ${jsonForHtml({
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
+${robots ? `  <meta name="robots" content="${escapeHtml(robots)}">` : ""}
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
-  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
-  <meta name="twitter:card" content="summary_large_image">${structuredData ? `\n${structuredData}` : ""}
+  <meta property="og:image" content="${socialImageUrl}">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:locale" content="${isEnglish ? "en_US" : "zh_CN"}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)} | Jiayu Lab">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${socialImageUrl}">${structuredData ? `\n${structuredData}` : ""}
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
@@ -563,7 +690,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
   <link rel="icon" href="${prefix}favicon.ico" sizes="any">
   <link rel="manifest" href="${prefix}site.webmanifest">
-  <link rel="stylesheet" href="${prefix}assets/styles.css?v=${styleVersion}">
+  <link rel="stylesheet" href="${prefix}assets/styles.css?v=${assetVersion}">
 ${usesMath ? `  <script>
     window.MathJax = {
       tex: {
@@ -583,6 +710,150 @@ ${nav(prefix, locale, route, active)}
 ${footer(prefix, locale)}
 </body>
 </html>`;
+};
+
+const buildPrivacyPage = async (locale) => {
+  const isEnglish = locale === "en";
+  const sourcePath = path.join(root, localeConfig[locale].contentRoot, "pages/privacy.md");
+  const item = parseDocument(await readFile(sourcePath, "utf8"), `${locale}/pages/privacy.md`);
+  const rendered = markdownToHtml(item.body, locale);
+  const content = `
+    <section class="page-hero compact-hero index-hero"><div class="container"><h1>${escapeHtml(item.meta.title)}</h1><p>${escapeHtml(item.meta.description)}</p></div></section>
+    <section class="section container"><div class="panel prose standalone-prose">${rendered.html}</div></section>`;
+  const output = path.join(root, localeConfig[locale].routeRoot, "privacy");
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({
+    prefix: isEnglish ? "../../" : "../",
+    locale,
+    route: "privacy/",
+    active: "",
+    title: item.meta.title,
+    description: item.meta.description,
+    content,
+    modifiedDate: item.meta.updated || item.meta.date || ""
+  }));
+  return item;
+};
+
+const buildOfflinePage = async (locale) => {
+  const isEnglish = locale === "en";
+  const content = `
+    <section class="page-hero compact-hero index-hero"><div class="container"><h1>${isEnglish ? "You are offline" : "当前处于离线状态"}</h1><p>${isEnglish ? "This page has not been cached yet. Reconnect and try again, or return to the cached homepage." : "这个页面尚未缓存。恢复网络后可重新访问，也可以返回已缓存的主页。"}</p><div class="button-row"><a class="button primary-button" href="${isEnglish ? "/en/" : "/"}">${isEnglish ? "Return home" : "返回主页"}</a></div></div></section>`;
+  const output = path.join(root, localeConfig[locale].routeRoot, "offline");
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({
+    prefix: "/",
+    locale,
+    route: "offline/",
+    active: "",
+    title: isEnglish ? "Offline" : "离线提示",
+    description: isEnglish ? "Offline fallback page for Jiayu Lab." : "Jiayu Lab 的离线回退页面。",
+    content,
+    robots: "noindex, nofollow"
+  }));
+};
+
+const homeStructuredData = (locale) => `  <script type="application/ld+json">
+${jsonForHtml({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "JiaYu",
+      url: `${siteUrl}/`,
+      sameAs: [
+        "https://github.com/jiayu-here",
+        "https://www.linkedin.com/in/jiayuhere",
+        "https://www.instagram.com/jiayuhere_/",
+        "https://jiayuhere.blogspot.com",
+        "https://v.douyin.com/lisWB6e9ImQ/"
+      ],
+      knowsAbout: ["Embedded Systems", "FPGA", "Digital Signal Processing", "Communication Systems", "Databases"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Jiayu Lab",
+      description: locale === "en"
+        ? "A personal space for engineering, code and continuous learning."
+        : "工程、代码与长期学习的个人数字空间",
+      inLanguage: localeConfig[locale].lang,
+      author: { "@id": `${siteUrl}/#person` }
+    }
+  ]
+})}
+  </script>`;
+
+const pagePrefixForUrl = (url) => {
+  const depth = url.split("/").filter(Boolean).length;
+  return "../".repeat(url.endsWith(".html") ? Math.max(0, depth - 1) : depth);
+};
+
+const ensureSharedPageShell = (html, url) => {
+  const isEnglish = url.startsWith("en/");
+  const locale = isEnglish ? "en" : "zh";
+  const prefix = pagePrefixForUrl(url);
+  const privacyHref = `${prefix}${localeConfig[locale].routeRoot}privacy/index.html`;
+  if (!html.includes(`href="${privacyHref}"`)) {
+    html = html.replace('<div class="footer-links">', `<div class="footer-links"><a href="${privacyHref}">${localeConfig[locale].strings.privacy}</a>`);
+  }
+  const themeTags = [];
+  if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*light/i.test(html)) {
+    themeTags.push(`  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">`);
+  }
+  if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*dark/i.test(html)) {
+    themeTags.push('  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">');
+  }
+  if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
+  return html
+    .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)
+    .replace(/assets\/styles\.css\?v=[^"]+/g, `assets/styles.css?v=${assetVersion}`)
+    .replace(/assets\/script\.js\?v=[^"]+/g, `assets/script.js?v=${assetVersion}`);
+};
+
+const ensurePageMetadata = (html, url) => {
+  const isEnglish = url.startsWith("en/");
+  const locale = isEnglish ? "en" : "zh";
+  const route = isEnglish ? url.slice(3) : url;
+  const canonical = `${siteUrl}/${url}`;
+  const chinese = `${siteUrl}/${route}`;
+  const english = `${siteUrl}/en/${route}`;
+  const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() || "Jiayu Lab";
+  const descriptionTag = html.match(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i)?.[0] || "";
+  const description = descriptionTag.match(/\bcontent="([^"]*)"/i)?.[1]
+    || descriptionTag.match(/\bcontent='([^']*)'/i)?.[1]
+    || "";
+  const additions = [];
+  const add = (pattern, tag) => {
+    if (!pattern.test(html)) additions.push(tag);
+  };
+
+  add(/<link\b[^>]*\brel=["']canonical["']/i, `  <link rel="canonical" href="${canonical}">`);
+  add(/<link\b[^>]*\bhreflang=["']zh-CN["']/i, `  <link rel="alternate" hreflang="zh-CN" href="${chinese}">`);
+  add(/<link\b[^>]*\bhreflang=["']en["']/i, `  <link rel="alternate" hreflang="en" href="${english}">`);
+  add(/<link\b[^>]*\bhreflang=["']x-default["']/i, `  <link rel="alternate" hreflang="x-default" href="${chinese}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:type["']/i, `  <meta property="og:type" content="website">`);
+  add(/<meta\b[^>]*\bproperty=["']og:title["']/i, `  <meta property="og:title" content="${title}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:description["']/i, `  <meta property="og:description" content="${description}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:image["']/i, `  <meta property="og:image" content="${socialImageUrl}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:image:alt["']/i, `  <meta property="og:image:alt" content="Jiayu Lab">`);
+  add(/<meta\b[^>]*\bproperty=["']og:url["']/i, `  <meta property="og:url" content="${canonical}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:locale["']/i, `  <meta property="og:locale" content="${isEnglish ? "en_US" : "zh_CN"}">`);
+  add(/<meta\b[^>]*\bname=["']twitter:card["']/i, `  <meta name="twitter:card" content="summary_large_image">`);
+  add(/<meta\b[^>]*\bname=["']twitter:title["']/i, `  <meta name="twitter:title" content="${title}">`);
+  add(/<meta\b[^>]*\bname=["']twitter:description["']/i, `  <meta name="twitter:description" content="${description}">`);
+  add(/<meta\b[^>]*\bname=["']twitter:image["']/i, `  <meta name="twitter:image" content="${socialImageUrl}">`);
+  if (additions.length) html = html.replace("</head>", `${additions.join("\n")}\n</head>`);
+
+  if ((url === "" || url === "en/") && !html.includes('"@type": "WebSite"') && !html.includes('"@type":"WebSite"')) {
+    html = html.replace("</head>", `${homeStructuredData(locale)}\n</head>`);
+  }
+
+  html = ensureSharedPageShell(html, url);
+  if (!html.includes(`gtag/js?id=${googleAnalyticsId}`)) html = html.replace("<head>", `<head>\n${googleAnalyticsTag}`);
+  return html;
 };
 
 const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
@@ -749,7 +1020,7 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   const prefix = isEnglish ? "../../../" : "../../";
   const route = `${config.output}/${item.meta.slug}/`;
   const usesMath = section === "notes" && /(^|[^\\])\$(?:\$|[^$])/.test(item.body);
-  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "", usesMath }));
+  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "", modifiedDate: item.meta.updated || "", usesMath }));
 };
 
 const buildLabIndex = async (items, locale) => {
@@ -887,15 +1158,32 @@ const loadPairedLogs = async () => {
 };
 
 const build = async () => {
+  await loadNoteImageManifest();
   const authoredContent = await loadPairedContent();
   const authoredLogs = await loadPairedLogs();
   const publicRepositories = await fetchPublicRepositories();
+  const privacyItems = {};
+  for (const locale of Object.keys(localeConfig)) {
+    privacyItems[locale] = await buildPrivacyPage(locale);
+    await buildOfflinePage(locale);
+  }
+  const splitNotes = {
+    zh: expandSplitNotes(authoredContent.zh.notes, "zh"),
+    en: expandSplitNotes(authoredContent.en.notes, "en")
+  };
+  const chineseSplitSlugs = splitNotes.zh.map((item) => item.meta.slug);
+  const englishSplitSlugs = splitNotes.en.map((item) => item.meta.slug);
+  if (chineseSplitSlugs.join("\n") !== englishSplitSlugs.join("\n")) {
+    throw new Error("Bilingual split-note slug mismatch");
+  }
   const localeBuilds = {};
 
   for (const locale of Object.keys(localeConfig)) {
     const searchIndex = [];
+    const sitemapEntries = [];
+    const summaryItems = [];
     const sectionCounts = {};
-    const contentDates = [];
+    const contentDates = [privacyItems[locale].meta.updated || privacyItems[locale].meta.date || ""].filter(Boolean);
     let articleItems = [];
     for (const [section, config] of Object.entries(sections)) {
       let items = [...authoredContent[locale][section]];
@@ -907,38 +1195,46 @@ const build = async () => {
           .filter((repository) => !authoredNames.has(repository.name.toLowerCase()))
           .map((repository) => fallbackProjectFor(repository, locale)));
       }
-      await pruneOutputs(section, items, locale);
-      for (const [index, item] of items.entries()) {
-        await buildDetail(section, item, index, items, locale);
+      const detailItems = section === "notes" ? splitNotes[locale] : items;
+      await pruneOutputs(section, detailItems, locale);
+      for (const [index, item] of detailItems.entries()) {
+        await buildDetail(section, item, index, detailItems, locale);
+        const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || []), plainText(item.body)].join(" ").toLowerCase();
+        const url = `/${localeConfig[locale].routeRoot}${config.output}/${item.meta.slug}/`;
         searchIndex.push({
           section,
           title: item.meta.title,
           description: item.meta.description,
           category: item.meta.category,
           tags: item.meta.tags || [],
-          content: plainText(item.body),
-          url: `/${localeConfig[locale].routeRoot}${config.output}/${item.meta.slug}/`
+          searchText,
+          url
         });
-        if (item.meta.date) contentDates.push(String(item.meta.date));
+        sitemapEntries.push({
+          url: url.replace(/^\//, ""),
+          lastmod: normalizeLastmod(item.meta.updated || item.meta.date)
+        });
       }
       sectionCounts[section] = items.length;
+      summaryItems.push(...items);
       if (section === "articles") articleItems = items;
+      contentDates.push(...items.map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
       await buildIndex(section, items, locale);
     }
     await buildLabIndex(authoredLogs[locale], locale);
-    contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.date || "")).filter(Boolean));
+    contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
     await buildRss(articleItems, locale);
     const searchFile = locale === "en" ? "search-index.en.json" : "search-index.json";
     await mkdir(path.join(root, "assets/data"), { recursive: true });
-    await writeFile(path.join(root, "assets/data", searchFile), `${JSON.stringify(searchIndex, null, 2)}\n`);
-    localeBuilds[locale] = { searchIndex, sectionCounts, contentDates, logCount: authoredLogs[locale].length };
+    await writeFile(path.join(root, "assets/data", searchFile), `${JSON.stringify(searchIndex)}\n`);
+    localeBuilds[locale] = { searchIndex, sitemapEntries, summaryItems, sectionCounts, contentDates, logCount: authoredLogs[locale].length };
   }
 
   const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
   const toolCount = (toolbox.match(/<article\b[^>]*\bclass="[^"]*\btool-card\b[^"]*"/g) || []).length;
   const chineseBuild = localeBuilds.zh;
-  const topicCount = (terms) => chineseBuild.searchIndex.filter((item) => {
-    const text = [item.title, item.description, item.category, ...(item.tags || [])].join(" ").toLowerCase();
+  const topicCount = (terms) => chineseBuild.summaryItems.filter((item) => {
+    const text = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || [])].join(" ").toLowerCase();
     return terms.some((term) => text.includes(term));
   }).length;
   const homeStats = {
@@ -953,23 +1249,29 @@ const build = async () => {
     communications: topicCount(["通信", "qpsk", "调制", "信号", "fft", "ber"]),
     software: topicCount(["python", "数据库", "mysql", "docker", "web", "算法", "git"])
   };
-  const lastUpdated = chineseBuild.contentDates.sort().at(-1) || "暂无更新";
+  const lastUpdated = chineseBuild.contentDates.map((date) => normalizeLastmod(date)).sort().at(-1) || "暂无更新";
   await updateHomeStats(homeStats, lastUpdated, "zh");
   await updateHomeStats(homeStats, lastUpdated, "en");
 
-  const staticUrls = ["", "about/", "resume/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/"];
+  const staticUrls = ["", "about/", "resume/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/", "privacy/"];
   const englishStaticUrls = staticUrls.map((url) => `en/${url}`);
-  const urls = [...staticUrls, ...englishStaticUrls, ...Object.values(localeBuilds).flatMap(({ searchIndex }) => searchIndex.map((item) => item.url.replace(/^\//, "")))];
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>https://www.jiayuhere.com/${url}</loc><lastmod>2026-07-14</lastmod></url>`).join("\n")}\n</urlset>\n`;
-  await writeFile(path.join(root, "sitemap.xml"), sitemap);
+  const sitemapByUrl = new Map([...staticUrls, ...englishStaticUrls].map((url) => [url, lastUpdated]));
+  for (const { sitemapEntries } of Object.values(localeBuilds)) {
+    for (const entry of sitemapEntries) sitemapByUrl.set(entry.url, entry.lastmod);
+  }
+  const urls = [...sitemapByUrl.keys()];
   for (const url of urls) {
     const htmlPath = url ? path.join(root, url, "index.html") : path.join(root, "index.html");
-    let html = await readFile(htmlPath, "utf8");
-    if (!html.includes(`gtag/js?id=${googleAnalyticsId}`)) {
-      html = html.replace("<head>", `<head>\n${googleAnalyticsTag}`);
-      await writeFile(htmlPath, html);
-    }
+    const html = ensurePageMetadata(await readFile(htmlPath, "utf8"), url);
+    await writeFile(htmlPath, html);
   }
+  for (const url of ["404.html", "en/404.html"]) {
+    const htmlPath = path.join(root, url);
+    const html = ensureSharedPageShell(await readFile(htmlPath, "utf8"), url);
+    await writeFile(htmlPath, html);
+  }
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...sitemapByUrl].map(([url, lastmod]) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastmod}</lastmod></url>`).join("\n")}\n</urlset>\n`;
+  await writeFile(path.join(root, "sitemap.xml"), sitemap);
   console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual Markdown pages and ${authoredLogs.zh.length} bilingual log entries.`);
 };
 

@@ -4,6 +4,8 @@ slug: math-007
 description: "Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Formula Collection. Original formulas, diagrams, and example problems are retained."
 category: "Mathematics"
 tags: ["Graduate Entrance Examination Mathematics","Mathematics Summary","Formula Collection"]
+updated: 2026-07-29
+split: chapters
 ---
 
 # Chapter 0: Mathematical Fundamentals

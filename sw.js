@@ -1,15 +1,16 @@
-const CACHE_NAME = "jiayuhere-20260729e";
+const CACHE_NAME = "jiayuhere-20260729f";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/en/",
+  "/offline/",
+  "/en/offline/",
   "/resume/",
   "/en/resume/",
-  "/assets/styles.css?v=20260729e",
-  "/assets/script.js?v=20260728a",
-  "/assets/data/search-index.json",
-  "/assets/data/search-index.en.json",
+  "/assets/styles.css?v=20260729f",
+  "/assets/script.js?v=20260729f",
   "/assets/images/github-avatar.jpg",
+  "/assets/icons/app-icon-192.png",
   "/favicon.ico",
   "/site.webmanifest"
 ];
@@ -39,7 +40,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(async () => (await caches.match(request)) || caches.match("/index.html"))
+        .catch(async () => (await caches.match(request)) || caches.match(url.pathname.startsWith("/en/") ? "/en/offline/" : "/offline/"))
     );
     return;
   }

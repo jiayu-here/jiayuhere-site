@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lecture 45: Calculation of Double Integrals | Jiayu Lab</title>
   <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.">
+
   <meta name="keywords" content="Graduate Entrance Examination Mathematics, Advanced Mathematics, Multiple Integrals">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Lecture 45: Calculation of Double Integrals | Jiayu Lab">
   <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/math-053/">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 45: Calculation of Double Integrals | Jiayu Lab">
+  <meta name="twitter:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 45: Calculation of Double Integrals. Retain original formulas, diagrams, and example problems.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-053/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-053/">
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-053/">
@@ -27,7 +34,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729f">
   <script>
     window.MathJax = {
       tex: {
@@ -113,18 +120,18 @@
 <li class="list-indent-2">3. Merging the two: $\int_{a}^{b}[\int_{y_{1}(x)}^{y_{2}(x)}f(x,y)dy]dx$</li>
 <li class="list-indent-1">Illustration:</li>
 <li class="list-indent-2">2D:</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/cc5c4223a429-Pasted-image-20240209014016.png" alt="Pasted image 20240209014016" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/cc5c4223a429-Pasted-image-20240209014016.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System"><picture><source srcset="/assets/note-previews/cc5c4223a429-Pasted-image-20240209014016.webp" type="image/webp"><img class="note-image" src="/assets/notes/cc5c4223a429-Pasted-image-20240209014016.png" alt="Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System" width="291" height="253" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-2">3D:</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/09f953820fd4-Pasted-image-20240209014221.png" alt="Pasted image 20240209014221" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/09f953820fd4-Pasted-image-20240209014221.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System"><picture><source srcset="/assets/note-previews/09f953820fd4-Pasted-image-20240209014221.webp" type="image/webp"><img class="note-image" src="/assets/notes/09f953820fd4-Pasted-image-20240209014221.png" alt="Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System" width="215" height="206" loading="lazy" decoding="async"></picture></a></li>
 <li>First <code>X</code> <code>Y</code>:</li>
 <li class="list-indent-1">Premise: $(\sigma)=\{(x,y)\mid x_1(y)\leq x\leq x_2(y),c\leq y\leq d\}$</li>
 <li class="list-indent-1">Illustration:</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/ae3eee53b8b5-Pasted-image-20240209015118.png" alt="Pasted image 20240209015118" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/ae3eee53b8b5-Pasted-image-20240209015118.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System"><picture><source srcset="/assets/note-previews/ae3eee53b8b5-Pasted-image-20240209015118.webp" type="image/webp"><img class="note-image" src="/assets/notes/ae3eee53b8b5-Pasted-image-20240209015118.png" alt="Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System" width="283" height="277" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">Convert to two single-invariant integrals with x before y;</li>
 <li class="list-indent-1">Formula: $\begin{aligned}\iint_{(\sigma)}f(x,y)\operatorname{d}\sigma&amp;=\int_c^d[\int_{x_1(y)}^{x_2(y)}f(x,y)dx]\operatorname{d}y\\\\&amp;=\int_c^d\operatorname{d}\left.y\right]_{x_1(y)}^{x_2(y)}f(x,y)\operatorname{d}x.\end{aligned}$</li>
 <li>Non-X and non-Y regions</li>
 <li class="list-indent-1">Illustration</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/ba644f067fd4-Pasted-image-20240209015436.png" alt="Pasted image 20240209015436" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/ba644f067fd4-Pasted-image-20240209015436.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System"><picture><source srcset="/assets/note-previews/ba644f067fd4-Pasted-image-20240209015436.webp" type="image/webp"><img class="note-image" src="/assets/notes/ba644f067fd4-Pasted-image-20240209015436.png" alt="Study-note illustration: 45.2 Calculation Using Cartesian Coordinate System" width="358" height="331" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">Concept:</li>
 <li class="list-indent-2">A complex double integral of a non-X and non-Y figure;</li>
 <li class="list-indent-1">Method:</li>
@@ -175,7 +182,7 @@
 <p><strong>Problem-solving steps</strong>: Example $\text{ Exchange cumulative points }\int_0^1dx\int_{x^2}^{2-x}f(x,y)dy\text{ The order }$</p>
 <ul>
 <li>Step 1: Draw the domain</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/2e7722fbd717-Pasted-image-20240508210257.png" alt="Pasted image 20240508210257" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/2e7722fbd717-Pasted-image-20240508210257.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: PART 1: Problem solving methods"><picture><source srcset="/assets/note-previews/2e7722fbd717-Pasted-image-20240508210257.webp" type="image/webp"><img class="note-image" src="/assets/notes/2e7722fbd717-Pasted-image-20240508210257.png" alt="Study-note illustration: PART 1: Problem solving methods" width="294" height="300" loading="lazy" decoding="async"></picture></a></li>
 <li>Step 2: After drawing the domain, define the domain in another order</li>
 <li class="list-indent-1">Swap order and reline:</li>
 <li class="list-indent-1">$$\int_0^1dy\int_0^{\sqrt{y}}f(x,y)dx+\int_1^2dy\int_0^{2-y}f(x,y)dx$$</li>
@@ -226,9 +233,9 @@
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
-    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260728a"></script>
+  <script src="../../../assets/script.js?v=20260729f"></script>
 </body>
 </html>

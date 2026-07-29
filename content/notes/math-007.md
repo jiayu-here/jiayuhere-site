@@ -4,6 +4,8 @@ slug: math-007
 description: "考研数学学习笔记：高等数学 - 公式合集。保留原始公式、图示与例题。"
 category: "数学"
 tags: ["考研数学", "数学总结", "公式合集"]
+updated: 2026-07-29
+split: chapters
 ---
 
 # Chapter 0：数学基础

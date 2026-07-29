@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 2：导数与微分 — 高等数学 - 公式合集 | Jiayu Lab</title>
+  <meta name="description" content="高等数学 - 公式合集中的Chapter 2：导数与微分，拆分为独立章节以便查阅并减少单页图片负载。">
+
+  <meta name="keywords" content="考研数学, 数学总结, 公式合集">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 2：导数与微分 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta property="og:description" content="高等数学 - 公式合集中的Chapter 2：导数与微分，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 2：导数与微分 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta name="twitter:description" content="高等数学 - 公式合集中的Chapter 2：导数与微分，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-007-chapter-02/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Chapter 2：导数与微分 — 高等数学 - 公式合集</h1><p class="article-lead">高等数学 - 公式合集中的Chapter 2：导数与微分，拆分为独立章节以便查阅并减少单页图片负载。</p><div class="article-meta"><span>数学</span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>数学总结</span><span>公式合集</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">Chapter 2：导数与微分</a><a href="#section-2">2.1 导数</a><a href="#section-3">2.2 求导</a><a href="#section-9">2.3 高阶导数</a><a href="#section-10">2.4 微分</a><a href="#section-11">2.5 泰勒公式  </a></nav></details><div class="prose"><h2 id="section-1">Chapter 2：导数与微分</h2>
+<h2 id="section-2">2.1 导数</h2>
+<p><strong>导数定义</strong></p>
+<ul>
+<li>定义：</li>
+<li class="list-indent-1">$\begin{aligned}\text{若 }&amp;\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}&amp;\text{存在，则称 }f(x)\text{ 在 }x_0\text{ 点可导}.\end{aligned}$</li>
+<li>另一种形式：</li>
+<li class="list-indent-1">$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li>形式一：$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</li>
+<li>形式二：$f^{\prime}(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+</ul>
+<p><strong>左右导数</strong></p>
+<ul>
+<li>左右导数的关系：可导 <code>&lt;--&gt;</code> <strong>左右导数存在且相等</strong>；</li>
+</ul>
+<h2 id="section-3">2.2 求导</h2>
+<h3 id="section-4">2.2.1 方法一：和差积商求导法则</h3>
+<p><strong>有理运算法则</strong></p>
+<p>设 $u(x),\nu(x)$ 都可导，则</p>
+<ul>
+<li>$(u\pm v)^{\prime}=u^{\prime}\pm v^{\prime}$</li>
+<li>$(uv)^{\prime}=u^{\prime}v+uv^{\prime}$</li>
+<li>$(\frac\mu\nu)^{\prime}=\frac{\mu^{\prime}\nu-\nu^{\prime}\mu}{\nu^2}\quad(\nu\neq0)$</li>
+</ul>
+<h3 id="section-5">2.2.2 方法二：反函数求导法则</h3>
+<p><strong>反函数求导</strong></p>
+<ul>
+<li>公式：</li>
+<li class="list-indent-1">$$(f^{-1})^{\prime}(x)=\frac1{f^{\prime}(y)}\quad\frac{dy}{dx}=\frac1{dx}$$</li>
+<li>含义：</li>
+<li class="list-indent-1">函数和反函数是两个函数，但是是同一条曲线；</li>
+<li class="list-indent-1">因此<strong>当函数连续且单调时，可以知其反函数也同样可导</strong>；</li>
+</ul>
+<h3 id="section-6">2.2.3 方法三：复合函数求导法则</h3>
+<p><strong>链式法则</strong></p>
+<ul>
+<li>设 $u=g(x)$ 在 $x$ 可导，$y=f(u)$ 在对应 $u$ 处可导，则 $y=f[g(x)]$ 在 x 处可导。</li>
+<li>则： $\frac{dy}{dx}=f^{\prime}(u)g^{\prime}(x)$</li>
+<li>其他形式：</li>
+<li class="list-indent-1">$$\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}$$</li>
+</ul>
+<h3 id="section-7">2.2.4 方法四：求导结论</h3>
+<p><strong>基本初等函数</strong></p>
+<ul>
+<li>基本</li>
+<li class="list-indent-1">$\begin{aligned}&amp;\quad(C)^{\prime}=0\quad&amp;\quad(x^\alpha)^{\prime}=\alpha x^{\alpha-1}\\&amp;\quad(a^x)^{\prime}=a^x\ln a\quad&amp;\quad(e^x)^{\prime}=e^x\\&amp;\quad(\log_ax)^{\prime}=\frac1{x\ln a}\quad&amp;\quad(\ln|x|)^{\prime}=\frac1x\end{aligned}$</li>
+<li>三角函数</li>
+<li class="list-indent-1">$(\sin x)^{\prime}=\cos x\quad\quad\quad\quad\quad(\cos x)^{\prime}=-\sin x$</li>
+<li class="list-indent-1">$\begin{aligned}(\tan x)^{\prime}&amp;=\sec^2x&amp;(\cot x)^{\prime}&amp;=-\csc^2x\\\\(\sec x)^{\prime}&amp;=\sec x\tan x&amp;(\csc x)^{\prime}&amp;=-\csc x\cot x\end{aligned}$</li>
+<li>反函数导数</li>
+<li class="list-indent-1">$\begin{aligned}&amp;(\arcsin x)^{\prime}=\frac1{\sqrt{1-x^2}}&amp;&amp;(\arccos x)^{\prime}=-\frac1{\sqrt{1-x^2}}\\&amp;(\arctan x)^{\prime}=\frac1{1+x^2}&amp;&amp;(\operatorname{arccot}x)^{\prime}=-\frac1{1+x^2}\end{aligned}$</li>
+</ul>
+<h3 id="section-8">2.2.5 方法五：对数求导法 </h3>
+<p><strong>例题</strong>：$\text{设}y=\left(1+\sin x\right)^{x},\text{则}\mathrm{d}y|_{x=\pi}=$</p>
+<ul>
+<li>分析</li>
+<li class="list-indent-1">这是幂指函数型，可以使用对数求导法；</li>
+<li>解析</li>
+<li class="list-indent-1">先取对数：$\ln y=x\ln(1+\sin x)$</li>
+<li class="list-indent-1">两边同时求导：$\frac{y^{\prime}}{y}=\ln(1+\sin x)+\frac{x\cos x}{1+\sin x}$</li>
+<li class="list-indent-1">提出 $y^{\prime}$，得到导函数</li>
+<li class="list-indent-1">带入 x=Π；</li>
+</ul>
+<p><strong>重要结论</strong></p>
+<ul>
+<li>$(\ln|x|)^{\prime}=\frac{1}{x}$</li>
+</ul>
+<p><strong>适用场合</strong></p>
+<ul>
+<li>1. 幂指型函数；</li>
+<li>2. 连乘、连除、乘法、开方；</li>
+</ul>
+<h2 id="section-9">2.3 高阶导数</h2>
+<p><strong>常见求 n 阶导数</strong></p>
+<ul>
+<li>指数</li>
+<li class="list-indent-1">$(e^{x})^{(n)}=e^{x}$</li>
+<li>三角函数</li>
+<li class="list-indent-1">$(\sin x)^{(n)}=\sin(x+n\frac\pi2)$</li>
+<li class="list-indent-1">$(\cos x)^{(n)}=\cos(x+n\frac{\pi}{2})$</li>
+<li><code>In</code> 函数</li>
+<li class="list-indent-1">$(\ln(1+x))^{(n)}=(-1)^{n-1}\frac{(n-1)!}{(1+x)^n}$</li>
+<li>加法</li>
+<li class="list-indent-1">$(u\pm v)^{(n)}=u^{(n)}\pm v^{(n)}$</li>
+<li>乘法</li>
+<li class="list-indent-1">莱布尼茨公式</li>
+<li class="list-indent-1">${(uv)^{(n)}}=\sum_{k=0}^nC_n^ku^{(k)}v^{(n-k)}$</li>
+</ul>
+<h2 id="section-10">2.4 微分</h2>
+<p><strong>微分定义</strong></p>
+<ul>
+<li>$\text{若 }f(x_0+\Delta x)-f(x_0)=A\Delta x+o(\Delta x)\text{ ，则称 }f(x)$ $在 x _0点可微；$</li>
+<li>$A\Delta x 称为 f(x)在 x_0 点的微分$</li>
+<li class="list-indent-1">第一部分为函数变化的主要部分</li>
+<li class="list-indent-1">第二部分为高阶无穷小，为次要部分</li>
+</ul>
+<p><strong>可微、可导、连续之间关系</strong></p>
+<p><a class="note-image-link" href="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：2.4 微分"><picture><source srcset="/assets/note-previews/fdce7bdf7363-Pasted-image-20240317192744.webp" type="image/webp"><img class="note-image" src="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" alt="学习笔记插图：2.4 微分" width="1857" height="860" loading="lazy" decoding="async"></picture></a></p>
+<h2 id="section-11">2.5 泰勒公式  </h2>
+<p><strong>公式</strong>：带 Peano 余项的泰勒公式 </p>
+<ul>
+<li>$\text{设}f(x)\text{ 在 }x_0\text{ 处 }n\text{ 阶可微,则}$：</li>
+<li>$$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</li>
+<li>$$f\left(x\right)=\frac{f\left(x_{0}\right)}{0!}+\frac{f^{\prime}\left(x_{0}\right)}{1!}(x-x_{0})+\frac{f^{\prime\prime}\left(x_{0}\right)}{2!}(x-x_{0})^{2}+\ldots+\frac{f^{\left(n\right)}\left(x_{0}\right)}{n!}(x-x_{0})^{n}+o((x-x_0)^n)$$</li>
+<li>$$\text{用}n+1\text{阶导数表示的余项叫拉格朗日余项, 用}o\left (x^n\right)\text{或者}o\left (\left (x-x_0\right)^n\right)\text{表示的是Peano 余项 }$$</li>
+</ul>
+<p><strong>公式</strong>：带 <code>Peano</code> 余项的泰勒公式 - 零点的泰勒展开</p>
+<ul>
+<li>$$\begin{gathered}\text{若 }x_0=0\text{，则}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0&lt;\theta&lt;1.\\\text{上式称为 }f(x)\text{ 的 Maclaurin 公式。}\end{gathered}$$</li>
+</ul>
+<p><strong>公式</strong>：带有 <code>拉格朗日余项</code> 的泰勒公式  </p>
+<ul>
+<li>其中的 $\xi$ 位于 $x$ 到 $x_0$ 之间，因此</li>
+<li>$$f(x)=f(a)+f^{\prime}(a)(x-a)+\frac{f^{\prime\prime}(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})^{n+1}$$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-007-chapter-01/index.html"><span>← 上一项</span><strong>Chapter 1：函数、极限、连续 — 高等数学 - 公式合集</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-03/index.html"><span>下一项 →</span><strong>Chapter 3：微分中值定理 — 高等数学 - 公式合集</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

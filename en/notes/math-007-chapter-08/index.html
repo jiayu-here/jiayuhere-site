@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 8: Multiple Integrals — Advanced Mathematics - Collection of Formulas | Jiayu Lab</title>
+  <meta name="description" content="Chapter 8: Multiple Integrals from the formula collection, kept as a focused chapter for faster reading and image loading.">
+
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Mathematics Summary, Formula Collection">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 8: Multiple Integrals — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta property="og:description" content="Chapter 8: Multiple Integrals from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/math-007-chapter-08/">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 8: Multiple Integrals — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta name="twitter:description" content="Chapter 8: Multiple Integrals from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-007-chapter-08/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-08/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-08/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-08/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/math-007-chapter-08/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Chapter 8: Multiple Integrals — Advanced Mathematics - Collection of Formulas</h1><p class="article-lead">Chapter 8: Multiple Integrals from the formula collection, kept as a focused chapter for faster reading and image loading.</p><div class="article-meta"><span>Mathematics</span><span>7 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Chapter 8: Multiple Integrals</a><a href="#section-2">8.1 Double Integral</a><a href="#section-3">8.2 Calculation of Double Integrals</a><a href="#section-4">8.3 Triple Integral</a></nav></details><div class="prose"><h2 id="section-1">Chapter 8: Multiple Integrals</h2>
+<h2 id="section-2">8.1 Double Integral</h2>
+<p><strong>Definition</strong>: Double integral</p>
+<ul>
+<li>If $f(x,y)$ is a bounded function on region D, divide region D arbitrarily into n regions: $\sigma_{1}$, $\sigma_{2}$... $\sigma_{n}$, take any point $(\xi_{i},\eta_{i})$ on each $\sigma_{n}$ and do $f(\xi,\eta_{i})\Delta\sigma_{i}$, when $\lambda\to0$:</li>
+<li>The following expression is called a double integral: $$\lim_{\lambda\to0}\sum_{i=1}^{n}\Delta\sigma_{i}f\left(\xi_{i},\eta_{i}\right)=\int\int_{D}f(x,y)d\sigma $$</li>
+</ul>
+<p><strong>Theorem</strong>: Properties of double integrals</p>
+<ul>
+<li>（1）</li>
+<li class="list-indent-1">If on D, $f(x,y)\leq g(x,y)$, then there is an inequality:</li>
+<li class="list-indent-1">$$\int\int_Df(x,y)d\sigma\leq\int\int_Dg(x,y)d\sigma $$</li>
+<li>（2）</li>
+<li class="list-indent-1">If there is a $m\leq f(x,y)\leq M$ on $D$, then:</li>
+<li class="list-indent-1">$$mS\leq\iint_Df(x,y)\mathrm{d}\sigma\leq MS$$</li>
+<li>（3）</li>
+<li class="list-indent-1">The absolute value of an integral, which is less than the absolute value</li>
+<li class="list-indent-1">$$\left|\iint_Df(x,y)\mathrm{d}\sigma\right|\leq\iint_D\left|f(x,y)\right|\mathrm{d}\sigma.$$</li>
+<li>（4）</li>
+<li class="list-indent-1">If $f(x,y)$ on region <code>D</code> is always equal to <code>1</code>, then its double integral is:</li>
+<li class="list-indent-1">$$\int\int_{D}\left(1)  d\sigma=\sigma\times1\right.$$</li>
+</ul>
+<p><strong>Theorem</strong>: The mean value theorem for double integrals</p>
+<ul>
+<li>Let the function $f(x,y)$ be continuous on the closed region <code>D</code>, <code>S</code> be the area of region <code>D</code>, then there is at least a bit of $(\xi,\eta)$ on <code>D</code>, such that $$\iint_Df(x,y)\mathrm{d}\sigma=f(\xi,\eta)\cdot S$$</li>
+</ul>
+<h2 id="section-3">8.2 Calculation of Double Integrals</h2>
+<p><strong>Suitable for polar coordinates</strong></p>
+<ul>
+<li>(1) Integrands suitable for polar coordinates calculations</li>
+<li class="list-indent-1">Formula:</li>
+<li class="list-indent-2">$$f(x^2+y^2),f(\sqrt{x^2+y^2}),f(\frac yx),f(\frac xy)$$</li>
+<li class="list-indent-1">Cause:</li>
+<li class="list-indent-2">$\sqrt{x^2+y^2}$ is more complex in the Cartesian coordinate system, but represents <code>ρ</code> in polar coordinates</li>
+<li class="list-indent-2">$\frac yx$ In polar coordinates, it represents an angle</li>
+<li>(2) Integration fields suitable for polar coordinates</li>
+<li class="list-indent-1">$$x^{2}+y^{2}\leq R^{2};\quad\quad\quad r^{2}\leq x^{2}+y^{2}\leq R^{2};\quad\quad\quad\\x^{2}+y^{2}\leq2ax;\quad\quad\quad x^{2}+y^{2}\leq2by;$$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2">When the center is not at the origin, $x-x_0$ can be set to $\rho\sin\theta$, and similarly, $y-y_0$</li>
+<li>If (1) and (2) have a conflict, (1) takes precedence</li>
+</ul>
+<p><strong>Theorem</strong>: Double integral calculation based on rectangular coordinate systems</p>
+<ul>
+<li>(1) First <code>Y</code> <code>X</code>: $$\int\int_D{f(x,y)d\sigma = \int_{a}^{b}[\int_{y_{1}(x)}^{y_{2}(x)}f(x,y)dy]dx}$$</li>
+<li class="list-indent-1">Area: $\begin{aligned}\varphi_1(x)&amp;\leq y\leq\varphi_2(x)\cdot\\a&amp;\leq x\leq b\end{aligned}$</li>
+<li class="list-indent-1">Where $\varphi_1(x)\leq y\leq\varphi_2(x)$ represents the range of x values, which is the function of x with respect to y, and $\varphi_1(x)$ is the actual value of y equal;</li>
+<li>(2) First <code>X</code> <code>Y</code>: $$\iint_Df(x,y)\mathrm{d}\sigma=\int_c^ddy\int_{\psi_1(y)}^{\psi_2(y)}f(x,y)dx$$</li>
+<li class="list-indent-1">Area: $\begin{aligned}\Psi(y)&amp;\leq X\leq\Psi_2(y)\\c&amp;\leq y\leq d\end{aligned}$</li>
+<li>Setting the points limit;</li>
+<li class="list-indent-1">When Y comes first, then X:</li>
+<li class="list-indent-2"><code>dy</code> upper and lower integral limits <code>-&gt;</code> Draw a ray from bottom to top, with the lower end of the ray being <code>dy</code> the lower limit of the integral and the upper end of the ray being the upper limit of the integral of dy;</li>
+<li class="list-indent-2"><code>dx</code> upper and lower limits of integration <code>-&gt;</code> Observe the graph to see the range of x values;</li>
+<li class="list-indent-1">When X comes first, then Y:</li>
+<li class="list-indent-2"><code>dx</code> upper and lower integral limits <code>-&gt;</code> Draw a ray from left to right, with the left end of the ray being the <code>dx</code> lower limit and the upper end of the ray being the <code>dx</code> lower limit;</li>
+<li class="list-indent-2"><code>dy</code> upper and lower limits of integration <code>-&gt;</code> Observe the image and see the range for <code>y</code>;</li>
+</ul>
+<p><strong>Theorem</strong>: Double integral calculation based on polar coordinates</p>
+<ul>
+<li>$$\text{ First }\rho\text{ Afterwards }\theta\quad\iint_Df (x, y)\mathrm{d}\sigma=\int_\alpha^\beta d\theta\int_{\varphi_1 (\theta)}^{\varphi_2 (\theta)}f (\rho\cos\theta,\rho\sin\theta)\rho d\rho$$</li>
+<li>Area: $\begin{aligned}\varphi_1(0)&amp;\leq p\leq\varphi_2(0)\\\alpha&amp;\leq\theta\leq\beta.\end{aligned}$</li>
+</ul>
+<p><strong>Theorem</strong>: Parity</p>
+<ul>
+<li>If the integral <code>D</code> relation <code>Y</code> axial symmetry, then the function is parity with respect to <code>X</code>:</li>
+<li class="list-indent-1">$$\iint\limits_{D}f(x,y)d\sigma=\begin{cases}2\iint\limits_{D_{x\geq0}}f(x,y)\mathrm{d}\sigma;&amp;f(-x,y)=f(x,y)\\0;&amp;f(-x,y)=-f(x,y)\end{cases}$$</li>
+<li>If the integral <code>D</code> relation <code>X</code> axial symmetry, then the function is parity with respect to <code>Y</code>:</li>
+<li class="list-indent-1">$$\iint\limits_{D}f(x,y)d\sigma=\begin{cases}2\iint\limits_{D_{y_{z_0}}}f(x,y)\mathrm{d}\sigma&amp;f(x,-y)=f(x,y)\\0&amp;f(x,-y)=-f(x,y)\end{cases}$$</li>
+</ul>
+<p><strong>Theorem</strong>: Symmetry</p>
+<ul>
+<li>$$\text{ If }D\text{ About }y=x\text{ Symmetric, then }\quad\iint_Df(x,y)\mathrm{d}\sigma=\iint_Df(y,x)\mathrm{d}\sigma $$</li>
+<li>Or:</li>
+<li class="list-indent-1">$$\int\int_{D(x,y)} f(x,y)\mathrm{d}x\mathrm{d}y=\int\int_{D(u,v)} f(u,v)\mathrm{d}u\mathrm{d}v=\int\int_{D(y,x)} f(y,x)\mathrm{d}y\mathrm{d}x$$</li>
+</ul>
+<h2 id="section-4">8.3 Triple Integral</h2>
+<p><strong>Definition</strong>: Triple points</p>
+<ul>
+<li>$\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\lim_{\lambda\to0}\sum_{k=1}^{n}f(\xi_{k},\eta_{k},\xi_{k})\Delta\nu_{k}$</li>
+<li>A ternary function integrating into a spatial field $\Omega$;</li>
+<li>$\Delta\nu_{k}$ is the volume of the geometric solid in the k-th region;</li>
+</ul>
+<p><strong>Calculation</strong>: Cartesian coordinates</p>
+<ul>
+<li>Method 1: First one, then two, $$\iiint_{\Omega}f(x,y,z)\mathrm{dv}=\iint_{D_{xy}}d\sigma\int_{z_{1}(x,y)}^{z_{2}(x,y)}f(x,y,z)dz$$</li>
+<li>Method 2: Put two first, then one, $$\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\int_{c_{1}}^{c_{2}}dz\iint_{D_{c}}f(x,y,z)dxdy$$</li>
+</ul>
+<p><strong>Calculation</strong>: Cylindrical coordinates</p>
+<ul>
+<li>Definition: Cylindrical coordinates</li>
+<li class="list-indent-1">$$\begin{cases}x=r\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\theta,&amp;\quad0\leq\theta\leq2\pi,\\z=z,&amp;\quad-\infty&lt;z&lt;+\infty.\end{cases}$$</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 8.3 Triple Integral"><picture><source srcset="/assets/note-previews/fb4663a3483a-Pasted-image-20240521035217.webp" type="image/webp"><img class="note-image" src="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" alt="Study-note illustration: 8.3 Triple Integral" width="244" height="270" loading="lazy" decoding="async"></picture></a></li>
+<li>Calculation:</li>
+<li class="list-indent-1">Volume microyuan: $dv=\rho d\rho d\theta dz$</li>
+<li class="list-indent-1">$$\iiint_\Omega f(x,y,z)d\nu=\iiint_{\Omega}f(\rho\cos\theta,\rho\sin\theta,z)r\operatorname{d}r\operatorname{d}\theta\operatorname{d}z$$</li>
+</ul>
+<p><strong>Calculation</strong>: Spherical coordinates</p>
+<ul>
+<li>Definition: Spherical coordinates</li>
+<li class="list-indent-1">$$\begin{cases}x=r\sin\varphi\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\varphi\sin\theta,&amp;\quad0\leq\varphi\leq\pi,\\z=r\cos\varphi,&amp;\quad0\leq\theta\leq2\pi.\end{cases}$$</li>
+<li>Illustration:</li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 8.3 Triple Integral"><picture><source srcset="/assets/note-previews/389e35889ff4-Pasted-image-20240521040109.webp" type="image/webp"><img class="note-image" src="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" alt="Study-note illustration: 8.3 Triple Integral" width="240" height="234" loading="lazy" decoding="async"></picture></a></li>
+<li>Calculation:</li>
+<li class="list-indent-1">Volume microyuan: $dv=r^{2}\sin\varphi drd\varphi d\theta$</li>
+<li class="list-indent-1">$$\iiint_{\Omega}f(x,y,z)d\nu =\iiint_\Omega f (r\sin\varphi\cos\theta, r\sin\varphi\sin\theta, r\cos\varphi) r^2\sin\varphi\operatorname{d}r\operatorname{d}\varphi\operatorname{d}\theta$$</li>
+<li>Applicable to: The integrand can be written as $f(\sqrt{x^2+y^2+z^2})$ or as a sphere, sphere, hemispherical, or curved cone centered at the origin <code>-&gt;</code> spherical coordinates are suitable</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-007-chapter-07/index.html"><span>← Previous item</span><strong>Chapter 7: Multivariable Differential Calculus — Advanced Mathematics - Collection of Formulas</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-09/index.html"><span>Next item →</span><strong>Chapter 9: Infinite Series — Advanced Mathematics - Collection of Formulas</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

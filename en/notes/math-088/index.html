@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lecture 19: Eigenvalues and eigenvectors | Jiayu Lab</title>
   <meta name="description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.">
+
   <meta name="keywords" content="Graduate Entrance Examination Mathematics, Linear Algebra, Eigenvalues and Eigenvectors">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Lecture 19: Eigenvalues and eigenvectors | Jiayu Lab">
   <meta property="og:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/math-088/">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 19: Eigenvalues and eigenvectors | Jiayu Lab">
+  <meta name="twitter:description" content="Postgraduate Entrance Exam Mathematics Study Notes: Lecture 19: Eigenvalues and eigenvectors. Retain original formulas, diagrams, and example problems.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-088/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-088/">
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-088/">
@@ -27,7 +34,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
   <link rel="icon" href="../../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729f">
   <script>
     window.MathJax = {
       tex: {
@@ -83,7 +90,7 @@
 <li class="list-indent-1">Because if $\xi$ equals 0, it means the current matrix has only a unique zero solution, i.e., <code>S=r(A)</code>. Acting A on $\xi$ does not reflect A's effect, because the matrix is still zero on the zero vector, so here $\xi$ is a nonzero vector;</li>
 <li class="list-indent-1">Demonstrate the effect, so you can understand the role of eigenvalues;</li>
 <li>Meaning:</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="Pasted image 20240701195431" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 19.1.1 Basic Concepts"><picture><source srcset="/assets/note-previews/34927b76a257-Pasted-image-20240701195431.webp" type="image/webp"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="Study-note illustration: 19.1.1 Basic Concepts" width="544" height="258" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>Analysis</strong>: Analyze the $A\xi=\lambda\xi$</p>
 <ul>
@@ -99,7 +106,7 @@
 <li class="list-indent-1"><code>-&gt;</code> $|\lambda E-A|=0$</li>
 <li class="list-indent-2">// Here you can find $\lambda_i(i=1,2,3...)$</li>
 <li>Illustration:</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Drawing 2024-07-01 19.50.31.excalidraw" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 19.1.1 Basic Concepts"><picture><source srcset="/assets/note-previews/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.webp" type="image/webp"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Study-note illustration: 19.1.1 Basic Concepts" width="4853" height="4801" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Characteristicequations</span></p>
 <blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
@@ -115,12 +122,12 @@
 <li class="list-indent-1">The value used to describe the transformation ratio of an eigenvector, called an eigenvalue;</li>
 <li class="list-indent-1">Eigenvectors are those vectors that remain on the original line after transformation;</li>
 <li>Illustration:</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="Pasted image 20240701194822" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 19.1.2 Geometric Explanation"><picture><source srcset="/assets/note-previews/113f80fbed00-Pasted-image-20240701194822.webp" type="image/webp"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="Study-note illustration: 19.1.2 Geometric Explanation" width="1985" height="1546" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>Concept</strong>: When the eigenvalue is negative</p>
 <ul>
 <li>Illustration:</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="Pasted image 20240701195210" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 19.1.2 Geometric Explanation"><picture><source srcset="/assets/note-previews/dd3ff05e0e06-Pasted-image-20240701195210.webp" type="image/webp"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="Study-note illustration: 19.1.2 Geometric Explanation" width="1034" height="304" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h2 id="section-4">19.2 Calculation method</h2>
 <h3 id="section-5">19.2.1 Methods for Finding Eigenvalues and Eigenvectors</h3>
@@ -236,7 +243,7 @@ $$</div>
 <p><strong>Summary</strong>: Eigenvalues and eigenvectors of commonly used matrices</p>
 <ul>
 <li>Illustration:</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="Pasted image 20240627205621" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 19.3.3 Common Eigenvalues and Eigenvectors of Matrices"><picture><source srcset="/assets/note-previews/82dc5ce0b772-Pasted-image-20240627205621.webp" type="image/webp"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="Study-note illustration: 19.3.3 Common Eigenvalues and Eigenvectors of Matrices" width="2058" height="375" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>Concept</strong>: The matrix is $f(A)$</p>
 <ul>
@@ -270,9 +277,9 @@ $$</div>
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
-    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260728a"></script>
+  <script src="../../../assets/script.js?v=20260729f"></script>
 </body>
 </html>

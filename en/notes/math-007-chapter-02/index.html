@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 2: Derivatives and Differentials — Advanced Mathematics - Collection of Formulas | Jiayu Lab</title>
+  <meta name="description" content="Chapter 2: Derivatives and Differentials from the formula collection, kept as a focused chapter for faster reading and image loading.">
+
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Mathematics Summary, Formula Collection">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 2: Derivatives and Differentials — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta property="og:description" content="Chapter 2: Derivatives and Differentials from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/math-007-chapter-02/">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 2: Derivatives and Differentials — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta name="twitter:description" content="Chapter 2: Derivatives and Differentials from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-02/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-02/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/math-007-chapter-02/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Chapter 2: Derivatives and Differentials — Advanced Mathematics - Collection of Formulas</h1><p class="article-lead">Chapter 2: Derivatives and Differentials from the formula collection, kept as a focused chapter for faster reading and image loading.</p><div class="article-meta"><span>Mathematics</span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Chapter 2: Derivatives and Differentials</a><a href="#section-2">2.1 derivative</a><a href="#section-3">2.2 differentiate</a><a href="#section-9">2.3 higher-order derivative</a><a href="#section-10">2.4 Differential</a><a href="#section-11">2.5 Taylor's formula</a></nav></details><div class="prose"><h2 id="section-1">Chapter 2: Derivatives and Differentials</h2>
+<h2 id="section-2">2.1 derivative</h2>
+<p><strong>derivative definition</strong></p>
+<ul>
+<li>Definition:</li>
+<li class="list-indent-1">If $\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$ exists, then $f$ is differentiable at $x_0$.</li>
+<li>Alternative form:</li>
+<li class="list-indent-1">$f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+<li>Form 1: $f^{\prime}(x_0)=\lim_{\Delta x\to0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$</li>
+<li>Form 2: $f^{\prime}(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$</li>
+</ul>
+<p><strong>left and right derivative</strong></p>
+<ul>
+<li>The relationship between the left and right derivatives: differentiable <code>&lt;--&gt;</code><strong>The left and right derivatives exist and are equal</strong>;</li>
+</ul>
+<h2 id="section-3">2.2 differentiate</h2>
+<h3 id="section-4">2.2.1 Method 1: sum, difference, product, and quotient rules</h3>
+<p><strong>algebraic manipulation law</strong></p>
+<p>Assume that $u(x), \nu(x)$ can all be imported, then</p>
+<ul>
+<li>$(u\pm v)^{\prime}=u^{\prime}\pm v^{\prime}$</li>
+<li>$(uv)^{\prime}=u^{\prime}v+uv^{\prime}$</li>
+<li>$(\frac\mu\nu)^{\prime}=\frac{\mu^{\prime}\nu-\nu^{\prime}\mu}{\nu^2}\quad(\nu\neq0)$</li>
+</ul>
+<h3 id="section-5">2.2.2 Method 2: inverse-function differentiation rule</h3>
+<p><strong>inverse function differentiate</strong></p>
+<ul>
+<li>Formula:</li>
+<li class="list-indent-1">$$(f^{-1})^{\prime}(x)=\frac1{f^{\prime}(y)}\quad\frac{dy}{dx}=\frac1{dx}$$</li>
+<li>Meaning:</li>
+<li class="list-indent-1">function and inverse function are two functions, but they are the same curve;</li>
+<li class="list-indent-1">Therefore<strong>when the function is continuity and monotonic, it can be known that its inverse function is also differentiable</strong>;</li>
+</ul>
+<h3 id="section-6">2.2.3 Method three: chain rule</h3>
+<p><strong>Chain Rule</strong></p>
+<ul>
+<li>Suppose $u=g(x)$ is differentiable at $x$ and $y=f(u)$ is differentiable at the corresponding $u$, then $y=f[g(x)]$ is differentiable at x.</li>
+<li>then: $\frac{dy}{dx}=f^{\prime}(u)g^{\prime}(x)$</li>
+<li>Other forms:</li>
+<li class="list-indent-1">$$\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}$$</li>
+</ul>
+<h3 id="section-7">2.2.4 Method 4: differentiate conclusion</h3>
+<p><strong>basic elementary functions</strong></p>
+<ul>
+<li>Basic</li>
+<li class="list-indent-1">$\begin{aligned}&amp;\quad(C)^{\prime}=0\quad&amp;\quad(x^\alpha)^{\prime}=\alpha x^{\alpha-1}\\&amp;\quad(a^x)^{\prime}=a^x\ln a\quad&amp;\quad(e^x)^{\prime}=e^x\\&amp;\quad(\log_ax)^{\prime}=\frac1{x\ln a}\quad&amp;\quad(\ln|x|)^{\prime}=\frac1x\end{aligned}$</li>
+<li>trigonometric functions</li>
+<li class="list-indent-1">$(\sin x)'=\cos x\qquad(\cos x)'=-\sin x$</li>
+<li class="list-indent-1">$\begin{aligned}(\tan x)^{\prime}&amp;=\sec^2x&amp;(\cot x)^{\prime}&amp;=-\csc^2x\\\\(\sec x)^{\prime}&amp;=\sec x\tan x&amp;(\csc x)^{\prime}&amp;=-\csc x\cot x\end{aligned}$</li>
+<li>inverse function derivative</li>
+<li class="list-indent-1">$\begin{aligned}&amp;(\arcsin x)'=\frac1{\sqrt{1-x^2}}&amp;&amp;(\arccos x)'=-\frac1{\sqrt{1-x^2}}\\&amp;(\arctan x)'=\frac1{1+x^2}&amp;&amp;(\operatorname{arccot}x)'=-\frac1{1+x^2}\end{aligned}$</li>
+</ul>
+<h3 id="section-8">2.2.5 Method 5: logarithmic differentiation</h3>
+<p><strong>Example</strong>: Let $y=(1+\sin x)^x$. Find $\mathrm{d}y\big|_{x=\pi}$.</p>
+<ul>
+<li>Analysis</li>
+<li class="list-indent-1">This is an exponent function type, logarithmic differentiation can be used;</li>
+<li>Analysis</li>
+<li class="list-indent-1">Logarithm first: $\ln y=x\ln(1+\sin x)$</li>
+<li class="list-indent-1">Differentiate both sides: $\frac{y'}{y}=\ln(1+\sin x)+\frac{x\cos x}{1+\sin x}$.</li>
+<li class="list-indent-1">Propose $y^{\prime}$, get the derivative function</li>
+<li class="list-indent-1">bring in x=Π;</li>
+</ul>
+<p><strong>IMPORTANT CONCLUSION</strong></p>
+<ul>
+<li>$(\ln|x|)^{\prime}=\frac{1}{x}$</li>
+</ul>
+<p><strong>Applicable occasions</strong></p>
+<ul>
+<li>1. Power exponential function;</li>
+<li>2. Continuous multiplication, continuous division, multiplication, square root;</li>
+</ul>
+<h2 id="section-9">2.3 higher-order derivative</h2>
+<p><strong>Commonly find n-order derivative</strong></p>
+<ul>
+<li>Index</li>
+<li class="list-indent-1">$(e^{x})^{(n)}=e^{x}$</li>
+<li>trigonometric functions</li>
+<li class="list-indent-1">$(\sin x)^{(n)}=\sin(x+n\frac\pi2)$</li>
+<li class="list-indent-1">$(\cos x)^{(n)}=\cos(x+n\frac{\pi}{2})$</li>
+<li><code>In</code> function</li>
+<li class="list-indent-1">$(\ln(1+x))^{(n)}=(-1)^{n-1}\frac{(n-1)!}{(1+x)^n}$</li>
+<li>Addition</li>
+<li class="list-indent-1">$(u\pm v)^{(n)}=u^{(n)}\pm v^{(n)}$</li>
+<li>Multiplication</li>
+<li class="list-indent-1">Leibniz formula</li>
+<li class="list-indent-1">$(uv)^{(n)}=\sum_{k=0}^n\binom{n}{k}u^{(k)}v^{(n-k)}$</li>
+</ul>
+<h2 id="section-10">2.4 Differential</h2>
+<p><strong>Differential Definition</strong></p>
+<ul>
+<li>If $f(x_0+\Delta x)-f(x_0)=A\Delta x+o(\Delta x)$, then $f(x)$ is said to be differentiable at $x _0$ point $; $</li>
+<li>$A\Delta x$ is called the derivative of $f(x)$ at the $x_0$ point</li>
+<li class="list-indent-1">The first part is the main part of the function change</li>
+<li class="list-indent-1">The second part is higher-order infinitesimal, which is the secondary part</li>
+</ul>
+<p><strong>The relationship between differentiability, differentiability, and continuity</strong></p>
+<p><a class="note-image-link" href="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 2.4 Differential"><picture><source srcset="/assets/note-previews/fdce7bdf7363-Pasted-image-20240317192744.webp" type="image/webp"><img class="note-image" src="/assets/notes/fdce7bdf7363-Pasted-image-20240317192744.png" alt="Study-note illustration: 2.4 Differential" width="1857" height="860" loading="lazy" decoding="async"></picture></a></p>
+<h2 id="section-11">2.5 Taylor's formula</h2>
+<p><strong>Formula</strong>: Taylor's formula with Peano remainder</p>
+<ul>
+<li>Suppose $f(x)$ is differentiable in $n$ order at $x_0$, then:</li>
+<li>$$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</li>
+<li>$$f\left(x\right)=\frac{f\left(x_{0}\right)}{0!}+\frac{f^{\prime}\left(x_{0}\right)}{1!}(x-x_{0})+\frac{f^{\prime\prime}\left(x_{0}\right)}{2!}(x-x_{0})^{2}+\ldots+\frac{f^{\left(n\right)}\left(x_{0}\right)}{n!}(x-x_{0})^{n}+o((x-x_0)^n)$$</li>
+<li>The remainder involving $f^{(n+1)}(\xi)$ is the Lagrange form of the remainder; a remainder written as $o\!\left((x-x_0)^n\right)$ is the Peano form.</li>
+</ul>
+<p><strong>Formula</strong>: Taylor's formula with <code>Peano</code> remainder - Taylor expansion of zero points</p>
+<ul>
+<li>$$\begin{gathered}\text{If }x_0=0,\text{ then}\\f(x)=f(0)+f^{\prime}(0)x+\frac{f^{\prime\prime}(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n+\frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1},\quad0&lt;\theta&lt;1.\\\text{This is the Maclaurin formula for }f(x).\end{gathered}$$</li>
+</ul>
+<p><strong>Formula</strong>: Taylor's formula with <code> Lagrangian remainder </code></p>
+<ul>
+<li>where $\xi$ is between $x$ and $x_0$, so</li>
+<li>$$f(x)=f(a)+f^{\prime}(a)(x-a)+\frac{f^{\prime\prime}(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})^{n+1}$$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-007-chapter-01/index.html"><span>← Previous item</span><strong>Chapter 1: Functions, Limits, Continuity — Advanced Mathematics - Collection of Formulas</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-03/index.html"><span>Next item →</span><strong>Chapter 3: mean value theorems — Advanced Mathematics - Collection of Formulas</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

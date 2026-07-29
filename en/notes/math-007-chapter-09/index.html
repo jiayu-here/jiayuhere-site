@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 9: Infinite Series — Advanced Mathematics - Collection of Formulas | Jiayu Lab</title>
+  <meta name="description" content="Chapter 9: Infinite Series from the formula collection, kept as a focused chapter for faster reading and image loading.">
+
+  <meta name="keywords" content="Graduate Entrance Examination Mathematics, Mathematics Summary, Formula Collection">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 9: Infinite Series — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta property="og:description" content="Chapter 9: Infinite Series from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/math-007-chapter-09/">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 9: Infinite Series — Advanced Mathematics - Collection of Formulas | Jiayu Lab">
+  <meta name="twitter:description" content="Chapter 9: Infinite Series from the formula collection, kept as a focused chapter for faster reading and image loading.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-09/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-09/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/math-007-chapter-09/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Chapter 9: Infinite Series — Advanced Mathematics - Collection of Formulas</h1><p class="article-lead">Chapter 9: Infinite Series from the formula collection, kept as a focused chapter for faster reading and image loading.</p><div class="article-meta"><span>Mathematics</span><span>25 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Chapter 9: Infinite Series</a><a href="#section-2">9.1 Series of Constant Terms</a><a href="#section-7">9.2 Power Series</a><a href="#section-11">9.3 Fourier Series</a></nav></details><div class="prose"><h2 id="section-1">Chapter 9: Infinite Series</h2>
+<h2 id="section-2">9.1 Series of Constant Terms</h2>
+<p><strong>Problem-Solving Steps</strong></p>
+<ul>
+<li>Step 1: Determine the type of series</li>
+<li class="list-indent-1">Positive, interleaved, arbitrary terms</li>
+<li>Step 2: Choose the method based on the number of levels</li>
+<li class="list-indent-1">Series of positive terms <code>-&gt;</code> Five types of criteria for convergence and dispersion are used for judgment;</li>
+<li class="list-indent-1">alternating series <code>-&gt;</code> a method;</li>
+<li class="list-indent-1">Any term series <code>-&gt;</code> one method;</li>
+<li>Step 3: If a determination cannot be made, you can use definitions and properties to make a judgment</li>
+<li class="list-indent-1">Definitions and properties apply to all types of series;</li>
+</ul>
+<h3 id="section-3">9.1.1 Basic Concepts</h3>
+<p><strong>Definition</strong>: Convergence of series of constant terms</p>
+<ul>
+<li>$u_{1}, u_{2},\cdots u_{n},\cdots$ represents the constant term, $S_{n}=u_{1}+u_{2}+\cdots+u_{n}$ represents the sum of the first <code>n</code> terms;</li>
+<li>If the finite limit</li>
+</ul>
+<p>  $$S=\lim_{n\to+\infty}S_n$$</p>
+<p>  exists, then the series $\sum_{n=1}^{\infty}u_n$ converges to $S$; otherwise it diverges.</p>
+<p><strong>Nature</strong></p>
+<ul>
+<li>1. If $\sum_{n=1}^{\infty}u_n=S$, then $\sum_{n=1}^{\infty}k u_n=kS$.</li>
+<li>2. If $\sum_{n=1}^{\infty}H_n=h$ and $\sum_{n=1}^{\infty}U_n=u$, then $\sum_{n=1}^{\infty}(H_n\pm U_n)=h\pm u$.</li>
+<li>3. Adding, removing, or changing finitely many terms does not affect convergence, although it may change the sum.</li>
+<li>4. Grouping finitely many consecutive terms of a convergent series preserves convergence and its sum.</li>
+<li>5. A necessary condition for convergence is</li>
+</ul>
+<p>  $$\sum_{n=1}^\infty u_n\text{ converges }\Longrightarrow\lim_{n\to\infty}u_n=0.$$</p>
+<p><strong>Common Conclusions</strong></p>
+<ul>
+<li>$$\sum_{n=1}^{\infty}|b_n|\text{ converges }\Longrightarrow \sum_{n=1}^{\infty}b_n^2\text{ converges}.$$</li>
+</ul>
+<h3 id="section-4">9.1.2 Series of Positive Terms</h3>
+<p><strong>Definition</strong>: Convergence of positive term series</p>
+<ul>
+<li>A positive-term series $\sum u_n$ converges if and only if its partial sums $\{S_n\}$ are bounded above:</li>
+</ul>
+<p>  $$\sum_{n=1}^\infty u_n\text{ converges }\Longleftrightarrow \{S_n\}\text{ is bounded above}.$$</p>
+<p><strong>Methods</strong>: Five types of methods for positive term series</p>
+<ul>
+<li>Method Classification:</li>
+<li class="list-indent-1">1. Comparative Method of Careful Convergence</li>
+<li class="list-indent-1">2. The limit form of the comparative method</li>
+<li class="list-indent-1">3. Ratio method</li>
+</ul>
+<p>	-4. root test</p>
+<ul>
+<li class="list-indent-1">5. Integral Discrimination Method</li>
+<li>Method Selection:</li>
+<li class="list-indent-1">First category: Method <code>1、2</code></li>
+<li class="list-indent-2">The current general term needs to be compared with other known general terms;</li>
+<li class="list-indent-2">Advantages:</li>
+<li class="list-indent-3">Broader applicability;</li>
+<li class="list-indent-3">As long as methods 3 and 4 can make a judgment, method <code>1、2</code> can definitely make a judgment, though it may be more inconvenient to do;</li>
+<li class="list-indent-2">Disadvantages:</li>
+<li class="list-indent-3">Inconvenient to use;</li>
+<li class="list-indent-1">Category Two: Method <code>3、4</code></li>
+<li class="list-indent-2">Concept:</li>
+<li class="list-indent-3">Only need to make judgments on their own;</li>
+<li class="list-indent-2">Advantages:</li>
+<li class="list-indent-3">Easy to use, no need for other levels, you can judge by yourself;</li>
+<li class="list-indent-2">Disadvantages:</li>
+<li class="list-indent-3">Sometimes, the series is clearly divergent but difficult to prove with methods;</li>
+<li class="list-indent-3">That is: narrow scope of application;</li>
+<li>Steps to solve the problem:</li>
+<li class="list-indent-1">1. First, observe whether the convergence and divergence <code>-&gt;</code> law can be directly seen;</li>
+<li class="list-indent-1">2. When judging methods, first consider the <code>3、4</code> of the method used;</li>
+<li class="list-indent-1">3. If a determination cannot be made, then consider <code>1、2</code>;</li>
+<li>Pattern:</li>
+<li class="list-indent-1">Big Three: $$a^n\quad n!\quad n^n$$</li>
+<li class="list-indent-1">If at least one of these three giants appears, the method <code>3、4</code> is usually used;</li>
+<li class="list-indent-1">If none of the three giants appear, the most common forms are $n^p$ or $In{n}$, and then the method is <code>1、2</code>;</li>
+</ul>
+<p><strong>Method One</strong>: Comparative Convergence Method</p>
+<ul>
+<li>If $\sum U_n$ and $\sum V_n$ are positive series and $u_n&lt;v_n$:</li>
+<li>$$\sum_{n=1}^\infty\nu_n\text{ Convergence }\Rightarrow\sum_{n=1}^\infty u_n\text{ Convergence }$$</li>
+<li>$$\sum_{n=1}^\infty u_n\text{ Diverges }\Rightarrow\sum_{n=1}^\infty\nu_n\text{ Diverges }$$</li>
+<li>Summary:</li>
+<li class="list-indent-1">Large convergence, small convergence converges;</li>
+<li class="list-indent-1">Small things diverge, big ones definitely diverge;</li>
+<li class="list-indent-1">The reverse is not allowed;</li>
+<li>How to use:</li>
+<li class="list-indent-1">Make a preliminary judgment before use;</li>
+<li class="list-indent-1">If the preliminary judgment is that it is convergent, magnify it;</li>
+<li class="list-indent-1">If preliminarily judged to be divergent, it will be reduced;</li>
+<li>Common Grade One:</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty\frac1{n^p}\quad\text{converges for }p&gt;1\text{ and diverges for }p\leq1.$$</li>
+<li class="list-indent-1">Note:</li>
+<li class="list-indent-2"><code>P=1</code> <code>-&gt;</code> Harmonic Series: $\sum\frac{1}{n}\quad \text{ It will definitely diverge }$</li>
+<li class="list-indent-2">Why is <code>P=1</code> divergent?</li>
+<li class="list-indent-1">The Nature of Convergence:</li>
+<li class="list-indent-2">Whether a series converges does not depend on whether the summation term is infinite, nor even on the size of the sum, but on the speed at which the common term in the sum approaches zero;</li>
+<li class="list-indent-2">Velocity comparison cannot determine whether a series diverges or converges, but velocity changes bring about fundamental changes;</li>
+<li>Common Grade Two:</li>
+<li class="list-indent-1">$$\sum_{n=1}^\infty aq^n\left(a&gt;0,q&gt;0\right)\quad\text{converges when }q&lt;1\text{ and diverges when }q\geq1.$$</li>
+<li class="list-indent-1">Whether a geometric series converges depends solely on the value of its <code>q</code>, i.e., the common ratio determines its convergence and divergence;</li>
+</ul>
+<p><strong>Method Two</strong>: The limit form of the comparative method</p>
+<ul>
+<li>Set $$\lim_{n\to\infty}\frac{u_n}{v_n}=l\left(0\leq l\leq+\infty\right)$$</li>
+<li>If:</li>
+<li class="list-indent-1">1. $$\text{If }0&lt;l&lt;+\infty,\text{ then }\sum_{n=1}^{\infty}u_{n}\text{ and }\sum_{n=1}^{\infty}\nu_{n}\text{ either both converge or both diverge}.$$</li>
+<li class="list-indent-1">2. $$\text{If }l=0,\quad \sum_{n=1}^\infty\nu_n\text{ converges }\Rightarrow\sum_{n=1}^\infty u_n\text{ converges, and }\sum_{n=1}^\infty u_n\text{ diverges }\Rightarrow\sum_{n=1}^\infty\nu_n\text{ diverges}.$$</li>
+<li class="list-indent-1">3. $$\text{If }l=+\infty,\quad \sum_{n=1}^\infty\nu_n\text{ diverges }\Rightarrow\sum_{n=1}^\infty u_n\text{ diverges, and }\sum_{n=1}^\infty u_n\text{ converges }\Rightarrow\sum_{n=1}^\infty\nu_n\text{ converges}.$$</li>
+</ul>
+<p><strong>Method 3</strong>: Ratio Convergence Method</p>
+<ul>
+<li>If $\sum U_n$ is a positive series, then if $$\lim_{n\to\infty}\frac{u_{n+1}}{u_{n}}=\rho$$</li>
+<li>If $\rho &lt;1$, then $\sum U_n$ converges;</li>
+<li>If $\rho &gt;1$, then $\sum U_n$ diverges;</li>
+<li>If $\rho =1$, $\sum U_n$ cannot be determined, please use other methods;</li>
+</ul>
+<p><strong>Method 4</strong>: root test</p>
+<ul>
+<li>$$\text{ Let }\lim_{n\to\infty}\sqrt[n]{u_n}=\rho\text{ , then }\sum_{n=1}^\infty u_n\begin{cases}\text{ Convergence },&amp;\rho&lt;1,\\\\\text{ Diverges },&amp;\rho&gt;1,\\\\\text{ Not necessarily },&amp;\rho=1,\end{cases}$$</li>
+</ul>
+<p><strong>Method 5</strong>: Points Discrimination Method</p>
+<ul>
+<li>Let $f(x)$ decrease monotonically on $[1,  +\infty), $ is a non-negative continuous function $, $ and $a_{n}=f(n), $ then $\sum_{n=1}^{\infty}a_{n}$ has the same convergence or divergence as $\int_{1}^{+\infty}f(x)dx$</li>
+</ul>
+<p>-<strong>Example Problems</strong>:</p>
+<ul>
+<li class="list-indent-1">Proof:</li>
+<li class="list-indent-2">Series $\sum_{i=1}^\infty\frac1{n^p}$ Converges when $p&gt;1$ and diverges when $p\leq1$;</li>
+<li class="list-indent-1">Analysis</li>
+<li class="list-indent-2">Set $a_{n}=\frac{1}{n^{p}}=f(u),f(x)=\frac{1}{x^{p}}$</li>
+<li class="list-indent-2">So the score is obtained: $\int_{1}^{+\infty}\frac{dx}{x^{p}}$</li>
+</ul>
+<h3 id="section-5">9.1.3 alternating series</h3>
+<p><strong>Definition</strong>: Alternating series</p>
+<ul>
+<li>$$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</li>
+<li>$u_{1}-u_{2}+u_{3}-u_{4}+u_{5}-u_{6}+\cdots$；</li>
+<li>$-u_{1}+u_{2}-u_{3}+u_{4}-u_{5}+u_{6}\cdots$；</li>
+</ul>
+<p><strong>Note</strong></p>
+<ul>
+<li>If the number of terms is infinite,<strong>parentheses cannot be arbitrarily added, and</strong>order cannot be arbitrarily changed**;</li>
+<li>For example:</li>
+<li class="list-indent-1">$1-1+1-1+1-1+1-1+1-1+1-1+1......$</li>
+<li class="list-indent-1">If it is an odd term -&gt;, the result is 1;</li>
+<li class="list-indent-1">If the even term -&gt; is 0;</li>
+<li>If you add parentheses</li>
+<li class="list-indent-1">$(1-1)+(1-1)+(1-1)+(1-1)+......$</li>
+<li class="list-indent-1">Adding parentheses to the infinite term like this may cause problems because it is unclear whether it is an odd or even term;</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Leibnizprinciple</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> currently has an alternating series $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$, when:</blockquote>
+<blockquote>1) $u_{n}\geq u_{n+1}$: Monotonous subtraction</blockquote>
+<blockquote>2）$\lim_{n\to\infty}u_{n}=0$</blockquote>
+<blockquote>then $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$ series converges, <code>S</code> <code>&lt;=</code> $u_1$, and $|r_{n}|\leq u_{n+1}$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Note:</li>
+<li class="list-indent-1">Requirements:</li>
+<li class="list-indent-2">1) $u_{n}\geq u_{n+1}$: Monotonous subtraction</li>
+<li class="list-indent-2">2）$\lim_{n\to\infty}u_{n}=0$</li>
+<li class="list-indent-1">These two requirements are<strong>sufficient conditions</strong>for the convergence of an alternate series, meaning if either of these does not hold, the convergence of an alternate series is also possible;</li>
+<li>Premise:</li>
+<li class="list-indent-1">Before using Leibniz's theorem, it must be ensured that the current is an alternating series;</li>
+<li class="list-indent-1">The latter is smaller than the former;</li>
+<li class="list-indent-1">And $u_n$ approaches zero;</li>
+</ul>
+<h3 id="section-6">9.1.4 Arbitrary Term Series</h3>
+<p><strong>Concept of Arbitrary Term Series</strong></p>
+<ul>
+<li>Features:</li>
+<li class="list-indent-1">There are positive terms and negative terms;</li>
+<li class="list-indent-1">And both positive and negative terms must be infinite;</li>
+<li>Any term: $u_{1}+u_{2}+u_{3}+u_{4}+\cdots$, and the positive or negative of $u_n$ is unknown;</li>
+<li>Positive term series: $|u_{1}|+|u_{2}|+|u_{3}|+|u_{4}|+\cdots$, each term takes an absolute value;</li>
+<li class="list-indent-1">This is an absolute series;</li>
+</ul>
+<p><strong>How to Judge</strong></p>
+<p>-<strong>Principle</strong>: Convert new problems into old problems <code>-&gt;</code> convert a variant series into a positive term series <code>-&gt;</code> Add an absolute value to the general term <code>-&gt;</code> When this new positive term series converges, any term series also converges;</p>
+<p><strong>Definition</strong>: <span class="note-tag">Absoluteconvergenceandconditionalconvergence</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1. Absolute convergence: If the absolute value of $\sum|u_{n}|$ converges, it is called $\sum u_n$ convergence;</blockquote>
+<blockquote>2. Conditional convergence: If $u_n$ is convergent and $\sum|u_{n}|$ divergent, then $\sum u_n$ is called conditionally convergent;</blockquote>
+<blockquote>Details:</blockquote>
+<blockquote>(1) If $\sum^{\infty}_{n=1}=|a_n|$ converges, then $\sum^{\infty}_{n=1}=a_n$ must converge; in this case, $\sum^{\infty}_{n=1}a_n$ is called absolute convergence</blockquote>
+<blockquote>(2) If $\sum^{\infty}_{n=1}=a_n$ converges and $\sum^{\infty}_{n=1}=|a_n|$ diverges, then it is called conditional convergence $\sum^{\infty}_{n=1}a_n$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Absolute convergence</li>
+<li class="list-indent-1">$\sum|u_{n}|$ Convergence</li>
+<li class="list-indent-1">$\sum u_n$ Convergence</li>
+<li>Conditional convergence</li>
+<li class="list-indent-1">$\sum|u_{n}|$ divergence</li>
+<li class="list-indent-1">$\sum u_n$ Convergence</li>
+</ul>
+<p><strong>Examples</strong></p>
+<ul>
+<li>$\sum(-1)^{n-1}\frac{1}{n}$: Interleaved adjustment series -&gt; convergent;</li>
+<li>$\sum(-1)^{n}\frac{1}{n^{3}}$: It is absolutely convergent;</li>
+</ul>
+<p><strong>Key Conclusions</strong></p>
+<ul>
+<li>1. A series of absolute convergence must converge <code>-&gt;</code> that is: $\sum^{\infty}_{n=1}|a_n|$ converges <code>-&gt;</code> $\sum^{\infty}_{n=1}a_n$ converges;</li>
+<li>2. A series formed by all positive (or negative) terms of conditionally convergent series must diverge <code>-&gt;</code> $$\sum_{n=1}^\infty u_n\text{ Conditional convergence }\Rightarrow\sum_{n=1}^\infty\frac{u_n+|u_n|}2\text{ and }\sum_{n=1}^\infty\frac{u_n-|u_n|}2\text{ Diverges }.$$</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Absoluteconvergenceofanytermseries</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if each term is summed with absolute value $\sum_{n=1}^{+\infty}|u_{n}|$, it converges, then its original series $\sum_{n=1}^{+\infty}u_{n}$ is also convergent;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Simpler understanding:</li>
+<li class="list-indent-1">If all numbers are positive (plus absolute value), it should converge even more;</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Judgmentfordivergenceandconvergenceofanytermseries</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ is an arbitrary series and $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
+<blockquote>1) When $l$ &lt; 1, $\sum u_n$ converges absolutely;</blockquote>
+<blockquote>2) When $L&gt;1(+\infty)$, $\sum u_n$ diverges;</blockquote>
+<blockquote>3) When L = 1, it cannot be determined;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>If L&gt;1, then the original series is divergent;</li>
+</ul>
+<h2 id="section-7">9.2 Power Series</h2>
+<h3 id="section-8">9.2.1 Basic Concepts of Power Series</h3>
+<p><strong>Sequence</strong>: Each term is only related to n</p>
+<ul>
+<li>Sequence: $u_{1},u_{2},\cdots,u_{n}$</li>
+<li>Infinite series: $u_{1}+u_{2}+\cdots+u_{n}+\cdots$</li>
+</ul>
+<p><strong>Function Sequences</strong>: Each term is related to n and $x$</p>
+<ul>
+<li>Assume x lies on interval $I$;</li>
+<li>Function sequence: $u_{1}(x), u_{2}(x), u_{n}(x),\cdots$</li>
+<li>Infinite series of function terms: $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$</li>
+</ul>
+<p><strong>Definition</strong>: <span class="note-tag">Powerseries</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>Common form: $$\sum_{n=0}^\infty a_nx^n=a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots $$</blockquote>
+<blockquote>General form: $$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots $$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">A power series contains nonnegative integer powers of $x$: $a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots$.</li>
+<li class="list-indent-1">Power series are actually the simplest type of function term series; $x^{n}$ is a function of x, $a_n$ is a sequence of numbers;</li>
+<li class="list-indent-1">$a_0,a_1,a_2...a_n$ called the coefficient;</li>
+<li>Supplement:</li>
+<li class="list-indent-1">General study of common forms, because general forms can be $x-x_0=t$ into common forms;</li>
+</ul>
+<p><strong>Definition</strong>: <span class="note-tag">Convergencepointanddivergencepoint</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote>1. If $x_{0}\in I$ and $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ converges, $x_o$ is called the convergence point; if it is an interval, it is called the convergence domain;</blockquote>
+<blockquote>2. If $x_{0}\in I$ and $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ diverges, $x_o$ is called the divergence point; if it is an interval, it is called the divergence domain;</blockquote>
+<blockquote>3. $S\left (x\right)=u\left (x\right)+u_{2\left (x\right)}+\cdots+u_{n}\left (x\right)+\cdots$ Called the sum function, $\lim_{n\to\infty}S_n(x)=S\left(x\right)$;</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Generally, the problem is to solve two questions: What is the convergence domain? What is the sum function?</li>
+</ul>
+<p><strong>Examples</strong></p>
+<ul>
+<li>$1+x+x^{2}+x^{3}+\cdots+x^{n}+\cdots$</li>
+<li>At this point:</li>
+<li class="list-indent-1">When $|x|&lt;1$, the interval of convergence is $(-1,1)$ and the sum is $\frac{1}{1-x}$.</li>
+<li class="list-indent-1">When $|x|\geq1$, the series diverges; the divergence set is $(-\infty,-1]\cup[1,+\infty)$.</li>
+</ul>
+<h3 id="section-9">9.2.2 Power Series Expansion</h3>
+<p><strong>Theorem</strong>: <span class="note-tag">Abelstheorem</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>If $\sum_{n=0}^{\infty}a_nx_0^n$ converges, then $\sum_{n=0}^{\infty}a_nx^n$ converges absolutely for $|x|&lt;|x_0|$.</blockquote>
+<blockquote>If $\sum_{n=0}^{\infty}a_nx_0^n$ diverges, then $\sum_{n=0}^{\infty}a_nx^n$ diverges for $|x|&gt;|x_0|$.</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Function of the theorem:</li>
+<li class="list-indent-1">Reveals the structure of the convergent and divergent fields of current power series <code>-&gt;</code> Converts the problem of finding the convergent domain into the problem of finding the general length of the entire interval <code>-&gt;</code> that is, finding the radius of convergence <code>R</code>;</li>
+<li>Absolute Convergence:</li>
+<li class="list-indent-1">At $|x|&lt;|x_0|$, all points in this interval also converge <code>-&gt;</code> and points closer to the origin converge;</li>
+<li>Divergence:</li>
+<li class="list-indent-1">For $|x|&gt;|x_0|$, points farther from the origin are divergence points.</li>
+<li>Summary:</li>
+<li class="list-indent-1">1. The boundary point between the convergence point and the divergence point <code>-&gt;</code> is the<strong>radius of convergence R</strong></li>
+<li class="list-indent-1">2. The series $\sum_{n=0}^{\infty}a_n(x+2)^n$ and $\sum_{n=0}^{\infty}a_n(x-3)^n$ have the same radius of convergence when their coefficients $a_n$ are the same.</li>
+<li>Note:</li>
+<li class="list-indent-1">Convergence intervals do not require endpoint attention;</li>
+<li class="list-indent-1">The convergence domain needs to focus on endpoints;</li>
+</ul>
+<p><strong>Supplement</strong>: Convergence intervals and convergence domains</p>
+<ul>
+<li>Convergence interval:</li>
+<li class="list-indent-1">$(-R,+R)$</li>
+<li>Convergence domain:</li>
+<li class="list-indent-1">Including endpoints: $\pm R$</li>
+<li class="list-indent-1">After determining the values of the two endpoints separately, the interval is obtained;</li>
+</ul>
+<p><strong>Supplement</strong>: Regarding the convergence domain when $x$ is not equal to $x_0$</p>
+<ul>
+<li>Premise:</li>
+<li class="list-indent-1">The series $\sum_{n=0}^{\infty}a_n(x+2)^n$ and $\sum_{n=0}^{\infty}a_n(x-3)^n$ have the same radius of convergence $R$ because they have the same coefficients.</li>
+<li>Concept:</li>
+<li class="list-indent-1">Convergence interval:</li>
+<li class="list-indent-2">For $\sum_{n=0}^{\infty}a_n(x+2)^n$, the center is $x_0=-2$. If $R=2$, the open interval of convergence is:</li>
+<li class="list-indent-2">$$\text{Interval of convergence}:\ (x_0-R,x_0+R)=(-2-2,-2+2)=(-4,0).$$</li>
+<li class="list-indent-1">Endpoint Convergence Invariance:</li>
+<li class="list-indent-2">Corresponding endpoints have the same convergence behavior after translating the center.</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Theconvergenceofpowerseries</span></p>
+<blockquote>A power series $\sum_{n=0}^{\infty}a_nx^n$ has exactly one of the following three convergence behaviors:</blockquote>
+<blockquote>(1) Convergence for any x belonging to $(-\infty ,+\infty)$;</blockquote>
+<blockquote>(2) Converges only at $x=0$;</blockquote>
+<blockquote>(3) There exists a positive number <code>R</code> When $|x| &lt; R$ is absolute convergence, when $|x|&gt;R$ diverges;</blockquote>
+<blockquote>Note: if $\sum_{n=0}^{\infty}a_nx^n$ converges conditionally at $x=x_0$, then $x_0$ is an endpoint of the interval of convergence $(-R,R)$.</blockquote>
+<p><strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\text{ If }\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho,\,\text{ then } R = \frac{1}{{\rho}}$$</blockquote>
+<blockquote>That is: there are three situations at this time: $$R=\begin{cases}\frac{1}{\rho},&amp;\rho\neq0\\+\infty,&amp;\rho=0\\0,&amp;\rho=+\infty\end{cases}$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Note:</li>
+<li>1. This theorem can only be applied in one direction;</li>
+<li>2. The convergence interval is endpoint-independent, i.e., $(-R,R)$</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span>: Based on radicals</p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\text{ If }\lim_{n\to\infty}\sqrt[n]{|a_n|}=\rho,\text{ then }\quad R=\frac1\rho $$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Derived using the root test.</li>
+</ul>
+<p><strong>Properties</strong>: Rational operations on power series</p>
+<ul>
+<li>Premise:</li>
+<li class="list-indent-1">Set</li>
+<li class="list-indent-1">1. The radius of convergence of $\sum_n^{\infty}a_nx^n$ is $R_1$</li>
+<li class="list-indent-1">2. The radius of convergence of $\sum_n^{\infty}b_nx^n$ is $R_2$</li>
+<li class="list-indent-1">Let $R=\min\{R_1,R_2\}$, then when $x\in(-R,R)$:</li>
+<li>Operation Properties:</li>
+<li class="list-indent-1">(1) Addition: $$\sum_{n=0}^\infty a_nx^n\pm\sum_{n=0}^\infty b_nx^n=\sum_{n=0}^\infty(a_n\pm b_n)x^n$$</li>
+<li class="list-indent-1">(2) Multiplication: $$(\sum_{n=0}^\infty a_nx^n)\cdot(\sum_{n=0}^\infty b_nx^n)=\sum_{n=0}^\infty c_nx^n$$</li>
+<li class="list-indent-2">The coefficients satisfy $c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$.</li>
+<li class="list-indent-1">(3) Division: $$\frac{\sum_{n=0}^\infty a_nx^n}{\sum_{n=0}^\infty b_nx^n}=\sum_{n=0}^\infty c_nx^n$$</li>
+</ul>
+<p><strong>Properties</strong>: The analytical properties of power series</p>
+<ul>
+<li>Premise:</li>
+<li class="list-indent-1">If the radius of convergence of $\sum_{n=0}^{+\infty}a_{n}x^{n}$ is <code>R</code> and the sum is $S(x)$, then:</li>
+<li>Analytical Nature:</li>
+<li class="list-indent-1">(1) Continuity:</li>
+<li class="list-indent-2">$S(x)$ $I$ is continuous on its convergence domain;</li>
+<li class="list-indent-1">(2) differentiability:</li>
+<li class="list-indent-2">$S(x)$ is differentiable on $(-R,R)$ and can be differentiated term by term, with the radius unchanged, that is:</li>
+<li class="list-indent-3">$$S^{\prime}(x)=\left(\sum_{n=0}^\infty a_nx^n\right)^{\prime}=\sum_{n=0}^\infty(a_nx^n)^{\prime}=\sum_{n=0}^\infty na_nx^{n-1}$$</li>
+<li class="list-indent-2">Note: Term-by-term differentiation leaves the radius of convergence equal to $R$ and introduces a factor of $n$ in each term.</li>
+<li class="list-indent-1">(3) Integrability:</li>
+<li class="list-indent-2">If the sum function $S(x)$ of $\sum_{n=0}^{\pm\infty}a_{n}x^{n}$ is integrable on $I$ and can be integrated by term:</li>
+<li class="list-indent-3">$$\int_{0}^{x}S(x)\operatorname{d}x=\int_{0}^{x}\sum_{n=0}^{\infty}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\int_{0}^{x}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\frac{1}{n+1}a_{n}x^{n+1}$$</li>
+<li class="list-indent-2">Note: The power series after integrating each term has the same radius of convergence as the original power series;</li>
+</ul>
+<p><strong>Problem Type</strong>: Find the radius of convergence</p>
+<ul>
+<li>Two methods:</li>
+<li class="list-indent-1">Method 1: Use the radius of convergence determination method</li>
+<li class="list-indent-1">Method 2: use the root test to find the radius of convergence.</li>
+<li>Note: When items are missing</li>
+<li class="list-indent-1">Missing item: $x^{2n-1}$, not $x^n$</li>
+<li class="list-indent-1">When missing terms, you cannot directly use the formula. If it is $x^{2n+b}$, then the <code>R</code> calculated by the root-value method must be taken to the $\frac{1}{2}$ power;</li>
+</ul>
+<p><strong>Problem Type</strong>: Find the convergence interval</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">To find the convergence interval, first find the radius of convergence;</li>
+</ul>
+<p><strong>Question Type</strong>: Find the convergence of endpoints</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">Substitute each endpoint into the series to obtain its general term. Then apply the appropriate positive-term, alternating-series, or general-series convergence test.</li>
+</ul>
+<p><strong>Question Type</strong>: Judge the convergence of any point</p>
+<ul>
+<li>Method:</li>
+<li class="list-indent-1">First, find the radius of convergence of the current power series (often using Abel's theorem), then, based on the convergence interval, determine whether any point lies within the interval to obtain convergence;</li>
+</ul>
+<h3 id="section-10">9.2.3 Expanding Functions into Power Series</h3>
+<p><strong>Why Expansion into Power Series Is Necessary</strong></p>
+<ul>
+<li>Cause:</li>
+<li class="list-indent-1">Some functions have no elementary antiderivative; for example, $e^{x^2}$ cannot be integrated in elementary terms.</li>
+<li class="list-indent-1">At this point, consider expanding it into a power series, since each term of a power series is simple and can be processed;</li>
+<li>Example: For instance, we need to find what $e^{0.2}$ equals</li>
+<li class="list-indent-1">Directly calculating is very difficult;</li>
+<li class="list-indent-1">But using the expanded power series, the calculation is very simple: $e^{x}=1+x+\frac{x^{2}}{2!}+\frac{x^{3}}{3!}+\cdots+\frac{x^{n}}{n!}+$</li>
+<li class="list-indent-1">The subsequent terms can be approximated; generally, three or four terms are sufficient;</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Thepowerseriesexpansionofthefunction</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>If the function $f(x)$ is on interval $(x_0-R,x_0+R)$ and can be expanded to a power series of $x-x_0$ $f(x)=\sum_{n=0}^{+\infty} a_n(x-x_0)^n$ then its expansion is unique;</blockquote>
+<blockquote>and call it the $f(x)$ at $x=x_0$ the<strong>Taylor series</strong>:$$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>If $\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$ can converge to $f(x)$, then it is said to be expandable;</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">ConvergenceofTaylorseries</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote>Let $f(x)$ be arbitrarily differentiable at $x=x_0$, then:</blockquote>
+<blockquote>$\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$ converges on $(x_0-R,  x_0+R)$ to $f(x)\Leftrightarrow\lim_{n\to\infty} R_n(x)=0.$</blockquote>
+<blockquote>Here $R_n(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$ is the Lagrange remainder in Taylor's formula at $x_0$: $f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)$.</blockquote>
+<blockquote>Therefore, when $R_n(x)$ <code>-&gt;</code> <code>0</code>, $f(x)$ tends toward the Taylor series: $\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$, that is, converges to a unique series;</blockquote>
+<p><strong>Supplement</strong>: Several commonly used expansion forms</p>
+<ul>
+<li>Direct Expansion Method:</li>
+<li class="list-indent-1">（1）$$\frac1{1-x}=1+x+x^2+\cdots+x^n+\cdots =\sum^{\infty}\limits_{n=0}x^n\quad (-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">（2）$$\frac1{1+x}=\sum_{n=0}^\infty(-1)^nx^n,|x|&lt;1$$</li>
+<li class="list-indent-1">（3）$$\sin x=x-\frac{x^3}{3!}+\cdots+\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1} \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-2">Note: The sum index starts from 0, <code>(-1)</code> is the exponent <code>n</code>;</li>
+<li class="list-indent-1">（4） $$e^x=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots \quad (-\infty&lt;x&lt;+\infty)=\sum^{\infty}\limits_{n=0}\frac{x^n}{n！}$$</li>
+<li>Indirect Expansion Method:</li>
+<li class="list-indent-1">(1) The expansion of <code>cosx</code> is derived from the derivative of the expansion of <code>sinx</code>: $$\cos x=1-\frac{x^2}{2!}+\cdots+\frac{(-1)^{n-1}x^{2n}}{(2n)!}+\cdots=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}   \quad(-\infty&lt;x&lt;+\infty)$$</li>
+<li class="list-indent-1">(2) The expansion of <code>In(1+x)</code>: $$\ln(1+x)=x-\frac{x^2}2+\cdots+\frac{(-1)^{n+1}x^n}n+\cdots=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^{n}\quad(-1&lt;x\leq1)$$</li>
+<li class="list-indent-1">(3) <code> the expansion of the α power </code> of (1+X), which is also indirectly obtained: $$\left(1+x\right)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n+\cdots \quad(-1&lt;x&lt;1)$$</li>
+<li class="list-indent-1">(4) $$\sum_{n=1}^{\infty}\frac{x^{n}}n=-\ln(1-x)\quad(-1\leq x&lt;1)$$</li>
+<li>Note:</li>
+<li class="list-indent-1">About subscripts: except for <code>In(1+x)</code>, which starts from <code>n=1</code>, all others start from <code>n=0</code>;</li>
+<li class="list-indent-1">About $(-1)^{n}$ and $(-1)^{n+1}$: only <code>In(1+x)</code> is <code>n+1</code>, the rest are from <code>n</code>;</li>
+<li class="list-indent-1">About the factorial: except for <code>In(1+x)</code>, where the denominator is non-factorial, all others with denominators are also factorials, and the factorial part matches the ideographic part;</li>
+<li class="list-indent-1">Regarding convergent fields: trigonometric functions and $e^{x}$ are from negative infinity to positive infinity, others are <code>-1</code> to <code>+1</code>, and <code>In(1+x)</code> is less than or equal to <code>+1</code>;</li>
+</ul>
+<h2 id="section-11">9.3 Fourier Series</h2>
+<p><strong>Definition</strong>: <span class="note-tag">Fouriercoefficient</span></p>
+<blockquote><span style="color:#ccc1d9"> description: </span> $$a_{n}=\frac1\pi\int_{-\pi}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac1\pi\int_{-\pi}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>The above formula can be used to find the coefficients of a given n expression;</li>
+</ul>
+<p><strong>Definition</strong>: <span class="note-tag">Fourierseries</span></p>
+<blockquote><span style="color:#ccc1d9"> Description: </span> <code>f</code> Fourier series of $$f(x)\sim\frac{a_0}2+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$$</blockquote>
+<p><strong>Explanation</strong></p>
+<ul>
+<li>Concept:</li>
+<li class="list-indent-1">Whether the above expression can be expanded depends on whether the <code>~</code> in the above expression can be written as an equal sign;</li>
+<li class="list-indent-1">Whether it can be expanded requires the use of the convergence theorem;</li>
+<li>Explanation:</li>
+<li class="list-indent-1"><code>~</code></li>
+<li class="list-indent-2">Means that, except for certain finite points (discontinuities, endpoints), all other points satisfy the properties specified in the formula;</li>
+<li class="list-indent-1">$\frac{a_0}2$</li>
+<li class="list-indent-2">In the fluctuation, represents the DC component;</li>
+<li class="list-indent-1">$(a_n\cos nx+b_n\sin nx)$：</li>
+<li class="list-indent-2">In fluctuation, represents the AC component;</li>
+<li class="list-indent-2">Note: The expansion of even functions only has cosine terms, while those of odd functions only have sine terms;</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="note-tag">Dirichlettheorem</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> Suppose $f$ is piecewise smooth on $[-\pi,\pi]$, with only finitely many discontinuities of the first kind and finitely many extrema. Then its Fourier series converges at every point, with:</blockquote>
+<blockquote>$$1)\quad S(x)=f(x)\qquad\text{at every continuity point of }f.$$</blockquote>
+<blockquote>$$2)\quad S(x)=\frac{f(x^-)+f(x^+)}2\qquad\text{at every discontinuity point of }f.$$</blockquote>
+<blockquote>$$3)\quad S(x)=\frac{f((-\pi)^+)+f(\pi^-)}2\quad\text{ when }x=\pm\pi.$$</blockquote>
+<p><strong>Concept Introduction</strong>: Expansion of a function with period $2\pi$</p>
+<ul>
+<li>(1) Expand on $[-\pi,+\pi]$: Expand generally</li>
+<li class="list-indent-1">$$\begin{aligned}a_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx&amp;&amp;(n=0,1,2,\ldots),\\b_n&amp;=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx&amp;&amp;(n=1,2,\ldots).\end{aligned}$$</li>
+<li>(2) Expansion on $[-\pi,+\pi]$: Expansion of parity functions</li>
+<li class="list-indent-1">1. $f(x)$ is an odd function:</li>
+<li class="list-indent-2">$$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-2">Explanation: Because $cosx$ is an even function and is in $a_n$, when $f(x)$ is an odd function, <code> odd function * even function = odd function </code>, so $a_n$ becomes 0 and $b_n$ becomes doubled. The same applies in other cases;</li>
+<li class="list-indent-1">2. $f(x)$ is an even function:</li>
+<li class="list-indent-2">$$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$</li>
+<li>(3) Expand on $[0,+\pi]$: Expand to be a sine or cosine</li>
+<li class="list-indent-1">Analysis:</li>
+<li class="list-indent-2">This is an expansion over half a cycle, so<strong>extension extension</strong>needs to be done during analysis;</li>
+<li class="list-indent-2">Odd function expansion: only the sine term. Because if only $[0,+\pi]$ is given, then if an odd function expansion is needed on $[-\pi,+\pi]$, only the sine term <code>-&gt;</code><strong>odd extension</strong>;</li>
+<li class="list-indent-2">When expanding to sine levels, theoretically an odd extension is required, but in practice, the expansion of odd functions can be used directly;</li>
+<li class="list-indent-2">Analogy even extension extension;</li>
+<li class="list-indent-1">1. Expanded to sine:</li>
+<li class="list-indent-2">$$a_{n}=0\quad n=0,1,2\cdots\quad\quad\\b_{n}=\frac2\pi\int_{0}^xf(x)\sin nx\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-1">2. Expanded to cosine:</li>
+<li class="list-indent-2">$$a_{n}=\frac2\pi\int_{0}^xf(x)\cos nx\mathrm{d}x\quad n=0,1,2\cdots\quad\quad\\b_{n}=0\quad\quad n=1,2\cdots $$</li>
+</ul>
+<p><strong>Concept Introduction</strong>: Expansion of a function with period $2l$</p>
+<ul>
+<li>(1) Expand on $[-l,+l]$</li>
+<li class="list-indent-1">$$a_n=\frac1l\int_{-l}^lf(x)\cos\frac{n\pi x}l\mathrm{d}x\quad\quad n=0,1,2\cdots\quad\quad \\b_n=\frac1l\int_{-l}^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li>(2) Expand on $[-l,+l]$: parity functions</li>
+<li class="list-indent-1">$$\text{i)}f(x)\text{ is an odd function }.\quad\quad \\a_n=0,n=0,1,2\cdots\quad\quad \\b_n=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x\quad\quad n=1,2\cdots $$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ii)}f(x)\text{ is an even function }.\\&amp;{a_n}=\frac2l\int_0^lf(x)\cos\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li>(3) Expand on $[0,l]$: Expand to be a sine or cosine</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ i) Expand to a sine }\\&amp;a_{n}=0,&amp;&amp;n=0,1,2\cdots\\&amp;b_{n}=\frac2l\int_0^lf(x)\sin\frac{n\pi x}l\mathrm{d}x&amp;&amp;n=1,2\cdots\end{aligned}$$</li>
+<li class="list-indent-1">$$\begin{aligned}&amp;\text{ ii) Expand to a cosine. }\\&amp;a_{n}=\frac{2}{l}\int_{0}^{l}f(x)\cos\frac{n\pi x}{l}\mathrm{d}x&amp;n=0,1,2\cdots\\&amp;b_{n}=0&amp;n=1,2\cdots\end{aligned}$$</li>
+</ul><nav class="article-pagination" aria-label="Adjacent content">
+    <a href="../math-007-chapter-08/index.html"><span>← Previous item</span><strong>Chapter 8: Multiple Integrals — Advanced Mathematics - Collection of Formulas</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-10/index.html"><span>Next item →</span><strong>Chapter 10: Vector Algebra and Spatial Geometry — Advanced Mathematics - Collection of Formulas</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

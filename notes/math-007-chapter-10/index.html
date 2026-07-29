@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V2VWFFLH85');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 10：向量代数与空间几何 — 高等数学 - 公式合集 | Jiayu Lab</title>
+  <meta name="description" content="高等数学 - 公式合集中的Chapter 10：向量代数与空间几何，拆分为独立章节以便查阅并减少单页图片负载。">
+
+  <meta name="keywords" content="考研数学, 数学总结, 公式合集">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Chapter 10：向量代数与空间几何 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta property="og:description" content="高等数学 - 公式合集中的Chapter 10：向量代数与空间几何，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-007-chapter-10/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapter 10：向量代数与空间几何 — 高等数学 - 公式合集 | Jiayu Lab">
+  <meta name="twitter:description" content="高等数学 - 公式合集中的Chapter 10：向量代数与空间几何，拆分为独立章节以便查阅并减少单页图片负载。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/math-007-chapter-10/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-007-chapter-10/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-007-chapter-10/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-007-chapter-10/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/math-007-chapter-10/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Chapter 10：向量代数与空间几何 — 高等数学 - 公式合集</h1><p class="article-lead">高等数学 - 公式合集中的Chapter 10：向量代数与空间几何，拆分为独立章节以便查阅并减少单页图片负载。</p><div class="article-meta"><span>数学</span><span>约 7 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>数学总结</span><span>公式合集</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">Chapter 10：向量代数与空间几何</a><a href="#section-2">10.1 向量代数</a><a href="#section-6">10.2 空间平面与直线 </a><a href="#section-10">10.3 曲面与空间曲线</a></nav></details><div class="prose"><h2 id="section-1">Chapter 10：向量代数与空间几何</h2>
+<h2 id="section-2">10.1 向量代数</h2>
+<h3 id="section-3">10.1.1 数量积</h3>
+<p><strong>定理</strong>： <span class="note-tag">向量代数的数量积</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote>$$1\text{)几何表示: }\mathbf{a}\cdot\mathbf{b}=\mid\mathbf{a}\mid\mid\mathbf{b}\mid\cos\alpha $$</blockquote>
+<blockquote>$$2\text{)代数表示:}\quad\mathbf{a}\cdot\mathbf{b}=\mathbf{a}_xb_x+\mathbf{a}_yb_y+\mathbf{a}_zb_z$$</blockquote>
+<blockquote>$$3\text{)运算规律:}\quad 交换律：\mathbf{a}\cdot\mathbf{b}=\mathbf{b}\cdot\mathbf{a} \quad \text{分配律: }\mathbf{a\cdot(b+c)=a\cdot b+a\cdot c}$$</blockquote>
+<blockquote>$$4\text{)几何应用:}\quad 求模：|\mathbf{a}|=\sqrt{\mathbf{a}\cdot\mathbf{a}} \quad \text{求夹角: }\cos\alpha=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\quad \text{判定两向量垂直:}\mathbf{a\perp b\Leftrightarrow a\cdot b=0}$$</blockquote>
+<h3 id="section-4">10.1.2 向量积</h3>
+<p><strong>定理</strong>： <span class="note-tag">向量代数的向量积</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote>$1. \text{几何表示:}\quad\mathbf{a}\times\mathbf{b}\text{ 是一向量}.\quad\text{模}:\mid\mathbf{a}\times\mathbf{b}\mid=\mid\mathbf{a}\mid\mid\mathbf{b}\mid\sin\alpha$</blockquote>
+<blockquote>$2. \text{代数表示:}\quad{\mathbf{a}\times\mathbf{b}}=\begin{vmatrix}\mathbf{i}&amp;\mathbf{j}&amp;\mathbf{k}\\a_x&amp;a_y&amp;a_z\\b_x&amp;b_y&amp;b_z\end{vmatrix}$</blockquote>
+<blockquote>$3. i) a\times b= - ( b\times a) \quad ii)分配律：a\times(b+c)=a\times b+a\times c$</blockquote>
+<blockquote>$4. 运算规律：i)求同时垂直于 a 和 b 的向量: a×b\quad ii)求以 a 和 b 为邻边的平行四边形面积:S=|a×b|\quad iii)判断两向量平行：\mathbf{a//b}\Leftrightarrow\mathbf{a\times b}=0$</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>几何表示 <code>-&gt;</code> 右手法则 <code>-&gt;</code> 垂直于 $a,b$ 向量的一个直线；</li>
+<li>注意：</li>
+<li class="list-indent-1">数量积满足交换律，向量积不满足交换律； </li>
+</ul>
+<h3 id="section-5">10.1.3 混合积</h3>
+<p><strong>定理</strong>： <span class="note-tag">向量代数的混合积</span></p>
+<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
+<blockquote>基本表述：$\left[ abc \right] = (a \times b) \cdot c$</blockquote>
+<blockquote>定义： $$\ a = a_xi + a_yj + a_zk \\ b = b_xi + b_yj + b_zk \\ c = c_xi + c_yj + c_zk$$</blockquote>
+<blockquote>性质：</blockquote>
+<blockquote>（1）$$(a\times b)\cdot c = a\cdot(b\times c) = b \cdot (c\times a)$$</blockquote>
+<blockquote>$$轮换对称性：(abc)=(bca)=(cab)\quad 交换变号：(\mathbf{abc})=-(\mathbf{acb})$$</blockquote>
+<blockquote>（2）$$\begin{aligned}(a\times b)\cdot c=-(b\times a)\cdot c\\(a\times b)\cdot c=-(c\times b)\cdot a\\(a\times b)\cdot c=-(a\times c)\cdot b\end{aligned}$$</blockquote>
+<blockquote>（3）$$a\text{、}b\text{、}c\text{三向量共面}\Leftrightarrow[abc]=0$$</blockquote>
+<blockquote>几何意义：</blockquote>
+<blockquote>1. 向量的混合积 $[abc]=(a\times b)\cdot c$ 的绝对值在数值上等于以向量 a、b、c 为棱的平行六面体的体积</blockquote>
+<blockquote>2. $V_\text{平行六面体}=|\mathrm{(abc)}|$</blockquote>
+<h2 id="section-6">10.2 空间平面与直线 </h2>
+<h3 id="section-7">10.2.1 平面方程</h3>
+<p><strong>定义</strong>： <span class="note-tag">平面方程</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote>$1\text{)一般式:}\quad Ax+By+Cz+D=0.\quad\mathbf{n}=\{A,B,C\}$</blockquote>
+<blockquote>$2\text{)点法式:}\quad A(x-x_0)+B(y-y_0)+C(z-z_0)=0$</blockquote>
+<blockquote>$3\text{)截距式:}\quad\frac xa+\frac yb+\frac zc=1$</blockquote>
+<h3 id="section-8">10.2.2 直线方程</h3>
+<p><strong>定义</strong>： <span class="note-tag">直线方程</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote>$$1)\text{一般式:}\quad\begin{cases}A_1x+B_1y+C_1z+D_1=0\\A_2x+B_2y+C_2z+D_2=0\end{cases}$$</blockquote>
+<blockquote>$$2)\text{对称式:}\quad\frac{x-x_0}l=\frac{y-y_0}m=\frac{z-z_0}n$$</blockquote>
+<blockquote>$$3)参数式：x=x_0+lt,y=y_0+mt,z=z_0+nt.$$</blockquote>
+<h3 id="section-9">10.2.3 距离关系</h3>
+<p><strong>核心</strong>：平面 <code>-&gt;</code> 看法线向量；直线 <code>-&gt;</code> 看方向向量</p>
+<p><strong>概念</strong>：点到面的距离</p>
+<ul>
+<li>点 $(x_0,y_0,z_0)$ 到平面 $Ax+By+Cy+D=0$ 的距离</li>
+<li>$$d=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$$</li>
+</ul>
+<p><strong>概念</strong>：点到直线距离 </p>
+<ul>
+<li>$\text{点 }({x_0,y_0,z_0})\text{ 到直线 }\frac{x-x_1}l=\frac{y-y_1}m=\frac{z-z_1}n$</li>
+<li>$$d=\frac{|\{x_1-x_0,y_1-y_0,z_1-z_0\}\times\{l,m,n\}|}{\sqrt{l^2+m^2+n^2}\quad J}$$</li>
+</ul>
+<h2 id="section-10">10.3 曲面与空间曲线</h2>
+<h3 id="section-11">10.3.1 基本概念</h3>
+<p><strong>定义</strong>： <span class="note-tag">空间曲面</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$F(x,y,z)=0\quad\text{或 }z=f(x,y)$$</blockquote>
+<p><strong>举例</strong>：$x+y+z=1$</p>
+<ul>
+<li>图示：</li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/38e5fe90a9d6-Pasted-image-20240523230111.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：10.3.1 基本概念"><picture><source srcset="/assets/note-previews/38e5fe90a9d6-Pasted-image-20240523230111.webp" type="image/webp"><img class="note-image" src="/assets/notes/38e5fe90a9d6-Pasted-image-20240523230111.png" alt="学习笔记插图：10.3.1 基本概念" width="854" height="820" loading="lazy" decoding="async"></picture></a></li>
+</ul>
+<p><strong>定义</strong>： <span class="note-tag">空间曲线</span></p>
+<blockquote><span style="color:#ccc1d9">描述：</span> $$\text{i)参数式:}\quad\begin{cases}x=x(t)\\y=y(t)\\z=z(t)\end{cases}\quad\text{ii)一般式:}\begin{cases}F(x,y,z)=0\\G(x,y,z)=0\end{cases}$$</blockquote>
+<p><strong>补充</strong>：为什么空间曲面只要一个方程确定，而空间曲线要两个</p>
+<ul>
+<li>核心：</li>
+<li class="list-indent-1">一个方程减少一个自由度；</li>
+<li class="list-indent-1">曲面有两个自由度，而曲线只有一个；</li>
+<li class="list-indent-1">因此空间曲线的一般式是关于 <code>xyz</code> 的两个方程；</li>
+</ul>
+<h3 id="section-12">10.3.2 常见曲面</h3>
+<p><strong>曲面一</strong>：<code>旋转面</code> <code>-&gt;</code> 一条平面曲线绕平面上一条直线旋转</p>
+<ul>
+<li>设 $L$ 是 $yoz$ 平面上一条曲线，其方程是：$\begin{cases}f({y},z)=0\\x=0\end{cases}$</li>
+<li>（1）$L\text{ 绕 }(y)\text{轴旋转所得旋转面方程为}\quad f(y,\pm\sqrt{x^2+z^2})=0.$</li>
+<li>（2）$L\text{ 绕 }z\text{ 轴旋转所得旋转面方程为}\quad f(\pm\sqrt{x^2+y^2},z)=0.$</li>
+</ul>
+<p><strong>曲面二</strong>：柱面 <code>-&gt;</code> 平行于定直线并沿定曲线移动的直线 L 形成的轨迹;</p>
+<ul>
+<li>$准线为\Gamma:\begin{cases}f(x,y)=0\\z=0\end{cases}，母线平行于z轴的柱面方程为f(x,y)=0$ </li>
+<li>$准线为\Gamma:\begin{cases}F(x,y,z)=0\\G(x,y,z)=0&amp;\end{cases}，母线平行于z轴的柱面方程为H(x,y)=0$</li>
+<li>图示：锥面 $z=\sqrt{x^{2}+y^{2}}$  在柱面 $x^{2}+y^{2}\le2x$ 的区域上：</li>
+<li class="list-indent-1">锥面：</li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/9eba24051fca-Pasted-image-20240523231234.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：10.3.2 常见曲面"><picture><source srcset="/assets/note-previews/9eba24051fca-Pasted-image-20240523231234.webp" type="image/webp"><img class="note-image" src="/assets/notes/9eba24051fca-Pasted-image-20240523231234.png" alt="学习笔记插图：10.3.2 常见曲面" width="979" height="949" loading="lazy" decoding="async"></picture></a></li>
+<li class="list-indent-1">柱面：</li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/0c8a093bcf8c-Pasted-image-20240523231044.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：10.3.2 常见曲面"><picture><source srcset="/assets/note-previews/0c8a093bcf8c-Pasted-image-20240523231044.webp" type="image/webp"><img class="note-image" src="/assets/notes/0c8a093bcf8c-Pasted-image-20240523231044.png" alt="学习笔记插图：10.3.2 常见曲面" width="641" height="645" loading="lazy" decoding="async"></picture></a></li>
+<li class="list-indent-1">三维：</li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/55293b40d098-Pasted-image-20240523231108.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：10.3.2 常见曲面"><picture><source srcset="/assets/note-previews/55293b40d098-Pasted-image-20240523231108.webp" type="image/webp"><img class="note-image" src="/assets/notes/55293b40d098-Pasted-image-20240523231108.png" alt="学习笔记插图：10.3.2 常见曲面" width="964" height="907" loading="lazy" decoding="async"></picture></a></li>
+</ul>
+<p><strong>曲面三</strong>：二次曲面</p>
+<ul>
+<li>$$\text{椭圆锥面 }\frac{x^2}{a^2}+\frac{y^2}{b^2}=z^2;$$</li>
+<li>$$\text{椭球面}\quad\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1;$$</li>
+<li>(3)  单叶双曲面 $$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}-\frac{z^{2}}{c^{2}}=1$$</li>
+<li>(4)  双叶双曲面 $$\frac {x^{2}}{a^{2}}- \frac {y^{2}}{b^{2}}- \frac {z^{2}}{c^{2}}= 1$$</li>
+<li>(5)  椭圆抛物面 $$\text{椭圆抛物面}\quad\frac{x^2}{a^2}+\frac{y^2}{b^2}=z;$$</li>
+</ul>
+<p><strong>曲面四</strong>：空间曲面投影</p>
+<ul>
+<li>$q曲线\Gamma:\begin{cases}F(x,y,z)=0\\G(x,y,z)=0\end{cases}在xoy面上的投影曲线方程为：\begin{cases}H(x,y)=0\\z=0\end{cases}$</li>
+</ul><nav class="article-pagination" aria-label="相邻内容">
+    <a href="../math-007-chapter-09/index.html"><span>← 上一项</span><strong>Chapter 9：无穷级数 — 高等数学 - 公式合集</strong></a>
+    <a class="article-pagination-next" href="../math-007-chapter-11/index.html"><span>下一项 →</span><strong>Chapter 11：多元积分学及其应用 — 高等数学 - 公式合集</strong></a>
+  </nav></div></div>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260729f"></script>
+</body>
+</html>

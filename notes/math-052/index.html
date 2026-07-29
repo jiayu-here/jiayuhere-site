@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lecture 44：二重积分 | Jiayu Lab</title>
   <meta name="description" content="考研数学学习笔记：Lecture 44：二重积分。保留原始公式、图示与例题。">
+
   <meta name="keywords" content="考研数学, 高等数学, 重积分">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Lecture 44：二重积分 | Jiayu Lab">
   <meta property="og:description" content="考研数学学习笔记：Lecture 44：二重积分。保留原始公式、图示与例题。">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-052/">
+  <meta property="og:locale" content="zh_CN">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 44：二重积分 | Jiayu Lab">
+  <meta name="twitter:description" content="考研数学学习笔记：Lecture 44：二重积分。保留原始公式、图示与例题。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <link rel="canonical" href="https://www.jiayuhere.com/notes/math-052/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-052/">
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-052/">
@@ -27,7 +34,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
   <script>
     window.MathJax = {
       tex: {
@@ -81,7 +88,7 @@
 <li class="list-indent-1">$$x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan2}(y,x).$$</li>
 <li class="list-indent-1">注意：上述转换方法仅限于二者圆点相同，且极坐标参考系与直角坐标的 𝑥 轴方向相同的情况；</li>
 <li>图示：</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/577fe472c3ac-Pasted-image-20240509172033.png" alt="Pasted image 20240509172033" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/577fe472c3ac-Pasted-image-20240509172033.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：44.0 极坐标基础知识"><picture><source srcset="/assets/note-previews/577fe472c3ac-Pasted-image-20240509172033.webp" type="image/webp"><img class="note-image" src="/assets/notes/577fe472c3ac-Pasted-image-20240509172033.png" alt="学习笔记插图：44.0 极坐标基础知识" width="359" height="261" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h2 id="section-2">44.1 二重积分基本概念</h2>
 <h3 id="section-3">44.1.1 概念引入</h3>
@@ -140,26 +147,26 @@
 <li>被积函数的常数因子可以提到二重积分的外面，即</li>
 </ol>
 <div class="math-display">$$
-\int\int_Dkf(x,y)d\sigma=k\int\int_Df(x,y)d\sigma 
+\int\int_Dkf(x,y)d\sigma=k\int\int_Df(x,y)d\sigma
 $$</div>
 <ol>
 <li>函数和 (或差)的二重积分等于各个函数二重积分的和 (或差), 即</li>
 </ol>
 <div class="math-display">$$
-\int\int_D[f(x,y)\pm g(x,y)]d\sigma=\int\int_Df(x,y)d\sigma+\int\int_Dg(x,y)d\sigma 
+\int\int_D[f(x,y)\pm g(x,y)]d\sigma=\int\int_Df(x,y)d\sigma+\int\int_Dg(x,y)d\sigma
 $$</div>
 <ol>
 <li>如果在 D 上，f (x, y)=A, A 是常数，则σ为 D 的面积，则</li>
 </ol>
 <div class="math-display">$$
-\sigma=\int\int_DA\cdot d\sigma=A\int\int_Dd\sigma 
+\sigma=\int\int_DA\cdot d\sigma=A\int\int_Dd\sigma
 $$</div>
 <ol>
 <li>如果闭区域 D 被有线条曲线分为有限个部分闭区域，则在 D 上的二重积分等于在各部分区域上</li>
 </ol>
 <p> 的二重积分的和，例如 D 被分为两个闭区域 D 1 和 D2，则</p>
 <div class="math-display">$$
-\int\int_Df(x,y)d\sigma=\int\int_{D_1}f(x,y)d\sigma+\int\int_{D_2}f(x,y)d\sigma 
+\int\int_Df(x,y)d\sigma=\int\int_{D_1}f(x,y)d\sigma+\int\int_{D_2}f(x,y)d\sigma
 $$</div>
 <ul>
 <li>几何含义：原本一个几何柱体可以一次二重积分求出来，现在将其一个柱体切分成两个柱体，然后分别对其求二重积分，求和即为完整的体积；</li>
@@ -178,9 +185,9 @@ $$</div>
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
-    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260728a"></script>
+  <script src="../../assets/script.js?v=20260729f"></script>
 </body>
 </html>

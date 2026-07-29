@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lecture 34：定积分的应用 | Jiayu Lab</title>
   <meta name="description" content="考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。">
+
   <meta name="keywords" content="考研数学, 高等数学, 定积分及反常积分">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Lecture 34：定积分的应用 | Jiayu Lab">
   <meta property="og:description" content="考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-042/">
+  <meta property="og:locale" content="zh_CN">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 34：定积分的应用 | Jiayu Lab">
+  <meta name="twitter:description" content="考研数学学习笔记：Lecture 34：定积分的应用。保留原始公式、图示与例题。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <link rel="canonical" href="https://www.jiayuhere.com/notes/math-042/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-042/">
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-042/">
@@ -27,7 +34,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
   <script>
     window.MathJax = {
       tex: {
@@ -109,15 +116,15 @@
 <p><strong>例题</strong>：求曲线 $y^2=x$ 与 $y=x^2$ 所围面积. </p>
 <ul>
 <li>分析</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/97772b994909-Pasted-image-20240131142232.png" alt="Pasted image 20240131142232" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/97772b994909-Pasted-image-20240131142232.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/97772b994909-Pasted-image-20240131142232.webp" type="image/webp"><img class="note-image" src="/assets/notes/97772b994909-Pasted-image-20240131142232.png" alt="学习笔记插图：1.2.1.2 例题" width="507" height="363" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">可以对 x 积分</li>
 <li class="list-indent-1">也可以对 y 积分</li>
 <li>解析 1：对 x 积分</li>
 <li class="list-indent-1">第一步：找范围</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/fbaaef2d4558-Pasted-image-20240131142306.png" alt="Pasted image 20240131142306" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/fbaaef2d4558-Pasted-image-20240131142306.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/fbaaef2d4558-Pasted-image-20240131142306.webp" type="image/webp"><img class="note-image" src="/assets/notes/fbaaef2d4558-Pasted-image-20240131142306.png" alt="学习笔记插图：1.2.1.2 例题" width="195" height="71" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">第二部：找微元</li>
 <li class="list-indent-2">x 和 x+dx</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/c6e80b9ce051-Pasted-image-20240131142332.png" alt="Pasted image 20240131142332" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/c6e80b9ce051-Pasted-image-20240131142332.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/c6e80b9ce051-Pasted-image-20240131142332.webp" type="image/webp"><img class="note-image" src="/assets/notes/c6e80b9ce051-Pasted-image-20240131142332.png" alt="学习笔记插图：1.2.1.2 例题" width="379" height="86" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">第三步：积分</li>
 <li class="list-indent-2">从 0-1 积分</li>
 <li class="list-indent-2">$\delta=\int_{0}^{1}\left(dx-x^{2}\right)dx=\frac{2}{3}-\frac{1}{3}=\frac{1}{3}$</li>
@@ -127,30 +134,30 @@
 <ul>
 <li>分析</li>
 <li class="list-indent-1">极坐标的题型；几何图形的坐标用极坐标给出；</li>
-<li class="list-indent-1">第一步：它的范围；是 <img class="note-image" src="/assets/notes/86669d54a8c5-Pasted-image-20240131150018.png" alt="Pasted image 20240131150018" loading="lazy" decoding="async"></li>
+<li class="list-indent-1">第一步：它的范围；是 <a class="note-image-link" href="/assets/notes/86669d54a8c5-Pasted-image-20240131150018.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/86669d54a8c5-Pasted-image-20240131150018.webp" type="image/webp"><img class="note-image" src="/assets/notes/86669d54a8c5-Pasted-image-20240131150018.png" alt="学习笔记插图：1.2.1.2 例题" width="245" height="65" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">第二步：求它在微小的区间上，对应图形如何求出对应面积：</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/f974e9ceede3-Pasted-image-20240131150049.png" alt="Pasted image 20240131150049" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/f974e9ceede3-Pasted-image-20240131150049.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/f974e9ceede3-Pasted-image-20240131150049.webp" type="image/webp"><img class="note-image" src="/assets/notes/f974e9ceede3-Pasted-image-20240131150049.png" alt="学习笔记插图：1.2.1.2 例题" width="266" height="228" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-2">可以近似看出一个扇形；</li>
 <li class="list-indent-2">微元：</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/1b49a7ce912f-Pasted-image-20240131150113.png" alt="Pasted image 20240131150113" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/1b49a7ce912f-Pasted-image-20240131150113.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/1b49a7ce912f-Pasted-image-20240131150113.webp" type="image/webp"><img class="note-image" src="/assets/notes/1b49a7ce912f-Pasted-image-20240131150113.png" alt="学习笔记插图：1.2.1.2 例题" width="190" height="72" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">第三步：求积分</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/5bc854126c2e-Pasted-image-20240131150129.png" alt="Pasted image 20240131150129" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/5bc854126c2e-Pasted-image-20240131150129.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/5bc854126c2e-Pasted-image-20240131150129.webp" type="image/webp"><img class="note-image" src="/assets/notes/5bc854126c2e-Pasted-image-20240131150129.png" alt="学习笔记插图：1.2.1.2 例题" width="197" height="78" loading="lazy" decoding="async"></picture></a></li>
 <li>解析</li>
 <li class="list-indent-1">第一步：确定范围</li>
 <li class="list-indent-2">可以先画图 -&gt; 画图需要先画一些<strong>特殊点</strong>；</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/1155e331d60d-Pasted-image-20240131150311.png" alt="Pasted image 20240131150311" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/1155e331d60d-Pasted-image-20240131150311.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/1155e331d60d-Pasted-image-20240131150311.webp" type="image/webp"><img class="note-image" src="/assets/notes/1155e331d60d-Pasted-image-20240131150311.png" alt="学习笔记插图：1.2.1.2 例题" width="225" height="173" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-2">因为 conx 的特点；</li>
 <li class="list-indent-2">确定范围：为 0 到 Π</li>
 <li class="list-indent-3">因为下面一半和上面一半一样，因此只需要求上面一半然后乘以 2 即可；</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/41f0e0225046-Pasted-image-20240131150353.png" alt="Pasted image 20240131150353" loading="lazy" decoding="async"></li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/7fbcc9288c72-Pasted-image-20240131150416.png" alt="Pasted image 20240131150416" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/41f0e0225046-Pasted-image-20240131150353.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/41f0e0225046-Pasted-image-20240131150353.webp" type="image/webp"><img class="note-image" src="/assets/notes/41f0e0225046-Pasted-image-20240131150353.png" alt="学习笔记插图：1.2.1.2 例题" width="226" height="165" loading="lazy" decoding="async"></picture></a></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/7fbcc9288c72-Pasted-image-20240131150416.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/7fbcc9288c72-Pasted-image-20240131150416.webp" type="image/webp"><img class="note-image" src="/assets/notes/7fbcc9288c72-Pasted-image-20240131150416.png" alt="学习笔记插图：1.2.1.2 例题" width="321" height="126" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">第三步：求解定积分</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/39066e2f6ba6-Pasted-image-20240131150658.png" alt="Pasted image 20240131150658" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/39066e2f6ba6-Pasted-image-20240131150658.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/39066e2f6ba6-Pasted-image-20240131150658.webp" type="image/webp"><img class="note-image" src="/assets/notes/39066e2f6ba6-Pasted-image-20240131150658.png" alt="学习笔记插图：1.2.1.2 例题" width="290" height="159" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-2">因为直接求 conx 在 0 到 PI 上无法求出，但求 0 到二分之 PI 上很简单，因此进行定积分代换：</li>
 <li class="list-indent-3">设：</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/8ad073c39bbf-Pasted-image-20240131150652.png" alt="Pasted image 20240131150652" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/8ad073c39bbf-Pasted-image-20240131150652.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/8ad073c39bbf-Pasted-image-20240131150652.webp" type="image/webp"><img class="note-image" src="/assets/notes/8ad073c39bbf-Pasted-image-20240131150652.png" alt="学习笔记插图：1.2.1.2 例题" width="83" height="59" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-2">因此：</li>
-<li class="list-indent-3"><img class="note-image" src="/assets/notes/a8e6224f7fd8-Pasted-image-20240131150832.png" alt="Pasted image 20240131150832" loading="lazy" decoding="async"></li>
+<li class="list-indent-3"><a class="note-image-link" href="/assets/notes/a8e6224f7fd8-Pasted-image-20240131150832.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.1.2 例题"><picture><source srcset="/assets/note-previews/a8e6224f7fd8-Pasted-image-20240131150832.webp" type="image/webp"><img class="note-image" src="/assets/notes/a8e6224f7fd8-Pasted-image-20240131150832.png" alt="学习笔记插图：1.2.1.2 例题" width="371" height="130" loading="lazy" decoding="async"></picture></a></li>
 <li>题型： <span class="note-tag">定积分的几何应用</span> </li>
 </ul>
 <h3 id="section-7">1.2.2 旋转体的体积</h3>
@@ -158,7 +165,7 @@
 <p><strong>图示</strong></p>
 <ul>
 <li>图示：绕 X 轴旋转</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/165df4bfaca3-Pasted-image-20240131151121.png" alt="Pasted image 20240131151121" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/165df4bfaca3-Pasted-image-20240131151121.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.1 基本概念"><picture><source srcset="/assets/note-previews/165df4bfaca3-Pasted-image-20240131151121.webp" type="image/webp"><img class="note-image" src="/assets/notes/165df4bfaca3-Pasted-image-20240131151121.png" alt="学习笔记插图：1.2.2.1 基本概念" width="290" height="236" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h5 id="section-9"><strong>定理</strong>： <span class="note-tag">定积分旋转体体积公式</span></h5>
 <blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
@@ -191,16 +198,16 @@
 <li class="list-indent-1">椭圆的图形</li>
 <li class="list-indent-2">只需要计算上面的一半就可以了；</li>
 <li class="list-indent-2">不止，只需要计算四分之一部分就可以了；</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/e7d6f432590b-Pasted-image-20240131152357.png" alt="Pasted image 20240131152357" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/e7d6f432590b-Pasted-image-20240131152357.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.2 例题"><picture><source srcset="/assets/note-previews/e7d6f432590b-Pasted-image-20240131152357.webp" type="image/webp"><img class="note-image" src="/assets/notes/e7d6f432590b-Pasted-image-20240131152357.png" alt="学习笔记插图：1.2.2.2 例题" width="244" height="191" loading="lazy" decoding="async"></picture></a></li>
 <li>解析</li>
 <li class="list-indent-1">由原式得 y 的公式：</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/dee2746800cc-Pasted-image-20240131152437.png" alt="Pasted image 20240131152437" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/dee2746800cc-Pasted-image-20240131152437.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.2 例题"><picture><source srcset="/assets/note-previews/dee2746800cc-Pasted-image-20240131152437.webp" type="image/webp"><img class="note-image" src="/assets/notes/dee2746800cc-Pasted-image-20240131152437.png" alt="学习笔记插图：1.2.2.2 例题" width="201" height="79" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">由体积公式可知：</li>
 <li class="list-indent-2">$V_{x}=\pi\int_{a}^{b}f^{2}(x)\operatorname{d}x$</li>
 <li class="list-indent-1">且，因为只需要求四分之一</li>
 <li class="list-indent-2">因此只需要求 $[0,a]$ 范围上，它旋转的面积</li>
 <li class="list-indent-1">因此，带入可得：</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/75f2ba96611f-Pasted-image-20240131152648.png" alt="Pasted image 20240131152648" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/75f2ba96611f-Pasted-image-20240131152648.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.2 例题"><picture><source srcset="/assets/note-previews/75f2ba96611f-Pasted-image-20240131152648.webp" type="image/webp"><img class="note-image" src="/assets/notes/75f2ba96611f-Pasted-image-20240131152648.png" alt="学习笔记插图：1.2.2.2 例题" width="379" height="179" loading="lazy" decoding="async"></picture></a></li>
 <li>题型： <span class="note-tag">定积分的几何应用</span> </li>
 </ul>
 <p><strong>例题</strong>：计算由摆线 $\begin{cases}x=a(t-\sin t)\\y=a(1-\cos t)&amp;\end{cases}(0\leq t\leq2\pi)$ 与 X 图形分别绕 X 轴、Y 轴所称的旋转体的体积；</p>
@@ -211,9 +218,9 @@
 <li>解析：求 X </li>
 <li class="list-indent-1">求求旋转体的体积公式可知：</li>
 <li class="list-indent-2">其中因为把 y 变成 y 和 x 的函数这一过程很麻烦，因此在下面的变化中，直接把 y 和 x 分别变成了和 t 的式子，带入：</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/9020088aec14-Pasted-image-20240131153411.png" alt="Pasted image 20240131153411" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/9020088aec14-Pasted-image-20240131153411.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.2 例题"><picture><source srcset="/assets/note-previews/9020088aec14-Pasted-image-20240131153411.webp" type="image/webp"><img class="note-image" src="/assets/notes/9020088aec14-Pasted-image-20240131153411.png" alt="学习笔记插图：1.2.2.2 例题" width="486" height="101" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">继续求解，其中令 u=t/2</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/5a9bc9f40dc7-Pasted-image-20240131153609.png" alt="Pasted image 20240131153609" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/5a9bc9f40dc7-Pasted-image-20240131153609.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.2.2 例题"><picture><source srcset="/assets/note-previews/5a9bc9f40dc7-Pasted-image-20240131153609.webp" type="image/webp"><img class="note-image" src="/assets/notes/5a9bc9f40dc7-Pasted-image-20240131153609.png" alt="学习笔记插图：1.2.2.2 例题" width="758" height="155" loading="lazy" decoding="async"></picture></a></li>
 <li>题型： <span class="note-tag">定积分的几何应用</span> </li>
 </ul>
 <h3 id="section-11">1.2.3 平面曲线的弧长</h3>
@@ -223,7 +230,7 @@
 <p><strong>解释</strong></p>
 <ul>
 <li>$s_n=\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/c52e94b31be8-Pasted-image-20240131160512.png" alt="Pasted image 20240131160512" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/c52e94b31be8-Pasted-image-20240131160512.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定义 ： 弧长"><picture><source srcset="/assets/note-previews/c52e94b31be8-Pasted-image-20240131160512.webp" type="image/webp"><img class="note-image" src="/assets/notes/c52e94b31be8-Pasted-image-20240131160512.png" alt="学习笔记插图：定义 ： 弧长" width="299" height="211" loading="lazy" decoding="async"></picture></a></li>
 <li class="list-indent-1">很多个小段线段的求和</li>
 <li>弧长的极限：$s=\lim_{\lambda\to0}s_n=\lim_{\lambda\to0}\sum_{i=1}^n\left\|\overline{M_{i-1}M_i}\right\|$</li>
 </ul>
@@ -242,10 +249,10 @@
 <ul>
 <li>分析</li>
 <li class="list-indent-1">这种题是第二种形式：</li>
-<li class="list-indent-2"><img class="note-image" src="/assets/notes/501c25b88d93-Pasted-image-20240131162204.png" alt="Pasted image 20240131162204" loading="lazy" decoding="async"></li>
+<li class="list-indent-2"><a class="note-image-link" href="/assets/notes/501c25b88d93-Pasted-image-20240131162204.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.3.2 例题"><picture><source srcset="/assets/note-previews/501c25b88d93-Pasted-image-20240131162204.webp" type="image/webp"><img class="note-image" src="/assets/notes/501c25b88d93-Pasted-image-20240131162204.png" alt="学习笔记插图：1.2.3.2 例题" width="700" height="107" loading="lazy" decoding="async"></picture></a></li>
 <li>解析</li>
 <li class="list-indent-1">将函数带入：</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/469fee3793f5-Pasted-image-20240131162350.png" alt="Pasted image 20240131162350" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/469fee3793f5-Pasted-image-20240131162350.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.2.3.2 例题"><picture><source srcset="/assets/note-previews/469fee3793f5-Pasted-image-20240131162350.webp" type="image/webp"><img class="note-image" src="/assets/notes/469fee3793f5-Pasted-image-20240131162350.png" alt="学习笔记插图：1.2.3.2 例题" width="804" height="200" loading="lazy" decoding="async"></picture></a></li>
 <li>题型： <span class="note-tag">定积分的几何应用</span> </li>
 </ul>
 <h3 id="section-16">1.2.4 旋转体侧面积 </h3>
@@ -254,7 +261,7 @@
 <p><strong>解释</strong>  </p>
 <ul>
 <li>图示： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/e940c3c3ad8a-Pasted-image-20240415204510.png" alt="Pasted image 20240415204510" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/e940c3c3ad8a-Pasted-image-20240415204510.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定理 ： 旋转体侧面积计算"><picture><source srcset="/assets/note-previews/e940c3c3ad8a-Pasted-image-20240415204510.webp" type="image/webp"><img class="note-image" src="/assets/notes/e940c3c3ad8a-Pasted-image-20240415204510.png" alt="学习笔记插图：定理 ： 旋转体侧面积计算" width="500" height="394" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h2 id="section-18">1.3 物理应用 </h2>
 <h3 id="section-19">1.3.1 变力做功 </h3>
@@ -268,7 +275,7 @@
 <ul>
 <li>问题：(1) 求容器的容积； (II) 若将容器内盛满的水从容器顶部全部抽出，至少需要做多少功？</li>
 <li>图示：</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/d83575448e89-Pasted-image-20240415213032.png" alt="Pasted image 20240415213032" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/d83575448e89-Pasted-image-20240415213032.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.3.1 变力做功"><picture><source srcset="/assets/note-previews/d83575448e89-Pasted-image-20240415213032.webp" type="image/webp"><img class="note-image" src="/assets/notes/d83575448e89-Pasted-image-20240415213032.png" alt="学习笔记插图：1.3.1 变力做功" width="334" height="302" loading="lazy" decoding="async"></picture></a></li>
 <li>解析：第一问</li>
 <li class="list-indent-1">上下圆的体积一样，因此只需要算当中一个圆绕轴转的体积即可；</li>
 <li class="list-indent-1">求下半部分圆的面积微分：</li>
@@ -298,7 +305,7 @@
 <p><strong>例题分析</strong>：某闸门的形状与大小如图所示，其中 y 轴为对称轴，闸门的上部为矩形 ABCD, DC=2 m, 下部由二次抛物线与线段 4 B 所围成，当水面与闸门的上端相平时，欲使闸门矩形部分承受的水压力与闸门下部承受的水压力之比为5:4，闸门矩形部分的高 h 应为多少 ？</p>
 <ul>
 <li>图示：</li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/d92ee3235ee3-Pasted-image-20240415215603.png" alt="Pasted image 20240415215603" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/d92ee3235ee3-Pasted-image-20240415215603.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：1.3.2 压力问题"><picture><source srcset="/assets/note-previews/d92ee3235ee3-Pasted-image-20240415215603.webp" type="image/webp"><img class="note-image" src="/assets/notes/d92ee3235ee3-Pasted-image-20240415215603.png" alt="学习笔记插图：1.3.2 压力问题" width="255" height="333" loading="lazy" decoding="async"></picture></a></li>
 <li>分析：</li>
 <li class="list-indent-1">深度的微小变化：</li>
 <li class="list-indent-2">压强：p=gρ(h+1-y)</li>
@@ -317,9 +324,9 @@
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
-    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260728a"></script>
+  <script src="../../assets/script.js?v=20260729f"></script>
 </body>
 </html>

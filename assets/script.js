@@ -38,7 +38,7 @@ window.addEventListener("keydown", (event) => {
   }
 });
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 820) setNavOpen(false);
+  if (window.innerWidth > 1040) setNavOpen(false);
 });
 
 document.querySelectorAll("[data-current-year]").forEach((element) => {
@@ -89,6 +89,13 @@ const dialogInput = searchDialog.querySelector("input");
 const dialogStatus = searchDialog.querySelector(".search-dialog-status");
 const dialogResults = searchDialog.querySelector(".search-results");
 let searchIndexPromise;
+const debounce = (callback, delay = 120) => {
+  let timer;
+  return (...args) => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => callback(...args), delay);
+  };
+};
 
 const loadSearchIndex = () => {
   searchIndexPromise ||= fetch(isEnglish ? "/assets/data/search-index.en.json" : "/assets/data/search-index.json")
@@ -115,7 +122,7 @@ const renderSearchResults = async () => {
     const index = await loadSearchIndex();
     const terms = query.split(/\s+/).filter(Boolean);
     const matches = index.filter((item) => {
-      const haystack = [item.title, item.description, item.category, ...(item.tags || []), item.content || ""].join(" ").toLowerCase();
+      const haystack = item.searchText || [item.title, item.description, item.category, ...(item.tags || [])].join(" ").toLowerCase();
       return terms.every((term) => haystack.includes(term));
     });
 
@@ -186,7 +193,7 @@ searchDialog.addEventListener("keydown", (event) => {
     first.focus();
   }
 });
-dialogInput?.addEventListener("input", renderSearchResults);
+dialogInput?.addEventListener("input", debounce(renderSearchResults));
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !searchDialog.hidden) closeSearch();
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
@@ -315,7 +322,7 @@ filterButtons.forEach((button) => {
     updateContentList({ expandMatchingNoteGroups: true });
   });
 });
-searchInput?.addEventListener("input", () => updateContentList({ expandMatchingNoteGroups: true }));
+searchInput?.addEventListener("input", debounce(() => updateContentList({ expandMatchingNoteGroups: true })));
 
 if (savedNoteIndexState) {
   const storedFilter = filterButtons.some((button) => button.dataset.filter === savedNoteIndexState.filter) ? savedNoteIndexState.filter : "all";
@@ -352,11 +359,10 @@ const saveNoteIndexState = () => {
   }
 };
 
-notesIndex?.querySelectorAll("[data-content-card] a[href]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    saveNoteIndexState();
-  });
+notesIndex?.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element) || !event.target.closest("[data-content-card] a[href]")) return;
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  saveNoteIndexState();
 });
 
 document.querySelectorAll(".tool-card").forEach((card, index) => {

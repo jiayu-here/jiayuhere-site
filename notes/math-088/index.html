@@ -12,14 +12,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lecture 19：特征值与特征向量 | Jiayu Lab</title>
   <meta name="description" content="考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。">
+
   <meta name="keywords" content="考研数学, 线性代数, 特征值与特征向量">
-  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Lecture 19：特征值与特征向量 | Jiayu Lab">
   <meta property="og:description" content="考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。">
   <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/math-088/">
+  <meta property="og:locale" content="zh_CN">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 19：特征值与特征向量 | Jiayu Lab">
+  <meta name="twitter:description" content="考研数学学习笔记：Lecture 19：特征值与特征向量。保留原始公式、图示与例题。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
   <link rel="canonical" href="https://www.jiayuhere.com/notes/math-088/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/math-088/">
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-088/">
@@ -27,7 +34,7 @@
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
   <link rel="icon" href="../../favicon.ico" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260729e">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260729f">
   <script>
     window.MathJax = {
       tex: {
@@ -83,7 +90,7 @@
 <li class="list-indent-1">因为如果 $\xi$ 等于 0，则表示当前矩阵只有唯一零解，即 <code>S=r(A)</code> ，此时将 A 作用在 $\xi$ 上是，体现不出来 A 的作用，因为矩阵作用在零向量上还是 0，因此在这里 $\xi$ 是非零向量；</li>
 <li class="list-indent-1">能体现出来效果，这样才能知道特征值的作用；</li>
 <li>含义： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="Pasted image 20240701195431" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定义 ： 特征值与特征向量"><picture><source srcset="/assets/note-previews/34927b76a257-Pasted-image-20240701195431.webp" type="image/webp"><img class="note-image" src="/assets/notes/34927b76a257-Pasted-image-20240701195431.png" alt="学习笔记插图：定义 ： 特征值与特征向量" width="544" height="258" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>分析</strong>：对 $A\xi=\lambda\xi$ 进行分析</p>
 <ul>
@@ -99,7 +106,7 @@
 <li class="list-indent-1"><code>-&gt;</code> $|\lambda E-A|=0$ </li>
 <li class="list-indent-2">// 这里可以求出 $\lambda_i(i=1,2,3...)$</li>
 <li>图示： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="Drawing 2024-07-01 19.50.31.excalidraw" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定义 ： 特征值与特征向量"><picture><source srcset="/assets/note-previews/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.webp" type="image/webp"><img class="note-image" src="/assets/notes/e1aaabd35726-Drawing-2024-07-01-19.50.31.excalidraw.png" alt="学习笔记插图：定义 ： 特征值与特征向量" width="4853" height="4801" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h5 id="section-4"><strong>定义</strong>： <span class="note-tag">特征方程</span></h5>
 <blockquote><span style="color:#ccc1d9">描述：</span> $$\begin{vmatrix}\lambda E-A\end{vmatrix}=\begin{vmatrix}\lambda-a_{11}&amp;-a_{12}&amp;\cdots&amp;-a_{1n}\\-a_{21}&amp;\lambda-a_{22}&amp;\cdots&amp;-a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\-a_{n1}&amp;-a_{n2}&amp;\cdots&amp;\lambda-a_{nn}\end{vmatrix}=0$$</blockquote>
@@ -115,12 +122,12 @@
 <li class="list-indent-1">用于描述特征向量的变换比例的值，称之为特征值；</li>
 <li class="list-indent-1">特征向量就是那些在变换后、依然停留在原本的直线上的向量；</li>
 <li>图示： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="Pasted image 20240701194822" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：19.1.2 几何解释"><picture><source srcset="/assets/note-previews/113f80fbed00-Pasted-image-20240701194822.webp" type="image/webp"><img class="note-image" src="/assets/notes/113f80fbed00-Pasted-image-20240701194822.png" alt="学习笔记插图：19.1.2 几何解释" width="1985" height="1546" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>概念</strong>：特征值为负值时</p>
 <ul>
 <li>图示： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="Pasted image 20240701195210" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：19.1.2 几何解释"><picture><source srcset="/assets/note-previews/dd3ff05e0e06-Pasted-image-20240701195210.webp" type="image/webp"><img class="note-image" src="/assets/notes/dd3ff05e0e06-Pasted-image-20240701195210.png" alt="学习笔记插图：19.1.2 几何解释" width="1034" height="304" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h2 id="section-6">19.2 求法 </h2>
 <h3 id="section-7">19.2.1 求特征值与特征向量的方法</h3>
@@ -232,7 +239,7 @@ $$</div>
 <p><strong>总结</strong>：常用矩阵的特征值与特征向量</p>
 <ul>
 <li>图示： </li>
-<li class="list-indent-1"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="Pasted image 20240627205621" loading="lazy" decoding="async"></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：19.3.3 常用矩阵的特征值与特征向量"><picture><source srcset="/assets/note-previews/82dc5ce0b772-Pasted-image-20240627205621.webp" type="image/webp"><img class="note-image" src="/assets/notes/82dc5ce0b772-Pasted-image-20240627205621.png" alt="学习笔记插图：19.3.3 常用矩阵的特征值与特征向量" width="2058" height="375" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <p><strong>概念</strong>：矩阵为 $f(A)$ </p>
 <ul>
@@ -266,9 +273,9 @@ $$</div>
 
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
-    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260728a"></script>
+  <script src="../../assets/script.js?v=20260729f"></script>
 </body>
 </html>
