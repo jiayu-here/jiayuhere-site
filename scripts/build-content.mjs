@@ -761,7 +761,7 @@ const buildLabIndex = async (items, locale) => {
     if (!projectSlug) throw new Error(`Log projectSlug missing: ${item.meta.title}`);
     const rendered = markdownToHtml(item.body, locale).html;
     const searchText = [item.meta.title, item.meta.description, plainText(item.body)].join(" ").toLowerCase();
-    return `<article class="timeline-item" id="${escapeHtml(item.meta.slug)}" data-search="${escapeHtml(searchText)}"><time>${escapeHtml(item.meta.date)}</time><div><h2>${escapeHtml(item.meta.title)}</h2><div class="log-details">${rendered}</div><a class="text-link" href="../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project" : "查看项目详情"} <span aria-hidden="true">→</span></a></div></article>`;
+    return `<article class="timeline-item" id="${escapeHtml(item.meta.slug)}" data-search="${escapeHtml(searchText)}"><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time><div><h2>${escapeHtml(item.meta.title)}</h2><div class="log-details">${rendered}</div><a class="text-link" href="../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project" : "查看项目详情"} <span aria-hidden="true">→</span></a></div></article>`;
   }).join("\n");
   const template = isEnglish
     ? `<article class="timeline-item"><time>TEMPLATE</time><div><h2>Future Log Template</h2><p><strong>Date:</strong> YYYY-MM-DD · <strong>Project:</strong> name</p><p><strong>Symptom:</strong> Repeatable and observable behavior.</p><p><strong>Hypothesis:</strong> Ranked possibilities, not conclusions.</p><p><strong>Investigation:</strong> Environment → reproduction → minimal experiment → comparison.</p><p><strong>Root cause:</strong> Evidence-supported explanation.</p><p><strong>Fix:</strong> Change plus regression evidence.</p><p><strong>Lesson:</strong> Reusable method and remaining limits.</p></div></article>`
@@ -795,9 +795,9 @@ const updateHomeStats = async (counts, lastUpdated, locale) => {
     home = home.replace(pattern, `$1${count}$2`);
   }
 
-  const updatedPattern = /(<time data-site-updated>)[^<]+(<\/time>)/;
+  const updatedPattern = /<time data-site-updated(?: datetime="[^"]*")?>[^<]+<\/time>/;
   if (!updatedPattern.test(home)) throw new Error("Homepage last-updated marker missing");
-  home = home.replace(updatedPattern, `$1${lastUpdated}$2`);
+  home = home.replace(updatedPattern, `<time data-site-updated datetime="${escapeHtml(lastUpdated)}">${escapeHtml(lastUpdated)}</time>`);
 
   await writeFile(homePath, home);
 };
