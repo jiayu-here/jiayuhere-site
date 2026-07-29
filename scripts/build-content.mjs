@@ -111,10 +111,32 @@ const readingMinutes = (value) => {
   return Math.max(1, Math.ceil(chineseCharacters / 300 + latinWords / 200));
 };
 
+const parseInlineList = (value) => {
+  const items = [];
+  let current = "";
+  let quote = "";
+  for (const character of value.slice(1, -1)) {
+    if (quote) {
+      if (character === quote) quote = "";
+      else current += character;
+    } else if (character === '"' || character === "'") {
+      quote = character;
+    } else if (character === ",") {
+      if (current.trim()) items.push(current.trim());
+      current = "";
+    } else {
+      current += character;
+    }
+  }
+  if (quote) throw new Error(`Unterminated quoted list value: ${value}`);
+  if (current.trim()) items.push(current.trim());
+  return items;
+};
+
 const parseValue = (raw) => {
   const value = raw.trim();
   if (value.startsWith("[") && value.endsWith("]")) {
-    return value.slice(1, -1).split(",").map((item) => item.trim().replace(/^['"]|['"]$/g, "")).filter(Boolean);
+    return parseInlineList(value);
   }
   return value.replace(/^['"]|['"]$/g, "");
 };
