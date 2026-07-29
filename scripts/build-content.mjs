@@ -517,7 +517,7 @@ const footer = (prefix, locale) => {
 
 const page = ({ prefix, locale, route, active, title, description, content, type = "website", keywords = [], blogPostingDate = "", usesMath = false }) => {
   const isEnglish = locale === "en";
-  const styleVersion = "20260729b";
+  const styleVersion = "20260729e";
   const canonical = `https://www.jiayuhere.com/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `https://www.jiayuhere.com/${route}`;
   const english = `https://www.jiayuhere.com/en/${route}`;
@@ -662,20 +662,20 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
       const chapters = courses.get(course);
       const chapterContent = [...chapters.keys()].map((chapter) => {
         const entries = chapters.get(chapter);
-        return `<details class="notes-chapter-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course, chapter)}" open>
+        return `<details class="notes-chapter-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course, chapter)}">
           <summary class="notes-chapter-header"><h4>${escapeHtml(chapter)}</h4><span>${entries.length} ${isEnglish ? "items" : "篇"}</span></summary>
           <div class="content-grid">${entries.map(({ item, hierarchy: itemHierarchy }) => cardFor(item, "notes", locale, prefix, itemHierarchy)).join("")}</div>
         </details>`;
       }).join("");
       const count = [...chapters.values()].reduce((total, entries) => total + entries.length, 0);
       const courseClass = course === "英语写作" || course === "English Writing" ? " notes-writing-course" : "";
-      return `<details class="notes-course-section${courseClass}" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course)}" open>
+      return `<details class="notes-course-section${courseClass}" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course)}">
         <summary class="notes-course-header"><h3>${escapeHtml(course)}</h3><span>${count} ${isEnglish ? "items" : "篇"}</span></summary>
         <div class="notes-chapter-list">${chapterContent}</div>
       </details>`;
     }).join("");
     const count = [...courses.values()].reduce((total, chapters) => total + [...chapters.values()].reduce((chapterTotal, entries) => chapterTotal + entries.length, 0), 0);
-    return `<details class="notes-major-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major)}" open>
+    return `<details class="notes-major-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major)}">
       <summary class="notes-major-header"><p>${isEnglish ? "Learning note category" : "学习笔记大类"}</p><h2>${escapeHtml(major)}</h2><span>${count} ${isEnglish ? "items" : "篇"}</span></summary>
       <div class="notes-course-list">${courseContent}</div>
     </details>`;
