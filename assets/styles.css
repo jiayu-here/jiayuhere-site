@@ -333,7 +333,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .prose li.list-indent-3 { margin-left: 3.75rem; }
 .prose li.list-indent-4 { margin-left: 5rem; }
 .prose li.list-indent-5 { margin-left: 6.25rem; }
-.prose code { padding: 2px 6px; border-radius: 5px; background: #f6f8fa; color: #24292f; font: .88em ui-monospace, Consolas, monospace; }
+.prose code { overflow-wrap: anywhere; padding: 2px 6px; border-radius: 5px; background: #f6f8fa; color: #24292f; font: .88em ui-monospace, Consolas, monospace; }
 .prose pre { overflow-x: auto; margin: 26px 0; padding: 22px; border-radius: 14px; background: #0d1117; color: #c9d1d9; }
 .prose pre code { padding: 0; background: transparent; color: inherit; }
 .prose blockquote { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--primary); background: var(--surface-soft); color: #57606a; }
