@@ -14,7 +14,7 @@ const writeFile = async (...args) => {
 };
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260801b";
+const assetVersion = "20260801c";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1133,13 +1133,18 @@ const buildIndex = async (section, items, locale) => {
     <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
-  const content = `
+  const description = isEnglish
+    ? section === "projects" ? "Complete engineering records from requirements and architecture through debugging and delivery." : section === "articles" ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "A long-term knowledge tree covering mathematics, English, engineering courses and programming."
+    : section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。";
+  const hero = section === "projects" ? `
+    <section class="page-hero compact-hero index-hero content-index-hero project-index-hero">
+      <div class="container"><div class="project-index-heading"><h1>${config.title}</h1><p>${description}</p></div>${controls}</div>
+    </section>` : `
     <section class="page-hero compact-hero index-hero content-index-hero">
-      <div class="container"><h1>${config.title}</h1><p>${isEnglish
-        ? section === "projects" ? "Complete engineering records from requirements and architecture through debugging and delivery." : section === "articles" ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "A long-term knowledge tree covering mathematics, English, engineering courses and programming."
-        : section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。"}</p></div>
-    </section>
-    <section class="section container content-index-section">${controls}<div class="content-grid" data-content-grid>${items.map((item) => cardFor(item, section, locale, prefix)).join("")}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching content." : "暂时没有匹配的内容。"}</p></section>`;
+      <div class="container"><h1>${config.title}</h1><p>${description}</p></div>
+    </section>`;
+  const content = `${hero}
+    <section class="section container content-index-section">${section === "projects" ? "" : controls}<div class="content-grid" data-content-grid>${items.map((item) => cardFor(item, section, locale, prefix)).join("")}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching content." : "暂时没有匹配的内容。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output);
   await mkdir(output, { recursive: true });
   await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: config.title, description: config.title, content }));

@@ -281,6 +281,10 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .content-index-hero h1::after { content: none; }
 .content-index-hero p:not(.eyebrow) { max-width: 720px; margin-inline: 0; font-size: 17px; }
 .content-index-section { padding-top: 32px; }
+.project-index-hero .container { display: grid; grid-template-columns: minmax(240px, .7fr) minmax(250px, .78fr) minmax(420px, 1.52fr); align-items: start; gap: 12px 24px; }
+.project-index-heading { min-width: 0; }
+.project-index-hero .content-controls { display: contents; }
+.project-index-hero .result-status { grid-column: 3; min-height: 22px; justify-content: flex-end; }
 .compact-controls { max-width: none; margin: 0 0 28px; }
 .compact-controls .search-box { width: 100%; max-width: none; margin-inline: 0; text-align: left; }
 .filter-control { display: grid; min-width: 0; gap: 7px; color: var(--muted); font-size: 13px; font-weight: 800; }
@@ -592,14 +596,27 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
   .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--surface-soft); }
 }
 
-@media (max-width: 1200px) and (min-width: 1041px) {
+@media (max-width: 1320px) and (min-width: 1041px) {
+  .site-header { justify-content: flex-start; gap: 12px; }
+  .nav-search { flex: 1 1 220px; max-width: 300px; margin: 0; }
   .theme-toggle { width: 42px; min-width: 42px; padding: 0; }
   .theme-toggle-text { display: none; }
+  .site-nav { gap: 18px; margin-left: auto; }
+}
+
+@media (max-width: 1100px) {
+  .project-index-hero .container { grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr); align-items: start; }
+  .project-index-heading { grid-row: 1 / 4; }
+  .project-index-hero .search-box, .project-index-hero .filter-control, .project-index-hero .result-status { grid-column: 2; }
+  .project-index-hero .result-status { justify-content: flex-start; }
 }
 
 @media (max-width: 820px) {
   .section-heading { align-items: start; flex-direction: column; }
   .content-controls, .content-controls-search-only { grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 14px; }
+  .project-index-hero .container { grid-template-columns: minmax(0, 1fr); }
+  .project-index-heading { grid-row: auto; }
+  .project-index-hero .search-box, .project-index-hero .filter-control, .project-index-hero .result-status { grid-column: 1; }
   .result-status { min-height: 24px; white-space: normal; }
   .contact-strip { grid-template-columns: 1fr; }
   .resume-hero .container { grid-template-columns: 1fr; align-items: start; }
