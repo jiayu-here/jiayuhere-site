@@ -1270,7 +1270,7 @@ const homepageUpdates = (recentItems, lastUpdated, locale) => {
   }).join("");
   return `<section class="section recent-updates" data-home-updates aria-labelledby="recent-updates-title">
       <div class="container">
-        <div class="section-heading"><div><p class="eyebrow">${isEnglish ? "Latest records" : "最近记录"}</p><h2 id="recent-updates-title">${isEnglish ? "Recently updated" : "最近更新"}</h2></div><p>${isEnglish ? "Latest source-backed additions across projects, writing, notes and lab logs." : "按内容源中的真实日期汇总项目、文章、笔记与实验日志。"}<br>${isEnglish ? "Latest update" : "最近一次更新"}：<time data-site-updated datetime="${escapeHtml(lastUpdated)}">${escapeHtml(lastUpdated)}</time></p></div>
+        <div class="section-heading"><div><p class="eyebrow">${isEnglish ? "Latest records" : "最近记录"}</p><h2 id="recent-updates-title">${isEnglish ? "Recently updated" : "最近更新"}</h2></div><p>${isEnglish ? "Latest source-backed additions across projects, writing, notes and lab logs." : "按内容源中的真实日期汇总项目、文章、笔记与实验日志。"}<br>${isEnglish ? "Latest update: " : "最近一次更新："}<time data-site-updated datetime="${escapeHtml(lastUpdated)}">${escapeHtml(lastUpdated)}</time></p></div>
         <ol class="recent-update-list">${links}</ol>
       </div>
     </section>`;
