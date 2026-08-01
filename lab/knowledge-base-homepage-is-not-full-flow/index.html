@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>个人知识库：首页可访问不代表流程可用 | Jiayu Lab</title>
+  <meta name="description" content="使用带 Cookie 的端到端请求验证登录、上传、检索、删除与持久化流程。">
+
+
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="个人知识库：首页可访问不代表流程可用 | Jiayu Lab">
+  <meta property="og:description" content="使用带 Cookie 的端到端请求验证登录、上传、检索、删除与持久化流程。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/lab/knowledge-base-homepage-is-not-full-flow/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="个人知识库：首页可访问不代表流程可用 | Jiayu Lab">
+  <meta name="twitter:description" content="使用带 Cookie 的端到端请求验证登录、上传、检索、删除与持久化流程。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/lab/knowledge-base-homepage-is-not-full-flow/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/lab/knowledge-base-homepage-is-not-full-flow/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/knowledge-base-homepage-is-not-full-flow/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/knowledge-base-homepage-is-not-full-flow/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a aria-current="page" href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/lab/knowledge-base-homepage-is-not-full-flow/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>个人知识库：首页可访问不代表流程可用</h1><p class="article-lead">使用带 Cookie 的端到端请求验证登录、上传、检索、删除与持久化流程。</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <section class="section container"><div class="panel prose standalone-prose"><p><strong>项目：</strong> 个人知识库与本地资料检索应用</p>
+<p><strong>问题现象：</strong> 只确认首页能够打开，无法证明登录、上传、解析、检索、详情、删除和退出功能真正可用。</p>
+<p><strong>初步判断：</strong> 问题不一定在页面本身，可能出现在会话 Cookie、文件挂载、解析流程或数据持久化环节。</p>
+<p><strong>排查过程：</strong> 先检查 Compose 配置和 Python 语法，再启动服务；使用保存 Cookie 的 HTTP 请求依次验证完整流程，并在容器重启后复查 SQLite 与上传资料。</p>
+<p><strong>最终原因：</strong> 单一首页健康检查覆盖范围不足，不能验证需要状态和持久化的用户流程。</p>
+<p><strong>解决方法：</strong> 建立带 Cookie 的端到端请求链，逐步验证登录、上传、提问、详情、删除与退出，并检查重启后的数据。</p>
+<p><strong>经验总结：</strong> Web 应用验收应覆盖真实用户路径和持久化，不应把“端口可访问”当作功能完成。</p><div class="button-row"><a class="button secondary-button" href="../../projects/personal-knowledge-base/index.html">查看项目档案</a></div></div></section>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260801a"></script>
+</body>
+</html>

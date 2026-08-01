@@ -4,19 +4,37 @@ import path from "node:path";
 const root = process.cwd();
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260729g";
+const assetVersion = "20260801a";
 const lightThemeColor = "#f7f8fb";
 const githubUser = "jiayu-here";
 const excludedRepositories = new Set(["jiayuhere-site"]);
 const googleAnalyticsId = "G-V2VWFFLH85";
 const noteImageManifest = new Map();
-const googleAnalyticsTag = `  <script async src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${googleAnalyticsId}');
+const googleAnalyticsTag = `  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "${googleAnalyticsId}");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
   </script>`;
+const legacyGoogleAnalyticsSourcePattern = new RegExp(
+  `<script\\b[^>]*src=["']https://www\\.googletagmanager\\.com/gtag/js\\?id=${googleAnalyticsId}["'][^>]*></script>\\s*`,
+  "gi"
+);
+const googleAnalyticsConfigPattern = new RegExp(`gtag\\(['"]config['"]\\s*,\\s*['"]${googleAnalyticsId}['"]\\)`);
 
 const sections = {
   projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品" },
@@ -118,7 +136,7 @@ const readingMinutes = (value) => {
   return Math.max(1, Math.ceil(chineseCharacters / 300 + latinWords / 200));
 };
 
-const normalizeLastmod = (value, fallback = "2026-07-29") => {
+const normalizeLastmod = (value, fallback = "2026-08-01") => {
   const date = String(value || "");
   if (/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
   if (/^\d{4}-\d{2}$/.test(date)) return `${date}-01`;
@@ -337,6 +355,18 @@ GitHub 标注的主要语言或技术为 ${language}。
 
 const pruneOutputs = async (section, items, locale) => {
   const outputDir = path.join(root, localeConfig[locale].routeRoot, sections[section].output);
+  await mkdir(outputDir, { recursive: true });
+  const activeSlugs = new Set(items.map((item) => item.meta.slug));
+  const entries = await readdir(outputDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory() && !activeSlugs.has(entry.name)) {
+      await rm(path.join(outputDir, entry.name), { recursive: true, force: true });
+    }
+  }
+};
+
+const pruneLogOutputs = async (items, locale) => {
+  const outputDir = path.join(root, localeConfig[locale].routeRoot, logConfig.output);
   await mkdir(outputDir, { recursive: true });
   const activeSlugs = new Set(items.map((item) => item.meta.slug));
   const entries = await readdir(outputDir, { withFileTypes: true });
@@ -853,7 +883,17 @@ const ensurePageMetadata = (html, url) => {
   }
 
   html = ensureSharedPageShell(html, url);
-  if (!html.includes(`gtag/js?id=${googleAnalyticsId}`)) html = html.replace("<head>", `<head>\n${googleAnalyticsTag}`);
+  html = ensureDeferredAnalytics(html);
+  return html;
+};
+
+const ensureDeferredAnalytics = (html) => {
+  html = html.replace(legacyGoogleAnalyticsSourcePattern, "");
+  html = html.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>\s*/gi, (script, attributes, body) => {
+    if (attributes.includes("data-google-analytics-loader")) return script;
+    return googleAnalyticsConfigPattern.test(body) ? "" : script;
+  });
+  if (!html.includes("data-google-analytics-loader")) html = html.replace("<head>", `<head>\n${googleAnalyticsTag}`);
   return html;
 };
 
@@ -1024,26 +1064,59 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: item.meta.title, description: item.meta.description, content, type: "article", keywords: item.meta.tags || [], blogPostingDate: section === "articles" ? item.meta.date : "", modifiedDate: item.meta.updated || "", usesMath }));
 };
 
+const logField = (item, label) => {
+  const pattern = new RegExp(`\\*\\*${label}[:：]\\*\\*\\s*([^\\n]+)`);
+  return item.body.match(pattern)?.[1]?.trim() || "";
+};
+
+const buildLogDetail = async (item, locale) => {
+  const isEnglish = locale === "en";
+  const rendered = markdownToHtml(item.body, locale).html;
+  const projectSlug = String(item.meta.projectSlug || "");
+  if (!projectSlug) throw new Error(`Log projectSlug missing: ${item.meta.title}`);
+  const content = `
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? "Back to lab logs" : "返回实验日志"}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta"><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time></div></header>
+      <section class="section container"><div class="panel prose standalone-prose">${rendered}<div class="button-row"><a class="button secondary-button" href="../../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project record" : "查看项目档案"}</a></div></div></section>
+    </article>`;
+  const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output, item.meta.slug);
+  await mkdir(output, { recursive: true });
+  await writeFile(path.join(output, "index.html"), page({
+    prefix: isEnglish ? "../../../" : "../../",
+    locale,
+    route: `${logConfig.output}/${item.meta.slug}/`,
+    active: "logs",
+    title: item.meta.title,
+    description: item.meta.description,
+    content,
+    type: "article",
+    modifiedDate: item.meta.updated || item.meta.date || ""
+  }));
+};
+
 const buildLabIndex = async (items, locale) => {
   const isEnglish = locale === "en";
   const prefix = isEnglish ? "../../" : "../";
   const route = `${logConfig.output}/`;
+  const labels = isEnglish
+    ? { symptom: "Symptom", cause: "Root cause", lesson: "Lesson" }
+    : { symptom: "问题", cause: "根因", lesson: "结论" };
   const timeline = items.map((item) => {
     const projectSlug = String(item.meta.projectSlug || "");
     if (!projectSlug) throw new Error(`Log projectSlug missing: ${item.meta.title}`);
-    const rendered = markdownToHtml(item.body, locale).html;
     const searchText = [item.meta.title, item.meta.description, plainText(item.body)].join(" ").toLowerCase();
-    return `<article class="timeline-item" id="${escapeHtml(item.meta.slug)}" data-search="${escapeHtml(searchText)}"><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time><div><h2>${escapeHtml(item.meta.title)}</h2><div class="log-details">${rendered}</div><a class="text-link" href="../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project" : "查看项目详情"} <span aria-hidden="true">→</span></a></div></article>`;
+    const project = logField(item, isEnglish ? "Project" : "项目");
+    const symptom = logField(item, isEnglish ? "Symptom" : "问题现象") || item.meta.description;
+    const cause = logField(item, isEnglish ? "Root cause" : "最终原因");
+    const lesson = logField(item, isEnglish ? "Lesson" : "经验总结");
+    return `<article class="timeline-item" id="${escapeHtml(item.meta.slug)}" data-search="${escapeHtml(searchText)}"><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time><div><h2>${escapeHtml(item.meta.title)}</h2><p class="log-project">${escapeHtml(project || item.meta.description)}</p><dl class="log-summary-list"><div><dt>${labels.symptom}</dt><dd>${escapeHtml(symptom)}</dd></div><div><dt>${labels.cause}</dt><dd>${escapeHtml(cause)}</dd></div><div><dt>${labels.lesson}</dt><dd>${escapeHtml(lesson)}</dd></div></dl><div class="log-links"><a class="text-link" href="${escapeHtml(item.meta.slug)}/index.html">${isEnglish ? "Read full review" : "阅读完整复盘"} <span aria-hidden="true">→</span></a><a class="text-link" href="../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project" : "查看项目档案"} <span aria-hidden="true">→</span></a></div></div></article>`;
   }).join("\n");
-  const template = isEnglish
-    ? `<article class="timeline-item"><time>TEMPLATE</time><div><h2>Future Log Template</h2><p><strong>Date:</strong> YYYY-MM-DD · <strong>Project:</strong> name</p><p><strong>Symptom:</strong> Repeatable and observable behavior.</p><p><strong>Hypothesis:</strong> Ranked possibilities, not conclusions.</p><p><strong>Investigation:</strong> Environment → reproduction → minimal experiment → comparison.</p><p><strong>Root cause:</strong> Evidence-supported explanation.</p><p><strong>Fix:</strong> Change plus regression evidence.</p><p><strong>Lesson:</strong> Reusable method and remaining limits.</p></div></article>`
-    : `<article class="timeline-item"><time>TEMPLATE</time><div><h2>后续日志记录模板</h2><p><strong>日期：</strong>YYYY-MM-DD　<strong>项目：</strong>项目名称</p><p><strong>问题现象：</strong>可复现、可观察的异常。</p><p><strong>初步判断：</strong>按可能性列出假设，不把猜测写成结论。</p><p><strong>排查过程：</strong>环境与版本 → 复现步骤 → 最小实验 → 对照结果。</p><p><strong>最终原因：</strong>由证据支持的根因。</p><p><strong>解决方法：</strong>修改内容与回归验证。</p><p><strong>经验总结：</strong>可复用的方法和仍未解决的限制。</p></div></article>`;
   const heroDescription = isEnglish
     ? `${items.length} public-project debugging records preserving the symptom, hypothesis, investigation, evidence-supported cause, fix and reusable lesson.`
     : `${items.length} 条公开项目调试记录，保留问题现象、初步判断、排查过程、证据支持的根因、解决方法与可复用经验。`;
   const content = `
     <section class="page-hero compact-hero index-hero"><div class="container"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1><p>${heroDescription}</p></div></section>
-    <section class="section container content-index-section"><div class="content-controls compact-controls"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div><div class="timeline">${timeline}\n${template}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
+    <section class="section container content-index-section"><div class="content-controls compact-controls"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div><div class="timeline">${timeline}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output);
   await mkdir(output, { recursive: true });
   await writeFile(path.join(output, "index.html"), page({
@@ -1222,6 +1295,14 @@ const build = async () => {
       contentDates.push(...items.map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
       await buildIndex(section, items, locale);
     }
+    await pruneLogOutputs(authoredLogs[locale], locale);
+    for (const item of authoredLogs[locale]) {
+      await buildLogDetail(item, locale);
+      sitemapEntries.push({
+        url: `${localeConfig[locale].routeRoot}${logConfig.output}/${item.meta.slug}/`,
+        lastmod: normalizeLastmod(item.meta.updated || item.meta.date)
+      });
+    }
     await buildLabIndex(authoredLogs[locale], locale);
     contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
     await buildRss(articleItems, locale);
@@ -1268,7 +1349,7 @@ const build = async () => {
   }
   for (const url of ["404.html", "en/404.html"]) {
     const htmlPath = path.join(root, url);
-    const html = ensureSharedPageShell(await readFile(htmlPath, "utf8"), url);
+    const html = ensureDeferredAnalytics(ensureSharedPageShell(await readFile(htmlPath, "utf8"), url));
     await writeFile(htmlPath, html);
   }
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...sitemapByUrl].map(([url, lastmod]) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastmod}</lastmod></url>`).join("\n")}\n</urlset>\n`;

@@ -1,12 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V2VWFFLH85');
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,8 +40,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="feed.xml">
   <link rel="manifest" href="../site.webmanifest">
-  <link rel="icon" href="../favicon.ico?v=20260729g" sizes="any">
-  <link rel="stylesheet" href="../assets/styles.css?v=20260729g">
+  <link rel="icon" href="../favicon.ico?v=20260801a" sizes="any">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260801a">
   <meta property="og:image:alt" content="Jiayu Lab">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:title" content="Jiayu Lab | Engineering, Code and Continuous Learning">
@@ -120,31 +133,6 @@
             </nav>
           </div>
         </div>
-        <div class="hero-visual" data-hero-rainbow aria-hidden="true">
-          <svg class="hero-rainbow" viewBox="0 0 420 420" focusable="false">
-            <defs>
-              <linearGradient id="hero-rainbow-gradient" x1="38" y1="78" x2="386" y2="330" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#1d4ed8"/>
-                <stop offset=".38" stop-color="#4338ca"/>
-                <stop offset=".7" stop-color="#c026d3"/>
-                <stop offset="1" stop-color="#ff2d6f"/>
-              </linearGradient>
-            </defs>
-            <path class="hero-rainbow-blob" d="M49 68C132 4 277 5 365 73c82 63 68 192 5 268-70 84-220 91-306 25C-23 300-30 129 49 68Z"/>
-            <g class="hero-rainbow-layer hero-rainbow-layer-back">
-              <path class="hero-rainbow-ribbon" d="M34 116C135 30 303 35 390 119"/>
-              <path class="hero-rainbow-dashes" pathLength="100" d="M34 116C135 30 303 35 390 119" stroke="url(#hero-rainbow-gradient)"/>
-            </g>
-            <g class="hero-rainbow-layer hero-rainbow-layer-middle">
-              <path class="hero-rainbow-ribbon" d="M25 225c108-98 284-96 378 3"/>
-              <path class="hero-rainbow-dashes" pathLength="100" d="M25 225c108-98 284-96 378 3" stroke="url(#hero-rainbow-gradient)"/>
-            </g>
-            <g class="hero-rainbow-layer hero-rainbow-layer-front">
-              <path class="hero-rainbow-ribbon" d="M55 326c99-83 242-81 318-9"/>
-              <path class="hero-rainbow-dashes" pathLength="100" d="M55 326c99-83 242-81 318-9" stroke="url(#hero-rainbow-gradient)"/>
-            </g>
-          </svg>
-        </div>
       </div>
     </section>
 
@@ -154,6 +142,6 @@
   </main>
 
   <footer class="site-footer"><div><a class="brand footer-brand" href="index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div><div class="footer-links"><a href="../en/privacy/index.html">Privacy</a><a href="about/index.html">About</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="feed.xml">RSS</a><a href="../sitemap.xml">Sitemap</a></div><p class="copyright">© <span data-current-year></span> Jiayu Lab</p></footer>
-  <script src="../assets/script.js?v=20260729g"></script>
+  <script src="../assets/script.js?v=20260801a"></script>
 </body>
 </html>

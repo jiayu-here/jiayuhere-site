@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>first-repo: Saving Locally Did Not Change GitHub | Jiayu Lab</title>
+  <meta name="description" content="Explains save, stage, commit and push as four separate steps in the Git workflow.">
+
+
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="first-repo: Saving Locally Did Not Change GitHub | Jiayu Lab">
+  <meta property="og:description" content="Explains save, stage, commit and push as four separate steps in the Git workflow.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/lab/first-repo-save-is-not-push/">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="first-repo: Saving Locally Did Not Change GitHub | Jiayu Lab">
+  <meta name="twitter:description" content="Explains save, stage, commit and push as four separate steps in the Git workflow.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/en/lab/first-repo-save-is-not-push/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/lab/first-repo-save-is-not-push/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/first-repo-save-is-not-push/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/first-repo-save-is-not-push/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a  href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a aria-current="page" href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../lab/first-repo-save-is-not-push/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to lab logs</a><h1>first-repo: Saving Locally Did Not Change GitHub</h1><p class="article-lead">Explains save, stage, commit and push as four separate steps in the Git workflow.</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <section class="section container"><div class="panel prose standalone-prose"><p><strong>Project:</strong> first-repo Git and GitHub Introductory Exercise</p>
+<p><strong>Symptom:</strong> A saved file did not appear on GitHub.</p>
+<p><strong>Hypothesis:</strong> The file may not have been staged or committed, or the commit may not have been pushed to the intended branch.</p>
+<p><strong>Investigation:</strong> Checked <code>git status</code>, <code>git log</code>, the current branch, remote URL and the GitHub commit page.</p>
+<p><strong>Root cause:</strong> Save, local commit and remote push were treated as one action.</p>
+<p><strong>Fix:</strong> Established the explicit save, stage, commit and push sequence with a status or log check at each boundary.</p>
+<p><strong>Lesson:</strong> Git does not update a remote merely because a file was saved.</p><div class="button-row"><a class="button secondary-button" href="../../projects/first-repo/index.html">View project record</a></div></div></section>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20260801a"></script>
+</body>
+</html>

@@ -45,27 +45,6 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
 
-const heroRainbow = document.querySelector("[data-hero-rainbow]");
-if (heroRainbow && window.matchMedia("(hover: hover) and (pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const hero = heroRainbow.closest(".hero");
-  let heroRainbowFrame;
-  const setHeroRainbowPosition = (x, y) => {
-    window.cancelAnimationFrame(heroRainbowFrame);
-    heroRainbowFrame = window.requestAnimationFrame(() => {
-      heroRainbow.style.setProperty("--hero-pointer-x", x.toFixed(3));
-      heroRainbow.style.setProperty("--hero-pointer-y", y.toFixed(3));
-    });
-  };
-  hero?.addEventListener("pointermove", (event) => {
-    const bounds = hero.getBoundingClientRect();
-    setHeroRainbowPosition(
-      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-      ((event.clientY - bounds.top) / bounds.height) * 2 - 1
-    );
-  });
-  hero?.addEventListener("pointerleave", () => setHeroRainbowPosition(0, 0));
-}
-
 const articleToc = document.querySelector(".article-toc");
 const compactArticleToc = window.matchMedia("(max-width: 980px)");
 const syncArticleToc = ({ matches }) => {
@@ -84,7 +63,7 @@ searchTrigger.innerHTML = `
   <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M11.5 10.5 15 14l-1 1-3.5-3.5a5.5 5.5 0 1 1 1-1ZM7.5 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"/></svg>
   <span class="nav-search-text">${t("搜索项目、文章和笔记", "Search projects, articles and notes")}</span>
   <kbd>Ctrl K</kbd>`;
-searchTrigger.setAttribute("aria-label", t("打开全站搜索", "Open site search"));
+searchTrigger.setAttribute("aria-label", t("搜索项目、文章和笔记，打开全站搜索", "Search projects, articles and notes, open site search"));
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
 
@@ -147,7 +126,12 @@ const renderSearchResults = async () => {
       return terms.every((term) => haystack.includes(term));
     });
 
-    dialogStatus.textContent = matches.length ? t(`找到 ${matches.length} 项内容。`, `${matches.length} result${matches.length === 1 ? "" : "s"} found.`) : t("没有找到匹配内容，请换一个关键词。", "No matching content. Try another keyword.");
+    const shownCount = Math.min(matches.length, 12);
+    dialogStatus.textContent = matches.length
+      ? matches.length > shownCount
+        ? t(`找到 ${matches.length} 项内容，显示前 ${shownCount} 项。`, `${matches.length} results found; showing the first ${shownCount}.`)
+        : t(`找到 ${matches.length} 项内容。`, `${matches.length} result${matches.length === 1 ? "" : "s"} found.`)
+      : t("没有找到匹配内容，请换一个关键词。", "No matching content. Try another keyword.");
     matches.slice(0, 12).forEach((item) => {
       const link = document.createElement("a");
       link.className = "search-result";
@@ -281,8 +265,10 @@ backToTop.addEventListener("click", () => {
 const searchInput = document.querySelector("[data-content-search]");
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
 const contentCards = searchInput
-  ? Array.from(document.querySelectorAll("[data-content-card], .tool-grid > .tool-card, .resource-grid > .resource-group, .timeline > .timeline-item"))
+  ? Array.from(document.querySelectorAll("[data-content-card], .tool-grid > .tool-card, .timeline > .timeline-item"))
   : Array.from(document.querySelectorAll("[data-content-card]"));
+const resourceGroups = searchInput ? Array.from(document.querySelectorAll(".resource-grid > .resource-group")) : [];
+const resourceItems = resourceGroups.flatMap((group) => Array.from(group.querySelectorAll("li")));
 const noteGroups = Array.from(document.querySelectorAll("[data-note-group]"));
 const notesIndex = document.querySelector("[data-notes-index]");
 const noteDetails = notesIndex ? Array.from(notesIndex.querySelectorAll("[data-note-details]")) : [];
@@ -291,6 +277,7 @@ const emptyState = document.querySelector("[data-empty-state]");
 let activeFilter = "all";
 const noteIndexStateKey = `jiayuhere-notes-index-state-v1-${document.documentElement.lang}`;
 let savedNoteIndexState = null;
+const autoOpenedNoteDetails = new Set();
 
 if (notesIndex) {
   try {
@@ -301,8 +288,15 @@ if (notesIndex) {
   }
 }
 
-const updateContentList = ({ expandMatchingNoteGroups = false } = {}) => {
-  if (!contentCards.length) return;
+const closeAutoOpenedNoteGroups = () => {
+  autoOpenedNoteDetails.forEach((detail) => {
+    detail.open = false;
+  });
+  autoOpenedNoteDetails.clear();
+};
+
+const updateContentList = ({ autoExpandMatchingNotes = false } = {}) => {
+  if (!contentCards.length && !resourceItems.length) return;
   const query = searchInput?.value.trim().toLowerCase() || "";
   let visibleCount = 0;
 
@@ -315,15 +309,32 @@ const updateContentList = ({ expandMatchingNoteGroups = false } = {}) => {
     if (visible) visibleCount += 1;
   });
 
+  resourceItems.forEach((item) => {
+    const group = item.closest(".resource-group");
+    const groupName = group?.querySelector("h2")?.textContent || "";
+    const link = item.querySelector("a");
+    const searchableText = `${groupName} ${item.textContent || ""} ${link?.href || ""}`.toLowerCase();
+    const visible = !query || searchableText.includes(query);
+    item.classList.toggle("is-hidden", !visible);
+    if (visible) visibleCount += 1;
+  });
+  resourceGroups.forEach((group) => {
+    group.hidden = !Array.from(group.querySelectorAll("li")).some((item) => !item.classList.contains("is-hidden"));
+  });
+
   noteGroups.forEach((group) => {
     const hasVisibleCard = Array.from(group.querySelectorAll("[data-content-card]")).some((card) => !card.classList.contains("is-hidden"));
     group.hidden = !hasVisibleCard;
   });
 
-  if (expandMatchingNoteGroups) {
+  closeAutoOpenedNoteGroups();
+  if (autoExpandMatchingNotes && query && visibleCount <= 12) {
     noteDetails.forEach((group) => {
       const hasVisibleCard = Array.from(group.querySelectorAll("[data-content-card]")).some((card) => !card.classList.contains("is-hidden"));
-      if (hasVisibleCard) group.open = true;
+      if (hasVisibleCard) {
+        group.open = true;
+        autoOpenedNoteDetails.add(group);
+      }
     });
   }
 
@@ -340,10 +351,10 @@ filterButtons.forEach((button) => {
       item.classList.toggle("is-active", isActive);
       item.setAttribute("aria-pressed", String(isActive));
     });
-    updateContentList({ expandMatchingNoteGroups: true });
+    updateContentList();
   });
 });
-searchInput?.addEventListener("input", debounce(() => updateContentList({ expandMatchingNoteGroups: true })));
+searchInput?.addEventListener("input", debounce(() => updateContentList({ autoExpandMatchingNotes: true })));
 
 if (savedNoteIndexState) {
   const storedFilter = filterButtons.some((button) => button.dataset.filter === savedNoteIndexState.filter) ? savedNoteIndexState.filter : "all";

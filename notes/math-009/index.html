@@ -1,12 +1,25 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V2VWFFLH85');
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,9 +45,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-009/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-009/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260729g" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260729g">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
 
 </head>
 <body>
@@ -98,6 +111,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260729g"></script>
+  <script src="../../assets/script.js?v=20260801a"></script>
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>双路温度检测：PB3/PB4 按键与 JTAG 冲突 | Jiayu Lab</title>
+  <meta name="description" content="通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。">
+
+
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="双路温度检测：PB3/PB4 按键与 JTAG 冲突 | Jiayu Lab">
+  <meta property="og:description" content="通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="双路温度检测：PB3/PB4 按键与 JTAG 冲突 | Jiayu Lab">
+  <meta name="twitter:description" content="通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <link rel="canonical" href="https://www.jiayuhere.com/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a  href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a aria-current="page" href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/lab/temperature-monitor-pb3-pb4-jtag-conflict/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>双路温度检测：PB3/PB4 按键与 JTAG 冲突</h1><p class="article-lead">通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <section class="section container"><div class="panel prose standalone-prose"><p><strong>项目：</strong> STM32F103 双路温度检测与报警系统</p>
+<p><strong>问题现象：</strong> 使用 PB3/PB4 作为按键输入时，按键功能与默认调试接口发生冲突。</p>
+<p><strong>初步判断：</strong> 先检查按键接线和消抖逻辑，再检查这两个引脚是否仍由芯片复用功能占用。</p>
+<p><strong>排查过程：</strong> 按主控、单个传感器、OLED、报警、按键、SD 和串口的顺序逐项接入，并核对 STM32F103 的调试端口复用配置。</p>
+<p><strong>最终原因：</strong> PB3/PB4 默认属于完整 JTAG 接口，未释放时不能按普通 GPIO 使用。</p>
+<p><strong>解决方法：</strong> 关闭完整 JTAG，仅保留 Serial Wire 调试，再验证按键输入；同时保留 SD 状态与错误计数用于后续排查。</p>
+<p><strong>经验总结：</strong> 遇到 GPIO 无响应时，应先核对复用功能和调试接口，再修改业务逻辑。工程和可烧录 HEX 已生成，传感器电压、SD 卡和报警功能仍需上板验证。</p><div class="button-row"><a class="button secondary-button" href="../../projects/temperature-inspector-stm32f103/index.html">查看项目档案</a></div></div></section>
+    </article></main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20260801a"></script>
+</body>
+</html>

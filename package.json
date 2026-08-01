@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-content.mjs",
-    "check": "node --check assets/script.js && node --check scripts/build-content.mjs && node --check scripts/serve.mjs && node --check sw.js",
+    "check": "node --check assets/script.js && node --check scripts/build-content.mjs && node --check scripts/serve.mjs && node --check scripts/check-cache-version.mjs && node --check sw.js && node scripts/check-cache-version.mjs",
     "optimize:notes": "node scripts/build-note-previews.mjs",
     "preview": "node scripts/serve.mjs"
   }
