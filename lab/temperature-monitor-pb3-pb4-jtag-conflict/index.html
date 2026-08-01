@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>双路温度检测：PB3/PB4 按键与 JTAG 冲突 | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/temperature-monitor-pb3-pb4-jtag-conflict/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -69,7 +77,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>双路温度检测：PB3/PB4 按键与 JTAG 冲突</h1><p class="article-lead">通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>双路温度检测：PB3/PB4 按键与 JTAG 冲突</h1><p class="article-lead">通过检查调试端口复用定位 STM32F103 按键 GPIO 无响应问题。</p><div class="article-meta"><span class="record-meta"><span class="record-date"><span>记录日期</span><time datetime="2026-07">2026-07</time></span></span></div></header>
       <section class="section container"><div class="panel prose standalone-prose"><p><strong>项目：</strong> STM32F103 双路温度检测与报警系统</p>
 <p><strong>问题现象：</strong> 使用 PB3/PB4 作为按键输入时，按键功能与默认调试接口发生冲突。</p>
 <p><strong>初步判断：</strong> 先检查按键接线和消抖逻辑，再检查这两个引脚是否仍由芯片复用功能占用。</p>
@@ -77,6 +85,10 @@
 <p><strong>最终原因：</strong> PB3/PB4 默认属于完整 JTAG 接口，未释放时不能按普通 GPIO 使用。</p>
 <p><strong>解决方法：</strong> 关闭完整 JTAG，仅保留 Serial Wire 调试，再验证按键输入；同时保留 SD 状态与错误计数用于后续排查。</p>
 <p><strong>经验总结：</strong> 遇到 GPIO 无响应时，应先核对复用功能和调试接口，再修改业务逻辑。工程和可烧录 HEX 已生成，传感器电压、SD 卡和报警功能仍需上板验证。</p><div class="button-row"><a class="button secondary-button" href="../../projects/temperature-inspector-stm32f103/index.html">查看项目档案</a></div></div></section>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/projects/temperature-inspector-stm32f103/"><span class="related-type">项目</span><strong>STM32F103 双路温度检测与报警系统</strong><span>集成 DS18B20、PT100、OLED、声光报警、SD 记录、串口调参和 Flash 阈值保存的 STM32 工程。</span></a><a class="related-card" href="/blog/stm32-temperature-nonblocking-design/"><span class="related-type">博客</span><strong>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</strong><span>以双路温度检测为例，拆解非阻塞采样、阈值管理、报警节奏、参数保存与上板调试方法。</span></a><a class="related-card" href="/notes/vision-robot-arm-commissioning-checklist/"><span class="related-type">笔记</span><strong>视觉机械臂标定、通信与实机验收清单</strong><span>按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -84,6 +96,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

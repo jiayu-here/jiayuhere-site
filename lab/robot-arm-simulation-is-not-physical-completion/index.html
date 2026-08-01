@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>视觉机械臂：仿真通过但不能写成实机完成 | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/robot-arm-simulation-is-not-physical-completion/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/robot-arm-simulation-is-not-physical-completion/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -69,7 +77,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>视觉机械臂：仿真通过但不能写成实机完成</h1><p class="article-lead">区分机械臂的软件闭环、固件构建结果与必须依赖真实硬件的验收项目。</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回实验日志</a><h1>视觉机械臂：仿真通过但不能写成实机完成</h1><p class="article-lead">区分机械臂的软件闭环、固件构建结果与必须依赖真实硬件的验收项目。</p><div class="article-meta"><span class="record-meta"><span class="record-date"><span>记录日期</span><time datetime="2026-07">2026-07</time></span></span></div></header>
       <section class="section container"><div class="panel prose standalone-prose"><p><strong>项目：</strong> STM32 视觉机械臂自动分拣系统</p>
 <p><strong>问题现象：</strong> 颜色识别、任务队列、串口协议、控制器仿真和固件编译均通过，但没有机械臂实物，无法测量真实抓取精度。</p>
 <p><strong>初步判断：</strong> 软件闭环证据可以验证算法和接口，不能替代舵机零偏、连杆尺寸、相机标定、FSR 阈值和电气保护验收。</p>
@@ -77,6 +85,10 @@
 <p><strong>最终原因：</strong> 软件模型使用的是配置参数，真实机械系统的几何误差、供电能力、传感器阈值和装配偏差只能在装机后获得。</p>
 <p><strong>解决方法：</strong> 把状态拆成“软件已验证、固件编译通过、实机待验证”，并提供从独立供电、单关节、四点标定、FSR 标定到自动分拣的分阶段验收顺序。</p>
 <p><strong>经验总结：</strong> 没有实物时最重要的不是隐藏限制，而是保留可复现的软件证据，并把真实硬件验收条件写清楚。</p><div class="button-row"><a class="button secondary-button" href="../../projects/stm32-vision-robot-arm-sorter/index.html">查看项目档案</a></div></div></section>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/projects/stm32-vision-robot-arm-sorter/"><span class="related-type">项目</span><strong>STM32 视觉机械臂自动分拣系统</strong><span>基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。</span></a><a class="related-card" href="/blog/vision-robot-arm-coordinate-safety-boundaries/"><span class="related-type">博客</span><strong>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</strong><span>结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</span></a><a class="related-card" href="/notes/vision-robot-arm-commissioning-checklist/"><span class="related-type">笔记</span><strong>视觉机械臂标定、通信与实机验收清单</strong><span>按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -84,6 +96,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

@@ -54,16 +54,16 @@ syncArticleToc(compactArticleToc);
 compactArticleToc.addEventListener("change", syncArticleToc);
 
 const sectionLabels = isEnglish
-  ? { projects: "Project", articles: "Article", notes: "Note" }
-  : { projects: "项目", articles: "博客", notes: "笔记" };
+  ? { projects: "Project", articles: "Blog", notes: "Note", toolbox: "Toolbox", resources: "Resources", logs: "Lab log" }
+  : { projects: "项目", articles: "博客", notes: "笔记", toolbox: "工具箱", resources: "资源", logs: "日志" };
 const searchTrigger = document.createElement("button");
 searchTrigger.type = "button";
 searchTrigger.className = "nav-search";
 searchTrigger.innerHTML = `
   <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M11.5 10.5 15 14l-1 1-3.5-3.5a5.5 5.5 0 1 1 1-1ZM7.5 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"/></svg>
-  <span class="nav-search-text">${t("搜索项目、文章和笔记", "Search projects, articles and notes")}</span>
+  <span class="nav-search-text">${t("搜索六个栏目", "Search all six sections")}</span>
   <kbd>Ctrl K</kbd>`;
-searchTrigger.setAttribute("aria-label", t("搜索项目、文章和笔记，打开全站搜索", "Search projects, articles and notes, open site search"));
+searchTrigger.setAttribute("aria-label", t("搜索项目、博客、笔记、工具箱、资源和日志", "Search projects, blog, notes, toolbox, resources and lab logs"));
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
 
@@ -77,12 +77,67 @@ searchDialog.innerHTML = `
       <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">${t("搜索全站内容", "Search the site")}</h2></div>
       <button class="search-close" type="button" aria-label="${t("关闭搜索", "Close search")}">×</button>
     </div>
-    <label class="search-dialog-field"><span>${t("输入项目、文章、笔记或技术关键词", "Enter a project, article, note or technical keyword")}</span><input type="search" autocomplete="off" placeholder="${t("例如：FPGA、FreeRTOS、通信原理", "For example: FPGA, FreeRTOS, communication theory")}"></label>
+    <label class="search-dialog-field"><span>${t("输入栏目内容或技术关键词", "Enter content or a technical keyword")}</span><input type="search" autocomplete="off" placeholder="${t("例如：FPGA、FreeRTOS、波特率", "For example: FPGA, FreeRTOS, baud rate")}"></label>
     <p class="search-dialog-status" aria-live="polite">${t("输入关键词后开始搜索。", "Enter a keyword to search.")}</p>
     <div class="search-results"></div>
   </section>`;
 
+const themeStorageKey = "jiayuhere-theme";
+const systemDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+const themeModes = ["system", "light", "dark"];
+let themeMode = "system";
+try {
+  const storedTheme = localStorage.getItem(themeStorageKey);
+  if (themeModes.includes(storedTheme)) themeMode = storedTheme;
+} catch {
+  themeMode = "system";
+}
+
+const themeToggle = document.createElement("button");
+themeToggle.type = "button";
+themeToggle.className = "theme-toggle";
+const themeIcon = document.createElement("span");
+themeIcon.className = "theme-toggle-icon";
+themeIcon.setAttribute("aria-hidden", "true");
+const themeText = document.createElement("span");
+themeText.className = "theme-toggle-text";
+themeToggle.append(themeIcon, themeText);
+
+const applyTheme = (mode) => {
+  themeMode = themeModes.includes(mode) ? mode : "system";
+  if (themeMode === "system") delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = themeMode;
+  try {
+    if (themeMode === "system") localStorage.removeItem(themeStorageKey);
+    else localStorage.setItem(themeStorageKey, themeMode);
+  } catch {
+    // Theme selection still works for the current page when storage is unavailable.
+  }
+  const labels = isEnglish
+    ? { system: "System", light: "Light", dark: "Dark" }
+    : { system: "跟随系统", light: "浅色", dark: "深色" };
+  const icons = { system: "◐", light: "☀", dark: "☾" };
+  themeIcon.textContent = icons[themeMode];
+  themeText.textContent = labels[themeMode];
+  themeToggle.setAttribute("aria-label", t(`当前主题：${labels[themeMode]}，点击切换`, `Current theme: ${labels[themeMode]}. Activate to switch.`));
+  themeToggle.title = themeToggle.getAttribute("aria-label");
+  const effectiveTheme = themeMode === "system" ? (systemDarkTheme.matches ? "dark" : "light") : themeMode;
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+    if (themeMode === "system") meta.content = meta.media.includes("dark") ? "#0d1117" : "#f7f8fb";
+    else meta.content = effectiveTheme === "dark" ? "#0d1117" : "#f7f8fb";
+  });
+};
+
+themeToggle.addEventListener("click", () => {
+  applyTheme(themeModes[(themeModes.indexOf(themeMode) + 1) % themeModes.length]);
+});
+systemDarkTheme.addEventListener("change", () => {
+  if (themeMode === "system") applyTheme("system");
+});
+applyTheme(themeMode);
+
 siteHeader?.insertBefore(searchTrigger, navToggle || siteNav || null);
+siteHeader?.insertBefore(themeToggle, navToggle || siteNav || null);
 document.body.append(searchDialog);
 
 const dialogInput = searchDialog.querySelector("input");
@@ -121,10 +176,25 @@ const renderSearchResults = async () => {
   try {
     const index = await loadSearchIndex();
     const terms = query.split(/\s+/).filter(Boolean);
-    const matches = index.filter((item) => {
-      const haystack = item.searchText || [item.title, item.description, item.category, ...(item.tags || [])].join(" ").toLowerCase();
-      return terms.every((term) => haystack.includes(term));
-    });
+    const matches = index.map((item) => {
+      const title = String(item.title || "").toLowerCase();
+      const description = String(item.description || "").toLowerCase();
+      const category = String(item.category || "").toLowerCase();
+      const tags = (item.tags || []).map((tag) => String(tag).toLowerCase());
+      const keywords = String(item.keywords || "").toLowerCase();
+      const haystack = [title, description, category, ...tags, keywords].join(" ");
+      if (!terms.every((term) => haystack.includes(term))) return null;
+      let score = title === query ? 160 : title.startsWith(query) ? 110 : title.includes(query) ? 80 : 0;
+      terms.forEach((term) => {
+        if (title.includes(term)) score += 24;
+        if (tags.some((tag) => tag === term)) score += 18;
+        else if (tags.some((tag) => tag.includes(term))) score += 10;
+        if (category.includes(term)) score += 8;
+        if (description.includes(term)) score += 4;
+        if (keywords.includes(term)) score += 1;
+      });
+      return { item, score };
+    }).filter(Boolean).sort((left, right) => right.score - left.score || left.item.title.localeCompare(right.item.title)).map(({ item }) => item);
 
     const shownCount = Math.min(matches.length, 12);
     dialogStatus.textContent = matches.length
@@ -479,7 +549,8 @@ document.querySelector("[data-divider-form]")?.addEventListener("submit", (event
   }
   const vout = vin * r2 / (r1 + r2);
   const current = vin / ((r1 + r2) * 1000) * 1000;
-  result.textContent = t(`输出电压  ${vout.toFixed(4)} V\n回路电流  ${current.toFixed(4)} mA\n分压比例  ${(vout / vin * 100).toFixed(2)}%`, `Output voltage ${vout.toFixed(4)} V\nLoop current   ${current.toFixed(4)} mA\nDivider ratio  ${(vout / vin * 100).toFixed(2)}%`);
+  const dividerRatio = r2 / (r1 + r2) * 100;
+  result.textContent = t(`输出电压  ${vout.toFixed(4)} V\n回路电流  ${current.toFixed(4)} mA\n分压比例  ${dividerRatio.toFixed(2)}%`, `Output voltage ${vout.toFixed(4)} V\nLoop current   ${current.toFixed(4)} mA\nDivider ratio  ${dividerRatio.toFixed(2)}%`);
 });
 
 document.querySelector("[data-pwm-form]")?.addEventListener("submit", (event) => {
@@ -497,7 +568,7 @@ document.querySelector("[data-pwm-form]")?.addEventListener("submit", (event) =>
   }
   const counterClock = timerClock / (prescaler + 1);
   const periodCounts = Math.round(counterClock / frequency);
-  if (periodCounts < 1) {
+  if (frequency > counterClock || periodCounts < 1) {
     result.textContent = t("当前计数时钟低于目标 PWM 频率，请减小 PSC 或降低目标频率。", "The counter clock is below the target PWM frequency. Reduce PSC or lower the target frequency.");
     return;
   }
@@ -592,12 +663,12 @@ document.querySelector("[data-adc-form]")?.addEventListener("submit", (event) =>
   result.textContent = t(`理想 1 LSB        ${(vref / levels * 1000).toFixed(6)} mV\n量化码            ${code} / ${maxCode} (0x${code.toString(16).toUpperCase()})\n码值对应电压      ${quantizedVoltage.toFixed(6)} V\n量化误差          ${errorMv.toFixed(6)} mV`, `Ideal 1 LSB      ${(vref / levels * 1000).toFixed(6)} mV\nQuantized code    ${code} / ${maxCode} (0x${code.toString(16).toUpperCase()})\nCode voltage      ${quantizedVoltage.toFixed(6)} V\nQuantization error ${errorMv.toFixed(6)} mV`);
 });
 
-const erf = (value) => {
-  const sign = value < 0 ? -1 : 1;
+const erfc = (value) => {
   const x = Math.abs(value);
-  const t = 1 / (1 + 0.3275911 * x);
-  const polynomial = (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t);
-  return sign * (1 - polynomial * Math.exp(-x * x));
+  const t = 1 / (1 + 0.5 * x);
+  const polynomial = 1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))));
+  const result = t * Math.exp(-x * x - 1.26551223 + t * polynomial);
+  return value >= 0 ? result : 2 - result;
 };
 
 document.querySelector("[data-snr-ber-form]")?.addEventListener("submit", (event) => {
@@ -615,7 +686,7 @@ document.querySelector("[data-snr-ber-form]")?.addEventListener("submit", (event
     return;
   }
   const ebn0Linear = 10 ** (ebn0Db / 10);
-  const ber = 0.5 * (1 - erf(Math.sqrt(ebn0Linear)));
+  const ber = 0.5 * erfc(Math.sqrt(ebn0Linear));
   const bitsPerSymbol = modulation === "qpsk" ? 2 : 1;
   const esn0Db = ebn0Db + 10 * Math.log10(bitsPerSymbol);
   const snrDb = ebn0Db + 10 * Math.log10(bitRate / noiseBandwidth);
@@ -772,7 +843,7 @@ document.querySelector("[data-latex-form]")?.addEventListener("submit", async (e
   }
 });
 
-const toolErrorPattern = /请输入|请选择|失败|无效|超出|不能为空|没有找到|低于|enter|choose|must|failed|invalid|unavailable|not found|exceeds|below/i;
+const toolErrorPattern = /请输入|请选择|请填写|必须|不符合|失败|无效|超出|不能为空|没有找到|低于|enter|choose|must|failed|invalid|unavailable|not found|exceeds|below/i;
 document.querySelectorAll(".tool-form").forEach((form) => {
   const result = form.querySelector(".tool-result, [data-markdown-result], [data-latex-result]");
   if (result) {

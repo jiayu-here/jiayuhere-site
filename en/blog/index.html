@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Technical Blog | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../en/feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -68,63 +76,63 @@
     </nav>
   </header>
 <main id="main">
-    <section class="page-hero compact-hero index-hero">
+    <section class="page-hero compact-hero index-hero content-index-hero">
       <div class="container"><h1>Technical Blog</h1><p>Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals.</p></div>
     </section>
     <section class="section container content-index-section"><div class="content-controls compact-controls">
     <label class="search-box"><span>Search articles</span><input type="search" data-content-search placeholder="Enter a title, tag or keyword"></label>
-    <div class="filter-row" role="group" aria-label="Content categories"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="Communication Theory" aria-pressed="false">Communication Theory</button><button class="filter-chip" type="button" data-filter="Digital Signal Processing" aria-pressed="false">Digital Signal Processing</button><button class="filter-chip" type="button" data-filter="Embedded Systems" aria-pressed="false">Embedded Systems</button><button class="filter-chip" type="button" data-filter="Databases" aria-pressed="false">Databases</button><button class="filter-chip" type="button" data-filter="FPGA" aria-pressed="false">FPGA</button><button class="filter-chip" type="button" data-filter="Communications and Algorithms" aria-pressed="false">Communications and Algorithms</button><button class="filter-chip" type="button" data-filter="Algorithms and Python" aria-pressed="false">Algorithms and Python</button><button class="filter-chip" type="button" data-filter="Embedded Systems and Computer Vision" aria-pressed="false">Embedded Systems and Computer Vision</button></div>
+    <div class="filter-control"><span>Filter by category</span><div class="filter-row" role="group" aria-label="Content categories"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="Communication Theory" aria-pressed="false">Communication Theory</button><button class="filter-chip" type="button" data-filter="Digital Signal Processing" aria-pressed="false">Digital Signal Processing</button><button class="filter-chip" type="button" data-filter="Embedded Systems" aria-pressed="false">Embedded Systems</button><button class="filter-chip" type="button" data-filter="Databases" aria-pressed="false">Databases</button><button class="filter-chip" type="button" data-filter="FPGA" aria-pressed="false">FPGA</button><button class="filter-chip" type="button" data-filter="Communications and Algorithms" aria-pressed="false">Communications and Algorithms</button><button class="filter-chip" type="button" data-filter="Algorithms and Python" aria-pressed="false">Algorithms and Python</button><button class="filter-chip" type="button" data-filter="Embedded Systems and Computer Vision" aria-pressed="false">Embedded Systems and Computer Vision</button></div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div><div class="content-grid" data-content-grid><article class="content-card" data-content-card data-category="Communication Theory" data-search="from constellation to rtl: a verifiable order for building a qpsk link a verification-first sequence for gray mapping, phase rotation, hard decisions and ber alignment. communication theory qpsk fpga ber gray">
-    <div class="card-topline"><span>Communication Theory</span><span>2026-07-14</span></div>
+    <div class="card-topline"><span class="card-category">Communication Theory</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-14" title="Record date">2026-07-14</time></span></div>
     <h2><a href="../../en/blog/qpsk-from-constellation-to-rtl/index.html">From Constellation to RTL: A Verifiable Order for Building a QPSK Link</a></h2>
     <p>A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.</p>
     <div class="tag-list"><span>QPSK</span><span>FPGA</span><span>BER</span><span>Gray</span></div>
     <a class="text-link" href="../../en/blog/qpsk-from-constellation-to-rtl/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Digital Signal Processing" data-search="five decisions to make before designing a fixed-point fpga fft a design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point ffts. digital signal processing fft fixed point fpga dsp">
-    <div class="card-topline"><span>Digital Signal Processing</span><span>2026-07-12</span></div>
+    <div class="card-topline"><span class="card-category">Digital Signal Processing</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-12" title="Record date">2026-07-12</time></span></div>
     <h2><a href="../../en/blog/fpga-fixed-point-fft-checklist/index.html">Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</a></h2>
     <p>A design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point FFTs.</p>
     <div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div>
     <a class="text-link" href="../../en/blog/fpga-fixed-point-fft-checklist/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems" data-search="freertos priority is about urgency, not importance design task priorities from deadlines, blocking relationships and resource contention rather than business labels. embedded systems freertos stm32 scheduling rtos">
-    <div class="card-topline"><span>Embedded Systems</span><span>2026-07-10</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-10" title="Record date">2026-07-10</time></span></div>
     <h2><a href="../../en/blog/freertos-priority-design/index.html">FreeRTOS Priority Is About Urgency, Not Importance</a></h2>
     <p>Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.</p>
     <div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div>
     <a class="text-link" href="../../en/blog/freertos-priority-design/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Databases" data-search="why mysql did not use the index: a structured debugging path diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans. databases mysql index sql explain">
-    <div class="card-topline"><span>Databases</span><span>2026-07-08</span></div>
+    <div class="card-topline"><span class="card-category">Databases</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-08" title="Record date">2026-07-08</time></span></div>
     <h2><a href="../../en/blog/mysql-index-debug-path/index.html">Why MySQL Did Not Use the Index: A Structured Debugging Path</a></h2>
     <p>Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.</p>
     <div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div>
     <a class="text-link" href="../../en/blog/mysql-index-debug-path/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems" data-search="non-blocking stm32 temperature monitoring: from sampling state machines to alarm tasks a dual-channel example covering non-blocking sampling, threshold management, alarm cadence, persistence and board bring-up. embedded systems stm32 ds18b20 pt100 non-blocking alarm">
-    <div class="card-topline"><span>Embedded Systems</span><span>2026-07-14</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-14" title="Record date">2026-07-14</time></span></div>
     <h2><a href="../../en/blog/stm32-temperature-nonblocking-design/index.html">Non-Blocking STM32 Temperature Monitoring: From Sampling State Machines to Alarm Tasks</a></h2>
     <p>A dual-channel example covering non-blocking sampling, threshold management, alarm cadence, persistence and board bring-up.</p>
     <div class="tag-list"><span>STM32</span><span>DS18B20</span><span>PT100</span><span>Non-blocking</span><span>Alarm</span></div>
     <a class="text-link" href="../../en/blog/stm32-temperature-nonblocking-design/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="FPGA" data-search="fpga dds from frequency word to measurement display: a verifiable path layered design and verification for the phase accumulator, waveform lut, sample-valid contract, statistics and board display. fpga fpga dds verilog adc quartus">
-    <div class="card-topline"><span>FPGA</span><span>2026-07-14</span></div>
+    <div class="card-topline"><span class="card-category">FPGA</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-14" title="Record date">2026-07-14</time></span></div>
     <h2><a href="../../en/blog/fpga-dds-frequency-word-to-display/index.html">FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path</a></h2>
     <p>Layered design and verification for the phase accumulator, waveform LUT, sample-valid contract, statistics and board display.</p>
     <div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div>
     <a class="text-link" href="../../en/blog/fpga-dds-frequency-word-to-display/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Communications and Algorithms" data-search="matlab modulation recognition: leakage-free data and interpretable features a reliable workflow from signal generation and snr injection through normalization, features and confusion-matrix analysis. communications and algorithms matlab modulation svm feature snr">
-    <div class="card-topline"><span>Communications and Algorithms</span><span>2026-07-14</span></div>
+    <div class="card-topline"><span class="card-category">Communications and Algorithms</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-14" title="Record date">2026-07-14</time></span></div>
     <h2><a href="../../en/blog/matlab-modulation-recognition-features/index.html">MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</a></h2>
     <p>A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.</p>
     <div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>SVM</span><span>Feature</span><span>SNR</span></div>
     <a class="text-link" href="../../en/blog/matlab-modulation-recognition-features/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Algorithms and Python" data-search="rrt and rrt* beyond animation: collision checks, rewiring and repeatable tests turn a planning animation into a testable planner through step size, edge collision, goal connection and correct rrt* rewiring. algorithms and python python rrt rrt star collision path planning">
-    <div class="card-topline"><span>Algorithms and Python</span><span>2026-07-14</span></div>
+    <div class="card-topline"><span class="card-category">Algorithms and Python</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-14" title="Record date">2026-07-14</time></span></div>
     <h2><a href="../../en/blog/rrt-rrtstar-reliable-planner/index.html">RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests</a></h2>
     <p>Turn a planning animation into a testable planner through step size, edge collision, goal connection and correct RRT* rewiring.</p>
     <div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Collision</span><span>Path Planning</span></div>
     <a class="text-link" href="../../en/blog/rrt-rrtstar-reliable-planner/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems and Computer Vision" data-search="from pixel coordinates to a safe grasp: five boundaries in a vision-guided arm uses the stm32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification. embedded systems and computer vision opencv stm32 homography inverse kinematics uart">
-    <div class="card-topline"><span>Embedded Systems and Computer Vision</span><span>2026-07-15</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems and Computer Vision</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-15" title="Record date">2026-07-15</time></span></div>
     <h2><a href="../../en/blog/vision-robot-arm-coordinate-safety-boundaries/index.html">From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm</a></h2>
     <p>Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.</p>
     <div class="tag-list"><span>OpenCV</span><span>STM32</span><span>Homography</span><span>Inverse Kinematics</span><span>UART</span></div>
@@ -136,6 +144,6 @@
     <div class="footer-links"><a href="../../en/about/index.html">About</a><a href="../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../en/feed.xml">RSS</a><a href="../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

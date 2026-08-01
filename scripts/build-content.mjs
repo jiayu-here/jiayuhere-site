@@ -1,11 +1,22 @@
-import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile as writeFileOnce } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
+const writeFile = async (...args) => {
+  for (let attempt = 0; ; attempt += 1) {
+    try {
+      return await writeFileOnce(...args);
+    } catch (error) {
+      if (error?.code !== "UNKNOWN" || attempt === 3) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 50 * (attempt + 1)));
+    }
+  }
+};
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260801a";
+const assetVersion = "20260801b";
 const lightThemeColor = "#f7f8fb";
+const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
 const excludedRepositories = new Set(["jiayuhere-site"]);
 const googleAnalyticsId = "G-V2VWFFLH85";
@@ -35,6 +46,14 @@ const legacyGoogleAnalyticsSourcePattern = new RegExp(
   "gi"
 );
 const googleAnalyticsConfigPattern = new RegExp(`gtag\\(['"]config['"]\\s*,\\s*['"]${googleAnalyticsId}['"]\\)`);
+const themeRestoreTag = `  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>`;
 
 const sections = {
   projects: { source: "content/projects", output: "projects", label: "项目作品", title: "项目作品" },
@@ -694,6 +713,7 @@ ${jsonForHtml({
   return `<!doctype html>
 <html lang="${localeConfig[locale].lang}">
 <head>
+${themeRestoreTag}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
@@ -701,7 +721,7 @@ ${jsonForHtml({
 ${robots ? `  <meta name="robots" content="${escapeHtml(robots)}">` : ""}
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
@@ -834,9 +854,10 @@ const ensureSharedPageShell = (html, url) => {
     themeTags.push(`  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">`);
   }
   if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*dark/i.test(html)) {
-    themeTags.push('  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">');
+    themeTags.push(`  <meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)">`);
   }
   if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
+  if (!html.includes("data-theme-restore")) html = html.replace("<head>", `<head>\n${themeRestoreTag}`);
   return html
     .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)
     .replace(/favicon\.ico(?:\?v=[^"]+)?/g, `favicon.ico?v=${assetVersion}`)
@@ -844,7 +865,28 @@ const ensureSharedPageShell = (html, url) => {
     .replace(/assets\/script\.js\?v=[^"]+/g, `assets/script.js?v=${assetVersion}`);
 };
 
+const ensureStaticSearchAnchors = (html, url) => {
+  const addIds = (className, prefix) => {
+    let index = 0;
+    html = html.replace(new RegExp(`<article\\b([^>]*\\bclass="[^"]*\\b${className}\\b[^"]*"[^>]*)>`, "g"), (tag) => {
+      index += 1;
+      let hasId = false;
+      const normalizedTag = tag.replace(/\s+id="[^"]+"/g, (attribute) => {
+        if (hasId) return "";
+        hasId = true;
+        return attribute;
+      });
+      if (hasId) return normalizedTag;
+      return tag.replace("<article", `<article id="${prefix}-${String(index).padStart(2, "0")}"`);
+    });
+  };
+  if (url === "toolbox/" || url === "en/toolbox/") addIds("tool-card", "tool");
+  if (url === "resources/" || url === "en/resources/") addIds("resource-group", "resource");
+  return html;
+};
+
 const ensurePageMetadata = (html, url) => {
+  html = ensureStaticSearchAnchors(html, url);
   const isEnglish = url.startsWith("en/");
   const locale = isEnglish ? "en" : "zh";
   const route = isEnglish ? url.slice(3) : url;
@@ -899,6 +941,29 @@ const ensureDeferredAnalytics = (html) => {
 
 const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
 
+const recordDateFor = (item) => String(item.meta.updated || item.meta.date || "");
+
+const statusToneFor = (status = "") => {
+  const value = String(status).toLowerCase();
+  if (/(归档|archived)/.test(value)) return "archived";
+  if (/(待|未验证|pending|unverified|not verified|awaiting)/.test(value)) return "pending";
+  if (/(验证|仿真|编译|测试|verified|validated|simulation|simulated|compiled|tested|build complete)/.test(value)) return "verified";
+  return "neutral";
+};
+
+const evidenceBadge = (status, locale) => status
+  ? `<span class="evidence-badge evidence-${statusToneFor(status)}" aria-label="${locale === "en" ? "Record status: " : "记录状态："}${escapeHtml(status)}">${escapeHtml(status)}</span>`
+  : "";
+
+const cardRecordMeta = (item, locale) => {
+  const date = recordDateFor(item);
+  const dateMarkup = date
+    ? `<time class="card-date" datetime="${escapeHtml(date)}" title="${locale === "en" ? "Record date" : "记录日期"}">${escapeHtml(date)}</time>`
+    : "";
+  const statusMarkup = evidenceBadge(item.meta.status, locale);
+  return dateMarkup || statusMarkup ? `<span class="card-record-meta">${dateMarkup}${statusMarkup}</span>` : "";
+};
+
 const noteHierarchyFor = (item, locale = "zh") => {
   const tags = item.meta.tags || [];
   const isEnglish = locale === "en";
@@ -924,12 +989,63 @@ const cardFor = (item, section, locale, prefix, noteHierarchy) => {
   const categoryLabel = noteHierarchy ? `${noteHierarchy.course} · ${noteHierarchy.chapter}` : (item.meta.category || config.label);
   const headingTag = noteHierarchy ? "h5" : "h2";
   return `<article class="content-card" data-content-card data-category="${escapeHtml(item.meta.category || (isEnglish ? "All" : "全部"))}" data-search="${escapeHtml(searchText.toLowerCase())}">
-    <div class="card-topline"><span>${escapeHtml(categoryLabel)}</span><span>${escapeHtml(item.meta.status || item.meta.date || (isEnglish ? "Ongoing" : "持续更新"))}</span></div>
+    <div class="card-topline"><span class="card-category">${escapeHtml(categoryLabel)}</span>${cardRecordMeta(item, locale)}</div>
     <${headingTag}><a href="${href}">${escapeHtml(item.meta.title)}</a></${headingTag}>
     <p>${escapeHtml(item.meta.description)}</p>
     ${tagList(item.meta.tags || [])}
     <a class="text-link" href="${href}">${isEnglish ? "View details" : "查看详情"} <span aria-hidden="true">→</span></a>
   </article>`;
+};
+
+const relationScore = (source, candidate) => {
+  const sourceTags = new Set((source.meta.tags || []).map((tag) => String(tag).trim().toLowerCase()).filter(Boolean));
+  const candidateTags = (candidate.meta.tags || []).map((tag) => String(tag).trim().toLowerCase()).filter(Boolean);
+  const sharedTags = candidateTags.filter((tag) => sourceTags.has(tag)).length;
+  return sharedTags * 4;
+};
+
+const relatedUrl = (section, item, locale) => {
+  const output = section === "articles" ? "blog" : section === "logs" ? logConfig.output : section;
+  return `/${localeConfig[locale].routeRoot}${output}/${escapeHtml(item.meta.slug)}/`;
+};
+
+const relatedContentFor = (item, section, catalog, locale) => {
+  const isEnglish = locale === "en";
+  const sourceProject = section === "projects"
+    ? item
+    : section === "logs"
+      ? catalog.projects.find((project) => project.meta.slug === item.meta.projectSlug)
+      : null;
+  const seed = sourceProject || item;
+  const related = [];
+  let selectedProject = sourceProject || null;
+
+  for (const candidateSection of ["projects", "articles", "notes"]) {
+    const candidates = catalog[candidateSection]
+      .filter((candidate) => !(candidateSection === section && candidate.meta.slug === item.meta.slug))
+      .map((candidate) => ({ candidate, score: section === "logs" && candidateSection === "projects" && candidate.meta.slug === item.meta.projectSlug ? 1000 : relationScore(seed, candidate) }))
+      .filter(({ score }) => score > 0)
+      .sort((left, right) => right.score - left.score || String(left.candidate.meta.title).localeCompare(String(right.candidate.meta.title), isEnglish ? "en-US" : "zh-CN"));
+    if (!candidates.length) continue;
+    const chosen = candidates[0].candidate;
+    related.push({ section: candidateSection, item: chosen });
+    if (candidateSection === "projects" && !selectedProject) selectedProject = chosen;
+  }
+
+  if (selectedProject) {
+    const log = catalog.logs.find((candidate) => candidate.meta.projectSlug === selectedProject.meta.slug && !(section === "logs" && candidate.meta.slug === item.meta.slug));
+    if (log) related.push({ section: "logs", item: log });
+  }
+
+  const unique = related.filter((entry, index, entries) => entries.findIndex((candidate) => candidate.section === entry.section && candidate.item.meta.slug === entry.item.meta.slug) === index).slice(0, 4);
+  if (!unique.length) return "";
+  const labels = isEnglish
+    ? { projects: "Project", articles: "Blog", notes: "Note", logs: "Lab log" }
+    : { projects: "项目", articles: "博客", notes: "笔记", logs: "日志" };
+  return `<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">${isEnglish ? "Continue exploring" : "继续阅读"}</p><h2 id="related-content-title">${isEnglish ? "Related records" : "相关内容"}</h2></div>
+    <div class="related-grid">${unique.map((entry) => `<a class="related-card" href="${relatedUrl(entry.section, entry.item, locale)}"><span class="related-type">${labels[entry.section]}</span><strong>${escapeHtml(entry.item.meta.title)}</strong><span>${escapeHtml(entry.item.meta.description)}</span></a>`).join("")}</div>
+  </aside>`;
 };
 
 const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
@@ -965,7 +1081,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], isEnglish ? ["Mathematics", "English"] : ["数学", "英语"]);
   const controls = `<div class="content-controls compact-controls">
     <label class="search-box"><span>${isEnglish ? "Search notes" : "搜索笔记"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
-    <div class="filter-row" role="group" aria-label="${isEnglish ? "Note categories" : "笔记大类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div>
+    <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Note categories" : "笔记大类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
   const hierarchy = sortNames(groups.keys(), groupOrder).map((major) => {
@@ -993,7 +1109,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
     </details>`;
   }).join("");
   const content = `
-    <section class="page-hero compact-hero index-hero">
+    <section class="page-hero compact-hero index-hero content-index-hero">
       <div class="container"><h1>${isEnglish ? "Learning Notes" : "学习笔记"}</h1><p>${isEnglish ? "Mathematics and English notes are grouped by course and chapter, making it easy to move from the knowledge framework to each note." : "数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。"}</p></div>
     </section>
     <section class="section container content-index-section">${controls}<div class="notes-major-list" data-notes-index>${hierarchy}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching notes." : "暂时没有匹配的内容。"}</p></section>`;
@@ -1014,11 +1130,11 @@ const buildIndex = async (section, items, locale) => {
     : section === "projects" ? "搜索项目" : section === "articles" ? "搜索文章" : "搜索笔记";
   const controls = `<div class="content-controls compact-controls">
     <label class="search-box"><span>${searchLabel}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
-    <div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div>
+    <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
   const content = `
-    <section class="page-hero compact-hero index-hero">
+    <section class="page-hero compact-hero index-hero content-index-hero">
       <div class="container"><h1>${config.title}</h1><p>${isEnglish
         ? section === "projects" ? "Complete engineering records from requirements and architecture through debugging and delivery." : section === "articles" ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "A long-term knowledge tree covering mathematics, English, engineering courses and programming."
         : section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。"}</p></div>
@@ -1029,12 +1145,22 @@ const buildIndex = async (section, items, locale) => {
   await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: section, title: config.title, description: config.title, content }));
 };
 
-const buildDetail = async (section, item, index, items, locale) => {
+const buildDetail = async (section, item, index, items, catalog, locale) => {
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
   const rendered = markdownToHtml(item.body, locale);
   const toc = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
-  const metaLine = [item.meta.category, item.meta.date, item.meta.status].filter(Boolean).map(escapeHtml).join(" · ");
+  const recordDate = recordDateFor(item);
+  const recordDateLabel = item.meta.updated
+    ? (isEnglish ? "Updated" : "更新")
+    : section === "articles"
+      ? (isEnglish ? "Published" : "发布")
+      : (isEnglish ? "Record date" : "记录日期");
+  const recordMeta = [
+    item.meta.category ? `<span class="record-category">${escapeHtml(item.meta.category)}</span>` : "",
+    recordDate ? `<span class="record-date"><span>${recordDateLabel}</span><time datetime="${escapeHtml(recordDate)}">${escapeHtml(recordDate)}</time></span>` : "",
+    evidenceBadge(item.meta.status, locale)
+  ].filter(Boolean).join("");
   const repositoryBase = String(item.meta.repository || "").replace(/\/$/, "");
   const repository = repositoryBase ? `<div class="button-row" aria-label="${isEnglish ? "GitHub repository links" : "GitHub 仓库入口"}">
         <a class="button primary-button" href="${escapeHtml(repositoryBase)}" target="_blank" rel="noreferrer">${isEnglish ? "View source" : "查看源码"}</a>
@@ -1053,8 +1179,9 @@ ${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${metaLine ? `<span>${metaLine}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
       <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
+${relatedContentFor(item, section, catalog, locale)}
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);
   await mkdir(output, { recursive: true });
@@ -1069,15 +1196,16 @@ const logField = (item, label) => {
   return item.body.match(pattern)?.[1]?.trim() || "";
 };
 
-const buildLogDetail = async (item, locale) => {
+const buildLogDetail = async (item, catalog, locale) => {
   const isEnglish = locale === "en";
   const rendered = markdownToHtml(item.body, locale).html;
   const projectSlug = String(item.meta.projectSlug || "");
   if (!projectSlug) throw new Error(`Log projectSlug missing: ${item.meta.title}`);
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? "Back to lab logs" : "返回实验日志"}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta"><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← ${isEnglish ? "Back to lab logs" : "返回实验日志"}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta"><span class="record-meta"><span class="record-date"><span>${isEnglish ? "Record date" : "记录日期"}</span><time datetime="${escapeHtml(item.meta.date)}">${escapeHtml(item.meta.date)}</time></span></span></div></header>
       <section class="section container"><div class="panel prose standalone-prose">${rendered}<div class="button-row"><a class="button secondary-button" href="../../projects/${escapeHtml(projectSlug)}/index.html">${isEnglish ? "View project record" : "查看项目档案"}</a></div></div></section>
+${relatedContentFor(item, "logs", catalog, locale)}
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output, item.meta.slug);
   await mkdir(output, { recursive: true });
@@ -1115,8 +1243,8 @@ const buildLabIndex = async (items, locale) => {
     ? `${items.length} public-project debugging records preserving the symptom, hypothesis, investigation, evidence-supported cause, fix and reusable lesson.`
     : `${items.length} 条公开项目调试记录，保留问题现象、初步判断、排查过程、证据支持的根因、解决方法与可复用经验。`;
   const content = `
-    <section class="page-hero compact-hero index-hero"><div class="container"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1><p>${heroDescription}</p></div></section>
-    <section class="section container content-index-section"><div class="content-controls compact-controls"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div><div class="timeline">${timeline}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
+    <section class="page-hero compact-hero index-hero content-index-hero"><div class="container"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1><p>${heroDescription}</p></div></section>
+    <section class="section container content-index-section"><div class="content-controls compact-controls content-controls-search-only"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div><div class="timeline">${timeline}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output);
   await mkdir(output, { recursive: true });
   await writeFile(path.join(output, "index.html"), page({
@@ -1130,19 +1258,36 @@ const buildLabIndex = async (items, locale) => {
   }));
 };
 
-const updateHomeStats = async (counts, lastUpdated, locale) => {
+const homepageUpdates = (recentItems, lastUpdated, locale) => {
+  const isEnglish = locale === "en";
+  const labels = isEnglish
+    ? { projects: "Project", articles: "Blog", notes: "Note", logs: "Lab log" }
+    : { projects: "项目", articles: "博客", notes: "笔记", logs: "日志" };
+  const links = recentItems.map(({ section, item }) => {
+    const output = section === "articles" ? "blog" : section === "logs" ? logConfig.output : section;
+    const date = recordDateFor(item);
+    return `<li><a href="${output}/${escapeHtml(item.meta.slug)}/index.html"><span class="recent-update-meta"><span class="record-type">${labels[section]}</span><time datetime="${escapeHtml(date)}">${escapeHtml(date)}</time></span><strong>${escapeHtml(item.meta.title)}</strong><span>${escapeHtml(item.meta.description)}</span></a></li>`;
+  }).join("");
+  return `<section class="section recent-updates" data-home-updates aria-labelledby="recent-updates-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">${isEnglish ? "Latest records" : "最近记录"}</p><h2 id="recent-updates-title">${isEnglish ? "Recently updated" : "最近更新"}</h2></div><p>${isEnglish ? "Latest source-backed additions across projects, writing, notes and lab logs." : "按内容源中的真实日期汇总项目、文章、笔记与实验日志。"}<br>${isEnglish ? "Latest update" : "最近一次更新"}：<time data-site-updated datetime="${escapeHtml(lastUpdated)}">${escapeHtml(lastUpdated)}</time></p></div>
+        <ol class="recent-update-list">${links}</ol>
+      </div>
+    </section>`;
+};
+
+const updateHomeStats = async (counts, lastUpdated, recentItems, locale) => {
   const homePath = path.join(root, localeConfig[locale].routeRoot, "index.html");
   let home = await readFile(homePath, "utf8");
 
   for (const [key, count] of Object.entries(counts)) {
     const pattern = new RegExp(`(<strong data-site-stat="${key}">)\\d+(</strong>)`, "g");
-    if (!pattern.test(home)) throw new Error(`Homepage statistic marker missing: ${key}`);
-    home = home.replace(pattern, `$1${count}$2`);
+    if (pattern.test(home)) home = home.replace(pattern, `$1${count}$2`);
   }
 
-  const updatedPattern = /<time data-site-updated(?: datetime="[^"]*")?>[^<]+<\/time>/;
-  if (!updatedPattern.test(home)) throw new Error("Homepage last-updated marker missing");
-  home = home.replace(updatedPattern, `<time data-site-updated datetime="${escapeHtml(lastUpdated)}">${escapeHtml(lastUpdated)}</time>`);
+  const updatesPattern = /<!-- HOME_UPDATES_START -->[\s\S]*?<!-- HOME_UPDATES_END -->/;
+  if (!updatesPattern.test(home)) throw new Error("Homepage recent-updates markers missing");
+  home = home.replace(updatesPattern, `<!-- HOME_UPDATES_START -->\n    ${homepageUpdates(recentItems, lastUpdated, locale)}\n    <!-- HOME_UPDATES_END -->`);
 
   await writeFile(homePath, home);
 };
@@ -1231,6 +1376,58 @@ const loadPairedLogs = async () => {
   return logs;
 };
 
+const searchEntryFor = (item, section, output, locale) => {
+  const headings = [...String(item.body || "").matchAll(/^#{1,4}\s+(.+)$/gm)].map((match) => plainText(match[1])).join(" ");
+  const excerpt = plainText(item.body || "").slice(0, 260);
+  return {
+    section,
+    title: item.meta.title,
+    description: item.meta.description,
+    category: item.meta.category || "",
+    tags: item.meta.tags || [],
+    keywords: [headings, excerpt].filter(Boolean).join(" "),
+    url: `/${localeConfig[locale].routeRoot}${output}/${item.meta.slug}/`
+  };
+};
+
+const htmlText = (value = "") => String(value)
+  .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+  .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+  .replace(/<[^>]+>/g, " ")
+  .replace(/&nbsp;/g, " ")
+  .replace(/&amp;/g, "&")
+  .replace(/&quot;/g, '"')
+  .replace(/&#(?:39|x27);/gi, "'")
+  .replace(/&lt;/g, "<")
+  .replace(/&gt;/g, ">")
+  .replace(/\s+/g, " ")
+  .trim();
+
+const staticSearchEntries = async (locale) => {
+  const routeRoot = localeConfig[locale].routeRoot;
+  const toolboxHtml = await readFile(path.join(root, routeRoot, "toolbox/index.html"), "utf8");
+  const resourcesHtml = await readFile(path.join(root, routeRoot, "resources/index.html"), "utf8");
+  const entries = [];
+  const toolPattern = /<article\b([^>]*\bclass="[^"]*\btool-card\b[^"]*"[^>]*)>([\s\S]*?)<\/article>/g;
+  [...toolboxHtml.matchAll(toolPattern)].forEach((match, index) => {
+    const id = match[1].match(/\bid="([^"]+)"/)?.[1] || `tool-${String(index + 1).padStart(2, "0")}`;
+    const title = htmlText(match[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/i)?.[1] || "");
+    const description = htmlText(match[2].match(/<\/h2>\s*<p\b[^>]*>([\s\S]*?)<\/p>/i)?.[1] || "");
+    const eyebrow = htmlText(match[2].match(/<p\b[^>]*\bclass="[^"]*\beyebrow\b[^"]*"[^>]*>([\s\S]*?)<\/p>/i)?.[1] || "");
+    const category = eyebrow.split("·").at(-1)?.trim() || (locale === "en" ? "Toolbox" : "工具箱");
+    entries.push({ section: "toolbox", title, description, category, tags: [], keywords: htmlText(match[2]).slice(0, 520), url: `/${routeRoot}toolbox/#${id}` });
+  });
+
+  const resourcePattern = /<article\b([^>]*\bclass="[^"]*\bresource-group\b[^"]*"[^>]*)>([\s\S]*?)<\/article>/g;
+  [...resourcesHtml.matchAll(resourcePattern)].forEach((match, index) => {
+    const id = match[1].match(/\bid="([^"]+)"/)?.[1] || `resource-${String(index + 1).padStart(2, "0")}`;
+    const title = htmlText(match[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/i)?.[1] || "");
+    const links = [...match[2].matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)].map((link) => htmlText(link[1])).filter(Boolean);
+    entries.push({ section: "resources", title, description: links.join(" · "), category: locale === "en" ? "Resources" : "资源", tags: [], keywords: links.join(" "), url: `/${routeRoot}resources/#${id}` });
+  });
+  return entries;
+};
+
 const build = async () => {
   await loadNoteImageManifest();
   const authoredContent = await loadPairedContent();
@@ -1258,7 +1455,7 @@ const build = async () => {
     const summaryItems = [];
     const sectionCounts = {};
     const contentDates = [privacyItems[locale].meta.updated || privacyItems[locale].meta.date || ""].filter(Boolean);
-    let articleItems = [];
+    const preparedSections = {};
     for (const [section, config] of Object.entries(sections)) {
       let items = [...authoredContent[locale][section]];
       if (section === "projects") {
@@ -1270,34 +1467,35 @@ const build = async () => {
           .map((repository) => fallbackProjectFor(repository, locale)));
       }
       const detailItems = section === "notes" ? splitNotes[locale] : items;
+      preparedSections[section] = { config, items, detailItems };
+    }
+    const catalog = {
+      projects: preparedSections.projects.items,
+      articles: preparedSections.articles.items,
+      notes: preparedSections.notes.detailItems,
+      logs: authoredLogs[locale]
+    };
+
+    for (const [section, { config, items, detailItems }] of Object.entries(preparedSections)) {
       await pruneOutputs(section, detailItems, locale);
       for (const [index, item] of detailItems.entries()) {
-        await buildDetail(section, item, index, detailItems, locale);
-        const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || []), plainText(item.body)].join(" ").toLowerCase();
-        const url = `/${localeConfig[locale].routeRoot}${config.output}/${item.meta.slug}/`;
-        searchIndex.push({
-          section,
-          title: item.meta.title,
-          description: item.meta.description,
-          category: item.meta.category,
-          tags: item.meta.tags || [],
-          searchText,
-          url
-        });
+        await buildDetail(section, item, index, detailItems, catalog, locale);
+        const searchEntry = searchEntryFor(item, section, config.output, locale);
+        searchIndex.push(searchEntry);
         sitemapEntries.push({
-          url: url.replace(/^\//, ""),
+          url: searchEntry.url.replace(/^\//, ""),
           lastmod: normalizeLastmod(item.meta.updated || item.meta.date)
         });
       }
       sectionCounts[section] = items.length;
       summaryItems.push(...items);
-      if (section === "articles") articleItems = items;
       contentDates.push(...items.map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
       await buildIndex(section, items, locale);
     }
     await pruneLogOutputs(authoredLogs[locale], locale);
     for (const item of authoredLogs[locale]) {
-      await buildLogDetail(item, locale);
+      await buildLogDetail(item, catalog, locale);
+      searchIndex.push(searchEntryFor(item, "logs", logConfig.output, locale));
       sitemapEntries.push({
         url: `${localeConfig[locale].routeRoot}${logConfig.output}/${item.meta.slug}/`,
         lastmod: normalizeLastmod(item.meta.updated || item.meta.date)
@@ -1305,11 +1503,19 @@ const build = async () => {
     }
     await buildLabIndex(authoredLogs[locale], locale);
     contentDates.push(...authoredLogs[locale].map((item) => String(item.meta.updated || item.meta.date || "")).filter(Boolean));
-    await buildRss(articleItems, locale);
+    await buildRss(preparedSections.articles.items, locale);
+    searchIndex.push(...await staticSearchEntries(locale));
     const searchFile = locale === "en" ? "search-index.en.json" : "search-index.json";
     await mkdir(path.join(root, "assets/data"), { recursive: true });
     await writeFile(path.join(root, "assets/data", searchFile), `${JSON.stringify(searchIndex)}\n`);
-    localeBuilds[locale] = { searchIndex, sitemapEntries, summaryItems, sectionCounts, contentDates, logCount: authoredLogs[locale].length };
+    const recentItems = [
+      ...Object.entries(preparedSections).flatMap(([section, entry]) => entry.items.map((item) => ({ section, item }))),
+      ...authoredLogs[locale].map((item) => ({ section: "logs", item }))
+    ]
+      .filter(({ item }) => recordDateFor(item))
+      .sort((left, right) => normalizeLastmod(recordDateFor(right.item)).localeCompare(normalizeLastmod(recordDateFor(left.item))) || String(left.item.meta.title).localeCompare(String(right.item.meta.title), locale === "en" ? "en-US" : "zh-CN"))
+      .slice(0, 6);
+    localeBuilds[locale] = { searchIndex, sitemapEntries, summaryItems, sectionCounts, contentDates, recentItems, logCount: authoredLogs[locale].length };
   }
 
   const toolbox = await readFile(path.join(root, "toolbox/index.html"), "utf8");
@@ -1332,8 +1538,8 @@ const build = async () => {
     software: topicCount(["python", "数据库", "mysql", "docker", "web", "算法", "git"])
   };
   const lastUpdated = chineseBuild.contentDates.map((date) => normalizeLastmod(date)).sort().at(-1) || "暂无更新";
-  await updateHomeStats(homeStats, lastUpdated, "zh");
-  await updateHomeStats(homeStats, lastUpdated, "en");
+  await updateHomeStats(homeStats, lastUpdated, localeBuilds.zh.recentItems, "zh");
+  await updateHomeStats(homeStats, lastUpdated, localeBuilds.en.recentItems, "en");
 
   const staticUrls = ["", "about/", "resume/", "projects/", "blog/", "notes/", "toolbox/", "resources/", "lab/", "contact/", "wechat/", "privacy/"];
   const englishStaticUrls = staticUrls.map((url) => `en/${url}`);
@@ -1354,7 +1560,7 @@ const build = async () => {
   }
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...sitemapByUrl].map(([url, lastmod]) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastmod}</lastmod></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(root, "sitemap.xml"), sitemap);
-  console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual Markdown pages and ${authoredLogs.zh.length} bilingual log entries.`);
+  console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual search entries and ${authoredLogs.zh.length} bilingual log entries.`);
 };
 
 await build();

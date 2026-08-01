@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界 | Jiayu Lab</title>
@@ -66,9 +74,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/vision-robot-arm-coordinate-safety-boundaries/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -90,7 +98,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</h1><p class="article-lead">结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</p><div class="article-meta"><span>嵌入式与机器视觉 · 2026-07-15</span><span>约 5 分钟阅读</span><div class="tag-list"><span>OpenCV</span><span>STM32</span><span>Homography</span><span>Inverse Kinematics</span><span>UART</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</h1><p class="article-lead">结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</p><div class="article-meta"><span class="record-meta"><span class="record-category">嵌入式与机器视觉</span><span class="record-date"><span>发布</span><time datetime="2026-07-15">2026-07-15</time></span></span><span>约 5 分钟阅读</span><div class="tag-list"><span>OpenCV</span><span>STM32</span><span>Homography</span><span>Inverse Kinematics</span><span>UART</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">为什么识别到目标还远远不够</a><a href="#section-2">边界一：颜色识别输出的是候选目标</a><a href="#section-3">边界二：像素坐标不是毫米坐标</a><a href="#section-4">边界三：坐标可达不代表关节安全</a><a href="#section-5">边界四：串口发送成功不等于命令可靠到达</a><a href="#section-6">边界五：软件闭环不能替代实机验收</a><a href="#section-7">如何建立可追溯的验证证据</a><a href="#section-8">总结</a></nav></details><div class="prose"><h2 id="section-1">为什么识别到目标还远远不够</h2>
 <p>摄像头画面中出现一个红色物体，并不等于机械臂已经知道如何安全抓取。完整链路至少要跨越五个边界：颜色像素到目标中心、像素坐标到工作平面坐标、笛卡尔坐标到关节角度、上位机命令到固件状态，以及软件结果到真实硬件动作。</p>
 <p>每个边界都可能产生独立错误。如果只看最终动画，就无法判断偏差来自灯光、标定点、连杆参数、串口数据还是舵机安装。</p>
@@ -140,6 +148,10 @@ if (cosine_elbow &lt; -1.0f || cosine_elbow &gt; 1.0f) {
     <a href="../rrt-rrtstar-reliable-planner/index.html"><span>← 上一篇</span><strong>RRT 与 RRT* 不只是动画：碰撞检测、重连和可重复验证</strong></a>
 
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/projects/stm32-vision-robot-arm-sorter/"><span class="related-type">项目</span><strong>STM32 视觉机械臂自动分拣系统</strong><span>基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。</span></a><a class="related-card" href="/blog/freertos-priority-design/"><span class="related-type">博客</span><strong>FreeRTOS 任务优先级不是越高越重要</strong><span>从响应期限、阻塞关系和资源竞争出发设计任务优先级。</span></a><a class="related-card" href="/notes/vision-robot-arm-commissioning-checklist/"><span class="related-type">笔记</span><strong>视觉机械臂标定、通信与实机验收清单</strong><span>按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</span></a><a class="related-card" href="/lab/robot-arm-simulation-is-not-physical-completion/"><span class="related-type">日志</span><strong>视觉机械臂：仿真通过但不能写成实机完成</strong><span>区分机械臂的软件闭环、固件构建结果与必须依赖真实硬件的验收项目。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -147,6 +159,6 @@ if (cosine_elbow &lt; -1.0f || cosine_elbow &gt; 1.0f) {
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

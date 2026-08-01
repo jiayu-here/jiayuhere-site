@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Modulation Recognition: Low-SNR Instability | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/lab/modulation-recognition-low-snr-instability/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/lab/modulation-recognition-low-snr-instability/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -69,7 +77,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to lab logs</a><h1>Modulation Recognition: Low-SNR Instability</h1><p class="article-lead">Uses normalization, feature checks and confusion matrices to explain classification instability at low SNR.</p><div class="article-meta"><time datetime="2026-07">2026-07</time></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to lab logs</a><h1>Modulation Recognition: Low-SNR Instability</h1><p class="article-lead">Uses normalization, feature checks and confusion matrices to explain classification instability at low SNR.</p><div class="article-meta"><span class="record-meta"><span class="record-date"><span>Record date</span><time datetime="2026-07">2026-07</time></span></span></div></header>
       <section class="section container"><div class="panel prose standalone-prose"><p><strong>Project:</strong> MATLAB Digital Modulation Recognition Simulation</p>
 <p><strong>Symptom:</strong> Phase and frequency-difference features became unstable at low SNR, while class amplitude scales biased decisions.</p>
 <p><strong>Hypothesis:</strong> The model could be relying too heavily on energy, with individual features becoming unreliable under noise.</p>
@@ -77,6 +85,10 @@
 <p><strong>Root cause:</strong> Unequal scale and noise-sensitive individual features.</p>
 <p><strong>Fix:</strong> Normalized each frame and combined amplitude, phase and higher-order statistics in an ECOC RBF-SVM.</p>
 <p><strong>Lesson:</strong> Accuracy requires context from normalization, feature stability and confusion matrices rather than one aggregate score.</p><div class="button-row"><a class="button secondary-button" href="../../projects/digital-modulation-recognition-matlab/index.html">View project record</a></div></div></section>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/projects/digital-modulation-recognition-matlab/"><span class="related-type">Project</span><strong>MATLAB Digital Modulation Recognition Simulation</strong><span>Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.</span></a><a class="related-card" href="/en/blog/matlab-modulation-recognition-features/"><span class="related-type">Blog</span><strong>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</strong><span>A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.</span></a><a class="related-card" href="/en/notes/communication-theory-index/"><span class="related-type">Note</span><strong>Communication Theory Review Index</strong><span>An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -84,6 +96,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260801a"></script>
+  <script src="../../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

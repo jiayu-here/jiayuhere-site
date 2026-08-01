@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>个人知识库与本地资料检索应用 | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/personal-knowledge-base/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/personal-knowledge-base/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -69,7 +77,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><h1>个人知识库与本地资料检索应用</h1><p class="article-lead">可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。</p><div class="article-meta"><span>Web 应用 · 2026-07 · 已完成本地验证</span><span>约 4 分钟阅读</span><div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回项目作品</a><h1>个人知识库与本地资料检索应用</h1><p class="article-lead">可登录、可上传文档、可本地检索并可选接入 AI 回答的 Docker 化个人知识库。</p><div class="article-meta"><span class="record-meta"><span class="record-category">Web 应用</span><span class="record-date"><span>记录日期</span><time datetime="2026-07">2026-07</time></span><span class="evidence-badge evidence-verified" aria-label="记录状态：已完成本地验证">已完成本地验证</span></span><span>约 4 分钟阅读</span><div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div></div><div class="button-row" aria-label="GitHub 仓库入口">
         <a class="button primary-button" href="https://github.com/jiayu-here/personal-knowledge-base" target="_blank" rel="noreferrer">查看源码</a>
         <a class="button secondary-button" href="https://github.com/jiayu-here/personal-knowledge-base#readme" target="_blank" rel="noreferrer">查看 README</a>
         <a class="button secondary-button" href="https://github.com/jiayu-here/personal-knowledge-base/commits" target="_blank" rel="noreferrer">提交记录</a>
@@ -159,6 +167,10 @@ hits = sorted(
     <a href="../digital-modulation-recognition-matlab/index.html"><span>← 上一项</span><strong>MATLAB 数字调制识别仿真系统</strong></a>
     <a class="article-pagination-next" href="../originlab-battery-aging/index.html"><span>下一项 →</span><strong>Origin 2024 锂电池老化与热安全分析</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/projects/fpga-qpsk-baseband-system/"><span class="related-type">项目</span><strong>FPGA QPSK 数字基带链路与可视化系统</strong><span>覆盖 PRBS、Gray 映射、相位信道、硬判决、BER、UART 遥测和 Python 星座图的 FPGA 通信工程。</span></a><a class="related-card" href="/blog/rrt-rrtstar-reliable-planner/"><span class="related-type">博客</span><strong>RRT 与 RRT* 不只是动画：碰撞检测、重连和可重复验证</strong><span>从扩展步长、边碰撞、目标连接到 RRT* 重连，说明如何把路径规划演示变成可测试的规划器。</span></a><a class="related-card" href="/lab/knowledge-base-homepage-is-not-full-flow/"><span class="related-type">日志</span><strong>个人知识库：首页可访问不代表流程可用</strong><span>使用带 Cookie 的端到端请求验证登录、上传、检索、删除与持久化流程。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -166,6 +178,6 @@ hits = sorted(
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

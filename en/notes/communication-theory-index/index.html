@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Communication Theory Review Index | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/communication-theory-index/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/communication-theory-index/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -69,7 +77,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Communication Theory Review Index</h1><p class="article-lead">An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.</p><div class="article-meta"><span>Engineering Courses · 2026-07</span><span>5 min read</span><div class="tag-list"><span>Communication Theory</span><span>Modulation</span><span>Channel</span><span>Detection</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Communication Theory Review Index</h1><p class="article-lead">An end-to-end review path from signal representation, sampling and modulation through channels, matched filters, BER and channel coding.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Engineering Courses</span><span class="record-date"><span>Record date</span><time datetime="2026-07">2026-07</time></span></span><span>5 min read</span><div class="tag-list"><span>Communication Theory</span><span>Modulation</span><span>Channel</span><span>Detection</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Start with the Complete Link</a><a href="#section-2">Signal Classes and Metrics</a><a href="#section-3">Spectrum, Bandwidth and Filtering</a><a href="#section-4">Sampling, Quantization and PCM</a><a href="#section-5">Baseband Transmission and ISI</a><a href="#section-6">Analog Modulation</a><a href="#section-7">Digital Passband Modulation</a><a href="#section-8">Channels and Noise</a><a href="#section-9">Matched Filtering and Detection</a><a href="#section-10">Synchronization</a><a href="#section-11">BER and Simulation</a><a href="#section-12">Channel Coding Basics</a><a href="#section-13">Review Checklist</a></nav></details><div class="prose"><h2 id="section-1">Start with the Complete Link</h2>
 <p>A digital link contains source, source coding, channel coding, modulation, channel, demodulation, decoding and information recovery. Place every concept in that chain and identify its input, output and problem. Pulse shaping controls bandwidth and ISI, coding adds corrective redundancy, and matched filtering improves sample-time SNR.</p>
 <h2 id="section-2">Signal Classes and Metrics</h2>
@@ -127,6 +135,10 @@ Amplitude ratio: 20·log10(A2/A1)</code></pre>
     <a href="../engineering-math-map/index.html"><span>← Previous item</span><strong>Engineering Mathematics Map: Complex Numbers, Transforms and Probability</strong></a>
     <a class="article-pagination-next" href="../embedded-c-checklist/index.html"><span>Next item →</span><strong>Embedded C Review Checklist</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/projects/digital-modulation-recognition-matlab/"><span class="related-type">Project</span><strong>MATLAB Digital Modulation Recognition Simulation</strong><span>Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.</span></a><a class="related-card" href="/en/blog/matlab-modulation-recognition-features/"><span class="related-type">Blog</span><strong>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</strong><span>A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.</span></a><a class="related-card" href="/en/lab/modulation-recognition-low-snr-instability/"><span class="related-type">Lab log</span><strong>Modulation Recognition: Low-SNR Instability</strong><span>Uses normalization, feature checks and confusion matrices to explain classification instability at low SNR.</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -134,6 +146,6 @@ Amplitude ratio: 20·log10(A2/A1)</code></pre>
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260801a"></script>
+  <script src="../../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

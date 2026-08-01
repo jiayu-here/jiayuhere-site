@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FreeRTOS Priority Is About Urgency, Not Importance | Jiayu Lab</title>
@@ -66,9 +74,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/freertos-priority-design/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/freertos-priority-design/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -90,7 +98,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><h1>FreeRTOS Priority Is About Urgency, Not Importance</h1><p class="article-lead">Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.</p><div class="article-meta"><span>Embedded Systems · 2026-07-10</span><span>3 min read</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><h1>FreeRTOS Priority Is About Urgency, Not Importance</h1><p class="article-lead">Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Embedded Systems</span><span class="record-date"><span>Published</span><time datetime="2026-07-10">2026-07-10</time></span></span><span>3 min read</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Priority Describes Scheduling Urgency</a><a href="#section-2">Record Timing Properties First</a><a href="#section-3">Use a Small Priority Hierarchy</a><a href="#section-4">Use vTaskDelayUntil for Periodic Work</a><a href="#section-5">Event Tasks Should Block</a><a href="#section-6">Keep Interrupt Handlers Minimal</a><a href="#section-7">Prefer Clear Resource Ownership</a><a href="#section-8">A Binary Semaphore Is Not a Mutex</a><a href="#section-9">Keep Critical Sections Tiny</a><a href="#section-10">Size Queues from Rates and Delay</a><a href="#section-11">Measure Stack and Heap</a><a href="#section-12">Let the Watchdog Observe Progress</a><a href="#section-13">Verify Under Load</a><a href="#section-14">Acceptance Checklist</a></nav></details><div class="prose"><h2 id="section-1">Priority Describes Scheduling Urgency</h2>
 <p>A higher FreeRTOS priority does not mean a task is more important to the product. It means the scheduler runs that ready task first. Short response deadlines, buffers that can overflow and work that unblocks downstream processing deserve priority. An OLED refresh can often wait; draining a DMA receive buffer may not.</p>
 <h2 id="section-2">Record Timing Properties First</h2>
@@ -146,6 +154,10 @@ Idle: cleanup and low-priority diagnostics</code></pre>
     <a href="../fpga-fixed-point-fft-checklist/index.html"><span>← Previous article</span><strong>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</strong></a>
     <a class="article-pagination-next" href="../mysql-index-debug-path/index.html"><span>Next article →</span><strong>Why MySQL Did Not Use the Index: A Structured Debugging Path</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/projects/stm32-vision-robot-arm-sorter/"><span class="related-type">Project</span><strong>STM32 Vision-Guided Robotic Arm Sorter</strong><span>A vision-guided sorter built with STM32F103, FreeRTOS, Python and OpenCV, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests.</span></a><a class="related-card" href="/en/blog/vision-robot-arm-coordinate-safety-boundaries/"><span class="related-type">Blog</span><strong>From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm</strong><span>Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.</span></a><a class="related-card" href="/en/notes/vision-robot-arm-commissioning-checklist/"><span class="related-type">Note</span><strong>Vision-Guided Arm Calibration, Communications and Hardware Acceptance Checklist</strong><span>A staged checklist covering power, vision, calibration, kinematics, serial transport, FreeRTOS and physical safety from simulation to commissioning.</span></a><a class="related-card" href="/en/lab/robot-arm-simulation-is-not-physical-completion/"><span class="related-type">Lab log</span><strong>Vision-Guided Arm: A Passing Simulator Is Not Physical Completion</strong><span>Separates the verified software loop and firmware build from acceptance work that requires real hardware.</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -153,6 +165,6 @@ Idle: cleanup and low-priority diagnostics</code></pre>
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260801a"></script>
+  <script src="../../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

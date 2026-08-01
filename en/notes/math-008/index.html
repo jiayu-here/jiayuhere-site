@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Advanced Mathematics - Mind Map | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-008/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-008/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260801b">
   <script>
     window.MathJax = {
       tex: {
@@ -80,7 +88,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Advanced Mathematics - Mind Map</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Mind Map. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span>Mathematics</span><span>12 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Advanced Mathematics - Mind Map</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Advanced Mathematics - Mind Map. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span></span><span>12 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Mathematics Summary</span><span>Formula Collection</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Advanced Mathematics</a><a href="#section-2">Differentiation</a><a href="#section-5">Integral Calculus</a><a href="#section-8">Differential Equations</a><a href="#section-12">Infinite Series</a><a href="#section-16">Analytic Geometry in Space</a></nav></details><div class="prose"><h2 id="section-1">Advanced Mathematics</h2>
 <h2 id="section-2">Differentiation</h2>
 <h3 id="section-3">Differential Calculus of Single-variable Functions</h3>
@@ -422,6 +430,10 @@
     <a href="../math-007-chapter-22/index.html"><span>← Previous item</span><strong>Chapter 22: Parameter Estimation and Hypothesis Testing — Advanced Mathematics - Collection of Formulas</strong></a>
     <a class="article-pagination-next" href="../math-009/index.html"><span>Next item →</span><strong>Lecture 1: Course Outline</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/math-007/"><span class="related-type">Note</span><strong>Advanced Mathematics - Collection of Formulas</strong><span>An index to the advanced-mathematics formula collection, split by chapter for faster loading while preserving the original source.</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -429,6 +441,6 @@
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260801a"></script>
+  <script src="../../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

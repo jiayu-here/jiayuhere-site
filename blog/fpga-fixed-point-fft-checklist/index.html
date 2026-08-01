@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FPGA 定点 FFT 设计前必须想清楚的五件事 | Jiayu Lab</title>
@@ -66,9 +74,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -90,7 +98,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span>数字信号处理 · 2026-07-12</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span class="record-meta"><span class="record-category">数字信号处理</span><span class="record-date"><span>发布</span><time datetime="2026-07-12">2026-07-12</time></span></span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">先确定系统指标</a><a href="#section-2">Q 格式必须写进接口文档</a><a href="#section-3">蝶形加法会产生增长位</a><a href="#section-4">复数乘法的位宽要逐项推导</a><a href="#section-5">旋转因子表也需要可追溯</a><a href="#section-6">数据顺序决定地址控制</a><a href="#section-7">流式接口要把数据和状态一起传递</a><a href="#section-8">溢出、舍入和饱和是三件事</a><a href="#section-9">软件参考模型必须模拟定点过程</a><a href="#section-10">测试向量要覆盖不同问题</a><a href="#section-16">时序与资源要在结构稳定后检查</a><a href="#section-17">常见错误与排查顺序</a><a href="#section-18">验收清单</a></nav></details><div class="prose"><h2 id="section-1">先确定系统指标</h2>
 <p>定点 FFT 的位宽和结构不能脱离系统需求单独决定。开始设计前应明确：</p>
 <ul>
@@ -194,6 +202,10 @@ wire signed [2*W:0] real_full = ac - bd;</code></pre>
     <a href="../qpsk-from-constellation-to-rtl/index.html"><span>← 上一篇</span><strong>从星座图到 RTL：QPSK 链路的实现顺序</strong></a>
     <a class="article-pagination-next" href="../freertos-priority-design/index.html"><span>下一篇 →</span><strong>FreeRTOS 任务优先级不是越高越重要</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/blog/qpsk-from-constellation-to-rtl/"><span class="related-type">博客</span><strong>从星座图到 RTL：QPSK 链路的实现顺序</strong><span>用可验证的顺序拆解 Gray 映射、相位旋转、硬判决与 BER 对齐。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -201,6 +213,6 @@ wire signed [2*W:0] real_full = ac - bd;</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FreeRTOS 任务优先级不是越高越重要 | Jiayu Lab</title>
@@ -66,9 +74,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/freertos-priority-design/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/freertos-priority-design/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -90,7 +98,7 @@
   </header>
 <main id="main">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span>嵌入式 · 2026-07-10</span><span>约 7 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FreeRTOS 任务优先级不是越高越重要</h1><p class="article-lead">从响应期限、阻塞关系和资源竞争出发设计任务优先级。</p><div class="article-meta"><span class="record-meta"><span class="record-category">嵌入式</span><span class="record-date"><span>发布</span><time datetime="2026-07-10">2026-07-10</time></span></span><span>约 7 分钟阅读</span><div class="tag-list"><span>FreeRTOS</span><span>STM32</span><span>Scheduling</span><span>RTOS</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">优先级描述的是调度紧迫性</a><a href="#section-2">先列出任务的时间属性</a><a href="#section-3">一个实用的优先级分层</a><a href="#section-4">周期任务使用 vTaskDelayUntil</a><a href="#section-5">事件任务应该主动阻塞</a><a href="#section-6">ISR 只做必须立即完成的工作</a><a href="#section-7">用所有权减少共享资源</a><a href="#section-8">二值信号量不能替代互斥量</a><a href="#section-9">临界区只保护最小原子操作</a><a href="#section-10">队列长度不能凭感觉设置</a><a href="#section-11">栈和堆必须测量</a><a href="#section-12">看门狗要监督系统进展</a><a href="#section-13">如何验证优先级设计</a><a href="#section-14">常见问题与定位顺序</a><a href="#section-15">验收清单</a></nav></details><div class="prose"><h2 id="section-1">优先级描述的是调度紧迫性</h2>
 <p>FreeRTOS 的高优先级并不等于“业务上更重要”。调度器只关心当前有哪些任务处于就绪态，并优先运行数值更高的任务。真正应该获得高优先级的，是具有短响应期限、缓冲区可能溢出或会阻塞下游链路的工作。</p>
 <p>例如，串口接收数据若不能及时从 DMA 缓冲区取走，后续字节可能覆盖旧数据；而 OLED 刷新即使晚几十毫秒，通常也不会破坏系统状态。前者比后者更需要及时调度。</p>
@@ -223,6 +231,10 @@
     <a href="../fpga-fixed-point-fft-checklist/index.html"><span>← 上一篇</span><strong>FPGA 定点 FFT 设计前必须想清楚的五件事</strong></a>
     <a class="article-pagination-next" href="../mysql-index-debug-path/index.html"><span>下一篇 →</span><strong>MySQL 索引为什么没有被使用：一份排查路径</strong></a>
   </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/projects/stm32-vision-robot-arm-sorter/"><span class="related-type">项目</span><strong>STM32 视觉机械臂自动分拣系统</strong><span>基于 STM32F103、FreeRTOS、Python 与 OpenCV 的视觉分拣系统，覆盖标定、运动学、串口协议、压力反馈、仿真与自动测试。</span></a><a class="related-card" href="/blog/vision-robot-arm-coordinate-safety-boundaries/"><span class="related-type">博客</span><strong>从像素坐标到安全抓取：视觉机械臂必须处理的五个边界</strong><span>结合 STM32 视觉机械臂项目，说明颜色识别、四点标定、逆运动学、可靠串口和实机安全为什么必须分层验证。</span></a><a class="related-card" href="/notes/vision-robot-arm-commissioning-checklist/"><span class="related-type">笔记</span><strong>视觉机械臂标定、通信与实机验收清单</strong><span>按电源、视觉、标定、运动学、串口、FreeRTOS 与实机安全整理机械臂从仿真到装机的检查顺序。</span></a><a class="related-card" href="/lab/robot-arm-simulation-is-not-physical-completion/"><span class="related-type">日志</span><strong>视觉机械臂：仿真通过但不能写成实机完成</strong><span>区分机械臂的软件闭环、固件构建结果与必须依赖真实硬件的验收项目。</span></a></div>
+  </aside>
     </article></main>
 
   <footer class="site-footer">
@@ -230,6 +242,6 @@
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>

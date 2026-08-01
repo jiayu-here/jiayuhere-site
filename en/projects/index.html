@@ -21,6 +21,14 @@
       }, { once: true });
     })();
   </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Jiayu Lab</title>
@@ -45,9 +53,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../en/feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260801a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260801b" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260801a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260801b">
 
 </head>
 <body>
@@ -68,81 +76,81 @@
     </nav>
   </header>
 <main id="main">
-    <section class="page-hero compact-hero index-hero">
+    <section class="page-hero compact-hero index-hero content-index-hero">
       <div class="container"><h1>Projects</h1><p>Complete engineering records from requirements and architecture through debugging and delivery.</p></div>
     </section>
     <section class="section container content-index-section"><div class="content-controls compact-controls">
     <label class="search-box"><span>Search projects</span><input type="search" data-content-search placeholder="Enter a title, tag or keyword"></label>
-    <div class="filter-row" role="group" aria-label="Content categories"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="FPGA" aria-pressed="false">FPGA</button><button class="filter-chip" type="button" data-filter="Embedded Systems" aria-pressed="false">Embedded Systems</button><button class="filter-chip" type="button" data-filter="Communication Simulation" aria-pressed="false">Communication Simulation</button><button class="filter-chip" type="button" data-filter="Web Application" aria-pressed="false">Web Application</button><button class="filter-chip" type="button" data-filter="Data Analysis" aria-pressed="false">Data Analysis</button><button class="filter-chip" type="button" data-filter="Algorithms" aria-pressed="false">Algorithms</button><button class="filter-chip" type="button" data-filter="Engineering Foundations" aria-pressed="false">Engineering Foundations</button><button class="filter-chip" type="button" data-filter="Embedded Systems and Computer Vision" aria-pressed="false">Embedded Systems and Computer Vision</button><button class="filter-chip" type="button" data-filter="Personal Profile" aria-pressed="false">Personal Profile</button></div>
+    <div class="filter-control"><span>Filter by category</span><div class="filter-row" role="group" aria-label="Content categories"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All</button><button class="filter-chip" type="button" data-filter="FPGA" aria-pressed="false">FPGA</button><button class="filter-chip" type="button" data-filter="Embedded Systems" aria-pressed="false">Embedded Systems</button><button class="filter-chip" type="button" data-filter="Communication Simulation" aria-pressed="false">Communication Simulation</button><button class="filter-chip" type="button" data-filter="Web Application" aria-pressed="false">Web Application</button><button class="filter-chip" type="button" data-filter="Data Analysis" aria-pressed="false">Data Analysis</button><button class="filter-chip" type="button" data-filter="Algorithms" aria-pressed="false">Algorithms</button><button class="filter-chip" type="button" data-filter="Engineering Foundations" aria-pressed="false">Engineering Foundations</button><button class="filter-chip" type="button" data-filter="Embedded Systems and Computer Vision" aria-pressed="false">Embedded Systems and Computer Vision</button><button class="filter-chip" type="button" data-filter="Personal Profile" aria-pressed="false">Personal Profile</button></div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div><div class="content-grid" data-content-grid><article class="content-card" data-content-card data-category="FPGA" data-search="multi-function fpga dds signal generation and measurement system a complete cyclone iv e design combining multi-waveform dds, pcf8591 ad/da, real-time statistics and seven-segment display output. fpga verilog dds quartus modelsim matlab">
-    <div class="card-topline"><span>FPGA</span><span>Compilation and simulation completed</span></div>
+    <div class="card-topline"><span class="card-category">FPGA</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-verified" aria-label="Record status: Compilation and simulation completed">Compilation and simulation completed</span></span></div>
     <h2><a href="../../en/projects/fpga-dds-measure-system/index.html">Multi-Function FPGA DDS Signal Generation and Measurement System</a></h2>
     <p>A complete Cyclone IV E design combining multi-waveform DDS, PCF8591 AD/DA, real-time statistics and seven-segment display output.</p>
     <div class="tag-list"><span>Verilog</span><span>DDS</span><span>Quartus</span><span>ModelSim</span><span>MATLAB</span></div>
     <a class="text-link" href="../../en/projects/fpga-dds-measure-system/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="FPGA" data-search="fpga qpsk baseband link and visualization system an fpga communications project covering prbs, gray mapping, phase rotation, hard decisions, ber, uart telemetry and python constellation plots. fpga qpsk verilog ber uart python">
-    <div class="card-topline"><span>FPGA</span><span>Compilation and simulation completed</span></div>
+    <div class="card-topline"><span class="card-category">FPGA</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-verified" aria-label="Record status: Compilation and simulation completed">Compilation and simulation completed</span></span></div>
     <h2><a href="../../en/projects/fpga-qpsk-baseband-system/index.html">FPGA QPSK Baseband Link and Visualization System</a></h2>
     <p>An FPGA communications project covering PRBS, Gray mapping, phase rotation, hard decisions, BER, UART telemetry and Python constellation plots.</p>
     <div class="tag-list"><span>QPSK</span><span>Verilog</span><span>BER</span><span>UART</span><span>Python</span></div>
     <a class="text-link" href="../../en/projects/fpga-qpsk-baseband-system/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems" data-search="stm32f103 freertos multi-mode smart car freertos smart-car firmware with dual-wheel pid, encoder odometry, line following, obstacle avoidance, flash parameters, safety protection and complete documentation. embedded systems stm32 freertos pid encoder bluetooth">
-    <div class="card-topline"><span>Embedded Systems</span><span>Software build completed; vehicle validation pending</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-pending" aria-label="Record status: Software build completed; vehicle validation pending">Software build completed; vehicle validation pending</span></span></div>
     <h2><a href="../../en/projects/stm32f103-freertos-smartcar/index.html">STM32F103 FreeRTOS Multi-Mode Smart Car</a></h2>
     <p>FreeRTOS smart-car firmware with dual-wheel PID, encoder odometry, line following, obstacle avoidance, Flash parameters, safety protection and complete documentation.</p>
     <div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>PID</span><span>Encoder</span><span>Bluetooth</span></div>
     <a class="text-link" href="../../en/projects/stm32f103-freertos-smartcar/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems" data-search="stm32f103 dual-channel temperature monitoring and alarm system an stm32 design integrating ds18b20, pt100, oled, audible and visual alarms, sd logging, serial configuration and flash threshold storage. embedded systems stm32 ds18b20 pt100 fatfs oled">
-    <div class="card-topline"><span>Embedded Systems</span><span>Project and firmware generated</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Project and firmware generated">Project and firmware generated</span></span></div>
     <h2><a href="../../en/projects/temperature-inspector-stm32f103/index.html">STM32F103 Dual-Channel Temperature Monitoring and Alarm System</a></h2>
     <p>An STM32 design integrating DS18B20, PT100, OLED, audible and visual alarms, SD logging, serial configuration and Flash threshold storage.</p>
     <div class="tag-list"><span>STM32</span><span>DS18B20</span><span>PT100</span><span>FatFs</span><span>OLED</span></div>
     <a class="text-link" href="../../en/projects/temperature-inspector-stm32f103/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Communication Simulation" data-search="matlab digital modulation recognition simulation generates five modulation classes, extracts features across awgn and multiple snr values, and compares rbf-svm with knn. communication simulation matlab modulation awgn svm knn">
-    <div class="card-topline"><span>Communication Simulation</span><span>Simulation completed</span></div>
+    <div class="card-topline"><span class="card-category">Communication Simulation</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-verified" aria-label="Record status: Simulation completed">Simulation completed</span></span></div>
     <h2><a href="../../en/projects/digital-modulation-recognition-matlab/index.html">MATLAB Digital Modulation Recognition Simulation</a></h2>
     <p>Generates five modulation classes, extracts features across AWGN and multiple SNR values, and compares RBF-SVM with KNN.</p>
     <div class="tag-list"><span>MATLAB</span><span>Modulation</span><span>AWGN</span><span>SVM</span><span>KNN</span></div>
     <a class="text-link" href="../../en/projects/digital-modulation-recognition-matlab/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Web Application" data-search="personal knowledge base and local document search a dockerized personal knowledge base with authentication, document upload, local search and optional ai answers. web application python sqlite docker search web">
-    <div class="card-topline"><span>Web Application</span><span>Locally verified</span></div>
+    <div class="card-topline"><span class="card-category">Web Application</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-verified" aria-label="Record status: Locally verified">Locally verified</span></span></div>
     <h2><a href="../../en/projects/personal-knowledge-base/index.html">Personal Knowledge Base and Local Document Search</a></h2>
     <p>A Dockerized personal knowledge base with authentication, document upload, local search and optional AI answers.</p>
     <div class="tag-list"><span>Python</span><span>SQLite</span><span>Docker</span><span>Search</span><span>Web</span></div>
     <a class="text-link" href="../../en/projects/personal-knowledge-base/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Data Analysis" data-search="origin 2024 battery aging and thermal safety analysis a workflow using csv, excel, powershell com and origin 2024 for cycle aging, dq/dv, thermal response and eis analysis. data analysis origin excel powershell battery eis">
-    <div class="card-topline"><span>Data Analysis</span><span>Analysis artifacts generated</span></div>
+    <div class="card-topline"><span class="card-category">Data Analysis</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Analysis artifacts generated">Analysis artifacts generated</span></span></div>
     <h2><a href="../../en/projects/originlab-battery-aging/index.html">Origin 2024 Battery Aging and Thermal Safety Analysis</a></h2>
     <p>A workflow using CSV, Excel, PowerShell COM and Origin 2024 for cycle aging, dQ/dV, thermal response and EIS analysis.</p>
     <div class="tag-list"><span>Origin</span><span>Excel</span><span>PowerShell</span><span>Battery</span><span>EIS</span></div>
     <a class="text-link" href="../../en/projects/originlab-battery-aging/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Algorithms" data-search="python rrt and rrt* path planning demo a standard-library-only python project for 2d random-tree planning, obstacle collision checks, gui animation and path export. algorithms python rrt rrt star tkinter path planning">
-    <div class="card-topline"><span>Algorithms</span><span>Completed</span></div>
+    <div class="card-topline"><span class="card-category">Algorithms</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Completed">Completed</span></span></div>
     <h2><a href="../../en/projects/rrt-path-planning/index.html">Python RRT and RRT* Path Planning Demo</a></h2>
     <p>A standard-library-only Python project for 2D random-tree planning, obstacle collision checks, GUI animation and path export.</p>
     <div class="tag-list"><span>Python</span><span>RRT</span><span>RRT Star</span><span>Tkinter</span><span>Path Planning</span></div>
     <a class="text-link" href="../../en/projects/rrt-path-planning/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Engineering Foundations" data-search="first-repo git and github starter exercise a first github repository using small text and shell files to practice creation, readme authoring, commits and pushes. engineering foundations git github shell readme">
-    <div class="card-topline"><span>Engineering Foundations</span><span>Learning repository</span></div>
+    <div class="card-topline"><span class="card-category">Engineering Foundations</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Learning repository">Learning repository</span></span></div>
     <h2><a href="../../en/projects/first-repo/index.html">first-repo Git and GitHub Starter Exercise</a></h2>
     <p>A first GitHub repository using small text and Shell files to practice creation, README authoring, commits and pushes.</p>
     <div class="tag-list"><span>Git</span><span>GitHub</span><span>Shell</span><span>README</span></div>
     <a class="text-link" href="../../en/projects/first-repo/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Engineering Foundations" data-search="remote-repo remote synchronization exercise a minimal exercise focused on connecting a local git repository to github and verifying push, pull and synchronization. engineering foundations git github remote push pull">
-    <div class="card-topline"><span>Engineering Foundations</span><span>Learning repository</span></div>
+    <div class="card-topline"><span class="card-category">Engineering Foundations</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Learning repository">Learning repository</span></span></div>
     <h2><a href="../../en/projects/remote-repo/index.html">remote-repo Remote Synchronization Exercise</a></h2>
     <p>A minimal exercise focused on connecting a local Git repository to GitHub and verifying push, pull and synchronization.</p>
     <div class="tag-list"><span>Git</span><span>GitHub</span><span>Remote</span><span>Push</span><span>Pull</span></div>
     <a class="text-link" href="../../en/projects/remote-repo/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Embedded Systems and Computer Vision" data-search="stm32 vision-guided robotic arm sorter a vision-guided sorter built with stm32f103, freertos, python and opencv, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests. embedded systems and computer vision stm32 freertos opencv inverse kinematics uart">
-    <div class="card-topline"><span>Embedded Systems and Computer Vision</span><span>Software loop and firmware build verified</span></div>
+    <div class="card-topline"><span class="card-category">Embedded Systems and Computer Vision</span><span class="card-record-meta"><time class="card-date" datetime="2026-07" title="Record date">2026-07</time><span class="evidence-badge evidence-verified" aria-label="Record status: Software loop and firmware build verified">Software loop and firmware build verified</span></span></div>
     <h2><a href="../../en/projects/stm32-vision-robot-arm-sorter/index.html">STM32 Vision-Guided Robotic Arm Sorter</a></h2>
     <p>A vision-guided sorter built with STM32F103, FreeRTOS, Python and OpenCV, including calibration, kinematics, a checked serial protocol, force feedback, simulation and automated tests.</p>
     <div class="tag-list"><span>STM32</span><span>FreeRTOS</span><span>OpenCV</span><span>Inverse Kinematics</span><span>UART</span></div>
     <a class="text-link" href="../../en/projects/stm32-vision-robot-arm-sorter/index.html">View details <span aria-hidden="true">→</span></a>
   </article><article class="content-card" data-content-card data-category="Personal Profile" data-search="github profile and bilingual introduction a chinese-english profile readme introducing long-term engineering interests, learning practices and the entry point to public work. personal profile github profile markdown bilingual">
-    <div class="card-topline"><span>Personal Profile</span><span>Publicly maintained</span></div>
+    <div class="card-topline"><span class="card-category">Personal Profile</span><span class="card-record-meta"><time class="card-date" datetime="2026-07-29" title="Record date">2026-07-29</time><span class="evidence-badge evidence-neutral" aria-label="Record status: Publicly maintained">Publicly maintained</span></span></div>
     <h2><a href="../../en/projects/jiayu-here/index.html">GitHub Profile and Bilingual Introduction</a></h2>
     <p>A Chinese-English profile README introducing long-term engineering interests, learning practices and the entry point to public work.</p>
     <div class="tag-list"><span>GitHub</span><span>Profile</span><span>Markdown</span><span>Bilingual</span></div>
@@ -154,6 +162,6 @@
     <div class="footer-links"><a href="../../en/about/index.html">About</a><a href="../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../en/feed.xml">RSS</a><a href="../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260801a"></script>
+  <script src="../../assets/script.js?v=20260801b"></script>
 </body>
 </html>
