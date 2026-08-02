@@ -14,7 +14,7 @@ const writeFile = async (...args) => {
 };
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260801d";
+const assetVersion = "20260802a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1110,7 +1110,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   }).join("");
   const content = `
     <section class="page-hero compact-hero index-hero content-index-hero section-index-hero">
-      <div class="container"><div class="section-index-heading"><h1>${isEnglish ? "Learning Notes" : "学习笔记"}</h1><p>${isEnglish ? "Mathematics and English notes are grouped by course and chapter, making it easy to move from the knowledge framework to each note." : "数学与英语按原始课程、章节逐层整理，便于从知识框架进入具体笔记。"}</p></div>${controls}</div>
+      <div class="container"><div class="section-index-heading"><h1>${isEnglish ? "Learning Notes" : "学习笔记"}</h1></div>${controls}</div>
     </section>
     <section class="section container content-index-section"><div class="notes-major-list" data-notes-index>${hierarchy}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching notes." : "暂时没有匹配的内容。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, "notes");
@@ -1133,12 +1133,9 @@ const buildIndex = async (section, items, locale) => {
     <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
-  const description = isEnglish
-    ? section === "projects" ? "Complete engineering records from requirements and architecture through debugging and delivery." : section === "articles" ? "Writing about communications, signal processing, embedded systems, FPGA and computing fundamentals." : "A long-term knowledge tree covering mathematics, English, engineering courses and programming."
-    : section === "projects" ? "记录从需求分析、系统设计到调试交付的完整工程过程。" : section === "articles" ? "围绕通信、信号处理、嵌入式、FPGA 与计算机基础持续写作。" : "把数学、英语、专业课与编程语言整理成可以长期查找的知识树。";
   const hero = `
     <section class="page-hero compact-hero index-hero content-index-hero section-index-hero">
-      <div class="container"><div class="section-index-heading"><h1>${config.title}</h1><p>${description}</p></div>${controls}</div>
+      <div class="container"><div class="section-index-heading"><h1>${config.title}</h1></div>${controls}</div>
     </section>`;
   const content = `${hero}
     <section class="section container content-index-section"><div class="content-grid" data-content-grid>${items.map((item) => cardFor(item, section, locale, prefix)).join("")}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching content." : "暂时没有匹配的内容。"}</p></section>`;
@@ -1246,7 +1243,7 @@ const buildLabIndex = async (items, locale) => {
     : `${items.length} 条公开项目调试记录，保留问题现象、初步判断、排查过程、证据支持的根因、解决方法与可复用经验。`;
   const controls = `<div class="content-controls compact-controls content-controls-search-only"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div>`;
   const content = `
-    <section class="page-hero compact-hero index-hero content-index-hero section-index-hero section-index-hero-search-only"><div class="container"><div class="section-index-heading"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1><p>${heroDescription}</p></div>${controls}</div></section>
+    <section class="page-hero compact-hero index-hero content-index-hero section-index-hero section-index-hero-search-only"><div class="container"><div class="section-index-heading"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1></div>${controls}</div></section>
     <section class="section container content-index-section"><div class="timeline">${timeline}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, logConfig.output);
   await mkdir(output, { recursive: true });
