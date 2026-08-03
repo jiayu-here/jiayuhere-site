@@ -7,8 +7,8 @@ const writeFile = async (...args) => {
     try {
       return await writeFileOnce(...args);
     } catch (error) {
-      if (error?.code !== "UNKNOWN" || attempt === 3) throw error;
-      await new Promise((resolve) => setTimeout(resolve, 50 * (attempt + 1)));
+      if (error?.code !== "UNKNOWN" || attempt === 9) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 100 * (attempt + 1)));
     }
   }
 };
