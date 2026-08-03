@@ -31,6 +31,7 @@ body {
   font-family: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
   line-height: 1.7;
 }
+:where(h1, h2, h3) { text-wrap: balance; }
 body::before {
   content: "";
   position: fixed;
