@@ -53,6 +53,37 @@ const syncArticleToc = ({ matches }) => {
 syncArticleToc(compactArticleToc);
 compactArticleToc.addEventListener("change", syncArticleToc);
 
+const articleTocLinks = articleToc ? Array.from(articleToc.querySelectorAll('a[href^="#"]')) : [];
+const articleSections = articleTocLinks.map((link) => {
+  const section = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+  return section ? { link, section } : null;
+}).filter(Boolean);
+if (articleSections.length) {
+  let articleTocFramePending = false;
+  const syncActiveArticleSection = () => {
+    articleTocFramePending = false;
+    const readingLine = Math.min(180, window.innerHeight * 0.28);
+    let activeSection = articleSections[0];
+    articleSections.forEach((entry) => {
+      if (entry.section.getBoundingClientRect().top <= readingLine) activeSection = entry;
+    });
+    articleSections.forEach(({ link }) => {
+      if (link === activeSection.link) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  const requestArticleTocSync = () => {
+    if (articleTocFramePending) return;
+    articleTocFramePending = true;
+    window.requestAnimationFrame(syncActiveArticleSection);
+  };
+  syncActiveArticleSection();
+  window.addEventListener("scroll", requestArticleTocSync, { passive: true });
+  window.addEventListener("resize", requestArticleTocSync);
+  window.addEventListener("hashchange", requestArticleTocSync);
+  window.addEventListener("load", requestArticleTocSync, { once: true });
+}
+
 const sectionLabels = isEnglish
   ? { projects: "Project", articles: "Blog", notes: "Note", toolbox: "Toolbox", resources: "Resources", logs: "Lab log" }
   : { projects: "项目", articles: "博客", notes: "笔记", toolbox: "工具箱", resources: "资源", logs: "日志" };

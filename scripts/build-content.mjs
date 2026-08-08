@@ -14,7 +14,7 @@ const writeFile = async (...args) => {
 };
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
-const assetVersion = "20260803a";
+const assetVersion = "20260808a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
