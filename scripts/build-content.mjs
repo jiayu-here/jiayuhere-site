@@ -14,6 +14,9 @@ const writeFile = async (...args) => {
 };
 const siteUrl = "https://www.jiayuhere.com";
 const socialImageUrl = `${siteUrl}/assets/images/og.png`;
+const socialImageType = "image/png";
+const socialImageWidth = 1200;
+const socialImageHeight = 630;
 const assetVersion = "20260808a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
@@ -726,13 +729,18 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="${socialImageUrl}">
+  <meta property="og:image:type" content="${socialImageType}">
+  <meta property="og:image:width" content="${socialImageWidth}">
+  <meta property="og:image:height" content="${socialImageHeight}">
   <meta property="og:image:alt" content="Jiayu Lab">
   <meta property="og:url" content="${canonical}">
   <meta property="og:locale" content="${isEnglish ? "en_US" : "zh_CN"}">
+  <meta property="og:locale:alternate" content="${isEnglish ? "zh_CN" : "en_US"}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${socialImageUrl}">${structuredData ? `\n${structuredData}` : ""}
+  <meta name="twitter:image" content="${socialImageUrl}">
+  <meta name="twitter:image:alt" content="Jiayu Lab">${structuredData ? `\n${structuredData}` : ""}
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
@@ -911,13 +919,18 @@ const ensurePageMetadata = (html, url) => {
   add(/<meta\b[^>]*\bproperty=["']og:title["']/i, `  <meta property="og:title" content="${title}">`);
   add(/<meta\b[^>]*\bproperty=["']og:description["']/i, `  <meta property="og:description" content="${description}">`);
   add(/<meta\b[^>]*\bproperty=["']og:image["']/i, `  <meta property="og:image" content="${socialImageUrl}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:image:type["']/i, `  <meta property="og:image:type" content="${socialImageType}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:image:width["']/i, `  <meta property="og:image:width" content="${socialImageWidth}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:image:height["']/i, `  <meta property="og:image:height" content="${socialImageHeight}">`);
   add(/<meta\b[^>]*\bproperty=["']og:image:alt["']/i, `  <meta property="og:image:alt" content="Jiayu Lab">`);
   add(/<meta\b[^>]*\bproperty=["']og:url["']/i, `  <meta property="og:url" content="${canonical}">`);
   add(/<meta\b[^>]*\bproperty=["']og:locale["']/i, `  <meta property="og:locale" content="${isEnglish ? "en_US" : "zh_CN"}">`);
+  add(/<meta\b[^>]*\bproperty=["']og:locale:alternate["']/i, `  <meta property="og:locale:alternate" content="${isEnglish ? "zh_CN" : "en_US"}">`);
   add(/<meta\b[^>]*\bname=["']twitter:card["']/i, `  <meta name="twitter:card" content="summary_large_image">`);
   add(/<meta\b[^>]*\bname=["']twitter:title["']/i, `  <meta name="twitter:title" content="${title}">`);
   add(/<meta\b[^>]*\bname=["']twitter:description["']/i, `  <meta name="twitter:description" content="${description}">`);
   add(/<meta\b[^>]*\bname=["']twitter:image["']/i, `  <meta name="twitter:image" content="${socialImageUrl}">`);
+  add(/<meta\b[^>]*\bname=["']twitter:image:alt["']/i, `  <meta name="twitter:image:alt" content="Jiayu Lab">`);
   if (additions.length) html = html.replace("</head>", `${additions.join("\n")}\n</head>`);
 
   if ((url === "" || url === "en/") && !html.includes('"@type": "WebSite"') && !html.includes('"@type":"WebSite"')) {
