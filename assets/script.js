@@ -95,6 +95,7 @@ searchTrigger.innerHTML = `
   <span class="nav-search-text">${t("搜索六个栏目", "Search all six sections")}</span>
   <kbd>Ctrl K</kbd>`;
 searchTrigger.setAttribute("aria-label", t("搜索项目、博客、笔记、工具箱、资源和日志", "Search projects, blog, notes, toolbox, resources and lab logs"));
+searchTrigger.setAttribute("aria-keyshortcuts", "Control+K Meta+K");
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
 
