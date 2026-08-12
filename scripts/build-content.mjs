@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260810a";
+const assetVersion = "20260812a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -679,7 +679,7 @@ const nav = (prefix, locale, route, active = "") => {
 const footer = (prefix, locale) => {
   const strings = localeConfig[locale].strings;
   return `
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">Jiayu Lab</a><p>${strings.footer}</p></div>
     <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
@@ -866,6 +866,7 @@ const ensureSharedPageShell = (html, url) => {
   }
   if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
   if (!html.includes("data-theme-restore")) html = html.replace("<head>", `<head>\n${themeRestoreTag}`);
+  html = html.replace(/<footer class="site-footer"(?![^>]*\brole=)>/g, '<footer class="site-footer" role="contentinfo">');
   return html
     .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)
     .replace(/favicon\.ico(?:\?v=[^"]+)?/g, `favicon.ico?v=${assetVersion}`)
