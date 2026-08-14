@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260813a";
+const assetVersion = "20260814a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -764,7 +764,7 @@ ${usesMath ? `  <script>
 </head>
 <body>
 ${nav(prefix, locale, route, active)}
-<main id="main">${content}</main>
+<main id="main" tabindex="-1">${content}</main>
 ${footer(prefix, locale)}
 </body>
 </html>`;
@@ -866,6 +866,9 @@ const ensureSharedPageShell = (html, url) => {
   }
   if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
   if (!html.includes("data-theme-restore")) html = html.replace("<head>", `<head>\n${themeRestoreTag}`);
+  html = html.replace(/<main\b(?=[^>]*\bid=["']main["'])[^>]*>/gi, (tag) => (
+    /\btabindex=/.test(tag) ? tag : tag.replace(/>$/, ' tabindex="-1">')
+  ));
   html = html.replace(/<footer class="site-footer"(?![^>]*\brole=)>/g, '<footer class="site-footer" role="contentinfo">');
   return html
     .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)

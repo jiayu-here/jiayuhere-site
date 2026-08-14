@@ -79,9 +79,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/fpga-fixed-point-fft-checklist/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260813a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260814a" sizes="any">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260813a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260814a">
 
 </head>
 <body>
@@ -101,7 +101,7 @@
       <a class="language-switch" href="../../en/blog/fpga-fixed-point-fft-checklist/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
     </nav>
   </header>
-<main id="main">
+<main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA 定点 FFT 设计前必须想清楚的五件事</h1><p class="article-lead">从位宽、缩放、旋转因子到时序接口，整理定点 FFT 的设计检查项。</p><div class="article-meta"><span class="record-meta"><span class="record-category">数字信号处理</span><span class="record-date"><span>发布</span><time datetime="2026-07-12">2026-07-12</time></span></span><span>约 7 分钟阅读</span><div class="tag-list"><span>FFT</span><span>Fixed Point</span><span>FPGA</span><span>DSP</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">先确定系统指标</a><a href="#section-2">Q 格式必须写进接口文档</a><a href="#section-3">蝶形加法会产生增长位</a><a href="#section-4">复数乘法的位宽要逐项推导</a><a href="#section-5">旋转因子表也需要可追溯</a><a href="#section-6">数据顺序决定地址控制</a><a href="#section-7">流式接口要把数据和状态一起传递</a><a href="#section-8">溢出、舍入和饱和是三件事</a><a href="#section-9">软件参考模型必须模拟定点过程</a><a href="#section-10">测试向量要覆盖不同问题</a><a href="#section-16">时序与资源要在结构稳定后检查</a><a href="#section-17">常见错误与排查顺序</a><a href="#section-18">验收清单</a></nav></details><div class="prose"><h2 id="section-1">先确定系统指标</h2>
@@ -218,6 +218,6 @@ wire signed [2*W:0] real_full = ac - bd;</code></pre>
     <div class="footer-links"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260813a"></script>
+  <script src="../../assets/script.js?v=20260814a"></script>
 </body>
 </html>

@@ -79,9 +79,9 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/mysql-index-debug-path/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/mysql-index-debug-path/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260813a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260814a" sizes="any">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260813a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260814a">
 
 </head>
 <body>
@@ -101,7 +101,7 @@
       <a class="language-switch" href="../../../blog/mysql-index-debug-path/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
     </nav>
   </header>
-<main id="main">
+<main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html">← Back to Technical Blog</a><h1>Why MySQL Did Not Use the Index: A Structured Debugging Path</h1><p class="article-lead">Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Databases</span><span class="record-date"><span>Published</span><time datetime="2026-07-08">2026-07-08</time></span></span><span>4 min read</span><div class="tag-list"><span>MySQL</span><span>Index</span><span>SQL</span><span>EXPLAIN</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Preserve a Reproducible Query</a><a href="#section-2">Start with EXPLAIN</a><a href="#section-3">Use EXPLAIN ANALYZE Carefully</a><a href="#section-4">Check Implicit Type Conversion</a><a href="#section-5">Keep Functions Off Indexed Columns</a><a href="#section-6">Respect the Leftmost Prefix</a><a href="#section-7">Understand Range Conditions</a><a href="#section-8">A Table Scan Can Be Correct</a><a href="#section-9">Use Covering Indexes Selectively</a><a href="#section-10">Include ORDER BY and LIMIT</a><a href="#section-11">Know the Limits of LIKE</a><a href="#section-12">Analyze OR and JOIN Branches</a><a href="#section-13">Refresh Stale Statistics</a><a href="#section-14">Treat FORCE INDEX as a Last Resort</a><a href="#section-15">Measure the Tradeoff</a><a href="#section-16">Recommended Sequence</a><a href="#section-17">Acceptance Checklist</a></nav></details><div class="prose"><h2 id="section-1">Preserve a Reproducible Query</h2>
@@ -176,6 +176,6 @@ LIMIT 20;</code></pre>
     <div class="footer-links"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></div>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260813a"></script>
+  <script src="../../../assets/script.js?v=20260814a"></script>
 </body>
 </html>
