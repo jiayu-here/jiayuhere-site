@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260814a";
+const assetVersion = "20260820a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -870,6 +870,23 @@ const ensureSharedPageShell = (html, url) => {
     /\btabindex=/.test(tag) ? tag : tag.replace(/>$/, ' tabindex="-1">')
   ));
   html = html.replace(/<footer class="site-footer"(?![^>]*\brole=)>/g, '<footer class="site-footer" role="contentinfo">');
+  if (url === "" || url === "en/") {
+    const identityProfiles = new Set([
+      "https://github.com/jiayu-here",
+      "https://www.linkedin.com/in/jiayuhere",
+      "https://www.instagram.com/jiayuhere_/",
+      "https://jiayuhere.blogspot.com",
+      "https://v.douyin.com/lisWB6e9ImQ/"
+    ]);
+    html = html.replace(/<a\b[^>]*>/gi, (tag) => {
+      const href = tag.match(/\bhref=["']([^"']+)["']/i)?.[1];
+      if (!identityProfiles.has(href)) return tag;
+      const rel = tag.match(/\brel=["']([^"']*)["']/i);
+      if (!rel) return tag.replace(/>$/, ' rel="me">');
+      const tokens = rel[1].split(/\s+/).filter((token) => token && token !== "me");
+      return tag.replace(rel[0], `rel="${["me", ...tokens].join(" ")}"`);
+    });
+  }
   return html
     .replace(/(<meta name="theme-color" content=")[^"]+(" media="\(prefers-color-scheme: light\)">)/g, `$1${lightThemeColor}$2`)
     .replace(/favicon\.ico(?:\?v=[^"]+)?/g, `favicon.ico?v=${assetVersion}`)
