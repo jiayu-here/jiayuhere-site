@@ -318,13 +318,22 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
   button.type = "button";
   button.className = "copy-code";
   button.textContent = t("复制代码", "Copy code");
+  const status = document.createElement("span");
+  status.className = "visually-hidden";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-atomic", "true");
   button.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(code.textContent || "");
       button.textContent = t("已复制", "Copied");
-      window.setTimeout(() => { button.textContent = t("复制代码", "Copy code"); }, 1600);
+      status.textContent = t("代码已复制到剪贴板。", "Code copied to clipboard.");
+      window.setTimeout(() => {
+        button.textContent = t("复制代码", "Copy code");
+        status.textContent = "";
+      }, 1600);
     } catch {
       button.textContent = t("复制失败", "Copy failed");
+      status.textContent = t("代码复制失败。", "Code could not be copied.");
     }
   });
   const language = Array.from(code.classList).find((name) => name.startsWith("language-"))?.slice(9);
@@ -335,7 +344,7 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
     wrapper.append(label);
   }
   pre.before(wrapper);
-  wrapper.append(button, pre);
+  wrapper.append(button, status, pre);
 });
 
 document.querySelectorAll(".prose h2[id]").forEach((heading) => {
