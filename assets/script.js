@@ -518,9 +518,12 @@ document.querySelectorAll(".tool-card").forEach((card, index) => {
 
   const panelId = form.id || `tool-panel-${index + 1}`;
   const toggleId = `tool-toggle-${index + 1}`;
+  const heading = card.querySelector("h2");
+  const headingId = heading?.id || `tool-heading-${index + 1}`;
+  if (heading) heading.id = headingId;
   form.id = panelId;
   form.hidden = true;
-  form.setAttribute("aria-labelledby", toggleId);
+  form.setAttribute("aria-labelledby", headingId);
 
   const toggle = document.createElement("button");
   toggle.type = "button";
