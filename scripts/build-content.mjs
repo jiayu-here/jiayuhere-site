@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260823a";
+const assetVersion = "20260824a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1114,7 +1114,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   const noteGroupId = (...parts) => `notes-${locale}-${parts.map((part) => encodeURIComponent(part).replace(/%/g, "-")).join("-")}`;
   const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], isEnglish ? ["Mathematics", "English"] : ["数学", "英语"]);
   const controls = `<div class="content-controls compact-controls">
-    <label class="search-box"><span>${isEnglish ? "Search notes" : "搜索笔记"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
+    <label class="search-box"><span>${isEnglish ? "Search notes" : "搜索笔记"}</span><input type="search" enterkeyhint="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
     <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Note categories" : "笔记大类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
@@ -1163,7 +1163,7 @@ const buildIndex = async (section, items, locale) => {
     ? section === "projects" ? "Search projects" : section === "articles" ? "Search articles" : "Search notes"
     : section === "projects" ? "搜索项目" : section === "articles" ? "搜索文章" : "搜索笔记";
   const controls = `<div class="content-controls compact-controls">
-    <label class="search-box"><span>${searchLabel}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
+    <label class="search-box"><span>${searchLabel}</span><input type="search" enterkeyhint="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
     <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Content categories" : "内容分类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
     <p class="result-status" data-result-status aria-live="polite"></p>
   </div>`;
@@ -1275,7 +1275,7 @@ const buildLabIndex = async (items, locale) => {
   const heroDescription = isEnglish
     ? `${items.length} public-project debugging records preserving the symptom, hypothesis, investigation, evidence-supported cause, fix and reusable lesson.`
     : `${items.length} 条公开项目调试记录，保留问题现象、初步判断、排查过程、证据支持的根因、解决方法与可复用经验。`;
-  const controls = `<div class="content-controls compact-controls content-controls-search-only"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div>`;
+  const controls = `<div class="content-controls compact-controls content-controls-search-only"><label class="search-box"><span>${isEnglish ? "Search lab logs" : "搜索日志"}</span><input type="search" enterkeyhint="search" data-content-search placeholder="${isEnglish ? "Enter a project, issue or keyword" : "输入项目、问题或关键词"}"></label><p class="result-status" data-result-status aria-live="polite"></p></div>`;
   const content = `
     <section class="page-hero compact-hero index-hero content-index-hero section-index-hero section-index-hero-search-only"><div class="container"><div class="section-index-heading"><h1>${isEnglish ? "Lab Notes and Bug Reviews" : "实验记录与 Bug 复盘"}</h1></div>${controls}</div></section>
     <section class="section container content-index-section"><div class="timeline">${timeline}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching lab logs." : "暂时没有匹配的日志。"}</p></section>`;
