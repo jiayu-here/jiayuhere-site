@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260824a";
+const assetVersion = "20260825a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -716,8 +716,8 @@ ${jsonForHtml({
   return `<!doctype html>
 <html lang="${localeConfig[locale].lang}">
 <head>
-${themeRestoreTag}
   <meta charset="utf-8">
+${themeRestoreTag}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
@@ -849,6 +849,13 @@ const pagePrefixForUrl = (url) => {
   return "../".repeat(url.endsWith(".html") ? Math.max(0, depth - 1) : depth);
 };
 
+const ensureEarlyCharset = (html) => {
+  const charset = html.match(/^[ \t]*<meta\s+charset=(?:"[^"]*"|'[^']*')[^>]*>[ \t]*(?:\r?\n)?/im);
+  const tag = charset?.[0].trim() || '<meta charset="utf-8">';
+  if (charset) html = html.replace(charset[0], "");
+  return html.replace(/<head\b[^>]*>/i, (head) => `${head}\n  ${tag}`);
+};
+
 const ensureSharedPageShell = (html, url) => {
   const isEnglish = url.startsWith("en/");
   const locale = isEnglish ? "en" : "zh";
@@ -960,7 +967,7 @@ const ensurePageMetadata = (html, url) => {
 
   html = ensureSharedPageShell(html, url);
   html = ensureDeferredAnalytics(html);
-  return html;
+  return ensureEarlyCharset(html);
 };
 
 const ensureDeferredAnalytics = (html) => {
@@ -1589,7 +1596,7 @@ const build = async () => {
   }
   for (const url of ["404.html", "en/404.html"]) {
     const htmlPath = path.join(root, url);
-    const html = ensureDeferredAnalytics(ensureSharedPageShell(await readFile(htmlPath, "utf8"), url));
+    const html = ensureEarlyCharset(ensureDeferredAnalytics(ensureSharedPageShell(await readFile(htmlPath, "utf8"), url)));
     await writeFile(htmlPath, html);
   }
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...sitemapByUrl].map(([url, lastmod]) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastmod}</lastmod></url>`).join("\n")}\n</urlset>\n`;
