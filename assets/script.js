@@ -32,7 +32,7 @@ siteNav?.addEventListener("click", (event) => {
   if (event.target instanceof HTMLAnchorElement) setNavOpen(false);
 });
 window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
+  if (event.key === "Escape" && siteNav?.classList.contains("is-open")) {
     setNavOpen(false);
     navToggle?.focus();
   }
