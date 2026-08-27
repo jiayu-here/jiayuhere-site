@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260826a";
+const assetVersion = "20260827a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -747,6 +747,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <link rel="alternate" hreflang="x-default" href="${chinese}">
   <link rel="alternate" type="application/rss+xml" title="${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}" href="${routeFromRoot(prefix, locale, "feed.xml")}">
   <link rel="icon" href="${prefix}favicon.ico?v=${assetVersion}" sizes="any">
+  <link rel="apple-touch-icon" href="${prefix}assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="${prefix}site.webmanifest">
   <link rel="stylesheet" href="${prefix}assets/styles.css?v=${assetVersion}">
 ${usesMath ? `  <script>
@@ -874,6 +875,9 @@ const ensureSharedPageShell = (html, url) => {
   }
   if (themeTags.length) html = html.replace("</head>", `${themeTags.join("\n")}\n</head>`);
   if (!html.includes("data-theme-restore")) html = html.replace("<head>", `<head>\n${themeRestoreTag}`);
+  if (!/<link\b[^>]*\brel=["']apple-touch-icon["']/i.test(html)) {
+    html = html.replace("</head>", `  <link rel="apple-touch-icon" href="${prefix}assets/images/app-icon-192.png" sizes="192x192">\n</head>`);
+  }
   html = html.replace(/<main\b(?=[^>]*\bid=["']main["'])[^>]*>/gi, (tag) => (
     /\btabindex=/.test(tag) ? tag : tag.replace(/>$/, ' tabindex="-1">')
   ));
