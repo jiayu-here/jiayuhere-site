@@ -850,9 +850,10 @@ const pagePrefixForUrl = (url) => {
 };
 
 const ensureEarlyCharset = (html) => {
-  const charset = html.match(/^[ \t]*<meta\s+charset=(?:"[^"]*"|'[^']*')[^>]*>[ \t]*(?:\r?\n)?/im);
+  const charsetPattern = /[ \t]*<meta\s+charset=(?:"[^"]*"|'[^']*')[^>]*>[ \t]*(?:\r?\n)?/gi;
+  const charset = html.match(charsetPattern);
   const tag = charset?.[0].trim() || '<meta charset="utf-8">';
-  if (charset) html = html.replace(charset[0], "");
+  html = html.replace(charsetPattern, "");
   return html.replace(/<head\b[^>]*>/i, (head) => `${head}\n  ${tag}`);
 };
 
