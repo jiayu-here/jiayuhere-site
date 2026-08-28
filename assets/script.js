@@ -94,7 +94,7 @@ searchTrigger.innerHTML = `
   <svg aria-hidden="true" viewBox="0 0 16 16"><path d="M11.5 10.5 15 14l-1 1-3.5-3.5a5.5 5.5 0 1 1 1-1ZM7.5 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"/></svg>
   <span class="nav-search-text">${t("搜索六个栏目", "Search all six sections")}</span>
   <kbd>Ctrl K</kbd>`;
-searchTrigger.setAttribute("aria-label", t("搜索项目、博客、笔记、工具箱、资源和日志", "Search projects, blog, notes, toolbox, resources and lab logs"));
+searchTrigger.setAttribute("aria-label", t("搜索六个栏目 Ctrl K：项目、博客、笔记、工具箱、资源和日志", "Search all six sections Ctrl K: projects, blog, notes, toolbox, resources and lab logs"));
 searchTrigger.setAttribute("aria-keyshortcuts", "Control+K Meta+K");
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
