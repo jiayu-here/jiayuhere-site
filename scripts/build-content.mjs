@@ -88,6 +88,7 @@ const localeConfig = {
       footer: "把工程实践、学习过程和可复用的方法整理成长期资产。",
       about: "关于我",
       privacy: "隐私说明",
+      footerNavLabel: "页脚导航",
       sitemap: "站点地图"
     }
   },
@@ -112,6 +113,7 @@ const localeConfig = {
       footer: "Turning engineering practice, learning and reusable methods into long-term assets.",
       about: "About",
       privacy: "Privacy",
+      footerNavLabel: "Footer navigation",
       sitemap: "Sitemap"
     }
   }
@@ -681,7 +683,7 @@ const footer = (prefix, locale) => {
   return `
   <footer class="site-footer" role="contentinfo">
     <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">Jiayu Lab</a><p>${strings.footer}</p></div>
-    <div class="footer-links"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></div>
+    <nav class="footer-links" aria-label="${strings.footerNavLabel}"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
   <script src="${prefix}assets/script.js?v=${assetVersion}"></script>`;
@@ -863,8 +865,14 @@ const ensureSharedPageShell = (html, url) => {
   const locale = isEnglish ? "en" : "zh";
   const prefix = pagePrefixForUrl(url);
   const privacyHref = `${prefix}${localeConfig[locale].routeRoot}privacy/index.html`;
+  const footerNavOpening = `<nav class="footer-links" aria-label="${localeConfig[locale].strings.footerNavLabel}">`;
+  html = html.replace(
+    /<div class="footer-links">([\s\S]*?)<\/div>(?=\s*<p class="copyright">)/i,
+    `${footerNavOpening}$1</nav>`
+  );
+  html = html.replace(/<nav class="footer-links"(?:\s+aria-label="[^"]*")?>/i, footerNavOpening);
   if (!html.includes(`href="${privacyHref}"`)) {
-    html = html.replace('<div class="footer-links">', `<div class="footer-links"><a href="${privacyHref}">${localeConfig[locale].strings.privacy}</a>`);
+    html = html.replace(footerNavOpening, `${footerNavOpening}<a href="${privacyHref}">${localeConfig[locale].strings.privacy}</a>`);
   }
   const themeTags = [];
   if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*light/i.test(html)) {
