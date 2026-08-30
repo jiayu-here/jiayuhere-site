@@ -683,7 +683,7 @@ const footer = (prefix, locale) => {
   return `
   <footer class="site-footer" role="contentinfo">
     <div><a class="brand footer-brand" href="${routeFromRoot(prefix, locale, "index.html")}">Jiayu Lab</a><p>${strings.footer}</p></div>
-    <nav class="footer-links" aria-label="${strings.footerNavLabel}"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></nav>
+    <nav class="footer-links" aria-label="${strings.footerNavLabel}"><a href="${routeFromRoot(prefix, locale, "about/index.html")}">${strings.about}</a><a href="${routeFromRoot(prefix, locale, "privacy/index.html")}">${strings.privacy}</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="${routeFromRoot(prefix, locale, "feed.xml")}">RSS</a><a href="${prefix}sitemap.xml">${strings.sitemap}</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
   <script src="${prefix}assets/script.js?v=${assetVersion}"></script>`;
@@ -874,6 +874,13 @@ const ensureSharedPageShell = (html, url) => {
   if (!html.includes(`href="${privacyHref}"`)) {
     html = html.replace(footerNavOpening, `${footerNavOpening}<a href="${privacyHref}">${localeConfig[locale].strings.privacy}</a>`);
   }
+  html = html.replace(/<a\b[^>]*\bhref=(["'])https:\/\/github\.com\/jiayu-here\/?\1[^>]*>/gi, (link) => {
+    if (/\brel=(["'])[^"']*\bme\b[^"']*\1/i.test(link)) return link;
+    if (/\brel=(["'])([^"']*)\1/i.test(link)) {
+      return link.replace(/\brel=(["'])([^"']*)\1/i, (_, quote, value) => `rel=${quote}me ${value}${quote}`);
+    }
+    return link.replace(/>$/, ' rel="me">');
+  });
   const themeTags = [];
   if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*light/i.test(html)) {
     themeTags.push(`  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">`);
