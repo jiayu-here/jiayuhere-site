@@ -881,6 +881,15 @@ const ensureSharedPageShell = (html, url) => {
     }
     return link.replace(/>$/, ' rel="me">');
   });
+  html = html.replace(
+    /<div\b([^>]*\bclass=(["'])[^"']*\bcontent-controls\b[^"']*\2[^>]*)>(?=\s*<label\b[^>]*\bclass=(["'])[^"']*\bsearch-box\b[^"']*\3[^>]*>\s*<span>([^<]+)<\/span>\s*<input\b[^>]*\bdata-content-search\b)/gi,
+    (tag, _attributes, _classQuote, _labelQuote, label) => {
+      let landmark = tag;
+      if (!/\brole=(["'])search\1/i.test(landmark)) landmark = landmark.replace(/>$/, ' role="search">');
+      if (!/\baria-label=/.test(landmark)) landmark = landmark.replace(/>$/, ` aria-label="${escapeHtml(label.trim())}">`);
+      return landmark;
+    }
+  );
   const themeTags = [];
   if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*light/i.test(html)) {
     themeTags.push(`  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">`);
