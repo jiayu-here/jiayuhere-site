@@ -721,6 +721,7 @@ ${jsonForHtml({
   <meta charset="utf-8">
 ${themeRestoreTag}
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
 ${robots ? `  <meta name="robots" content="${escapeHtml(robots)}">` : ""}
@@ -890,6 +891,12 @@ const ensureSharedPageShell = (html, url) => {
       return landmark;
     }
   );
+  if (!/<meta\b(?=[^>]*\bname=["']color-scheme["'])[^>]*>/i.test(html)) {
+    html = html.replace(
+      /(<meta\b(?=[^>]*\bname=["']viewport["'])[^>]*>)/i,
+      '$1\n  <meta name="color-scheme" content="light dark">'
+    );
+  }
   const themeTags = [];
   if (!/<meta name="theme-color"[^>]*prefers-color-scheme:\s*light/i.test(html)) {
     themeTags.push(`  <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">`);
