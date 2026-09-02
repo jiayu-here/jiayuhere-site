@@ -117,6 +117,9 @@ searchDialog.innerHTML = `
 const themeStorageKey = "jiayuhere-theme";
 const systemDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
 const themeModes = ["system", "light", "dark"];
+const themeLabels = isEnglish
+  ? { system: "System", light: "Light", dark: "Dark" }
+  : { system: "跟随系统", light: "浅色", dark: "深色" };
 let themeMode = "system";
 try {
   const storedTheme = localStorage.getItem(themeStorageKey);
@@ -128,6 +131,11 @@ try {
 const themeToggle = document.createElement("button");
 themeToggle.type = "button";
 themeToggle.className = "theme-toggle";
+const themeStatus = document.createElement("p");
+themeStatus.className = "visually-hidden";
+themeStatus.setAttribute("role", "status");
+themeStatus.setAttribute("aria-live", "polite");
+themeStatus.setAttribute("aria-atomic", "true");
 const themeIcon = document.createElement("span");
 themeIcon.className = "theme-toggle-icon";
 themeIcon.setAttribute("aria-hidden", "true");
@@ -145,13 +153,10 @@ const applyTheme = (mode) => {
   } catch {
     // Theme selection still works for the current page when storage is unavailable.
   }
-  const labels = isEnglish
-    ? { system: "System", light: "Light", dark: "Dark" }
-    : { system: "跟随系统", light: "浅色", dark: "深色" };
   const icons = { system: "◐", light: "☀", dark: "☾" };
   themeIcon.textContent = icons[themeMode];
-  themeText.textContent = labels[themeMode];
-  themeToggle.setAttribute("aria-label", t(`当前主题：${labels[themeMode]}，点击切换`, `Current theme: ${labels[themeMode]}. Activate to switch.`));
+  themeText.textContent = themeLabels[themeMode];
+  themeToggle.setAttribute("aria-label", t(`当前主题：${themeLabels[themeMode]}，点击切换`, `Current theme: ${themeLabels[themeMode]}. Activate to switch.`));
   themeToggle.title = themeToggle.getAttribute("aria-label");
   const effectiveTheme = themeMode === "system" ? (systemDarkTheme.matches ? "dark" : "light") : themeMode;
   document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
@@ -161,7 +166,9 @@ const applyTheme = (mode) => {
 };
 
 themeToggle.addEventListener("click", () => {
-  applyTheme(themeModes[(themeModes.indexOf(themeMode) + 1) % themeModes.length]);
+  const nextTheme = themeModes[(themeModes.indexOf(themeMode) + 1) % themeModes.length];
+  applyTheme(nextTheme);
+  themeStatus.textContent = t(`主题已切换为${themeLabels[nextTheme]}。`, `Theme set to ${themeLabels[nextTheme]}.`);
 });
 systemDarkTheme.addEventListener("change", () => {
   if (themeMode === "system") applyTheme("system");
@@ -170,7 +177,7 @@ applyTheme(themeMode);
 
 siteHeader?.insertBefore(searchTrigger, navToggle || siteNav || null);
 siteHeader?.insertBefore(themeToggle, navToggle || siteNav || null);
-document.body.append(searchDialog);
+document.body.append(searchDialog, themeStatus);
 
 const dialogInput = searchDialog.querySelector("input");
 const dialogStatus = searchDialog.querySelector(".search-dialog-status");
