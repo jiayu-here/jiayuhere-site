@@ -279,7 +279,15 @@ document.querySelectorAll("img").forEach((image) => {
   else image.addEventListener("error", showFallback, { once: true });
 });
 
+let searchReturnFocus = searchTrigger;
+
 const openSearch = () => {
+  if (searchDialog.hidden) {
+    const activeElement = document.activeElement;
+    searchReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body && activeElement.isConnected
+      ? activeElement
+      : searchTrigger;
+  }
   setNavOpen(false);
   searchDialog.hidden = false;
   document.body.classList.add("search-open");
@@ -289,7 +297,9 @@ const openSearch = () => {
 const closeSearch = () => {
   searchDialog.hidden = true;
   document.body.classList.remove("search-open");
-  searchTrigger.focus();
+  const returnFocus = searchReturnFocus.isConnected ? searchReturnFocus : searchTrigger;
+  searchReturnFocus = searchTrigger;
+  returnFocus.focus();
 };
 
 searchTrigger.addEventListener("click", openSearch);
