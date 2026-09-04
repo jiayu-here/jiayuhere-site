@@ -280,6 +280,21 @@ document.querySelectorAll("img").forEach((image) => {
 });
 
 let searchReturnFocus = searchTrigger;
+let searchInertSiblings = [];
+
+const setSearchBackgroundInert = (inert) => {
+  if (inert) {
+    searchInertSiblings = Array.from(document.body.children)
+      .filter((element) => element !== searchDialog)
+      .map((element) => ({ element, inert: element.inert }));
+    searchInertSiblings.forEach(({ element }) => { element.inert = true; });
+    return;
+  }
+  searchInertSiblings.forEach(({ element, inert: wasInert }) => {
+    if (element.isConnected) element.inert = wasInert;
+  });
+  searchInertSiblings = [];
+};
 
 const openSearch = () => {
   if (searchDialog.hidden) {
@@ -287,6 +302,7 @@ const openSearch = () => {
     searchReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body && activeElement.isConnected
       ? activeElement
       : searchTrigger;
+    setSearchBackgroundInert(true);
   }
   setNavOpen(false);
   searchDialog.hidden = false;
@@ -297,6 +313,7 @@ const openSearch = () => {
 const closeSearch = () => {
   searchDialog.hidden = true;
   document.body.classList.remove("search-open");
+  setSearchBackgroundInert(false);
   const returnFocus = searchReturnFocus.isConnected ? searchReturnFocus : searchTrigger;
   searchReturnFocus = searchTrigger;
   returnFocus.focus();
