@@ -98,6 +98,7 @@ searchTrigger.setAttribute("aria-label", t("搜索六个栏目 Ctrl K：项目�
 searchTrigger.setAttribute("aria-keyshortcuts", "Control+K Meta+K");
 searchTrigger.setAttribute("aria-haspopup", "dialog");
 searchTrigger.setAttribute("aria-controls", "siteSearchDialog");
+searchTrigger.setAttribute("aria-expanded", "false");
 
 const searchDialog = document.createElement("div");
 searchDialog.className = "search-overlay";
@@ -306,12 +307,14 @@ const openSearch = () => {
   }
   setNavOpen(false);
   searchDialog.hidden = false;
+  searchTrigger.setAttribute("aria-expanded", "true");
   document.body.classList.add("search-open");
   dialogInput?.focus();
 };
 
 const closeSearch = () => {
   searchDialog.hidden = true;
+  searchTrigger.setAttribute("aria-expanded", "false");
   document.body.classList.remove("search-open");
   setSearchBackgroundInert(false);
   const returnFocus = searchReturnFocus.isConnected ? searchReturnFocus : searchTrigger;
