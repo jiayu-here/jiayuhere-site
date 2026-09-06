@@ -110,7 +110,7 @@ searchDialog.innerHTML = `
       <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">${t("搜索全站内容", "Search the site")}</h2></div>
       <button class="search-close" type="button" aria-label="${t("关闭搜索", "Close search")}">×</button>
     </div>
-    <label class="search-dialog-field"><span>${t("输入栏目内容或技术关键词", "Enter content or a technical keyword")}</span><input type="search" enterkeyhint="search" autocomplete="off" placeholder="${t("例如：FPGA、FreeRTOS、波特率", "For example: FPGA, FreeRTOS, baud rate")}"></label>
+    <label class="search-dialog-field"><span>${t("输入栏目内容或技术关键词", "Enter content or a technical keyword")}</span><input type="search" enterkeyhint="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="${t("例如：FPGA、FreeRTOS、波特率", "For example: FPGA, FreeRTOS, baud rate")}"></label>
     <p class="search-dialog-status" aria-live="polite" aria-busy="false">${t("输入关键词后开始搜索。", "Enter a keyword to search.")}</p>
     <div class="search-results"></div>
   </section>`;
