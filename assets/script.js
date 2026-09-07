@@ -410,6 +410,7 @@ document.body.append(backToTop);
 const updateBackToTop = () => { backToTop.hidden = window.scrollY < 700; };
 window.addEventListener("scroll", updateBackToTop, { passive: true });
 backToTop.addEventListener("click", () => {
+  document.querySelector("#main")?.focus({ preventScroll: true });
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
 });
