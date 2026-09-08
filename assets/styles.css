@@ -10,6 +10,7 @@
   --primary-dark: #0d1117;
   --on-primary: #ffffff;
   --accent: #4338ca;
+  --focus-ring: var(--accent);
   --accent-dark: #3730a3;
   --on-accent: #ffffff;
   --brand: #3730a3;
@@ -59,7 +60,7 @@ button { color: inherit; }
   transform: translateY(-160%);
 }
 .skip-link:focus { transform: translateY(0); }
-:focus-visible { outline: 3px solid rgba(79, 70, 229, 0.46); outline-offset: 4px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
 
 .site-header {
   position: sticky;
@@ -391,7 +392,7 @@ h1, h2, h3 { margin-top: 0; line-height: 1.18; letter-spacing: -0.035em; }
 .system-flow-row { display: flex; align-items: stretch; gap: 10px; overflow-x: auto; }
 .system-flow-node { display: flex; flex: 1 0 118px; min-height: 68px; align-items: center; justify-content: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); text-align: center; font-size: 14px; font-weight: 800; line-height: 1.45; }
 .system-flow-arrow { align-self: center; flex: 0 0 auto; color: var(--muted); font-size: 20px; font-weight: 900; }
-.code-block { position: relative; margin: 26px 0; }
+.code-block { --focus-ring: #fff; position: relative; margin: 26px 0; }
 .code-block .code-language { position: absolute; top: 16px; left: 18px; z-index: 1; color: #8b949e; font: 750 11px ui-monospace, Consolas, monospace; letter-spacing: .08em; }
 .code-block .copy-code { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 6px 10px; border: 1px solid #30363d; border-radius: 8px; background: #21262d; color: #c9d1d9; cursor: pointer; font-size: 12px; font-weight: 750; }
 .code-block pre { margin: 0; padding-top: 52px; }
