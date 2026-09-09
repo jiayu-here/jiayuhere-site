@@ -350,6 +350,7 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+const codeScrollAreas = [];
 document.querySelectorAll(".prose pre").forEach((pre) => {
   const code = pre.querySelector("code");
   if (!code) return;
@@ -386,7 +387,34 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
   }
   pre.before(wrapper);
   wrapper.append(button, status, pre);
+  codeScrollAreas.push({
+    pre,
+    label: language
+      ? t(`${language.toUpperCase()} 代码，可横向滚动`, `${language.toUpperCase()} code, horizontally scrollable`)
+      : t("代码块，可横向滚动", "Code block, horizontally scrollable")
+  });
 });
+
+const syncCodeScrollAccess = () => {
+  codeScrollAreas.forEach(({ pre, label }) => {
+    if (pre.scrollWidth > pre.clientWidth + 1) {
+      pre.tabIndex = 0;
+      pre.setAttribute("role", "region");
+      pre.setAttribute("aria-label", label);
+    } else {
+      pre.removeAttribute("tabindex");
+      pre.removeAttribute("role");
+      pre.removeAttribute("aria-label");
+    }
+  });
+};
+syncCodeScrollAccess();
+if (codeScrollAreas.length && "ResizeObserver" in window) {
+  const codeScrollObserver = new ResizeObserver(syncCodeScrollAccess);
+  codeScrollAreas.forEach(({ pre }) => codeScrollObserver.observe(pre));
+} else if (codeScrollAreas.length) {
+  window.addEventListener("resize", syncCodeScrollAccess, { passive: true });
+}
 
 document.querySelectorAll(".prose h2[id]").forEach((heading) => {
   const sectionTitle = heading.textContent?.trim() || t("本节", "this section");
