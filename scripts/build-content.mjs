@@ -719,7 +719,7 @@ ${jsonForHtml({
 <html lang="${localeConfig[locale].lang}">
 <head>
   <meta charset="utf-8">
-${themeRestoreTag}
+${usesMath ? '  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>\n' : ""}${themeRestoreTag}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
