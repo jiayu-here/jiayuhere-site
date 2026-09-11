@@ -729,6 +729,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="${type}">
+  <meta property="og:site_name" content="Jiayu Lab">
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:image" content="${socialImageUrl}">
@@ -980,6 +981,7 @@ const ensurePageMetadata = (html, url) => {
   add(/<link\b[^>]*\bhreflang=["']en["']/i, `  <link rel="alternate" hreflang="en" href="${english}">`);
   add(/<link\b[^>]*\bhreflang=["']x-default["']/i, `  <link rel="alternate" hreflang="x-default" href="${chinese}">`);
   add(/<meta\b[^>]*\bproperty=["']og:type["']/i, `  <meta property="og:type" content="website">`);
+  add(/<meta\b[^>]*\bproperty=["']og:site_name["']/i, `  <meta property="og:site_name" content="Jiayu Lab">`);
   add(/<meta\b[^>]*\bproperty=["']og:title["']/i, `  <meta property="og:title" content="${title}">`);
   add(/<meta\b[^>]*\bproperty=["']og:description["']/i, `  <meta property="og:description" content="${description}">`);
   add(/<meta\b[^>]*\bproperty=["']og:image["']/i, `  <meta property="og:image" content="${socialImageUrl}">`);
