@@ -724,7 +724,7 @@ ${usesMath ? '  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorig
   <meta name="color-scheme" content="light dark">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
-${robots ? `  <meta name="robots" content="${escapeHtml(robots)}">` : ""}
+  <meta name="robots" content="${escapeHtml(robots || "max-image-preview:large")}">
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)">
@@ -976,6 +976,7 @@ const ensurePageMetadata = (html, url) => {
     if (!pattern.test(html)) additions.push(tag);
   };
 
+  add(/<meta\b[^>]*\bname=["']robots["']/i, `  <meta name="robots" content="max-image-preview:large">`);
   add(/<link\b[^>]*\brel=["']canonical["']/i, `  <link rel="canonical" href="${canonical}">`);
   add(/<link\b[^>]*\bhreflang=["']zh-CN["']/i, `  <link rel="alternate" hreflang="zh-CN" href="${chinese}">`);
   add(/<link\b[^>]*\bhreflang=["']en["']/i, `  <link rel="alternate" hreflang="en" href="${english}">`);
