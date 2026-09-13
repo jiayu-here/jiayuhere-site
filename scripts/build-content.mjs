@@ -728,7 +728,7 @@ ${usesMath ? '  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorig
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)">
-  <meta property="og:type" content="${type}">
+  <meta property="og:type" content="${type}">${blogPostingDate ? `\n  <meta property="article:published_time" content="${escapeHtml(blogPostingDate)}">` : ""}
   <meta property="og:site_name" content="Jiayu Lab">
   <meta property="og:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta property="og:description" content="${escapeHtml(description)}">
