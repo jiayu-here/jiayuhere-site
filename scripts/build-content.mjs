@@ -849,6 +849,24 @@ ${jsonForHtml({
 })}
   </script>`;
 
+const profilePageStructuredData = ({ locale, canonical, title, description }) => `  <script type="application/ld+json">
+${jsonForHtml({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${canonical}#profilepage`,
+  url: canonical,
+  name: title,
+  description,
+  inLanguage: localeConfig[locale].lang,
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "JiaYu",
+    url: `${siteUrl}/`
+  }
+})}
+  </script>`;
+
 const pagePrefixForUrl = (url) => {
   const depth = url.split("/").filter(Boolean).length;
   return "../".repeat(url.endsWith(".html") ? Math.max(0, depth - 1) : depth);
@@ -1002,6 +1020,9 @@ const ensurePageMetadata = (html, url) => {
 
   if ((url === "" || url === "en/") && !html.includes('"@type": "WebSite"') && !html.includes('"@type":"WebSite"')) {
     html = html.replace("</head>", `${homeStructuredData(locale)}\n</head>`);
+  }
+  if (route === "about/" && !html.includes('"@type": "ProfilePage"') && !html.includes('"@type":"ProfilePage"')) {
+    html = html.replace("</head>", `${profilePageStructuredData({ locale, canonical, title, description })}\n</head>`);
   }
 
   html = ensureSharedPageShell(html, url);
