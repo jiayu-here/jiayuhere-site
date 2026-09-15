@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Jiayu Lab Technical Blog</title>
     <link>https://www.jiayuhere.com/en/blog/</link>
@@ -11,6 +11,7 @@
       <title>From Pixel Coordinates to a Safe Grasp: Five Boundaries in a Vision-Guided Arm</title>
       <link>https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/vision-robot-arm-coordinate-safety-boundaries/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
       <description>Uses the STM32 vision-arm project to explain why color detection, four-point calibration, inverse kinematics, robust serial transport and hardware safety need separate verification.</description>
       <category>OpenCV</category>
@@ -23,6 +24,7 @@
       <title>From Constellation to RTL: A Verifiable Order for Building a QPSK Link</title>
       <link>https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/qpsk-from-constellation-to-rtl/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
       <description>A verification-first sequence for Gray mapping, phase rotation, hard decisions and BER alignment.</description>
       <category>QPSK</category>
@@ -34,6 +36,7 @@
       <title>Non-Blocking STM32 Temperature Monitoring: From Sampling State Machines to Alarm Tasks</title>
       <link>https://www.jiayuhere.com/en/blog/stm32-temperature-nonblocking-design/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/stm32-temperature-nonblocking-design/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
       <description>A dual-channel example covering non-blocking sampling, threshold management, alarm cadence, persistence and board bring-up.</description>
       <category>STM32</category>
@@ -46,6 +49,7 @@
       <title>FPGA DDS from Frequency Word to Measurement Display: A Verifiable Path</title>
       <link>https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
       <description>Layered design and verification for the phase accumulator, waveform LUT, sample-valid contract, statistics and board display.</description>
       <category>FPGA</category>
@@ -58,6 +62,7 @@
       <title>MATLAB Modulation Recognition: Leakage-Free Data and Interpretable Features</title>
       <link>https://www.jiayuhere.com/en/blog/matlab-modulation-recognition-features/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/matlab-modulation-recognition-features/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
       <description>A reliable workflow from signal generation and SNR injection through normalization, features and confusion-matrix analysis.</description>
       <category>MATLAB</category>
@@ -70,6 +75,7 @@
       <title>RRT and RRT* Beyond Animation: Collision Checks, Rewiring and Repeatable Tests</title>
       <link>https://www.jiayuhere.com/en/blog/rrt-rrtstar-reliable-planner/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/rrt-rrtstar-reliable-planner/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
       <description>Turn a planning animation into a testable planner through step size, edge collision, goal connection and correct RRT* rewiring.</description>
       <category>Python</category>
@@ -82,6 +88,7 @@
       <title>Five Decisions to Make Before Designing a Fixed-Point FPGA FFT</title>
       <link>https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/fpga-fixed-point-fft-checklist/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Sun, 12 Jul 2026 00:00:00 GMT</pubDate>
       <description>A design checklist covering width, scaling, twiddle factors, data order and streaming timing for fixed-point FFTs.</description>
       <category>FFT</category>
@@ -93,6 +100,7 @@
       <title>FreeRTOS Priority Is About Urgency, Not Importance</title>
       <link>https://www.jiayuhere.com/en/blog/freertos-priority-design/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/freertos-priority-design/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
       <description>Design task priorities from deadlines, blocking relationships and resource contention rather than business labels.</description>
       <category>FreeRTOS</category>
@@ -104,6 +112,7 @@
       <title>Why MySQL Did Not Use the Index: A Structured Debugging Path</title>
       <link>https://www.jiayuhere.com/en/blog/mysql-index-debug-path/</link>
       <guid isPermaLink="true">https://www.jiayuhere.com/en/blog/mysql-index-debug-path/</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
       <description>Diagnose missing index use through query shape, selectivity, type conversion, statistics and measured execution plans.</description>
       <category>MySQL</category>

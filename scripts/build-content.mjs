@@ -474,6 +474,7 @@ const buildRss = async (items, locale) => {
       <title>${escapeXml(item.meta.title)}</title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
+      <dc:creator>JiaYu</dc:creator>
       <pubDate>${rssDate(item.meta.date)}</pubDate>
       <description>${escapeXml(item.meta.description)}</description>
 ${categories}
@@ -481,7 +482,7 @@ ${categories}
   }).join("\n");
   const latestDate = ordered.length ? rssDate(ordered[0].meta.date) : new Date(0).toUTCString();
   const feed = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>${isEnglish ? "Jiayu Lab Technical Blog" : "Jiayu Lab 技术博客"}</title>
     <link>https://www.jiayuhere.com/${isEnglish ? "en/" : ""}blog/</link>
