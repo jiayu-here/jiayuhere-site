@@ -586,6 +586,7 @@ document.querySelectorAll(".tool-card").forEach((card, index) => {
   const toggleId = `tool-toggle-${index + 1}`;
   const heading = card.querySelector("h2");
   const headingId = heading?.id || `tool-heading-${index + 1}`;
+  const toolName = heading?.textContent?.trim() || t(`工具 ${index + 1}`, `Tool ${index + 1}`);
   if (heading) heading.id = headingId;
   form.id = panelId;
   form.hidden = true;
@@ -596,15 +597,20 @@ document.querySelectorAll(".tool-card").forEach((card, index) => {
   toggle.id = toggleId;
   toggle.className = "tool-card-toggle";
   toggle.setAttribute("aria-controls", panelId);
-  toggle.setAttribute("aria-expanded", "false");
   toggle.innerHTML = `<span>${t("展开使用", "Open tool")}</span><span class="tool-toggle-icon" aria-hidden="true">+</span>`;
 
+  const setToolOpen = (open) => {
+    const action = open ? t("收起工具", "Close tool") : t("展开使用", "Open tool");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", isEnglish ? `${action}: ${toolName}` : `${action}：${toolName}`);
+    toggle.firstElementChild.textContent = action;
+    form.hidden = !open;
+    card.classList.toggle("is-expanded", open);
+  };
+
+  setToolOpen(false);
   toggle.addEventListener("click", () => {
-    const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    toggle.firstElementChild.textContent = expanded ? t("展开使用", "Open tool") : t("收起工具", "Close tool");
-    form.hidden = expanded;
-    card.classList.toggle("is-expanded", !expanded);
+    setToolOpen(toggle.getAttribute("aria-expanded") !== "true");
   });
 
   form.before(toggle);
