@@ -1,4 +1,4 @@
-const CACHE_NAME = "jiayuhere-20260916a";
+const CACHE_NAME = "jiayuhere-20260917a";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -7,13 +7,13 @@ const APP_SHELL = [
   "/en/offline/",
   "/resume/",
   "/en/resume/",
-  "/assets/styles.css?v=20260916a",
-  "/assets/script.js?v=20260916a",
+  "/assets/styles.css?v=20260917a",
+  "/assets/script.js?v=20260917a",
   "/assets/images/github-avatar.jpg",
   "/assets/images/app-icon-192.png",
   "/assets/images/app-icon-512.png",
   "/assets/images/app-icon-maskable-512.png",
-  "/favicon.ico?v=20260916a",
+  "/favicon.ico?v=20260917a",
   "/site.webmanifest"
 ];
 

@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/stm32f103-freertos-smartcar/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/stm32f103-freertos-smartcar/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -119,8 +119,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>系统分为应用层、BSP、HAL/CMSIS 和 FreeRTOS 内核。七个任务按安全、控制、通信、行为、传感、显示和监控分工；安全任务优先级最高，控制任务以 10 ms 周期完成编码器、斜坡、PID 和里程计；通信任务通过 StreamBuffer 解析蓝牙命令。</p>
-<div class="system-flow" role="img" aria-label="系统架构：传感器与蓝牙 到 BSP 与 HAL 驱动 到 FreeRTOS 任务层 到 模式与安全决策 到 PID 与里程计 到 PWM 电机驱动；编码器与故障状态 到 控制和监控任务 到 OLED 与 UART 日志"><div class="system-flow-row"><span class="system-flow-node">传感器与蓝牙</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">BSP 与 HAL 驱动</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FreeRTOS 任务层</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模式与安全决策</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PID 与里程计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PWM 电机驱动</span></div>
-<div class="system-flow-row"><span class="system-flow-node">编码器与故障状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">控制和监控任务</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 与 UART 日志</span></div></div>
+<figure class="system-flow" aria-label="系统架构：传感器与蓝牙 到 BSP 与 HAL 驱动 到 FreeRTOS 任务层 到 模式与安全决策 到 PID 与里程计 到 PWM 电机驱动；编码器与故障状态 到 控制和监控任务 到 OLED 与 UART 日志"><div class="system-flow-row"><span class="system-flow-node">传感器与蓝牙</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">BSP 与 HAL 驱动</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FreeRTOS 任务层</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模式与安全决策</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PID 与里程计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PWM 电机驱动</span></div>
+<div class="system-flow-row"><span class="system-flow-node">编码器与故障状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">控制和监控任务</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 与 UART 日志</span></div></figure>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>双电机 20 kHz PWM、双编码器测速和独立 PID。</li>
@@ -191,6 +191,6 @@
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260916a"></script>
+  <script src="../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260916a";
+const assetVersion = "20260917a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -454,7 +454,8 @@ const architectureDiagram = (lines, locale) => {
   if (!rows.length) throw new Error("Architecture diagram requires at least two nodes");
   const label = rows.map((nodes) => nodes.join(locale === "en" ? " to " : " 到 ")).join(locale === "en" ? "; " : "；");
   const content = rows.map((nodes) => `<div class="system-flow-row">${nodes.map((node, index) => `${index ? '<span class="system-flow-arrow" aria-hidden="true">→</span>' : ""}<span class="system-flow-node">${escapeHtml(node)}</span>`).join("")}</div>`).join("\n");
-  return `<div class="system-flow" role="img" aria-label="${locale === "en" ? "System architecture" : "系统架构"}：${escapeHtml(label)}">${content}</div>`;
+  const separator = locale === "en" ? ": " : "：";
+  return `<figure class="system-flow" aria-label="${locale === "en" ? "System architecture" : "系统架构"}${separator}${escapeHtml(label)}">${content}</figure>`;
 };
 
 const rssDate = (value = "") => {

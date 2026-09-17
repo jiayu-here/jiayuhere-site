@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/stm32-vision-robot-arm-sorter/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -132,8 +132,8 @@
 </ul>
 <h2 id="section-7">System Architecture</h2>
 <p>The PC application owns vision, calibration, task scheduling and interaction. The STM32 firmware owns safety checks, kinematics, servo trajectories, force feedback and telemetry. A binary frame carrying version, sequence and CRC16 connects the two boundaries.</p>
-<div class="system-flow" role="img" aria-label="System architecture：USB camera to OpenCV color detection to Four-point calibration to Queue and workspace checks to CRC16 serial protocol; STM32F103 and FreeRTOS to Inverse kinematics and smooth PWM to Four-axis arm and gripper to FSR confirmation to Telemetry"><div class="system-flow-row"><span class="system-flow-node">USB camera</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV color detection</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-point calibration</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Queue and workspace checks</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 serial protocol</span></div>
-<div class="system-flow-row"><span class="system-flow-node">STM32F103 and FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Inverse kinematics and smooth PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-axis arm and gripper</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Telemetry</span></div></div>
+<figure class="system-flow" aria-label="System architecture: USB camera to OpenCV color detection to Four-point calibration to Queue and workspace checks to CRC16 serial protocol; STM32F103 and FreeRTOS to Inverse kinematics and smooth PWM to Four-axis arm and gripper to FSR confirmation to Telemetry"><div class="system-flow-row"><span class="system-flow-node">USB camera</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV color detection</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-point calibration</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Queue and workspace checks</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 serial protocol</span></div>
+<div class="system-flow-row"><span class="system-flow-node">STM32F103 and FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Inverse kinematics and smooth PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Four-axis arm and gripper</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Telemetry</span></div></figure>
 <h2 id="section-8">Functional Modules</h2>
 <ul>
 <li><code>vision.py</code>: HSV segmentation, morphology, contour filtering and target centers.</li>
@@ -215,6 +215,6 @@ const float base = atan2f(y_mm, x_mm) * RAD_TO_DEG + 90.0f;</code></pre>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260916a"></script>
+  <script src="../../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

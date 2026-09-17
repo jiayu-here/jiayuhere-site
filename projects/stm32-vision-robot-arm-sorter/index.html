@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/stm32-vision-robot-arm-sorter/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/stm32-vision-robot-arm-sorter/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -132,8 +132,8 @@
 </ul>
 <h2 id="section-7">系统架构</h2>
 <p>上位机负责视觉识别、标定、任务队列和交互；STM32 固件负责安全检查、运动学、舵机轨迹、压力反馈和遥测。两个边界通过带版本、序号和 CRC16 的二进制帧连接。</p>
-<div class="system-flow" role="img" aria-label="系统架构：USB 摄像头 到 OpenCV 颜色识别 到 四点手眼标定 到 任务队列与工作空间检查 到 CRC16 串口协议；STM32F103 与 FreeRTOS 到 逆运动学与平滑 PWM 到 四轴机械臂与夹爪 到 FSR 抓取确认 到 状态遥测"><div class="system-flow-row"><span class="system-flow-node">USB 摄像头</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV 颜色识别</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四点手眼标定</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">任务队列与工作空间检查</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 串口协议</span></div>
-<div class="system-flow-row"><span class="system-flow-node">STM32F103 与 FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">逆运动学与平滑 PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四轴机械臂与夹爪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR 抓取确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">状态遥测</span></div></div>
+<figure class="system-flow" aria-label="系统架构：USB 摄像头 到 OpenCV 颜色识别 到 四点手眼标定 到 任务队列与工作空间检查 到 CRC16 串口协议；STM32F103 与 FreeRTOS 到 逆运动学与平滑 PWM 到 四轴机械臂与夹爪 到 FSR 抓取确认 到 状态遥测"><div class="system-flow-row"><span class="system-flow-node">USB 摄像头</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OpenCV 颜色识别</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四点手眼标定</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">任务队列与工作空间检查</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CRC16 串口协议</span></div>
+<div class="system-flow-row"><span class="system-flow-node">STM32F103 与 FreeRTOS</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">逆运动学与平滑 PWM</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">四轴机械臂与夹爪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FSR 抓取确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">状态遥测</span></div></figure>
 <h2 id="section-8">功能模块</h2>
 <ul>
 <li><code>vision.py</code>：HSV 分割、形态学处理、轮廓过滤和目标中心提取。</li>
@@ -215,6 +215,6 @@ const float base = atan2f(y_mm, x_mm) * RAD_TO_DEG + 90.0f;</code></pre>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260916a"></script>
+  <script src="../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

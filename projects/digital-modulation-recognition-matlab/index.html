@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/digital-modulation-recognition-matlab/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/digital-modulation-recognition-matlab/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -113,8 +113,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>脚本分为参数配置、信号生成、加噪、特征提取、数据集构建、模型训练、预测评估和结果导出八个阶段。训练集与测试集按调制类型和 SNR 生成，特征矩阵统一标准化后分别送入 SVM 与 KNN。</p>
-<div class="system-flow" role="img" aria-label="系统架构：参数配置 到 调制信号生成 到 AWGN 加噪 到 17 维特征提取 到 特征标准化 到 SVM 与 KNN 到 准确率与混淆矩阵；评估结果 到 CSV 与 MAT 到 时域频谱和星座图 到 论文材料"><div class="system-flow-row"><span class="system-flow-node">参数配置</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">调制信号生成</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">AWGN 加噪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">17 维特征提取</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">特征标准化</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">SVM 与 KNN</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">准确率与混淆矩阵</span></div>
-<div class="system-flow-row"><span class="system-flow-node">评估结果</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CSV 与 MAT</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">时域频谱和星座图</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">论文材料</span></div></div>
+<figure class="system-flow" aria-label="系统架构：参数配置 到 调制信号生成 到 AWGN 加噪 到 17 维特征提取 到 特征标准化 到 SVM 与 KNN 到 准确率与混淆矩阵；评估结果 到 CSV 与 MAT 到 时域频谱和星座图 到 论文材料"><div class="system-flow-row"><span class="system-flow-node">参数配置</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">调制信号生成</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">AWGN 加噪</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">17 维特征提取</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">特征标准化</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">SVM 与 KNN</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">准确率与混淆矩阵</span></div>
+<div class="system-flow-row"><span class="system-flow-node">评估结果</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">CSV 与 MAT</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">时域频谱和星座图</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">论文材料</span></div></figure>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li>五类调制信号生成和功率归一化。</li>
@@ -183,6 +183,6 @@ svmPred = predict(svmModel, XTest);</code></pre>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260916a"></script>
+  <script src="../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

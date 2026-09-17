@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/temperature-inspector-stm32f103/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/temperature-inspector-stm32f103/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -105,8 +105,8 @@
 <p>C, STM32 HAL, ADC, 1-Wire, I2C, SPI, FatFs, UART, internal Flash, non-blocking periodic scheduling and debounced limit decisions. Hardware includes the STM32F103C8T6, ST-Link, DS18B20, PT100 voltage module, SSD1306 OLED, SD SPI module, keys, buzzer and alarm LED. Serial is 115200 8N1.</p>
 <h2 id="section-4">System Architecture</h2>
 <p>The main loop uses independent millisecond timestamps. Sampling updates channel values and ranges; the alarm block requires two consecutive violations; the display refreshes only after content changes; FatFs appends CSV records; and UART receives and parses whole lines without blocking.</p>
-<div class="system-flow" role="img" aria-label="System architecture：DS18B20 and PT100 to Non-blocking sampler to Limit confirmation to OLED status to Buzzer and LED; Temperature and thresholds to FatFs CSV to Flash settings to UART query and configuration"><div class="system-flow-row"><span class="system-flow-node">DS18B20 and PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Non-blocking sampler</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Limit confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED status</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Buzzer and LED</span></div>
-<div class="system-flow-row"><span class="system-flow-node">Temperature and thresholds</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash settings</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">UART query and configuration</span></div></div>
+<figure class="system-flow" aria-label="System architecture: DS18B20 and PT100 to Non-blocking sampler to Limit confirmation to OLED status to Buzzer and LED; Temperature and thresholds to FatFs CSV to Flash settings to UART query and configuration"><div class="system-flow-row"><span class="system-flow-node">DS18B20 and PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Non-blocking sampler</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Limit confirmation</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED status</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Buzzer and LED</span></div>
+<div class="system-flow-row"><span class="system-flow-node">Temperature and thresholds</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash settings</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">UART query and configuration</span></div></figure>
 <h2 id="section-5">Functional Modules</h2>
 <ul>
 <li><code>app_ds18b20.c</code>, <code>app_pt100.c</code>: two sensing paths.</li>
@@ -166,6 +166,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260916a"></script>
+  <script src="../../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

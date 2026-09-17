@@ -351,7 +351,8 @@ window.addEventListener("keydown", (event) => {
 });
 
 const codeScrollAreas = [];
-document.querySelectorAll(".prose pre").forEach((pre) => {
+const codeBlocks = document.querySelectorAll(".prose pre");
+codeBlocks.forEach((pre, index) => {
   const code = pre.querySelector("code");
   if (!code) return;
   const wrapper = document.createElement("div");
@@ -390,8 +391,14 @@ document.querySelectorAll(".prose pre").forEach((pre) => {
   codeScrollAreas.push({
     pre,
     label: language
-      ? t(`${language.toUpperCase()} 代码，可横向滚动`, `${language.toUpperCase()} code, horizontally scrollable`)
-      : t("代码块，可横向滚动", "Code block, horizontally scrollable")
+      ? t(
+        `${language.toUpperCase()} 代码块 ${index + 1}/${codeBlocks.length}，可横向滚动`,
+        `${language.toUpperCase()} code block ${index + 1} of ${codeBlocks.length}, horizontally scrollable`
+      )
+      : t(
+        `代码块 ${index + 1}/${codeBlocks.length}，可横向滚动`,
+        `Code block ${index + 1} of ${codeBlocks.length}, horizontally scrollable`
+      )
   });
 });
 
@@ -414,6 +421,50 @@ if (codeScrollAreas.length && "ResizeObserver" in window) {
   codeScrollAreas.forEach(({ pre }) => codeScrollObserver.observe(pre));
 } else if (codeScrollAreas.length) {
   window.addEventListener("resize", syncCodeScrollAccess, { passive: true });
+}
+
+const systemFlowScrollAreas = [];
+document.querySelectorAll(".system-flow").forEach((flow) => {
+  const rows = Array.from(flow.querySelectorAll(".system-flow-row"));
+  rows.forEach((row, index) => {
+    const path = Array.from(row.querySelectorAll(".system-flow-node"))
+      .map((node) => node.textContent?.trim())
+      .filter(Boolean)
+      .join(t(" 到 ", " to "));
+    row.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(event.key) || row.scrollWidth <= row.clientWidth + 1) return;
+      event.preventDefault();
+      row.scrollBy({ left: event.key === "ArrowRight" ? 64 : -64 });
+    });
+    systemFlowScrollAreas.push({
+      row,
+      label: t(
+        `系统架构第 ${index + 1} 行，共 ${rows.length} 行：${path}。可横向滚动。`,
+        `System architecture row ${index + 1} of ${rows.length}: ${path}. Horizontally scrollable.`
+      )
+    });
+  });
+});
+
+const syncSystemFlowScrollAccess = () => {
+  systemFlowScrollAreas.forEach(({ row, label }) => {
+    if (row.scrollWidth > row.clientWidth + 1) {
+      row.tabIndex = 0;
+      row.setAttribute("role", "region");
+      row.setAttribute("aria-label", label);
+    } else {
+      row.removeAttribute("tabindex");
+      row.removeAttribute("role");
+      row.removeAttribute("aria-label");
+    }
+  });
+};
+syncSystemFlowScrollAccess();
+if (systemFlowScrollAreas.length && "ResizeObserver" in window) {
+  const systemFlowScrollObserver = new ResizeObserver(syncSystemFlowScrollAccess);
+  systemFlowScrollAreas.forEach(({ row }) => systemFlowScrollObserver.observe(row));
+} else if (systemFlowScrollAreas.length) {
+  window.addEventListener("resize", syncSystemFlowScrollAccess, { passive: true });
 }
 
 document.querySelectorAll(".prose h2[id]").forEach((heading) => {

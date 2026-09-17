@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/temperature-inspector-stm32f103/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/temperature-inspector-stm32f103/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -119,8 +119,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>主循环使用多个毫秒时间戳进行非阻塞调度：采样任务更新两路温度和范围；报警模块执行连续两次越限确认；显示任务只在内容变化时刷新；存储任务通过 FatFs 追加 CSV；串口任务以非阻塞方式接收并解析整行命令。</p>
-<div class="system-flow" role="img" aria-label="系统架构：DS18B20 与 PT100 到 非阻塞采样调度 到 越限确认 到 OLED 状态显示 到 蜂鸣器报警；温度与阈值状态 到 FatFs CSV 记录 到 Flash 参数保存 到 串口命令查询"><div class="system-flow-row"><span class="system-flow-node">DS18B20 与 PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">非阻塞采样调度</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">越限确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 状态显示</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">蜂鸣器报警</span></div>
-<div class="system-flow-row"><span class="system-flow-node">温度与阈值状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV 记录</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash 参数保存</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">串口命令查询</span></div></div>
+<figure class="system-flow" aria-label="系统架构：DS18B20 与 PT100 到 非阻塞采样调度 到 越限确认 到 OLED 状态显示 到 蜂鸣器报警；温度与阈值状态 到 FatFs CSV 记录 到 Flash 参数保存 到 串口命令查询"><div class="system-flow-row"><span class="system-flow-node">DS18B20 与 PT100</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">非阻塞采样调度</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">越限确认</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">OLED 状态显示</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">蜂鸣器报警</span></div>
+<div class="system-flow-row"><span class="system-flow-node">温度与阈值状态</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">FatFs CSV 记录</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">Flash 参数保存</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">串口命令查询</span></div></figure>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li><code>app_ds18b20.c</code>、<code>app_pt100.c</code>：两路温度采集。</li>
@@ -204,6 +204,6 @@
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260916a"></script>
+  <script src="../../assets/script.js?v=20260917a"></script>
 </body>
 </html>

@@ -60,10 +60,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/projects/fpga-dds-measure-system/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/projects/fpga-dds-measure-system/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260916a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260916a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
 
 </head>
 <body>
@@ -118,8 +118,8 @@
 </ul>
 <h2 id="section-6">系统架构</h2>
 <p>顶层连接 DDS、PCF8591T I2C、ADC 统计和数码管显示。DDS 产生统一 8 bit 波形数据并送入 DAC；I2C 模块在写 DAC 的同时读取 ADC；<code>adc_valid</code> 作为统计模块的更新边界；显示层根据按键选择输出平均值、最小值、最大值或当前 DDS 采样值。</p>
-<div class="system-flow" role="img" aria-label="系统架构：按键与频率控制 到 DDS 波形核心 到 8 bit 波形数据 到 PCF8591T DAC 到 模拟输出；PCF8591T ADC 到 adc_valid 到 采样统计 到 显示选择 到 74HC595 数码管"><div class="system-flow-row"><span class="system-flow-node">按键与频率控制</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">DDS 波形核心</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">8 bit 波形数据</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PCF8591T DAC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模拟输出</span></div>
-<div class="system-flow-row"><span class="system-flow-node">PCF8591T ADC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">adc_valid</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">采样统计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">显示选择</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">74HC595 数码管</span></div></div>
+<figure class="system-flow" aria-label="系统架构：按键与频率控制 到 DDS 波形核心 到 8 bit 波形数据 到 PCF8591T DAC 到 模拟输出；PCF8591T ADC 到 adc_valid 到 采样统计 到 显示选择 到 74HC595 数码管"><div class="system-flow-row"><span class="system-flow-node">按键与频率控制</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">DDS 波形核心</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">8 bit 波形数据</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">PCF8591T DAC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">模拟输出</span></div>
+<div class="system-flow-row"><span class="system-flow-node">PCF8591T ADC</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">adc_valid</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">采样统计</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">显示选择</span><span class="system-flow-arrow" aria-hidden="true">→</span><span class="system-flow-node">74HC595 数码管</span></div></figure>
 <h2 id="section-7">功能模块</h2>
 <ul>
 <li><code>dds_core.v</code>：相位累加和四种波形选择。</li>
@@ -188,6 +188,6 @@ end</code></pre>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260916a"></script>
+  <script src="../../assets/script.js?v=20260917a"></script>
 </body>
 </html>
