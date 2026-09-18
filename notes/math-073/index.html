@@ -149,7 +149,7 @@
 <li>矩阵 $\begin{pmatrix}1&amp;2&amp;3\\4&amp;6&amp;9\\2&amp;4&amp;6\end{pmatrix}$ 可以看作由三个行向量 $[1,2,3],[4,6,9],[2,4,6]$ 组成，也可以看作由三个列向量 $[1,4,2]^{\mathrm{T}},[2,6,4]^{\mathrm{T}},[3,9,6]^{\mathrm{T}}$ 组成。</li>
 </ul>
 <h5 id="section-3"><strong>定义</strong>： <span class="note-tag">矩阵的秩</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span>设 $A$ 是 $m*n$ 矩阵，$A$ 中<strong>最高阶非零子式的阶数</strong>称为<strong>矩阵的秩</strong>，记为 $r(A)$ </blockquote>
+<blockquote><span>描述：</span>设 $A$ 是 $m*n$ 矩阵，$A$ 中<strong>最高阶非零子式的阶数</strong>称为<strong>矩阵的秩</strong>，记为 $r(A)$ </blockquote>
 <blockquote>也可以这样定义：若存在 $k$ 阶子式不为零，而任意 $k+1$ 阶子式 (如果有的话) 全为零，则 $r(A)=k$，且：</blockquote>
 <blockquote>$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{可逆}$$</blockquote>
 <blockquote>即：矩阵秩的本质，就是组成该矩阵的线性无关的向量的个数</blockquote>
@@ -173,7 +173,7 @@
 <p>（4）  乘法：矩阵的乘法不满足交换律，所以，一般地，   AB≠BA。但是，如果 A与 B 都是 n 阶方阵，则有 |AB|=|A| |B|=|B| |A|=|BA|。</p>
 <h2 id="section-5">4.2 矩阵的定义</h2>
 <h5 id="section-6"><strong>定义</strong>： <span class="note-tag">矩阵</span> </h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> $\text{由}m\times n\text{ 个数}a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{排成的}m\text{行}n\text{列的矩形表格}$：</blockquote>
+<blockquote><span>描述：</span> $\text{由}m\times n\text{ 个数}a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{排成的}m\text{行}n\text{列的矩形表格}$：</blockquote>
 <blockquote>$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <blockquote>其称为一个 $m\times n$ 矩阵，简记为 $A$ 或 $\left(a_{ij}\right)_{m\times n}\left(i=1,2,\cdotp\cdotp\cdotp,m;\: j=1,2,\cdotp\cdotp\cdotp,n\right).$ </blockquote>
 <blockquote>当 $m=n$ 时，称 $A$ 为 $n$ 阶方阵；</blockquote>
@@ -222,7 +222,7 @@
 <p>其中，<code>A，B，C</code> 是同型矩阵，k, l 是任意常数</p>
 <h3 id="section-9">4.3.2 矩阵乘法运算</h3>
 <h5 id="section-10"><strong>定理</strong>： <span class="note-tag">矩阵乘法</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>矩阵的乘法设 $A$ 是 $m\times s$ 矩阵，$B$ 是 $s\times n$ 矩阵 (矩阵 $A$ 的列数必须与矩阵 $B$ 的行数相等 ), 则 $A$ , $B$ 可以相乘，乘积 $AB$ 是 $m\times n$ 矩阵，记 $C=AB=(c_ij)_{m\times n}$</blockquote>
+<blockquote><span><span>描述：</span></span>矩阵的乘法设 $A$ 是 $m\times s$ 矩阵，$B$ 是 $s\times n$ 矩阵 (矩阵 $A$ 的列数必须与矩阵 $B$ 的行数相等 ), 则 $A$ , $B$ 可以相乘，乘积 $AB$ 是 $m\times n$ 矩阵，记 $C=AB=(c_ij)_{m\times n}$</blockquote>
 <blockquote>$C$ 的第 $i$ 行第 $j$ 列元素 $c_{ij}$ 是 $A$ 的第 $i$ 行的 <code>s</code> 个元素与 $B$ 的第 $j$ 列的 $s$ 个对应元素两两乘积之和，即：</blockquote>
 <blockquote>$$c_{ij}=\sum_{k=1}^{s}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}(i=1,2,\cdots,m;j=1,2,\cdots,n)$$</blockquote>
 <p><strong>解释</strong></p>
@@ -260,7 +260,7 @@
 </ul>
 <h3 id="section-11">4.3.3 转置矩阵 </h3>
 <h5 id="section-12"><strong>定义</strong>： <span class="note-tag">转置矩阵</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> $\text{将 }m\times n\text{ 矩阵 }A=\left(a_{ij}\right)_{m\times n}\text{的行与列互换得到的}n\times m\text{矩阵,称为矩阵 }A\text{ 的转置矩阵}，记为A^T，即：$ </blockquote>
+<blockquote><span>描述：</span> $\text{将 }m\times n\text{ 矩阵 }A=\left(a_{ij}\right)_{m\times n}\text{的行与列互换得到的}n\times m\text{矩阵,称为矩阵 }A\text{ 的转置矩阵}，记为A^T，即：$ </blockquote>
 <blockquote>$$A^{T}=\begin{bmatrix}a_{11}&amp;a_{21}&amp;\cdots&amp;a_{m1}\\a_{12}&amp;a_{22}&amp;\cdots&amp;a_{m2}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{1n}&amp;a_{2n}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -280,7 +280,7 @@
 </ul>
 <h3 id="section-13">4.3.4 方阵的行列式 </h3>
 <h5 id="section-14"><strong>定义</strong>： <span class="note-tag">方阵的行列式</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> $\text{当用}n\text{ 阶方阵}A\text{ 计算行列式时,记成}|A|$；</blockquote>
+<blockquote><span>描述：</span> $\text{当用}n\text{ 阶方阵}A\text{ 计算行列式时,记成}|A|$；</blockquote>
 <blockquote>1. $|kA|=k^{n}|A|\neq k|A|(n\geqslant2,k\neq0,1)$</blockquote>
 <blockquote>2. $\text{一般地,}\left|A+B\right|\neq\left|A\right|+\left|B\right|$</blockquote>
 <blockquote>3. 注意：$A\neq0\Rightarrow|A|\neq0$</blockquote>

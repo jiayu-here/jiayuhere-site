@@ -118,7 +118,7 @@
 <li>此时可以先设一个 $b$，然后让 b 趋向于极限；</li>
 </ul>
 <h5 id="section-4"><strong>定义</strong>： <span class="note-tag">反常积分</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span>积分区间无限或被积函数无界的积分，称为反常积分；又称之为广义积分；</blockquote>
+<blockquote><span>描述：</span>积分区间无限或被积函数无界的积分，称为反常积分；又称之为广义积分；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>当趋于无限时，极限有值，则称积分收敛；</li>
@@ -134,7 +134,7 @@
 <li>$\int_{-\infty}^{+\infty}f(x)dx=F(x)|_{-\infty}^{+\infty}$</li>
 </ul>
 <h5 id="section-5"><strong>定义</strong>： <span class="note-tag">无穷区间上的反常积分</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> </blockquote>
+<blockquote><span>描述：</span> </blockquote>
 <blockquote>1. 定义一： $$\int_{a}^{+\infty}f(x)dx=\lim_{t\to+\infty}\int_{a}^{t}f(x)dx$$ 若这个极限存在，则称这个反常积分是收敛的；反之则为发散的；</blockquote>
 <blockquote>2. 定义二：$$\int_{-\infty}^{b}f(x)dx=\lim_{t\to-\infty}\int_{t}^{b}f(x)dx$$ 与定义一同理；</blockquote>
 <blockquote>3. 定义三：$$\int_{-\infty}^{+\infty}f(x)dx=\int_{-\infty}^{0}f(x)dx+\int_{0}^{+\infty}f(x)dx$$ 若这两个都收敛，则收敛；否则发散；</blockquote>
@@ -145,7 +145,7 @@
 </ul>
 <h3 id="section-6">1.1.2 计算方法</h3>
 <h5 id="section-7"><strong>定理</strong>： <span class="note-tag">比较判别法</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>用于判断反常积分的敛散性；</blockquote>
+<blockquote><span><span>描述：</span></span>用于判断反常积分的敛散性；</blockquote>
 <blockquote>$$\text{设 }f (x), g (x)\text{ 在 }[a,+\infty)\text{ 上连续, 且 }0\leq f (x)\leq g (x)\text{, 则}$$</blockquote>
 <blockquote>$$1)\int_{a}^{+\infty}g(x)dx\text{收敛}\Rightarrow\int_{a}^{+\infty}f(x)dx\text{收敛}$$</blockquote>
 <blockquote>$$2) \int_{a}^{+\infty}f(x)dx\text{发散}\Rightarrow\int_{a}^{+\infty}g(x)dx\text{发散}$$</blockquote>
@@ -165,7 +165,7 @@
 <li>因为 <code>P&gt;1</code> ，所以收敛 <code>-&gt;</code> $\int_1^{+\infty}\frac{\sqrt{x}}{1+x^2}dx.$ 收敛；</li>
 </ul>
 <h5 id="section-8"><strong>定理</strong>： <span class="note-tag">比较判别法的极限形式</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
+<blockquote><span><span>描述：</span></span> </blockquote>
 <blockquote>比较判别法： $$\text{设 }f(x),g(x)\text{ 在 }[a,+\infty)\text{ 非负连续},\lim_{x\to+\infty}\frac{f(x)}{g(x)}=\lambda\text{,则}$$</blockquote>
 <blockquote>$$1)当\lambda&gt;0时,\int_{a}^{+\infty}f(x)dx\text{与}\int_{a}^{+\infty}g(x)dx\text{同敛散;}$$</blockquote>
 <blockquote>$$2)当\quad\lambda=0\text{ 时,}\int_{a}^{+\infty}g(x)dx\text{ 收敛 }\Rightarrow\int_{a}^{+\infty}f(x)dx\text{ 收敛}$$</blockquote>
@@ -182,17 +182,17 @@
 <h2 id="section-10">1.2 无界函数的反常积分</h2>
 <h3 id="section-11">1.2.1 基本概念</h3>
 <h5 id="section-12"><strong>定义</strong>： <span class="note-tag">无界函数的反常积分</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote><span>描述：</span></blockquote>
 <blockquote>1. 定于一：如果函数 $f(x)$ 在点 a 的任意邻域内都无界，则点 a 为函数 $f(x)$ 的瑕点：$$\int_a^bf(x)dx=\lim_{t\to a^+}\int_t^bf(x)dx$$</blockquote>
 <blockquote>2. 定义二：设点 b 为函数 $f(x)$ 的瑕点：$$\int_{a}^{b}f(x)dx=\lim_{t\to b^{-}}\int_{a}^{t}f(x)dx.$$</blockquote>
 <blockquote>3. 定义三：设点 c 为函数 $f(x)$ 的瑕点 $(a&lt;c&lt;b)$：$$\int_{a}^{b}f(x)dx=\int_{a}^{c}f(x)dx+\int_{c}^{b}f(x)dx$$</blockquote>
 <h5 id="section-13"><strong>定理</strong>： <span class="note-tag">比较判别法</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>$$\text{设 }f (x), g (x)\text{ 在 }(a,b]\text{ 上连续, 且 }0\leq f (x)\leq g (x)\text{, 则}$$</blockquote>
 <blockquote>$$1)\int_{a}^{b}g(x)dx\text{收敛}\Rightarrow\int_{a}^{b}f(x)dx\text{收敛}$$</blockquote>
 <blockquote>$$2) \int_{a}^{b}f(x)dx\text{发散}\Rightarrow\int_{a}^{b}g(x)dx\text{发散}$$</blockquote>
 <h5 id="section-14"><strong>定理</strong>： <span class="note-tag">比较判别法的极限形式</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
+<blockquote><span><span>描述：</span></span> </blockquote>
 <blockquote>比较判别法： $$\text{设 }f (x), g (x)\text{ 在 }(a, b]\text{ 非负连续},\lim_{x\to a^+}\frac{f (x)}{g (x)}=\lambda\text{ ,则}$$</blockquote>
 <blockquote>$$\begin{aligned}&amp;1)\ \lambda&gt;0\text{ 时，}\int_{a}^{b}f(x)\,dx\text{ 与 }\int_{a}^{b}g(x)\,dx\text{ 同敛散};\\&amp;2)\ \lambda=0\text{ 时，}\int_{a}^{b}g(x)\,dx\text{ 收敛}\Rightarrow\int_{a}^{b}f(x)\,dx\text{ 收敛};\\&amp;3)\ \lambda=+\infty\text{ 时，}\int_{a}^{b}g(x)\,dx\text{ 发散}\Rightarrow\int_{a}^{b}f(x)\,dx\text{ 发散}.\end{aligned}$$</blockquote>
 <blockquote>常用结论：$$\int_a^b\frac1{\left(x-a\right)^P}dx,\int_a^b\frac1{\left(b-x\right)^P}dx\quad\begin{cases}{P}&lt;1&amp;\text{收敛}\\P\geq1&amp;\text{发散}\end{cases}$$</blockquote>

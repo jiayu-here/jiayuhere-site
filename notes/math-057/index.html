@@ -101,7 +101,7 @@
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">49.1 交错级数</a><a href="#section-6">49.2 任意项级数</a></nav></details><div class="prose"><h2 id="section-1">49.1 交错级数</h2>
 <h3 id="section-2">49.1.1 交错级数概念</h3>
 <h5 id="section-3"><strong>定义</strong>： <span class="note-tag">交错级数</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> $$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</blockquote>
+<blockquote><span>描述：</span> $$\sum_{n=1}^\infty(-1)^{n-1}u_n,u_n&gt;0$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>正负交错出现的级数：</li>
@@ -123,7 +123,7 @@
 </ul>
 <h3 id="section-4">49.1.2 交错级数判断方法</h3>
 <h5 id="section-5"><strong>定理</strong>： <span class="note-tag">莱布尼茨准则</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>当前有交错级数 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$，当：</blockquote>
+<blockquote><span><span>描述：</span></span>当前有交错级数 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$，当：</blockquote>
 <blockquote>1）$u_{n}\geq u_{n+1}$：单调减</blockquote>
 <blockquote>2）$\lim_{n\to\infty}u_{n}=0$</blockquote>
 <blockquote>则可得到 $\sum_{n=1}^{+\infty}\left(-1\right)^{n-1}u_{n}$ 级数收敛，<code>S</code> <code>&lt;=</code> $u_1$，且 $|r_{n}|\leq u_{n+1}$</blockquote>
@@ -157,7 +157,7 @@
 <h3 id="section-8">49.2.2 任意项级数判断方法</h3>
 <p><strong>原则</strong>：把新问题化成老问题 <code>-&gt;</code> 把一个变号的级数，化成一个正项级数 <code>-&gt;</code> 通项加一个绝对值 <code>-&gt;</code> 这个新的正项级数收敛时，任意项级数也收敛；</p>
 <h5 id="section-9"><strong>定义</strong>： <span class="note-tag">绝对收敛与条件收敛</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span></blockquote>
+<blockquote><span>描述：</span></blockquote>
 <blockquote>1. 绝对收敛：如果加了绝对值的 $\sum|u_{n}|$ 收敛，则称 $\sum u_n$ 收敛；</blockquote>
 <blockquote>2. 条件收敛：如果 $u_n$ 是收敛的，$\sum|u_{n}|$ 是发散的，则称 $\sum u_n$ 是条件收敛的； </blockquote>
 <blockquote>具体情况：</blockquote>
@@ -183,14 +183,14 @@
 <li>2. 条件收敛的级数的所有正项（或负项）构成的级数，一定发散 <code>-&gt;</code> $$\sum_{n=1}^\infty u_n\text{ 条件收敛 }\Rightarrow\sum_{n=1}^\infty\frac{u_n+|u_n|}2\text{ 和 }\sum_{n=1}^\infty\frac{u_n-|u_n|}2\text{ 发散}.$$</li>
 </ul>
 <h5 id="section-10"><strong>定理</strong>： <span class="note-tag">任意项级数的绝对收敛</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果每项都加绝对值 $\sum_{n=1}^{+\infty}|u_{n}|$ 以后，它是收敛的，则它原来的级数 $\sum_{n=1}^{+\infty}u_{n}$ 也是收敛的；</blockquote>
+<blockquote><span><span>描述：</span></span>如果每项都加绝对值 $\sum_{n=1}^{+\infty}|u_{n}|$ 以后，它是收敛的，则它原来的级数 $\sum_{n=1}^{+\infty}u_{n}$ 也是收敛的；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>更简单的理解：</li>
 <li class="list-indent-1">全是正数（加绝对值）的情况下都可以收敛，那他原本有正有负的情况下就更应该是收敛的；</li>
 </ul>
 <h5 id="section-11"><strong>定理</strong>： <span class="note-tag">任意项级数发散收敛判断</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>如果 $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ 是任意项级数，且 $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
+<blockquote><span><span>描述：</span></span>如果 $\sum_{n=1}^{+\infty}u_{n}=u_{1}+u_{2}+u_{3}+\cdots$ 是任意项级数，且 $\lim_{n\to+\infty}\left|\frac{u_{n+1}}{u_{n}}\right|=l$</blockquote>
 <blockquote>1）当 $l$ &lt; 1 时，$\sum u_n$ 绝对收敛；</blockquote>
 <blockquote>2）当 $L&gt;1(+\infty)$ 时，$\sum u_n$ 发散；</blockquote>
 <blockquote>3）当 L =1 时，无法判断；</blockquote>

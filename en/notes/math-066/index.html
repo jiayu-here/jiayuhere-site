@@ -114,7 +114,7 @@
 </ul>
 <h3 id="section-2">58.1.1 Basic Concepts</h3>
 <p> #####<strong>Definition</strong>: <span class="note-tag">Thesecondtypeiscurveintegrals</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
+<blockquote><span> description: </span> $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Divide the curve arbitrarily into n small ends, and multiply the projection of each directional small arc segment on the x-axis</li>
@@ -126,7 +126,7 @@
 <h2 id="section-3">58.2 Calculation Methods</h2>
 <h3 id="section-4">58.2.1 Method One: Direct Method</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Thesecondtypecalculatescurveintegrals</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> the current parameter equation is $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$, from start point A to endpoint B, t moves from α to β:$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
+<blockquote><span><span> Description: </span></span> the current parameter equation is $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$, from start point A to endpoint B, t moves from α to β:$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Concept:</li>
@@ -141,13 +141,13 @@
 <li>This function is achieved by Green's formula;</li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Singleconnectedarea</span></p>
-<blockquote><span style="color:#ccc1d9">Description:</span> A plane region $D$ is simply connected if every simple closed curve in $D$, together with its interior, lies entirely in $D$. Otherwise, the region is multiply connected.</blockquote>
+<blockquote><span>Description:</span> A plane region $D$ is simply connected if every simple closed curve in $D$, together with its interior, lies entirely in $D$. Otherwise, the region is multiply connected.</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>The region must be simply connected (it contains no holes).</li>
 </ul>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Greensformula</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span> Let the closed region $D$ be bounded by a piecewise smooth, positively oriented curve $L$. If $P(x,y)$ and $Q(x,y)$ have continuous first-order partial derivatives on $D$, then:</blockquote>
+<blockquote><span><span>Description:</span></span> Let the closed region $D$ be bounded by a piecewise smooth, positively oriented curve $L$. If $P(x,y)$ and $Q(x,y)$ have continuous first-order partial derivatives on $D$, then:</blockquote>
 <blockquote>    $$\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}\sigma =\oint_{L}Pdx+Qdy$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -162,7 +162,7 @@
 <li>Green's theorem applies to a closed curve. For an open path, add a convenient auxiliary segment to form a closed curve, apply Green's theorem, and then subtract the integral over the auxiliary segment.</li>
 </ul>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Usinglineintegralsisindependentofthepath</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span></blockquote>
+<blockquote><span><span> description: </span></span></blockquote>
 <blockquote>$\text{ i) Determination: }\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} (\text{ Region }D\text{ Simply connected }))$</blockquote>
 <blockquote>$ii)\text{ Calculation }:$</blockquote>
 <blockquote>(a) Change path: First, change to a simpler path (usually along the coordinate axis).</blockquote>
@@ -170,11 +170,11 @@
 <blockquote>Methods for finding the potential function: 1. Integrate one partial derivative and determine the remaining function; 2. Complete the total differential.</blockquote>
 <h2 id="section-6">28.3 Connections Between Two Types of Line Integrals</h2>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Theconnectionbetweenthetwotypesoflineintegrals</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
+<blockquote><span><span> description: </span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
 <h2 id="section-7">28.4 Calculation Method: Space</h2>
 <h3 id="section-8">28.4.1 Direct Method</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Secondspatialcalculationsforcurvedareafractions</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $\text{ Let }L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
+<blockquote><span><span> description: </span></span> $\text{ Let }L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
 <blockquote>$$\int_{L}P(x,y,z)dx+Q(x,y,z)dy+R(x,y,z)dz\\=\int_{a}^{\beta}\{P[x(t),y(t),z(t)]x^{\prime}(t)+Q[x(t),y(t),z(t)]y^{\prime}(t)+\\R[x(t),y(t),z(t)]z^{\prime}(t)\}dt$$</blockquote>
 <p><strong>Example</strong>: $\text{ Let }L\text{ This is the column face }x^2+y^2=1\text{ and planes }y+z=0\text{ The intersection of the line, from }z\text{ The axis is steadfastly longing }z\text{ If the negative axis is viewed counterclockwise, then the curve integral }\int_{L}z\operatorname{d}x+y\operatorname{d}z$</p>
 <ul>
@@ -182,7 +182,7 @@
 </ul>
 <h3 id="section-9">28.4.2 Srocks Formula</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Stokesformula</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 28.4.2 Srocks Formula"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Study-note illustration: 28.4.2 Srocks Formula" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
+<blockquote><span><span> description: </span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 28.4.2 Srocks Formula"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Study-note illustration: 28.4.2 Srocks Formula" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>When planar: choose the first method</li>

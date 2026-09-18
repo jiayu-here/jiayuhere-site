@@ -201,7 +201,7 @@
 </ul>
 <h3 id="section-7">2.2.3 Essential Definition of an N-Order Determinant</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">nThe</span> steps and rows are arranged in order</p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{aligned}&amp;n\text{ The steps and rows are arranged in order }D_n=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{nn}\end{vmatrix}\text{ It was because of this }n\text{ Piece }n\text{ Dimension vector }a_1=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots,a_{1n}\end{bmatrix},\cdots,a_{n}=[a_{n1},a_{n2},\cdots,a_{nn}]\text{ , and its (operation rule) result is given by this }n\text{ The vectors are adjacent sides }n\text{ Dimensional graphical (yes }\\&amp;\text{ Volume. }\end{aligned}$$</blockquote>
+<blockquote><span> description: </span> $$\begin{aligned}&amp;n\text{ The steps and rows are arranged in order }D_n=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{nn}\end{vmatrix}\text{ It was because of this }n\text{ Piece }n\text{ Dimension vector }a_1=\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots,a_{1n}\end{bmatrix},\cdots,a_{n}=[a_{n1},a_{n2},\cdots,a_{nn}]\text{ , and its (operation rule) result is given by this }n\text{ The vectors are adjacent sides }n\text{ Dimensional graphical (yes }\\&amp;\text{ Volume. }\end{aligned}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>The determinant is <code>0</code>, the set of vectors is linearly dependent, the determinant is not <code>0</code>, the set of vectors is linearly independent;</li>
@@ -229,7 +229,7 @@
 </ul>
 <h3 id="section-10">2.3.2 The second definition of an n-th-order determinant</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">nThe</span> steps and rows are arranged in order: The second definition</p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{r(j_{1}j_{2}\cdots j_{n})}a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}.$$</blockquote>
+<blockquote><span> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{r(j_{1}j_{2}\cdots j_{n})}a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}.$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Explanation:</li>
@@ -255,7 +255,7 @@
 <p><strong>Core Idea</strong>: Downgrade</p>
 <h3 id="section-12">2.4.1 Minors</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Minor</span></p>
-<blockquote><span style="color:#ccc1d9">Description:</span> In a determinant of order $n$, delete row $i$ and column $j$ containing $a_{ij}$. The determinant of order $n-1$ formed by the remaining elements is the minor of $a_{ij}$, denoted by $M_{ij}$.</blockquote>
+<blockquote><span>Description:</span> In a determinant of order $n$, delete row $i$ and column $j$ containing $a_{ij}$. The determinant of order $n-1$ formed by the remaining elements is the minor of $a_{ij}$, denoted by $M_{ij}$.</blockquote>
 <blockquote>That is: $$M_{ij}=\begin{vmatrix}a_{11}&amp;\cdots&amp;a_{1,j-1}&amp;a_{1,j+1}&amp;\cdots&amp;a_{1n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{i-1,1}&amp;\cdots&amp;a_{i-1,j-1}&amp;a_{i-1,j+1}&amp;\cdots&amp;a_{i-1,n}\\a_{i+1,1}&amp;\cdots&amp;a_{i+1,j-1}&amp;a_{i+1,j+1}&amp;\cdots&amp;a_{i+1,n}\\\vdots&amp;&amp;\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,j-1}&amp;a_{n,j+1}&amp;\cdots&amp;a_{nn}\end{vmatrix}.$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -271,7 +271,7 @@
 </ul>
 <h3 id="section-13">2.4.2 Cofactors</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Cofactor</span></p>
-<blockquote><span style="color:#ccc1d9">Description:</span> Multiplying the minor $M_{ij}$ by $(-1)^{i+j}$ gives the cofactor of $a_{ij}$, denoted by $A_{ij}$:</blockquote>
+<blockquote><span>Description:</span> Multiplying the minor $M_{ij}$ by $(-1)^{i+j}$ gives the cofactor of $a_{ij}$, denoted by $A_{ij}$:</blockquote>
 <blockquote>$$A_{ij}=(-1)^{i+j}M_{ij},\qquad M_{ij}=(-1)^{i+j}A_{ij}.$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -282,7 +282,7 @@
 </ul>
 <h3 id="section-14">2.4.3 Determinant Expansion Formula</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Theexpansiontheoremofdeterminants</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> the value of a determinant equals the value of a certain row (column) element of the determinant, multiply it by its corresponding algebraic coefficient expression, then sum, i.e., $$\left|A\right|=\begin{cases}a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\sum_{j=1}^{n}a_{ij}A_{ij}\left(i=1,2,\cdots,n\right),\\\\a_{1j}A_{1j}+a_{2j}A_{2j}+\cdots+a_{nj}A_{nj}=\sum_{i=1}^{n}a_{ij}A_{ij}\left(j=1,2,\cdots,n\right).\end{cases}$$</blockquote>
+<blockquote><span><span> Description: </span></span> the value of a determinant equals the value of a certain row (column) element of the determinant, multiply it by its corresponding algebraic coefficient expression, then sum, i.e., $$\left|A\right|=\begin{cases}a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\sum_{j=1}^{n}a_{ij}A_{ij}\left(i=1,2,\cdots,n\right),\\\\a_{1j}A_{1j}+a_{2j}A_{2j}+\cdots+a_{nj}A_{nj}=\sum_{i=1}^{n}a_{ij}A_{ij}\left(j=1,2,\cdots,n\right).\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Example:</li>
@@ -382,21 +382,21 @@
 <h2 id="section-23">2.6 Several Important Determinants</h2>
 <h3 id="section-24">2.6.1 Main Diagonal Determinant</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Maindiagonaldeterminant</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\0&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\a_{21}&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\0&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\prod_{i=1}^na_{ii}.$$</blockquote>
+<blockquote><span> description: </span> $$\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\0&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\a_{21}&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}a_{11}&amp;0&amp;\cdots&amp;0\\0&amp;a_{22}&amp;\cdots&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots\\0&amp;0&amp;\cdots&amp;a_{nn}\end{vmatrix}=\prod_{i=1}^na_{ii}.$$</blockquote>
 <p><strong>Explanation</strong>: The determinant of the upper (lower) triangle</p>
 <ul>
 <li>The result equals the product of the main diagonal elements;</li>
 </ul>
 <h3 id="section-25">2.6.2 Determinant of the Paradiagonal</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Thedeterminantofthesubdiagonal</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\begin{aligned}\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1,n-1}&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;0&amp;\cdots&amp;0&amp;0\end{vmatrix}&amp;=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;a_{2n}\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,n-1}&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;0&amp;0\end{vmatrix}\\&amp;=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}.\end{aligned}$$</blockquote>
+<blockquote><span> description: </span> $$\begin{aligned}\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1,n-1}&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;0&amp;\cdots&amp;0&amp;0\end{vmatrix}&amp;=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;a_{2n}\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{n,n-1}&amp;a_{nn}\end{vmatrix}=\begin{vmatrix}0&amp;\cdots&amp;0&amp;a_{1n}\\0&amp;\cdots&amp;a_{2,n-1}&amp;0\\\vdots&amp;&amp;\vdots&amp;\vdots\\a_{n1}&amp;\cdots&amp;0&amp;0\end{vmatrix}\\&amp;=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}.\end{aligned}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>The result equals the subdiagonal elements multiplied by the inverse ordinal;</li>
 </ul>
 <h3 id="section-26">2.6.3 Laplace Expansion</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">LaplaceExpandableStyle</span></p>
-<blockquote><span style="color:#ccc1d9">Description: </span> $$\begin{gathered}</blockquote>
+<blockquote><span>Description: </span> $$\begin{gathered}</blockquote>
 <p>Suppose A is an m-order matrix and B is an n-order matrix, then \\</p>
 <p>\begin{vmatrix}A&amp;O\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;C\\O&amp;B\end{vmatrix}=\begin{vmatrix}A&amp;O\\C&amp;B\end{vmatrix}=|A||B|, \\</p>
 <p> \\</p>
@@ -416,7 +416,7 @@
 </ul>
 <h3 id="section-27">2.6.4 Vandermonde Determinant</h3>
 <h5 id="section-28"><strong>Definition</strong>: <span class="note-tag">VandermondeDeterminant</span></h5>
-<blockquote><span style="color:#ccc1d9">Description:</span> $$\begin{vmatrix}1&amp;1&amp;\cdots&amp;1\\x_1&amp;x_2&amp;\cdots&amp;x_n\\x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\\vdots&amp;\vdots&amp;&amp;\vdots\\x_1^{n-1}&amp;x_2^{n-1}&amp;\cdots&amp;x_n^{n-1}\end{vmatrix}=\prod_{1\leq i&lt;j\leq n}(x_j-x_i),n\geq2.$$</blockquote>
+<blockquote><span>Description:</span> $$\begin{vmatrix}1&amp;1&amp;\cdots&amp;1\\x_1&amp;x_2&amp;\cdots&amp;x_n\\x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\\vdots&amp;\vdots&amp;&amp;\vdots\\x_1^{n-1}&amp;x_2^{n-1}&amp;\cdots&amp;x_n^{n-1}\end{vmatrix}=\prod_{1\leq i&lt;j\leq n}(x_j-x_i),n\geq2.$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Analysis: A third-order Vandermonde determinant is $V_{3}=\begin{vmatrix}1&amp;1&amp;1\\x_{1}&amp;x_{2}&amp;x_{3}\\x_{1}^{2}&amp;x_{2}^{2}&amp;x_{3}^{2}\end{vmatrix}$;</li>

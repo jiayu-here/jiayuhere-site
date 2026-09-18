@@ -149,7 +149,7 @@
 <li>The matrix $\begin{pmatrix}1&amp;2&amp;3\\4&amp;6&amp;9\\2&amp;4&amp;6\end{pmatrix}$ consists of the row vectors $[1,2,3],[4,6,9],[2,4,6]$, or equivalently the column vectors $[1,4,2]^{\mathrm{T}},[2,6,4]^{\mathrm{T}},[3,9,6]^{\mathrm{T}}$.</li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Rankofthematrix</span></p>
-<blockquote><span style="color:#ccc1d9">Description:</span> Let $A$ be an $m\times n$ matrix. The largest order of any nonzero minor of $A$ is called the rank of $A$, denoted by $r(A)$.</blockquote>
+<blockquote><span>Description:</span> Let $A$ be an $m\times n$ matrix. The largest order of any nonzero minor of $A$ is called the rank of $A$, denoted by $r(A)$.</blockquote>
 <blockquote>Equivalently, if at least one minor of order $k$ is nonzero and every minor of order $k+1$ is zero, then $r(A)=k$. For a square matrix:</blockquote>
 <blockquote>$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{ is invertible}.$$</blockquote>
 <blockquote>That is: the essence of a matrix rank is the number of linearly independent vectors that make up the matrix</blockquote>
@@ -175,7 +175,7 @@
 <p>(4) Multiplication: Multiplication of matrices does not satisfy the commutative law, so generally, AB ≠ BA. However, if both A and B are n-dimensional square matrices, then we have | AB|=| A| | B|=| B| | A|=|BA|。</p>
 <h2 id="section-4">4.2 Definition of Matrices</h2>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Matrix</span></p>
-<blockquote><span style="color:#ccc1d9"> Description: </span> $\text{ From }m\times n\text{ Quantity }a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{ Arranged together }m\text{ Alright }n\text{ Rectangular table of columns }$:</blockquote>
+<blockquote><span> Description: </span> $\text{ From }m\times n\text{ Quantity }a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{ Arranged together }m\text{ Alright }n\text{ Rectangular table of columns }$:</blockquote>
 <blockquote>$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <blockquote>It is called a $m\times n$ matrix, abbreviated as $A$ or $\left(a_{ij}\right)_{m\times n}\left(i=1,2,\cdotp\cdotp\cdotp,m;\: j=1,2,\cdotp\cdotp\cdotp,n\right).$</blockquote>
 <blockquote>When $m=n$, $A$ is called a $n$-order square;</blockquote>
@@ -224,7 +224,7 @@
 <p>Here, <code>A，B，C</code> is a homomorphic matrix, and k and l are arbitrary constants</p>
 <h3 id="section-7">4.3.2 Matrix Multiplication</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Matrixmultiplication</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: Multiplication of </span></span> matrix Let $A$ be $m\times s$ matrix, $B$ be $s\times n$ matrix (the number of columns in matrix $A$ must equal the number of rows in matrix $B$), then $A$ and $B$ can be multiplied, and the product $AB$ is the $m\times n$ matrix, denoted as $C=AB=(c_ij)_{m\times n}$</blockquote>
+<blockquote><span><span> description: Multiplication of </span></span> matrix Let $A$ be $m\times s$ matrix, $B$ be $s\times n$ matrix (the number of columns in matrix $A$ must equal the number of rows in matrix $B$), then $A$ and $B$ can be multiplied, and the product $AB$ is the $m\times n$ matrix, denoted as $C=AB=(c_ij)_{m\times n}$</blockquote>
 <p>The element $c_{ij}$ of the $i$-th row and column $j$ of &gt; $C$ is the sum of the <code>s</code> elements in the $i$ row of $A$ and the $s$ pairwise elements in the $j$ column of $B$, that is:</p>
 <blockquote>$$c_{ij}=\sum_{k=1}^{s}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}(i=1,2,\cdots,m;j=1,2,\cdots,n)$$</blockquote>
 <p><strong>Explanation</strong></p>
@@ -262,7 +262,7 @@
 </ul>
 <h3 id="section-8">4.3.3 Transpose Matrices</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Transposethematrix</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $\text{ General }m\times n\text{ Matrix }A=\left(a_{ij}\right)_{m\times n}\text{ The interchangeable row and column of }n\times m\text{ A matrix is called a matrix }A\text{ transpose matrix },\,\text{ Recorded as }A^T,\,\text{ That is }:\,$</blockquote>
+<blockquote><span> description: </span> $\text{ General }m\times n\text{ Matrix }A=\left(a_{ij}\right)_{m\times n}\text{ The interchangeable row and column of }n\times m\text{ A matrix is called a matrix }A\text{ transpose matrix },\,\text{ Recorded as }A^T,\,\text{ That is }:\,$</blockquote>
 <blockquote>$$A^{T}=\begin{bmatrix}a_{11}&amp;a_{21}&amp;\cdots&amp;a_{m1}\\a_{12}&amp;a_{22}&amp;\cdots&amp;a_{m2}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{1n}&amp;a_{2n}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -282,7 +282,7 @@
 </ul>
 <h3 id="section-9">4.3.4 Determinant of a Phalanx</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Determinantofaphalanx</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $\text{ and should be employed }n\text{ The steps formed a square formation }A\text{ When calculating the determinant, denote as }|A|$;</blockquote>
+<blockquote><span> description: </span> $\text{ and should be employed }n\text{ The steps formed a square formation }A\text{ When calculating the determinant, denote as }|A|$;</blockquote>
 <blockquote>1. $|kA|=k^{n}|A|\neq k|A|(n\geqslant2,k\neq0,1)$</blockquote>
 <blockquote>2. $\text{ Generally, }\left|A+B\right|\neq\left|A\right|+\left|B\right|$</blockquote>
 <blockquote>3. Note: $A\neq0\Rightarrow|A|\neq0$</blockquote>

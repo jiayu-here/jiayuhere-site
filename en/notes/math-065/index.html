@@ -101,14 +101,14 @@
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">57.1 Curve Integral with Respect to Arc Length</a><a href="#section-3">57.2 Calculation of Curve Integrals</a></nav></details><div class="prose"><h2 id="section-1">57.1 Curve Integral with Respect to Arc Length</h2>
 <h3 id="section-2">57.1.1 Basic Concepts</h3>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Thelineintegralofthearclengthontheplane</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
+<blockquote><span> description: </span> $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>A binary function integrating along a two-dimensional curve segment;</li>
 <li>Divide the curve into n small ends, multiply the curve's function value by the length of the small arc segment, sum each segment and take the limit. If this limit exists, then the line integral exists;</li>
 </ul>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Propertiesoflineintegrals</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
+<blockquote><span><span> description: </span></span> $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Meaning: Line integral is unrelated to the direction of the path;</li>
@@ -123,7 +123,7 @@
 <h2 id="section-3">57.2 Calculation of Curve Integrals</h2>
 <h3 id="section-4">57.2.1 Basic Law</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Thefirsttypecalculatescurveintegrals</span>: Direct method</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> assume the parameter equation of L is $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$, then: $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
+<blockquote><span><span> Description: </span></span> assume the parameter equation of L is $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$, then: $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Note:</li>
@@ -131,22 +131,22 @@
 <li class="list-indent-1">The upper and lower limits are arc lengths from small to large;</li>
 </ul>
 <p>#####<strong>Theorem</strong>: # Calculation of line integral of the first kind: Cartesian equations</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $\text{ If }C:y=y(x),\quad a\leq x\leq b$, then:</blockquote>
+<blockquote><span><span> description: </span></span> $\text{ If }C:y=y(x),\quad a\leq x\leq b$, then:</blockquote>
 <blockquote>$$\int_{}f(x,y)\mathrm{d}s=\int_{a}^{b}f(x,y(x))\sqrt{1+y'^2(x)}\mathrm{d}x$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Equivalent to treating <code>x</code> as a parameter;</li>
 </ul>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Thefirsttypecalculatescurveintegrals</span>: Polar coordinate equation</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $\text{ If }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$, then:</blockquote>
+<blockquote><span><span> description: </span></span> $\text{ If }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$, then:</blockquote>
 <blockquote>$$\int_{C}f(x,y)ds=\int_{\alpha}^{\beta}f(\rho(\theta)\cos\theta,\rho(\theta)\sin\theta)\sqrt{\rho^{2}(\theta)+\rho^{\prime2}(\theta)}d\theta $$</blockquote>
 <p><strong>Explanation</strong></p>
 <h3 id="section-5">57.2.2 Parity and Symmetry</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Parityoftheintegralcurve</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
+<blockquote><span><span> description: </span></span> $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Symmetry</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> General situation: $\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
+<blockquote><span><span> description: </span></span> General situation: $\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
 <blockquote>Special: $\int_Cf(x)ds=\int_Cf(y)ds$</blockquote><nav class="article-pagination" aria-label="Adjacent content">
     <a href="../math-064/index.html"><span>← Previous item</span><strong>Lecture 56: Geometric Applications of Multivariable Differentials</strong></a>
     <a class="article-pagination-next" href="../math-066/index.html"><span>Next item →</span><strong>Lecture 49: Line Integrals with Respect to Coordinates</strong></a>

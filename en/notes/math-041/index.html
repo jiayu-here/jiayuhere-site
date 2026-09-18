@@ -118,7 +118,7 @@
 <li>At this point, you can first set a $b$, then let b approach its limit;</li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Anomalousintegral</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> integral with infinite intervals or unbounded integrands is called improper integral; also known as generalized integral;</blockquote>
+<blockquote><span> description: </span> integral with infinite intervals or unbounded integrands is called improper integral; also known as generalized integral;</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>When it approaches infinity, if the limit has value, then it is called integral convergence;</li>
@@ -134,7 +134,7 @@
 <li>$\int_{-\infty}^{+\infty}f(x)dx=F(x)|_{-\infty}^{+\infty}$</li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Improperintegralsoveraninfiniteinterval</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span></blockquote>
+<blockquote><span> description: </span></blockquote>
 <blockquote>1. Definition 1: $$\int_{a}^{+\infty}f(x)dx=\lim_{t\to+\infty}\int_{a}^{t}f(x)dx$$ If this limit exists, then the improper integral is called convergent; Conversely, it is divergent;</blockquote>
 <blockquote>2. Definition 2: $$\int_{-\infty}^{b}f(x)dx=\lim_{t\to-\infty}\int_{t}^{b}f(x)dx$$ Same logic as definition one;</blockquote>
 <blockquote>3. Definition 3: $$\int_{-\infty}^{+\infty}f(x)dx=\int_{-\infty}^{0}f(x)dx+\int_{0}^{+\infty}f(x)dx$$ If both converge, then converge; Otherwise, divergence;</blockquote>
@@ -145,7 +145,7 @@
 </ul>
 <h3 id="section-4">1.1.2 Calculation Methods</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">ComparativeDiscrimination</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> description: </span></span> used to determine the divergence of improper integrals;</blockquote>
+<blockquote><span><span> description: </span></span> used to determine the divergence of improper integrals;</blockquote>
 <blockquote>Suppose $f (x),  g (x)$ continuity on $[a,  +\infty)$, and $0\leq f (x)\leq g (x)$, then</blockquote>
 <blockquote>$$1)\int_{a}^{+\infty}g(x)dx\text{ Convergence }\Rightarrow\int_{a}^{+\infty}f(x)dx\text{ Convergence }$$</blockquote>
 <blockquote>$$2) \int_{a}^{+\infty}f(x)dx\text{ Diverges }\Rightarrow\int_{a}^{+\infty}g(x)dx\text{ Diverges }$$</blockquote>
@@ -165,7 +165,7 @@
 <li>Because the comparison integral has exponent $P=\frac32&gt;1$, $\int_1^{+\infty}\frac{\sqrt{x}}{1+x^2}\,dx$ converges;</li>
 </ul>
 <h5 id="section-5"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be nonnegative and continuous on $[a,+\infty)$, and suppose $\lim_{x\to+\infty}\frac{f(x)}{g(x)}=\lambda$. Then:</blockquote>
 <blockquote>1. If $\lambda&gt;0$, then $\int_a^\infty f(x)\,dx$ and $\int_a^\infty g(x)\,dx$ have the same convergence behavior.</blockquote>
 <blockquote>2. If $\lambda=0$ and $\int_a^\infty g(x)\,dx$ converges, then $\int_a^\infty f(x)\,dx$ converges.</blockquote>
@@ -181,17 +181,17 @@
 <h2 id="section-7">1.2 Improper integrals of unbounded functions</h2>
 <h3 id="section-8">1.2.1 Basic Concepts</h3>
 <h5 id="section-9"><strong>Definition</strong>: <span class="note-tag">ImproperIntegralsOfUnboundedFunctions</span></h5>
-<blockquote><span style="color:#ccc1d9">Description:</span></blockquote>
+<blockquote><span>Description:</span></blockquote>
 <blockquote>1. If $f(x)$ is unbounded in every right-hand neighborhood of $a$, then $a$ is a singular point and $$\int_a^bf(x)\,dx=\lim_{t\to a^+}\int_t^bf(x)\,dx;$$</blockquote>
 <blockquote>2. If $b$ is a singular point, then $$\int_{a}^{b}f(x)\,dx=\lim_{t\to b^{-}}\int_{a}^{t}f(x)\,dx;$$</blockquote>
 <blockquote>3. If $c$ is a singular point with $a&lt;c&lt;b$, then both sides must converge and $$\int_{a}^{b}f(x)\,dx=\int_{a}^{c}f(x)\,dx+\int_{c}^{b}f(x)\,dx.$$</blockquote>
 <h5 id="section-10"><strong>Theorem</strong>: <span class="note-tag">ComparisonTest</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be continuous on $(a,b]$ and satisfy $0\leq f(x)\leq g(x)$. Then:</blockquote>
 <blockquote>$$\int_{a}^{b}g(x)\,dx\text{ converges }\Rightarrow\int_{a}^{b}f(x)\,dx\text{ converges};$$</blockquote>
 <blockquote>$$\int_{a}^{b}f(x)\,dx\text{ diverges }\Rightarrow\int_{a}^{b}g(x)\,dx\text{ diverges}.$$</blockquote>
 <h5 id="section-11"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">Description:</span></span></blockquote>
+<blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be nonnegative and continuous on $(a,b]$, and suppose $\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lambda$. Then</blockquote>
 <blockquote>$$\begin{aligned}&amp;1)\ \lambda&gt;0:\ \int_a^b f(x)\,dx\text{ and }\int_a^b g(x)\,dx\text{ have the same convergence behavior};\\&amp;2)\ \lambda=0:\ \int_a^b g(x)\,dx\text{ convergent}\Rightarrow\int_a^b f(x)\,dx\text{ convergent};\\&amp;3)\ \lambda=+\infty:\ \int_a^b g(x)\,dx\text{ divergent}\Rightarrow\int_a^b f(x)\,dx\text{ divergent}.\end{aligned}$$</blockquote>
 <blockquote>Common result: $$\int_a^b\frac{dx}{(x-a)^P},\quad\int_a^b\frac{dx}{(b-x)^P}\quad\begin{cases}\text{converge},&amp;P&lt;1,\\\text{diverge},&amp;P\geq1.\end{cases}$$</blockquote>

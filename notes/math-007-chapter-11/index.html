@@ -102,14 +102,14 @@
 <h2 id="section-2">11.1 第一类曲线积分 </h2>
 <h3 id="section-3">11.1.1 对弧长的曲线积分</h3>
 <p><strong>定义</strong>： <span class="note-tag">平面上对弧长的线积分</span></p>
-<blockquote><span style="color:#ccc1d9">描述：</span> $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
+<blockquote><span>描述：</span> $$\int_{L}f(x,y)ds=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i})\Delta s_{i}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>一个二元函数，沿着一个二维的曲线段的积分；</li>
 <li>把曲线分成 n 个小端，将曲线的函数值乘以小弧段的长度，将每一段求和、取极限，如果这个极限存在，则线积分存在；</li>
 </ul>
 <p><strong>定理</strong>： <span class="note-tag">线积分的性质</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
+<blockquote><span><span>描述：</span></span> $$\int_{L(AB)}f(x,y)ds=\int_{L(BA)}f(x,y)ds$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>含义：线积分和路径的方向无关；</li>
@@ -123,7 +123,7 @@
 </ul>
 <h3 id="section-4">11.1.2 曲线积分的计算</h3>
 <p><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：直接法</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>假设 L 的参数方程为 $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$，则： $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
+<blockquote><span><span>描述：</span></span>假设 L 的参数方程为 $\begin{cases}x=\varphi(t),\\y=\psi(t),&amp;\end{cases}(\alpha\leqslant t\leqslant\beta)$，则： $$\int_{L}f(x,y)\mathrm{d}s=\int_{\alpha}^{\beta}f(\varphi(t),\psi(t))\sqrt{\varphi'(t)^2+\psi'(t)^2}\mathrm{d}t$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>注意：</li>
@@ -131,19 +131,19 @@
 <li class="list-indent-1">上下限是弧长从小到大；</li>
 </ul>
 <p><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：直角方程</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }C:y=y(x),\quad a\leq x\leq b$，则：</blockquote>
+<blockquote><span><span>描述：</span></span> $\text{若 }C:y=y(x),\quad a\leq x\leq b$，则：</blockquote>
 <blockquote>$$\int_{}f(x,y)\mathrm{d}s=\int_{a}^{b}f(x,y(x))\sqrt{1+y'^2(x)}\mathrm{d}x$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>相当于把 <code>x</code> 看作为参数；</li>
 </ul>
 <p><strong>定理</strong>： <span class="note-tag">第一类曲线积分的计算</span>：极坐标方程</p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $\text{若 }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$，则：</blockquote>
+<blockquote><span><span>描述：</span></span> $\text{若 }C:\rho=\rho (\theta)\quad\alpha\leq\theta\leq\beta$，则：</blockquote>
 <blockquote>$$\int_{C}f(x,y)ds=\int_{\alpha}^{\beta}f(\rho(\theta)\cos\theta,\rho(\theta)\sin\theta)\sqrt{\rho^{2}(\theta)+\rho^{\prime2}(\theta)}d\theta $$</blockquote>
 <p><strong>定理</strong>： <span class="note-tag">积分曲线的奇偶性</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
+<blockquote><span><span>描述：</span></span> $$\int_{C}f(x,y)\mathrm{d}s=\begin{cases}2\int_{C_{x&gt;4}}f(x,y)\mathrm{d}s,&amp;f(-x,y)=f(x,y)\\0,&amp;f(-x,y)=-f(x,y)\end{cases}$$</blockquote>
 <p><strong>定理</strong>： <span class="note-tag">对称性</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>一般情况：$\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
+<blockquote><span><span>描述：</span></span>一般情况：$\int_{c}f(x,y)\mathrm{d}s=\int_{c}f(y,x)\mathrm{d}s$</blockquote>
 <blockquote>特别：$\int_Cf(x)ds=\int_Cf(y)ds$</blockquote>
 <h2 id="section-5">11.2 第二类曲线积分 </h2>
 <p><strong>解释</strong>：方法选择</p>
@@ -161,7 +161,7 @@
 </ul>
 <h3 id="section-6">11.2.1 基本概念</h3>
 <p><strong>定义</strong>： <span class="note-tag">第二类曲线积分</span> </p>
-<blockquote><span style="color:#ccc1d9">描述：</span> $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
+<blockquote><span>描述：</span> $$\int_{L}P(x,y)dx+Q(x,y)dy=\lim_{\lambda\to0}\sum_{i=1}^{n}[P(\xi_{i},\eta_{i})\Delta x_{i}+Q(\xi_{i},\eta_{i})\Delta y_{i}]$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>把曲线任意划分成 n 个小端，每一个有方向的小弧段在 x 轴上的投影乘以</li>
@@ -173,7 +173,7 @@
 <h3 id="section-7">11.2.2 计算方法</h3>
 <p><strong>方法一：直接法</strong></p>
 <p><strong>定理</strong>： <span class="note-tag">第二类曲线积分的计算</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[P(\varphi(t),\psi(t))\varphi^{\prime}(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
+<blockquote><span><span>描述：</span></span>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[P(\varphi(t),\psi(t))\varphi^{\prime}(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念：</li>
@@ -187,9 +187,9 @@
 <li>这个作用由格林公式达成；</li>
 </ul>
 <p><strong>定义</strong>： <span class="note-tag">单连通区域</span> </p>
-<blockquote><span style="color:#ccc1d9">描述：</span>假设在 <code>D</code> 平面区域内，<code>D</code> 内任意一闭曲线围成的部分都居于 <code>D</code>；否则则称之为复连通区域；</blockquote>
+<blockquote><span>描述：</span>假设在 <code>D</code> 平面区域内，<code>D</code> 内任意一闭曲线围成的部分都居于 <code>D</code>；否则则称之为复连通区域；</blockquote>
 <p><strong>定理</strong>： <span class="note-tag">格林公式</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>闭区域 <code>D</code> 上由分段光滑的曲线 <code>L</code> 围成的，$P(x,y)、Q(x,y)$ 在 <code>D</code> 上有一阶连续偏导；则：</blockquote>
+<blockquote><span><span>描述：</span></span>闭区域 <code>D</code> 上由分段光滑的曲线 <code>L</code> 围成的，$P(x,y)、Q(x,y)$ 在 <code>D</code> 上有一阶连续偏导；则：</blockquote>
 <blockquote>    $$\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}\sigma =\oint_{L}Pdx+Qdy$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -204,7 +204,7 @@
 <li>因为格林公式只能使用在封闭区域，因此当需要在非封闭区域使用时，可以进行补线，将非封闭区域补线为封闭区域，然后对封闭区域使用格林公式后再减去补线的部分，得到结果；</li>
 </ul>
 <p><strong>定理</strong>： <span class="note-tag">利用线积分与路径无关</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> </blockquote>
+<blockquote><span><span>描述：</span></span> </blockquote>
 <blockquote>$\text{i)判定:}\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} (区域D单连通))$</blockquote>
 <blockquote>$ii)计算:$</blockquote>
 <blockquote>	(a)改换路径：先改成更简单的（一般是沿着坐标轴的）的路径</blockquote>
@@ -212,15 +212,15 @@
 <blockquote>	求原函数的方法：1. 偏积分；2. 凑微分；</blockquote>
 <h3 id="section-8">11.2.3 两类线积分的联系</h3>
 <p><strong>定理</strong>： <span class="note-tag">两类线积分的联系</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
+<blockquote><span><span>描述：</span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
 <h3 id="section-9">11.2.4 计算方法：空间</h3>
 <h4 id="section-10">11.2.4.1 直接法</h4>
 <p><strong>定理</strong>： <span class="note-tag">第二类曲面积分的空间计算</span> </p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $设L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
+<blockquote><span><span>描述：</span></span> $设L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
 <blockquote>$$\int_{L}P(x,y,z)dx+Q(x,y,z)dy+R(x,y,z)dz\\=\int_{a}^{\beta}\{P[x(t),y(t),z(t)]x^{\prime}(t)+Q[x(t),y(t),z(t)]y^{\prime}(t)+\\R[x(t),y(t),z(t)]z^{\prime}(t)\}dt$$</blockquote>
 <h4 id="section-11">11.2.4.2 斯托克斯公式</h4>
 <p><strong>定理</strong>： <span class="note-tag">斯托克斯公式</span> </p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$ <a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：11.2.4.2 斯托克斯公式"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="学习笔记插图：11.2.4.2 斯托克斯公式" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
+<blockquote><span><span>描述：</span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$ <a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：11.2.4.2 斯托克斯公式"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="学习笔记插图：11.2.4.2 斯托克斯公式" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>平面时：选第一种</li>
@@ -235,7 +235,7 @@
 <li>用每一个小面积上的密度乘以其面积，然后全部求和，得到完整的质量：$M=\lim_{\lambda\to0}\sum_{k=1}^n\rho(\xi_k,\eta_k,\zeta_k){\Delta S_k}$</li>
 </ul>
 <p><strong>定义</strong>： <span class="note-tag">第一类曲面积分</span></p>
-<blockquote><span style="color:#ccc1d9">描述：</span> $\text{设}\sum\text{为光滑曲面},f(x,y,z)\text{ 是定义在}\sum\text{上的一}\text{个有界函数,若对}\Sigma\text{ 做任意分割和局部区域任意取点},$ 可以得到</blockquote>
+<blockquote><span>描述：</span> $\text{设}\sum\text{为光滑曲面},f(x,y,z)\text{ 是定义在}\sum\text{上的一}\text{个有界函数,若对}\Sigma\text{ 做任意分割和局部区域任意取点},$ 可以得到</blockquote>
 <blockquote>乘积和式极限：$\lim_{\lambda\to0}\sum_{k=1}^nf\left(\xi_k,\eta_k,\zeta_k\right)\Delta S_k$ 都存在，则称此极限为函数 $f(x,y,z)$ 在曲面 $\Sigma$ 上对面积的曲面积分；</blockquote>
 <blockquote>记作：$$\iint_{\Sigma}f(x,y,z)dS=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i},\zeta_{i})\Delta S_{i}$$</blockquote>
 <p><strong>解释</strong></p>
@@ -257,7 +257,7 @@
 <h3 id="section-14">11.3.2 对面积的曲面积分的计算</h3>
 <h4 id="section-15">11.3.2.1 直接法</h4>
 <p><strong>定理</strong>： <span class="note-tag">第一类曲面积分的计算</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>有光滑曲面，其 $\Sigma:z=z(x,y),(x,y)\in D_{xy}，f(x,y,z)\text{ 在 }\sum\text{上连续}$</blockquote>
 <blockquote>则曲面积分 $\iint_{\Sigma}f(x,y,z)dS\text{存在},\text{且有}$：</blockquote>
 <blockquote>$$\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y,z(x,y))\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}\mathrm{d}x\mathrm{d}y$$</blockquote>
@@ -276,7 +276,7 @@
 </ul>
 <h4 id="section-16">11.3.2.1 奇偶性与对称性</h4>
 <p><strong>定理</strong>： <span class="note-tag">第一类曲面积分的奇偶性</span>    </p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span>若曲面 $\sum$ 关于 $xoy$ 对称，则：</blockquote>
+<blockquote><span><span>描述：</span></span>若曲面 $\sum$ 关于 $xoy$ 对称，则：</blockquote>
 <blockquote>$$\iint_{\Sigma}f(x,y,z)\mathrm{d}S=\begin{cases}2\iint_{\sum_{z&gt;0}} f(x,y,z)\mathrm{d}S,&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
 <p><strong>知识点</strong>：对称性</p>
 <ul>
@@ -292,7 +292,7 @@
 </ul>
 <h3 id="section-19">11.4.2 第二类曲面积分：对坐标的曲面积分</h3>
 <p><strong>定义</strong>： <span class="note-tag">第二类曲面积分</span></p>
-<blockquote><span style="color:#ccc1d9">描述：</span> $$\iint_{\Sigma}R(x,y,z)dxdy=\lim_{\lambda\to0}\sum_{i=1}^nR(\xi_i,\eta_i,\zeta_i)(\Delta S_i)_{xy}$$</blockquote>
+<blockquote><span>描述：</span> $$\iint_{\Sigma}R(x,y,z)dxdy=\lim_{\lambda\to0}\sum_{i=1}^nR(\xi_i,\eta_i,\zeta_i)(\Delta S_i)_{xy}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>注意：第二类曲面积分有方向</li>
@@ -309,7 +309,7 @@
 <h3 id="section-20">11.4.3 对坐标的曲面积分的计算</h3>
 <h4 id="section-21">11.4.3.1 直接法</h4>
 <p><strong>定理</strong>： <span class="note-tag">第二类曲面积分的计算</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span></blockquote>
+<blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>1. $\text{设光滑曲面 }\Sigma:z=z(x,y),(x,y){\in}D_{xy}\text{ 取上侧}R(x,y,z)\text{是 }\Sigma\text{ 上的连续函数, 则}$：</blockquote>
 <blockquote>$$\iint_{\Sigma}R(x,y,z)\operatorname{d}x\operatorname{d}y=\pm\iint_{D_{xy}}R(x,y,z(x,y))\operatorname{d}x\operatorname{d}y$$</blockquote>
 <blockquote>2. $\text{设光滑曲面 }\Sigma:x=x(y,z),(y,z){\in}D_{yz}\text{，且 }P(x,y,z)\text{ 是 }\Sigma\text{ 上的连续函数，则}$：</blockquote>
@@ -337,7 +337,7 @@
 </ul>
 <h4 id="section-22">11.4.3.2 高斯公式 </h4>
 <p><strong>定理</strong>： <span class="note-tag">高斯公式</span> </p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0">描述：</span></span> $$\oint\oint_{\Sigma_{\text{外}}}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}zdx+R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)\mathrm{d}V$$</blockquote>
+<blockquote><span><span>描述：</span></span> $$\oint\oint_{\Sigma_{\text{外}}}P\mathrm{d}y\mathrm{d}z+Q\mathrm{d}zdx+R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)\mathrm{d}V$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念： </li>

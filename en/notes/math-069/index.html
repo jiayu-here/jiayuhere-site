@@ -101,7 +101,7 @@
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">61.1 Directional Derivative</a><a href="#section-4">61.2 Gradient</a><a href="#section-5">61.3 Divergence and Curl</a></nav></details><div class="prose"><h2 id="section-1">61.1 Directional Derivative</h2>
 <h3 id="section-2">61.1.1 Basic Concepts of Directional Derivatives</h3>
 <p> #####<strong>Definition</strong>: <span class="note-tag">Directionalderivative</span></p>
-<blockquote><span style="color:#ccc1d9"> description: </span> $$\frac{\partial f}{\partial l}\Bigg|_{(x_0,y_0)}=\lim_{t\to0^+}\frac{f(x_0+t\cos\alpha,y_0+t\cos\beta)-f(x_0,y_0)}t$$</blockquote>
+<blockquote><span> description: </span> $$\frac{\partial f}{\partial l}\Bigg|_{(x_0,y_0)}=\lim_{t\to0^+}\frac{f(x_0+t\cos\alpha,y_0+t\cos\beta)-f(x_0,y_0)}t$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Function:</li>
@@ -116,12 +116,12 @@
 </ul>
 <h3 id="section-3">61.1.2 Differentiability Judgment of Directional Derivatives</h3>
 <p>#####<strong>Theorem</strong>: <span class="note-tag">Determinationoftheexistenceofdirectionalderivatives</span></p>
-<blockquote><span style="color:#8db3e2"><span style="color:#c6d9f0"> Description: </span></span> if $z=f(x,y)$ is differentiable, then this point exists in any directional derivative, and the directional derivative equals two partial derivatives, multiplied by their directional cosine, as shown in the following formula:</blockquote>
+<blockquote><span><span> Description: </span></span> if $z=f(x,y)$ is differentiable, then this point exists in any directional derivative, and the directional derivative equals two partial derivatives, multiplied by their directional cosine, as shown in the following formula:</blockquote>
 <blockquote>$$\frac{\partial f}{\partial l}=\frac{\partial f}{\partial x}\cos\alpha+\frac{\partial f}{\partial y}\cos\beta $$</blockquote>
 <p><strong>Explanation</strong>: Differentiable <code>-&gt;</code> Arbitrarily directional;</p>
 <h2 id="section-4">61.2 Gradient</h2>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Gradient</span></p>
-<blockquote><span style="color:#ccc1d9"> Description: </span> Suppose $f(x,  y)$ has continuity first-order partial derivative at point $P(x_0,  y_0)$, then: $$\mathrm{grad}u=f_x(x_0, y_0)\mathbf{i}+f_y(x_0, y_0)\mathbf{j}$$</blockquote>
+<blockquote><span> Description: </span> Suppose $f(x,  y)$ has continuity first-order partial derivative at point $P(x_0,  y_0)$, then: $$\mathrm{grad}u=f_x(x_0, y_0)\mathbf{i}+f_y(x_0, y_0)\mathbf{j}$$</blockquote>
 <p><strong>Explanation</strong>: The meaning of gradients</p>
 <ul>
 <li>Each point has infinite directional derivatives, but<strong>the directional derivative along the gradient direction is the largest</strong>;</li>
@@ -129,14 +129,14 @@
 </ul>
 <h2 id="section-5">61.3 Divergence and Curl</h2>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Divergence</span></p>
-<blockquote><span style="color:#ccc1d9">Description:</span> For a vector field $\mathbf{A}(x,y,z)=(P,Q,R)$:</blockquote>
+<blockquote><span>Description:</span> For a vector field $\mathbf{A}(x,y,z)=(P,Q,R)$:</blockquote>
 <blockquote>$$\operatorname{div}\mathbf{A}=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Divergence is a number;</li>
 </ul>
 <p>#####<strong>Definition</strong>: <span class="note-tag">Rotateandcross</span></p>
-<blockquote><span style="color:#ccc1d9"> Description: </span> Given a vector field $A(x,y,z)=({P,Q,R})$, then:</blockquote>
+<blockquote><span> Description: </span> Given a vector field $A(x,y,z)=({P,Q,R})$, then:</blockquote>
 <blockquote>$$\operatorname{curl}\mathbf{A}=\begin{vmatrix}\mathbf{i}&amp;\mathbf{j}&amp;\mathbf{k}\\\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\P&amp;Q&amp;R\end{vmatrix}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>

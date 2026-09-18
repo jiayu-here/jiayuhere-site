@@ -101,7 +101,7 @@
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">20.1 矩阵相似 </a><a href="#section-7">20.2 矩阵的相似对角化</a><a href="#section-12">20.3 实对称矩阵的相似对角化 </a></nav></details><div class="prose"><h2 id="section-1">20.1 矩阵相似 </h2>
 <h3 id="section-2">20.1.1 相似矩阵的定义</h3>
 <h5 id="section-3"><strong>定义</strong>： <span class="note-tag">矩阵相似</span> </h5>
-<blockquote><span style="color:#ccc1d9">描述：</span>设 A, B 是两个 <code>n</code> 阶方阵，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=B$，则称 <code>A</code> 相似于 <code>B</code>，记成 <code>A~B</code></blockquote>
+<blockquote><span>描述：</span>设 A, B 是两个 <code>n</code> 阶方阵，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=B$，则称 <code>A</code> 相似于 <code>B</code>，记成 <code>A~B</code></blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li>概念： </li>
@@ -198,7 +198,7 @@ $$</div>
 <h2 id="section-7">20.2 矩阵的相似对角化</h2>
 <h3 id="section-8">20.2.1 基础概念 </h3>
 <h5 id="section-9"><strong>定义</strong>： <span class="note-tag">矩阵的相似对角化</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span> 设 <code>n</code> 阶矩阵 <code>A</code>，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=\Lambda$，则其中的 $\Lambda$ 是对角矩阵，并且称 <code>A</code> 可相似对角化，记作 $A\sim\Lambda$，并称 $\Lambda$ 为 <code>A</code> 的相似标准型；</blockquote>
+<blockquote><span>描述：</span> 设 <code>n</code> 阶矩阵 <code>A</code>，若存在 <code>n</code> 阶可逆矩阵 <code>P</code>，使得 $P^{-1}AP=\Lambda$，则其中的 $\Lambda$ 是对角矩阵，并且称 <code>A</code> 可相似对角化，记作 $A\sim\Lambda$，并称 $\Lambda$ 为 <code>A</code> 的相似标准型；</blockquote>
 <blockquote><code>A</code> 可以相似对角化、最本质的定义是：<code>A</code> 有 <code>n</code> 个线性无关的特征向量； </blockquote>
 <p><strong>概念</strong>：图形解释</p>
 <ul>
@@ -296,7 +296,7 @@ $$</div>
 <h2 id="section-12">20.3 实对称矩阵的相似对角化 </h2>
 <h3 id="section-13">20.3.1 实对称矩阵 </h3>
 <h5 id="section-14"><strong>定义</strong>： <span class="note-tag">实对称矩阵</span></h5>
-<blockquote><span style="color:#ccc1d9">描述：</span>若 $A^T=A$ ，则 A 为对称矩阵。如果组成 A 的元素都是实数，则 A 为实对称矩阵；</blockquote>
+<blockquote><span>描述：</span>若 $A^T=A$ ，则 A 为对称矩阵。如果组成 A 的元素都是实数，则 A 为实对称矩阵；</blockquote>
 <blockquote>（1）<code>A</code> 是实对称矩阵，则 A 的特征值是实数，特征向量是实向量 (不用证明)；</blockquote>
 <blockquote>（2）实对称矩阵 <code>A</code> 中，属于不同特征值的特征向量相互正交，即：$\lambda_{1}\neq\lambda_{2}\Rightarrow\xi_{1}\perp\xi_{2}$。对于重特征值，可以在对应的特征子空间内选取一组标准正交基；</blockquote>
 <blockquote>（3）对于任意的 n 阶实对称矩阵 A，存在 n 阶正交矩阵 Q，使得：$Q^{\mathrm{T}}AQ=Q^{-1}AQ=\begin{bmatrix}\lambda_1&amp;&amp;&amp;\\&amp;\lambda_2&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;\lambda_n\end{bmatrix}$ ，这里 $\lambda_i$ 是 A 的全部特征值； </blockquote>
