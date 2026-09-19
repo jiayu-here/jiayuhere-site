@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-076/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-076/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,9 +98,9 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 7: Elementary Transformations and Elementary Matrices</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 7: Elementary Transformations and Elementary Matrices. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span></span><span>13 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Matrices</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">7.1 Elementary Transformations</a><a href="#section-4">7.2 Elementary Matrices</a><a href="#section-8">7.3 Properties of Elementary Matrices</a><a href="#section-9">7.4 Row Ladder Matrix and Row Simplest Step Matrix</a><a href="#section-12">7.5 Using Elementary Transformations to Find Inverse Matrices</a><a href="#section-13">7.6 Inverse of Simple Block Matrices</a></nav></details><div class="prose"><h2 id="section-1">7.1 Elementary Transformations</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">7.1 Elementary Transformations</a><a href="#section-5">7.2 Elementary Matrices</a><a href="#section-13">7.3 Properties of Elementary Matrices</a><a href="#section-14">7.4 Row Ladder Matrix and Row Simplest Step Matrix</a><a href="#section-19">7.5 Using Elementary Transformations to Find Inverse Matrices</a><a href="#section-21">7.6 Inverse of Simple Block Matrices</a></nav></details><div class="prose"><h2 id="section-1">7.1 Elementary Transformations</h2>
 <h3 id="section-2">7.1.1 Definition</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Elementarytransformation</span></p>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">Elementarytransformation</span></h4>
 <blockquote><span> description: </span></blockquote>
 <p>&gt;(1) Multiplication: A row (column) of a nonzero constant multiplied by a matrix;</p>
 <p>  (2) Swap: the positions of two rows (columns) in the swap matrix;</p>
@@ -111,7 +111,7 @@
 <li>All three of these transformations are called<strong>same-solution transformations</strong><code>&lt;-</code> No matter how you transform, you must ensure they are the same-solution;</li>
 </ul>
 <p><strong>Essence</strong>: The rank of the matrix does not change, but the determinant changes;</p>
-<h3 id="section-3">7.1.2 Supplement: The Essence of Linear Transformations</h3>
+<h3 id="section-4">7.1.2 Supplement: The Essence of Linear Transformations</h3>
 <p><strong>Concept</strong>: What is transformation?</p>
 <ul>
 <li>Explanation:</li>
@@ -148,9 +148,9 @@
 <li>Formula: 2D</li>
 <li class="list-indent-1">$$\left.\left[\begin{array}{cc}a&amp;b\\c&amp;d\end{array}\right.\right]\left[\begin{array}{c}x\\y\end{array}\right]=x\left[\begin{array}{c}a\\c\end{array}\right]+y\left[\begin{array}{c}b\\d\end{array}\right]=\left[\begin{array}{c}ax+by\\cx+dy\end{array}\right]$$</li>
 </ul>
-<h2 id="section-4">7.2 Elementary Matrices</h2>
-<h3 id="section-5">7.2.1 Definition of Elementary Matrices</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Definitionofelementarymatrices</span></p>
+<h2 id="section-5">7.2 Elementary Matrices</h2>
+<h3 id="section-6">7.2.1 Definition of Elementary Matrices</h3>
+<h4 id="section-7"><strong>Definition</strong>: <span class="note-tag">Definitionofelementarymatrices</span></h4>
 <blockquote><span> description: </span> a matrix obtained from a unit matrix through a primary transformation is called an<strong>elementary matrix</strong>. Taking a 3x3 matrix as an example: $E_{2}\left(k\right)=\left[\begin{matrix}1&amp;0&amp;0\\0&amp;k&amp;0\\0&amp;0&amp;1\end{matrix}\right]$</blockquote>
 <blockquote>Multiply the <code>2</code> th row (or column 2) of E by <code>k</code> times the multiplication of the elementary matrix;</blockquote>
 <p>&gt;</p>
@@ -169,12 +169,12 @@
 <li>Function:</li>
 <li class="list-indent-1">When a set of vectors is transformed using an elementary matrix,</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Leftrowandrightcolumntheorem</span></p>
+<h4 id="section-8"><strong>Theorem</strong>: <span class="note-tag">Leftrowandrightcolumntheorem</span></h4>
 <blockquote><span><span> description: </span></span> perform an elementary row transformation on the <code>n</code> th order matrix <code>A</code>, equivalent to multiplying the left side of matrix A by the corresponding elementary matrix;</blockquote>
 <blockquote>Similarly, performing an elementary transformation on <code>A</code> is equivalent to multiplying the right side of matrix <code>A</code> by the corresponding elementary matrix;</blockquote>
 <p><strong>Explanation</strong></p>
-<h3 id="section-6">7.2.2 Interchange Elementary Matrices</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Interchangeelementarymatrices</span></p>
+<h3 id="section-9">7.2.2 Interchange Elementary Matrices</h3>
+<h4 id="section-10"><strong>Definition</strong>: <span class="note-tag">Interchangeelementarymatrices</span></h4>
 <blockquote><span> description: </span> $E_{12}=\begin{bmatrix}0&amp;1&amp;0\\1&amp;0&amp;0\\0&amp;0&amp;1\end{bmatrix}$, the 1st and 2nd rows (or columns 1 and 2) of E are swapped, called the swap elementary matrix;</blockquote>
 <blockquote>Definition: $$E_{ij}\text{ represents the unit matrix }E\text{ Exchange No }i\text{ and was granted a residence }j\text{ Alright }(\text{ or exchange residences }i\text{ and ranked among the top ranks }j\text{ List })\text{ The resulting elementary matrix }$$</blockquote>
 <p><strong>Explanation</strong></p>
@@ -189,12 +189,12 @@
 <li class="list-indent-1">Since the elementary matrix is on the right, column transformations are performed;</li>
 <li class="list-indent-1">Because the second and third columns of the elementary matrix are swapped, the second and third columns of $\begin{pmatrix}1&amp;2&amp;-4\\2&amp;3&amp;2\\-1&amp;-2&amp;0\end{pmatrix}$ are swapped;</li>
 </ul>
-<h3 id="section-7">7.2.3x Elementary Matrix</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Multiplytheelementarymatrix</span></p>
+<h3 id="section-11">7.2.3x Elementary Matrix</h3>
+<h4 id="section-12"><strong>Definition</strong>: <span class="note-tag">Multiplytheelementarymatrix</span></h4>
 <blockquote><span> description: </span> $E_{31}\left(k\right)=\left[\begin{matrix}1&amp;0&amp;0\\0&amp;1&amp;0\\k&amp;0&amp;1\end{matrix}\right]$, the k multiplied by the 1st row of E to the 3rd row (or the k multiplied by the k of the 3rd column to the 1st column) is called the multiplication elementary matrix;</blockquote>
 <blockquote>Definition: $E_{ij}(k)$ represents the elementary matrix obtained by multiplying the $j$ th row of the identity matrix $E$ by multiplying $k$ to the $i$ th row (or $k$ of the $i$ th column to the $j$ th column);</blockquote>
 <p><strong>Explanation</strong></p>
-<h2 id="section-8">7.3 Properties of Elementary Matrices</h2>
+<h2 id="section-13">7.3 Properties of Elementary Matrices</h2>
 <p><strong>Property One</strong>: The transpose of an elementary matrix is still an elementary matrix</p>
 <ul>
 <li>$E_{ij}^{T}=E_{ij}$</li>
@@ -220,9 +220,9 @@
 <li class="list-indent-1">Give A an E and perform a row transformation, resulting in the inverse matrix A;</li>
 </ul>
 <p><strong>Property Four</strong>: Performing an elementary row transformation on <code>n</code>-order matrix <code>A</code> is equivalent to multiplying the left side of matrix <code>A</code> by the corresponding elementary matrix; Similarly, performing an elementary column transformation on <code>A</code> is equivalent to multiplying the right side of matrix <code>A</code> by the corresponding elementary matrix;</p>
-<h2 id="section-9">7.4 Row Ladder Matrix and Row Simplest Step Matrix</h2>
-<h3 id="section-10">7.4.1 Row Ladder Matrices</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Rowladdermatrix</span></p>
+<h2 id="section-14">7.4 Row Ladder Matrix and Row Simplest Step Matrix</h2>
+<h3 id="section-15">7.4.1 Row Ladder Matrices</h3>
+<h4 id="section-16"><strong>Definition</strong>: <span class="note-tag">Rowladdermatrix</span></h4>
 <blockquote><span> description: A matrix </span> the following characteristics is called a rowed ladder matrix:</blockquote>
 <blockquote>(1) If there is a zero line (i.e., a row with all elements zero), then all zero rows are below the non-zero row;</blockquote>
 <blockquote>(2) For each nonzero row, the column indicator for the first nonzero element from the left is a strictly increasing <code>-&gt;</code> solution from top to bottom;</blockquote>
@@ -238,8 +238,8 @@
 <li class="list-indent-1">The leftmost element of each step is called the base <code>-&gt;</code> reduce it to its simplest form;</li>
 </ul>
 <p><strong>Example</strong>: Find the general solution for homogeneous linear systems: $\begin{cases}x_{1}+x_{2}-3x_{4}-x_{5}=0,\\x_{1}-x_{2}+2x_{3}-x_{4}=0,\\4x_{1}-2x_{2}+6x_{3}+3x_{4}-4x_{5}=0,\\2x_{1}+4x_{2}-2x_{3}+4x_{4}-7x_{5}=0\end{cases}$</p>
-<h3 id="section-11">7.4.2 Row of the Simplest Stepped Trapezoidal Matrices</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Thesimpleststeppedtrapezoidalmatrixisused</span></p>
+<h3 id="section-17">7.4.2 Row of the Simplest Stepped Trapezoidal Matrices</h3>
+<h4 id="section-18"><strong>Definition</strong>: <span class="note-tag">Thesimpleststeppedtrapezoidalmatrixisused</span></h4>
 <blockquote><span> description: </span> a row of stepped matrices is called the simplest row ladder matrix if the first nonzero element in a nonzero row is <code>1</code>, and all other elements in the column containing these nonzero elements are <code>0</code>;</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -259,8 +259,8 @@
 <li>Systems of linear equations can always be substituted by elimination;</li>
 <li>Generally, it can be converted to a row ladder matrix;</li>
 </ul>
-<h2 id="section-12">7.5 Using Elementary Transformations to Find Inverse Matrices</h2>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Useelementarytransformationstofindtheinversematrix</span></p>
+<h2 id="section-19">7.5 Using Elementary Transformations to Find Inverse Matrices</h2>
+<h3 id="section-20"><strong>Theorem</strong>: <span class="note-tag">Useelementarytransformationstofindtheinversematrix</span></h3>
 <blockquote><span><span> description: </span></span> $$\begin{bmatrix}A\vdots E\end{bmatrix}\xrightarrow{\text{ Elementary line transformation }}\begin{bmatrix}E\vdots A^{-1}\end{bmatrix},\\\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow{\text{ Elementary column transformation }}\begin{bmatrix}E\\A^{-1}\end{bmatrix}.$$</blockquote>
 <p><strong>Example Problem</strong>: When $A=\begin{bmatrix}0&amp;2&amp;-1\\1&amp;1&amp;2\\-1&amp;-1&amp;-1\end{bmatrix}$, find $A^{-1}$</p>
 <ul>
@@ -271,8 +271,8 @@
 <li class="list-indent-1">Finally, form the $(E|A^{-1})$</li>
 <li>Analysis</li>
 </ul>
-<h2 id="section-13">7.6 Inverse of Simple Block Matrices</h2>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Theinverseofasimpleblockmatrix</span></p>
+<h2 id="section-21">7.6 Inverse of Simple Block Matrices</h2>
+<h3 id="section-22"><strong>Definition</strong>: <span class="note-tag">Theinverseofasimpleblockmatrix</span></h3>
 <blockquote><span> description: </span> $$\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}^{-1}=\begin{bmatrix}A^{-1}&amp;O\\O&amp;B^{-1}\end{bmatrix},\begin{bmatrix}O&amp;A\\B&amp;O\end{bmatrix}^{-1}=\begin{bmatrix}O&amp;B^{-1}\\A^{-1}&amp;O\end{bmatrix}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -312,6 +312,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-072/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-072/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 3: Calculation of Determinants</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 3: Calculation of Determinants. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span></span><span>13 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Determinants</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">3.1 Calculation of Concrete Determinants</a><a href="#section-9">3.2 Calculation of Abstract Determinants</a><a href="#section-13">3.3 Kramer's Law</a></nav></details><div class="prose"><p><strong>Category</strong>: Based on the perspective of the exam question</p>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">3.1 Calculation of Concrete Determinants</a><a href="#section-9">3.2 Calculation of Abstract Determinants</a><a href="#section-14">3.3 Kramer's Law</a></nav></details><div class="prose"><p><strong>Category</strong>: Based on the perspective of the exam question</p>
 <ul>
 <li>1. Regular determinants:</li>
 <li class="list-indent-1"><code>n</code> order, <code>n</code> is very likely because it follows a pattern, so it can be solved, and can be solved using formulas;</li>
@@ -247,7 +247,7 @@
 <li class="list-indent-1">Calculation result: $|B-A|=|A|\left|\begin{matrix}0&amp;2&amp;1\\-1&amp;2&amp;2\\2&amp;5&amp;-2\end{matrix}\right|=2*5=10$</li>
 </ul>
 <h3 id="section-12">3.2.3 Linear Combinatorial Calculations of Residual and Algebraic Coenzyme Expressions</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Linearcombinatorialcalculationofcoconexpressionsandalgebraiccoenzymeexpressions</span></p>
+<h4 id="section-13"><strong>Theorem</strong>: <span class="note-tag">Linearcombinatorialcalculationofcoconexpressionsandalgebraiccoenzymeexpressions</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>by $a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}=\begin{vmatrix}<em>\\a_{i1}&amp;a_{i2}&amp;\cdots&amp;a_{in}\\</em>&amp;\end{vmatrix}$</blockquote>
 <blockquote>then $k_{1}A_{i1}+k_{2}A_{i2}+\cdots+k_{n}A_{in}=\begin{vmatrix}&amp;&amp;<em>&amp;&amp;\\k_{1}&amp;&amp;k_{2}&amp;\cdots&amp;k_{n}\\&amp;&amp;</em>&amp;&amp;\end{vmatrix}$</blockquote>
@@ -268,8 +268,8 @@
 <li class="list-indent-1">Example: Given $|A|=\begin{vmatrix}1&amp;-2&amp;1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{vmatrix}$, find $A_{11}-2A_{12}+A_{13}$</li>
 <li class="list-indent-2">From <code>A</code> knows: expand by line 1: $|A|=1\cdot A_{11}+(-2)A_{12}+1A_{13}=1$</li>
 </ul>
-<h2 id="section-13">3.3 Kramer's Law</h2>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">KramersLaw</span></p>
+<h2 id="section-14">3.3 Kramer's Law</h2>
+<h3 id="section-15"><strong>Theorem</strong>: <span class="note-tag">KramersLaw</span></h3>
 <blockquote><span><span> Description: </span></span> a system of nonhomogeneous linear equations <code>n</code> unknowns (this is the premise) for an equation: $$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=b_{1},\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=b_{2},\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=b_{n},\end{cases}$$</blockquote>
 <blockquote>If the determinant of the coefficient is $$D=\begin{vmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{vmatrix}\neq0$$, then the system has the only solution to the right, and the solution is: $x_{i}=\frac{D_{i}}{D},i=1,2,\cdots,n$, where $D_i\text{ It is derived from the constant term }b_1,b_2,\cdots,b_n\text{ Replace }D\text{ and passed the imperial examination }i\text{ The determinant obtained from the column element }$</blockquote>
 <p>&gt;</p>
@@ -286,7 +286,7 @@
 <li>Function:</li>
 <li class="list-indent-1">Kramer's Law provides a procedural solution;</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">HomogeneoustimeKramersrule</span></p>
+<h3 id="section-16"><strong>Theorem</strong>: <span class="note-tag">HomogeneoustimeKramersrule</span></h3>
 <blockquote><span><span> Description: When </span></span> is in sync: $$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\cdots+a_{1n}x_{n}=0,\\a_{21}x_{1}+a_{22}x_{2}+\cdots+a_{2n}x_{n}=0,\\\cdots\cdots\\a_{n1}x_{1}+a_{n2}x_{2}+\cdots+a_{nn}x_{n}=0,\end{cases}$$</blockquote>
 <blockquote>$\text{ If }D\neq0,\text{ then the system of homogeneous equations has only zero solutions };\text{ If }D=0,\text{ then the system of homogeneous equations has nonzero solutions }$</blockquote>
 <p><strong>Explanation</strong></p><nav class="article-pagination" aria-label="Adjacent content">
@@ -304,6 +304,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

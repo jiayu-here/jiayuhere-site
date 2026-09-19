@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-058/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-058/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 56: Power Series</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 56: Power Series. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-02-14">2024-02-14</time></span></span><span>2 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Infinite Series</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">50.1 Power Series</a><a href="#section-6">50.2 Operations on Power Series</a><a href="#section-9">50.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">50.1 Power Series</a><a href="#section-11">50.2 Operations on Power Series</a><a href="#section-14">50.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
 <ul>
 <li>(1) Radius of convergence, convergence interval, and convergence domain</li>
 <li>(2) Properties of Power Series</li>
@@ -126,7 +126,7 @@
 <li>Function sequence: $u_{1}(x), u_{2}(x), u_{n}(x),\cdots$</li>
 <li>Infinite series of function terms: $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Powerseries</span></p>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">Powerseries</span></h4>
 <blockquote><span> description: </span></blockquote>
 <blockquote>Common form: $$\sum_{n=0}^\infty a_nx^n=a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots $$</blockquote>
 <blockquote>General form: $$\sum_{n=0}^\infty a_n(x-x_0)^n=a_0+a_1(x-x_0)+\cdots+a_n(x-x_0)^n+\cdots $$</blockquote>
@@ -139,8 +139,8 @@
 <li>Supplement:</li>
 <li class="list-indent-1">General study of common forms, because general forms can be $x-x_0=t$ into common forms;</li>
 </ul>
-<h3 id="section-3">50.1.2 Convergence and Divergence</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Convergencepointanddivergencepoint</span></p>
+<h3 id="section-4">50.1.2 Convergence and Divergence</h3>
+<h4 id="section-5"><strong>Definition</strong>: <span class="note-tag">Convergencepointanddivergencepoint</span></h4>
 <blockquote><span> description: </span></blockquote>
 <blockquote>1. If $x_{0}\in I$ and $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ converges, $x_o$ is called the convergence point; if it is an interval, it is called the convergence domain;</blockquote>
 <blockquote>2. If $x_{0}\in I$ and $u_{1}(x)+u_{2}(x)+\cdots+u_{n}(x)+\cdots$ diverges, $x_o$ is called the divergence point; if it is an interval, it is called the divergence domain;</blockquote>
@@ -156,7 +156,7 @@
 <li class="list-indent-1">For $|x|&lt;1$, the interval of convergence is $(-1,1)$ and the sum is $\frac{1}{1-x}$;</li>
 <li class="list-indent-1">For $|x|\geq1$, the series diverges, so the divergence set is $(-\infty,-1]\cup[1,+\infty)$;</li>
 </ul>
-<h5 id="section-4"><strong>Theorem</strong>: <span class="note-tag">AbelsTheorem</span></h5>
+<h4 id="section-6"><strong>Theorem</strong>: <span class="note-tag">AbelsTheorem</span></h4>
 <blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>For the power series $\sum_{n=0}^{+\infty}a_nx^n$:</blockquote>
 <blockquote>- If it converges at $x=x_0$, then it converges absolutely for every $|x|&lt;|x_0|$;</blockquote>
@@ -195,14 +195,14 @@
 <li class="list-indent-1">Endpoint Convergence Invariance:</li>
 <li class="list-indent-2">Because the two series have the same coefficients $a_n$, corresponding endpoints have the same convergence behavior after translation.</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Theconvergenceofpowerseries</span></p>
+<h4 id="section-7"><strong>Theorem</strong>: <span class="note-tag">Theconvergenceofpowerseries</span></h4>
 <blockquote><span><span>Description:</span></span> The power series $\sum_{n=0}^{+\infty}a_nx^n$ has exactly one of three convergence behaviors:</blockquote>
 <blockquote>(1) Convergence for any x belonging to $(-\infty ,+\infty)$;</blockquote>
 <blockquote>(2) Converges only at $x=0$;</blockquote>
 <blockquote>(3) There exists a positive number <code>R</code> When $|x| &lt; R$ is absolute convergence, when $|x|&gt;R$ diverges;</blockquote>
 <blockquote>Note: If the power series $\sum_{n=0}^{+\infty}a_nx$ converges conditionally at point $x=x_0$, then point $x_0$ must be an endpoint of the convergence interval $(-R,R)$ of that power series;</blockquote>
-<h3 id="section-5">50.1.3 Radius of Convergence R</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span></p>
+<h3 id="section-8">50.1.3 Radius of Convergence R</h3>
+<h4 id="section-9"><strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span></h4>
 <blockquote><span><span> description: </span></span> $$\text{ If }\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho,\,\text{ then } R = \frac{1}{{\rho}}$$</blockquote>
 <blockquote>That is: there are three situations at this time: $$R=\begin{cases}\frac{1}{\rho},&amp;\rho\neq0\\+\infty,&amp;\rho=0\\0,&amp;\rho=+\infty\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
@@ -211,14 +211,14 @@
 <li>1. This theorem can only be applied in one direction;</li>
 <li>2. The convergence interval is endpoint-independent, i.e., $(-R,R)$</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span>: Based on radicals</p>
+<h4 id="section-10"><strong>Theorem</strong>: <span class="note-tag">Determiningtheradiusofconvergence</span>: Based on radicals</h4>
 <blockquote><span><span> description: </span></span> $$\text{ If }\lim_{n\to\infty}\sqrt[n]{|a_n|}=\rho,\text{ then }\quad R=\frac1\rho $$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>derived based on root test;</li>
 </ul>
-<h2 id="section-6">50.2 Operations on Power Series</h2>
-<h3 id="section-7">50.2.1 Properties of Power Series Operations</h3>
+<h2 id="section-11">50.2 Operations on Power Series</h2>
+<h3 id="section-12">50.2.1 Properties of Power Series Operations</h3>
 <p><strong>Properties</strong>: Properties of rational operations</p>
 <ul>
 <li>Premise:</li>
@@ -232,7 +232,7 @@
 <li class="list-indent-2">The coefficients satisfy $c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$.</li>
 <li class="list-indent-1">(3) Division: $$\frac{\sum_{n=0}^\infty a_nx^n}{\sum_{n=0}^\infty b_nx^n}=\sum_{n=0}^\infty c_nx^n$$</li>
 </ul>
-<h3 id="section-8">50.2.2 Analytical Properties of Power Series</h3>
+<h3 id="section-13">50.2.2 Analytical Properties of Power Series</h3>
 <p><strong>Properties</strong>: Derivative by term</p>
 <ul>
 <li>Premise:</li>
@@ -249,10 +249,10 @@
 <li class="list-indent-3">$$\int_{0}^{x}S(x)\operatorname{d}x=\int_{0}^{x}\sum_{n=0}^{\infty}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\int_{0}^{x}a_{n}x^{n}\operatorname{d}x=\sum_{n=0}^{\infty}\frac{1}{n+1}a_{n}x^{n+1}$$</li>
 <li class="list-indent-2">Note: The power series after integrating each term has the same radius of convergence as the original power series;</li>
 </ul>
-<h2 id="section-9">50.3 Frequently Tested Question Types</h2>
+<h2 id="section-14">50.3 Frequently Tested Question Types</h2>
 <hr>
-<h3 id="section-10">Question Type: <span class="note-tag">Findtheradiusofconvergence</span>. Convergence interval, convergence domain</h3>
-<h4 id="section-11">PART 1: Problem-solving methods</h4>
+<h3 id="section-15">Question Type: <span class="note-tag">Findtheradiusofconvergence</span>. Convergence interval, convergence domain</h3>
+<h4 id="section-16">PART 1: Problem-solving methods</h4>
 <p><strong>Problem Type</strong>: Find the radius of convergence</p>
 <ul>
 <li>Two methods:</li>
@@ -277,9 +277,9 @@
 <li>Method:</li>
 <li class="list-indent-1">First, find the radius of convergence of the current power series (often using Abel's theorem), then, based on the convergence interval, determine whether any point lies within the interval to obtain convergence;</li>
 </ul>
-<h4 id="section-12">PART 2: Typical Example Problems</h4>
+<h4 id="section-17">PART 2: Typical Example Problems</h4>
 <p><strong>Example Question</strong>: Find $\sum_{n=1}^\infty\frac{e^n-(-1)^n}{n^2}x^n$</p>
-<h4 id="section-13">PART 3: Key Points Review</h4>
+<h4 id="section-18">PART 3: Key Points Review</h4>
 <p><strong>Key Point</strong>: When there is n next to the $a_n$ of the power series $\sum_{n=0}^\infty na_nx^n$</p>
 <ul>
 <li>Key point: According to the property that the radius of convergence remains unchanged after taking the derivative of a power series with**terms by term, R for $\sum_{n=0}^\infty na_nx^n$ and $\sum_{n=0}^\infty a_nx^n$ remains unchanged;</li>
@@ -298,6 +298,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

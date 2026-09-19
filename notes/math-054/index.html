@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-054/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-054/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -100,7 +100,7 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 47：三重积分</h1><p class="article-lead">考研数学学习笔记：Lecture 47：三重积分。保留原始公式、图示与例题。</p><div class="article-meta"><span class="record-meta"><span class="record-category">数学</span><span class="record-date"><span>记录日期</span><time datetime="2024-02-09">2024-02-09</time></span></span><span>约 5 分钟阅读</span><div class="tag-list"><span>考研数学</span><span>高等数学</span><span>重积分</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">46.1 三重积分</a><a href="#section-6">46.2 柱坐标</a><a href="#section-11">46.3 球坐标计算三重积分</a><a href="#section-16">46.4 三重积分的性质</a><a href="#section-21">46.5 常考题型</a></nav></details><div class="prose"><h2 id="section-1">46.1 三重积分</h2>
 <h3 id="section-2">46.1.1 基础概念</h3>
-<h5 id="section-3"><strong>定义</strong>： <span class="note-tag">三重积分</span> </h5>
+<h4 id="section-3"><strong>定义</strong>： <span class="note-tag">三重积分</span> </h4>
 <blockquote><span>描述：</span> $\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\lim_{\lambda\to0}\sum_{k=1}^{n}f(\xi_{k},\eta_{k},\xi_{k})\Delta\nu_{k}$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -112,7 +112,7 @@
 <li class="list-indent-1">而三重积分计算的核心，就是将其转化为定积分或者二重积分的计算；</li>
 </ul>
 <h3 id="section-4">46.1.2 基本计算方法</h3>
-<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">三重积分的直坐标计算</span></h5>
+<h4 id="section-5"><strong>定理</strong>： <span class="note-tag">三重积分的直坐标计算</span></h4>
 <blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>1. 先一后二：$$\iiint_{\Omega}f(x,y,z)\mathrm{dv}=\iint_{D_{xy}}d\sigma\int_{z_{1}(x,y)}^{z_{2}(x,y)}f(x,y,z)dz$$</blockquote>
 <blockquote>2. 先二后一：$$\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\int_{c_{1}}^{c_{2}}dz\iint_{D_{c}}f(x,y,z)dxdy$$</blockquote>
@@ -134,7 +134,7 @@
 </ul>
 <h2 id="section-6">46.2 柱坐标</h2>
 <h3 id="section-7">46.2.1 基础概念</h3>
-<h5 id="section-8"><strong>定义</strong>： <span class="note-tag">柱坐标</span></h5>
+<h4 id="section-8"><strong>定义</strong>： <span class="note-tag">柱坐标</span></h4>
 <blockquote><span>描述：</span> $$\begin{cases}x=r\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\theta,&amp;\quad0\leq\theta\leq2\pi,\\z=z,&amp;\quad-\infty&lt;z&lt;+\infty.\end{cases}$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -146,7 +146,7 @@
 <li class="list-indent-1"><a class="note-image-link" href="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定义 ： 柱坐标"><picture><source srcset="/assets/note-previews/fb4663a3483a-Pasted-image-20240521035217.webp" type="image/webp"><img class="note-image" src="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" alt="学习笔记插图：定义 ： 柱坐标" width="244" height="270" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h3 id="section-9">46.2.2 柱坐标计算方法</h3>
-<h5 id="section-10"><strong>定理</strong>： <span class="note-tag">柱坐标计算方法</span></h5>
+<h4 id="section-10"><strong>定理</strong>： <span class="note-tag">柱坐标计算方法</span></h4>
 <blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>体积微元：$dv=\rho d\rho d\theta dz$</blockquote>
 <blockquote>计算：$$\iiint_\Omega f(x,y,z)d\nu=\iiint_{\Omega}f(\rho\cos\theta,\rho\sin\theta,z)r\operatorname{d}r\operatorname{d}\theta\operatorname{d}z$$ </blockquote>
@@ -159,7 +159,7 @@
 </ul>
 <h2 id="section-11">46.3 球坐标计算三重积分</h2>
 <h3 id="section-12">46.3.1 基本概念 </h3>
-<h5 id="section-13"><strong>定义</strong>： <span class="note-tag">球坐标</span></h5>
+<h4 id="section-13"><strong>定义</strong>： <span class="note-tag">球坐标</span></h4>
 <blockquote><span>描述：</span> $$\begin{cases}x=r\sin\varphi\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\varphi\sin\theta,&amp;\quad0\leq\varphi\leq\pi,\\z=r\cos\varphi,&amp;\quad0\leq\theta\leq2\pi.\end{cases}$$</blockquote>
 <p><strong>解释</strong> </p>
 <ul>
@@ -167,7 +167,7 @@
 <li><a class="note-image-link" href="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定义 ： 球坐标"><picture><source srcset="/assets/note-previews/389e35889ff4-Pasted-image-20240521040109.webp" type="image/webp"><img class="note-image" src="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" alt="学习笔记插图：定义 ： 球坐标" width="240" height="234" loading="lazy" decoding="async"></picture></a></li>
 </ul>
 <h3 id="section-14">46.3.2 球坐标计算方法</h3>
-<h5 id="section-15"><strong>定理</strong>： <span class="note-tag">球坐标计算方法</span></h5>
+<h4 id="section-15"><strong>定理</strong>： <span class="note-tag">球坐标计算方法</span></h4>
 <blockquote><span><span>描述：</span></span></blockquote>
 <blockquote>体积微元：$dv=r^{2}\sin\varphi drd\varphi d\theta$</blockquote>
 <blockquote>计算：$$\iiint_{\Omega}f(x,y,z)d\nu =\iiint_\Omega f (r\sin\varphi\cos\theta, r\sin\varphi\sin\theta, r\cos\varphi) r^2\sin\varphi\operatorname{d}r\operatorname{d}\varphi\operatorname{d}\theta$$</blockquote>
@@ -180,11 +180,11 @@
 </ul>
 <h2 id="section-16">46.4 三重积分的性质</h2>
 <h3 id="section-17">46.4.1 奇偶性</h3>
-<h5 id="section-18"><strong>定理</strong>： <span class="note-tag">三重积分的奇偶性计算</span></h5>
+<h4 id="section-18"><strong>定理</strong>： <span class="note-tag">三重积分的奇偶性计算</span></h4>
 <blockquote><span><span>描述：</span></span> $$\text{若积分域 }\Omega\text{ 关于 }xoy\text{ 坐标面对称}，则\iiint_{\Omega}f(x,y,z)\mathrm{d}V=\begin{cases}2\iiint f(x,y,z)\mathrm{d}V&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
 <p><strong>解释</strong></p>
 <h3 id="section-19">46.4.2 对称性</h3>
-<h5 id="section-20"><strong>定理</strong>： <span class="note-tag">三重积分的对称性</span></h5>
+<h4 id="section-20"><strong>定理</strong>： <span class="note-tag">三重积分的对称性</span></h4>
 <blockquote><span><span>描述：</span></span></blockquote>
 <h2 id="section-21">46.5 常考题型</h2>
 <hr>
@@ -211,6 +211,6 @@
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260917a"></script>
+  <script src="../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

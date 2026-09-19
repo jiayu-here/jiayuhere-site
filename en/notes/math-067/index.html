@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-067/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-067/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,14 +98,14 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 51: Surface Integrals with Respect to Area</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 51: Surface Integrals with Respect to Area. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-02-12">2024-02-12</time></span></span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Integral Calculus and Applications</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</a><a href="#section-2">59.2 Calculation of Area Partitions for Curvatures</a><a href="#section-5">59.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</a><a href="#section-3">59.2 Calculation of Area Partitions for Curvatures</a><a href="#section-8">59.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area</h2>
 <p><strong>Example</strong>: Given that a curved surface component has a continuous surface density ρ(x, y, z), find its mass M;</p>
 <ul>
 <li>Illustration</li>
 <li class="list-indent-1"><a class="note-image-link" href="/assets/notes/ad52d081b939-Pasted-image-20240212143059.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area"><picture><source srcset="/assets/note-previews/ad52d081b939-Pasted-image-20240212143059.webp" type="image/webp"><img class="note-image" src="/assets/notes/ad52d081b939-Pasted-image-20240212143059.png" alt="Study-note illustration: 59.1 First Category of Curvaturous Area Division: Surface Division of Curved Area" width="322" height="361" loading="lazy" decoding="async"></picture></a></li>
 <li>Multiply the density on each small area by its area, then sum them all to get the complete mass: $M=\lim_{\lambda\to0}\sum_{k=1}^n\rho(\xi_k,\eta_k,\zeta_k){\Delta S_k}$</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Thefirstcategoryistheareaofcurves</span></p>
+<h3 id="section-2"><strong>Definition</strong>: <span class="note-tag">Thefirstcategoryistheareaofcurves</span></h3>
 <blockquote><span> description: </span> $\text{ Let }\sum\text{ It is a smooth curved surface },f(x,y,z)\text{ It is defined as }\sum\text{ The first one }\text{ If }\Sigma\text{ Perform arbitrary segmentation and arbitrary local area point selection },$ can be obtained</blockquote>
 <blockquote>Product sum limit: $\lim_{\lambda\to0}\sum_{k=1}^nf\left(\xi_k,\eta_k,\zeta_k\right)\Delta S_k$ exists in both cases, then this limit is called the function $f(x,y,z)$ the area component of the surface $\Sigma$ over the surface;</blockquote>
 <blockquote>Written as: $$\iint_{\Sigma}f(x,y,z)dS=\lim_{\lambda\to0}\sum_{i=1}^{n}f(\xi_{i},\eta_{i},\zeta_{i})\Delta S_{i}$$</blockquote>
@@ -125,9 +125,9 @@
 <li class="list-indent-1">3. Additivity to the integration domain: If $\sum$ is smooth in shards, then $\iint_{\Sigma}f(x,y,z)\operatorname{d}S=\iint_{\Sigma_{1}}f(x,y,z)\operatorname{d}S+\iint_{\Sigma_{2}}f(x,y,z)\operatorname{d}S$</li>
 <li class="list-indent-1">4. Linear properties of integration: $$\begin{aligned}\iint_{\Sigma}[k_1f(x,y,z)\pm k_2g(x,y,z)]&amp;\operatorname{d}S=k_1\iint_{\Sigma}f(x,y,z)\operatorname{d}S\pm k_2\iint_{\Sigma}g(x,y,z)\operatorname{d}S\end{aligned}$$</li>
 </ul>
-<h2 id="section-2">59.2 Calculation of Area Partitions for Curvatures</h2>
-<h3 id="section-3">59.2.1 Direct Method</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationofthefirsttypeofcurvedareaanalysis</span></p>
+<h2 id="section-3">59.2 Calculation of Area Partitions for Curvatures</h2>
+<h3 id="section-4">59.2.1 Direct Method</h3>
+<h4 id="section-5"><strong>Theorem</strong>: <span class="note-tag">Calculationofthefirsttypeofcurvedareaanalysis</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>There are smooth surfaces with $\Sigma:  z=z(x,  y),  (x,  y)\in D_{xy},  f(x,  y,  z)$ continuity on $\sum$</blockquote>
 <blockquote>Then surface integral $\iint_{\Sigma}f(x,  y,  z)dS$ exists $, $ and has:</blockquote>
@@ -145,8 +145,8 @@
 <li class="list-indent-1">At this point, $y=y(x,z)$ <code>-&gt;</code> $\iint_{\Sigma}f(x,y,{z}){\mathrm{d}S}=\iint_{D_{xy}}f(x,y=y(x,z),z)\sqrt{1+{z_x}^2(x,z)+{z_z}^2(x,z)}\mathrm{d}x\mathrm{d}z$ should be used</li>
 <li class="list-indent-1">Similarly, for $x=x(y,z)$ form;</li>
 </ul>
-<h3 id="section-4">59.2.2 Parity and Symmetry</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Theparityofthefirsttypeofsurfacefraction</span></p>
+<h3 id="section-6">59.2.2 Parity and Symmetry</h3>
+<h4 id="section-7"><strong>Theorem</strong>: <span class="note-tag">Theparityofthefirsttypeofsurfacefraction</span></h4>
 <blockquote><span><span> description: </span></span> if the surface $\sum$ is symmetric about $xoy$, then:</blockquote>
 <blockquote>$$\iint_{\Sigma}f(x,y,z)\mathrm{d}S=\begin{cases}2\iint_{\sum_{z&gt;0}} f(x,y,z)\mathrm{d}S,&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
 <p><strong>Key Point</strong>: Symmetry</p>
@@ -154,11 +154,11 @@
 <li>$x^2+y^2+z^2=1$ Good symmetry;</li>
 <li>Therefore, symmetry can be used to simplify the calculation: $\iint_{\Sigma}(x^2+y^2)ds=(\frac{2}{3})\iint (x^2+y^2+z^2)ds=(\frac{2}{3})\iint 1ds=\frac{2}{3}4\pi$</li>
 </ul>
-<h2 id="section-5">59.3 Frequently Tested Question Types</h2>
+<h2 id="section-8">59.3 Frequently Tested Question Types</h2>
 <hr>
-<h3 id="section-6">Question Type: <span class="note-tag">Calculationofthefirstcategoryofareapoints</span></h3>
-<h4 id="section-7">PART 1: Problem-solving methods</h4>
-<h4 id="section-8">PART 2: Typical Example Problems</h4>
+<h3 id="section-9">Question Type: <span class="note-tag">Calculationofthefirstcategoryofareapoints</span></h3>
+<h4 id="section-10">PART 1: Problem-solving methods</h4>
+<h4 id="section-11">PART 2: Typical Example Problems</h4>
 <p><strong>Example Question</strong>: $\Sigma=\{(x,y,z)\mid x+y+z=1,x\geq0,y\geq0,z\geq0\},\,\text{ then }\iint_\Sigma y^2dS$</p>
 <ul>
 <li>Analysis</li>
@@ -167,7 +167,7 @@
 <li class="list-indent-1">It can be converted into a double integral over the projection domain on <code>Dxy</code>;</li>
 <li class="list-indent-1">Because $ds=\sqrt{1+{z_x}^2(x,y)+{z_y}^2(x,y)}dxdy$</li>
 </ul>
-<h4 id="section-9">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+<h4 id="section-12">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
     <a href="../math-066/index.html"><span>← Previous item</span><strong>Lecture 49: Line Integrals with Respect to Coordinates</strong></a>
     <a class="article-pagination-next" href="../math-068/index.html"><span>Next item →</span><strong>Lecture 52: Surface Integrals with Respect to Coordinates</strong></a>
   </nav></div></div>
@@ -182,6 +182,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

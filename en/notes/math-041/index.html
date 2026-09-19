@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-041/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-041/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 33: Applications of Definite Integrals</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 33: Application of Definite Integrals. Retain original formulas, diagrams, and example problems.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-01-24">2024-01-24</time></span></span><span>8 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Definite and Improper Integrals</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Example Questions</a><a href="#section-2">1.1 Improper integrals of infinity</a><a href="#section-7">1.2 Improper integrals of unbounded functions</a><a href="#section-12">1.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Example Questions</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">Common Question Types and Typical Example Questions</a><a href="#section-2">1.1 Improper integrals of infinity</a><a href="#section-10">1.2 Improper integrals of unbounded functions</a><a href="#section-15">1.3 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">Common Question Types and Typical Example Questions</h2>
 <p><strong>Frequently Tested Contents</strong></p>
 <ul>
 <li>(1) Improper integrals over an infinite interval</li>
@@ -117,7 +117,7 @@
 <li>When an integral from $a$ to infinity is needed: $\int_{a}^{+\infty}f(x)dx$</li>
 <li>At this point, you can first set a $b$, then let b approach its limit;</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Anomalousintegral</span></p>
+<h4 id="section-4"><strong>Definition</strong>: <span class="note-tag">Anomalousintegral</span></h4>
 <blockquote><span> description: </span> integral with infinite intervals or unbounded integrands is called improper integral; also known as generalized integral;</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -133,7 +133,7 @@
 <ul>
 <li>$\int_{-\infty}^{+\infty}f(x)dx=F(x)|_{-\infty}^{+\infty}$</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Improperintegralsoveraninfiniteinterval</span></p>
+<h4 id="section-5"><strong>Definition</strong>: <span class="note-tag">Improperintegralsoveraninfiniteinterval</span></h4>
 <blockquote><span> description: </span></blockquote>
 <blockquote>1. Definition 1: $$\int_{a}^{+\infty}f(x)dx=\lim_{t\to+\infty}\int_{a}^{t}f(x)dx$$ If this limit exists, then the improper integral is called convergent; Conversely, it is divergent;</blockquote>
 <blockquote>2. Definition 2: $$\int_{-\infty}^{b}f(x)dx=\lim_{t\to-\infty}\int_{t}^{b}f(x)dx$$ Same logic as definition one;</blockquote>
@@ -143,8 +143,8 @@
 <li>Integral on an infinite interval, defined using the limit of the integral over a finite interval;</li>
 <li>Convergence can be evaluated;</li>
 </ul>
-<h3 id="section-4">1.1.2 Calculation Methods</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">ComparativeDiscrimination</span></p>
+<h3 id="section-6">1.1.2 Calculation Methods</h3>
+<h4 id="section-7"><strong>Theorem</strong>: <span class="note-tag">ComparativeDiscrimination</span></h4>
 <blockquote><span><span> description: </span></span> used to determine the divergence of improper integrals;</blockquote>
 <blockquote>Suppose $f (x),  g (x)$ continuity on $[a,  +\infty)$, and $0\leq f (x)\leq g (x)$, then</blockquote>
 <blockquote>$$1)\int_{a}^{+\infty}g(x)dx\text{ Convergence }\Rightarrow\int_{a}^{+\infty}f(x)dx\text{ Convergence }$$</blockquote>
@@ -164,33 +164,33 @@
 <li>Since $1+x^2&gt;x^2$, $\frac{\sqrt{x}}{1+x^{2}}&lt;\frac{\sqrt{x}}{x^{2}}=\frac{1}{x^{3/2}}$;</li>
 <li>Because the comparison integral has exponent $P=\frac32&gt;1$, $\int_1^{+\infty}\frac{\sqrt{x}}{1+x^2}\,dx$ converges;</li>
 </ul>
-<h5 id="section-5"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
+<h4 id="section-8"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h4>
 <blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be nonnegative and continuous on $[a,+\infty)$, and suppose $\lim_{x\to+\infty}\frac{f(x)}{g(x)}=\lambda$. Then:</blockquote>
 <blockquote>1. If $\lambda&gt;0$, then $\int_a^\infty f(x)\,dx$ and $\int_a^\infty g(x)\,dx$ have the same convergence behavior.</blockquote>
 <blockquote>2. If $\lambda=0$ and $\int_a^\infty g(x)\,dx$ converges, then $\int_a^\infty f(x)\,dx$ converges.</blockquote>
 <blockquote>3. If $\lambda=\infty$ and $\int_a^\infty g(x)\,dx$ diverges, then $\int_a^\infty f(x)\,dx$ diverges.</blockquote>
 <blockquote>Common result: $$\int_{a}^{+\infty}\frac{1}{x^{P}}\,dx\begin{cases}\text{converges},&amp;P&gt;1,\\\text{diverges},&amp;P\leq1,\end{cases}\qquad(a&gt;0).$$</blockquote>
-<h3 id="section-6">1.1.3 Example Problems</h3>
+<h3 id="section-9">1.1.3 Example Problems</h3>
 <p><strong>Example Question</strong>: Find $\int_{-\infty}^{+\infty}\frac{dx}{1+x^{2}}$</p>
 <ul>
 <li>Solution:</li>
 <li class="list-indent-1">$\arctan x\big|_{-\infty}^{+\infty}=\frac{\pi}{2}-(-\frac{\pi}{2})=\pi$;</li>
 <li>Question Type: <span class="note-tag">ImproperIntegral</span></li>
 </ul>
-<h2 id="section-7">1.2 Improper integrals of unbounded functions</h2>
-<h3 id="section-8">1.2.1 Basic Concepts</h3>
-<h5 id="section-9"><strong>Definition</strong>: <span class="note-tag">ImproperIntegralsOfUnboundedFunctions</span></h5>
+<h2 id="section-10">1.2 Improper integrals of unbounded functions</h2>
+<h3 id="section-11">1.2.1 Basic Concepts</h3>
+<h4 id="section-12"><strong>Definition</strong>: <span class="note-tag">ImproperIntegralsOfUnboundedFunctions</span></h4>
 <blockquote><span>Description:</span></blockquote>
 <blockquote>1. If $f(x)$ is unbounded in every right-hand neighborhood of $a$, then $a$ is a singular point and $$\int_a^bf(x)\,dx=\lim_{t\to a^+}\int_t^bf(x)\,dx;$$</blockquote>
 <blockquote>2. If $b$ is a singular point, then $$\int_{a}^{b}f(x)\,dx=\lim_{t\to b^{-}}\int_{a}^{t}f(x)\,dx;$$</blockquote>
 <blockquote>3. If $c$ is a singular point with $a&lt;c&lt;b$, then both sides must converge and $$\int_{a}^{b}f(x)\,dx=\int_{a}^{c}f(x)\,dx+\int_{c}^{b}f(x)\,dx.$$</blockquote>
-<h5 id="section-10"><strong>Theorem</strong>: <span class="note-tag">ComparisonTest</span></h5>
+<h4 id="section-13"><strong>Theorem</strong>: <span class="note-tag">ComparisonTest</span></h4>
 <blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be continuous on $(a,b]$ and satisfy $0\leq f(x)\leq g(x)$. Then:</blockquote>
 <blockquote>$$\int_{a}^{b}g(x)\,dx\text{ converges }\Rightarrow\int_{a}^{b}f(x)\,dx\text{ converges};$$</blockquote>
 <blockquote>$$\int_{a}^{b}f(x)\,dx\text{ diverges }\Rightarrow\int_{a}^{b}g(x)\,dx\text{ diverges}.$$</blockquote>
-<h5 id="section-11"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h5>
+<h4 id="section-14"><strong>Theorem</strong>: <span class="note-tag">LimitComparisonTest</span></h4>
 <blockquote><span><span>Description:</span></span></blockquote>
 <blockquote>Let $f,g$ be nonnegative and continuous on $(a,b]$, and suppose $\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lambda$. Then</blockquote>
 <blockquote>$$\begin{aligned}&amp;1)\ \lambda&gt;0:\ \int_a^b f(x)\,dx\text{ and }\int_a^b g(x)\,dx\text{ have the same convergence behavior};\\&amp;2)\ \lambda=0:\ \int_a^b g(x)\,dx\text{ convergent}\Rightarrow\int_a^b f(x)\,dx\text{ convergent};\\&amp;3)\ \lambda=+\infty:\ \int_a^b g(x)\,dx\text{ divergent}\Rightarrow\int_a^b f(x)\,dx\text{ divergent}.\end{aligned}$$</blockquote>
@@ -206,9 +206,9 @@
 <li>Only looking at the upper and lower limits of the definite integral cannot determine whether the current integral is a flawed integral;</li>
 <li>You need to check the current conditions for the function to see if they are met;</li>
 </ul>
-<h2 id="section-12">1.3 Frequently Tested Question Types</h2>
-<h3 id="section-13">Question Type: <span class="note-tag">Convergenceofimproperintegrals</span></h3>
-<h4 id="section-14">PART 1: Problem-solving methods</h4>
+<h2 id="section-15">1.3 Frequently Tested Question Types</h2>
+<h3 id="section-16">Question Type: <span class="note-tag">Convergenceofimproperintegrals</span></h3>
+<h4 id="section-17">PART 1: Problem-solving methods</h4>
 <p><strong>Methods for Determining Convergence and Divergence</strong></p>
 <ul>
 <li>1. Definition method;</li>
@@ -223,7 +223,7 @@
 <li>Use whichever is most convenient;</li>
 </ul>
 <p><strong>Note</strong>: When it comes to $\mathrm{e}^{\infty}$, pay attention to dividing it into left and right sections;</p>
-<h4 id="section-15">PART 2: Typical Example Problems</h4>
+<h4 id="section-18">PART 2: Typical Example Problems</h4>
 <p><strong>Example Question</strong>: $\int_{2}^{+\infty}\frac{1}{\sqrt{x}}dx$</p>
 <ul>
 <li>Analysis</li>
@@ -251,9 +251,9 @@
 <li>Analysis</li>
 <li>Question Type: #</li>
 </ul>
-<h4 id="section-16">PART 3: Key Points Review</h4>
-<h3 id="section-17">Question Type: <span class="note-tag">Calculationofimproperintegrals</span></h3>
-<h4 id="section-18">PART 1: Problem-solving methods</h4>
+<h4 id="section-19">PART 3: Key Points Review</h4>
+<h3 id="section-20">Question Type: <span class="note-tag">Calculationofimproperintegrals</span></h3>
+<h4 id="section-21">PART 1: Problem-solving methods</h4>
 <p><strong>What is the Calculation of Improper Integrals</strong></p>
 <ul>
 <li>Definition:</li>
@@ -262,7 +262,7 @@
 <li class="list-indent-1">Method 1: Substitution method</li>
 <li class="list-indent-1">Method 2: Partial Method</li>
 </ul>
-<h4 id="section-19">PART 2: Typical Example Problems</h4>
+<h4 id="section-22">PART 2: Typical Example Problems</h4>
 <p><strong>Example Question</strong>: $\int_{2}^{+\infty}\frac{\mathrm{d}x}{(x+7)\sqrt{x-2}}=$</p>
 <ul>
 <li>Analysis</li>
@@ -278,7 +278,7 @@
 <li>Analysis</li>
 <li>Question Type: #</li>
 </ul>
-<h4 id="section-20">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+<h4 id="section-23">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
     <a href="../math-040/index.html"><span>← Previous item</span><strong>Lecture 32: Calculation of definite integrals</strong></a>
     <a class="article-pagination-next" href="../math-042/index.html"><span>Next item →</span><strong>Lecture 34: Application of Definite Integrals</strong></a>
   </nav></div></div>
@@ -293,6 +293,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

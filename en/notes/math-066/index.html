@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-066/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-066/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 49: Line Integrals with Respect to Coordinates</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 49: Line Integrals with Respect to Coordinates. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-02-11">2024-02-11</time></span></span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Integral Calculus and Applications</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">58.1 Curve Integration with Respect to Coordinates</a><a href="#section-3">58.2 Calculation Methods</a><a href="#section-6">28.3 Connections Between Two Types of Line Integrals</a><a href="#section-7">28.4 Calculation Method: Space</a></nav></details><div class="prose"><h2 id="section-1">58.1 Curve Integration with Respect to Coordinates</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">58.1 Curve Integration with Respect to Coordinates</a><a href="#section-3">58.2 Calculation Methods</a><a href="#section-10">28.3 Connections Between Two Types of Line Integrals</a><a href="#section-12">28.4 Calculation Method: Space</a></nav></details><div class="prose"><h2 id="section-1">58.1 Curve Integration with Respect to Coordinates</h2>
 <p><strong>Explanation</strong>: Method selection</p>
 <ul>
 <li>Closed Section:</li>
@@ -125,7 +125,7 @@
 </ul>
 <h2 id="section-3">58.2 Calculation Methods</h2>
 <h3 id="section-4">58.2.1 Method One: Direct Method</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Thesecondtypecalculatescurveintegrals</span></p>
+<h4 id="section-5"><strong>Theorem</strong>: <span class="note-tag">Thesecondtypecalculatescurveintegrals</span></h4>
 <blockquote><span><span> Description: </span></span> the current parameter equation is $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$, from start point A to endpoint B, t moves from α to β:$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -134,19 +134,19 @@
 <li>Note:</li>
 <li class="list-indent-1">The upper and lower limits are calculated from the starting point parameter <code>-&gt;</code> the endpoint parameters, rather than by size;</li>
 </ul>
-<h3 id="section-5">58.2.2 Method Two: Green's Formula</h3>
+<h3 id="section-6">58.2.2 Method Two: Green's Formula</h3>
 <p><strong>Introduction</strong></p>
 <ul>
 <li>On a double integral of a closed region <code>D</code> in a plane, can only the value difference on the boundary curve <code>L</code> be found without calculating the values of all points on the surface?</li>
 <li>This function is achieved by Green's formula;</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Singleconnectedarea</span></p>
+<h4 id="section-7"><strong>Definition</strong>: <span class="note-tag">Singleconnectedarea</span></h4>
 <blockquote><span>Description:</span> A plane region $D$ is simply connected if every simple closed curve in $D$, together with its interior, lies entirely in $D$. Otherwise, the region is multiply connected.</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>The region must be simply connected (it contains no holes).</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Greensformula</span></p>
+<h4 id="section-8"><strong>Theorem</strong>: <span class="note-tag">Greensformula</span></h4>
 <blockquote><span><span>Description:</span></span> Let the closed region $D$ be bounded by a piecewise smooth, positively oriented curve $L$. If $P(x,y)$ and $Q(x,y)$ have continuous first-order partial derivatives on $D$, then:</blockquote>
 <blockquote>    $$\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}\sigma =\oint_{L}Pdx+Qdy$$</blockquote>
 <p><strong>Explanation</strong></p>
@@ -161,28 +161,28 @@
 <ul>
 <li>Green's theorem applies to a closed curve. For an open path, add a convenient auxiliary segment to form a closed curve, apply Green's theorem, and then subtract the integral over the auxiliary segment.</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Usinglineintegralsisindependentofthepath</span></p>
+<h4 id="section-9"><strong>Theorem</strong>: <span class="note-tag">Usinglineintegralsisindependentofthepath</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>$\text{ i) Determination: }\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} (\text{ Region }D\text{ Simply connected }))$</blockquote>
 <blockquote>$ii)\text{ Calculation }:$</blockquote>
 <blockquote>(a) Change path: First, change to a simpler path (usually along the coordinate axis).</blockquote>
 <blockquote>(b) Using a potential function: $\int_{(x_{1},y_{1})}^{(x_{2},y_{2})}P\mathrm{d}x+Q\mathrm{d}y=F(x_{2},y_{2})-F(x_{1},y_{1})$</blockquote>
 <blockquote>Methods for finding the potential function: 1. Integrate one partial derivative and determine the remaining function; 2. Complete the total differential.</blockquote>
-<h2 id="section-6">28.3 Connections Between Two Types of Line Integrals</h2>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Theconnectionbetweenthetwotypesoflineintegrals</span></p>
+<h2 id="section-10">28.3 Connections Between Two Types of Line Integrals</h2>
+<h3 id="section-11"><strong>Theorem</strong>: <span class="note-tag">Theconnectionbetweenthetwotypesoflineintegrals</span></h3>
 <blockquote><span><span> description: </span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
-<h2 id="section-7">28.4 Calculation Method: Space</h2>
-<h3 id="section-8">28.4.1 Direct Method</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Secondspatialcalculationsforcurvedareafractions</span></p>
+<h2 id="section-12">28.4 Calculation Method: Space</h2>
+<h3 id="section-13">28.4.1 Direct Method</h3>
+<h4 id="section-14"><strong>Theorem</strong>: <span class="note-tag">Secondspatialcalculationsforcurvedareafractions</span></h4>
 <blockquote><span><span> description: </span></span> $\text{ Let }L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
 <blockquote>$$\int_{L}P(x,y,z)dx+Q(x,y,z)dy+R(x,y,z)dz\\=\int_{a}^{\beta}\{P[x(t),y(t),z(t)]x^{\prime}(t)+Q[x(t),y(t),z(t)]y^{\prime}(t)+\\R[x(t),y(t),z(t)]z^{\prime}(t)\}dt$$</blockquote>
 <p><strong>Example</strong>: $\text{ Let }L\text{ This is the column face }x^2+y^2=1\text{ and planes }y+z=0\text{ The intersection of the line, from }z\text{ The axis is steadfastly longing }z\text{ If the negative axis is viewed counterclockwise, then the curve integral }\int_{L}z\operatorname{d}x+y\operatorname{d}z$</p>
 <ul>
 <li>Let $x=\cos t,y=\sin t,z=-\sin t$, substitute to get the definite integral: $I=\int_{0}^{2x}(\sin^{2}t-\sin t\cos t)dt$</li>
 </ul>
-<h3 id="section-9">28.4.2 Srocks Formula</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Stokesformula</span></p>
-<blockquote><span><span> description: </span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 28.4.2 Srocks Formula"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Study-note illustration: 28.4.2 Srocks Formula" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
+<h3 id="section-15">28.4.2 Srocks Formula</h3>
+<h4 id="section-16"><strong>Theorem</strong>: <span class="note-tag">Stokesformula</span></h4>
+<blockquote><span><span> description: </span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: Theorem : Stokesformula"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="Study-note illustration: Theorem : Stokesformula" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>When planar: choose the first method</li>
@@ -202,6 +202,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

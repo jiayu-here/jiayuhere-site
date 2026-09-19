@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-066/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-066/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -125,7 +125,7 @@
 </ul>
 <h2 id="section-3">58.2 计算方法</h2>
 <h3 id="section-4">58.2.1 方法一：直接法</h3>
-<h5 id="section-5"><strong>定理</strong>： <span class="note-tag">第二类曲线积分的计算</span></h5>
+<h4 id="section-5"><strong>定理</strong>： <span class="note-tag">第二类曲线积分的计算</span></h4>
 <blockquote><span><span>描述：</span></span>当前参数方程为 $\begin{cases}x=\varphi(t)\\y=\psi(t)\end{cases}$，从起点 A 到终点 B 中，t 从 α 到 β：$$\int_{L}P(x,y)dx+Q(x,y)dy = \int_{\alpha}^{\beta}[p(\psi(t),\psi(t))\psi(t)+Q(\varphi(t),\psi(t))\psi^{\prime}(t)]dt$$</blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -140,13 +140,13 @@
 <li>在一个平面闭区域 <code>D</code> 的二重积分上，是否可以只求边界曲线 <code>L</code> 上值得相差，而不计算曲面上的所有点的值；</li>
 <li>这个作用由格林公式达成；</li>
 </ul>
-<h5 id="section-7"><strong>定义</strong>： <span class="note-tag">单连通区域</span> </h5>
+<h4 id="section-7"><strong>定义</strong>： <span class="note-tag">单连通区域</span> </h4>
 <blockquote><span>描述：</span>假设在 <code>D</code> 平面区域内，<code>D</code> 内任意一闭曲线围成的部分都居于 <code>D</code>；否则则称之为复连通区域；</blockquote>
 <p><strong>解释</strong></p>
 <ul>
 <li><strong>无洞无眼</strong>；</li>
 </ul>
-<h5 id="section-8"><strong>定理</strong>： <span class="note-tag">格林公式</span></h5>
+<h4 id="section-8"><strong>定理</strong>： <span class="note-tag">格林公式</span></h4>
 <blockquote><span><span>描述：</span></span>闭区域 <code>D</code> 上由分段光滑的曲线 <code>L</code> 围成的，$P(x,y)、Q(x,y)$ 在 <code>D</code> 上有一阶连续偏导；则：</blockquote>
 <blockquote>    $$\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}\sigma =\oint_{L}Pdx+Qdy$$</blockquote>
 <p><strong>解释</strong></p>
@@ -161,7 +161,7 @@
 <ul>
 <li>因为格林公式只能使用在封闭区域，因此当需要在非封闭区域使用时，可以进行补线，将非封闭区域补线为封闭区域，然后对封闭区域使用格林公式后再减去补线的部分，得到结果；</li>
 </ul>
-<h5 id="section-9"><strong>定理</strong>： <span class="note-tag">利用线积分与路径无关</span></h5>
+<h4 id="section-9"><strong>定理</strong>： <span class="note-tag">利用线积分与路径无关</span></h4>
 <blockquote><span><span>描述：</span></span> </blockquote>
 <blockquote>$\text{i)判定:}\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} (区域D单连通))$</blockquote>
 <blockquote>$ii)计算:$</blockquote>
@@ -169,11 +169,11 @@
 <blockquote>	(b)利用原函数：$\int_{(x_{1},y_{1})}^{(x_{2},y_{2})}P\mathrm{d}x+Q\mathrm{d}y=F(x_{2},y_{2})-F(x_{1},y_{1})$</blockquote>
 <blockquote>	求原函数的方法：1. 偏积分；2. 凑微分；</blockquote>
 <h2 id="section-10">28.3 两类线积分的联系</h2>
-<h5 id="section-11"><strong>定理</strong>： <span class="note-tag">两类线积分的联系</span></h5>
+<h3 id="section-11"><strong>定理</strong>： <span class="note-tag">两类线积分的联系</span></h3>
 <blockquote><span><span>描述：</span></span> $$\int_{L}P\mathbf{d}x+Q\mathbf{d}y=\int_{L}(P\cos\alpha+Q\cos\beta)\mathbf{d}s$$</blockquote>
 <h2 id="section-12">28.4 计算方法：空间</h2>
 <h3 id="section-13">28.4.1 直接法</h3>
-<h5 id="section-14"><strong>定理</strong>： <span class="note-tag">第二类曲面积分的空间计算</span> </h5>
+<h4 id="section-14"><strong>定理</strong>： <span class="note-tag">第二类曲面积分的空间计算</span> </h4>
 <blockquote><span><span>描述：</span></span> $设L:x=x(t),y=y(t),z=z(t),\quad t\in[\alpha,\beta]$</blockquote>
 <blockquote>$$\int_{L}P(x,y,z)dx+Q(x,y,z)dy+R(x,y,z)dz\\=\int_{a}^{\beta}\{P[x(t),y(t),z(t)]x^{\prime}(t)+Q[x(t),y(t),z(t)]y^{\prime}(t)+\\R[x(t),y(t),z(t)]z^{\prime}(t)\}dt$$</blockquote>
 <p><strong>举例</strong>：$\text{设 }L\text{ 是柱面 }x^2+y^2=1\text{ 与平面 }y+z=0的交线，从z轴正向往z轴负向看去为逆时针方向，则曲线积分\int_{L}z\operatorname{d}x+y\operatorname{d}z$</p>
@@ -181,7 +181,7 @@
 <li>设 $x=\cos t,y=\sin t,z=-\sin t$，代入得到定积分：$I=\int_{0}^{2x}(\sin^{2}t-\sin t\cos t)dt$</li>
 </ul>
 <h3 id="section-15">28.4.2 斯罗克斯公式</h3>
-<h5 id="section-16"><strong>定理</strong>： <span class="note-tag">斯托克斯公式</span> </h5>
+<h4 id="section-16"><strong>定理</strong>： <span class="note-tag">斯托克斯公式</span> </h4>
 <blockquote><span><span>描述：</span></span> $$\int_{L}P(x,y,z)\mathrm{d}x+Q(x,y,z)\mathrm{d}y+R(x,y,z)dz=$$<a class="note-image-link" href="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" target="_blank" rel="noreferrer" aria-label="打开原图：学习笔记插图：定理 ： 斯托克斯公式"><picture><source srcset="/assets/note-previews/f7f6cb8cc62a-Pasted-image-20240521214413.webp" type="image/webp"><img class="note-image" src="/assets/notes/f7f6cb8cc62a-Pasted-image-20240521214413.png" alt="学习笔记插图：定理 ： 斯托克斯公式" width="370" height="172" loading="lazy" decoding="async"></picture></a></blockquote>
 <p><strong>解释</strong></p>
 <ul>
@@ -202,6 +202,6 @@
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260917a"></script>
+  <script src="../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

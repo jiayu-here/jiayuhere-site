@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-030/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-030/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 22: L’Hôpital’s Rule</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 22: L’Hôpital’s Rule. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2023-12-27">2023-12-27</time></span></span><span>7 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What Is L'Hôpital's Rule?</a><a href="#section-4">1.2 Situations Where L'Hôpital's Rule Is Used</a></nav></details><div class="prose"><h2 id="section-1">1.1 What Is L'Hôpital's Rule?</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What Is L'Hôpital's Rule?</a><a href="#section-5">1.2 Situations Where L'Hôpital's Rule Is Used</a></nav></details><div class="prose"><h2 id="section-1">1.1 What Is L'Hôpital's Rule?</h2>
 <h3 id="section-2">1.1.1 Basic Concepts of L'Hôpital's Rule</h3>
 <p><strong>Why L'Hôpital's Rule Is Needed</strong></p>
 <p>-<strong>Using derivatives to calculate limits with indeterminate forms</strong>, mainly used for calculating indeterminate forms in fractional form;</p>
@@ -119,7 +119,7 @@
 <li class="list-indent-1">Each time you calculate the direction, the camera is half as slow; as it slows down, the process of crossing the finish line becomes increasingly clear;</li>
 <li class="list-indent-1">This slow-motion analogy has limits: L'Hôpital's rule cannot be used if the functions are not differentiable in the required punctured neighborhood, if the derivative ratio has no usable limit, or if the original expression is not of type $0/0$ or $\infty/\infty$.</li>
 </ul>
-<p>#####<strong>Theorem</strong>: L'Hôpital's Rule</p>
+<h4 id="section-3"><strong>Theorem</strong>: L'Hôpital's Rule</h4>
 <blockquote><span><span> Description: </span></span> if the following conditions are met:</blockquote>
 <blockquote>1）$\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0;$</blockquote>
 <blockquote>2) $f(x)$ and $g(x)$ are differentiable within $\overset{\circ}{\operatorname*{U}}(x_0,  \delta)$, and $g^{\prime}(x)\neq0; $</blockquote>
@@ -140,7 +140,7 @@
 <li>${\tan-x\sim\frac13x^3}$</li>
 </ul>
 <p><strong>Corollary 2</strong>: When x approaches infinity, the growth rate is: $\log_{a}x\ll x^{\alpha}\ll a^{\alpha}$</p>
-<h3 id="section-3">1.1.2 Example Problems</h3>
+<h3 id="section-4">1.1.2 Example Problems</h3>
 <p><strong>Example Question</strong>: $\text{ Find the limit }\lim_{x\to0}\frac{x^2+2\cos x-2}{\left(e^x-1\right)^2\ln(1+x^2)}$</p>
 <ul>
 <li>Analysis</li>
@@ -198,8 +198,8 @@ $$</div>
 <li class="list-indent-1">1.<strong>Zero to the power of zero</strong>(including 1 to the power of infinite), convert it into<strong>exponential function with base e</strong>, find the limit of the exponent part;</li>
 <li class="list-indent-1">2.<strong>0 × infinity</strong>type, converts the 0 part into a denominator, then inverts it to become a denominator, making infinity a comparison to infinity;</li>
 </ul>
-<h2 id="section-4">1.2 Situations Where L'Hôpital's Rule Is Used</h2>
-<h3 id="section-5">1.2.1 Usage Scenarios</h3>
+<h2 id="section-5">1.2 Situations Where L'Hôpital's Rule Is Used</h2>
+<h3 id="section-6">1.2.1 Usage Scenarios</h3>
 <p><strong>Usage Analysis</strong>: $\frac00;\quad\frac\infty\infty;\quad0\cdot\infty;\quad\infty-\infty;\quad1^\infty;\quad\infty^0;\quad0^0$;</p>
 <ul>
 <li>The forms $\frac00$ and $\frac\infty\infty$ can be handled directly when the other hypotheses of L'Hôpital's rule hold.</li>
@@ -211,7 +211,7 @@ $$</div>
 <li>$\frac00,\frac\infty\infty\quad\Leftarrow\begin{cases}0\cdot\infty&amp;\Leftarrow\begin{cases}1^\infty\\\infty^0\\0^0&amp;\end{cases}&amp;\end{cases}$</li>
 <li><a class="note-image-link" href="/assets/notes/b5abe1b07464-Pasted-image-20240111174212.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 1.2.1 Usage Scenarios"><picture><source srcset="/assets/note-previews/b5abe1b07464-Pasted-image-20240111174212.webp" type="image/webp"><img class="note-image" src="/assets/notes/b5abe1b07464-Pasted-image-20240111174212.png" alt="Study-note illustration: 1.2.1 Usage Scenarios" width="419" height="239" loading="lazy" decoding="async"></picture></a></li>
 </ul>
-<h3 id="section-6">1.2.2 Notes</h3>
+<h3 id="section-7">1.2.2 Notes</h3>
 <ul>
 <li>1. It needs to be simplified first</li>
 <li class="list-indent-1">By using equivalent substitution, it is replaced with a simpler form;</li>
@@ -233,6 +233,6 @@ $$</div>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

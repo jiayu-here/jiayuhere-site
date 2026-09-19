@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-080/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-080/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -100,7 +100,7 @@
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 11: Linear Dependence of Vectors and Vector Sets</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics study notes: Lecture 11: Linear Dependence of Vectors and Vector Sets. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span></span><span>6 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Vector Sets</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">11.1 Vectors and Spans</a><a href="#section-6">11.2 Inner Products and Orthogonality</a><a href="#section-12">11.3 Linear Combinations, Dependence, and Independence</a><a href="#section-19">11.4 Criteria and Useful Theorems</a></nav></details><div class="prose"><h2 id="section-1">11.1 Vectors and Spans</h2>
 <h3 id="section-2">11.1.1 Vectors</h3>
-<h5 id="section-3"><strong>Definition</strong>: <span class="note-tag">vector</span></h5>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">vector</span></h4>
 <p>An $n$-dimensional row vector is an ordered array</p>
 <div class="math-display">$$
 \alpha=\begin{bmatrix}a_1&amp;a_2&amp;\cdots&amp;a_n\end{bmatrix},
@@ -130,7 +130,7 @@ $$</div>
 $$</div>
 <p>satisfy $\alpha_3=2\alpha_1$, so $\alpha_3$ contributes no new independent direction.</p>
 <h3 id="section-4">11.1.2 Span</h3>
-<h5 id="section-5"><strong>Definition</strong>: <span class="note-tag">span</span></h5>
+<h4 id="section-5"><strong>Definition</strong>: <span class="note-tag">span</span></h4>
 <p>The span of vectors $\alpha_1,\ldots,\alpha_m$ is the set of all their linear combinations:</p>
 <div class="math-display">$$
 \operatorname{span}\{\alpha_1,\ldots,\alpha_m\}
@@ -153,7 +153,7 @@ $$</div>
 <p>Coordinates depend on the chosen basis, but the geometric vector itself does not.</p>
 <h2 id="section-6">11.2 Inner Products and Orthogonality</h2>
 <h3 id="section-7">11.2.1 Inner Product and Norm</h3>
-<h5 id="section-8"><strong>Definition</strong>: <span class="note-tag">inner-product</span></h5>
+<h4 id="section-8"><strong>Definition</strong>: <span class="note-tag">inner-product</span></h4>
 <p>For $\alpha,\beta\in\mathbb R^n$,</p>
 <div class="math-display">$$
 \langle\alpha,\beta\rangle
@@ -169,7 +169,7 @@ $$</div>
 $$</div>
 <p>A vector with norm $1$ is a unit vector.</p>
 <h3 id="section-9">11.2.2 Orthogonal Vectors and Orthogonal Matrices</h3>
-<h5 id="section-10"><strong>Definition</strong>: <span class="note-tag">orthogonal-vectors</span></h5>
+<h4 id="section-10"><strong>Definition</strong>: <span class="note-tag">orthogonal-vectors</span></h4>
 <p>Vectors $\alpha$ and $\beta$ are orthogonal if</p>
 <div class="math-display">$$
 \langle\alpha,\beta\rangle=\alpha^{\mathrm T}\beta=0.
@@ -183,7 +183,7 @@ $$</div>
 0,&amp;i\ne j.
 \end{cases}
 $$</div>
-<h5 id="section-11"><strong>Definition</strong>: <span class="note-tag">orthogonal-matrix</span></h5>
+<h4 id="section-11"><strong>Definition</strong>: <span class="note-tag">orthogonal-matrix</span></h4>
 <p>An $n\times n$ matrix $A$ is orthogonal if</p>
 <div class="math-display">$$
 A^{\mathrm T}A=I_n.
@@ -203,7 +203,7 @@ Q=
 $$</div>
 <h2 id="section-12">11.3 Linear Combinations, Dependence, and Independence</h2>
 <h3 id="section-13">11.3.1 Linear Representation</h3>
-<h5 id="section-14"><strong>Definition</strong>: <span class="note-tag">linear-combination</span></h5>
+<h4 id="section-14"><strong>Definition</strong>: <span class="note-tag">linear-combination</span></h4>
 <p>An expression</p>
 <div class="math-display">$$
 k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m
@@ -215,7 +215,7 @@ $$</div>
 $$</div>
 <p>This is equivalent to $\beta\in\operatorname{span}\{\alpha_1,\ldots,\alpha_m\}$.</p>
 <h3 id="section-15">11.3.2 Linear Dependence</h3>
-<h5 id="section-16"><strong>Definition</strong>: <span class="note-tag">linear-dependence</span></h5>
+<h4 id="section-16"><strong>Definition</strong>: <span class="note-tag">linear-dependence</span></h4>
 <p>The vector set $\alpha_1,\ldots,\alpha_m$ is linearly dependent if scalars $k_1,\ldots,k_m$, not all zero, satisfy</p>
 <div class="math-display">$$
 k_1\alpha_1+\cdots+k_m\alpha_m=0.
@@ -226,7 +226,7 @@ $$</div>
 <li>Any vector set containing two proportional vectors is linearly dependent.</li>
 </ul>
 <h3 id="section-17">11.3.3 Linear Independence</h3>
-<h5 id="section-18"><strong>Definition</strong>: <span class="note-tag">linear-independence</span></h5>
+<h4 id="section-18"><strong>Definition</strong>: <span class="note-tag">linear-independence</span></h4>
 <p>The vector set $\alpha_1,\ldots,\alpha_m$ is linearly independent if</p>
 <div class="math-display">$$
 k_1\alpha_1+\cdots+k_m\alpha_m=0
@@ -238,20 +238,20 @@ $$</div>
 <p>A single nonzero vector is linearly independent. Two vectors are linearly independent if and only if neither is a scalar multiple of the other.</p>
 <h2 id="section-19">11.4 Criteria and Useful Theorems</h2>
 <h3 id="section-20">11.4.1 Removing or Adding a Vector</h3>
-<h5 id="section-21"><strong>Theorem</strong>: <span class="note-tag">dependence-criterion</span></h5>
+<h4 id="section-21"><strong>Theorem</strong>: <span class="note-tag">dependence-criterion</span></h4>
 <p>For a set containing at least two vectors, the following are equivalent:</p>
 <ol>
 <li>the set is linearly dependent;</li>
 <li>at least one vector is a linear combination of the remaining vectors.</li>
 </ol>
-<h5 id="section-22"><strong>Theorem</strong>: <span class="note-tag">unique-representation</span></h5>
+<h4 id="section-22"><strong>Theorem</strong>: <span class="note-tag">unique-representation</span></h4>
 <p>If $\alpha_1,\ldots,\alpha_m$ is linearly independent but $\alpha_1,\ldots,\alpha_m,\beta$ is linearly dependent, then</p>
 <div class="math-display">$$
 \beta=k_1\alpha_1+\cdots+k_m\alpha_m
 $$</div>
 <p>for a unique set of coefficients $k_1,\ldots,k_m$.</p>
 <h3 id="section-23">11.4.2 Comparing the Sizes of Vector Sets</h3>
-<h5 id="section-24"><strong>Theorem</strong>: <span class="note-tag">dimension-bound</span></h5>
+<h4 id="section-24"><strong>Theorem</strong>: <span class="note-tag">dimension-bound</span></h4>
 <p>If each of the $t$ vectors $\beta_1,\ldots,\beta_t$ can be represented by $\alpha_1,\ldots,\alpha_s$ and $t&gt;s$, then $\beta_1,\ldots,\beta_t$ is linearly dependent.</p>
 <p>Equivalently, if $\beta_1,\ldots,\beta_t$ is linearly independent and lies in the span of $\alpha_1,\ldots,\alpha_s$, then $t\le s$.</p>
 <h3 id="section-25">11.4.3 Dependence, Homogeneous Systems, and Rank</h3>
@@ -326,6 +326,6 @@ $$</div>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

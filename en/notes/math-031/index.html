@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-031/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-031/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 23: Taylor's Formula</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 23: Taylor's Formula. Original formulas, illustrations, and example problems are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-01-12">2024-01-12</time></span></span><span>6 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Mean Value Theorems and Applications of Derivatives</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What is Taylor's Formula?</a><a href="#section-3">1.2 Content Summary</a><a href="#section-6">1.3 Example Problems</a></nav></details><div class="prose"><p>The role of Taylor's formula: establishing the relationship between higher-order derivatives and functions, using higher-order derivatives to study functions;</p>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">1.1 What is Taylor's Formula?</a><a href="#section-5">1.2 Content Summary</a><a href="#section-8">1.3 Example Problems</a></nav></details><div class="prose"><p>The role of Taylor's formula: establishing the relationship between higher-order derivatives and functions, using higher-order derivatives to study functions;</p>
 <h2 id="section-1">1.1 What is Taylor's Formula?</h2>
 <ul>
 <li>Popular Science Article: <a href="https://www.zhihu.com/question/21149770" target="_blank" rel="noreferrer">(99+ private messages / 85 messages) How to explain Taylor's formula in simple terms? - Zhihu (zhihu.com)</a></li>
@@ -109,7 +109,7 @@
 <li>Explanation: Complex equations are approximated using a series of simple, computable equations. For example, turning the area of an irregular figure into the area of a series of (many) squares and then adding them together;</li>
 </ul>
 <h3 id="section-2">1.1.1 Definition of Taylor's Formula</h3>
-<p>#####<strong>Theorem</strong>: Taylor's Theorem - with the remainder of Peano</p>
+<h4 id="section-3"><strong>Theorem</strong>: Taylor's Theorem - with the remainder of Peano</h4>
 <blockquote><span><span> Description: </span></span> Taylor's formula with Peano remainder: Suppose $f(x)$ is differentiable in $n$ order at $x_0$, then $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o((x-x_0)^n)$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -136,7 +136,7 @@
 <li>Therefore, we get $a_0=f(x_0),\quad a_k=\frac{f^{(k)}(x_0)}{k!}\quad k=1,2\cdots n$</li>
 <li>So: $P_n(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$</li>
 </ul>
-<p>#####<strong>Theorem</strong>: Taylor's Formula - Lagrange</p>
+<h4 id="section-4"><strong>Theorem</strong>: Taylor's Formula - Lagrange</h4>
 <blockquote><span><span> Description: </span></span> Let $f(x)$ be in the interval $I$ and $n+1$ order is differentiable $,  x_0\in I, $ then $\forall x\in I,  \exists\xi\in I\quad(\xi$ is between $x_0$ and $x$), making $$f(x)=\sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}\big(x-x_0\big)^k+\frac{f^{(n+1)}(\xi)}{(n+1)!}\big(x-x_0\big)^{n+1}$$</blockquote>
 <blockquote>Taylor's formula with Lagrangian remainders:</blockquote>
 <blockquote>$$R_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_{0})^{n+1}$$</blockquote>
@@ -155,8 +155,8 @@
 <li>$\sin x=x-\frac{x^3}{3!}+\cdots+\left(-1\right)^{m-1}\frac{x^{2m-1}}{\left(2m-1\right)!}+\left(-1\right)^m\frac{\cos\theta x}{\left(2m+1\right)!}x^{2m+1}$</li>
 <li>$\begin{aligned}(1+x)^\alpha&amp;=1+cx+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n\\&amp;+\frac{\alpha(\alpha-1)\cdots(\alpha-n)(1+\beta x)^{x-n-1}}{(n+1)!}x^{n+1}\quad x\in(-1,+\infty)\end{aligned}$</li>
 </ul>
-<h2 id="section-3">1.2 Content Summary</h2>
-<h3 id="section-4">1.2.1 Commonalities</h3>
+<h2 id="section-5">1.2 Content Summary</h2>
+<h3 id="section-6">1.2.1 Commonalities</h3>
 <p><strong>Commonalities</strong></p>
 <ul>
 <li>1. Use simple polynomial functions to approximate general functions;</li>
@@ -177,7 +177,7 @@
 <ul>
 <li>Why? Because solving polynomials is simple</li>
 </ul>
-<h3 id="section-5">1.2.2 Analysis of the Use of Two Taylor Formulas</h3>
+<h3 id="section-7">1.2.2 Analysis of the Use of Two Taylor Formulas</h3>
 <p><strong>Differences</strong></p>
 <ul>
 <li>Other items differ</li>
@@ -199,7 +199,7 @@
 <li class="list-indent-1">Taylor's Theorem: Study the relationship between $f(x)$ and higher-order derivatives</li>
 <li>Commonality: Studying the relationship between functions and derivatives, laying the foundation for<strong>using derivatives to study functions</strong>;</li>
 </ul>
-<h2 id="section-6">1.3 Example Problems</h2>
+<h2 id="section-8">1.3 Example Problems</h2>
 <p><strong>Example Question</strong>: $\text{ Find the limit }\lim_{x\to0}\frac{\cos x-e^{-\frac{x^2}2}}{x^4}$</p>
 <ul>
 <li>Analysis</li>
@@ -230,6 +230,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

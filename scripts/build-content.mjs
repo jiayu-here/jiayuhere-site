@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260917a";
+const assetVersion = "20260919a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -505,6 +505,23 @@ const markdownToHtml = (markdown, locale) => {
   const lines = markdown.split(/\r?\n/);
   const html = [];
   const headings = [];
+  const headingFor = (line) => {
+    const standard = line.match(/^(#{1,6})\s+(.+)$/);
+    if (standard) return { sourceLevel: standard[1].length, text: standard[2] };
+    const legacyBold = line.match(/^(#{1,6})(\*\*.+)$/);
+    return legacyBold ? { sourceLevel: legacyBold[1].length, text: legacyBold[2] } : null;
+  };
+  let scanningCodeFence = false;
+  const sourceHeadingLevels = lines.flatMap((line) => {
+    if (/^```/.test(line)) {
+      scanningCodeFence = !scanningCodeFence;
+      return [];
+    }
+    const sourceLevel = scanningCodeFence ? 0 : headingFor(line)?.sourceLevel;
+    return sourceLevel ? [sourceLevel] : [];
+  });
+  const headingOffset = sourceHeadingLevels.length ? 2 - Math.min(...sourceHeadingLevels) : 0;
+  const renderedLevelBySource = new Map();
   let inCode = false;
   let inMath = false;
   let codeLanguage = "";
@@ -570,15 +587,23 @@ const markdownToHtml = (markdown, locale) => {
       continue;
     }
 
-    const heading = line.match(/^(#{1,6})\s+(.+)$/);
+    const heading = headingFor(line);
     if (heading) {
       closeList();
       headingIndex += 1;
-      const level = Math.min(6, Math.max(2, heading[1].length));
+      for (const sourceLevel of renderedLevelBySource.keys()) {
+        if (sourceLevel > heading.sourceLevel) renderedLevelBySource.delete(sourceLevel);
+      }
+      const parentSourceLevel = [...renderedLevelBySource.keys()]
+        .filter((sourceLevel) => sourceLevel < heading.sourceLevel)
+        .sort((left, right) => right - left)[0];
+      const parentLevel = renderedLevelBySource.get(parentSourceLevel) || 1;
+      const level = Math.min(6, Math.max(2, Math.min(heading.sourceLevel + headingOffset, parentLevel + 1)));
+      renderedLevelBySource.set(heading.sourceLevel, level);
       const id = `section-${headingIndex}`;
-      headings.push({ level, id, text: heading[2] });
-      currentHeading = plainText(heading[2]);
-      html.push(`<h${level} id="${id}">${inline(heading[2], locale, { heading: currentHeading })}</h${level}>`);
+      headings.push({ level, sourceLevel: heading.sourceLevel, id, text: heading.text });
+      currentHeading = plainText(heading.text);
+      html.push(`<h${level} id="${id}">${inline(heading.text, locale, { heading: currentHeading })}</h${level}>`);
       continue;
     }
 
@@ -1251,7 +1276,7 @@ const buildDetail = async (section, item, index, items, catalog, locale) => {
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
   const rendered = markdownToHtml(item.body, locale);
-  const toc = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
+  const toc = rendered.headings.filter((heading) => heading.sourceLevel <= 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
   const recordDate = recordDateFor(item);
   const recordDateLabel = item.meta.updated
     ? (isEnglish ? "Updated" : "更新")

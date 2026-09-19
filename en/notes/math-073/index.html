@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-073/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-073/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 4: Definition of Matrices and Their Basic Operations</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 4: Definition of Matrices and Their Basic Operations. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span></span><span>19 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Linear Algebra</span><span>Matrices</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">4.1 The Nature of Matrices</a><a href="#section-4">4.2 Definition of Matrices</a><a href="#section-5">4.3 Matrix Operations</a><a href="#section-10">4.4 Several Important Matrices</a><a href="#section-13">4.5 Composite Transformations of Matrices</a></nav></details><div class="prose"><h2 id="section-1">4.1 The Nature of Matrices</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">4.1 The Nature of Matrices</a><a href="#section-5">4.2 Definition of Matrices</a><a href="#section-7">4.3 Matrix Operations</a><a href="#section-15">4.4 Several Important Matrices</a><a href="#section-18">4.5 Composite Transformations of Matrices</a></nav></details><div class="prose"><h2 id="section-1">4.1 The Nature of Matrices</h2>
 <h3 id="section-2">4.1.1 Matrix Concept</h3>
 <p><strong>Introduction</strong>: The role of matrices <code>-&gt;</code> Expressing system information;</p>
 <ul>
@@ -148,7 +148,7 @@
 <ul>
 <li>The matrix $\begin{pmatrix}1&amp;2&amp;3\\4&amp;6&amp;9\\2&amp;4&amp;6\end{pmatrix}$ consists of the row vectors $[1,2,3],[4,6,9],[2,4,6]$, or equivalently the column vectors $[1,4,2]^{\mathrm{T}},[2,6,4]^{\mathrm{T}},[3,9,6]^{\mathrm{T}}$.</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Rankofthematrix</span></p>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">Rankofthematrix</span></h4>
 <blockquote><span>Description:</span> Let $A$ be an $m\times n$ matrix. The largest order of any nonzero minor of $A$ is called the rank of $A$, denoted by $r(A)$.</blockquote>
 <blockquote>Equivalently, if at least one minor of order $k$ is nonzero and every minor of order $k+1$ is zero, then $r(A)=k$. For a square matrix:</blockquote>
 <blockquote>$$r\left(A_{n\times n}\right)=n\Leftrightarrow\left|A\right|\neq0\Leftrightarrow A\text{ is invertible}.$$</blockquote>
@@ -163,7 +163,7 @@
 <li class="list-indent-1">The world formed by this matrix is one-dimensional;</li>
 <li class="list-indent-1">One-dimensionality is not just a <code>x</code> axis;</li>
 </ul>
-<h3 id="section-3">4.1.2 Differences Between Matrices and Determinants</h3>
+<h3 id="section-4">4.1.2 Differences Between Matrices and Determinants</h3>
 <ol>
 <li>The essence of a determinant is the magnification of a linear transformation, while the essence of a matrix is a list of numbers.</li>
 <li>Determinant number of rows = number of columns, and matrices are not necessarily (if the number of rows and columns equals n, it is called an n-th-order square matrix), and the way they are represented also differs.</li>
@@ -173,8 +173,8 @@
 <p>(2) Addition (or subtraction): Adding (subtracting) two matrices means adding (or subtracting) their corresponding elements, so only matrices of the same type can be added (or subtracted); And two determinants can always be added (subtracted) as two numbers.</p>
 <p>(3) Multiplication operation: Multiplying a number by a matrix means multiplying that number by each element of the matrix; Multiplying a number by the determinant can only be multiplied by a row or column of the determinant, and the same applies to extracting common factors.</p>
 <p>(4) Multiplication: Multiplication of matrices does not satisfy the commutative law, so generally, AB ≠ BA. However, if both A and B are n-dimensional square matrices, then we have | AB|=| A| | B|=| B| | A|=|BA|。</p>
-<h2 id="section-4">4.2 Definition of Matrices</h2>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Matrix</span></p>
+<h2 id="section-5">4.2 Definition of Matrices</h2>
+<h3 id="section-6"><strong>Definition</strong>: <span class="note-tag">Matrix</span></h3>
 <blockquote><span> Description: </span> $\text{ From }m\times n\text{ Quantity }a_{ij}(i=1,2,\cdots,m;j=1,2,\cdots,n)\text{ Arranged together }m\text{ Alright }n\text{ Rectangular table of columns }$:</blockquote>
 <blockquote>$$\begin{bmatrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{m1}&amp;a_{m2}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <blockquote>It is called a $m\times n$ matrix, abbreviated as $A$ or $\left(a_{ij}\right)_{m\times n}\left(i=1,2,\cdotp\cdotp\cdotp,m;\: j=1,2,\cdotp\cdotp\cdotp,n\right).$</blockquote>
@@ -189,7 +189,7 @@
 <li>Isomorphic matrices:</li>
 <li class="list-indent-1">The number of rows and columns in <code>A</code> and <code>B</code> is equal;</li>
 </ul>
-<h2 id="section-5">4.3 Matrix Operations</h2>
+<h2 id="section-7">4.3 Matrix Operations</h2>
 <p><strong>Analysis</strong>: How to calculate the matrix</p>
 <ul>
 <li>1. First, let's see if it is a <code>-rank 1 matrix </code></li>
@@ -197,7 +197,7 @@
 <li class="list-indent-1">Example: $\left(\begin{matrix}0&amp;-1\\1&amp;0\end{matrix}\right)^4=\left(\begin{matrix}1&amp;0\\0&amp;1\end{matrix}\right)$ Unit Formation <code>&lt;-</code> After four operations, it becomes a unit Matrix;</li>
 <li>3. If the matrix can be divided into a decomposition of the unit, then the matrix can be decomposed</li>
 </ul>
-<h3 id="section-6">4.3.1 Basic Operations of Matrices</h3>
+<h3 id="section-8">4.3.1 Basic Operations of Matrices</h3>
 <p><strong>Operation</strong>: Equal</p>
 <ul>
 <li>$$A=(a_ij)_{m\times n}=B=(b_i)_{s\times k}\Leftrightarrow m=_S,n=k$$</li>
@@ -222,8 +222,8 @@
 <li>$\text{ The associative law of multiplication between numbers and matrices }:\,k\left(lA\right)=\left(kl\right)A=l\left(kA\right).$</li>
 </ol>
 <p>Here, <code>A，B，C</code> is a homomorphic matrix, and k and l are arbitrary constants</p>
-<h3 id="section-7">4.3.2 Matrix Multiplication</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Matrixmultiplication</span></p>
+<h3 id="section-9">4.3.2 Matrix Multiplication</h3>
+<h4 id="section-10"><strong>Theorem</strong>: <span class="note-tag">Matrixmultiplication</span></h4>
 <blockquote><span><span> description: Multiplication of </span></span> matrix Let $A$ be $m\times s$ matrix, $B$ be $s\times n$ matrix (the number of columns in matrix $A$ must equal the number of rows in matrix $B$), then $A$ and $B$ can be multiplied, and the product $AB$ is the $m\times n$ matrix, denoted as $C=AB=(c_ij)_{m\times n}$</blockquote>
 <p>The element $c_{ij}$ of the $i$-th row and column $j$ of &gt; $C$ is the sum of the <code>s</code> elements in the $i$ row of $A$ and the $s$ pairwise elements in the $j$ column of $B$, that is:</p>
 <blockquote>$$c_{ij}=\sum_{k=1}^{s}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}(i=1,2,\cdots,m;j=1,2,\cdots,n)$$</blockquote>
@@ -260,8 +260,8 @@
 <li>(3) Important: <code>A</code> polynomial</li>
 <li class="list-indent-1">$\text{ If }f\left(x\right)=a_{0}+a_{1}x+\cdotp\cdotp\cdotp+a_{m}x^{m},\text{ then }:\,f(A)=a_0E+a_1A+\cdots+a_mA^m$</li>
 </ul>
-<h3 id="section-8">4.3.3 Transpose Matrices</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Transposethematrix</span></p>
+<h3 id="section-11">4.3.3 Transpose Matrices</h3>
+<h4 id="section-12"><strong>Definition</strong>: <span class="note-tag">Transposethematrix</span></h4>
 <blockquote><span> description: </span> $\text{ General }m\times n\text{ Matrix }A=\left(a_{ij}\right)_{m\times n}\text{ The interchangeable row and column of }n\times m\text{ A matrix is called a matrix }A\text{ transpose matrix },\,\text{ Recorded as }A^T,\,\text{ That is }:\,$</blockquote>
 <blockquote>$$A^{T}=\begin{bmatrix}a_{11}&amp;a_{21}&amp;\cdots&amp;a_{m1}\\a_{12}&amp;a_{22}&amp;\cdots&amp;a_{m2}\\\vdots&amp;\vdots&amp;&amp;\vdots\\a_{1n}&amp;a_{2n}&amp;\cdots&amp;a_{mn}\end{bmatrix}$$</blockquote>
 <p><strong>Explanation</strong></p>
@@ -280,8 +280,8 @@
 <li class="list-indent-1">$(AB)^{\mathrm{T}}=B^{\mathrm{T}}A^{\mathrm{T}}$</li>
 <li class="list-indent-1">Multiply from left to right, which equals writing from right to left: $\left(ABC\right)^{T}=C^{T}B^{T}A^{T}$</li>
 </ul>
-<h3 id="section-9">4.3.4 Determinant of a Phalanx</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Determinantofaphalanx</span></p>
+<h3 id="section-13">4.3.4 Determinant of a Phalanx</h3>
+<h4 id="section-14"><strong>Definition</strong>: <span class="note-tag">Determinantofaphalanx</span></h4>
 <blockquote><span> description: </span> $\text{ and should be employed }n\text{ The steps formed a square formation }A\text{ When calculating the determinant, denote as }|A|$;</blockquote>
 <blockquote>1. $|kA|=k^{n}|A|\neq k|A|(n\geqslant2,k\neq0,1)$</blockquote>
 <blockquote>2. $\text{ Generally, }\left|A+B\right|\neq\left|A\right|+\left|B\right|$</blockquote>
@@ -289,8 +289,8 @@
 <blockquote>4. $A\neq B\Rightarrow\left|A\right|\neq\left|B\right|$</blockquote>
 <blockquote>5. $\left|A^{\mathrm{T}}\right|=\left|A\right|$</blockquote>
 <blockquote>6. $\text{ Let }A,B\text{ This is a formation of the same rank, then }|AB|=|A||B|$</blockquote>
-<h2 id="section-10">4.4 Several Important Matrices</h2>
-<h3 id="section-11">4.4.1 Basic Matrix Form</h3>
+<h2 id="section-15">4.4 Several Important Matrices</h2>
+<h3 id="section-16">4.4.1 Basic Matrix Form</h3>
 <p><strong>Matrix One</strong>: Zero Matrix</p>
 <ul>
 <li>Definition: A matrix where each element is zero, denoted as $O$</li>
@@ -389,7 +389,7 @@
 <li>Symbol:</li>
 <li class="list-indent-1"><code>tr</code></li>
 </ul>
-<h3 id="section-12">4.4.2 Block Matrices</h3>
+<h3 id="section-17">4.4.2 Block Matrices</h3>
 <p><strong>Concept</strong>: Segmentation of the matrix</p>
 <ul>
 <li>Concept:</li>
@@ -418,7 +418,7 @@
 <li class="list-indent-1">Supplement:</li>
 <li class="list-indent-2">$\begin{bmatrix}A&amp;O\\O&amp;B\end{bmatrix}^n=\begin{bmatrix}A^n&amp;O\\O&amp;B^n\end{bmatrix}$</li>
 </ul>
-<h2 id="section-13">4.5 Composite Transformations of Matrices</h2>
+<h2 id="section-18">4.5 Composite Transformations of Matrices</h2>
 <p><strong>Example</strong>: Composite transformation of a matrix</p>
 <ul>
 <li>Concept:</li>
@@ -440,6 +440,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

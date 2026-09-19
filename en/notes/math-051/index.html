@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-051/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-051/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,7 +98,7 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 43: Local and Absolute Extrema of Multivariable Functions</h1><p class="article-lead">Graduate Entrance Examination Mathematics study notes: Lecture 43: Local and Absolute Extrema of Multivariable Functions. Original formulas, diagrams, and examples are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-02-07">2024-02-07</time></span></span><span>3 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multivariable Differential Calculus</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">43.1 Unconditional Extrema of Multivariable Functions</a><a href="#section-4">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</a><a href="#section-6">43.3 Maximum/Minimum Values of Multivariable Functions</a><a href="#section-9">43.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">43.1 Unconditional Extrema of Multivariable Functions</a><a href="#section-8">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</a><a href="#section-13">43.3 Maximum/Minimum Values of Multivariable Functions</a><a href="#section-16">43.3 Frequently Tested Question Types</a></nav></details><div class="prose"><p><strong>Section Overview</strong></p>
 <ul>
 <li>(1) Unconstrained extremum</li>
 <li>(2) Conditional Extrema and Lagrange Multiplier Method</li>
@@ -113,7 +113,7 @@
 <hr>
 <h2 id="section-1">43.1 Unconditional Extrema of Multivariable Functions</h2>
 <h3 id="section-2">43.1.1 Basic Concepts</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Extremumofmultivariablefunctions</span></p>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">Extremumofmultivariablefunctions</span></h4>
 <blockquote><span> Description: </span> the maximum or minimum value of a multivariable function in a neighborhood;</blockquote>
 <blockquote>If in a neighborhood of point $(x_0,y_0)$, the inequality always holds: $$f(x,y)\leq f(x_0,y_0)\quad(f(x,y)\geq f(x_0,y_0))$$</blockquote>
 <blockquote>Then $f$ has a local maximum (minimum) at $(x_0,y_0)$, and $(x_0,y_0)$ is called a local maximum (minimum) point.</blockquote>
@@ -124,13 +124,13 @@
 <li>$z=3x^{2}+4y^{2}$ is minimal at $(0.0)$;</li>
 <li>$z=-\sqrt{x^{2}+y^{2}}$ is maximum at $\quad(0.0)$</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Thestationarypointofamultivariablefunction</span></p>
+<h4 id="section-4"><strong>Definition</strong>: <span class="note-tag">Thestationarypointofamultivariablefunction</span></h4>
 <blockquote><span> Description: </span> point where the partial derivative of a multivariable function equals 0 is called the stationary point of the multivariable function;</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>$f_{x}^{\prime}=0.f_{y}^{\prime}=0$ Points that exist simultaneously are called stationary points;</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Thenecessaryconditionfortheexistenceofextremainmultivariablefunctions</span></p>
+<h4 id="section-5"><strong>Theorem</strong>: <span class="note-tag">Thenecessaryconditionfortheexistenceofextremainmultivariablefunctions</span></h4>
 <blockquote><span><span> Description: </span></span> if $z=f(x,y)$ has a partial derivative at point $(x_0,y_0)$ and takes an extremum at $(x_0,y_0)$, then we have: $$f_{x}^{\prime}(x_{0},y_{0})=0,\,f_{y}^{\prime}(x_{0},y_{0})=0$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -154,7 +154,7 @@
 <li class="list-indent-3">Extremes only need to find stationary points;</li>
 </ul>
 <p>-</p>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Sufficientconditionsforextremes</span></p>
+<h4 id="section-6"><strong>Theorem</strong>: <span class="note-tag">Sufficientconditionsforextremes</span></h4>
 <blockquote><span><span> Description: </span></span><strong>Determination of Standpoint Extremity of Multivariable Functions</strong></blockquote>
 <blockquote>When $z=f(x,y)$ has a second-order continuous partial derivative in a neighborhood of point $P_0(x_0,y_0)$, and $f_x^{\prime}(x_0,y_{0})=f_y^{\prime}(x_0,y_{0})=0$, $A=f_{xx}^{\prime\prime}(x_{0},y_{0})\quad\quad B=f_{xy}^{\prime\prime}(x_{0},y_{0})\quad\quad C=f_{yy}^{\prime\prime}(x_{0},y_{0})$;</blockquote>
 <blockquote>1. If it is $AC-B^{2}&gt;0$, then there are extremes</blockquote>
@@ -166,7 +166,7 @@
 <ul>
 <li>After finding the stationary point, you only need to use this sufficient conditional determination method to determine whether it is an extremum</li>
 </ul>
-<h3 id="section-3">43.1.2 Example Problems</h3>
+<h3 id="section-7">43.1.2 Example Problems</h3>
 <p><strong>Example</strong>: Find the extremum of $f(x,y)=x^{3}-y^{3}+3x^{2}+3y^{2}-9x$;</p>
 <ul>
 <li>Analysis</li>
@@ -192,8 +192,8 @@
 <li class="list-indent-1">Other analogies</li>
 <li>Question Type: <span class="note-tag">Extremumofmultivariablefunctions</span></li>
 </ul>
-<h2 id="section-4">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</h2>
-<h3 id="section-5">43.2.1 Basic Concepts</h3>
+<h2 id="section-8">43.2 Conditional Extremum of Multivariable Functions: Lagrange Multiplier Method</h2>
+<h3 id="section-9">43.2.1 Basic Concepts</h3>
 <p><strong>Unconditional Extrema and Conditional Extremum</strong></p>
 <ul>
 <li>Unconditional</li>
@@ -202,7 +202,7 @@
 <li class="list-indent-1">Example: Find the tallest student in the school, from Shandong, Gemini;</li>
 <li>The more conditions you add, the smaller the maximum value</li>
 </ul>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Conditionextremes</span></p>
+<h4 id="section-10"><strong>Definition</strong>: <span class="note-tag">Conditionextremes</span></h4>
 <blockquote><span> Description: </span> given $z=f(x,y)$, its extremum is under the condition of $\varphi(x,y)=0$, find its extremum as the conditional extremum;</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -214,7 +214,7 @@
 <li class="list-indent-1">Here, derivative from z to x: $\frac{dz}{dx}=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\cdot\frac{dy}{dx}$</li>
 <li class="list-indent-1">Write out $\frac{dz}{dx}\vert_{x=x_{0}}=f^{\prime}(x_{0},y)+f^{\prime}(x_{0},y)\frac{dy}{dx}\vert_{x=x_{0}}=0$</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Lagrangemultipliermethod</span></p>
+<h4 id="section-11"><strong>Theorem</strong>: <span class="note-tag">Lagrangemultipliermethod</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>(1) For a single constraint: let $F(x,y,\lambda)=f(x,y)+\lambda\varphi(x,y)$</blockquote>
 <blockquote>then the necessary condition to obtain the extremum is: $$\begin{cases}F_x=f_x^{\prime}(x,y)+\lambda\varphi_x^{\prime}(x,y)=0,\\F_y=f_y^{\prime}(x,y)+\lambda\varphi_y^{\prime}(x,y)=0,\\F_\lambda=\varphi(x,y)=0,\end{cases}$$</blockquote>
@@ -229,11 +229,11 @@
 <li>Note:</li>
 <li class="list-indent-1">The point obtained by solving this constraint is the possible extremum, not a definite one;</li>
 </ul>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">nMeta-Lagrange</span> multiplier method</p>
+<h4 id="section-12"><strong>Theorem</strong>: <span class="note-tag">nMeta-Lagrange</span> multiplier method</h4>
 <blockquote><span><span> Description: </span></span> the above methods can be generalized to the extremum problem of $n$-element functions under $m$ constraints,</blockquote>
 <blockquote>To find the extremum of $u=f(x,y,z)$ under condition $\varphi(x,y,z)=0,\psi(x,y,z)=0$, construct the Lagrange function: $$F(x,y,z,\lambda,\mu)=f(x,y,z)+\lambda\varphi(x,y,z)+\mu\psi(x,y,z).$$ find the partial derivatives for $x,y,z,\lambda,\mu$ of $F$ and construct a system of equations: $$\begin{aligned}&amp;f_{x}^{\prime}(x,y,z)+\lambda\varphi_{x}^{\prime}(x,y,z)+\mu\psi_{x}^{\prime}(x,y,z)=0,\\&amp;f_{y}^{\prime}(x,y,z)+\lambda\varphi_{y}^{\prime}(x,y,z)+\mu\psi_{y}^{\prime}(x,y,z)=0,\\&amp;f_{z}^{\prime}(x,y,z)+\lambda\varphi_{z}^{\prime}(x,y,z)+\mu\psi_{z}^{\prime}(x,y,z)=0,\\&amp;\varphi(x,y,z)=0,\\&amp;\psi(x,y,z)=0.\end{aligned}$$ solve for $x,y,z,\lambda$ and $\mu$, then ($x,y,z)$ is the<strong>possible extreme point</strong>.</blockquote>
-<h2 id="section-6">43.3 Maximum/Minimum Values of Multivariable Functions</h2>
-<h3 id="section-7">43.3.1 Basic Concepts</h3>
+<h2 id="section-13">43.3 Maximum/Minimum Values of Multivariable Functions</h2>
+<h3 id="section-14">43.3.1 Basic Concepts</h3>
 <p><strong>Summary</strong>: Find the maximum and minimum values of the continuous function <code>f(x, y)</code> on a bounded closed domain <code>D</code></p>
 <ul>
 <li>Step 1: Find the possible extremum points of <code>f(x, y)</code> within <code>D</code>;</li>
@@ -243,11 +243,11 @@
 <li class="list-indent-1">Find the maximum and minimum <code>-&gt;</code> on the boundary. This is essentially finding a conditional extremum;</li>
 <li>Step 3: Compare the extremes;</li>
 </ul>
-<h3 id="section-8">44.3.2 Conditional Maximum Problem</h3>
-<h2 id="section-9">43.3 Frequently Tested Question Types</h2>
+<h3 id="section-15">44.3.2 Conditional Maximum Problem</h3>
+<h2 id="section-16">43.3 Frequently Tested Question Types</h2>
 <hr>
-<h3 id="section-10">Question Type: <span class="note-tag">Findtheextremum</span></h3>
-<h4 id="section-11">PART 1: Problem-solving methods</h4>
+<h3 id="section-17">Question Type: <span class="note-tag">Findtheextremum</span></h3>
+<h4 id="section-18">PART 1: Problem-solving methods</h4>
 <p><strong>Problem Type</strong>: Know the total differential of a function and determine the extremum</p>
 <ul>
 <li>Solution Guidance:</li>
@@ -276,11 +276,11 @@
 <li>Note:</li>
 <li class="list-indent-1">If calculating ABC is troublesome, you can use &quot;substitution first, then calculate&quot;<code>-&gt;</code> When finding Y, first substitute X; similarly, when calculating X;</li>
 </ul>
-<h4 id="section-12">PART 2: Typical Example Problems</h4>
-<h4 id="section-13">PART 3: Key Points Review</h4>
+<h4 id="section-19">PART 2: Typical Example Problems</h4>
+<h4 id="section-20">PART 3: Key Points Review</h4>
 <hr>
-<h3 id="section-14">Question Type: <span class="note-tag">ConditionalextremumandLagrangemultipliermethod</span></h3>
-<h4 id="section-15">PART 1: Problem-solving methods</h4>
+<h3 id="section-21">Question Type: <span class="note-tag">ConditionalextremumandLagrangemultipliermethod</span></h3>
+<h4 id="section-22">PART 1: Problem-solving methods</h4>
 <p><strong>Question Type</strong>: Conditional maximum-value problems</p>
 <ul>
 <li>Concept:</li>
@@ -308,8 +308,8 @@
 <li class="list-indent-3">Parametric equations</li>
 <li class="list-indent-1">3. Compare the maximum and minimum values on the boundary with possible extremes within the region;</li>
 </ul>
-<h4 id="section-16">PART 2: Typical Example Problems</h4>
-<h4 id="section-17">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
+<h4 id="section-23">PART 2: Typical Example Problems</h4>
+<h4 id="section-24">PART 3: Key Points Review</h4><nav class="article-pagination" aria-label="Adjacent content">
     <a href="../math-050/index.html"><span>← Previous item</span><strong>Lecture 41: Differentiation of Implicit Functions</strong></a>
     <a class="article-pagination-next" href="../math-052/index.html"><span>Next item →</span><strong>Lecture 44: Double Integrals</strong></a>
   </nav></div></div>
@@ -324,6 +324,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>

@@ -61,10 +61,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/math-054/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/math-054/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20260917a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20260919a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20260917a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20260919a">
   <script>
     window.MathJax = {
       tex: {
@@ -98,9 +98,9 @@
 <main id="main" tabindex="-1">
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1>Lecture 47: Triple Integral</h1><p class="article-lead">Postgraduate Entrance Exam Mathematics Study Notes: Lecture 47: Triple Integrals. Original formulas, diagrams, and example problems are retained.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Mathematics</span><span class="record-date"><span>Record date</span><time datetime="2024-02-09">2024-02-09</time></span></span><span>5 min read</span><div class="tag-list"><span>Graduate Entrance Examination Mathematics</span><span>Advanced Mathematics</span><span>Multiple Integrals</span></div></div></header>
-      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">46.1 Triple Integral</a><a href="#section-4">46.2 Cylindrical Coordinates</a><a href="#section-7">46.3 Calculating Triple Integrals with Spherical Coordinates</a><a href="#section-10">46.4 Properties of Triple Integrals</a><a href="#section-13">46.5 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">46.1 Triple Integral</h2>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page"><a href="#section-1">46.1 Triple Integral</a><a href="#section-6">46.2 Cylindrical Coordinates</a><a href="#section-11">46.3 Calculating Triple Integrals with Spherical Coordinates</a><a href="#section-16">46.4 Properties of Triple Integrals</a><a href="#section-21">46.5 Frequently Tested Question Types</a></nav></details><div class="prose"><h2 id="section-1">46.1 Triple Integral</h2>
 <h3 id="section-2">46.1.1 Basic Concepts</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Triplepoints</span></p>
+<h4 id="section-3"><strong>Definition</strong>: <span class="note-tag">Triplepoints</span></h4>
 <blockquote><span> description: </span> $\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\lim_{\lambda\to0}\sum_{k=1}^{n}f(\xi_{k},\eta_{k},\xi_{k})\Delta\nu_{k}$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -111,8 +111,8 @@
 <li class="list-indent-1">The core of the triple integral section is the calculation of the triple integral;</li>
 <li class="list-indent-1">The core of triple integral calculations is to convert them into definite integrals or double integrals;</li>
 </ul>
-<h3 id="section-3">46.1.2 Basic Calculation Methods</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Calculationoftherectangularcoordinateoftripleintegrals</span></p>
+<h3 id="section-4">46.1.2 Basic Calculation Methods</h3>
+<h4 id="section-5"><strong>Theorem</strong>: <span class="note-tag">Calculationoftherectangularcoordinateoftripleintegrals</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>1. First one, then two: $$\iiint_{\Omega}f(x,y,z)\mathrm{dv}=\iint_{D_{xy}}d\sigma\int_{z_{1}(x,y)}^{z_{2}(x,y)}f(x,y,z)dz$$</blockquote>
 <blockquote>2. Two first, one later: $$\iiint_{\Omega}f(x,y,z)\mathrm{d}\mathbf{v}=\int_{c_{1}}^{c_{2}}dz\iint_{D_{c}}f(x,y,z)dxdy$$</blockquote>
@@ -132,9 +132,9 @@
 <li class="list-indent-1">Limiting method:</li>
 <li class="list-indent-2">When projecting a geometric solid onto the <code>z</code> axis, the upper and lower bounds of <code>z</code> are its maximum and minimum values projected onto the <code>z</code> axis;</li>
 </ul>
-<h2 id="section-4">46.2 Cylindrical Coordinates</h2>
-<h3 id="section-5">46.2.1 Basic Concepts</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Cylindricalcoordinates</span></p>
+<h2 id="section-6">46.2 Cylindrical Coordinates</h2>
+<h3 id="section-7">46.2.1 Basic Concepts</h3>
+<h4 id="section-8"><strong>Definition</strong>: <span class="note-tag">Cylindricalcoordinates</span></h4>
 <blockquote><span> description: </span> $$\begin{cases}x=r\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\theta,&amp;\quad0\leq\theta\leq2\pi,\\z=z,&amp;\quad-\infty&lt;z&lt;+\infty.\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
@@ -143,10 +143,10 @@
 <li class="list-indent-1"><code>z</code>: height on the z-axis;</li>
 <li class="list-indent-1"><code> angle </code>: Limit the angle of the current line segment;</li>
 <li>Illustration:</li>
-<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 46.2.1 Basic Concepts"><picture><source srcset="/assets/note-previews/fb4663a3483a-Pasted-image-20240521035217.webp" type="image/webp"><img class="note-image" src="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" alt="Study-note illustration: 46.2.1 Basic Concepts" width="244" height="270" loading="lazy" decoding="async"></picture></a></li>
+<li class="list-indent-1"><a class="note-image-link" href="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: Definition : Cylindricalcoordinates"><picture><source srcset="/assets/note-previews/fb4663a3483a-Pasted-image-20240521035217.webp" type="image/webp"><img class="note-image" src="/assets/notes/fb4663a3483a-Pasted-image-20240521035217.png" alt="Study-note illustration: Definition : Cylindricalcoordinates" width="244" height="270" loading="lazy" decoding="async"></picture></a></li>
 </ul>
-<h3 id="section-6">46.2.2 Methods for Calculating Cylindrical Coordinates</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Cylindricalcoordinatecalculationmethod</span></p>
+<h3 id="section-9">46.2.2 Methods for Calculating Cylindrical Coordinates</h3>
+<h4 id="section-10"><strong>Theorem</strong>: <span class="note-tag">Cylindricalcoordinatecalculationmethod</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>Volume micro yuan: $dv=\rho d\rho d\theta dz$</blockquote>
 <blockquote>Calculation: $$\iiint_\Omega f(x,y,z)d\nu=\iiint_{\Omega}f(\rho\cos\theta,\rho\sin\theta,z)r\operatorname{d}r\operatorname{d}\theta\operatorname{d}z$$</blockquote>
@@ -157,17 +157,17 @@
 <li>Regional Perspective:</li>
 <li class="list-indent-1">Cylindrical coordinates such as <code>z</code>-axis cylinders, eccentric cylinders, and cones <code>-&gt;</code> are suitable for cylindrical coordinates;</li>
 </ul>
-<h2 id="section-7">46.3 Calculating Triple Integrals with Spherical Coordinates</h2>
-<h3 id="section-8">46.3.1 Basic Concepts</h3>
-<p>#####<strong>Definition</strong>: <span class="note-tag">Sphericalcoordinates</span></p>
+<h2 id="section-11">46.3 Calculating Triple Integrals with Spherical Coordinates</h2>
+<h3 id="section-12">46.3.1 Basic Concepts</h3>
+<h4 id="section-13"><strong>Definition</strong>: <span class="note-tag">Sphericalcoordinates</span></h4>
 <blockquote><span> description: </span> $$\begin{cases}x=r\sin\varphi\cos\theta,&amp;\quad0\leq r&lt;+\infty,\\y=r\sin\varphi\sin\theta,&amp;\quad0\leq\varphi\leq\pi,\\z=r\cos\varphi,&amp;\quad0\leq\theta\leq2\pi.\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
 <ul>
 <li>Illustration:</li>
-<li><a class="note-image-link" href="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: 46.3.1 Basic Concepts"><picture><source srcset="/assets/note-previews/389e35889ff4-Pasted-image-20240521040109.webp" type="image/webp"><img class="note-image" src="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" alt="Study-note illustration: 46.3.1 Basic Concepts" width="240" height="234" loading="lazy" decoding="async"></picture></a></li>
+<li><a class="note-image-link" href="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" target="_blank" rel="noreferrer" aria-label="Open original image: Study-note illustration: Definition : Sphericalcoordinates"><picture><source srcset="/assets/note-previews/389e35889ff4-Pasted-image-20240521040109.webp" type="image/webp"><img class="note-image" src="/assets/notes/389e35889ff4-Pasted-image-20240521040109.png" alt="Study-note illustration: Definition : Sphericalcoordinates" width="240" height="234" loading="lazy" decoding="async"></picture></a></li>
 </ul>
-<h3 id="section-9">46.3.2 Methods for Calculating Spherical Coordinates</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Methodsforcalculatingsphericalcoordinates</span></p>
+<h3 id="section-14">46.3.2 Methods for Calculating Spherical Coordinates</h3>
+<h4 id="section-15"><strong>Theorem</strong>: <span class="note-tag">Methodsforcalculatingsphericalcoordinates</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
 <blockquote>Volume micro yuan: $dv=r^{2}\sin\varphi drd\varphi d\theta$</blockquote>
 <blockquote>Calculation: $$\iiint_{\Omega}f(x,y,z)d\nu =\iiint_\Omega f (r\sin\varphi\cos\theta, r\sin\varphi\sin\theta, r\cos\varphi) r^2\sin\varphi\operatorname{d}r\operatorname{d}\varphi\operatorname{d}\theta$$</blockquote>
@@ -178,20 +178,20 @@
 <li>Regional Perspective:</li>
 <li class="list-indent-1">Spherical spheres, spheres, hemispheroids, and curved pyramids centered at the origin <code>-&gt;</code> suitable for spherical coordinates;</li>
 </ul>
-<h2 id="section-10">46.4 Properties of Triple Integrals</h2>
-<h3 id="section-11">46.4.1 Parity</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Paritycalculationoftripleintegrals</span></p>
+<h2 id="section-16">46.4 Properties of Triple Integrals</h2>
+<h3 id="section-17">46.4.1 Parity</h3>
+<h4 id="section-18"><strong>Theorem</strong>: <span class="note-tag">Paritycalculationoftripleintegrals</span></h4>
 <blockquote><span><span> description: </span></span> $$\text{ Like a division domain }\Omega\text{ About }xoy\text{ Coordinate face-to-face symmetry },\,\text{ then }\iiint_{\Omega}f(x,y,z)\mathrm{d}V=\begin{cases}2\iiint f(x,y,z)\mathrm{d}V&amp;f(x,y,-z)=f(x,y,z)\\0&amp;f(x,y,-z)=-f(x,y,z)\end{cases}$$</blockquote>
 <p><strong>Explanation</strong></p>
-<h3 id="section-12">46.4.2 Symmetry</h3>
-<p>#####<strong>Theorem</strong>: <span class="note-tag">Symmetryoftripleintegrals</span></p>
+<h3 id="section-19">46.4.2 Symmetry</h3>
+<h4 id="section-20"><strong>Theorem</strong>: <span class="note-tag">Symmetryoftripleintegrals</span></h4>
 <blockquote><span><span> description: </span></span></blockquote>
-<h2 id="section-13">46.5 Frequently Tested Question Types</h2>
+<h2 id="section-21">46.5 Frequently Tested Question Types</h2>
 <hr>
-<h3 id="section-14">Question Type: <span class="note-tag">Calculationoftripleintegrals</span></h3>
-<h4 id="section-15">PART 1: Problem-solving methods</h4>
-<h4 id="section-16">PART 2: Typical Example Problems</h4>
-<h4 id="section-17">PART 3: Key Points Review</h4>
+<h3 id="section-22">Question Type: <span class="note-tag">Calculationoftripleintegrals</span></h3>
+<h4 id="section-23">PART 1: Problem-solving methods</h4>
+<h4 id="section-24">PART 2: Typical Example Problems</h4>
+<h4 id="section-25">PART 3: Key Points Review</h4>
 <p><strong>Key Point</strong>: Suitable for situations where two comes first, then one</p>
 <ul>
 <li>1. The integrand function is simply a single-variable function about <code>z</code>;</li>
@@ -211,6 +211,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20260917a"></script>
+  <script src="../../../assets/script.js?v=20260919a"></script>
 </body>
 </html>
