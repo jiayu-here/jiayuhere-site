@@ -721,6 +721,38 @@ const page = ({ prefix, locale, route, active, title, description, content, type
   const canonical = `${siteUrl}/${localeConfig[locale].routeRoot}${route}`;
   const chinese = `${siteUrl}/${route}`;
   const english = `${siteUrl}/en/${route}`;
+  const breadcrumbSection = {
+    projects: { route: "projects/", name: localeConfig[locale].strings.projects },
+    articles: { route: "blog/", name: localeConfig[locale].strings.articles },
+    notes: { route: "notes/", name: localeConfig[locale].strings.notes },
+    logs: { route: "lab/", name: localeConfig[locale].strings.lab }
+  }[active];
+  const breadcrumbStructuredData = breadcrumbSection && route !== breadcrumbSection.route ? `  <script type="application/ld+json">
+${jsonForHtml({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: isEnglish ? "Home" : "首页",
+      item: `${siteUrl}/${localeConfig[locale].routeRoot}`
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: breadcrumbSection.name,
+      item: `${siteUrl}/${localeConfig[locale].routeRoot}${breadcrumbSection.route}`
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: title,
+      item: canonical
+    }
+  ]
+})}
+  </script>` : "";
   const structuredData = blogPostingDate ? `  <script type="application/ld+json">
 ${jsonForHtml({
   "@context": "https://schema.org",
@@ -771,7 +803,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta name="twitter:title" content="${escapeHtml(title)} | Jiayu Lab">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${socialImageUrl}">
-  <meta name="twitter:image:alt" content="Jiayu Lab">${structuredData ? `\n${structuredData}` : ""}
+  <meta name="twitter:image:alt" content="Jiayu Lab">${structuredData ? `\n${structuredData}` : ""}${breadcrumbStructuredData ? `\n${breadcrumbStructuredData}` : ""}
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
