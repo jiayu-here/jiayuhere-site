@@ -1686,7 +1686,16 @@ const build = async () => {
     const html = ensureEarlyCharset(ensureDeferredAnalytics(ensureSharedPageShell(await readFile(htmlPath, "utf8"), url)));
     await writeFile(htmlPath, html);
   }
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...sitemapByUrl].map(([url, lastmod]) => `  <url><loc>${siteUrl}/${url}</loc><lastmod>${lastmod}</lastmod></url>`).join("\n")}\n</urlset>\n`;
+  const sitemapEntries = [...sitemapByUrl].map(([url, lastmod]) => {
+    const route = url.startsWith("en/") ? url.slice(3) : url;
+    const chineseUrl = route;
+    const englishUrl = `en/${route}`;
+    const alternates = sitemapByUrl.has(chineseUrl) && sitemapByUrl.has(englishUrl)
+      ? `<xhtml:link rel="alternate" hreflang="zh-CN" href="${siteUrl}/${chineseUrl}"/><xhtml:link rel="alternate" hreflang="en" href="${siteUrl}/${englishUrl}"/><xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}/${chineseUrl}"/>`
+      : "";
+    return `  <url><loc>${escapeXml(`${siteUrl}/${url}`)}</loc><lastmod>${escapeXml(lastmod)}</lastmod>${alternates}</url>`;
+  }).join("\n");
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries}\n</urlset>\n`;
   await writeFile(path.join(root, "sitemap.xml"), sitemap);
   console.log(`Built ${Object.values(localeBuilds).reduce((total, item) => total + item.searchIndex.length, 0)} bilingual search entries and ${authoredLogs.zh.length} bilingual log entries.`);
 };
