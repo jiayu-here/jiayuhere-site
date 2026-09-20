@@ -506,10 +506,25 @@ const notesIndex = document.querySelector("[data-notes-index]");
 const noteDetails = notesIndex ? Array.from(notesIndex.querySelectorAll("[data-note-details]")) : [];
 const resultStatus = document.querySelector("[data-result-status]");
 const emptyState = document.querySelector("[data-empty-state]");
+const resultContainer = searchInput
+  ? notesIndex || document.querySelector("[data-content-grid], .tool-grid, .resource-grid, .timeline")
+  : null;
 let activeFilter = "all";
 const noteIndexStateKey = `jiayuhere-notes-index-state-v1-${document.documentElement.lang}`;
 let savedNoteIndexState = null;
 const autoOpenedNoteDetails = new Set();
+
+if (resultContainer) {
+  resultContainer.id = resultContainer.id || "filtered-results";
+  searchInput?.setAttribute("aria-controls", resultContainer.id);
+  filterButtons.forEach((button) => button.setAttribute("aria-controls", resultContainer.id));
+}
+
+if (resultStatus) {
+  resultStatus.id = resultStatus.id || "filtered-results-status";
+  resultStatus.setAttribute("aria-atomic", "true");
+  searchInput?.setAttribute("aria-describedby", resultStatus.id);
+}
 
 if (notesIndex) {
   try {
