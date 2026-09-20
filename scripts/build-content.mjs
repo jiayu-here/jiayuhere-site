@@ -1035,8 +1035,37 @@ const ensureStaticSearchAnchors = (html, url) => {
   return html;
 };
 
+const ensureToolFormDescriptions = (html, url) => {
+  if (url !== "toolbox/" && url !== "en/toolbox/") return html;
+  const setAttribute = (tag, name, value) => {
+    const pattern = new RegExp(`\\s${name}=(['"])[^'"]*\\1`, "i");
+    return pattern.test(tag)
+      ? tag.replace(pattern, ` ${name}="${value}"`)
+      : tag.replace(/>$/, ` ${name}="${value}">`);
+  };
+  let index = 0;
+  return html.replace(/<article\b(?=[^>]*\bclass="[^"]*\btool-card\b[^"]*")[^>]*>[\s\S]*?<\/article>/gi, (article) => {
+    if (!/<form\b(?=[^>]*\bclass="[^"]*\btool-form\b[^"]*")/i.test(article)) return article;
+    index += 1;
+    const headingFallback = `tool-heading-${index}`;
+    const descriptionFallback = `tool-description-${index}`;
+    let headingId = headingFallback;
+    let descriptionId = descriptionFallback;
+    article = article.replace(/<h2\b[^>]*>/i, (tag) => {
+      headingId = tag.match(/\bid="([^"]+)"/i)?.[1] || headingFallback;
+      return setAttribute(tag, "id", headingId);
+    });
+    article = article.replace(/(<\/h2>\s*)<p\b[^>]*>/i, (match, before) => {
+      const tag = match.slice(before.length);
+      descriptionId = tag.match(/\bid="([^"]+)"/i)?.[1] || descriptionFallback;
+      return `${before}${setAttribute(tag, "id", descriptionId)}`;
+    });
+    return article.replace(/<form\b[^>]*>/i, (tag) => setAttribute(setAttribute(tag, "aria-labelledby", headingId), "aria-describedby", descriptionId));
+  });
+};
+
 const ensurePageMetadata = (html, url) => {
-  html = ensureStaticSearchAnchors(html, url);
+  html = ensureToolFormDescriptions(ensureStaticSearchAnchors(html, url), url);
   const isEnglish = url.startsWith("en/");
   const locale = isEnglish ? "en" : "zh";
   const route = isEnglish ? url.slice(3) : url;
