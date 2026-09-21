@@ -524,6 +524,7 @@ if (resultStatus) {
   resultStatus.id = resultStatus.id || "filtered-results-status";
   resultStatus.setAttribute("aria-atomic", "true");
   searchInput?.setAttribute("aria-describedby", resultStatus.id);
+  filterButtons.forEach((button) => button.setAttribute("aria-describedby", resultStatus.id));
 }
 
 if (notesIndex) {
