@@ -108,10 +108,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/blog/fpga-dds-frequency-word-to-display/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/blog/fpga-dds-frequency-word-to-display/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20260921a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20260922a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20260921a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20260922a">
 
 </head>
 <body>
@@ -133,7 +133,7 @@
   </header>
 <main id="main" tabindex="-1">
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</h1><p class="article-lead">说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</p><div class="article-meta"><span class="record-meta"><span class="record-category">FPGA</span><span class="record-date"><span>发布</span><time datetime="2026-07-14">2026-07-14</time></span></span><span>约 5 分钟阅读</span><div class="tag-list"><span>FPGA</span><span>DDS</span><span>Verilog</span><span>ADC</span><span>Quartus</span></div></div></header>
+      <header class="article-header container"><a class="back-link" href="../index.html">← 返回技术博客</a><h1>FPGA DDS 从频率控制字到测量显示：一条可验证的实现路径</h1><p class="article-lead">说明相位累加器、波形查表、采样有效信号、统计模块和板级显示应如何分层设计与验证。</p><div class="article-meta"><span class="record-meta"><span class="record-category">FPGA</span><span class="record-date"><span>发布</span><time datetime="2026-07-14">2026-07-14</time></span></span><span>约 5 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">FPGA</span><span role="listitem">DDS</span><span role="listitem">Verilog</span><span role="listitem">ADC</span><span role="listitem">Quartus</span></div></div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">DDS 的核心不是波形表，而是相位</a><a href="#section-2">相位累加器保持简单</a><a href="#section-3">多种波形可以共享相位</a><a href="#section-4">LUT 生成过程也需要版本管理</a><a href="#section-5">ADC 数据必须带有效信号</a><a href="#section-6">显示模块不要反向控制算法模块</a><a href="#section-7">仿真应分四层推进</a><a href="#section-12">TimeQuest 中需要关注什么</a><a href="#section-13">上板前后的验收边界</a></nav></details><div class="prose"><h2 id="section-1">DDS 的核心不是波形表，而是相位</h2>
 <p>直接数字频率合成器的核心是相位累加器。每个系统时钟到来时，相位增加一个固定步长，再用相位高位查询波形表。只要相位按照模二进制自然回绕，就能连续产生周期波形。</p>
 <p>当相位累加器宽度为 N、系统时钟为 <code>f_clk</code>、频率控制字为 <code>phase_inc</code> 时，理想输出频率为：</p>
@@ -196,8 +196,8 @@ end</code></pre>
 <h2 id="section-13">上板前后的验收边界</h2>
 <p>仿真可以证明数字逻辑在测试条件下符合预期，Quartus 和 TimeQuest 可以证明工程能够实现并满足约束；但 DAC 波形幅值、ADC 模拟输入、数码管亮度和引脚电平仍需实物确认。</p>
 <p>一份可靠的项目记录应明确区分“仿真通过”“编译通过”“时序通过”和“实物验证通过”，避免把不同层级的证据混为一个结论。</p><nav class="article-pagination" aria-label="相邻内容">
-    <a href="../stm32-temperature-nonblocking-design/index.html"><span>← 上一篇</span><strong>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</strong></a>
-    <a class="article-pagination-next" href="../matlab-modulation-recognition-features/index.html"><span>下一篇 →</span><strong>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</strong></a>
+    <a rel="prev" href="../stm32-temperature-nonblocking-design/index.html"><span>← 上一篇</span><strong>STM32 温度检测如何避免阻塞：从采样状态机到报警任务</strong></a>
+    <a class="article-pagination-next" rel="next" href="../matlab-modulation-recognition-features/index.html"><span>下一篇 →</span><strong>MATLAB 数字调制识别：如何构造不泄漏的数据与可解释特征</strong></a>
   </nav></div></div>
 <aside class="related-content container" aria-labelledby="related-content-title">
     <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
@@ -210,6 +210,6 @@ end</code></pre>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20260921a"></script>
+  <script src="../../assets/script.js?v=20260922a"></script>
 </body>
 </html>

@@ -110,9 +110,9 @@ searchDialog.innerHTML = `
       <div><p class="eyebrow">Site Search</p><h2 id="siteSearchTitle">${t("搜索全站内容", "Search the site")}</h2></div>
       <button class="search-close" type="button" aria-label="${t("关闭搜索", "Close search")}">×</button>
     </div>
-    <label class="search-dialog-field"><span>${t("输入栏目内容或技术关键词", "Enter content or a technical keyword")}</span><input type="search" enterkeyhint="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="${t("例如：FPGA、FreeRTOS、波特率", "For example: FPGA, FreeRTOS, baud rate")}"></label>
-    <p class="search-dialog-status" aria-live="polite" aria-busy="false">${t("输入关键词后开始搜索。", "Enter a keyword to search.")}</p>
-    <div class="search-results"></div>
+    <label class="search-dialog-field"><span>${t("输入栏目内容或技术关键词", "Enter content or a technical keyword")}</span><input type="search" enterkeyhint="search" autocomplete="off" autocapitalize="none" spellcheck="false" aria-controls="siteSearchResults" aria-describedby="siteSearchStatus" placeholder="${t("例如：FPGA、FreeRTOS、波特率", "For example: FPGA, FreeRTOS, baud rate")}"></label>
+    <p class="search-dialog-status" id="siteSearchStatus" role="status" aria-live="polite" aria-atomic="true">${t("输入关键词后开始搜索。", "Enter a keyword to search.")}</p>
+    <div class="search-results" id="siteSearchResults" aria-busy="false"></div>
   </section>`;
 
 const themeStorageKey = "jiayuhere-theme";
@@ -206,13 +206,13 @@ const renderSearchResults = async () => {
   const query = dialogInput.value.trim().toLowerCase();
   dialogResults.replaceChildren();
   if (!query) {
-    dialogStatus.setAttribute("aria-busy", "false");
+    dialogResults.setAttribute("aria-busy", "false");
     dialogStatus.classList.remove("is-error");
     dialogStatus.textContent = t("输入关键词后开始搜索。", "Enter a keyword to search.");
     return;
   }
 
-  dialogStatus.setAttribute("aria-busy", "true");
+  dialogResults.setAttribute("aria-busy", "true");
   dialogStatus.classList.remove("is-error");
   dialogStatus.textContent = t("正在搜索…", "Searching…");
   try {
@@ -265,7 +265,7 @@ const renderSearchResults = async () => {
     dialogStatus.classList.add("is-error");
     dialogStatus.textContent = t("搜索内容暂时无法加载，请稍后重试。", "Search is temporarily unavailable. Please try again later.");
   } finally {
-    dialogStatus.setAttribute("aria-busy", "false");
+    dialogResults.setAttribute("aria-busy", "false");
   }
 };
 
@@ -1036,6 +1036,7 @@ document.querySelectorAll(".tool-form").forEach((form) => {
   if (result) {
     result.setAttribute("role", "status");
     result.setAttribute("aria-live", "polite");
+    result.setAttribute("aria-atomic", "true");
     const updateResultState = () => {
       const isError = toolErrorPattern.test(result.textContent || "");
       result.classList.toggle("is-error", isError);

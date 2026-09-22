@@ -17,7 +17,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260921a";
+const assetVersion = "20260922a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1064,10 +1064,28 @@ const ensureToolFormDescriptions = (html, url) => {
   });
 };
 
+const ensureTagListSemantics = (html, locale) => {
+  const setAttribute = (tag, name, value) => {
+    const pattern = new RegExp(`\\s${name}=(['"])[^'"]*\\1`, "i");
+    return pattern.test(tag)
+      ? tag.replace(pattern, ` ${name}="${value}"`)
+      : tag.replace(/>$/, ` ${name}="${value}">`);
+  };
+  const label = locale === "en" ? "Content tags" : "内容标签";
+  return html.replace(/<div\b(?=[^>]*\bclass="[^"]*\btag-list\b[^"]*")[^>]*>[\s\S]*?<\/div>/gi, (list) => {
+    const opening = list.match(/^<div\b[^>]*>/i)?.[0];
+    if (!opening) return list;
+    const semanticOpening = setAttribute(setAttribute(opening, "role", "list"), "aria-label", label);
+    const items = list.slice(opening.length, -6).replace(/<span\b[^>]*>/gi, (tag) => setAttribute(tag, "role", "listitem"));
+    return `${semanticOpening}${items}</div>`;
+  });
+};
+
 const ensurePageMetadata = (html, url) => {
   html = ensureToolFormDescriptions(ensureStaticSearchAnchors(html, url), url);
   const isEnglish = url.startsWith("en/");
   const locale = isEnglish ? "en" : "zh";
+  html = ensureTagListSemantics(html, locale);
   const route = isEnglish ? url.slice(3) : url;
   const canonical = `${siteUrl}/${url}`;
   const chinese = `${siteUrl}/${route}`;
@@ -1128,7 +1146,7 @@ const ensureDeferredAnalytics = (html) => {
   return html;
 };
 
-const tagList = (tags = []) => `<div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>`;
+const tagList = (tags = [], locale = "zh") => `<div class="tag-list" role="list" aria-label="${locale === "en" ? "Content tags" : "内容标签"}">${tags.map((tag) => `<span role="listitem">${escapeHtml(tag)}</span>`).join("")}</div>`;
 
 const recordDateFor = (item) => String(item.meta.updated || item.meta.date || "");
 
@@ -1181,7 +1199,7 @@ const cardFor = (item, section, locale, prefix, noteHierarchy) => {
     <div class="card-topline"><span class="card-category">${escapeHtml(categoryLabel)}</span>${cardRecordMeta(item, locale)}</div>
     <${headingTag}><a href="${href}">${escapeHtml(item.meta.title)}</a></${headingTag}>
     <p>${escapeHtml(item.meta.description)}</p>
-    ${tagList(item.meta.tags || [])}
+    ${tagList(item.meta.tags || [], locale)}
     <a class="text-link" href="${href}">${isEnglish ? "View details" : "查看详情"} <span aria-hidden="true">→</span></a>
   </article>`;
 };
@@ -1362,12 +1380,12 @@ const buildDetail = async (section, item, index, items, catalog, locale) => {
   const previousLabel = isEnglish ? (section === "articles" ? "Previous article" : "Previous item") : (section === "articles" ? "上一篇" : "上一项");
   const nextLabel = isEnglish ? (section === "articles" ? "Next article" : "Next item") : (section === "articles" ? "下一篇" : "下一项");
   const pagination = previous || next ? `<nav class="article-pagination" aria-label="${isEnglish ? "Adjacent content" : "相邻内容"}">
-${previous ? `    <a href="../${escapeHtml(previous.meta.slug)}/index.html"><span>← ${previousLabel}</span><strong>${escapeHtml(previous.meta.title)}</strong></a>` : ""}
-${next ? `    <a class="article-pagination-next" href="../${escapeHtml(next.meta.slug)}/index.html"><span>${nextLabel} →</span><strong>${escapeHtml(next.meta.title)}</strong></a>` : ""}
+${previous ? `    <a rel="prev" href="../${escapeHtml(previous.meta.slug)}/index.html"><span>← ${previousLabel}</span><strong>${escapeHtml(previous.meta.title)}</strong></a>` : ""}
+${next ? `    <a class="article-pagination-next" rel="next" href="../${escapeHtml(next.meta.slug)}/index.html"><span>${nextLabel} →</span><strong>${escapeHtml(next.meta.title)}</strong></a>` : ""}
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [])}</div>${repository}</header>
+      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [], locale)}</div>${repository}</header>
       <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
 ${relatedContentFor(item, section, catalog, locale)}
     </article>`;
