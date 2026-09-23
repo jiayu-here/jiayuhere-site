@@ -783,6 +783,7 @@ ${usesMath ? '  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorig
   <meta name="color-scheme" content="light dark">
   <title>${escapeHtml(title)} | Jiayu Lab</title>
   <meta name="description" content="${escapeHtml(description)}">
+  <meta name="author" content="JiaYu">
   <meta name="robots" content="${escapeHtml(robots || "max-image-preview:large")}">
 ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">` : ""}
   <meta name="theme-color" content="${lightThemeColor}" media="(prefers-color-scheme: light)">
@@ -805,6 +806,7 @@ ${keywords.length ? `  <meta name="keywords" content="${escapeHtml(keywords.join
   <meta name="twitter:image" content="${socialImageUrl}">
   <meta name="twitter:image:alt" content="Jiayu Lab">${structuredData ? `\n${structuredData}` : ""}${breadcrumbStructuredData ? `\n${breadcrumbStructuredData}` : ""}
   <link rel="canonical" href="${canonical}">
+  <link rel="author" href="${siteUrl}/${localeConfig[locale].routeRoot}about/">
   <link rel="alternate" hreflang="zh-CN" href="${chinese}">
   <link rel="alternate" hreflang="en" href="${english}">
   <link rel="alternate" hreflang="x-default" href="${chinese}">
@@ -1101,7 +1103,9 @@ const ensurePageMetadata = (html, url) => {
   };
 
   add(/<meta\b[^>]*\bname=["']robots["']/i, `  <meta name="robots" content="max-image-preview:large">`);
+  add(/<meta\b[^>]*\bname=["']author["']/i, `  <meta name="author" content="JiaYu">`);
   add(/<link\b[^>]*\brel=["']canonical["']/i, `  <link rel="canonical" href="${canonical}">`);
+  add(/<link\b[^>]*\brel=["']author["']/i, `  <link rel="author" href="${siteUrl}/${localeConfig[locale].routeRoot}about/">`);
   add(/<link\b[^>]*\bhreflang=["']zh-CN["']/i, `  <link rel="alternate" hreflang="zh-CN" href="${chinese}">`);
   add(/<link\b[^>]*\bhreflang=["']en["']/i, `  <link rel="alternate" hreflang="en" href="${english}">`);
   add(/<link\b[^>]*\bhreflang=["']x-default["']/i, `  <link rel="alternate" hreflang="x-default" href="${chinese}">`);
