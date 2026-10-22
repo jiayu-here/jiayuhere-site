@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>408 知识图谱总览 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 408 知识图谱总览. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Overview and Records">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="408 知识图谱总览 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 408 知识图谱总览. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-7afacd3a9ea5/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="408 知识图谱总览 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 408 知识图谱总览. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "408 知识图谱总览",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-7afacd3a9ea5/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-7afacd3a9ea5/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-7afacd3a9ea5/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-7afacd3a9ea5/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-7afacd3a9ea5/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-7afacd3a9ea5/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">408 知识图谱总览</h1><p class="article-lead">Chinese-language Computer Science 408 note: 408 知识图谱总览. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-10-11">2026-10-11</time></span></span><span>2 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Overview and Records</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">408 主课</a><a href="#section-2">复试扩展</a><a href="#section-3">跨科目桥梁</a><a href="#section-9">维护与质量记录</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p><strong>ABSTRACT</strong> · 使用说明
+这是整个笔记库的总入口。先从科目导航进入章节，再进入具体知识点；下方“跨科目桥梁”用于把原本分散在不同课程中的同一条计算机系统主线串起来。</p>
+</blockquote>
+<h2 id="section-1">408 主课</h2>
+<ul>
+<li><a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a>：逻辑结构、存储结构、算法与代码实现。</li>
+<li><a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a>：进程、内存、文件与 I/O 管理。</li>
+<li><a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a>：数据表示、存储器、指令、CPU、总线与 I/O。</li>
+<li><a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a>：从体系结构、物理层到应用层。</li>
+</ul>
+<h2 id="section-2">复试扩展</h2>
+<ul>
+<li><a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a>：机器学习、深度学习、数据库与软件工程。</li>
+</ul>
+<h2 id="section-3">跨科目桥梁</h2>
+<h3 id="section-4">存储体系：硬件机制到操作系统抽象</h3>
+<p><a href="/en/notes/cs408-bfaf5bd149c2/">存储器层次结构</a> → <a href="/en/notes/cs408-d5113c15e970/">Cache</a> → <a href="/en/notes/cs408-5865bd37ecaf/">页表、TLB 与虚拟存储器硬件</a> → <a href="/en/notes/cs408-6e190f5755e2/">内存管理基础</a> → <a href="/en/notes/cs408-dd853a0ed1a2/">虚拟内存管理策略</a></p>
+<h3 id="section-5">I/O 链路：中断、接口与设备管理</h3>
+<p><a href="/en/notes/cs408-a58dbd00622a/">中断</a> → <a href="/en/notes/cs408-67e2b38e518a/">I/O 接口</a> → <a href="/en/notes/cs408-914a13597252/">I/O 方式</a> → <a href="/en/notes/cs408-39b45084fd1d/">操作系统 I/O 管理</a></p>
+<h3 id="section-6">图算法到网络路由</h3>
+<p><a href="/en/notes/cs408-a1c21fbceeaf/">最短路径与图的经典应用</a> → <a href="/en/notes/cs408-5064ace109f8/">路由协议</a></p>
+<h3 id="section-7">机器学习到深度学习</h3>
+<p><a href="/en/notes/cs408-5b39b66a185c/">神经网络模型</a> → <a href="/en/notes/cs408-b1364442cb67/">神经网络与后向传播</a> → <a href="/en/notes/cs408-f43cdf74b38c/">卷积神经网络</a></p>
+<h3 id="section-8">需求、数据与软件设计</h3>
+<p><a href="/en/notes/cs408-c7b75c1ae846/">软件需求工程</a> → <a href="/en/notes/cs408-9c185b7e5178/">数据库设计</a> → <a href="/en/notes/cs408-f652c4049d0f/">软件设计与实现</a></p>
+<h2 id="section-9">维护与质量记录</h2>
+<ul>
+<li><a href="/en/notes/cs408-b236e9204607/">重写方法与质量标准</a></li>
+<li><a href="/en/notes/cs408-39ac80f6dca5/">重写进度与复核记录</a></li>
+<li><a href="/en/notes/cs408-71f5fb08648b/">四科教材覆盖度与补全记录</a></li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-7822ebc414be/index.html"><span>← Previous item</span><strong>1 题型 - 分组或报文传输速率</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-7b4c62ebd1f2/index.html"><span>Next item →</span><strong>Lecture 27：B 树</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-71f5fb08648b/"><span class="related-type">Note</span><strong>2026-10-17 四科教材覆盖度与补全记录</strong><span>Chinese-language Computer Science 408 note: 2026-10-17 四科教材覆盖度与补全记录. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

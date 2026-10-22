@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：聚类 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 9：聚类。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：聚类 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 9：聚类。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-c3d6d4b33f5b/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：聚类 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 9：聚类。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：聚类",
+      "item": "https://www.jiayuhere.com/notes/cs408-c3d6d4b33f5b/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-c3d6d4b33f5b/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c3d6d4b33f5b/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c3d6d4b33f5b/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c3d6d4b33f5b/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-c3d6d4b33f5b/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 9：聚类</h1><p class="article-lead">408 学习笔记：Lecture 9：聚类。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 8 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/a4caf53bbd1e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/a4caf53bbd1e.pdf" download="Lecture 9：聚类.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">9.1 聚类基本概念</a><a href="#section-2">9.2 相似性、簇与距离</a><a href="#section-3">$$
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-4">9.3 K-Means</a><a href="#section-6">$$
+J</a><a href="#section-7">$$
+\boldsymbol{\mu}_k</a><a href="#section-8">9.4 聚类与 KNN 的区别</a><a href="#section-9">9.5 常见数值距离</a><a href="#section-10">$$
+\operatorname{dist}_{\mathrm{mk}}
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-11">$$
+\operatorname{dist}_2
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-12">$$
+\operatorname{dist}_1
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-13">9.6 无序属性与 VDM</a><a href="#section-14">$$
+\operatorname{VDM}_p(a,b)</a><a href="#section-15">\sum_{i=1}^{k}
+\left|
+\frac{m_{u,a,i}}{m_{u,a}}</a><a href="#section-16">9.7 混合属性距离</a><a href="#section-17">$$
+\operatorname{MinkovDM}_p
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-18">9.8 聚类方法概述</a><a href="#section-22">9.9 聚类质量没有绝对标准</a><a href="#section-23">9.10 易错点</a><a href="#section-24">相关知识</a><a href="#section-25">9.11 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节整理聚类与无监督学习、距离度量、K-Means、无序和混合属性的 VDM 距离，以及原型、密度、层次三类聚类方法。</p>
+</blockquote>
+<h2 id="section-1">9.1 聚类基本概念</h2>
+<ul>
+<li>聚类是无监督学习中研究和应用最广泛的任务之一。</li>
+<li>它把数据样本划分为若干个通常互不相交的簇（cluster），使簇内样本较相似、簇间样本较不同。</li>
+<li>聚类不需要样本类别标记，算法根据数据本身的结构分组。</li>
+<li>聚类既可作为独立的数据探索过程，也可作为分类等监督学习任务的前置步骤。</li>
+<li>例如可先把通信软件用户按行为聚成若干群组，再在各群组中建立有监督模型。</li>
+</ul>
+<p>源资料作了如下类比：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>有监督学习</th>
+<th>无监督学习中的对应任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类：预测离散类别</td>
+<td>聚类：发现离散群组</td>
+</tr>
+<tr>
+<td>回归：预测连续值</td>
+<td>密度估计：学习连续概率结构</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>这只是任务形式上的类比；聚类得到的簇没有预先定义的类别语义，不能直接等同于真实标签。</li>
+</ul>
+<h2 id="section-2">9.2 相似性、簇与距离</h2>
+<ul>
+<li>判断两个样本是否属于同一簇，需要先定义相似性。</li>
+<li>数值空间中常用距离表示不相似程度：距离越小，通常认为越相似。</li>
+<li>距离度量 $\operatorname{dist}$ 一般满足四个性质。</li>
+</ul>
+<p>非负性：</p>
+<p>$$
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_j)\geq0.
+$$</p>
+<p>同一性：</p>
+<p>$$
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_j)=0
+\iff
+\boldsymbol{x}_i=\boldsymbol{x}_j.
+$$</p>
+<p>对称性：</p>
+<h1 id="section-3">$$
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\operatorname{dist}(\boldsymbol{x}_j,\boldsymbol{x}_i).
+$$</p>
+<p>三角不等式：</p>
+<p>$$
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_j)
+\leq
+\operatorname{dist}(\boldsymbol{x}_i,\boldsymbol{x}_k)
++
+\operatorname{dist}(\boldsymbol{x}_k,\boldsymbol{x}_j).
+$$</p>
+<ul>
+<li>某些任务会使用不满足全部性质的相似度或不相似度，此时严格说不再是数学意义上的距离。</li>
+</ul>
+<h2 id="section-4">9.3 K-Means</h2>
+<p>K-Means 是基于原型的无监督聚类方法，使用每个簇的均值向量作为中心。</p>
+<h3 id="section-5">9.3.1 算法过程</h3>
+<ol>
+<li>选择 $K$ 个初始中心 $\boldsymbol{\mu}_1,\ldots,\boldsymbol{\mu}_K$；实践中常从样本中选取（如 K-Means++），但数学上初始中心不必强制等于某个样本。</li>
+<li>对每个样本，计算到各中心的平方欧氏距离，并分到最近中心对应的簇。</li>
+<li>对每个簇重新计算样本均值，作为新中心。</li>
+<li>重复分配与更新，直到中心不再改变、簇分配稳定或目标函数变化小于阈值。</li>
+</ol>
+<p>典型目标是最小化簇内平方误差：</p>
+<h1 id="section-6">$$
+J</h1>
+<p>\sum_{k=1}^{K}
+\sum_{\boldsymbol{x}\in C_k}
+|\boldsymbol{x}-\boldsymbol{\mu}_k|_2^2.
+$$</p>
+<p>在分配固定时，均值是使簇内平方距离最小的中心：</p>
+<h1 id="section-7">$$
+\boldsymbol{\mu}_k</h1>
+<p>\frac{1}{|C_k|}
+\sum_{\boldsymbol{x}\in C_k}
+\boldsymbol{x}.
+$$</p>
+<p>均值更新与上述平方欧氏距离目标配套；若改用任意距离或不相似度，最优原型通常不再是算术均值，应改用 K-Medoids 或与该距离相匹配的原型更新。</p>
+<ul>
+<li>$K$ 值对结果非常敏感，需要结合任务知识或聚类评价选择。</li>
+<li>初始化不同可能收敛到不同局部最优解，常需多次随机初始化。</li>
+<li>K-Means 关注整个数据集的全局簇结构。</li>
+</ul>
+<h2 id="section-8">9.4 聚类与 KNN 的区别</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>K-Means</th>
+<th>KNN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习类型</td>
+<td>无监督</td>
+<td>有监督</td>
+</tr>
+<tr>
+<td>是否需要标记</td>
+<td>不需要</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>关注范围</td>
+<td>全局簇结构</td>
+<td>待测点局部邻域</td>
+</tr>
+<tr>
+<td>$K/k$ 含义</td>
+<td>簇的数量</td>
+<td>参与预测的邻居数量</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>簇划分与中心</td>
+<td>类别或回归值</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>两者名称都含 $K$，但参数意义和学习任务完全不同。</li>
+</ul>
+<h2 id="section-9">9.5 常见数值距离</h2>
+<p>闵可夫斯基距离为</p>
+<h1 id="section-10">$$
+\operatorname{dist}_{\mathrm{mk}}
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\left(
+\sum_{u=1}^{n}
+|x_{iu}-x_{ju}|^p
+\right)^{1/p},
+\qquad p\geq1.
+$$</p>
+<ul>
+<li>当 $p=2$ 时是欧氏距离：</li>
+</ul>
+<h1 id="section-11">$$
+\operatorname{dist}_2
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\left(
+\sum_{u=1}^{n}
+|x_{iu}-x_{ju}|^2
+\right)^{1/2}.
+$$</p>
+<ul>
+<li>当 $p=1$ 时是曼哈顿距离：</li>
+</ul>
+<h1 id="section-12">$$
+\operatorname{dist}_1
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\sum_{u=1}^{n}
+|x_{iu}-x_{ju}|.
+$$</p>
+<ul>
+<li>不同距离对应不同几何形状和归纳偏好；若特征量纲差异很大，应先标准化，否则大尺度特征会主导距离。</li>
+</ul>
+<h2 id="section-13">9.6 无序属性与 VDM</h2>
+<p>对无序属性，数值差没有自然意义，可使用 Value Difference Metric（VDM）。</p>
+<p>令：</p>
+<ul>
+<li>$m_{u,a}$：属性 $u$ 取值为 $a$ 的样本数。</li>
+<li>$m_{u,a,i}$：第 $i$ 类样本中，属性 $u$ 取值为 $a$ 的样本数。</li>
+<li>$k$：类别数。</li>
+</ul>
+<p>属性 $u$ 上两个离散取值 $a,b$ 的 VDM 为</p>
+<h1 id="section-14">$$
+\operatorname{VDM}_p(a,b)</h1>
+<h2 id="section-15">\sum_{i=1}^{k}
+\left|
+\frac{m_{u,a,i}}{m_{u,a}}</h2>
+<p>\frac{m_{u,b,i}}{m_{u,b}}
+\right|^p.
+$$</p>
+<ul>
+<li>若 $a,b$ 在各类别中的条件分布相近，VDM 较小。</li>
+<li>若二者与类别的关联方式差异很大，VDM 较大。</li>
+<li>VDM 使用类别频率，因此严格说适合有类别统计可用的混合属性距离设计；纯无监督场景需要改用其他类别无关的离散相似度或迭代估计。</li>
+</ul>
+<h2 id="section-16">9.7 混合属性距离</h2>
+<p>若前 $n_c$ 个属性为连续属性，后面的属性为无序离散属性，可组合闵可夫斯基距离与 VDM：</p>
+<h1 id="section-17">$$
+\operatorname{MinkovDM}_p
+(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\left(
+\sum_{u=1}^{n_c}
+|x_{iu}-x_{ju}|^p
++
+\sum_{u=n_c+1}^{n}
+\operatorname{VDM}<em>p(x</em>{iu},x_{ju})
+\right)^{1/p}.
+$$</p>
+<ul>
+<li>连续与离散部分的数值范围可能不同，实践中常需归一化或设置权重。</li>
+</ul>
+<h2 id="section-18">9.8 聚类方法概述</h2>
+<h3 id="section-19">9.8.1 原型聚类</h3>
+<ul>
+<li>假设聚类结构可由一组原型刻画。</li>
+<li>先初始化原型，再反复分配样本和更新原型。</li>
+<li>代表方法包括 K-Means、学习向量量化（LVQ）和高斯混合聚类。</li>
+</ul>
+<h3 id="section-20">9.8.2 密度聚类</h3>
+<ul>
+<li>假设簇可通过样本分布的紧密程度确定。</li>
+<li>从密度角度考察样本的可连接性，并不断扩展连通区域。</li>
+<li>代表方法包括 DBSCAN、OPTICS、DENCLUE。</li>
+</ul>
+<h3 id="section-21">9.8.3 层次聚类</h3>
+<ul>
+<li>在不同层次上对数据集进行划分，形成树状聚类结构。</li>
+<li>AGNES 采用自底向上的凝聚过程。</li>
+<li>DIANA 采用自顶向下的分裂过程。</li>
+</ul>
+<h2 id="section-22">9.9 聚类质量没有绝对标准</h2>
+<ul>
+<li>聚类结果的好坏依赖用户目标、距离定义、簇形状假设和评价指标。</li>
+<li>同一数据可以按颜色、形状、密度或业务价值形成不同但合理的聚类。</li>
+<li>只要更换任务标准，就可能出现让既有算法失效的新数据结构，因此不能脱离用途宣称某种聚类算法绝对最好。</li>
+<li>源资料引用的观点是：“The goodness of clustering depends on the opinion of the user.”</li>
+</ul>
+<h2 id="section-23">9.10 易错点</h2>
+<ul>
+<li>聚类不是分类：聚类没有预先给出的类别标签，簇编号本身没有固定语义。</li>
+<li>K-Means 的 $K$ 是簇数，KNN 的 $k$ 是邻居数。</li>
+<li>K-Means 每轮必须先分配样本，再按簇内均值更新中心。</li>
+<li>K-Means 只保证目标函数单调不增并收敛到局部最优，不保证得到全局最优。</li>
+<li>欧氏距离对量纲敏感，使用前应检查标准化。</li>
+<li>VDM 的对象是无序属性取值的类别分布差异，不是把类别编码后直接做欧氏距离。</li>
+<li>密度聚类能处理非球形簇；K-Means 更偏好由均值和平方距离描述的近似凸形簇。</li>
+<li>聚类质量取决于任务定义，内部指标好不等于业务上有意义。</li>
+</ul>
+<h2 id="section-24">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-a42ee6cb57ff/">上一篇：集成学习</a> · <a href="/notes/cs408-330c7ebb726a/">下一篇：KNN</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-330c7ebb726a/">KNN 与局部邻域</a></li>
+</ul>
+<h2 id="section-25">9.11 本节复盘</h2>
+<ul>
+<li>聚类是不依赖标签的无监督分组，可独立探索结构，也可作为监督学习的前置过程。</li>
+<li>合法距离通常满足非负、同一、对称和三角不等式。</li>
+<li>K-Means 反复执行最近中心分配与均值更新，最小化簇内平方误差。</li>
+<li>K-Means 的簇数 $K$、初始化和距离尺度都会显著影响结果。</li>
+<li>闵可夫斯基距离在 $p=1$ 时为曼哈顿距离，$p=2$ 时为欧氏距离。</li>
+<li>无序属性可用 VDM 描述类别条件分布差异，混合属性可组合数值距离与 VDM。</li>
+<li>聚类方法可分为原型、密度和层次三类，不存在脱离任务目标的绝对最优算法。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-c2d3a38a7b30/index.html"><span>← 上一项</span><strong>Lecture 25：知识 - 外部设备</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c4914b00ec31/index.html"><span>下一项 →</span><strong>Lecture 2：知识 - 计算机性能指标</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

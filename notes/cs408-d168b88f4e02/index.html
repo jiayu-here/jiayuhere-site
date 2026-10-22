@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：强化学习 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 4：强化学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：强化学习 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 4：强化学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-d168b88f4e02/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：强化学习 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 4：强化学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：强化学习",
+      "item": "https://www.jiayuhere.com/notes/cs408-d168b88f4e02/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-d168b88f4e02/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-d168b88f4e02/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d168b88f4e02/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d168b88f4e02/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-d168b88f4e02/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 4：强化学习</h1><p class="article-lead">408 学习笔记：Lecture 4：强化学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 13 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/04d715b3e74f.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/04d715b3e74f.pdf" download="Lecture 4：强化学习.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 强化学习与监督学习</a><a href="#section-4">$$
+\pi(a\mid s)</a><a href="#section-5">4.2 基本要素与时间顺序</a><a href="#section-6">4.3 马尔可夫假设</a><a href="#section-8">$$
+P(S_{t+1}\mid S_t,S_{t-1},\ldots,S_0)</a><a href="#section-9">$$
+P(S_{t+1}=s',R_{t+1}=r
+\mid S_t=s,A_t=a,\text{history})</a><a href="#section-11">4.4 马尔可夫决策过程</a><a href="#section-12">4.5 回报与折扣回报</a><a href="#section-14">$$
+G_t</a><a href="#section-16">$$
+G_t</a><a href="#section-17">$$
+G_t</a><a href="#section-19">4.6 状态价值与动作价值</a><a href="#section-21">$$
+V^{\pi}(s)</a><a href="#section-23">$$
+Q^{\pi}(s,a)</a><a href="#section-24">$$
+V^{\pi}(s)</a><a href="#section-25">$$
+V^{\pi}(s)</a><a href="#section-27">$$
+Q^*(s,a)</a><a href="#section-28">$$
+V^*(s)</a><a href="#section-29">4.7 Bellman 方程</a><a href="#section-31">$$
+V^{\pi}(s)</a><a href="#section-32">$$
+Q^{\pi}(s,a)</a><a href="#section-34">$$
+Q^*(s,a)</a><a href="#section-35">4.8 Gym/Gymnasium 环境</a><a href="#section-36">4.9 价值学习与 DQN</a><a href="#section-38">$$
+a_t</a><a href="#section-40">4.10 时序差分学习</a><a href="#section-43">$$
+y_t^{\mathrm{SARSA}}</a><a href="#section-44">$$
+y_t^{\mathrm{DQN}}</a><a href="#section-45">4.11 DQN 损失与更新</a><a href="#section-47">$$
+y_t</a><a href="#section-49">$$
+L_t(\theta)</a><a href="#section-50">$$
+\nabla_{\theta}L_t</a><a href="#section-51">$$
+\theta
+\leftarrow
+\theta</a><a href="#section-53">4.12 DQN 一步训练流程</a><a href="#section-54">$$
+y_t</a><a href="#section-55">4.13 易错点</a><a href="#section-56">相关知识</a><a href="#section-57">4.14 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节整理强化学习与监督学习的区别、状态/动作/奖励/策略、马尔可夫决策过程、折扣回报、状态价值与动作价值、Bellman 方程，并推导 Q-learning、DQN 和时序差分学习。</p>
+</blockquote>
+<h2 id="section-1">4.1 强化学习与监督学习</h2>
+<h3 id="section-2">4.1.1 主要区别</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>监督学习</th>
+<th>强化学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练样本通常带目标标签</td>
+<td>通常没有每一步的正确动作标签，而由奖励评价行为结果</td>
+</tr>
+<tr>
+<td>数据集常预先给定</td>
+<td>数据分布会受智能体行为影响</td>
+</tr>
+<tr>
+<td>单个预测的误差可直接计算</td>
+<td>动作可能很久以后才产生奖励，存在延迟归因</td>
+</tr>
+<tr>
+<td>目标是拟合输入到标签的映射</td>
+<td>目标是学习能最大化长期回报的策略</td>
+</tr>
+</tbody>
+</table></div>
+<p>强化学习中，当前动作会同时影响：</p>
+<ul>
+<li>当前或未来奖励。</li>
+<li>下一个状态。</li>
+<li>后续能够观察到的数据。</li>
+</ul>
+<p>例如下棋时，不同落子会形成不同棋盘轨迹，最终输赢奖励可能到终局才出现。</p>
+<p>这不是说强化学习永远没有固定数据集：离线强化学习会使用预先记录的交互数据，但这些数据仍由某种行为策略产生，且没有逐状态“最佳动作标签”。</p>
+<h3 id="section-3">4.1.2 学习目标</h3>
+<p>智能体（agent）观察状态（state），选择动作（action），环境（environment）返回奖励并转移到下一状态。</p>
+<p>目标是学习策略：</p>
+<h1 id="section-4">$$
+\pi(a\mid s)</h1>
+<p>P(A_t=a\mid S_t=s),
+$$</p>
+<p>使期望累积回报最大。也可以先学习最优动作价值 $Q^*(s,a)$，再由它导出策略。</p>
+<h2 id="section-5">4.2 基本要素与时间顺序</h2>
+<p>统一采用常见时序：</p>
+<pre><code class="language-text">S_t --选择 A_t--&gt; 环境 --返回 R_{t+1}, S_{t+1}--&gt; S_{t+1}
+</code></pre>
+<ul>
+<li>$S_t$：$t$ 时刻状态，概括当前决策所需的环境信息。</li>
+<li>$A_t$：智能体在 $S_t$ 下采取的动作。</li>
+<li>$R_{t+1}$：执行 $A_t$ 后得到的奖励。</li>
+<li>$\pi(a\mid s)$：在状态 $s$ 下选择动作 $a$ 的概率。</li>
+</ul>
+<p>奖励由任务设计决定。例如游戏可在获得金币时给 $+1$，终局获胜给较大奖励；围棋也常在终局给 $+1/-1/0$。课件中的“终局 1 或 0”只是具体编码方式之一。</p>
+<h2 id="section-6">4.3 马尔可夫假设</h2>
+<h3 id="section-7">4.3.1 状态的充分性</h3>
+<p>马尔可夫性质要求：给定当前状态后，未来与更早历史条件独立。</p>
+<p>无动作的写法：</p>
+<h1 id="section-8">$$
+P(S_{t+1}\mid S_t,S_{t-1},\ldots,S_0)</h1>
+<p>P(S_{t+1}\mid S_t).
+$$</p>
+<p>在控制问题中：</p>
+<h1 id="section-9">$$
+P(S_{t+1}=s',R_{t+1}=r
+\mid S_t=s,A_t=a,\text{history})</h1>
+<p>p(s',r\mid s,a).
+$$</p>
+<h3 id="section-10">4.3.2 外部环境并不违反马尔可夫性</h3>
+<p>自动驾驶的下一状态当然受其他车辆、道路和天气影响；这些影响应包含在状态或环境转移分布中。</p>
+<ul>
+<li>若状态完整描述了决策所需信息，仍可建模为 MDP。</li>
+<li>若智能体只能观察到不完整信息，更合适的是部分可观测 MDP（POMDP），此时单个观测不一定具有马尔可夫性。</li>
+</ul>
+<p>课件把“外部环境影响”说成马尔可夫假设的例外，不够准确；关键在于状态是否充分。</p>
+<h2 id="section-11">4.4 马尔可夫决策过程</h2>
+<p>一个折扣 MDP 常写为五元组：</p>
+<p>$$
+(\mathcal S,\mathcal A,P,R,\gamma).
+$$</p>
+<ul>
+<li>$\mathcal S$：状态空间。</li>
+<li>$\mathcal A$：动作空间。</li>
+<li>$P(s'\mid s,a)$：状态转移概率。</li>
+<li>$R$：奖励模型，可写成 $R(s,a,s')$，或用 $R(s,a)=\mathbb E[R_{t+1}\mid s,a]$ 表示条件期望奖励。</li>
+<li>$\gamma$：折扣因子。</li>
+</ul>
+<p>另一种等价口径是直接用联合核 $p(s',r\mid s,a)$ 同时描述下一状态与奖励；采用该口径时就不应再把同一个奖励随机量作为五元组中的独立分量重复定义。</p>
+<p>初始状态由分布 $\rho_0$ 采样：</p>
+<p>$$
+S_0\sim\rho_0.
+$$</p>
+<p>交互循环：</p>
+<ol>
+<li>智能体按 $A_t\sim\pi(\cdot\mid S_t)$ 选择动作。</li>
+<li>环境按 $p(s',r\mid S_t,A_t)$ 采样 $R_{t+1},S_{t+1}$。</li>
+<li>智能体获得奖励和新状态，继续决策，直到终止。</li>
+</ol>
+<p>一条轨迹为：</p>
+<p>$$
+S_0,A_0,R_1,S_1,A_1,R_2,\ldots
+$$</p>
+<h2 id="section-12">4.5 回报与折扣回报</h2>
+<h3 id="section-13">4.5.1 未折扣回报</h3>
+<p>从时刻 $t$ 起的累积回报：</p>
+<h1 id="section-14">$$
+G_t</h1>
+<p>R_{t+1}+R_{t+2}+R_{t+3}+\cdots.
+$$</p>
+<h3 id="section-15">4.5.2 折扣回报</h3>
+<h1 id="section-16">$$
+G_t</h1>
+<p>\sum_{k=0}^{\infty}
+\gamma^kR_{t+k+1},
+\qquad
+0\leq\gamma&lt;1.
+$$</p>
+<p>有限回合任务在回报有限时也可取 $\gamma=1$。</p>
+<p>折扣的作用：</p>
+<ul>
+<li>让近期奖励权重更大。</li>
+<li>在无限时域且奖励有界时保证级数收敛。</li>
+<li>表达对未来不确定性或时间偏好的建模选择。</li>
+</ul>
+<p>递推关系：</p>
+<h1 id="section-17">$$
+G_t</h1>
+<p>R_{t+1}+\gamma G_{t+1}.
+$$</p>
+<h3 id="section-18">4.5.3 回报为什么是随机变量</h3>
+<p>即使当前状态固定，未来回报仍可能随机，因为：</p>
+<ul>
+<li>策略可能随机：$A_t\sim\pi(\cdot\mid S_t)$。</li>
+<li>环境转移可能随机：$S_{t+1}\sim p(\cdot\mid S_t,A_t)$。</li>
+<li>奖励本身也可能随机。</li>
+</ul>
+<p>因此要用期望价值函数评价状态或动作。</p>
+<h2 id="section-19">4.6 状态价值与动作价值</h2>
+<h3 id="section-20">4.6.1 状态价值函数</h3>
+<p>策略 $\pi$ 下：</p>
+<h1 id="section-21">$$
+V^{\pi}(s)</h1>
+<p>\mathbb E_{\pi}[G_t\mid S_t=s].
+$$</p>
+<p>它衡量“处于状态 $s$ 后，继续执行策略 $\pi$，平均能获得多少折扣回报”。</p>
+<h3 id="section-22">4.6.2 动作价值函数</h3>
+<h1 id="section-23">$$
+Q^{\pi}(s,a)</h1>
+<p>\mathbb E_{\pi}
+[G_t\mid S_t=s,A_t=a].
+$$</p>
+<p>它衡量“在状态 $s$ 先执行动作 $a$，之后继续执行策略 $\pi$ 的期望回报”。</p>
+<p>二者关系：</p>
+<p>离散动作：</p>
+<h1 id="section-24">$$
+V^{\pi}(s)</h1>
+<p>\sum_{a\in\mathcal A}
+\pi(a\mid s)Q^{\pi}(s,a).
+$$</p>
+<p>连续动作：</p>
+<h1 id="section-25">$$
+V^{\pi}(s)</h1>
+<p>\int
+\pi(a\mid s)Q^{\pi}(s,a),da.
+$$</p>
+<h3 id="section-26">4.6.3 最优价值函数</h3>
+<h1 id="section-27">$$
+Q^*(s,a)</h1>
+<p>\max_{\pi}Q^{\pi}(s,a),
+$$</p>
+<h1 id="section-28">$$
+V^*(s)</h1>
+<p>\max_a Q^*(s,a).
+$$</p>
+<p>源课件把 $Q^<em>$ 的定义与“对动作取最大”混写。应先在所有策略中取最优，得到 $Q^</em>$；然后在当前状态对动作取最大，得到最优价值和贪心动作：</p>
+<p>$$
+a^<em>(s)
+\in
+\arg\max_aQ^</em>(s,a).
+$$</p>
+<h2 id="section-29">4.7 Bellman 方程</h2>
+<h3 id="section-30">4.7.1 Bellman 期望方程</h3>
+<p>状态价值：</p>
+<h1 id="section-31">$$
+V^{\pi}(s)</h1>
+<p>\sum_a\pi(a\mid s)
+\sum_{s',r}
+p(s',r\mid s,a)
+\left[r+\gamma V^{\pi}(s')\right].
+$$</p>
+<p>动作价值：</p>
+<h1 id="section-32">$$
+Q^{\pi}(s,a)</h1>
+<p>\sum_{s',r}
+p(s',r\mid s,a)
+\left[
+r
++\gamma
+\sum_{a'}\pi(a'\mid s')Q^{\pi}(s',a')
+\right].
+$$</p>
+<h3 id="section-33">4.7.2 Bellman 最优方程</h3>
+<h1 id="section-34">$$
+Q^*(s,a)</h1>
+<p>\sum_{s',r}
+p(s',r\mid s,a)
+\left[
+r+\gamma\max_{a'}Q^*(s',a')
+\right].
+$$</p>
+<p>$$
+V^<em>(s)=\max_aQ^</em>(s,a).
+$$</p>
+<p>Bellman 方程把长期回报分解为“一步奖励 + 下一状态的折扣价值”，是动态规划、TD 和 Q-learning 的基础。</p>
+<h2 id="section-35">4.8 Gym/Gymnasium 环境</h2>
+<p>课件使用旧版 OpenAI Gym API。当前更常用 Gymnasium，接口变化包括：</p>
+<ul>
+<li><code>reset()</code> 返回 <code>(observation, info)</code>。</li>
+<li><code>step()</code> 返回 <code>(observation, reward, terminated, truncated, info)</code>。</li>
+<li><code>CartPole-v0</code> 已过时，通常使用 <code>CartPole-v1</code>。</li>
+</ul>
+<p>随机策略示例：</p>
+<pre><code class="language-python">import gymnasium as gym
+
+env = gym.make(&quot;CartPole-v1&quot;, render_mode=&quot;human&quot;)
+state, info = env.reset()
+
+for step in range(1000):
+    action = env.action_space.sample()
+    next_state, reward, terminated, truncated, info = env.step(action)
+    state = next_state
+
+    if terminated or truncated:
+        print(&quot;Finished&quot;)
+        break
+
+env.close()
+</code></pre>
+<p>此代码只演示环境交互，没有学习策略。</p>
+<h2 id="section-36">4.9 价值学习与 DQN</h2>
+<h3 id="section-37">4.9.1 用神经网络近似 $Q^*$</h3>
+<p>若已知 $Q^*$，最优动作可选：</p>
+<h1 id="section-38">$$
+a_t</h1>
+<p>\arg\max_aQ^*(S_t,a).
+$$</p>
+<p>DQN 用神经网络：</p>
+<p>$$
+Q(s,a;\theta)
+\approx
+Q^*(s,a).
+$$</p>
+<p>对离散动作空间，网络输入状态，输出一个向量：</p>
+<p>$$
+\begin{bmatrix}
+Q(s,a_1;\theta) &amp;
+Q(s,a_2;\theta) &amp;
+\cdots &amp;
+Q(s,a_K;\theta)
+\end{bmatrix}.
+$$</p>
+<p>游戏画面可先经过 CNN 提取特征，再由全连接层输出“左、右、上”等每个动作的 Q 值。</p>
+<h3 id="section-39">4.9.2 探索与利用</h3>
+<p>如果始终选当前最大 Q 值，智能体可能永远发现不了更好的动作。常用 $\varepsilon$-greedy：</p>
+<p>$$
+A_t=
+\begin{cases}
+\text{随机动作}, &amp; \text{概率 }\varepsilon,\
+\arg\max_aQ(S_t,a;\theta), &amp; \text{概率 }1-\varepsilon.
+\end{cases}
+$$</p>
+<p>训练时逐渐减小 $\varepsilon$，在探索和利用之间平衡。</p>
+<h2 id="section-40">4.10 时序差分学习</h2>
+<h3 id="section-41">4.10.1 TD 思想</h3>
+<p>折扣回报满足：</p>
+<p>$$
+G_t=R_{t+1}+\gamma G_{t+1}.
+$$</p>
+<p>TD 不等待整个回合结束，而用“当前奖励 + 下一状态估值”作为自举目标。</p>
+<p>类比行程时间：纽约到亚特兰大的总时间，可由纽约到华盛顿的已知时间，加上对华盛顿到亚特兰大剩余时间的估计来更新。</p>
+<h3 id="section-42">4.10.2 SARSA 与 Q-learning 不能混写</h3>
+<p>SARSA 的一步目标：</p>
+<h1 id="section-43">$$
+y_t^{\mathrm{SARSA}}</h1>
+<p>R_{t+1}
++\gamma Q(S_{t+1},A_{t+1};\theta).
+$$</p>
+<p>Q-learning/DQN 的一步目标：</p>
+<h1 id="section-44">$$
+y_t^{\mathrm{DQN}}</h1>
+<p>R_{t+1}
++\gamma\max_{a'}Q(S_{t+1},a';\theta^-).
+$$</p>
+<ul>
+<li>SARSA 使用行为策略实际选出的下一动作，是 on-policy。</li>
+<li>Q-learning 使用下一状态的最大动作价值，是 off-policy。</li>
+<li>源课件先写 $Q(S_{t+1},A_{t+1})$，后又写 $\max_aQ(S_{t+1},a)$，混合了两种算法。</li>
+</ul>
+<p>若 $S_{t+1}$ 是真正终止状态，不能再加未来价值：</p>
+<p>$$
+y_t=R_{t+1}.
+$$</p>
+<p>因时间上限而截断是否 bootstrap，要根据任务语义处理，不能简单等同于自然终止。</p>
+<h2 id="section-45">4.11 DQN 损失与更新</h2>
+<h3 id="section-46">4.11.1 TD 误差</h3>
+<p>当前估计：</p>
+<p>$$
+q_t=Q(S_t,A_t;\theta).
+$$</p>
+<p>目标：</p>
+<h1 id="section-47">$$
+y_t</h1>
+<p>R_{t+1}
++\gamma(1-d_t)
+\max_{a'}Q(S_{t+1},a';\theta^-),
+$$</p>
+<p>其中 $d_t=1$ 表示真正终止。</p>
+<p>TD 误差：</p>
+<p>$$
+\delta_t=y_t-q_t.
+$$</p>
+<h3 id="section-48">4.11.2 损失</h3>
+<p>课件使用平方损失：</p>
+<h1 id="section-49">$$
+L_t(\theta)</h1>
+<p>\frac{1}{2}
+[Q(S_t,A_t;\theta)-y_t]^2.
+$$</p>
+<p>现代实现也常使用 Huber loss，减小异常 TD 误差对更新的影响。</p>
+<p>目标 $y_t$ 在当前梯度步中视为常量，不把梯度传过目标网络：</p>
+<h1 id="section-50">$$
+\nabla_{\theta}L_t</h1>
+<p>(q_t-y_t)
+\nabla_{\theta}Q(S_t,A_t;\theta).
+$$</p>
+<p>参数更新：</p>
+<h2 id="section-51">$$
+\theta
+\leftarrow
+\theta</h2>
+<p>\alpha
+(q_t-y_t)
+\nabla_{\theta}Q(S_t,A_t;\theta).
+$$</p>
+<h3 id="section-52">4.11.3 稳定 DQN 的关键机制</h3>
+<p>仅用连续相邻样本和同一个快速变化网络自举，训练容易不稳定。经典 DQN 使用：</p>
+<ol>
+<li>经验回放：把 $(s,a,r,s',done)$ 存入回放池，随机采样 Mini-batch，减弱样本相关性并提高数据复用。</li>
+<li>目标网络：用参数 $\theta^-$ 计算 TD 目标，隔一段时间从在线网络同步，减缓目标漂移。</li>
+<li>$\varepsilon$-greedy：保证探索。</li>
+<li>奖励裁剪、梯度裁剪等工程措施：控制更新尺度，具体是否使用取决于任务。</li>
+</ol>
+<h2 id="section-53">4.12 DQN 一步训练流程</h2>
+<ol>
+<li>观察 $S_t$。</li>
+<li>按 $\varepsilon$-greedy 选择 $A_t$。</li>
+<li>执行动作，得到 $R_{t+1},S_{t+1}$ 和终止标记。</li>
+<li>把转移存入经验回放池。</li>
+<li>随机采样一批转移。</li>
+<li>在线网络计算所选动作的 $Q(S_t,A_t;\theta)$。</li>
+<li>目标网络计算：</li>
+</ol>
+<h1 id="section-54">$$
+y_t</h1>
+<p>R_{t+1}
++\gamma(1-d_t)
+\max_{a'}Q(S_{t+1},a';\theta^-).
+$$</p>
+<ol start="8">
+<li>最小化预测值与目标值之间的损失。</li>
+<li>周期性令 $\theta^-\leftarrow\theta$，或采用软更新。</li>
+</ol>
+<h2 id="section-55">4.13 易错点</h2>
+<ul>
+<li>强化学习没有逐动作标签，但可能存在固定的离线交互数据集。</li>
+<li>奖励和下一状态通常在执行 $A_t$ 后产生，统一记为 $R_{t+1},S_{t+1}$。</li>
+<li>外界影响应由状态和转移分布描述；观测不充分时是 POMDP，而不是“马尔可夫假设天然不适用于自动驾驶”。</li>
+<li>折扣回报是奖励的加权和，不是“加权平均”，其权重一般不归一化。</li>
+<li>$Q^*(s,a)=\max_{\pi}Q^{\pi}(s,a)$；贪心动作才是对 $a$ 取 $\arg\max$。</li>
+<li>$V^{\pi}$ 对策略动作分布求期望，$Q^{\pi}$ 条件在第一个动作已经指定。</li>
+<li>SARSA 使用实际下一动作，Q-learning/DQN 使用下一状态最大 Q 值，二者不能混写。</li>
+<li>终止状态的 TD 目标只有即时奖励；截断与终止要区分。</li>
+<li>DQN 输出的是每个离散动作的价值估计，不是动作概率。</li>
+<li>TD 目标必须停止梯度；经典 DQN 还依赖经验回放和目标网络稳定训练。</li>
+<li>Gym 旧 API 的 <code>done</code> 已拆分为 <code>terminated</code> 与 <code>truncated</code>，<code>CartPole-v0</code> 也应换成 <code>v1</code>。</li>
+</ul>
+<h2 id="section-56">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-f43cdf74b38c/">上一篇：卷积神经网络</a> · <a href="/notes/cs408-598d9fb6fbb4/">下一篇：特征选择与特征提取</a></li>
+</ul>
+<h2 id="section-57">4.14 本节复盘</h2>
+<ul>
+<li>强化学习通过智能体与环境交互产生数据，目标是最大化长期累积回报。</li>
+<li>MDP 由状态、动作、转移、奖励和折扣因子构成，马尔可夫性要求当前状态足以预测未来。</li>
+<li>折扣回报满足 $G_t=R_{t+1}+\gamma G_{t+1}$，为 TD 自举提供基础。</li>
+<li>$V^{\pi}(s)$ 评价状态，$Q^{\pi}(s,a)$ 评价状态-动作对；二者由 Bellman 方程递归定义。</li>
+<li>最优策略可由 $Q^*$ 的贪心动作得到，但训练时仍要保留探索。</li>
+<li>DQN 用神经网络为每个离散动作估计 Q 值。</li>
+<li>Q-learning 的 TD 目标是一步奖励加下一状态最大 Q 值；终止时不 bootstrap。</li>
+<li>经验回放打破样本相关性，目标网络减缓目标漂移，二者是经典 DQN 稳定训练的核心。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-cd74b2a4d67e/index.html"><span>← 上一项</span><strong>Lecture 22：知识 - 多处理器</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-d33925ae4333/index.html"><span>下一项 →</span><strong>Lecture 9：知识 - 主存储器</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>7. 排序 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：7. 排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="7. 排序 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：7. 排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-c558f3264d82/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="7. 排序 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：7. 排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "7. 排序",
+      "item": "https://www.jiayuhere.com/notes/cs408-c558f3264d82/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-c558f3264d82/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c558f3264d82/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c558f3264d82/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c558f3264d82/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-c558f3264d82/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>7. 排序</h1><p class="article-lead">408 学习笔记：7. 排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/4bb8a7061c2f.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/4bb8a7061c2f.pdf" download="7. 排序.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1. 插入排序</a><a href="#section-5">2. 交换排序</a><a href="#section-8">3. 选择排序</a><a href="#section-11">4. 归并排序</a><a href="#section-13">5. 复杂度与性质总表</a><a href="#section-14">6. 原题覆盖与纠错索引</a><a href="#section-15">相关知识</a><a href="#section-16">7. 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p><strong>ABSTRACT</strong> · 本节范围
+本笔记逐页覆盖原 PDF 的 8 页和 7 道实际题目：题 1、2、4、5、6、7、8。原文件本身没有题 3。内容包括直接插入、链表插入、折半插入、冒泡、快速、简单选择、堆和归并排序；代码统一为 C++17。</p>
+</blockquote>
+<blockquote>
+<p><strong>IMPORTANT</strong> · 先统一下标
+除题 1 的哨兵版本明确使用 <code>records[1..n]</code> 外，其余顺序表代码都使用 <code>values[0..n-1]</code>。稳定是指关键字相等的记录在排序后仍保持原相对次序。</p>
+</blockquote>
+<pre class="mermaid">flowchart TD
+    S[本节内部排序] --&gt; I[插入类]
+    I --&gt; D[直接插入]
+    I --&gt; BI[折半插入]
+    S --&gt; X[交换类]
+    X --&gt; B[冒泡]
+    X --&gt; Q[快速]
+    S --&gt; C[选择类]
+    C --&gt; SS[简单选择]
+    C --&gt; H[堆排序]
+    S --&gt; M[归并类]
+    M --&gt; MS[二路归并]
+</pre>
+<h2 id="section-1">1. 插入排序</h2>
+<h3 id="section-2">题 1：直接插入排序 - 顺序表</h3>
+<p>在第 $i$ 趟开始时，<code>records[1..i-1]</code> 已经有序。先把 <code>records[i]</code> 暂存在哨兵 <code>records[0]</code>，再从右向左移动所有严格大于它的元素，最后写入空位。只移动“大于”而不移动“等于”，因此算法稳定。</p>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;cstddef&gt;
+#include &lt;vector&gt;
+
+// records[0] 是哨兵，真正数据位于 records[1..n]。
+void insertionSortWithSentinel(std::vector&lt;int&gt;&amp; records) {
+    if (records.size() &lt;= 2) {
+        return;
+    }
+
+    const int n = static_cast&lt;int&gt;(records.size()) - 1;
+    for (int current = 2; current &lt;= n; ++current) {
+        records[0] = records[current];
+        int previous = current - 1;
+        while (records[0] &lt; records[previous]) {
+            records[previous + 1] = records[previous];
+            --previous;
+        }
+        records[previous + 1] = records[0];
+    }
+}
+</code></pre>
+<p>最好情况为已有序，只需 $\Theta(n)$ 次比较且几乎不移动；平均和最坏时间为 $\Theta(n^2)$，辅助空间 $\Theta(1)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿把 <code>j</code> 声明在 <code>for</code> 的局部作用域中，却在循环结束后继续使用 <code>R[j+1]</code>，标准 C++ 无法编译。当前版本把下标声明移到循环外，并保留哨兵防止向左越界。</p>
+</blockquote>
+<h3 id="section-3">题 1：直接插入排序 - 带头结点单链表</h3>
+<p>先让第一个数据结点独立成为有序链，再逐个摘下无序区结点，在有序区寻找插入前驱。寻找时越过所有“小于或等于”当前关键字的结点，才能让后出现的相等记录仍排在后面。</p>
+<pre><code class="language-cpp">struct ListNode {
+    int key = 0;
+    ListNode* next = nullptr;
+};
+
+// head 是带头结点、无环的单链表。
+void insertionSortList(ListNode* head) {
+    if (head == nullptr || head-&gt;next == nullptr) {
+        return;
+    }
+
+    ListNode* unsorted = head-&gt;next-&gt;next;
+    head-&gt;next-&gt;next = nullptr;
+    while (unsorted != nullptr) {
+        ListNode* node = unsorted;
+        unsorted = unsorted-&gt;next;
+
+        ListNode* previous = head;
+        while (previous-&gt;next != nullptr
+                &amp;&amp; previous-&gt;next-&gt;key &lt;= node-&gt;key) {
+            previous = previous-&gt;next;
+        }
+        node-&gt;next = previous-&gt;next;
+        previous-&gt;next = node;
+    }
+}
+</code></pre>
+<p>链表不支持随机访问，因此不能用折半查找降低定位比较次数；整体时间仍为 $O(n^2)$，只改指针而不搬移记录，辅助空间 $O(1)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿未处理空链表与只有头结点的情况，并在判断 <code>pre-&gt;next != null</code> 之前先访问 <code>pre-&gt;next-&gt;data</code>，可能解引用空指针；用 <code>&lt;</code> 寻找位置还会把后出现的相等结点插到前面，破坏稳定性。</p>
+</blockquote>
+<h3 id="section-4">题 2：折半插入排序</h3>
+<p>有序前缀上使用二分查找，找到当前关键字的上界位置 <code>[low, high)</code>：若相等则继续向右，因此插入到已有相等元素之后。二分只减少比较次数，后移元素仍可能达到 $\Theta(n^2)$。</p>
+<pre><code class="language-cpp">void binaryInsertionSort(std::vector&lt;int&gt;&amp; values) {
+    for (std::size_t current = 1;
+         current &lt; values.size(); ++current) {
+        const int key = values[current];
+        std::size_t low = 0;
+        std::size_t high = current;
+
+        while (low &lt; high) {
+            const std::size_t middle =
+                low + (high - low) / 2;
+            if (key &lt; values[middle]) {
+                high = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+
+        for (std::size_t move = current;
+             move &gt; low; --move) {
+            values[move] = values[move - 1];
+        }
+        values[low] = key;
+    }
+}
+</code></pre>
+<p>关键字比较次数为 $\Theta(n\log n)$；最好总时间为 $\Theta(n\log n)$，平均和最坏时间为 $\Theta(n^2)$，辅助空间 $\Theta(1)$，算法稳定。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿把移动循环放进二分循环的错误层级，并使用未声明的 <code>i</code>、<code>j</code>；<code>high = mid - 1</code> 与最终插入 <code>high + 1</code> 的边界也没有统一。当前版本直接在半开区间中求稳定上界。</p>
+</blockquote>
+<h2 id="section-5">2. 交换排序</h2>
+<h3 id="section-6">题 4：冒泡排序</h3>
+<p>第 1 趟把未排序区最大元素交换到末尾；每完成一趟，右侧有序区扩大 1。只有相邻元素严格逆序时才交换，所以相等记录不会越过彼此。</p>
+<pre><code class="language-cpp">void bubbleSort(std::vector&lt;int&gt;&amp; values) {
+    for (std::size_t end = values.size(); end &gt; 1; --end) {
+        bool changed = false;
+        for (std::size_t current = 1;
+             current &lt; end; ++current) {
+            if (values[current] &lt; values[current - 1]) {
+                std::swap(values[current], values[current - 1]);
+                changed = true;
+            }
+        }
+        if (!changed) {
+            return;
+        }
+    }
+}
+</code></pre>
+<p>带提前结束标志时，最好时间 $\Theta(n)$，平均和最坏时间 $\Theta(n^2)$；辅助空间 $\Theta(1)$，算法稳定。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿把 <code>false</code> 拼成 <code>flase</code>，且注释把标志语义说反：<code>changed == true</code> 表示本趟发生过交换，只有 <code>changed == false</code> 才能证明序列已有序。</p>
+</blockquote>
+<h3 id="section-7">题 5：快速排序</h3>
+<p>以下“挖坑法”取区间首元素为枢轴。右侧扫描跳过大于或等于枢轴的元素，左侧扫描跳过小于或等于枢轴的元素；必须包含等号，否则遇到大量重复关键字时两个指针可能都不移动。</p>
+<pre><code class="language-cpp">int partition(std::vector&lt;int&gt;&amp; values, int low, int high) {
+    const int pivot = values[low];
+    while (low &lt; high) {
+        while (low &lt; high &amp;&amp; values[high] &gt;= pivot) {
+            --high;
+        }
+        values[low] = values[high];
+
+        while (low &lt; high &amp;&amp; values[low] &lt;= pivot) {
+            ++low;
+        }
+        values[high] = values[low];
+    }
+    values[low] = pivot;
+    return low;
+}
+
+void quickSortRange(std::vector&lt;int&gt;&amp; values,
+                    int low,
+                    int high) {
+    if (low &gt;= high) {
+        return;
+    }
+    const int pivotPosition = partition(values, low, high);
+    quickSortRange(values, low, pivotPosition - 1);
+    quickSortRange(values, pivotPosition + 1, high);
+}
+
+void quickSort(std::vector&lt;int&gt;&amp; values) {
+    if (!values.empty()) {
+        quickSortRange(values, 0,
+                       static_cast&lt;int&gt;(values.size()) - 1);
+    }
+}
+</code></pre>
+<p>划分较均衡时，最好和平均时间为 $\Theta(n\log n)$、递归栈平均 $O(\log n)$；若每次枢轴都是极值，时间和递归栈分别退化为 $\Theta(n^2)$ 与 $O(n)$。算法通常不稳定。随机选枢轴或三数取中可降低持续退化的概率，但不能改变理论最坏界。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿缺少分号并把实参写成 <code>part(A[], low, high)</code>，函数边界也被花括号截断；更关键的是两侧扫描都使用严格不等号，重复值可能使循环停滞。</p>
+</blockquote>
+<h2 id="section-8">3. 选择排序</h2>
+<h3 id="section-9">题 6：简单选择排序</h3>
+<p>第 $i$ 趟在无序区 <code>[i, n)</code> 中找最小元素，与 <code>values[i]</code> 交换。长距离交换可能让相等记录跨越，所以标准简单选择排序不稳定。</p>
+<pre><code class="language-cpp">void selectionSort(std::vector&lt;int&gt;&amp; values) {
+    for (std::size_t first = 0;
+         first + 1 &lt; values.size(); ++first) {
+        std::size_t minimum = first;
+        for (std::size_t current = first + 1;
+             current &lt; values.size(); ++current) {
+            if (values[current] &lt; values[minimum]) {
+                minimum = current;
+            }
+        }
+        if (minimum != first) {
+            std::swap(values[first], values[minimum]);
+        }
+    }
+}
+</code></pre>
+<p>最好、平均、最坏时间均为 $\Theta(n^2)$，但交换次数最多 $n-1$；辅助空间 $\Theta(1)$，算法不稳定。原稿主体思路正确，本稿只避免无意义的自交换并补全性质边界。</p>
+<h3 id="section-10">题 7：堆排序</h3>
+<p>0 下标数组中，结点 $i$ 的左右孩子分别为 $2i+1$、$2i+2$。升序排列使用大根堆：先在线性时间内建堆，再反复把堆顶最大值换到当前堆尾，并对缩小后的堆向下调整。</p>
+<pre><code class="language-cpp">void siftDown(std::vector&lt;int&gt;&amp; values, int root, int high) {
+    const int rootValue = values[root];
+    for (int child = 2 * root + 1;
+         child &lt;= high;
+         child = 2 * root + 1) {
+        if (child &lt; high
+                &amp;&amp; values[child] &lt; values[child + 1]) {
+            ++child;
+        }
+        if (rootValue &gt;= values[child]) {
+            break;
+        }
+        values[root] = values[child];
+        root = child;
+    }
+    values[root] = rootValue;
+}
+
+void heapSort(std::vector&lt;int&gt;&amp; values) {
+    const int n = static_cast&lt;int&gt;(values.size());
+    for (int root = n / 2 - 1; root &gt;= 0; --root) {
+        siftDown(values, root, n - 1);
+    }
+    for (int end = n - 1; end &gt; 0; --end) {
+        std::swap(values[0], values[end]);
+        siftDown(values, 0, end - 1);
+    }
+}
+</code></pre>
+<p>建堆为 $\Theta(n)$，随后 $n-1$ 次调整总计 $\Theta(n\log n)$；最好、平均和最坏排序时间均为 $\Theta(n\log n)$，辅助空间 $\Theta(1)$，算法不稳定。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿在确认 <code>j &lt; high</code> 之前先访问 <code>arr[j+1]</code>，可能越界；下沉后又拿已被覆盖的 <code>arr[i]</code> 与孩子比较，而非与暂存根值比较。建堆循环误写成 <code>i++</code>，排序阶段还混用了 <code>a</code> 与 <code>arr</code>。</p>
+</blockquote>
+<h2 id="section-11">4. 归并排序</h2>
+<h3 id="section-12">题 8：二路归并排序</h3>
+<p>递归排序左右半区后，用辅助数组保存原区间，再以 <code>left</code>、<code>right</code> 两个指针归并。相等时先取左半区记录，才能保持稳定；辅助数组只在入口申请一次，避免每层递归重复分配。</p>
+<pre><code class="language-cpp">void mergeRange(std::vector&lt;int&gt;&amp; values,
+                std::vector&lt;int&gt;&amp; buffer,
+                int low,
+                int middle,
+                int high) {
+    for (int index = low; index &lt;= high; ++index) {
+        buffer[index] = values[index];
+    }
+
+    int left = low;
+    int right = middle + 1;
+    for (int output = low; output &lt;= high; ++output) {
+        if (left &gt; middle) {
+            values[output] = buffer[right++];
+        } else if (right &gt; high) {
+            values[output] = buffer[left++];
+        } else if (buffer[left] &lt;= buffer[right]) {
+            values[output] = buffer[left++];
+        } else {
+            values[output] = buffer[right++];
+        }
+    }
+}
+
+void mergeSortRange(std::vector&lt;int&gt;&amp; values,
+                    std::vector&lt;int&gt;&amp; buffer,
+                    int low,
+                    int high) {
+    if (low &gt;= high) {
+        return;
+    }
+    const int middle = low + (high - low) / 2;
+    mergeSortRange(values, buffer, low, middle);
+    mergeSortRange(values, buffer, middle + 1, high);
+    mergeRange(values, buffer, low, middle, high);
+}
+
+void mergeSort(std::vector&lt;int&gt;&amp; values) {
+    if (values.empty()) {
+        return;
+    }
+    std::vector&lt;int&gt; buffer(values.size());
+    mergeSortRange(values, buffer, 0,
+                   static_cast&lt;int&gt;(values.size()) - 1);
+}
+</code></pre>
+<p>最好、平均和最坏时间均为 $\Theta(n\log n)$，辅助数组占 $\Theta(n)$，递归栈占 $O(\log n)$，总体辅助空间 $\Theta(n)$；算法稳定。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+<code>new B[maxsize]</code> 不是合法的动态数组表达式；主归并循环的控制变量与条件混乱，一侧剩余时又从已被覆盖的 <code>A</code> 而非备份 <code>B</code> 复制，且辅助数组既未复用也未释放。</p>
+</blockquote>
+<h2 id="section-13">5. 复杂度与性质总表</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th style="text-align:right">最好时间</th>
+<th style="text-align:right">平均时间</th>
+<th style="text-align:right">最坏时间</th>
+<th style="text-align:right">主要辅助空间</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入</td>
+<td style="text-align:right">$\Theta(n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(1)$</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>折半插入</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(1)$</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>优化冒泡</td>
+<td style="text-align:right">$\Theta(n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(1)$</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">平均 $O(\log n)$，最坏 $O(n)$</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>简单选择</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(1)$</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(1)$</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>二路归并</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n)$</td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 折半插入的最好情况
+即使输入已有序，本实现仍会对每个有序前缀执行二分查找，因此关键字比较总数为 $\Theta(n\log n)$；它只把移动次数降到 $\Theta(n)$，不能像直接插入那样达到线性总时间。</p>
+</blockquote>
+<h2 id="section-14">6. 原题覆盖与纠错索引</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">原题号</th>
+<th>内容</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>顺序表直接插入 + 链表插入排序</td>
+<td>已覆盖，补全空链与稳定性</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>折半插入排序</td>
+<td>已覆盖，统一半开区间边界</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>冒泡排序</td>
+<td>已覆盖，修正标志含义与拼写</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>快速排序</td>
+<td>已覆盖，修正重复值停滞与递归边界</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>简单选择排序</td>
+<td>已覆盖，补全性质</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>堆排序</td>
+<td>已覆盖，修正越界、建堆方向和变量名</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>归并排序</td>
+<td>已覆盖，修正缓冲区、循环和剩余段复制</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 题号说明
+原 PDF 的实际编号是题 1、2、4、5、6、7、8，共 7 题；文件中没有题 3，并非本稿遗漏。</p>
+</blockquote>
+<h2 id="section-15">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-d690a826208c/">上一篇：图代码</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-2e90359dd8ec/">排序原理</a></li>
+</ul>
+<h2 id="section-16">7. 本节复盘</h2>
+<ul>
+<li>先写清数组下标体系、有序区和无序区边界，再写循环；哨兵版的 <code>records[0]</code> 不属于数据区。</li>
+<li>插入排序和冒泡排序只让严格逆序记录移动，因而可以稳定；折半插入要把新记录放到相等记录之后。</li>
+<li>快排两侧扫描必须防止指针交叉，并妥善处理等于枢轴的记录；枢轴选择影响划分质量。</li>
+<li>简单选择排序比较次数不随初始序列改变；堆排序建堆为 $\Theta(n)$，完整排序为 $\Theta(n\log n)$。</li>
+<li>0 下标堆的左右孩子是 $2i+1$、$2i+2$；比较右孩子前必须先确认它存在。</li>
+<li>归并时相等先取左表才能稳定，且剩余元素必须从未被覆盖的辅助数组复制。</li>
+<li>所有模板都要验证空表、单元素、重复值、负数、已有序和逆序输入。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-c4914b00ec31/index.html"><span>← 上一项</span><strong>Lecture 2：知识 - 计算机性能指标</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c58d699dca6a/index.html"><span>下一项 →</span><strong>Lecture 24：查找的基本概念</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

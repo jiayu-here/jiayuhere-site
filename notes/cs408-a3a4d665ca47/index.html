@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：知识 - 同步与互斥 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 4：知识 - 同步与互斥。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 操作系统">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：知识 - 同步与互斥 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 4：知识 - 同步与互斥。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-a3a4d665ca47/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：知识 - 同步与互斥 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 4：知识 - 同步与互斥。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：知识 - 同步与互斥",
+      "item": "https://www.jiayuhere.com/notes/cs408-a3a4d665ca47/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-a3a4d665ca47/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a3a4d665ca47/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a3a4d665ca47/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a3a4d665ca47/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-a3a4d665ca47/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 4：知识 - 同步与互斥</h1><p class="article-lead">408 学习笔记：Lecture 4：知识 - 同步与互斥。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">操作系统</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/17e985591ad4.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/17e985591ad4.pdf" download="Lecture 4：知识 - 同步与互斥.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 同步、异步与互斥</a><a href="#section-4">4.2 软件与硬件互斥方法</a><a href="#section-8">4.3 信号量与 PV 原语</a><a href="#section-11">4.4 PV 题的通用解法</a><a href="#section-12">4.5 经典同步问题</a><a href="#section-16">4.6 管程</a><a href="#section-19">相关知识</a><a href="#section-20">4.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>并发题先分清“谁不能同时访问同一资源”（互斥）和“谁必须在谁之后发生”（同步），再为每个资源或前驱关系设置语义清晰的锁/信号量。不能只背 PV 模板而不分析资源和事件。</p>
+</blockquote>
+<h2 id="section-1">4.1 同步、异步与互斥</h2>
+<h3 id="section-2">4.1.1 基本关系</h3>
+<ul>
+<li><strong>同步（直接制约关系）</strong>：为完成共同任务，进程/线程须在某些事件点相互等待、配合。例如产品放入缓冲区后，消费者才能取出。</li>
+<li><strong>异步性</strong>：并发进程以独立、不可预知的速度推进；同步机制用于建立必要的先后约束。</li>
+<li><strong>互斥（间接制约关系）</strong>：多个进程竞争访问同一数据或资源，执行结果会受交错次序影响，故同一时刻只允许一个访问者。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>资源类型</th>
+<th>特点</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>临界资源（互斥共享）</td>
+<td>一段时间内只允许一个进程使用</td>
+<td>打印机、可修改共享变量、缓冲区、文件写入区</td>
+</tr>
+<tr>
+<td>同时共享资源</td>
+<td>允许多个进程同时访问</td>
+<td>只读程序、只读数据</td>
+</tr>
+</tbody>
+</table></div>
+<p>临界资源是被保护的对象；<strong>临界区</strong>是访问临界资源的那段代码，二者不能混淆。</p>
+<h3 id="section-3">4.1.2 临界区结构与四准则</h3>
+<pre><code class="language-text">do {
+    entry section;     // 进入区：申请许可、上锁或等待
+    critical section;  // 临界区：访问临界资源
+    exit section;      // 退出区：解锁、释放资源
+    remainder section; // 剩余区：其他代码
+} while (true);
+</code></pre>
+<p>临界区问题的四项原则：</p>
+<ol>
+<li><strong>空闲让进</strong>：临界区空闲时，应尽快允许一个请求者进入。</li>
+<li><strong>忙则等待</strong>：已有进程在临界区时，其他请求者必须等待，保证互斥。</li>
+<li><strong>有限等待</strong>：一个进程申请后，必须能在有限时间内进入，避免饥饿。</li>
+<li><strong>让权等待</strong>：不能进入时应让出 CPU，避免持续占用 CPU 自旋。</li>
+</ol>
+<p>前 3 项侧重正确性；让权等待侧重效率。自旋锁可保证互斥，但不满足让权等待。</p>
+<h2 id="section-4">4.2 软件与硬件互斥方法</h2>
+<h3 id="section-5">4.2.1 软件算法的比较</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>思路</th>
+<th>主要缺陷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单标志法</td>
+<td><code>turn</code> 指定当前只允许某一方进入</td>
+<td>可能轮到不想进入的进程，违反空闲让进</td>
+</tr>
+<tr>
+<td>双标志先检查</td>
+<td>先检查对方标志，再声明自己要进入</td>
+<td>“检查”和“置标志”不是原子整体，可能同时进入，违反互斥</td>
+</tr>
+<tr>
+<td>双标志后检查</td>
+<td>先声明意图，再检查对方意图</td>
+<td>双方都声明后可相互等待，违反空闲让进/有限等待</td>
+</tr>
+<tr>
+<td>Peterson</td>
+<td><code>flag[i]</code> 表示进入意图，<code>turn</code> 表示两者竞争时的让步</td>
+<td>两进程情形可满足前三项，但仍忙等，且依赖内存访问顺序</td>
+</tr>
+</tbody>
+</table></div>
+<p>Peterson 的核心不是 <code>turn</code> 的“所有权”，而是双方都申请时的谦让：进程 $i$ 先设置 <code>flag[i]=true</code>，再令 <code>turn=j</code>，在“对方也想进入且轮到对方”时等待。</p>
+<h3 id="section-6">4.2.2 中断屏蔽</h3>
+<p>单处理机内核可在进入临界区前关中断、退出后开中断，使临界区执行期间不会因中断被切换。它简单高效，但：</p>
+<ul>
+<li>不适合多处理器：关闭本 CPU 中断不能阻止其他 CPU 进入临界区。</li>
+<li>只能由内核使用：关/开中断是特权指令，用户程序不能也不应执行。</li>
+<li>只能保护很短的内核临界区，否则会损害中断响应。</li>
+</ul>
+<h3 id="section-7">4.2.3 TestAndSet、Swap 与自旋锁</h3>
+<p><code>TestAndSet</code>（TSL）和 <code>Swap</code>/<code>Exchange</code> 是不可中断的硬件原子指令，可将“检查锁”和“置锁”合成为一个原子动作，适用于多处理器：</p>
+<pre><code class="language-c">// 返回 lock 的旧值，同时把 lock 置为 true；整个调用原子完成
+while (TestAndSet(&amp;lock)) {
+    ;  // busy waiting
+}
+/* critical section */
+lock = false;
+</code></pre>
+<ul>
+<li>优点：实现简单，不会出现软件算法中检查/置锁被拆开的漏洞；适合锁持有时间短的多核临界区。</li>
+<li>缺点：等待者一直占用 CPU，违反让权等待；单核或临界区较长时浪费 CPU。</li>
+<li>普通函数调用不天然原子；必须由硬件原子指令实现，才可作为互斥基础。</li>
+</ul>
+<p>互斥锁可抽象为 <code>acquire()</code>/<code>release()</code>。获取不到锁时，自旋锁循环检查；可阻塞 mutex 则将等待线程挂入队列、让出 CPU。</p>
+<h2 id="section-8">4.3 信号量与 PV 原语</h2>
+<h3 id="section-9">4.3.1 定义与操作</h3>
+<p>信号量是表示资源数量或事件状态的整型/记录型变量，只能通过初始化、<code>wait</code> 和 <code>signal</code> 原子访问：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>别名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wait(S)</code></td>
+<td><code>P(S)</code>、proberen</td>
+<td>申请资源，或等待前驱事件</td>
+</tr>
+<tr>
+<td><code>signal(S)</code></td>
+<td><code>V(S)</code>、verhogen</td>
+<td>释放资源，或通知后继事件</td>
+</tr>
+</tbody>
+</table></div>
+<p>PV 操作都是原语，必须一气呵成。整型信号量的简化形式为：</p>
+<pre><code class="language-c">wait(S)   { while (S &lt;= 0) ; S--; }  // 资源不可用时忙等
+signal(S) { S++; }
+</code></pre>
+<p>它仍然忙等。记录型信号量以等待队列实现让权等待：</p>
+<pre><code class="language-c">typedef struct { int value; queue L; } semaphore;
+
+wait(S) {
+    S.value--;
+    if (S.value &lt; 0) { add_this_process_to(S.L); block(); }
+}
+signal(S) {
+    S.value++;
+    if (S.value &lt;= 0) { remove_a_process_from(S.L); wakeup(); }
+}
+</code></pre>
+<p>若 <code>S.value&lt;0</code>，其绝对值常可理解为等待该资源的进程数。队列可按 FIFO 等策略组织；多处理机上，PV 的原子性仍要借助硬件原子操作或锁保证。</p>
+<h3 id="section-10">4.3.2 用 PV 实现互斥和同步</h3>
+<p><strong>互斥</strong>：每个临界资源设置一个互斥信号量，初值通常为 1。</p>
+<pre><code class="language-c">semaphore mutex = 1;
+P(mutex);
+/* critical section */
+V(mutex);
+</code></pre>
+<p><strong>同步</strong>：每一对前驱/后继关系设置一个同步信号量，初值通常为 0；前操作完成后 <code>V(S)</code>，后操作开始前 <code>P(S)</code>。</p>
+<pre><code class="language-c">semaphore S = 0;
+P1: 前操作; V(S);
+P2: P(S); 后操作;
+</code></pre>
+<p><code>P</code> 可能阻塞，<code>V</code> 不会使执行它的进程因资源不足而阻塞。因此多个 <code>P</code> 的顺序尤其重要：若先 <code>P(mutex)</code>、后因同步 <code>P(S)</code> 阻塞，就会持锁等待，能产生事件的进程可能无法进入临界区，导致死锁。相邻且独立的 <code>V</code> 操作通常可交换，但仍须核对题目所要求的事件顺序。</p>
+<h2 id="section-11">4.4 PV 题的通用解法</h2>
+<ol>
+<li>列出并发进程/线程和每个进程是否反复执行；未说明只执行一次时通常要写 <code>while (true)</code>。</li>
+<li>找临界资源：同一可写对象的读-写、写-读、写-写通常要互斥；读-读通常可并行。</li>
+<li>找每个前驱关系：前操作之后放 <code>V</code>，后操作之前放 <code>P</code>。</li>
+<li>为每个资源或关系定义语义明确的信号量，并按资源数或事件是否已发生设置初值。</li>
+<li>检查所有 <code>P</code>：是否有对应 <code>V</code>；共享计数器是否被保护；是否出现拿着一把锁再等待另一条件的环。</li>
+</ol>
+<p>一个资源存在多组互斥关系时，可设置多个更细粒度的锁来提高并发度，不能因“都是全局变量”就把无冲突的读操作也串行化。</p>
+<h2 id="section-12">4.5 经典同步问题</h2>
+<h3 id="section-13">4.5.1 生产者-消费者</h3>
+<p>大小为 $N$ 的有界缓冲区：满时生产者等待，空时消费者等待；放入/取出缓冲区还要互斥。</p>
+<pre><code class="language-c">semaphore mutex = 1, empty = N, full = 0;
+
+producer() {
+    while (true) {
+        item x = produce();
+        P(empty); P(mutex);
+        put(x);
+        V(mutex); V(full);
+    }
+}
+consumer() {
+    while (true) {
+        P(full); P(mutex);
+        item x = get();
+        V(mutex); V(empty);
+        consume(x);
+    }
+}
+</code></pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>信号量</th>
+<th style="text-align:right">初值</th>
+<th>语义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mutex</code></td>
+<td style="text-align:right">1</td>
+<td>保护缓冲区及其访问操作的互斥</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td style="text-align:right">$N$</td>
+<td>空缓冲单元数，控制生产者</td>
+</tr>
+<tr>
+<td><code>full</code></td>
+<td style="text-align:right">0</td>
+<td>已有产品数，控制消费者</td>
+</tr>
+</tbody>
+</table></div>
+<p>必须先 <code>P(empty/full)</code> 再 <code>P(mutex)</code>。否则进程可能拿着 <code>mutex</code> 在条件信号量上阻塞，另一类进程无法进入缓冲区改变条件，从而死锁。多生产者/多消费者、一次取/放多个产品时，仍按“资源数量同步 + 缓冲区互斥”拆分，并将批量操作整体分析。</p>
+<p><strong>原资料中的单槽水果盘</strong>是两类生产者、两类消费者的具体变体：父亲只放苹果、母亲只放橘子；女儿只取苹果、儿子只取橘子。盘子容量为 1，初始为空，可这样设置：</p>
+<pre><code class="language-c">semaphore plate = 1, apple = 0, orange = 0;
+
+father()   { P(plate);  put_apple();   V(apple);  }
+mother()   { P(plate);  put_orange();  V(orange); }
+daughter() { P(apple);  take_apple();  V(plate);  }
+son()      { P(orange); take_orange(); V(plate);  }
+</code></pre>
+<p>四个函数可各自循环执行。<code>plate</code> 保证盘子空时仅有一个生产者能放入水果；<code>apple/orange</code> 分别保证对应消费者只能取到自己需要的水果。<strong>仅在这种单槽、一次放/取一个且三个信号量按上面配对使用的模型下</strong>，同步信号量已顺带保证盘子的互斥访问，不一定需要额外 <code>mutex</code>；换成多个槽或一次批量操作时必须重新分析，不能直接套用。</p>
+<h3 id="section-14">4.5.2 读者-写者</h3>
+<p>共享文件允许多个读者同时读；写者写入时不允许读者或其他写者访问。读者优先模型：</p>
+<pre><code class="language-c">semaphore rw = 1;       // 文件的读写互斥
+semaphore mutex = 1;    // 保护 readCount
+int readCount = 0;
+
+reader() {
+    P(mutex);
+    if (readCount == 0) P(rw); // 第一个读者阻止写者
+    readCount++;
+    V(mutex);
+    read_file();
+    P(mutex);
+    readCount--;
+    if (readCount == 0) V(rw); // 最后一个读者放行写者
+    V(mutex);
+}
+writer() { P(rw); write_file(); V(rw); }
+</code></pre>
+<p>读-读不互斥，读-写、写-读、写-写互斥。读者优先可能让写者饥饿；写者优先或公平策略需增加门闩/排队信号量，阻止新读者越过已等待的写者。</p>
+<h3 id="section-15">4.5.3 哲学家进餐</h3>
+<p>$n$ 名哲学家各需同时取得左右两支筷子才能进餐；每支筷子一次只能被一人使用。所有人都先取左再等待右会形成环路等待，可能死锁。</p>
+<ul>
+<li>最多允许 $n-1$ 人同时尝试取筷子。</li>
+<li>为筷子编号，统一按小编号到大编号申请，破坏循环等待。</li>
+<li>引入服务员/全局锁，使“检查两支筷子都可用并占用”成为原子动作；不足则等待。</li>
+<li>可为每支筷子设置资源信号量，但必须注意全局锁的释放位置，不能持锁等待筷子。</li>
+</ul>
+<p><strong>原资料中的“还需一只碗”变体</strong>：$n&gt;3$ 名哲学家围坐，中央有 $m&gt;1$ 只共享碗，每人须同时取得一只碗和左右两支筷子才能吃。任意相邻两人不能同时用餐，因此同时用餐人数的上界为</p>
+<p>$$\min\left(m,\left\lfloor\frac n2\right\rfloor\right).$$</p>
+<p>若希望避免“已拿到碗和一支筷子，却永远等另一支”的死锁，可让服务员在短暂持有互斥锁期间<strong>一次性检查并分配</strong>这三件资源；三件不齐时先释放该锁，再等待条件变化，不能持锁睡眠或让所有人先各占一件资源。就餐阶段不持服务员锁，归还资源时再短暂加锁并唤醒等待者。这样互不相邻且有碗可用的哲学家仍可并行用餐；具体唤醒顺序还需考虑公平性，避免个别人饥饿。</p>
+<h2 id="section-16">4.6 管程</h2>
+<h3 id="section-17">4.6.1 基本思想</h3>
+<p>管程（monitor）是高级同步模块，封装：共享数据结构、初始化语句、操作共享数据的一组入口过程，以及管程名称。外部只能通过入口过程访问共享数据；同一时刻最多一个进程/线程在管程内执行，因此入口过程天然互斥。</p>
+<p>它把 PV 代码中的锁、共享变量和操作封装起来，降低漏锁、错序的风险；管程不等同于管道。</p>
+<h3 id="section-18">4.6.2 条件变量</h3>
+<p>管程内的条件变量用于“条件不满足则等待、条件满足则唤醒”：</p>
+<ul>
+<li><code>x.wait()</code>：调用者阻塞并插入 <code>x</code> 的等待队列，同时释放管程，以便其他进程进入。</li>
+<li><code>x.signal()</code>：若 <code>x</code> 队列有等待者，唤醒其中一个；若没有等待者，通常不累计资源数量。</li>
+</ul>
+<p>条件变量用于同步，不是普通资源计数信号量。生产者-消费者可在管程中封装 <code>count</code>、缓冲区、<code>full</code>、<code>empty</code> 条件变量：满时生产者等待，空时消费者等待，插入或取出后唤醒对应队列。</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> · 等待条件要重检
+原 PDF 第 39 页示例用 <code>if (count==N) wait(full)</code> 和 <code>if (count==0) wait(empty)</code> 表达条件等待。它不能无条件搬到常见的 <strong>Mesa 式</strong>条件变量：被唤醒者只是重新变为可竞争管程的线程，等它再次进入时，条件可能已被别人改变；实现还可能发生虚假唤醒。因此通常写成 <code>while (count==N) full.wait()</code>、<code>while (count==0) empty.wait()</code>，醒后重新检查。只有在明确采用立即移交执行权、无虚假唤醒等更强语义的模型下，才可按相应前提讨论一次 <code>if</code> 检查。</p>
+</blockquote>
+<h2 id="section-19">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-8b0d4ecd05ad/">上一篇：处理器调度</a> · <a href="/notes/cs408-9fd9ee90b095/">下一篇：死锁</a></li>
+</ul>
+<h2 id="section-20">4.7 本节复盘</h2>
+<ol>
+<li>互斥保护同一时刻的资源访问；同步保证前驱事件先发生；一个题往往同时需要二者。</li>
+<li>临界区要满足空闲让进、忙则等待、有限等待和让权等待；自旋锁不满足让权等待。</li>
+<li><code>P</code> 申请/等待且可能阻塞，<code>V</code> 释放/通知且可能唤醒一个进程；PV 必须原子执行。</li>
+<li>互斥锁初值通常为 1；资源计数按可用数量初始化；纯前驱同步信号量通常初值为 0。</li>
+<li>生产者消费者中先 <code>P(empty/full)</code> 后 <code>P(mutex)</code>；读者写者关注首读者加锁和末读者解锁；哲学家问题核心是破坏循环等待。</li>
+<li>写完 PV 代码后，逐个核对每个 <code>P</code> 的唤醒来源、每个共享计数的保护和是否存在持锁阻塞。</li>
+</ol>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-a2a1fce63aa5/index.html"><span>← 上一项</span><strong>Lecture 2：模型评估和选择</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a42ee6cb57ff/index.html"><span>下一项 →</span><strong>Lecture 8：集成学习</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-b2e9e261e13a/"><span class="related-type">笔记</span><strong>操作系统导航</strong><span>408 学习笔记：操作系统导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

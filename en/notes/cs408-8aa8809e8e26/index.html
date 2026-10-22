@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 17：知识 - CPU 的功能与结构 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 17：知识 - CPU 的功能与结构. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 17：知识 - CPU 的功能与结构 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 17：知识 - CPU 的功能与结构. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-8aa8809e8e26/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 17：知识 - CPU 的功能与结构 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 17：知识 - CPU 的功能与结构. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 17：知识 - CPU 的功能与结构",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-8aa8809e8e26/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-8aa8809e8e26/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-8aa8809e8e26/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8aa8809e8e26/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8aa8809e8e26/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-8aa8809e8e26/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 17：知识 - CPU 的功能与结构</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 17：知识 - CPU 的功能与结构. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>7 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/a1ae6bae07a0.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/a1ae6bae07a0.pdf" download="Lecture 17：知识 - CPU的功能与结构.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 CPU 的基本功能</a><a href="#section-2">5.2 程序员可见与不可见寄存器</a><a href="#section-3">5.3 运算器基本结构</a><a href="#section-5">5.4 ALU 与寄存器的连接方式</a><a href="#section-9">5.5 控制器在整体中的位置</a><a href="#section-12">相关知识</a><a href="#section-13">5.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：CPU 不只是 ALU：它通过控制器按时间发出微操作信号，让运算器、寄存器、主存与 I/O 协同。读结构图时，先分出运算器与控制器，再追踪数据通路和控制信号。</p>
+</blockquote>
+<h2 id="section-1">5.1 CPU 的基本功能</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令控制</td>
+<td>取指、分析、执行，完成程序顺序控制</td>
+</tr>
+<tr>
+<td>操作控制</td>
+<td>从指令导出各部件所需控制信号，并让部件按要求动作</td>
+</tr>
+<tr>
+<td>时间控制</td>
+<td>按正确时序提供控制信号，协调各微操作</td>
+</tr>
+<tr>
+<td>数据加工</td>
+<td>完成算术、逻辑、移位等处理</td>
+</tr>
+<tr>
+<td>中断处理</td>
+<td>响应异常情况和特殊请求，并转入相应服务流程</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>一条机器指令在硬件上会分解为若干微操作；“操作控制”说明做什么，“时间控制”说明何时做，两者缺一不可。</li>
+<li>CPU 的工作建立在存储程序之上：PC 给出取指地址，控制器解释 IR 中的指令，再驱动数据通路完成执行。</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    PC[&quot;PC：下一条待取指令地址&quot;] --&gt; MAR[&quot;MAR：主存地址&quot;]
+    MAR --&gt; MEM[&quot;主存&quot;]
+    MEM &lt;--&gt; MDR[&quot;MDR：主存数据缓冲&quot;]
+    MDR --&gt; IR[&quot;IR：当前指令&quot;]
+    IR --&gt; CU[&quot;控制器 CU&quot;]
+    CU -. &quot;控制与时序信号&quot; .-&gt; DP[&quot;运算器与寄存器数据通路&quot;]
+    MDR &lt;--&gt; DP
+    DP --&gt; PSW[&quot;PSW：状态/条件码&quot;]
+    PSW --&gt; CU
+</pre>
+<h2 id="section-2">5.2 程序员可见与不可见寄存器</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>寄存器</th>
+<th>原因/作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可见</td>
+<td>PC</td>
+<td>汇编程序、转移与调试可涉及程序地址</td>
+</tr>
+<tr>
+<td>可见（受限）</td>
+<td>BR</td>
+<td>基址寄存器可见但通常由 OS 控制，普通用户不可任意修改</td>
+</tr>
+<tr>
+<td>可见</td>
+<td>PSW</td>
+<td>程序状态/条件码，影响条件转移与状态切换</td>
+</tr>
+<tr>
+<td>可见</td>
+<td>通用寄存器</td>
+<td>程序显式保存操作数、地址、中间结果</td>
+</tr>
+<tr>
+<td>不可见</td>
+<td>MAR、MDR、IR、微指令寄存器</td>
+<td>CPU 内部完成访存、取指和微控制，程序员不直接编码访问</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>“程序员可见”是 ISA/汇编层面可用或可观察的资源；不表示任何用户态程序都拥有完整修改权限。表中 BR 的分类遵循源 PDF 的教材模型：它对系统程序可见但由 OS 控制；实际 ISA 可能用专用重定位寄存器、页表基址寄存器或普通通用寄存器承担类似作用，权限也可能不同。</li>
+<li>MAR 保存访问主存的地址，MDR 暂存主存数据，IR 保存当前指令，微指令寄存器服务于微程序控制；它们不应与普通通用寄存器混淆。</li>
+</ul>
+<h2 id="section-3">5.3 运算器基本结构</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>部件</th>
+<th>主要职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALU</td>
+<td>算术与逻辑运算</td>
+</tr>
+<tr>
+<td>通用寄存器组</td>
+<td>暂存源/目的操作数、中间结果和地址，如 AX、BX、CX、DX、SP</td>
+</tr>
+<tr>
+<td>暂存寄存器</td>
+<td>缓存来自主存的数据，避免覆盖通用寄存器已有内容</td>
+</tr>
+<tr>
+<td>累加寄存器 ACC</td>
+<td>暂存 ALU 结果，常用于累加式运算</td>
+</tr>
+<tr>
+<td>PSW</td>
+<td>保存 OF、SF、ZF、CF 等状态/条件标志，参与条件微操作形成</td>
+</tr>
+<tr>
+<td>移位器</td>
+<td>对结果逻辑/算术移位</td>
+</tr>
+<tr>
+<td>计数器</td>
+<td>控制乘除等迭代操作步数</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>SP 是栈顶指针，既属于寄存器组，又在过程调用中承担特定寻址职责。</li>
+<li>暂存寄存器与 ACC 的存在反映了微操作期间需要中间缓冲：不能随意占用程序可见寄存器，否则会破坏原有操作数。</li>
+</ul>
+<h3 id="section-4">5.3.1 原图中的组合元件与时序元件</h3>
+<p>原 PDF 第 4 页把运算器拆成两类，不能只记 ALU 和通用寄存器：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>元件与作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>组合逻辑</td>
+<td>ALU 做算术/逻辑或直送；加法器做加减（减法可由补码加法实现）；乘法器/除法器承担相应运算；三态门决定是否驱动公共线；MUX 从多路输入中选一路；译码器把编码后的选择信号转换成具体某一路的使能信号</td>
+</tr>
+<tr>
+<td>时序存储</td>
+<td>MAR、MDR、IR、PC、PSW 等专用寄存器，运算用暂存寄存器，以及由读/写使能和寄存器编号选择的通用寄存器组</td>
+</tr>
+</tbody>
+</table></div>
+<p>若有 $2^n$ 个备选功能或输入，通常用 $n$ 位控制码选择其一；译码器可把 $n$ 位编码转换为至多 $2^n$ 条互斥选择线。这里的“组合”指输出由当前输入决定，“时序”指寄存器能跨时钟边界保存状态；三态门的高阻态表示暂不驱动总线，不能当作第三个普通二进制值。</p>
+<p>原图还列出可带的<strong>寄存器附加功能</strong>：移位（包括用左移表示乘 $2^k$ 的有限条件）、自增/自减（如顺序取指中的 PC 更新）、符号扩展、零扩展和按位取反。符号扩展复制符号位，零扩展补 0；二者对最高位为 1 的窄数据给出不同宽数据，不能混用。具体寄存器是否内建这些功能由数据通路设计决定，不意味着每个通用寄存器都必须具备。</p>
+<h2 id="section-5">5.4 ALU 与寄存器的连接方式</h2>
+<h3 id="section-6">5.4.1 专用数据通路</h3>
+<p>按指令执行过程中数据/地址的流向专门铺设连线，常以 MUX 多路选择器或三态门安排多源选择。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据冲突少、可并行传输、性能高</td>
+<td>连线和控制复杂、硬件量大、不易实现</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-7">5.4.2 单总线数据通路</h3>
+<p>所有寄存器输入端、输出端连接到同一公共总线。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构简单、硬件较省、易实现</td>
+<td>同一时刻总线通常只能由一个源驱动，传输冲突多、微操作需分时，性能较低</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-8"><strong>定义</strong>：#三态门</h5>
+<p>三态门除 0、1 外还可呈高阻态，用于把寄存器受控接入公共总线。例如 <code>SRout</code> 有效时开放 SR 输出三态门，使 SR 驱动总线；无效时 SR 与总线断开。多源共用单总线时，必须保证不会有多个输出三态门同时使能。</p>
+<h2 id="section-9">5.5 控制器在整体中的位置</h2>
+<p>控制器接收 IR 的操作码、PSW 状态、时钟/中断等信息，产生寄存器读写、ALU 功能选择、总线驱动、主存读写等控制信号。运算器负责“算”，控制器负责“让谁在何时经哪条路算”。</p>
+<ul>
+<li>运算器数据通路与控制器并不是互相独立：控制器通过微操作信号选择 MUX、打开三态门、装入寄存器、发起存储器读写。</li>
+<li>后续的硬布线控制、微程序控制、指令周期和流水线，都是围绕“如何更快更正确地产生这些控制信号”展开。</li>
+</ul>
+<h3 id="section-10">题型：#CPU结构辨析</h3>
+<h4 id="section-11">第一部分：判断方法</h4>
+<ul>
+<li>题问“保存当前指令”答 IR；“保存待访问主存地址”答 MAR；“暂存读/写主存数据”答 MDR；“程序顺序地址”答 PC。</li>
+<li>题问“哪项可被汇编程序直接使用”优先选通用寄存器、PC/PSW 等 ISA 可见资源；微指令寄存器、MAR/MDR/IR 是内部资源。</li>
+<li>题问总线冲突或硬件量：专用通路性能高而复杂，单总线简单而需分时。</li>
+</ul>
+<h2 id="section-12">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-8a0212571862/">上一篇：高级语言与机器级代码的对应</a> · <a href="/en/notes/cs408-d889ec3bdd23/">下一篇：指令执行过程</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-bc90db5fb862/">进程、线程与现场</a></li>
+</ul>
+<h2 id="section-13">5.6 本节复盘</h2>
+<ul>
+<li>CPU 具有指令、操作、时间、数据加工和中断处理五项核心功能；控制信号由“做什么”和“何时做”两部分决定。</li>
+<li>运算器含 ALU、寄存器、PSW、移位器、计数器等；控制器驱动这些部件协同。</li>
+<li>PC、PSW、通用寄存器等程序可见，MAR、MDR、IR 与微指令寄存器等为内部不可见资源。</li>
+<li>专用数据通路快但复杂，单总线简单但易冲突；三态门实现寄存器对公共总线的受控接入。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-8a0212571862/index.html"><span>← Previous item</span><strong>Lecture 16：知识 - 高级语言程序与机器级代码之间的对应</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-8b0d4ecd05ad/index.html"><span>Next item →</span><strong>Lecture 3：知识 - 处理器调度</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

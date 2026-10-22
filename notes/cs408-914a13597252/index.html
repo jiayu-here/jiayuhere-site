@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 27：知识 - IO方式 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 27：知识 - IO方式。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 27：知识 - IO方式 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 27：知识 - IO方式。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-914a13597252/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 27：知识 - IO方式 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 27：知识 - IO方式。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 27：知识 - IO方式",
+      "item": "https://www.jiayuhere.com/notes/cs408-914a13597252/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-914a13597252/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-914a13597252/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-914a13597252/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-914a13597252/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-914a13597252/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 27：知识 - IO方式</h1><p class="article-lead">408 学习笔记：Lecture 27：知识 - IO方式。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 15 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/1a004dbd6b09.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/1a004dbd6b09.pdf" download="Lecture 27：知识 - IO方式.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 程序查询方式</a><a href="#section-4">6.2 程序中断 I/O 方式</a><a href="#section-7">6.3 DMA 方式</a><a href="#section-12">6.4 DMA 与 CPU 争用主存的三种方式</a><a href="#section-15">6.5 DMA 工作流程（按阶段）</a><a href="#section-16">6.6 通道控制方式</a><a href="#section-20">相关知识</a><a href="#section-21">6.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：I/O 方式按 CPU 参与程度递减可理解为程序查询、中断、DMA、通道。核心区别：查询和中断的数据搬运都靠 CPU/软件；DMA 由硬件直接在主存与接口间搬运整块数据；通道进一步把多设备管理交给专用处理器。</p>
+</blockquote>
+<h2 id="section-1">6.1 程序查询方式</h2>
+<p>程序查询（轮询）方式中，CPU 与 I/O 设备串行通信。CPU 不断读取 I/O 接口的状态寄存器，直到设备就绪，然后才进行一次数据传送。</p>
+<pre><code class="language-text">初始化主存地址和传送计数 -&gt; 发控制命令 -&gt; 读状态寄存器
+                                      ├─ 未就绪：继续查询
+                                      └─ 就绪：读/写数据端口
+                                               -&gt; 修改地址和计数
+                                               -&gt; 未完成则启动下一次传送
+</code></pre>
+<p>典型独立编址指令可写为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IN Rd, Rs</code></td>
+<td>将 I/O 端口 <code>Rs</code> 的数据读入 CPU 寄存器 <code>Rd</code></td>
+</tr>
+<tr>
+<td><code>OUT Rd, Rs</code></td>
+<td>将 CPU 寄存器 <code>Rs</code> 的数据写至 I/O 端口 <code>Rd</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>不同教材对操作数书写顺序可能不同，解题时以题给 ISA 为准；本质永远是<strong>通用寄存器与 I/O 数据端口</strong>之间传输。</p>
+<h3 id="section-2">6.1.1 以打印机输出为例</h3>
+<ol>
+<li>CPU 向控制端口写命令字，启动打印机。</li>
+<li>打印机/控制器把忙、就绪等状态写入状态寄存器。</li>
+<li>CPU 持续用 <code>IN</code> 读取状态端口。</li>
+<li>判断就绪后，CPU 用 <code>OUT</code> 把待打印数据写到数据缓冲寄存器，再开始下一字节/字传送。</li>
+</ol>
+<p>该方式实现简单、硬件少，但 CPU 花费大量时间查询和等待，一段时间通常只能同一个外设交换信息，利用率低。</p>
+<h3 id="section-3">6.1.2 独占查询与定时查询</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>CPU 行为</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>独占查询</td>
+<td>100% 时间反复检查设备状态</td>
+<td>最直接但完全串行，CPU 空等严重</td>
+</tr>
+<tr>
+<td>定时查询</td>
+<td>在不丢失数据的前提下每隔一段时间查询一次</td>
+<td>查询间隙可执行其他程序，需选好最大间隔</td>
+</tr>
+</tbody>
+</table></div>
+<p>在<strong>单字缓冲、无流控且新数据可能覆盖旧数据</strong>的题设中，若设备每次准备/填满一个端口字的时间为 $T_d$，定时查询间隔必须不大于 $T_d$。若接口带 FIFO、握手流控或能暂停发送端，则最大安全间隔还取决于 FIFO 深度和流控机制，不能只套用一个端口字的时间。</p>
+<blockquote>
+<p>例（2018 年真题参数）：CPU 主频为 $500,MHz$，设备 A 以 $2,MB/s$ 准备数据，端口缓冲为 32 bit $=4,B$，填满时间为 $4,B/(2,MB/s)=2,\mu s$，因此最多间隔 $2,\mu s$ 查询一次，即每秒至少查询 $5\times10^5$ 次。若每次 I/O 需执行 10 条指令、CPI 为 4，则每秒占用
+$$
+5\times10^5\times10\times4=2\times10^7\ \text{个时钟周期},
+$$
+占 CPU 总时间至少为 $(2\times10^7)/(5\times10^8)=4%$。这里的 MB 按真题常用十进制单位 $10^6,B$ 计算。</p>
+</blockquote>
+<h2 id="section-4">6.2 程序中断 I/O 方式</h2>
+<p>中断方式让 CPU 在设备准备数据期间执行其他程序。设备就绪/完成后，I/O 控制器向 CPU 发外部中断请求；CPU 在指令边界响应后转入 ISR，完成一次端口数据传送并可启动设备下一次工作。</p>
+<pre><code class="language-text">CPU 启动设备 -&gt; CPU 执行其他程序
+设备就绪 -&gt; I/O 控制器请求中断 -&gt; CPU 响应 -&gt; ISR 读/写端口
+-&gt; 重新启动设备（若需要） -&gt; 中断返回原程序
+</code></pre>
+<h3 id="section-5">6.2.1 特点与限制</h3>
+<ul>
+<li>适合相对慢速的设备。若设备极快、每个字节/字都中断一次，CPU 会被大量 ISR 淹没，利用率反而严重下降；磁盘块传输通常不适宜逐字采用中断 I/O。</li>
+<li>中断 I/O 的数据传输由<strong>软件</strong>执行：CPU 在 ISR 中读/写 I/O 端口，再通过程序把数据写入/读出主存。</li>
+<li>CPU 和 I/O 端口间传送的信息中不需要把“数据所在主存地址”交给接口；内存地址由执行 I/O 的程序/ISR 自己使用，接口只看到端口数据与控制信息。</li>
+<li>可屏蔽外部中断只有 CPU 开中断、且在指令执行结束边界时才能响应。</li>
+</ul>
+<h3 id="section-6">6.2.2 查询与中断的比较</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>程序查询</th>
+<th>程序中断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>谁发现就绪</td>
+<td>CPU 定期/连续读状态</td>
+<td>设备控制器主动请求</td>
+</tr>
+<tr>
+<td>CPU 等待期间</td>
+<td>忙等或按时轮询</td>
+<td>可执行其他程序</td>
+</tr>
+<tr>
+<td>单次数据搬运</td>
+<td>CPU 指令</td>
+<td>CPU 在 ISR 中的软件指令</td>
+</tr>
+<tr>
+<td>硬件/控制复杂度</td>
+<td>低</td>
+<td>需中断机构与 ISR</td>
+</tr>
+<tr>
+<td>适用</td>
+<td>极简单、可容忍忙等</td>
+<td>慢速、事件不频繁设备</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-7">6.3 DMA 方式</h2>
+<h3 id="section-8">6.3.1 基本思想与角色</h3>
+<p>DMA（Direct Memory Access）接口也是一种 I/O 接口。它使 DMA 控制器能作为总线主控者，在主存和高速 I/O 设备之间建立直接数据通路，使数据不必经 CPU 的通用寄存器逐字搬运。教材三总线示意图把这条通路画成“DMA 总线”；实际系统也可能复用系统互连或内存总线，因此“直接”是指<strong>不经 CPU 搬运</strong>，不等于必定有一组独立物理导线。</p>
+<p>CPU 只在传送前设置参数：</p>
+<ol>
+<li>输入还是输出（传送方向）；</li>
+<li>主存起始地址，以及控制器需要的设备端地址/位置参数（若设备协议需要）；</li>
+<li>传送的数据量/长度；</li>
+<li>读写等控制命令。</li>
+</ol>
+<p>随后 DMA 控制器自动完成主存与设备控制器间的数据读写。正常情况下整块传输结束后向 CPU 发一次<strong>完成中断</strong>；总线错误、设备错误等也可能使 DMA 提前终止并发出错误中断，故“整块结束才中断一次”是常见正常路径而非无条件定律。</p>
+<h3 id="section-9">6.3.2 DMA 控制器的必要状态</h3>
+<p>为自动传送，DMA 控制器需维护/使用：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>传送中的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主存地址计数</td>
+<td>给出当前主存单元，传送后自动修改</td>
+</tr>
+<tr>
+<td>数据传送长度计数</td>
+<td>记录剩余字/字节数，逐次递减至完成</td>
+</tr>
+<tr>
+<td>数据缓冲寄存器</td>
+<td>暂存设备端与内存总线之间本次传送的数据字</td>
+</tr>
+<tr>
+<td>设备/端口相关信息</td>
+<td>指向目标设备或缓冲寄存器</td>
+</tr>
+<tr>
+<td>控制状态</td>
+<td>保存方向、读写命令、完成/错误状态</td>
+</tr>
+</tbody>
+</table></div>
+<p>不同教材的寄存器缩写并不统一：主存地址寄存器常写作 <code>AR</code> 或地址计数器，设备地址寄存器可写作 <code>DAR</code>，传送字计数器常写作 <code>WC</code>，数据缓冲寄存器常写作 <code>DR</code>。考试应依据功能和连线辨认，不能只背缩写。</p>
+<p>主存不再只由 CPU 访问：CPU 与 DMA 都可成为访问主存的发起者，但二者同时提出请求时仍需仲裁，不能理解为同一组内存端口可无条件在同一时刻服务二者。DMA 传送前有程序预处理，结束后由中断进行后处理；传送期间 CPU 可执行不需要被占用总线的工作，因此总体效率高。</p>
+<h3 id="section-10">6.3.3 DMA 请求与传送链路</h3>
+<p>设备控制器与 DMA 控制器用 <code>DMA-request</code> / <code>DMA-acknowledge</code> 线路握手：</p>
+<ol>
+<li>设备有数据需要传输，向 DMA 控制器提出 DMA 请求。</li>
+<li>DMA 控制器向 CPU 申请<strong>总线使用权</strong>（不是中断请求）。</li>
+<li>CPU 在可让出的总线边界响应，DMA 取得总线控制权并送出主存地址、读写控制。</li>
+<li>DMA 向设备发确认，设备控制器经数据通路传送一个字/块，并清除本次请求。</li>
+<li>地址/长度计数器更新；未结束则继续，正常完成或发生错误后 DMA 再按状态中断 CPU。</li>
+</ol>
+<ul>
+<li>DMA 控制器占用内存总线时，CPU 暂时不能通过该总线访问主存，但通常仍可进行纯寄存器运算，或在体系结构允许时使用 Cache 命中的数据。</li>
+<li>DMA 与 CPU Cache 之间还存在一致性问题：非一致性 DMA 系统中，设备读内存前可能需要把 CPU 脏 Cache 行写回，设备写内存后可能需要使 CPU 对应 Cache 行失效；具备一致性互连的系统可由硬件协议承担这些工作。IOMMU 负责 DMA 地址转换、权限检查与设备隔离，本身不等同于 Cache 一致性机制。408 计算题若未说明，通常忽略这一实现细节。</li>
+<li>多数 DMA 使用物理地址；采用直接虚拟内存访问（DVMA）时，DMA 可用虚拟地址，需完成虚实地址转换。</li>
+</ul>
+<h3 id="section-11">6.3.4 DMA 与中断方式的本质区别</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>程序中断 I/O</th>
+<th>DMA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU/控制器申请的资源</td>
+<td>CPU 的处理时间</td>
+<td>总线使用权</td>
+</tr>
+<tr>
+<td>数据搬运</td>
+<td>软件、CPU 指令逐次完成</td>
+<td>DMA 硬件直接完成</td>
+</tr>
+<tr>
+<td>通知粒度</td>
+<td>通常每次设备就绪/每字可中断</td>
+<td>正常时整块传送结束后一次完成中断，错误也可提前中断</td>
+</tr>
+<tr>
+<td>响应边界</td>
+<td>一条指令执行结束</td>
+<td>一个总线事务结束/总线空闲时</td>
+</tr>
+<tr>
+<td>主存地址是否须交给接口</td>
+<td>一般不交给普通 I/O 接口</td>
+<td>CPU 初始化时交给 DMA 控制器</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-12">6.4 DMA 与 CPU 争用主存的三种方式</h2>
+<p>I/O 数据若不及时写入主存/从主存取出可能丢失，DMA 的访存优先级通常高于 CPU 访存。两者争用时有三种经典安排：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>DMA 对 CPU 的影响</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>停止 CPU 访存</td>
+<td>DMA 获得总线后，CPU 停止访问主存，直到一整块传完</td>
+<td>DMA 块传输连续、快；CPU 停顿较长</td>
+</tr>
+<tr>
+<td>周期挪用（cycle stealing）</td>
+<td>DMA 每次挪用一个存取周期传一个字，立刻释放总线</td>
+<td>单字传送；CPU 变慢但可在间隔中访存</td>
+</tr>
+<tr>
+<td>交替使用</td>
+<td>一个 CPU 工作周期分为 CPU 访存和 DMA 访存时间片</td>
+<td>固定分时，无需反复申请/归还总线；必须给两方各留出足够的访存时间</td>
+</tr>
+</tbody>
+</table></div>
+<p>在原资料的<strong>两个等长时间片</strong>模型中，若两方各要完成一次完整主存访问，需满足 $T_{CPU}\ge2T_m$，而不只是 $T_{CPU}&gt;T_m$。原页举例 CPU 工作周期 $1.2,\mu s$、主存存取周期小于 $0.6,\mu s$，才可把一个 CPU 周期分成两个约 $0.6,\mu s$ 的访存时隙；具体硬件还应考虑切换与建立时间。</p>
+<h3 id="section-13">6.4.1 周期挪用细节</h3>
+<p>周期挪用在每次传一个数据字后就释放总线。设备再次准备好数据后才会再占用总线，可能出现：</p>
+<ol>
+<li>CPU 没在访存：DMA 直接使用空闲总线。</li>
+<li>CPU 正在访存：DMA 等当前存取周期结束后再取得总线。</li>
+<li>CPU 与 I/O 同时请求主存：CPU 暂时让出总线，DMA 优先。</li>
+</ol>
+<blockquote>
+<p>易错：周期挪用是<strong>单字传送</strong>，但不是“每传一个字 CPU 永远不能访问主存”；DMA 释放总线后 CPU 可再次访存。</p>
+</blockquote>
+<h3 id="section-14">6.4.2 典型计算</h3>
+<p>若 DMA 缓冲寄存器宽度为 $W$ bit，周期挪用每请求传一个缓冲字，则传送 $B$ byte 数据需要：</p>
+<p>$$N_{DMA}=\left\lceil\frac{B}{W/8}\right\rceil$$</p>
+<p>若 $B$ 恰好为缓冲字节数的整数倍，可直接相除；最后不足一个字时通常仍需一次传送，并由字节使能或长度字段标识有效字节。</p>
+<p><strong>例（2012 年真题）</strong>：CPU 主频 $80,MHz$、CPI 为 4，平均每条指令访存 1.5 次；Cache 命中率为 99%，仅在 Cache 缺失后访问主存，而这些主存访问的缺页率为 $0.0005%$。页面为 4 KB，DMA 数据缓冲寄存器为 32 bit。</p>
+<p>$$
+\begin{aligned}
+\text{指令数/s} &amp;= 80,M/4=20,M,\
+\text{访存数/s} &amp;= 20,M\times1.5=30,M,\
+\text{Cache 缺失数/s} &amp;= 30,M\times(1-0.99)=300,000,\
+\text{缺页数/s} &amp;= 300,000\times0.0005%=1.5.
+\end{aligned}
+$$</p>
+<p>一次调入 4 KB 页面需 $4096/(32/8)=1024$ 次单字 DMA 请求，故每秒至少 $1024\times1.5=1536$ 次。CPU 与 DMA 同时请求存储器总线时，按该题的经典周期挪用模型让 DMA 优先，以避免设备缓冲溢出；实际系统仲裁策略仍由硬件的优先级和服务质量规则决定。</p>
+<p>多体低位交叉存储达到流水稳定后，若每体每存储周期取 $w$ B、存储周期为 $T_m$、有 $m$ 个体且启动间隔满足交叉要求，理想最大带宽：</p>
+<p>$$BW_{max}=\frac{m\times w}{T_m}$$</p>
+<p>例如 4 体、每体每 50 ns 取 4 B，则 $BW=4\times4,B/50,ns=320,MB/s$。该结果还假定总线与控制器能支持每 $T_m/m$ 启动一次传送；若总线峰值更低，实际最大带宽应受总线瓶颈限制。</p>
+<blockquote>
+<p>2020 年真题边界：周期挪用传送 512 B 数据块、I/O 端口缓冲为 32 bit 时，共需 $512/4=128$ 次单字传送/总线请求。DMA 每传完一个字便释放总线，所以“整个 512 B 传送期间 CPU 都不能访问主存”是错误说法；CPU 可在相邻挪用周期之间访存。</p>
+</blockquote>
+<h2 id="section-15">6.5 DMA 工作流程（按阶段）</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>关键操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传送前</td>
+<td>设备驱动程序设置方向、地址、长度等 DMA 参数；DMA 请求总线，CPU 给出总线响应，DMA 接管总线进入操作周期</td>
+</tr>
+<tr>
+<td>传送中</td>
+<td>DMA 自主给出主存地址、自动更新地址/长度计数、发读写控制，在设备和主存间传数据；CPU 不参与数据总线控制</td>
+</tr>
+<tr>
+<td>结束后</td>
+<td>DMA 控制器向 CPU 发中断请求报告完成，CPU 执行 DMA 完成的 ISR 做后处理</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    A[驱动程序设置方向、地址、长度] --&gt; B[启动设备与 DMA]
+    B --&gt; C[设备提出 DMA 请求]
+    C --&gt; D[DMA 请求总线]
+    D --&gt; E[CPU / 仲裁器授予总线]
+    E --&gt; F[DMA 在设备与主存间传送]
+    F --&gt; G[更新地址和剩余长度]
+    G --&gt; H{完成或错误?}
+    H -- 否 --&gt; C
+    H -- 是 --&gt; I[释放总线并记录状态]
+    I --&gt; J[向 CPU 发完成 / 错误中断]
+    J --&gt; K[ISR 后处理]
+</pre>
+<p>基于教材三总线结构时，主存与 DMA 接口有直接数据通路，数据传送无需穿过 CPU；这让 I/O 与主机程序可并行，但 CPU 和 DMA 同时访问同一主存通路仍须由上述仲裁方式解决冲突。三总线是便于理解的一种结构，不是所有 DMA 系统的唯一拓扑。</p>
+<h2 id="section-16">6.6 通道控制方式</h2>
+<p>大型机/中型机可能连接大量 I/O 设备，若都由 CPU 细管控，CPU 负担很重。<strong>通道</strong>是具专门 I/O 管理功能的处理器，可理解为功能更专一的处理器；它有自己的通道指令系统，不等同于 CPU ISA。</p>
+<p>流程：</p>
+<ol>
+<li>CPU 发 I/O 指令给通道，指出主存中通道程序的位置和待操作设备。</li>
+<li>CPU 继续执行其他任务；通道读取并执行一系列通道指令，分别控制相应 I/O 设备完成动作。</li>
+<li>通道完成规定任务后向 CPU 发中断请求，CPU 再处理完成事件。</li>
+</ol>
+<p>通道相对 DMA 进一步承担多设备的控制序列管理；DMA 的重点是主存与设备间大块直接数据搬运，通道的重点是按通道程序统一管理 I/O 任务。</p>
+<h3 id="section-17">题型：#选择 I/O 方式与 DMA 计算</h3>
+<h4 id="section-18">第一部分：快速判别</h4>
+<ul>
+<li>“CPU 不断读状态寄存器” -&gt; 程序查询。</li>
+<li>“设备就绪后请求中断，ISR 由 CPU 搬数据” -&gt; 程序中断。</li>
+<li>“CPU 预设地址和长度，控制器直接搬块，结束一次中断” -&gt; DMA。</li>
+<li>“CPU 启动通道程序，专用处理器管理一串 I/O 指令” -&gt; 通道。</li>
+</ul>
+<h4 id="section-19">第二部分：计算步骤</h4>
+<ol>
+<li>每秒执行指令数为 $f_{CPU}/CPI$；乘平均每指令访存次数和 Cache 缺失率等，逐层得到主存访问/缺页次数。</li>
+<li>每次 DMA 请求传输量由 DMA 数据缓冲寄存器宽度决定；块大小除以每请求字节数得到请求数。</li>
+<li>对程序查询，查询间隔由端口容量/设备速率决定，CPU 开销按查询次数乘每次 I/O 的指令周期计算。</li>
+<li>对交叉存储，先算单体带宽 $w/T_m$，再乘可稳定流水的体数。</li>
+</ol>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-67e2b38e518a/">上一篇：I/O 接口</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-39b45084fd1d/">操作系统 I/O 路径</a></li>
+</ul>
+<h2 id="section-21">6.7 本节复盘</h2>
+<ul>
+<li>程序查询让 CPU 轮询状态，简单但忙等；独占查询全程等待，定时查询在安全间隔内可穿插其他程序。</li>
+<li>中断方式由设备主动通知，CPU 在 ISR 中用软件搬数据，适合慢速设备；它申请 CPU 处理时间。</li>
+<li>DMA 初始化后由硬件在主存与设备间直接搬整块数据，申请总线使用权，结束才中断 CPU。</li>
+<li>DMA 争用主存可停止 CPU、周期挪用或交替使用；周期挪用每次只传一个字并释放总线。</li>
+<li>通道执行主存中的通道程序，统一管理大量 I/O 设备，完成后中断 CPU。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-9128ab174798/index.html"><span>← 上一项</span><strong>Lecture 17：二叉树的遍历</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-937337386c65/index.html"><span>下一项 →</span><strong>Lecture 0：PyTorch 总结</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

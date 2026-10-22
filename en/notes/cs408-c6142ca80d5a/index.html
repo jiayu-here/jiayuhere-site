@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 13：知识 - 磁盘管理 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 13：知识 - 磁盘管理. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 13：知识 - 磁盘管理 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 13：知识 - 磁盘管理. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-c6142ca80d5a/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 13：知识 - 磁盘管理 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 13：知识 - 磁盘管理. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 13：知识 - 磁盘管理",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-c6142ca80d5a/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-c6142ca80d5a/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c6142ca80d5a/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c6142ca80d5a/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c6142ca80d5a/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-c6142ca80d5a/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 13：知识 - 磁盘管理</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 13：知识 - 磁盘管理. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>9 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/9f511cd76488.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/9f511cd76488.pdf" download="Lecture 13： 知识 - 磁盘管理.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">13.1 结构与地址</a><a href="#section-2">13.2 访问时间与调度</a><a href="#section-3">13.3 初始化、引导与坏块</a><a href="#section-4">13.4 图示复核、公式与典型题</a><a href="#section-11">相关知识</a><a href="#section-12">13.5 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>磁盘访问时间由寻道、旋转延迟和传输时间组成。调度算法主要减少磁臂移动距离；地址与格式化题要分清柱面、盘面和扇区的层次。</p>
+</blockquote>
+<h2 id="section-1">13.1 结构与地址</h2>
+<ul>
+<li>盘面划分为磁道，磁道划分为物理扇区；扇区是磁盘硬件的基本读写/寻址单位。文件系统逻辑块是软件分配单位，一个逻辑块可以由一个或多个物理扇区组成，二者不能无条件等同。</li>
+<li>同一半径、不同盘面的磁道构成柱面；所有磁头装在同一磁臂上，活动头磁盘的磁头共进退。</li>
+<li>按磁头是否能径向移动，可分为活动头磁盘与固定头磁盘；后者每磁道可配独立磁头。按盘片能否拆换，还可分为可换盘片磁盘与固定盘片磁盘。这两种分类维度不同。</li>
+<li>磁盘地址通常为：</li>
+</ul>
+<p>$$
+(\text{柱面号/磁道号},\ \text{盘面号/磁头号},\ \text{扇区号})
+$$</p>
+<ul>
+<li>位数计算：若字段有 $N$ 种可能取值，需要 $\lceil\log_2N\rceil$ 位；盘片数与盘面数需正确换算（每盘片通常双面）。</li>
+</ul>
+<h2 id="section-2">13.2 访问时间与调度</h2>
+<p>$$
+T_{access}=T_{seek}+T_{rotation}+T_{transfer}
+$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>选择规则</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FCFS</td>
+<td>按到达顺序</td>
+<td>公平简单，平均寻道可能大</td>
+</tr>
+<tr>
+<td>SSTF</td>
+<td>最近磁道优先</td>
+<td>平均移动小，远端请求可能饥饿</td>
+</tr>
+<tr>
+<td>SCAN</td>
+<td>磁臂单向扫描到端点再反向</td>
+<td>电梯算法，服务较均匀</td>
+</tr>
+<tr>
+<td>LOOK</td>
+<td>扫到本方向最后请求即反向</td>
+<td>不必走到物理端点</td>
+</tr>
+<tr>
+<td>C-SCAN/C-LOOK</td>
+<td>单方向服务，回到起点再服务</td>
+<td>等待时间更均匀</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>计算移动磁道数时按实际服务顺序逐段求绝对差；不要把回程是否计入与算法规则混淆。</li>
+<li>交替编号能降低连续逻辑扇区读取时的旋转等待；优化块布局、预读和延迟写也能改善 I/O 性能。</li>
+<li>原 PDF 的 2012 年题还列出三类改善措施：重排 I/O 请求次序、预读取与滞后写、优化文件物理块分布。<strong>仅增加磁盘分区数量</strong>不会直接缩短磁头寻道或旋转等待，不能当作独立的 I/O 性能优化方法。</li>
+</ul>
+<h2 id="section-3">13.3 初始化、引导与坏块</h2>
+<ol>
+<li>物理格式化：划分磁道和扇区、设置校验等。</li>
+<li>分区：每分区由若干柱面组成。</li>
+<li>逻辑格式化：创建文件系统、根目录和空闲空间管理结构。</li>
+</ol>
+<ul>
+<li>ROM 中的自举装入程序定位磁盘启动块，将完整引导程序读入内存，再装入内核。</li>
+<li>坏块是硬件故障，OS 不能修复数据面；可通过坏块表、扇区备用/重映射等避免继续分配。简单系统可在文件系统层标记，现代磁盘常由控制器重映射。</li>
+<li>SSD 无机械寻道和旋转延迟，随机访问性能好；擦写次数有限，需要磨损均衡。</li>
+</ul>
+<h2 id="section-4">13.4 图示复核、公式与典型题</h2>
+<h3 id="section-5">访问时间的分解</h3>
+<p>磁盘一次访问的平均时间由寻道、旋转延迟和传输三部分组成：</p>
+<p>$$
+T_a=T_s+T_r+T_t
+$$</p>
+<p>设启动磁头臂的固定时间为 $s$，磁头匀速跨过一个磁道需 $m$，本次跨越 $n$ 个磁道；磁盘转速为 $r$ 转/秒（或先换算为转/秒），本磁道有 $N$ 字节，本次传输 $b$ 字节，则：</p>
+<p>$$
+T_s=s+mn,\qquad T_r=\frac{1}{2r},\qquad T_t=\frac{1}{r}\cdot\frac{b}{N}=\frac{b}{rN}
+$$</p>
+<p>调度算法直接影响的是 $T_s$；在其他条件不变时，$T_r$ 与 $T_t$ 都与转速 $r$ 近似成反比，通常不能由操作系统的磁臂调度消除。</p>
+<h3 id="section-6">CHS 地址题（2022）</h3>
+<p>磁盘地址的三个字段是<strong>柱面号（磁道号）</strong>、<strong>磁头号（盘面号）</strong>、<strong>扇区号</strong>。例：4 个双面盘片、每盘面 20,000 条磁道、每磁道 500 个扇区时：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th style="text-align:right">可取值数</th>
+<th style="text-align:right">至少位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>柱面号</td>
+<td style="text-align:right">20,000</td>
+<td style="text-align:right">15 bit</td>
+</tr>
+<tr>
+<td>磁头号</td>
+<td style="text-align:right">$4\times2=8$ 个盘面</td>
+<td style="text-align:right">3 bit</td>
+</tr>
+<tr>
+<td>扇区号</td>
+<td style="text-align:right">500</td>
+<td style="text-align:right">9 bit</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-7">FCFS 与 SSTF 手算</h3>
+<p>FCFS 按到达顺序服务。若初始磁头在 100，请求序列为 $55,58,39,18,90,160,150,38,184$，则服务顺序不变，总移动量为：</p>
+<p>$$45+3+19+21+72+70+10+112+146=498$$</p>
+<p>平均寻道长度为 $498/9\approx55.3$ 个磁道。</p>
+<p>SSTF 每次选与当前磁头距离最近的请求，是局部贪心，并不保证总寻道距离全局最小。2021 题中，磁道范围 0--199、初始 184、请求为 $184,187,176,182,199$；初始位置的同号请求不产生移动，之后顺序为：</p>
+<p>$$184\to182\to187\to176\to199$$</p>
+<p>总移动量为 $2+5+11+23=41$。SSTF 平均寻道时间较短，但持续到达的邻近请求可能使远端请求饥饿。</p>
+<h3 id="section-8">SCAN 与 C-SCAN 手算</h3>
+<ul>
+<li>
+<p><strong>SCAN</strong> 沿当前方向服务，到物理端点后才反向（电梯算法）。2009 题中，初始 105 且向磁道号增加方向移动，请求为 $35,45,12,68,110,180,170,195$，服务序列为：</p>
+<p>$$110\to170\to180\to195\to68\to45\to35\to12$$</p>
+<p>未给最大磁道号时，题目通常只要求给出请求服务顺序；若计算距离且给出了端点，则必须把前往端点的移动也计入。</p>
+</li>
+<li>
+<p>2015 题中，共 200 个磁道（0--199），初始 58，方向为从外向内，即磁道号增加方向；请求为 $130,42,180,15,199$。SCAN 的轨迹为：</p>
+<p>$$58\xrightarrow{72}130\xrightarrow{50}180\xrightarrow{19}199\xrightarrow{157}42\xrightarrow{27}15$$</p>
+<p>总移动量为 $325$。这里 199 是物理内侧端点，故到达它后才允许反向。</p>
+</li>
+<li>
+<p><strong>C-SCAN</strong> 只在一个方向服务，到端点后快速返回另一端，返回过程的移动距离也要计入。2024 题中，磁道号 0--399，已完成 200 号请求且向减小方向移动，待请求为 $300,120,110,0,160,210,399$：</p>
+<p>$$200\to160\to120\to110\to0\quad(200)$$</p>
+<p>$$0\to399\quad(399),\qquad399\to300\to210\quad(189)$$</p>
+<p>故总移动量为 $200+399+189=788$。</p>
+</li>
+</ul>
+<h3 id="section-9">LOOK、C-LOOK 与饥饿辨析</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>与对应扫描算法的差异</th>
+<th>主要取舍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOOK</td>
+<td>当前方向已无请求时即反向，不必到物理端点。</td>
+<td>比 SCAN 少无效寻道。</td>
+</tr>
+<tr>
+<td>C-LOOK</td>
+<td>当前方向无请求时，直接回到另一端最远的待服务请求，不必到物理端点。</td>
+<td>比 C-SCAN 少无效寻道，且仍维持单方向服务的等待均匀性。</td>
+</tr>
+<tr>
+<td>FCFS</td>
+<td>按到达顺序。</td>
+<td>公平、简单；不产生磁臂粘着，但请求分散时寻道距离大。</td>
+</tr>
+<tr>
+<td>SSTF</td>
+<td>最近请求优先。</td>
+<td>平均寻道短，但可能饥饿/磁臂粘着。</td>
+</tr>
+<tr>
+<td>SCAN、C-SCAN</td>
+<td>按固定方向扫描，到规定端点再反向或回卷。</td>
+<td>在每次请求服务有限、扫描方向不被新请求重置的标准定义下，近邻请求不会使磁臂无限停在原处；但不同磁道的等待时间可能不均，负载过高时仍会排队很久。</td>
+</tr>
+</tbody>
+</table></div>
+<p>标准术语必须区分：SCAN/C-SCAN 会继续到规定的扫描端点，LOOK/C-LOOK 只走到当前方向最远的待服务请求。部分教材或题解会把二者简化混称；遇到这类题应以题干给出的移动规则为准，并在答案中写明采用的口径，不能默认互换。</p>
+<blockquote>
+<p><strong>WARNING</strong> · 原稿表述边界
+原 PDF 第 5 页把 SCAN/C-SCAN 与 SSTF 一起列为可能发生“磁臂粘着”，并用不断出现当前方向请求来解释。对于上表所述的标准 SCAN/C-SCAN，新请求不会让磁臂反复改向或取消既定端点，因此不能据此推出无限停留；如果实现改用 LOOK 式动态端点、服务队列持续超载或题目另定规则，才应按具体调度过程重新分析。SSTF 的近邻请求饥饿风险则是明确的。</p>
+</blockquote>
+<h3 id="section-10">图示补充</h3>
+<ul>
+<li>多盘面图中，同半径位置的磁道构成一个柱面；所有磁头装在同一磁臂上，因而只能共进退。一次访问依次经历寻道、选盘面、等待目标扇区旋转到磁头下方。</li>
+<li>交替编号让逻辑相邻扇区在物理上留出间隔，以补偿处理完前一扇区后的控制器处理时间，减少连续读的旋转等待。</li>
+<li>磁盘初始化顺序为：低级格式化（划分带校验的扇区）→ 分区（若干柱面组成一分区）→ 逻辑格式化（建文件系统、根目录和位图等空闲空间结构）。</li>
+<li>ROM 中只保存很小的自举装入程序；它定位固定位置的引导块，把完整自举程序读入内存。简单磁盘可在 FAT 等文件系统结构中标记坏块；复杂磁盘由控制器维护坏块表并以备用扇区重映射，后者对 OS 透明。</li>
+</ul>
+<h2 id="section-11">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-69c0d725657f/">上一篇：设备独立性软件</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-2d95192b7574/">磁盘与 RAID</a></li>
+</ul>
+<h2 id="section-12">13.5 本节复盘</h2>
+<ul>
+<li>物理扇区是磁盘硬件的基本读写单位，文件系统逻辑块可包含多个扇区；柱面由同半径磁道组成，活动磁头共进退。</li>
+<li>磁盘调度主要优化寻道，手算按实际服务次序累计移动距离。</li>
+<li>初始化顺序是物理格式化→分区→逻辑格式化；启动块/ROM 与坏块管理是常考补充。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-c60c78e602f8/index.html"><span>← Previous item</span><strong>Lecture 20：知识 - 控制器的功能和工作原理</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c7b75c1ae846/index.html"><span>Next item →</span><strong>Lecture 3：软件需求工程</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

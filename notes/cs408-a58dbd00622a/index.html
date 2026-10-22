@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 24：知识 - 中断 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 24：知识 - 中断。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 24：知识 - 中断 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 24：知识 - 中断。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-a58dbd00622a/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 24：知识 - 中断 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 24：知识 - 中断。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 24：知识 - 中断",
+      "item": "https://www.jiayuhere.com/notes/cs408-a58dbd00622a/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-a58dbd00622a/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a58dbd00622a/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a58dbd00622a/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a58dbd00622a/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-a58dbd00622a/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 24：知识 - 中断</h1><p class="article-lead">408 学习笔记：Lecture 24：知识 - 中断。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 17 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/6b2fd2c47dde.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/6b2fd2c47dde.pdf" download="Lecture 24：知识 - 中断.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 中断的基本概念与作用</a><a href="#section-2">6.2 中断的分类与响应时机</a><a href="#section-5">6.3 从请求到响应：优先级的两层含义</a><a href="#section-6">6.4 中断响应（中断隐指令）：硬件完成什么</a><a href="#section-9">6.5 中断服务程序：软件完成什么</a><a href="#section-12">6.6 屏蔽字与优先级设计</a><a href="#section-16">相关知识</a><a href="#section-17">6.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：中断让 CPU 暂停现行程序去处理异常或请求，随后从正确的断点恢复。最关键的分界是：硬件做检测、响应、保护断点和转入口；操作系统软件保存现场、处理事件、恢复现场。多重中断还要区分“谁先被响应”和“谁能打断谁”。</p>
+</blockquote>
+<h2 id="section-1">6.1 中断的基本概念与作用</h2>
+<p><strong>程序中断</strong>是 CPU 执行当前程序时发生异常或特殊请求，CPU 暂停当前程序，转去处理；处理程序完成后通过专用中断返回机制恢复状态与断点，再继续原程序。CPU 会在规定的检查点检测异常/中断请求，不能把“提出请求”与“已经响应”混为一谈。</p>
+<p>中断系统的作用：</p>
+<ul>
+<li>实现 CPU 与 I/O 设备并行工作，避免 CPU 对慢设备持续轮询。</li>
+<li>处理硬件故障、软件错误和异常。</li>
+<li>支持人机交互、用户干预、多道程序与分时系统。</li>
+<li>实现应用程序与操作系统（管态程序）之间的切换；软件触发的此类切换常称软中断/自陷。</li>
+<li>支持多处理器之间的信息交流与任务切换。</li>
+</ul>
+<p>中断、异常和系统调用都会把控制权转交给内核，但三者不能等同：<strong>外部中断</strong>由设备等外部事件异步触发，<strong>内部异常</strong>与当前指令同步发生，<strong>系统调用</strong>则是用户程序通过专用指令主动请求内核服务。进入处理程序时，硬件按体系结构规则保存返回位置和必要的处理器状态并转入内核入口，其余软件现场再由入口代码保存。</p>
+<h2 id="section-2">6.2 中断的分类与响应时机</h2>
+<h3 id="section-3">6.2.1 可屏蔽与不可屏蔽中断</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>与开/关中断的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不可屏蔽中断 NMI</td>
+<td>用于掉电等紧急事件</td>
+<td>不受普通可屏蔽中断允许位/屏蔽字控制，优先级通常高于可屏蔽中断；仍在体系结构规定的检查点进入</td>
+</tr>
+<tr>
+<td>可屏蔽中断</td>
+<td>一般外部中断请求</td>
+<td>要求 CPU 处于开中断状态，且请求未被当前屏蔽字屏蔽</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-4">6.2.2 内部中断与外部中断</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>别称/来源</th>
+<th>检测时机</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内部中断</td>
+<td>异常，与当前指令有关</td>
+<td>当前指令执行过程中由 CPU 内部逻辑检测</td>
+<td>非法操作码、缺页/越权、除零、算术溢出（若 ISA 规定产生异常）、陷阱</td>
+</tr>
+<tr>
+<td>外部中断</td>
+<td>狭义中断，与当前指令无直接关系</td>
+<td>通常在一条指令执行结束后、取下一条前查询</td>
+<td>I/O 完成、时钟、外部设备请求</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>译码时可发现非法指令，取指/访存时可发现缺页和保护错，整数除法执行时可发现除数为 0。</li>
+<li>外部中断通常由 CPU 在指令结束边界采样中断请求引脚或向 I/O 接口发中断查询；处理器不能在任意一条指令的中间随意响应外部中断。</li>
+<li>对可响应的外部中断，常见条件为：有请求、CPU 开中断、当前指令已完成且无更紧迫任务。内核态也能检测和响应中断。</li>
+</ul>
+<p>每一中断源可有一个中断请求标记触发器 <code>INTR</code>；<code>INTR=1</code> 表示该源有请求。多个标记可集中构成中断请求寄存器，也可分散在各中断源处。</p>
+<h2 id="section-5">6.3 从请求到响应：优先级的两层含义</h2>
+<p>中断处理应按三个阶段理解：<strong>请求</strong>、<strong>能否进入</strong>、<strong>从谁开始</strong>。</p>
+<ol>
+<li>中断源发出请求，<code>INTR</code> 被置位。</li>
+<li><strong>中断处理优先级</strong>通过当前屏蔽字决定一个请求能否在当前服务程序中进入；它回答“能不能进/能否打断当前处理”。</li>
+<li>当多个未屏蔽请求同时可响应时，<strong>中断响应优先级</strong>（中断判优）选择一个首先响应；它回答“谁先进入”。</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>实现依据</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中断响应优先级</td>
+<td>硬件排队器/判优线路，或软件查询程序</td>
+<td>多个待响应源中谁先响应</td>
+</tr>
+<tr>
+<td>中断处理优先级</td>
+<td>中断屏蔽字/屏蔽寄存器</td>
+<td>当前服务程序允许哪些请求嵌套进入</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>两种优先级不必相同。例如 2、4 同时请求，可先由响应优先级选择 2；但 2 的服务中若其屏蔽字不屏蔽处理优先级更高的 4，则 4 仍能嵌套打断 2。</li>
+<li>在教材讨论的<strong>可屏蔽外中断</strong>模型中，CPU 只有在开中断且至少存在一个未被屏蔽的有效请求时，才进入相应的中断响应周期。NMI 不受全局中断允许位限制；内部异常也按各自的异常规则进入处理流程。</li>
+</ul>
+<p>教材中常见的优先级设计倾向是：硬件故障高于软件中断、不可屏蔽中断高于可屏蔽中断、DMA 请求高于普通 I/O 中断、高速设备高于低速设备、输入设备高于输出设备、实时设备高于普通设备。这些是常见设计原则，并非所有机器都固定采用的唯一顺序；具体题目仍以给定的响应顺序和屏蔽字为准。</p>
+<p><strong>例：响应顺序与实际执行顺序不同。</strong> 设 5 个中断源的响应优先级为</p>
+<p>$$1&gt;2&gt;3&gt;4&gt;5$$</p>
+<p>处理优先级为</p>
+<p>$$1&gt;4&gt;5&gt;2&gt;3$$</p>
+<p>用户程序运行时，2、4 同时请求；在处理 2 的过程中，1、3、5 又同时请求。实际过程如下：</p>
+<ol>
+<li>2 与 4 同时请求时，按<strong>响应优先级</strong>先响应 2。</li>
+<li>进入 ISR 2 后，4 的<strong>处理优先级</strong>高于 2，故 4 可嵌套打断 2；ISR 4 完成后返回 ISR 2。</li>
+<li>1、3、5 同时待处理时，先按响应优先级考察 1；因 1 的处理优先级高于 2，ISR 1 打断 ISR 2，完成后返回 2。</li>
+<li>余下 3、5 中，虽然响应优先级先考察 3，但 3 的处理优先级低于 2，当前屏蔽字不允许它进入；随后 5 的处理优先级高于 2，故 ISR 5 可以打断 ISR 2。</li>
+<li>ISR 5 完成后返回 ISR 2；ISR 2 完成并返回用户程序后，尚未处理的 3 才能进入。</li>
+</ol>
+<p>因此完整服务次序为 <code>2（被打断） -&gt; 4 -&gt; 2（被打断） -&gt; 1 -&gt; 2（被打断） -&gt; 5 -&gt; 2 -&gt; 用户程序 -&gt; 3</code>。画时序图时要把“选择哪个待响应源”和“该源能否打断当前 ISR”分成两次判断。</p>
+<h2 id="section-6">6.4 中断响应（中断隐指令）：硬件完成什么</h2>
+<p><strong>中断隐指令</strong>也称中断响应，由硬件自动完成，不能误写成中断服务程序的软件步骤。408 教材的典型抽象包含：</p>
+<ol>
+<li><strong>关中断</strong>：先避免服务开始前现场再次被打断（多重中断系统在保存后可再开中断）。</li>
+<li><strong>保存断点及必要状态</strong>：至少保存原程序 PC，通常入栈或写入指定单元；支持嵌套时必须为每一层保留独立副本。许多 ISA 还会由硬件同时保存 PSW、特权级或部分原因信息。</li>
+<li><strong>识别中断源</strong>：确定异常/中断类型。</li>
+<li><strong>中断服务程序寻址</strong>：得到入口地址，装入 PC，开始执行服务程序。</li>
+</ol>
+<pre class="mermaid">flowchart LR
+    A[中断源提出请求] --&gt; B{满足响应条件?}
+    B -- 否 --&gt; C[保持请求并继续执行]
+    C --&gt; B
+    B -- 是 --&gt; D[硬件判优与关中断]
+    D --&gt; E[保存断点及必要状态]
+    E --&gt; F[识别来源并取得 ISR 入口]
+    F --&gt; G[软件保存其余现场]
+    G --&gt; H[执行 ISR]
+    H --&gt; I[软件恢复现场]
+    I --&gt; J[中断返回指令恢复状态与断点]
+</pre>
+<h3 id="section-7">6.4.1 保存哪个 PC</h3>
+<p>“断点”是返回后要继续执行的位置，取决于事件的可恢复性与指令执行进度：</p>
+<ul>
+<li>执行 <code>trap</code>/自陷指令时，已完成该指令，通常保存其<strong>下一条指令地址</strong>。</li>
+<li>若 <code>Load/Store</code> 因缺页而未能完成，则返回后需重执行该访存指令，应保存<strong>发生缺页的指令地址</strong>。在每条 4 B、PC 已顺序更新时常表现为保存 <code>PC-4</code>。</li>
+<li>硬件至少负责保存 PC 断点；是否还自动保存 PSW、特权级等状态取决于 ISA。通用寄存器和软件管理的屏蔽字通常由入口代码保存。答题时应先写教材抽象，再按题设给出的体系结构边界判断，不能把“状态寄存器一定全由软件保存”当成普遍结论。</li>
+</ul>
+<h3 id="section-8">6.4.2 中断源识别与向量</h3>
+<p>识别的目的不是只得到一个名称，而是找到对应服务程序的入口。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>准确定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中断服务程序 ISR</td>
+<td>处理某中断事件的程序</td>
+</tr>
+<tr>
+<td>中断向量</td>
+<td>ISR 的入口地址</td>
+</tr>
+<tr>
+<td>中断向量表</td>
+<td>集中保存所有 ISR 入口地址，或入口跳转指令的表</td>
+</tr>
+<tr>
+<td>向量地址/中断类型号</td>
+<td>向量表表项的内存地址或索引值</td>
+</tr>
+<tr>
+<td>向量中断</td>
+<td>通过类型号索引向量表来识别/转入服务程序的技术</td>
+</tr>
+</tbody>
+</table></div>
+<p>向量法流程：<code>识别中断源 -&gt; 获得类型号 -&gt; 计算向量表项地址 -&gt; 取入口地址 -&gt; 写入 PC</code>。非向量中断可用软件查询法依次查询状态。</p>
+<p>原 PDF 第 13 页的示意图采用“向量跳转表”：类型号 <code>13H</code> 指到表项 <code>13H: JMP 300</code>，执行该跳转后进入地址 300 的显示器服务程序；<code>12H: JMP 200</code> 则指向地址 200 的打印机服务程序。<code>13H</code> 是表项索引/向量地址，<code>300</code> 才是该例实际 ISR 入口，二者不能混称。</p>
+<ul>
+<li>硬件判优/识别可使用硬件排队器，位置可在 CPU 内或分散于各中断源。</li>
+<li>软件识别可由统一异常查询程序按优先级检查异常状态寄存器；例如 MIPS 的 <code>cause</code> 寄存器配合异常入口查询。内部异常也可能在发现时直接得到类型并跳到相应处理程序。</li>
+<li>外部中断随机且不由当前指令现象决定，必须在指令边界检测；内部异常与当前指令相关，CPU 可在执行中检测。</li>
+</ul>
+<h2 id="section-9">6.5 中断服务程序：软件完成什么</h2>
+<h3 id="section-10">6.5.1 单级中断</h3>
+<p>单级中断表示执行 ISR 时不响应新的中断请求。基本顺序：</p>
+<ol>
+<li>保存现场和屏蔽字。</li>
+<li>执行 ISR，完成事件处理。</li>
+<li>恢复现场和屏蔽字。</li>
+<li>执行专用的中断返回指令，回到断点。若原中断允许状态保存在硬件现场中，通常由 <code>iret</code>、<code>mret</code> 等返回指令按 ISA 规则一并恢复；若题设采用显式“开中断后返回”的教材模型，则按题设作答。</li>
+</ol>
+<h3 id="section-11">6.5.2 多重中断（中断嵌套）</h3>
+<p>多重中断表示 ISR 执行时允许更高优先级的新请求进入。正确时序为：</p>
+<ol>
+<li>保存其余现场和原屏蔽字：包括尚未由硬件自动保存的用户可见通用寄存器、状态信息等，可入栈或存指定单元。</li>
+<li><strong>设置本级新屏蔽字</strong>：把当前 ISR 对应的屏蔽字装入屏蔽寄存器，至少屏蔽自身，并只放行题设允许嵌套的更高处理优先级请求；这是软件动作，必须在重新开中断前完成。</li>
+<li><strong>开中断</strong>：只在现场、旧屏蔽字已保护且新屏蔽字已生效后执行，允许更高优先级请求嵌套。</li>
+<li>执行 ISR。</li>
+<li><strong>关中断</strong>：在恢复阶段前禁止再嵌套，保证恢复操作原子完成。</li>
+<li>恢复现场和原屏蔽字。</li>
+<li>按题设恢复中断允许状态并执行中断返回，按栈的后进先出关系返回被打断程序/低级 ISR。实际 ISA 常由专用返回指令恢复硬件保存的状态，而不是把“先执行普通开中断指令、再返回”规定为所有体系结构的固定两步。</li>
+</ol>
+<p>多级相对单级的关键新增是设置本级新屏蔽字，以及一对为嵌套服务的开中断/关中断操作。<strong>外部中断</strong>通常在一条指令结束的边界响应；内部异常与当前指令同步，可能在译码、访存或执行阶段被检测，不能套用“所有事件都在指令结束后才响应”。</p>
+<h2 id="section-12">6.6 屏蔽字与优先级设计</h2>
+<p>在 408 常见题设约定中，每个中断源对应一个屏蔽触发器，<strong>1 表示屏蔽、0 表示允许申请</strong>。全部触发器组成屏蔽字寄存器，其中的值为当前 ISR 的屏蔽字；若题目另行规定 0/1 含义，应以题设为准。</p>
+<ul>
+<li>一个中断源进入 ISR 后至少应屏蔽它自身，防止同级重入。</li>
+<li>在同一题设且屏蔽字按合法优先级关系设计时，1 较多通常表示允许打断它的中断源更少，可据此判断其处理优先级较高；但“1 的个数”不是处理优先级的普遍定义，最终仍要逐位判断哪些请求能嵌套进入。</li>
+<li>支持多重中断的必要条件：服务程序中适时开中断；高处理优先级中断不应被低处理优先级 ISR 屏蔽。</li>
+</ul>
+<p><strong>例：四中断源的屏蔽字与执行轨迹（原 PDF 第 17 页）。</strong> 设硬件<strong>响应</strong>优先级为 $A&gt;B&gt;C&gt;D$，要求软件<strong>处理</strong>优先级变为 $D&gt;A&gt;C&gt;B$；屏蔽字按 <code>A B C D</code> 排列，<code>1</code> 表示屏蔽，且每个 ISR 屏蔽自身：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>当前 ISR</th>
+<th style="text-align:right">A</th>
+<th style="text-align:right">B</th>
+<th style="text-align:right">C</th>
+<th style="text-align:right">D</th>
+<th>屏蔽字</th>
+<th>可打断当前 ISR 的源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td><code>1110</code></td>
+<td>D</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td><code>0100</code></td>
+<td>A、C、D</td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td><code>0110</code></td>
+<td>A、D</td>
+</tr>
+<tr>
+<td>D</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td><code>1111</code></td>
+<td>无</td>
+</tr>
+</tbody>
+</table></div>
+<p>再设 B、D、A、C 分别在 $5,10,35,60,\mu s$ 请求，每个 ISR 净执行 $20,\mu s$。按原题图忽略响应、保存和恢复的额外耗时，则 CPU 轨迹为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>时间区间（$\mu s$）</th>
+<th>CPU 执行</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0\sim5$</td>
+<td>原程序</td>
+<td>尚无请求</td>
+</tr>
+<tr>
+<td>$5\sim10$</td>
+<td>B</td>
+<td>B 先到达，仅执行 5 $\mu s$</td>
+</tr>
+<tr>
+<td>$10\sim30$</td>
+<td>D</td>
+<td>D 可以打断 B，执行满 20 $\mu s$</td>
+</tr>
+<tr>
+<td>$30\sim35$</td>
+<td>B</td>
+<td>从断点继续，又执行 5 $\mu s$</td>
+</tr>
+<tr>
+<td>$35\sim55$</td>
+<td>A</td>
+<td>A 可以打断 B，执行满 20 $\mu s$</td>
+</tr>
+<tr>
+<td>$55\sim60$</td>
+<td>B</td>
+<td>再继续 5 $\mu s$</td>
+</tr>
+<tr>
+<td>$60\sim80$</td>
+<td>C</td>
+<td>C 可以打断 B，执行满 20 $\mu s$</td>
+</tr>
+<tr>
+<td>$80\sim85$</td>
+<td>B</td>
+<td>做完剩余 5 $\mu s$，随后返回原程序</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里各请求不同时到达，响应优先级并未改变上述先后；真正决定三次嵌套的是 B 的 <code>0100</code> 屏蔽字允许 D、A、C 进入。若请求时刻、ISR 时长或开中断时刻变化，须重新画轨迹，不可套用本表。</p>
+<h3 id="section-13">题型：#中断过程与时序</h3>
+<h4 id="section-14">第一部分：解题方法</h4>
+<ol>
+<li>先给事件定性：异常在指令内检测；外部中断在指令边界查询；NMI 不受关中断影响。</li>
+<li>问硬件动作时写“关中断、保存 PC 断点、识别来源、取 ISR 入口”；问软件动作时写“保存/恢复现场与屏蔽字、实际服务”。</li>
+<li>多请求先依据响应优先级判谁先响应；进入 ISR 后，再以当前屏蔽字判断是否允许另一请求嵌套。</li>
+<li>确定返回 PC 时判断故障指令是否已完成：已完成返回下一条；需要重执行则返回故障指令本身。</li>
+</ol>
+<h4 id="section-15">第二部分：I/O 中断时间计算</h4>
+<p>设备完成一次字符操作后，I/O 控制器发请求；CPU 的开销应单列为“中断响应周期 + ISR 实际执行周期”。若 ISR 中第 $k$ 条指令启动下一次设备操作，则设备工作时间可与余下 ISR 指令重叠；计算一批字符的总历时与 CPU 实际占用时间时要分别考虑这段并行重叠，不能把所有 I/O 等待与所有 CPU 周期简单相加。</p>
+<p><strong>例（2016 年真题参数）</strong>：CPU 主频为 $50\ \text{MHz}$，CPI 为 4；设备采用异步串行方式传送 7 位 ASCII 字符，含 1 位起始位、1 位奇偶校验位和 1 位停止位；每字符设备工作 $0.5\ \text{ms}$。中断响应需 10 个时钟周期，ISR 共 20 条指令，并在第 15 条指令启动下一次设备工作。</p>
+<ol>
+<li>每字符共传 $1+7+1+1=10$ 位，故每秒最多传送
+$$
+\frac{1}{0.5\ \text{ms}}=2000\ \text{个字符},
+$$
+对应线路速率为 $2000\times 10=20\ \text{kbit/s}$。</li>
+<li>从一次设备启动到下一次设备启动，约经历设备工作、中断响应和 ISR 前 15 条指令：
+$$
+0.5\ \text{ms}\times 50\ \text{MHz}+10+15\times 4
+=25,070\ \text{个时钟周期}.
+$$
+因而读入 1000 个字符的总历时约为 $25,070,000$ 个时钟周期，即 $0.5014\ \text{s}$。题目使用“约”时可按每字符一个稳定工作周期估算；若要求严格首尾时序，则应依据给定时序图单独处理首次启动和最后一次返回。</li>
+<li>CPU 对每个字符实际占用中断响应与全部 20 条 ISR 指令，故 CPU 占用量为
+$$
+1000\times(10+20\times4)=90,000\ \text{个时钟周期}=1.8\ \text{ms}.
+$$</li>
+<li>中断响应阶段主要由硬件关中断、保存断点及必要状态、识别来源并取得 ISR 入口；它不包含 ISR 的 20 条软件指令。</li>
+</ol>
+<h2 id="section-16">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-310416bce0d2/">上一篇：总线</a> · <a href="/notes/cs408-c2d3a38a7b30/">下一篇：外部设备</a></li>
+<li><strong>CPU 与异常处理关联</strong>：<a href="/notes/cs408-8aa8809e8e26/">CPU 的中断处理功能</a> · <a href="/notes/cs408-5865bd37ecaf/">缺页异常与指令重启</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-39b45084fd1d/">操作系统 I/O 与中断</a></li>
+</ul>
+<h2 id="section-17">6.7 本节复盘</h2>
+<ul>
+<li>中断让 CPU 从现行程序转入异常/请求处理，完成后按断点返回；它支持 I/O 并行、异常处理、分时和任务切换。</li>
+<li>NMI 在关中断下仍响应；内部异常在当前指令执行中检测，外部中断通常在指令结束边界响应。</li>
+<li>响应优先级决定多个请求“谁先响应”，处理优先级/屏蔽字决定 ISR 中“谁能嵌套进来”。</li>
+<li>隐指令由硬件关中断、保存断点及必要状态、识别来源并转入入口；ISR 软件保存其余现场/屏蔽字、处理、恢复并返回，具体分界由 ISA 决定。</li>
+<li>多重中断在保存完现场后开中断，在恢复前关中断；中断返回指令按体系结构规则恢复状态与断点。向量法用类型号索引向量表，取得 ISR 入口地址。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-a42ee6cb57ff/index.html"><span>← 上一项</span><strong>Lecture 8：集成学习</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a7218565071e/index.html"><span>下一项 →</span><strong>Lecture 9：栈在括号匹配中的应用</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>4 题型 - 最大传输速率 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 4 题型 - 最大传输速率. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="4 题型 - 最大传输速率 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 4 题型 - 最大传输速率. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-8d35cda087a1/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="4 题型 - 最大传输速率 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 4 题型 - 最大传输速率. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "4 题型 - 最大传输速率",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-8d35cda087a1/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-8d35cda087a1/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-8d35cda087a1/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8d35cda087a1/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8d35cda087a1/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-8d35cda087a1/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">4 题型 - 最大传输速率</h1><p class="article-lead">Chinese-language Computer Science 408 note: 4 题型 - 最大传输速率. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c37749e8ca30.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c37749e8ca30.pdf" download="4 题型 - 最大传输速率.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 三组核心公式</a><a href="#section-5">4.2 解题判断</a><a href="#section-6">4.3 典型方法：2017 年真题</a><a href="#section-7">4.4 历年真题</a><a href="#section-12">4.5 易错点</a><a href="#section-13">相关知识</a><a href="#section-14">4.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：最大传输速率题围绕三个量展开：信道带宽、码元速率和比特率。无噪声带宽限制用奈奎斯特公式，有噪声信道容量用香农公式；若一个码元有多个状态，还要用 $\log_2M$ 在波特率与比特率之间换算。</p>
+</blockquote>
+<h2 id="section-1">4.1 三组核心公式</h2>
+<h3 id="section-2">4.1.1 码元速率与比特率</h3>
+<p>若一个码元有 $M$ 个可区分状态，则每个码元可携带：</p>
+<p>$$k=\log_2M\quad(bit/码元)$$</p>
+<p>比特率 $R_b$ 与码元速率 $R_B$ 的关系为：</p>
+<p>$$R_b=R_B\log_2M,\qquad R_B=\frac{R_b}{\log_2M}$$</p>
+<p>码元速率的单位是 Baud，比特率的单位是 bit/s。只有 $M=2$ 时，两者数值才相同。</p>
+<h3 id="section-3">4.1.2 奈奎斯特定理</h3>
+<p>带宽为 $W$ 的理想无噪声低通信道，最高码元速率为：</p>
+<p>$$R_{B,max}=2W\quad(Baud)$$</p>
+<p>若每个码元有 $M$ 种状态，最高比特率为：</p>
+<p>$$C_N=2W\log_2M\quad(bit/s)$$</p>
+<h3 id="section-4">4.1.3 香农定理</h3>
+<p>带宽为 $W$、线性信噪比为 $S/N$ 的有噪声信道，其理论容量为：</p>
+<p>$$C_S=W\log_2\left(1+\frac{S}{N}\right)\quad(bit/s)$$</p>
+<p>若题目给出分贝值，必须先转换：</p>
+<p>$$SNR_{dB}=10\log_{10}\frac{S}{N},\qquad \frac{S}{N}=10^{SNR_{dB}/10}$$</p>
+<h2 id="section-5">4.2 解题判断</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>题目条件</th>
+<th>使用方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无噪声、给带宽和状态数</td>
+<td>奈奎斯特 $2W\log_2M$</td>
+</tr>
+<tr>
+<td>给信噪比或噪声功率</td>
+<td>香农 $W\log_2(1+S/N)$</td>
+</tr>
+<tr>
+<td>给比特率、状态数，求波特率</td>
+<td>$R_B=R_b/\log_2M$</td>
+</tr>
+<tr>
+<td>同时给无噪声和有噪声上限</td>
+<td>两个公式分别列式并比较</td>
+</tr>
+<tr>
+<td>给相位数与幅值数</td>
+<td>先求总状态数 $M=M_{相位}\times M_{幅值}$</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-6">4.3 典型方法：2017 年真题</h2>
+<p><strong>条件</strong>：若无噪声信道的极限数据率不小于信噪比为 $30,dB$ 时的极限数据率，求信号状态数 $n$ 的最小值。</p>
+<p>先转换信噪比：</p>
+<p>$$\frac{S}{N}=10^{30/10}=1000$$</p>
+<p>由题意：</p>
+<p>$$2W\log_2n\ge W\log_2(1+1000)$$</p>
+<p>约去 $W$：</p>
+<p>$$
+\begin{aligned}
+2\log_2n&amp;\ge\log_2(1001)\
+n&amp;\ge\sqrt{1001}\approx31.64
+\end{aligned}
+$$</p>
+<p>因此状态数至少为：</p>
+<p>$$n_{min}=32$$</p>
+<h2 id="section-7">4.4 历年真题</h2>
+<h3 id="section-8">4.4.1 2009 年：QAM 状态数</h3>
+<p><strong>条件</strong>：无噪声信道带宽 $W=3,kHz$，QAM 采用 4 个相位，每个相位有 4 种幅度。</p>
+<p>总状态数为：</p>
+<p>$$M=4\times4=16$$</p>
+<p>最高数据率：</p>
+<p>$$C_N=2\times3,kHz\times\log_2 16=24,kb/s$$</p>
+<p><strong>答案：B，$24,kb/s$。</strong></p>
+<h3 id="section-9">4.4.2 2011 年：由比特率求波特率</h3>
+<p><strong>条件</strong>：数据传输速率为 $2400,b/s$，采用 4 个相位调制。</p>
+<p>每个码元携带：</p>
+<p>$$\log_2 4=2,bit$$</p>
+<p>波特率为：</p>
+<p>$$R_B=\frac{2400}{2}=1200,Baud$$</p>
+<p><strong>答案：B，$1200,Baud$。</strong></p>
+<h3 id="section-10">4.4.3 2016 年：香农容量的百分比</h3>
+<p><strong>条件</strong>：信道带宽 $8,kHz$，信噪比 $30,dB$，实际数据率约为理论最大值的 $50%$。</p>
+<p>$$\frac{S}{N}=1000$$</p>
+<p>理论容量约为：</p>
+<p>$$C_S=8,kHz\times\log_2(1001)\approx80,kb/s$$</p>
+<p>实际数据率约为：</p>
+<p>$$R=80,kb/s\times50%=40,kb/s$$</p>
+<p><strong>答案：C，$40,kb/s$。</strong></p>
+<h3 id="section-11">4.4.4 2022 年：多进制 ASK</h3>
+<p><strong>条件</strong>：带宽为 $200,kHz$ 的无噪声信道，采用 4 个幅值的 ASK 调制。</p>
+<p>4 个幅值就是 $M=4$ 个码元状态：</p>
+<p>$$C_N=2\times200,kHz\times\log_2 4=800,kb/s$$</p>
+<p><strong>答案：C，$800,kb/s$。</strong></p>
+<h2 id="section-12">4.5 易错点</h2>
+<ul>
+<li>$W$ 的单位 Hz 不是 Baud；$2W$ 才是理想低通信道的最高码元速率。</li>
+<li>奈奎斯特公式中的 $M$ 是<strong>总状态数</strong>，不是相位数、幅值数中的任意一个。</li>
+<li>$30,dB$ 不能直接代入香农公式，应先换成线性值 $1000$。</li>
+<li>求实际速率时，先求理论容量，再乘题目给定的利用比例。</li>
+<li>题目只给比特率和调制状态数时，不需要奈奎斯特或香农公式，直接做比特率与波特率换算。</li>
+<li>比较两种理论上限时不要漏掉奈奎斯特公式前面的系数 2。</li>
+</ul>
+<h2 id="section-13">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-55b7284bc1ed/">上一篇：CSMA 计算</a> · <a href="/en/notes/cs408-95a5278d5a7d/">下一篇：调制与复用技术</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-04eb683de74c/">信道的极限容量</a></li>
+</ul>
+<h2 id="section-14">4.6 本节复盘</h2>
+<ul>
+<li>$M$ 种码元状态携带 $\log_2M$ bit，故 $R_b=R_B\log_2M$。</li>
+<li>无噪声极限为 $2W\log_2M$；有噪声容量为 $W\log_2(1+S/N)$。</li>
+<li>分贝信噪比按 $S/N=10^{SNR_{dB}/10}$ 转换。</li>
+<li>4 相位乘 4 幅值形成 16 种状态；4 相位或 4 幅值都表示每码元携带 2 bit。</li>
+<li>2017 年比较题由 $2W\log_2n\ge W\log_2(1001)$ 得 $n\ge32$。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-8b0d4ecd05ad/index.html"><span>← Previous item</span><strong>Lecture 3：知识 - 处理器调度</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-8f1f495f90b2/index.html"><span>Next item →</span><strong>Lecture 5：关系数据理论</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

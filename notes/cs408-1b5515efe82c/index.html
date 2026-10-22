@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 13：串 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 13：串。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 13：串 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 13：串。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-1b5515efe82c/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 13：串 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 13：串。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 13：串",
+      "item": "https://www.jiayuhere.com/notes/cs408-1b5515efe82c/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-1b5515efe82c/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-1b5515efe82c/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1b5515efe82c/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1b5515efe82c/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-1b5515efe82c/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 13：串</h1><p class="article-lead">408 学习笔记：Lecture 13：串。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-02">2026-07-02</time></span></span><span>约 14 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/bd60a76ba275.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/bd60a76ba275.pdf" download="Lecture 13：串.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">13.1 串的基本概念</a><a href="#section-3">13.2 串的相关概念</a><a href="#section-8">13.3 串的结构特点</a><a href="#section-9">13.4 串的基本操作</a><a href="#section-13">13.5 串的顺序存储</a><a href="#section-17">13.6 串的链式存储</a><a href="#section-20">13.7 串的基本操作代码</a><a href="#section-25">13.8 串的朴素模式匹配算法</a><a href="#section-31">13.9 题型整理</a><a href="#section-40">相关知识</a><a href="#section-41">13.10 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">13.1 串的基本概念</h2>
+<h5 id="section-2"><strong>定义</strong>：#串</h5>
+<blockquote>
+<p>描述：
+串，即字符串，是由零个或多个字符组成的有限序列。</p>
+</blockquote>
+<p>一般记为：
+$$
+S=a_1a_2\cdots a_n
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$S$ 是串名。</li>
+<li>$S$ 的整体表示串的值。</li>
+<li>$a_i$ 可以是字母、数字或其他字符。</li>
+<li>串中字符的个数称为串的长度。</li>
+</ul>
+<p>当：
+$$
+n=0
+$$
+时，该串称为空串，通常用 <code>&quot;&quot;</code> 或：
+$$
+\varepsilon
+$$
+表示。</p>
+<blockquote>
+<p>空串是长度为 $0$ 的串，不是空集 $\emptyset$；串是字符序列，集合是另一类数学对象。</p>
+</blockquote>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">S = &quot;HelloWorld&quot;
+</code></pre>
+<p><strong>注意</strong></p>
+<ul>
+<li>有些语言用双引号表示字符串，如 Java、C。</li>
+<li>有些语言也可以用单引号表示字符串，如 Python。</li>
+<li>空格也是一种字符。</li>
+</ul>
+<h2 id="section-3">13.2 串的相关概念</h2>
+<h3 id="section-4">13.2.1 子串和主串</h3>
+<h5 id="section-5"><strong>定义</strong>：#子串</h5>
+<blockquote>
+<p>描述：
+子串是串中任意个连续字符组成的子序列。</p>
+</blockquote>
+<h5 id="section-6"><strong>定义</strong>：#主串</h5>
+<blockquote>
+<p>描述：
+主串是包含某个子串的串。</p>
+</blockquote>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">S = &quot;iPhone 11 Pro Max?&quot;
+T = &quot;Pro&quot;
+</code></pre>
+<ul>
+<li><code>T</code> 是 <code>S</code> 的子串。</li>
+<li><code>S</code> 是 <code>T</code> 的主串。</li>
+</ul>
+<h3 id="section-7">13.2.2 位置</h3>
+<p><strong>字符在主串中的位置</strong></p>
+<ul>
+<li>字符在串中的序号。</li>
+<li>同一字符可以在串中出现多次，每次出现都有各自的位序；只有“查找字符第一次出现位置”这类操作才特指第一次出现。</li>
+</ul>
+<p><strong>子串在主串中的位置</strong></p>
+<ul>
+<li>子串第一个字符在主串中的位置。</li>
+</ul>
+<p><strong>重要注意</strong></p>
+<ul>
+<li>串的位序通常从 $1$ 开始，而不是从 $0$ 开始。</li>
+<li>这和 C 语言数组下标从 $0$ 开始不同。</li>
+</ul>
+<h2 id="section-8">13.3 串的结构特点</h2>
+<p><strong>串是一种特殊的线性表</strong></p>
+<ul>
+<li>数据元素之间呈线性关系。</li>
+<li>每个数据元素都是字符。</li>
+</ul>
+<p><strong>串与普通线性表的区别</strong></p>
+<ul>
+<li>串的数据对象限定为字符集。
+<ul>
+<li>中文字符；</li>
+<li>英文字符；</li>
+<li>数字字符；</li>
+<li>标点字符；</li>
+<li>空格字符。</li>
+</ul>
+</li>
+<li>串的基本操作通常以子串为操作对象。</li>
+<li>例如增删改查常常不是操作单个字符，而是操作一段子串。</li>
+</ul>
+<h2 id="section-9">13.4 串的基本操作</h2>
+<p>设：</p>
+<pre><code class="language-text">T = &quot;&quot;
+S = &quot;iPhone 11 Pro Max?&quot;
+W = &quot;Pro&quot;
+</code></pre>
+<h3 id="section-10">13.4.1 基本操作表</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StrAssign(&amp;T, chars)</code></td>
+<td>赋值操作，把串 <code>T</code> 赋值为 <code>chars</code></td>
+</tr>
+<tr>
+<td><code>StrCopy(&amp;T, S)</code></td>
+<td>复制操作，由串 <code>S</code> 复制得到串 <code>T</code></td>
+</tr>
+<tr>
+<td><code>StrEmpty(S)</code></td>
+<td>判空操作，若 <code>S</code> 为空串则返回 <code>TRUE</code>，否则返回 <code>FALSE</code></td>
+</tr>
+<tr>
+<td><code>StrLength(S)</code></td>
+<td>求串长，返回串 <code>S</code> 的元素个数</td>
+</tr>
+<tr>
+<td><code>ClearString(&amp;S)</code></td>
+<td>清空操作，将 <code>S</code> 清为空串</td>
+</tr>
+<tr>
+<td><code>DestroyString(&amp;S)</code></td>
+<td>销毁串，回收串 <code>S</code> 的存储空间</td>
+</tr>
+<tr>
+<td><code>Concat(&amp;T, S1, S2)</code></td>
+<td>串联接，用 <code>T</code> 返回由 <code>S1</code> 和 <code>S2</code> 联接成的新串</td>
+</tr>
+<tr>
+<td><code>SubString(&amp;Sub, S, pos, len)</code></td>
+<td>求子串，用 <code>Sub</code> 返回从 <code>S</code> 第 <code>pos</code> 个字符起长度为 <code>len</code> 的子串</td>
+</tr>
+<tr>
+<td><code>Index(S, T)</code></td>
+<td>定位操作，返回 <code>T</code> 在主串 <code>S</code> 中第一次出现的位置，不存在则返回 <code>0</code></td>
+</tr>
+<tr>
+<td><code>StrCompare(S, T)</code></td>
+<td>比较操作，比较两个串的大小</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-11">13.4.2 串比较规则</h3>
+<p><strong>规则</strong></p>
+<ul>
+<li>从第一个字符开始往后依次比较。</li>
+<li>先出现更大字符的串更大。</li>
+<li>若扫描过的所有字符都相同，则长度更长的串更大。</li>
+<li>只有两个串完全相同时才相等。</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">&quot;ab&quot; &lt; &quot;ac&quot;
+</code></pre>
+<p>原因是：</p>
+<pre><code class="language-text">'b' &lt; 'c'
+</code></pre>
+<p><strong>返回值</strong></p>
+<ul>
+<li>若 $S&gt;T$，则返回值 $&gt;0$。</li>
+<li>若 $S=T$，则返回值 $=0$。</li>
+<li>若 $S&lt;T$，则返回值 $&lt;0$。</li>
+</ul>
+<h3 id="section-12">13.4.3 字符集</h3>
+<p><strong>ASCII 字符集</strong></p>
+<ul>
+<li>常用于英文字符。</li>
+<li>考研中通常默认每个字符占 $1B$。</li>
+</ul>
+<p><strong>Unicode 字符集</strong></p>
+<ul>
+<li>可表示中英文等更多字符。</li>
+<li>基于同一个字符集可以有多种编码方案。</li>
+<li>例如：
+<ul>
+<li>UTF-8；</li>
+<li>UTF-16。</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>不同编码方式下，每个字符所占空间可能不同。</li>
+<li>考研题中若无特别说明，通常默认每个字符占：
+$$
+1B
+$$</li>
+</ul>
+<p><strong>ASCII 常用范围</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">十进制编码</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">$0\sim31$、$127$</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td style="text-align:right">$32$</td>
+<td>空格</td>
+</tr>
+<tr>
+<td style="text-align:right">$48\sim57$</td>
+<td>数字 <code>0</code> 至 <code>9</code></td>
+</tr>
+<tr>
+<td style="text-align:right">$65\sim90$</td>
+<td>大写字母 <code>A</code> 至 <code>Z</code></td>
+</tr>
+<tr>
+<td style="text-align:right">$97\sim122$</td>
+<td>小写字母 <code>a</code> 至 <code>z</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>标准 ASCII 是 $7$ 位编码，范围为 $0\sim127$；所谓“扩展 ASCII”不是唯一统一标准。原图信息已由本表完整结构化。</p>
+</blockquote>
+<h2 id="section-13">13.5 串的顺序存储</h2>
+<h3 id="section-14">13.5.1 静态数组实现</h3>
+<h5 id="section-15"><strong>定义</strong>：#串的顺序存储</h5>
+<blockquote>
+<p>描述：
+串的顺序存储用一组地址连续的存储单元保存串中的字符。</p>
+</blockquote>
+<p><strong>基本概念</strong></p>
+<ul>
+<li>每个 <code>char</code> 字符占 $1B$。</li>
+<li>通常还需要额外位置保存当前串的实际长度。</li>
+</ul>
+<p><strong>四种方案</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方案一</td>
+<td>把 <code>length</code> 放到数组最后</td>
+<td>字符区在前，长度在后</td>
+</tr>
+<tr>
+<td>方案二</td>
+<td>用 <code>ch[0]</code> 充当 <code>length</code></td>
+<td>字符位序和数组下标一致</td>
+</tr>
+<tr>
+<td>方案三</td>
+<td>不单独存长度，以 <code>\0</code> 结尾</td>
+<td>类似 C 风格字符串，求长度需扫描</td>
+</tr>
+<tr>
+<td>方案四</td>
+<td><code>ch[0]</code> 空置，字符从 <code>ch[1]</code> 开始，长度另存于独立变量</td>
+<td>教材与本节代码采用的方案</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>方案二缺点</strong></p>
+<ul>
+<li>若用一个字符单元 <code>ch[0]</code> 保存长度，串长会受该单元可表示范围限制；按 $8$ 位无符号值理解时最多表示 $255$。</li>
+<li>C/C++ 中普通 <code>char</code> 是否有符号由实现决定，若真正存长度应明确使用 <code>unsigned char</code> 或更宽的整数类型。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/a28ed24dc211.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L13-静态串四种方案.png"><img class="note-image" src="/assets/408/images/a28ed24dc211.png" alt="DS-L13-静态串四种方案.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>方案二和方案四都让字符位序与数组下标一致，但方案二把长度塞进 <code>ch[0]</code>，方案四则让 <code>ch[0]</code> 空置并用独立整数字段保存长度。</li>
+<li>方案三依靠终止符判断结尾，串内不能把 <code>\0</code> 当普通字符使用；方案一、二、四可在 $O(1)$ 时间取得已保存的长度。</li>
+</ul>
+<p><strong>代码定义：静态数组实现</strong></p>
+<pre><code class="language-c">#define MAXLEN 255
+
+typedef struct {
+    char ch[MAXLEN + 1];  // ch[0] 空置，字符使用 ch[1]...ch[MAXLEN]
+    int length;
+} SString;
+</code></pre>
+<p><strong>说明</strong></p>
+<ul>
+<li><code>ch</code> 中每个分量存储一个字符。</li>
+<li><code>length</code> 表示串的实际长度。</li>
+<li>静态数组作为局部变量时，空间可由系统自动回收。</li>
+</ul>
+<h3 id="section-16">13.5.2 动态存储</h3>
+<p><strong>代码定义</strong></p>
+<pre><code class="language-c">typedef struct {
+    char *ch;
+    int length;
+} HString;
+</code></pre>
+<p><strong>申请空间</strong></p>
+<pre><code class="language-c">S.ch = (char *)malloc((MAXLEN + 1) * sizeof(char));
+S.length = 0;
+</code></pre>
+<p><strong>说明</strong></p>
+<ul>
+<li><code>ch</code> 指向串的基地址。</li>
+<li>此例继续采用字符位序从 $1$ 开始、<code>ch[0]</code> 空置的约定，因此要为最多 <code>MAXLEN</code> 个字符申请 <code>MAXLEN+1</code> 个单元；若改用从 $0$ 开始的存储约定，应同步改动所有访问下标。</li>
+<li>这里仅表示运行时申请空间，不会自动扩容；要容纳更长的串，必须重新分配并维护实际容量。</li>
+<li>动态申请的空间需要手动释放：</li>
+</ul>
+<pre><code class="language-c">free(S.ch);
+</code></pre>
+<h2 id="section-17">13.6 串的链式存储</h2>
+<h3 id="section-18">13.6.1 一般存储方法</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-c">typedef struct StringNode {
+    char ch;
+    struct StringNode *next;
+} StringNode, *String;
+</code></pre>
+<p><strong>特点</strong></p>
+<ul>
+<li>每个结点存储 $1$ 个字符。</li>
+<li>指针域会带来较大额外开销。</li>
+<li>每个字符通常占 $1B$；指针在 $32$ 位环境中通常占 $4B$，在 $64$ 位环境中通常占 $8B$，还可能因内存对齐产生额外填充，因此单字符结点的存储密度很低。</li>
+</ul>
+<h3 id="section-19">13.6.2 改进存储方法</h3>
+<p><strong>思想</strong></p>
+<ul>
+<li>每个结点存储多个字符。</li>
+<li>若最后一个结点有空位，可用特殊字符填充。</li>
+<li>这样可以提高存储密度。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-c">typedef struct StringNode {
+    char ch[4];
+    struct StringNode *next;
+} StringNode, *String;
+</code></pre>
+<p><strong>说明</strong></p>
+<ul>
+<li>PDF 中以每个结点存 $4$ 个字符为例。</li>
+<li>真实实现中，每个结点存多少字符取决于设计。</li>
+</ul>
+<h2 id="section-20">13.7 串的基本操作代码</h2>
+<h3 id="section-21">13.7.1 求子串 <code>SubString</code></h3>
+<p><strong>功能</strong></p>
+<ul>
+<li>传入空的 <code>Sub</code>。</li>
+<li>用 <code>Sub</code> 返回从 <code>S</code> 的第 <code>pos</code> 个字符开始、长度为 <code>len</code> 的子串。</li>
+</ul>
+<p><strong>越界条件</strong>
+必须同时满足：
+$$
+pos\ge 1,\qquad len\ge 0,\qquad pos+len-1\le S.length
+$$
+否则参数非法或子串越界。长度为 $0$ 时允许取得空串，但起点不能超过 <code>S.length+1</code>。</p>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool SubString(SString &amp;Sub, SString S, int pos, int len) {
+    if (pos &lt; 1 || len &lt; 0 || pos + len - 1 &gt; S.length)
+        return false;
+
+    for (int i = pos; i &lt; pos + len; i++)
+        Sub.ch[i - pos + 1] = S.ch[i];
+
+    Sub.length = len;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>串的位序从 $1$ 开始。</li>
+<li><code>Sub.ch[1]</code> 保存子串第一个字符。</li>
+<li><code>Sub.ch[i - pos + 1]</code> 用于把主串位置映射到子串位置。</li>
+</ul>
+<h3 id="section-22">13.7.2 比较操作 <code>StrCompare</code></h3>
+<p><strong>返回值</strong></p>
+<ul>
+<li>$S&gt;T$，返回值 $&gt;0$。</li>
+<li>$S=T$，返回值 $=0$。</li>
+<li>$S&lt;T$，返回值 $&lt;0$。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-c">int StrCompare(SString S, SString T) {
+    for (int i = 1; i &lt;= S.length &amp;&amp; i &lt;= T.length; i++) {
+        if (S.ch[i] != T.ch[i])
+            return (unsigned char)S.ch[i] - (unsigned char)T.ch[i];
+    }
+
+    return S.length - T.length;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果某一位字符不同，在本节单字节编码模型下返回无符号字节值之差，避免 <code>char</code> 默认有符号时的比较歧义。</li>
+<li>如果扫描过的所有字符都相同，则长度长的串更大。</li>
+<li>该代码比较的是存储字节，不是中文等多字节文本的自然语言排序；处理 Unicode 字符和本地化排序时须另定字符边界与比较规则。</li>
+</ul>
+<h3 id="section-23">13.7.3 定位操作 <code>Index</code></h3>
+<h5 id="section-24"><strong>定义</strong>：#Index</h5>
+<blockquote>
+<p>描述：
+若主串 <code>S</code> 中存在与串 <code>T</code> 值相同的子串，则返回它在主串 <code>S</code> 中第一次出现的位置；否则返回 <code>0</code>。</p>
+</blockquote>
+<p><strong>代码：借助 <code>SubString</code> 和 <code>StrCompare</code></strong>
+以下实现与后文逐字符扫描的 <code>Index</code> 是两种备选写法，不能把两个同名函数原样放进同一程序。</p>
+<pre><code class="language-cpp">int Index(SString S, SString T) {
+    int i = 1;
+    int n = StrLength(S);
+    int m = StrLength(T);
+    SString sub;
+
+    while (i &lt;= n - m + 1) {
+        SubString(sub, S, i, m);
+
+        if (StrCompare(sub, T) != 0)
+            ++i;
+        else
+            return i;
+    }
+
+    return 0;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>当 $1\le m\le n$ 时，最多需要比较：
+$$
+n-m+1
+$$
+个子串；$m&gt;n$ 时没有候选，$m=0$ 时按空模式约定直接在起始位置成功。</li>
+<li>每次取出从位置 $i$ 开始、长度为 $m$ 的子串。</li>
+<li>若子串和模式串相等，则返回 $i$。</li>
+<li>若全部不相等，则返回 $0$。</li>
+</ul>
+<h2 id="section-25">13.8 串的朴素模式匹配算法</h2>
+<h3 id="section-26">13.8.1 串的模式匹配</h3>
+<h5 id="section-27"><strong>定义</strong>：#模式匹配</h5>
+<blockquote>
+<p>描述：
+串的模式匹配是在主串中找到与模式串相同的子串，并返回其所在位置。</p>
+</blockquote>
+<p><strong>模式串</strong></p>
+<ul>
+<li>想在主串中找到的目标串。</li>
+<li>模式串不一定能在主串中找到。</li>
+</ul>
+<p><strong>定位操作</strong></p>
+<ul>
+<li>定位操作也称模式匹配。</li>
+<li><code>Index(S, T)</code>：
+<ul>
+<li>若主串 <code>S</code> 中存在与 <code>T</code> 值相同的子串，返回第一次出现的位置；</li>
+<li>否则返回 $0$。</li>
+</ul>
+</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/d552fe7ec4ef.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L13-朴素匹配移动过程.png"><img class="note-image" src="/assets/408/images/d552fe7ec4ef.png" alt="DS-L13-朴素匹配移动过程.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>每轮固定一个候选起点 <code>k</code>，从该位置起逐字符比较主串和模式串。</li>
+<li>只要出现一个不相等字符，本轮立即失败，候选起点后移一位，模式串重新从第一个字符比较。</li>
+<li>所有对应字符都相等时返回当前起点；因此朴素算法会重复比较已经比较过的主串字符。</li>
+</ul>
+<h3 id="section-28">13.8.2 朴素模式匹配过程</h3>
+<p><strong>过程</strong></p>
+<ul>
+<li>取出从位置 $i$ 开始、长度为 $m$ 的子串。</li>
+<li>将该子串和模式串逐字符比较。</li>
+<li>若匹配成功，则返回当前起始位置。</li>
+<li>若不匹配，则匹配下一个子串。</li>
+<li>匹配下一子串时：
+<ul>
+<li>主串指针 <code>i</code> 指向下一个子串的第一个位置；</li>
+<li>模式串指针 <code>j</code> 回到模式串的第一个位置。</li>
+</ul>
+</li>
+</ul>
+<p><strong>最多比较的子串数</strong>
+设主串长度为 $n$，模式串长度为 $m$。</p>
+<p>当 $1\le m\le n$ 时，最多对比：
+$$
+n-m+1
+$$
+个候选子串。若 $m&gt;n$，不存在长度为 $m$ 的候选子串，可直接判定匹配失败；若 $m=0$，通常约定空模式串在起始位置匹配成功，不能机械套用 $n-m+1$ 作为字符比较次数。</p>
+<h3 id="section-29">13.8.3 代码实现</h3>
+<pre><code class="language-c">int Index(SString S, SString T) {
+    if (T.length == 0)
+        return 1;                  // 本节采用 1 起始位序
+    if (T.length &gt; S.length)
+        return 0;
+
+    int k = 1;
+    int i = k;
+    int j = 1;
+
+    while (i &lt;= S.length &amp;&amp; j &lt;= T.length) {
+        if (S.ch[i] == T.ch[j]) {
+            ++i;
+            ++j;
+        } else {
+            k++;
+            i = k;
+            j = 1;
+        }
+    }
+
+    if (j &gt; T.length)
+        return k;
+    else
+        return 0;
+}
+</code></pre>
+<p><strong>变量含义</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>k</code></td>
+<td>当前正在尝试匹配的子串起始位置</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td>主串当前比较位置</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>模式串当前比较位置</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>匹配成功条件</strong>
+若：
+$$
+j&gt;T.length
+$$
+说明模式串已经全部匹配成功。</p>
+<p><strong>匹配失败时</strong></p>
+<ul>
+<li><code>k++</code>：检查下一个子串。</li>
+<li><code>i = k</code>：主串指针回到新子串起点。</li>
+<li><code>j = 1</code>：模式串指针回到第一个字符。</li>
+</ul>
+<h3 id="section-30">13.8.4 时间复杂度</h3>
+<p>设：</p>
+<ul>
+<li>主串长度为 $n$；</li>
+<li>模式串长度为 $m$。</li>
+</ul>
+<p>在 $1\le m\le n$ 的前提下，最坏情况下：</p>
+<ul>
+<li>共有 $n-m+1$ 个子串需要尝试。</li>
+<li>每个子串最多比较 $m$ 个字符。</li>
+</ul>
+<p>所以：
+$$
+O((n-m+1)m)=O(nm)
+$$</p>
+<p>若 $m&gt;n$，先比较长度即可在 $O(1)$ 时间判定失败；若 $m=0$，按上述空模式约定在 $O(1)$ 时间返回起始位置。</p>
+<h2 id="section-31">13.9 题型整理</h2>
+<h3 id="section-32">题型：#串的基本概念</h3>
+<h4 id="section-33">第一部分：解题方法</h4>
+<ul>
+<li>判断是否为子串时，必须连续。</li>
+<li>判断子串位置时，取子串第一个字符在主串中的位置。</li>
+<li>串的位序从 $1$ 开始，别和数组下标混淆。</li>
+</ul>
+<h4 id="section-34">第二部分：典型例题</h4>
+<p><strong>例题：<code>&quot;Pro&quot;</code> 在 <code>&quot;iPhone 11 Pro Max?&quot;</code> 中的位置是多少？</strong></p>
+<p>按本节从 $1$ 开始的位序，空格也计入长度：<code>iPhone</code> 占第 $1$–$6$ 位、空格第 $7$ 位、<code>11</code> 为第 $8$–$9$ 位、第二个空格第 $10$ 位，因此 <code>&quot;Pro&quot;</code> 的 <code>P</code> 在第 $11$ 位，<code>Index(S,T)=11</code>。主串第 $2$ 位虽也是 <code>P</code>，但其后不是 <code>ro</code>，不能只按单个字符查找。</p>
+<h4 id="section-35">第三部分：知识点复盘</h4>
+<ul>
+<li>子串必须连续。</li>
+<li>主串包含子串。</li>
+<li>空格也是字符。</li>
+<li>空串长度为 $0$。</li>
+</ul>
+<h3 id="section-36">题型：#朴素模式匹配</h3>
+<h4 id="section-37">第一部分：解题方法</h4>
+<ul>
+<li>从主串第 $1$ 个位置开始尝试。</li>
+<li>逐个字符和模式串比较。</li>
+<li>一旦失败，就回到下一个起始位置重新比较。</li>
+<li>模式串匹配完，返回当前起始位置。</li>
+<li>主串所有可能起点都失败，返回 $0$。</li>
+</ul>
+<h4 id="section-38">第二部分：典型例题</h4>
+<p><strong>例题：为什么朴素模式匹配最坏时间复杂度是 $O(nm)$？</strong></p>
+<p>在 $1\le m\le n$ 的前提下：</p>
+<ul>
+<li>最多尝试 $n-m+1$ 个起始位置；</li>
+<li>每个起始位置最多比较 $m$ 个字符。</li>
+</ul>
+<p>所以：
+$$
+O((n-m+1)m)=O(nm)
+$$</p>
+<p>$m&gt;n$ 与 $m=0$ 分别按“长度不足立即失败”和“空模式在起点成功”的边界处理，均不套用上述逐字符最坏过程。</p>
+<h4 id="section-39">第三部分：知识点复盘</h4>
+<ul>
+<li>朴素模式匹配失败后，模式串指针回到 $1$。</li>
+<li>主串起始位置后移 $1$。</li>
+<li>KMP 算法的改进点就在于避免不必要的回退。</li>
+</ul>
+<h2 id="section-40">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-36ff99353ad8/">上一篇：特殊矩阵与压缩存储</a> · <a href="/notes/cs408-2eed9d5baec0/">下一篇：KMP 算法</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-424a656729a9/">重点算法汇总</a></li>
+</ul>
+<h2 id="section-41">13.10 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>串是由零个或多个字符组成的有限序列。</li>
+<li>空串长度为 $0$。</li>
+<li>子串必须是连续字符序列。</li>
+<li>串的位序通常从 $1$ 开始。</li>
+<li>串是一种特殊线性表，数据对象限定为字符集。</li>
+<li>串的操作通常以子串为对象。</li>
+<li>顺序存储可以静态数组实现，也可以动态分配。</li>
+<li>链式存储可以一个结点存一个字符，也可以一个结点存多个字符。</li>
+<li><code>Index(S, T)</code> 是定位操作，也称模式匹配。</li>
+<li>朴素模式匹配最坏时间复杂度为：
+$$
+O(nm)
+$$</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>子串不是子序列，子串必须连续。</li>
+<li>空格也是字符。</li>
+<li>字符串位序从 $1$ 开始，而 C 数组下标从 $0$ 开始。</li>
+<li><code>Index</code> 查找失败返回 $0$。</li>
+<li><code>StrCompare</code> 不是只看长度，而是先逐字符比较。</li>
+<li>朴素模式匹配失败后，<code>j</code> 回到 $1$，<code>k</code> 后移一位。</li>
+</ul>
+<p><strong>一句话总结</strong></p>
+<ul>
+<li>串是操作对象受限为字符的特殊线性表，常考基本概念、存储结构、子串定位和朴素模式匹配复杂度。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-1b0b51efe56e/index.html"><span>← 上一项</span><strong>Lecture 16：二叉树常考性质</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-1c2f720beeaf/index.html"><span>下一项 →</span><strong>6 题型 - 检错与纠错机制</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

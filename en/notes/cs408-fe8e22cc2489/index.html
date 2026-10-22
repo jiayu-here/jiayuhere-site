@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 10：知识框架 - 网络层 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 10：知识框架 - 网络层. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 10：知识框架 - 网络层 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 10：知识框架 - 网络层. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-fe8e22cc2489/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 10：知识框架 - 网络层 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 10：知识框架 - 网络层. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 10：知识框架 - 网络层",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-fe8e22cc2489/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-fe8e22cc2489/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-fe8e22cc2489/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-fe8e22cc2489/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-fe8e22cc2489/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-fe8e22cc2489/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 10：知识框架 - 网络层</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 10：知识框架 - 网络层. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>35 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/47321d9a4593.md" target="_blank" rel="noreferrer">View original canvas source</a>
+        <a class="button secondary-button" href="/assets/408/originals/47321d9a4593.md" download="知识框架 - 网络层.md">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 网络层的任务：路由与转发</a><a href="#section-5">4.2 IPv4 数据报</a><a href="#section-9">4.3 IPv4 地址与编址</a><a href="#section-13">4.4 IPv4 地址、MAC 地址与 ARP</a><a href="#section-16">4.5 路由协议</a><a href="#section-23">4.6 ICMP</a><a href="#section-26">4.7 VPN 与 NAT</a><a href="#section-29">4.8 IPv6</a><a href="#section-34">4.9 IP 多播与移动 IP</a><a href="#section-37">4.10 软件定义网络 SDN</a><a href="#section-40">相关知识</a><a href="#section-41">4.11 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：网络层负责把分组从源主机跨越多个网络送到目的主机。主线是：IP 负责无连接分组交付，路由算法生成路由，路由器按转发表逐跳转发；ARP、ICMP、NAT、VPN、IPv6、移动 IP、IP 多播和 SDN 分别解决地址映射、差错报告、地址复用、安全互联、地址扩展、移动性、多点交付与控制平面重构问题。</p>
+</blockquote>
+<blockquote>
+<p><strong>NOTE</strong> · 原始知识框架（点击展开）
+<a href="/assets/408/originals/47321d9a4593.md">Download original Excalidraw canvas</a></p>
+</blockquote>
+<p>本篇按“<strong>服务模型与转发 -&gt; IPv4 首部与分片 -&gt; 编址与 ARP -&gt; 路由协议 -&gt; ICMP/NAT/VPN -&gt; IPv6 -&gt; 多播与移动 IP -&gt; SDN</strong>”组织。计算题和真题详解可从下列专题进入：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>专题</th>
+<th>入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPv4 地址、子网、VLSM、特殊地址</td>
+<td><a href="/en/notes/cs408-e843016612d3/">1 题型 - IPv4地址结构及其计算</a></td>
+</tr>
+<tr>
+<td>最长前缀、逐跳 MAC、NAT 转发</td>
+<td><a href="/en/notes/cs408-f3115f915ba6/">2 题型 - 网络层转发</a></td>
+</tr>
+<tr>
+<td>RIP、OSPF、BGP、TTL 综合题</td>
+<td><a href="/en/notes/cs408-5064ace109f8/">3 题型 - 路由协议</a></td>
+</tr>
+<tr>
+<td>VLAN、ARP、Access/Trunk、802.1Q</td>
+<td><a href="/en/notes/cs408-b0e7f0582b88/">4 题型 - 虚拟局域网</a></td>
+</tr>
+<tr>
+<td>IPv4 多播、MAC 映射、IGMP、RPF</td>
+<td><a href="/en/notes/cs408-ac7b677ecc0f/">5 题型 - IP多播</a></td>
+</tr>
+<tr>
+<td>SDN、OpenFlow 1.0 流表</td>
+<td><a href="/en/notes/cs408-cbd01644a3c3/">6 题型 - SDN软件定义网络</a></td>
+</tr>
+<tr>
+<td>IPv6 表示、首部、ICMPv6</td>
+<td><a href="/en/notes/cs408-324f552507c6/">7 题型 - IPv6</a></td>
+</tr>
+<tr>
+<td>移动 IP、代理、转交地址、隧道</td>
+<td><a href="/en/notes/cs408-d3d15cc6df11/">8 题型 - 移动IP</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-1">4.1 网络层的任务：路由与转发</h2>
+<ul>
+<li><strong>路由选择</strong>：根据网络拓扑和代价计算到各目的网络的路径，形成路由表。它属于控制平面，关注全局路径。</li>
+<li><strong>分组转发</strong>：路由器收到分组后，根据目的 IP 查转发表，决定输出接口和下一跳。它属于数据平面，发生在每个分组上。</li>
+<li>Internet 网络层采用<strong>无连接、尽力而为的数据报服务</strong>：发送前不建立网络层连接，不保证可靠、按序、无重复或时延上界，可靠性通常由端系统的运输层补充。</li>
+</ul>
+<pre><code class="language-text">目的 IP -&gt; 最长前缀匹配 -&gt; 找到下一跳/输出接口 -&gt; 重新封装链路层帧 -&gt; 发往下一跳
+</code></pre>
+<p>若多条路由都能匹配目的地址，选择网络前缀最长、范围最具体的一条；默认路由 <code>0.0.0.0/0</code> 只在没有更具体路由时使用。</p>
+<h3 id="section-2">4.1.1 路由表、转发表与逐跳交付</h3>
+<ul>
+<li><strong>路由表</strong>偏控制平面，记录路由协议或管理员得到的候选路径、度量和来源。</li>
+<li><strong>转发表 FIB</strong>偏数据平面，是从选定路由生成的高效查找结构；题目通常把二者统称为“路由表”，应按题意作答。</li>
+<li>路由条目常含目的前缀、下一跳、出接口、度量等。直连路由可以没有中间路由器下一跳；主机路由 <code>/32</code> 只匹配一台 IPv4 主机；默认路由 <code>/0</code> 最宽泛。</li>
+<li>最长前缀匹配只解决“多条前缀都匹配时选哪一条”。若同一前缀存在多条候选路由，还要按题设比较管理距离、协议度量或是否等价；不能把“前缀最长”误当成全部选路规则。</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    H1[源主机] --&gt;|帧目的 MAC：默认网关| R1[路由器 R1]
+    R1 --&gt;|查目的 IP；重封装当前链路帧| R2[路由器 R2]
+    R2 --&gt;|最后一跳帧目的 MAC：目的主机| H2[目的主机]
+</pre>
+<p>没有 NAT 时，图中 IP 源/目的地址保持端到端不变；每经过一条链路，帧的源/目的 MAC 都按当前发送接口与下一跳重新填写。</p>
+<h3 id="section-3">4.1.2 路由器的组成与分组处理</h3>
+<blockquote>
+<p><strong>INFO</strong> · 教材补充：路由表“算出来”和分组“转出去”是两条路径</p>
+</blockquote>
+<pre class="mermaid">flowchart LR
+    IN[输入端口&lt;br/&gt;物理/链路接收&lt;br/&gt;查转发表与排队] --&gt; F[交换结构&lt;br/&gt;输入端口到输出端口]
+    F --&gt; OUT[输出端口&lt;br/&gt;缓存、调度&lt;br/&gt;链路封装与发送]
+    RP[路由选择处理机&lt;br/&gt;运行路由协议&lt;br/&gt;维护路由表并生成转发表] -.控制平面.-&gt; IN
+    RP -.配置/管理.-&gt; F
+    RP -.控制平面.-&gt; OUT
+</pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>部件</th>
+<th>主要职责</th>
+<th>易错边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入端口</td>
+<td>完成物理层接收、链路层解封装，并对分组首部做查表、分类和输入缓存</td>
+<td>“端口”是路由器接口部件，不是运输层端口号</td>
+</tr>
+<tr>
+<td>交换结构</td>
+<td>把分组从选定输入端口移到相应输出端口；可采用经内存、共享总线、交叉开关等实现</td>
+<td>它负责设备内部搬运，不是外部网络的分组交换服务名称</td>
+</tr>
+<tr>
+<td>输出端口</td>
+<td>缓存等待发送的分组，执行调度，再完成链路层封装和物理发送</td>
+<td>多个输入同时指向同一输出时可能形成输出排队</td>
+</tr>
+<tr>
+<td>路由选择处理机</td>
+<td>运行路由协议和管理功能，维护路由信息并把可供高速查找的转发表下发给数据平面</td>
+<td>普通分组不必逐个交给处理机做完整路由计算</td>
+</tr>
+</tbody>
+</table></div>
+<p>典型转发过程是：接收并检查当前链路帧 -&gt; 取出 IP 数据报 -&gt; 检查首部、更新 TTL/校验和 -&gt; 按目的前缀做最长前缀匹配 -&gt; 选择下一跳和输出端口 -&gt; 排队调度 -&gt; 重新封装下一链路的帧。具体硬件可把若干步骤并行或放在不同部件中，但“每跳重新封装链路层帧、无 NAT 时端到端 IP 地址通常不变”这一逻辑不变。</p>
+<ul>
+<li>当交换结构暂时来不及接收输入分组时会出现<strong>输入排队</strong>；输入 FIFO 队首分组被繁忙输出阻塞、连带挡住后方本可转发分组，称为<strong>队头阻塞（HOL blocking）</strong>。</li>
+<li>当多个输入端口同时把分组送往同一输出，而到达速率超过该输出链路速率时会出现<strong>输出排队</strong>；缓存耗尽便丢包。</li>
+<li>输出调度可采用 FIFO、优先级、轮询/加权公平等策略；选择何种策略会影响时延、公平性和服务质量。</li>
+</ul>
+<h3 id="section-4">4.1.3 网络拥塞与控制思路</h3>
+<blockquote>
+<p><strong>INFO</strong> · 教材补充</p>
+</blockquote>
+<p>当网络中一段时间内对链路带宽、交换能力或缓冲区的需求超过可用资源时会发生<strong>拥塞</strong>。它通常先表现为队列增长和时延上升，继而出现丢包；若发送方因丢包不断重传，还可能进一步浪费带宽并造成有效吞吐量下降。</p>
+<p><strong>流量控制</strong>解决“发送方不要压垮接收方”，常依据接收缓存；<strong>拥塞控制</strong>解决“所有发送者合计不要压垮网络”，关注链路、路由器缓存和全局负载。二者可以同时限制同一数据流，但控制对象不同。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>思路</th>
+<th>是否依赖运行时反馈</th>
+<th>典型机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开环/预防式控制</td>
+<td>主要在拥塞发生前制定策略，不依赖当前拥塞反馈闭环调节</td>
+<td>接纳控制、资源预留、业务整形、合理的路由/调度与重传策略</td>
+</tr>
+<tr>
+<td>闭环/反馈式控制</td>
+<td>检测拥塞，把信息反馈给相关节点，再降低负载或调整资源</td>
+<td>依据丢包/时延的隐式反馈，拥塞通知/ECN 等显式反馈，发送端降速，动态路由、队列管理或负载丢弃</td>
+</tr>
+</tbody>
+</table></div>
+<p>路由器的缓存只能吸收短时突发，不能凭空增加长期输出能力；缓存无限增大反而可能让排队时延失控。端系统的 TCP 拥塞窗口是闭环控制的一种实现，详见 <a href="/en/notes/cs408-59e41ea74a00/#section-20">TCP 拥塞控制</a>，但“网络层拥塞问题”不等同于“只有 TCP 四算法”。</p>
+<h2 id="section-5">4.2 IPv4 数据报</h2>
+<h3 id="section-6">4.2.1 IPv4 首部</h3>
+<p>IPv4 基本首部为 20 B，存在选项时最长 60 B。重要字段如下。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用与考点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本</td>
+<td>IPv4 为 4</td>
+</tr>
+<tr>
+<td>首部长度 IHL</td>
+<td>单位为 4 B；最小值 5，表示 20 B</td>
+</tr>
+<tr>
+<td>总长度</td>
+<td>首部与数据总长度，单位为 B，最大 $2^{16}-1$ B</td>
+</tr>
+<tr>
+<td>标识</td>
+<td>同一原始数据报的各分片使用相同标识</td>
+</tr>
+<tr>
+<td>标志</td>
+<td><code>DF=1</code> 禁止分片；<code>MF=1</code> 表示后面还有分片</td>
+</tr>
+<tr>
+<td>片偏移</td>
+<td>本分片数据在原数据报中的相对位置，单位为 8 B</td>
+</tr>
+<tr>
+<td>TTL</td>
+<td>每经过一个路由器至少减 1；减为 0 时丢弃并通常返回 ICMP 超时</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>指示上层协议，如 ICMP=1、TCP=6、UDP=17</td>
+</tr>
+<tr>
+<td>首部校验和</td>
+<td>只校验 IPv4 首部；每跳修改 TTL 后需重算</td>
+</tr>
+<tr>
+<td>源/目的地址</td>
+<td>各 32 bit；原则上端到端保持不变，NAT 是例外</td>
+</tr>
+</tbody>
+</table></div>
+<p>完整首部还包括以下字段：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th style="text-align:right">位数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区分服务 DS/ECN</td>
+<td style="text-align:right">8</td>
+<td>DSCP 可标识服务类别，ECN 可显式通知拥塞；旧教材常称 ToS</td>
+</tr>
+<tr>
+<td>标志</td>
+<td style="text-align:right">3</td>
+<td>保留位、DF、MF；保留位必须为 0</td>
+</tr>
+<tr>
+<td>选项</td>
+<td style="text-align:right">0-40 B</td>
+<td>可携带时间戳、记录路由等扩展信息；现代普通分组通常不带选项</td>
+</tr>
+<tr>
+<td>填充</td>
+<td style="text-align:right">可变</td>
+<td>用 0 补齐，使首部长度成为 4 B 的整数倍</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-text">0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-------+-------+---------------+--------------------------------+
+|Version|  IHL  |    DS/ECN     |          Total Length          |
++-------------------------------+---+----------------------------+
+|         Identification        |Flg|      Fragment Offset       |
++---------------+---------------+--------------------------------+
+|      TTL      |   Protocol    |        Header Checksum         |
++---------------------------------------------------------------+
+|                       Source Address                            |
++---------------------------------------------------------------+
+|                    Destination Address                         |
++---------------------------------------------------------------+
+|             Options（若有）与 Padding（若需）                  |
++---------------------------------------------------------------+
+</code></pre>
+<p>首部长度字段单位是 4 B，总长度字段单位是 1 B，片偏移单位是 8 B；三种单位是 IPv4 计算题最容易混淆的地方。</p>
+<h3 id="section-7">4.2.2 IPv4 分片</h3>
+<p>链路 MTU 小于数据报长度且 <code>DF=0</code> 时，IPv4 路由器可分片；各片独立转发，最终只在目的主机重组。</p>
+<p>设 MTU 为 $M$，IPv4 首部长度为 $H$，则除最后一片外，每片数据最大长度为：</p>
+<p>$$L=\left\lfloor\frac{M-H}{8}\right\rfloor\times 8$$</p>
+<p>第 $i$ 片的片偏移为：</p>
+<p>$$Offset_i=\frac{\text{该片数据在原数据部分的起始字节位置}}{8}$$</p>
+<ul>
+<li>每个分片都有独立首部，总长度字段是该分片自身长度。</li>
+<li>最后一片 <code>MF=0</code>，此前各片 <code>MF=1</code>；若原数据报未分片，片偏移为 0 且 <code>MF=0</code>。</li>
+<li>IPv6 路由器不负责分片，源主机依据路径 MTU 处理。</li>
+</ul>
+<h4 id="section-8">分片计算示例</h4>
+<p>一个 IPv4 数据报总长度为 4000 B，基本首部 20 B，经过 MTU=1500 B 的链路。原数据为 3980 B，每个非末片最多携带：</p>
+<p>$$
+\left\lfloor\frac{1500-20}{8}\right\rfloor\times8=1480\ \mathrm{B}
+$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">分片</th>
+<th style="text-align:right">数据长度</th>
+<th style="text-align:right">总长度</th>
+<th style="text-align:right">片偏移</th>
+<th style="text-align:right">MF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1480 B</td>
+<td style="text-align:right">1500 B</td>
+<td style="text-align:right">$0/8=0$</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1480 B</td>
+<td style="text-align:right">1500 B</td>
+<td style="text-align:right">$1480/8=185$</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1020 B</td>
+<td style="text-align:right">1040 B</td>
+<td style="text-align:right">$2960/8=370$</td>
+<td style="text-align:right">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>校验时应满足：分片数据长度之和等于原数据长度，各片起始位置连续，除末片外数据长度为 8 B 的整数倍。</p>
+<p>若 <code>DF=1</code> 且下一链路 MTU 过小，路由器不能分片，必须丢弃该报文；对允许回复 ICMP 差错的普通单播报文，应返回“目的不可达：需要分片但设置了 DF”（类型 3、代码 4），供源端进行路径 MTU 发现。若原报文是广播/多播、非首片分片或本身为 ICMP 差错报文等，则不得再发送 ICMP 差错；不能把“返回”写成无条件结果。IPv6 的对应反馈是 ICMPv6 Packet Too Big。IPv4 的分片只在最终目的主机重组，中间路由器不会为了继续转发而重组。此边界依据 <a href="https://www.rfc-editor.org/rfc/rfc1812.html">RFC 1812 的 ICMP 禁发规则</a>，为教材补充与纠错。</p>
+<h2 id="section-9">4.3 IPv4 地址与编址</h2>
+<h3 id="section-10">4.3.1 分类编址与特殊地址</h3>
+<p>传统分类编址把地址分为 A、B、C 类单播地址，D 类用于多播，E 类保留。现代网络主要使用 CIDR，但类别边界仍常用于基础题。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>固定高位</th>
+<th>首字节典型范围</th>
+<th style="text-align:right">默认网络前缀</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>0</code></td>
+<td>1-126</td>
+<td style="text-align:right">/8</td>
+<td>大型单播网络；0/8 与 127/8 有特殊用途</td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>10</code></td>
+<td>128-191</td>
+<td style="text-align:right">/16</td>
+<td>单播</td>
+</tr>
+<tr>
+<td>C</td>
+<td><code>110</code></td>
+<td>192-223</td>
+<td style="text-align:right">/24</td>
+<td>单播</td>
+</tr>
+<tr>
+<td>D</td>
+<td><code>1110</code></td>
+<td>224-239</td>
+<td style="text-align:right">不适用</td>
+<td>IPv4 多播</td>
+</tr>
+<tr>
+<td>E</td>
+<td><code>1111</code></td>
+<td>240-255</td>
+<td style="text-align:right">不适用</td>
+<td>保留/实验</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址/前缀</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0.0.0.0</code></td>
+<td>未指定地址；默认路由写作 <code>0.0.0.0/0</code></td>
+</tr>
+<tr>
+<td><code>255.255.255.255</code></td>
+<td>本地网络受限广播</td>
+</tr>
+<tr>
+<td><code>127.0.0.0/8</code></td>
+<td>环回测试，常用 <code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td><code>10.0.0.0/8</code></td>
+<td>私有地址</td>
+</tr>
+<tr>
+<td><code>172.16.0.0/12</code></td>
+<td>私有地址</td>
+</tr>
+<tr>
+<td><code>192.168.0.0/16</code></td>
+<td>私有地址</td>
+</tr>
+<tr>
+<td><code>169.254.0.0/16</code></td>
+<td>链路本地自动配置地址</td>
+</tr>
+</tbody>
+</table></div>
+<p>网络号全 0、主机号全 0、主机号全 1 等结论要放回具体编址语境判断，不能只看某个十进制字节。<code>0.0.0.0</code> 可在尚未配置地址时作未指明源地址，不能作为普通单播目的地址；<code>255.255.255.255</code> 是受限广播目的地址，不能作为源地址。</p>
+<h3 id="section-11">4.3.2 子网划分、CIDR 与 VLSM</h3>
+<p>掩码或前缀长度把 IP 划分为网络前缀与主机号。地址 <code>IP</code> 所在网络为：</p>
+<p>$$Network=IP\ \operatorname{AND}\ Mask$$</p>
+<p>若前缀长度为 $n$：</p>
+<ul>
+<li>地址块总数为 $2^{32-n}$。</li>
+<li>传统 IPv4 子网可分配主机地址通常为 $2^{32-n}-2$，需扣除全 0 网络地址和全 1 广播地址。</li>
+<li>广播地址等于网络地址把主机位全部置 1。</li>
+</ul>
+<p><code>2^{32-n}-2</code> 是传统广播型 IPv4 子网的普通主机数公式。点到点链路可按 RFC 3021 使用 <code>/31</code> 的两个地址，单主机路由使用 <code>/32</code>；题目未说明这些现代特例时，通常按传统“减 2”规则计算。</p>
+<p><strong>VLSM 地址规划</strong>应按需求主机数从大到小分配：先为最大子网选择能容纳主机数的最短前缀，再在剩余地址空间继续分配，避免碎片和重叠。</p>
+<p><strong>CIDR 路由聚合</strong>要求被聚合网段连续、数量通常为 2 的幂、起始地址按聚合块大小对齐。聚合减少路由表项，但不能把不连续网络强行合并。</p>
+<p>聚合前应做二进制检查：从高位起找所有网络地址的最长公共前缀，再确认聚合块没有错误覆盖题目不允许包含的地址。路由器即使同时存在聚合路由与更具体路由，也会按最长前缀选择更具体项。</p>
+<h3 id="section-12">4.3.3 地址规划验算清单</h3>
+<ol>
+<li><code>IP AND Mask</code> 得到网络地址。</li>
+<li>块大小为 $2^{32-n}$，起始地址必须按块大小对齐。</li>
+<li>广播地址等于“下一地址块起点减 1”。</li>
+<li>可分配区间位于网络地址与广播地址之间。</li>
+<li>VLSM 从最大需求开始分配，并检查所有子网不重叠、不越出父前缀。</li>
+<li>默认网关必须是主机所在 IP 子网内的路由器接口地址。</li>
+</ol>
+<h2 id="section-13">4.4 IPv4 地址、MAC 地址与 ARP</h2>
+<ul>
+<li>IP 地址是网络层逻辑地址，标识主机/接口所在网络，贯穿端到端路径。</li>
+<li>MAC 地址是链路层地址，只用于当前一跳的帧交付；每经过一个路由器，帧的源/目的 MAC 都会改变。</li>
+<li>主机判断目的 IP 是否与自己同网段：同网段时解析目的主机 MAC；不同网段时解析默认网关 MAC，IP 目的地址仍是最终主机。</li>
+</ul>
+<p><strong>ARP</strong>用已知 IPv4 地址查询同一链路上的 MAC 地址：请求通常以广播帧发送，目标主机单播响应，结果缓存在 ARP 表中。</p>
+<p>ARP 请求中同时携带发送方 IP/MAC 与待查询的目标 IP；目标 MAC 未知时相应字段填 0。接收方可从请求中学习发送方映射，再用 ARP 响应告知自己的 MAC。ARP 报文直接封装在链路层帧中，不封装在 IP 数据报中。</p>
+<pre><code class="language-text">发送远程 IP 分组
+  -&gt; 查路由得到下一跳网关
+  -&gt; ARP 查询网关 MAC
+  -&gt; 帧目的 MAC=网关 MAC，IP 目的地址=远程主机 IP
+</code></pre>
+<p>ARP 只解决同一广播域中的下一跳地址映射，不会跨路由器广播，也不负责把域名解析成 IP。</p>
+<h3 id="section-14">4.4.1 一次完整的跨网转发</h3>
+<p>设 H1 向异网 H2 发送数据，且缓存均为空：</p>
+<ol>
+<li>H1 用本机掩码判断 H2 不在本地子网，查路由选择默认网关 R1。</li>
+<li>H1 广播 ARP 请求 R1 入接口 MAC；R1 单播响应。</li>
+<li>H1 构造 <code>目的 MAC=R1</code>、<code>目的 IP=H2</code> 的帧并发送。</li>
+<li>R1 去掉链路层首尾部，校验 IPv4 首部、递减 TTL、更新首部校验和并查转发表。</li>
+<li>R1 在出链路上解析下一跳 MAC，重新封装新帧；原 IP 数据报的源/目的地址通常不变。</li>
+<li>最后一跳路由器解析 H2 的 MAC，把数据报直接交付给 H2。</li>
+</ol>
+<p>若路径经过 $n$ 个路由器，而且 $n+1$ 段都是使用 ARP 的 IPv4 广播链路、各段相关缓存均为空，则最多发生 $n+1$ 次 ARP 交互。点到点链路或 IPv6 邻居发现等场景不能机械套用该结论。</p>
+<h3 id="section-15">4.4.2 ARP 表、MAC 地址表与 VLAN</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>表</th>
+<th>典型维护者</th>
+<th>映射关系</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ARP/邻居表</td>
+<td>主机、路由器三层接口</td>
+<td>IPv4 地址 -&gt; MAC 地址</td>
+<td>为当前链路确定下一跳链路层地址</td>
+</tr>
+<tr>
+<td>MAC 地址表</td>
+<td>二层交换机</td>
+<td>MAC 地址 -&gt; 交换端口</td>
+<td>在 VLAN 内转发以太网帧</td>
+</tr>
+<tr>
+<td>路由/转发表</td>
+<td>主机、路由器</td>
+<td>IP 前缀 -&gt; 下一跳/出接口</td>
+<td>选择网络层下一跳</td>
+</tr>
+</tbody>
+</table></div>
+<p>VLAN 把二层交换网络划分成多个广播域。ARP 广播只在所属 VLAN 内传播；不同 VLAN 之间通信时，源主机解析的是本 VLAN 默认网关的 MAC，三层设备完成 VLAN 间路由。Access、Trunk 与 802.1Q 的完整规则见 <a href="/en/notes/cs408-b0e7f0582b88/">4 题型 - 虚拟局域网</a>。</p>
+<h2 id="section-16">4.5 路由协议</h2>
+<h3 id="section-17">4.5.1 静态路由与动态路由</h3>
+<ul>
+<li><strong>静态路由</strong>由管理员配置，稳定、开销小，适合小型或拓扑固定网络，但故障后不能自动收敛。</li>
+<li><strong>动态路由</strong>由路由器交换信息并自动计算，适应拓扑变化，但存在协议报文、计算开销和收敛过程。</li>
+<li>自治系统 AS 内使用内部网关协议 IGP；AS 之间使用外部网关协议 EGP。</li>
+</ul>
+<h3 id="section-18">4.5.2 RIP、OSPF 与 BGP</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>范围/算法</th>
+<th>度量与传输</th>
+<th>高频特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RIP</td>
+<td>IGP，距离向量，Bellman-Ford 思想</td>
+<td>跳数；UDP 520</td>
+<td>最大有效距离 15 跳，16 表示不可达；周期交换整张距离向量，收敛慢，可能计数到无穷</td>
+</tr>
+<tr>
+<td>OSPF</td>
+<td>IGP，链路状态，Dijkstra</td>
+<td>代价；直接封装在 IP，协议号 89</td>
+<td>在同一区域内洪泛链路状态并构建一致的区域拓扑；支持区域、等价负载与快速收敛</td>
+</tr>
+<tr>
+<td>BGP</td>
+<td>EGP，路径向量</td>
+<td>策略和 AS-PATH；TCP 179</td>
+<td>交换网络前缀与属性，按策略选路；AS-PATH 可抑制自治系统级环路</td>
+</tr>
+</tbody>
+</table></div>
+<p>距离向量路由器只知道“经某邻居到目的地的距离”；链路状态路由器获得区域拓扑后自行运行最短路算法。BGP 追求可达性与策略，不等同于在全球按某个简单代价求绝对最短路。</p>
+<h4 id="section-19">RIP 更新规则</h4>
+<p>路由器 X 收到邻居 Y 的 <code>&lt;目的网络 N, 距离 d, 下一跳 Z&gt;</code> 后，先改为 <code>&lt;N, min(d+1, 16), Y&gt;</code>，再与本表比较：</p>
+<ol>
+<li>本表没有 N：加入。</li>
+<li>本表已有 N、下一跳不同：新距离更小时更新。</li>
+<li>本表已有 N、下一跳相同：无论新距离变小还是变大，都采用邻居的最新结果。</li>
+</ol>
+<p>第三条体现“原路由依赖同一邻居”，不能因新距离变大而保留过时值。RIP 通常约每 30 s 周期更新，失效信息可能逐跳缓慢传播；水平分割、毒性逆转、触发更新和抑制定时器可减轻环路与计数到无穷，但不能把这些机制与题目指定的简化更新时序混用。RIPv1 不携带掩码，是分类协议；RIPv2 携带掩码，支持 CIDR/VLSM。</p>
+<h4 id="section-20">OSPF 工作过程</h4>
+<pre><code class="language-text">发现并维持邻居
+  -&gt; 交换/同步链路状态数据库 LSDB
+  -&gt; 可靠洪泛链路状态通告 LSA
+  -&gt; 每台路由器以自己为根运行 Dijkstra/SPF
+  -&gt; 生成最短路径树与路由
+</code></pre>
+<p>常见 OSPF 报文有 Hello、数据库描述 DBD、链路状态请求 LSR、链路状态更新 LSU、链路状态确认 LSAck。OSPF 可按区域分层，骨干区域为 Area 0；多路访问网络可选 DR/BDR 减少邻接与洪泛开销。</p>
+<p>同一区域内的链路状态数据库一致且协议已经收敛后，该区域内各路由器基于一致的<strong>区域拓扑</strong>运行 SPF，所得最短路径树无环，也不存在 RIP 的“计数到无穷”。多区域 OSPF 中，区域边界路由器通过汇总和区域间 LSA 传播可达性；普通路由器并不因此保存整个自治系统所有其他区域的完整详细拓扑。拓扑变化刚发生、LSA 尚未完全传播时，各路由器状态还可能短暂不一致，不能无条件断言任何瞬间都绝不会出现暂态转发环路。</p>
+<h4 id="section-21">BGP 会话、报文与选路</h4>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>BGP-4 报文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPEN</td>
+<td>建立 BGP 邻接并协商参数</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>通告新可达前缀、路径属性和撤销路由</td>
+</tr>
+<tr>
+<td>KEEPALIVE</td>
+<td>保活并确认 OPEN</td>
+</tr>
+<tr>
+<td>NOTIFICATION</td>
+<td>报告错误并关闭连接</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>eBGP 对等端位于不同 AS，iBGP 对等端位于同一 AS；二者都通过 TCP 179 可靠传输。</li>
+<li>AS_PATH 记录路由经过的 AS 序列，可检测自治系统级环路；NEXT_HOP 指明到该前缀应使用的下一跳。</li>
+<li>BGP 的实际决策受本地策略和多种属性影响。408 题若明确“无策略约束”且只给 AS_PATH 与内部代价，通常先排除 AS_PATH 更长者，再用“热土豆”原则选择内部代价更小的出口。</li>
+<li>传统 iBGP 中，从一个 iBGP 邻居学到的路由不能直接转告给另一个 iBGP 邻居，因此需全互连、路由反射器或联盟等机制保证传播。</li>
+</ul>
+<p>三种协议的分层关系可概括为：RIP/OSPF 解决 AS 内部如何到出口或内部前缀，BGP 解决 AS 间可达性和策略；BGP 选定出口后，仍需 IGP 提供到 BGP 下一跳的内部可达路径。</p>
+<h3 id="section-22">4.5.3 层次路由为什么能扩展</h3>
+<blockquote>
+<p><strong>INFO</strong> · 教材补充</p>
+</blockquote>
+<p>如果每台路由器都保存全球每条链路的细节并参与同一套算法，路由表、更新流量和计算量都会随网络扩大而失控。层次路由把详细信息限制在较小范围，并在边界聚合后向上层通告：</p>
+<pre><code class="language-text">Internet
+  -&gt; 多个自治系统 AS：AS 间由 BGP 交换可达前缀与策略
+  -&gt; 一个 AS 内：由 RIP、OSPF 等 IGP 计算内部路径
+  -&gt; 大型 OSPF AS 再划分区域：区域内保留详细拓扑，区域间经骨干 Area 0 交换摘要信息
+</code></pre>
+<ul>
+<li><strong>AS 层次</strong>：不同组织可选择自己的内部路由算法和度量；BGP 只在 AS 间交换前缀及路径属性，不传播每条内部链路细节。</li>
+<li><strong>OSPF 区域层次</strong>：同一区域内的路由器维护该区域一致的链路状态数据库；区域边界路由器 ABR 连接多个区域，骨干区域 Area 0 负责区域间信息传播，并可在边界做地址汇总。</li>
+<li><strong>代价</strong>：隐藏细节和聚合显著降低状态规模、更新流量与故障影响范围，但聚合或策略也可能使所选路径不是整个网络拓扑上的绝对最短路径。</li>
+</ul>
+<p>“层次”不是把数据分组套上更多首部层，而是限制路由信息的可见范围和计算范围；最终逐包转发仍依据转发表做最长前缀匹配。</p>
+<h2 id="section-23">4.6 ICMP</h2>
+<p>ICMP 与 IP 配合报告网络层差错和提供诊断信息，报文封装在 IP 数据报中。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的不可达</td>
+<td>网络/主机/端口不可达，或因 <code>DF=1</code> 而无法分片</td>
+</tr>
+<tr>
+<td>时间超过</td>
+<td>TTL 归零，或分片重组超时</td>
+</tr>
+<tr>
+<td>参数问题</td>
+<td>IPv4 首部字段存在问题</td>
+</tr>
+<tr>
+<td>重定向</td>
+<td>路由器提示主机存在更合适下一跳</td>
+</tr>
+<tr>
+<td>回显请求/回答</td>
+<td><code>ping</code> 测试可达性与往返时间</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>traceroute/tracert</code> 通过逐步增大 TTL，使沿途路由器依次返回 ICMP 时间超过，从而发现路径。ICMP 只报告问题，不保证原数据报重传；运输层或应用需决定恢复策略。</p>
+<h3 id="section-24">4.6.1 ICMP 差错报告的边界</h3>
+<p>为避免差错报文风暴或无法确定合法单播源，通常不再对以下分组发送 ICMP 差错报告：</p>
+<ul>
+<li>另一个 ICMP 差错报告报文。</li>
+<li>目的为 IPv4 多播或广播的分组，以及链路层广播/多播帧中携带的分组。</li>
+<li>非首片 IPv4 分片；后续分片没有完整运输层首部，难以向正确会话报告。</li>
+<li>源地址不是有效单播主机地址的分组，如未指明、广播或多播源地址。</li>
+</ul>
+<p>上述限制针对“ICMP 差错报告”，不表示 ICMP 回显请求/回答等查询报文一律不能使用。</p>
+<h3 id="section-25">4.6.2 <code>ping</code> 与路径探测</h3>
+<ul>
+<li><code>ping</code> 使用 ICMP 回显请求与回显回答；IPv4 首部 <code>Protocol=1</code>。</li>
+<li>路径探测通过逐跳增大 TTL/Hop Limit，使中间路由器返回时间超过。Windows <code>tracert</code> 常发送 ICMP Echo，传统 Unix <code>traceroute</code> 常发送高端口 UDP，最终主机用端口不可达表示到达；实现不同，但利用 TTL 与 ICMP 反馈的原理相同。</li>
+<li>若设备因策略过滤 ICMP，探测超时不必然等于数据转发路径物理中断。</li>
+</ul>
+<h2 id="section-26">4.7 VPN 与 NAT</h2>
+<h3 id="section-27">4.7.1 VPN</h3>
+<p>VPN 利用隧道、加密和认证等机制，在公用网络上连接逻辑私有网络。私网内部可使用私有 IPv4 地址；跨公网传输时把内部分组封装在可路由的外层分组中。</p>
+<p>隧道解决“把内部协议分组穿过中间公网”的封装与可达性问题；机密性、完整性与身份认证必须由 IPsec、TLS 等相应安全机制提供，不能只看见“隧道”二字就断言数据已经加密。站点到站点 VPN 连接两个私网，远程接入 VPN 连接单个终端与组织网络。</p>
+<h3 id="section-28">4.7.2 NAT/NAPT</h3>
+<p>NAT 在边界设备上改写地址；NAPT/PAT 进一步利用端口号，让多台内网主机共享一个公网 IPv4 地址。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>内网套接字</th>
+<th>公网映射套接字</th>
+<th>远端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>192.168.1.10:49152</code></td>
+<td><code>203.0.113.5:30001</code></td>
+<td><code>198.51.100.8:443</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>返回报文依据 NAT 映射表还原到内网主机。NAT 缓解地址不足并隐藏内部结构，但破坏严格的端到端透明性；外部主动连接、某些携带 IP/端口的应用协议和端到端加密可能需要端口映射、ALG 或穿透机制。</p>
+<p>NAT 可按映射方式区分：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>映射特点</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静态 NAT</td>
+<td>一个内部地址固定映射一个公网地址</td>
+<td>对外发布固定内部服务</td>
+</tr>
+<tr>
+<td>动态 NAT</td>
+<td>从公网地址池临时选择地址</td>
+<td>多个内部主机按需占用地址池</td>
+</tr>
+<tr>
+<td>NAPT/PAT</td>
+<td>按 IP 与运输层端口组合建立映射，必要时改写端口</td>
+<td>多台主机共享一个或少量公网地址</td>
+</tr>
+</tbody>
+</table></div>
+<p>NAPT 出站与回程过程：</p>
+<pre><code class="language-text">内网 192.168.1.10:49152 -&gt; 198.51.100.8:443
+        NAT 改写源套接字并记录映射
+公网 203.0.113.5:30001 -&gt; 198.51.100.8:443
+
+返回 198.51.100.8:443 -&gt; 203.0.113.5:30001
+        NAT 查表改写目的套接字
+内网 198.51.100.8:443 -&gt; 192.168.1.10:49152
+</code></pre>
+<p>改写 IP 地址或 TCP/UDP 端口后，相关校验和也必须相应更新。NAT 转换依赖方向和映射表：出站通常改源地址/源端口，返回方向恢复目的地址/目的端口，不能笼统地说 NAT 永远只改“源地址”。</p>
+<h2 id="section-29">4.8 IPv6</h2>
+<p>IPv6 地址为 128 bit，以 8 组十六进制数表示。每组前导 0 可省略；连续的全 0 组可用一次 <code>::</code> 压缩。</p>
+<ul>
+<li>IPv6 基本首部固定 40 B，路由器处理更简单。</li>
+<li>首部取消 IPv4 首部校验和；可选功能由扩展首部串联。</li>
+<li>Hop Limit 对应 IPv4 TTL；Next Header 指示扩展首部或上层协议。</li>
+<li>路由器不分片；需要分片时由源主机使用分片扩展首部。</li>
+<li>IPv6 没有广播，主要使用单播、多播和任播；邻居发现以 ICMPv6 取代 IPv4 ARP 的主要功能。</li>
+<li>常见过渡机制包括双协议栈、隧道和协议转换。</li>
+</ul>
+<h3 id="section-30">4.8.1 IPv6 基本首部</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th style="text-align:right">位数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td style="text-align:right">4</td>
+<td>固定为 6</td>
+</tr>
+<tr>
+<td>Traffic Class</td>
+<td style="text-align:right">8</td>
+<td>区分服务与拥塞通知</td>
+</tr>
+<tr>
+<td>Flow Label</td>
+<td style="text-align:right">20</td>
+<td>标识需要一致处理的一条流</td>
+</tr>
+<tr>
+<td>Payload Length</td>
+<td style="text-align:right">16</td>
+<td>基本首部之后的扩展首部与上层数据总长度</td>
+</tr>
+<tr>
+<td>Next Header</td>
+<td style="text-align:right">8</td>
+<td>指示下一个扩展首部或 TCP/UDP/ICMPv6 等上层协议</td>
+</tr>
+<tr>
+<td>Hop Limit</td>
+<td style="text-align:right">8</td>
+<td>每经过一个路由器减 1，对应 IPv4 TTL</td>
+</tr>
+<tr>
+<td>Source Address</td>
+<td style="text-align:right">128</td>
+<td>源 IPv6 地址</td>
+</tr>
+<tr>
+<td>Destination Address</td>
+<td style="text-align:right">128</td>
+<td>目的 IPv6 地址</td>
+</tr>
+</tbody>
+</table></div>
+<p>IPv6 把 IPv4 选项改为链式扩展首部，普通路由器通常只处理基本首部和必要的逐跳选项。常见扩展首部包括逐跳选项、路由、分片、目的选项、AH、ESP。<code>Next Header</code> 把基本首部、扩展首部与最终上层协议串起来。</p>
+<p>IPv6 路由器不分片。若分组超过下一跳 MTU，路由器丢弃并返回 ICMPv6 Packet Too Big，源主机据此降低分组大小；确需分片时由源主机添加分片扩展首部，最终目的主机重组。</p>
+<h3 id="section-31">4.8.2 地址表示与地址类型</h3>
+<p>压缩/展开规则：</p>
+<ol>
+<li>每个 16 位组的前导 0 可省略。</li>
+<li>一段连续全 0 组可用 <code>::</code> 压缩；同一地址最多出现一次 <code>::</code>。</li>
+<li>展开时先数已经写出的组，<code>::</code> 补足到 8 组；末尾点分十进制 IPv4 部分按两个组计。</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址或前缀</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>::</code></td>
+<td>未指明地址，只能在特定初始化阶段作源地址，不能作普通目的地址</td>
+</tr>
+<tr>
+<td><code>::1</code></td>
+<td>环回地址</td>
+</tr>
+<tr>
+<td><code>fe80::/10</code></td>
+<td>链路本地单播，只在本链路有效</td>
+</tr>
+<tr>
+<td><code>2000::/3</code></td>
+<td>当前常见全球单播分配范围</td>
+</tr>
+<tr>
+<td><code>fc00::/7</code></td>
+<td>唯一本地地址 ULA</td>
+</tr>
+<tr>
+<td><code>ff00::/8</code></td>
+<td>IPv6 多播</td>
+</tr>
+<tr>
+<td><code>::ffff:w.x.y.z</code></td>
+<td>IPv4 映射 IPv6 地址的一种混合表示</td>
+</tr>
+</tbody>
+</table></div>
+<p>IPv6 没有广播地址。<strong>任播</strong>把同一个单播地址配置给多个接口，路由把分组送到拓扑意义上较近的一个；任播没有单独的地址前缀格式。</p>
+<h3 id="section-32">4.8.3 ICMPv6、邻居发现与自动配置</h3>
+<p>IPv6 不使用独立 ARPv6 或 IGMPv6：</p>
+<ul>
+<li>邻居发现 NDP 属于 ICMPv6，使用路由器请求 RS、路由器通告 RA、邻站请求 NS、邻站通告 NA、重定向 Redirect 等报文。</li>
+<li>NS/NA 可完成 IPv4 ARP 的邻居地址解析、可达性检测和重复地址检测等功能。</li>
+<li>多播听众发现 MLD 也基于 ICMPv6，承担类似 IPv4 IGMP 的组成员管理功能。</li>
+<li>主机可依据 RA 中的前缀进行 SLAAC；也可结合 DHCPv6 获取有状态配置，具体由网络策略决定。</li>
+</ul>
+<h3 id="section-33">4.8.4 IPv4 向 IPv6 过渡</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>思路</th>
+<th>边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>双协议栈</td>
+<td>节点同时运行 IPv4 与 IPv6，按目的和 DNS 结果选择</td>
+<td>仍需维护两套协议与地址</td>
+</tr>
+<tr>
+<td>隧道</td>
+<td>把一种 IP 分组封装在另一种 IP 网络中穿越不支持区域</td>
+<td>增加首部与 MTU 开销；端点必须解封装</td>
+</tr>
+<tr>
+<td>协议转换</td>
+<td>在 IPv4/IPv6 边界转换地址和协议，如 NAT64</td>
+<td>破坏部分端到端语义，某些应用需辅助机制</td>
+</tr>
+</tbody>
+</table></div>
+<p>地址表示真题与 IPv4/IPv6 对比详见 <a href="/en/notes/cs408-324f552507c6/">7 题型 - IPv6</a>。</p>
+<h2 id="section-34">4.9 IP 多播与移动 IP</h2>
+<ul>
+<li>IPv4 多播使用 D 类地址标识多播组；发送者向组地址发送，网络只在需要的分支复制分组。局域网组成员管理常使用 IGMP，路由器之间还需多播路由协议。</li>
+<li>多播地址表示一组接收者而不是某一台固定主机，不能把它当普通单播地址做 ARP 一对一解析。</li>
+<li>移动 IP 让移动节点离开归属网络后仍保持归属地址。归属代理维护当前位置，并将到归属地址的分组通过隧道转交到转交地址；反向通信可直接发送或经归属代理转发，具体取决于方案。</li>
+</ul>
+<h3 id="section-35">4.9.1 IPv4 多播地址、MAC 映射与 IGMP</h3>
+<p>IPv4 多播地址范围是 <code>224.0.0.0/4</code>。映射到以太网时，MAC 前 25 位固定，低 23 位取自多播 IPv4 地址：</p>
+<pre><code class="language-text">IPv4 低 23 位 -&gt; 01-00-5E-0xxxxxxx-xxxxxxxx-xxxxxxxx
+</code></pre>
+<p>IPv4 多播组地址有 28 个可变位，而 MAC 只携带低 23 位，因此最多有 $2^5=32$ 个 IPv4 多播地址映射为同一个 MAC；网卡按 MAC 接收后，IP 层还要继续按真正的目的 IP 过滤。例如：</p>
+<pre><code class="language-text">224.0.0.1 -&gt; 01-00-5E-00-00-01
+</code></pre>
+<p>IGMP 只让本地多播路由器知道“本局域网是否存在某组成员”，不能单独建立跨路由器的多播路径，也不能给出全网成员名单或数量。一般查询可发往 <code>224.0.0.1</code>，TTL=1，把报文限制在本链路；IGMP 直接封装在 IPv4 中，协议号为 2。</p>
+<p>多播路由常用反向路径转发 RPF：只有当分组到达接口与路由器到“源”的最佳反向路径一致时才接受并向其他接口复制，否则丢弃重复/绕行副本。初始树可再通过剪枝删除没有组成员的下游分支。完整映射题见 <a href="/en/notes/cs408-ac7b677ecc0f/">5 题型 - IP多播</a>。</p>
+<h3 id="section-36">4.9.2 移动 IP</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>永久地址/归属地址</td>
+<td>移动结点稳定的通信身份</td>
+</tr>
+<tr>
+<td>归属网络</td>
+<td>永久地址所属网络</td>
+</tr>
+<tr>
+<td>归属代理</td>
+<td>维护永久地址到当前位置的绑定，截获并隧道转发入站分组</td>
+</tr>
+<tr>
+<td>外地网络/外地代理</td>
+<td>移动结点当前接入网络及协助交付的代理</td>
+</tr>
+<tr>
+<td>转交地址 COA</td>
+<td>表示移动结点当前位置，作为隧道外层目的地址</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：两类转交地址与反向隧道</p>
+<ul>
+<li><strong>外地代理转交地址</strong>：多个移动结点可借用外地代理的地址作为隧道终点，由代理解封装后在本地链路交付。</li>
+<li><strong>配置转交地址（co-located COA）</strong>：移动结点在外地网络取得一个临时地址，自身作为隧道终点并负责解封装，不必依赖外地代理代收。</li>
+<li><strong>反向隧道</strong>：移动结点发出的分组也先隧道送回归属代理，再由归属代理转发给通信对端。它可绕过外地网络对“源地址不属于本地前缀”的入口过滤，但路径更绕、封装开销更大。</li>
+</ul>
+</blockquote>
+<p>移动结点发现代理、取得转交地址后，要向归属代理注册“归属地址 -&gt; 当前 COA”的有期限绑定；移动到新网络或绑定到期时需要更新。转交地址标识当前位置，归属地址维持上层连接所见的稳定身份，二者不能互换。</p>
+<p>固定主机发往移动结点时，原始目的 IP 始终是移动结点的永久地址；归属代理封装后，隧道外层目的才是转交地址。若移动结点直接经外地代理回包，源 IP 仍用永久地址，由此形成：</p>
+<pre class="mermaid">flowchart LR
+    B[固定主机] --&gt;|目的：永久地址| H[归属代理]
+    H --&gt;|隧道外层目的：转交地址| F[外地代理]
+    F --&gt; A[移动结点]
+    A --&gt;|源：永久地址，直接回程| B
+</pre>
+<p>去程绕归属代理、回程直接返回称为三角路由。务必区分主机永久地址与归属网络前缀；网络号不能拿来充当主机源地址。详见 <a href="/en/notes/cs408-d3d15cc6df11/">8 题型 - 移动IP</a>。</p>
+<h2 id="section-37">4.10 软件定义网络 SDN</h2>
+<p>传统路由器把控制平面和数据平面分布在各设备中；SDN 将控制逻辑与高速转发分离，以逻辑集中的控制器统一编程网络。</p>
+<pre><code class="language-text">网络应用
+  -&gt; 北向接口
+SDN 控制器（逻辑集中控制平面）
+  -&gt; 南向接口，如 OpenFlow
+交换/转发设备（数据平面）
+</code></pre>
+<ul>
+<li>数据平面按流表执行匹配与动作，如转发、丢弃、修改字段或上送控制器。</li>
+<li>控制器可依据全局视图下发流表，提高策略编排与自动化能力。</li>
+<li>“集中”通常指逻辑集中，不代表控制器只能有一个物理实例；工程上可用集群保证扩展性和可靠性。</li>
+</ul>
+<h3 id="section-38">4.10.1 三层架构与接口</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>主要职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>表达路由、安全、负载均衡、访问控制等网络意图</td>
+</tr>
+<tr>
+<td>控制层</td>
+<td>控制器维护逻辑全局视图、计算策略并管理设备</td>
+</tr>
+<tr>
+<td>基础设施/数据层</td>
+<td>交换机按流表高速匹配并执行动作</td>
+</tr>
+</tbody>
+</table></div>
+<p>应用与控制器之间是北向接口，控制器与数据平面设备之间是南向接口；OpenFlow 是典型南向协议。控制器不需要亲自转发每个普通数据分组，而是下发规则让设备在本地高速处理。</p>
+<h3 id="section-39">4.10.2 OpenFlow 1.0 流表</h3>
+<p>一条流表项由“匹配字段、计数器、动作”组成：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>典型内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>匹配</td>
+<td>入端口；源/目的 MAC、以太网类型；VLAN ID/优先级；IPv4 源/目的、协议、ToS；TCP/UDP 源/目的端口</td>
+</tr>
+<tr>
+<td>计数器</td>
+<td>匹配分组数、匹配字节数、流表项持续时间</td>
+</tr>
+<tr>
+<td>动作</td>
+<td>转发到端口、丢弃、修改字段、交给控制器等</td>
+</tr>
+</tbody>
+</table></div>
+<p>OpenFlow 1.0 常见的 12 项匹配信息中，入端口属于交换机元数据，其余 11 项来自二至四层首部。IPv4 匹配字段包括源/目的地址、协议和 ToS，不包含 TTL；“能处理 IPv4”不等于“能匹配 IPv4 首部所有字段”。</p>
+<pre><code class="language-text">分组到达
+  -&gt; 按优先级匹配流表
+  -&gt; 更新分组数/字节数/持续时间等计数器
+  -&gt; 执行动作
+  -&gt; 无匹配项时按 table-miss 规则丢弃或上送控制器
+</code></pre>
+<p>SDN 提高可编程性，但控制器可用性、控制通道安全、规则一致性和故障收敛仍需专门设计；“逻辑集中”不能理解为没有分布式容错。题型详解见 <a href="/en/notes/cs408-cbd01644a3c3/">6 题型 - SDN软件定义网络</a>。</p>
+<h2 id="section-40">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-b4e470ce1426/">上一篇：CSMA/CA</a> · <a href="/en/notes/cs408-e843016612d3/">下一篇：IPv4 地址结构及计算</a></li>
+</ul>
+<h2 id="section-41">4.11 本节复盘</h2>
+<ul>
+<li>网络层以 IP 数据报为核心，路由负责算路径，转发负责按最长前缀匹配逐跳送出。</li>
+<li>路由器由输入端口、交换结构、输出端口和路由选择处理机协作；控制平面生成转发表，数据平面按表高速转发。</li>
+<li>拥塞源于总需求超过网络资源，不能与只保护接收缓存的流量控制混淆；预防式与反馈式机制需要配合。</li>
+<li>IPv4 首部、分片、子网/CIDR、VLSM 和路由聚合是计算高频点；片偏移单位为 8 B。</li>
+<li>IP 地址端到端标识通信对象，MAC 地址只服务当前一跳；ARP 查询下一跳 MAC。</li>
+<li>RIP 是距离向量，OSPF 是链路状态，BGP 是 AS 间路径向量；AS/区域层次以隐藏细节和路由汇总换取可扩展性。</li>
+<li>ICMP 支持差错报告与诊断；NAT 复用公网地址，VPN 通过隧道连接私网。</li>
+<li>IPv6 扩大地址空间并简化基本首部；SDN 把控制逻辑与数据转发解耦。</li>
+</ul>
+<h3 id="section-42">4.11.1 高频单位与不变量</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>必记结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPv4 IHL</td>
+<td>单位 4 B；5-15，对应 20-60 B</td>
+</tr>
+<tr>
+<td>IPv4 总长度</td>
+<td>单位 1 B，包含首部与数据</td>
+</tr>
+<tr>
+<td>IPv4 片偏移</td>
+<td>单位 8 B</td>
+</tr>
+<tr>
+<td>TTL/Hop Limit</td>
+<td>每经过一个路由器至少减 1；要成功经过 $n$ 个路由器，初值至少 $n+1$</td>
+</tr>
+<tr>
+<td>普通逐跳转发</td>
+<td>无 NAT 时 IP 源/目的不变，MAC 源/目的逐跳变化</td>
+</tr>
+<tr>
+<td>最长前缀</td>
+<td>先在所有匹配路由中选择前缀最长者；默认 <code>/0</code> 最不具体</td>
+</tr>
+<tr>
+<td>RIP</td>
+<td>UDP 520，最大有效距离 15，16 表示不可达</td>
+</tr>
+<tr>
+<td>OSPF</td>
+<td>直接封装 IPv4，协议号 89；数据库一致且收敛后 SPF 结果无环</td>
+</tr>
+<tr>
+<td>BGP</td>
+<td>TCP 179，UPDATE 承担路由通告和撤销</td>
+</tr>
+<tr>
+<td>ICMP/IGMP</td>
+<td>IPv4 协议号分别为 1、2</td>
+</tr>
+<tr>
+<td>IPv6</td>
+<td>基本首部固定 40 B；路由器不分片；无广播</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-43">4.11.2 综合题检查顺序</h3>
+<ol>
+<li>先标出每个接口的 IP/前缀、MAC、所属链路或 VLAN。</li>
+<li>对每个 IP 做按位与，判断直接交付还是间接交付。</li>
+<li>查路由时列出所有匹配前缀，再做最长前缀和题设度量比较。</li>
+<li>逐跳写 TTL、出接口、下一跳和帧 MAC；无 NAT 时锁定端到端 IP 不变。</li>
+<li>有 MTU 时先算单片最大数据长度，再列总长度、偏移、MF/DF。</li>
+<li>有 NAT/NAPT 时分别写出站与回程转换，并区分地址和网络前缀。</li>
+<li>协议题先判 AS 内/AS 间、控制平面/数据平面，再套 RIP、OSPF、BGP 或 OpenFlow 规则。</li>
+<li>最后检查单位、网络地址/广播地址、特殊地址、题目对 ACK/周期/代价取整等自定义规则。</li>
+</ol>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-f652c4049d0f/index.html"><span>← Previous item</span><strong>Lecture 4：软件设计与实现</strong></a>
+    <a class="article-pagination-next" rel="next" href="../english-001/index.html"><span>Next item →</span><strong>01 Simple Sentences — Summary</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

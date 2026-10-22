@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 8：知识 - 文件 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 文件. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 8：知识 - 文件 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 文件. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-01376a76f77e/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 8：知识 - 文件 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 文件. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 8：知识 - 文件",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-01376a76f77e/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-01376a76f77e/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-01376a76f77e/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-01376a76f77e/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-01376a76f77e/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-01376a76f77e/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 8：知识 - 文件</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 8：知识 - 文件. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>16 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/29b440a9a825.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/29b440a9a825.pdf" download="Lecture 8：知识 - 文件.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">8.1 文件元数据、FCB 与 inode</a><a href="#section-4">8.2 文件描述符与打开文件表</a><a href="#section-6">8.3 文件访问速度与保护</a><a href="#section-9">8.4 文件的逻辑结构</a><a href="#section-13">8.5 文件的物理结构</a><a href="#section-18">8.6 物理分配对比与图示复核</a><a href="#section-19">相关知识</a><a href="#section-20">8.7 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>文件管理用 FCB/inode 保存元数据，用逻辑结构组织记录，用物理结构把逻辑块映射到磁盘块。核心链路是：<strong>文件名查目录 → FCB/inode 定位 → <code>open</code> 返回 fd → <code>read/write</code> 按 fd 操作</strong>。</p>
+</blockquote>
+<h2 id="section-1">8.1 文件元数据、FCB 与 inode</h2>
+<h3 id="section-2">文件属性与 FCB</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件名</td>
+<td>用户为便于查找而命名；同一目录内不允许重名。</td>
+</tr>
+<tr>
+<td>标识符</td>
+<td>系统内部唯一、对用户通常不可读的名称。</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>指示文件类型。</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>路径供用户使用；外存地址供 OS 使用，对用户透明。</td>
+</tr>
+<tr>
+<td>创建者/所有者、时间</td>
+<td>记录来源及建立、修改等使用信息。</td>
+</tr>
+<tr>
+<td>保护信息</td>
+<td>不同用户或组的读、写、执行等访问权限。</td>
+</tr>
+</tbody>
+</table></div>
+<p>**文件控制块（FCB）**是记录控制文件所需信息的数据结构，实现按名存取。一个文件对应一个 FCB；FCB 的有序集合是文件目录，目录中的一个 FCB 是一个目录项。创建文件时必须创建其 FCB；目录文件本身也是一种文件。</p>
+<h3 id="section-3">inode 对目录检索的优化</h3>
+<p>目录文件通常在磁盘上。若目录很大，顺序查目录时需要将目录数据块逐块调入内存；在匹配文件名以前，目录项中的大部分描述信息并不需要。</p>
+<p>UNIX 将文件名与描述信息分离：目录项只保留“文件名 + inode 号（或指针）”，其余信息放在该文件唯一的 inode 中。匹配文件名后才调入 inode，并由 inode 中的外存地址定位数据。</p>
+<p>例：FCB 为 64 B、块大小为 1 KB，故每块仅含 $1024/64=16$ 个 FCB。若目录有 640 个 FCB，共占 40 块；UNIX 目录项仅 16 B（文件名 14 B、inode 号 2 B）时，每块有 64 项，共占 10 块。按教材“查一半块”的近似口径，平均磁盘启动次数约从 20 次降到 5 次，即约为原来的 $1/4$。若假定目标均匀分布且从首块开始冷缓存顺序查找，严格期望分别是 $(1+40)/2=20.5$ 次和 $(1+10)/2=5.5$ 次；因此 20、5 与 $1/4$ 均为近似值。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>保存位置与附加状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>磁盘 inode</td>
+<td>外存中的持久控制信息，例如文件类型、权限、所有者、链接计数、大小和块地址。</td>
+</tr>
+<tr>
+<td>内存 inode</td>
+<td>磁盘 inode 被调入后的运行时对象；还要记录修改标志、设备号、锁、当前访问者/引用等内存管理信息。</td>
+</tr>
+</tbody>
+</table></div>
+<p>文件总数受 inode 总数约束：一个文件对应一个 inode，故 inode 号位数/索引节点总数决定可创建的最大文件数，<strong>与单个文件长度无关</strong>。单个文件长度则受块大小、地址项数和间接索引层数制约。</p>
+<h2 id="section-4">8.2 文件描述符与打开文件表</h2>
+<p>文件名完成 FCB/inode 定位后不再是已打开文件表的必要内容。<code>open()</code> 后，后续 <code>read()</code>、<code>write()</code>、<code>lseek()</code>、<code>close()</code> 都使用文件描述符 <code>fd</code>；UNIX 称为文件描述符（file descriptor），Windows 常称为文件句柄（file handle）。</p>
+<p>打开文件需要保存的运行时信息：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>为什么不能只存于磁盘 FCB/inode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前文件位置/读写指针</td>
+<td>每个打开该文件的进程都可能不同。</td>
+</tr>
+<tr>
+<td>打开计数</td>
+<td>多进程可同时打开同一文件，最后一个关闭前不能删除系统表项。</td>
+</tr>
+<tr>
+<td>文件磁盘位置、大小、访问日期等</td>
+<td>放在内存中可避免每次操作都重新读磁盘。</td>
+</tr>
+<tr>
+<td>本次打开的访问方式</td>
+<td>如创建、只读、读写、追加；用于允许或拒绝后续 I/O。</td>
+</tr>
+</tbody>
+</table></div>
+<p>系统通常采用两级打开文件表：</p>
+<pre><code class="language-text">进程 A 的 fd 表项 ──&gt; 打开文件描述 A（偏移、状态标志、引用计数）──&gt; 内存 inode/vnode
+进程 B 的 fd 表项 ──&gt; 打开文件描述 B（独立 open 时偏移可不同）──&gt; 同一内存 inode/vnode
+dup/fork 得到的 fd ──&gt; 与原 fd 共享打开文件描述及其偏移
+</code></pre>
+<ul>
+<li><strong>系统级结构</strong>保存内存 inode/vnode 等文件对象，以及一次打开所形成的打开文件描述；后者通常含当前文件偏移、状态标志和引用计数。</li>
+<li><strong>进程打开文件表</strong>每进程一张，以 fd 指向打开文件描述，并可保存 close-on-exec 等描述符级标志。独立 <code>open</code> 通常得到独立的打开文件描述；<code>dup</code> 或 <code>fork</code> 继承的描述符可以共享同一偏移。</li>
+</ul>
+<h3 id="section-5"><code>open</code>、<code>close</code>、<code>read</code>、<code>write</code></h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>调用</th>
+<th>参数/主要过程</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create</code></td>
+<td>外存空间大小、文件路径、文件名；分配外存，在目标目录建立目录项。</td>
+<td>目录项含文件名及定位文件所需信息。</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>文件路径、文件名；查目录并删除相应目录项。</td>
+<td>删除目录项后递减硬链接计数；只有硬链接计数为 0 且不再有打开引用时，inode/FCB 与数据块才可最终回收。删除不等于关闭。</td>
+</tr>
+<tr>
+<td><code>read(fd, buf, n)</code></td>
+<td>从读指针处向用户缓冲区 <code>buf</code> 读入 $n$ 字节。</td>
+<td>若所需文件块不在内存，进程等待磁盘 I/O，随后转为就绪态；读/写按 fd，不再按文件名。</td>
+</tr>
+<tr>
+<td><code>write(fd, buf, n)</code></td>
+<td>把用户缓冲区的 $n$ 字节写向写指针处。</td>
+<td>多进程可同时以读/写方式打开同一文件，OS 不自动保证写互斥；需通过加锁处理读者-写者式互斥。</td>
+</tr>
+<tr>
+<td><code>open(path, name, mode)</code></td>
+<td>按路径查目录并取得/缓存 inode 等文件对象，再为这次打开建立打开文件描述和进程 fd 表项；不同的独立 <code>open</code> 通常有独立偏移。</td>
+<td>内存 inode/vnode 可以复用，但不能据此断定不同 <code>open</code> 必然共享同一打开状态；打开文件也不等于把文件数据全部读入内存。</td>
+</tr>
+<tr>
+<td><code>close(fd)</code></td>
+<td>删除进程 fd 表项，递减其指向的打开文件描述引用计数；引用计数为 0 时释放该打开描述，并相应释放内存文件对象引用。</td>
+<td>关闭不递减外存 inode 的硬链接计数，也不直接释放仍有目录链接的文件数据；已取消链接的文件可在最后一个打开引用关闭后回收。</td>
+</tr>
+</tbody>
+</table></div>
+<p>2024 题的要点：带“按文件名查找文件”功能的是 <code>open()</code>；<code>read</code>、<code>write</code>、<code>close</code> 使用 <code>open</code> 返回的 fd。</p>
+<h2 id="section-6">8.3 文件访问速度与保护</h2>
+<h3 id="section-7">提升访问速度</h3>
+<ol>
+<li><strong>预读</strong>：读当前块时把后续若干块一并读入缓存。</li>
+<li><strong>连续分配簇</strong>：顺序读取时无需查找下一数据块的位置。</li>
+<li><strong>延迟写</strong>：先写入缓冲区并设置延迟写标志，稍后批量写回，减少不必要的磁盘操作。在课件所述的经典空闲缓冲区链表算法中，带延迟写标志的缓冲区被再次申请是写回时机之一；一般系统还可能因后台周期回写、内存压力或缓存回收，以及 <code>sync</code>、<code>fsync</code> 等显式同步请求而写回，不能理解为“只有再次申请时才写盘”。</li>
+<li><strong>磁盘高速缓存</strong>：命中缓存时避免外存访问。</li>
+</ol>
+<h3 id="section-8">访问控制、口令与加密</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>实现与特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACL</td>
+<td>在 FCB/inode 中维护“用户名 → 允许操作”的访问控制列表。表达灵活，但表长难预测、空间管理复杂。</td>
+</tr>
+<tr>
+<td>精简 ACL</td>
+<td>把用户划为拥有者、组、其他三类；为每类用位描述读、写、执行等权限。创建时在 FCB 保存拥有者与组名，访问时按“拥有者 → 同组 → 其他”顺序判定。</td>
+</tr>
+<tr>
+<td>口令保护</td>
+<td>在 FCB/inode 存口令，访问时比对。空间与时间开销小，但正确口令存于系统内，安全性较弱。</td>
+</tr>
+<tr>
+<td>加密保护</td>
+<td>数据按密钥加密，正确密钥才能解密；保密性强且不必在系统中明存口令，但编/解码耗时。</td>
+</tr>
+</tbody>
+</table></div>
+<p>课程列出的常见访问类型是：读、写、执行、添加、删除、列清单。访问控制信息属于<strong>文件</strong>而非某个用户，实质是“用户类别 × 访问类型”的权限矩阵。例：4 类用户、5 类权限需 $4\times5=20$ 位。</p>
+<h2 id="section-9">8.4 文件的逻辑结构</h2>
+<h3 id="section-10">无结构与有结构文件</h3>
+<ul>
+<li><strong>无结构文件（流式文件）</strong>：内部是连续的二进制流或字符流，如文本文件。</li>
+<li><strong>有结构文件（记录式文件）</strong>：由一组相似记录组成，每条记录由若干数据项组成；记录可以定长或可变长。</li>
+</ul>
+<h3 id="section-11">顺序文件</h3>
+<p>记录在逻辑上一个接一个排列；物理上可顺序存储或链接存储。逻辑排列又分：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>记录顺序</th>
+<th>查找/更新特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串结构</td>
+<td>与关键字无关，通常按录入时间。</td>
+<td>不可按关键字快速检索；除尾部插入外，插入删除困难。</td>
+</tr>
+<tr>
+<td>顺序结构</td>
+<td>按关键字有序。</td>
+<td>若定长且物理连续，可通过 $i\times L$ 直接定位第 $i$ 条记录，并可按关键字快速查找。</td>
+</tr>
+</tbody>
+</table></div>
+<p>随机存取条件要同时判断：</p>
+<ul>
+<li>链式存储：定长、可变长都不能随机存取；必须从首记录顺序找。</li>
+<li>连续存储但记录可变长：不能随机存取。</li>
+<li>连续存储且记录定长：可随机存取，第 $i$ 条记录相对地址为 $iL$。</li>
+</ul>
+<p>考试中“顺序文件”一般默认指<strong>物理连续存储的顺序文件</strong>。</p>
+<h3 id="section-12">索引文件与索引顺序文件</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>索引粒度</th>
+<th>关键性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>索引文件</td>
+<td>每条记录一个索引项。</td>
+<td>索引表连续存储、数据记录可离散；索引项可按关键字有序以支持折半查找。检索快，适合及时性要求高的场合，但索引表可能很大。</td>
+</tr>
+<tr>
+<td>索引顺序文件</td>
+<td>一组记录一个索引项。</td>
+<td>组间关键字有序，组内可不有序；索引项减少，插入更方便。先找组，再在组内顺序找。</td>
+</tr>
+<tr>
+<td>多级索引顺序文件</td>
+<td>对索引表继续分组建上级索引。</td>
+<td>进一步缩短大文件的查找路径。</td>
+</tr>
+</tbody>
+</table></div>
+<p>例：10,000 条记录的串结构顺序查找平均约 5,000 次。若分为 100 组、每组 100 条，先顺序查 100 项索引表平均 50 次，再在组内平均查 50 次，共约 100 次。对 $10^6$ 条记录，每 100 条建低级索引，则低级索引约 10,000 项；再每 100 项建顶级索引，顶级约 100 项。</p>
+<h2 id="section-13">8.5 文件的物理结构</h2>
+<p>外存按等大的物理块（磁盘块）划分，文件逻辑空间也按文件块划分。逻辑地址为 <code>(逻辑块号, 块内地址)</code>，物理地址为 <code>(物理块号, 块内地址)</code>；文件系统以块为单位分配空间。块内地址位数取决于块大小。</p>
+<h3 id="section-14">连续分配</h3>
+<p>一个文件占一组连续物理块，目录项记录起始块号和长度。访问逻辑块 $i$ 时：</p>
+<p>$$\text{物理块号}=\text{起始块号}+i$$</p>
+<p>并要检查 $i&lt;\text{长度}$。</p>
+<p>优点：支持顺序和随机访问，地址转换简单，顺序读写最快。缺点：扩展困难，易有外部碎片，必要时紧凑需要大代价。</p>
+<p>插入题：文件 F 有 200 条记录（从 1 编号）、一块一条记录，现插入为第 30 条且首尾均有空闲块。可把前 29 块整体前移一块，为每移动一块执行读入、释放原块、写入新块；29 块需 $29\times2=58$ 次块访问，再写入新第 30 块，共最少 <strong>59 次</strong>。FCB 的<strong>起始块号</strong>（前移后改变）和<strong>长度</strong>（200 变 201）需要更新。</p>
+<h3 id="section-15">隐式链接分配</h3>
+<p>文件可离散存储，除末块外每块保存下一块指针；目录项保存首块、尾块指针。未特别说明的“链接分配”通常指这种隐式链接。</p>
+<ul>
+<li>优点：易扩展、无外部碎片、外存利用率高。</li>
+<li>缺点：只支持顺序访问，查找第 $i$ 块需沿链访问；每块指针占空间且指针损坏会断链。</li>
+</ul>
+<p>同一插入题中，若从首块沿链定位，需读取第 1～29 块以找到第 30 条的前驱；将新记录写入一个空闲块，再把第 29 块的后继指针改为新块并写回，共 $29+1+1=\mathbf{31}$ 次块访问（按原题不计分配空闲块等元数据 I/O，且第 29 块读出后可在内存中修改，无须重复读取）。新块的后继指针须指向原第 30 块。与连续分配相比不需搬移后续记录，但定位链中间位置慢。若块大小 1 KiB、指针 4 B，则每块数据容量为 1020 B；按题目理想化假设，4 B 块号可表示 $2^{32}$ 个块，最大文件数据长度为：</p>
+<p>$$2^{32}\times1020\text{ B}=4{,}380{,}866{,}641{,}920\text{ B}=4080\text{ GiB}$$</p>
+<p>此长度不计每块链接指针自身占用，且假设全部 $2^{32}$ 个块号都可用；若部分编码保留作空指针/结束标记，还须扣除。原 PDF 将这里的二进制单位写作 <code>4080 GB</code>，严格说应为 <code>4080 GiB</code>（约 <code>4380.87 GB</code>）。</p>
+<h3 id="section-16">FAT（显式链接）分配</h3>
+<p>FAT 将“下一块指针”显式集中存于文件分配表；一个磁盘一张 FAT，开机时读入内存并常驻。FAT 表项物理连续、等长，物理块号可由表项位置隐含。</p>
+<ul>
+<li>优点：易扩展、无外部碎片；按教材口径支持随机访问，因为沿 FAT 查找后继块时无需逐块读磁盘，较隐式链接快。但定位第 $i$ 个逻辑块仍须从起始块沿内存 FAT 逐项追踪，不能像连续分配或索引分配那样由 $i$ 直接算出物理块号。</li>
+<li>缺点：FAT 本身占存储空间。</li>
+<li>区分：FAT 是<strong>每磁盘一张</strong>的全局表；下述索引分配的索引表是<strong>每文件一张</strong>。</li>
+</ul>
+<h3 id="section-17">索引分配</h3>
+<p>每个文件有一张索引表，索引表所在块称<strong>索引块</strong>，文件数据所在块称<strong>数据块</strong>；目录项记录索引块号。访问逻辑块 $i$：从目录项得索引表位置 → 把索引表读入内存 → 查第 $i$ 项得物理块号。</p>
+<p>优点：支持随机访问，扩展时分配新数据块并新增索引项即可；缺点是索引块有额外开销。逻辑块号可隐含在索引项顺序中。</p>
+<p>大文件三种索引方案：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>做法</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>链接方案</td>
+<td>一个索引块放不下时，以指针串接多个索引块。</td>
+<td>若每索引块 256 项，要到第 $i$ 个索引块必须依次读此前索引块；大文件 I/O 多。</td>
+</tr>
+<tr>
+<td>多层索引</td>
+<td>顶级索引块指向下一层索引块，可继续扩展层级。</td>
+<td>顶级索引表未在内存时，$K$ 层索引访问一个数据块需 $K+1$ 次磁盘读；小文件也承受该开销。每层索引表不能超过一个块。</td>
+</tr>
+<tr>
+<td>混合索引</td>
+<td>顶级表同时含直接、一级间接、二级间接等地址项。</td>
+<td>小文件先走直接项，I/O 少；大文件再使用间接项。</td>
+</tr>
+</tbody>
+</table></div>
+<p>混合索引图中，顶级索引表未在内存，有 8 个直接项、1 个一级间接项和 1 个二级间接项，每个索引块有 256 项：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>逻辑块范围</th>
+<th style="text-align:right">需读磁盘次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0--7（直接）</td>
+<td style="text-align:right">2：顶级索引块 + 数据块</td>
+</tr>
+<tr>
+<td>8--263（一级间接）</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td>264--65799（二级间接）</td>
+<td style="text-align:right">4</td>
+</tr>
+</tbody>
+</table></div>
+<p>该结构可支持的数据块数为 $8+256+256^2=65{,}800$；若块大小为 1 KB，最大文件数据长度为 65,800 KB。</p>
+<h2 id="section-18">8.6 物理分配对比与图示复核</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分配方式</th>
+<th>目录中保存</th>
+<th>随机访问</th>
+<th>扩展与碎片</th>
+<th>主要额外开销</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连续分配</td>
+<td>起始块号、长度</td>
+<td>支持，直接相加</td>
+<td>扩展难，有外部碎片</td>
+<td>无额外索引/链接块</td>
+</tr>
+<tr>
+<td>隐式链接</td>
+<td>首块、尾块</td>
+<td>不支持</td>
+<td>易扩展，无外部碎片</td>
+<td>每数据块的下一块指针</td>
+</tr>
+<tr>
+<td>FAT 显式链接</td>
+<td>起始块号，后继在 FAT</td>
+<td>支持（查内存 FAT）</td>
+<td>易扩展，无外部碎片</td>
+<td>一张全局 FAT</td>
+</tr>
+<tr>
+<td>索引分配</td>
+<td>索引块号</td>
+<td>支持</td>
+<td>易扩展，无外部碎片</td>
+<td>每文件索引块；大文件可能多级</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>FCB 与 UNIX 目录图明确：传统目录项可含完整控制信息，而 UNIX 目录项缩为“文件名 + inode 号”。</li>
+<li>打开文件表图明确：用户空间的 <code>read(fd)</code> 经进程打开文件表、系统打开文件表，最后定位辅存中的 FCB/inode 和数据块。</li>
+<li>逻辑地址图明确：文件逻辑块号和块内地址由 OS 转成物理块号和块内地址；分配最小单位是块。</li>
+<li>三类物理结构图明确：连续分配按起始块加逻辑块号，隐式链接在数据块内串指针，FAT 将指针外置到内存常驻的表中，索引分配以单文件索引表映射所有逻辑块。</li>
+</ul>
+<h2 id="section-19">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-dd853a0ed1a2/">上一篇：虚拟内存管理</a> · <a href="/en/notes/cs408-5cc130a6e9c2/">下一篇：目录</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c2d3a38a7b30/">外部存储设备</a></li>
+</ul>
+<h2 id="section-20">8.7 本节复盘</h2>
+<ul>
+<li>文件名只用于查目录；打开后用 fd。<code>open</code> 进行按名查找，<code>read/write/close</code> 不再重新查目录。</li>
+<li>目录项解决按名查找，inode 保存文件元数据；系统级打开文件描述保存本次打开的偏移和状态，进程 fd 表保存描述符映射及其标志。独立 <code>open</code> 的偏移通常不同，<code>dup</code>/<code>fork</code> 共享同一打开文件描述时则共享偏移，不能一概称为“进程私有偏移”。</li>
+<li>定长记录可先由 $iL$ 计算文件内逻辑字节偏移，再由文件系统把逻辑块映射到物理块；物理块不必连续。变长记录若无索引，通常需从前向后解析记录边界；顺序访问也不等于可按关键字快速检索。</li>
+<li>物理分配计算题先明确块大小、指针大小、是否将索引块计入文件长度、索引块是否已在内存，以及题目中的“链接分配”是否特指 FAT。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../vision-robot-arm-commissioning-checklist/index.html"><span>← Previous item</span><strong>Vision-Guided Arm Calibration, Communications and Hardware Acceptance Checklist</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-01ad73094eab/index.html"><span>Next item →</span><strong>Lecture 2：算法和算法评价</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

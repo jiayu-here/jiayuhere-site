@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 10：栈在表达式求值中的应用 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 10：栈在表达式求值中的应用。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 10：栈在表达式求值中的应用 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 10：栈在表达式求值中的应用。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-160305fb8386/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 10：栈在表达式求值中的应用 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 10：栈在表达式求值中的应用。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 10：栈在表达式求值中的应用",
+      "item": "https://www.jiayuhere.com/notes/cs408-160305fb8386/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-160305fb8386/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-160305fb8386/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-160305fb8386/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-160305fb8386/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-160305fb8386/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 10：栈在表达式求值中的应用</h1><p class="article-lead">408 学习笔记：Lecture 10：栈在表达式求值中的应用。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c6ccb67244f1.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c6ccb67244f1.pdf" download="Lecture 10：栈在表达式求值中的应用.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">10.1 三种表达式</a><a href="#section-8">10.2 中缀转后缀的手算方法</a><a href="#section-16">10.3 中缀转前缀的手算方法</a><a href="#section-23">10.4 后缀表达式算法</a><a href="#section-27">10.5 中缀表达式算法</a><a href="#section-30">10.6 中缀表达式转后缀表达式：栈算法</a><a href="#section-38">10.7 三种算法汇总</a><a href="#section-42">相关知识</a><a href="#section-43">10.8 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">10.1 三种表达式</h2>
+<h3 id="section-2">10.1.1 中缀表达式</h3>
+<h5 id="section-3"><strong>定义</strong>：#中缀表达式</h5>
+<blockquote>
+<p>描述：
+中缀表达式是我们平时数学运算中最常用的表达式形式，运算符写在两个操作数中间。</p>
+</blockquote>
+<p><strong>例子</strong>
+$$
+a+b
+$$</p>
+<p>$$
+a+b-c\times d
+$$</p>
+<p>$$
+((15\div(7-(1+1)))\times3)-(2+(1+1))
+$$</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>符合人的书写习惯。</li>
+<li>需要考虑：
+<ul>
+<li>运算符优先级；</li>
+<li>括号；</li>
+<li>运算结合性。</li>
+</ul>
+</li>
+<li>计算机直接处理较麻烦，通常会借助栈转换或求值。</li>
+</ul>
+<h3 id="section-4">10.1.2 前缀表达式</h3>
+<h5 id="section-5"><strong>定义</strong>：#前缀表达式</h5>
+<blockquote>
+<p>描述：
+前缀表达式又称波兰表达式，运算符写在两个操作数前面。</p>
+</blockquote>
+<p>英文名称：
+$$
+\text{Polish notation}
+$$</p>
+<p><strong>规则</strong></p>
+<ul>
+<li>运算符在两个操作数前面。</li>
+<li>形式为：
+$$
+\text{运算符}\quad \text{左操作数}\quad \text{右操作数}
+$$</li>
+</ul>
+<p><strong>例子</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>中缀表达式</th>
+<th>前缀表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$a+b$</td>
+<td><code>+ a b</code></td>
+</tr>
+<tr>
+<td>$(a+b)-c$</td>
+<td><code>- + a b c</code></td>
+</tr>
+<tr>
+<td>$(a+b)-(c\times d)$</td>
+<td><code>- + a b * c d</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>原 PDF 中的紧凑写法：</p>
+<pre><code class="language-text">+ab
+-+abc
+-+ab*cd
+</code></pre>
+<h3 id="section-6">10.1.3 后缀表达式</h3>
+<h5 id="section-7"><strong>定义</strong>：#后缀表达式</h5>
+<blockquote>
+<p>描述：
+后缀表达式又称逆波兰表达式，运算符写在两个操作数后面。</p>
+</blockquote>
+<p>英文名称：
+$$
+\text{Reverse Polish notation}
+$$</p>
+<p><strong>规则</strong></p>
+<ul>
+<li>运算符在两个操作数后面。</li>
+<li>形式为：
+$$
+\text{左操作数}\quad \text{右操作数}\quad \text{运算符}
+$$</li>
+</ul>
+<p><strong>例子</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>中缀表达式</th>
+<th>后缀表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$a+b$</td>
+<td><code>a b +</code></td>
+</tr>
+<tr>
+<td>$(a+b)-c$</td>
+<td><code>a b + c -</code></td>
+</tr>
+<tr>
+<td>$(a+b)-(c\times d)$</td>
+<td><code>a b + c d * -</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>原 PDF 中的紧凑写法：</p>
+<pre><code class="language-text">ab+
+ab+c-
+ab+cd*-
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>对于：
+$$
+(a+b)-c
+$$</li>
+<li>先把 $a+b$ 的结果作为整体：</li>
+</ul>
+<pre><code class="language-text">a b +
+</code></pre>
+<ul>
+<li>再和 $c$ 相减，运算符放到后面：</li>
+</ul>
+<pre><code class="language-text">a b + c -
+</code></pre>
+<ul>
+<li>对于：
+$$
+(a+b)-(c\times d)
+$$</li>
+<li>先得到：</li>
+</ul>
+<pre><code class="language-text">a b +
+</code></pre>
+<ul>
+<li>再得到：</li>
+</ul>
+<pre><code class="language-text">c d *
+</code></pre>
+<ul>
+<li>最后相减：</li>
+</ul>
+<pre><code class="language-text">a b + c d * -
+</code></pre>
+<h2 id="section-8">10.2 中缀转后缀的手算方法</h2>
+<h3 id="section-9">10.2.1 基本步骤</h3>
+<h3 id="section-10">题型：#中缀转后缀</h3>
+<h4 id="section-11">第一部分：解题方法</h4>
+<ol>
+<li>确定中缀表达式中各个运算符的运算顺序。</li>
+<li>选择下一个运算符，按照“左操作数 右操作数 运算符”的方式组合成一个新的操作数。</li>
+<li>如果还有运算符没有被处理，就继续第 2 步。</li>
+</ol>
+<p><strong>核心</strong></p>
+<ul>
+<li>后缀表达式中，运算符在两个操作数后面。</li>
+<li>每处理一个运算符，就把它和对应的两个操作数组成一个整体。</li>
+</ul>
+<p><strong>图示信息结构化</strong></p>
+<ul>
+<li>括号先确定局部整体，优先级再确定乘除先于加减，结合性处理同级运算符。</li>
+<li>每确定一个运算步骤，就把“左操作数、右操作数、运算符”作为一个新的整体继续参与转换。</li>
+</ul>
+<h3 id="section-12">10.2.2 左优先原则</h3>
+<p><strong>规则</strong></p>
+<ul>
+<li>从左往右扫描。</li>
+<li>每遇到一个可以生效的运算符，就让该运算符前面最近的两个操作数执行对应运算。</li>
+<li>只要左边的运算符能计算，就优先计算左边的。</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>后缀表达式的运算符生效顺序和手算转换顺序一致。</li>
+<li>同优先级运算符通常按左结合处理。</li>
+<li>这就是原 PDF 强调的“左优先原则”。</li>
+</ul>
+<h3 id="section-13">10.2.3 例题：复杂中缀转后缀</h3>
+<p>原 PDF 例子：
+$$
+((15\div(7-(1+1)))\times3)-(2+(1+1))
+$$</p>
+<p><strong>运算顺序</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">顺序</th>
+<th>子表达式</th>
+<th>后缀形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>$1+1$</td>
+<td><code>1 1 +</code></td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>$7-(1+1)$</td>
+<td><code>7 1 1 + -</code></td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>$15\div(7-(1+1))$</td>
+<td><code>15 7 1 1 + - /</code></td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>$(15\div(7-(1+1)))\times3$</td>
+<td><code>15 7 1 1 + - / 3 *</code></td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>$1+1$</td>
+<td><code>1 1 +</code></td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>$2+(1+1)$</td>
+<td><code>2 1 1 + +</code></td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>左侧整体减右侧整体</td>
+<td><code>15 7 1 1 + - / 3 * 2 1 1 + + -</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>最终后缀表达式</strong></p>
+<pre><code class="language-text">15 7 1 1 + - / 3 * 2 1 1 + + -
+</code></pre>
+<p><a class="note-image-link" href="/assets/408/images/f230c9a31530.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L10-复杂后缀转换.png"><img class="note-image" src="/assets/408/images/f230c9a31530.png" alt="DS-L10-复杂后缀转换.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>图中圆圈编号表示中缀表达式各运算符的生效次序；后缀表达式中的运算符出现次序与之相同。</li>
+<li>蓝色括线表示每个运算符对应的两个操作数整体，能直观看出嵌套子表达式如何逐层合并。</li>
+<li>最终结果仍以空格分隔的后缀序列为准，避免多位数 <code>15</code> 与相邻数字混淆。</li>
+</ul>
+<h4 id="section-14">第二部分：典型例题</h4>
+<p><strong>例题：将 $a+b-c\times d$ 转为后缀表达式</strong></p>
+<p>先算乘法：
+$$
+c\times d
+$$
+对应：</p>
+<pre><code class="language-text">c d *
+</code></pre>
+<p>再处理 $a+b$：</p>
+<pre><code class="language-text">a b +
+</code></pre>
+<p>最后相减：</p>
+<pre><code class="language-text">a b + c d * -
+</code></pre>
+<h4 id="section-15">第三部分：知识点复盘</h4>
+<ul>
+<li>中缀转后缀时，同优先级按左优先。</li>
+<li>括号会改变运算顺序。</li>
+<li>后缀表达式不需要括号也能明确运算顺序。</li>
+</ul>
+<h2 id="section-16">10.3 中缀转前缀的手算方法</h2>
+<h3 id="section-17">10.3.1 基本步骤</h3>
+<h3 id="section-18">题型：#中缀转前缀</h3>
+<h4 id="section-19">第一部分：解题方法</h4>
+<ol>
+<li>确定中缀表达式中各个运算符的运算顺序。</li>
+<li>选择下一个运算符，按照“运算符 左操作数 右操作数”的方式组合成一个新的操作数。</li>
+<li>如果还有运算符没有被处理，就继续第 2 步。</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li>中缀转前缀手算时，原 PDF 采用右优先原则。</li>
+<li>也就是遇到同优先级、同层次运算符时，优先处理右边可计算的部分。</li>
+<li>“右优先”只是构造前缀表达式时保持原结合关系的手算策略；不能交换左右操作数，也不能改变原中缀表达式的语义。</li>
+</ul>
+<h3 id="section-20">10.3.2 例题：中缀转前缀</h3>
+<p>原 PDF 例子：
+$$
+6+3\times(7-4)-8\div2
+$$</p>
+<p><strong>运算顺序</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>子表达式</th>
+<th>前缀形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$7-4$</td>
+<td><code>- 7 4</code></td>
+</tr>
+<tr>
+<td>$3\times(7-4)$</td>
+<td><code>* 3 - 7 4</code></td>
+</tr>
+<tr>
+<td>$6+3\times(7-4)$</td>
+<td><code>+ 6 * 3 - 7 4</code></td>
+</tr>
+<tr>
+<td>$8\div2$</td>
+<td><code>/ 8 2</code></td>
+</tr>
+<tr>
+<td>整体相减</td>
+<td><code>- + 6 * 3 - 7 4 / 8 2</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>最终前缀表达式</strong></p>
+<pre><code class="language-text">- + 6 * 3 - 7 4 / 8 2
+</code></pre>
+<p>原 PDF 紧凑写法：</p>
+<pre><code class="language-text">-+6*3-74/82
+</code></pre>
+<p>上表已经完整保留原图的运算顺序和前缀结果；原图中的两个空栈只是手算辅助框，不包含额外算法信息，因此不再重复嵌入。</p>
+<h4 id="section-21">第二部分：典型例题</h4>
+<p><strong>例题：将 $(a+b)-(c\times d)$ 转为前缀表达式</strong></p>
+<p>先得到：</p>
+<pre><code class="language-text">+ a b
+</code></pre>
+<p>再得到：</p>
+<pre><code class="language-text">* c d
+</code></pre>
+<p>最后整体相减：</p>
+<pre><code class="language-text">- + a b * c d
+</code></pre>
+<h4 id="section-22">第三部分：知识点复盘</h4>
+<ul>
+<li>前缀表达式中运算符在操作数前面。</li>
+<li>中缀转前缀时，组合方式是：
+$$
+\text{运算符}\quad \text{左操作数}\quad \text{右操作数}
+$$</li>
+<li>手算时注意右优先原则。</li>
+</ul>
+<h2 id="section-23">10.4 后缀表达式算法</h2>
+<h3 id="section-24">10.4.1 用栈实现后缀表达式计算</h3>
+<h5 id="section-25"><strong>定义</strong>：#后缀表达式求值</h5>
+<blockquote>
+<p>描述：
+后缀表达式求值是从左往右扫描表达式，遇到操作数入栈，遇到运算符就弹出两个操作数进行运算，再把结果压回栈。</p>
+</blockquote>
+<p><strong>算法步骤</strong></p>
+<ol>
+<li>从左往右扫描下一个元素，直到处理完所有元素。</li>
+<li>若扫描到操作数，则压入栈，并回到第 1 步。</li>
+<li>若扫描到运算符，则弹出两个栈顶元素，执行相应运算。</li>
+<li>将运算结果压回栈顶，再回到第 1 步。</li>
+</ol>
+<p><strong>重要注意</strong></p>
+<ul>
+<li>先出栈的是右操作数。</li>
+<li>后出栈的是左操作数。</li>
+<li>对于减法和除法，这一点非常重要。</li>
+</ul>
+<p>若先出栈的是 $b$，后出栈的是 $a$，遇到运算符 <code>-</code>，应计算：
+$$
+a-b
+$$</p>
+<p>遇到运算符 <code>/</code>，应计算：
+$$
+a\div b
+$$</p>
+<p><strong>合法表达式的结果</strong></p>
+<ul>
+<li>如果后缀表达式合法，最后栈中只会留下一个元素。</li>
+<li>这个元素就是最终结果。</li>
+</ul>
+<h3 id="section-26">10.4.2 后缀求值例题</h3>
+<p>以后缀表达式为例：</p>
+<pre><code class="language-text">15 7 1 1 + - / 3 * 2 1 1 + + -
+</code></pre>
+<p>它来自中缀表达式：
+$$
+((15\div(7-(1+1)))\times3)-(2+(1+1))
+$$</p>
+<p><strong>计算过程</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>扫描</th>
+<th>操作</th>
+<th>栈中内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>15</code></td>
+<td>入栈</td>
+<td><code>15</code></td>
+</tr>
+<tr>
+<td><code>7</code></td>
+<td>入栈</td>
+<td><code>15, 7</code></td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>入栈</td>
+<td><code>15, 7, 1</code></td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>入栈</td>
+<td><code>15, 7, 1, 1</code></td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>$1+1=2$</td>
+<td><code>15, 7, 2</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>$7-2=5$</td>
+<td><code>15, 5</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>$15\div5=3$</td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>入栈</td>
+<td><code>3, 3</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>$3\times3=9$</td>
+<td><code>9</code></td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>入栈</td>
+<td><code>9, 2</code></td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>入栈</td>
+<td><code>9, 2, 1</code></td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>入栈</td>
+<td><code>9, 2, 1, 1</code></td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>$1+1=2$</td>
+<td><code>9, 2, 2</code></td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>$2+2=4$</td>
+<td><code>9, 4</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>$9-4=5$</td>
+<td><code>5</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>最终结果：
+$$
+5
+$$</p>
+<h2 id="section-27">10.5 中缀表达式算法</h2>
+<h3 id="section-28">10.5.1 用栈实现中缀表达式计算</h3>
+<h5 id="section-29"><strong>定义</strong>：#中缀表达式求值</h5>
+<blockquote>
+<p>描述：
+中缀表达式求值可以用两个栈实现，一个保存操作数，一个保存运算符。</p>
+</blockquote>
+<p><strong>需要两个栈</strong></p>
+<ul>
+<li>操作数栈。</li>
+<li>运算符栈。</li>
+</ul>
+<p><strong>基本规则</strong></p>
+<ol>
+<li>若扫描到操作数，压入操作数栈。</li>
+<li>若扫描到运算符或界限符，则按照“中缀转后缀”的逻辑处理运算符栈。</li>
+<li>处理过程中，每当弹出一个运算符，就再弹出两个操作数栈的栈顶元素并执行相应运算。</li>
+<li>运算结果再压回操作数栈。</li>
+</ol>
+<p><strong>一句话理解</strong></p>
+<ul>
+<li>中缀表达式的计算可以看成：
+<ul>
+<li>先把中缀转后缀；</li>
+<li>再对后缀表达式求值；</li>
+<li>也可以在转换过程中同步完成计算。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-30">10.6 中缀表达式转后缀表达式：栈算法</h2>
+<h3 id="section-31">10.6.1 方法</h3>
+<p><strong>初始化</strong></p>
+<ul>
+<li>初始化一个栈。</li>
+<li>该栈用于保存暂时还不能确定运算顺序的运算符。</li>
+</ul>
+<p><strong>扫描方向</strong></p>
+<ul>
+<li>从左到右处理各个元素，直到末尾。</li>
+</ul>
+<h3 id="section-32">10.6.2 可能遇到的三种情况</h3>
+<h4 id="section-33">情况一：遇到操作数</h4>
+<ul>
+<li>直接加入后缀表达式。</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">a
+</code></pre>
+<p>直接输出：</p>
+<pre><code class="language-text">a
+</code></pre>
+<h4 id="section-34">情况二：遇到界限符</h4>
+<p><strong>遇到左括号 <code>(</code></strong></p>
+<ul>
+<li>直接入栈。</li>
+</ul>
+<p><strong>遇到右括号 <code>)</code></strong></p>
+<ul>
+<li>依次弹出栈内运算符，并加入后缀表达式。</li>
+<li>直到弹出 <code>(</code> 为止。</li>
+<li>注意：<code>(</code> 不加入后缀表达式。</li>
+</ul>
+<h4 id="section-35">情况三：遇到运算符</h4>
+<ul>
+<li>对本节的 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code> 左结合二元运算符，依次弹出栈中优先级高于或等于当前运算符的所有运算符。</li>
+<li>弹出的运算符加入后缀表达式。</li>
+<li>如果遇到 <code>(</code> 或栈空，则停止弹出。</li>
+<li>最后把当前运算符入栈。</li>
+</ul>
+<p><strong>处理完所有字符后</strong></p>
+<ul>
+<li>将栈中剩余运算符依次弹出。</li>
+<li>弹出的运算符依次加入后缀表达式。</li>
+</ul>
+<p><strong>结合性补充</strong></p>
+<ul>
+<li>通用规则是：栈顶优先级更高时弹出；优先级相等时，仅当当前运算符为左结合时弹出。</li>
+<li>若扩展到右结合的幂运算符（如 <code>^</code>），遇到同级 <code>^</code> 时不能按本节规则直接弹出。</li>
+<li>一元运算符还需要单独定义优先级、结合性和操作数个数，不能直接套用二元运算符规则。</li>
+</ul>
+<h3 id="section-36">10.6.3 运算符优先级</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(</code></td>
+<td>入栈后作为界限符，不直接比较输出</td>
+</tr>
+<tr>
+<td><code>*</code>、<code>/</code></td>
+<td>高</td>
+</tr>
+<tr>
+<td><code>+</code>、<code>-</code></td>
+<td>低</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>同级处理</strong></p>
+<ul>
+<li>本节四种运算符均按左结合。</li>
+<li>因此遇到当前运算符时，栈顶同级运算符也要先弹出。</li>
+<li>“高于或等于当前运算符都弹出”只适用于这里的左结合二元运算符集合。</li>
+</ul>
+<h3 id="section-37">10.6.4 伪代码</h3>
+<pre><code class="language-text">初始化运算符栈 opStack
+初始化后缀表达式 postfix
+
+从左到右扫描中缀表达式：
+    如果是操作数：
+        加入 postfix
+
+    如果是 '('：
+        入 opStack
+
+    如果是 ')'：
+        不断弹出 opStack 栈顶运算符并加入 postfix
+        直到弹出 '('
+
+    如果是运算符 op：
+        当 opStack 非空，且栈顶不是 '('，
+        且（栈顶优先级更高，
+            或二者同级且当前 op 为左结合）：
+            弹出栈顶运算符并加入 postfix
+        将 op 入 opStack
+
+扫描结束后：
+    将 opStack 中剩余运算符依次弹出并加入 postfix
+</code></pre>
+<h2 id="section-38">10.7 三种算法汇总</h2>
+<h3 id="section-39">10.7.1 用栈实现中缀转后缀</h3>
+<ul>
+<li>初始化一个栈，用于保存暂时还不能确定运算顺序的运算符。</li>
+<li>从左到右处理各个元素，直到末尾。</li>
+<li>遇到操作数，直接加入后缀表达式。</li>
+<li>遇到 <code>(</code>，直接入栈。</li>
+<li>遇到 <code>)</code>，依次弹出栈内运算符并加入后缀表达式，直到弹出 <code>(</code>。</li>
+<li>遇到本节的左结合二元运算符，依次弹出栈中优先级高于或等于当前运算符的所有运算符，并加入后缀表达式。</li>
+<li>遇到 <code>(</code> 或栈空则停止弹出，再把当前运算符入栈。</li>
+<li>所有字符处理完后，将栈中剩余运算符依次弹出并加入后缀表达式。</li>
+</ul>
+<h3 id="section-40">10.7.2 用栈实现后缀表达式计算</h3>
+<ul>
+<li>从左往右扫描下一个元素，直到处理完所有元素。</li>
+<li>若扫描到操作数，则压入栈。</li>
+<li>若扫描到运算符，则弹出两个栈顶元素，执行相应运算。</li>
+<li>运算结果压回栈顶。</li>
+<li>先出栈的是右操作数。</li>
+<li>合法表达式最后栈中只剩一个元素，即最终结果。</li>
+</ul>
+<h3 id="section-41">10.7.3 用栈实现中缀表达式计算</h3>
+<ul>
+<li>初始化两个栈：
+<ul>
+<li>操作数栈；</li>
+<li>运算符栈。</li>
+</ul>
+</li>
+<li>若扫描到操作数，压入操作数栈。</li>
+<li>若扫描到运算符或界限符，则按照“中缀转后缀”的逻辑处理运算符栈。</li>
+<li>每弹出一个运算符，就弹出两个操作数并执行相应运算。</li>
+<li>结果压回操作数栈。</li>
+</ul>
+<h2 id="section-42">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-a7218565071e/">上一篇：栈在括号匹配中的应用</a> · <a href="/notes/cs408-2b5ec3d1aa84/">下一篇：栈在递归中的应用</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-19ccba30ce38/">栈与队列代码</a></li>
+</ul>
+<h2 id="section-43">10.8 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>前缀表达式：运算符在操作数前面。</li>
+<li>后缀表达式：运算符在操作数后面。</li>
+<li>中缀表达式：运算符在两个操作数中间。</li>
+<li>中缀转后缀手算使用左优先原则。</li>
+<li>中缀转前缀手算使用右优先原则。</li>
+<li>后缀表达式求值从左往右扫描。</li>
+<li>后缀求值遇到操作数入栈，遇到运算符弹出两个操作数计算。</li>
+<li>后缀求值中，先出栈的是右操作数。</li>
+<li>中缀表达式求值可用两个栈：
+<ul>
+<li>操作数栈；</li>
+<li>运算符栈。</li>
+</ul>
+</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>后缀表达式中，<code>a b -</code> 表示 $a-b$，不是 $b-a$。</li>
+<li>后缀求值时先出栈的是右操作数。</li>
+<li>中缀转后缀时，遇到 <code>)</code> 要弹出到 <code>(</code> 为止，但 <code>(</code> 不加入后缀表达式。</li>
+<li>中缀转后缀时，遇到同级运算符是否弹栈取决于当前运算符的结合性：左结合弹出，右结合不先弹出。</li>
+<li>前缀、后缀表达式本身不需要括号。</li>
+</ul>
+<p><strong>一句话总结</strong></p>
+<ul>
+<li>表达式求值的核心是把“运算顺序”显式化；后缀表达式用栈最容易计算，中缀表达式可以先转后缀，也可以用两个栈边转边算。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-141b2cb5b281/index.html"><span>← 上一项</span><strong>Lecture 25：顺序查找和折半查找</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-160888f26a5f/index.html"><span>下一项 →</span><strong>Lecture 35：排序算法总结</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

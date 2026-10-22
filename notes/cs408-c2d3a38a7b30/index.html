@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 25：知识 - 外部设备 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 25：知识 - 外部设备。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 25：知识 - 外部设备 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 25：知识 - 外部设备。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-c2d3a38a7b30/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 25：知识 - 外部设备 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 25：知识 - 外部设备。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 25：知识 - 外部设备",
+      "item": "https://www.jiayuhere.com/notes/cs408-c2d3a38a7b30/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-c2d3a38a7b30/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c2d3a38a7b30/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c2d3a38a7b30/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c2d3a38a7b30/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-c2d3a38a7b30/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 25：知识 - 外部设备</h1><p class="article-lead">408 学习笔记：Lecture 25：知识 - 外部设备。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c09baa2931e1.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c09baa2931e1.pdf" download="Lecture 25：知识 - 外部设备.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 输入设备</a><a href="#section-4">6.2 输出设备与视频存储器 VRAM</a><a href="#section-7">6.3 CRT 显示器与显示方式</a><a href="#section-10">6.4 打印机</a><a href="#section-19">相关知识</a><a href="#section-20">6.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：外设把人与物理世界的信息同计算机交换。输入设备的重点是“把动作/信号编码后送主机”，显示设备的核心计算是显存容量和刷新带宽，打印机常按击打方式辨析。</p>
+</blockquote>
+<h2 id="section-1">6.1 输入设备</h2>
+<p>输入设备将外部信息转换成主机可接收的二进制编码，并经 I/O 接口送入计算机。</p>
+<h3 id="section-2">6.1.1 键盘</h3>
+<p>一次按键输入的基本链路：</p>
+<ol>
+<li>键盘控制电路检测按下的是哪一个键。</li>
+<li>将键位翻译成主机接受的编码，例如 ASCII 码（实际系统也可用扫描码再由软件转换）。</li>
+<li>把编码经接口传送给主机。</li>
+</ol>
+<p>键盘的“按键”本身不是 CPU 可直接处理的字符；CPU 最终看到的是接口缓冲区中的编码数据。</p>
+<h3 id="section-3">6.1.2 鼠标</h3>
+<p>鼠标底部传感器检测平面移动的方向和距离，再由控制器把位移信息转换为相应的光标运动。它通常传送的是相对位移、按键状态等数据，而不是“屏幕绝对坐标”本身。</p>
+<h2 id="section-4">6.2 输出设备与视频存储器 VRAM</h2>
+<p>显示输出要持续读取一帧图像信息，故需要<strong>显示存储器</strong>（Video RAM，VRAM），也称刷新存储器。显示控制器按照刷新节奏读取 VRAM，把数据转换成屏幕信号；CPU/图形系统则更新其中的显示内容。</p>
+<p>原资料列出的显示器参数要分开理解：<strong>屏幕尺寸</strong>是可视区域对角线长度，常用英寸表示；<strong>分辨率</strong>是横向与纵向像素数；<strong>灰度级/色深</strong>决定每像素可表达的亮度或颜色数量；<strong>刷新率</strong>是每秒更新画面的次数，单位 Hz。屏幕尺寸不直接决定像素总数，刷新率也不改变单帧的存储容量，但会影响持续读取带宽。</p>
+<h3 id="section-5">6.2.1 显存容量</h3>
+<p>设水平、垂直分辨率为 $H,V$，每个像素的颜色/灰度位数为 $b$，帧缓冲数为 $n$，则：</p>
+<p>$$
+\begin{aligned}
+\text{一帧像素数}&amp;=H\times V\
+\text{一帧大小（bit）}&amp;=H\times V\times b\
+\text{VRAM 容量（最低）}&amp;=n\times H\times V\times b
+\end{aligned}
+$$</p>
+<ul>
+<li>若题目只给“分辨率”和“灰度级”，先把灰度级转换成每像素位数：$b=\log_2(\text{灰度级数})$。</li>
+<li>分辨率越高、灰度级/色深越多、采用双缓冲等更多帧缓冲时，所需显存越大。</li>
+<li>单位换算：$8,bit=1,B$；计算得到 bit 后要除以 8 才是字节数。</li>
+</ul>
+<h3 id="section-6">6.2.2 刷新带宽</h3>
+<p>一帧数据每秒必须读取 $f$ 次（帧频/刷新率），仅刷新读取所需带宽为：</p>
+<p>$$BW_{refresh}=H\times V\times b\times f$$</p>
+<p>该式的单位为 bit/s；换算为 B/s 需除以 8。题目所称 VRAM 带宽是显存的读写传输能力，而非只看显存容量。</p>
+<blockquote>
+<p>例：$1600\times1200$、24 bit 色深、85 Hz 的刷新读取带宽为
+$$1600\times1200\times24\times85=3916.8,Mb/s$$
+若显存总带宽中只有 50% 可用于刷新，则总带宽至少为 $3916.8/0.5=7833.6,Mb/s$，约 $7834,Mb/s$。</p>
+</blockquote>
+<ul>
+<li>集成显卡常从系统主存划出一部分作为显存，因此其显示带宽会与 CPU 等共享内存带宽。</li>
+<li>计算题要读清题干是问“刷新所需带宽”还是“显存总带宽”：若只允许比例 $p$ 用于刷新，需用 $BW_{refresh}/p$，而不是再乘 $p$。</li>
+</ul>
+<h2 id="section-7">6.3 CRT 显示器与显示方式</h2>
+<h3 id="section-8">6.3.1 字符显示器（光栅扫描）</h3>
+<p>字符显示以 $m\times n$ 的<strong>点阵</strong>为基础；点阵大小影响字符质量和字符窗口大小。字符窗口包括字符显示点阵和字符间隔。</p>
+<ol>
+<li>每个待显示字符的 ASCII 代码等字符码存放在 VRAM 中。</li>
+<li>由 ROM 构成的字符发生器保存每种字符的点阵字形。</li>
+<li>CRT 光栅扫描时，依据字符码从字符发生器依次取出点阵。</li>
+<li>点阵位为 0 或 1 控制电子束关/开，于屏幕相应位置形成字符。</li>
+</ol>
+<blockquote>
+<p>易错：VRAM 存的是“屏幕上要显示什么字符/像素”的信息；字符发生器 ROM 存的是“某字符的字形点阵”。两者职能不同。</p>
+</blockquote>
+<h3 id="section-9">6.3.2 图形显示器（随机扫描）</h3>
+<p>在传统 CRT 的<strong>随机扫描（矢量扫描）<strong>方式中，可把图形坐标和绘图命令组成</strong>显示文件</strong>，放入缓冲存储器；显示文件再送至矢量（线段）产生器，产生模拟控制电压，直接控制电子束轨迹。这是教材中的历史显示结构，不应误认为现代 LCD/OLED 的通用扫描方式。</p>
+<ul>
+<li>为保持图像稳定，需要周期性重复刷新。</li>
+<li>优点：分辨率高、曲线平滑，高质量图形显示可采用这种随机扫描方式。</li>
+<li>缺点：图形复杂时需重复绘制大量线段，可能出现闪烁。</li>
+</ul>
+<h2 id="section-10">6.4 打印机</h2>
+<h3 id="section-11">6.4.1 按是否击打分类</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>原理</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>击打式</td>
+<td>印字机构以机械动作使色带与纸相撞，形成字符</td>
+<td>结构和耗材成本较低，可在多联纸上复写，机械击打记录便于核验</td>
+<td>噪声大、速度慢；常见针式机分辨率和印字质量不如激光机</td>
+</tr>
+<tr>
+<td>非击打式</td>
+<td>用电、磁、光、喷墨等物理/化学方法成像</td>
+<td>通常更安静，速度、分辨率和彩色图形能力较好</td>
+<td>耗材、纸张或设备成本随具体技术而异，通常不能直接复写多联纸</td>
+</tr>
+</tbody>
+</table></div>
+<p>“按工作方式”还可按逐字符、逐行、逐页等处理粒度区分；解题时应以题干给出的分类维度为准，不能把“击打/非击打”与“串行/并行接口”混为同一分类。</p>
+<h3 id="section-12">6.4.2 常见打印方式</h3>
+<h4 id="section-13">针式打印机</h4>
+<p>针式打印机属于击打式打印机。主机送来的字符或图形先经接口、检测和控制电路形成点阵驱动信号；走纸机构使纸张纵向移动，打印头横向移动，打印针隔着色带撞击纸面形成点阵。</p>
+<ul>
+<li>优点：原理简单、设备与色带成本较低，可打印多联复写票据。</li>
+<li>缺点：噪声大、速度较慢，点阵分辨率和印字质量通常低于喷墨、激光打印。</li>
+</ul>
+<h4 id="section-14">喷墨打印机</h4>
+<p>喷墨打印机属于非击打式打印机。打印头按像素位置把微小墨滴喷到纸面；不同实现可用热气泡或压电方式产生墨滴，彩色打印通常组合青、品红、黄、黑等墨水形成所需颜色。教材中“带电墨滴经电场偏转”描述的是连续式喷墨的一种实现，不能概括所有喷墨机。</p>
+<ul>
+<li>优点：噪声小、彩色能力强，设备价格通常较低，打印质量较好。</li>
+<li>缺点：墨盒等耗材成本较高，速度、防水性和纸张适应性随机型而异。</li>
+</ul>
+<h4 id="section-15">激光打印机</h4>
+<p>激光打印机属于非击打式页式打印机。控制器把页面栅格化后调制激光扫描，在感光鼓上形成静电潜像；碳粉吸附到潜像区域，再转印到纸面并通过定影组件加热、加压固定。</p>
+<ul>
+<li>优点：速度快、分辨率和印字质量高、噪声较小，适合批量文本与图形输出。</li>
+<li>缺点：设备和耗材成本相对较高，不能像针式打印机那样直接复写多联票据。</li>
+</ul>
+<h3 id="section-16">题型：#显存容量与刷新带宽</h3>
+<h4 id="section-17">第一部分：解题方法</h4>
+<ol>
+<li>先将分辨率写为像素数 $H\times V$，色深写为 $b$ bit/像素，刷新率写为 $f$ Hz。</li>
+<li>显存容量计算“一帧像素数 $\times$ 色深”，再转 B/KB/MB；若有双缓冲、深度缓冲等按题意增加帧数或位数。</li>
+<li>刷新带宽计算“一帧大小 $\times$ 帧频”；题目限制刷新只能占总带宽的某比例时，再除以该比例。</li>
+<li>检查单位：题中若使用 <code>Mb/s</code> 是兆比特每秒，不能直接当 <code>MB/s</code>。</li>
+</ol>
+<h4 id="section-18">第二部分：典型易错点</h4>
+<ul>
+<li>色深“24 bit”是每像素 24 bit，不是每帧 24 bit；灰度级数为 256 时才可换成 8 bit/像素。</li>
+<li>分辨率高不一定代表刷新率高；两者对带宽均为线性影响。</li>
+<li>显存容量只够放一帧，并不意味着其带宽足以在目标刷新率下稳定显示。</li>
+</ul>
+<h2 id="section-19">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-a58dbd00622a/">上一篇：中断</a> · <a href="/notes/cs408-67e2b38e518a/">下一篇：I/O 接口</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-39b45084fd1d/">I/O 设备管理</a></li>
+</ul>
+<h2 id="section-20">6.5 本节复盘</h2>
+<ul>
+<li>键盘完成键位检测、编码转换、向主机传送；鼠标传感器把运动方向和距离转为光标运动数据。</li>
+<li>VRAM 是显示/刷新存储器；容量由分辨率、色深和帧缓冲数决定，刷新带宽为分辨率乘色深乘帧频。</li>
+<li>字符显示器以 VRAM 字符码索引字符发生器 ROM 的点阵；传统 CRT 图形随机扫描以显示文件控制矢量产生器。</li>
+<li>击打式打印靠色带与纸碰撞，能复写但慢且噪声大；喷墨用墨滴成像，激光机经感光、显影、转印和定影完成页式打印。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-c0d1b15ecf57/index.html"><span>← 上一项</span><strong>Lecture 34：外部排序</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c3d6d4b33f5b/index.html"><span>下一项 →</span><strong>Lecture 9：聚类</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

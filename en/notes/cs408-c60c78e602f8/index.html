@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 20：知识 - 控制器的功能和工作原理 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 20：知识 - 控制器的功能和工作原理. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 20：知识 - 控制器的功能和工作原理 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 20：知识 - 控制器的功能和工作原理. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-c60c78e602f8/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 20：知识 - 控制器的功能和工作原理 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 20：知识 - 控制器的功能和工作原理. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 20：知识 - 控制器的功能和工作原理",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-c60c78e602f8/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-c60c78e602f8/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c60c78e602f8/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c60c78e602f8/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c60c78e602f8/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-c60c78e602f8/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 20：知识 - 控制器的功能和工作原理</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 20：知识 - 控制器的功能和工作原理. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>10 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/780cb60a3214.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/780cb60a3214.pdf" download="Lecture 20：知识 - 控制器的功能和工作原理.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 控制器功能与外部关系</a><a href="#section-2">5.2 硬布线控制器</a><a href="#section-6">5.3 微程序控制器</a><a href="#section-11">5.4 微指令格式与编码</a><a href="#section-13">5.5 微程序设计与两类控制器比较</a><a href="#section-14">相关知识</a><a href="#section-15">5.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：控制器是系统指挥中心：取指并形成下一地址、译码并产生微命令、控制 CPU/主存/I/O 数据流。硬布线控制以逻辑电路即时产生命令，微程序控制把命令序列存入控制存储器。</p>
+</blockquote>
+<h2 id="section-1">5.1 控制器功能与外部关系</h2>
+<ul>
+<li>控制器从数据总线接收指令信息、从运算器接收转移相关信息，向地址总线送指令地址，并向各部件发控制信号。</li>
+<li>主存与 I/O 从地址总线取得地址、从控制总线取得读写/握手信号、经数据总线传数据；I/O 通过接口接入总线。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>核心功能</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>取指与定址</td>
+<td>从主存取指并指出下一条指令位置</td>
+</tr>
+<tr>
+<td>译码/测试</td>
+<td>分析 OP 和条件，形成所需微操作控制信号</td>
+</tr>
+<tr>
+<td>数据流控制</td>
+<td>指挥 CPU、主存和 I/O 间数据传输方向与时序</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-2">5.2 硬布线控制器</h2>
+<h5 id="section-3"><strong>定义</strong>：#硬布线控制器</h5>
+<p>硬布线控制器由组合逻辑和触发器构成，根据<strong>操作码、当前机器周期、节拍信号、机器状态条件</strong>即时产生微命令；也称组合逻辑控制器。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>特点</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>速度快</td>
+<td>纯硬件逻辑产生控制信号，主要受门电路延迟影响</td>
+</tr>
+<tr>
+<td>扩展难</td>
+<td>新增指令往往要改动较多逻辑，指令越多设计越复杂</td>
+</tr>
+<tr>
+<td>适用倾向</td>
+<td>常与规则、精简的 RISC 指令系统相配合</td>
+</tr>
+<tr>
+<td>并行性</td>
+<td>同一节拍可安排多个被控对象不同且相容的微操作</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>不同指令所需节拍数可不同。同步定长机器周期设计常按可能的最大节拍数确定周期，实际较短指令可把操作安排在周期末端节拍。</li>
+<li>设计流程：列取指/间址/执行/中断微操作序列 <code>-&gt;</code> 选定长或不定长机器周期及节拍数 <code>-&gt;</code> 按依赖与相容性排时序 <code>-&gt;</code> 写每个微命令最简逻辑表达式并画逻辑电路。</li>
+</ul>
+<h3 id="section-4">5.2.1 典型微操作</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>典型微操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>取指</td>
+<td><code>PC-&gt;MAR</code>，读主存，<code>M(MAR)-&gt;MDR-&gt;IR</code>，<code>OP(IR)-&gt;ID</code>，<code>PC+1-&gt;PC</code></td>
+</tr>
+<tr>
+<td>间址</td>
+<td><code>Ad(IR)-&gt;MAR</code>，读主存，<code>M(MAR)-&gt;MDR-&gt;Ad(IR)</code></td>
+</tr>
+<tr>
+<td>执行</td>
+<td><code>CLA: 0-&gt;ACC</code>；<code>LDA: Ad(IR)-&gt;MAR</code>、读、<code>MDR-&gt;ACC</code>；<code>JMP: Ad(IR)-&gt;PC</code></td>
+</tr>
+<tr>
+<td>条件转移</td>
+<td>如 ACC 为负时按条件选择 <code>Ad(IR)-&gt;PC</code> 或 <code>PC</code> 保持/顺序值</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>排时序原则：保持先后依赖；被控对象不同且相容的操作尽量同节拍；速度很快的寄存器间操作可在同一节拍按先后串接（以题设数据通路为准）。</li>
+</ul>
+<h3 id="section-5">5.2.2 原资料实例：同一微操作的控制信号</h3>
+<p>原 PDF 第 3、6 页以 <code>M(MAR)-&gt;MDR</code> 为例：该微操作可出现在取指周期的 $T_1$、间址周期的 $T_1$，以及部分指令执行周期的 $T_1$。若 <code>FE</code>、<code>IND</code>、<code>EX</code> 分别表示所处周期，<code>ADD</code> 等表示操作码译码线，控制信号的简化逻辑式为：</p>
+<p>$$
+C_{MDR\leftarrow M(MAR)}=
+FE\cdot T_1+
+IND\cdot T_1\cdot(ADD+STA+LDA+JMP+BAN)+
+EX\cdot T_1\cdot(ADD+LDA)
+$$</p>
+<p>式中“$+$”为逻辑或，“$\cdot$”为逻辑与；各项列举的是<strong>不同条件下执行同一微操作</strong>，不是要把这些机器指令相加。实际访存还须配合读命令及存储器就绪时序，不能仅凭此式完成数据传送。</p>
+<p>原 PDF 第 5 页把取指微操作排成三个节拍，展示了控制器如何利用并行与短寄存器路径：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>节拍</th>
+<th>安排的微操作</th>
+<th>先后条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$T_0$</td>
+<td><code>PC-&gt;MAR</code>，<code>1-&gt;R</code></td>
+<td>读命令与地址准备相配合</td>
+</tr>
+<tr>
+<td>$T_1$</td>
+<td><code>M(MAR)-&gt;MDR</code>，<code>PC+1-&gt;PC</code></td>
+<td>主存取数在 <code>PC-&gt;MAR</code> 后；PC 自增与取数可并行</td>
+</tr>
+<tr>
+<td>$T_2$</td>
+<td><code>MDR-&gt;IR</code>，<code>OP(IR)-&gt;ID</code></td>
+<td>先把指令送入 IR，再经组合译码形成操作码线</td>
+</tr>
+</tbody>
+</table></div>
+<p>同节拍安排不意味着有依赖的动作严格同时发生；能否串接取决于题设数据通路与节拍长度。</p>
+<h2 id="section-6">5.3 微程序控制器</h2>
+<h3 id="section-7">5.3.1 微程序层次</h3>
+<p><code>程序 -&gt; 机器指令序列 -&gt; 每条机器指令对应的微程序 -&gt; 微程序由微指令序列组成 -&gt; 微指令包含多个微命令/微操作</code></p>
+<ul>
+<li>微指令是控制存储器中由 0/1 组成、可直接控制 CPU 微操作的代码；一条微指令可包含多个可并行微操作。微周期是取出并执行一条微指令的时间。</li>
+<li>严格区分：<strong>微命令</strong>是控制器发出的控制信号，<strong>微操作</strong>是该信号触发的数据传送或运算动作。教材中二者常按一一对应关系简称，但不能把“信号”和“动作”当成同一个物理对象。</li>
+<li>物理上取指与执行可分别画成微指令序列，但逻辑上“一个机器指令对应一个微程序”；取指/间址/中断微程序通常被多条机器指令共用。</li>
+</ul>
+<h3 id="section-8">5.3.2 基本组成</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>部件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>控制存储器 CM</td>
+<td>存放微指令序列，常用 ROM；位于 CPU 内部，与主存不同，按地址访问</td>
+</tr>
+<tr>
+<td>微地址寄存器 CMAR</td>
+<td>保存当前要访问的微指令地址，类似主存 MAR</td>
+</tr>
+<tr>
+<td>微指令寄存器 CMDR</td>
+<td>保存从 CM 读出的微指令，位数等于微指令字长，类似 MDR/IR 的控制层角色</td>
+</tr>
+<tr>
+<td>微地址形成部件</td>
+<td>根据 OP、下地址、条件、硬件入口等形成初始/后继微地址</td>
+</tr>
+<tr>
+<td>地址译码与顺序逻辑</td>
+<td>选中 CM 单元并控制微指令执行顺序</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    OP[&quot;机器指令 OP&quot;] --&gt; NEXT[&quot;微地址形成/顺序逻辑&quot;]
+    COND[&quot;状态条件与周期入口&quot;] --&gt; NEXT
+    CMDR[&quot;CMDR 中的下地址字段&quot;] --&gt; NEXT
+    NEXT --&gt; CMAR[&quot;CMAR&quot;]
+    CMAR --&gt; CM[&quot;控制存储器 CM&quot;]
+    CM --&gt; CMDR[&quot;CMDR：当前微指令&quot;]
+    CMDR --&gt; CTRL[&quot;操作控制字段译码&quot;]
+    CTRL --&gt; SIG[&quot;微命令/控制信号&quot;]
+    SIG --&gt; DP[&quot;数据通路执行微操作&quot;]
+    DP --&gt; COND
+</pre>
+<h3 id="section-9">5.3.3 工作过程与下地址</h3>
+<ul>
+<li>取指微程序从固定入口执行；依据寻址/标志信息决定是否进入间址微程序；执行微程序入口通常由 <code>OP(IR)</code> 经微地址形成部件给出；中断微程序入口也可由专用硬件给出。</li>
+<li>下地址形成方式包括：微指令内<strong>下地址字段（断定法）</strong>、<code>CMAR+1</code> 增量计数、由机器指令操作码形成、按条件分支转移、硬件固定入口。</li>
+<li>按源 PDF 把每条机器指令的执行微程序与公共取指微程序分开计数时，若有 $n$ 条机器指令，CM 中至少记为 $n+1$ 个微程序；公共间址/中断是否另计依具体 CPU。不同教材也可能把公共取指段视为每条机器指令微程序的共享入口，因此答题必须沿用题目的计数口径；“微程序条数”与“微指令条数”更不能混淆。</li>
+</ul>
+<p>原页第 10 页的控存布局示例把公共取指微指令放在 <code>#1</code>～<code>#3</code>，间址/中断各占另一段，而 <code>LDA X</code> 的执行入口为 <code>#13</code>，随后执行 <code>#14</code>、<code>#15</code>；<code>STA</code> 的入口为 <code>#16</code>，随后执行 <code>#17</code>、<code>#18</code>。是否经过间址段取决于寻址标志；取指结束后依据 <code>OP(IR)</code> 转到对应执行入口，执行段末再回取指入口。图中编号只是这份示例的<strong>控存地址</strong>，不是机器指令地址；后面设计步骤图另把公共入口记为 <code>#0</code>，两张示意图采用不同编号，不能拼成一张连续地址表。</p>
+<p>微程序控制相对硬布线还须安排“下一条微指令从哪里取”：普通顺序步可用 <code>Ad(CMDR)-&gt;CMAR</code> 读当前微指令的下地址字段；取指末步用 <code>OP(IR)-&gt;微地址形成部件-&gt;CMAR</code> 选择机器指令的执行微程序；执行末步再把公共取指入口地址送入 CMAR。只有数据通路中的 <code>PC-&gt;MAR</code>、<code>MDR-&gt;IR</code> 等微操作还不足以让微程序本身继续运行。</p>
+<h3 id="section-10">题型：#下地址字段位数</h3>
+<p>若控制存储器总共需容纳 $N$ 条微指令，断定法下地址字段至少为：</p>
+<p>$$\lceil\log_2 N\rceil\text{ 位}$$</p>
+<p>例：32 条机器指令、每条平均 4 条微指令，加公共取指 2 条，共 $32\times4+2=130$ 条微指令，需 $\lceil\log_2 130\rceil=8$ 位下地址字段。</p>
+<h2 id="section-11">5.4 微指令格式与编码</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>一条微指令可定义的微命令</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>水平型</td>
+<td>多个可并行微命令</td>
+<td>微程序短、快、并行性好；微指令长且编写复杂</td>
+</tr>
+<tr>
+<td>垂直型</td>
+<td>通常一个微命令，由微操作码译出</td>
+<td>微指令短、规则易写；微程序长、速度低、并行性弱</td>
+</tr>
+<tr>
+<td>混合型</td>
+<td>在垂直基础上加入部分并行字段</td>
+<td>在长度和并行度间折中</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-12">5.4.1 水平型操作控制字段</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>编码</th>
+<th>方法与权衡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接编码</td>
+<td>每位对应一个微命令，1 表示有效；最快最直观、并行性好，但 $n$ 命令需 $n$ 位，控存大</td>
+</tr>
+<tr>
+<td>字段直接编码</td>
+<td>控制字段分段，各段译码；互斥命令同段、相容命令异段，每段留“不操作”编码，缩短字长</td>
+</tr>
+<tr>
+<td>字段间接编码</td>
+<td>一个字段的命令还受另一字段解释（隐式/两次译码）；更短但削弱并行性，常作辅助</td>
+</tr>
+</tbody>
+</table></div>
+<p>字段直接编码中，若一互斥类有 $k$ 个命令且需一个空操作码，字段位数为 $\lceil\log_2(k+1)\rceil$。例如五类含 7、3、12、5、6 个命令，所需位数为 $3+2+4+3+3=15$ 位。</p>
+<h2 id="section-13">5.5 微程序设计与两类控制器比较</h2>
+<p>微程序控制器设计：分析各阶段微操作 <code>-&gt;</code> 安排机器指令/节拍并补充 CMAR/CMDR 特有操作 <code>-&gt;</code> 依微操作数和 CM 总微指令数确定控制/顺序字段 <code>-&gt;</code> 编写微指令码点。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>硬布线控制</th>
+<th>微程序控制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现</td>
+<td>专用逻辑电路</td>
+<td>控制存储器中的微程序，体现存储程序思想</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>快</td>
+<td>需访问 CM，通常较慢</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>差，改指令需改电路</td>
+<td>好，修改/扩充微程序相对容易</td>
+</tr>
+<tr>
+<td>适用</td>
+<td>指令少、规则</td>
+<td>复杂指令、兼容/扩展需求强</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>静态微程序通常不需改变，控制存储器可用 ROM；动态微程序若要求运行时修改微指令，应使用 RAM 等可写控制存储器。EPROM 可在停机并经过擦写后重新编程，但严格说不等于运行时动态可写。毫微程序设计则用更低层毫微程序解释微程序。</li>
+</ul>
+<h2 id="section-14">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-d6101803f8c4/">上一篇：数据通路的功能和基本结构</a> · <a href="/en/notes/cs408-ba3d460787c2/">下一篇：指令流水线</a></li>
+</ul>
+<h2 id="section-15">5.6 本节复盘</h2>
+<ul>
+<li>控制器取指、译码、生成控制信号并协调 CPU/主存/I/O；硬布线由 OP、周期、节拍、状态即时产生微命令。</li>
+<li>硬布线快而难扩展；微程序用 CM、CMAR、CMDR 和微地址形成部件实现，慢一些但灵活。</li>
+<li>一条机器指令逻辑上对应一个微程序，微程序由微指令构成，微指令可含多个微操作。</li>
+<li>水平型快且长，垂直型短且慢，字段编码按“互斥同段、相容异段、每段留空码”计算位数；断定法下地址字段按 CM 总微指令数取对数。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-c58d699dca6a/index.html"><span>← Previous item</span><strong>Lecture 24：查找的基本概念</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c6142ca80d5a/index.html"><span>Next item →</span><strong>Lecture 13：知识 - 磁盘管理</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

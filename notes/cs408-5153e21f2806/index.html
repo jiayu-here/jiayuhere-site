@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 33：归并排序与基数排序 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 33：归并排序与基数排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 33：归并排序与基数排序 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 33：归并排序与基数排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-5153e21f2806/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 33：归并排序与基数排序 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 33：归并排序与基数排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 33：归并排序与基数排序",
+      "item": "https://www.jiayuhere.com/notes/cs408-5153e21f2806/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-5153e21f2806/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5153e21f2806/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5153e21f2806/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5153e21f2806/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-5153e21f2806/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 33：归并排序与基数排序</h1><p class="article-lead">408 学习笔记：Lecture 33：归并排序与基数排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 7 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c0726891ea22.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c0726891ea22.pdf" download="Lecture 33：归并排序与基准排序.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">33.1 二路归并与归并排序</a><a href="#section-5">33.2 基数排序</a><a href="#section-14">相关知识</a><a href="#section-15">33.3 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>归并排序先把问题分成小序列，再把有序子序列合并；基数排序则不直接比较完整关键字，而是按关键字的各“位”稳定地分配和收集。两者都能达到稳定排序，但依赖的辅助空间和适用条件不同。</p>
+</blockquote>
+<blockquote>
+<p><strong>NOTE</strong> · 源文件题名纠正
+原 PDF 文件名写作“归并排序与<strong>基准</strong>排序”，但后半部分内容、算法步骤和复杂度全部属于“<strong>基数排序</strong>（radix sort）”。“基准”通常用于快速排序的枢轴语境，不能与基数排序混为一谈；本笔记正文使用正确名称，<code>source</code> 仍保留原文件路径以便追溯。</p>
+</blockquote>
+<h2 id="section-1">33.1 二路归并与归并排序</h2>
+<h3 id="section-2">33.1.1 归并操作</h3>
+<h5 id="section-3"><strong>定义</strong>：#归并</h5>
+<blockquote>
+<p>描述：归并是把两个或多个已经有序的序列合并成一个有序序列。二路归并每次比较两个子序列当前最前元素，输出较小者。</p>
+</blockquote>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+
+void Merge(int A[], int B[], int low, int mid, int high) {
+    for (int k = low; k &lt;= high; ++k) B[k] = A[k];
+    int i = low, j = mid + 1, k = low;
+    while (i &lt;= mid &amp;&amp; j &lt;= high) {
+        if (B[i] &lt;= B[j]) A[k++] = B[i++]; // 相等时先取左表，保持稳定
+        else              A[k++] = B[j++];
+    }
+    while (i &lt;= mid) A[k++] = B[i++];
+    while (j &lt;= high) A[k++] = B[j++];
+}
+</code></pre>
+<ul>
+<li>某一子表耗尽后，另一子表的剩余元素本身已有序，可直接复制，不必继续逐个比较。</li>
+<li>长度分别为 $n_1,n_2$ 的两个有序表，二路归并最坏只需 $n_1+n_2-1$ 次关键字比较；但某个尚未输出的元素可能连续与另一表的多个元素比较，不能说“每个元素最多比较一次”。</li>
+<li>$k$ 路直接比较各路当前首元素选最小值时，每输出一个元素最多需 $k-1$ 次比较，因此内部合并通常优先二路，外部排序再结合败者树和 I/O 趟数权衡。</li>
+<li><code>B[i] &lt;= B[j]</code> 时先取左侧，才能保证左表中原先靠前的相等记录不被右表记录越过；若写成严格 <code>&lt;</code> 并在相等时取右侧，则归并排序不稳定。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/416242db1e33.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L33-二路归并指针.png"><img class="note-image" src="/assets/408/images/416242db1e33.png" alt="DS-L33-二路归并指针.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p><code>i</code>、<code>j</code> 分别指向左右有序子表当前元素，<code>k</code> 指向输出位置。每次只移动被选中一侧的指针和 <code>k</code>；任一侧耗尽后，另一侧剩余部分直接复制。</p>
+</blockquote>
+<h3 id="section-4">33.1.2 递归归并排序</h3>
+<pre><code class="language-c">static void MergeSortRange(int A[], int B[], int low, int high) {
+    if (low &gt;= high) return;
+    int mid = low + (high - low) / 2;
+    MergeSortRange(A, B, low, mid);
+    MergeSortRange(A, B, mid + 1, high);
+    Merge(A, B, low, mid, high);
+}
+
+int MergeSort(int A[], int n) {
+    if (n &lt;= 1) return 1;
+    int *B = malloc((size_t)n * sizeof *B);
+    if (B == NULL) return 0;
+    MergeSortRange(A, B, 0, n - 1);
+    free(B);
+    return 1;
+}
+</code></pre>
+<ul>
+<li>
+<p>两段代码连用，以 <code>MergeSort(A, n)</code> 为入口；调用时 $n\ge0$，<code>A</code> 至少有 $n$ 个元素。返回 <code>1</code> 表示排序完成，返回 <code>0</code> 表示辅助数组分配失败；<code>B</code> 由入口分配一次并在结束后释放。示例以整数关键字展示，若记录含其他字段，应整体复制记录、仅比较其关键字。</p>
+</li>
+<li>
+<p>递归到单元素区间时天然有序；回溯时做归并。</p>
+</li>
+<li>
+<p>第 $t$ 层有若干次归并，但每层合并的总元素数不超过 $n$，故每层代价为 $O(n)$。</p>
+</li>
+<li>
+<p>递归层数为 $\lceil\log_2n\rceil$，因此时间复杂度为：</p>
+</li>
+</ul>
+<p>$$
+O(n\log n)
+$$</p>
+<ul>
+<li>辅助数组 $B$ 需要 $O(n)$ 空间；递归栈为 $O(\log n)$，总体辅助空间量级为 $O(n)$。</li>
+<li>归并排序稳定，时间复杂度不受初始序列有序程度影响；代价是不能像堆排序那样只用 $O(1)$ 辅助空间完成标准数组实现。</li>
+</ul>
+<hr>
+<h2 id="section-5">33.2 基数排序</h2>
+<h3 id="section-6">33.2.1 多关键字与链式基数排序</h3>
+<h5 id="section-7"><strong>定义</strong>：#基数排序 #多关键字排序</h5>
+<blockquote>
+<p>描述：将每个关键字拆成 $d$ 个位（或组）$\left(k_{d-1},\ldots,k_1,k_0\right)$，每一位取值范围为 $0\sim r-1$。基数排序对每一位依次做稳定的“分配—收集”。</p>
+</blockquote>
+<p>以最低位优先（LSD）升序为例：</p>
+<ol>
+<li>建立 $r$ 个空队列 $Q_0,Q_1,\ldots,Q_{r-1}$。</li>
+<li>从低位到高位依次处理每一关键字位。</li>
+<li>顺序扫描当前序列，当前位为 $x$ 的记录进入 $Q_x$ 的<strong>队尾</strong>。</li>
+<li>按 $Q_0\to Q_{r-1}$ 的顺序依次出队、重新链接为新序列。</li>
+</ol>
+<ul>
+<li>队尾入队、队首出队保证同一位取值相同的记录原有相对次序不变；每一趟稳定是 LSD 正确性的必要条件。</li>
+<li>第一趟按最低位有序；第二趟按次低位有序，并在次低位相同者内部保留最低位次序；处理至最高位后得到整体有序。</li>
+<li>若要求降序收集，应按 $Q_{r-1}\to Q_0$ 收集，且每个队列内部仍需保持先进先出。</li>
+</ul>
+<h5 id="section-8"><strong>原稿三位十进制降序例题</strong>：</h5>
+<p>初始序列为：</p>
+<p>$$
+520,211,438,888,007,111,985,666,996,233,168
+$$</p>
+<p>采用 LSD，并按 $Q_9\to Q_0$ 收集实现降序：</p>
+<ol>
+<li>按个位稳定分配，$Q_8$ 中依次为 $438,888,168$，$Q_6$ 中依次为 $666,996$；队内顺序必须保持。</li>
+<li>个位收集后得到 $438,888,168,007,666,996,985,233,211,111,520$。</li>
+<li>再按十位分配、收集，得到 $996,888,985,168,666,438,233,520,211,111,007$。</li>
+<li>最后按百位稳定分配、收集，得到完整降序结果。</li>
+</ol>
+<p><a class="note-image-link" href="/assets/408/images/d3abd3de87cf.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L33-个位分配.png"><img class="note-image" src="/assets/408/images/d3abd3de87cf.png" alt="DS-L33-个位分配.png" loading="lazy" decoding="async"></a></p>
+<p><a class="note-image-link" href="/assets/408/images/fd91c506962c.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L33-基数排序前两趟.png"><img class="note-image" src="/assets/408/images/fd91c506962c.png" alt="DS-L33-基数排序前两趟.png" loading="lazy" decoding="async"></a></p>
+<p><a class="note-image-link" href="/assets/408/images/67f886b1929e.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L33-基数排序结果.png"><img class="note-image" src="/assets/408/images/67f886b1929e.png" alt="DS-L33-基数排序结果.png" loading="lazy" decoding="async"></a></p>
+<p>最终序列为：</p>
+<p>$$
+996,985,888,666,520,438,233,211,168,111,007
+$$</p>
+<blockquote>
+<p><code>007</code> 必须按三位关键字处理，不能先转成不带前导零的文本后再按字符长度比较。</p>
+</blockquote>
+<h5 id="section-9"><strong>LSD 与 MSD 的区别</strong>：</h5>
+<ul>
+<li>LSD 从最低位到最高位，每一趟对整个序列稳定分配和收集，适合位数固定的数值或定长编码。</li>
+<li>MSD 从最高位开始，收集后要在每个桶内部递归处理下一位；它不是把全表按下一位再次统一分配，否则会破坏已经确定的高位次序。</li>
+</ul>
+<h3 id="section-10">33.2.2 复杂度与适用条件</h3>
+<p>$$
+T(n)=O\bigl(d(n+r)\bigr)
+$$</p>
+<ul>
+<li>每一位需要扫描 $n$ 个记录并访问 $r$ 个队列，累计处理 $d$ 位。</li>
+<li>队列头、尾指针等辅助信息为 $O(r)$；链式实现通常复用原记录结点，不需搬动完整记录，但仍需维护 $r$ 个队列。</li>
+<li>基数排序稳定，且不是基于关键字比较的排序。</li>
+</ul>
+<h5 id="section-11"><strong>适用条件</strong>：</h5>
+<ul>
+<li>关键字能方便拆成 $d$ 组，且 $d$ 较小。</li>
+<li>每组的基数 $r$ 不宜过大，否则队列数量和每趟收集成本会升高。</li>
+<li>数据量 $n$ 较大时才能体现 $O(d(n+r))$ 的优势；不能将任意长、任意格式字段不加分析地套入基数排序。</li>
+</ul>
+<h3 id="section-12">题型：#归并与基数排序过程</h3>
+<h4 id="section-13">第一部分：解题方法</h4>
+<ol>
+<li>归并题先写出两个子表是否各自有序，再按“比较首元素—输出较小者—移动对应指针”执行。</li>
+<li>基数题明确 LSD 或 MSD、升序或降序；每一趟都列出各队列分配结果和收集顺序。</li>
+<li>稳定性题不要只背结论：归并看相等时先取哪边，基数看每趟是否保持队列内次序。</li>
+</ol>
+<h2 id="section-14">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-0c5623624226/">上一篇：选择排序</a> · <a href="/notes/cs408-c0d1b15ecf57/">下一篇：外部排序</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-c558f3264d82/">排序代码</a></li>
+</ul>
+<h2 id="section-15">33.3 本节复盘</h2>
+<ul>
+<li>二路归并合并两个有序表；标准归并排序时间 $O(n\log n)$、空间 $O(n)$、稳定。</li>
+<li>基数排序按位稳定地分配与收集，时间 $O(d(n+r))$，适合位数和基数较小的结构化关键字。</li>
+<li>两类算法都需要辅助结构；要区分“稳定的队列收集”和“相等时优先左表”这两个稳定性来源。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-5064ace109f8/index.html"><span>← 上一项</span><strong>3 题型 - 路由协议</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-518c0a668e31/index.html"><span>下一项 →</span><strong>Lecture 19：树与二叉树的应用</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

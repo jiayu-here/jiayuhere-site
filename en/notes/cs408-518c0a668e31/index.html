@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 19：树与二叉树的应用 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 19：树与二叉树的应用. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 19：树与二叉树的应用 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 19：树与二叉树的应用. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-518c0a668e31/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 19：树与二叉树的应用 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 19：树与二叉树的应用. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 19：树与二叉树的应用",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-518c0a668e31/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-518c0a668e31/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-518c0a668e31/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-518c0a668e31/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-518c0a668e31/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-518c0a668e31/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 19：树与二叉树的应用</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 19：树与二叉树的应用. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-02">2026-07-02</time></span></span><span>28 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/aa544cf3d753.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/aa544cf3d753.pdf" download="Lecture 19：树与二叉树的应用.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">19.1 二叉排序树</a><a href="#section-19">19.2 平衡二叉树</a><a href="#section-30">19.3 哈夫曼树</a><a href="#section-43">19.4 并查集</a><a href="#section-64">教材补充：堆及其应用</a><a href="#section-71">19.5 题型：树与二叉树应用</a><a href="#section-88">相关知识</a><a href="#section-89">19.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">19.1 二叉排序树</h2>
+<h3 id="section-2">19.1.1 定义与查找</h3>
+<h5 id="section-3"><strong>定义</strong>：#二叉排序树</h5>
+<blockquote>
+<p>描述：
+二叉排序树是一棵空树，或者是满足“左子树结点值小于根结点值，右子树结点值大于根结点值”的二叉树，并且它的左、右子树也分别是二叉排序树。</p>
+</blockquote>
+<p><strong>性质</strong>
+$$
+\text{左子树结点值}&lt;\text{根结点值}&lt;\text{右子树结点值}
+$$</p>
+<p><strong>中序遍历性质</strong></p>
+<ul>
+<li>在关键字互异、重复关键字不插入的约定下，对二叉排序树进行中序遍历，可以得到一个严格递增序列。</li>
+<li>这是二叉排序树能够用于查找、排序的基础。</li>
+</ul>
+<h4 id="section-4">如何查找</h4>
+<p>若树非空，将目标值 <code>key</code> 与根结点关键字比较：</p>
+<ol>
+<li>若相等，则查找成功。</li>
+<li>若 <code>key</code> 小于根结点值，则在左子树中继续查找。</li>
+<li>若 <code>key</code> 大于根结点值，则在右子树中继续查找。</li>
+<li>查找成功返回结点指针。</li>
+<li>查找失败返回 <code>NULL</code>。</li>
+</ol>
+<h4 id="section-5">结点定义</h4>
+<pre><code class="language-c">typedef struct BSTNode {
+    int key;
+    struct BSTNode *lchild, *rchild;
+} BSTNode, *BSTree;
+</code></pre>
+<h4 id="section-6">非递归查找</h4>
+<pre><code class="language-c">BSTNode *BST_Search(BSTree T, int key) {
+    while (T != NULL &amp;&amp; key != T-&gt;key) {
+        if (key &lt; T-&gt;key) {
+            T = T-&gt;lchild;
+        } else {
+            T = T-&gt;rchild;
+        }
+    }
+
+    return T;
+}
+</code></pre>
+<p><strong>复杂度</strong></p>
+<ul>
+<li>非递归查找不使用递归工作栈。</li>
+<li>最坏空间复杂度为：
+$$
+O(1)
+$$</li>
+</ul>
+<h4 id="section-7">递归查找</h4>
+<pre><code class="language-c">BSTNode *BSTSearch(BSTree T, int key) {
+    if (T == NULL) {
+        return NULL;             // 查找失败
+    }
+
+    if (key == T-&gt;key) {
+        return T;                // 查找成功
+    } else if (key &lt; T-&gt;key) {
+        return BSTSearch(T-&gt;lchild, key);
+    } else {
+        return BSTSearch(T-&gt;rchild, key);
+    }
+}
+</code></pre>
+<p><strong>递归空间复杂度</strong>
+若树高为 $h$，递归栈最坏空间复杂度为：
+$$
+O(h)
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/af92772cab75.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-BST查找路径.png"><img class="note-image" src="/assets/408/images/af92772cab75.png" alt="DS-L19-BST查找路径.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>查找 <code>60</code> 时依次比较 <code>50、66、60</code>：大于 <code>50</code> 向右，小于 <code>66</code> 向左，最后命中 <code>60</code>。</li>
+<li>红色结点和箭头是实际访问路径，因此成功查找长度为 $3$。</li>
+</ul>
+<h3 id="section-8">19.1.2 插入</h3>
+<h5 id="section-9"><strong>定义</strong>：#二叉排序树插入</h5>
+<blockquote>
+<p>描述：
+二叉排序树插入是将一个新关键字按二叉排序树性质插入到树中，使插入后仍保持左小右大的有序关系。</p>
+</blockquote>
+<p><strong>如何插入</strong></p>
+<ol>
+<li>若原二叉排序树为空，则新结点直接作为根结点。</li>
+<li>若关键字 $k$ 小于根结点值，则插入到左子树。</li>
+<li>若关键字 $k$ 大于根结点值，则插入到右子树。</li>
+<li>若关键字 $k$ 等于已有结点值，通常不插入。</li>
+</ol>
+<p><strong>重要结论</strong></p>
+<ul>
+<li>新插入的结点一定是叶子结点。</li>
+<li>插入过程本质上是一次查找失败的过程。</li>
+</ul>
+<h4 id="section-10">插入代码</h4>
+<pre><code class="language-cpp">int BST_Insert(BSTree &amp;T, int k) {
+    if (T == NULL) {
+        T = (BSTree)malloc(sizeof(BSTNode));
+        T-&gt;key = k;
+        T-&gt;lchild = T-&gt;rchild = NULL;
+        return 1;                // 插入成功
+    } else if (k == T-&gt;key) {
+        return 0;                // 树中已有相同关键字
+    } else if (k &lt; T-&gt;key) {
+        return BST_Insert(T-&gt;lchild, k);
+    } else {
+        return BST_Insert(T-&gt;rchild, k);
+    }
+}
+</code></pre>
+<p><strong>空间复杂度</strong>
+递归插入最坏空间复杂度为：
+$$
+O(h)
+$$</p>
+<h3 id="section-11">19.1.3 构造与删除</h3>
+<h4 id="section-12">二叉排序树的构造</h4>
+<p><strong>思想</strong></p>
+<ul>
+<li>初始时二叉排序树为空。</li>
+<li>按给定关键字序列顺序，依次插入每个关键字。</li>
+<li>插入顺序不同，最终构造出的二叉排序树可能不同。</li>
+</ul>
+<pre><code class="language-cpp">void Creat_BST(BSTree &amp;T, int str[], int n) {
+    T = NULL;
+
+    int i = 0;
+    while (i &lt; n) {
+        BST_Insert(T, str[i]);
+        i++;
+    }
+}
+</code></pre>
+<h4 id="section-13">二叉排序树的删除</h4>
+<p>删除前先搜索找到目标结点 <code>z</code>。</p>
+<p><strong>情况一：<code>z</code> 是叶子结点</strong></p>
+<ul>
+<li>直接删除。</li>
+<li>不会破坏二叉排序树性质。</li>
+</ul>
+<p><strong>情况二：<code>z</code> 只有一棵左子树或右子树</strong></p>
+<ul>
+<li>让 <code>z</code> 的子树替代 <code>z</code> 的位置。</li>
+<li>也就是让 <code>z</code> 的孩子成为 <code>z</code> 父结点的孩子。</li>
+</ul>
+<p><strong>情况三：<code>z</code> 有左、右两棵子树</strong></p>
+<ul>
+<li>令 <code>z</code> 的直接后继或直接前驱替代 <code>z</code>。</li>
+<li>然后从二叉排序树中删除这个直接后继或直接前驱。</li>
+<li>这样会转换成情况一或情况二。</li>
+</ul>
+<p><strong>为什么可行</strong></p>
+<ul>
+<li>直接前驱是左子树中最大的结点。</li>
+<li>直接后继是右子树中最小的结点。</li>
+<li>用它们替代 <code>z</code> 后，仍能保持左小右大的性质。</li>
+</ul>
+<h3 id="section-14">19.1.4 查找效率分析</h3>
+<h4 id="section-15">查找长度</h4>
+<h5 id="section-16"><strong>定义</strong>：#查找长度</h5>
+<blockquote>
+<p>描述：
+在查找运算中，需要对比关键字的次数称为查找长度。</p>
+</blockquote>
+<p><strong>单次查找的最好情况</strong></p>
+<ul>
+<li>目标关键字就在根结点时，只需比较 $1$ 次，时间复杂度为 $O(1)$；这与整棵树是否平衡是两个不同问题。</li>
+</ul>
+<p><strong>树形对等概率成功查找平均长度的影响</strong></p>
+<ul>
+<li>
+<p>二叉排序树较平衡时，$n$ 个结点的二叉树最小高度为：
+$$
+\left\lfloor\log_2 n\right\rfloor+1
+$$</p>
+</li>
+<li>
+<p>在各结点等概率被成功查找等常见假设下，平均查找长度为：
+$$
+O(\log_2 n)
+$$</p>
+</li>
+<li>
+<p>当每个结点只有一个分支、二叉排序树退化为单链时，树高为：
+$$
+h=n
+$$</p>
+</li>
+<li>
+<p>此时等概率成功查找的平均长度和单次查找的最坏长度均为：
+$$
+O(n)
+$$</p>
+</li>
+</ul>
+<h4 id="section-17">查找失败的 ASL</h4>
+<h5 id="section-18"><strong>定义</strong>：#ASL</h5>
+<blockquote>
+<p>描述：
+ASL 是 Average Search Length，即平均查找长度。</p>
+</blockquote>
+<p>查找失败时，通常给每个空指针补一个外部结点，将外部结点视为失败位置。含有 $n$ 个内部结点的二叉树共有 $n+1$ 个外部结点。</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> · 比较次数口径
+若根的深度记为 $0$，某外部结点的深度就等于到达该失败位置前进行的关键字比较次数。若把根记作第 $1$ 层，则失败比较次数等于“外部结点层次减 $1$”。PDF 公式中的“本层高度”应理解为对应失败位置的比较次数，不能把两种层次口径混用。</p>
+</blockquote>
+<p>PDF 给出的计算思想：
+$$
+ASL_{\text{失败}}=\frac{\sum(\text{该失败位置的比较次数}\times\text{同类外部结点数})}{n+1}
+$$</p>
+<p><strong>PDF 示例</strong></p>
+<ul>
+<li>
+<p>较平衡的树：
+$$
+ASL=\frac{3\times 7+4\times 2}{9}=3.22
+$$</p>
+</li>
+<li>
+<p>退化较明显的树：
+$$
+ASL=\frac{2\times 3+3+4+5+6+7\times 2}{9}=4.22
+$$</p>
+</li>
+</ul>
+<p><strong>解释</strong></p>
+<ul>
+<li>查找失败时，会走到某个空指针位置。</li>
+<li>每个空指针位置都可以看作一个“失败叶子”。</li>
+<li>深度越大的失败位置，查找失败时比较次数越多。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/00da02ee7f9f.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-查找失败ASL.png"><img class="note-image" src="/assets/408/images/00da02ee7f9f.png" alt="DS-L19-查找失败ASL.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>紫色方块是补出的外部结点；左图较平衡，失败比较次数主要为 $3$，右图退化更明显，深层失败位置更多。</li>
+<li>计算时应平均所有 $n+1$ 个外部结点，而不是只挑某一条失败路径。</li>
+</ul>
+<h2 id="section-19">19.2 平衡二叉树</h2>
+<h3 id="section-20">19.2.1 定义</h3>
+<h5 id="section-21"><strong>定义</strong>：#平衡二叉树</h5>
+<blockquote>
+<p>描述：
+AVL 树首先是一棵二叉排序树，并且树上任一结点的左、右子树高度之差的绝对值不超过 $1$。只有“高度平衡”但不满足二叉排序树有序性的二叉树，不是本章所说的 AVL 树。</p>
+</blockquote>
+<p><strong>平衡因子</strong>
+结点的平衡因子定义为：
+$$
+\text{平衡因子}=\text{左子树高}-\text{右子树高}
+$$</p>
+<p>平衡二叉树中任意结点的平衡因子只能是：
+$$
+-1,\ 0,\ 1
+$$</p>
+<h4 id="section-22">结点定义</h4>
+<pre><code class="language-c">typedef struct AVLNode {
+    int key;                    // 数据域
+    int balance;                // 平衡因子
+    struct AVLNode *lchild, *rchild;
+} AVLNode, *AVLTree;
+</code></pre>
+<h3 id="section-23">19.2.2 调整最小不平衡子树</h3>
+<h5 id="section-24"><strong>定义</strong>：#最小不平衡子树</h5>
+<blockquote>
+<p>描述：
+插入结点后，沿插入路径向上检查，第一个失去平衡的结点作为根的子树，称为最小不平衡子树。</p>
+</blockquote>
+<p><strong>调整目标</strong></p>
+<ol>
+<li>恢复平衡。</li>
+<li>保持二叉排序树性质。</li>
+</ol>
+<p><strong>四种失衡类型</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>插入位置</th>
+<th>调整方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LL</td>
+<td>在 <code>A</code> 的左孩子的左子树中插入</td>
+<td>对 <code>A</code> 右单旋</td>
+</tr>
+<tr>
+<td>RR</td>
+<td>在 <code>A</code> 的右孩子的右子树中插入</td>
+<td>对 <code>A</code> 左单旋</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>在 <code>A</code> 的左孩子的右子树中插入</td>
+<td>先左旋左孩子，再右旋 <code>A</code></td>
+</tr>
+<tr>
+<td>RL</td>
+<td>在 <code>A</code> 的右孩子的左子树中插入</td>
+<td>先右旋右孩子，再左旋 <code>A</code></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-25">LL 型：右单旋</h4>
+<p><strong>触发条件</strong></p>
+<ul>
+<li>在结点 <code>A</code> 的左孩子 <code>B</code> 的左子树中插入新结点。</li>
+<li>导致 <code>A</code> 的平衡因子由 $1$ 增至 $2$。</li>
+</ul>
+<p><strong>调整</strong></p>
+<ul>
+<li>对 <code>A</code> 做一次右旋。</li>
+<li><code>B</code> 上升为子树根。</li>
+<li><code>A</code> 下降为 <code>B</code> 的右孩子。</li>
+<li><code>B</code> 原来的右子树变成 <code>A</code> 的左子树。</li>
+</ul>
+<p><strong>有序关系</strong>
+若子树按大小关系为：
+$$
+BL &lt; B &lt; BR &lt; A &lt; AR
+$$</p>
+<p>右旋后仍保持二叉排序树性质。</p>
+<h4 id="section-26">RR 型：左单旋</h4>
+<p><strong>触发条件</strong></p>
+<ul>
+<li>在结点 <code>A</code> 的右孩子 <code>B</code> 的右子树中插入新结点。</li>
+<li>导致 <code>A</code> 的平衡因子由 $-1$ 减至 $-2$。</li>
+</ul>
+<p><strong>调整</strong></p>
+<ul>
+<li>对 <code>A</code> 做一次左旋。</li>
+<li><code>B</code> 上升为子树根。</li>
+<li><code>A</code> 下降为 <code>B</code> 的左孩子。</li>
+<li><code>B</code> 原来的左子树变成 <code>A</code> 的右子树。</li>
+</ul>
+<h4 id="section-27">LR 型：先左后右双旋</h4>
+<p><strong>触发条件</strong></p>
+<ul>
+<li>在结点 <code>A</code> 的左孩子 <code>B</code> 的右子树中插入新结点。</li>
+<li>导致以 <code>A</code> 为根的子树失去平衡。</li>
+</ul>
+<p><strong>调整</strong></p>
+<ol>
+<li>先对 <code>B</code> 做左旋，使 <code>B</code> 的右孩子 <code>C</code> 上升。</li>
+<li>再对 <code>A</code> 做右旋，使 <code>C</code> 上升为最小不平衡子树的新根。</li>
+</ol>
+<p><strong>记忆</strong></p>
+<pre><code class="language-text">LR = 先 L 后 R
+</code></pre>
+<p>也就是：</p>
+<ul>
+<li>先左旋。</li>
+<li>再右旋。</li>
+</ul>
+<h4 id="section-28">RL 型：先右后左双旋</h4>
+<p><strong>触发条件</strong></p>
+<ul>
+<li>在结点 <code>A</code> 的右孩子 <code>B</code> 的左子树中插入新结点。</li>
+<li>导致以 <code>A</code> 为根的子树失去平衡。</li>
+</ul>
+<p><strong>调整</strong></p>
+<ol>
+<li>先对 <code>B</code> 做右旋，使 <code>B</code> 的左孩子 <code>C</code> 上升。</li>
+<li>再对 <code>A</code> 做左旋，使 <code>C</code> 上升为最小不平衡子树的新根。</li>
+</ol>
+<p><strong>记忆</strong></p>
+<pre><code class="language-text">RL = 先 R 后 L
+</code></pre>
+<p>也就是：</p>
+<ul>
+<li>先右旋。</li>
+<li>再左旋。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/1118b6e80482.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-AVL四类旋转.png"><img class="note-image" src="/assets/408/images/1118b6e80482.png" alt="DS-L19-AVL四类旋转.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>LL、RR 是一次单旋；LR、RL 先处理较低层拐弯，再旋转最小不平衡子树的根。</li>
+<li>图中红色 <code>A</code> 是调整前的最小不平衡子树根；旋转后仍保持中序关键字次序不变。</li>
+</ul>
+<h3 id="section-29">19.2.3 AVL 查找效率</h3>
+<p>设树高为 $h$，则最坏情况下查找一个关键字最多比较 $h$ 次。</p>
+<p><strong>平衡二叉树的最少结点数递推</strong>
+这里把空树高度记为 $0$、单结点树高度记为 $1$。设 $n_h$ 表示高度为 $h$ 的 AVL 树中含有的最少结点数，则：
+$$
+n_0=0,\quad n_1=1,\quad n_2=2
+$$</p>
+<p>并且：
+$$
+n_h=n_{h-1}+n_{h-2}+1
+$$</p>
+<p><strong>结论</strong></p>
+<ul>
+<li>
+<p>含有 $n$ 个结点的平衡二叉树最大深度为：
+$$
+O(\log_2 n)
+$$</p>
+</li>
+<li>
+<p>平衡二叉树的平均查找长度为：
+$$
+O(\log_2 n)
+$$</p>
+</li>
+</ul>
+<h2 id="section-30">19.3 哈夫曼树</h2>
+<h3 id="section-31">19.3.1 带权路径长度</h3>
+<h5 id="section-32"><strong>定义</strong>：#权</h5>
+<blockquote>
+<p>描述：
+权是赋予结点的某种现实意义的数值，例如频率、概率、重要性等。</p>
+</blockquote>
+<h5 id="section-33"><strong>定义</strong>：#结点的带权路径长度</h5>
+<blockquote>
+<p>描述：
+从树的根到该结点的路径长度，与该结点权值的乘积，称为该结点的带权路径长度。</p>
+</blockquote>
+<h5 id="section-34"><strong>定义</strong>：#WPL</h5>
+<blockquote>
+<p>描述：
+树中所有叶结点的带权路径长度之和，称为树的带权路径长度，即 WPL。</p>
+</blockquote>
+<p>公式为：
+$$
+WPL=\sum_{i=1}^{n}w_i l_i
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$w_i$ 表示第 $i$ 个叶结点的权值。</li>
+<li>$l_i$ 表示第 $i$ 个叶结点到根的路径长度。</li>
+</ul>
+<p><strong>PDF 示例</strong>
+四个叶结点权值为：</p>
+<pre><code class="language-text">1, 3, 4, 5
+</code></pre>
+<p>它们到根的路径长度都为 $2$，因此：
+$$
+WPL=2\times 1+2\times 3+2\times 4+2\times 5=26
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/ef7fb6c0b184.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-WPL示例.png"><img class="note-image" src="/assets/408/images/ef7fb6c0b184.png" alt="DS-L19-WPL示例.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>路径长度按边数计算；图中四个叶结点都在深度 $2$，所以每个权值都乘 $2$。</li>
+</ul>
+<h3 id="section-35">19.3.2 哈夫曼树的定义与构造</h3>
+<h5 id="section-36"><strong>定义</strong>：#哈夫曼树</h5>
+<blockquote>
+<p>描述：
+在含有 $n$ 个带权叶结点的二叉树中，带权路径长度 WPL 最小的二叉树称为哈夫曼树，也称最优二叉树。</p>
+</blockquote>
+<h4 id="section-37">哈夫曼树构造方法</h4>
+<p>假设给定 $n$ 个权值：
+$$
+W_1,W_2,\cdots,W_n
+$$</p>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：权值与单符号边界
+标准哈夫曼树问题取 $n\ge 1$ 且 $W_i\ge 0$；编码实际出现的字符通常具有正频数或正概率。若允许负权值，“反复合并两个最小权值”不再具有这里的标准最优性语境。$n=1$ 时树就是唯一叶结点，不发生合并；实际编码接口通常仍给该符号约定一个比特（如 <code>0</code>），而不是使用不可传输的空码字。</p>
+</blockquote>
+<p>构造步骤如下：</p>
+<ol>
+<li>将这 $n$ 个结点分别作为 $n$ 棵仅含一个结点的二叉树，构成森林 $F$。</li>
+<li>从 $F$ 中选取两棵根结点权值最小的树，作为新结点的左、右子树。</li>
+<li>新结点的权值等于左、右子树根结点权值之和。</li>
+<li>从 $F$ 中删除刚才选出的两棵树。</li>
+<li>将新得到的树加入 $F$。</li>
+<li>重复步骤 2 到步骤 5，直到 $F$ 中只剩下一棵树。</li>
+</ol>
+<p><strong>PDF 示例权值</strong></p>
+<pre><code class="language-text">a:1, b:3, c:2, d:7, e:2
+</code></pre>
+<p>构造过程：</p>
+<ol>
+<li>选 <code>a:1</code> 和 <code>c:2</code>，合并为权值 <code>3</code>。</li>
+<li>按 PDF 图示，在并列的权值 <code>3</code> 中选 <code>b:3</code>，与 <code>e:2</code> 合并为权值 <code>5</code>。</li>
+<li>将前两步得到的 <code>3</code> 和 <code>5</code> 合并为权值 <code>8</code>。</li>
+<li>将 <code>d:7</code> 和 <code>8</code> 合并为权值 <code>15</code>，只剩一棵树。并列权值也可选另一棵根为 <code>3</code> 的树，树形可能不同。</li>
+</ol>
+<p>PDF 示例最终：
+$$
+WPL=1\times 7+3\times(1+2+2+3)=31
+$$</p>
+<p><strong>哈夫曼树特点</strong></p>
+<ol>
+<li>每个初始结点最终都成为叶结点。</li>
+<li>较大权值应尽量靠近根；在最优排列中可以使较大权值的路径不长于较小权值。权值相等或合并时出现并列最小，会造成多种同样最优的树形。</li>
+<li>哈夫曼树的结点总数为：
+$$
+2n-1
+$$</li>
+<li>哈夫曼树中不存在度为 $1$ 的结点。</li>
+<li>哈夫曼树不唯一，但 WPL 必然相同且最优。</li>
+</ol>
+<p><strong>为什么结点总数是 $2n-1$</strong></p>
+<ul>
+<li>初始有 $n$ 个叶结点。</li>
+<li>每次合并两棵树会新增一个结点。</li>
+<li>合并到只剩一棵树，需要合并 $n-1$ 次。</li>
+<li>因此总点数为：
+$$
+n+(n-1)=2n-1
+$$</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/de66733aa62f.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-哈夫曼构造.png"><img class="note-image" src="/assets/408/images/de66733aa62f.png" alt="DS-L19-哈夫曼构造.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>每一步都从当前森林中取根权值最小的两棵树合并，新根权值为两者之和。</li>
+<li>左右子树可以互换，遇到相同权值时选择次序也可能不同，因此树形和编码不唯一，但最小 WPL 数值相同。</li>
+</ul>
+<h3 id="section-38">19.3.3 哈夫曼编码</h3>
+<h5 id="section-39"><strong>定义</strong>：#可变长度编码</h5>
+<blockquote>
+<p>描述：
+可变长度编码允许不同字符用不等长的二进制位表示。</p>
+</blockquote>
+<h5 id="section-40"><strong>定义</strong>：#固定长度编码</h5>
+<blockquote>
+<p>描述：
+固定长度编码中，每个字符都用相等长度的二进制位表示。</p>
+</blockquote>
+<h5 id="section-41"><strong>定义</strong>：#前缀编码</h5>
+<blockquote>
+<p>描述：
+若没有任何一个编码是另一个编码的前缀，则称这样的编码为前缀编码。</p>
+</blockquote>
+<p><strong>前缀编码的意义</strong></p>
+<ul>
+<li>接收方读到一串编码后，可以无歧义地解码。</li>
+<li>不会出现“已经读到的编码可能还是另一个编码前半部分”的问题。</li>
+</ul>
+<h5 id="section-42"><strong>定义</strong>：#哈夫曼编码</h5>
+<blockquote>
+<p>描述：
+哈夫曼编码是用哈夫曼树构造的一种字符集编码方案。字符作为叶结点，字符出现频率作为权值，根据哈夫曼树得到编码。</p>
+</blockquote>
+<p><strong>构造方法</strong></p>
+<ol>
+<li>每个字符作为一个叶结点。</li>
+<li>每个字符出现频率作为该叶结点权值。</li>
+<li>按哈夫曼树构造方法建树。</li>
+<li>通常约定左分支为 <code>0</code>，右分支为 <code>1</code>。</li>
+<li>从根到某个叶结点路径上的 <code>0/1</code> 序列，就是该字符的编码。</li>
+</ol>
+<p><strong>特点</strong></p>
+<ul>
+<li>高频字符路径短，编码短。</li>
+<li>低频字符路径长，编码长。</li>
+<li>哈夫曼编码结果不唯一。</li>
+<li>对给定字符权值，在二元前缀码的范围内，哈夫曼编码使加权平均码长最小；不能把这一结论直接扩大为所有压缩方法或允许跨多个字符联合编码的方案。</li>
+</ul>
+<h2 id="section-43">19.4 并查集</h2>
+<h3 id="section-44">19.4.1 逻辑结构</h3>
+<h5 id="section-45"><strong>定义</strong>：#并查集</h5>
+<blockquote>
+<p>描述：
+并查集是一种用于管理若干互不相交集合的数据结构，主要支持查找和合并两类操作。</p>
+</blockquote>
+<p><strong>集合</strong></p>
+<ul>
+<li>各个集合之间互不相交。</li>
+<li>代码实现集合的思想是：将不同的不相交集合放到不同的树下，构成森林。</li>
+</ul>
+<p><strong>树与集合</strong></p>
+<ul>
+<li>一棵树表示一个集合。</li>
+<li>树中所有结点属于同一个集合。</li>
+<li>根结点代表这个集合。</li>
+</ul>
+<h3 id="section-46">19.4.2 基本操作</h3>
+<h4 id="section-47">查找操作：Find</h4>
+<h5 id="section-48"><strong>定义</strong>：#Find</h5>
+<blockquote>
+<p>描述：
+Find 操作用于确定一个指定元素所属集合。</p>
+</blockquote>
+<p><strong>方法</strong></p>
+<ul>
+<li>从当前元素出发。</li>
+<li>一路向上找父结点。</li>
+<li>找到根结点。</li>
+<li>根结点代表该元素所属集合。</li>
+</ul>
+<h4 id="section-49">判同</h4>
+<p><strong>目的</strong></p>
+<ul>
+<li>判断两个元素是否属于同一个集合。</li>
+</ul>
+<p><strong>方法</strong></p>
+<ul>
+<li>分别对两个元素执行 <code>Find</code>。</li>
+<li>若两个元素的根结点相同，则属于同一个集合。</li>
+<li>若根结点不同，则属于不同集合。</li>
+</ul>
+<h4 id="section-50">合并操作：Union</h4>
+<h5 id="section-51"><strong>定义</strong>：#Union</h5>
+<blockquote>
+<p>描述：
+Union 操作用于将两个互不相交的集合合并为一个集合。</p>
+</blockquote>
+<p><strong>方法</strong></p>
+<ul>
+<li>让一棵树成为另一棵树的子树。</li>
+<li>本质上是修改其中一个根结点的父指针。</li>
+</ul>
+<h3 id="section-52">19.4.3 存储结构</h3>
+<p>并查集使用树的双亲表示法进行存储。</p>
+<p><strong>核心思想</strong></p>
+<ul>
+<li>用一个数组 <code>S[]</code> 保存每个结点的父结点下标。</li>
+<li>若 <code>S[i] &lt; 0</code>，表示 <code>i</code> 是根结点。</li>
+<li>初始时每个元素都是独立集合，因此：
+$$
+S[i]=-1
+$$</li>
+</ul>
+<p><strong>PDF 示例</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th style="text-align:right">A</th>
+<th style="text-align:right">B</th>
+<th style="text-align:right">C</th>
+<th style="text-align:right">D</th>
+<th style="text-align:right">E</th>
+<th style="text-align:right">F</th>
+<th style="text-align:right">G</th>
+<th style="text-align:right">H</th>
+<th style="text-align:right">I</th>
+<th style="text-align:right">J</th>
+<th style="text-align:right">K</th>
+<th style="text-align:right">L</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>下标</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td><code>S[]</code></td>
+<td style="text-align:right">-1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">-1</td>
+<td style="text-align:right">-1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">4</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>含义</strong></p>
+<ul>
+<li><code>S[0] = -1</code>，说明 <code>A</code> 是一个集合的根。</li>
+<li><code>S[1] = 0</code>，说明 <code>B</code> 的父结点是 <code>A</code>。</li>
+<li><code>S[4] = 1</code>，说明 <code>E</code> 的父结点是 <code>B</code>。</li>
+<li>多个 <code>S[i] &lt; 0</code> 的位置对应多个集合的根。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/770f39ae4449.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-并查集双亲数组.png"><img class="note-image" src="/assets/408/images/770f39ae4449.png" alt="DS-L19-并查集双亲数组.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>图中有三棵树，因此数组中有三个负值根：<code>A、C、D</code>。</li>
+<li>箭头由孩子指向双亲，数组 <code>S[i]</code> 保存同一关系中的双亲下标。</li>
+</ul>
+<h3 id="section-53">19.4.4 基本代码</h3>
+<h4 id="section-54">初始化</h4>
+<pre><code class="language-c">#define SIZE 13
+int UFSets[SIZE];       // 集合元素数组
+
+void Initial(int S[]) {
+    for (int i = 0; i &lt; SIZE; i++) {
+        S[i] = -1;
+    }
+}
+</code></pre>
+<h4 id="section-55">查找</h4>
+<pre><code class="language-c">int Find(int S[], int x) {
+    while (S[x] &gt;= 0) {
+        x = S[x];
+    }
+
+    return x;
+}
+</code></pre>
+<p><strong>复杂度</strong></p>
+<ul>
+<li><code>Find</code> 的时间复杂度与树高直接相关。</li>
+<li>未优化时最坏为：
+$$
+O(n)
+$$</li>
+</ul>
+<h4 id="section-56">合并</h4>
+<pre><code class="language-c">void Union(int S[], int Root1, int Root2) {
+    if (Root1 == Root2) {
+        return;
+    }
+
+    S[Root2] = Root1;    // 将 Root2 连接到 Root1 下面
+}
+</code></pre>
+<p><strong>复杂度</strong></p>
+<ul>
+<li>已知两个根结点时，<code>Union</code> 只修改一个数组元素。</li>
+<li>时间复杂度为：
+$$
+O(1)
+$$</li>
+<li>若接口传入的是任意两个元素而不是两个根，必须先执行两次 <code>Find</code>；此时一次完整合并的复杂度是两次查根代价再加 $O(1)$，不能只写成 $O(1)$。</li>
+</ul>
+<h3 id="section-57">19.4.5 对并操作的优化</h3>
+<h5 id="section-58"><strong>定义</strong>：#按规模合并</h5>
+<blockquote>
+<p>描述：
+每次 Union 时，将小树合并到大树下面，尽可能让树不长高。</p>
+</blockquote>
+<p><strong>思想</strong></p>
+<ul>
+<li>在根结点中保存集合规模。</li>
+<li>根结点的数组值使用负数表示集合大小。</li>
+<li>例如：
+$$
+S[0]=-13
+$$
+表示下标为 <code>0</code> 的根下面共有 $13$ 个元素。</li>
+</ul>
+<p><strong>操作</strong></p>
+<ol>
+<li>用根结点数组值的绝对值表示树的结点总数。</li>
+<li>执行 <code>Union</code> 时，让小树合并到大树下面。</li>
+<li>新根结点的负值更新为两个集合规模之和的相反数。</li>
+</ol>
+<p><strong>树高</strong>
+该方法构造的树高不超过：
+$$
+\left\lfloor\log_2 n\right\rfloor+1
+$$</p>
+<p><strong>效率</strong>
+查找复杂度降为：
+$$
+O(\log_2 n)
+$$</p>
+<h4 id="section-59">按规模合并代码</h4>
+<pre><code class="language-c">void Union(int S[], int root1, int root2) {
+    if (root1 == root2) {
+        return;
+    }
+
+    // S[root] 为负数，绝对值越大，集合规模越大
+    if (S[root2] &gt; S[root1]) {
+        // root1 规模更大，将 root2 合并到 root1
+        S[root1] += S[root2];
+        S[root2] = root1;
+    } else {
+        // root2 规模更大或相等，将 root1 合并到 root2
+        S[root2] += S[root1];
+        S[root1] = root2;
+    }
+}
+</code></pre>
+<p><a class="note-image-link" href="/assets/408/images/44d2f989eaf4.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-按规模合并.png"><img class="note-image" src="/assets/408/images/44d2f989eaf4.png" alt="DS-L19-按规模合并.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>根数组值的绝对值表示集合规模；小集合的根被挂到大集合的根下。</li>
+<li>新根的负值更新为两个负规模之和，从而同时保留根标记与集合大小。</li>
+</ul>
+<h3 id="section-60">19.4.6 对查操作的优化</h3>
+<h5 id="section-61"><strong>定义</strong>：#路径压缩</h5>
+<blockquote>
+<p>描述：
+路径压缩是在执行 Find 时，先找到根结点，再把查找路径上的所有结点都直接挂到根结点下面。</p>
+</blockquote>
+<p><strong>思想</strong></p>
+<ol>
+<li>先沿父指针找到根。</li>
+<li>再处理查找路径上的各个顶点。</li>
+<li>把这些顶点的父结点直接改成根结点。</li>
+</ol>
+<p><strong>效果</strong></p>
+<ul>
+<li>之后再查找这些结点时，路径会大幅变短。</li>
+<li>查找效率接近常数级。</li>
+</ul>
+<h4 id="section-62">路径压缩代码</h4>
+<pre><code class="language-c">int Find(int S[], int x) {
+    int root = x;
+
+    while (S[root] &gt;= 0) {
+        root = S[root];        // 先找到根
+    }
+
+    while (x != root) {
+        int t = S[x];          // t 指向 x 的父结点
+        S[x] = root;           // x 直接挂在根结点下
+        x = t;
+    }
+
+    return root;
+}
+</code></pre>
+<p><strong>复杂度</strong></p>
+<ul>
+<li>路径压缩会显著加速后续查找，但不能把一次孤立 <code>Find</code> 的最坏时间直接写成 $O(\alpha(n))$。</li>
+<li>当路径压缩与按规模（或按秩）合并同时使用时，对一个包含 $m$ 次 <code>Find/Union</code> 的操作序列，总时间为：
+$$
+O(m\alpha(n))
+$$</li>
+<li>因而每次操作的均摊复杂度为 $O(\alpha(n))$。其中 $\alpha(n)$ 是增长极慢的反阿克曼函数，在实际规模下可视为很小的常数，但它不是严格的 $O(1)$ 结论。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/a372b2bb324a.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L19-路径压缩.png"><img class="note-image" src="/assets/408/images/a372b2bb324a.png" alt="DS-L19-路径压缩.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示说明</strong></p>
+<ul>
+<li>左图中蓝色查找路径为 <code>L -&gt; E -&gt; B -&gt; A</code>。</li>
+<li>右图为对 <code>L</code> 执行路径压缩后：路径上的 <code>L、E、B</code> 都直接挂到根 <code>A</code> 下；未访问的 <code>K、F、C、G</code> 分支保持原结构。</li>
+</ul>
+<h3 id="section-63">19.4.7 并查集复杂度总结</h3>
+<p>下表的“总合并流程”指从任意元素出发、每次合并都包含必要的查根过程，而不是已经给定两个根后只改一个父指针。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>单次 <code>Find</code></th>
+<th>执行 $n-1$ 次含查根的合并流程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无优化</td>
+<td>$O(n)$</td>
+<td>$O(n^2)$</td>
+</tr>
+<tr>
+<td>仅 Union 优化</td>
+<td>$O(\log_2 n)$</td>
+<td>$O(n\log_2 n)$</td>
+</tr>
+<tr>
+<td>按规模合并 + 路径压缩</td>
+<td>均摊 $O(\alpha(n))$</td>
+<td>$O(n\alpha(n))$</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 已知根时的连接代价
+如果每次都已直接给出两个不同集合的根，那么连接本身始终是 $O(1)$，做 $n-1$ 次连接是 $O(n)$；表中的更高复杂度来自查根。</p>
+</blockquote>
+<p><strong>理解</strong></p>
+<ul>
+<li>无优化时，树可能退化成链。</li>
+<li>Union 优化让树尽量不长高。</li>
+<li>Find 优化把查找路径压缩到根下。</li>
+<li>两者结合，是并查集高效的关键。</li>
+</ul>
+<h2 id="section-64">教材补充：堆及其应用</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 补充范围
+原 PDF 在排序章讲了建堆和堆排序；这里从完整教材体系补齐堆作为抽象数据结构时的操作、优先队列和 Top-K，并与<a href="/en/notes/cs408-0c5623624226/#section-4">堆排序</a>互链。2027 年 408 数据结构大纲也把“堆及其应用”列作最低覆盖项。</p>
+</blockquote>
+<h3 id="section-65">二叉堆的结构不变量</h3>
+<p>二叉堆同时满足两个条件：</p>
+<ol>
+<li><strong>结构性</strong>：它是一棵完全二叉树，适合按层序放在连续数组中。</li>
+<li><strong>堆序性</strong>：大根堆满足父键不小于孩子，小根堆满足父键不大于孩子。</li>
+</ol>
+<p>堆序只约束父子边，不保证左右兄弟、不同子树之间有序。因此：</p>
+<ul>
+<li>大根堆只能立即确定堆顶是最大值。含至少 $2$ 个元素时，按允许重复的次序统计口径，第二个最大元素必在根<strong>现有的</strong>孩子中产生：$n=2$ 时只有左孩子，$n=1$ 时不存在第二个元素。若题目问“第二大的不同关键字”，而根与孩子可能同值，则还可能需要继续向下搜索。</li>
+<li>对堆做中序遍历不会得到有序序列；堆不是二叉搜索树。</li>
+<li>本节的“堆”是二叉堆数据结构，不是程序运行时用于动态分配的内存堆。</li>
+</ul>
+<h3 id="section-66">基本操作及复杂度</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>方法</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读取堆顶 <code>Peek</code></td>
+<td>直接访问根</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>插入 <code>Push</code></td>
+<td>表尾加入，再向上调整</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>删除堆顶 <code>Pop</code></td>
+<td>末元素覆盖根，再向下调整</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>删除任意已知下标</td>
+<td>末元素覆盖；按与父、子的关系决定上调或下调</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>自底向上建堆</td>
+<td>从最后一个非叶结点依次向下调整</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>逐个插入建堆</td>
+<td>对 $n$ 个元素逐次执行插入</td>
+<td>$O(n\log n)$</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    A[插入新元素到表尾] --&gt; B{违反父子堆序?}
+    B -- 是 --&gt; C[与父交换并继续向上]
+    B -- 否 --&gt; D[插入完成]
+    E[删除堆顶] --&gt; F[末元素覆盖根]
+    F --&gt; G[与更合适的孩子交换并向下]
+    G --&gt; H[恢复堆序]
+</pre>
+<p>向下调整大根堆时必须与两个孩子中的<strong>较大者</strong>比较，小根堆则与<strong>较小者</strong>比较；只固定选择左孩子会在另一孩子更优时留下非法堆。</p>
+<h3 id="section-67">优先队列</h3>
+<h5 id="section-68"><strong>定义</strong>：#优先队列</h5>
+<blockquote>
+<p>优先队列中的元素按优先级而不是到达先后接受服务。最大优先队列可用大根堆实现，最小优先队列可用小根堆实现。</p>
+</blockquote>
+<ul>
+<li>入队对应堆插入，$O(\log n)$。</li>
+<li>查看最高优先级元素对应读堆顶，$O(1)$。</li>
+<li>取出最高优先级元素对应删除堆顶，$O(\log n)$。</li>
+<li>普通 FIFO 队列在队尾插入、队头删除；优先队列不保证先进先出。若相同优先级还要求保持到达顺序，需要把到达序号作为次关键字，或使用额外的稳定机制。</li>
+</ul>
+<h3 id="section-69">Top-K 与第 $k$ 大问题</h3>
+<p>在 $1\le k\le n$ 的前提下，从 $n$ 个元素中保留最大的 $k$ 个元素，适合维护一个容量为 $k$ 的<strong>小根堆</strong>；$k=0$ 或 $k&gt;n$ 时，“前 $k$ 个元素建堆”和“第 $k$ 大”均无定义，应由接口另行处理：</p>
+<ol>
+<li>用前 $k$ 个元素建小根堆。</li>
+<li>依次读取其余元素 $x$。</li>
+<li>若 $x$ 不大于堆顶，忽略；若 $x$ 大于堆顶，用 $x$ 替换堆顶并向下调整。</li>
+<li>扫描结束后，堆中就是按出现次数计算的最大 $k$ 个元素；堆顶是这 $k$ 个元素中的最小者，即整体第 $k$ 大值。</li>
+</ol>
+<p>$$
+\text{时间}=O!\left(n\log\max{2,k}\right),\qquad \text{额外空间}=O(k)
+$$</p>
+<p>当 $k\ge 2$ 时通常简写为 $O(n\log k)$；当 $k=1$ 时只需线性扫描最大值，时间为 $O(n)$，不能把 $\log 1=0$ 机械解释成零时间。</p>
+<p>求最小的 $k$ 个元素则对称地维护容量为 $k$ 的<strong>大根堆</strong>。若题目要求“互不相同的 Top-K”，还必须额外去重；普通堆会把重复关键字当作多个独立元素。</p>
+<h3 id="section-70">动态数据流的中位数</h3>
+<p>教材中常见的进一步应用是用两个堆维护动态中位数：</p>
+<ul>
+<li>大根堆保存较小的一半，小根堆保存较大的一半；</li>
+<li>保持两堆大小之差不超过 $1$，并保持大根堆顶不大于小根堆顶；</li>
+<li>每插入一个元素，先按边界放入一侧，再在两堆之间移动堆顶恢复平衡，单次 $O(\log n)$；</li>
+<li>元素总数为奇数时，中位数来自较大一侧的堆顶；为偶数时，按题意取两个堆顶的均值或上下中位数。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 易错边界
+堆擅长反复取得一个极值，不擅长按关键字做任意查找：在普通堆中查找给定关键字最坏仍需 $O(n)$。若题目要求有序遍历、范围查找或快速定位任意键，应考虑 BST、B+ 树或散列表等结构。</p>
+</blockquote>
+<h2 id="section-71">19.5 题型：树与二叉树应用</h2>
+<h3 id="section-72">题型一：二叉排序树操作</h3>
+<h4 id="section-73">第一部分：解题方法</h4>
+<ol>
+<li>查找：小往左，大往右。</li>
+<li>插入：按查找失败位置插入，新结点一定是叶子。</li>
+<li>构造：按序列顺序依次插入。</li>
+<li>删除：
+<ul>
+<li>叶子直接删。</li>
+<li>单子树用子树顶上。</li>
+<li>双子树用直接前驱或后继替换。</li>
+</ul>
+</li>
+</ol>
+<h4 id="section-74">第二部分：典型例题</h4>
+<p>给定序列：</p>
+<pre><code class="language-text">50, 26, 66, 21, 30, 60, 70
+</code></pre>
+<p>依次插入得到二叉排序树：</p>
+<pre><code class="language-text">        50
+      /    \
+    26      66
+   /  \    /  \
+ 21   30 60   70
+</code></pre>
+<p>查找 <code>60</code> 的路径为：</p>
+<pre><code class="language-text">50 -&gt; 66 -&gt; 60
+</code></pre>
+<p>查找长度为：
+$$
+3
+$$</p>
+<h4 id="section-75">第三部分：知识点复盘</h4>
+<ul>
+<li>二叉排序树中序遍历有序。</li>
+<li>插入顺序会影响树形。</li>
+<li>删除双子树结点时，要找直接前驱或直接后继。</li>
+</ul>
+<h3 id="section-76">题型二：AVL 旋转判断</h3>
+<h4 id="section-77">第一部分：解题方法</h4>
+<ol>
+<li>找插入后第一个失衡的祖先结点 <code>A</code>。</li>
+<li>看新结点插入在 <code>A</code> 的哪条路径上。</li>
+<li>按路径判断旋转类型：</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>路径</th>
+<th>类型</th>
+<th>调整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左-左</td>
+<td>LL</td>
+<td>右单旋</td>
+</tr>
+<tr>
+<td>右-右</td>
+<td>RR</td>
+<td>左单旋</td>
+</tr>
+<tr>
+<td>左-右</td>
+<td>LR</td>
+<td>先左后右</td>
+</tr>
+<tr>
+<td>右-左</td>
+<td>RL</td>
+<td>先右后左</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-78">第二部分：典型例题</h4>
+<p>若在 <code>A</code> 的左孩子的右子树中插入新结点导致失衡，则属于：</p>
+<pre><code class="language-text">LR 型
+</code></pre>
+<p>调整方法：</p>
+<pre><code class="language-text">先对左孩子左旋，再对 A 右旋
+</code></pre>
+<h4 id="section-79">第三部分：知识点复盘</h4>
+<ul>
+<li>LL 和 RR 是单旋。</li>
+<li>LR 和 RL 是双旋。</li>
+<li>调整后仍必须保持二叉排序树性质。</li>
+</ul>
+<h3 id="section-80">题型三：哈夫曼树与 WPL</h3>
+<h4 id="section-81">第一部分：解题方法</h4>
+<ol>
+<li>每次选择两个最小权值合并。</li>
+<li>新结点权值为两者之和。</li>
+<li>重复直到只剩一棵树。</li>
+<li>用叶结点权值乘路径长度求 WPL。</li>
+</ol>
+<h4 id="section-82">第二部分：典型例题</h4>
+<p>给定权值：</p>
+<pre><code class="language-text">1, 2, 2, 3, 7
+</code></pre>
+<p>构造哈夫曼树时：</p>
+<ol>
+<li>选 <code>1</code> 和 <code>2</code> 合并为 <code>3</code>。</li>
+<li>再从当前森林中继续选两个最小权值。</li>
+<li>直到只剩一棵树。</li>
+</ol>
+<p>若最终路径长度对应 PDF 示例，则：
+$$
+WPL=1\times 7+3\times(1+2+2+3)=31
+$$</p>
+<h4 id="section-83">第三部分：知识点复盘</h4>
+<ul>
+<li>哈夫曼树不唯一。</li>
+<li>对固定权值集合，最小 WPL 数值确定；达到该 WPL 的哈夫曼树和编码可能不唯一。</li>
+<li>哈夫曼树没有度为 $1$ 的结点。</li>
+<li>$n$ 个叶结点的哈夫曼树共有 $2n-1$ 个结点。</li>
+</ul>
+<h3 id="section-84">题型四：并查集操作</h3>
+<h4 id="section-85">第一部分：解题方法</h4>
+<ol>
+<li><code>Find(x)</code>：沿父指针找到根。</li>
+<li>判同：比较两个元素的根是否相同。</li>
+<li><code>Union(a,b)</code>：把一个根挂到另一个根下面。</li>
+<li>优化：
+<ul>
+<li>小树并到大树。</li>
+<li>查找路径压缩。</li>
+</ul>
+</li>
+</ol>
+<h4 id="section-86">第二部分：典型例题</h4>
+<p>若有：</p>
+<pre><code class="language-text">S[4] = 1
+S[1] = 0
+S[0] = -1
+</code></pre>
+<p>则 <code>Find(4)</code> 的路径为：</p>
+<pre><code class="language-text">4 -&gt; 1 -&gt; 0
+</code></pre>
+<p>根结点为：
+$$
+0
+$$</p>
+<p>因此元素 <code>4</code> 属于以 <code>0</code> 为根的集合。</p>
+<h4 id="section-87">第三部分：知识点复盘</h4>
+<ul>
+<li><code>S[i] &lt; 0</code> 表示 <code>i</code> 是根。</li>
+<li>未优化时 <code>Find</code> 可能是 $O(n)$。</li>
+<li>按规模合并让树不容易长高。</li>
+<li>路径压缩让后续查找更快。</li>
+</ul>
+<h2 id="section-88">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-c0568749182e/">上一篇：树、森林</a> · <a href="/en/notes/cs408-312cfdf36075/">下一篇：图基本概念</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-033ead68e5bc/">二叉树代码</a></li>
+</ul>
+<h2 id="section-89">19.6 本节复盘</h2>
+<p><strong>二叉排序树</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>核心</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查找</td>
+<td>小往左，大往右</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>查找失败处插入</td>
+</tr>
+<tr>
+<td>构造</td>
+<td>按序列依次插入</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>叶子、单子树、双子树三类讨论</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>AVL</strong>
+AVL 必须同时满足二叉排序树有序性和高度平衡性。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>插入位置</th>
+<th>调整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LL</td>
+<td>左孩子的左子树</td>
+<td>右单旋</td>
+</tr>
+<tr>
+<td>RR</td>
+<td>右孩子的右子树</td>
+<td>左单旋</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>左孩子的右子树</td>
+<td>先左后右</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>右孩子的左子树</td>
+<td>先右后左</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>哈夫曼树</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WPL</td>
+<td>$\sum_{i=1}^{n}w_i l_i$</td>
+</tr>
+<tr>
+<td>构造</td>
+<td>每次合并两个最小权值</td>
+</tr>
+<tr>
+<td>结点总数</td>
+<td>$2n-1$</td>
+</tr>
+<tr>
+<td>度为 $1$ 的结点</td>
+<td>不存在</td>
+</tr>
+<tr>
+<td>是否唯一</td>
+<td>树不唯一，WPL 最优</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>并查集</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Find</code></td>
+<td>找根，确定所属集合</td>
+</tr>
+<tr>
+<td><code>Union</code></td>
+<td>合并两个集合</td>
+</tr>
+<tr>
+<td>按规模合并</td>
+<td>小树挂到大树</td>
+</tr>
+<tr>
+<td>路径压缩</td>
+<td>查找路径上的点直接挂根</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>堆及其应用</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作或场景</th>
+<th>核心结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自底向上建堆</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>插入、删除堆顶</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>读堆顶</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>优先队列</td>
+<td>大根堆服务最高键，小根堆服务最低键</td>
+</tr>
+<tr>
+<td>最大 Top-K</td>
+<td>$1\le k\le n$；维护容量为 $k$ 的小根堆，统一写为 $O(n\log\max{2,k})$，$k=1$ 时即 $O(n)$</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>复杂度</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>单次 <code>Find</code></th>
+<th>$n-1$ 次含查根的合并流程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无优化</td>
+<td>$O(n)$</td>
+<td>$O(n^2)$</td>
+</tr>
+<tr>
+<td>Union 优化</td>
+<td>$O(\log_2 n)$</td>
+<td>$O(n\log_2 n)$</td>
+</tr>
+<tr>
+<td>按规模合并 + 路径压缩</td>
+<td>均摊 $O(\alpha(n))$</td>
+<td>$O(n\alpha(n))$</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>易错点</strong></p>
+<ul>
+<li>二叉排序树插入的新结点一定是叶子。</li>
+<li>二叉排序树删除双子树结点时，不是随便找一个孩子替代，而是找直接前驱或直接后继。</li>
+<li>失败 ASL 必须统一外部结点层次与关键字比较次数的口径。</li>
+<li>AVL 不只是“左右高度差不超过 $1$”，还必须满足二叉排序树性质。</li>
+<li>AVL 的 LL、RR、LR、RL 要按插入路径判断。</li>
+<li>哈夫曼编码不唯一，但必须是前缀编码。</li>
+<li>并查集中负数表示根，负数绝对值可表示集合规模。</li>
+<li>已知根时连接是 $O(1)$；传入任意元素时，完整 <code>Union</code> 还要计入两次 <code>Find</code>。</li>
+<li>按规模合并在 <code>Union</code> 时控制树高，路径压缩在 <code>Find</code> 时压平访问路径；两者结合才有均摊 $O(\alpha(n))$。</li>
+<li>堆只保证父子堆序，不是整体有序；优先队列也不是普通 FIFO 队列。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-5153e21f2806/index.html"><span>← Previous item</span><strong>Lecture 33：归并排序与基数排序</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-52d40cc31415/index.html"><span>Next item →</span><strong>Lecture 3：线性模型</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

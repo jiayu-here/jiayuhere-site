@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 10：KNN | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 10：KNN. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 10：KNN | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 10：KNN. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-330c7ebb726a/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 10：KNN | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 10：KNN. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 10：KNN",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-330c7ebb726a/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-330c7ebb726a/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-330c7ebb726a/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-330c7ebb726a/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-330c7ebb726a/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-330c7ebb726a/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 10：KNN</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 10：KNN. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>10 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/eaa5bec4cea7.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/eaa5bec4cea7.pdf" download="Lecture 10：KNN.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">10.1 KNN 基本概念</a><a href="#section-2">10.2 懒惰学习</a><a href="#section-3">10.3 KNN 分类算法</a><a href="#section-4">$$
+\hat y</a><a href="#section-5">$$
+\hat y</a><a href="#section-6">10.4 最近邻误差界</a><a href="#section-7">10.5 距离度量</a><a href="#section-8">$$
+L_p(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-10">$$
+L_2(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-12">$$
+L_1(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-14">$$
+L_\infty(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-15">10.6 $k$ 值选择</a><a href="#section-18">10.7 多数表决与 0-1 损失</a><a href="#section-19">$$
+\frac{1}{k}
+\sum_{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\mathbb I(y_i\neq c_j)</a><a href="#section-20">10.8 kd 树</a><a href="#section-23">10.9 kd 树最近邻搜索</a><a href="#section-24">10.10 kd 树效率与局限</a><a href="#section-25">10.11 易错点</a><a href="#section-26">相关知识</a><a href="#section-27">10.12 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节整理 KNN 的分类与回归规则、懒惰学习、$L_p$ 距离、$k$ 值的偏差-方差权衡、多数表决的风险含义，以及 kd 树的构造和最近邻回溯搜索。</p>
+</blockquote>
+<h2 id="section-1">10.1 KNN 基本概念</h2>
+<p>K 近邻（k-Nearest Neighbor，KNN）是一种常用监督学习方法。</p>
+<p>给定测试样本：</p>
+<ol>
+<li>根据某种距离度量，在训练集中找出距离最近的 $k$ 个样本。</li>
+<li>利用这 $k$ 个邻居的标记预测。</li>
+</ol>
+<p>分类任务：</p>
+<ul>
+<li>使用多数投票，把邻居中出现次数最多的类别作为预测。</li>
+<li>也可按距离加权投票，越近的邻居权重越大。</li>
+</ul>
+<p>回归任务：</p>
+<ul>
+<li>使用邻居输出的平均值。</li>
+<li>也可按距离加权平均。</li>
+</ul>
+<h2 id="section-2">10.2 懒惰学习</h2>
+<ul>
+<li>KNN 是懒惰学习（lazy learning）的代表。</li>
+<li>训练阶段主要保存样本，不显式拟合参数化模型，训练开销很小。</li>
+<li>收到测试样本后才计算距离、寻找邻居并预测，因此预测开销较大。</li>
+<li>与之相对，急切学习（eager learning）在训练阶段就拟合模型，预测时直接使用已学参数。</li>
+</ul>
+<p>当以下四项确定后，KNN 对任意输入的预测规则也随之确定：</p>
+<ol>
+<li>训练集。</li>
+<li>距离度量。</li>
+<li>$k$ 值。</li>
+<li>分类或回归决策规则。</li>
+</ol>
+<ul>
+<li>这些要素共同把特征空间隐式划分成不同预测区域，因此 KNN 仍然定义了模型，只是模型由训练样本直接表示。</li>
+</ul>
+<h2 id="section-3">10.3 KNN 分类算法</h2>
+<p>训练集为</p>
+<p>$$
+T=
+{(\boldsymbol{x}_1,y_1),
+(\boldsymbol{x}_2,y_2),
+\ldots,
+(\boldsymbol{x}_N,y_N)},
+$$</p>
+<p>其中</p>
+<p>$$
+\boldsymbol{x}_i\in\mathcal X\subseteq\mathbb R^n,
+\qquad
+y_i\in\mathcal Y={c_1,c_2,\ldots,c_K}.
+$$</p>
+<p>对输入 $\boldsymbol{x}$：</p>
+<ol>
+<li>找到训练集中与 $\boldsymbol{x}$ 最近的 $k$ 个点，邻域记为 $N_k(\boldsymbol{x})$。</li>
+<li>使用多数表决：</li>
+</ol>
+<h1 id="section-4">$$
+\hat y</h1>
+<p>\mathop{\arg\max}<em>{c_j}
+\sum</em>{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\mathbb I(y_i=c_j).
+$$</p>
+<ul>
+<li>若票数相同，需要预先规定平票规则，例如选择距离总和更小的类别。</li>
+<li>距离加权投票可写为</li>
+</ul>
+<h1 id="section-5">$$
+\hat y</h1>
+<p>\mathop{\arg\max}<em>{c_j}
+\sum</em>{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\omega_i
+\mathbb I(y_i=c_j),
+$$</p>
+<p>其中 $\omega_i$ 随距离增大而减小。</p>
+<h2 id="section-6">10.4 最近邻误差界</h2>
+<p>源资料指出，最近邻分类器的泛化错误率不超过贝叶斯最优分类器错误率的两倍。</p>
+<p>更精确地，在相应分布和渐近条件下，1-NN 的渐近错误率 $R_{\mathrm{1NN}}$ 满足 Cover-Hart 界：</p>
+<p>$$
+R_{\mathrm{1NN}}
+\leq
+R^<em>(2-R^</em>)
+\leq
+2R^*,
+$$</p>
+<p>其中 $R^*$ 是贝叶斯最优错误率。</p>
+<ul>
+<li>这是渐近理论界，不表示任意有限样本、任意距离和任意维度下测试误差都严格不超过两倍。</li>
+</ul>
+<h2 id="section-7">10.5 距离度量</h2>
+<p>设</p>
+<p>$$
+\boldsymbol{x}_i
+=(x_i^{(1)},x_i^{(2)},\ldots,x_i^{(n)})^\mathrm T,
+$$</p>
+<p>$$
+\boldsymbol{x}_j
+=(x_j^{(1)},x_j^{(2)},\ldots,x_j^{(n)})^\mathrm T.
+$$</p>
+<p>$L_p$ 距离为</p>
+<h1 id="section-8">$$
+L_p(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\left(
+\sum_{l=1}^{n}
+\left|
+x_i^{(l)}-x_j^{(l)}
+\right|^p
+\right)^{1/p},
+\qquad p\geq1.
+$$</p>
+<h3 id="section-9">10.5.1 欧氏距离</h3>
+<p>当 $p=2$：</p>
+<h1 id="section-10">$$
+L_2(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\left(
+\sum_{l=1}^{n}
+\left|
+x_i^{(l)}-x_j^{(l)}
+\right|^2
+\right)^{1/2}.
+$$</p>
+<h3 id="section-11">10.5.2 曼哈顿距离</h3>
+<p>当 $p=1$：</p>
+<h1 id="section-12">$$
+L_1(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\sum_{l=1}^{n}
+\left|
+x_i^{(l)}-x_j^{(l)}
+\right|.
+$$</p>
+<h3 id="section-13">10.5.3 切比雪夫距离</h3>
+<p>当 $p\rightarrow\infty$：</p>
+<h1 id="section-14">$$
+L_\infty(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\max_l
+\left|
+x_i^{(l)}-x_j^{(l)}
+\right|.
+$$</p>
+<p>二维空间中，以原点为中心、距离为 $1$ 的单位球形状：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>距离</th>
+<th>单位球</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$p=1$</td>
+<td>菱形</td>
+</tr>
+<tr>
+<td>$p=2$</td>
+<td>圆</td>
+</tr>
+<tr>
+<td>$p=\infty$</td>
+<td>正方形</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>距离度量决定“近邻”的含义，可能直接改变分类边界。</li>
+<li>不同特征量纲差异较大时要先标准化。</li>
+</ul>
+<h2 id="section-15">10.6 $k$ 值选择</h2>
+<h3 id="section-16">10.6.1 较小的 $k$</h3>
+<ul>
+<li>邻域小，只有非常相似的样本参与预测。</li>
+<li>近似误差较小，局部细节表达能力强。</li>
+<li>估计误差较大，对单个噪声点敏感。</li>
+<li>模型更复杂，容易过拟合。</li>
+</ul>
+<h3 id="section-17">10.6.2 较大的 $k$</h3>
+<ul>
+<li>邻域大，更多较远样本参与预测。</li>
+<li>估计误差降低，结果更稳定。</li>
+<li>近似误差增大，局部结构被平滑。</li>
+<li>模型更简单，可能欠拟合。</li>
+</ul>
+<p>极端情况下，</p>
+<p>$$
+k=N,
+$$</p>
+<p>分类器对所有输入都预测训练集中数量最多的类别，几乎忽略输入位置。</p>
+<ul>
+<li>$k$ 应通过验证集或交叉验证选择。</li>
+<li>二分类常选择奇数 $k$ 减少平票，但多分类或类别数量分布复杂时仍可能平票。</li>
+</ul>
+<h2 id="section-18">10.7 多数表决与 0-1 损失</h2>
+<p>若预测邻域 $N_k(\boldsymbol{x})$ 为类别 $c_j$，该邻域上的经验误分类率为</p>
+<p>$$
+\frac{1}{k}
+\sum_{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\mathbb I(y_i\neq c_j).
+$$</p>
+<p>利用</p>
+<p>$$
+\mathbb I(y_i\neq c_j)
+=1-\mathbb I(y_i=c_j),
+$$</p>
+<p>有</p>
+<h1 id="section-19">$$
+\frac{1}{k}
+\sum_{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\mathbb I(y_i\neq c_j)</h1>
+<p>1-
+\frac{1}{k}
+\sum_{\boldsymbol{x}_i\in N_k(\boldsymbol{x})}
+\mathbb I(y_i=c_j).
+$$</p>
+<ul>
+<li>因而在 0-1 损失下，选择邻域中票数最多的类别，等价于最小化邻域经验误分类率。</li>
+</ul>
+<h2 id="section-20">10.8 kd 树</h2>
+<p>kd 树是一种对 $k$ 维空间中的实例点进行组织，以便快速检索的二叉树结构。</p>
+<ul>
+<li>每个结点对应一个由坐标轴对齐边界确定的 $k$ 维超矩形区域。</li>
+<li>每次用垂直于某个坐标轴的超平面把区域分为两个子区域。</li>
+<li>实例点保存在相应结点中。</li>
+</ul>
+<h3 id="section-21">10.8.1 构造过程</h3>
+<ol>
+<li>根结点对应包含全部实例的超矩形。</li>
+<li>选择一个坐标轴和该轴上的切分点。</li>
+<li>通过切分点作垂直于该轴的超平面，把区域分为左右两个子区域。</li>
+<li>把样本分到两个子区域，并对各区域递归切分。</li>
+<li>子区域内没有更多实例可分时终止。</li>
+</ol>
+<ul>
+<li>常见实现轮换坐标轴，并选择该轴坐标的中位数，使树较平衡。</li>
+</ul>
+<h3 id="section-22">10.8.2 源资料构造示例</h3>
+<p>数据集：</p>
+<p>$$
+T=
+{
+(2,3)^\mathrm T,
+(5,4)^\mathrm T,
+(9,6)^\mathrm T,
+(4,7)^\mathrm T,
+(8,1)^\mathrm T,
+(7,2)^\mathrm T
+}.
+$$</p>
+<p>按坐标轴交替、取中位点构造：</p>
+<ul>
+<li>根结点为 $(7,2)$，以 $x^{(1)}=7$ 切分。</li>
+<li>左子树根为 $(5,4)$，其子结点为 $(2,3)$ 和 $(4,7)$。</li>
+<li>右子树根为 $(9,6)$，其子结点为 $(8,1)$。</li>
+</ul>
+<p>对应树形结构：</p>
+<p>$$
+\begin{array}{c}
+(7,2)\
+/\qquad\backslash\
+(5,4)\qquad(9,6)\
+/\quad\backslash\qquad/\
+(2,3)\quad(4,7)\quad(8,1)
+\end{array}
+$$</p>
+<h2 id="section-23">10.9 kd 树最近邻搜索</h2>
+<p>给定目标点 $\boldsymbol{x}$：</p>
+<ol>
+<li>从根结点按切分坐标向下访问，找到包含目标点的叶结点。</li>
+<li>把该叶结点实例作为当前最近点。</li>
+<li>从叶结点向父结点回溯。</li>
+<li>若父结点实例更近，就更新当前最近点。</li>
+<li>以目标点为球心、当前最小距离为半径形成超球体。</li>
+<li>若兄弟子树对应超矩形与超球体相交，兄弟区域内可能存在更近点，必须进入该子树继续搜索。</li>
+<li>若不相交，可剪去该子树。</li>
+<li>回溯到根且所有可能区域都已检查后，当前最近点即为结果。</li>
+</ol>
+<p>源资料图示过程：</p>
+<ul>
+<li>先找到包含目标点 $S$ 的叶结点 $D$，暂以 $D$ 为最近邻。</li>
+<li>回到父结点 $B$，其另一子区域 $F$ 与以 $S$ 为圆心、$SD$ 为半径的圆不相交，剪枝。</li>
+<li>回到更高层 $A$，另一子区域 $C$ 与圆相交，需进入检查。</li>
+<li>区域内点 $E$ 比 $D$ 更近，因此把 $E$ 更新为最近邻。</li>
+</ul>
+<h2 id="section-24">10.10 kd 树效率与局限</h2>
+<ul>
+<li>数据较随机、树较平衡且维度较低时，平均查询可接近 $O(\log N)$。</li>
+<li>最坏情况下需要检查大量结点，复杂度可退化为 $O(N)$。</li>
+<li>维度升高后，超球体容易与许多超矩形相交，剪枝能力下降，出现“维数灾难”。</li>
+<li>因而 kd 树适合中低维精确近邻搜索，高维数据常需近似近邻等方法。</li>
+</ul>
+<h2 id="section-25">10.11 易错点</h2>
+<ul>
+<li>KNN 是有监督学习，K-Means 是无监督学习。</li>
+<li>KNN 的“训练开销接近 0”不表示没有存储开销；它通常要保存全部训练样本。</li>
+<li>$k$ 越小模型越复杂、方差越大；$k$ 越大模型越简单、偏差越大。</li>
+<li>距离度量和特征标准化会直接改变近邻集合。</li>
+<li>多数投票在 0-1 损失下最小化局部经验错误，不表示对所有代价函数都最优。</li>
+<li>1-NN 的“两倍贝叶斯错误率”是带条件的渐近上界，不能误当作任意有限测试集保证。</li>
+<li>kd 树中的 $k$ 表示空间维数，不是 KNN 的邻居数量 $k$。</li>
+<li>kd 树搜索不能找到叶结点后立即停止，必须回溯并检查与当前超球体相交的兄弟区域。</li>
+<li>kd 树平均 $O(\log N)$ 依赖树平衡、维度和数据分布，最坏可退化为线性扫描。</li>
+</ul>
+<h2 id="section-26">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-c3d6d4b33f5b/">上一篇：聚类</a> · <a href="/en/notes/cs408-937337386c65/">下一篇：PyTorch 总结</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c3d6d4b33f5b/">距离度量与聚类</a></li>
+</ul>
+<h2 id="section-27">10.12 本节复盘</h2>
+<ul>
+<li>KNN 保存训练样本，预测时寻找最近的 $k$ 个邻居；分类投票，回归平均，也可按距离加权。</li>
+<li>KNN 是懒惰学习，训练简单但预测和存储开销较大。</li>
+<li>$L_p$ 距离在 $p=1,2,\infty$ 时分别对应曼哈顿、欧氏和切比雪夫距离。</li>
+<li>小 $k$ 低偏差高方差，容易过拟合；大 $k$ 高偏差低方差，可能欠拟合。</li>
+<li>多数表决等价于在邻域内最小化 0-1 经验损失。</li>
+<li>kd 树用坐标轴对齐超平面递归划分空间，可通过超矩形与当前搜索超球体是否相交来剪枝。</li>
+<li>kd 树在低维、平衡条件下查询较快，但高维或最坏情况下可能退化为近似线性扫描。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-324f552507c6/index.html"><span>← Previous item</span><strong>7 题型 - IPv6</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-34e57b06068c/index.html"><span>Next item →</span><strong>4 题型 - 透明传输与PPP协议</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>1 题型 - IPv4地址结构及其计算 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：1 题型 - IPv4地址结构及其计算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="1 题型 - IPv4地址结构及其计算 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：1 题型 - IPv4地址结构及其计算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-e843016612d3/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1 题型 - IPv4地址结构及其计算 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：1 题型 - IPv4地址结构及其计算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "1 题型 - IPv4地址结构及其计算",
+      "item": "https://www.jiayuhere.com/notes/cs408-e843016612d3/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-e843016612d3/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-e843016612d3/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-e843016612d3/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-e843016612d3/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-e843016612d3/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>1 题型 - IPv4地址结构及其计算</h1><p class="article-lead">408 学习笔记：1 题型 - IPv4地址结构及其计算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/6bc22c95364f.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/6bc22c95364f.pdf" download="1 题型 - IPv4地址结构及其计算.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 三个基本计算</a><a href="#section-3">1.2 定长与变长子网划分</a><a href="#section-6">1.3 历年真题</a><a href="#section-14">1.4 特殊地址与私有地址</a><a href="#section-17">1.5 易错点</a><a href="#section-18">相关知识</a><a href="#section-19">1.6 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：IPv4 地址计算的核心是把 32 bit 划分为网络前缀和主机号。网络地址由 IP 与掩码按位与得到，广播地址把主机位全置 1；子网数看借用的网络位，主机数看剩余主机位。综合题还会结合默认网关、/30 点到点链路、特殊地址和 NAT 转换。</p>
+</blockquote>
+<h2 id="section-1">1.1 三个基本计算</h2>
+<p>设 IPv4 地址为 $IP$、子网掩码为 $Mask$：</p>
+<p>$$Network=IP\ \operatorname{AND}\ Mask$$</p>
+<p>$$Broadcast=Network\ \operatorname{OR}\ (\operatorname{NOT}Mask)$$</p>
+<p>若前缀长度为 $p$，主机位数为 $h=32-p$，普通子网可分配主机地址数为：</p>
+<p>$$N_{host}=2^h-2$$</p>
+<p>减去的两个地址是主机位全 0 的网络地址和主机位全 1 的定向广播地址。</p>
+<h3 id="section-2">1.1.1 常见前缀速查</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">前缀</th>
+<th style="text-align:right">最后一个非 255 掩码字节</th>
+<th style="text-align:right">地址块大小</th>
+<th style="text-align:right">可分配主机数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">/22</td>
+<td style="text-align:right">252</td>
+<td style="text-align:right">1024</td>
+<td style="text-align:right">1022</td>
+</tr>
+<tr>
+<td style="text-align:right">/24</td>
+<td style="text-align:right">255</td>
+<td style="text-align:right">256</td>
+<td style="text-align:right">254</td>
+</tr>
+<tr>
+<td style="text-align:right">/25</td>
+<td style="text-align:right">128</td>
+<td style="text-align:right">128</td>
+<td style="text-align:right">126</td>
+</tr>
+<tr>
+<td style="text-align:right">/26</td>
+<td style="text-align:right">192</td>
+<td style="text-align:right">64</td>
+<td style="text-align:right">62</td>
+</tr>
+<tr>
+<td style="text-align:right">/27</td>
+<td style="text-align:right">224</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">30</td>
+</tr>
+<tr>
+<td style="text-align:right">/28</td>
+<td style="text-align:right">240</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td style="text-align:right">/29</td>
+<td style="text-align:right">248</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">/30</td>
+<td style="text-align:right">252</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-3">1.2 定长与变长子网划分</h2>
+<h3 id="section-4">1.2.1 FLSM</h3>
+<p>原网络前缀为 $p$，再借 $s$ 位作为子网号时：</p>
+<p>$$N_{subnet}=2^s$$</p>
+<p>新前缀为 $p+s$，每个子网剩余 $32-p-s$ 个主机位。</p>
+<h3 id="section-5">1.2.2 VLSM</h3>
+<p>VLSM 按各子网实际需求分配不同长度前缀。常用步骤：</p>
+<ol>
+<li>按所需主机数从大到小排序。</li>
+<li>为每个子网选择能容纳需求的最小 $2^h$ 地址块。</li>
+<li>从父网络的低地址开始，按地址块边界依次分配。</li>
+<li>检查各前缀互不重叠，且每个子网起始地址对齐其块大小。</li>
+</ol>
+<h2 id="section-6">1.3 历年真题</h2>
+<h3 id="section-7">1.3.1 2010 年：FLSM 子网数与主机数</h3>
+<p><code>192.168.5.0/24</code> 使用掩码 <code>255.255.255.248=/29</code>。</p>
+<p>从 /24 扩展到 /29，借用 5 位作为子网号：</p>
+<p>$$N_{subnet}=2^5=32$$</p>
+<p>剩余 3 位作为主机号：</p>
+<p>$$N_{host}=2^3-2=6$$</p>
+<p><strong>答案：B，32 个子网、每个子网 6 个可分配地址。</strong></p>
+<h3 id="section-8">1.3.2 2011 年：/30 定向广播</h3>
+<p>子网 <code>192.168.4.0/30</code> 的 4 个地址为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>192.168.4.0</code></td>
+<td>网络地址</td>
+</tr>
+<tr>
+<td><code>192.168.4.1</code></td>
+<td>可分配主机地址</td>
+</tr>
+<tr>
+<td><code>192.168.4.2</code></td>
+<td>可分配主机地址</td>
+</tr>
+<tr>
+<td><code>192.168.4.3</code></td>
+<td>定向广播地址</td>
+</tr>
+</tbody>
+</table></div>
+<p>目的地址为 <code>192.168.4.3</code> 的广播分组可被该子网中的 2 台普通主机接收。</p>
+<p><strong>答案：C，2 台。</strong></p>
+<h3 id="section-9">1.3.3 2012 年：求所在子网广播地址</h3>
+<p>主机地址 <code>180.80.77.55</code>，掩码 <code>255.255.252.0=/22</code>。第三个字节的地址块大小为：</p>
+<p>$$256-252=4$$</p>
+<p>77 落在 $76-79$ 地址块内，因此：</p>
+<pre><code class="language-text">网络地址：180.80.76.0
+广播地址：180.80.79.255
+</code></pre>
+<p><strong>答案：D，<code>180.80.79.255</code>。</strong></p>
+<h3 id="section-10">1.3.4 2016 年：子网、默认网关与 NAT 综合</h3>
+<p>题图中 H1/H2 配置 <code>/25</code>，地址分别为 <code>192.168.3.2、192.168.3.3</code>，默认网关均填 <code>192.168.3.1</code>；H3/H4 也配置 <code>/25</code>，地址为 <code>192.168.3.251、192.168.3.252</code>，默认网关均填 <code>192.168.3.254</code>。</p>
+<p>它们实际位于两个子网：</p>
+<pre><code class="language-text">H1、H2：192.168.3.0/25，范围 192.168.3.0-127
+H3、H4：192.168.3.128/25，范围 192.168.3.128-255
+</code></pre>
+<ul>
+<li>H1 与 H2 同网段，可经交换机直接通信。</li>
+<li>H3 与 H4 同网段，可经 Hub 直接通信。</li>
+<li>两组主机网络号不同，跨组通信必须经过路由器。</li>
+<li>路由器 R2 的局域网接口为 <code>192.168.3.254/25</code>，只属于 <code>192.168.3.128/25</code>；它不能作为 H1/H2 所在 <code>/25</code> 的合法直连网关。</li>
+<li>默认网关必须与主机位于同一 IP 子网；仅“物理上连在同一个交换网络”不能替代网络层同网段条件。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 原资料第 3 页解说与题图不符
+解说称 H1/H2 “默认网关配置正确、可访问 Internet”，但题图只给出 R2 的 LAN 接口 <code>192.168.3.254</code>，并没有作为 H1/H2 网关的 <code>192.168.3.1</code> 路由接口。按题图所给设备与配置，H1/H2 可在 <code>192.168.3.0/25</code> 内直接通信，却不能通过所填网关经 R2 出网；不能照搬该句解说。若另设 <code>192.168.3.1</code> 网关或代理 ARP 等机制，须在题设中明确给出。</p>
+</blockquote>
+<p>同一题的 NAT 小问中，R1 与 R2 的点到点网络为 <code>201.1.3.8/30</code>。已知 R1 接口为 <code>201.1.3.9</code>，则 R2 面向 R1 的接口为 <code>201.1.3.10</code>。H3 访问 Web 服务器 <code>130.18.10.1</code> 时，R2 对外转发的请求分组为：</p>
+<pre><code class="language-text">源 IP：201.1.3.10
+目的 IP：130.18.10.1
+</code></pre>
+<p><strong>NAT 只修改需要转换的一侧地址；目的 Web 服务器地址保持不变。</strong></p>
+<h3 id="section-11">1.3.5 2017 年：只能作源地址的特殊地址</h3>
+<p>选项中：</p>
+<ul>
+<li><code>0.0.0.0</code> 可在主机尚未获得地址时表示“本主机/未知源地址”，可作源地址，但不能作普通目的地址。</li>
+<li><code>127.0.0.1</code> 是本地回环地址，可作为本机通信的源/目的地址。</li>
+<li><code>200.10.10.3</code> 是普通单播地址。</li>
+<li><code>255.255.255.255</code> 是受限广播目的地址，不能作源地址。</li>
+</ul>
+<p><strong>答案：A，<code>0.0.0.0</code>。</strong></p>
+<h3 id="section-12">1.3.6 2019 年：把 /20 划分为 5 个 VLSM 子网</h3>
+<p>把一个 <code>/20</code> 恰好递归划成 5 个前缀子网，只需进行 4 次二分。题目问“可能的最小子网”，要让其中某个地址块尽可能小，可让 4 次二分沿同一分支持续进行，于是叶子前缀依次为：</p>
+<pre><code class="language-text">/21、/22、/23、/24、/24
+</code></pre>
+<p>这些地址块合计正好占满一个 <code>/20</code>。4 次二分的最大深度为 <code>/24</code>，因此不可能在只保留 5 个叶子子网的同时再得到更小的 <code>/25</code> 叶子。最小子网是 <code>/24</code>，可分配地址数为：</p>
+<p>$$2^{32-24}-2=254$$</p>
+<p><strong>答案：B，254。</strong></p>
+<h3 id="section-13">1.3.7 2022 年：子网掩码与默认网关</h3>
+<p>主机 H 为 <code>192.168.1.60</code>，所连接路由器接口为 <code>192.168.1.62/27</code>。</p>
+<p><code>/27</code> 对应掩码：</p>
+<pre><code class="language-text">255.255.255.224
+</code></pre>
+<p>该接口与 H 同属 <code>192.168.1.32/27</code>，所以 H 的默认网关应为路由器的局域网接口 <code>192.168.1.62</code>，不能使用另一条 <code>/30</code> 链路上的地址。</p>
+<p><strong>答案：D，<code>255.255.255.224，192.168.1.62</code>。</strong></p>
+<h2 id="section-14">1.4 特殊地址与私有地址</h2>
+<h3 id="section-15">1.4.1 历史分类地址与 CIDR</h3>
+<p>原资料中的 A～E 类按首字节划分如下；这是<strong>有类编址的历史分类</strong>，现代子网计算仍应以实际给定的前缀长度或子网掩码为准，不能只看首字节推断掩码。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>首字节范围</th>
+<th>历史用途/默认前缀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>1～126</td>
+<td>单播，默认 /8；0 和 127 段另有特殊用途</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128～191</td>
+<td>单播，默认 /16</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192～223</td>
+<td>单播，默认 /24</td>
+</tr>
+<tr>
+<td>D</td>
+<td>224～239</td>
+<td>组播地址，不按普通单播主机地址分配</td>
+</tr>
+<tr>
+<td>E</td>
+<td>240～255</td>
+<td>保留/特殊用途；<code>255.255.255.255</code> 是受限广播地址</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-16">1.4.2 特殊地址与私有范围</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址/范围</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主机位全 0</td>
+<td>当前子网的网络地址，不分配给普通主机</td>
+</tr>
+<tr>
+<td>主机位全 1</td>
+<td>当前子网的定向广播地址</td>
+</tr>
+<tr>
+<td><code>255.255.255.255</code></td>
+<td>受限广播，只作目的地址</td>
+</tr>
+<tr>
+<td><code>0.0.0.0</code></td>
+<td>未指定地址，可在初始化阶段作源地址</td>
+</tr>
+<tr>
+<td><code>127.0.0.0/8</code></td>
+<td>本地回环地址，分组不离开本机</td>
+</tr>
+</tbody>
+</table></div>
+<p>私有 IPv4 地址范围：</p>
+<pre><code class="language-text">10.0.0.0/8
+172.16.0.0/12
+192.168.0.0/16
+</code></pre>
+<p>私有地址不在公网中直接路由。内网访问公网通常由 NAT/NAPT 把私有源地址转换为 NAT 设备可用于公网通信的地址；它可以是设备接口地址，也可以来自分配给该设备的公网地址池。NAPT 还把运输层端口纳入映射，并在必要时改写端口。</p>
+<h2 id="section-17">1.5 易错点</h2>
+<ul>
+<li>子网掩码与 IP 做按位与得到网络地址；不能只凭最后一个十进制数“看起来接近”来判断。</li>
+<li>普通子网可分配地址数要减去网络地址和广播地址，但子网数量按现代规则不减 2。</li>
+<li>/30 有 4 个地址、2 个可分配接口地址，常用于点到点链路。</li>
+<li>默认网关必须是主机所在子网内的路由器接口地址。</li>
+<li>私有地址不能直接作为公网路由中的源地址；经源 NAT 后应换成可用于公网通信的地址，不一定是路由器自身接口地址。</li>
+<li>NAT 通常改变源/目的 IP 中的一侧；无 NAT 时端到端源、目的 IP 不随每跳转发改变。</li>
+</ul>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-fe8e22cc2489/">上一篇：网络层知识框架</a> · <a href="/notes/cs408-f3115f915ba6/">下一篇：网络层转发</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-fe8e22cc2489/">网络层总纲</a></li>
+</ul>
+<h2 id="section-19">1.6 本节复盘</h2>
+<ul>
+<li><code>网络地址=IP AND 掩码</code>，广播地址是网络前缀不变、主机位全 1。</li>
+<li>/29 每块 8 个地址、可分配 6 个；/30 每块 4 个、可分配 2 个；/27 掩码为 <code>255.255.255.224</code>。</li>
+<li>VLSM 应从大到小分配并按块边界对齐；一个 /20 划分 5 个子网时最小子网可做到 /24，即 254 个主机地址。</li>
+<li>默认网关必须与主机同网段，源 NAT 对外转发时用可用于公网通信的地址替换私有源地址。</li>
+<li><code>0.0.0.0</code> 可作初始化源地址，<code>255.255.255.255</code> 是受限广播目的地址，<code>127/8</code> 是回环地址。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-e503e71568f6/index.html"><span>← 上一项</span><strong>Lecture 6：知识 - 编码与调制</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-e93053729cfd/index.html"><span>下一项 →</span><strong>Lecture 11：知识 - 指令系统的基本概念</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

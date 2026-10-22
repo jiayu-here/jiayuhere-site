@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 3：知识 - 处理器调度 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 3：知识 - 处理器调度. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 3：知识 - 处理器调度 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 3：知识 - 处理器调度. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-8b0d4ecd05ad/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 3：知识 - 处理器调度 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 3：知识 - 处理器调度. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 3：知识 - 处理器调度",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-8b0d4ecd05ad/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-8b0d4ecd05ad/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-8b0d4ecd05ad/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8b0d4ecd05ad/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8b0d4ecd05ad/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-8b0d4ecd05ad/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 3：知识 - 处理器调度</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 3：知识 - 处理器调度. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>21 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/cac1d5de2c79.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/cac1d5de2c79.pdf" download="Lecture 3：知识 - 处理器调度.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 调度的基本概念</a><a href="#section-2">3.2 三个层次的调度</a><a href="#section-4">3.3 调度目标与性能指标</a><a href="#section-5">3.4 调度程序与上下文切换</a><a href="#section-9">3.5 调度时机、临界区与调度方式</a><a href="#section-13">3.6 用户级与内核级线程调度</a><a href="#section-14">3.7 典型调度算法：非抢占式</a><a href="#section-19">3.8 典型调度算法：交互式与抢占式</a><a href="#section-23">3.9 多处理器调度</a><a href="#section-26">相关知识</a><a href="#section-27">3.10 本节复盘：手算步骤与易错点</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>调度题先画时间轴，再逐时刻更新“已到达进程、就绪队列、当前运行者、剩余服务时间”。周转时间从提交/到达到完成计算；响应时间从请求提出到首次得到响应计算，题目若明确把“首次运行”视为响应，再按首次获 CPU 时刻计算。</p>
+</blockquote>
+<h2 id="section-1">3.1 调度的基本概念</h2>
+<p>当待处理任务多于可立即使用的处理资源时，系统必须按某种规则决定处理顺序，这就是调度研究的问题。<strong>处理机调度</strong>是操作系统按照一定算法，从就绪队列中选择一个进程（准确说通常是可运行的内核级线程），把 CPU 分配给它，以实现并发进程的推进。</p>
+<ul>
+<li>用户向系统提交的是<strong>作业</strong>；作业被接纳、装入内存并建立 PCB 后才成为可被处理机调度的<strong>进程</strong>。</li>
+<li>日常语境中的“进程调度”和“线程调度”常混用；现代内核实际直接调度的对象通常是内核级线程。</li>
+<li>调度的目标不是只让某个进程最快，而是在 CPU 利用率、吞吐量、周转时间、响应性、公平性等目标之间取舍。</li>
+</ul>
+<h2 id="section-2">3.2 三个层次的调度</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>别名</th>
+<th>做什么</th>
+<th>范围/状态变化</th>
+<th>发生频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高级调度</td>
+<td>作业调度</td>
+<td>从后备队列选择作业调入内存，并建立相应进程</td>
+<td>外存 → 内存；创建态 → 就绪态</td>
+<td>最低，通常每个作业只调入一次</td>
+</tr>
+<tr>
+<td>中级调度</td>
+<td>内存调度、对换</td>
+<td>决定哪些挂起进程重新调入内存；必要时换出暂不运行或长期阻塞的进程</td>
+<td>外存 ↔ 内存；挂起态 ↔ 相应非挂起态</td>
+<td>中等，可反复发生</td>
+</tr>
+<tr>
+<td>低级调度</td>
+<td>进程调度、短程调度</td>
+<td>从就绪队列选出一个进程/内核线程并分配 CPU</td>
+<td>内存 → CPU；就绪态 → 运行态</td>
+<td>最高，通常毫秒量级</td>
+</tr>
+</tbody>
+</table></div>
+<p>高级调度还决定多道程序度：调入太多作业会争夺内存和 CPU，太少又可能使设备或 CPU 空闲。中级调度引入后，进程映像可换到外存来节省内存；应注意：<strong>被挂起的是进程映像，PCB 及其队列管理信息通常仍由内核保存</strong>。</p>
+<h3 id="section-3">3.2.1 七状态模型</h3>
+<p>五状态模型增加“就绪挂起”和“阻塞挂起”后形成七状态模型：</p>
+<ul>
+<li>创建态 → 就绪态：高级调度接纳作业、建立 PCB 后完成创建。</li>
+<li>就绪态 ⇄ 就绪挂起态：内存紧张时换出/条件具备时换入。</li>
+<li>阻塞态 ⇄ 阻塞挂起态：阻塞进程可被换出；它在外存等待事件。</li>
+<li>阻塞挂起态 → 就绪挂起态：等待事件发生，但进程尚未被调回内存。</li>
+<li>就绪态 → 运行态：低级调度选中；运行态因抢占、时间片到而转就绪，因等待事件而转阻塞。</li>
+</ul>
+<p><strong>挂起与阻塞不同</strong>：两者都暂时不能获得 CPU；挂起强调进程映像在外存，阻塞强调正在等待事件，故可同时存在。</p>
+<h2 id="section-4">3.3 调度目标与性能指标</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义/公式</th>
+<th>使用要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU 利用率</td>
+<td>$U=\dfrac{CPU\ 忙碌时间}{观测总时间}$</td>
+<td>忙碌时间通常指非 idle 时间；按题目口径计入内核和切换开销</td>
+</tr>
+<tr>
+<td>系统吞吐量</td>
+<td>$\dfrac{单位时间内完成的作业数}{时间长度}$</td>
+<td>关心单位时间完成数量，而非某一个作业快慢</td>
+</tr>
+<tr>
+<td>周转时间</td>
+<td>$T_i=完成时刻-提交（到达）时刻$</td>
+<td>包含后备队列等待、就绪等待、CPU 执行和 I/O 等待等全过程</td>
+</tr>
+<tr>
+<td>平均周转时间</td>
+<td>$\overline T=\dfrac{\sum T_i}{n}$</td>
+<td>批处理系统常用</td>
+</tr>
+<tr>
+<td>带权周转时间</td>
+<td>$W_i=\dfrac{T_i}{实际运行时间}$</td>
+<td>服务时间短但等待很久时数值会很大</td>
+</tr>
+<tr>
+<td>平均带权周转时间</td>
+<td>$\overline W=\dfrac{\sum W_i}{n}$</td>
+<td>不能把各项分子分母分别求和后再相除</td>
+</tr>
+<tr>
+<td>等待时间</td>
+<td>作业/进程在相应等待队列中等待服务的总时间</td>
+<td>进程的 CPU 等待通常指在<strong>就绪队列</strong>等待 CPU 的时间，不含正在运行时间</td>
+</tr>
+<tr>
+<td>响应时间</td>
+<td>从用户提交请求到系统首次产生响应的时间</td>
+<td>交互式系统特别关注；具体手算口径以题干为准</td>
+</tr>
+<tr>
+<td>响应比</td>
+<td>$R=\dfrac{等待时间+要求服务时间}{要求服务时间}$</td>
+<td>HRRN 的选择依据，不等同于“响应时间”</td>
+</tr>
+</tbody>
+</table></div>
+<p>CPU 调度并不会改变作业实际执行的 CPU 时间和 I/O 服务时间；它主要影响进程在就绪队列等待 CPU 的时间。因此比较调度算法时，常重点比较等待时间、周转时间和响应时间。</p>
+<p>原 PDF 写作“有效工作时间 /（有效工作时间 + 空闲等待时间）”，适用于忽略调度开销、且时间轴只分有效工作与空闲两类的简化题。若要衡量用户任务的<strong>有效工作占比</strong>，分母仍须是完整观测时间，包含上下文切换等开销；此时有效工作占比与包含内核忙碌时间的 CPU 利用率不是同一个口径。</p>
+<h2 id="section-5">3.4 调度程序与上下文切换</h2>
+<h3 id="section-6">3.4.1 调度程序的组成</h3>
+<p>调度程序通常由三部分协作：</p>
+<ol>
+<li><strong>排队器（队列管理器）</strong>：按调度策略把就绪进程组织成一个或多个就绪队列；进程进入就绪态时插入相应队列。</li>
+<li><strong>分派器（dispatcher）</strong>：按策略从就绪队列选出进程，将 CPU 分配给它。</li>
+<li><strong>上下文切换器</strong>：保存被换下进程的上下文，并把被选中进程的上下文装入 CPU 寄存器。</li>
+</ol>
+<p>定时器是抢占式调度的重要硬件基础：它产生时钟中断，内核据此更新时钟变量、当前进程已用 CPU 时间和剩余时间片，并在需要时触发调度。</p>
+<h3 id="section-7">3.4.2 闲逛进程</h3>
+<p>没有其他就绪进程时，调度程序运行<strong>闲逛进程（idle）</strong>。它是始终存在的后备执行实体，优先级最低，通常执行低功耗等待或轮询中断；一旦有普通就绪进程，立即让出 CPU。</p>
+<h3 id="section-8">3.4.3 进程上下文切换</h3>
+<p>上下文切换是 CPU 从一个进程的运行环境转到另一个进程运行环境的过程，概括为：</p>
+<ol>
+<li>挂起当前进程，将 PC、通用寄存器等 CPU 上下文保存到其 PCB；发生中断或进程切换时还需正确保存 PSW 等状态字。</li>
+<li>按当前状态把该 PCB 放回就绪队列或相应事件等待队列。</li>
+<li>调度程序选择下一个进程，更新其 PCB 状态。</li>
+<li>从新 PCB 恢复 CPU 上下文，修改 PC，跳转到新进程下次应执行的位置。</li>
+</ol>
+<p>子程序调用只需保存调用约定要求的现场，不一定需要保存 PSW；中断处理和进程上下文切换则必须保证中断前机器状态可正确恢复。上下文切换本身不产生用户任务的有效工作，且可能造成缓存/TLB 等局部性损失，故切换频繁会降低效率。</p>
+<p>在教材的调度程序模型里，可把切换理解为“旧进程现场 → 分派程序现场 → 新进程现场”两段交接；实际保存位置和入口代码取决于内核与体系结构。进程上下文不仅有 PC 和通用寄存器，还包括运行状态及地址空间等管理信息；中断/系统调用进入内核时先保存必要现场，随后<strong>可能</strong>继续执行原进程，也可能调度到别的进程。前者只是用户态/内核态的模式切换，不必然是进程上下文切换。原 PDF 末尾将 xv6 的 <code>trapframe</code>、RISC-V 的 <code>sscratch</code> 与使用 <code>%rsp</code>、<code>pushq</code> 的 x86-64 汇编样例并置；它们不能拼接成同一套 CPU 的切换流程，寄存器名、保存位置和顺序也不是通则。</p>
+<h2 id="section-9">3.5 调度时机、临界区与调度方式</h2>
+<h3 id="section-10">3.5.1 可以进行处理机调度的时机</h3>
+<ul>
+<li>创建新进程后：父、子进程均就绪时，需决定谁先运行。</li>
+<li>当前进程正常或异常结束后：从就绪队列选择后继；若无就绪进程则运行闲逛进程。</li>
+<li>当前进程请求 I/O、等待信号量/条件或其他原因进入阻塞态后。</li>
+<li>I/O 完成、进程由阻塞转就绪后：决定让新就绪进程运行，还是让当前运行者继续。</li>
+<li>出现更紧急或优先级更高的任务时：抢占式系统可强制让出 CPU。</li>
+<li>中断处理结束后、当前进程时间片用完时：都可能触发重新调度。</li>
+</ul>
+<h3 id="section-11">3.5.2 不能进行进程切换的情况</h3>
+<p>以下代码段不应任意进行进程切换：</p>
+<ul>
+<li><strong>中断处理过程中</strong>：中断处理往往与硬件时序和状态恢复相关，应在合适的中断返回点再调度。</li>
+<li><strong>内核临界区中</strong>：该区访问内核共享数据结构，如就绪队列 PCB 链；贸然切走可能造成数据不一致。</li>
+<li><strong>原语执行过程中</strong>：原语要求原子完成，例如修改 PCB 状态并把 PCB 移入队列的复合操作不能被拆开。</li>
+</ul>
+<p>临界资源是在一个时间段内只允许一个进程使用的资源；访问它的代码是临界区。普通用户态临界区中的进程可以被抢占，互斥由同步机制保证；内核临界区通常要短时间禁止中断、关闭抢占或加锁，以保护内核数据。</p>
+<h3 id="section-12">3.5.3 非抢占式与抢占式</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>调度条件</th>
+<th>优点</th>
+<th>局限/适用情形</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非抢占式</td>
+<td>当前进程主动放弃 CPU，如结束、阻塞或等待</td>
+<td>实现简单，切换开销小</td>
+<td>无法及时响应紧急任务；多用于早期批处理系统或缺少定时器支持的环境</td>
+</tr>
+<tr>
+<td>抢占式</td>
+<td>除主动放弃外，时间片到或更高优先级任务到达也可强制切换</td>
+<td>响应性好，可实现分时和优先级调度</td>
+<td>需时钟中断、现场保存和内核同步，切换开销更高</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-13">3.6 用户级与内核级线程调度</h2>
+<ul>
+<li><strong>用户级线程调度</strong>：内核只看见进程，先给进程分配时间片；进程内部由用户态线程库从就绪线程中选择一个运行。用户线程切换少量机器指令即可完成，但一个阻塞系统调用可能让整个进程失去 CPU。</li>
+<li><strong>内核级线程调度</strong>：内核在所有可运行内核线程中挑选，不要求两个相继运行的线程属于同一进程；一个线程阻塞时，同一进程的其他可运行内核线程仍可被调度。代价是每次切换都可能涉及完整内核上下文和地址空间相关开销。</li>
+</ul>
+<h2 id="section-14">3.7 典型调度算法：非抢占式</h2>
+<h3 id="section-15">3.7.1 FCFS：先来先服务</h3>
+<p><strong>FCFS（First Come First Serve）</strong> 按作业进入后备队列或进程进入就绪队列的先后顺序服务，通常为非抢占式。</p>
+<ul>
+<li>优点：公平、规则和实现简单；只要按先后顺序排队，通常不会饥饿。</li>
+<li>缺点：长作业在前时，短作业会集体等待，称为“护航效应”；对短作业和交互体验不利，平均等待时间通常不最小。</li>
+<li>使用时务必分清：用于作业调度时比较到达后备队列顺序；用于进程调度时比较到达就绪队列顺序。</li>
+</ul>
+<h3 id="section-16">3.7.2 SJF/SPF 与 SRTN</h3>
+<p><strong>SJF（Shortest Job First）/SPF（Shortest Process First）</strong> 在 CPU 空闲时选择预计服务时间最短的作业/进程，属于非抢占式；“最短”指预计的下一段 CPU 服务时间，不是等待时间最短。</p>
+<ul>
+<li>在服务时间已知、所有作业同时到达等经典前提下，SJF 的平均等待时间、平均周转时间最小；到达时刻不同也常有较好平均指标，但结论需结合题设。</li>
+<li>实际系统难以精确预知下一次 CPU 执行时间，估计不准会影响结果；用户也可能故意把长作业申报为短作业。</li>
+<li>长作业在短作业持续到达时可能长期得不到服务，发生<strong>饥饿</strong>。</li>
+</ul>
+<p><strong>SRTN/SRTF（Shortest Remaining Time Next/First）</strong> 是 SJF 的抢占式版本：每当新进程到达或当前进程完成时比较剩余服务时间；若新到进程剩余时间更短，抢占当前进程，原进程回到就绪队列。</p>
+<h3 id="section-17">3.7.3 HRRN：高响应比优先</h3>
+<p>HRRN（Highest Response Ratio Next）每次调度计算所有就绪作业的响应比：</p>
+<p>$$
+R=\frac{等待时间+要求服务时间}{要求服务时间}=1+\frac{等待时间}{要求服务时间}
+$$</p>
+<p>选择 $R$ 最大者，通常为非抢占式。服务时间相同，等待越久响应比越高；等待时间相同，服务时间更短者响应比更高。因此它兼顾 SJF 的短作业倾向和 FCFS 的老化效果，通常可避免无限期饥饿，但仍需要估计服务时间。</p>
+<h3 id="section-18">3.7.4 原 PDF 统一手算例：FCFS、SJF、SRTN 与 HRRN</h3>
+<p>原 PDF 用同一组纯计算型进程比较四种算法：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>进程</th>
+<th style="text-align:right">到达时刻</th>
+<th style="text-align:right">服务时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td>P2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td>P3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>P4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">4</td>
+</tr>
+</tbody>
+</table></div>
+<p>甘特图结构化结果如下；区间写成左闭右开形式：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>执行区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FCFS</td>
+<td><code>[0,7) P1 → [7,11) P2 → [11,12) P3 → [12,16) P4</code></td>
+</tr>
+<tr>
+<td>非抢占 SJF</td>
+<td><code>[0,7) P1 → [7,8) P3 → [8,12) P2 → [12,16) P4</code></td>
+</tr>
+<tr>
+<td>SRTN</td>
+<td><code>[0,2) P1 → [2,4) P2 → [4,5) P3 → [5,7) P2 → [7,11) P4 → [11,16) P1</code></td>
+</tr>
+<tr>
+<td>HRRN</td>
+<td><code>[0,7) P1 → [7,8) P3 → [8,12) P2 → [12,16) P4</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>以 $T_i=C_i-A_i$、$W_i=T_i/S_i$ 计算：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>P1/P2/P3/P4 周转时间</th>
+<th style="text-align:right">平均周转时间</th>
+<th>P1/P2/P3/P4 带权周转时间</th>
+<th style="text-align:right">平均带权周转时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FCFS</td>
+<td>7，9，8，11</td>
+<td style="text-align:right">8.75</td>
+<td>1，2.25，8，2.75</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>非抢占 SJF</td>
+<td>7，10，4，11</td>
+<td style="text-align:right">8</td>
+<td>1，2.5，4，2.75</td>
+<td style="text-align:right">2.5625</td>
+</tr>
+<tr>
+<td>SRTN</td>
+<td>16，5，1，6</td>
+<td style="text-align:right">7</td>
+<td>$16/7$，1.25，1，1.5</td>
+<td style="text-align:right">$169/112\approx1.509$</td>
+</tr>
+<tr>
+<td>HRRN</td>
+<td>7，10，4，11</td>
+<td style="text-align:right">8</td>
+<td>1，2.5，4，2.75</td>
+<td style="text-align:right">2.5625</td>
+</tr>
+</tbody>
+</table></div>
+<p>HRRN 在 $t=7$ 时的响应比分别为 P2：$2.25$、P3：$4$、P4：$1.5$，故先选 P3；$t=8$ 时 P2 为 $2.5$、P4 为 $1.75$，故再选 P2。该例中 HRRN 与非抢占 SJF 的执行顺序相同只是数据导致的巧合，不代表两种算法等价。</p>
+<blockquote>
+<p><strong>NOTE</strong> · 等待时间口径
+上例没有 I/O，故就绪等待时间可用“周转时间减服务时间”计算；若进程还含 I/O 等待，则不能把全部非运行时间都算成等待 CPU 的时间。</p>
+</blockquote>
+<h2 id="section-19">3.8 典型调度算法：交互式与抢占式</h2>
+<h3 id="section-20">3.8.1 RR：时间片轮转</h3>
+<p>RR（Round-Robin）按进程到达就绪队列的顺序轮流服务，每个进程一次最多执行一个固定时间片。</p>
+<ol>
+<li>队首进程获得 CPU，运行不超过一个时间片。</li>
+<li>若在片内完成或主动阻塞，立即释放 CPU，选择新的队首。</li>
+<li>若片用完仍未完成，时钟中断触发抢占，进程被放到就绪队列<strong>队尾</strong>。</li>
+</ol>
+<p>RR 公平、响应快，适合分时/交互式系统；实现涉及 PCB、时钟中断处理程序和就绪队列。时间片过大时，RR 退化为 FCFS，响应时间变长；时间片过小时，频繁保存/恢复上下文，切换开销吞噬有效 CPU 时间。通常应让切换开销占比远低于时间片（教材常以不超过约 1% 作为经验目标）。RR 不区分任务紧急程度，紧急任务到达时常需结合优先级调度。</p>
+<p><strong>原 PDF 的 RR 数值例</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>进程</th>
+<th style="text-align:right">到达时刻</th>
+<th style="text-align:right">服务时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td>P2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td>P3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>P4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">6</td>
+</tr>
+</tbody>
+</table></div>
+<p>取时间片 $q=2$，并约定新到进程先进入就绪队列、时间片耗尽的旧进程随后回到队尾：</p>
+<pre><code class="language-text">[0,2) P1 → [2,4) P2 → [4,6) P1 → [6,7) P3
+→ [7,9) P2 → [9,11) P4 → [11,12) P1
+→ [12,14) P4 → [14,16) P4
+</code></pre>
+<p>完成时刻为 P1=12、P2=9、P3=7、P4=16；周转时间依次为 12、7、3、11，平均周转时间为 $8.25$。在 $t=4$，P3 和时间片用完的 P1 同时准备入队时，队尾先后次序会影响后续甘特图，因此做题必须采用题目给定的同刻事件规则。</p>
+<h3 id="section-21">3.8.2 优先级调度</h3>
+<p>优先级调度每次选择<strong>优先级最高</strong>的就绪进程；题目必须先确认“数值大优先还是数值小优先”。它既可非抢占（当前进程主动让出时才选）也可抢占（高优先级进程到达即比较、必要时抢占）。</p>
+<ul>
+<li><strong>静态优先级</strong>创建后一般不变；<strong>动态优先级</strong>可按等待时间、CPU 使用量、I/O 特性等调整。</li>
+<li>优点：能区分紧急程度，适合实时或强调重要性的任务。</li>
+<li>缺点：低优先级进程可能饥饿。常用补救是<strong>老化（aging）</strong>：等待越久，逐步提高其优先级。</li>
+</ul>
+<p>原 PDF 还给出了优先数越大、优先级越高的例子：P1/P2/P3/P4 的到达时刻为 0/2/4/5，服务时间为 7/4/1/4，优先数为 1/2/3/2。</p>
+<ul>
+<li>非抢占式：<code>[0,7) P1 → [7,8) P3 → [8,12) P2 → [12,16) P4</code>；P2 与 P4 同优先级时按先到先服务。</li>
+<li>抢占式：<code>[0,2) P1 → [2,4) P2 → [4,5) P3 → [5,7) P2 → [7,11) P4 → [11,16) P1</code>。</li>
+</ul>
+<p>这里“优先数越大越优先”只适用于该例；换到其他题目必须先确认数值方向。</p>
+<h3 id="section-22">3.8.3 多级队列与多级反馈队列</h3>
+<p><strong>多级队列调度</strong>把就绪队列按进程类别分为多个独立队列，例如系统进程、交互式进程、批处理进程；每级可使用不同算法（前台可 RR、后台可 FCFS），队列间通常用固定优先级或时间片划分。</p>
+<p>**多级反馈队列（MLFQ）**允许进程在队列间移动，是对多级队列的改进。典型规则为：</p>
+<ol>
+<li>设置多个优先级从高到低的就绪队列，优先级越高时间片越小；例如从上到下可为 $1,2,4,\ldots$。</li>
+<li>新到进程先进入最高优先级队列，按队内 FCFS 等待分配时间片。</li>
+<li>若进程在当前时间片内完成，直接结束；若未完成则被抢占，移到下一低优先级队列队尾。最低级队列常以 RR 运行。</li>
+<li>仅当所有更高优先级队列为空，才调度较低级队列；运行低级队列时若高优先级新进程到达，可抢占当前进程。</li>
+</ol>
+<p>它综合了 FCFS 的公平、RR 的快速响应和 SJF 的“短 CPU 突发优先”效果，也不必事先知道进程总运行时间；可按 CPU 密集型或 I/O 密集型特点调整偏好。若高优先级短任务持续到达，低级长任务仍可能饥饿，实际系统可通过周期性提升、I/O 返回时调整等策略缓解。</p>
+<p><strong>原 PDF 第 23 页的 2019 年二级反馈队列题</strong>：$Q_1$ 优先于 $Q_2$；$Q_1$ 按 RR 调度，时间片为 $10,\mathrm{ms}$；$Q_2$ 按短进程优先选进程（比较转入时尚需的 CPU 时间）。$P_1$、$P_2$ 依次创建并进入 $Q_1$，所需 CPU 时间分别为 $30$、$20,\mathrm{ms}$。$Q_1$ 中各运行一个时间片但未完成的进程转入 $Q_2$。忽略切换开销，时间线为：</p>
+<pre><code class="language-text">[0,10) P1/Q1 → [10,20) P2/Q1 → [20,30) P2/Q2 → [30,50) P1/Q2
+</code></pre>
+<p>进入 $Q_2$ 时，$P_1$、$P_2$ 分别还需 $20$、$10,\mathrm{ms}$，故先运行 $P_2$。从创建到完成，$P_1$ 的等待时间为 $50-30=20,\mathrm{ms}$，$P_2$ 为 $30-20=10,\mathrm{ms}$，平均等待时间为 $(20+10)/2=15,\mathrm{ms}$。同一进程在不同队列中的相邻运行区间可连续，但仍须按队列规则分别判断。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>抢占</th>
+<th>主要优点</th>
+<th>主要风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RR</td>
+<td>是</td>
+<td>公平、适合分时、响应快</td>
+<td>时间片取值不当；不区分优先级</td>
+</tr>
+<tr>
+<td>优先级</td>
+<td>可抢占或非抢占</td>
+<td>可表达紧急/重要程度</td>
+<td>低优先级饥饿，需老化</td>
+</tr>
+<tr>
+<td>MLFQ</td>
+<td>通常是</td>
+<td>兼顾响应和平均周转，不必预知服务时间</td>
+<td>规则复杂，低级队列仍可能饥饿</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-23">3.9 多处理器调度</h2>
+<h3 id="section-24">3.9.1 非对称与对称多处理</h3>
+<ul>
+<li><strong>非对称多处理（AMP）</strong>：一个主处理器负责调度决策、I/O 处理和其他系统活动，其他处理器主要运行用户代码。实现较简单、共享数据少，但主处理器容易成为瓶颈。</li>
+<li><strong>对称多处理（SMP）</strong>：每个处理器可自行调度。可采用共享就绪队列，或每个处理器维护私有就绪队列；前者便于均衡，后者竞争较少但需处理迁移和负载不均。多个处理器访问/更新共享队列时必须同步。</li>
+</ul>
+<h3 id="section-25">3.9.2 处理器亲和性与负载均衡</h3>
+<p>进程在一个 CPU 上运行后，其工作集会留在该 CPU 的 Cache 中；迁移到另一 CPU 会失去这些缓存局部性。因此调度器常保持<strong>处理器亲和性</strong>：</p>
+<ul>
+<li><strong>软亲和性</strong>：系统尽量让进程继续在原 CPU 上运行，但不保证。</li>
+<li><strong>硬亲和性</strong>：把进程绑定到指定 CPU 或 CPU 集合，严格限制迁移。</li>
+</ul>
+<p>负载均衡避免某些 CPU 空闲、另一些 CPU 长期繁忙，常有两类机制：</p>
+<ul>
+<li><strong>推迁移（push migration）</strong>：周期性检查各 CPU 负载，发现不均衡就把任务从繁忙 CPU 迁到较空闲 CPU。</li>
+<li><strong>拉迁移（pull migration）</strong>：空闲 CPU 主动从其他 CPU 的队列中拉取等待任务。</li>
+</ul>
+<p>负载均衡与处理器亲和性存在取舍：迁移能提升整体并行度，却可能损失缓存命中率；实际系统需要在两者之间折中。</p>
+<h2 id="section-26">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-bc90db5fb862/">上一篇：进程与线程</a> · <a href="/en/notes/cs408-a3a4d665ca47/">下一篇：同步与互斥</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c4914b00ec31/">计算机性能指标</a></li>
+</ul>
+<h2 id="section-27">3.10 本节复盘：手算步骤与易错点</h2>
+<ol>
+<li>明确算法是否抢占、优先级数值方向、时间片大小、进程到达和 I/O 完成与时钟中断的先后规则。</li>
+<li>从 $t=0$ 开始画甘特图；每个到达、完成、阻塞、I/O 完成、时间片到都是可能重排队列的事件点。</li>
+<li>每个进程分别求完成时刻、周转时间、带权周转时间；计算 RR/SRTN/抢占优先级时，不能只凭直觉跳过中间事件。</li>
+<li>等待时间在纯 CPU 突发题中常等于周转时间减服务时间；含 I/O 时必须按题干口径区分就绪等待、I/O 等待和总周转。</li>
+<li>FCFS 不饥饿但可能护航；SJF/SRTN 可能饿死长作业；HRRN 用等待时间提高响应比；优先级和 MLFQ 要靠老化/提升防止低级任务长期饥饿。</li>
+</ol>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-8aa8809e8e26/index.html"><span>← Previous item</span><strong>Lecture 17：知识 - CPU 的功能与结构</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-8d35cda087a1/index.html"><span>Next item →</span><strong>4 题型 - 最大传输速率</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

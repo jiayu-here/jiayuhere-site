@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 12：思维导图 - 应用层 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 12：思维导图 - 应用层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 12：思维导图 - 应用层 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 12：思维导图 - 应用层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-a8acba740351/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 12：思维导图 - 应用层 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 12：思维导图 - 应用层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 12：思维导图 - 应用层",
+      "item": "https://www.jiayuhere.com/notes/cs408-a8acba740351/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-a8acba740351/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a8acba740351/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a8acba740351/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a8acba740351/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-a8acba740351/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 12：思维导图 - 应用层</h1><p class="article-lead">408 学习笔记：Lecture 12：思维导图 - 应用层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 17 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/images/4d31d5a5d00b.png" target="_blank" rel="noreferrer">查看原始图片</a>
+        <a class="button secondary-button" href="/assets/408/images/4d31d5a5d00b.png" download="Lecture 12：思维导图 - 应用层.png">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 应用层概述</a><a href="#section-3">6.2 C/S 与 P2P</a><a href="#section-6">6.3 DHCP</a><a href="#section-9">6.4 DNS</a><a href="#section-13">6.5 FTP</a><a href="#section-14">6.6 电子邮件</a><a href="#section-17">6.7 万维网与 HTTP</a><a href="#section-23">6.8 网络管理与 SNMP（教材补充入口）</a><a href="#section-24">6.9 题型索引</a><a href="#section-25">相关知识</a><a href="#section-26">6.10 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：应用层直接为用户程序提供网络服务。主线是：C/S 与 P2P 定义应用组织方式；DHCP 自动配置主机；DNS 完成域名到 IP 等信息的查询；FTP 传文件；SMTP、POP3、IMAP 与 MIME 组成电子邮件系统；HTTP 在万维网中请求和传输资源；教材补充专篇进一步给出 SNMP 与网络管理体系。</p>
+</blockquote>
+<blockquote>
+<p><strong>NOTE</strong> · 原始知识网（点击展开）
+<a class="note-image-link" href="/assets/408/images/4d31d5a5d00b.png" target="_blank" rel="noreferrer" aria-label="打开原图: Lecture 12：思维导图 - 应用层（原始知识图）.png"><picture><source srcset="/assets/408/previews/4d31d5a5d00b.webp" type="image/webp"><img class="note-image" src="/assets/408/images/4d31d5a5d00b.png" alt="Lecture 12：思维导图 - 应用层（原始知识图）.png" loading="lazy" decoding="async"></picture></a></p>
+</blockquote>
+<p>本篇按“<strong>应用体系结构 -&gt; DHCP -&gt; DNS -&gt; FTP -&gt; 电子邮件 -&gt; HTTP -&gt; 网络管理与 SNMP</strong>”整理。三类综合计算与一篇教材补充另设入口：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>专题</th>
+<th>入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP 非持续/持续连接、流水线、并行与 RTT</td>
+<td><a href="/notes/cs408-0bb2d5ae08e6/">1 题型 - HTTP连接</a></td>
+</tr>
+<tr>
+<td>DHCP 报文、地址字段、中继、租约与冲突处理</td>
+<td><a href="/notes/cs408-c001d492e92c/">2 题型 - DHCP应用</a></td>
+</tr>
+<tr>
+<td>DNS 查询次数、缓存与 HTTP 总时延</td>
+<td><a href="/notes/cs408-b9c8f13ec3e6/">3 题型 - DNS与HTTP综合</a></td>
+</tr>
+<tr>
+<td>网络管理、MIB/SMI/OID、SNMP 操作、端口、通知与安全</td>
+<td><a href="/notes/cs408-1aaca18e58e7/">教材补充：SNMP 与网络管理</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-1">6.1 应用层概述</h2>
+<p>网络应用由运行在不同端系统上的进程组成，进程通过套接字使用运输层。应用层协议通常定义：</p>
+<ul>
+<li>报文类型，如请求与响应。</li>
+<li>各类报文的语法、字段与编码。</li>
+<li>字段的语义。</li>
+<li>进程何时发送报文、收到报文后如何处理。</li>
+</ul>
+<p>选择运输服务时要权衡可靠性、吞吐、时延与安全。需要完整可靠数据时通常选择 TCP；能容忍少量丢失、强调实时性或自行实现可靠机制时可选择 UDP。加密、认证等安全需求常由 TLS 或应用自身补充。</p>
+<h3 id="section-2">6.1.1 常见端口</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>应用协议</th>
+<th style="text-align:right">默认端口</th>
+<th>运输协议</th>
+<th>主要用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FTP 控制</td>
+<td style="text-align:right">21</td>
+<td>TCP</td>
+<td>发送命令与响应</td>
+</tr>
+<tr>
+<td>FTP 主动模式数据</td>
+<td style="text-align:right">20</td>
+<td>TCP</td>
+<td>主动模式服务器发起数据连接</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td style="text-align:right">22</td>
+<td>TCP</td>
+<td>安全远程登录</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td style="text-align:right">23</td>
+<td>TCP</td>
+<td>明文远程终端</td>
+</tr>
+<tr>
+<td>SMTP 中继</td>
+<td style="text-align:right">25</td>
+<td>TCP</td>
+<td>邮件服务器之间传递；教材基础模型也常用它概括 SMTP</td>
+</tr>
+<tr>
+<td>邮件提交</td>
+<td style="text-align:right">587</td>
+<td>TCP</td>
+<td>邮件客户端向提交服务器发送邮件，通常配合认证与 STARTTLS</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td style="text-align:right">53</td>
+<td>UDP/TCP</td>
+<td>查询常用 UDP；区域传送和特定大响应使用 TCP</td>
+</tr>
+<tr>
+<td>DHCP 服务器/客户端</td>
+<td style="text-align:right">67/68</td>
+<td>UDP</td>
+<td>动态主机配置</td>
+</tr>
+<tr>
+<td>TFTP</td>
+<td style="text-align:right">69</td>
+<td>UDP</td>
+<td>简单文件传输</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td style="text-align:right">80</td>
+<td>TCP</td>
+<td>Web 明文传输</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td style="text-align:right">110</td>
+<td>TCP</td>
+<td>下载/管理服务器邮件</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td style="text-align:right">143</td>
+<td>TCP</td>
+<td>服务器端邮件同步管理</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td style="text-align:right">161</td>
+<td>UDP</td>
+<td>网络管理查询与操作；Trap 通知通常使用 UDP 162</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td style="text-align:right">443</td>
+<td>TCP，HTTP/3 使用 QUIC/UDP</td>
+<td>加密 Web 访问</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-3">6.2 C/S 与 P2P</h2>
+<h3 id="section-4">6.2.1 客户/服务器 C/S</h3>
+<ul>
+<li>服务器通常长期在线，具有固定或可解析地址，为多个客户提供服务。</li>
+<li>客户主动发起请求，客户之间一般不直接通信。</li>
+<li>数据中心可扩展服务器能力，但服务器上行带宽和处理能力可能成为瓶颈。</li>
+</ul>
+<p>设要向 $N$ 个客户分发大小为 $F$ 的文件，服务器上传速率为 $u_s$，最慢客户端下载速率为 $d_{min}$，理想 C/S 分发时间至少为：</p>
+<p>$$D_{CS}\ge\max\left(\frac{NF}{u_s},\frac{F}{d_{min}}\right)$$</p>
+<h3 id="section-5">6.2.2 对等 P2P</h3>
+<ul>
+<li>对等方既是客户端又是服务器，可直接交换数据，具有自扩展性。</li>
+<li>节点上线、离线和地址变化频繁，管理、安全和内容发现更复杂。</li>
+<li>总上传能力随加入的对等方增加，适合大规模内容分发。</li>
+</ul>
+<p>若第 $i$ 个对等方上传速率为 $u_i$，理想 P2P 分发时间至少为：</p>
+<p>$$D_{P2P}\ge\max\left(\frac{F}{u_s},\frac{F}{d_{min}},\frac{NF}{u_s+\sum_{i=1}^{N}u_i}\right)$$</p>
+<h2 id="section-6">6.3 DHCP</h2>
+<p>DHCP 为主机动态分配 IP 地址，并可下发子网掩码、默认网关、DNS 服务器和租期等参数。客户端使用 UDP 68，服务器使用 UDP 67。</p>
+<h3 id="section-7">6.3.1 DORA 四步</h3>
+<pre><code class="language-text">客户端                         DHCP服务器
+DHCPDISCOVER  广播       --------&gt;
+                         &lt;--------  DHCPOFFER
+DHCPREQUEST   广播       --------&gt;
+                         &lt;--------  DHCPACK
+</code></pre>
+<ol>
+<li><strong>Discover</strong>：新客户端尚无可用 IP，以 <code>0.0.0.0:68</code> 向 <code>255.255.255.255:67</code> 广播发现服务器。</li>
+<li><strong>Offer</strong>：服务器提出可租用地址和配置。</li>
+<li><strong>Request</strong>：客户端广播选择某一服务器的提议，也让其他服务器撤回保留。</li>
+<li><strong>ACK</strong>：服务器确认租约；若请求不可接受可返回 DHCPNAK。</li>
+</ol>
+<h3 id="section-8">6.3.2 租约、续租与中继</h3>
+<ul>
+<li>地址是有期限租用，不是永久归客户端所有。租期到约 $T_1=0.5$ 时，客户端通常单播 DHCPREQUEST 向原服务器续租；到约 $T_2=0.875$ 时仍未成功，则广播 DHCPREQUEST，向任意可用服务器重新绑定。租期到期仍失败就必须停用该地址并重新发现。</li>
+<li>DHCPACK 后客户端还可用 ARP 做地址冲突检测；若发现冲突，发送 <strong>DHCPDECLINE</strong> 并重新开始发现。不再需要地址时可发送 <strong>DHCPRELEASE</strong>，让服务器提前回收租约。</li>
+<li>DHCP 广播不能通过普通路由器跨网段。<strong>DHCP 中继代理</strong>接收客户端广播并以单播转发给远程 DHCP 服务器，使多个子网可共享服务器。</li>
+<li>DHCP 依赖 UDP，但通过事务 ID、重试和超时在应用层处理报文丢失。</li>
+</ul>
+<h2 id="section-9">6.4 DNS</h2>
+<p>DNS 是分布式、层次化的命名系统，把域名映射为 IP 地址，也保存邮件交换、别名和权威服务器等信息。</p>
+<h3 id="section-10">6.4.1 层次结构与服务器</h3>
+<pre><code class="language-text">根域名服务器
+  -&gt; 顶级域 TLD 服务器（com、cn、org...）
+    -&gt; 权威域名服务器
+      -&gt; 主机资源记录
+</code></pre>
+<ul>
+<li><strong>本地域名服务器/递归解析器</strong>接受主机查询，使用缓存；缓存未命中时代表主机继续查询。</li>
+<li><strong>根服务器</strong>返回相应 TLD 服务器线索，通常不直接给最终主机地址。</li>
+<li><strong>TLD 服务器</strong>管理顶级域下的授权信息。顶级域可分为国家/地区顶级域（如 <code>.cn</code>、<code>.uk</code>）和通用顶级域（如 <code>.com</code>、<code>.org</code>）。</li>
+<li><strong>权威服务器</strong>保存某区域的正式资源记录并给出权威回答。</li>
+<li>根服务器有 A 至 M 共 <strong>13 个逻辑标识</strong>，但通过任播等方式在全球部署了大量物理实例，不能理解成全世界只有 13 台机器。</li>
+</ul>
+<p>域名由点分隔的标签组成。单个标签的线格式长度最多 63 octet。完整域名的 DNS <strong>线格式</strong>最多 255 octet（包含每个标签的长度字段和结尾的根标签 <code>0</code>）；对应的常见文本 FQDN 最多 253 个字符（不写末尾根点），显式写出末尾根点时最多 254 个字符。教材笼统写“域名最长 255 字符”时，实际混用了线格式字节数与文本字符数，使用时必须说明口径。</p>
+<h3 id="section-11">6.4.2 递归查询与迭代查询</h3>
+<ul>
+<li><strong>递归查询</strong>要求被询问服务器完成后续解析并返回最终结果或错误，客户端对本地 DNS 常使用递归查询。</li>
+<li><strong>迭代查询</strong>由服务器返回下一步应询问的服务器地址，查询者继续请求；本地 DNS 向根、TLD、权威服务器的过程通常按迭代理解。</li>
+<li>缓存记录具有 TTL，过期后需重新查询。缓存降低时延和 DNS 层次负载，但在 TTL 内可能暂时保留旧结果。</li>
+</ul>
+<h3 id="section-12">6.4.3 常见资源记录</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>域名到 IPv4 地址</td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>域名到 IPv6 地址</td>
+</tr>
+<tr>
+<td>NS</td>
+<td>某区域的权威域名服务器</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>别名到规范域名</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>接收该域邮件的邮件服务器及优先级</td>
+</tr>
+<tr>
+<td>PTR</td>
+<td>IP 地址到域名的反向解析</td>
+</tr>
+</tbody>
+</table></div>
+<p>DNS 普通查询通常使用 UDP 53；区域传送使用 TCP 53，响应过大或被截断时也可能改用 TCP。DNS 负责名字与记录查询，不负责自动给主机分配 IP，后者是 DHCP 的任务。</p>
+<h2 id="section-13">6.5 FTP</h2>
+<p>FTP 基于 TCP，使用独立的控制连接与数据连接，属于<strong>带外控制</strong>。</p>
+<ul>
+<li>FTP 提供交互式访问，支持登录鉴权、目录浏览、文件上传与下载，也可按权限限制用户能执行的操作。</li>
+<li>传输时可协商 ASCII、二进制等文件表示类型以及相关格式，使异构主机之间不必由用户手工处理每一种系统差异；实际传普通二进制文件应使用图像/二进制类型，避免内容被换行转换破坏。</li>
+<li>控制连接通常由客户端连服务器 TCP 21，贯穿整个会话，用于登录、目录和传输命令。</li>
+<li>每次文件或目录数据传输另建数据连接，传输结束后关闭。</li>
+<li><strong>主动模式</strong>中服务器通常从 TCP 20 主动连接客户端指定端口。</li>
+<li><strong>被动模式</strong>中服务器告知临时端口，由客户端主动建立数据连接，更适合客户端位于 NAT/防火墙之后的场景。</li>
+</ul>
+<p>FTP 的控制连接和数据连接均为 TCP，因此可靠性由 TCP 提供；“两条连接”不等于要建立两次控制会话。</p>
+<h2 id="section-14">6.6 电子邮件</h2>
+<h3 id="section-15">6.6.1 系统组成与传输路径</h3>
+<p>电子邮件系统包含用户代理、邮件服务器和邮件协议：</p>
+<pre><code class="language-text">发送方用户代理
+  -&gt; SMTP 提交给发送方邮件服务器
+  -&gt; SMTP 在邮件服务器间转发
+  -&gt; 接收方邮件服务器保存邮箱
+  -&gt; POP3 或 IMAP 供接收方读取
+</code></pre>
+<ul>
+<li><strong>SMTP</strong>是基于 TCP 的推送协议，负责邮件提交及邮件服务器之间转发。服务器间中继通常使用端口 25；现代邮件客户端向提交服务器发送邮件通常使用端口 587，并配合身份认证和 STARTTLS，隐式 TLS 提交还常见端口 465。教材只写“SMTP 使用 25”时，多指基础模型或服务器间中继。命令/响应使用文本形式，基本 SMTP 主要处理 7 bit ASCII。</li>
+<li><strong>MIME</strong>扩展邮件格式，通过内容类型、传输编码和多部分边界支持中文、附件、图片、音视频等非 ASCII 内容；它不是独立的邮件传输协议。</li>
+<li><strong>POP3</strong>通常把邮件下载到客户端，模型简单；可配置下载后是否保留服务器副本。</li>
+<li><strong>IMAP</strong>侧重在服务器上管理邮件、文件夹和状态，适合多设备同步，可只取邮件头或部分内容。</li>
+<li>Webmail 浏览器与邮件网站之间使用 HTTP/HTTPS，但网站邮件服务器之间仍通常使用 SMTP。</li>
+</ul>
+<p>一封 Internet 邮件由<strong>首部</strong>与<strong>正文</strong>组成，中间以空行分隔；首部包含 <code>From</code>、<code>To</code>、<code>Subject</code> 等字段。SMTP 的 <code>MAIL FROM</code>、<code>RCPT TO</code> 是传输信封命令，不等同于邮件首部中的同名信息。MIME 通过 <code>Content-Type</code>、<code>Content-Transfer-Encoding</code>、边界参数等字段描述正文类型、编码和多部分结构。</p>
+<h3 id="section-16">6.6.2 SMTP 基本会话</h3>
+<p>典型命令顺序为：<code>HELO/EHLO</code>、<code>MAIL FROM</code>、一个或多个 <code>RCPT TO</code>、<code>DATA</code>，正文以 <code>&lt;CRLF&gt;.&lt;CRLF&gt;</code> 标记结束，服务器返回状态码，最后 <code>QUIT</code>。多个收件人通常不需要重复发送完整邮件正文，服务器可依据多个 <code>RCPT TO</code> 投递。</p>
+<h2 id="section-17">6.7 万维网与 HTTP</h2>
+<h3 id="section-18">6.7.1 URL 与 Web 对象</h3>
+<p>URL 用于定位资源，基本形式为：</p>
+<pre><code class="language-text">协议://主机名:端口/路径?查询参数#片段
+</code></pre>
+<p>一个网页常由基础 HTML 和图片、CSS、JavaScript 等多个对象组成。浏览器可边接收边解析 HTML，识别到引用地址后便可能请求其他对象；经典 RTT 题才常假定“先收齐基础 HTML，再请求引用对象”，详见 <a href="/notes/cs408-0bb2d5ae08e6/#section-1">HTTP 连接题的简化时序</a>。</p>
+<h3 id="section-19">6.7.2 HTTP 特点与报文</h3>
+<ul>
+<li>HTTP 使用请求/响应模型，服务器本身按协议设计为无状态；Cookie、会话标识和应用数据库可在其上实现状态。</li>
+<li>HTTP/1.0 通常按非持续连接使用；HTTP/1.1 默认持续连接并支持流水线思想，实际浏览器实现还会并行连接。</li>
+<li>HTTP/2 在一个连接上多路复用二进制帧；HTTP/3 运行在 QUIC/UDP 上。408 基础计算若未特别说明，通常按题设的 HTTP/1.0 或 HTTP/1.1 模型。</li>
+</ul>
+<p>HTTP/1.x 请求报文由<strong>请求行、若干首部字段、空行和可选实体正文</strong>组成；响应报文对应为<strong>状态行、若干首部字段、空行和可选实体正文</strong>。请求行包含方法、请求目标和版本，状态行包含版本、状态码和原因短语。HTTP/1.1 默认持续连接，但报文若明确含 <code>Connection: close</code>，则应在本次响应后关闭连接，相关计算按非持续/不再复用处理。</p>
+<p>常见请求方法包括 <code>GET</code>、<code>HEAD</code>、<code>POST</code>、<code>PUT</code>、<code>DELETE</code>。常见状态码：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">状态码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">200</td>
+<td>请求成功</td>
+</tr>
+<tr>
+<td style="text-align:right">301/302</td>
+<td>永久/临时重定向</td>
+</tr>
+<tr>
+<td style="text-align:right">304</td>
+<td>缓存资源仍有效，无需返回实体</td>
+</tr>
+<tr>
+<td style="text-align:right">400</td>
+<td>请求语法错误</td>
+</tr>
+<tr>
+<td style="text-align:right">403</td>
+<td>服务器理解但拒绝访问</td>
+</tr>
+<tr>
+<td style="text-align:right">404</td>
+<td>资源不存在</td>
+</tr>
+<tr>
+<td style="text-align:right">500</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td style="text-align:right">505</td>
+<td>不支持请求的 HTTP 版本</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-20">6.7.3 持续连接与 RTT 计算</h3>
+<p>忽略对象发送时间、DNS 和 TCP 关闭时延时：</p>
+<ul>
+<li>建立一个 TCP 连接约需 1 RTT。</li>
+<li>在已建立连接上发送 HTTP 请求并收到响应首字节约需 1 RTT。</li>
+<li>非持续 HTTP 获取一个对象通常约为 $2RTT$；每个对象需要新 TCP 连接。</li>
+</ul>
+<p>若一个基础 HTML 引用 $N$ 个小对象，并采用“主 HTML 完整到达后才开始请求引用对象”的教材时序模型：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th style="text-align:right">近似 RTT 数（不计并行与发送时间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非持续、串行</td>
+<td style="text-align:right">$2(N+1)$</td>
+</tr>
+<tr>
+<td>持续、非流水线</td>
+<td style="text-align:right">$2+N$</td>
+</tr>
+<tr>
+<td>持续、流水线</td>
+<td style="text-align:right">约 $3$</td>
+</tr>
+</tbody>
+</table></div>
+<p>若允许 $k$ 条并行非持续连接，请把 $N$ 个对象分成 $\lceil N/k\rceil$ 批，每批约 2 RTT，再加基础 HTML 的 2 RTT。题目给出发送时延时，还要加上各对象大小除以链路速率，不能只数 RTT。</p>
+<h3 id="section-21">6.7.4 Cookie 与 Web 缓存</h3>
+<p>Cookie 机制通常包括响应中的 <code>Set-Cookie</code>、客户端保存的 Cookie、后续请求中的 <code>Cookie</code> 首部，以及服务器端关联状态的数据库。Cookie 可维持登录、购物车和个性化，但涉及隐私和安全，应配合 <code>Secure</code>、<code>HttpOnly</code>、<code>SameSite</code> 等属性。</p>
+<p>Web 缓存/代理服务器保存对象副本。客户端可通过条件请求验证缓存：例如发送 <code>If-Modified-Since</code> 或实体标签，未修改时服务器返回 <code>304 Not Modified</code>，减少传输量与响应时间。</p>
+<h3 id="section-22">6.7.5 HTTPS 与 TLS 的职责</h3>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充
+HTTPS 不是另一套网页语义，而是让 HTTP 在经过认证和加密保护的安全传输通道上运行。HTTP/1.1、HTTP/2 通常在 TCP 之上使用 TLS；HTTP/3 则在 UDP 之上使用集成 TLS 1.3 的 QUIC。</p>
+</blockquote>
+<p>TLS 建立安全会话时主要完成：</p>
+<ol>
+<li><strong>身份认证</strong>：服务器通常发送证书链。客户端验证受信 CA 签名、域名、有效期等，把公钥与所访问的服务器身份绑定；客户端证书是可选机制。</li>
+<li><strong>密钥协商</strong>：双方协商算法并产生本次会话使用的对称密钥；现代 TLS 通常使用临时 Diffie-Hellman 类密钥交换以提供前向保密。</li>
+<li><strong>机密性与完整性</strong>：后续应用数据加密传输并进行完整性/认证校验，防止旁路者直接读取或静默篡改。</li>
+</ol>
+<pre class="mermaid">sequenceDiagram
+    participant B as 浏览器
+    participant S as HTTPS 服务器
+    B-&gt;&gt;S: 建立 TCP 或 QUIC 连接
+    B-&gt;&gt;S: TLS 参数与密钥协商
+    S--&gt;&gt;B: 证书与握手信息
+    B-&gt;&gt;B: 验证证书和域名
+    B-&gt;&gt;S: 完成握手
+    B-&gt;&gt;S: 加密的 HTTP 请求
+    S--&gt;&gt;B: 加密的 HTTP 响应
+</pre>
+<p>边界必须分清：有效证书说明客户端建立的是被证书所标识端点的加密连接，不自动保证网站内容真实、程序无漏洞或服务器绝不泄露数据；用户忽略证书警告、中间端点被攻陷、终端恶意软件等也不由 TLS 单独解决。</p>
+<p>做时延题时，经典 <code>2RTT</code> 非持续 HTTP 模型通常未计 TLS。若题目明确 HTTPS，应按给出的 TLS 版本、是否会话恢复、TCP/QUIC 建连能否合并等条件另加握手时延，不能擅自套固定 RTT 数。</p>
+<h2 id="section-23">6.8 网络管理与 SNMP（教材补充入口）</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充
+原始 Lecture 12 知识图只在端口表中列出 SNMP，没有展开网络管理体系。完整内容见 <a href="/notes/cs408-1aaca18e58e7/">教材补充：SNMP 与网络管理</a>，其中覆盖 FCAPS、管理站与代理、SMI/MIB/OID、Get/Set/Trap/Inform、UDP 161/162、轮询与通知以及 SNMPv3 安全边界。</p>
+</blockquote>
+<h2 id="section-24">6.9 题型索引</h2>
+<ul>
+<li><a href="/notes/cs408-0bb2d5ae08e6/">1 题型 - HTTP连接</a>：非持续/持续连接、流水线、并行、慢开始与 RTT 计算。</li>
+<li><a href="/notes/cs408-c001d492e92c/">2 题型 - DHCP应用</a>：UDP 端口、初始地址、DORA、中继、冲突检测和租约阶段。</li>
+<li><a href="/notes/cs408-b9c8f13ec3e6/">3 题型 - DNS与HTTP综合</a>：缓存、递归/迭代查询次数及 DNS 与 HTTP 总时延。</li>
+</ul>
+<h2 id="section-25">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-efc7c4d94382/">上一篇：连接控制</a> · <a href="/notes/cs408-1aaca18e58e7/">下一篇：SNMP 与网络管理</a></li>
+</ul>
+<h2 id="section-26">6.10 本节复盘</h2>
+<ul>
+<li>C/S 依赖集中服务器，P2P 汇聚各对等方上传能力；分发时间取服务器上传、客户端下载和系统总上传约束的最大值。</li>
+<li>DHCP 用 DORA 和租约动态配置主机，跨网段需要 DHCP 中继。</li>
+<li>DNS 是分布式层次命名系统；主机对本地解析器多用递归，本地解析器向根/TLD/权威服务器多用迭代，并依靠 TTL 缓存。</li>
+<li>FTP 使用持久控制连接和按需数据连接；主动/被动模式的数据连接发起方不同。</li>
+<li>SMTP 负责发送，POP3/IMAP 负责接收与管理，MIME 扩展非 ASCII 正文和附件格式。</li>
+<li>HTTP 获取对象的时间由 DNS、TCP 建连、请求响应 RTT、对象发送时间以及是否持续/并行/流水线共同决定。</li>
+<li>HTTPS 用 TLS 提供端点认证、密钥协商、机密性与完整性；它保护传输通道，但不等于自动保证站点内容和终端本身安全。</li>
+<li>SNMP 通过管理站、代理与 MIB 对象完成查询、设置和事件通知；常见查询使用 UDP 161，Trap/Inform 通知接收使用 UDP 162，完整内容见教材补充专篇。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-a732e9dcf77f/index.html"><span>← 上一项</span><strong>Lecture 7：栈基本概念</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-ac7b677ecc0f/index.html"><span>下一项 →</span><strong>5 题型 - IP多播</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

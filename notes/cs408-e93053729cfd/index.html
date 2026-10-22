@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 11：知识 - 指令系统的基本概念 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 11：知识 - 指令系统的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 11：知识 - 指令系统的基本概念 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 11：知识 - 指令系统的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-e93053729cfd/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 11：知识 - 指令系统的基本概念 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 11：知识 - 指令系统的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 11：知识 - 指令系统的基本概念",
+      "item": "https://www.jiayuhere.com/notes/cs408-e93053729cfd/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-e93053729cfd/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-e93053729cfd/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-e93053729cfd/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-e93053729cfd/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-e93053729cfd/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 11：知识 - 指令系统的基本概念</h1><p class="article-lead">408 学习笔记：Lecture 11：知识 - 指令系统的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 7 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/2142dd41fb67.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/2142dd41fb67.pdf" download="Lecture 11：知识 - 指令系统的基本概念.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 指令、指令集与 ISA</a><a href="#section-5">4.2 ISA 规定的内容</a><a href="#section-6">4.3 指令的组成与长度</a><a href="#section-9">4.4 本章知识地图与学习接口</a><a href="#section-15">相关知识</a><a href="#section-16">4.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：指令集体系结构（ISA）是软硬件的交界面：程序员/编译器看到的是寄存器、指令、地址空间和异常等规则，CPU 内部如何用流水线、微码或电路实现则是微结构问题。</p>
+</blockquote>
+<h2 id="section-1">4.1 指令、指令集与 ISA</h2>
+<h5 id="section-2"><strong>定义</strong>：#指令</h5>
+<p>指令是计算机执行某种操作的命令，是机器可识别并执行的最小功能单位。程序本质上是按既定顺序组织的一串指令及其数据。</p>
+<h5 id="section-3"><strong>定义</strong>：#指令集</h5>
+<p>一台计算机全部机器指令的集合称为其<strong>指令系统/指令集</strong>。机器只能直接执行本 ISA 规定的指令，不能直接执行其他 ISA 的机器码；例如 x86 与 ARM 的二进制指令通常不可互换，需要重新编译、翻译或模拟。</p>
+<h5 id="section-4"><strong>定义</strong>：#ISA</h5>
+<p>指令集体系结构是软件与硬件之间的可见约定。它说明“机器对外能做什么、如何编码和访问”，而不规定某型号 CPU 内部一定如何实现。ISA 是计算机体系结构的重要内容；同一个 ISA 可由不同主频、流水线深度、Cache 组织的处理器实现。</p>
+<h2 id="section-5">4.2 ISA 规定的内容</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>范畴</th>
+<th>ISA 要规定的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据</td>
+<td>支持的数据类型、长度与编码格式</td>
+</tr>
+<tr>
+<td>指令</td>
+<td>指令种类、语义、操作码与指令格式</td>
+</tr>
+<tr>
+<td>地址与寻址</td>
+<td>寻址方式、可访问地址空间大小</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>程序可见寄存器的个数、位数、编号，以及控制寄存器定义</td>
+</tr>
+<tr>
+<td>I/O</td>
+<td>I/O 空间编址方式、I/O 结构与数据传送方式</td>
+</tr>
+<tr>
+<td>异常与状态</td>
+<td>中断结构、机器工作状态及其切换</td>
+</tr>
+<tr>
+<td>保护</td>
+<td>存储保护方式与访问权限规则</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>对应用程序，ISA 决定一段机器级代码是否能运行；对编译器，ISA 决定可选指令、寄存器分配和调用约定的基础；对 OS，ISA 决定特权状态、中断、地址转换等机制。</li>
+<li>微程序、控制器设计、流水线划分等属于 ISA 下的具体实现；它们可能改变性能，却不必改变已有程序的二进制兼容性。</li>
+</ul>
+<h2 id="section-6">4.3 指令的组成与长度</h2>
+<h3 id="section-7">4.3.1 基本格式</h3>
+<p>一条指令通常由<strong>操作码</strong>和<strong>地址码</strong>组成：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作码（opcode）</td>
+<td>说明执行何种操作，是识别指令功能、理解操作数使用方式的关键信息</td>
+</tr>
+<tr>
+<td>地址码（address field）</td>
+<td>给出操作数位置、转移目标或其他相关地址信息；具体含义由寻址方式决定</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>地址码不一定永远是“内存绝对地址”：它可能编码寄存器号、位移量、立即数、间接地址或寻址方式字段。</li>
+<li>指令字长是一条指令含有的二进制位数；机器字长是 CPU 整数通路/寄存器等的宽度，二者没有必然相等关系。</li>
+</ul>
+<h3 id="section-8">4.3.2 指令长度组织</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>判据</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单字长/多字长/半字长指令</td>
+<td>指令字长相对机器字长的倍数关系</td>
+<td>只描述编码长度与机器字长的关系；取指所需访存次数还取决于存储字长、总线与 Cache 等组织</td>
+</tr>
+<tr>
+<td>定长指令字</td>
+<td>指令系统中各指令长度相同</td>
+<td>译码和取指边界简单，适合规则流水</td>
+</tr>
+<tr>
+<td>变长指令字</td>
+<td>不同指令可使用不同长度</td>
+<td>常用操作可短编码，表达力高，但取指和译码更复杂</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>单字长不等于“只能有一个操作数”，半字长也不等于“半条指令”；它们是指令编码长度和机器字长度的关系。</li>
+<li>判断定长/变长只看同一 ISA 内指令长度是否一致，不看不同机器之间的字长差异。</li>
+</ul>
+<h2 id="section-9">4.4 本章知识地图与学习接口</h2>
+<p>本章后续内容可按以下链路理解：</p>
+<p><code>ISA 定义可见资源 -&gt; 指令格式编码 -&gt; 寻址获得操作数 -&gt; 对齐/端序决定内存字节解释 -&gt; CISC/RISC 影响实现取舍 -&gt; 高级语言经编译、汇编、链接落到机器指令</code></p>
+<ul>
+<li>指令格式决定操作码和字段如何装入指令字；寻址方式决定地址码如何得到有效地址；数据对齐与端序决定多字节数据怎样落在内存。</li>
+<li>高级语言的选择、循环、函数调用最终都要转换为比较、分支、跳转、栈和寄存器操作，后续讲会从机器级角度展开。</li>
+</ul>
+<h3 id="section-10">4.4.1 从源代码到 ISA 指令</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>输入</th>
+<th>输出/职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编译器</td>
+<td>高级语言源代码</td>
+<td>生成汇编代码或目标代码，并依据 ISA 选择指令、分配寄存器、安排控制流</td>
+</tr>
+<tr>
+<td>汇编器</td>
+<td>汇编语言</td>
+<td>把助记符和符号地址翻译为可重定位机器目标代码</td>
+</tr>
+<tr>
+<td>链接器</td>
+<td>多个目标文件与库</td>
+<td>解析外部符号、合并段并完成地址重定位，生成可执行文件</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>编译器、汇编器、链接器都服务于“把人类可读代码变成符合目标 ISA 的机器码”，但分工不同。编译器不能绕开 ISA，汇编器也不能让 ARM 汇编直接变成 x86 机器码。</li>
+<li>操作系统加载程序后，CPU 取到的最终是机器指令；源文件、汇编源文件和可重定位目标文件都不是 CPU 直接按原样执行的最终形式。</li>
+</ul>
+<h3 id="section-11">4.4.2 指令设计的基本权衡</h3>
+<ul>
+<li>操作码位数越多，可编码的指令种类越多；但在定长指令中会压缩地址码或立即数字段的可用位数。</li>
+<li>地址码字段越多，一条指令可直接描述更多操作数；但指令长度、取指带宽与译码复杂度也会增加，因此很多 ISA 使用寄存器操作数、隐含操作数或不同长度指令折中。</li>
+<li>ISA 一经广泛采用，兼容性很重要。新处理器可在内部彻底改变实现，只要保持程序可见行为和指令语义不变，旧二进制程序仍可运行。</li>
+</ul>
+<h3 id="section-12">题型：#ISA 与微结构辨析</h3>
+<h4 id="section-13">第一部分：判断方法</h4>
+<ul>
+<li>问“程序可见的寄存器、指令、地址空间、异常入口”通常属于 ISA。</li>
+<li>问“几级 Cache、几级流水、是否超标量、具体控制器电路”通常属于微结构或实现；除非题目明确把这些暴露为 ISA 特性。</li>
+<li>问“能否直接执行”看指令编码是否属于同一 ISA；操作系统相同、主频相同都不能替代 ISA 兼容。</li>
+</ul>
+<h4 id="section-14">第二部分：易错点</h4>
+<ul>
+<li>不要把“指令集”说成“某程序包含的指令”；它是机器支持的全部指令集合。</li>
+<li>不要因数据和指令都是二进制，就认为不同架构二进制程序通用；操作码、寄存器、寻址和异常规则均可能不同。</li>
+</ul>
+<h2 id="section-15">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-5865bd37ecaf/">上一篇：虚拟存储器</a> · <a href="/notes/cs408-3150a4e10306/">下一篇：寻址方式</a></li>
+</ul>
+<h2 id="section-16">4.5 本节复盘</h2>
+<ul>
+<li>指令是机器执行操作的最小命令；一台机器的全部指令构成指令集，直接执行能力由 ISA 决定。</li>
+<li>ISA 规定数据、指令、寻址、寄存器、I/O、中断/状态和保护等软件可见规则，是软硬件交界面。</li>
+<li>一条指令的核心字段是操作码和地址码；地址码可以表示多种操作数/目标信息，指令字长与机器字长没有固定关系。</li>
+<li>定长指令按统一长度组织，变长指令允许不同长度；后续所有寻址、格式与机器级代码题都建立在这套 ISA 规则上。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-e843016612d3/index.html"><span>← 上一项</span><strong>1 题型 - IPv4地址结构及其计算</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-eea268c88872/index.html"><span>下一项 →</span><strong>Lecture 1：数据库绪论</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

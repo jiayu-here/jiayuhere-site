@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 8：集成学习 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 8：集成学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 8：集成学习 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 8：集成学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-a42ee6cb57ff/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 8：集成学习 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 8：集成学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 8：集成学习",
+      "item": "https://www.jiayuhere.com/notes/cs408-a42ee6cb57ff/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-a42ee6cb57ff/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a42ee6cb57ff/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a42ee6cb57ff/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a42ee6cb57ff/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-a42ee6cb57ff/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 8：集成学习</h1><p class="article-lead">408 学习笔记：Lecture 8：集成学习。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 11 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/8e5e8bbfac0e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/8e5e8bbfac0e.pdf" download="Lecture 8：集成学习.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">8.1 强可学习、弱可学习与集成</a><a href="#section-2">8.2 集成有效的条件：好而不同</a><a href="#section-3">8.3 误差-分歧分解</a><a href="#section-4">8.4 两类主要集成方法</a><a href="#section-5">8.5 Boosting</a><a href="#section-6">8.6 Bagging</a><a href="#section-7">8.7 多样性度量</a><a href="#section-8">$$
+\operatorname{dis}(h_i,h_j)</a><a href="#section-9">8.8 随机森林</a><a href="#section-10">8.9 AdaBoost</a><a href="#section-11">8.10 AdaBoost 算法</a><a href="#section-14">$$
+\epsilon_t</a><a href="#section-15">$$
+\alpha_t</a><a href="#section-16">$$
+D_{t+1}(i)</a><a href="#section-17">$$
+D_{t+1}(i)</a><a href="#section-18">$$
+w_i^{\mathrm{new}}</a><a href="#section-19">$$
+w_i^{\mathrm{new}}</a><a href="#section-21">$$
+H(\boldsymbol{x})</a><a href="#section-22">8.11 AdaBoost、指数损失与过拟合</a><a href="#section-25">$$
+\operatorname{margin}_i</a><a href="#section-27">8.12 易错点</a><a href="#section-28">相关知识</a><a href="#section-29">8.13 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节说明集成学习“好而不同”的核心要求，区分 Boosting 与 Bagging，整理多样性度量、随机森林、AdaBoost 的完整算法，以及 AdaBoost 与指数损失、分类间隔的关系。</p>
+</blockquote>
+<h2 id="section-1">8.1 强可学习、弱可学习与集成</h2>
+<ul>
+<li>强可学习指存在多项式时间学习算法，能训练出错误概率足够小的模型。</li>
+<li>弱可学习指学习效果只需稳定地略好于随机猜测。</li>
+<li>Boosting 理论关心：能否把多个弱学习器组合成强学习器。</li>
+<li>集成学习把多个个体学习器组合起来共同解决一个问题。</li>
+</ul>
+<p>若所有个体由同类算法生成，称为同质集成；若个体模型类型不同，称为异质集成。</p>
+<ul>
+<li>同质集成易于统一比较和组合，但必须通过数据、特征、参数或训练顺序制造差异。</li>
+<li>异质集成天然具有差异，但不同模型的输出尺度和语义可能不同，组合前常需校准或对齐。</li>
+<li>产生个体学习器的算法称为基学习算法，生成的模型称为基学习器。</li>
+</ul>
+<h2 id="section-2">8.2 集成有效的条件：好而不同</h2>
+<p>源资料用三个准确率均为 $66.6%$ 的学习器说明：</p>
+<ul>
+<li>若三个学习器犯错位置不同，多数投票可能把整体准确率提高到 $100%$。</li>
+<li>若三个学习器在同一位置犯错，投票后仍只有 $66.6%$。</li>
+<li>若每个学习器都很差，即使错误不同，多数投票也可能得到更坏结果。</li>
+</ul>
+<p>因此有效集成要求：</p>
+<ol>
+<li>个体学习器不能太差。</li>
+<li>个体学习器之间要有足够差异。</li>
+</ol>
+<h2 id="section-3">8.3 误差-分歧分解</h2>
+<p>在平方损失等特定条件下，集成误差可分解为</p>
+<p>$$
+E=\bar E-\bar A,
+$$</p>
+<p>其中：</p>
+<ul>
+<li>
+<p>$E$ 是集成误差。</p>
+</li>
+<li>
+<p>$\bar E$ 是个体学习器平均误差。</p>
+</li>
+<li>
+<p>$\bar A$ 是个体相对集成输出的平均分歧，也称 ambiguity 或 diversity。</p>
+</li>
+<li>
+<p>希望 $\bar E$ 小，即个体准确。</p>
+</li>
+<li>
+<p>希望 $\bar A$ 大，即个体多样。</p>
+</li>
+<li>
+<p>“误差小”和“差异大”往往相互制约，实际算法要在二者之间平衡。</p>
+</li>
+<li>
+<p>该等式依赖具体损失、组合规则和假设，不能无条件套用到所有分类集成。</p>
+</li>
+</ul>
+<h2 id="section-4">8.4 两类主要集成方法</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>训练关系</th>
+<th>代表算法</th>
+<th>核心方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>序列化</td>
+<td>后一模型依赖前一模型</td>
+<td>AdaBoost、Gradient Boost</td>
+<td>逐轮关注前面未解决的问题</td>
+</tr>
+<tr>
+<td>并行化</td>
+<td>各模型可相对独立训练</td>
+<td>Bagging、Random Forest、Random Subspace</td>
+<td>重采样或随机特征制造差异</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-5">8.5 Boosting</h2>
+<ul>
+<li>Boosting 先训练第一个学习器，再根据其错误调整训练分布或残差，使后续学习器更关注困难样本。</li>
+<li>各学习器按顺序生成，后一学习器依赖前面学习器的结果。</li>
+<li>最后使用加权组合得到集成输出。</li>
+<li>Boosting 主要降低偏差，能把许多弱学习器逐步增强。</li>
+</ul>
+<h2 id="section-6">8.6 Bagging</h2>
+<p>Bagging 是 Bootstrap Aggregating 的缩写。</p>
+<ol>
+<li>从原始数据集通过有放回的自助采样生成多个训练集。</li>
+<li>在每个自助样本集上独立训练一个基学习器。</li>
+<li>分类任务使用投票，回归任务使用平均。</li>
+</ol>
+<p>若原始数据有 $m$ 个样本，每个自助集抽取 $m$ 次，则一个样本至少被抽到一次的概率趋于</p>
+<p>$$
+1-\frac{1}{e}
+\approx0.632.
+$$</p>
+<ul>
+<li>每个自助集约含 $63.2%$ 个不重复的原始样本，其余抽样位置是重复样本。</li>
+<li>源资料写作 $63.7%$，按极限公式正确近似值应为 $63.2%$。</li>
+<li>不同自助集不完全相同，从而产生有差异的学习器。</li>
+<li>Bagging 可并行训练，常用于降低高方差模型的方差。</li>
+</ul>
+<h2 id="section-7">8.7 多样性度量</h2>
+<p>对两个二分类器 $h_i,h_j$，可按预测是否正确构造表：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">$h_i$ 正确</th>
+<th style="text-align:right">$h_i$ 错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$h_j$ 正确</td>
+<td style="text-align:right">$a$</td>
+<td style="text-align:right">$c$</td>
+</tr>
+<tr>
+<td>$h_j$ 错误</td>
+<td style="text-align:right">$b$</td>
+<td style="text-align:right">$d$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>两者预测表现一致的样本数是 $a+d$。</li>
+<li>两者表现不一致的样本数是 $b+c$。</li>
+<li>源资料用</li>
+</ul>
+<p>$$
+\frac{b+c}{a+d}
+$$</p>
+<p>或</p>
+<p>$$
+(b+c)-(a+d)
+$$</p>
+<p>直观比较分歧。</p>
+<ul>
+<li>常见标准化不合度为</li>
+</ul>
+<h1 id="section-8">$$
+\operatorname{dis}(h_i,h_j)</h1>
+<p>\frac{b+c}{a+b+c+d}.
+$$</p>
+<ul>
+<li>其他度量还包括相关系数、$Q$ 统计量和 $\kappa$ 统计量。</li>
+<li>多样性必须结合个体准确率理解，差异越大并不自动意味着集成越好。</li>
+</ul>
+<h2 id="section-9">8.8 随机森林</h2>
+<p>随机森林是以决策树为基学习器的并行集成。</p>
+<p>“随机”通常来自两方面：</p>
+<ol>
+<li>每棵树使用原始训练集的自助采样子集。</li>
+<li>每个结点划分时，只从随机选择的一部分候选特征中寻找最优划分。</li>
+</ol>
+<p>基本过程：</p>
+<ol>
+<li>设定树的数量、最大深度、每次候选特征数等超参数。</li>
+<li>对每棵树生成自助训练集并独立训练。</li>
+<li>分类取多数票，回归取平均值。</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>随机性与平均化通常使模型对噪声和异常点较稳健，不易出现单棵深树那样的高方差过拟合。</li>
+<li>能处理高维数据，并可并行训练。</li>
+<li>可给出基于划分或置换的特征重要性。</li>
+</ul>
+<p>局限：</p>
+<ul>
+<li>模型由许多树组成，整体不再像单棵小树那样容易逐路径解释。</li>
+<li>特征重要性只表示统计贡献，不等于因果解释，并可能受特征尺度、基数和相关性影响。</li>
+<li>随机森林常有较强稳健基线性能，但并非绝不会过拟合，也不能保证解决所有复杂任务。</li>
+</ul>
+<h2 id="section-10">8.9 AdaBoost</h2>
+<p>AdaBoost 是 Adaptive Boosting，即自适应增强。</p>
+<ul>
+<li>先训练弱学习器。</li>
+<li>降低已正确分类样本的权重，提高误分类样本的权重。</li>
+<li>后续学习器更关注前面难以处理的样本。</li>
+<li>最终按每个弱学习器的可靠程度加权组合。</li>
+</ul>
+<p>它与 Bagging 的主要差异是：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>Bagging/随机森林</th>
+<th>AdaBoost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练关系</td>
+<td>相对独立、可并行</td>
+<td>顺序依赖</td>
+</tr>
+<tr>
+<td>数据变化</td>
+<td>自助采样</td>
+<td>调整样本权重</td>
+</tr>
+<tr>
+<td>组合</td>
+<td>常等权投票/平均</td>
+<td>加权投票</td>
+</tr>
+<tr>
+<td>主要效果</td>
+<td>降低方差</td>
+<td>逐步降低偏差</td>
+</tr>
+<tr>
+<td>对异常点</td>
+<td>通常较稳健</td>
+<td>可能过度关注错分异常点</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-11">8.10 AdaBoost 算法</h2>
+<p>给定训练集</p>
+<p>$$
+D={(\boldsymbol{x}<em>i,y_i)}</em>{i=1}^{m},
+\qquad
+y_i\in{-1,+1},
+$$</p>
+<p>基学习算法 $\mathcal L$ 和轮数 $T$。</p>
+<h3 id="section-12">8.10.1 初始化</h3>
+<p>每个样本初始权重相同：</p>
+<p>$$
+D_1(i)=\frac{1}{m}.
+$$</p>
+<h3 id="section-13">8.10.2 第 $t$ 轮</h3>
+<p>用当前分布训练弱学习器：</p>
+<p>$$
+h_t=\mathcal L(D,D_t).
+$$</p>
+<p>加权错误率：</p>
+<h1 id="section-14">$$
+\epsilon_t</h1>
+<p>\sum_{i=1}^{m}
+D_t(i)
+\mathbb I
+\left(
+h_t(\boldsymbol{x}_i)\neq y_i
+\right).
+$$</p>
+<p>若</p>
+<p>$$
+\epsilon_t\geq 0.5,
+$$</p>
+<p>该二分类弱学习器不优于随机猜测；$\epsilon_t=0.5$ 时 $\alpha_t=0$，本轮没有贡献，应停止、重新训练或换学习器。若 $\epsilon_t=0$，弱学习器已在当前加权训练集上完美分类，下面的对数公式会发散，应直接停止或在数值实现中裁剪误差。因此有限权重公式按 $0&lt;\epsilon_t&lt;0.5$ 使用。</p>
+<p>学习器权重：</p>
+<h1 id="section-15">$$
+\alpha_t</h1>
+<p>\frac{1}{2}
+\ln
+\frac{1-\epsilon_t}{\epsilon_t}.
+$$</p>
+<p>更新样本分布：</p>
+<h1 id="section-16">$$
+D_{t+1}(i)</h1>
+<p>\frac{
+D_t(i)
+\exp
+\left[
+-\alpha_ty_ih_t(\boldsymbol{x}_i)
+\right]
+}{
+Z_t
+},
+$$</p>
+<p>其中 $Z_t$ 是归一化常数。</p>
+<p>等价地：</p>
+<h1 id="section-17">$$
+D_{t+1}(i)</h1>
+<p>\frac{D_t(i)}{Z_t}
+\begin{cases}
+e^{-\alpha_t},
+&amp;h_t(\boldsymbol{x}_i)=y_i,\
+e^{\alpha_t},
+&amp;h_t(\boldsymbol{x}_i)\neq y_i.
+\end{cases}
+$$</p>
+<p>归一化后，正确样本的权重可写为</p>
+<h1 id="section-18">$$
+w_i^{\mathrm{new}}</h1>
+<p>\frac{1}{2(1-\epsilon_t)}
+w_i^{\mathrm{old}},
+$$</p>
+<p>错误样本的权重为</p>
+<h1 id="section-19">$$
+w_i^{\mathrm{new}}</h1>
+<p>\frac{1}{2\epsilon_t}
+w_i^{\mathrm{old}}.
+$$</p>
+<p>因为 $\epsilon_t&lt;0.5$，错分样本权重会相对增大。</p>
+<h3 id="section-20">8.10.3 输出</h3>
+<p>最终强分类器为</p>
+<h1 id="section-21">$$
+H(\boldsymbol{x})</h1>
+<p>\operatorname{sign}
+\left(
+\sum_{t=1}^{T}
+\alpha_t
+h_t(\boldsymbol{x})
+\right).
+$$</p>
+<ul>
+<li>错误率越小，$\alpha_t$ 越大，该弱学习器在最终投票中权重越高。</li>
+</ul>
+<h2 id="section-22">8.11 AdaBoost、指数损失与过拟合</h2>
+<h3 id="section-23">8.11.1 统计观点</h3>
+<ul>
+<li>0-1 损失不连续，直接优化困难。</li>
+<li>AdaBoost 的样本权重更新与指数损失密切相关，可理解为逐步优化</li>
+</ul>
+<p>$$
+\sum_{i=1}^{m}
+\exp
+\left[
+-y_iF(\boldsymbol{x}_i)
+\right].
+$$</p>
+<ul>
+<li>改变替代损失和优化方式可得到其他 Boosting 方法。</li>
+<li>这一观点解释了权重更新和函数优化的联系，但不能单独保证 AdaBoost 永不过拟合。</li>
+</ul>
+<h3 id="section-24">8.11.2 间隔观点</h3>
+<p>对样本 $(\boldsymbol{x}_i,y_i)$，集成分类间隔可写为</p>
+<h1 id="section-25">$$
+\operatorname{margin}_i</h1>
+<p>\frac{
+y_i\sum_{t=1}^{T}
+\alpha_t h_t(\boldsymbol{x}<em>i)
+}{
+\sum</em>{t=1}^{T}|\alpha_t|
+}.
+$$</p>
+<ul>
+<li>间隔为正表示分类正确，间隔越大通常表示分类把握越强。</li>
+<li>即使训练误差已降到 $0$，继续训练仍可能改善间隔分布，因此测试性能有时继续提高。</li>
+<li>研究后来从只关注最小间隔，发展到关注平均间隔或整个间隔分布，并结合模型复杂度给出泛化界。</li>
+</ul>
+<h3 id="section-26">8.11.3 正确结论</h3>
+<ul>
+<li>AdaBoost 在许多干净数据上表现出对继续训练的经验抗过拟合现象。</li>
+<li>但它会持续提高错分样本权重，对标签噪声和异常点可能非常敏感，仍然可能过拟合。</li>
+<li>因而不能简单断言“AdaBoost 不会过拟合”；应结合噪声、基学习器复杂度、轮数和验证性能判断。</li>
+</ul>
+<h2 id="section-27">8.12 易错点</h2>
+<ul>
+<li>集成不是模型越多越好；个体若高度相关或普遍很差，投票不能产生有效提升。</li>
+<li>同质模型表示算法类型相同，不表示训练数据、参数和预测完全相同。</li>
+<li>Bagging 的单个自助训练集约含 $63.2%$ 个不同原始样本，不是 $63.2%$ 个抽样位置。</li>
+<li>随机森林除样本随机外，还在结点划分时随机选择候选特征。</li>
+<li>随机森林分类用投票，回归用平均。</li>
+<li>多样性越大不一定越好，必须与个体误差同时考虑。</li>
+<li>AdaBoost 的弱学习器必须优于随机猜测，二分类中要求 $\epsilon_t&lt;0.5$。</li>
+<li>$\epsilon_t=0.5$ 时弱学习器权重为 0，$\epsilon_t=0$ 时理论权重趋于无穷；两种边界都应在代入对数公式前单独处理。</li>
+<li>错分样本权重变大，正确样本权重变小；弱学习器权重 $\alpha_t$ 随错误率下降而增大。</li>
+<li>AdaBoost 的最终结果是加权符号和，不是简单等权多数票。</li>
+<li>AdaBoost 可能在训练误差为 $0$ 后继续改善间隔，但噪声和异常点仍可使其过拟合。</li>
+</ul>
+<h2 id="section-28">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-ad7ab8f32e2a/">上一篇：贝叶斯决策论</a> · <a href="/notes/cs408-c3d6d4b33f5b/">下一篇：聚类</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-598d9fb6fbb4/">AdaBoost 与特征选择</a></li>
+</ul>
+<h2 id="section-29">8.13 本节复盘</h2>
+<ul>
+<li>集成学习用多个学习器共同预测，有效集成要求个体“好而不同”。</li>
+<li>误差-分歧分解表明，在适用条件下，个体误差越小、分歧越大，集成误差越低。</li>
+<li>Boosting 顺序训练，后续模型关注前面错误；Bagging 用自助样本并行训练，再投票或平均。</li>
+<li>自助训练集约含 $63.2%$ 个不同原始样本。</li>
+<li>随机森林同时随机采样样本和候选特征，分类取众数，回归取均值。</li>
+<li>AdaBoost 依据加权错误率计算 $\alpha_t$，提高错分样本权重，最后输出 $\operatorname{sign}(\sum_t\alpha_th_t)$。</li>
+<li>指数损失解释 AdaBoost 的函数优化过程，间隔理论解释训练误差为 $0$ 后仍可能提升泛化；但它并非绝不会过拟合。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-a3a4d665ca47/index.html"><span>← 上一项</span><strong>Lecture 4：知识 - 同步与互斥</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a58dbd00622a/index.html"><span>下一项 →</span><strong>Lecture 24：知识 - 中断</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 2：知识 - 计算机网络体系结构与参考模型 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 2：知识 - 计算机网络体系结构与参考模型。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 2：知识 - 计算机网络体系结构与参考模型 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 2：知识 - 计算机网络体系结构与参考模型。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-9af3b667a6a2/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 2：知识 - 计算机网络体系结构与参考模型 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 2：知识 - 计算机网络体系结构与参考模型。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 2：知识 - 计算机网络体系结构与参考模型",
+      "item": "https://www.jiayuhere.com/notes/cs408-9af3b667a6a2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-9af3b667a6a2/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-9af3b667a6a2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-9af3b667a6a2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-9af3b667a6a2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-9af3b667a6a2/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 2：知识 - 计算机网络体系结构与参考模型</h1><p class="article-lead">408 学习笔记：Lecture 2：知识 - 计算机网络体系结构与参考模型。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 14 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/27075a40fee0.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/27075a40fee0.pdf" download="Lecture 2：知识 - 计算机网络体系结构与参考模型.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 网络体系结构与分层</a><a href="#section-5">1.2 协议、服务与接口</a><a href="#section-11">1.3 OSI 七层参考模型</a><a href="#section-19">1.4 TCP/IP 四层模型</a><a href="#section-20">1.5 OSI 与 TCP/IP 的比较</a><a href="#section-21">1.6 数据的封装、传输和解封装</a><a href="#section-25">相关知识</a><a href="#section-26">1.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：网络体系结构定义“各层做什么、相邻层怎样服务、对等层怎样通信”，但不规定具体软硬件代码。用“协议横向、服务纵向、接口在相邻层之间”理解 OSI 和 TCP/IP，可串起封装、端到端与点到点的所有考点。</p>
+</blockquote>
+<h2 id="section-1">1.1 网络体系结构与分层</h2>
+<p><strong>网络体系结构</strong>（architecture）是计算机网络各层及其协议的集合，是对网络及其应完成功能的精确定义。体系结构是抽象规范；硬件、软件如何实现某协议是具体实现问题，体系结构不描述实现细节。</p>
+<h3 id="section-2">1.1.1 基本术语</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对等层</td>
+<td>不同机器上的同一层</td>
+</tr>
+<tr>
+<td>对等实体</td>
+<td>不同机器上同一层的实体，按本层协议进行逻辑通信</td>
+</tr>
+<tr>
+<td>服务提供者/服务用户</td>
+<td>第 $n$ 层向第 $n+1$ 层提供服务，前者为提供者，后者为用户</td>
+</tr>
+<tr>
+<td>PDU</td>
+<td>对等实体间传送的协议数据单元；第 $n$ 层的为 $n$-PDU，含数据和控制信息两部分</td>
+</tr>
+<tr>
+<td>SDU</td>
+<td>上层交给本层、作为本层数据部分的服务数据单元</td>
+</tr>
+<tr>
+<td>PCI</td>
+<td>本层为实现协议加入的控制信息（protocol control information）</td>
+</tr>
+</tbody>
+</table></div>
+<p>每层 PDU 可抽象为：</p>
+<p>$$n\text{-PDU}=n\text{-PCI}+n\text{-SDU}$$</p>
+<p>其中 $n\text{-SDU}$ 是第 $n+1$ 层交给第 $n$ 层的数据；通常可理解为上层的 $(n+1)\text{-PDU}$ 下交后成为本层的 $n\text{-SDU}$，本层再加入 $n\text{-PCI}$ 形成 $n\text{-PDU}$。</p>
+<h3 id="section-3">1.1.2 分层原则</h3>
+<ol>
+<li>每层实现相对独立功能，降低大系统复杂度。</li>
+<li>层间接口清晰、相互交流尽量少。</li>
+<li>层功能定义独立于实现方法，可选适合的技术实现。</li>
+<li>下层对上层保持独立，上层只使用下层服务。</li>
+<li>分层结构应促进标准化。</li>
+</ol>
+<h3 id="section-4">1.1.3 网络标准化与主要组织</h3>
+<blockquote>
+<p><strong>INFO</strong> · 教材补充</p>
+</blockquote>
+<p>网络设备只有遵守共同的接口和协议规范才能互通。标准大体可分为：</p>
+<ul>
+<li><strong>法定标准（de jure）</strong>：由权威标准组织按正式程序制定，如 ISO、ITU-T、IEEE 发布的标准。</li>
+<li><strong>事实标准（de facto）</strong>：先因广泛实现和使用形成产业共识，再可能被正式吸收；TCP/IP 的早期普及是典型例子。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>组织/文档体系</th>
+<th>与计算机网络的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO</td>
+<td>制定国际标准；OSI 参考模型由 ISO 推出</td>
+</tr>
+<tr>
+<td>ITU-T</td>
+<td>制定电信、传输与接口等建议标准</td>
+</tr>
+<tr>
+<td>IEEE</td>
+<td>制定局域网/城域网的 IEEE 802 系列，如 802.3 以太网、802.11 无线局域网</td>
+</tr>
+<tr>
+<td>IETF</td>
+<td>通过开放工作组推进 Internet 协议规范，成果主要发布在 RFC 文档系列中</td>
+</tr>
+</tbody>
+</table></div>
+<p>RFC 是一类公开文档的编号体系，<strong>并非每一份 RFC 都是 Internet 标准</strong>；其中还包括信息性、实验性、最佳当前实践等文档。Internet-Draft 是有期限的工作草案，也不能直接当作已发布 RFC。教材旧版有时把标准轨道写成“建议标准 -&gt; 草案标准 -&gt; Internet 标准”，而当前 IETF 标准轨道的主要成熟级别是 <strong>Proposed Standard</strong> 与 <strong>Internet Standard</strong>；做历史题时应按题目给定年代和口径判断。</p>
+<h2 id="section-5">1.2 协议、服务与接口</h2>
+<h3 id="section-6">1.2.1 协议：对等层间的横向规则</h3>
+<p><strong>协议</strong>是控制对等实体通信规则的集合，由**语法、语义、同步（时序）**组成。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>定义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语法</td>
+<td>数据与控制信息的格式</td>
+<td>TCP 报文段首部字段和格式</td>
+</tr>
+<tr>
+<td>语义</td>
+<td>应发何种控制信息、完成什么动作、如何应答</td>
+<td>TCP 三次握手中收到报文后应进行的操作</td>
+</tr>
+<tr>
+<td>同步/时序</td>
+<td>操作条件、事件顺序与时间关系</td>
+<td>三次握手“先 SYN、后 SYN+ACK、再 ACK”的顺序</td>
+</tr>
+</tbody>
+</table></div>
+<p>口诀：<strong>语法看形式，语义看做什么，同步看先后。</strong> 时序图中的纵向时间轴/报文先后通常考查同步，而报文格式图才考查语法。</p>
+<h3 id="section-7">1.2.2 服务与 SAP：相邻层间的纵向关系</h3>
+<p><strong>服务</strong>是下层向紧邻上层提供的功能调用，方向是垂直的。每层实体在本层协议约束下工作，借助下层服务，进而向上层提供服务。</p>
+<p>层只能与紧邻层定义接口，不能跨层定义接口。<strong>服务访问点</strong>（SAP，Service Access Point）是同一节点内相邻两层实体交换信息的逻辑接口，即第 $n+1$ 层访问第 $n$ 层服务的位置。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>具体协议/层次</th>
+<th>常见上层协议分用标识</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>以太网数据链路层</td>
+<td>EtherType 字段标识所承载的上层协议</td>
+</tr>
+<tr>
+<td>IPv4/IPv6 网络层</td>
+<td>Protocol/Next Header 字段标识上层协议</td>
+</tr>
+<tr>
+<td>TCP/UDP 传输层</td>
+<td>端口号帮助把报文分用到进程或套接字</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>SAP 是相邻层之间的抽象服务访问位置；以上字段是具体协议中常见的<strong>分用标识</strong>，可帮助理解服务用户的选择，但不能无条件等同于所有体系结构中的 SAP 本体。</p>
+</blockquote>
+<h3 id="section-8">1.2.3 服务分类</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>类型</th>
+<th>特征与例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否建连</td>
+<td>面向连接</td>
+<td>先建立连接/分配资源，再传输，结束时释放；分建立、数据传输、释放三阶段，TCP 为例</td>
+</tr>
+<tr>
+<td></td>
+<td>无连接</td>
+<td>无须预建连接，带目的地址的数据可直接发送；无连接只描述建连方式，不必然等于不可靠。IP、UDP 是无连接且不可靠的具体例子</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>可靠服务</td>
+<td>通过检错配合重传，或使用前向纠错等机制，按服务承诺保证数据正确、可靠地交付；只有应答而无超时、重传等配套机制并不足以保证可靠</td>
+</tr>
+<tr>
+<td></td>
+<td>不可靠服务</td>
+<td>只按既定能力尽量交付；需要时可由上层增加序号、确认、超时与重传等机制来获得所需可靠性</td>
+</tr>
+<tr>
+<td>是否自动确认</td>
+<td>有应答</td>
+<td>在<strong>所讨论层的服务接口</strong>中，接收/服务方按该服务规范返回响应或证实</td>
+</tr>
+<tr>
+<td></td>
+<td>无应答</td>
+<td>在所讨论层的服务接口中不自动返回证实；下层是否仍有 TCP ACK 等机制是另一问题</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>教材有时用“文件传输有应答、WWW 页面无应答”举例，只能理解为特定层次和服务原语的分类；不能据此断言底层没有 TCP 确认，也不能把 HTTP 响应与链路/传输层确认混为一谈。</p>
+</blockquote>
+<h3 id="section-9">1.2.4 服务原语</h3>
+<p>上层使用下层服务时发出的命令称<strong>服务原语</strong>。有应答服务使用四类原语；无应答服务只需请求、指示两类。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原语</th>
+<th>方向</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Request</code> 请求</td>
+<td>服务用户 -&gt; 服务提供者</td>
+<td>请求执行工作</td>
+</tr>
+<tr>
+<td><code>Indication</code> 指示</td>
+<td>服务提供者 -&gt; 服务用户</td>
+<td>告知用户发生/到达某事件</td>
+</tr>
+<tr>
+<td><code>Response</code> 响应</td>
+<td>服务用户 -&gt; 服务提供者</td>
+<td>对指示作出响应</td>
+</tr>
+<tr>
+<td><code>Confirmation</code> 证实</td>
+<td>服务提供者 -&gt; 服务用户</td>
+<td>证实此前请求的完成/结果</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-10">1.2.5 协议与服务的区别</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同层对等实体间的<strong>水平</strong>通信规则</td>
+<td>同一节点相邻层间的<strong>垂直</strong>功能提供</td>
+</tr>
+<tr>
+<td>规定本层如何同远端对等层协作</td>
+<td>描述本层向上层“提供什么”</td>
+</tr>
+<tr>
+<td>本层协议实现正确，才能保证服务实现</td>
+<td>上层无需知道下层协议内部实现细节</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-11">1.3 OSI 七层参考模型</h2>
+<p>OSI（Open Systems Interconnection Reference Model）由 ISO 提出，自下而上为：</p>
+<pre><code class="language-text">7 应用层        用户与网络的接口
+6 表示层        数据表示、转换、压缩、加密
+5 会话层        会话建立/管理/终止、同步点
+4 传输层        进程到进程的端到端传输
+3 网络层        分组跨网传送、路由
+2 数据链路层    相邻节点帧传输
+1 物理层        原始比特流
+</code></pre>
+<ul>
+<li>低三层（物理、数据链路、网络）通常称<strong>通信子网</strong>，承担数据传输。</li>
+<li>高三层（会话、表示、应用）通常称<strong>资源子网</strong>，承担用户侧数据处理。</li>
+<li>传输层承上启下，提供端到端服务。</li>
+</ul>
+<h3 id="section-12">1.3.1 物理层</h3>
+<p>在物理介质上透明传输原始比特流，定义数据终端设备 DTE 与数据通信设备 DCE 的物理/逻辑连接方法。PDU/传输单位为<strong>比特</strong>。</p>
+<h3 id="section-13">1.3.2 数据链路层</h3>
+<p>把网络层交来的分组封装为<strong>帧</strong>，在相邻节点之间传送。OSI 教材常把其服务目标概括为：通过成帧、差错检测、流量控制，必要时再配合确认与重传，把可能出错的物理连接抽象成对网络层更可靠、逻辑上近似无差错的数据链路。</p>
+<ul>
+<li>关注的是<strong>一段一段的相邻链路</strong>，而非跨多个路由器的端到端。</li>
+<li>相邻节点间的流量控制等功能属于数据链路层。</li>
+<li>具体协议的服务能力不同：例如以太网通常能检错并丢弃坏帧，却不在链路层负责重传，因此“数据链路层一定可靠交付”是错误结论。</li>
+</ul>
+<h3 id="section-14">1.3.3 网络层</h3>
+<p>在 OSI 教材功能集合中，网络层控制通信子网运行，把分组从源节点传到目的节点，并讨论路由选择、流量控制、拥塞控制、差错控制和网际互连等功能。传输单位为<strong>数据报/分组</strong>。这组功能不能原样套到 TCP/IP 的无连接 IP：IP 本身提供尽力而为的数据报交付，并不保证可靠、按序，也不提供端到端流量控制。</p>
+<h3 id="section-15">1.3.4 传输层</h3>
+<p>负责主机中两个<strong>进程</strong>之间的端到端通信。OSI 教材模型强调可靠传输、流量控制、差错控制、QoS 和数据传输管理；在 TCP/IP 实际协议族中则要区分：TCP 提供面向连接的可靠字节流，UDP 提供无连接、不可靠的数据报服务。</p>
+<blockquote>
+<p>“端到端”在传输层以两个应用进程为端点；“逐跳/相邻节点”描述数据沿每一段链路在相邻网络设备之间转发。MAC 地址通常用于本链路一跳的帧交付，IP 地址用于网络层逻辑寻址并由路由器逐跳查表转发；不能把“点到点”简单定义成“基于 MAC 或 IP”。题目若说相邻两节点的链路流控，不要选传输层。</p>
+</blockquote>
+<h3 id="section-16">1.3.5 会话层</h3>
+<p>允许不同主机上的进程会话，为表示层实体或用户进程建立连接，并在连接中有序传输数据/建立同步。它负责会话建立、管理、终止；<strong>检查点</strong>机制可在通信失效后从检查点继续，类似断点续传。</p>
+<h3 id="section-17">1.3.6 表示层</h3>
+<p>处理通信系统间信息的<strong>表示方式</strong>，用抽象标准数据结构和编码使不同主机的表示方法可交换；另负责数据压缩、加密、解密。数据格式转换是表示层而非应用层职能。</p>
+<h3 id="section-18">1.3.7 应用层</h3>
+<p>用户与网络的接口，为特定应用提供访问 OSI 环境的手段。它使用的应用协议最多、最复杂，例如 FTP（文件传送）、SMTP（邮件）、HTTP（万维网）。</p>
+<h2 id="section-19">1.4 TCP/IP 四层模型</h2>
+<p>TCP/IP 因广泛应用成为事实上的国际标准。自下而上四层：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>TCP/IP 层</th>
+<th>对应 OSI 层</th>
+<th>核心含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络接口层</td>
+<td>物理层 + 数据链路层</td>
+<td>接入本地链路、帧与比特传送</td>
+</tr>
+<tr>
+<td>网际层</td>
+<td>网络层</td>
+<td>跨网络 IP 数据报转发；提供无连接、不可靠数据报服务</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输层</td>
+<td>端到端进程通信；可有 TCP/UDP 等不同服务</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>会话层 + 表示层 + 应用层</td>
+<td>面向用户的应用协议及会话/表示功能</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-20">1.5 OSI 与 TCP/IP 的比较</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>OSI</th>
+<th>TCP/IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构</td>
+<td>7 层</td>
+<td>4 层；合并 OSI 的会话/表示/应用为应用层，合并物理/链路为网络接口层</td>
+</tr>
+<tr>
+<td>服务、协议、接口</td>
+<td>精确定义并明确区分，是 OSI 的重要贡献</td>
+<td>这三个概念没有 OSI 那样明确分离</td>
+</tr>
+<tr>
+<td>形成次序</td>
+<td>先有参考模型，再有协议规范，通用性较好</td>
+<td>先有成熟协议栈，再归纳模型，主要适于 TCP/IP 网络</td>
+</tr>
+<tr>
+<td>网络层/传输层连接性</td>
+<td>网络层支持无连接和面向连接，传输层仅面向连接（教材模型）</td>
+<td>网际层仅无连接；传输层支持无连接和面向连接，可靠性由端到端解决</td>
+</tr>
+</tbody>
+</table></div>
+<p>二者共同点：均采用分层体系结构、基于相对独立协议栈概念，都能帮助异构网络互连、使不同厂商计算机通信。</p>
+<h2 id="section-21">1.6 数据的封装、传输和解封装</h2>
+<p>每个协议栈顶端面向用户；用户的自然语言/应用数据先被应用层转换为通信数据。向下交付时，上一层 PDU 作为下一层 SDU，下一层加自己的 PCI 形成新 PDU，即逐层封装：</p>
+<pre><code class="language-text">应用数据
+  -&gt; [传输层 PCI | 应用数据] = 传输层 PDU
+  -&gt; [网络层 PCI | 传输层 PDU] = 网络层 PDU（分组/数据报）
+  -&gt; [链路层 PCI | 网络层 PDU | 链路层控制信息] = 帧
+  -&gt; 比特流经物理介质发送
+</code></pre>
+<p>接收端反向逐层检查并剥离本层 PCI（解封装），把 SDU 向上提交，最终交还给目标应用/用户。控制信息随层封装而增加，使各层能完成寻址、复用、差错检测等本层职责。</p>
+<h3 id="section-22">题型：#分层概念与模型映射</h3>
+<h4 id="section-23">第一部分：判断方法</h4>
+<ol>
+<li>“同层远端通信规则”是协议；“相邻层提供功能”是服务；“可访问下层服务的位置”是 SAP/接口。</li>
+<li>对协议三要素：格式选语法、做何操作选语义、先后顺序选同步。</li>
+<li>相邻节点帧传输/流控选数据链路层；IP 跨网路由选网络层；两进程可靠通信选传输层；格式转换/加密选表示层。</li>
+<li>TCP/IP 映射：网接 = OSI 1+2，应用 = OSI 5+6+7。</li>
+</ol>
+<h4 id="section-24">第二部分：易错点</h4>
+<ul>
+<li>服务“可靠”不等于一定“面向连接”，面向连接/无连接与可靠/不可靠是两条分类维度。</li>
+<li>PDU 是对等层间的单位，不是“同一台机器中相邻层的接口数据”这一概念本身。</li>
+<li>网络体系结构规定功能和协议关系，不是网卡、路由器、操作系统的具体实现说明书。</li>
+<li>EtherType、IP Protocol/Next Header 和端口号是具体协议的分用标识，不能无条件当成抽象 SAP 的同义词。</li>
+</ul>
+<h2 id="section-25">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-5c0168fd0259/">上一篇：计算机网络概述</a> · <a href="/notes/cs408-47eb3dfcdc83/">下一篇：物理层概述</a></li>
+</ul>
+<h2 id="section-26">1.7 本节复盘</h2>
+<ul>
+<li>网络体系结构是分层与协议功能的抽象定义；对等层靠协议横向通信，相邻层靠服务纵向协作，SAP 是服务入口。</li>
+<li>协议三要素：语法定格式、语义定动作、同步定时序；面向连接、可靠性、有无应答是不同服务维度，不能由一种属性推出另一种。</li>
+<li>OSI 七层中物理传比特、链路传帧、网络传分组、传输做进程端到端；具体层是否可靠要看服务与协议，不能只凭层名判断；会话管理会话、表示处理格式/加密、应用面向用户。</li>
+<li>TCP/IP 为网络接口、网际、传输、应用四层；网际层无连接不可靠，传输层可同时支持不同服务。</li>
+<li>封装过程是上层 PDU 下交成为下层 SDU、下层增加 PCI；接收端逆向解封装。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-95a5278d5a7d/index.html"><span>← 上一项</span><strong>5 题型 - 调制与复用技术</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-9c185b7e5178/index.html"><span>下一项 →</span><strong>Lecture 6：数据库设计</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

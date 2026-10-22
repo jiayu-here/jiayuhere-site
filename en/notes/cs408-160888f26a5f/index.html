@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 35：排序算法总结 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 35：排序算法总结. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 35：排序算法总结 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 35：排序算法总结. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-160888f26a5f/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 35：排序算法总结 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 35：排序算法总结. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 35：排序算法总结",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-160888f26a5f/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-160888f26a5f/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-160888f26a5f/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-160888f26a5f/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-160888f26a5f/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-160888f26a5f/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 35：排序算法总结</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 35：排序算法总结. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>13 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/6e630a1d4ece.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/6e630a1d4ece.pdf" download="Lecture 35：排序算法总结.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">35.1 内部排序算法总表</a><a href="#section-4">35.2 存储结构与稳定性</a><a href="#section-8">35.3 排序过程辨识</a><a href="#section-14">35.4 选型与高频陷阱</a><a href="#section-16">教材补充：计数排序</a><a href="#section-20">相关知识</a><a href="#section-21">35.5 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>排序综合题不能只背一张表。先从“每趟做什么”辨认算法，再用时间、空间、稳定性、适用存储结构和输入特征逐项验证；所有复杂度结论都带有实现与输入前提。</p>
+</blockquote>
+<h2 id="section-1">35.1 内部排序算法总表</h2>
+<p>下表按常见统考实现给出紧确量级。$n$ 为记录数，$d$ 为关键字位数，$r$ 为每位可能取值数，$k$ 为计数排序的关键字取值范围大小。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>最好时间</th>
+<th>平均时间</th>
+<th>最坏时间</th>
+<th>辅助空间</th>
+<th>稳定性</th>
+<th>核心特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入</td>
+<td>$\Theta(n)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$O(1)$</td>
+<td>稳定</td>
+<td>前缀有序，适合小规模或近乎有序</td>
+</tr>
+<tr>
+<td>折半插入</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$O(1)$</td>
+<td>稳定</td>
+<td>只减少定位比较，不能消除批量移动</td>
+</tr>
+<tr>
+<td>希尔</td>
+<td>依增量序列而定</td>
+<td>依增量序列而定</td>
+<td>常见折半增量为 $O(n^2)$</td>
+<td>$O(1)$</td>
+<td>不稳定</td>
+<td>对多个增量子表做插入排序</td>
+</tr>
+<tr>
+<td>冒泡（带标志）</td>
+<td>$\Theta(n)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$O(1)$</td>
+<td>稳定</td>
+<td>相邻交换，可检测已有序后提前结束</td>
+</tr>
+<tr>
+<td>快速</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n^2)$</td>
+<td>平均 $O(\log n)$，最坏 $O(n)$</td>
+<td>不稳定</td>
+<td>划分递归，枢轴质量决定性能</td>
+</tr>
+<tr>
+<td>简单选择</td>
+<td>$\Theta(n^2)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$\Theta(n^2)$</td>
+<td>$O(1)$</td>
+<td>不稳定</td>
+<td>比较次数固定，交换次数少</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n\log n)$</td>
+<td>$O(1)$</td>
+<td>不稳定</td>
+<td>线性建堆，反复输出堆顶</td>
+</tr>
+<tr>
+<td>二路归并</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n\log n)$</td>
+<td>$\Theta(n\log n)$</td>
+<td>$O(n)$</td>
+<td>稳定</td>
+<td>每层线性归并，时间不随初始有序度明显改善</td>
+</tr>
+<tr>
+<td>LSD 基数</td>
+<td>$\Theta(d(n+r))$</td>
+<td>$\Theta(d(n+r))$</td>
+<td>$\Theta(d(n+r))$</td>
+<td>常见为 $O(r)$ 或 $O(n+r)$</td>
+<td>稳定</td>
+<td>非比较排序，依赖关键字可分解为 $d$ 位</td>
+</tr>
+<tr>
+<td>计数排序</td>
+<td>$\Theta(n+k)$</td>
+<td>$\Theta(n+k)$</td>
+<td>$\Theta(n+k)$</td>
+<td>稳定实现为 $O(n+k)$</td>
+<td>稳定实现可稳定</td>
+<td>非比较排序，要求整数键的有限值域可承受</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-2"><strong>读表注意</strong>：</h5>
+<ul>
+<li>折半插入在每趟都做折半定位，因此最好情况下比较总量仍为 $\Theta(n\log n)$；平均和最坏情况下，$\Theta(n^2)$ 的记录移动占主导。</li>
+<li>快排只有在划分较均衡时递归深度才为 $\Theta(\log n)$；连续产生规模为 $0$ 与 $n-1$ 的子问题时，时间和栈深分别退化为 $\Theta(n^2)$ 与 $\Theta(n)$。</li>
+<li>希尔排序的时间复杂度必须结合增量序列说明，不能把某一增量序列的结论推广到所有实现。</li>
+<li>基数排序若只保存各桶首尾指针并复用记录链域，附加队列信息可为 $O(r)$；若另开桶存储全部记录，则为 $O(n+r)$。</li>
+<li>标准自底向上建堆是 $\Theta(n)$，但完整堆排序还要做 $n-1$ 次删除堆顶和调整，因此总时间仍为 $\Theta(n\log n)$。</li>
+<li>计数排序的 $k$ 是最大键与最小键之差加 $1$；当 $k$ 远大于 $n$ 时，时间和空间都会浪费，不能只看它对 $n$ 的线性项。</li>
+</ul>
+<h3 id="section-3">35.1.1 比较排序的下界</h3>
+<ul>
+<li>对 $n$ 个互异关键字，基于比较的排序必须区分 $n!$ 种排列；二叉判定树高度至少为：</li>
+</ul>
+<p>$$
+\left\lceil\log_2(n!)\right\rceil=\Omega(n\log n)
+$$</p>
+<ul>
+<li>因此任何比较排序的最坏比较次数都不可能优于 $\Omega(n\log n)$；在等概率排列等常见模型下，平均比较次数也有同阶下界。</li>
+<li>基数排序不是比较排序，不受该判定树下界直接约束，但它受关键字结构、位数 $d$、基数 $r$ 和额外空间限制。</li>
+</ul>
+<hr>
+<h2 id="section-4">35.2 存储结构与稳定性</h2>
+<h3 id="section-5">35.2.1 存储结构的适配</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更合适的算法</th>
+<th>原因与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序表、要求原地</td>
+<td>直接插入、希尔、冒泡、简单选择、堆</td>
+<td>可直接按下标访问；堆与希尔尤其依赖高效随机定位</td>
+</tr>
+<tr>
+<td>顺序表、追求平均速度</td>
+<td>快速排序</td>
+<td>连续区间划分方便，但要防止枢轴导致退化</td>
+</tr>
+<tr>
+<td>链表、要求稳定且 $O(n\log n)$</td>
+<td>归并排序</td>
+<td>可通过改链合并，不要求随机访问；自底向上的链式实现可只用 $O(1)$ 个额外结点指针</td>
+</tr>
+<tr>
+<td>链表、小规模或近乎有序</td>
+<td>直接插入排序</td>
+<td>找到位置后改链即可，移动记录代价小</td>
+</tr>
+<tr>
+<td>固定位数的整数或字符串关键字</td>
+<td>基数排序</td>
+<td>链式桶分配与收集自然，但必须保持每趟稳定</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>折半查找虽然只需 $O(\log n)$ 次比较，但链表不能 $O(1)$ 访问中点，因此折半插入在链表上通常失去优势。</li>
+<li>希尔排序与数组堆排序依赖下标间隔或父子下标关系，通常不用于普通链表。</li>
+<li>“某算法能否改写到某存储结构”与“是否适合”不是一回事；快排、冒泡、选择等也能设计链式版本，但不一定保留顺序表实现的常数优势。</li>
+</ul>
+<h3 id="section-6">35.2.2 稳定性结论与成立条件</h3>
+<ul>
+<li>稳定：直接插入、折半插入、冒泡、归并、基数。</li>
+<li>不稳定：希尔、快速、简单选择、堆。</li>
+<li>稳定性是<strong>具体算法实现</strong>的性质，而不是排序结果的性质：
+<ul>
+<li>插入排序应把新记录放在已有相等记录之后；</li>
+<li>冒泡排序只交换严格逆序的相邻记录；</li>
+<li>归并时关键字相等应先取左段记录；</li>
+<li>基数排序每一趟的分配与收集都必须稳定。</li>
+</ul>
+</li>
+<li>源 PDF 中“选择插入排序”不是规范算法名，此处按其实际内容更正为<strong>简单选择排序</strong>。</li>
+</ul>
+<h3 id="section-7">题型：#稳定性判断</h3>
+<ol>
+<li>给相等关键字加标签，例如 <code>3a, 3b</code>，并令 <code>3a</code> 原先在前。</li>
+<li>按算法的真实交换、移动或收集规则走一遍。</li>
+<li>若存在某个合法输入能使 <code>3b</code> 越过 <code>3a</code>，该算法即不稳定；只看比较条件是否含等号并不足够。</li>
+<li>远距离交换或跨组移动是高风险信号，所以希尔、快速、简单选择和堆排序通常不稳定。</li>
+</ol>
+<hr>
+<h2 id="section-8">35.3 排序过程辨识</h2>
+<h3 id="section-9">35.3.1 直接插入与折半插入</h3>
+<p><a class="note-image-link" href="/assets/408/images/05fca2a0ea48.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-直接与折半插入.png"><img class="note-image" src="/assets/408/images/05fca2a0ea48.png" alt="DS-L35-直接与折半插入.png" loading="lazy" decoding="async"></a></p>
+<ul>
+<li>两者都维护有序前缀，并把当前记录插入其中；区别只在于<strong>如何寻找插入位置</strong>。</li>
+<li>直接插入从后向前顺序比较；折半插入用二分查找位置，但定位后仍要整体后移后缀。</li>
+<li>折半插入必须统一相等关键字的边界策略；插到已有相等记录之后时可保持稳定。</li>
+</ul>
+<h3 id="section-10">35.3.2 插入排序与简单选择排序</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>直接插入排序</th>
+<th>简单选择排序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已排序区</td>
+<td>前缀有序，长度每趟加一</td>
+<td>前缀已放好当前最小值</td>
+</tr>
+<tr>
+<td>本趟扫描对象</td>
+<td>向前扫描<strong>已排序区</strong>找插入位置</td>
+<td>向后扫描<strong>未排序区</strong>找最小值</td>
+</tr>
+<tr>
+<td>主要移动</td>
+<td>多个较大元素整体后移</td>
+<td>扫描结束后通常做一次交换</td>
+</tr>
+<tr>
+<td>比较次数</td>
+<td>随初始有序度变化</td>
+<td>固定为 $n(n-1)/2$</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>稳定</td>
+<td>不稳定</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>“暂存未排序区首元素，再向前移动较大元素”是插入排序。</li>
+<li>“扫描整个未排序区记住最小下标，最后与边界交换”是简单选择排序。</li>
+<li>记录本身很大且交换代价高时，简单选择的交换次数至多 $n-1$，但它的比较次数仍为 $\Theta(n^2)$。</li>
+</ul>
+<h3 id="section-11">35.3.3 希尔与冒泡</h3>
+<p><a class="note-image-link" href="/assets/408/images/edbde0d3eed2.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-希尔分组过程.png"><img class="note-image" src="/assets/408/images/edbde0d3eed2.png" alt="DS-L35-希尔分组过程.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>希尔排序按增量 $h$ 把间隔为 $h$ 的元素看作同一子表，各子表分别做直接插入；最终必须取 $h=1$。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/d1442de79b62.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-冒泡过程.png"><img class="note-image" src="/assets/408/images/d1442de79b62.png" alt="DS-L35-冒泡过程.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>冒泡排序每趟扫描当前无序区，通过相邻交换把一个极值送到边界。带交换标志时，已有序输入只需一趟，时间为 $\Theta(n)$。</p>
+</blockquote>
+<h3 id="section-12">35.3.4 快速、堆与归并</h3>
+<p><a class="note-image-link" href="/assets/408/images/2667ca8dacc3.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-快速排序递归.png"><img class="note-image" src="/assets/408/images/2667ca8dacc3.png" alt="DS-L35-快速排序递归.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>快排每次划分使枢轴到达最终位置。图中的 $\log n$ 层只对应较均衡划分；极端不平衡时递归深度可达 $n$。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/f8e3037d5033.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-堆排序过程.png"><img class="note-image" src="/assets/408/images/f8e3037d5033.png" alt="DS-L35-堆排序过程.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>堆只保证父结点不小于（或不大于）孩子，并非全局有序。建堆为 $\Theta(n)$；每次交换堆顶后下坠为 $O(\log n)$，完整排序为 $\Theta(n\log n)$。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/f229e70fe37b.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L35-归并排序过程.png"><img class="note-image" src="/assets/408/images/f229e70fe37b.png" alt="DS-L35-归并排序过程.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>二路归并共有 $\Theta(\log n)$ 层，每层处理全部 $n$ 个元素，故总时间为 $\Theta(n\log n)$；数组实现通常需要 $O(n)$ 辅助空间。</p>
+</blockquote>
+<h3 id="section-13">35.3.5 一眼识别特征</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>对应算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相邻逆序即交换，某极值逐趟移动到边界</td>
+<td>冒泡排序</td>
+</tr>
+<tr>
+<td>选枢轴，左右指针划分，枢轴到最终位置</td>
+<td>快速排序</td>
+</tr>
+<tr>
+<td>下标满足 $i,2i,2i+1$ 或 $i,2i+1,2i+2$，不断上升或下坠</td>
+<td>堆/堆排序</td>
+</tr>
+<tr>
+<td>两个有序段用三个指针合为一个有序段</td>
+<td>归并排序</td>
+</tr>
+<tr>
+<td>按个位、十位等依次进入多个队列再收集</td>
+<td>基数排序</td>
+</tr>
+<tr>
+<td>多个增量子表分别插入排序，增量最终为 $1$</td>
+<td>希尔排序</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="section-14">35.4 选型与高频陷阱</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>需求或数据特征</th>
+<th>优先考虑</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$n$ 小或基本有序</td>
+<td>直接插入</td>
+<td>简单、稳定、最好 $\Theta(n)$</td>
+</tr>
+<tr>
+<td>平均速度快且可接受不稳定</td>
+<td>快速排序</td>
+<td>实践常用；应随机化或改进枢轴选择降低退化概率</td>
+</tr>
+<tr>
+<td>最坏时间必须为 $\Theta(n\log n)$ 且额外空间小</td>
+<td>堆排序</td>
+<td>原地但不稳定，局部访问性通常不如快排</td>
+</tr>
+<tr>
+<td>稳定且最坏 $\Theta(n\log n)$</td>
+<td>归并排序</td>
+<td>数组需 $O(n)$ 辅助空间，链表尤其合适</td>
+</tr>
+<tr>
+<td>记录交换代价远高于比较</td>
+<td>简单选择</td>
+<td>交换少，但比较仍是 $\Theta(n^2)$</td>
+</tr>
+<tr>
+<td>固定位数、取值范围可分桶</td>
+<td>基数排序</td>
+<td>可突破比较排序下界，但依赖关键字结构</td>
+</tr>
+<tr>
+<td>外存文件远大于内存</td>
+<td>多路归并</td>
+<td>先生成初始归并段，再优化归并路数、段数与归并树</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-15"><strong>高频陷阱</strong>：</h5>
+<ul>
+<li>折半插入减少比较，不会把最坏记录移动量降到 $O(n\log n)$。</li>
+<li>简单选择的比较次数与初始有序度无关；冒泡和直接插入则具有一定自适应性。</li>
+<li>快排“枢轴最终就位”不代表左右子区间已经有序。</li>
+<li>堆序只约束父子，不能由大根堆直接推出任意兄弟或跨子树结点的大小关系。</li>
+<li>归并一个长度为 $n_1$ 与 $n_2$ 的有序段，最多比较 $n_1+n_2-1$ 次，而不是“每个元素最多比较一次”。</li>
+<li>稳定算法若实现时错误处理相等关键字，也可能失去稳定性。</li>
+</ul>
+<h2 id="section-16">教材补充：计数排序</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 教材范围
+计数排序不是 2027 年 408 考纲单列的必考算法，但 2027 版常用复习教材把它列为扩展内容。这里补齐算法原理、稳定实现和适用边界，不把它混入原 PDF 内容。</p>
+</blockquote>
+<h3 id="section-17">基本思想</h3>
+<p>若每条记录的整数关键字都落在闭区间 $[L,U]$，令：</p>
+<p>$$
+k=U-L+1
+$$</p>
+<p>用 <code>count[x-L]</code> 统计关键字 $x$ 出现次数。仅输出数值时，按关键字从小到大重复输出即可；若记录还带有其他字段且要求稳定性，则需要把计数改成前缀和，再把记录放到独立输出数组。</p>
+<h3 id="section-18">稳定实现</h3>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+typedef struct { int key; int payload; } Record; // payload 代表随关键字移动的其他字段
+
+// n &gt;= 0，L &lt;= U，k = U-L+1 可由 int 表示；A、B 是互不重叠的 n 元素数组
+// Record.key 必须落在 [L, U]；返回 1 表示成功，0 表示内存分配失败
+int CountingSort(Record A[], Record B[], int n, int L, int U) {
+    int k = U - L + 1;
+    int *count = calloc((size_t)k, sizeof *count);
+    if (count == NULL) return 0;
+
+    for (int i = 0; i &lt; n; ++i)
+        ++count[A[i].key - L];
+
+    for (int i = 1; i &lt; k; ++i)
+        count[i] += count[i - 1];
+
+    for (int i = n - 1; i &gt;= 0; --i) {
+        int p = A[i].key - L;
+        B[--count[p]] = A[i];
+    }
+
+    free(count);
+    return 1;
+}
+</code></pre>
+<ul>
+<li>前缀和 <code>count[p]</code> 表示关键字不大于该键的记录数，也就是该键在输出数组中的右边界后一位。</li>
+<li>必须从右向左扫描输入，并在放置前递减计数，才能让原序列中靠右的相等记录落在输出中靠右，从而保持相对次序。</li>
+<li>负关键字并不妨碍计数排序，只需统一减去下界 $L$ 作为数组偏移。</li>
+</ul>
+<h3 id="section-19">复杂度与适用边界</h3>
+<p>$$
+\text{时间}=\Theta(n+k),\qquad
+\text{额外空间}=\Theta(n+k)
+$$</p>
+<ul>
+<li>若只排序裸整数并直接重复输出，可不设长度为 $n$ 的输出数组，但这种简化不能表达带附属数据记录的稳定性。</li>
+<li>计数排序不进行关键字之间的比较，因此不受比较排序 $\Omega(n\log n)$ 下界约束。</li>
+<li>它只适合能映射到不太大的离散整数区间的关键字。对浮点数、任意字符串或极稀疏的巨大整数范围，直接开计数数组通常不合适。</li>
+<li>基数排序可在每一位内部使用稳定的计数排序；若某一趟不稳定，前面各趟建立的低位次序会被破坏。</li>
+</ul>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-c0d1b15ecf57/">上一篇：外部排序</a> · <a href="/en/notes/cs408-424a656729a9/">下一篇：重点算法汇总</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c558f3264d82/">排序代码</a></li>
+</ul>
+<h2 id="section-21">35.5 本节复盘</h2>
+<ul>
+<li>先识别每趟动作，再核验复杂度、空间、稳定性和存储结构，比死记表格可靠。</li>
+<li>比较排序最坏比较次数有 $\Omega(n\log n)$ 下界；基数排序依靠关键字分位绕开比较模型。</li>
+<li>插入看“扫描已排序区找位置”，选择看“扫描未排序区找极值”。</li>
+<li>快排平均快但会退化；堆保证最坏 $n\log n$ 且原地；归并稳定但数组实现需线性辅助空间。</li>
+<li>计数排序为 $\Theta(n+k)$，适合值域不大的离散整数键；稳定版本需要前缀和与输出数组。</li>
+<li>高频陷阱集中在：折半插入的移动量、希尔增量前提、快排递归深度、堆的局部有序、归并空间和稳定性实现条件。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-160305fb8386/index.html"><span>← Previous item</span><strong>Lecture 10：栈在表达式求值中的应用</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-18a77c541c35/index.html"><span>Next item →</span><strong>5. 查找</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

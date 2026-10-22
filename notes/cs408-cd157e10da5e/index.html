@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 15：知识 - CISC 和 RISC 的基本概念 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 15：知识 - CISC 和 RISC 的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 15：知识 - CISC 和 RISC 的基本概念 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 15：知识 - CISC 和 RISC 的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-cd157e10da5e/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 15：知识 - CISC 和 RISC 的基本概念 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 15：知识 - CISC 和 RISC 的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 15：知识 - CISC 和 RISC 的基本概念",
+      "item": "https://www.jiayuhere.com/notes/cs408-cd157e10da5e/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-cd157e10da5e/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-cd157e10da5e/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-cd157e10da5e/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-cd157e10da5e/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-cd157e10da5e/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 15：知识 - CISC 和 RISC 的基本概念</h1><p class="article-lead">408 学习笔记：Lecture 15：知识 - CISC 和 RISC 的基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 5 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ee7fdc1d9b58.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ee7fdc1d9b58.pdf" download="Lecture 15：知识 - CISC 和 RISC 的基本概念.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 两种设计思想</a><a href="#section-2">4.2 典型特征对比</a><a href="#section-3">4.3 硬件、编译器与应用</a><a href="#section-9">相关知识</a><a href="#section-10">4.4 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：CISC 与 RISC 是 ISA 设计哲学，不是“复杂就一定慢、精简就一定快”的简单标签。真正的性能还取决于微结构、编译器、流水线、Cache 和程序负载。</p>
+</blockquote>
+<h2 id="section-1">4.1 两种设计思想</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>全称</th>
+<th>核心思路</th>
+<th>常见代表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CISC</td>
+<td>Complex Instruction Set Computer</td>
+<td>让一条指令完成较复杂的基本功能，提供丰富指令与寻址</td>
+<td>x86</td>
+</tr>
+<tr>
+<td>RISC</td>
+<td>Reduced Instruction Set Computer</td>
+<td>每条指令完成一个简单基本动作，复杂功能由多条简单指令组合</td>
+<td>ARM、RISC-V</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>CISC 希望硬件直接支持更多高级语言层面的复杂操作，以减少一项任务的指令条数和软件显式步骤。</li>
+<li>RISC 希望简化常用指令的语义、格式和执行路径，使单条指令更规则、行为更易预测，并通过组合指令实现复杂功能；它不要求整个 ISA 的指令条目数量在任何情况下都绝对更少。</li>
+</ul>
+<h2 id="section-2">4.2 典型特征对比</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>CISC（传统特征）</th>
+<th>RISC（传统特征）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令种类和功能</td>
+<td>数量多、功能复杂，一条可完成多个微操作</td>
+<td>种类较少、功能简单、粒度统一</td>
+</tr>
+<tr>
+<td>指令长度</td>
+<td>常含变长格式</td>
+<td>常采用定长或较规则格式</td>
+</tr>
+<tr>
+<td>寻址方式</td>
+<td>通常较丰富</td>
+<td>通常较少、更规则</td>
+</tr>
+<tr>
+<td>访存方式</td>
+<td>指令可直接对内存操作或完成复杂内存操作</td>
+<td>常见 load/store 风格：仅读写指令访问内存，运算在寄存器间进行</td>
+</tr>
+<tr>
+<td>控制实现</td>
+<td>可用微程序/复杂译码实现</td>
+<td>控制器和数据通路较规整，便于硬连线/流水化</td>
+</tr>
+<tr>
+<td>指令执行</td>
+<td>单条指令周期可能差异大</td>
+<td>单条指令通常较短、易于规律化执行</td>
+</tr>
+<tr>
+<td>代码密度</td>
+<td>复杂指令可能减少指令条数</td>
+<td>为同一复杂任务可能需要更多指令</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>“CISC 一条指令完成复杂功能”不代表一定用一块专用大电路；可由通用执行部件配合控制存储/微操作序列完成。</li>
+<li>“RISC 一条指令一个动作”使指令译码和执行更利于并行化、流水化和低功耗设计，但程序可能使用更多显式指令。</li>
+</ul>
+<h2 id="section-3">4.3 硬件、编译器与应用</h2>
+<h3 id="section-4">4.3.1 硬件实现取舍</h3>
+<ul>
+<li>CISC 的丰富格式和寻址方式使取指、译码、控制逻辑更复杂；现代实现常把复杂 ISA 指令解码为内部微操作，再由类似 RISC 的后端流水/乱序执行。</li>
+<li>RISC 指令通常格式规整、执行行为更容易预测，较易设计深流水、超标量发射和能效优化，但不能仅靠 ISA 名称推断实际功耗或性能。</li>
+<li>两类 ISA 都能使用 Cache、流水线、分支预测、乱序执行等现代技术；这些优化并非某一类 ISA 的专属。</li>
+</ul>
+<h3 id="section-5">4.3.2 软件与生态</h3>
+<ul>
+<li>编译器会把高级语言转换为目标 ISA 指令。CISC 可利用复杂指令压缩某些任务，RISC 则常通过优化的指令序列、寄存器分配和调度取得效率。</li>
+<li>x86 仍广泛用于 PC 和服务器；ARM 在手机、平板、嵌入式和服务器中广泛使用；RISC-V 是开放 ISA，正在设备、教学和服务器等领域发展。</li>
+<li>设备类型不是绝对边界：x86 也用于服务器和嵌入式，ARM 也用于桌面/服务器。答题时应写“常见应用”，不要写成物理上只能用于某类设备。</li>
+</ul>
+<h3 id="section-6">题型：#CISC与RISC辨析</h3>
+<h4 id="section-7">第一部分：判断关键词</h4>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>题干关键词</th>
+<th>更符合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令功能复杂、寻址方式多、变长、微程序控制</td>
+<td>CISC 的传统特征</td>
+</tr>
+<tr>
+<td>指令简单规则、load/store、定长、寄存器操作、易流水</td>
+<td>RISC 的传统特征</td>
+</tr>
+<tr>
+<td>内部微操作、深流水、乱序、Cache</td>
+<td>现代微结构特征，不能单独断定 ISA 类别</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-8">第二部分：易错点</h4>
+<ul>
+<li>RISC 并不是“指令数量绝对少”，而是强调单条指令功能和格式精简；完成同一任务的动态指令数可能更多。</li>
+<li>CISC 不是“不能流水化”，RISC 也不是“每条永远一个周期”。现代处理器实现已大量融合设计思想。</li>
+<li>ISA 是软件可见接口，微操作翻译和执行单元是实现细节；外部兼容 x86 的 CPU 内部可以非常像 RISC 后端。</li>
+</ul>
+<h2 id="section-9">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-659f35b126ff/">上一篇：数据对齐和大小端存放</a> · <a href="/notes/cs408-8a0212571862/">下一篇：高级语言与机器级代码的对应</a></li>
+</ul>
+<h2 id="section-10">4.4 本节复盘</h2>
+<ul>
+<li>CISC 追求一条指令完成较复杂功能，RISC 追求简单规则指令组合完成复杂功能。</li>
+<li>传统上 CISC 指令/寻址更丰富、译码更复杂；RISC 更规则，便于流水和并行，但二者均可采用现代高性能微结构。</li>
+<li>x86 是典型 CISC，ARM 和 RISC-V 是典型 RISC；应用领域有常见分布，不是绝对限制。</li>
+<li>任何性能判断都要落到具体 CPU、编译器和工作负载，不能只凭 CISC/RISC 标签下结论。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-cbd01644a3c3/index.html"><span>← 上一项</span><strong>6 题型 - SDN软件定义网络</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-cd234cc86adc/index.html"><span>下一项 →</span><strong>Lecture 9：思维导图 - 数据链路层</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

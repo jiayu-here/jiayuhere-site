@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 12：知识 - 寻址方式 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 12：知识 - 寻址方式. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 12：知识 - 寻址方式 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 12：知识 - 寻址方式. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-3150a4e10306/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 12：知识 - 寻址方式 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 12：知识 - 寻址方式. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 12：知识 - 寻址方式",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-3150a4e10306/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-3150a4e10306/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-3150a4e10306/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-3150a4e10306/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-3150a4e10306/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-3150a4e10306/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 12：知识 - 寻址方式</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 12：知识 - 寻址方式. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>9 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/695a1e53abf3.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/695a1e53abf3.pdf" download="Lecture 12：知识 - 寻址方式.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 指令寻址与数据寻址</a><a href="#section-4">4.2 基本数据寻址方式</a><a href="#section-11">4.3 偏移寻址：相对、基址、变址</a><a href="#section-17">4.4 堆栈寻址</a><a href="#section-18">相关知识</a><a href="#section-19">4.5 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：寻址就是确定“下一条指令在哪”和“本指令操作数在哪”。题目中的 <code>A</code> 是形式地址，<code>EA</code> 是有效地址；括号 <code>(X)</code> 表示取寄存器或内存 X 的内容，必须和地址 X 本身区分。</p>
+</blockquote>
+<h2 id="section-1">4.1 指令寻址与数据寻址</h2>
+<h3 id="section-2">4.1.1 指令寻址</h3>
+<p>指令寻址确定下一条待执行指令地址，PC 保存该地址。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>PC 更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序执行、按字编址且一条指令占一字</td>
+<td>$PC\leftarrow PC+1$</td>
+</tr>
+<tr>
+<td>字节编址，指令占 2 B</td>
+<td>$PC\leftarrow PC+2$</td>
+</tr>
+<tr>
+<td>变长指令</td>
+<td>译码器根据操作码以及可能的前缀、寻址字段、位移和立即数字段确定实际长度 $n$，再 $PC\leftarrow PC+n$</td>
+</tr>
+<tr>
+<td>转移/跳转</td>
+<td>按转移指令规定的目标地址更新 PC</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>PC 在指令边界处指向<strong>下一条将取的指令地址</strong>。计算本节的 PC 相对目标时，先按指令实际长度求顺序下一条指令地址，再加位移；处理器内部何时更新 PC 取决于实现，不能固定理解为“译码后才加”。</li>
+</ul>
+<h3 id="section-3">4.1.2 数据寻址与访存次数</h3>
+<p>数据寻址确定本条指令地址码所指操作数的真实位置。下表的“执行阶段访存”不含取指、不含写回结果，题目若要求总访存次数需再加取指和可能的写回。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>有效地址/操作数</th>
+<th style="text-align:right">执行阶段访存</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>立即</td>
+<td>操作数就是 $A$</td>
+<td style="text-align:right">0</td>
+<td><code>#</code> 常表示立即数</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>$EA=A$，操作数为 $(EA)$</td>
+<td style="text-align:right">1</td>
+<td>地址字段直接给内存地址</td>
+</tr>
+<tr>
+<td>一次间接</td>
+<td>$EA=(A)$</td>
+<td style="text-align:right">2</td>
+<td>$A$ 指向“有效地址所在单元”</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>操作数在寄存器 $R_i$</td>
+<td style="text-align:right">0</td>
+<td>指令写寄存器编号</td>
+</tr>
+<tr>
+<td>寄存器间接</td>
+<td>$EA=(R_i)$</td>
+<td style="text-align:right">1</td>
+<td>寄存器保存内存地址</td>
+</tr>
+<tr>
+<td>隐含</td>
+<td>地址由指令语义隐含</td>
+<td style="text-align:right">依指令</td>
+<td>例如 ACC、SP 等</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-4">4.2 基本数据寻址方式</h2>
+<h3 id="section-5">4.2.1 直接、间接、寄存器、立即与隐含</h3>
+<h4 id="section-6">源 PDF 的地址字段位宽例题（2020 年）</h4>
+<p>单地址、定长 16 位指令共有 48 条操作指令，支持直接、间接、立即、相对四种寻址方式，且操作码和寻址方式位数固定。操作码至少占 $\lceil\log_2 48\rceil=6$ 位，寻址方式占 $\log_2 4=2$ 位，因此形式地址最多剩 $16-6-2=8$ 位。在<strong>直接寻址且该字段按无符号主存地址解释</strong>时，可寻址范围是 $0\sim 2^8-1$，即 $0\sim255$；不能把相对寻址的有符号位移范围套到直接寻址上。这个计算按题设字段独立、等长编码进行；若 ISA 对不同指令采用扩展操作码或不同格式，应重新按实际格式分配位数。</p>
+<h5 id="section-7"><strong>定义</strong>：#直接寻址</h5>
+<p>$EA=A$。指令取指 1 次、执行取操作数再访存 1 次，因此不计写回时总访存 2 次。优点是简单、执行阶段只访存一次；缺点是形式地址位数限制范围，且操作数地址不易修改。</p>
+<h5 id="section-8"><strong>定义</strong>：#间接寻址</h5>
+<p>$EA=(A)$。先访问 $A$ 所指单元获得 EA，再访问 EA 获得操作数；一次间接不计写回总访存 3 次。优点是 EA 位宽可大于形式地址、范围更大，且便于子程序返回等；缺点是多次访存。多次间接需通过间址字的标志判断是否继续。</p>
+<p>原页的二次间接图可逐级读作：先从 $M[A]$ 取得带“继续间接”标志的地址 $A_1$，再从 $M[A_1]$ 取得带“结束间接”标志的 $EA$，最后读 $M[EA]$ 才是操作数。按这张图的取址流程，不计取指与写回时需访问主存 3 次；连同一次取指则为 4 次。标志位属于题设的间址字格式，不能把它当成普通地址位。</p>
+<h5 id="section-9"><strong>定义</strong>：#寄存器寻址与寄存器间接寻址</h5>
+<ul>
+<li>寄存器寻址：指令给出寄存器号，操作数就是寄存器内容 $(R_i)$，不需要形成主存有效地址 EA；执行阶段不访问主存，指令短且快，代价是寄存器数量有限。</li>
+<li>寄存器间接：$R_i$ 保存操作数所在主存地址，$EA=(R_i)$；执行阶段须访问该内存单元一次，适合指针。</li>
+</ul>
+<h5 id="section-10"><strong>定义</strong>：#立即寻址与隐含寻址</h5>
+<ul>
+<li>立即寻址中 $A$ 就是操作数本身，通常以 <code>#</code> 表示。执行阶段零访存、最快，但 $A$ 位数限制立即数范围；若为 $n$ 位补码，范围为 $[-2^{n-1},2^{n-1}-1]$。</li>
+<li>隐含寻址不显式写操作数地址，由指令默认使用的 ACC、SP 等给出。优点是缩短指令，缺点是需要相应隐含硬件/寄存器。</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    A[&quot;形式地址 A&quot;] --&gt;|&quot;直接：EA=A&quot;| D[&quot;M[EA] 为操作数&quot;]
+    A --&gt;|&quot;间接：先读 M[A]&quot;| I[&quot;M[A]=EA&quot;]
+    I --&gt; IO[&quot;再读 M[EA] 得操作数&quot;]
+    R[&quot;寄存器 R_i&quot;] --&gt;|&quot;寄存器：直接取内容&quot;| RO[&quot;(R_i) 为操作数&quot;]
+    R --&gt;|&quot;寄存器间接：(R_i)=EA&quot;| RI[&quot;M[EA] 为操作数&quot;]
+    A --&gt;|&quot;立即：不求 EA&quot;| IM[&quot;A 本身为操作数&quot;]
+</pre>
+<h2 id="section-11">4.3 偏移寻址：相对、基址、变址</h2>
+<p>三者结构相似，均为“某寄存器内容 + 形式地址”：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>公式</th>
+<th>谁可变</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基址寻址</td>
+<td>$EA=(BR)+A$</td>
+<td>程序期间 BR 通常不变，$A$ 为偏移</td>
+<td>程序重定位、多道程序</td>
+</tr>
+<tr>
+<td>变址寻址</td>
+<td>$EA=(IX)+A$</td>
+<td>$A$ 常作数组首地址，IX 由用户不断改变</td>
+<td>数组、循环</td>
+</tr>
+<tr>
+<td>相对寻址</td>
+<td>$EA=(PC)+A$</td>
+<td>PC 随执行改变，$A$ 为相对下一条指令的补码位移</td>
+<td>分支、转移、代码段内浮动</td>
+</tr>
+</tbody>
+</table></div>
+<p>三种偏移方式的加法本身不访问主存；若指令随后要读取内存操作数 $(EA)$，执行阶段再访存 1 次。相对转移只把 EA 作为转移目标时，不应额外算作一次数据访存。</p>
+<h3 id="section-12">4.3.1 基址寻址</h3>
+<p>基址寄存器 BR 面向操作系统/管理程序；其内容通常由 OS 装入，程序执行过程中保持为基地址。优点：程序可整体装到不同内存位置而无需修改内部地址，适合多道程序；且 BR 与偏移共同扩展范围。通用寄存器也可承担 BR，但基地址管理语义仍由系统负责。</p>
+<h3 id="section-13">4.3.2 变址寻址</h3>
+<p>变址寄存器 IX 面向用户，IX 是随循环/下标变化的偏移，形式地址 $A$ 常为数组首地址。不断改 IX 即可生成数组任一元素地址；IX 位数足够时可覆盖整个寻址空间，特别适合循环程序。</p>
+<h3 id="section-14">4.3.3 相对寻址</h3>
+<p>相对寻址用下一条指令的 PC 加补码位移 $A$。目标随程序整体移动而同样移动，且与当前指令距离固定，因此适合条件转移和位置相对的代码。</p>
+<h3 id="section-15">题型：#复合寻址</h3>
+<ul>
+<li>一定按题目顺序逐层代入。先基址再变址只是先形成“基址 + 形式地址”这一中间和，再加变址量，最终为 $EA=(BR)+(IX)+A$；这里没有间接寻址，也不应因分组括号多算一次访存。</li>
+<li>先变址再间接：先得中间地址 $(IX)+D$，再取该单元内容：$EA=((IX)+D)$；最终操作数为 $(EA)=(((IX)+D))$。</li>
+<li>数括号时只把“取内容”算一次：$A$、$(A)$、$((A))$ 分别是三个不同层次，不能省略。</li>
+</ul>
+<h4 id="section-16">源 PDF 数值例题复算</h4>
+<ol>
+<li>
+<p>变址寄存器 $(IX)=1000H$，形式地址 $A=2000H$，且 $(1000H)=2000H$、$(2000H)=3000H$、$(3000H)=4000H$。变址寻址先求</p>
+<p>$$EA=(IX)+A=1000H+2000H=3000H$$</p>
+<p>题目问的是操作数而非有效地址，所以还要访问一次主存：操作数 $(EA)=(3000H)=4000H$。其余给出的内存内容是干扰项。</p>
+</li>
+<li>
+<p>指令字段为 <code>OP | M | I | D</code>，要求“先变址、后间接”时，先形成中间地址 $(I)+D$，再取该主存单元内容，故 $EA=((I)+D)$；若继续问操作数，则为 $(EA)=(((I)+D))$。</p>
+</li>
+<li>
+<p>机器字长 16 位、按字节编址，一条相对转移指令占 2 B，指令首地址为 <code>2000H</code>、位移为 <code>06H</code>。取指完成后 $PC=2002H$，再按相对寻址计算：</p>
+<p>$$EA=(PC)+06H=2002H+06H=2008H$$</p>
+<p>不能用指令首地址 <code>2000H</code> 直接加位移。</p>
+</li>
+</ol>
+<h2 id="section-17">4.4 堆栈寻址</h2>
+<p>堆栈是按后进先出（LIFO）管理的特定存储区，SP（堆栈指针）给出栈顶地址，故操作数地址通常隐含。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>存放位置</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>硬堆栈</td>
+<td>专用寄存器组</td>
+<td>速度快、容量小</td>
+</tr>
+<tr>
+<td>软堆栈</td>
+<td>主存划出的栈区</td>
+<td>容量大、通用，函数调用常用</td>
+</tr>
+</tbody>
+</table></div>
+<p>以栈向小地址生长为例：入栈先 $SP\leftarrow SP-1$，再 $Y\to M_{SP}$；出栈先 $M_{SP}\to ACC$，再 $SP\leftarrow SP+1$。栈增长方向与操作顺序必须以题设为准。</p>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-e93053729cfd/">上一篇：指令系统的基本概念</a> · <a href="/en/notes/cs408-35c58c723ece/">下一篇：指令格式</a></li>
+</ul>
+<h2 id="section-19">4.5 本节复盘</h2>
+<ul>
+<li>指令寻址更新 PC，数据寻址求 EA；变长指令必须由完整的指令编码格式识别长度，不能无条件说只看操作码。<code>A</code> 是形式地址，<code>EA</code> 才是真实地址。</li>
+<li>直接 $EA=A$，间接 $EA=(A)$，寄存器间接 $EA=(R_i)$；立即数无需执行阶段访存，寄存器寻址也无需主存访问。</li>
+<li>基址面向 OS、BR 通常不变，适合程序浮动；变址面向用户、IX 可变，适合数组循环；相对寻址以 PC 为基准，常用于转移。</li>
+<li>复合寻址逐步代入并数清括号；堆栈寻址隐含 SP，软/硬堆栈分别在主存/寄存器实现。</li>
+<li>做访存次数题时先写明是否计入取指和写回，避免同一寻址方式因统计口径不同而得出看似矛盾的答案。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-312cfdf36075/index.html"><span>← Previous item</span><strong>Lecture 20：图基本概念</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-324f552507c6/index.html"><span>Next item →</span><strong>7 题型 - IPv6</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 29：排序 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 29：排序. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 29：排序 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 29：排序. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-2e90359dd8ec/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 29：排序 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 29：排序. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 29：排序",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-2e90359dd8ec/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-2e90359dd8ec/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-2e90359dd8ec/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-2e90359dd8ec/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-2e90359dd8ec/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-2e90359dd8ec/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 29：排序</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 29：排序. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/82e704caef51.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/82e704caef51.pdf" download="Lecture 29：排序.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">29.1 排序的基本概念</a><a href="#section-6">29.2 内部排序与外部排序</a><a href="#section-11">相关知识</a><a href="#section-12">29.3 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>排序是把记录按关键字重新排列为有序序列。408 中不只问“结果是否有序”，还常考稳定性、存储位置、时间/空间复杂度，以及外存场景下的 I/O 代价。</p>
+</blockquote>
+<h2 id="section-1">29.1 排序的基本概念</h2>
+<h5 id="section-2"><strong>定义</strong>：#排序</h5>
+<blockquote>
+<p>描述：排序是将一组记录按关键字的非递减（或非递增）次序重新排列的过程。默认升序时，结果满足：</p>
+</blockquote>
+<p>$$
+K_1\le K_2\le\cdots\le K_n
+$$</p>
+<ul>
+<li>排序对象是<strong>记录</strong>，关键字只是排序依据；交换或移动时记录的其他字段应随关键字一起移动。</li>
+<li>关键字可以重复，因此“有序”并不能唯一确定所有记录的相对次序；这正是稳定性的意义。</li>
+<li>题目未说明升降序时，要先结合比较条件或最终序列判断，不能把算法名直接等同于升序。</li>
+</ul>
+<h3 id="section-3">29.1.1 稳定性</h3>
+<h5 id="section-4"><strong>定义</strong>：#稳定排序</h5>
+<blockquote>
+<p>描述：若排序前两个记录 $R_i,R_j$ 满足 $key_i=key_j$ 且 $R_i$ 在 $R_j$ 之前，排序后 $R_i$ 仍在 $R_j$ 之前，则该排序算法稳定；否则不稳定。</p>
+</blockquote>
+<ul>
+<li>稳定性只讨论<strong>关键字相等</strong>的记录；关键字不同的记录相对位置改变是排序的正常目的。</li>
+<li>当记录还有次关键字或附带信息时，稳定排序可保留原来的次序。例如先按姓名排序、再稳定地按班级排序，可保留同班同学的姓名序。</li>
+<li>同一算法的稳定性取决于实现细节。典型例子：归并时相等元素优先取左表元素才稳定；冒泡仅在 <code>A[j-1] &gt; A[j]</code> 时交换才稳定。</li>
+<li>判定某个具体实现“不稳定”，只需构造一组相等关键字次序被颠倒的反例；但某一次运行恰好没有颠倒相等元素，不能据此证明算法稳定，稳定性要求对所有合法输入都成立。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/f25a93fe7eb3.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L29-排序稳定性.png"><img class="note-image" src="/assets/408/images/f25a93fe7eb3.png" alt="DS-L29-排序稳定性.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>紫色 $3$ 原先在红色 $3$ 前：左侧排序结果仍保持这个次序，右侧结果把两者颠倒。注意图中比较的是两条记录的身份，不只是数值都等于 $3$。</p>
+</blockquote>
+<h3 id="section-5">29.1.2 衡量排序算法</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>关注内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>时间复杂度</td>
+<td>关键字比较、记录移动、递归等总耗时的量级</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>排序过程额外占用的存储空间</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>相等关键字记录的相对次序是否保持</td>
+</tr>
+<tr>
+<td>适用存储结构</td>
+<td>是否依赖随机访问、连续数组或链式结构</td>
+</tr>
+<tr>
+<td>外存 I/O</td>
+<td>数据无法全部装入内存时，读写磁盘块的次数</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>“比较次数少”不必然意味着整体更快：插入排序即使通过二分减少比较，记录后移仍可能达到 $O(n^2)$。</li>
+<li>“原地”有两种常见口径：严格按全部辅助空间计，只有 $O(1)$ 才算原地；若仅指在原数组内划分、不另开线性缓冲区，递归快排也常被称作原地。无论采用哪种说法，递归栈都须单独计入：快排平均 $O(\log n)$、最坏 $O(n)$，不能把整套递归实现误写为 $O(1)$ 辅助空间。</li>
+</ul>
+<hr>
+<h2 id="section-6">29.2 内部排序与外部排序</h2>
+<h3 id="section-7">29.2.1 内部排序</h3>
+<h5 id="section-8"><strong>定义</strong>：#内部排序</h5>
+<blockquote>
+<p>描述：待排序记录在排序过程中可全部放入内存的排序，称为内部排序。</p>
+</blockquote>
+<ul>
+<li>主要分析比较、移动、递归和辅助数组等内存代价。</li>
+<li>本章的插入、交换、选择、归并、基数排序均可作为内部排序算法讨论。</li>
+<li>数据量并非按文件大小绝对划分，而看可用内存能否同时容纳待排数据。</li>
+</ul>
+<h3 id="section-9">29.2.2 外部排序</h3>
+<h5 id="section-10"><strong>定义</strong>：#外部排序</h5>
+<blockquote>
+<p>描述：待排序数据量过大，无法一次全部读入内存，需要在外存与内存之间分批读写并完成排序，称为外部排序。</p>
+</blockquote>
+<ul>
+<li>外存以块为单位读写，数据必须先进入内存才能比较和修改。</li>
+<li>外部排序通常先生成多个有序的初始归并段，再做多路归并。</li>
+<li>磁盘 I/O 远慢于内存运算，所以优化重点是减少归并趟数和读写块次数，而不仅是减少关键字比较。</li>
+</ul>
+<h2 id="section-11">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-53073a86de3c/">上一篇：散列查找</a> · <a href="/en/notes/cs408-62c967cc0244/">下一篇：插入排序</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c558f3264d82/">排序代码</a></li>
+</ul>
+<h2 id="section-12">29.3 本节复盘</h2>
+<ul>
+<li>排序将记录按关键字有序排列；记录的其他字段必须随记录整体移动。</li>
+<li>稳定性只针对相等关键字：原先靠前者排序后仍靠前才稳定。</li>
+<li>内部排序关注时间和空间，外部排序还要重点计算磁盘块 I/O。</li>
+<li>后续做算法对比题时，至少同时检查稳定性、最坏复杂度、辅助空间与存储结构前提。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-2d95192b7574/index.html"><span>← Previous item</span><strong>Lecture 8：知识 - 存储器</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-2eed9d5baec0/index.html"><span>Next item →</span><strong>Lecture 14：KMP算法</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

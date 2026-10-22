@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：知识 - 浮点数的表示与运算 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 4：知识 - 浮点数的表示与运算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：知识 - 浮点数的表示与运算 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 4：知识 - 浮点数的表示与运算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-6f958f0fc0e0/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：知识 - 浮点数的表示与运算 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 4：知识 - 浮点数的表示与运算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：知识 - 浮点数的表示与运算",
+      "item": "https://www.jiayuhere.com/notes/cs408-6f958f0fc0e0/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-6f958f0fc0e0/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-6f958f0fc0e0/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-6f958f0fc0e0/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-6f958f0fc0e0/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-6f958f0fc0e0/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 4：知识 - 浮点数的表示与运算</h1><p class="article-lead">408 学习笔记：Lecture 4：知识 - 浮点数的表示与运算。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/511687f18390.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/511687f18390.pdf" download="Lecture 4：知识 - 浮点数的表示与运算.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">2.1 浮点表示与规格化</a><a href="#section-7">2.2 浮点加减运算</a><a href="#section-11">2.3 定点与浮点的比较、C 语言转换</a><a href="#section-12">相关知识</a><a href="#section-13">2.4 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：浮点数以“尾数决定精度、阶码决定范围”为核心。其运算不是直接相加，而是对阶、尾数运算、规格化、舍入，并最终判断<strong>阶码</strong>是否溢出。</p>
+</blockquote>
+<h2 id="section-1">2.1 浮点表示与规格化</h2>
+<h3 id="section-2">2.1.1 基本形式</h3>
+<p>浮点数一般写作：</p>
+<p>$$X=(-1)^S\times M\times R^E$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>决定什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$S$</td>
+<td>数符，取 0 或 1</td>
+<td>正负</td>
+</tr>
+<tr>
+<td>$M$</td>
+<td>尾数，通常是二进制定点小数</td>
+<td>有效位数，即精度</td>
+</tr>
+<tr>
+<td>$E$</td>
+<td>阶码/指数，通常以移码表示</td>
+<td>小数点位置，即表示范围</td>
+</tr>
+<tr>
+<td>$R$</td>
+<td>基数，常取 2、4 或 16</td>
+<td>每调整 1 阶相当于缩放的倍率</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>浮点表示能显著扩大范围，但在相同字长下可表示的数的个数并没有增加，所以数轴分布更稀疏且不均匀，精度不如同字长定点数均匀。</li>
+<li><strong>规格化</strong>要求非零尾数的最高有效位尽量靠前。二进制规格化常写为 $1.xxxx\times2^E$，表示形式唯一并充分利用尾数字段。</li>
+<li>左规：尾数最高位未出现有效 <code>1</code> 时，尾数左移、阶码减 1，可连续多次；右规：尾数产生进位到小数点左边时，尾数右移、阶码加 1，通常只需一次。</li>
+</ul>
+<h3 id="section-3">2.1.2 IEEE 754</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>字段</th>
+<th style="text-align:right">偏置值</th>
+<th>规格化真值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单精度 float</td>
+<td>1 位符号 + 8 位阶码 + 23 位尾数</td>
+<td style="text-align:right">127</td>
+<td>$(-1)^S\times1.f\times2^{e-127}$</td>
+</tr>
+<tr>
+<td>双精度 double</td>
+<td>1 位符号 + 11 位阶码 + 52 位尾数</td>
+<td style="text-align:right">1023</td>
+<td>$(-1)^S\times1.f\times2^{e-1023}$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>IEEE 754 的规格化二进制尾数首位恒为 1，故不存该位，称<strong>隐藏位</strong>。单精度的 23 位 fraction 实际提供 24 位有效二进制位。</li>
+<li>阶码存储的是“真阶码 + 偏置”。例如单精度真阶码 $3$ 编为 $127+3=130=82_H$。</li>
+<li>源 PDF 第 1 页把单精度偏置写成了 128，与其后页的公式和 IEEE 754 标准不符；<strong>实际偏置是 127</strong>，不能把这一处误印带入计算。</li>
+<li>规格化有限数的最小正值和最大正值分别为：</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>最小正规格化正数</th>
+<th>最大有限正数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单精度</td>
+<td>$2^{-126}\approx1.1755\times10^{-38}$</td>
+<td>$(2-2^{-23})2^{127}=2^{128}-2^{104}\approx3.4028\times10^{38}$</td>
+</tr>
+<tr>
+<td>双精度</td>
+<td>$2^{-1022}\approx2.2251\times10^{-308}$</td>
+<td>$(2-2^{-52})2^{1023}\approx1.7977\times10^{308}$</td>
+</tr>
+</tbody>
+</table></div>
+<p>对应的有限负数范围关于 0 对称，但 0 与最小正规格化正数之间还有非规格化数。</p>
+<h3 id="section-4">原 PDF 的两道范围题</h3>
+<ol>
+<li>2012 年题：IEEE 754 单精度 <code>float</code> 能表示的最大正整数是多少？选项为 A $2^{126}-2^{103}$、B $2^{127}-2^{104}$、C $2^{127}-2^{103}$、D $2^{128}-2^{104}$。最大有限数的阶码字段为 254，真阶码为 $254-127=127$；尾数字段全 1 时有效数为 $2-2^{-23}$，故最大值是 $(2-2^{-23})2^{127}=2^{128}-2^{104}$，选 <strong>D</strong>。这个值本身是整数；题目不是问“从 0 起每个整数都能连续精确表示到哪里”。</li>
+<li>2018 年题：IEEE 754 单精度格式能表示的最小正规格化正数是多少？选项为 A $1.0\times2^{-126}$、B $1.0\times2^{-127}$、C $1.0\times2^{-128}$、D $1.0\times2^{-149}$。规格化数的最小阶码字段为 1，真阶码为 $1-127=-126$，fraction 全 0 时有效数为 1，故选 <strong>A</strong>；D 是最小正非规格化数。</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶码字段</th>
+<th>尾数字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全 0</td>
+<td>全 0</td>
+<td>$+0$ 或 $-0$</td>
+</tr>
+<tr>
+<td>全 0</td>
+<td>非 0</td>
+<td>非规格化数，用于渐进下溢</td>
+</tr>
+<tr>
+<td>1 至全 1 前</td>
+<td>任意</td>
+<td>规格化有限数，使用隐藏位 1</td>
+</tr>
+<tr>
+<td>全 1</td>
+<td>全 0</td>
+<td>正/负无穷大</td>
+</tr>
+<tr>
+<td>全 1</td>
+<td>非 0</td>
+<td>NaN（非数/无定义数）</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>单精度非规格化数的真值为 $(-1)^S\times0.f\times2^{-126}$，最小正非零值为 $2^{-149}$；双精度对应最小正非零值为 $2^{-1074}$。它们填补了 0 与各自最小正规格化数之间的间隙。</li>
+<li>“浮点范围大”不等于能精确表示所有大整数。单精度只有 24 位有效二进制精度，40 位整数即使数值没超范围，也可能无法精确表示；double 的有效尾数更多。</li>
+</ul>
+<h3 id="section-5">例：$-8.25$ 的 IEEE 754 单精度编码</h3>
+<p>源 PDF 的图示换算如下：</p>
+<p>$$
+-8.25_{10}=-1000.01_2=-1.00001_2\times2^3
+$$</p>
+<ul>
+<li>数符 $S=1$；</li>
+<li>真阶码 $E=3$，阶码字段 $e=3+127=130=10000010_2$；</li>
+<li>隐藏最高位 1 后，fraction 为 <code>00001000000000000000000</code>。</li>
+</ul>
+<p>因此 32 位编码为：</p>
+<pre><code class="language-text">1 | 10000010 | 00001000000000000000000
+</code></pre>
+<p>对应十六进制为 <code>0xC1040000</code>。</p>
+<h3 id="section-6">二进制小数与十进制小数</h3>
+<p>二进制小数从小数点后第一位起，位权依次为 $2^{-1},2^{-2},2^{-3},\ldots$。原 PDF 的两个示例为 $0.001_2=2^{-3}=0.125_{10}$，以及 $0.011_2=2^{-2}+2^{-3}=0.375_{10}$。反向将 $0.375_{10}$ 转为二进制，可依次乘以 2 并取整数位：$0.375\times2=0.75$ 取 0，$0.75\times2=1.5$ 取 1，$0.5\times2=1.0$ 取 1，得到 $0.011_2$。</p>
+<h2 id="section-7">2.2 浮点加减运算</h2>
+<h3 id="section-8">2.2.1 四步过程</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对阶</td>
+<td>小阶码向大阶码对齐</td>
+<td>小阶码尾数右移，阶码加 1，直到相等；不会引起阶码上溢</td>
+</tr>
+<tr>
+<td>尾数加减</td>
+<td>按定点数规则进行</td>
+<td>IEEE 格式要先补回隐藏位</td>
+</tr>
+<tr>
+<td>规格化</td>
+<td>恢复 $1.xxx$ 形式</td>
+<td>左规可多次，右规一次；右规使阶码加 1</td>
+</tr>
+<tr>
+<td>舍入</td>
+<td>砍掉超过精度的低位</td>
+<td>最后才还原为 IEEE 字段，必要时可能再右规</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>对阶时右移丢出的低位不应立刻抛弃，应保留为保护位/舍入信息参加中间运算，否则会额外损失精度。</li>
+<li>基数为 2 时，左规一次“尾数乘 2、阶码减 1”，右规一次“尾数除 2、阶码加 1”，数值本身不变。</li>
+<li>尾数溢出本身不等于最终溢出：可通过右规将其恢复为规格化形式；真正的数值溢出主要看最终阶码是否超范围。</li>
+</ul>
+<h3 id="section-9">2.2.2 舍入方式</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>就近舍入、偶数优先</td>
+<td>取最近可表示数；正好居中时使最后保留位为偶数</td>
+</tr>
+<tr>
+<td>正向舍入</td>
+<td>朝 $+\infty$ 取最近可表示数</td>
+</tr>
+<tr>
+<td>负向舍入</td>
+<td>朝 $-\infty$ 取最近可表示数</td>
+</tr>
+<tr>
+<td>截断</td>
+<td>直接丢弃低位；对正负数都趋向 0</td>
+</tr>
+</tbody>
+</table></div>
+<p>例：若尾数保留小数点后两位，即保留 <code>1.24</code> 这样的三位有效数字，则 $1.2400\times10^5+0.0050\times10^5=1.2450\times10^5$ 恰在 $1.24\times10^5$ 与 $1.25\times10^5$ 中间，按偶数优先取 $1.24\times10^5$。</p>
+<h3 id="section-10">2.2.3 上溢、下溢与机器零</h3>
+<ul>
+<li><strong>上溢</strong>：最终结果绝对值超过最大可表示有限数，正上溢与负上溢都需异常处理或相应溢出结果。</li>
+<li><strong>下溢（教材简化口径）</strong>：规格化后的真阶码低于正常阶码下界。IEEE 754 可先用非规格化数实现渐进下溢；能被非规格化数精确表示的微小结果不必直接变成 0，严格的 IEEE 下溢异常还与舍入后是否不精确有关。</li>
+<li>左规会使阶码减小，可能造成指数下溢；右规或舍入进位会使阶码加大，可能造成指数上溢。</li>
+<li><strong>机器零</strong>通常指尾数为 0，或在不支持/不采用非规格化数的简化模型中因阶码下溢而被冲刷为 0 的结果。非零但尚未规格化的尾数应先继续规格化，不能仅因“形式不规范”就判为机器零。</li>
+</ul>
+<h2 id="section-11">2.3 定点与浮点的比较、C 语言转换</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>定点数</th>
+<th>浮点数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值范围</td>
+<td>同字长较小</td>
+<td>同字长远大于定点</td>
+</tr>
+<tr>
+<td>精度分布</td>
+<td>固定且均匀</td>
+<td>相对精度近似固定，绝对间隔随数值变大</td>
+</tr>
+<tr>
+<td>运算</td>
+<td>直接整数/小数运算</td>
+<td>须做阶码和尾数运算、规格化与舍入</td>
+</tr>
+<tr>
+<td>溢出判断</td>
+<td>结果超数值范围即溢出</td>
+<td>主要看规格化后的阶码是否超范围</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>C 中 <code>float</code> 通常对应 IEEE 单精度，<code>double</code> 对应双精度，<code>long double</code> 的长度与格式由编译器和平台决定。</li>
+<li>“类型等级更高”不等于转换一定无损。<code>char -&gt; int</code>（当 <code>int</code> 能覆盖其范围）、<code>int -&gt; long</code>（目标范围足够）和 <code>float -&gt; double</code> 通常能保值；<code>long -&gt; double</code> 是否精确取决于整数位宽和 double 的有效精度，不能列为无条件无损转换。</li>
+<li>C 的混合表达式应按<strong>整数提升与通常算术转换</strong>逐步判断，而不是笼统地把“低类型”转为“高类型”。<code>int -&gt; float</code> 在整数有效位超过 float 的 24 位精度时会舍入，常见 32 位 <code>int -&gt; double</code> 则可精确容纳。</li>
+<li><code>double -&gt; float</code> 可能舍入、上溢或下溢；<code>float/double -&gt; int</code> 先截去小数部分（趋向 0），若截断后的值仍超出目标整数范围，C 语言层面属于未定义行为，不能简单当作普通回绕。</li>
+</ul>
+<h2 id="section-12">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-47193abe2561/">上一篇：数制与编码</a> · <a href="/notes/cs408-bb3c8bf8e273/">下一篇：运算方法和运算电路</a></li>
+</ul>
+<h2 id="section-13">2.4 本节复盘</h2>
+<ul>
+<li>尾数决定精度、阶码决定范围；IEEE 规格化数用隐藏首位 1 扩展有效精度。</li>
+<li>单精度公式为 $(-1)^S\times1.f\times2^{e-127}$，双精度偏置为 1023；全零/全一阶码有专门语义。</li>
+<li>浮点加减必须依次对阶、尾数运算、规格化、舍入；小阶码向大阶码对齐，右移低位需保留舍入信息。</li>
+<li>结果是否真正溢出取决于阶码；尾数溢出可经右规修正。大范围不代表大整数一定能精确表示。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-6e190f5755e2/index.html"><span>← 上一项</span><strong>Lecture 6：知识 - 内存管理基础</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-71f5fb08648b/index.html"><span>下一项 →</span><strong>2026-10-17 四科教材覆盖度与补全记录</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

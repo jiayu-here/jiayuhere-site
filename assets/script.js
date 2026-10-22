@@ -1066,3 +1066,15 @@ if ("serviceWorker" in navigator && ["http:", "https:"].includes(window.location
     navigator.serviceWorker.register("/sw.js").catch(() => {});
   });
 }
+
+const mermaidDiagrams = document.querySelectorAll("pre.mermaid");
+if (mermaidDiagrams.length) {
+  import("https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs")
+    .then(({ default: mermaid }) => {
+      mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "neutral" });
+      return mermaid.run({ nodes: mermaidDiagrams });
+    })
+    .catch(() => {
+      // The readable diagram source remains visible when the CDN is unavailable.
+    });
+}

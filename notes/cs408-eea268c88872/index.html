@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 1：数据库绪论 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 1：数据库绪论。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 1：数据库绪论 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 1：数据库绪论。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-eea268c88872/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 1：数据库绪论 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 1：数据库绪论。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 1：数据库绪论",
+      "item": "https://www.jiayuhere.com/notes/cs408-eea268c88872/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-eea268c88872/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-eea268c88872/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-eea268c88872/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-eea268c88872/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-eea268c88872/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 1：数据库绪论</h1><p class="article-lead">408 学习笔记：Lecture 1：数据库绪论。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 11 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d09b17e7f7ed.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d09b17e7f7ed.pdf" download="Lecture 1：数据库绪论.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 数据库系统基本概念</a><a href="#section-7">1.2 为什么建立数据模型</a><a href="#section-8">1.3 数据模型三要素</a><a href="#section-12">1.4 数据模型的三个层次</a><a href="#section-17">1.5 模式与实例</a><a href="#section-20">1.6 三级模式结构</a><a href="#section-25">1.7 两级映像</a><a href="#section-28">1.8 数据独立性</a><a href="#section-31">1.9 易错点</a><a href="#section-32">相关知识</a><a href="#section-33">1.10 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节区分数据、数据库、数据库管理系统、数据库系统和数据库管理员，整理数据模型的三要素及概念/逻辑/物理三个层次，并说明外模式、模式、内模式、两级映像与逻辑/物理数据独立性。</p>
+</blockquote>
+<h2 id="section-1">1.1 数据库系统基本概念</h2>
+<h3 id="section-2">1.1.1 数据 Data</h3>
+<p>数据是描述现实世界事物的符号记录，可以是数字、文字、图像、音频、视频等。</p>
+<p>数据本身需要结合语义才能成为有意义的信息。例如 <code>2026-08-14</code> 只有在说明它是日期、生日或提交时间后，含义才明确。</p>
+<h3 id="section-3">1.1.2 数据库 DB</h3>
+<p>数据库（Database，DB）是长期存储在计算机内、有组织、可共享的数据集合。</p>
+<p>典型特征：</p>
+<ul>
+<li>数据按一定模型组织。</li>
+<li>冗余受到控制。</li>
+<li>可供多个用户或应用共享。</li>
+<li>数据与应用程序具有一定独立性。</li>
+<li>由 DBMS 统一管理。</li>
+</ul>
+<h3 id="section-4">1.1.3 数据库管理系统 DBMS</h3>
+<p>数据库管理系统（Database Management System，DBMS）是位于用户/应用程序与数据库之间的系统软件。</p>
+<p>主要功能包括：</p>
+<ul>
+<li>数据定义：定义模式、表、约束等。</li>
+<li>数据组织、存储和管理。</li>
+<li>数据操纵：查询、插入、删除、修改。</li>
+<li>事务管理与并发控制。</li>
+<li>安全性、完整性控制。</li>
+<li>数据备份与故障恢复。</li>
+<li>数据字典和运行维护。</li>
+</ul>
+<p>DBMS 不是数据库本身。前者是管理数据的软件，后者是被管理的数据集合。</p>
+<h3 id="section-5">1.1.4 数据库系统 DBS</h3>
+<p>数据库系统（Database System，DBS）是采用数据库技术保存和管理数据的完整系统。</p>
+<p>课件结构图可整理为：</p>
+<pre><code class="language-text">程序员 / 数据库终端用户
+            ↓
+         应用程序
+            ↓
+   数据库管理系统 DBMS ← 数据库管理员 DBA
+            ↓
+         数据库 DB
+            ↓
+          数据 Data
+</code></pre>
+<p>广义的数据库系统包括：</p>
+<ul>
+<li>数据库 DB。</li>
+<li>数据库管理系统 DBMS。</li>
+<li>应用程序。</li>
+<li>数据库管理员 DBA。</li>
+<li>用户。</li>
+<li>支撑运行的计算机系统与相关文档。</li>
+</ul>
+<p>关系可以简记为：</p>
+<p>$$
+\text{DBS}
+\supset
+\text{DBMS}+
+\text{DB}+
+\text{应用}+
+\text{人员}.
+$$</p>
+<h3 id="section-6">1.1.5 数据库管理员 DBA</h3>
+<p>数据库管理员（Database Administrator，DBA）负责数据库系统的规划、授权、运行和维护。</p>
+<p>典型职责：</p>
+<ul>
+<li>设计或审核数据库模式。</li>
+<li>分配权限并制定安全策略。</li>
+<li>定义完整性约束。</li>
+<li>监控性能并进行调优。</li>
+<li>制定备份和恢复策略。</li>
+<li>处理容量、存储和版本维护。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 易错点
+DB 是数据集合，DBMS 是管理软件，DBS 是包含数据、软件、应用和人员的完整系统，DBA 是管理角色。</p>
+</blockquote>
+<h2 id="section-7">1.2 为什么建立数据模型</h2>
+<p>现实事物不能直接被计算机理解，必须先把实体、属性、联系和约束转换为可表示、可处理的数据。</p>
+<p>数据模型（Data Model）是对现实世界数据特征的抽象，为数据库系统提供统一的信息表示与操作框架，是数据库系统的核心基础。</p>
+<p>抽象过程通常是：</p>
+<pre><code class="language-text">现实世界
+   ↓ 抽象
+信息世界：实体、属性、联系
+   ↓ 转换
+机器世界：表、记录、文件、索引等
+</code></pre>
+<h2 id="section-8">1.3 数据模型三要素</h2>
+<p>一个完整的数据模型包含三部分。</p>
+<h3 id="section-9">1.3.1 数据结构</h3>
+<p>数据结构描述系统的<strong>静态特征</strong>，回答：</p>
+<ul>
+<li>有哪些对象？</li>
+<li>对象有哪些属性？</li>
+<li>对象之间有什么联系？</li>
+<li>数据以什么结构组织？</li>
+</ul>
+<p>例如关系模型用关系、元组、属性来组织数据。</p>
+<h3 id="section-10">1.3.2 数据操作</h3>
+<p>数据操作描述系统的<strong>动态行为</strong>，包括对数据的查询和更新。</p>
+<p>基本操作：</p>
+<ul>
+<li>查询。</li>
+<li>插入。</li>
+<li>删除。</li>
+<li>修改。</li>
+</ul>
+<p>数据模型还应规定操作的含义及操作规则。</p>
+<h3 id="section-11">1.3.3 数据约束</h3>
+<p>数据约束规定数据及其变化必须满足的条件，用于保证正确性和一致性。</p>
+<p>例如：</p>
+<ul>
+<li>学号必须唯一。</li>
+<li>年龄不能为负数。</li>
+<li>选课记录中的学生必须已经存在。</li>
+<li>事务执行前后必须保持数据库一致性。</li>
+</ul>
+<p>三要素对应关系：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>描述重点</th>
+<th>系统特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据结构</td>
+<td>数据对象及联系</td>
+<td>静态特征</td>
+</tr>
+<tr>
+<td>数据操作</td>
+<td>查询和更新行为</td>
+<td>动态特征</td>
+</tr>
+<tr>
+<td>数据约束</td>
+<td>合法状态与变化规则</td>
+<td>完整性条件</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-12">1.4 数据模型的三个层次</h2>
+<h3 id="section-13">1.4.1 概念模型</h3>
+<p>概念模型位于数据抽象的最高层，从用户和设计者角度描述现实世界信息。</p>
+<p>特点：</p>
+<ul>
+<li>面向现实业务，不依赖具体 DBMS。</li>
+<li>使用较直观、简单的符号。</li>
+<li>主要用于数据库概念设计阶段。</li>
+<li>常用工具是 E-R 图或 UML 类图。</li>
+</ul>
+<p>典型元素包括实体、属性和实体之间的联系。</p>
+<blockquote>
+<p><strong>NOTE</strong>
+课件说概念模型“没有严格规定”是强调它比逻辑模型更贴近用户、实现无关；实际使用 E-R/UML 时仍需遵守相应表示规则。</p>
+</blockquote>
+<h3 id="section-14">1.4.2 逻辑模型</h3>
+<p>逻辑模型位于中间层，描述数据的逻辑结构以及可执行的数据操作和约束。</p>
+<p>常见逻辑模型：</p>
+<ul>
+<li>层次模型：树形结构。</li>
+<li>网状模型：图结构。</li>
+<li>关系模型：二维表结构。</li>
+<li>面向对象、对象关系等模型。</li>
+</ul>
+<p>DBMS 总是基于某种逻辑数据模型实现其对外的数据组织和操作接口。</p>
+<h3 id="section-15">1.4.3 物理模型</h3>
+<p>物理模型位于最底层，描述逻辑数据在存储介质上的组织与存取方式，是逻辑模型的物理实现。</p>
+<p>涉及内容：</p>
+<ul>
+<li>文件组织。</li>
+<li>记录布局。</li>
+<li>数据页和块。</li>
+<li>索引结构。</li>
+<li>聚簇方式。</li>
+<li>存储位置和访问路径。</li>
+</ul>
+<h3 id="section-16">1.4.4 三者对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>面向对象</th>
+<th>主要内容</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概念模型</td>
+<td>用户、设计人员</td>
+<td>现实实体、属性、联系</td>
+<td>概念设计，E-R 图/类图</td>
+</tr>
+<tr>
+<td>逻辑模型</td>
+<td>DBMS、开发人员</td>
+<td>表/树/图等逻辑结构</td>
+<td>逻辑设计与数据操作</td>
+</tr>
+<tr>
+<td>物理模型</td>
+<td>系统实现、DBA</td>
+<td>文件、页、索引、存储路径</td>
+<td>物理设计与性能优化</td>
+</tr>
+</tbody>
+</table></div>
+<p>抽象方向：</p>
+<pre><code class="language-text">概念模型：现实业务是什么
+          ↓
+逻辑模型：数据逻辑上怎样组织
+          ↓
+物理模型：数据实际上怎样存储
+</code></pre>
+<h2 id="section-17">1.5 模式与实例</h2>
+<h3 id="section-18">1.5.1 模式 Schema</h3>
+<p>模式是数据库全体数据的逻辑结构和特征的描述，相当于数据库的设计蓝图。</p>
+<p>模式通常相对稳定，例如表名、属性、类型、联系和约束。</p>
+<h3 id="section-19">1.5.2 实例 Instance</h3>
+<p>实例是数据库在某一时刻实际存放的数据，是模式的具体取值。</p>
+<p>例如：</p>
+<ul>
+<li><code>Student(Sno, Sname, Age)</code> 是模式的一部分。</li>
+<li>某时刻表中的所有学生记录构成一个实例。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong>
+模式描述结构，实例描述当前数据；数据库实例会频繁变化，模式通常较稳定。</p>
+</blockquote>
+<h2 id="section-20">1.6 三级模式结构</h2>
+<p>数据库系统用外模式、模式、内模式形成三个抽象层次。</p>
+<h3 id="section-21">1.6.1 外模式</h3>
+<p>外模式（External Schema）也称子模式或用户模式，是数据库<strong>局部数据</strong>的逻辑结构和特征描述。</p>
+<p>特点：</p>
+<ul>
+<li>面向某个用户、用户组或应用。</li>
+<li>只暴露所需的数据子集。</li>
+<li>可以隐藏其他数据，提高安全性和简洁性。</li>
+<li>一个数据库可以有多个外模式。</li>
+<li>多个应用也可以共享同一外模式。</li>
+</ul>
+<h3 id="section-22">1.6.2 模式</h3>
+<p>模式（Conceptual Schema）也称概念模式，是数据库<strong>全体数据</strong>的逻辑结构和特征描述。</p>
+<p>特点：</p>
+<ul>
+<li>是所有用户公共数据视图的综合。</li>
+<li>描述数据的逻辑结构、联系和约束。</li>
+<li>不关心具体物理存储细节。</li>
+<li>一个数据库通常只有一个模式。</li>
+</ul>
+<h3 id="section-23">1.6.3 内模式</h3>
+<p>内模式（Internal Schema）也称存储模式，是数据库物理结构和存储方式的描述。</p>
+<p>包括：</p>
+<ul>
+<li>记录如何存放。</li>
+<li>数据页和文件如何组织。</li>
+<li>使用哪些索引和访问路径。</li>
+<li>是否压缩、聚簇或分区。</li>
+</ul>
+<p>一个数据库通常只有一个内模式。</p>
+<h3 id="section-24">1.6.4 图中结构</h3>
+<p>课件第三页显示：</p>
+<pre><code class="language-text">应用 A、B        应用 C        应用 D、E
+    ↕               ↕              ↕
+  外模式 1        外模式 2        外模式 3
+       \            |            /
+              模式
+                ↕
+              内模式
+                ↕
+              数据库
+</code></pre>
+<p>因此：</p>
+<ul>
+<li>外模式可以有多个，并分别服务不同应用。</li>
+<li>模式是全局逻辑视图。</li>
+<li>内模式对应统一的物理存储视图。</li>
+</ul>
+<h2 id="section-25">1.7 两级映像</h2>
+<p>三级模式之间通过两级映像连接。</p>
+<h3 id="section-26">1.7.1 外模式/模式映像</h3>
+<p>外模式/模式映像定义每个外模式与全局模式之间的对应关系。</p>
+<p>当模式发生一定范围的变化时，只要调整映像，就可尽量保持外模式和应用程序不变。</p>
+<p>它保证<strong>逻辑数据独立性</strong>。</p>
+<h3 id="section-27">1.7.2 模式/内模式映像</h3>
+<p>模式/内模式映像定义全局逻辑结构与物理存储结构之间的对应关系。</p>
+<p>当存储文件、索引或访问路径变化时，只要调整映像，就可尽量保持模式和应用程序不变。</p>
+<p>它保证<strong>物理数据独立性</strong>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>映像</th>
+<th>连接层次</th>
+<th>保证的独立性</th>
+<th>典型变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外模式/模式映像</td>
+<td>外模式 ↔ 模式</td>
+<td>逻辑独立性</td>
+<td>逻辑结构变化</td>
+</tr>
+<tr>
+<td>模式/内模式映像</td>
+<td>模式 ↔ 内模式</td>
+<td>物理独立性</td>
+<td>文件、索引、存储方式变化</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-28">1.8 数据独立性</h2>
+<h3 id="section-29">1.8.1 逻辑独立性</h3>
+<p>逻辑独立性指模式改变时，应用程序和外模式可尽量不变。</p>
+<p>例如给基本表增加一个应用不使用的属性，可通过外模式/模式映像使原应用继续运行。</p>
+<h3 id="section-30">1.8.2 物理独立性</h3>
+<p>物理独立性指内模式改变时，模式、外模式和应用程序可保持不变。</p>
+<p>例如：</p>
+<ul>
+<li>为表增加索引。</li>
+<li>改变文件组织。</li>
+<li>把数据迁移到另一存储设备。</li>
+<li>调整分区和聚簇方式。</li>
+</ul>
+<p>通常物理独立性比逻辑独立性更容易实现。</p>
+<h2 id="section-31">1.9 易错点</h2>
+<ul>
+<li>数据不是数据库；数据库是按模型组织、长期存储和共享的数据集合。</li>
+<li>DBMS 是软件，DB 是数据，DBS 是完整系统，DBA 是管理人员。</li>
+<li>数据模型三要素是数据结构、数据操作和数据约束，不能只写数据结构。</li>
+<li>概念模型面向现实业务，逻辑模型面向逻辑组织，物理模型面向存储实现。</li>
+<li>概念模型与三级模式中的“模式”不是同一个层次术语，不要只凭“概念”二字混用。</li>
+<li>外模式描述局部数据，模式描述全体数据的逻辑结构，内模式描述物理存储。</li>
+<li>一个数据库可有多个外模式，但通常只有一个模式和一个内模式。</li>
+<li>外模式/模式映像保证逻辑独立性；模式/内模式映像保证物理独立性。</li>
+<li>模式是结构蓝图，实例是某时刻的具体数据。</li>
+<li>数据独立性表示修改某一层时减少对更高层的影响，不表示各层完全没有映射关系。</li>
+</ul>
+<h2 id="section-32">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-0815015b5f7f/">上一篇：注意力机制</a> · <a href="/notes/cs408-b05bacc57032/">下一篇：关系数据库</a></li>
+</ul>
+<h2 id="section-33">1.10 本节复盘</h2>
+<ul>
+<li>数据库系统由 DB、DBMS、应用程序、用户、DBA 及运行环境共同构成。</li>
+<li>DBMS 位于应用与数据库之间，统一完成定义、操作、事务、安全、完整性和恢复管理。</li>
+<li>数据模型是现实世界数据特征的抽象，包含数据结构、数据操作和数据约束三要素。</li>
+<li>概念模型用于业务抽象，逻辑模型描述表/树/图等逻辑结构，物理模型描述存储组织。</li>
+<li>外模式是局部用户视图，模式是全局逻辑视图，内模式是物理存储视图。</li>
+<li>外模式/模式映像隔离逻辑结构变化，提供逻辑独立性。</li>
+<li>模式/内模式映像隔离物理存储变化，提供物理独立性。</li>
+<li>模式相对稳定，实例随数据库当前内容变化。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-e93053729cfd/index.html"><span>← 上一项</span><strong>Lecture 11：知识 - 指令系统的基本概念</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-efc7c4d94382/index.html"><span>下一项 →</span><strong>2 题型 - 连接控制</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

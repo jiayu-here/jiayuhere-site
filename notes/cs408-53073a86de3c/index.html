@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 28：散列查找 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 28：散列查找。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 28：散列查找 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 28：散列查找。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-53073a86de3c/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 28：散列查找 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 28：散列查找。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 28：散列查找",
+      "item": "https://www.jiayuhere.com/notes/cs408-53073a86de3c/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-53073a86de3c/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-53073a86de3c/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-53073a86de3c/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-53073a86de3c/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-53073a86de3c/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 28：散列查找</h1><p class="article-lead">408 学习笔记：Lecture 28：散列查找。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/f9cb9a8a894c.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/f9cb9a8a894c.pdf" download="Lecture 28：散列查找.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">28.1 散列表基础</a><a href="#section-6">28.2 常用散列函数构造</a><a href="#section-14">28.3 拉链法</a><a href="#section-19">28.4 开放定址法</a><a href="#section-34">相关知识</a><a href="#section-35">28.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>散列查找不通过比较树或有序位置逐层缩小范围，而是先用散列函数把关键字映射到地址。理想查找近似 $O(1)$。当整个关键字域大于有限地址域时，映射整体上必然存在碰撞；但某个具体插入集合仍可能恰好没有冲突。构造函数、控制装填因子、选对冲突处理方法才是题目的重点。</p>
+</blockquote>
+<h2 id="section-1">28.1 散列表基础</h2>
+<h3 id="section-2">28.1.1 散列函数与冲突</h3>
+<h5 id="section-3"><strong>定义</strong>：#散列表 #散列函数</h5>
+<blockquote>
+<p>描述：散列表（Hash Table）按散列函数 $H$ 将关键字映射到表中地址：$\text{Addr}=H(\text{key})$。通过地址直接访问记录的查找方式称为散列查找。</p>
+</blockquote>
+<p>$$
+\text{Addr}=H(\text{key})
+$$</p>
+<ul>
+<li>理想情况下，计算地址后一次访问就能找到记录，查找、插入和删除的期望时间可接近 $O(1)$。</li>
+<li>关键字取值空间通常远大于表地址空间，$H$ 在整个关键字域上不可能一一映射，因此必然存在某些关键字对发生碰撞；对当前实际插入的有限关键字集合，冲突并非每次都必然出现。</li>
+<li>不同关键字映射到同一初始散列地址时，这些关键字互称为<strong>同义词</strong>。</li>
+<li>$O(1)$ 是散列均匀且装填因子受控时的期望量级，不是无条件最坏界；大量关键字集中到同一链或同一探测簇时，单次操作最坏可退化为 $O(n)$。</li>
+</ul>
+<h5 id="section-4"><strong>定义</strong>：#装填因子</h5>
+<blockquote>
+<p>描述：装填因子 $\alpha$ 表示散列表已存记录数与表长之比：</p>
+</blockquote>
+<p>$$
+\alpha=\frac{n}{m}
+$$</p>
+<ul>
+<li>$n$ 为表中记录数，$m$ 为散列表长度。</li>
+<li>$\alpha$ 越大，地址拥挤、冲突概率和平均探测长度通常越大。</li>
+<li>拉链法中 $\alpha$ 可以大于 $1$；开放定址法必须有空位才可继续插入，通常要求 $\alpha&lt;1$。</li>
+</ul>
+<h3 id="section-5">28.1.2 好的散列函数</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>要求</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义域完整</td>
+<td>能处理所有可能关键字，不能因负数、字符或特殊格式失效</td>
+</tr>
+<tr>
+<td>值域合法</td>
+<td>输出必须落在地址范围内，通常为 $0\sim m-1$</td>
+</tr>
+<tr>
+<td>分布均匀</td>
+<td>尽量减少同义词，避免大量关键字落入少数地址</td>
+</tr>
+<tr>
+<td>计算简单</td>
+<td>函数本身不能比查找还昂贵</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>散列函数只能<strong>减少</strong>冲突，不能保证消灭冲突；题目中声称“完全不会冲突”时，需检查关键字范围和地址空间是否确能一一对应。</li>
+<li>插入、查找、删除必须使用同一个 $H$ 和同一种冲突处理规则，否则无法沿正确位置或探测序列定位记录。</li>
+</ul>
+<hr>
+<h2 id="section-6">28.2 常用散列函数构造</h2>
+<h3 id="section-7">28.2.1 除留余数法</h3>
+<h5 id="section-8"><strong>定义</strong>：#除留余数法</h5>
+<p>$$
+H(\text{key})=\text{key}\bmod p
+$$</p>
+<ul>
+<li>$p$ 应取不大于表长 $m$ 且尽量接近 $m$ 的质数（素数）。例如 $m=15$ 时可取 $p=13$。</li>
+<li>质数取模通常能避免关键字分布规律与表长存在不良公因数，从而改善均匀性。</li>
+<li>地址空间以 $0\sim m-1$ 为准；$p&lt;m$ 时，部分地址可能不由初始散列函数直接产生，但开放定址的后续探测仍可能访问它们。</li>
+<li>教材补充：若允许负关键字，需注意某些语言的 <code>%</code> 会得到负余数；作为数组地址时应归一化为 <code>((key % p) + p) % p</code>，保证结果落在 $0\sim p-1$。</li>
+</ul>
+<h3 id="section-9">28.2.2 直接定址法</h3>
+<h5 id="section-10"><strong>定义</strong>：#直接定址法</h5>
+<p>$$
+H(\text{key})=\text{key}
+\quad\text{或}\quad
+H(\text{key})=a\times\text{key}+b
+$$</p>
+<ul>
+<li>若关键字本身连续或近似连续，直接定址计算快且可避免冲突。</li>
+<li>若关键字稀疏，例如学号跨度很大而记录很少，会产生大量空位，空间利用率低。</li>
+<li>“不会冲突”要求该线性映射在实际关键字集合上是一一映射，且结果全部落入合法地址范围；若 $a=0$、结果被再次取模或超界截断，仍可能冲突，不能只见到 $a\times key+b$ 就直接判无冲突。</li>
+</ul>
+<h3 id="section-11">28.2.3 数字分析法与平方取中法</h3>
+<h5 id="section-12"><strong>数字分析法</strong>：</h5>
+<ul>
+<li>观察已知关键字各数位的分布，选取分布较均匀的若干位组成地址。</li>
+<li>适合关键字集合已知、各位分布差异明显的场景，例如号码、编码类关键字。</li>
+<li>不能机械取“最后几位”；若最后几位集中或有固定前后缀，冲突反而会增多。</li>
+</ul>
+<h5 id="section-13"><strong>平方取中法</strong>：</h5>
+<ul>
+<li>先求关键字平方，再取中间若干位作为地址。</li>
+<li>平方结果的中间位受原关键字多个数位共同影响，适合各位都不够均匀、又不易直接挑选有效位的情况。</li>
+<li>取几位仍由表长决定，结果必须映射到合法地址范围。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/e34b4fef4e82.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-平方取中.png"><img class="note-image" src="/assets/408/images/e34b4fef4e82.png" alt="DS-L28-平方取中.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中不同车型号平方后，中间若干位同时受原关键字多位影响；实际取几位由地址空间大小决定，不能固定照抄图中的位数。</p>
+</blockquote>
+<hr>
+<h2 id="section-14">28.3 拉链法</h2>
+<h3 id="section-15">28.3.1 结构与操作</h3>
+<h5 id="section-16"><strong>定义</strong>：#拉链法 #链地址法</h5>
+<blockquote>
+<p>描述：为散列表的每个地址建立一个链表，将初始地址相同的所有同义词链接在该链表中。</p>
+</blockquote>
+<pre><code class="language-text">table[i] -&gt; 记录1 -&gt; 记录2 -&gt; ... -&gt; NULL
+</code></pre>
+<h5 id="section-17"><strong>插入、查找、删除</strong>：</h5>
+<ol>
+<li>计算初始地址 $i=H(key)$。</li>
+<li>插入时把新记录接入 <code>table[i]</code> 对应链表（头插或尾插都可以，但顺序会影响具体查找长度）。</li>
+<li>查找时仅在该链表中顺序比较关键字；链表结束仍未命中则失败。</li>
+<li>删除时在链表中找到目标后修改前驱指针或表头指针即可。</li>
+</ol>
+<p>原 PDF 的删除图例中，$H(key)=key\bmod13$：桶 1 的链上可删除 $27$，桶 7 可删除 $20$；$66\bmod13=1$，但桶 1 链中没有 $66$，查找失败，因此也不能删除 $66$。删除一个结点不影响同桶其余结点的可查找性。</p>
+<p>以 $m=13,H(key)=key\bmod13$ 为例，依次插入 $19,14,23,1,68,20$；若采用头插法，地址 $1$ 的链为 $1\to14$，地址 $3$ 存 $68$，地址 $6$ 存 $19$，地址 $7$ 存 $20$，地址 $10$ 存 $23$。</p>
+<p><a class="note-image-link" href="/assets/408/images/943f81fb32c6.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-拉链法插入.png"><img class="note-image" src="/assets/408/images/943f81fb32c6.png" alt="DS-L28-拉链法插入.png" loading="lazy" decoding="async"></a></p>
+<ul>
+<li>表头为空时，查找可立即失败。</li>
+<li>链表长度就是该地址的冲突程度；若散列均匀，平均链长约为 $\alpha$。</li>
+<li>在均匀散列的常见分析下，拉链法的期望查找代价为 $O(1+\alpha)$。</li>
+</ul>
+<h5 id="section-18"><strong>查找长度口径</strong>：</h5>
+<ul>
+<li>408 题通常统计<strong>关键字比较次数</strong>；是否把链表末尾的空指针比较计入，以题目说明为准。</li>
+<li>不能把“计算散列地址”自动算成一次关键字比较，除非题目明确要求统计函数计算或访问次数。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/a3a79b95378e.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-拉链法失败查找.png"><img class="note-image" src="/assets/408/images/a3a79b95378e.png" alt="DS-L28-拉链法失败查找.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中查找 $66$，初始地址为 $66\bmod13=1$，依次比较 $79,27,1,14$ 后失败；按“只计关键字比较”口径，失败查找长度为 $4$。</p>
+</blockquote>
+<hr>
+<h2 id="section-19">28.4 开放定址法</h2>
+<h3 id="section-20">28.4.1 通用探测公式</h3>
+<h5 id="section-21"><strong>定义</strong>：#开放定址法</h5>
+<blockquote>
+<p>描述：发生冲突时，不另建链表，而是按约定探测序列在散列表的其他单元中寻找空位置。表内任一地址都可能存放来自其他初始地址的记录。</p>
+</blockquote>
+<p>$$
+H_i=(H(\text{key})+d_i)\bmod m
+$$</p>
+<ul>
+<li>$H(\text{key})$ 是初始散列地址，$d_i$ 是第 $i$ 次探测的偏移量，$m$ 是表长。</li>
+<li>插入和查找都必须按<strong>完全相同</strong>的探测序列进行：查找碰到空单元才可判定失败；碰到其他关键字只说明继续探测。</li>
+<li>开放定址法记录都在表数组内，装填因子升高时探测长度会明显变大。</li>
+</ul>
+<h3 id="section-22">28.4.2 四种探测方法</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>偏移序列</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性探测</td>
+<td>$d_i=0,1,2,\ldots,m-1$</td>
+<td>简单，若表长合适可遍历全表；易产生一次聚集</td>
+</tr>
+<tr>
+<td>平方探测</td>
+<td>$0^2,1^2,-1^2,2^2,-2^2,\ldots$</td>
+<td>可缓解线性连续堆积；覆盖范围取决于表长，不能无条件声称至少一半或覆盖全表</td>
+</tr>
+<tr>
+<td>双散列</td>
+<td>$d_i=i\times H_2(key)$</td>
+<td>第二函数与表长互质时可覆盖全表，聚集较少</td>
+</tr>
+<tr>
+<td>伪随机探测</td>
+<td>按预设伪随机偏移序列</td>
+<td>覆盖能力取决于序列设计，必须可重复</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-23"><strong>线性探测法</strong>：</h5>
+<ul>
+<li>连续同义词会依次占据相邻位置，后来即使初始地址不同的关键字也可能被挤入这一段，称为<strong>一次聚集（primary clustering）</strong>。</li>
+<li>优点是规则直观；缺点是聚集会让成功和失败查找都变慢。</li>
+</ul>
+<p>例如 $m=13,H(key)=key\bmod13$，插入 $1$ 时依次访问地址 $1,2,3,4$，前三处已被 $14,2,15$ 占用，最终存入地址 $4$。</p>
+<p><a class="note-image-link" href="/assets/408/images/0e6933ccd65e.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-线性探测.png"><img class="note-image" src="/assets/408/images/0e6933ccd65e.png" alt="DS-L28-线性探测.png" loading="lazy" decoding="async"></a></p>
+<h5 id="section-24"><strong>平方探测的覆盖边界</strong>：</h5>
+<ul>
+<li>对 $d_i=0,1^2,-1^2,2^2,-2^2,\ldots$，若 $m$ 是形如 $4j+3$ 的质数，可以覆盖全部地址；若 $m$ 是形如 $4j+1$ 的质数，只会得到约一半的不同地址。</li>
+<li>教材常说“至少能探测一半”时，隐含了表长取合适质数等条件；对于任意合数表长，这个结论并非无条件成立。</li>
+<li>图中插入 $1$ 时从地址 $1$ 出发，依次按 $+1^2,-1^2,+2^2$ 访问 $2,0,5$，最终落在地址 $5$。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/947271a6169f.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-平方探测.png"><img class="note-image" src="/assets/408/images/947271a6169f.png" alt="DS-L28-平方探测.png" loading="lazy" decoding="async"></a></p>
+<h5 id="section-25"><strong>双散列法的覆盖条件</strong>：</h5>
+<ul>
+<li>若 $\gcd(H_2(key),m)=1$，探测步长与表长互质，才能遍历全部 $m$ 个地址。</li>
+<li>“双散列一定能访问全表”是错误的；需检查步长和 $m$ 的最大公因数。</li>
+<li>原稿示例采用 $H_2(key)=m-(key\bmod m)$。它对图中的 $m=13,key=1$ 给出步长 $12$，确实与 $13$ 互质；但若 $key\bmod m=0$，会得到步长 $m\equiv0\pmod m$，探测将停在原地址，因此这个公式并非对所有关键字都安全。</li>
+<li>更稳妥的常见设计是取小于 $m$ 的质数 $R$，令 $H_2(key)=R-(key\bmod R)$，并逐题验证 $\gcd(H_2(key),m)=1$；当 $m$ 为质数时，也可令 $H_2(key)=1+(key\bmod(m-1))$。</li>
+</ul>
+<p>图中 $m=13,key=1,H_2=12$，探测地址依次为 $1,0,12,11$，最终插入地址 $11$。</p>
+<p><a class="note-image-link" href="/assets/408/images/1e2182ee91e3.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-双散列.png"><img class="note-image" src="/assets/408/images/1e2182ee91e3.png" alt="DS-L28-双散列.png" loading="lazy" decoding="async"></a></p>
+<h5 id="section-26"><strong>伪随机探测法</strong>：</h5>
+<ul>
+<li>所谓“随机”必须由可重复的伪随机偏移序列给出，插入和查找才能重现同一路径；覆盖能力仍取决于序列在模 $m$ 后产生多少个不同地址。</li>
+<li>图中偏移序列从 $0,5,3,\ldots$ 开始，插入 $1$ 时先查地址 $1$，再查 $6$，最后在地址 $4$ 成功插入。</li>
+<li>原 PDF 第 9 页文字把序列写为 $0,3,5,11$，但同页图和算式依次使用 $+5$、$+3$；图示结果 $1\to6\to4$ 只与 $0,5,3,11$ 相符。遇到这种原稿内部不一致，应按题目实际给定的序列逐项计算。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/a560f983a8ac.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-伪随机探测.png"><img class="note-image" src="/assets/408/images/a560f983a8ac.png" alt="DS-L28-伪随机探测.png" loading="lazy" decoding="async"></a></p>
+<h3 id="section-27">28.4.3 查找长度与 ASL 手算</h3>
+<ul>
+<li><strong>成功查找长度</strong>：对每个已存关键字，从它自己的初始地址开始，按规定探测序列重放，直到命中；访问了几个表项，就记几次比较。不能简单用“最终地址减初始地址”。</li>
+<li><strong>失败查找长度</strong>：从题目指定的每个初始地址开始探测，直到首次遇到“从未使用”的空单元；墓碑标记不能终止失败查找。若探测序列先重复，则说明该序列覆盖范围已耗尽。</li>
+<li>成功 ASL 的分母通常是表中关键字数；失败 ASL 的分母可能是题目指定的若干初始地址数或散列函数值域大小，必须按题干口径。</li>
+<li>线性探测可以把连续被占用区间视为聚集簇辅助计数，但平方探测、双散列和伪随机探测必须逐个关键字重放，不能沿数组连续数格。</li>
+</ul>
+<h3 id="section-28">28.4.4 删除不能直接清空</h3>
+<h5 id="section-29"><strong>定义</strong>：#删除标记 #墓碑标记</h5>
+<blockquote>
+<p>描述：开放定址法删除记录时，应把该位置标记为“已删除”，而不能立刻改成“从未使用的空单元”。</p>
+</blockquote>
+<p>原因是：后续冲突记录可能正是沿探测序列越过该位置存入的。若直接清空，查找在这里提前停止，会误判后面的记录不存在。</p>
+<h5 id="section-30"><strong>正确处理</strong>：</h5>
+<ul>
+<li>查找遇到“已删除”标记时继续探测；遇到真正从未使用的空单元才失败。</li>
+<li>插入可记住第一个已删除位置，但仍应继续按探测序列确认不存在同键记录，再决定是否复用该位置。</li>
+<li>删除标记过多会使探测变长，实际系统会在合适时机重散列；408 手算题按给定表状态和规则模拟即可。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/ef9ddaf5be8a.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L28-逻辑删除.png"><img class="note-image" src="/assets/408/images/ef9ddaf5be8a.png" alt="DS-L28-逻辑删除.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中地址 $3$ 已逻辑删除。随后查找 $1$ 时仍须越过该墓碑并继续到地址 $4$；若把地址 $3$ 直接清空，查找会在此提前失败。</p>
+</blockquote>
+<h3 id="section-31">题型：#散列插入查找删除</h3>
+<h4 id="section-32">第一部分：解题方法</h4>
+<ol>
+<li>先写出 $H(key)$，得到初始地址；不要跳过取模过程。</li>
+<li>若冲突，严格列出 $d_i$ 和每次 $H_i$，每访问一个单元都检查其状态。</li>
+<li>查找仅在命中目标或遇到真正空单元时结束；插入遇到真正空单元即可确定终点，遇到墓碑则先记住候选位置，并继续确认后面不存在同键记录。</li>
+<li>删除题标明“删除标记”，不要把开放定址单元直接涂成空白。</li>
+</ol>
+<h4 id="section-33">第二部分：易错点</h4>
+<ul>
+<li>同义词指初始地址相同的关键字；在线性探测中占到同一连续区的记录不一定互为同义词。</li>
+<li>拉链法的删除可直接断链；开放定址法的删除必须保留探测链。</li>
+<li>平方探测、双散列、伪随机法是否能遍历全表取决于参数，不能只凭名称下结论。</li>
+</ul>
+<h2 id="section-34">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-7b4c62ebd1f2/">上一篇：B 树</a> · <a href="/notes/cs408-2e90359dd8ec/">下一篇：排序基本概念</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-18a77c541c35/">查找代码</a></li>
+</ul>
+<h2 id="section-35">28.5 本节复盘</h2>
+<ul>
+<li>散列查找用 $\text{Addr}=H(key)$ 直接定位；整个关键字域到有限地址域的映射无法消除所有潜在碰撞，但某个具体插入集合可以没有实际冲突。</li>
+<li>装填因子 $\alpha=\frac{n}{m}$ 越大，平均探测或链长通常越大。</li>
+<li>拉链法把同义词放在同一链表；开放定址法按探测序列找表中空位。</li>
+<li>开放定址删除采用墓碑标记，确保后续记录的探测路径不断裂。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-52d40cc31415/index.html"><span>← 上一项</span><strong>Lecture 3：线性模型</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-53cbe59d76f3/index.html"><span>下一项 →</span><strong>复试常考科目导航</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2 题型 - 信道利用率相关计算 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 2 题型 - 信道利用率相关计算. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="2 题型 - 信道利用率相关计算 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 2 题型 - 信道利用率相关计算. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-df715a00a371/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2 题型 - 信道利用率相关计算 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 2 题型 - 信道利用率相关计算. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "2 题型 - 信道利用率相关计算",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-df715a00a371/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-df715a00a371/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-df715a00a371/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-df715a00a371/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-df715a00a371/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-df715a00a371/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">2 题型 - 信道利用率相关计算</h1><p class="article-lead">Chinese-language Computer Science 408 note: 2 题型 - 信道利用率相关计算. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>7 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/4693f266ee0a.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/4693f266ee0a.pdf" download="2 题型 - 信道利用率相关计算.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 时间量与通用公式</a><a href="#section-4">2.2 窗口与序号位数</a><a href="#section-5">2.3 历年真题</a><a href="#section-12">2.4 易错点</a><a href="#section-13">相关知识</a><a href="#section-14">2.5 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：信道利用率是发送方用于传输有效数据帧的时间占一个发送周期的比例。停止等待一次只能发一帧；滑动窗口能在确认返回前连续发送多帧。解题时先画清数据帧、确认帧和双向传播的时间，再由所需窗口反推帧序号位数。</p>
+</blockquote>
+<h2 id="section-1">2.1 时间量与通用公式</h2>
+<p>设数据帧长度为 $L_D$、确认帧长度为 $L_A$、传输速率为 $R$、单向传播时延为 $t_p$：</p>
+<p>$$t_D=\frac{L_D}{R},\qquad t_A=\frac{L_A}{R}$$</p>
+<p>忽略处理时间时，从开始发送一个数据帧到其确认完整返回的周期为：</p>
+<p>$$T_{cycle}=t_D+2t_p+t_A$$</p>
+<h3 id="section-2">2.1.1 停止等待</h3>
+<p>$$U_{SW}=\frac{t_D}{t_D+2t_p+t_A}$$</p>
+<p>若确认帧的发送时延忽略不计：</p>
+<p>$$U_{SW}=\frac{t_D}{t_D+2t_p}$$</p>
+<h3 id="section-3">2.1.2 滑动窗口</h3>
+<p>发送窗口为 $W$ 时，在一个确认周期内最多连续发送 $W$ 个数据帧：</p>
+<p>$$U=\min\left(1,\frac{W t_D}{t_D+2t_p+t_A}\right)$$</p>
+<p>要使发送端不因等待确认而空闲，至少需要：</p>
+<p>$$W_{min}=\left\lceil\frac{t_D+2t_p+t_A}{t_D}\right\rceil$$</p>
+<p>平均有效数据率为：</p>
+<p>$$Throughput=U\times R$$</p>
+<p>这里的 $U$ 若以“发送数据帧所占时间”为分子，得到的是<strong>数据帧发送时间利用率</strong>；它把帧首部、尾部和填充也算在数据帧内。若题目问真正的有效载荷速率（goodput），还要再乘载荷占整个数据帧的比例：</p>
+<p>$$Goodput=U\times R\times\frac{L_{payload}}{L_D}$$</p>
+<p>只有当题目把整帧都视为有效数据，或明确忽略首尾部开销时，才可直接把 $U\times R$ 称为有效数据率。</p>
+<h2 id="section-4">2.2 窗口与序号位数</h2>
+<p>若帧序号占 $m$ bit，则序号空间共有 $2^m$ 个编号：</p>
+<ul>
+<li>GBN：$W_S\le2^m-1$。</li>
+<li>SR：$W_S+W_R\le2^m$；若收发窗口相等，则 $W\le2^{m-1}$。</li>
+</ul>
+<p>不能只写“$2^m$ 能表示多少个数”；还要结合具体协议的窗口上限。</p>
+<h2 id="section-5">2.3 历年真题</h2>
+<h3 id="section-6">2.3.1 2012 年：GBN 满利用率所需序号位数</h3>
+<p><strong>条件</strong>：$R=16,kb/s$，单向传播时延 $270,ms$，数据帧长为 $128-512,B$，确认帧总与数据帧等长。</p>
+<p>为保证在整个允许帧长范围内都能达到最高利用率，应按发送时延最短、需要窗口最大的 $128,B$ 帧计算：</p>
+<p>$$L_D=L_A=128,B=1024,b$$</p>
+<p>$$t_D=t_A=\frac{1024}{16\times10^3}=64,ms$$</p>
+<p>确认周期：</p>
+<p>$$T_{cycle}=64+2\times270+64=668,ms$$</p>
+<p>持续发送所需窗口：</p>
+<p>$$W_{min}=\left\lceil\frac{668}{64}\right\rceil=11$$</p>
+<p>GBN 要满足 $2^m-1\ge11$。$m=3$ 时窗口最多 7，$m=4$ 时窗口最多 15，因此至少需要 4 bit。</p>
+<p><strong>答案：B，4 bit。</strong></p>
+<h3 id="section-7">2.3.2 2014 年：发送窗口限制平均速率</h3>
+<blockquote>
+<p>PDF 的段落标签写作“2015 年”，题图本身标明为 2014 年统考真题，以下按题图年份记录。</p>
+</blockquote>
+<p><strong>条件</strong>：GBN 发送窗口为 1000，数据帧 $1000,B$，$R=100,Mb/s$，单向传播时延 $50,ms$，确认帧很短，忽略其发送时延。</p>
+<p>一个数据帧的发送时延：</p>
+<p>$$t_D=\frac{1000\times8}{100\times10^6}=80,\mu s$$</p>
+<p>一个确认周期为：</p>
+<p>$$T_{cycle}=80,\mu s+2\times50,ms=100.08,ms$$</p>
+<p>若要完全填满信道，需窗口：</p>
+<p>$$\left\lceil\frac{100.08,ms}{80,\mu s}\right\rceil=1251$$</p>
+<p>实际窗口只有 1000，所以不能达到 100% 利用率：</p>
+<p>$$U=\frac{1000\times80,\mu s}{100.08,ms}\approx0.7994$$</p>
+<p>$$Throughput\approx0.7994\times100,Mb/s\approx80,Mb/s$$</p>
+<p><strong>答案：C，约 $80,Mb/s$。</strong></p>
+<h3 id="section-8">2.3.3 2015 年：利用率反推帧序号位数</h3>
+<p><strong>条件</strong>：$R=128,kb/s$，单向传播时延 $250,ms$，帧长 $1000,B$，忽略确认帧开销，要求利用率不小于 $80%$。</p>
+<p>$$t_D=\frac{1000\times8}{128\times10^3}=62.5,ms$$</p>
+<p>由滑动窗口利用率公式：</p>
+<p>$$0.8\le\frac{W\times62.5}{62.5+500}$$</p>
+<p>$$W\ge7.2$$</p>
+<p>窗口必须取整数，故至少为 8。无论按 GBN 的 $W\le2^m-1$，还是按 SR 等大窗口的 $W\le2^{m-1}$，都至少需要 $m=4$ bit。</p>
+<p><strong>答案：B，4 bit。</strong></p>
+<h3 id="section-9">2.3.4 2018 年：停止等待反求帧长</h3>
+<p><strong>条件</strong>：$R=3,kb/s$，单向传播时延 $200,ms$，忽略确认帧发送时延，信道利用率为 $40%$。</p>
+<p>设数据帧发送时延为 $t_D$：</p>
+<p>$$\frac{t_D}{t_D+400,ms}=0.4$$</p>
+<p>解得：</p>
+<p>$$t_D=\frac{0.4}{0.6}\times400,ms=266.67,ms$$</p>
+<p>帧长为：</p>
+<p>$$L_D=3,kb/s\times0.26667,s=800,bit$$</p>
+<p><strong>答案：D，$800,bit$。</strong></p>
+<h3 id="section-10">2.3.5 2020 年：确认帧发送时延不可忽略</h3>
+<p><strong>条件</strong>：停止等待，数据帧与确认帧均为 $1000,B$，$R=10,kb/s$，单向传播时延 $200,ms$。</p>
+<p>$$t_D=t_A=\frac{1000\times8}{10\times10^3}=0.8,s$$</p>
+<p>$$U=\frac{0.8}{0.8+0.8+2\times0.2}=0.4=40%$$</p>
+<p><strong>答案：D，$40%$。</strong></p>
+<h3 id="section-11">2.3.6 2023 年：三种协议利用率排序</h3>
+<p>三种协议使用同一信道、相同帧长，忽略确认帧长；序号位数为 3 bit。设停止等待、GBN、SR 的最大利用率分别为 $U_1、U_2、U_3$，且 GBN/SR 的收发窗口按题设取相应最大值。</p>
+<ul>
+<li>停止等待：$W=1$。</li>
+<li>GBN：$W_S\le2^3-1=7$。</li>
+<li>SR：收发窗口相等，$2W\le2^3$，故 $W\le4$。</li>
+</ul>
+<p>利用率随可连续发送的窗口大小单调不减，因此：</p>
+<p>$$U_1\le U_3\le U_2$$</p>
+<p>若某个窗口已经足以填满信道，相邻利用率可以相等，所以用“$\le$”而不是严格小于。</p>
+<p><strong>答案：B。</strong></p>
+<h2 id="section-12">2.4 易错点</h2>
+<ul>
+<li>数据帧和确认帧等长时，确认帧发送时延 $t_A$ 不能省略。</li>
+<li>“单向传播时延”在一个确认周期中出现两次；不要把它误当成 RTT 后再乘 2。</li>
+<li>帧长必须先统一为 bit，再除以 bit/s。</li>
+<li>由 $W\ge7.2$ 应取整数窗口 8；窗口大小不能保留小数。</li>
+<li>序号空间有 $2^m$ 个编号，不代表 GBN 可把窗口开到 $2^m$。</li>
+<li>求平均速率时先算利用率，再乘链路传输速率；窗口不足时吞吐量小于物理带宽。</li>
+<li>若题目要求应用/网络层有效载荷速率，还要扣除数据链路层首部、尾部与填充开销；不要把 frame throughput 当成 goodput。</li>
+</ul>
+<h2 id="section-13">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-0d03dc451308/">上一篇：三种可靠传输协议</a> · <a href="/en/notes/cs408-b5bf851a87da/">下一篇：CSMA/CD 计算</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-cd234cc86adc/">数据链路层总纲</a></li>
+</ul>
+<h2 id="section-14">2.5 本节复盘</h2>
+<ul>
+<li>停止等待利用率为 $t_D/(t_D+2t_p+t_A)$；滑动窗口利用率为 $\min(1,Wt_D/T_{cycle})$。</li>
+<li>满流水所需窗口为 $\lceil T_{cycle}/t_D\rceil$，再根据 GBN/SR 的窗口上限反推序号位数。</li>
+<li>传播时延很大、帧很短时，需要更大的发送窗口才能填满信道。</li>
+<li>确认帧长度不可忽略时必须计入 $t_A$；2020 年真题因此得到 $40%$。</li>
+<li>3 bit 序号下，窗口大小为停止等待 1、SR 最多 4、GBN 最多 7，故 $U_1\le U_3\le U_2$。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-de0669613621/index.html"><span>← Previous item</span><strong>1 题型 - IP、UDP、TCP报文段</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-e503e71568f6/index.html"><span>Next item →</span><strong>Lecture 6：知识 - 编码与调制</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

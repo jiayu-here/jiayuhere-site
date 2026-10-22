@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：知识 - 目录 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 9：知识 - 目录. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：知识 - 目录 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 9：知识 - 目录. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-5cc130a6e9c2/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：知识 - 目录 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 9：知识 - 目录. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：知识 - 目录",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-5cc130a6e9c2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-5cc130a6e9c2/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5cc130a6e9c2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5cc130a6e9c2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5cc130a6e9c2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-5cc130a6e9c2/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 9：知识 - 目录</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 9：知识 - 目录. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>6 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/b14fa49e02ba.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/b14fa49e02ba.pdf" download="Lecture 9：知识 - 目录.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">9.1 目录结构</a><a href="#section-2">9.2 目录操作与链接</a><a href="#section-3">9.3 图示复核：目录项、inode 与共享</a><a href="#section-9">相关知识</a><a href="#section-10">9.4 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>目录是特殊文件，由目录项组成，承担按名存取、分类、共享和保护。目录结构的演进体现了多用户、分类和共享需求的增加。</p>
+</blockquote>
+<h2 id="section-1">9.1 目录结构</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单级目录</td>
+<td>全系统一张目录表，重名冲突、查找慢，不适合多用户</td>
+</tr>
+<tr>
+<td>两级目录</td>
+<td>MFD 按用户定位 UFD，不同用户可重名，但用户内无法分类</td>
+</tr>
+<tr>
+<td>树形目录</td>
+<td>根到文件的层次路径，分类清晰、保护方便，逐级查找增加 I/O</td>
+</tr>
+<tr>
+<td>无环图目录</td>
+<td>增加共享链接，允许同文件/目录多入口，需共享计数防止误删</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>绝对路径从根目录开始；相对路径从当前工作目录开始。</li>
+<li>共享文件不是复制文件：多个目录项指向同一对象，一方修改所有共享者可见。链接计数归零是回收文件的必要条件；若仍有进程打开该文件，还须等待最后一个打开引用关闭。</li>
+</ul>
+<h2 id="section-2">9.2 目录操作与链接</h2>
+<ul>
+<li>基本操作：搜索、创建、删除、显示、改名、遍历、改变当前目录。创建先检查同目录重名；删除非空目录通常受限制。</li>
+<li>硬链接是不同目录项指向同一 inode，通常不能跨文件系统且一般禁止普通用户对目录建立硬链接；删除一个链接仅减少链接计数。</li>
+<li>软链接（符号链接）是存放目标路径的独立文件，可跨文件系统、可指向目录；目标删除后软链接会悬空。</li>
+</ul>
+<h2 id="section-3">9.3 图示复核：目录项、inode 与共享</h2>
+<h3 id="section-4">目录项与 FCB</h3>
+<p>目录本身是有结构的文件，由一条条目录项组成；一个目录项对应该目录下的一个文件。传统目录项可保存完整 FCB，FCB 包括：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>信息类别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本信息</td>
+<td>文件名、外存物理地址、逻辑结构、物理结构等。</td>
+</tr>
+<tr>
+<td>存取控制信息</td>
+<td>可读/可写标志、禁止访问的用户名单等。</td>
+</tr>
+<tr>
+<td>使用信息</td>
+<td>建立时间、修改时间等。</td>
+</tr>
+</tbody>
+</table></div>
+<p>目录的目的不仅是按名存取（实现文件名到文件的映射），还包括提高检索效率、支持多用户共享及对用户文件重命名。</p>
+<h3 id="section-5">单级、两级与树形目录的图示关系</h3>
+<pre><code class="language-text">两级目录：
+MFD（用户名 → UFD 位置）
+ ├─ User1 → UFD1（文件名 → FCB/位置）
+ ├─ User2 → UFD2（文件名 → FCB/位置）
+ └─ User3 → UFD3（文件名 → FCB/位置）
+</code></pre>
+<ul>
+<li>单级目录中整个系统只有一张目录表：建立文件需先查全表重名；按文件名找到 FCB 后还要进行合法性检查。它支持按名存取，也可在新名称不冲突时重命名，但不支持不同用户的同名文件和分层分类，目录很大时查找也慢。</li>
+<li>两级目录中，MFD 的一项记录用户名与该用户 UFD 的位置，UFD 记录该用户全部文件的 FCB。不同用户可有同名文件，并可在目录层实施访问限制；但一个用户仍不能对自己的文件再分类。</li>
+<li>树形目录的路径由从根目录到目标的各目录名和文件名用 <code>/</code> 连接。绝对路径从根开始，相对路径从当前目录开始。树形目录便于分类、管理、保护，但沿路径逐级查找会增加外存访问。</li>
+<li>无环图目录是在树形目录上增加指向同一结点的有向边，以共享文件或整个目录；必须保持无环，否则路径遍历和回收会失控。</li>
+</ul>
+<h3 id="section-6">用 inode 让目录“瘦身”</h3>
+<p>只有文件名匹配后才需要读取文件的其他属性。采用 inode 后，目录项仅保存：</p>
+<ol>
+<li>文件名；</li>
+<li>指向相应 inode 的指针（或 inode 号）。</li>
+</ol>
+<p>除文件名外的描述信息（包括文件的外存位置）放在该文件唯一的 inode 中。找到目录项后才把 inode 调入内存，并由其中的块地址定位文件。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>磁盘 inode</td>
+<td>存放在外存的持久 inode。</td>
+</tr>
+<tr>
+<td>内存 inode</td>
+<td>磁盘 inode 调入后的运行时表示；除磁盘属性外，还会记录是否已修改、当前访问该文件的进程数等。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-7">硬链接与软链接的删除语义</h3>
+<p><strong>硬链接</strong>让多个用户目录项（可以用不同文件名）指向同一个 inode；inode 再指向同一份文件数据。</p>
+<pre><code class="language-text">User1/aaa ─┐
+           ├─&gt; inode（link count = 2） ─&gt; 文件数据
+User2/bbb ─┘
+</code></pre>
+<ul>
+<li>建立新硬链接：增加一个目录项，并令 inode 的 <code>count++</code>。</li>
+<li>删除一个硬链接：只删该目录项，<code>count--</code>。课程的简化模型在 <code>count == 0</code> 时回收 inode 和数据；实际 Unix 类系统若还有进程打开该文件，即使链接计数已归零，也会等最后一个打开引用关闭后才回收。</li>
+<li>因此硬链接共享的是同一份数据；任何一个用户修改后，其他链接名访问到的内容同步变化。</li>
+</ul>
+<p>**软链接（符号链接）**本身是独立的 <code>Link</code> 型文件，其内容记录目标文件的路径（类似 Windows 快捷方式）。访问软链接时，OS 根据该路径逐级查目录，最终再定位目标文件。</p>
+<pre><code class="language-text">User3/ccc（Link 文件，内容：/User1/aaa）
+    └─ 路径解析 ─&gt; User1/aaa ─&gt; inode 1 ─&gt; 文件 1
+</code></pre>
+<ul>
+<li>删除目标文件后，软链接文件仍然存在，但解析路径会失败，成为悬空链接。</li>
+<li>直接删除软链接的路径名时，默认删除的是链接自身，不会删除其目标；通过软链接打开、读取或写入时才会跟随路径访问目标。</li>
+<li>符号链接拥有独立 inode，其链接计数不随目标文件变化；课程示例中该值为 1，但这不是所有文件系统和所有操作下恒成立的普遍定律。</li>
+<li>在 Unix 类系统中，能否删除某个目录项主要取决于调用者对<strong>父目录</strong>是否具有写权限和执行权限，并受 sticky bit 等规则限制，而不是简单取决于是否为目标文件拥有者。软链接也不会让用户绕过这些权限检查。</li>
+</ul>
+<h3 id="section-8">目录的基本操作</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>对目录的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>搜索</td>
+<td>按文件名查目录，取得对应目录项。</td>
+</tr>
+<tr>
+<td>创建文件</td>
+<td>在所属目录增加一个目录项。</td>
+</tr>
+<tr>
+<td>删除文件</td>
+<td>在目录中删除相应目录项；硬链接还要处理 <code>count</code>。</td>
+</tr>
+<tr>
+<td>显示目录</td>
+<td>列出目录内文件及其属性。</td>
+</tr>
+<tr>
+<td>修改目录</td>
+<td>文件名等保存在目录项中的属性变化时，修改对应目录项。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-9">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-01376a76f77e/">上一篇：文件</a> · <a href="/en/notes/cs408-0f7e7a7a0522/">下一篇：文件系统</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c0568749182e/">树形目录所需的树结构</a></li>
+</ul>
+<h2 id="section-10">9.4 本节复盘</h2>
+<ul>
+<li>目录项实现文件名到 FCB/inode 的映射；树形目录解决分类，无环图目录解决共享。</li>
+<li>硬链接共享 inode，软链接保存路径；删除语义和跨文件系统能力不同。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-5c0168fd0259/index.html"><span>← Previous item</span><strong>Lecture 1：知识 - 计算机网络概述</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-5efaa92ea781/index.html"><span>Next item →</span><strong>Lecture 22：图的遍历</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>1. 顺序表 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 1. 顺序表. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="1. 顺序表 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 1. 顺序表. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-7528c27ca114/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1. 顺序表 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 1. 顺序表. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "1. 顺序表",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-7528c27ca114/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-7528c27ca114/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-7528c27ca114/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-7528c27ca114/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-7528c27ca114/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-7528c27ca114/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">1. 顺序表</h1><p class="article-lead">Chinese-language Computer Science 408 note: 1. 顺序表. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>7 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/1196e7f6f7c2.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/1196e7f6f7c2.pdf" download="1. 顺序表.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">1.0 统一定义与约定</a><a href="#section-2">1.1 代码题 1：递增有序表插入元素</a><a href="#section-4">1.2 代码题 2：用末元素覆盖最小元素</a><a href="#section-6">1.3 代码题 3：原地逆置顺序表</a><a href="#section-7">1.4 代码题 4：交换两个连续子序列</a><a href="#section-9">1.5 代码题 5：删除所有值为 x 的元素</a><a href="#section-12">1.6 代码题 6：删除值在闭区间 s 到 t 内的元素</a><a href="#section-13">1.7 代码题 7：有序表原地去重</a><a href="#section-14">1.8 代码题 8：合并两个递增顺序表</a><a href="#section-15">1.9 代码题 9：两个递增序列合并后的中位数</a><a href="#section-18">1.10 代码题 10：最小未出现正整数</a><a href="#section-20">1.11 代码题 11：寻找主元素</a><a href="#section-23">1.12 原 PDF 代码错误清单</a><a href="#section-24">相关知识</a><a href="#section-25">1.13 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>本资料共 11 道顺序表代码题。核心是明确下标含义、容量上限和循环不变量：筛选题通常让 <code>i</code> 负责读取、<code>k</code> 负责写入；区间题统一采用闭区间；所有访问都必须先证明下标合法。</p>
+</blockquote>
+<h2 id="section-1">1.0 统一定义与约定</h2>
+<p>以下代码采用 C++ 引用语法；数组下标从 0 开始，合法数据区为 <code>data[0..length-1]</code>。</p>
+<pre><code class="language-cpp">constexpr int MAXSIZE = 100;
+using ElemType = int;
+
+struct SqList {
+    ElemType data[MAXSIZE];
+    int length = 0;
+};
+</code></pre>
+<ul>
+<li>涉及插入或合并时必须检查容量，不能写入 <code>data[MAXSIZE]</code>。</li>
+<li>需要返回元素且可能失败时，使用 <code>bool</code> 表示成功与否，用引用参数带回结果，避免用某个合法整数充当失败哨兵。</li>
+<li>除非特别说明，“递增”按非递减理解，即允许相等关键字。</li>
+</ul>
+<hr>
+<h2 id="section-2">1.1 代码题 1：递增有序表插入元素</h2>
+<h3 id="section-3">题目</h3>
+<p>在非递减顺序表中插入元素 <code>x</code>，使插入后仍保持非递减。</p>
+<pre><code class="language-cpp">bool OrderedInsert(SqList &amp;L, ElemType x) {
+    if (L.length &gt;= MAXSIZE) return false;
+
+    int pos = 0;
+    // 跳过所有 &lt;= x 的元素，使 x 插到已有相等元素之后。
+    while (pos &lt; L.length &amp;&amp; L.data[pos] &lt;= x) ++pos;
+
+    for (int j = L.length; j &gt; pos; --j)
+        L.data[j] = L.data[j - 1];
+
+    L.data[pos] = x;
+    ++L.length;
+    return true;
+}
+</code></pre>
+<ul>
+<li>循环结束时，<code>[0,pos)</code> 中元素均不大于 <code>x</code>，<code>[pos,length)</code> 中元素均大于 <code>x</code>。</li>
+<li>从尾部向前移动，避免尚未复制的元素被覆盖。</li>
+<li>时间 $O(n)$、空间 $O(1)$；插在已有相等元素之后可保持稳定性。</li>
+<li>原 PDF 使用了未定义变量 <code>index</code>，且比较方向不能正确找到插入点；上面已修正。</li>
+</ul>
+<hr>
+<h2 id="section-4">1.2 代码题 2：用末元素覆盖最小元素</h2>
+<h3 id="section-5">题目</h3>
+<p>删除顺序表中的最小元素，用最后一个元素填补其位置，并返回被删除的最小值。</p>
+<pre><code class="language-cpp">bool DeleteMin(SqList &amp;L, ElemType &amp;minValue) {
+    if (L.length == 0) return false;
+
+    int minIndex = 0;
+    for (int i = 1; i &lt; L.length; ++i)
+        if (L.data[i] &lt; L.data[minIndex])
+            minIndex = i;
+
+    minValue = L.data[minIndex];
+    L.data[minIndex] = L.data[L.length - 1];
+    --L.length;
+    return true;
+}
+</code></pre>
+<ul>
+<li>时间 $O(n)$、空间 $O(1)$。</li>
+<li>题目明确要求“末元素覆盖”，因此删除后<strong>不保证原有次序</strong>；若必须保持次序，应把后继元素依次前移。</li>
+<li>空表时不能读取 <code>data[0]</code>，所以必须先判空。</li>
+</ul>
+<hr>
+<h2 id="section-6">1.3 代码题 3：原地逆置顺序表</h2>
+<pre><code class="language-cpp">void Reverse(SqList &amp;L) {
+    for (int i = 0, j = L.length - 1; i &lt; j; ++i, --j) {
+        ElemType temp = L.data[i];
+        L.data[i] = L.data[j];
+        L.data[j] = temp;
+    }
+}
+</code></pre>
+<ul>
+<li>循环不变量：<code>i</code> 左侧和 <code>j</code> 右侧的元素已经到达最终位置。</li>
+<li>奇数长度时中间元素无须处理；空表时 <code>j=-1</code>，条件 <code>i&lt;j</code> 直接为假。</li>
+<li>时间 $O(n)$、空间 $O(1)$。</li>
+</ul>
+<hr>
+<h2 id="section-7">1.4 代码题 4：交换两个连续子序列</h2>
+<h3 id="section-8">题目</h3>
+<p>将</p>
+<p>$$
+(a_1,a_2,\ldots,a_m,b_1,b_2,\ldots,b_n)
+$$</p>
+<p>原地变为</p>
+<p>$$
+(b_1,b_2,\ldots,b_n,a_1,a_2,\ldots,a_m)
+$$</p>
+<pre><code class="language-cpp">void ReverseRange(SqList &amp;L, int left, int right) { // 闭区间
+    while (left &lt; right) {
+        ElemType temp = L.data[left];
+        L.data[left++] = L.data[right];
+        L.data[right--] = temp;
+    }
+}
+
+bool ExchangeBlocks(SqList &amp;L, int m, int n) {
+    if (m &lt; 0 || n &lt; 0 || m + n != L.length) return false;
+
+    ReverseRange(L, 0, m - 1);
+    ReverseRange(L, m, m + n - 1);
+    ReverseRange(L, 0, m + n - 1);
+    return true;
+}
+</code></pre>
+<ul>
+<li>三次逆置的中间状态为 $A^RB^R\rightarrow( A^RB^R)^R=BA$。</li>
+<li><code>m</code>、<code>n</code> 是两个子序列的<strong>长度</strong>，所以第二段末下标是 <code>m+n-1</code>，不是 <code>n-1</code>；原 PDF 在此混淆了长度与下标。</li>
+<li>本题交换的是构成整个顺序表的两个连续块，因此还必须满足 <code>m+n==L.length</code>。若只想交换表的某个前缀，应另行传入区间边界并在接口名中说明。</li>
+<li>时间 $O(m+n)$、空间 $O(1)$。</li>
+</ul>
+<hr>
+<h2 id="section-9">1.5 代码题 5：删除所有值为 x 的元素</h2>
+<h3 id="section-10">方法一：写指针保存保留元素</h3>
+<pre><code class="language-cpp">void DeleteX(SqList &amp;L, ElemType x) {
+    int k = 0; // 下一次写入位置
+    for (int i = 0; i &lt; L.length; ++i)
+        if (L.data[i] != x)
+            L.data[k++] = L.data[i];
+    L.length = k;
+}
+</code></pre>
+<h3 id="section-11">方法二：累计已删除数量</h3>
+<pre><code class="language-cpp">void DeleteXByCount(SqList &amp;L, ElemType x) {
+    int removed = 0;
+    for (int i = 0; i &lt; L.length; ++i) {
+        if (L.data[i] == x)
+            ++removed;
+        else
+            L.data[i - removed] = L.data[i];
+    }
+    L.length -= removed;
+}
+</code></pre>
+<ul>
+<li>两种方法都保持剩余元素的相对次序，时间 $O(n)$、空间 $O(1)$。</li>
+<li>不要每发现一个 <code>x</code> 就把全部后继前移，否则最坏时间会变成 $O(n^2)$。</li>
+</ul>
+<hr>
+<h2 id="section-12">1.6 代码题 6：删除值在闭区间 s 到 t 内的元素</h2>
+<pre><code class="language-cpp">bool DeleteRange(SqList &amp;L, ElemType s, ElemType t) {
+    if (s &gt; t) return false;
+
+    int k = 0;
+    for (int i = 0; i &lt; L.length; ++i)
+        if (L.data[i] &lt; s || L.data[i] &gt; t)
+            L.data[k++] = L.data[i];
+    L.length = k;
+    return true;
+}
+</code></pre>
+<ul>
+<li>保留条件是区间补集 <code>value &lt; s || value &gt; t</code>；把 <code>||</code> 错写成 <code>&amp;&amp;</code> 会导致没有元素能被保留。</li>
+<li><code>s&gt;t</code> 属于非法区间，本实现返回 <code>false</code> 且不修改顺序表。</li>
+<li>时间 $O(n)$、空间 $O(1)$。</li>
+</ul>
+<hr>
+<h2 id="section-13">1.7 代码题 7：有序表原地去重</h2>
+<pre><code class="language-cpp">void DeleteDuplicates(SqList &amp;L) { // L 已非递减有序
+    if (L.length &lt;= 1) return;
+
+    int k = 0; // 最后一个已保留元素的下标
+    for (int i = 1; i &lt; L.length; ++i)
+        if (L.data[i] != L.data[k])
+            L.data[++k] = L.data[i];
+    L.length = k + 1;
+}
+</code></pre>
+<ul>
+<li><code>k</code> 指向最后一个已保留元素，而不是下一写入位置，所以最终长度是 <code>k+1</code>。</li>
+<li>有序性保证相同元素连续；无序表不能直接使用本算法。</li>
+<li>时间 $O(n)$、空间 $O(1)$，且保留每个值第一次出现的记录。</li>
+</ul>
+<hr>
+<h2 id="section-14">1.8 代码题 8：合并两个递增顺序表</h2>
+<pre><code class="language-cpp">bool Merge(const SqList &amp;A, const SqList &amp;B, SqList &amp;C) {
+    if (A.length + B.length &gt; MAXSIZE) return false;
+
+    int i = 0, j = 0, k = 0;
+    while (i &lt; A.length &amp;&amp; j &lt; B.length) {
+        if (A.data[i] &lt;= B.data[j])
+            C.data[k++] = A.data[i++];
+        else
+            C.data[k++] = B.data[j++];
+    }
+    while (i &lt; A.length) C.data[k++] = A.data[i++];
+    while (j &lt; B.length) C.data[k++] = B.data[j++];
+    C.length = k;
+    return true;
+}
+</code></pre>
+<ul>
+<li><code>A</code>、<code>B</code> 必须已按同一规则有序，且输出表 <code>C</code> 不能与输入表共用同一存储区。</li>
+<li>相等时先取 <code>A</code> 中记录可保持两输入序列之间的稳定次序。</li>
+<li>一方耗尽后，另一方剩余元素直接复制；时间 $O(m+n)$，输出空间 $O(m+n)$。</li>
+<li>原 PDF 的返回类型、变量名和 <code>l.length</code> 均不一致，且缺少容量检查；上面已统一。</li>
+</ul>
+<hr>
+<h2 id="section-15">1.9 代码题 9：两个递增序列合并后的中位数</h2>
+<p>本题必须先确认“中位数”的口径。以下按总长度 $N=m+n$ 的<strong>下中位数</strong>处理，其 0 下标为：</p>
+<p>$$
+target=\left\lfloor\frac{N-1}{2}\right\rfloor
+$$</p>
+<h3 id="section-16">方法一：完整合并</h3>
+<pre><code class="language-cpp">bool LowerMedianByMerge(const SqList &amp;A, const SqList &amp;B,
+                        ElemType &amp;median) {
+    SqList C;
+    if (!Merge(A, B, C) || C.length == 0) return false;
+    median = C.data[(C.length - 1) / 2];
+    return true;
+}
+</code></pre>
+<h3 id="section-17">方法二：只归并到目标位置</h3>
+<pre><code class="language-cpp">bool LowerMedian(const SqList &amp;A, const SqList &amp;B,
+                 ElemType &amp;median) {
+    const int total = A.length + B.length;
+    if (total == 0) return false;
+
+    const int target = (total - 1) / 2;
+    int i = 0, j = 0;
+    for (int k = 0; k &lt;= target; ++k) {
+        if (j &gt;= B.length ||
+            (i &lt; A.length &amp;&amp; A.data[i] &lt;= B.data[j]))
+            median = A.data[i++];
+        else
+            median = B.data[j++];
+    }
+    return true;
+}
+</code></pre>
+<ul>
+<li>方法一时间 $O(m+n)$、另需 $O(m+n)$ 输出空间；方法二最坏时间 $O(m+n)$、额外空间 $O(1)$。</li>
+<li>原 PDF 的 <code>GetMid</code> 返回了中位数<strong>下标</strong>，不是该下标处的元素，属于实质性错误。</li>
+<li>若题目定义上中位数或偶数长度取两中间值平均数，应相应改变目标下标和返回类型。</li>
+</ul>
+<hr>
+<h2 id="section-18">1.10 代码题 10：最小未出现正整数</h2>
+<h3 id="section-19">关键结论</h3>
+<p>长度为 $n$ 的数组中，最小未出现正整数一定属于 $[1,n+1]$。大于 $n$ 的值、0 和负数都不会影响答案。</p>
+<pre><code class="language-cpp">int FirstMissingPositive(const int A[], int n) {
+    bool *seen = new bool[n + 1]{}; // 只使用 seen[1..n]
+
+    for (int i = 0; i &lt; n; ++i)
+        if (A[i] &gt;= 1 &amp;&amp; A[i] &lt;= n)
+            seen[A[i]] = true;
+
+    int answer = 1;
+    while (answer &lt;= n &amp;&amp; seen[answer]) ++answer;
+
+    delete[] seen;
+    return answer;
+}
+</code></pre>
+<ul>
+<li>时间 $O(n)$、空间 $O(n)$；若 <code>1..n</code> 全出现，循环自然返回 <code>n+1</code>。</li>
+<li>记录数组必须零初始化，映射前必须检查 <code>1&lt;=A[i]&lt;=n</code>，否则会越界。</li>
+<li>原 PDF 在寻找答案时扫描了原数组 <code>a</code> 而非标记数组 <code>record</code>，还混用了 <code>minNumber</code>、<code>maxNumber</code> 与大小写不同的释放变量；上面已全部修正。</li>
+</ul>
+<hr>
+<h2 id="section-20">1.11 代码题 11：寻找主元素</h2>
+<h3 id="section-21">题目</h3>
+<p>若某元素出现次数严格大于 $n/2$，称为主元素。找到它；不存在则报告失败。</p>
+<h3 id="section-22">最优空间：Boyer-Moore 投票并复核</h3>
+<pre><code class="language-cpp">bool MajorityElement(const int A[], int n, int &amp;majority) {
+    if (n &lt;= 0) return false;
+
+    int candidate = A[0];
+    int votes = 1;
+    for (int i = 1; i &lt; n; ++i) {
+        if (votes == 0) {
+            candidate = A[i];
+            votes = 1;
+        } else if (A[i] == candidate) {
+            ++votes;
+        } else {
+            --votes;
+        }
+    }
+
+    int count = 0;
+    for (int i = 0; i &lt; n; ++i)
+        if (A[i] == candidate) ++count;
+
+    if (count &lt;= n / 2) return false;
+    majority = candidate;
+    return true;
+}
+</code></pre>
+<ul>
+<li>两个不同元素可以成对抵消；若主元素存在，抵消后它必是候选者。</li>
+<li>“候选者”不等于“必然是主元素”，所以第二趟必须统计并验证 <code>count&gt;n/2</code>。</li>
+<li>时间 $O(n)$、空间 $O(1)$。</li>
+<li>原 PDF 利用 <code>0&lt;a_i&lt;n</code> 建立计数数组也能做到 $O(n)$ 时间，但需要 $O(n)$ 空间，且依赖值域前提；投票法不依赖值域。</li>
+</ul>
+<hr>
+<h2 id="section-23">1.12 原 PDF 代码错误清单</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">题号</th>
+<th>原代码主要问题</th>
+<th>修正原则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td><code>index</code> 未定义、查找条件方向错误、无满表检查</td>
+<td>明确插入位置并从尾部移动</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>空表直接访问 <code>data[0]</code></td>
+<td>先判空，再返回删除值</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>语句缺分号、交换语句位置被 OCR/排版打乱</td>
+<td>以 <code>i&lt;j</code> 为循环条件原地交换</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>把后段长度 <code>n</code> 误作结束下标</td>
+<td>第二段为 <code>[m,m+n-1]</code></td>
+</tr>
+<tr>
+<td style="text-align:right">5～7</td>
+<td>类型名拼写不一、写指针语义不统一</td>
+<td>明确 <code>k</code> 是下一写位或最后保留位</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>返回类型、变量名、最终长度对象错误</td>
+<td>三指针合并并检查总容量</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>返回中位数下标而非中位数</td>
+<td>扫描到目标位置后返回元素值</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>扫描错数组、变量名混乱、释放对象大小写错误</td>
+<td>扫描 <code>seen</code> 并统一变量</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>只给计数数组方案</td>
+<td>投票得到候选者后必须复核</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-24">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-424a656729a9/">上一篇：重点算法汇总</a> · <a href="/en/notes/cs408-200f7524e253/">下一篇：链表代码</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-1e099c203994/">顺序表原理</a></li>
+</ul>
+<h2 id="section-25">1.13 本节复盘</h2>
+<ul>
+<li>插入：先检查容量，找位置后必须从后向前搬移。</li>
+<li>压缩删除：<code>i</code> 读、<code>k</code> 写；去重时先判断 <code>k</code> 表示“下一写入位置”还是“最后保留位置”。</li>
+<li>交换相邻块：三个闭区间依次逆置，长度不能误当下标。</li>
+<li>有序表合并：三指针、复制剩余段、相等时固定取值侧，并检查输出容量。</li>
+<li>中位数函数必须返回元素而不是下标；题目未说明时要先明确下中位数、上中位数或平均值口径。</li>
+<li>标记数组题先证明答案范围再映射；主元素题必须验证候选者。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-73a51c61296d/index.html"><span>← Previous item</span><strong>Lecture 6：顺序表和链表对比</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-769850dc79d7/index.html"><span>Next item →</span><strong>Lecture 4：知识 - 物理层下的传输媒体</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

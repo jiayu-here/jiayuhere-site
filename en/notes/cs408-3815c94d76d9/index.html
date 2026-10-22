@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 6：支持向量机 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 6：支持向量机. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 6：支持向量机 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 6：支持向量机. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-3815c94d76d9/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 6：支持向量机 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 6：支持向量机. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 6：支持向量机",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-3815c94d76d9/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-3815c94d76d9/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-3815c94d76d9/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-3815c94d76d9/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-3815c94d76d9/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-3815c94d76d9/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 6：支持向量机</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 6：支持向量机. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>10 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/e6a25e27e281.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/e6a25e27e281.pdf" download="Lecture 6：支持向量机.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">6.1 最大间隔思想</a><a href="#section-2">$$
+r</a><a href="#section-3">6.2 硬间隔 SVM 原始问题</a><a href="#section-4">6.3 拉格朗日对偶</a><a href="#section-6">$$
+L(\boldsymbol{w},b,\boldsymbol{\alpha})</a><a href="#section-8">$$
+f(\boldsymbol{x})
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b</a><a href="#section-9">6.4 KKT 条件与稀疏性</a><a href="#section-10">6.5 SMO 求解</a><a href="#section-11">6.6 特征空间映射</a><a href="#section-12">$$
+f(\boldsymbol{x})</a><a href="#section-13">6.7 核函数</a><a href="#section-14">$$
+\kappa(\boldsymbol{x}_i,\boldsymbol{x}_j)</a><a href="#section-15">$$
+f(\boldsymbol{x})</a><a href="#section-17">6.8 支持向量回归</a><a href="#section-18">$$
+\ell_\epsilon(z)</a><a href="#section-19">$$
+f(\boldsymbol{x})</a><a href="#section-20">6.9 使用层次</a><a href="#section-21">6.10 易错点</a><a href="#section-22">相关知识</a><a href="#section-23">6.11 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节从最大间隔分类器出发，推导硬间隔 SVM 的原始问题、拉格朗日对偶、KKT 条件和 SMO，进一步整理特征映射、核函数以及 $\epsilon$-不敏感支持向量回归。</p>
+</blockquote>
+<h2 id="section-1">6.1 最大间隔思想</h2>
+<p>对线性可分训练集，能把两类样本分开的超平面通常不止一个。支持向量机选择两类之间间隔最大的超平面，以提高分类鲁棒性和泛化能力。</p>
+<p>超平面写为</p>
+<p>$$
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b=0.
+$$</p>
+<p>点 $\boldsymbol{x}$ 到超平面的几何距离为</p>
+<h1 id="section-2">$$
+r</h1>
+<p>\frac{
+\left|\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b\right|
+}{
+|\boldsymbol{w}|
+}.
+$$</p>
+<p>把正、负类标签记为 $y_i\in{+1,-1}$，通过缩放 $\boldsymbol{w},b$，可令离超平面最近的样本满足</p>
+<p>$$
+y_i
+\left(
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}_i+b
+\right)=1.
+$$</p>
+<p>两条间隔边界为</p>
+<p>$$
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b=1
+$$</p>
+<p>和</p>
+<p>$$
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b=-1.
+$$</p>
+<p>两者距离，即总间隔为</p>
+<p>$$
+\gamma=\frac{2}{|\boldsymbol{w}|}.
+$$</p>
+<ul>
+<li>落在间隔边界上的训练样本称为支持向量。</li>
+<li>间隔越大，分类边界对样本小扰动越不敏感。</li>
+</ul>
+<h2 id="section-3">6.2 硬间隔 SVM 原始问题</h2>
+<p>最大化</p>
+<p>$$
+\frac{2}{|\boldsymbol{w}|}
+$$</p>
+<p>等价于最小化</p>
+<p>$$
+\frac{1}{2}|\boldsymbol{w}|^2.
+$$</p>
+<p>硬间隔 SVM 的原始问题为</p>
+<p>$$
+\begin{aligned}
+\min_{\boldsymbol{w},b}\quad&amp;
+\frac{1}{2}|\boldsymbol{w}|^2\
+\text{s.t.}\quad&amp;
+y_i
+\left(
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}_i+b
+\right)\geq1,
+\quad i=1,2,\ldots,m.
+\end{aligned}
+$$</p>
+<ul>
+<li>这是凸二次规划问题。</li>
+<li>硬间隔要求训练样本线性可分；若存在噪声或错分，需要软间隔等扩展。</li>
+</ul>
+<h2 id="section-4">6.3 拉格朗日对偶</h2>
+<h3 id="section-5">6.3.1 构造拉格朗日函数</h3>
+<p>为每个约束引入拉格朗日乘子 $\alpha_i\geq0$：</p>
+<h1 id="section-6">$$
+L(\boldsymbol{w},b,\boldsymbol{\alpha})</h1>
+<p>\frac{1}{2}|\boldsymbol{w}|^2
++\sum_{i=1}^{m}
+\alpha_i
+\left[
+1-y_i
+\left(
+\boldsymbol{w}^{\mathrm T}\boldsymbol{x}_i+b
+\right)
+\right].
+$$</p>
+<p>令 $L$ 对 $\boldsymbol{w}$ 和 $b$ 的偏导为 $0$：</p>
+<p>$$
+\boldsymbol{w}
+=\sum_{i=1}^{m}
+\alpha_i y_i\boldsymbol{x}_i,
+$$</p>
+<p>$$
+\sum_{i=1}^{m}\alpha_i y_i=0.
+$$</p>
+<h3 id="section-7">6.3.2 对偶问题</h3>
+<p>把上式代回拉格朗日函数，得到</p>
+<p>$$
+\begin{aligned}
+\max_{\boldsymbol{\alpha}}\quad&amp;
+\sum_{i=1}^{m}\alpha_i
+-\frac{1}{2}
+\sum_{i=1}^{m}\sum_{j=1}^{m}
+\alpha_i\alpha_jy_iy_j
+\boldsymbol{x}_i^{\mathrm T}\boldsymbol{x}<em>j\
+\text{s.t.}\quad&amp;
+\sum</em>{i=1}^{m}\alpha_i y_i=0,\
+&amp;\alpha_i\geq0,
+\quad i=1,2,\ldots,m.
+\end{aligned}
+$$</p>
+<p>最终判别函数为</p>
+<h1 id="section-8">$$
+f(\boldsymbol{x})
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b</h1>
+<p>\sum_{i=1}^{m}
+\alpha_i y_i
+\boldsymbol{x}_i^{\mathrm T}\boldsymbol{x}
++b.
+$$</p>
+<p>分类结果通常取</p>
+<p>$$
+\operatorname{sign}(f(\boldsymbol{x})).
+$$</p>
+<h2 id="section-9">6.4 KKT 条件与稀疏性</h2>
+<p>硬间隔问题的互补松弛条件为</p>
+<p>$$
+\alpha_i
+\left[
+1-y_if(\boldsymbol{x}_i)
+\right]=0.
+$$</p>
+<p>结合</p>
+<p>$$
+\alpha_i\geq0
+$$</p>
+<p>和</p>
+<p>$$
+y_if(\boldsymbol{x}_i)\geq1,
+$$</p>
+<p>可知每个样本必满足以下至少一个条件：</p>
+<p>$$
+\alpha_i=0
+$$</p>
+<p>或</p>
+<p>$$
+y_if(\boldsymbol{x}_i)=1.
+$$</p>
+<ul>
+<li>非支持向量位于间隔之外，通常有 $\alpha_i=0$，不出现在最终求和中。</li>
+<li>支持向量位于间隔边界上，可有 $\alpha_i&gt;0$。</li>
+<li>因此训练完成后，最终模型只与少量支持向量有关，具有稀疏性。</li>
+</ul>
+<p>对任一满足 $y_sf(\boldsymbol{x}_s)=1$ 的支持向量，可求</p>
+<p>$$
+b
+=y_s
+-\sum_{i=1}^{m}
+\alpha_i y_i
+\boldsymbol{x}_i^{\mathrm T}\boldsymbol{x}_s.
+$$</p>
+<ul>
+<li>为提高数值鲁棒性，通常对多个支持向量得到的 $b$ 取平均。</li>
+</ul>
+<h2 id="section-10">6.5 SMO 求解</h2>
+<p>序列最小最优化（SMO）反复执行：</p>
+<ol>
+<li>选择一对需要更新的变量 $\alpha_i,\alpha_j$。</li>
+<li>固定其余乘子，把对偶问题化为关于这一对变量的小规模问题。</li>
+<li>利用约束</li>
+</ol>
+<p>$$
+\sum_{k=1}^{m}\alpha_ky_k=0
+$$</p>
+<p>得到</p>
+<p>$$
+\alpha_i y_i+\alpha_j y_j=c,
+$$</p>
+<p>把一个变量表示为另一个变量，求闭式更新并裁剪到可行域。
+4. 重复直到满足收敛和 KKT 条件。</p>
+<ul>
+<li>对偶约束使单独更新一个 $\alpha_i$ 通常无法保持等式成立，因此 SMO 每次至少联合更新两个变量。</li>
+</ul>
+<h2 id="section-11">6.6 特征空间映射</h2>
+<p>若原始空间中样本不能被线性超平面正确分开，可使用映射</p>
+<p>$$
+\phi:\mathcal X\rightarrow\mathcal H
+$$</p>
+<p>把输入映射到更高维特征空间，在该空间中构造线性分类器：</p>
+<h1 id="section-12">$$
+f(\boldsymbol{x})</h1>
+<p>\boldsymbol{w}^{\mathrm T}
+\phi(\boldsymbol{x})+b.
+$$</p>
+<p>相应原始问题为</p>
+<p>$$
+\begin{aligned}
+\min_{\boldsymbol{w},b}\quad&amp;
+\frac{1}{2}|\boldsymbol{w}|^2\
+\text{s.t.}\quad&amp;
+y_i
+\left(
+\boldsymbol{w}^{\mathrm T}\phi(\boldsymbol{x}_i)+b
+\right)\geq1.
+\end{aligned}
+$$</p>
+<p>对偶问题只通过内积</p>
+<p>$$
+\phi(\boldsymbol{x}_i)^\mathrm T
+\phi(\boldsymbol{x}_j)
+$$</p>
+<p>依赖映射后的特征。</p>
+<ul>
+<li>高维特征空间可能维数极高甚至无限，显式构造 $\phi(\boldsymbol{x})$ 会带来巨大计算和存储开销。</li>
+</ul>
+<h2 id="section-13">6.7 核函数</h2>
+<p>核技巧直接在原空间计算高维特征内积：</p>
+<h1 id="section-14">$$
+\kappa(\boldsymbol{x}_i,\boldsymbol{x}_j)</h1>
+<p>\phi(\boldsymbol{x}_i)^\mathrm T
+\phi(\boldsymbol{x}_j).
+$$</p>
+<p>于是对偶目标中的</p>
+<p>$$
+\boldsymbol{x}_i^\mathrm T\boldsymbol{x}_j
+$$</p>
+<p>替换为</p>
+<p>$$
+\kappa(\boldsymbol{x}_i,\boldsymbol{x}_j),
+$$</p>
+<p>无需显式求出 $\phi$。</p>
+<p>核化后的判别函数为</p>
+<h1 id="section-15">$$
+f(\boldsymbol{x})</h1>
+<p>\sum_{i=1}^{m}
+\alpha_i y_i
+\kappa(\boldsymbol{x}_i,\boldsymbol{x})
++b.
+$$</p>
+<h3 id="section-16">6.7.1 Mercer 条件与核矩阵</h3>
+<p>对有限样本 ${\boldsymbol{x}_1,\ldots,\boldsymbol{x}_m}$，核矩阵为</p>
+<p>$$
+\boldsymbol{K}_{ij}
+=\kappa(\boldsymbol{x}_i,\boldsymbol{x}_j).
+$$</p>
+<p>有效核函数应使核矩阵对称、半正定，即对任意 $\boldsymbol{c}$ 有</p>
+<p>$$
+\boldsymbol{c}^{\mathrm T}
+\boldsymbol{K}
+\boldsymbol{c}\geq0.
+$$</p>
+<ul>
+<li>满足相应条件的核函数隐式定义一个再生核希尔伯特空间（RKHS）。</li>
+<li>源资料把“核矩阵主对角线为 0、副对角线对称”作为条件，这实际上混淆了距离矩阵与核 Gram 矩阵。核矩阵对角元是</li>
+</ul>
+<p>$$
+K_{ii}
+=\kappa(\boldsymbol{x}_i,\boldsymbol{x}_i)
+=|\phi(\boldsymbol{x}_i)|^2\geq0,
+$$</p>
+<p>一般不为 $0$；关键条件是对称半正定。</p>
+<ul>
+<li>不同核函数对应不同特征空间与归纳偏好，核函数选择是 SVM 模型选择的关键。</li>
+</ul>
+<h2 id="section-17">6.8 支持向量回归</h2>
+<p>支持向量回归（SVR）允许预测与真实输出之间存在宽度为 $2\epsilon$ 的无损失间隔带。</p>
+<p>$\epsilon$-不敏感损失为</p>
+<h1 id="section-18">$$
+\ell_\epsilon(z)</h1>
+<p>\begin{cases}
+0,&amp;|z|\leq\epsilon,\
+|z|-\epsilon,&amp;|z|&gt;\epsilon.
+\end{cases}
+$$</p>
+<ul>
+<li>落在间隔带内的样本不计损失，带外样本只计算超出 $\epsilon$ 的部分。</li>
+<li>与对所有残差都平方惩罚的最小二乘不同，SVR 对小误差不敏感。</li>
+</ul>
+<p>引入松弛变量 $\xi_i,\hat\xi_i$ 后，原始问题为</p>
+<p>$$
+\begin{aligned}
+\min_{\boldsymbol{w},b,\boldsymbol{\xi},\hat{\boldsymbol{\xi}}}
+\quad&amp;
+\frac{1}{2}|\boldsymbol{w}|^2
++C\sum_{i=1}^{m}
+(\xi_i+\hat\xi_i)\
+\text{s.t.}\quad&amp;
+f(\boldsymbol{x}_i)-y_i
+\leq\epsilon+\xi_i,\
+&amp;
+y_i-f(\boldsymbol{x}_i)
+\leq\epsilon+\hat\xi_i,\
+&amp;
+\xi_i\geq0,\quad
+\hat\xi_i\geq0.
+\end{aligned}
+$$</p>
+<p>其对偶形式可写为</p>
+<p>$$
+\begin{aligned}
+\max_{\boldsymbol{\alpha},\hat{\boldsymbol{\alpha}}}\quad&amp;
+\sum_{i=1}^{m}
+y_i(\hat\alpha_i-\alpha_i)
+-\epsilon\sum_{i=1}^{m}
+(\alpha_i+\hat\alpha_i)\
+&amp;-\frac{1}{2}
+\sum_{i=1}^{m}\sum_{j=1}^{m}
+(\hat\alpha_i-\alpha_i)
+(\hat\alpha_j-\alpha_j)
+\boldsymbol{x}_i^\mathrm T\boldsymbol{x}<em>j\
+\text{s.t.}\quad&amp;
+\sum</em>{i=1}^{m}
+(\hat\alpha_i-\alpha_i)=0,\
+&amp;
+0\leq\alpha_i,\hat\alpha_i\leq C.
+\end{aligned}
+$$</p>
+<p>预测函数为</p>
+<h1 id="section-19">$$
+f(\boldsymbol{x})</h1>
+<p>\sum_{i=1}^{m}
+(\hat\alpha_i-\alpha_i)
+\boldsymbol{x}_i^\mathrm T\boldsymbol{x}
++b.
+$$</p>
+<ul>
+<li>核化 SVR 只需把内积替换为核函数。</li>
+<li>$C$ 控制模型平坦程度与带外误差的权衡；$\epsilon$ 控制无损失间隔带宽。</li>
+</ul>
+<h2 id="section-20">6.9 使用层次</h2>
+<p>源资料把 SVM 的使用概括为三个层次：</p>
+<ul>
+<li>入门：能够调用和实现常见 SVM 版本。</li>
+<li>进阶：理解并尝试选择、组合核函数。</li>
+<li>深入：根据具体问题设计目标函数、替代损失和约束。</li>
+</ul>
+<h2 id="section-21">6.10 易错点</h2>
+<ul>
+<li>支持向量到分类超平面的单侧距离是 $1/|\boldsymbol{w}|$，两条间隔边界的总宽度才是 $2/|\boldsymbol{w}|$。</li>
+<li>最大化间隔等价于最小化 $\frac12|\boldsymbol{w}|^2$，不是最小化间隔本身。</li>
+<li>对偶问题是最大化问题；原始问题是最小化问题。</li>
+<li>硬间隔 SVM 中，$\alpha_i&gt;0$ 的样本位于间隔边界。软间隔 SVM 中，$0&lt;\alpha_i&lt;C$ 的样本位于间隔边界，而 $\alpha_i=C$ 的支持向量还可落在间隔内或被误分类；写成“所有支持向量都在 $\pm1$ 边界”是错误的。</li>
+<li>SMO 每次更新两个拉格朗日乘子，是为了维持 $\sum_i\alpha_iy_i=0$。</li>
+<li>核函数计算的是特征空间内积，不是直接计算距离。</li>
+<li>Mercer 核矩阵应对称半正定，对角线一般不为 $0$。</li>
+<li>“映射到更高维一定线性可分”需要结合有限样本、所选映射和模型条件理解；核技巧本身不保证任意数据在任意核下都可分。</li>
+<li>硬间隔 SVM 要求线性可分；现实数据通常还需软间隔参数 $C$。</li>
+<li>SVR 的 $2\epsilon$ 间隔带内损失为 $0$，带外损失为 $|z|-\epsilon$。</li>
+</ul>
+<h2 id="section-22">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-5b39b66a185c/">上一篇：神经网络模型</a> · <a href="/en/notes/cs408-ad7ab8f32e2a/">下一篇：贝叶斯决策论</a></li>
+</ul>
+<h2 id="section-23">6.11 本节复盘</h2>
+<ul>
+<li>硬间隔 SVM 的支持向量位于 $\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b=\pm1$ 上，总间隔为 $2/|\boldsymbol{w}|$；软间隔支持向量还可位于间隔内或错误一侧。</li>
+<li>硬间隔原始问题最小化 $\frac12|\boldsymbol{w}|^2$，对偶问题只依赖样本内积。</li>
+<li>只有 $\alpha_i&gt;0$ 的支持向量进入最终判别函数，因此解常具有稀疏性；但支持向量数量取决于数据、核与超参数，不能保证总是很少。</li>
+<li>SMO 每次联合更新两个乘子，以满足对偶等式约束。</li>
+<li>核函数用 $\kappa(\boldsymbol{x}_i,\boldsymbol{x}_j)$ 直接计算高维特征内积；有效核矩阵应对称半正定。</li>
+<li>核函数决定隐式特征空间，因此核选择属于重要的模型选择问题。</li>
+<li>SVR 用 $\epsilon$-不敏感损失忽略间隔带内的小误差，并用 $C$ 平衡模型平坦性与带外误差。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-36ff99353ad8/index.html"><span>← Previous item</span><strong>Lecture 12：特殊矩阵与压缩存储</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-39ac80f6dca5/index.html"><span>Next item →</span><strong>408重写进度</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

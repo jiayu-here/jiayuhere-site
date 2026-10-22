@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：思维导图 - 数据链路层 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 9：思维导图 - 数据链路层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：思维导图 - 数据链路层 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 9：思维导图 - 数据链路层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-cd234cc86adc/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：思维导图 - 数据链路层 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 9：思维导图 - 数据链路层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：思维导图 - 数据链路层",
+      "item": "https://www.jiayuhere.com/notes/cs408-cd234cc86adc/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-cd234cc86adc/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-cd234cc86adc/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-cd234cc86adc/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-cd234cc86adc/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-cd234cc86adc/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 9：思维导图 - 数据链路层</h1><p class="article-lead">408 学习笔记：Lecture 9：思维导图 - 数据链路层。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 25 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/images/333893dd13a7.png" target="_blank" rel="noreferrer">查看原始图片</a>
+        <a class="button secondary-button" href="/assets/408/images/333893dd13a7.png" download="Lecture 9：思维导图 - 数据链路层.png">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">3.1 数据链路层的三大功能</a><a href="#section-5">3.2 点对点协议 PPP</a><a href="#section-9">3.3 MAC 与局域网</a><a href="#section-23">3.4 无线局域网 IEEE 802.11</a><a href="#section-28">3.5 高频边界与易错点</a><a href="#section-29">3.6 题型索引</a><a href="#section-30">相关知识</a><a href="#section-31">3.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：数据链路层在相邻节点间传输帧。主线是：把网络层分组封装成帧并透明传输；检出比特差错；在需要时以 ARQ 提供可靠传输。局域网侧再延伸到 MAC、以太网、交换机、VLAN 和 802.11 无线 LAN。</p>
+</blockquote>
+<blockquote>
+<p><strong>NOTE</strong> · 原始知识网（点击展开）
+<a class="note-image-link" href="/assets/408/images/333893dd13a7.png" target="_blank" rel="noreferrer" aria-label="打开原图: Lecture 9：思维导图 - 数据链路层（原始知识图）.png"><picture><source srcset="/assets/408/previews/333893dd13a7.webp" type="image/webp"><img class="note-image" src="/assets/408/images/333893dd13a7.png" alt="Lecture 9：思维导图 - 数据链路层（原始知识图）.png" loading="lazy" decoding="async"></picture></a></p>
+</blockquote>
+<p>本篇按“<strong>链路层基本问题 → PPP 点到点链路 → 共享介质访问 → 以太网与交换 → VLAN → 802.11 WLAN</strong>”整理。公式中的传播时延、发送时延和窗口均先统一单位；涉及 ACK 编号时以题目给出的语义为准。</p>
+<h2 id="section-1">3.1 数据链路层的三大功能</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：链路、数据链路与服务边界
+<strong>链路</strong>是相邻节点之间的物理通道；<strong>数据链路</strong>是在物理链路上加入实现帧同步、介质访问、差错处理等所需的硬件和协议后形成的逻辑传输通道。数据链路层主要解决同一段链路上相邻节点间的帧传送，不负责跨越多台路由器的端到端选路。</p>
+</blockquote>
+<p>不同链路协议可向网络层提供不同强度的服务：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>服务</th>
+<th>是否先建立逻辑连接</th>
+<th>是否逐帧确认</th>
+<th>适用思路</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无确认的无连接服务</td>
+<td>否</td>
+<td>否</td>
+<td>误码率低或由上层恢复，如常见以太网数据服务</td>
+</tr>
+<tr>
+<td>有确认的无连接服务</td>
+<td>否</td>
+<td>是</td>
+<td>每帧独立确认，适合误码率较高的链路</td>
+</tr>
+<tr>
+<td>有确认的面向连接服务</td>
+<td>是</td>
+<td>是，并维持顺序与状态</td>
+<td>建立、传输、释放三个阶段，适合要求链路层可靠有序交付的场景</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些是服务模型，不等于所有数据链路协议都必须实现三种。链路层是否重传、是否流量控制，必须看具体协议；以太网能用 FCS 检错并丢弃坏帧，但通常不在 MAC 层为普通数据帧确认和重传。</p>
+<pre><code class="language-text">网络层分组
+   -&gt; 封装成帧与透明传输
+   -&gt; 差错检测
+   -&gt; 发生差错后按需可靠传输
+   -&gt; 相邻节点的网络层
+</code></pre>
+<h3 id="section-2">3.1.1 封装成帧与透明传输</h3>
+<ul>
+<li><strong>封装成帧</strong>：在网络层分组前后加入首部、尾部，形成帧；首部/尾部包含地址、控制、帧界定、检错等信息。</li>
+<li><strong>透明传输</strong>：无论帧的数据部分出现何种比特组合，接收端均能正确还原原始数据，不把数据误认为帧定界符。</li>
+<li>若数据中恰出现帧首/尾界定符，就会破坏边界，需字节填充或比特填充。</li>
+<li><strong>MTU</strong>（最大传送单元）限制一帧数据部分可封装的最大网络层分组；超过 MTU 时需由上层或网络层按协议规则处理。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>成帧/透明传输方法</th>
+<th>适用与规则</th>
+<th>关键风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符计数法</td>
+<td>首部用计数字段指出帧内字符数</td>
+<td>计数字段出错会使后续边界连续失步</td>
+</tr>
+<tr>
+<td>字节填充</td>
+<td>面向字节；特殊字节前插入转义字节，接收端反转义</td>
+<td>必须区分帧标志、转义字节与普通数据</td>
+</tr>
+<tr>
+<td>比特填充</td>
+<td>面向比特；发送端在连续 5 个 <code>1</code> 后插入 <code>0</code>，接收端删除该填充 <code>0</code></td>
+<td>处理两个边界标志之间的帧内容，不处理边界标志本身</td>
+</tr>
+<tr>
+<td>违规编码法</td>
+<td>使用物理编码中不会表示普通数据的保留信号界定帧</td>
+<td>依赖物理层编码存在可用的非法/保留组合</td>
+</tr>
+</tbody>
+</table></div>
+<p>PPP 是点到点链路常见协议：异步链路采用字节填充，同步链路采用零比特填充；HDLC 等比特面向协议也常结合比特填充。</p>
+<h3 id="section-3">3.1.2 差错检测</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>能力与要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>奇偶校验</td>
+<td>加 1 位使 1 的总数为奇/偶；可检奇数位错误，不能可靠检偶数位错误</td>
+</tr>
+<tr>
+<td>CRC 循环冗余校验</td>
+<td>发送端按生成多项式 $G(x)$ 对数据做模 2 除法，将余数作为 FCS；接收端再除，余数为 0 才通过校验</td>
+</tr>
+</tbody>
+</table></div>
+<p>若生成多项式 $G(x)$ 的最高次数为 $r$，发送端把数据 $M$ 左移 $r$ 位，再做模 2 除法：</p>
+<p>$$R=(M\cdot 2^r)\bmod G$$</p>
+<p>发送序列为 $M\cdot2^r+R$。模 2 加减均为异或，不产生进位或借位。接收端用同一 $G$ 相除；余数非 0 可判错，余数为 0 只表示“未检出错误”，并非数学上绝对无错。</p>
+<p>CRC 是<strong>检错</strong>机制，不自动纠错；FCS 是帧中实际携带的检错序列。校验失败后是否重传由可靠传输协议决定。</p>
+<h3 id="section-4">3.1.3 可靠传输</h3>
+<p>无线链路误码率较高，常要求链路层向网络层提供可靠传输。核心机制是确认、序号、超时和重传。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th style="text-align:right">发送窗口</th>
+<th style="text-align:right">接收窗口</th>
+<th>确认与重传</th>
+<th>接收失序帧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>停止—等待</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td>每帧确认；超时只重传当前帧</td>
+<td>不涉及流水失序</td>
+</tr>
+<tr>
+<td>回退 N 帧 GBN</td>
+<td style="text-align:right">$1&lt;W_S\le2^m-1$</td>
+<td style="text-align:right">1</td>
+<td>通常累计确认；最早未确认帧超时后重传它及其后所有已发送未确认帧</td>
+<td>丢弃</td>
+</tr>
+<tr>
+<td>选择重传 SR</td>
+<td style="text-align:right">通常 $W_S\le2^{m-1}$</td>
+<td style="text-align:right">$W_R&gt;1$</td>
+<td>逐帧/选择确认；只重传超时或被拒绝帧</td>
+<td>缓存接收窗口内的帧</td>
+</tr>
+</tbody>
+</table></div>
+<p>其中 $m$ 为帧序号位数，序号空间为 $2^m$。一般约束为：</p>
+<p>$$GBN:\quad W_S\le2^m-1$$</p>
+<p>$$SR:\quad W_S+W_R\le2^m$$</p>
+<p>若 SR 收发窗口相等，则 $W_S=W_R\le2^{m-1}$。<code>ACK i</code> 可能表示“已经确认到帧 $i$”，也可能表示“下一期待帧为 $i$”；必须先读题目定义。</p>
+<p>设 $T_D$、$T_A$ 分别为数据帧和确认帧的发送时延，$T_p$ 为<strong>单向传播时延</strong>。忽略处理与排队时延时，停止等待利用率为：</p>
+<p>$$U=\frac{T_D}{T_D+2T_p+T_A}$$</p>
+<p>若发送窗口为 $W$，忽略处理时间，流水线发送时间利用率为：</p>
+<p>$$U=\min\left(1,\frac{WT_D}{T_D+2T_p+T_A}\right)$$</p>
+<p>满流水至少需要：</p>
+<p>$$W_{min}=\left\lceil\frac{T_D+2T_p+T_A}{T_D}\right\rceil$$</p>
+<p>若题目给的是“往返传播时延”，可直接用它替换 $2T_p$；若给的是从开始发送数据帧到完整收到 ACK 的实测确认周期，则该数值通常已含 $T_D$、$T_A$，不能再重复相加。这里不把含处理、排队和发送时延的广义网络 RTT 与 $2T_p$ 混为一谈。</p>
+<p>流水线协议可同时发送多帧，提升链路利用率；窗口大小受序号位数、带宽时延积和接收缓冲限制。若题目问有效载荷 goodput，还需在 $U\times R$ 基础上乘 $L_{payload}/L_{frame}$，不能把首部、尾部和填充当作有效载荷。</p>
+<h2 id="section-5">3.2 点对点协议 PPP</h2>
+<p>PPP 面向点到点全双工链路，可承载多种网络层协议。它结构简单、支持链路参数协商和身份鉴别，但<strong>不提供序号、确认、重传与流量控制</strong>；FCS 出错的帧直接丢弃，因此 PPP 本身提供无连接、不可靠的数据报服务。</p>
+<h3 id="section-6">3.2.1 PPP 的组成与帧格式</h3>
+<p>PPP 由三部分组成：</p>
+<ol>
+<li><strong>封装方法</strong>：把 IP 等网络层分组封装为 PPP 帧，并用 FCS 检错。</li>
+<li><strong>LCP（链路控制协议）</strong>：建立、配置、测试和终止数据链路，可协商 MRU、鉴别协议等参数。</li>
+<li><strong>NCP（网络控制协议）</strong>：为不同网络层协议配置参数；承载 IPv4 时常用 IPCP。</li>
+</ol>
+<pre><code class="language-text">| Flag | Address | Control | Protocol | Information | FCS | Flag |
+|  1B  |   1B    |   1B    |  1/2B    | 0~1500B*   |2/4B |  1B  |
+   7E       FF        03
+</code></pre>
+<p><code>*</code> 信息字段默认最大长度为 1500 B，可经 LCP 协商。<code>Protocol</code> 指明信息字段承载 IP、LCP、NCP 等哪类分组。首尾 <code>Flag=0x7E</code> 可共用；<code>Address=0xFF</code>、<code>Control=0x03</code> 在常规 PPP 中固定，不承担多站寻址或可靠传输序号功能。</p>
+<h3 id="section-7">3.2.2 透明传输</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>链路方式</th>
+<th>发送端规则</th>
+<th>接收端规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>异步、面向字节</td>
+<td>对两个边界标志之间需转义的帧字节执行字节填充；<code>0x7E -&gt; 0x7D 0x5E</code>，<code>0x7D -&gt; 0x7D 0x5D</code>，控制字节按 ACCM 规则处理</td>
+<td>读到 <code>0x7D</code> 后，将下一字节与 <code>0x20</code> 异或以恢复原字节</td>
+</tr>
+<tr>
+<td>同步、面向比特</td>
+<td>两个边界标志之间每出现连续 5 个 <code>1</code> 就插入一个 <code>0</code></td>
+<td>连续 5 个 <code>1</code> 后若为填充 <code>0</code>，删除它</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>WARNING</strong> · 易错
+“加 <code>0x20</code>”不是通用反转义规则。PPP 异步字节转义的统一表达是与 <code>0x20</code> <strong>异或</strong>；例如 <code>0x5E XOR 0x20 = 0x7E</code>。</p>
+</blockquote>
+<h3 id="section-8">3.2.3 链路工作阶段</h3>
+<pre class="mermaid">flowchart LR
+    A[静止] --&gt;|检测到载波| B[建立]
+    B --&gt;|LCP 协商成功| C{需要鉴别?}
+    C --&gt;|是| D[鉴别]
+    C --&gt;|否| E[网络]
+    D --&gt;|鉴别成功| E
+    E --&gt;|NCP 配置完成| F[打开]
+    F --&gt;|传送网络层分组| F
+    F --&gt;|链路关闭/故障| G[终止]
+    G --&gt; A
+</pre>
+<p>链路主线是“静止 → 建立 → 可选鉴别 → 网络 → 打开 → 终止”。LCP 管链路本身，NCP 配置对应网络层协议；二者不能混淆。</p>
+<h2 id="section-9">3.3 MAC 与局域网</h2>
+<p>IEEE 802 把局域网数据链路层划分为 LLC（逻辑链路控制）与 MAC（介质访问控制）两个子层。LLC 向网络层提供统一接口；MAC 负责成帧、MAC 寻址以及共享介质访问。现代以太网考题主要集中在 MAC 帧、交换与 VLAN。</p>
+<h3 id="section-10">3.3.1 介质访问控制方法</h3>
+<p>广播信道上多个站共享介质，必须决定“谁在何时发送”。常见方法可分为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>典型方法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静态划分</td>
+<td>FDM、TDM、WDM、CDM</td>
+<td>预先分资源，无碰撞；突发业务时可能浪费空闲份额</td>
+</tr>
+<tr>
+<td>随机访问</td>
+<td>ALOHA、时隙 ALOHA、CSMA、CSMA/CD、CSMA/CA</td>
+<td>站点自主竞争，负载低时灵活；负载高时碰撞/退避增多</td>
+</tr>
+<tr>
+<td>受控访问</td>
+<td>轮询、令牌传递</td>
+<td>发送权受控，重负载时较稳定；存在控制开销和单点/令牌故障处理</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>纯 ALOHA</strong>：随时发送，碰撞后随机重传；易受干扰时间为两倍帧时，最大吞吐量 $1/(2e)\approx18.4%$。</li>
+<li><strong>时隙 ALOHA</strong>：只能在时隙边界发送，最大吞吐量 $1/e\approx36.8%$。</li>
+<li><strong>1-坚持 CSMA</strong>：信道空闲立即发送，忙则持续监听；容易在刚转为空闲时集中碰撞。</li>
+<li><strong>非坚持 CSMA</strong>：忙时随机等待后再监听，碰撞较少但时延和空闲浪费可能增大。</li>
+<li><strong>$p$-坚持 CSMA</strong>：时隙信道空闲时以概率 $p$ 发送，以 $1-p$ 推迟到下一时隙。</li>
+</ul>
+<blockquote>
+<p>纯 ALOHA 与时隙 ALOHA 的上述最大吞吐量来自固定帧长、独立随机发送/重传且总到达近似泊松过程的经典模型；它们用于比较协议机制，不应脱离这些假设当作任意实际网络的固定上限。</p>
+</blockquote>
+<h4 id="section-11">轮询访问</h4>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充
+轮询由一个主控站按顺序询问各从站是否需要发送。只有获得许可的站才能占用信道，因此正常工作时不会因争用而碰撞。</p>
+</blockquote>
+<pre class="mermaid">sequenceDiagram
+    participant C as 主控站
+    participant A as 站 A
+    participant B as 站 B
+    C-&gt;&gt;A: POLL：是否发送
+    A--&gt;&gt;C: 数据或“无数据”
+    C-&gt;&gt;B: POLL：是否发送
+    B--&gt;&gt;C: 数据或“无数据”
+</pre>
+<ul>
+<li><strong>优点</strong>：访问次序确定，可给出等待时间上界；负载高时不会把大量带宽浪费在碰撞和随机退避上，也便于按优先级或配额调度。</li>
+<li><strong>开销</strong>：每次询问、应答和主控站切换都占用时间；大量空闲站仍会产生轮询开销，低负载下往往不如随机访问灵活。</li>
+<li><strong>故障边界</strong>：主控站是单点故障；某从站无响应时，主控站必须依靠超时跳过，否则整个轮询可能停滞。</li>
+<li><strong>等待上界</strong>：正常、有限站点且每站占用时间受限时，一个站最多等待一轮轮询；若允许某站无限期占用，便不能据此声称有界等待。</li>
+</ul>
+<h4 id="section-12">令牌传递</h4>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充
+令牌是一个表示“发送许可”的特殊控制帧。站点按规定的逻辑顺序传递令牌，只有持有令牌的站可发送；发送完毕或达到持有时间上限后，再把令牌交给下一站。</p>
+</blockquote>
+<pre class="mermaid">flowchart LR
+    A[站 A] --&gt;|令牌| B[站 B]
+    B --&gt;|令牌| C[站 C]
+    C --&gt;|令牌| D[站 D]
+    D --&gt;|令牌| A
+</pre>
+<ul>
+<li><strong>优点</strong>：正常情况下无碰撞；每站最长持有时间受限时可形成有界等待，重负载下吞吐量和时延比随机争用更可预测。</li>
+<li><strong>开销</strong>：即使没有数据，也要传递令牌；站点少、负载低或环很长时，等待令牌本身可能比直接争用更慢。</li>
+<li><strong>管理问题</strong>：令牌丢失需要监测并重新生成；重复令牌必须删除；站点或链路故障时还要重构逻辑环。系统必须保证“恢复令牌”不会长期产生多个有效令牌。</li>
+<li><strong>逻辑环不等于物理环</strong>：令牌传递描述的是发送权的逻辑顺序，具体物理拓扑与实现可以不同，不能仅凭“有令牌”断定所有链路一定是物理环形。</li>
+</ul>
+<h4 id="section-13">三类方法的负载边界</h4>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更合适的思路</th>
+<th>原因与代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务持续且每站需求稳定</td>
+<td>静态划分</td>
+<td>无争用，但空闲份额不易临时让给别站</td>
+</tr>
+<tr>
+<td>业务突发、平均负载较低</td>
+<td>随机访问</td>
+<td>无需维护发送权，轻载时接入快；重载时碰撞和退避急剧增加</td>
+</tr>
+<tr>
+<td>负载较高或需要确定性等待</td>
+<td>受控访问</td>
+<td>无碰撞且可调度；要承担轮询/令牌和故障恢复开销</td>
+</tr>
+</tbody>
+</table></div>
+<p>以上只是一般取舍，不是绝对结论；传播时延、站点数量、帧长分布、优先级和实现协议都会改变实际性能。</p>
+<h3 id="section-14">3.3.2 MAC 地址与以太网帧</h3>
+<p>MAC 地址是网络接口的链路层标识，IEEE 802 MAC 通常为 48 bit：前 24 bit 通常含 OUI 厂商标识，后 24 bit 由厂商分配。一个 48 bit 地址常写作 6 个十六进制字节，如 <code>02-11-22-33-44-55</code>。</p>
+<ul>
+<li>单播目的地址只交付给一个接口；广播 MAC 为 <code>FF-FF-FF-FF-FF-FF</code>；多播有特定地址范围。</li>
+<li>MAC 只用于同一链路/局域网内交付；跨网通信仍靠 IP 与路由。</li>
+<li>首字节最低有效位是 <strong>I/G 位</strong>：0 表示单个地址，1 表示组地址（多播/广播）。次低位是 <strong>U/L 位</strong>：0 表示全局管理，1 表示本地管理。</li>
+<li>判断 I/G、U/L 位时看<strong>首字节的低位</strong>，不要误看整串地址最右端。</li>
+</ul>
+<h4 id="section-15">Ethernet II 与 IEEE 802.3</h4>
+<pre><code class="language-text">前导码 7B | SFD 1B | 目的 6B | 源 6B | 类型/长度 2B | 数据+填充 46~1500B | FCS 4B
+                       &lt;------------ MAC 帧：64~1518B ------------&gt;
+</code></pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Ethernet II</th>
+<th>IEEE 802.3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 B 字段含义</td>
+<td>EtherType，指出上层协议</td>
+<td>数据字段长度，后接 LLC/SNAP 等</td>
+</tr>
+<tr>
+<td>常用判别</td>
+<td>值 $\ge1536$（<code>0x0600</code>）按类型解释</td>
+<td>值 $\le1500$ 按长度解释</td>
+</tr>
+<tr>
+<td>其余主体</td>
+<td>目的/源 MAC、数据、FCS 基本相同</td>
+<td>目的/源 MAC、数据、FCS 基本相同</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>MAC 帧最小 64 B、最大 1518 B，均从目的 MAC 算到 FCS；<strong>不包含</strong> 7 B 前导码与 1 B 帧开始定界符 SFD。</li>
+<li>最小数据字段为 46 B，不足时补填充；接收端如何区分有效数据与填充依赖上层长度信息。</li>
+<li>相邻以太网帧之间至少保留 96 bit time 的帧间间隔。</li>
+<li>IEEE 802.1Q 在源 MAC 后插入 4 B VLAN 标签（常见 TPID 为 <code>0x8100</code>），普通最大标记帧由 1518 B 增至 <strong>1522 B</strong>。</li>
+</ul>
+<h3 id="section-16">3.3.3 共享式以太网：CSMA/CD</h3>
+<p>共享总线/集线器以太网使用 CSMA/CD：先载波监听，空闲再发送；边发边检测冲突，冲突后立即停止、发送强化干扰信号，按截断二进制指数退避等待后重发。</p>
+<ul>
+<li>只有共享、半双工以太网需要 CSMA/CD；交换式全双工以太网无冲突，不使用它。</li>
+<li>最小帧长保证发送端在发送结束前能检测最远端冲突；最远端往返传播时间决定槽时间。</li>
+</ul>
+<p>设最远两站单向传播时延为 $\tau$、链路速率为 $R$：</p>
+<p>$$T_{frame}\ge2\tau,\qquad L_{min}\ge2\tau R$$</p>
+<p>争用期（槽时间）为 $2\tau$。传统以太网将其取为 512 bit time；10 Mb/s 下为 $51.2,\mu s$。发生第 $i$ 次碰撞后：</p>
+<p>$$k=\min(i,10),\qquad r\in{0,1,\ldots,2^k-1}$$</p>
+<p>$$T_{backoff}=r\times512\text{ bit time}$$</p>
+<p>发送站检测到碰撞后立即停止当前帧、发送强化干扰信号，再退避重传；连续碰撞 16 次仍失败则放弃并向上层报告。常用近似效率公式为：</p>
+<p>$$\eta\approx\frac{1}{1+5a},\qquad a=\frac{\tau}{T_{frame}}$$</p>
+<p>它用于估算传播时延相对帧发送时间对效率的影响；若题目给出另一模型或精确参数，以题设为准。</p>
+<h3 id="section-17">3.3.4 集线器、网桥与交换机</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>层次</th>
+<th>转发依据</th>
+<th>冲突域</th>
+<th>广播域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集线器 Hub</td>
+<td>物理层</td>
+<td>比特复制到其他端口</td>
+<td>所有端口共 1 个</td>
+<td>所有端口共 1 个</td>
+</tr>
+<tr>
+<td>网桥 Bridge</td>
+<td>数据链路层</td>
+<td>MAC 表</td>
+<td>每个端口隔离</td>
+<td>默认仍为 1 个</td>
+</tr>
+<tr>
+<td>交换机 Switch</td>
+<td>数据链路层，多端口网桥</td>
+<td>MAC 表/端口</td>
+<td>每个端口 1 个</td>
+<td>每个 VLAN 1 个</td>
+</tr>
+<tr>
+<td>路由器/三层交换</td>
+<td>网络层</td>
+<td>IP 路由表</td>
+<td>每接口隔离</td>
+<td>每三层接口/VLAN 隔离</td>
+</tr>
+</tbody>
+</table></div>
+<p>交换机是多端口二层设备，维护 MAC 地址表。对每个到达帧，先按<strong>源 MAC + 入端口</strong>学习或刷新表项，再处理目的 MAC：</p>
+<pre class="mermaid">flowchart TD
+    A[帧从端口 P 到达] --&gt; B[学习/刷新 源MAC -&gt; P]
+    B --&gt; C{目的MAC是否已知?}
+    C --&gt;|否/广播/需泛洪的多播| D[向除 P 外的本 VLAN 端口泛洪]
+    C --&gt;|是| E{目的端口是否等于 P?}
+    E --&gt;|是| F[过滤/丢弃 不再转发]
+    E --&gt;|否| G[只向表中目的端口转发]
+</pre>
+<ul>
+<li>MAC 表是动态软状态；超时未刷新会<strong>老化</strong>删除，主机移动后也可通过新源帧更新端口。</li>
+<li>未知单播泛洪不等于广播：目的 MAC 仍是单播，只是交换机暂时不知道出口。</li>
+<li>透明网桥/交换网络若存在二层环路，泛洪帧可能无限循环并造成广播风暴；STP 通过逻辑阻塞冗余路径形成无环生成树，链路故障时可重新收敛。</li>
+</ul>
+<h4 id="section-18">生成树协议 STP</h4>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充
+以太网帧没有类似 IP TTL 的逐跳寿命字段。二层出现环路时，广播、未知单播或某些多播帧可能不断复制循环，同时导致 MAC 表在不同端口间反复抖动。STP 保留物理冗余链路，但把部分端口置为不转发状态，使当前的<strong>逻辑转发拓扑</strong>成为一棵无环树。</p>
+</blockquote>
+<p>经典 STP 的选举主线是：</p>
+<ol>
+<li><strong>选根桥</strong>：桥 ID 最小的交换机成为根桥；桥 ID 由优先级和地址等字段共同决定，不能只比较 MAC 地址而忽略优先级。</li>
+<li><strong>选根端口</strong>：每台非根交换机选择一条到根桥累计路径开销最小的端口作为根端口；并列时再按上游桥 ID、端口 ID 等规则打破平局。</li>
+<li><strong>选指定端口</strong>：每个网段选择到根桥路径最优的桥所连接端口作为该段指定端口，负责向该网段转发。</li>
+<li><strong>阻塞剩余冗余端口</strong>：根端口和指定端口参与正常转发，其他端口不转发普通数据帧，从而切断环路。</li>
+</ol>
+<p>交换机用 BPDU 交换根桥、路径开销和拓扑信息。链路或设备故障后会重新计算并启用备用路径，因此 STP 的目的不是删除冗余，而是在某一时刻只让无环子集转发。重新收敛期间可能短时中断；RSTP 等改进协议用于加快状态迁移。</p>
+<pre class="mermaid">flowchart TD
+    R[根桥] --&gt;|转发| A[交换机 A]
+    R --&gt;|转发| B[交换机 B]
+    A -.冗余链路：一端阻塞.- B
+</pre>
+<h4 id="section-19">交换方式</h4>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>开始转发时机</th>
+<th>优点</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储转发</td>
+<td>收完整帧并校验 FCS 后</td>
+<td>可丢弃错误帧，支持不同端口速率</td>
+<td>时延至少包含完整帧接收时间</td>
+</tr>
+<tr>
+<td>直通交换</td>
+<td>读到目的 MAC 后即可</td>
+<td>转发时延低</td>
+<td>可能传播坏帧，且更依赖端口速率/缓存条件</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>每端口形成独立冲突域；全双工下不发生冲突。</li>
+<li>交换机的学习、转发、泛洪、老化是高频考点，不能把它写成路由器的 IP 路由表。</li>
+</ul>
+<h4 id="section-20">冲突域与广播域示意</h4>
+<pre><code class="language-text">主机 -- Hub -- 主机       整个 Hub：1 个冲突域、1 个广播域
+          |
+        Switch            每个交换机端口：独立冲突域
+       /      \
+   VLAN 10   VLAN 20      每个 VLAN：独立广播域
+       \      /
+       三层转发            跨 VLAN 必须经过路由/三层交换
+</code></pre>
+<h3 id="section-21">3.3.5 VLAN</h3>
+<p>VLAN 在交换网络中把一个物理 LAN 划分为多个逻辑广播域，隔离广播流量、改善安全与管理。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>端口模式</th>
+<th>常见用途</th>
+<th>入/出方向的典型标签处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access</td>
+<td>连接普通终端，只承载一个 VLAN</td>
+<td>入端无标签帧按 PVID 归入 VLAN；出端通常去标签</td>
+</tr>
+<tr>
+<td>Trunk</td>
+<td>交换机、AP、路由器等之间承载多个 VLAN</td>
+<td>多数 VLAN 帧保留 802.1Q 标签；本征/PVID VLAN 是否无标签依配置</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>一个端口按策略承载多个 VLAN</td>
+<td>可分别配置哪些 VLAN 出端带标签、哪些不带标签</td>
+</tr>
+</tbody>
+</table></div>
+<p>跨 VLAN 的三层通信必须经过路由/三层交换，二层交换机本身不会跨 VLAN 转发广播域流量。</p>
+<h3 id="section-22">3.3.6 以太网速率演进</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>代际</th>
+<th style="text-align:right">典型速率</th>
+<th>双工与 CSMA/CD 要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准以太网</td>
+<td style="text-align:right">10 Mb/s</td>
+<td>共享/半双工使用 CSMA/CD，最小帧 64 B</td>
+</tr>
+<tr>
+<td>快速以太网</td>
+<td style="text-align:right">100 Mb/s</td>
+<td>兼容 MAC 帧格式；半双工仍可用 CSMA/CD，全双工不用</td>
+</tr>
+<tr>
+<td>千兆以太网</td>
+<td style="text-align:right">1 Gb/s</td>
+<td>主要采用交换式全双工；半双工为兼容 CSMA/CD 曾引入载波延伸/帧突发</td>
+</tr>
+<tr>
+<td>10 吉比特以太网</td>
+<td style="text-align:right">10 Gb/s</td>
+<td>只工作于全双工交换链路，不使用 CSMA/CD</td>
+</tr>
+</tbody>
+</table></div>
+<p>速率提升没有改变 48 bit MAC 地址与常见以太网 MAC 帧主体。判断是否使用 CSMA/CD 的关键不是“是否叫以太网”，而是链路是否处于<strong>共享、半双工冲突域</strong>。</p>
+<h2 id="section-23">3.4 无线局域网 IEEE 802.11</h2>
+<p>无线介质不能可靠边发边听，存在隐藏站等问题，故 802.11 使用 CSMA/CA（载波侦听多路访问/冲突避免），而不是 CSMA/CD。</p>
+<h3 id="section-24">3.4.1 体系结构</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STA</td>
+<td>具有 802.11 接口的站点</td>
+</tr>
+<tr>
+<td>BSS</td>
+<td>基本服务集；一组可直接协调通信的站点</td>
+</tr>
+<tr>
+<td>BSA</td>
+<td>基本服务区；一个 BSS 的无线覆盖范围</td>
+</tr>
+<tr>
+<td>AP</td>
+<td>接入点；基础设施 BSS 的中心站，并接入分配系统</td>
+</tr>
+<tr>
+<td>SSID</td>
+<td>用户可见的网络名称；多个 BSS 可配置相同 SSID</td>
+</tr>
+<tr>
+<td>BSSID</td>
+<td>标识具体 BSS 的地址；基础设施网络中通常是 AP 无线接口 MAC</td>
+</tr>
+<tr>
+<td>DS</td>
+<td>分配系统；连接多个 AP/BSS，常由有线以太网实现</td>
+</tr>
+<tr>
+<td>Portal</td>
+<td>802.11 分配系统与其他 802.x LAN/外部网络的逻辑入口</td>
+</tr>
+<tr>
+<td>ESS</td>
+<td>扩展服务集；由 DS 连接的一个或多个基础设施 BSS，对上层呈现为一个 LAN</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>基础设施网络</strong>：STA 先与 AP 关联，通常通过 AP 转发，即使通信双方处于同一 BSS。</li>
+<li><strong>Ad hoc/IBSS</strong>：没有 AP，站点临时组成独立基本服务集并直接通信。</li>
+<li>SSID 是网络名，BSSID 标识具体 BSS，BSA 是覆盖区域；三者不要混淆。</li>
+</ul>
+<h3 id="section-25">3.4.2 CSMA/CA 与帧间间隔</h3>
+<ul>
+<li>发送前进行物理/虚拟载波监听；新到达的帧若发现信道已持续空闲 DIFS，可按规则直接发送。若信道忙、需要重传或处于发送后退避，则在信道重新空闲 DIFS 后执行随机退避。</li>
+<li>对典型普通单播数据帧，计数到 0 后发送 DATA；接收方经 SIFS 回 ACK。未收到预期 ACK 时按规则扩大竞争窗口并重试，直到成功或达到重试上限；组播/广播通常不逐帧 ACK，块确认等模式另有确认方式。</li>
+<li>RTS/CTS 可缓解隐藏站：RTS、CTS 中携带持续时间，旁听站设置 NAV 虚拟载波监听。</li>
+<li>SIFS 小于 DIFS，使 ACK、CTS 等即时控制帧优先于普通竞争发送。</li>
+</ul>
+<p>帧间间隔优先级为：</p>
+<p>$$SIFS&lt;PIFS&lt;DIFS$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>间隔</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIFS</td>
+<td>ACK、CTS、分片间响应等即时应答，优先级最高</td>
+</tr>
+<tr>
+<td>PIFS</td>
+<td>点协调功能 PCF 的无竞争访问，优先于普通 DCF 站</td>
+</tr>
+<tr>
+<td>DIFS</td>
+<td>DCF 普通数据站竞争介质前等待</td>
+</tr>
+</tbody>
+</table></div>
+<p>退避计数每经过一个空闲时隙减 1；一旦介质变忙就<strong>冻结</strong>，待介质再次空闲并持续 DIFS 后从剩余值继续，而不是重新抽取。发送失败时扩大竞争窗口；成功后按规则执行发送后退避，防止单个站持续独占。</p>
+<h3 id="section-26">3.4.3 隐藏站、RTS/CTS 与 NAV</h3>
+<ul>
+<li><strong>隐藏站</strong>：A、C 彼此听不到，却都能到达同一 AP；二者同时发送会在 AP 处碰撞。</li>
+<li><strong>暴露站</strong>：某站听到邻站发送后过度退避，但它向另一接收方发送本可不造成干扰，导致空间复用下降。</li>
+<li>RTS/CTS 主要缓解隐藏站：旁听 RTS 或 CTS 的站按 Duration 设置 NAV，在预约期内保持静默。它不能消除控制帧碰撞、误码或所有无线冲突。</li>
+</ul>
+<p>CTS 发出后的 NAV 为：</p>
+<p>$$NAV_{CTS}=SIFS+T_{DATA}+SIFS+T_{ACK}$$</p>
+<pre class="mermaid">sequenceDiagram
+    participant S as 发送站
+    participant A as AP/接收站
+    participant O as 其他站
+    Note over S,O: 信道空闲 DIFS，发送站完成随机退避
+    S-&gt;&gt;A: RTS（预约剩余时间）
+    Note over S,A: SIFS
+    A-&gt;&gt;S: CTS
+    A--&gt;&gt;O: 其他站旁听同一 CTS（非 MAC 广播）并设置 NAV
+    Note over S,A: SIFS
+    S-&gt;&gt;A: DATA
+    Note over S,A: SIFS
+    A-&gt;&gt;S: ACK
+</pre>
+<h3 id="section-27">3.4.4 802.11 地址字段</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">去往 DS</th>
+<th style="text-align:right">来自 DS</th>
+<th>地址 1</th>
+<th>地址 2</th>
+<th>地址 3</th>
+<th>地址 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td>DA/RA</td>
+<td>SA/TA</td>
+<td>BSSID</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td>BSSID/RA（接收 AP）</td>
+<td>SA/TA（无线源站）</td>
+<td>DA（最终目的）</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td>DA/RA（无线目的站）</td>
+<td>BSSID/TA（发送 AP）</td>
+<td>SA（原始源）</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td>RA</td>
+<td>TA</td>
+<td>DA</td>
+<td>SA</td>
+</tr>
+</tbody>
+</table></div>
+<p>RA/TA 是当前无线一跳的接收方/发送方，DA/SA 是 MSDU 的最终目的/原始源。普通基础设施 BSS 最常考 <code>To DS=1, From DS=0</code> 与 <code>To DS=0, From DS=1</code>；四地址同时使用主要见无线分配系统桥接。</p>
+<h2 id="section-28">3.5 高频边界与易错点</h2>
+<ul>
+<li>数据链路层解决相邻节点的帧传输；端到端可靠性属于运输层问题，二者层次不同。</li>
+<li>CRC/FCS 是检错，不等于纠错或自动重传；余数为 0 也只能说“未检出错误”。</li>
+<li>PPP 有 FCS 却仍不可靠，因为它没有序号、ACK、超时重传和流量控制。</li>
+<li>以太网 64~1518 B 不含前导码与 SFD；802.1Q 普通最大标记帧为 1522 B，帧间间隔为 96 bit time。</li>
+<li>Hub 不隔离冲突域；交换机每端口隔离冲突域，但同一 VLAN 默认仍属于同一广播域。</li>
+<li>交换机按源 MAC 学习、按目的 MAC 查表；目的端口等于入端口时过滤，未知单播才泛洪。</li>
+<li>全双工交换式以太网不使用 CSMA/CD；10 Gb/s 以太网只支持全双工。</li>
+<li>VLAN 是二层广播域划分；跨 VLAN 必须三层转发。Access、Trunk、Hybrid 的具体标签行为要结合 PVID/端口配置。</li>
+<li>802.11 用 CSMA/CA，退避遇忙冻结；RTS/CTS 缓解但不能彻底消除隐藏站和碰撞。</li>
+</ul>
+<h2 id="section-29">3.6 题型索引</h2>
+<ul>
+<li><a href="/notes/cs408-0d03dc451308/">1 题型 - 三种可靠传输协议</a>：停止等待、GBN、SR 的窗口、ACK 与重传范围。</li>
+<li><a href="/notes/cs408-df715a00a371/">2 题型 - 信道利用率相关计算</a>：传播/发送时延、流水窗口、序号位数与 goodput。</li>
+<li><a href="/notes/cs408-b5bf851a87da/">3 题型 - CSMA CD相关信息计算</a>：争用期、最小帧长、Hub 延迟与二进制指数退避。</li>
+<li><a href="/notes/cs408-34e57b06068c/">4 题型 - 透明传输与PPP协议</a>：零比特填充、字节反转义、PPP 状态与不可靠性。</li>
+<li><a href="/notes/cs408-b4e470ce1426/">5 题型 - CSMA CA协议</a>：SIFS/DIFS、退避、RTS/CTS、NAV 与四地址映射。</li>
+</ul>
+<h2 id="section-30">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-1c2f720beeaf/">上一篇：检错与纠错机制</a> · <a href="/notes/cs408-0d03dc451308/">下一篇：三种可靠传输协议</a></li>
+</ul>
+<h2 id="section-31">3.7 本节复盘</h2>
+<ul>
+<li>数据链路层围绕“成帧透明传输、检错、可靠传输”展开；透明传输靠字节/比特填充。</li>
+<li>CRC 用模 2 除法检错；停止等待、GBN、SR 通过确认、序号、超时重传提供不同程度的可靠性与效率。</li>
+<li>MAC 是二层本地标识；共享以太网用 CSMA/CD，交换式全双工不使用 CSMA/CD。</li>
+<li>交换机按源 MAC 学习、按目的 MAC 转发；VLAN 划分逻辑广播域，跨 VLAN 需三层转发。</li>
+<li>802.11 用 CSMA/CA、退避及可选 RTS/CTS 缓解无线冲突/隐藏站；典型单播交换另用 ACK/重传提高单跳可靠性，不能概括为所有帧必达或逐帧确认。</li>
+<li>PPP 由封装、LCP 和 NCP 组成；同步链路零比特填充，异步链路按 <code>XOR 0x20</code> 字节转义。</li>
+<li>以太网帧、VLAN 标签、交换机学习/STP 与 WLAN 四地址必须结合具体字段和转发方向判断，不能只背设备层次。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-cd157e10da5e/index.html"><span>← 上一项</span><strong>Lecture 15：知识 - CISC 和 RISC 的基本概念</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-cd74b2a4d67e/index.html"><span>下一项 →</span><strong>Lecture 22：知识 - 多处理器</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

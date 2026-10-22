@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 2：知识 - 计算机性能指标 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 2：知识 - 计算机性能指标。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 2：知识 - 计算机性能指标 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 2：知识 - 计算机性能指标。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-c4914b00ec31/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 2：知识 - 计算机性能指标 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 2：知识 - 计算机性能指标。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 2：知识 - 计算机性能指标",
+      "item": "https://www.jiayuhere.com/notes/cs408-c4914b00ec31/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-c4914b00ec31/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c4914b00ec31/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c4914b00ec31/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c4914b00ec31/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-c4914b00ec31/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 2：知识 - 计算机性能指标</h1><p class="article-lead">408 学习笔记：Lecture 2：知识 - 计算机性能指标。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/72151a0bb7b8.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/72151a0bb7b8.pdf" download="Lecture 2：知识 - 计算机性能指标.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 容量与位宽指标</a><a href="#section-3">1.2 系统时间与速度</a><a href="#section-8">1.3 性能公式与单位</a><a href="#section-15">相关知识</a><a href="#section-16">1.4 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：性能题先辨别“容量、位宽、时间、频率、平均周期数、指令条数”分别在说什么，再使用统一关系式。主频高不自动代表程序更快，必须同时考虑 CPI 与指令条数。</p>
+</blockquote>
+<h2 id="section-1">1.1 容量与位宽指标</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+<th>高频辨析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字（word）</td>
+<td>被处理信息的基本单位，用于度量数据类型宽度</td>
+<td>x86 传统上把 16 位称为一个字</td>
+</tr>
+<tr>
+<td>机器字长</td>
+<td>CPU 整数数据通路宽度，通常与 ALU、通用寄存器位数相关</td>
+<td>反映整数处理能力</td>
+</tr>
+<tr>
+<td>指令字长</td>
+<td>一条指令包含的二进制位数</td>
+<td>在本 PDF 所采用的常见字节可寻址模型中通常为字节整数倍，并常取存储字长的整数倍；一般体系结构仍应以其编码和最小可寻址单位为准</td>
+</tr>
+<tr>
+<td>存储字长</td>
+<td>一个存储单元保存的位数</td>
+<td>与 MDR 宽度通常相等</td>
+</tr>
+<tr>
+<td>数据通路带宽</td>
+<td>一次可并行传输的数据位数</td>
+<td>本讲通常指外部数据总线宽度，不必等于 CPU 内部总线/寄存器宽度</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-2"><strong>定义</strong>：#主存容量</h5>
+<p>主存可保存信息的最大量，可用字节数表示，也可写为“字数 $\times$ 字长”。</p>
+<ul>
+<li>MAR 有 $m$ 位，表示可寻址 $2^m$ 个存储单元；MDR 有 $n$ 位，表示每单元宽 $n$ 位。</li>
+<li>例如 MAR 为 16 位、MDR 为 32 位：单元数 $2^{16}=64K$，容量为 $64K\times32$ 位，即 $64K\times4$ B。</li>
+<li>在“一次访存至多读出一个存储字、指令按存储字边界对齐且忽略 Cache”的教材模型中，若指令字长是存储字长的两倍，取一条指令需 2 个访存周期；二者相等时，取指通常只需 1 个访存周期。不要把“指令字长”误当“机器字长”。</li>
+</ul>
+<h2 id="section-3">1.2 系统时间与速度</h2>
+<h3 id="section-4">1.2.1 吞吐量和响应时间</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义</th>
+<th>关注点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>吞吐量</td>
+<td>单位时间处理请求的数量</td>
+<td>适合衡量批处理、服务器等整体能力</td>
+</tr>
+<tr>
+<td>响应时间</td>
+<td>从提交请求到获得结果的总历时（墙钟时间）</td>
+<td>包含 CPU 时间与各类等待时间，适合衡量交互体验</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>吞吐量受输入、取指、主存读写、输出等环节共同影响；系统主存的<strong>存取周期</strong>往往是关键限制。</li>
+<li>响应时间除了程序实际占用 CPU 的时间，还包括磁盘、存储器、I/O、调度和 OS 开销造成的等待。</li>
+</ul>
+<h3 id="section-5">1.2.2 时钟周期、主频与 CPI</h3>
+<h5 id="section-6"><strong>定义</strong>：#时钟周期与主频</h5>
+<p>时钟周期 $T$ 是相邻两个同相位有效时钟边沿之间的时间，也是同步 CPU 推进状态的基本时间单位；教材有时简称为“主时钟脉冲的宽度”，但严格说它不等于高电平或低电平的脉冲宽度。主频 $f$ 是时钟频率，二者互为倒数：</p>
+<p>$$f=\frac{1}{T}$$</p>
+<ul>
+<li>时钟周期需覆盖相邻状态单元间组合逻辑的最大延迟；流水线机器中还要计入最慢流水段的组合逻辑延迟、流水寄存器开销和必要的时钟裕量。</li>
+<li>同型号、同微结构且其他条件近似时，主频越高，完成一个时钟步骤的时间越短；跨架构比较不能只看主频。</li>
+</ul>
+<h5 id="section-7"><strong>定义</strong>：#CPI</h5>
+<p>**CPI（Cycles Per Instruction）**是平均每条指令需要的时钟周期数。不同指令耗时可不同，程序 CPI 是按动态执行次数加权的平均值。</p>
+<p>若第 $i$ 类指令动态执行 $IC_i$ 次、每条需 $CPI_i$ 个周期，则</p>
+<p>$$
+CPI_{avg}=\frac{\sum_i IC_i\times CPI_i}{\sum_i IC_i}
+$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>处理器类型</th>
+<th>CPI 特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单周期 CPU</td>
+<td>所有指令一个时钟周期完成，$CPI=1$</td>
+</tr>
+<tr>
+<td>多周期 CPU</td>
+<td>一条指令拆成多个时钟周期完成，$CPI&gt;1$</td>
+</tr>
+<tr>
+<td>基本流水线</td>
+<td>理想、流水线充满时每周期完成一条指令，$CPI=1$；有冒险时一般 $CPI&gt;1$</td>
+</tr>
+<tr>
+<td>超标量流水线</td>
+<td>具备同周期发射/完成多条指令的能力；资源利用充分且并行度足够时平均 $CPI$ 可小于 1，但受相关、分支失误和 Cache 未命中影响时并不保证小于 1</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-8">1.3 性能公式与单位</h2>
+<h3 id="section-9">1.3.1 CPU 执行时间</h3>
+<p>CPU 性能由<strong>指令条数、CPI、主频</strong>共同决定：</p>
+<p>$$
+\begin{aligned}
+\text{CPU 时钟周期数} &amp;= \text{指令条数}\times CPI\
+\text{CPU 执行时间} &amp;= \frac{\text{指令条数}\times CPI}{\text{主频}}
+\end{aligned}
+$$</p>
+<ul>
+<li>要缩短 CPU 时间，可减少动态指令数、降低平均 CPI 或提高主频；优化一种因素时可能伤害另一种，必须算总结果。</li>
+<li>程序 $A$ 比 $B$ 快 $k$ 倍，按执行时间定义为 $T_B/T_A=k$；性能与执行时间成反比。</li>
+</ul>
+<h3 id="section-10">教材补充：加速比与局部优化上限</h3>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充（非源 PDF）
+性能比较不能只看“被优化部分快了多少”，还要看它原来占总时间的比例。Amdahl 定律把这一边界写成可计算形式。</p>
+</blockquote>
+<p>若可优化部分原来占执行时间比例为 $f$，该部分获得 $s$ 倍加速，其余部分不变，则总体加速比为：</p>
+<p>$$
+S=\frac{T_{old}}{T_{new}}
+=\frac{1}{(1-f)+\frac{f}{s}}
+$$</p>
+<ul>
+<li>即使把该部分加速到无限快，整体加速比上限仍为 $S_{max}=1/(1-f)$；未被优化的串行部分决定天花板。</li>
+<li>若有多个彼此独立的优化部分，可把新时间分别写成原时间比例再相加，而不能把各自加速比直接相乘。</li>
+<li>例：访存停顿占原时间 40%，将其加速 5 倍，则 $S=1/(0.6+0.4/5)\approx1.47$，不是 5 倍。</li>
+<li>若题目同时改变指令数、CPI 和主频，应优先分别计算优化前后的 $T=IC\times CPI/f$；Amdahl 定律适合题目明确给出“某部分时间占比和局部加速倍数”的场景。</li>
+</ul>
+<h3 id="section-11">1.3.2 IPS、MIPS 与 FLOPS</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义</th>
+<th>公式/备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPS</td>
+<td>每秒执行指令数</td>
+<td>$IPS=\dfrac{\text{主频}}{CPI}$</td>
+</tr>
+<tr>
+<td>MIPS</td>
+<td>每秒百万条指令数</td>
+<td>$MIPS=\dfrac{\text{指令条数}}{\text{执行时间}\times10^6}=\dfrac{\text{主频}}{CPI\times10^6}$</td>
+</tr>
+<tr>
+<td>FLOPS</td>
+<td>每秒浮点运算次数</td>
+<td>适合浮点密集型任务，不能概括所有程序性能</td>
+</tr>
+</tbody>
+</table></div>
+<p>源 PDF 按十进制前缀逐项列出 FLOPS 单位：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>单位</th>
+<th>名称</th>
+<th style="text-align:right">换算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MFLOPS</td>
+<td>Mega FLOPS</td>
+<td style="text-align:right">$10^6,\text{FLOPS}$</td>
+</tr>
+<tr>
+<td>GFLOPS</td>
+<td>Giga FLOPS</td>
+<td style="text-align:right">$10^9,\text{FLOPS}$</td>
+</tr>
+<tr>
+<td>TFLOPS</td>
+<td>Tera FLOPS</td>
+<td style="text-align:right">$10^{12},\text{FLOPS}$</td>
+</tr>
+<tr>
+<td>PFLOPS</td>
+<td>Peta FLOPS</td>
+<td style="text-align:right">$10^{15},\text{FLOPS}$</td>
+</tr>
+<tr>
+<td>EFLOPS</td>
+<td>Exa FLOPS</td>
+<td style="text-align:right">$10^{18},\text{FLOPS}$</td>
+</tr>
+<tr>
+<td>ZFLOPS</td>
+<td>Zetta FLOPS</td>
+<td style="text-align:right">$10^{21},\text{FLOPS}$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>上表相邻单位相差 $10^3$；例如 $93,PFLOPS=93\times10^{15}=9.3\times10^{16}$ FLOPS。</li>
+<li>注意大小写：存储容量语境中 $K=2^{10}$ 常见；性能数量级中的 k、M、G 等常按 $10^3$ 递进，必须看题目约定。</li>
+<li>MIPS 与主频都不能脱离指令集、CPI 和程序特征直接比较不同机器；一条“指令”在不同 ISA 上完成的工作量可能完全不同。</li>
+</ul>
+<p>源 PDF 最后一页还专门对照了速率与容量单位：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>量</th>
+<th>基本单位</th>
+<th>常用换算</th>
+<th>读题要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据传输速率</td>
+<td><code>b/s</code>（bit/s）</td>
+<td>$1,kb/s=10^3,b/s$，$1,Mb/s=10^6,b/s$，$1,Gb/s=10^9,b/s$，$1,Tb/s=10^{12},b/s$</td>
+<td>小写 <code>b</code> 表示 bit，网络速率通常按十进制前缀</td>
+</tr>
+<tr>
+<td>存储容量</td>
+<td><code>B</code>（Byte）</td>
+<td>$1,B=8,b$；408 题常约定 $1,KB=2^{10},B$、$1,MB=2^{20},B$、$1,GB=2^{30},B$</td>
+<td>大写 <code>B</code> 表示字节；严格 SI/IEC 记法中 $2^{10},B$ 写作 <code>KiB</code>，做题以题设约定为准</td>
+</tr>
+</tbody>
+</table></div>
+<p>因此 <code>10 b/s</code> 表示每秒 10 bit，不是每秒 10 B；容量与速率之间换算时还必须处理 $1,B=8,b$。</p>
+<h3 id="section-12">题型：#性能比较</h3>
+<h4 id="section-13">第一部分：解题方法</h4>
+<ul>
+<li>统一时间单位，先写 $T=IC\times CPI/f$。</li>
+<li>给出多类指令时，先算平均 $CPI=\sum_i CPI_i\times\dfrac{IC_i}{IC}$。</li>
+<li>题目给“优化后指令数变化、CPI 变化、主频变化”时，分别代入优化前后公式，再取时间比。</li>
+<li>不把“访存次数”直接当“时钟周期数”；除非题目明确给出命中时间、存取周期或各阶段耗时。</li>
+</ul>
+<h4 id="section-14">第二部分：易错点</h4>
+<ul>
+<li>单周期 CPU 的 CPI 是 1，但其时钟周期必须按最慢指令确定，未必比多周期机器快。</li>
+<li>基本流水线的理想 $CPI=1$ 指的是稳态吞吐率；第一条指令仍要经历多个流水段，存在装入和排空时间。</li>
+<li>“字长”“指令字长”“存储字长”“数据总线宽度”是四个不同维度，不能因数值相同就等同。</li>
+</ul>
+<h2 id="section-15">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-f40d324810a1/">上一篇：计算机系统层次结构</a> · <a href="/notes/cs408-47193abe2561/">下一篇：数制与编码</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-8b0d4ecd05ad/">处理器调度</a></li>
+</ul>
+<h2 id="section-16">1.4 本节复盘</h2>
+<ul>
+<li>MAR 决定可寻址单元数，MDR 与存储字长对应；容量可写为字数乘字长。</li>
+<li>主频 $f$ 和时钟周期 $T$ 满足 $f=1/T$，但衡量程序速度还需 CPI 和动态指令条数。</li>
+<li>计算 CPU 时间的主公式是 $T=IC\times CPI/f$；IPS、MIPS 都可由主频和 CPI 推出。局部优化还应按 Amdahl 定律计入未优化部分，不能把局部倍数当整体倍数。</li>
+<li>评估系统整体能力用吞吐量，评估一次请求等待用响应时间；比较异构机器不能只看主频或 MIPS。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-c3d6d4b33f5b/index.html"><span>← 上一项</span><strong>Lecture 9：聚类</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c558f3264d82/index.html"><span>下一项 →</span><strong>7. 排序</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

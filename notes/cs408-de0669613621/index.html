@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>1 题型 - IP、UDP、TCP报文段 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：1 题型 - IP、UDP、TCP报文段。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="1 题型 - IP、UDP、TCP报文段 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：1 题型 - IP、UDP、TCP报文段。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-de0669613621/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1 题型 - IP、UDP、TCP报文段 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：1 题型 - IP、UDP、TCP报文段。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "1 题型 - IP、UDP、TCP报文段",
+      "item": "https://www.jiayuhere.com/notes/cs408-de0669613621/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-de0669613621/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-de0669613621/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-de0669613621/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-de0669613621/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-de0669613621/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>1 题型 - IP、UDP、TCP报文段</h1><p class="article-lead">408 学习笔记：1 题型 - IP、UDP、TCP报文段。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 10 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/cc011859ae23.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/cc011859ae23.pdf" download="1 题型 - IP、UDP、TCP报文段.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 三种首部快速对比</a><a href="#section-2">1.2 UDP 用户数据报</a><a href="#section-3">1.3 TCP 报文段</a><a href="#section-4">1.4 IPv4 首部与字段单位</a><a href="#section-8">1.5 因特网检验和</a><a href="#section-12">1.6 模拟题一：检验和叙述</a><a href="#section-13">1.7 IPv4 分片计算</a><a href="#section-14">1.8 模拟题二：HTTP 报文传输效率</a><a href="#section-15">1.9 模拟题三：UDP/TCP 伪首部</a><a href="#section-18">1.10 解题步骤</a><a href="#section-19">1.11 易错点</a><a href="#section-20">相关知识</a><a href="#section-21">1.12 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本题型综合考查 IPv4、UDP、TCP 的首部长度和字段单位、因特网检验和、IP 分片、协议封装效率与运输层伪首部。关键是分清“IPv4 只校验首部”和“UDP/TCP 校验首部与数据”。</p>
+</blockquote>
+<blockquote>
+<p><strong>TIP</strong> · 章节导航：<a href="/notes/cs408-59e41ea74a00/">返回第五章：运输层总纲</a></p>
+</blockquote>
+<h2 id="section-1">1.1 三种首部快速对比</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>IPv4 数据报</th>
+<th>UDP 用户数据报</th>
+<th>TCP 报文段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最小/固定首部</td>
+<td>20 B</td>
+<td>8 B</td>
+<td>20 B</td>
+</tr>
+<tr>
+<td>最大首部</td>
+<td>60 B</td>
+<td>固定 8 B</td>
+<td>60 B</td>
+</tr>
+<tr>
+<td>长度相关单位</td>
+<td>总长度 1 B；IHL 4 B；片偏移 8 B</td>
+<td>Length 以 B 计，含首部与数据</td>
+<td>Data Offset 以 4 B 为单位</td>
+</tr>
+<tr>
+<td>检验范围</td>
+<td>只校验 IPv4 首部</td>
+<td>伪首部 + UDP 首部 + 数据</td>
+<td>伪首部 + TCP 首部 + 数据</td>
+</tr>
+<tr>
+<td>地址/端口</td>
+<td>源、目的 IPv4 地址各 4 B</td>
+<td>源、目的端口各 2 B</td>
+<td>源、目的端口各 2 B</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-2">1.2 UDP 用户数据报</h2>
+<p>UDP 首部固定为 8 B，由 4 个 2 B 字段组成：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th style="text-align:right">长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>源端口</td>
+<td style="text-align:right">2 B</td>
+<td>发送进程端口</td>
+</tr>
+<tr>
+<td>目的端口</td>
+<td style="text-align:right">2 B</td>
+<td>接收进程端口</td>
+</tr>
+<tr>
+<td>长度</td>
+<td style="text-align:right">2 B</td>
+<td>UDP 首部与数据的总长度</td>
+</tr>
+<tr>
+<td>检验和</td>
+<td style="text-align:right">2 B</td>
+<td>覆盖伪首部、UDP 首部与数据</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>IPv4 中 UDP 检验和可以不使用，此时字段全 0。</li>
+<li>IPv6 中普通 UDP 报文默认必须计算检验和；特定 UDP 隧道的<strong>外层封装报文</strong>才允许按协议要求启用零检验和模式，这不是普通 UDP 通信的可选开关。</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：IPv6 UDP 的例外边界
+408 基础题按“IPv6 UDP 检验和必须使用”判断即可；更完整的协议规定见 <a href="https://www.rfc-editor.org/rfc/rfc6935.html">RFC 6935</a>：满足其限制条件的 UDP 隧道可为指定端口启用零检验和模式，默认模式的报文仍须计算检验和。</p>
+</blockquote>
+<ul>
+<li>UDP 长度最小为 8 B，因为长度包含首部自身。</li>
+</ul>
+<h2 id="section-3">1.3 TCP 报文段</h2>
+<ul>
+<li>TCP 固定首部为 20 B，带选项时最大为 60 B。</li>
+<li>源端口、目的端口各 2 B。</li>
+<li>序号与确认号各 4 B。</li>
+<li>**教材补充与纠错：**不含 SYN 的数据段，其 <code>seq</code> 是数据首字节序号；若设置 SYN，<code>seq</code> 是 SYN 的初始序号，同段数据的首字节序号为 <code>seq+1</code>。FIN 位于数据之后并占 1 个序号；无数据且无 SYN/FIN 的纯 ACK 不占序号。详见 <a href="https://www.rfc-editor.org/rfc/rfc9293.html">RFC 9293 的序号定义</a>。</li>
+<li>确认号表示期望收到对方的下一个序号；在普通数据阶段，它通常就是下一个数据字节的序号，确认 SYN/FIN 时还须计入它们各占的 1 个序号。</li>
+<li>数据偏移 Data Offset 表示 TCP 首部长度，单位为 4 B。</li>
+<li>窗口字段表示允许对方继续发送的数据量，用于流量控制。</li>
+<li>TCP 检验和覆盖伪首部、TCP 首部与数据，IPv4 和 IPv6 中都使用。</li>
+</ul>
+<h2 id="section-4">1.4 IPv4 首部与字段单位</h2>
+<h3 id="section-5">1.4.1 长度与地址</h3>
+<ul>
+<li>IPv4 固定首部为 20 B，最大 60 B。</li>
+<li>首部长度 IHL 的单位是 4 B。</li>
+<li>总长度字段的单位是 1 B，值包含首部和数据。</li>
+<li>片偏移字段的单位是 8 B。</li>
+<li>源地址、目的地址各占 4 B。</li>
+</ul>
+<p>可用口诀记住三个单位：</p>
+<pre><code class="language-text">总长度：1 B
+片偏移：8 B
+首部长度：4 B
+</code></pre>
+<h3 id="section-6">1.4.2 DF、MF 与 TTL</h3>
+<ul>
+<li>DF=1：不允许分片。</li>
+<li>DF=0：允许分片。</li>
+<li>MF=1：后面还有分片。</li>
+<li>MF=0：这是最后一片；未分片数据报的 MF 也为 0。</li>
+<li>每经过一个路由器，TTL 减 1；减到 0 时丢弃，通常向源端发送 ICMP 时间超过报文。但若原分组为广播/多播、非首片分片，或原分组本身为 ICMP 差错报文等，按 ICMP 差错报文的禁止回复规则不发送。</li>
+</ul>
+<h3 id="section-7">1.4.3 首部检验和</h3>
+<p>IPv4 检验和只覆盖首部，所以也称首部检验和。路由器转发时 TTL 会改变，必须重新计算首部检验和。</p>
+<h2 id="section-8">1.5 因特网检验和</h2>
+<h3 id="section-9">1.5.1 基本计算思想</h3>
+<p>发送方通常按以下步骤计算：</p>
+<ol>
+<li>把检验和字段暂置 0。</li>
+<li>按 16 位字进行反码加法。</li>
+<li>最高位产生的进位回卷，加到最低位。</li>
+<li>对最终和逐位取反，写入检验和字段。</li>
+</ol>
+<p>接收方把所有 16 位字连同检验和一起求反码和，正确结果应为全 1。</p>
+<p>这种算法简单、适合路由器频繁更新 IPv4 首部，但检错能力弱于 CRC。</p>
+<h3 id="section-10">1.5.2 三种协议的校验范围</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>校验范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPv4</td>
+<td>仅 IPv4 首部，不含数据载荷</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>伪首部、UDP 首部、UDP 数据</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>伪首部、TCP 首部、TCP 数据</td>
+</tr>
+</tbody>
+</table></div>
+<p>IPv6 取消的是 IPv6 基本首部中的首部检验和字段，不是取消整个协议栈中的 UDP/TCP 检验和。</p>
+<h3 id="section-11">1.5.3 首部误码与 ICMP</h3>
+<ul>
+<li>路由器若通过 IPv4 首部检验和发现首部误码，默认静默丢弃数据报，不向源主机发送 ICMP 差错报告。</li>
+<li>ICMP 参数问题表示必需首部字段缺失，或某些字段值在语义上不正确；这可能来自实现错误或恶意构造，不等同于“检验和查出比特误码”。</li>
+<li>检测到参数问题时，路由器丢弃数据报，并可向源主机发送 ICMP 参数问题报文。</li>
+</ul>
+<h2 id="section-12">1.6 模拟题一：检验和叙述</h2>
+<p>四项叙述的判断：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>判断</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>错误</td>
+<td>IPv4 只校验首部，UDP/TCP 的校验范围还包含数据</td>
+</tr>
+<tr>
+<td>II</td>
+<td>正确</td>
+<td>因特网检验和的检错能力弱于 CRC</td>
+</tr>
+<tr>
+<td>III</td>
+<td>错误</td>
+<td>IPv6 基本首部无校验和，但 UDP/TCP 仍使用检验和</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>错误</td>
+<td>首部检验和发现误码时默认静默丢弃，不发送 ICMP 参数问题</td>
+</tr>
+</tbody>
+</table></div>
+<p>只有 II 正确。</p>
+<p><strong>答案：A，仅 II。</strong></p>
+<h2 id="section-13">1.7 IPv4 分片计算</h2>
+<p>题图给出：原 IPv4 数据报总长度 1500 B，首部 20 B，链路 MTU 为 800 B。</p>
+<p>原数据长度：</p>
+<p>$$
+1500-20=1480\ \mathrm{B}
+$$</p>
+<p>每片可放的数据既不能超过 $800-20=780$ B，又必须是 8 B 的整数倍：</p>
+<p>$$
+\left\lfloor\frac{780}{8}\right\rfloor\times 8
+=97\times 8
+=776\ \mathrm{B}
+$$</p>
+<p>剩余数据：</p>
+<p>$$
+1480-776=704\ \mathrm{B}
+$$</p>
+<p>分片结果：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分片</th>
+<th style="text-align:right">首部</th>
+<th style="text-align:right">数据</th>
+<th style="text-align:right">总长度</th>
+<th style="text-align:right">片偏移</th>
+<th style="text-align:right">DF</th>
+<th style="text-align:right">MF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 片</td>
+<td style="text-align:right">20 B</td>
+<td style="text-align:right">776 B</td>
+<td style="text-align:right">796 B</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>第 2 片</td>
+<td style="text-align:right">20 B</td>
+<td style="text-align:right">704 B</td>
+<td style="text-align:right">724 B</td>
+<td style="text-align:right">$776/8=97$</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>最后一片的数据长度可以不是 8 B 的整数倍；本题恰好是。片偏移表示本片数据在原始数据部分中的起始位置，不包含任何 IP 首部。</p>
+<h2 id="section-14">1.8 模拟题二：HTTP 报文传输效率</h2>
+<p>HTTP 请求报文为 222 B；TCP 和 IPv4 都采用 20 B 固定首部；以太网帧头 14 B、FCS 4 B；不考虑物理层前导码。</p>
+<p>封装后的总长度：</p>
+<p>$$
+222+20+20+14+4=280\ \mathrm{B}
+$$</p>
+<p>有效载荷效率：</p>
+<p>$$
+\eta=\frac{222}{280}\times100%
+\approx79.3%
+$$</p>
+<p>本题网络层载荷为 $222+20=242$ B，大于以太网最小数据字段 46 B，不需要额外填充。</p>
+<p><strong>答案：约 79.3%。</strong></p>
+<h2 id="section-15">1.9 模拟题三：UDP/TCP 伪首部</h2>
+<h3 id="section-16">1.9.1 IPv4 伪首部结构</h3>
+<p>UDP 和 TCP 计算检验和时，在运输层报文段前临时添加伪首部：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th style="text-align:right">长度</th>
+<th style="text-align:right">TCP 值</th>
+<th style="text-align:right">UDP 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>源 IPv4 地址</td>
+<td style="text-align:right">4 B</td>
+<td style="text-align:right">源 IP</td>
+<td style="text-align:right">源 IP</td>
+</tr>
+<tr>
+<td>目的 IPv4 地址</td>
+<td style="text-align:right">4 B</td>
+<td style="text-align:right">目的 IP</td>
+<td style="text-align:right">目的 IP</td>
+</tr>
+<tr>
+<td>保留</td>
+<td style="text-align:right">1 B</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td>协议</td>
+<td style="text-align:right">1 B</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">17</td>
+</tr>
+<tr>
+<td>运输层长度</td>
+<td style="text-align:right">2 B</td>
+<td style="text-align:right">TCP 报文段长度</td>
+<td style="text-align:right">UDP 用户数据报长度</td>
+</tr>
+</tbody>
+</table></div>
+<p>伪首部只参与检验和计算，不作为运输层报文的一部分传输。</p>
+<h3 id="section-17">1.9.2 选项判断</h3>
+<p>题目问伪首部除全 0 保留字节外，还包含 IPv4 首部中的哪些字段：</p>
+<pre><code class="language-text">I. 源 IP 地址
+II. 目的 IP 地址
+III. 生存时间 TTL
+IV. 协议
+</code></pre>
+<p>伪首部包含 I、II、IV，不包含 TTL。</p>
+<p><strong>答案：D，仅 I、II、IV。</strong></p>
+<h2 id="section-18">1.10 解题步骤</h2>
+<ol>
+<li>先确定是哪一层的检验和：IPv4 只看首部，UDP/TCP 看伪首部、首部和数据。</li>
+<li>长度字段题先写单位：总长度 1 B、IHL/Data Offset 4 B、片偏移 8 B。</li>
+<li>分片时用 $\lfloor(MTU-IHL)/8\rfloor\times8$ 求非末片最大数据长度。</li>
+<li>传输效率的分母要加入每层实际出现的首部和尾部，并检查以太网是否需要填充。</li>
+<li>伪首部记住“源 IP、目的 IP、0、协议、长度”，不含 TTL。</li>
+</ol>
+<h2 id="section-19">1.11 易错点</h2>
+<ul>
+<li>IPv4 首部检验和不保护数据载荷。</li>
+<li>IPv6 取消自身基本首部校验和，但 UDP/TCP 检验和仍然存在；普通 IPv6 UDP 默认不能省略检验和，特定隧道外层封装是受限例外。</li>
+<li>UDP 长度包含 8 B 首部，TCP 确认号表示期望收到的下一个字节序号。</li>
+<li>IP 片偏移以 8 B 为单位，TCP/IPv4 首部长度字段以 4 B 为单位。</li>
+<li>非最后分片的数据长度必须是 8 B 的整数倍；最后一片可以不是。</li>
+<li>首部校验和发现误码时是静默丢弃，不要误判为 ICMP 参数问题。</li>
+<li>伪首部参与校验但不传输，也不含 TTL。</li>
+</ul>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-59e41ea74a00/">上一篇：运输层思维导图</a> · <a href="/notes/cs408-efc7c4d94382/">下一篇：连接控制</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-59e41ea74a00/">运输层总纲</a></li>
+</ul>
+<h2 id="section-21">1.12 本节复盘</h2>
+<ul>
+<li>UDP 首部固定 8 B；TCP 和 IPv4 首部均最小 20 B、最大 60 B。</li>
+<li>IPv4 只校验首部，UDP/TCP 校验伪首部、首部和数据；因特网检验和弱于 CRC。</li>
+<li>IPv6 取消基本首部校验和，不影响 UDP/TCP 继续使用检验和。</li>
+<li>1500 B 数据报经过 MTU 800 B 链路时分为 776 B 与 704 B 数据，两片偏移为 0、97。</li>
+<li>222 B HTTP 报文经 TCP、IPv4、以太网封装后的效率约为 79.3%。</li>
+<li>IPv4 运输层伪首部包含源 IP、目的 IP、0、协议和运输层长度，不含 TTL；模拟题三答案 D。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-dd853a0ed1a2/index.html"><span>← 上一项</span><strong>Lecture 7：知识 - 虚拟内存管理</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-df715a00a371/index.html"><span>下一项 →</span><strong>2 题型 - 信道利用率相关计算</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

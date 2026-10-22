@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 3：卷积神经网络 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 3：卷积神经网络。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 3：卷积神经网络 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 3：卷积神经网络。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-f43cdf74b38c/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 3：卷积神经网络 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 3：卷积神经网络。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 3：卷积神经网络",
+      "item": "https://www.jiayuhere.com/notes/cs408-f43cdf74b38c/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-f43cdf74b38c/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-f43cdf74b38c/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-f43cdf74b38c/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-f43cdf74b38c/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-f43cdf74b38c/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 3：卷积神经网络</h1><p class="article-lead">408 学习笔记：Lecture 3：卷积神经网络。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 18 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/eb14e3c278db.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/eb14e3c278db.pdf" download="Lecture 3：卷积神经网络.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">3.1 CNN 的基本思想</a><a href="#section-2">3.2 图像、卷积核与特征图</a><a href="#section-7">3.3 步长、填充与输出尺寸</a><a href="#section-10">$$
+H_{out}</a><a href="#section-11">$$
+W_{out}</a><a href="#section-12">$$
+H_{out}</a><a href="#section-14">3.4 CNN 与全连接网络的区别</a><a href="#section-17">3.5 LeNet-5</a><a href="#section-22">3.6 Caffe 实现 LeNet 的历史流程</a><a href="#section-23">3.7 AlexNet</a><a href="#section-26">3.8 AlexNet 的关键改进</a><a href="#section-30">$$
+\tilde h</a><a href="#section-34">3.9 感受野与 VGGNet</a><a href="#section-37">3.10 GoogLeNet 与 Inception</a><a href="#section-38">3.11 ResNet 残差网络</a><a href="#section-41">$$
+\boldsymbol{y}</a><a href="#section-42">3.12 CNN 的人脸识别应用</a><a href="#section-43">3.13 迁移学习</a><a href="#section-44">3.14 易错点</a><a href="#section-45">相关知识</a><a href="#section-46">3.15 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节整理卷积核、步长、通道、特征图、padding、局部连接与权重共享，并分析 LeNet、AlexNet、VGG、GoogLeNet、ResNet 的结构演进、池化、Dropout、数据增强、感受野和迁移学习。</p>
+</blockquote>
+<h2 id="section-1">3.1 CNN 的基本思想</h2>
+<p>卷积神经网络（Convolutional Neural Network，CNN）在 20 世纪 80-90 年代逐步形成，LeNet 是早期代表。</p>
+<p>传统图像处理中，卷积核往往由人工设计；CNN 的关键变化是：</p>
+<ul>
+<li>从大量样本中自动学习卷积核参数。</li>
+<li>利用图像的局部结构，让神经元只连接局部区域。</li>
+<li>让同一卷积核在不同空间位置共享权重。</li>
+<li>逐层把像素变为边缘、纹理、局部结构和高层语义。</li>
+</ul>
+<h2 id="section-2">3.2 图像、卷积核与特征图</h2>
+<h3 id="section-3">3.2.1 输入张量</h3>
+<p>一张 $32\times32$ 的 RGB 图像有 3 个通道，可表示为：</p>
+<p>$$
+X\in\mathbb R^{32\times32\times3}.
+$$</p>
+<p>深度学习框架常把带批次图像存为 <code>[N,C,H,W]</code>，即：</p>
+<p>$$
+X\in\mathbb R^{N\times3\times32\times32}.
+$$</p>
+<h3 id="section-4">3.2.2 卷积核</h3>
+<p>在普通卷积（<code>groups=1</code>）中，若输入有 3 个通道，一个二维卷积核必须覆盖全部输入通道，例如：</p>
+<p>$$
+K\in\mathbb R^{5\times5\times3}.
+$$</p>
+<p>卷积核滑到某个位置时，把核元素与覆盖区域逐元素相乘、求和，再加偏置，得到一个输出数。</p>
+<p>严格数学卷积会翻转卷积核；主流深度学习框架实际执行互相关（cross-correlation），但习惯上仍称为卷积。</p>
+<h3 id="section-5">3.2.3 单通道示例与权重共享</h3>
+<p>对 $3\times3$ 输入和 $2\times2$ 核：</p>
+<p>$$
+K=
+\begin{bmatrix}
+w_1 &amp; w_2\
+w_3 &amp; w_4
+\end{bmatrix}.
+$$</p>
+<p>步长为 1、无填充时：</p>
+<p>$$
+p_1=w_1x_1+w_2x_2+w_3x_4+w_4x_5+b,
+$$</p>
+<p>$$
+p_2=w_1x_2+w_2x_3+w_3x_5+w_4x_6+b,
+$$</p>
+<p>$$
+p_3=w_1x_4+w_2x_5+w_3x_7+w_4x_8+b,
+$$</p>
+<p>$$
+p_4=w_1x_5+w_2x_6+w_3x_8+w_4x_9+b.
+$$</p>
+<p>所有位置共享同一组 $w_1,\ldots,w_4$ 和同一个输出通道偏置 $b$。</p>
+<ul>
+<li>源课件图中把不同位置写成 $b_1,b_2,b_3,b_4$，这不符合标准 CNN 的空间权重共享。</li>
+<li>一个输出通道对应一个偏置；不同输出通道可有不同偏置。</li>
+<li>反向传播时，同一共享参数在所有空间位置产生的梯度要累加。</li>
+</ul>
+<h3 id="section-6">3.2.4 多通道计算</h3>
+<p>当 <code>groups=1</code> 时，RGB 图像中的一个滤波器分别与 R、G、B 三个通道做局部乘加，再把三通道结果相加并加偏置，生成一个特征图。分组卷积中，每个输出通道只连接其所在组的 $C_{in}/groups$ 个输入通道。</p>
+<p>若使用 $C_{out}$ 个滤波器，就得到 $C_{out}$ 个输出通道：</p>
+<p>$$
+W\in
+\mathbb R^{C_{out}\times C_{in}\times K_h\times K_w}.
+$$</p>
+<p>上式是 <code>groups=1</code> 的权重形状；一般分组卷积为</p>
+<p>$$
+W\in
+\mathbb R^{C_{out}\times(C_{in}/groups)\times K_h\times K_w}.
+$$</p>
+<p>例如 $32\times32\times3$ 输入，使用 6 个 $5\times5\times3$ 滤波器，步长为 1、无填充，输出为：</p>
+<p>$$
+28\times28\times6.
+$$</p>
+<h2 id="section-7">3.3 步长、填充与输出尺寸</h2>
+<h3 id="section-8">3.3.1 步长</h3>
+<p>步长（stride）表示卷积核相邻两次位置移动的距离。</p>
+<ul>
+<li><code>stride=(1,1)</code>：水平和垂直各移动 1 格。</li>
+<li><code>stride=(2,2)</code>：每次移动 2 格，输出空间尺寸更小。</li>
+</ul>
+<p>遍历通常先沿宽方向移动，到达一行末尾后再向下移动。</p>
+<h3 id="section-9">3.3.2 通用输出公式</h3>
+<p>输入高 $H_{in}$、核高 $K_h$、填充 $P_h$、步长 $S_h$、空洞率 $D_h$ 时：</p>
+<h1 id="section-10">$$
+H_{out}</h1>
+<p>\left\lfloor
+\frac{H_{in}+2P_h-D_h(K_h-1)-1}{S_h}
++1
+\right\rfloor.
+$$</p>
+<p>宽度同理：</p>
+<h1 id="section-11">$$
+W_{out}</h1>
+<p>\left\lfloor
+\frac{W_{in}+2P_w-D_w(K_w-1)-1}{S_w}
++1
+\right\rfloor.
+$$</p>
+<p>无空洞、无填充时退化为：</p>
+<h1 id="section-12">$$
+H_{out}</h1>
+<p>\left\lfloor
+\frac{H_{in}-K_h}{S_h}
+\right\rfloor+1.
+$$</p>
+<h3 id="section-13">3.3.3 Padding</h3>
+<p>Padding 在输入边缘补值，最常见是补零。</p>
+<p>作用：</p>
+<ul>
+<li>控制输出尺寸。</li>
+<li>让边缘像素参与更多卷积窗口。</li>
+<li>配合适当步长减少信息过快丢失。</li>
+</ul>
+<p>当核为奇数、步长为 1、空洞率为 1 时，若希望输出与输入同尺寸，常取：</p>
+<p>$$
+P=\frac{K-1}{2}.
+$$</p>
+<p>例如 $5\times5$ 核取 $P=2$。</p>
+<ul>
+<li>Padding 并不存在“$2\times2$ 核最多只能补一圈”的理论上限。</li>
+<li>填充大小应根据目标输出尺寸和模型设计决定；过大填充可能让大量计算落在人工边界上。</li>
+</ul>
+<h2 id="section-14">3.4 CNN 与全连接网络的区别</h2>
+<h3 id="section-15">3.4.1 局部连接</h3>
+<p>全连接层中，每个输出神经元连接全部输入；卷积层中，每个输出位置只观察输入的局部感受野。</p>
+<h3 id="section-16">3.4.2 权重共享</h3>
+<p>同一卷积核在所有空间位置复用，使模型可以检测某种局部模式，无论它出现在图像哪里。</p>
+<p>若输入为 $H\times W\times C_{in}$，输出通道数为 $C_{out}$，卷积核为 $K_h\times K_w$，在 <code>groups=1</code> 且每个输出通道有一个偏置时，参数数目为：</p>
+<p>$$
+C_{out}(K_hK_wC_{in}+1),
+$$</p>
+<p>与输入的 $H,W$ 无关。</p>
+<p>一般分组卷积的参数量为 $C_{out}(K_hK_wC_{in}/groups+1)$；若 <code>bias=False</code>，去掉末尾的 $C_{out}$ 个偏置。</p>
+<p>权重共享显著减少参数，但不意味着卷积结果完全平移不变：边界、步长、池化和下采样都会影响平移等变性。</p>
+<h2 id="section-17">3.5 LeNet-5</h2>
+<h3 id="section-18">3.5.1 课件中的简化结构</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>层</th>
+<th>输出</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$32\times32\times1$</td>
+<td>灰度图</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>$28\times28\times6$</td>
+<td>6 个 $5\times5$ 卷积核</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>$14\times14\times6$</td>
+<td>$2\times2$ 降采样</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>$10\times10\times16$</td>
+<td>16 个 $5\times5\times6$ 卷积核</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>$5\times5\times16$</td>
+<td>$2\times2$ 降采样</td>
+</tr>
+<tr>
+<td>C5/FC</td>
+<td>120</td>
+<td>展平后连接 120 个单元</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>84</td>
+<td>全连接</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>10</td>
+<td>十类数字</td>
+</tr>
+</tbody>
+</table></div>
+<p>池化/降采样层把相邻 $2\times2$ 区域聚合成一个数，空间尺寸减半。现代实现常用平均池化或最大池化；课件按无参数池化计算。</p>
+<p>每个线性卷积或全连接变换之后通常需要非线性激活。否则相邻线性层可以合并，无法增加非线性表达能力。</p>
+<h3 id="section-19">3.5.2 尺寸计算</h3>
+<p>从 $14\times14\times6$ 经 $5\times5$、步长 1、无填充卷积：</p>
+<p>$$
+14-5+1=10,
+$$</p>
+<p>因此输出为 $10\times10\times16$。</p>
+<p>S4 输出含：</p>
+<p>$$
+5\times5\times16=400
+$$</p>
+<p>个数，展平后连接 120 个神经元。</p>
+<h3 id="section-20">3.5.3 参数量</h3>
+<p>按课件的“C3 全连接到全部 6 个输入通道、池化无参数”简化版本：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>层</th>
+<th style="text-align:right">参数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td style="text-align:right">$(5\times5\times1+1)\times6=156$</td>
+</tr>
+<tr>
+<td>S2</td>
+<td style="text-align:right">$0$</td>
+</tr>
+<tr>
+<td>C3</td>
+<td style="text-align:right">$(5\times5\times6+1)\times16=2416$</td>
+</tr>
+<tr>
+<td>S4</td>
+<td style="text-align:right">$0$</td>
+</tr>
+<tr>
+<td>400 到 120</td>
+<td style="text-align:right">$(400+1)\times120=48120$</td>
+</tr>
+<tr>
+<td>120 到 84</td>
+<td style="text-align:right">$(120+1)\times84=10164$</td>
+</tr>
+<tr>
+<td>84 到 10</td>
+<td style="text-align:right">$(84+1)\times10=850$</td>
+</tr>
+<tr>
+<td>总计</td>
+<td style="text-align:right">$61706$</td>
+</tr>
+</tbody>
+</table></div>
+<p>注意：原始 LeNet-5 的 C3 使用部分连接，S2/S4 还有可学习缩放和偏置，因此其精确参数表与课件简化版不同。</p>
+<p>早期 CNN 中：</p>
+<ul>
+<li>卷积层常主导计算量。</li>
+<li>大型全连接层常主导参数量。</li>
+</ul>
+<p>这不是所有现代 CNN 的固定规律；使用全局平均池化后，全连接参数可大幅减少。</p>
+<h3 id="section-21">3.5.4 功能分工</h3>
+<ul>
+<li>卷积与池化：逐层提取和压缩特征。</li>
+<li>全连接层：把高层特征映射为类别分数。</li>
+<li>浅层特征偏向边缘、纹理等细节。</li>
+<li>深层特征偏向形状、部件和整体语义。</li>
+<li>最后用 Softmax/交叉熵进行十分类。</li>
+</ul>
+<h2 id="section-22">3.6 Caffe 实现 LeNet 的历史流程</h2>
+<p>源课件使用 Caffe，是较早的深度学习框架。流程包括：</p>
+<ol>
+<li><code>create_lmdb.sh</code>：把 MNIST 图片转换为 LMDB/LevelDB。</li>
+<li><code>compute_mean.sh</code>：计算训练图像均值，供预处理使用。</li>
+<li><code>lenet_train_test.prototxt</code>：定义网络结构和训练/测试数据层。</li>
+<li><code>lenet_solver.prototxt</code>：定义优化器和训练超参数。</li>
+<li><code>train_lenet.sh</code>：调用 Caffe 启动训练。</li>
+</ol>
+<p>课件配置的关键项：</p>
+<pre><code class="language-text">test_iter: 100
+test_interval: 500
+base_lr: 0.01
+momentum: 0.0
+weight_decay: 0.0005
+lr_policy: &quot;inv&quot;
+gamma: 0.0001
+power: 0.75
+display: 100
+max_iter: 10000
+snapshot: 5000
+solver_mode: GPU
+type: &quot;RMSProp&quot;
+rms_decay: 0.98
+</code></pre>
+<ul>
+<li><code>test_interval: 500</code> 表示每训练 500 次做一次测试。</li>
+<li><code>base_lr: 0.01</code> 是基础学习率。</li>
+<li>这套脚本具有历史价值；新项目通常使用 PyTorch 等现代框架，不必为了复现知识点而依赖 Caffe。</li>
+</ul>
+<h2 id="section-23">3.7 AlexNet</h2>
+<h3 id="section-24">3.7.1 背景与结构</h3>
+<p>AlexNet 在 ILSVRC-2012 中显著降低 ImageNet 分类错误率，推动深度 CNN 普及。</p>
+<ul>
+<li>输入常在不同实现中记为 $224\times224$ 或 $227\times227$；差异来自裁剪与卷积尺寸约定。</li>
+<li>第一层为 96 个 $11\times11$ 卷积核，步长为 4，不是源课件文字中的 16 个。</li>
+<li>两块 GPU 分担计算，第一组 48 个通道在一块 GPU，另一组 48 个在另一块 GPU，并在特定层交互。</li>
+<li>网络含 5 个卷积层和 3 个全连接层，输出 1000 类。</li>
+<li>参数约 6000 万，不是 6 亿。</li>
+</ul>
+<p>课件所说“与 LeNet 没有本质区别”，是指二者都遵循卷积、池化、全连接的基本范式；AlexNet 在规模、激活、正则化、数据和算力上都明显升级。</p>
+<h3 id="section-25">3.7.2 结果口径</h3>
+<p>课件记录 Top-1 错误率约 $37.5%$、Top-5 错误率约 $16.4%$。不同文献会因单模型/集成和测试口径给出约 $15.3%-17.0%$ 的 Top-5 数字：</p>
+<ul>
+<li>AlexNet 论文摘要常见单模型结果为 Top-1 $37.5%$、Top-5 $17.0%$。</li>
+<li>ILSVRC-2012 获胜集成系统常被引用为 Top-5 $15.3%$。</li>
+</ul>
+<p>因此比较时必须说明数据划分和是否集成，不能把多个口径混在一起。</p>
+<h2 id="section-26">3.8 AlexNet 的关键改进</h2>
+<h3 id="section-27">3.8.1 ReLU</h3>
+<p>AlexNet 用 ReLU 代替 Sigmoid/tanh：</p>
+<ul>
+<li>正半轴梯度为 1，缓解饱和区梯度消失。</li>
+<li>计算简单，训练速度更快。</li>
+<li>可产生稀疏激活。</li>
+</ul>
+<p>但 ReLU 不保证“每层恰好一半神经元激活”，其激活比例由数据和参数决定。</p>
+<h3 id="section-28">3.8.2 最大池化</h3>
+<p>最大池化在局部窗口内取最大值：</p>
+<p>$$
+y=\max(x_1,x_2,\ldots,x_k).
+$$</p>
+<ul>
+<li>降低空间分辨率和后续计算量。</li>
+<li>对小范围位置变化更稳定。</li>
+<li>引入非线性。</li>
+<li>反向传播时，梯度传给前向最大值对应位置；并列最大值如何处理由实现决定。</li>
+</ul>
+<p>AlexNet 使用重叠最大池化；LeNet 课件示例使用不重叠降采样。重叠池化在当时实验中改善泛化，但不能普遍断言一定优于不重叠池化。</p>
+<p>最大池化偏向保留最强局部响应；平均池化保留区域平均信息。把它们简单分别等同于“纹理”和“背景”只是一种直观说法，不是严格结论。</p>
+<h3 id="section-29">3.8.3 Dropout</h3>
+<p>训练时，对激活乘 Bernoulli 掩码。现代 inverted Dropout：</p>
+<h1 id="section-30">$$
+\tilde h</h1>
+<p>\frac{m\odot h}{1-p},
+\qquad
+m_i\sim\operatorname{Bernoulli}(1-p).
+$$</p>
+<ul>
+<li>$p$ 是丢弃概率。</li>
+<li>每批掩码不同，可降低神经元共适应并近似集成许多子网络。</li>
+<li>使用 inverted Dropout 时，测试阶段直接关闭 Dropout，无需再把权重乘以 $1-p$。</li>
+</ul>
+<p>源课件采用旧式描述“训练不缩放、测试乘 $1-p$”，两种约定数学上可对应，但现代框架默认使用 inverted Dropout。</p>
+<p>Dropout 与池化作用不同，也不保证加快收敛；它常增加训练噪声、可能需要更久训练，但能改善泛化。</p>
+<h3 id="section-31">3.8.4 数据增强</h3>
+<p>AlexNet 使用：</p>
+<ul>
+<li>从缩放后的图像随机裁取 $224\times224$ 区域。</li>
+<li>随机水平翻转。</li>
+<li>RGB 主成分方向上的颜色扰动。</li>
+</ul>
+<p>若从 $256\times256$ 中枚举 $224\times224$ 裁剪，单轴有 $33$ 个起点，加翻转共有 $33\times33\times2=2178$ 种离散组合；训练通常在线随机采样，不应把源课件的“固定 2048 张”当作严格数量。</p>
+<h3 id="section-32">3.8.5 GPU 训练</h3>
+<p>原 AlexNet 使用两块 GTX 580 GPU 并行训练，约需数天。GPU 擅长卷积和矩阵乘法的大规模并行计算，是其可训练性的关键条件之一。</p>
+<h3 id="section-33">3.8.6 其他历史组件</h3>
+<p>AlexNet 还使用局部响应归一化（LRN）。该设计在后续网络中大多被 BatchNorm 等方法取代。</p>
+<h2 id="section-34">3.9 感受野与 VGGNet</h2>
+<h3 id="section-35">3.9.1 感受野</h3>
+<p>某层一个神经元的感受野，是它在原始输入上能影响到的区域。</p>
+<p>若第 $l$ 层核大小为 $k_l$、步长为 $s_l$，记输入上的跳距为 $j_l$、感受野为 $r_l$：</p>
+<p>$$
+j_l=j_{l-1}s_l,
+$$</p>
+<p>$$
+r_l=r_{l-1}+(k_l-1)j_{l-1}.
+$$</p>
+<p>初始 $j_0=r_0=1$。</p>
+<h3 id="section-36">3.9.2 堆叠 $3\times3$ 卷积</h3>
+<p>在步长 1、无空洞条件下：</p>
+<ul>
+<li>两层 $3\times3$ 的感受野是 $5\times5$。</li>
+<li>三层 $3\times3$ 的感受野是 $7\times7$。</li>
+</ul>
+<p>源课件说“两层 $3\times3$ 得到 $7\times7$ 感受野”，这是错误，应为三层。</p>
+<p>若输入输出通道均为 $C$：</p>
+<ul>
+<li>一层 $7\times7$ 卷积参数约为 $49C^2$。</li>
+<li>三层 $3\times3$ 卷积参数约为 $27C^2$。</li>
+</ul>
+<p>三层小核还插入三次非线性，表达能力更强。若比较两层 $3\times3$ 与一层 $5\times5$，参数则是 $18C^2$ 对 $25C^2$。</p>
+<p>VGG16/VGG19 通过重复小卷积核和池化构建更深网络，结构规整，但计算量和全连接参数较大。</p>
+<h2 id="section-37">3.10 GoogLeNet 与 Inception</h2>
+<p>Inception 模块并行执行不同尺度操作：</p>
+<ul>
+<li>$1\times1$ 卷积。</li>
+<li>$3\times3$ 卷积。</li>
+<li>$5\times5$ 卷积。</li>
+<li>池化分支。</li>
+</ul>
+<p>各分支输出在通道维拼接，使网络同时捕捉不同尺度特征。</p>
+<p>改进的 Inception 在大卷积前加入 $1\times1$ 卷积做通道降维：</p>
+<ul>
+<li>减少 $3\times3$、$5\times5$ 卷积的计算和参数。</li>
+<li>引入额外非线性。</li>
+<li>控制模块输出通道规模。</li>
+</ul>
+<p>GoogLeNet 使用 Inception 模块构建深网络，并通过全局平均池化等方法减少大型全连接层。</p>
+<h2 id="section-38">3.11 ResNet 残差网络</h2>
+<h3 id="section-39">3.11.1 退化问题</h3>
+<p>研究发现，普通 56 层网络可能在训练集和测试集上都比 20 层网络误差更高。这不是单纯过拟合，而是深层网络难以优化的退化问题。</p>
+<p>理论上，多出来的层至少可以学习恒等映射，使深网络不差于浅网络；但普通堆叠层很难自动学到精确恒等映射。</p>
+<h3 id="section-40">3.11.2 残差块</h3>
+<p>残差块学习：</p>
+<h1 id="section-41">$$
+\boldsymbol{y}</h1>
+<p>F(\boldsymbol{x})+\boldsymbol{x}.
+$$</p>
+<ul>
+<li>跳跃连接让信息和梯度更容易跨层传播。</li>
+<li>若最优映射接近恒等，令 $F(x)\approx0$ 比直接拟合 $H(x)\approx x$ 更容易。</li>
+<li>当形状不同，可用 $1\times1$ 投影或下采样匹配维度。</li>
+</ul>
+<p>ResNet-152 获得 ILSVRC-2015 冠军，常见报道的 Top-5 错误率约为 $3.57%$。</p>
+<h2 id="section-42">3.12 CNN 的人脸识别应用</h2>
+<p>课件以 2014-2015 年 DeepID 系列为例：CNN 从人脸中学习身份表征，再完成验证或识别。</p>
+<ul>
+<li>课件给出 LFW 上约 $99.15%$ 的识别率，并与人工基准约 $97.52%$ 比较。</li>
+<li>初代 DeepID、DeepID2/2+ 和不同集成协议的结果并不相同；$99.15%$ 更接近后续 DeepID 系列结果，不能不加区分地归到单篇初代 DeepID 论文。</li>
+<li>ROC 曲线以假阳性率为横轴、真阳性率为纵轴，适合比较不同阈值下的人脸验证性能。</li>
+</ul>
+<p>课件还展示了身份证场景的实时识别设想：在嵌入式平台上以每帧约 20-30 ms 处理，并通过特定场景数据继续优化。真实性能取决于模型、硬件、分辨率和评测协议。</p>
+<h2 id="section-43">3.13 迁移学习</h2>
+<p>当目标数据不足时，可分阶段迁移：</p>
+<ol>
+<li>先用大规模通用人脸数据训练特征提取器。</li>
+<li>再用目标人群数据微调，使特征适应人群分布。</li>
+<li>最后用身份证照片等目标场景数据继续微调。</li>
+</ol>
+<p>迁移方式：</p>
+<ul>
+<li>固定前部卷积层，只训练新分类头。</li>
+<li>解冻后部高层，以较小学习率微调。</li>
+<li>数据差异较大或目标数据较多时，再逐步解冻更多层。</li>
+</ul>
+<p>低层边缘与纹理通常更通用，高层身份和场景特征更依赖数据分布。</p>
+<h2 id="section-44">3.14 易错点</h2>
+<ul>
+<li>深度学习框架中的“卷积”通常实际是互相关，不翻转卷积核。</li>
+<li>普通卷积（<code>groups=1</code>）的滤波器覆盖全部输入通道；分组卷积中每个输出通道只连接本组的 $C_{in}/groups$ 个输入通道。滤波器个数决定输出通道数。</li>
+<li>标准 CNN 在空间位置共享同一偏置，不是每个输出像素一个独立偏置。</li>
+<li>输出尺寸必须使用带 floor、padding、stride 和 dilation 的完整公式。</li>
+<li>Padding 大小没有“最多一圈”的固定上限。</li>
+<li>局部连接减少每个输出的输入范围，权重共享减少参数数目；二者是不同性质。</li>
+<li>课件 LeNet 参数表是简化全连接 C3 版本，不等同于原始 LeNet-5 精确连接表。</li>
+<li>AlexNet 第一层是 96 个 $11\times11$ 卷积核，参数约 6000 万。</li>
+<li>AlexNet Top-5 的 $15.3%$、$17.0%$ 等数字对应不同单模型/集成口径。</li>
+<li>ReLU 不保证恰好一半单元激活；最大池化也不能普遍保证克服过拟合。</li>
+<li>inverted Dropout 在训练时缩放，测试时直接关闭，不再乘 $1-p$。</li>
+<li>两层 $3\times3$ 的感受野是 $5\times5$，三层才是 $7\times7$。</li>
+<li>ResNet 解决的是深层网络优化退化问题，不只是普通意义上的测试集过拟合。</li>
+<li>DeepID 系列不同版本和评测协议不能混用一个识别率。</li>
+</ul>
+<h2 id="section-45">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-b1364442cb67/">上一篇：神经网络与后向传播</a> · <a href="/notes/cs408-d168b88f4e02/">下一篇：强化学习</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-7b66c3b26ed2/">目标检测</a> · <a href="/notes/cs408-6b01fbe86253/">语义分割</a></li>
+</ul>
+<h2 id="section-46">3.15 本节复盘</h2>
+<ul>
+<li>CNN 通过局部连接和空间权重共享学习卷积核，比全连接网络更适合图像结构。</li>
+<li>普通卷积核覆盖全部输入通道；分组卷积只覆盖所属通道组。一个输出滤波器生成一个特征图，多个滤波器形成多个输出通道。</li>
+<li>stride、padding、dilation 和 kernel size 共同决定输出尺寸。</li>
+<li>LeNet 建立卷积、降采样、全连接的基本范式；旧式网络常由卷积主导计算、全连接主导参数。</li>
+<li>AlexNet 通过 ReLU、重叠最大池化、Dropout、数据增强和双 GPU 大幅推进 ImageNet 分类。</li>
+<li>池化降低空间尺寸，Dropout 随机屏蔽激活，二者原理和目的不能混为一谈。</li>
+<li>VGG 用多层小卷积扩大感受野；三层 $3\times3$ 等效覆盖 $7\times7$，参数更少且非线性更多。</li>
+<li>GoogLeNet 用 Inception 并行多尺度分支和 $1\times1$ 瓶颈；ResNet 用 $F(x)+x$ 跳连缓解深层退化。</li>
+<li>CNN 可用于人脸识别等任务；目标数据不足时，可把预训练网络作为特征提取器并分阶段微调。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-f40d324810a1/index.html"><span>← 上一项</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-f652c4049d0f/index.html"><span>下一项 →</span><strong>Lecture 4：软件设计与实现</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

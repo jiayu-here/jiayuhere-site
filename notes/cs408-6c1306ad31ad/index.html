@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2 题型 - 编码分析 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：2 题型 - 编码分析。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="2 题型 - 编码分析 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：2 题型 - 编码分析。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-6c1306ad31ad/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2 题型 - 编码分析 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：2 题型 - 编码分析。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "2 题型 - 编码分析",
+      "item": "https://www.jiayuhere.com/notes/cs408-6c1306ad31ad/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-6c1306ad31ad/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-6c1306ad31ad/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-6c1306ad31ad/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-6c1306ad31ad/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-6c1306ad31ad/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>2 题型 - 编码分析</h1><p class="article-lead">408 学习笔记：2 题型 - 编码分析。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 5 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/710a5c68859a.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/710a5c68859a.pdf" download="2 题型 - 编码分析.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">2.1 常用编码的识别特征</a><a href="#section-2">2.2 波形题通用步骤</a><a href="#section-3">2.3 历年真题</a><a href="#section-7">2.4 易错点</a><a href="#section-8">相关知识</a><a href="#section-9">2.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：波形题先按虚线或码元周期切分，再看码元中点是否必跳变、码元开始处是否跳变。普通曼彻斯特由中点跳变方向表示比特，差分曼彻斯特由码元开始处有无跳变表示比特；具体的 0/1 映射必须服从题设。</p>
+</blockquote>
+<h2 id="section-1">2.1 常用编码的识别特征</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>编码</th>
+<th>主要识别特征</th>
+<th>是否自同步</th>
+<th>判定 0/1 的依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NRZ</td>
+<td>一个码元内不强制回零，连续相同比特可保持同一电平</td>
+<td>否</td>
+<td>绝对高低电平，映射由题设决定</td>
+</tr>
+<tr>
+<td>NRZI</td>
+<td>码元内不回零，以码元边界处是否反转表示数据</td>
+<td>否</td>
+<td>是否反转，映射由题设决定</td>
+</tr>
+<tr>
+<td>曼彻斯特</td>
+<td>每个码元中点必有一次跳变</td>
+<td>是</td>
+<td>中点跳变方向</td>
+</tr>
+<tr>
+<td>差分曼彻斯特</td>
+<td>每个码元中点必跳变</td>
+<td>是</td>
+<td>码元开始处有无跳变</td>
+</tr>
+</tbody>
+</table></div>
+<p>本材料采用的差分曼彻斯特规则为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>码元开始处</th>
+<th style="text-align:right">比特</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有跳变</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td>无跳变</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table></div>
+<p>普通曼彻斯特可能采用“低到高表示 1”或相反约定，不能脱离题图、教材约定或选项单独判断。</p>
+<h2 id="section-2">2.2 波形题通用步骤</h2>
+<ol>
+<li>按题图中的码元边界，把波形分成等宽时间片。</li>
+<li>检查每个码元中点：若中点并非必跳变，优先考虑 NRZ/NRZI；若中点必跳变，考虑曼彻斯特或差分曼彻斯特。</li>
+<li>若为曼彻斯特，记录每个中点是上跳还是下跳，再按题设映射为 0/1。</li>
+<li>若为差分曼彻斯特，忽略中点的同步跳变，只检查每个码元开始处是否跳变。</li>
+<li>若首个码元之前的电平未知，首位可能无法直接确定；先解出其余比特，再结合选项排除。</li>
+</ol>
+<h2 id="section-3">2.3 历年真题</h2>
+<h3 id="section-4">2.3.1 2013 年：10BaseT 波形译码</h3>
+<p>10BaseT 使用曼彻斯特编码。按码元中点观察，8 个中点的跳变方向依次为：</p>
+<blockquote>
+<p><strong>FIGURE</strong> · 原 PDF 第 1 页：2013 年题目波形
+<a class="note-image-link" href="/assets/408/images/3e16fe4277fa.png" target="_blank" rel="noreferrer" aria-label="打开原图: P093-2013-10BaseT波形.png"><img class="note-image" src="/assets/408/images/3e16fe4277fa.png" alt="P093-2013-10BaseT波形.png" loading="lazy" decoding="async"></a></p>
+<p>虚线给出码元中点/边界的判读位置；下文按每个码元中点的跳变方向译码。</p>
+</blockquote>
+<p>$$上、上、下、下、上、下、下、上$$</p>
+<p>由于题目没有单独写出跳变方向与 0/1 的映射，按两种相反约定会得到互补序列：</p>
+<p>$$00110110\quad\text{或}\quad11001001$$</p>
+<p>对照选项，只有 <code>00110110</code> 出现。</p>
+<p><strong>答案：A，<code>00110110</code>。</strong></p>
+<h3 id="section-5">2.3.2 2015 年：判断两种编码方案</h3>
+<p>题目给定比特流 <code>01100111</code> 及两条编码波形。</p>
+<blockquote>
+<p><strong>FIGURE</strong> · 原 PDF 第 1 页：2015 年两种编码波形
+<a class="note-image-link" href="/assets/408/images/f076e5b2a86b.png" target="_blank" rel="noreferrer" aria-label="打开原图: P093-2015-两种编码波形.png"><img class="note-image" src="/assets/408/images/f076e5b2a86b.png" alt="P093-2015-两种编码波形.png" loading="lazy" decoding="async"></a></p>
+<p>上方是给定比特流，中间与下方分别是编码 1、编码 2；虚线为码元边界。</p>
+</blockquote>
+<p><strong>编码 1</strong>：每个码元保持一个固定电平，只有数据变化时才改变电平，中点没有用于同步的强制跳变，因此是 <strong>NRZ 编码</strong>。</p>
+<p><strong>编码 2</strong>：每个码元中点都有跳变。按中点跳变方向解码，可得到 <code>01100111</code>（若约定完全相反则得到其反码），与题目给定比特流相符，因此是 <strong>曼彻斯特编码</strong>。</p>
+<p>若把编码 2 当作差分曼彻斯特，按码元开始处是否跳变无法还原题给序列，故排除。</p>
+<p><strong>答案：A，NRZ 编码和曼彻斯特编码。</strong></p>
+<h3 id="section-6">2.3.3 2021 年：差分曼彻斯特译码</h3>
+<p>材料规定“码元开始处跳变表示 0，不跳变表示 1”。由于题图没有给出第一个码元之前的电平，第一位不能只靠局部波形确定；从第二位开始读取，可得到：</p>
+<blockquote>
+<p><strong>FIGURE</strong> · 原 PDF 第 2 页：2021 年题目波形
+<a class="note-image-link" href="/assets/408/images/07e16b8dd3cc.png" target="_blank" rel="noreferrer" aria-label="打开原图: P093-2021-差分曼彻斯特波形.png"><img class="note-image" src="/assets/408/images/07e16b8dd3cc.png" alt="P093-2021-差分曼彻斯特波形.png" loading="lazy" decoding="async"></a></p>
+<p>虚线分隔码元；每码元中点的跳变用于同步，码元开始处的有无跳变才决定本题位值。</p>
+</blockquote>
+<p>$$X0111001$$</p>
+<p>其中 $X$ 表示首位待定。对照四个选项，只有 <code>10111001</code> 的后 7 位为 <code>0111001</code>。</p>
+<p><strong>答案：A，<code>10111001</code>。</strong></p>
+<h2 id="section-7">2.4 易错点</h2>
+<ul>
+<li>10BaseT 使用曼彻斯特编码；不要因波形中出现连续高低电平就误判为 NRZ。</li>
+<li>曼彻斯特看<strong>码元中点的跳变方向</strong>，差分曼彻斯特看<strong>码元开始处是否跳变</strong>。</li>
+<li>差分曼彻斯特的中点跳变只用于同步，不直接表示 0/1。</li>
+<li>普通曼彻斯特的高低跳变映射可能因教材而异；若题干未声明，可用已知比特流或选项确定。</li>
+<li>首位的差分判定需要前一码元末电平；题图未给时应保留未知位，再用其他信息确定。</li>
+<li><code>NRZ</code> 是 Non Return to Zero，<code>NRZI</code> 是 Non Return to Zero Inverted；二者都不是“每个码元结束时归零”。</li>
+</ul>
+<h2 id="section-8">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-7822ebc414be/">上一篇：分组或报文传输速率</a> · <a href="/notes/cs408-55b7284bc1ed/">下一篇：CSMA 计算</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-e503e71568f6/">编码与调制</a></li>
+</ul>
+<h2 id="section-9">2.5 本节复盘</h2>
+<ul>
+<li>NRZ 不强制回零，连续同码缺少跳变，不能从数据本身稳定恢复时钟。</li>
+<li>曼彻斯特每个码元中点必跳变，跳变方向表示比特；10BaseT 使用这种编码。</li>
+<li>差分曼彻斯特同样中点必跳变，但数据由码元开始处有无跳变表示，本材料采用“跳变 0、不跳变 1”。</li>
+<li>波形译码必须先划分码元，再分清“中点”和“开始处”；首位缺少前态时先写成未知量。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-6b01fbe86253/index.html"><span>← 上一项</span><strong>Lecture 7：语义分割</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-6e190f5755e2/index.html"><span>下一项 →</span><strong>Lecture 6：知识 - 内存管理基础</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

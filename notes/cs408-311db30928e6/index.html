@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 1：机器学习基础概念 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 1：机器学习基础概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 1：机器学习基础概念 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 1：机器学习基础概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-311db30928e6/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 1：机器学习基础概念 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 1：机器学习基础概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 1：机器学习基础概念",
+      "item": "https://www.jiayuhere.com/notes/cs408-311db30928e6/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-311db30928e6/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-311db30928e6/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-311db30928e6/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-311db30928e6/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-311db30928e6/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 1：机器学习基础概念</h1><p class="article-lead">408 学习笔记：Lecture 1：机器学习基础概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 11 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ec053fcc63b9.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ec053fcc63b9.pdf" download="Lecture 1：机器学习基础概念.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 基本术语</a><a href="#section-5">1.2 监督学习</a><a href="#section-9">1.3 无监督学习与泛化</a><a href="#section-12">1.4 强化学习</a><a href="#section-13">1.5 半监督学习与主动学习</a><a href="#section-16">1.6 归纳偏好</a><a href="#section-18">1.7 NFL 定理</a><a href="#section-19">1.8 统计学习方法三要素</a><a href="#section-23">1.9 易错点</a><a href="#section-24">相关知识</a><a href="#section-25">1.10 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节建立机器学习的基础语言，区分监督、无监督、强化、半监督和主动学习，说明归纳偏好、NFL 定理以及统计学习方法的“模型、策略、算法”三要素。</p>
+</blockquote>
+<h2 id="section-1">1.1 基本术语</h2>
+<h3 id="section-2">1.1.1 数据、样本与特征</h3>
+<ul>
+<li>数据集是样本的集合。建模时通常至少区分训练集和测试集。</li>
+<li>训练数据与测试数据应当相互独立、没有样本重叠；测试集应在训练开始前确定，不能在反复查看测试结果后继续调模型。</li>
+<li>一个对象可由若干属性描述，属性也称特征，属性的取值称属性值。</li>
+<li>若一个对象具有 $d$ 个属性，可把每个属性看作坐标轴，该对象写成特征向量</li>
+</ul>
+<p>$$
+\boldsymbol{x}=(x_1,x_2,\ldots,x_d)^\mathrm{T}.
+$$</p>
+<ul>
+<li>所有可能特征向量构成属性空间、样本空间或输入空间 $\mathcal X$；所有可能输出构成标记空间或输出空间 $\mathcal Y$。</li>
+<li>在带标记数据中，一个训练样本常写为 $(\boldsymbol{x}_i,y_i)$，其中 $\boldsymbol{x}_i$ 是输入，$y_i$ 是标记。</li>
+<li>源资料把“示例”解释为有结果的数据、“样例”解释为无结果的数据；实际教材中 instance、example、sample 的译法常混用，答题时应先明确是否包含标记，避免只凭中文词形判断。</li>
+</ul>
+<h3 id="section-3">1.1.2 模型、假设与学习器</h3>
+<ul>
+<li>模型描述从输入到输出的规律。例如</li>
+</ul>
+<p>$$
+y=f(\boldsymbol{x}),
+$$</p>
+<p>其中 $f$ 是从数据中学习到的映射。</p>
+<ul>
+<li>对同一问题可以提出许多候选映射，每一个候选映射都是一个假设；所有候选假设组成假设空间。</li>
+<li>“真相”是数据背后真实但通常未知的规律。学习的目标不是背下训练样本，而是用有限数据逼近这一规律。</li>
+<li>学习器是学习算法在训练数据上运行后得到的模型，也可强调“由学习过程产生的模型”。</li>
+</ul>
+<h3 id="section-4">1.1.3 分类、回归与标注</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输出特点</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回归</td>
+<td>连续值</td>
+<td>房价、温度、概率估计</td>
+</tr>
+<tr>
+<td>二分类</td>
+<td>两个离散类别</td>
+<td>好/坏、真/假、阳性/阴性</td>
+</tr>
+<tr>
+<td>多分类</td>
+<td>多个离散类别</td>
+<td>手写数字、物体类别</td>
+</tr>
+<tr>
+<td>标注问题</td>
+<td>输入和输出均为序列</td>
+<td>词性标注、序列标注</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>二分类中的正类和反类是人为约定的，两者在数学上通常可交换，但业务代价往往并不对称。</li>
+<li>多分类可以直接求解，也可以拆成若干二分类问题。</li>
+</ul>
+<h2 id="section-5">1.2 监督学习</h2>
+<h3 id="section-6">1.2.1 定义与本质</h3>
+<ul>
+<li>监督学习从标注数据中学习预测模型。标注数据给出了输入与期望输出之间的对应关系。</li>
+<li>监督学习的本质是学习输入到输出的统计映射规律。</li>
+<li>输入、输出随机变量通常写作大写 $X,Y$，其具体取值写作小写 $x,y$；变量既可以是标量，也可以是向量。</li>
+<li>回归问题通常具有连续输出；分类问题具有有限个离散输出；序列到序列的预测可形成标注问题。</li>
+</ul>
+<h3 id="section-7">1.2.2 假设空间</h3>
+<ul>
+<li>监督学习要从一组候选模型中选出较好的模型。这组从 $\mathcal X$ 到 $\mathcal Y$ 的候选映射集合称为假设空间：</li>
+</ul>
+<p>$$
+\mathcal F={f\mid f:\mathcal X\rightarrow\mathcal Y}.
+$$</p>
+<ul>
+<li>确定假设空间，就是确定学习可以搜索的范围。空间太小可能无法表达真实规律，空间过大又更容易过拟合。</li>
+</ul>
+<h3 id="section-8">1.2.3 学习与预测过程</h3>
+<p>监督学习分为两个阶段：</p>
+<ol>
+<li>学习系统读取训练集</li>
+</ol>
+<p>$$
+D={(\boldsymbol{x}_1,y_1),(\boldsymbol{x}_2,y_2),\ldots,(\boldsymbol{x}_N,y_N)},
+$$</p>
+<p>并从假设空间中选择模型 $\hat f$。
+2. 预测系统接收未见输入 $\boldsymbol{x}_{N+1}$，输出</p>
+<p>$$
+\hat y_{N+1}=\hat f(\boldsymbol{x}_{N+1}).
+$$</p>
+<ul>
+<li>对训练样本 $\boldsymbol{x}_i$，模型输出 $\hat f(\boldsymbol{x}_i)$ 应尽量接近真实标记 $y_i$。</li>
+<li>只在训练集上表现好还不够；学习系统最终追求的是对未知样本也有良好的预测能力。</li>
+</ul>
+<h2 id="section-9">1.3 无监督学习与泛化</h2>
+<h3 id="section-10">1.3.1 无监督学习</h3>
+<ul>
+<li>无监督学习从无标注数据中学习模型，数据没有预先给出的期望输出。</li>
+<li>其本质是发现数据中的统计规律或潜在结构。</li>
+<li>常见任务包括聚类、密度估计、表示学习和数据变换。</li>
+<li>聚类把相似数据自动分组，但分组结果的语义通常仍需结合领域知识解释。</li>
+</ul>
+<h3 id="section-11">1.3.2 未见样本、独立同分布与泛化</h3>
+<ul>
+<li>未见样本是训练阶段没有出现过的新数据。</li>
+<li>独立同分布通常记为 i.i.d.：各样本彼此独立，并来自同一个概率分布。</li>
+<li>同分布假设使得训练样本中的频率能够用于估计总体概率；若训练分布与未来数据分布明显不同，经验规律可能失效。</li>
+<li>泛化是把从训练数据中学到的规律推广到未见数据的能力。泛化性能差的模型，即使训练误差很低，也没有实际使用价值。</li>
+</ul>
+<h2 id="section-12">1.4 强化学习</h2>
+<ul>
+<li>强化学习研究智能系统在与环境的连续交互中学习最优行为策略。</li>
+<li>常用建模基础是马尔可夫决策过程。马尔可夫性表示：给定当前状态和动作后，下一状态不再依赖更早的历史。</li>
+<li>在时刻 $t$，智能体观察状态 $s_t$，选择动作 $a_t$；环境返回奖励 $r_t$ 并转移到状态 $s_{t+1}$。</li>
+<li>学习目标不是让某一次即时奖励最大，而是使长期累积奖励最大，例如折扣回报</li>
+</ul>
+<p>$$
+G_t=\sum_{k=0}^{\infty}\gamma^k r_{t+k+1},\qquad 0\leq\gamma&lt;1.
+$$</p>
+<ul>
+<li>强化学习通过不断试错改进策略，因此必须处理探索未知动作和利用已有经验之间的平衡。</li>
+</ul>
+<h2 id="section-13">1.5 半监督学习与主动学习</h2>
+<h3 id="section-14">1.5.1 半监督学习</h3>
+<ul>
+<li>半监督学习同时利用少量标注数据和大量未标注数据训练预测模型。</li>
+<li>标注通常依赖人工且成本较高，未标注数据更容易获得。</li>
+<li>核心目标是从未标注数据的分布或结构中获取额外信息，辅助监督学习，以较低标注成本获得更好的效果。</li>
+</ul>
+<h3 id="section-15">1.5.2 主动学习</h3>
+<ul>
+<li>主动学习让学习器主动选择最有价值的未标注实例，请教师或标注者给出标记，再把新标记数据加入训练。</li>
+<li>普通监督学习被动接收既有标注；主动学习则优先询问最不确定、最有代表性或对模型改进最有帮助的实例。</li>
+<li>目标是在较小标注代价下达到较好的学习效果。</li>
+</ul>
+<h2 id="section-16">1.6 归纳偏好</h2>
+<ul>
+<li>归纳偏好（inductive bias）是学习算法在多个能够解释训练数据的假设之间，对某类假设的偏好。</li>
+<li>只凭有限训练样本通常不能唯一确定真实规律，因此任何有效学习算法都必须带有归纳偏好。</li>
+<li>算法的偏好是否与当前问题匹配，往往直接决定其泛化性能。</li>
+</ul>
+<h3 id="section-17">1.6.1 奥卡姆剃刀</h3>
+<ul>
+<li>奥卡姆剃刀可概括为“若非必要，勿增实体”：若多个假设都能同样解释已知现象，优先选择更简单的假设。</li>
+<li>“更简单”本身也需要定义。比较 $y=ax^2+bx+c$ 与 $y=ax^3+c$ 时，一个次数更低，一个参数更少，不能脱离模型表示、数据分布和任务目标武断判断。</li>
+<li>因而奥卡姆剃刀是一种归纳偏好，不是无条件正确的定理。</li>
+</ul>
+<h2 id="section-18">1.7 NFL 定理</h2>
+<ul>
+<li>NFL（No Free Lunch）定理说明：若把所有可能问题视为等可能，一个算法在某些问题上的优势必然由它在另一些问题上的劣势抵消。</li>
+<li>对同一组训练点，两条曲线都可能完全穿过训练点；仅凭训练拟合无法断定哪条曲线对未来样本更好。</li>
+<li>机器学习中的问题不仅包括模型形式，还包括输入域 $\mathcal X$、输出域 $\mathcal Y$ 以及数据分布。即使都叫“推荐”，游戏推荐和服装推荐也可能是完全不同的问题。</li>
+<li>现实中并非所有问题等可能、等重要，因此 NFL 不是说“所有算法在实际任务中一样好”，而是说不存在脱离具体任务、始终最优的学习算法。</li>
+<li>正确结论是：必须结合数据、目标和约束具体分析，必要时按需设计模型，而不能只比较抽象的算法名称。</li>
+</ul>
+<h2 id="section-19">1.8 统计学习方法三要素</h2>
+<p>统计学习方法可概括为</p>
+<p>$$
+\text{方法}=\text{模型}+\text{策略}+\text{算法}.
+$$</p>
+<h3 id="section-20">1.8.1 模型</h3>
+<ul>
+<li>模型回答“学习什么”。在监督学习中，模型可以是决策函数，也可以是条件概率分布。</li>
+<li>假设空间 $\mathcal F$ 包含所有候选决策函数或条件概率分布。例如线性决策函数的假设空间可写为</li>
+</ul>
+<p>$$
+\mathcal F={f(\boldsymbol{x})=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b}.
+$$</p>
+<h3 id="section-21">1.8.2 策略</h3>
+<ul>
+<li>策略回答“怎样判断模型好坏”。损失函数衡量一次预测的好坏，风险函数衡量平均意义上的预测好坏。</li>
+<li>常见损失函数包括：</li>
+</ul>
+<p>0-1 损失：</p>
+<p>$$
+L(Y,f(X))=
+\begin{cases}
+1,&amp;Y\neq f(X),\
+0,&amp;Y=f(X).
+\end{cases}
+$$</p>
+<p>平方损失：</p>
+<p>$$
+L(Y,f(X))=(Y-f(X))^2.
+$$</p>
+<p>对数损失：</p>
+<p>$$
+L(Y,P(Y\mid X))=-\log P(Y\mid X).
+$$</p>
+<h3 id="section-22">1.8.3 算法</h3>
+<ul>
+<li>算法回答“如何计算出最优模型”。确定模型和学习策略后，训练通常归结为最优化问题。</li>
+<li>若最优化问题存在显式解析解，可直接求解；多数复杂问题需要数值优化。</li>
+<li>算法设计既要关注能否找到全局或足够好的解，也要关注计算效率、存储开销和数值稳定性。</li>
+</ul>
+<h2 id="section-23">1.9 易错点</h2>
+<ul>
+<li>训练集与测试集有重叠会造成数据泄漏，测试结果不能代表真实泛化能力。</li>
+<li>分类还是回归由输出空间决定，不由输入是连续还是离散决定。</li>
+<li>正类、反类可交换不意味着两类数量一定相等，也不意味着误判代价相同。</li>
+<li>无监督学习不是“没有目标”，而是没有人工标记，目标通常由聚类、密度估计等学习准则给出。</li>
+<li>i.i.d. 是常用建模假设，不是所有现实数据天然满足的事实。</li>
+<li>NFL 定理不否认特定任务上存在更好的算法；它否认的是脱离任务分布的普适最优算法。</li>
+<li>模型、策略和算法不能混淆：模型给出候选函数，策略定义选择标准，算法负责求解。</li>
+</ul>
+<h2 id="section-24">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-a2a1fce63aa5/">下一篇：模型评估和选择</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-2f3d569a9394/">深度学习预备知识</a></li>
+</ul>
+<h2 id="section-25">1.10 本节复盘</h2>
+<ul>
+<li>数据由特征向量表示，输入空间记为 $\mathcal X$，输出空间记为 $\mathcal Y$；带标记样本写作 $(\boldsymbol{x}_i,y_i)$。</li>
+<li>监督学习从标注数据学习输入到输出的映射；无监督学习发现无标注数据的潜在结构；强化学习从交互和奖励中学习序贯决策。</li>
+<li>半监督学习利用少量标注和大量未标注数据；主动学习主动挑选最值得标注的实例。</li>
+<li>泛化能力衡量模型对未见数据的表现，训练误差低不等于泛化好。</li>
+<li>归纳偏好使学习器能在多个一致假设中作出选择；奥卡姆剃刀偏好简单解释，但“简单”必须结合表示和任务定义。</li>
+<li>NFL 定理要求比较算法时明确具体问题、数据分布和评价目标。</li>
+<li>统计学习方法由模型、策略、算法三要素构成，分别回答“学什么、怎样算好、如何求解”。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-310416bce0d2/index.html"><span>← 上一项</span><strong>Lecture 23：知识 - 总线</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-312cfdf36075/index.html"><span>下一项 →</span><strong>Lecture 20：图基本概念</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

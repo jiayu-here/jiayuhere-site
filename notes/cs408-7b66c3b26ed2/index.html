@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 6：目标检测 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 6：目标检测。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 6：目标检测 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 6：目标检测。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-7b66c3b26ed2/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 6：目标检测 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 6：目标检测。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 6：目标检测",
+      "item": "https://www.jiayuhere.com/notes/cs408-7b66c3b26ed2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-7b66c3b26ed2/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-7b66c3b26ed2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-7b66c3b26ed2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-7b66c3b26ed2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-7b66c3b26ed2/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 6：目标检测</h1><p class="article-lead">408 学习笔记：Lecture 6：目标检测。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 14 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/db983ae04048.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/db983ae04048.pdf" download="Lecture 6：目标检测.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 视觉任务的区别</a><a href="#section-6">6.2 滑动窗口检测</a><a href="#section-7">6.3 Haar-like 特征</a><a href="#section-8">6.4 积分图</a><a href="#section-9">$$
+I_{\Sigma}(x,y)</a><a href="#section-10">$$
+S</a><a href="#section-11">6.5 AdaBoost 人脸检测</a><a href="#section-13">$$
+h(x;f,p,\theta)</a><a href="#section-16">6.6 CNN 分类与单目标定位</a><a href="#section-17">$$
+L</a><a href="#section-18">6.7 边界框表示与代码</a><a href="#section-21">6.8 目标检测数据集</a><a href="#section-22">6.9 锚框与框回归</a><a href="#section-25">6.10 IoU</a><a href="#section-26">$$
+\operatorname{IoU}(A,B)</a><a href="#section-27">6.11 非极大值抑制</a><a href="#section-28">6.12 R-CNN</a><a href="#section-31">6.13 RoI Pooling</a><a href="#section-32">6.14 Fast R-CNN</a><a href="#section-33">6.15 Faster R-CNN</a><a href="#section-37">6.16 SSD</a><a href="#section-38">6.17 YOLO</a><a href="#section-42">6.18 易错点</a><a href="#section-43">相关知识</a><a href="#section-44">6.19 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节区分分类、定位、目标检测和分割，整理 Viola-Jones 的 Haar 特征、积分图与 AdaBoost，并系统说明边界框、IoU、锚框、NMS、R-CNN、Fast R-CNN、Faster R-CNN、SSD 和 YOLO。</p>
+</blockquote>
+<h2 id="section-1">6.1 视觉任务的区别</h2>
+<h3 id="section-2">6.1.1 图像分类</h3>
+<p>输入整张图像，输出一个或多个类别，不要求目标位置。</p>
+<h3 id="section-3">6.1.2 分类与定位</h3>
+<p>图中通常假设只有一个主要目标，同时输出：</p>
+<ul>
+<li>类别。</li>
+<li>一个包围目标的边界框。</li>
+</ul>
+<h3 id="section-4">6.1.3 目标检测</h3>
+<p>图中可有多个目标，需要为每个实例输出：</p>
+<ul>
+<li>类别。</li>
+<li>置信度。</li>
+<li>边界框。</li>
+</ul>
+<h3 id="section-5">6.1.4 语义分割与实例分割</h3>
+<ul>
+<li>语义分割：给每个像素分配语义类别，同类实例不区分。</li>
+<li>实例分割：既给像素分类，又区分同类的不同目标实例。</li>
+</ul>
+<p>源课件说这些任务“都需要目标分割”，不准确。目标检测只要求边界框，不必先得到像素级分割；R-CNN 的 selective search 使用区域分割生成候选框，是某一历史方法，不是所有检测器的必要步骤。</p>
+<h2 id="section-6">6.2 滑动窗口检测</h2>
+<p>传统方法可在不同尺度上用窗口逐位置扫描图像：</p>
+<ol>
+<li>选择固定大小窗口。</li>
+<li>遍历所有空间位置。</li>
+<li>改变图像或窗口尺度，重复扫描。</li>
+<li>对每个窗口做目标/背景分类。</li>
+</ol>
+<p>问题：</p>
+<ul>
+<li>窗口位置、尺度和长宽比组合非常多。</li>
+<li>相邻窗口高度重叠，重复计算严重。</li>
+<li>步长过大又容易漏检。</li>
+</ul>
+<p>Viola-Jones 人脸检测通过积分图、AdaBoost 特征选择和级联分类器显著加速这一流程。</p>
+<h2 id="section-7">6.3 Haar-like 特征</h2>
+<p>Haar-like 特征由相邻白色/黑色矩形区域组成，特征值通常是白色区域像素和减去黑色区域像素和。</p>
+<p>典型模式：</p>
+<ul>
+<li>两矩形水平或垂直差。</li>
+<li>三矩形中心与两侧差。</li>
+<li>四矩形对角差。</li>
+</ul>
+<p>它们可描述人脸中的明暗对比，例如：</p>
+<ul>
+<li>眼睛区域通常比面颊暗。</li>
+<li>鼻梁区域与两侧存在亮度差。</li>
+</ul>
+<p>在 $24\times24$ 检测窗口中，所有位置和尺度的 Haar-like 特征约有十六万多个，课件近似写为二十万。必须用快速方法计算。</p>
+<h2 id="section-8">6.4 积分图</h2>
+<p>定义积分图：</p>
+<h1 id="section-9">$$
+I_{\Sigma}(x,y)</h1>
+<p>\sum_{u\leq x}
+\sum_{v\leq y}
+I(u,v).
+$$</p>
+<p>它表示从左上角到 $(x,y)$ 的矩形像素和。</p>
+<p>任意轴对齐矩形 $[x_1,x_2]\times[y_1,y_2]$ 的像素和可由四次查表得到：</p>
+<h1 id="section-10">$$
+S</h1>
+<p>I_{\Sigma}(x_2,y_2)
+-I_{\Sigma}(x_1-1,y_2)
+-I_{\Sigma}(x_2,y_1-1)
++I_{\Sigma}(x_1-1,y_1-1).
+$$</p>
+<p>因此矩形和的计算复杂度与矩形面积无关，Haar 特征也可用少量加减快速获得。</p>
+<h2 id="section-11">6.5 AdaBoost 人脸检测</h2>
+<h3 id="section-12">6.5.1 弱分类器</h3>
+<p>对 Haar 特征 $f(x)$：</p>
+<h1 id="section-13">$$
+h(x;f,p,\theta)</h1>
+<p>\begin{cases}
+1, &amp; p f(x)&lt;p\theta,\
+0, &amp; \text{otherwise},
+\end{cases}
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$x$：图像窗口。</li>
+<li>$f$：某个 Haar-like 特征。</li>
+<li>$\theta$：阈值。</li>
+<li>$p\in{-1,+1}$：极性，决定不等号方向。</li>
+</ul>
+<p>对每个候选特征选择最佳 $p,\theta$，得到仅略好于随机猜测的弱分类器。</p>
+<h3 id="section-14">6.5.2 AdaBoost 的作用</h3>
+<p>课件示例训练数据约为 6000 张人脸和 7 万张非人脸。</p>
+<p>AdaBoost：</p>
+<ol>
+<li>初始化样本权重。</li>
+<li>选择加权错误率最低的 Haar 弱分类器。</li>
+<li>提高错分样本权重，降低正确样本权重。</li>
+<li>继续选择新的弱分类器。</li>
+<li>把多个弱分类器加权组合成强分类器。</li>
+</ol>
+<p>这同时实现：</p>
+<ul>
+<li>从海量 Haar 特征中选出少量有判别力特征。</li>
+<li>把多个弱阈值分类器集成为强分类器。</li>
+</ul>
+<p>标准 AdaBoost 直接使用样本权重；按权重重采样是可选实现，不是必须步骤。</p>
+<h3 id="section-15">6.5.3 级联分类器</h3>
+<p>Viola-Jones 把多个强分类器串成级联：</p>
+<ul>
+<li>前级使用少量简单特征，快速排除大量明显非人脸窗口。</li>
+<li>只有通过前级的候选才进入更复杂的后级。</li>
+<li>多姿态检测可训练不同姿态分支，再组成树状/级联结构。</li>
+</ul>
+<p>检测时可固定检测窗口并构建图像金字塔：每轮把图像按约 $1/1.2$ 下采样，在每层滑动同一窗口；当缩放后的图像任一必要尺寸小于检测窗口时停止。等价地，也可在原图上逐步放大检测窗口，直到窗口超过图像范围。缩放方向与停止条件必须成对说明，不能写成“窗口小于最小检测尺寸”。</p>
+<h2 id="section-16">6.6 CNN 分类与单目标定位</h2>
+<p>图中只有一个目标时，可共享 CNN 特征，再接两个输出头：</p>
+<ol>
+<li>分类头：输出类别 logits，使用交叉熵损失。</li>
+<li>定位头：输出四个框参数，使用 L1、Smooth L1 或 IoU 类回归损失。</li>
+</ol>
+<p>总损失：</p>
+<h1 id="section-17">$$
+L</h1>
+<p>L_{cls}
++\lambda L_{box}.
+$$</p>
+<p>四个参数可以是 $(x_{min},y_{min},x_{max},y_{max})$，也可以是中心点和宽高 $(c_x,c_y,w,h)$。</p>
+<p>多目标图像中目标数和位置不固定，需要候选区域或密集预测机制。</p>
+<h2 id="section-18">6.7 边界框表示与代码</h2>
+<h3 id="section-19">6.7.1 两种表示</h3>
+<p>角点式：</p>
+<p>$$
+(x_1,y_1,x_2,y_2).
+$$</p>
+<p>中心式：</p>
+<p>$$
+(c_x,c_y,w,h),
+$$</p>
+<p>其中：</p>
+<p>$$
+c_x=\frac{x_1+x_2}{2},
+\qquad
+c_y=\frac{y_1+y_2}{2},
+$$</p>
+<p>$$
+w=x_2-x_1,
+\qquad
+h=y_2-y_1.
+$$</p>
+<h3 id="section-20">6.7.2 正确转换代码</h3>
+<pre><code class="language-python">import torch
+
+
+def box_corner_to_center(boxes):
+    x1, y1, x2, y2 = (
+        boxes[:, 0],
+        boxes[:, 1],
+        boxes[:, 2],
+        boxes[:, 3],
+    )
+    cx = (x1 + x2) / 2
+    cy = (y1 + y2) / 2
+    w = x2 - x1
+    h = y2 - y1
+    return torch.stack((cx, cy, w, h), dim=-1)
+
+
+def box_center_to_corner(boxes):
+    cx, cy, w, h = (
+        boxes[:, 0],
+        boxes[:, 1],
+        boxes[:, 2],
+        boxes[:, 3],
+    )
+    x1 = cx - w / 2
+    y1 = cy - h / 2
+    x2 = cx + w / 2
+    y2 = cy + h / 2
+    return torch.stack((x1, y1, x2, y2), dim=-1)
+</code></pre>
+<p>源代码中的 <code>axis=-1</code> 在 PyTorch 中可用，但统一写 <code>dim=-1</code> 更符合 PyTorch 接口习惯；绘图函数还漏了逗号，应修正后使用。</p>
+<h2 id="section-21">6.8 目标检测数据集</h2>
+<p>典型标注每个实例一行或一个对象记录：</p>
+<pre><code class="language-text">图片标识, 类别, x_min, y_min, x_max, y_max
+</code></pre>
+<p>COCO 检测任务常用口径：</p>
+<ul>
+<li>80 个常用目标类别。</li>
+<li>约 33 万张图像。</li>
+<li>超过 150 万个目标实例。</li>
+<li>还包含实例分割、关键点和图像描述等标注。</li>
+</ul>
+<p>具体训练/验证/测试数量应按使用的 COCO 年份和 split 说明。</p>
+<h2 id="section-22">6.9 锚框与框回归</h2>
+<h3 id="section-23">6.9.1 锚框</h3>
+<p>锚框（anchor）是预设的参考框。检测器在特征图位置上生成不同：</p>
+<ul>
+<li>尺度。</li>
+<li>长宽比。</li>
+</ul>
+<p>网络预测：</p>
+<ul>
+<li>锚框是否包含目标及其类别。</li>
+<li>从锚框到真实框的坐标偏移。</li>
+</ul>
+<h3 id="section-24">6.9.2 训练标记</h3>
+<p>根据锚框与真实框的 IoU：</p>
+<ul>
+<li>高于正阈值：正样本，匹配一个真实框。</li>
+<li>低于负阈值：背景样本。</li>
+<li>中间区域：可忽略，避免模糊监督。</li>
+</ul>
+<p>密集锚框中背景远多于前景，可用：</p>
+<ul>
+<li>正负样本采样。</li>
+<li>难例挖掘。</li>
+<li>Focal Loss。</li>
+<li>适当类别权重。</li>
+</ul>
+<h2 id="section-25">6.10 IoU</h2>
+<p>两个边界框 $A,B$ 的交并比：</p>
+<h1 id="section-26">$$
+\operatorname{IoU}(A,B)</h1>
+<p>\frac{|A\cap B|}{|A\cup B|}.
+$$</p>
+<ul>
+<li>无重叠时为 0。</li>
+<li>完全重合时为 1。</li>
+<li>用于锚框匹配、评估和 NMS。</li>
+</ul>
+<p>若交集宽或高小于等于零，交集面积为 0。实现时要注意像素闭区间和连续坐标两种约定，不能混用 <code>+1</code>。</p>
+<h2 id="section-27">6.11 非极大值抑制</h2>
+<p>同一目标常产生多个重叠预测框。标准 NMS 对每个类别分别执行：</p>
+<ol>
+<li>选择当前置信度最高的框，加入输出。</li>
+<li>计算它与其余同类框的 IoU。</li>
+<li>删除 IoU 大于阈值 $\theta$ 的框。</li>
+<li>重复直到没有候选框。</li>
+</ol>
+<p>NMS 是“保留一个、抑制其他”，不是把框坐标直接合并。Soft-NMS 则降低重叠框分数而不是立即删除。</p>
+<p>若不按类别执行，可能错误压制空间重叠但类别不同的目标。</p>
+<h2 id="section-28">6.12 R-CNN</h2>
+<h3 id="section-29">6.12.1 流程</h3>
+<ol>
+<li>用 selective search 生成约 2000 个候选区域。</li>
+<li>selective search 先做图像过分割，再按颜色、纹理、大小等相似度合并相邻区域，形成多尺度 region proposals。</li>
+<li>把每个候选区域裁剪/缩放到固定尺寸。</li>
+<li>每个候选区域独立经过预训练 CNN 提取特征。</li>
+<li>用类别 SVM 分类。</li>
+<li>用线性回归修正边界框。</li>
+</ol>
+<h3 id="section-30">6.12.2 缺点</h3>
+<ul>
+<li>每个候选框都独立经过 CNN，重复计算严重。</li>
+<li>selective search 不可学习，是单独的耗时阶段。</li>
+<li>多阶段训练和磁盘特征缓存复杂。</li>
+<li>早期实现单张图像可能需要几十秒，接近课件所说的一分钟。</li>
+</ul>
+<h2 id="section-31">6.13 RoI Pooling</h2>
+<p>给定特征图上的任意大小 RoI：</p>
+<ol>
+<li>把 RoI 划分成固定 $H\times W$ 个网格。</li>
+<li>每个网格内做最大池化。</li>
+<li>输出固定大小 $H\times W\times C$ 特征。</li>
+</ol>
+<p>例如 $2\times2$ RoI Pooling 总是输出每通道 4 个值，无论原 RoI 多大。</p>
+<p>RoI Pooling 要量化边界，可能产生坐标误差。Mask R-CNN 后来的 RoIAlign 使用双线性插值，避免粗量化。</p>
+<h2 id="section-32">6.14 Fast R-CNN</h2>
+<p>Fast R-CNN 的关键改进：</p>
+<ol>
+<li>整张图像只经过一次 CNN，得到共享特征图。</li>
+<li>把外部候选框映射到特征图。</li>
+<li>对每个候选框做 RoI Pooling，得到固定长度特征。</li>
+<li>共享全连接特征，同时预测类别和边界框偏移。</li>
+<li>用多任务损失端到端训练检测头。</li>
+</ol>
+<p>它消除了 R-CNN 对每个候选框重复卷积的问题。</p>
+<p>重要纠错：Fast R-CNN 仍使用 selective search 等外部 proposal；课件放在 Fast R-CNN 下的“每个特征点生成 9 个 anchors”属于 Faster R-CNN 的 RPN，不是 Fast R-CNN 本身。</p>
+<h2 id="section-33">6.15 Faster R-CNN</h2>
+<h3 id="section-34">6.15.1 Region Proposal Network</h3>
+<p>Faster R-CNN 用 RPN 替代外部启发式候选区域算法。</p>
+<p>对共享特征图的每个位置，传统实现常放置：</p>
+<ul>
+<li>3 种尺度。</li>
+<li>3 种长宽比，例如 $1:1$、$1:2$、$2:1$。</li>
+<li>共 $3\times3=9$ 个锚框。</li>
+</ul>
+<p>RPN 对每个锚框预测：</p>
+<ul>
+<li>前景/背景 objectness。</li>
+<li>4 个边界框偏移。</li>
+</ul>
+<p>然后经 NMS 得到 proposal，送入 RoI Pooling/头部网络。</p>
+<h3 id="section-35">6.15.2 四类训练目标</h3>
+<p>Faster R-CNN 联合优化：</p>
+<ol>
+<li>RPN 前景/背景分类损失。</li>
+<li>RPN 边界框回归损失。</li>
+<li>最终目标类别分类损失。</li>
+<li>最终边界框回归损失。</li>
+</ol>
+<p>RPN 和检测头共享主干特征，候选区域生成也可以学习，速度和精度都优于 R-CNN/Fast R-CNN 的外部候选流程。</p>
+<h3 id="section-36">6.15.3 两阶段检测器</h3>
+<p>Faster R-CNN 是两阶段检测器：</p>
+<ol>
+<li>第一阶段生成少量候选区域。</li>
+<li>第二阶段对候选区域精细分类和回归。</li>
+</ol>
+<p>它通常强调精度；Mask R-CNN 在此基础上加入掩码分支和 RoIAlign，实现实例分割。</p>
+<h2 id="section-37">6.16 SSD</h2>
+<p>SSD 是单阶段检测器：</p>
+<ul>
+<li>在多个尺度的特征图上放置 default boxes/anchors。</li>
+<li>一次前向传播直接预测类别和框偏移。</li>
+<li>多尺度特征图负责不同大小目标。</li>
+</ul>
+<p>密集默认框确实会大量重叠，需要匹配、困难负样本挖掘和 NMS，但这不是 YOLO 与 SSD 的唯一或本质差别。</p>
+<h2 id="section-38">6.17 YOLO</h2>
+<h3 id="section-39">6.17.1 原始 YOLO 思想</h3>
+<p>原始 YOLO 把图像划分为 $S\times S$ 网格：</p>
+<ul>
+<li>目标中心落在哪个网格，该网格负责预测目标。</li>
+<li>每个网格预测 $B$ 个边界框、objectness 和类别信息。</li>
+<li>一次网络前向完成全部预测，因此速度快。</li>
+</ul>
+<p>输出框数量量级为：</p>
+<p>$$
+S^2B.
+$$</p>
+<h3 id="section-40">6.17.2 课件中的错误理解</h3>
+<ul>
+<li>网格单元互不相交，但预测边界框可以跨越网格并彼此重叠。</li>
+<li>不能说“YOLO 生成的框全部不相交，所以没有重复计算”。</li>
+<li>原始 YOLO 反而不擅长同一网格中有多个目标中心的情况，因为一个网格的类别和框容量有限。</li>
+<li>后续 YOLO 版本有锚框式和 anchor-free 等不同设计，不能用初代描述概括全部版本。</li>
+</ul>
+<h3 id="section-41">6.17.3 一阶段与两阶段</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>一阶段检测器</th>
+<th>两阶段检测器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YOLO、SSD 等</td>
+<td>Faster R-CNN 等</td>
+</tr>
+<tr>
+<td>密集直接预测</td>
+<td>先 proposal，再精分类/回归</td>
+</tr>
+<tr>
+<td>通常速度更快</td>
+<td>通常精度和小目标处理更强</td>
+</tr>
+</tbody>
+</table></div>
+<p>具体速度/精度取决于版本、主干、输入分辨率和部署硬件，不能只按算法家族绝对判断。</p>
+<h2 id="section-42">6.18 易错点</h2>
+<ul>
+<li>语义分割给像素分类，目标检测输出实例框；检测不一定先做分割。</li>
+<li>积分图只用四次查表即可求轴对齐矩形和。</li>
+<li>AdaBoost 在 Viola-Jones 中既挑选 Haar 特征，也组合弱分类器；标准算法不要求重采样。</li>
+<li>分类与定位通常假设一个主要目标，多目标检测需要可变数量预测。</li>
+<li>边界框角点式与中心式不能混用；宽高应保证非负。</li>
+<li>IoU 是交集面积除以并集面积，不是交集除以两框面积和。</li>
+<li>锚框可标为正、负或忽略；不能强迫每个锚框都属于某个目标或背景。</li>
+<li>NMS 抑制同类重叠框，不是坐标合并，也通常不能跨类别盲目压制。</li>
+<li>R-CNN 每个 proposal 独立卷积；Fast R-CNN 共享整图卷积，但仍使用外部 proposals。</li>
+<li>锚框和 RPN 属于 Faster R-CNN，不属于原始 Fast R-CNN。</li>
+<li>RoI Pooling 有量化误差，RoIAlign 用插值改善定位。</li>
+<li>YOLO 网格互不相交不代表预测框互不相交；现代 YOLO 也不都采用同一种锚框方案。</li>
+</ul>
+<h2 id="section-43">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-598d9fb6fbb4/">上一篇：特征选择与特征提取</a> · <a href="/notes/cs408-6b01fbe86253/">下一篇：语义分割</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-f43cdf74b38c/">卷积神经网络</a></li>
+</ul>
+<h2 id="section-44">6.19 本节复盘</h2>
+<ul>
+<li>分类只给类别，定位给单目标类别和框，检测给多个实例框，分割给像素标签。</li>
+<li>Viola-Jones 用 Haar 特征描述明暗差，用积分图常数时间求矩形和，用 AdaBoost 选特征，再以级联快速排除背景。</li>
+<li>目标检测常用角点式或中心式边界框，IoU 衡量两个框的重叠程度。</li>
+<li>锚框提供参考位置和尺度，网络预测类别/objectness 与坐标偏移；密集背景需要采样或损失重加权。</li>
+<li>NMS 依次保留高分框并抑制高 IoU 同类框。</li>
+<li>R-CNN 用 selective search 加逐 proposal CNN；Fast R-CNN 共享整图特征；Faster R-CNN 再用 RPN 学习候选区域。</li>
+<li>RoI Pooling 把任意候选区域变为固定特征，RoIAlign 进一步减少坐标量化误差。</li>
+<li>SSD/YOLO 直接做密集单阶段预测，速度快；Faster R-CNN 属于两阶段检测器，通常更强调精细候选处理。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-7b4c62ebd1f2/index.html"><span>← 上一项</span><strong>Lecture 27：B 树</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-871e91cac1d7/index.html"><span>下一项 →</span><strong>Lecture 7：数据库恢复技术</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

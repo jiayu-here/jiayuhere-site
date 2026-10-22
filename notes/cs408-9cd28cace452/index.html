@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：数据库完整性 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 4：数据库完整性。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：数据库完整性 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 4：数据库完整性。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-9cd28cace452/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：数据库完整性 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 4：数据库完整性。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：数据库完整性",
+      "item": "https://www.jiayuhere.com/notes/cs408-9cd28cace452/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-9cd28cace452/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-9cd28cace452/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-9cd28cace452/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-9cd28cace452/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-9cd28cace452/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 4：数据库完整性</h1><p class="article-lead">408 学习笔记：Lecture 4：数据库完整性。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 7 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/326adfe2a462.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/326adfe2a462.pdf" download="Lecture 4：数据库完整性.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">4.1 数据库完整性</a><a href="#section-2">4.2 完整性与安全性</a><a href="#section-3">4.3 三类完整性</a><a href="#section-7">4.4 常用 SQL 约束</a><a href="#section-14">4.5 课件建表示例整理</a><a href="#section-15">4.6 列级与表级约束</a><a href="#section-19">4.7 主键与索引</a><a href="#section-20">4.8 约束检查时机</a><a href="#section-21">4.9 易错点</a><a href="#section-22">相关知识</a><a href="#section-23">4.10 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节区分数据库完整性与安全性，复习实体、参照和用户定义完整性，并用完整 SQL 示例整理 PRIMARY KEY、FOREIGN KEY、UNIQUE、NOT NULL、DEFAULT、CHECK 及命名约束的定义方式。</p>
+</blockquote>
+<h2 id="section-1">4.1 数据库完整性</h2>
+<p>数据库完整性保证数据满足现实语义和业务规则，防止不正确、不相容或无意义的数据进入数据库。</p>
+<p>完整性关注：</p>
+<ul>
+<li>数据值是否正确。</li>
+<li>数据之间是否相容。</li>
+<li>数据状态是否满足约束。</li>
+<li>更新操作是否把数据库从一个合法状态带到另一个合法状态。</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>学号不能重复。</li>
+<li>姓名不能为空。</li>
+<li>性别值必须来自允许集合。</li>
+<li>学生的教师号必须引用现有教师。</li>
+</ul>
+<h2 id="section-2">4.2 完整性与安全性</h2>
+<p>课件对比如下：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>完整性</th>
+<th>安全性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的</td>
+<td>防止不符合语义、不正确的数据存在</td>
+<td>防止恶意破坏和非法存取</td>
+</tr>
+<tr>
+<td>防范对象</td>
+<td>非法数据状态、错误更新</td>
+<td>非法用户、越权操作、攻击行为</td>
+</tr>
+<tr>
+<td>典型机制</td>
+<td>主键、外键、CHECK、触发器</td>
+<td>鉴权、授权、加密、审计</td>
+</tr>
+</tbody>
+</table></div>
+<p>两者可能同时作用于一次操作：</p>
+<ul>
+<li>安全性先判断用户有没有修改权限。</li>
+<li>完整性再判断修改后的数据是否合法。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong>
+“有权修改”不代表“可写入任意值”；权限检查通过后，数据仍必须满足完整性约束。</p>
+</blockquote>
+<h2 id="section-3">4.3 三类完整性</h2>
+<h3 id="section-4">4.3.1 实体完整性</h3>
+<p>实体完整性要求主键能够唯一、稳定地标识每个实体：</p>
+<ul>
+<li>主键值唯一。</li>
+<li>主键各组成列不得为 NULL。</li>
+</ul>
+<p>SQL 使用 <code>PRIMARY KEY</code> 实现。</p>
+<h3 id="section-5">4.3.2 参照完整性</h3>
+<p>若表 $R$ 的外键 $F$ 引用表 $S$ 的候选键 $K$，则 $R$ 中每个 $F$ 值必须：</p>
+<ol>
+<li>等于 $S$ 中某个现有元组的 $K$ 值；或</li>
+<li>在允许空值时取 NULL。</li>
+</ol>
+<p>这防止产生“孤儿引用”。</p>
+<h3 id="section-6">4.3.3 用户定义完整性</h3>
+<p>用户定义完整性表达具体业务规则，例如：</p>
+<ul>
+<li>学号唯一。</li>
+<li>姓名非空。</li>
+<li>默认年龄为 18。</li>
+<li>性别只能取指定值。</li>
+<li>分数必须在 0 到 100 之间。</li>
+</ul>
+<p>可使用 <code>UNIQUE</code>、<code>NOT NULL</code>、<code>DEFAULT</code>、<code>CHECK</code>、触发器等实现。</p>
+<h2 id="section-7">4.4 常用 SQL 约束</h2>
+<h3 id="section-8">4.4.1 PRIMARY KEY</h3>
+<pre><code class="language-sql">CONSTRAINT pk_student PRIMARY KEY (id)
+</code></pre>
+<p>作用：</p>
+<ul>
+<li>唯一标识元组。</li>
+<li>隐含唯一性。</li>
+<li>隐含非空性。</li>
+<li>一张表只有一个主键约束，但可由多列组成。</li>
+</ul>
+<h3 id="section-9">4.4.2 FOREIGN KEY</h3>
+<pre><code class="language-sql">CONSTRAINT fk_student_teacher
+    FOREIGN KEY (tno)
+    REFERENCES t_teacher(tno)
+</code></pre>
+<p>作用：</p>
+<ul>
+<li>建立引用关系。</li>
+<li>限制外键只能为空或匹配被引用键。</li>
+<li>可配置删除、更新时的级联策略。</li>
+</ul>
+<h3 id="section-10">4.4.3 UNIQUE</h3>
+<pre><code class="language-sql">Sno NUMERIC(6) UNIQUE
+</code></pre>
+<p>保证列或列组不出现重复的非空键值。</p>
+<p><code>UNIQUE</code> 与 <code>PRIMARY KEY</code> 的区别：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>PRIMARY KEY</th>
+<th>UNIQUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每表数量</td>
+<td>一个约束</td>
+<td>可有多个</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>不允许</td>
+<td>规则因 DBMS 而异</td>
+</tr>
+<tr>
+<td>语义</td>
+<td>实体主标识</td>
+<td>备用唯一性</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-11">4.4.4 NOT NULL</h3>
+<pre><code class="language-sql">Sname CHAR(20) NOT NULL
+</code></pre>
+<p>保证该列必须给出非空值。</p>
+<h3 id="section-12">4.4.5 DEFAULT</h3>
+<pre><code class="language-sql">Sage NUMERIC(3) DEFAULT 18
+</code></pre>
+<p>插入时未显式提供该列，系统使用默认值。显式写入 NULL 是否替换为默认值取决于 DBMS 和列定义，不能把 <code>DEFAULT</code> 当成 <code>NOT NULL</code>。</p>
+<h3 id="section-13">4.4.6 CHECK</h3>
+<pre><code class="language-sql">Ssex CHAR(2) CHECK (Ssex IN ('男', '女'))
+</code></pre>
+<p>标准 SQL 的 <code>CHECK</code> 采用三值逻辑：检查结果为 FALSE 时拒绝该行，为 TRUE 或 UNKNOWN 时通过。因此本例中 <code>Ssex=NULL</code> 会使条件为 UNKNOWN，单靠 <code>CHECK</code> 不能禁止空值；若必须非空，应同时声明 <code>NOT NULL</code>。</p>
+<p>更完整的范围例子：</p>
+<pre><code class="language-sql">Score NUMERIC(5, 2)
+    NOT NULL
+    CHECK (Score BETWEEN 0 AND 100)
+</code></pre>
+<h2 id="section-14">4.5 课件建表示例整理</h2>
+<p>课件第二页的代码被图片边界截断，整理后为：</p>
+<pre><code class="language-sql">CREATE TABLE t_teacher (
+    tno   CHAR(10) PRIMARY KEY,
+    tname CHAR(16)
+);
+
+CREATE TABLE t_student (
+    id    BIGINT AUTO_INCREMENT,
+    Sno   NUMERIC(6) UNIQUE,
+    Sname CHAR(20) NOT NULL,
+    Sage  NUMERIC(3) DEFAULT 18,
+    Ssex  CHAR(2) CHECK (Ssex IN ('男', '女')),
+    tno   CHAR(10),
+
+    CONSTRAINT pk_student
+        PRIMARY KEY (id),
+    CONSTRAINT fk_student_teacher
+        FOREIGN KEY (tno)
+        REFERENCES t_teacher(tno)
+);
+</code></pre>
+<p>约束对应关系：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>列/约束</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t_teacher.tno PRIMARY KEY</code></td>
+<td>教师号唯一且非空</td>
+</tr>
+<tr>
+<td><code>id AUTO_INCREMENT</code></td>
+<td>学生内部编号自动增长，语法依 DBMS</td>
+</tr>
+<tr>
+<td><code>Sno UNIQUE</code></td>
+<td>学号不重复</td>
+</tr>
+<tr>
+<td><code>Sname NOT NULL</code></td>
+<td>姓名必须提供</td>
+</tr>
+<tr>
+<td><code>Sage DEFAULT 18</code></td>
+<td>未给年龄时使用 18</td>
+</tr>
+<tr>
+<td><code>Ssex CHECK (...)</code></td>
+<td>性别值域限制</td>
+</tr>
+<tr>
+<td><code>tno FOREIGN KEY</code></td>
+<td>学生教师号引用教师表</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong>
+<code>AUTO_INCREMENT</code> 是 MySQL 风格。其他系统可能使用 <code>IDENTITY</code>、序列或 <code>GENERATED ... AS IDENTITY</code>。</p>
+</blockquote>
+<h2 id="section-15">4.6 列级与表级约束</h2>
+<h3 id="section-16">4.6.1 列级定义</h3>
+<p>约束直接跟在列定义后：</p>
+<pre><code class="language-sql">tno CHAR(10) PRIMARY KEY
+</code></pre>
+<p>适合只涉及单列的约束。</p>
+<h3 id="section-17">4.6.2 表级定义</h3>
+<p>约束单独写在表定义中：</p>
+<pre><code class="language-sql">CONSTRAINT pk_order_detail
+    PRIMARY KEY (OrderID, ProductID)
+</code></pre>
+<p>适合：</p>
+<ul>
+<li>复合主键。</li>
+<li>复合外键。</li>
+<li>跨多列的 <code>UNIQUE</code> 或 <code>CHECK</code>。</li>
+<li>需要显式命名的约束。</li>
+</ul>
+<h3 id="section-18">4.6.3 命名约束</h3>
+<p>一般格式：</p>
+<pre><code class="language-text">CONSTRAINT 约束名 约束短语
+</code></pre>
+<p>显式命名便于：</p>
+<ul>
+<li>报错时识别约束。</li>
+<li>后续删除或修改约束。</li>
+<li>统一数据库对象命名规范。</li>
+</ul>
+<h2 id="section-19">4.7 主键与索引</h2>
+<p>主键的逻辑语义是唯一且非空。DBMS 通常会创建或利用唯一索引来高效检查主键，但是否使用聚簇索引属于物理实现策略。</p>
+<p>不同系统示例：</p>
+<ul>
+<li>MySQL InnoDB 通常按主键组织聚簇索引。</li>
+<li>SQL Server 在没有冲突配置时常把主键默认建为聚簇索引，但可以指定非聚簇。</li>
+<li>其他 DBMS 可能使用普通唯一索引或不同存储实现。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 课件表述纠错
+“主键默认有聚簇索引”不是跨 DBMS 的通用关系模型规则。应记住：主键必须唯一且非空；唯一索引/聚簇索引是具体 DBMS 的实现选择。</p>
+</blockquote>
+<h2 id="section-20">4.8 约束检查时机</h2>
+<p>完整性约束会在插入、修改、删除等操作时检查：</p>
+<ul>
+<li>插入学生：检查主键、学号、姓名、性别和教师引用。</li>
+<li>修改教师号：检查新的教师是否存在。</li>
+<li>删除教师：检查是否仍有学生引用，或执行配置的级联动作。</li>
+<li>修改分数：检查范围约束。</li>
+</ul>
+<p>事务执行失败时，DBMS 通常拒绝违反约束的语句；事务原子性还要保证失败操作不会留下半完成状态。</p>
+<h2 id="section-21">4.9 易错点</h2>
+<ul>
+<li>完整性防错误数据，安全性防非法访问和破坏，两者目标不同但相互配合。</li>
+<li><code>PRIMARY KEY</code> 同时保证唯一和非空；<code>UNIQUE</code> 的 NULL 规则依 DBMS 而异。</li>
+<li><code>DEFAULT</code> 只处理缺省输入，不等于非空约束。</li>
+<li>外键值必须匹配被引用键或在允许时为空，不要求外键本身唯一。</li>
+<li><code>CHECK</code> 用于限定值域和行内业务条件。</li>
+<li>多列约束应使用表级语法，尤其是复合主键和复合外键。</li>
+<li><code>CONSTRAINT</code> 名称便于维护，但不是约束类型本身。</li>
+<li>主键的逻辑要求不等于必然采用聚簇索引。</li>
+<li><code>AUTO_INCREMENT</code> 不是标准通用语法，迁移 DBMS 时要替换。</li>
+</ul>
+<h2 id="section-22">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-4c822339ea7b/">上一篇：数据库安全性</a> · <a href="/notes/cs408-8f1f495f90b2/">下一篇：关系数据理论</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-b05bacc57032/">关系模型与完整性</a></li>
+</ul>
+<h2 id="section-23">4.10 本节复盘</h2>
+<ul>
+<li>数据库完整性防止不正确、不相容或不符合业务语义的数据进入数据库。</li>
+<li>实体完整性由主键保证，参照完整性由外键保证，用户定义完整性由具体业务约束保证。</li>
+<li><code>PRIMARY KEY</code> 唯一且非空，<code>FOREIGN KEY</code> 维护跨表引用。</li>
+<li><code>UNIQUE</code> 限制重复，<code>NOT NULL</code> 限制空值，<code>DEFAULT</code> 提供缺省值，<code>CHECK</code> 限制条件。</li>
+<li>约束可定义在列级或表级；复合约束必须使用表级形式。</li>
+<li>视图中的完整 SQL 示例同时覆盖主键、外键、唯一、非空、默认和检查约束。</li>
+<li>主键通常借助唯一索引实现，但是否聚簇取决于具体 DBMS，不能当成通用理论规则。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-9c185b7e5178/index.html"><span>← 上一项</span><strong>Lecture 6：数据库设计</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-9fd9ee90b095/index.html"><span>下一项 →</span><strong>Lecture 5：知识 - 死锁</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

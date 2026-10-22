@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 34：外部排序 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 34：外部排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 34：外部排序 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 34：外部排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 34：外部排序 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 34：外部排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 34：外部排序",
+      "item": "https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c0d1b15ecf57/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-c0d1b15ecf57/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 34：外部排序</h1><p class="article-lead">408 学习笔记：Lecture 34：外部排序。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/91fb0618f55e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/91fb0618f55e.pdf" download="Lecture 34：外部排序.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">34.1 外部排序与归并过程</a><a href="#section-5">34.2 多路归并与败者树</a><a href="#section-9">34.3 置换—选择排序</a><a href="#section-14">34.4 最佳归并树</a><a href="#section-18">相关知识</a><a href="#section-19">34.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>外部排序的瓶颈通常是外存读写，而不是内存中的一次比较。基本路线是“生成初始归并段 → 多路归并”；优化则从两个方向入手：增大归并路数 $k$，或减少初始归并段数 $r$。</p>
+</blockquote>
+<h2 id="section-1">34.1 外部排序与归并过程</h2>
+<h3 id="section-2">34.1.1 基本模型</h3>
+<h5 id="section-3"><strong>定义</strong>：#外部排序 #初始归并段</h5>
+<blockquote>
+<p>描述：当待排序文件不能全部装入内存时，将外存数据分批读入内存、在内存中形成有序段并写回外存；这些有序段称为初始归并段。之后反复归并，直到只剩一个有序文件。</p>
+</blockquote>
+<ul>
+<li>磁盘以<strong>块</strong>为单位读写；记录必须读入内存后才可比较、修改，处理后再成块写回外存。</li>
+<li>外部排序的总开销可概括为：</li>
+</ul>
+<p>$$
+T_{\text{外排}}=T_{\text{外存读写}}+T_{\text{内部排序}}+T_{\text{内部归并}}
+$$</p>
+<ul>
+<li>通常 $T_{\text{外存读写}}$ 占主导，因此优先减少 I/O，再降低内部归并的关键字比较次数。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/6689eb564c77.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-外部排序全流程.png"><img class="note-image" src="/assets/408/images/6689eb564c77.png" alt="DS-L34-外部排序全流程.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图示：16 块文件先形成 8 个初始归并段，再经 3 趟二路归并得到最终有序文件。</p>
+</blockquote>
+<h3 id="section-4">34.1.2 二路归并与 I/O 计数</h3>
+<ul>
+<li>二路归并至少需要两个输入缓冲区和一个输出缓冲区，即 3 块内存缓冲区。</li>
+<li>每次比较两个输入缓冲区的当前记录，将较小者送入输出缓冲区。输入缓冲区空时，从对应归并段读入下一块；输出缓冲区满时，整块写回外存。</li>
+<li>某一归并段已耗尽后，另一归并段的剩余记录可直接依次输出，但仍要完成相应的块读写。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/959cf82f6722.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-二路归并缓冲区.png"><img class="note-image" src="/assets/408/images/959cf82f6722.png" alt="DS-L34-二路归并缓冲区.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图示：输出缓冲区已有 $1,8,9$，两个输入缓冲区当前候选记录为 $26$ 与 $25$，下一条应输出 $25$。</p>
+</blockquote>
+<ul>
+<li>若文件共有 $b$ 个磁盘块，每个完整阶段都读遍并写遍全文件，则该阶段约有 $2b$ 次块 I/O。</li>
+<li>设初始归并段数量为 $r$，采用 $k$ 路平衡归并，则归并趟数为：</li>
+</ul>
+<p>$$
+s=\left\lceil\log_k r\right\rceil
+$$</p>
+<ul>
+<li>若把“生成初始归并段”也按一次完整读写计入，概略 I/O 为：</li>
+</ul>
+<p>$$
+2b(s+1)
+$$</p>
+<ul>
+<li>原图示例中 $b=16$、$r=8$、$k=2$，因此生成初始段需 $2b=32$ 次 I/O，3 趟归并需 $3\times 2b=96$ 次，总计：</li>
+</ul>
+<p>$$
+32+3\times 32=128
+$$</p>
+<ul>
+<li>必须按题目给定的“块数、初始段生成方式、是否计入初始段生成、每趟是否读写全文件”计算；上式是均匀平衡归并的常用模型，不能脱离条件硬套。</li>
+</ul>
+<hr>
+<h2 id="section-5">34.2 多路归并与败者树</h2>
+<h3 id="section-6">34.2.1 多路归并的取舍</h3>
+<ul>
+<li>增大归并路数 $k$ 会使 $\lceil\log_k r\rceil$ 降低，从而减少读写全文件的归并趟数。</li>
+<li>$k$ 路归并至少需要 $k$ 个输入缓冲区和一个输出缓冲区；若内存总缓冲块数为 $m$，最直接的上界通常为 $k\le m-1$。</li>
+<li>若每次直接顺序扫描 $k$ 个当前候选记录选最小者，最多需要 $k-1$ 次比较；$k$ 过大将增加内部归并时间。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/e593e566eef7.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-归并树.png"><img class="note-image" src="/assets/408/images/e593e566eef7.png" alt="DS-L34-归并树.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图示：归并树的叶结点是初始归并段，树高对应归并趟数。减少树高可以减少整文件读写次数。</p>
+</blockquote>
+<h3 id="section-7">34.2.2 败者树</h3>
+<h5 id="section-8"><strong>定义</strong>：#败者树</h5>
+<blockquote>
+<p>描述：败者树是一种锦标赛式选择树。叶结点对应各归并段的当前记录；普通内部结点保存该场比较的败者，胜者继续向上比较。总冠军通常保存在树顶的额外位置或单独槽位，而不是笼统地由普通内部根结点同时保存。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/0e60756ef179.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-败者树结构.png"><img class="note-image" src="/assets/408/images/0e60756ef179.png" alt="DS-L34-败者树结构.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图示：绿色叶结点对应 8 个归并段的当前记录；灰色内部结点保存每轮败者；最上方蓝色位置保存最终胜者。</p>
+</blockquote>
+<ul>
+<li>初次建立含 $k$ 个候选者的锦标赛需要 $k-1$ 次关键字比较，时间为 $O(k)$。</li>
+<li>输出全局最小记录后，从其所属归并段补入下一条记录；若该段已空，则补入大于所有有效关键字的哨兵 $+\infty$。</li>
+<li>只有从该叶到树顶的比赛结果可能变化，因此在平衡实现中最多重新比较：</li>
+</ul>
+<p>$$
+\left\lceil\log_2 k\right\rceil
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/33c19c93ecae.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-败者树更新.png"><img class="note-image" src="/assets/408/images/33c19c93ecae.png" alt="DS-L34-败者树更新.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图示：归并段 1 补入新记录后，只沿原冠军路径逐层与已保存的败者重新比较，无须重建整棵树。</p>
+</blockquote>
+<ul>
+<li>若总共输出 $N$ 条记录，败者树辅助的内部选择总时间为 $O(N\log k)$；顺序扫描候选者则为 $O(Nk)$。</li>
+<li>这里的 $k$ 是归并路数，不是初始归并段数 $r$；$r$ 用于计算归并趟数。</li>
+<li>败者树只减少内部比较，不改变“每一归并趟仍需读写全文件”的基本 I/O 量。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 原资料第 6 页的数值误写
+原 PDF 称“1024 路败者树更新需比较 19 次”，但 $1024=2^{10}$，平衡败者树从叶到顶只有 <strong>10</strong> 层比赛，更新最多比较 10 次；19 不能由该路数推出。首次建树的比较次数仍为 $1024-1=1023$ 次，两者不可混淆。</p>
+</blockquote>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：外部排序的稳定性边界
+外部排序只有在初始归并段的生成过程稳定，并且多路归并遇到等键时以原输入先后作为最终判定，才能保证整体稳定。对按原文件连续分块生成的归并段，较早的段次序可表达这一先后；更一般的生成方式可携带原输入序号。败者树只改变候选记录的选择效率，其比较器也必须使用同一等键规则，否则等键记录仍可能换序。</p>
+</blockquote>
+<hr>
+<h2 id="section-9">34.3 置换—选择排序</h2>
+<h3 id="section-10">34.3.1 目标与核心约束</h3>
+<h5 id="section-11"><strong>定义</strong>：#置换选择排序</h5>
+<blockquote>
+<p>描述：利用容量为 $w$ 的内存工作区生成初始归并段。每次输出当前未冻结记录中的最小关键字并读入一条新记录；若新记录小于本归并段刚输出的关键字，则将它冻结到下一归并段。</p>
+</blockquote>
+<ul>
+<li>普通分批内部排序时，一个完整初始归并段的长度通常不超过工作区容量 $w$。</li>
+<li>置换选择生成的归并段可能长于 $w$，从而减少 $r$ 和后续归并趟数；在输入关键字独立、连续、随机等常见假设下，平均段长约为 $2w$，但这不是任意输入下的保证。</li>
+<li>“冻结”记录不能继续输出到当前段，因为它会破坏当前段的非递减顺序；它仍留在工作区，供下一段使用。</li>
+<li>可用最小堆或败者树维护当前未冻结记录中的最小者。</li>
+</ul>
+<h3 id="section-12">34.3.2 算法步骤</h3>
+<ol>
+<li>从输入文件 <code>FI</code> 读入至多 $w$ 条记录至工作区 <code>WA</code>。</li>
+<li>从当前未冻结记录中选最小者，记作 <code>MINIMAX</code>，输出到归并段文件 <code>FO</code>。</li>
+<li>若 <code>FI</code> 非空，读入下一条记录补入 <code>WA</code>。</li>
+<li>若新记录关键字不小于刚输出的 <code>MINIMAX</code>，它可参与当前归并段；若更小，则将它冻结。</li>
+<li>重复步骤 2～4，直到 <code>WA</code> 中不存在当前段可用的未冻结记录；写入归并段结束标志。</li>
+<li>解冻 <code>WA</code> 中的记录，开始下一归并段；当 <code>FI</code> 已空且 <code>WA</code> 也为空时结束。</li>
+</ol>
+<ul>
+<li><code>MINIMAX</code> 是当前归并段最后输出的关键字，也是后续可输出记录的下界；相等关键字可以继续进入当前非递减归并段。</li>
+<li>置换选择只负责生成初始归并段，不能替代后续多路归并。</li>
+</ul>
+<h3 id="section-13">34.3.3 数值过程：工作区容量 $w=3$</h3>
+<p>初始工作区为 $WA={4,6,9}$，其余输入依次为：</p>
+<p>$$
+7,13,11,16,14,10,22,30,2,3,19,20,17,1,23,5,36,12,18,21,39
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/8c6f1eb6e87e.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-置换选择初始状态.png"><img class="note-image" src="/assets/408/images/8c6f1eb6e87e.png" alt="DS-L34-置换选择初始状态.png" loading="lazy" decoding="async"></a></p>
+<ul>
+<li>归并段 1：依次输出 $4,6,7,9,11,13,14,16,22,30$。读入 $10,2,3$ 时，它们分别小于当时刚输出的下界，最终全部冻结。</li>
+<li>解冻 $2,3,10$ 后生成归并段 2：依次输出 $2,3,10,17,19,20,23,36$；其中 $1,5,12$ 被留给下一段。</li>
+<li>解冻后生成归并段 3：依次输出 $1,5,12,18,21,39$。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>初始归并段</th>
+<th>输出序列</th>
+<th style="text-align:right">长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>$4,6,7,9,11,13,14,16,22,30$</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$2,3,10,17,19,20,23,36$</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$1,5,12,18,21,39$</td>
+<td style="text-align:right">6</td>
+</tr>
+</tbody>
+</table></div>
+<p><a class="note-image-link" href="/assets/408/images/fb0bff368358.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L34-置换选择最终归并段.png"><img class="note-image" src="/assets/408/images/fb0bff368358.png" alt="DS-L34-置换选择最终归并段.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>工作区只能容纳 3 条记录，但三个归并段的长度分别达到 10、8、6，体现了置换选择可突破固定分批长度的特点。</p>
+</blockquote>
+<hr>
+<h2 id="section-14">34.4 最佳归并树</h2>
+<h5 id="section-15"><strong>定义</strong>：#最佳归并树 #多路Huffman树</h5>
+<blockquote>
+<p>描述：当初始归并段长度不等时，以各段长度为叶结点权值构造 $k$ 叉 Huffman 树，使带权路径长度最小；该树称为最佳归并树。</p>
+</blockquote>
+<ul>
+<li>若某归并段有 $w_i$ 个块、在归并树中的深度为 $l_i$，它要在 $l_i$ 趟归并中各被读、写一次。所有归并阶段的块 I/O 为：</li>
+</ul>
+<p>$$
+2\sum_i w_i l_i=2\operatorname{WPL}
+$$</p>
+<ul>
+<li>上式不含最初生成归并段的 I/O；若题目要求总 I/O，还要另加初始段生成阶段。</li>
+<li>构造方法：反复选择当前权值最小的 $k$ 个结点合并为新结点，再把新权值放回集合；所有非叶结点权值之和等于 WPL。</li>
+<li>为使严格 $k$ 叉树满足叶结点数关系，需要补入权值为 0 的虚段。设原有 $r$ 个初始归并段，补入数量为：</li>
+</ul>
+<p>$$
+x=\Bigl((k-1)-(r-1)\bmod(k-1)\Bigr)\bmod(k-1)
+$$</p>
+<ul>
+<li>等价条件是：</li>
+</ul>
+<p>$$
+r+x\equiv 1\pmod{k-1},\qquad 0\le x&lt;k-1
+$$</p>
+<ul>
+<li>虚段必须在<strong>最初</strong>作为零权叶结点参与选择，不能随意补在树的高层；否则未必得到最小 WPL。</li>
+<li>当各初始段等长且可以做完全平衡归并时，平衡归并树已经最优；长度不等时，最佳归并树可以减少总读写量。</li>
+</ul>
+<h3 id="section-16">题型：#外部排序I/O计算</h3>
+<h4 id="section-17">第一部分：解题方法</h4>
+<ol>
+<li>求初始归并段数 $r$；若使用置换选择，按模拟得到的实际段数和段长计算，不能直接用文件总量除以工作区容量。</li>
+<li>根据可用缓冲区确定归并路数 $k$，通常需要 $k$ 个输入缓冲区和 1 个输出缓冲区。</li>
+<li>等长平衡归并可用 $s=\lceil\log_k r\rceil$ 求趟数；不等长段要求最少 I/O 时，应构造最佳归并树并计算 $2\operatorname{WPL}$。</li>
+<li>构造 $k$ 叉最佳归并树前先计算零权虚段数 $x$，再反复合并最小的 $k$ 个权值。</li>
+<li>明确题目是否计入初始段生成，以及一次“读写”按 1 次还是“读 1 次、写 1 次”共 2 次计数。</li>
+</ol>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-5153e21f2806/">上一篇：归并排序与基数排序</a> · <a href="/notes/cs408-160888f26a5f/">下一篇：排序算法总结</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-c558f3264d82/">排序代码</a></li>
+</ul>
+<h2 id="section-19">34.5 本节复盘</h2>
+<ul>
+<li>外部排序用初始归并段和多路归并处理超内存数据，核心代价是磁盘块 I/O。</li>
+<li>多路归并通过增大 $k$ 降低归并趟数，但增加缓冲区和内部选择成本；败者树将每次重新选择降为 $O(\log k)$。</li>
+<li>置换选择通过拉长初始归并段减少 $r$，与增大归并路数分别从两端减少 $\lceil\log_k r\rceil$。</li>
+<li>初始归并段长度不等时，用补零后的 $k$ 叉 Huffman 树最小化 WPL；归并阶段块 I/O 为 $2\operatorname{WPL}$。</li>
+<li>计算题必须先统一“块数、归并路数、是否计入初始段生成、读写计数口径”，再套用公式。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-c0568749182e/index.html"><span>← 上一项</span><strong>Lecture 18：树、森林</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-c2d3a38a7b30/index.html"><span>下一项 →</span><strong>Lecture 25：知识 - 外部设备</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

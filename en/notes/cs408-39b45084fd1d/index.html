@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 11：知识 - IO管理概述 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 11：知识 - IO管理概述. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 11：知识 - IO管理概述 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 11：知识 - IO管理概述. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-39b45084fd1d/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 11：知识 - IO管理概述 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 11：知识 - IO管理概述. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 11：知识 - IO管理概述",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-39b45084fd1d/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-39b45084fd1d/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-39b45084fd1d/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-39b45084fd1d/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-39b45084fd1d/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-39b45084fd1d/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 11：知识 - IO管理概述</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 11：知识 - IO管理概述. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>15 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d7116073330c.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d7116073330c.pdf" download="Lecture 11： 知识 - IO管理概述.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">11.1 I/O 设备、控制器与端口</a><a href="#section-4">11.2 从 I/O 请求到完成：处理路径</a><a href="#section-5">11.3 四种 I/O 控制方式</a><a href="#section-10">11.4 I/O 软件层次</a><a href="#section-15">11.5 输入/输出应用程序接口</a><a href="#section-16">相关知识</a><a href="#section-17">11.6 本节复盘与速记</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>I/O 管理要解决三件事：让 CPU 能控制各类外设、缓和 CPU 与设备的速度差、把具体硬件差异隐藏在统一接口之后。比较轮询、中断、DMA 和通道时，始终分清 <strong>谁搬数据、每次搬多少、CPU 何时参与</strong>。</p>
+</blockquote>
+<h2 id="section-1">11.1 I/O 设备、控制器与端口</h2>
+<h3 id="section-2">I/O 设备的构成与分类</h3>
+<ul>
+<li>I/O 设备是计算机与外部环境交换信息的部件，既可向主机输入数据，也可接收主机输出的数据。</li>
+<li>在 UNIX 中，外部设备通常被抽象为特殊文件，用户可用与普通文件相似的方式访问它们。</li>
+<li>I/O 设备可同时含机械和电子部分：键盘按键机构、机械鼠标机构、磁盘盘片与磁臂属于机械部分；LED/液晶像素、传感器和控制电路属于电子部分。设备控制器也不一定是独立扩展卡，可以集成在主板、芯片组或设备内部。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>信息交换基本单位</th>
+<th>特征</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>块设备</td>
+<td>块</td>
+<td>传输率较高，可寻址，可随机读/写任一块</td>
+<td>磁盘</td>
+</tr>
+<tr>
+<td>字符设备</td>
+<td>字符</td>
+<td>传输率较慢，通常不可寻址；输入/输出常采用中断驱动</td>
+<td>键盘、鼠标</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-3">I/O 控制器</h3>
+<p>CPU 不能直接操纵设备的机械部件，而是先控制设备控制器（I/O 控制器），再由控制器控制设备。控制器的主要职责是：</p>
+<ol>
+<li>接收、识别并解释 CPU 发出的 <code>read</code>、<code>write</code> 等命令；</li>
+<li>用状态寄存器向 CPU 报告设备状态，如空闲、忙、就绪或出错；</li>
+<li>通过数据寄存器暂存输入或输出数据。</li>
+</ol>
+<p>在程序查询或中断驱动 I/O 中，输入数据可先进入控制器的数据寄存器再由 CPU 读出，输出数据则由 CPU 写入数据寄存器；DMA 模式下，数据由 DMA 控制器在设备与主存之间成块传送，CPU 不逐字搬运。CPU 与控制器之间通过三类总线通信：地址线选择控制器/寄存器，控制线传递命令，数据线双向传送数据；控制器与设备之间也有相应的数据、状态和控制接口。</p>
+<ul>
+<li>一个控制器可以连接多个设备；一个控制器中的数据、控制、状态寄存器也都可能有多个，每个寄存器必须有地址。</li>
+<li><strong>内存映射 I/O</strong>：控制器寄存器占用内存地址空间的一部分，CPU 用访存指令访问它们。</li>
+<li><strong>寄存器独立编址（独立 I/O）</strong>：控制器寄存器使用独立的端口地址空间，CPU 通常以专用 I/O 指令访问端口。</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充与纠错：端口如何定位控制器
+独立编址的本质是 I/O 端口地址空间与内存地址空间分离。端口地址必须能够唯一定位目标控制器中的目标寄存器；有的教材把它解释成“控制器编号 + 寄存器号”，但具体指令格式也可以把二者编码成一个端口地址，并不普遍要求再给出一个独立的控制器编号。</p>
+</blockquote>
+<blockquote>
+<p>2024 题型：键盘中断服务例程执行完后，键盘输入数据所在的位置是 <strong>内核缓冲区</strong>，而不是用户缓冲区、CPU 通用寄存器或键盘控制器的数据缓冲区。</p>
+</blockquote>
+<h2 id="section-4">11.2 从 I/O 请求到完成：处理路径</h2>
+<p>若主机主动发起 I/O 请求，处理自上而下；硬件发出 I/O 完成响应，则处理自下而上。中断处理程序是设备完成或报告事件后的<strong>上行处理入口</strong>，不是每次正常 I/O 请求下发到硬件前必经的一层：</p>
+<pre><code class="language-text">请求：用户层 I/O 软件 → 设备独立性软件 → 驱动程序 → 设备控制器/硬件
+中断完成：硬件 → 中断处理程序 → 驱动程序/设备独立性软件 → 唤醒进程 → 用户层 I/O 软件
+</code></pre>
+<p>轮询方式下甚至没有“完成中断”这条回程路径；中断处理程序与驱动程序的具体回调先后和分工取决于实现，不能把概念分层图误读成每次调用都严格逐层执行的固定函数链。</p>
+<p>以进程调用 <code>read</code> 从键盘输入为例，典型流程如下：</p>
+<ol>
+<li>用户程序可调用 C 标准 I/O 库函数 <code>scanf()</code>；库在需要补充输入缓冲时可能调用 POSIX <code>read()</code> 系统调用包装函数，后者通过陷入进入内核的读取服务。<code>scanf</code> 本身不是系统调用，<code>read</code> 也不是 C 标准 I/O 函数。</li>
+<li>内核 I/O 子系统检查参数；若数据已在内核缓冲区，可直接返回。否则将请求送入相应 I/O 请求队列。</li>
+<li>设备驱动程序把通用 I/O 请求转换为针对控制器的命令，初始化 I/O 操作；调度程序选择其他就绪进程运行，发出请求的进程进入阻塞等待队列。</li>
+<li>用户在键盘上输入字符后，外设向 CPU 发出中断请求。</li>
+<li>CPU 响应中断，进入键盘中断处理入口；中断处理程序与驱动程序的设备相关后续处理协作，从控制器读出字符并写入内核缓冲区。二者的具体分工取决于系统实现。</li>
+<li>请求满足后，内核 I/O 子系统确认完成、更新状态，并唤醒相应进程，使其从阻塞态转为就绪态；数据复制到用户地址空间可在完成路径或进程恢复后的内核路径中进行。该进程被再次调度后从系统调用返回。</li>
+</ol>
+<p>可把数据路径概括为：设备 → 控制器 → 驱动/内核缓冲区 → 用户地址空间；完成通知路径则由硬件中断开始，逐层向上返回。</p>
+<blockquote>
+<p>2023 统考题的排序结论：若进程 <code>P</code> 执行从键盘读一个字符并阻塞，给定操作的正确次序为 <strong>入阻塞队列 → 用户键入字符 → 启动/执行中断处理 → 数据进入系统缓冲区 → P 入就绪队列 → P 从系统调用返回</strong>。进入阻塞态后 CPU 必须切换到其他进程；P 入就绪队列后，调度程序才能再次选择 P。键盘驱动程序负责驱动 I/O 设备、执行与设备直接相关的具体操作；中断处理、驱动和设备独立性软件均在内核态运行。</p>
+</blockquote>
+<h2 id="section-5">11.3 四种 I/O 控制方式</h2>
+<h3 id="section-6">程序直接控制方式（轮询）</h3>
+<p>CPU 向控制器发出读/写命令后不断检查控制器状态寄存器；未就绪则忙等，就绪后由 CPU 把一个字符/字从 I/O 模块搬至 CPU，再由 CPU 写入内存。输出方向相反：内存 → CPU → I/O 设备。</p>
+<ul>
+<li>每次传送单位是一个字符（或字），每一单位的数据都需要 CPU 参与；CPU 干预频率最高。</li>
+<li>优点是实现简单；缺点是 CPU 在设备工作期间持续轮询，并亲自搬运每个传送单位，不能把等待时间用于运行其他有用任务。设备与控制器在物理上仍会推进 I/O，问题是 CPU 与其他计算缺少有效重叠，不能把“忙等”误解成所有硬件动作严格逐个串行。</li>
+</ul>
+<h3 id="section-7">中断驱动方式</h3>
+<p>CPU 发出命令后不再轮询，可继续执行其他程序。设备就绪或完成时向 CPU 发中断；CPU 在指令周期结束时检查中断，保存现场，执行中断服务程序，从控制器读/写一个字符，再恢复被中断进程的执行环境。</p>
+<ul>
+<li>CPU 不必在等待阶段忙等，CPU 与 I/O 设备可并行工作。</li>
+<li>但设备与内存之间的每个字符仍要经 CPU 搬运；高频中断还会增加保存/恢复现场的开销。因此 CPU 干预仍较多。</li>
+</ul>
+<h3 id="section-8">DMA 方式（Direct Memory Access）</h3>
+<p>DMA 用于以块为单位的大批量传送。DMA 控制器可在设备与主存之间直接传送数据，读操作为 I/O 设备 → 内存，写操作为内存 → I/O 设备，数据不再必须先经过 CPU 寄存器。</p>
+<p>DMA 控制器的常用寄存器如下：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>含义</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DR（Data Register）</td>
+<td>数据寄存器</td>
+<td>暂存设备送往内存或内存送往设备的数据</td>
+</tr>
+<tr>
+<td>MAR（Memory Address Register）</td>
+<td>内存地址寄存器</td>
+<td>指明本次数据块在内存中的位置</td>
+</tr>
+<tr>
+<td>DC（Data Counter）</td>
+<td>数据计数器</td>
+<td>记录剩余读/写字节数</td>
+</tr>
+<tr>
+<td>CR（Command Register）</td>
+<td>命令/状态寄存器</td>
+<td>接收 CPU 的 I/O 命令或保存设备状态</td>
+</tr>
+</tbody>
+</table></div>
+<p>DMA 过程分为三阶段：</p>
+<ol>
+<li><strong>预处理</strong>：CPU 通过 I/O 指令或内存映射寄存器初始化 DMA 控制器，设置传送方向、内存首地址、数据量等，并启动设备；CPU 随后继续执行其他程序。这是 CPU 主动配置设备的普通控制过程，不是“DMA 完成中断”，也不是设备此时已经取得整段总线使用权。</li>
+<li><strong>传送</strong>：I/O 设备就绪后向 DMA 控制器提出 DMA 请求，DMA 控制器取得总线使用权，在设备和内存之间连续传送一个或多个数据块。</li>
+<li><strong>后处理</strong>：传送结束或发生错误后，DMA 控制器通常向 CPU 发中断；中断处理程序读取状态、记录完成量、处理错误并唤醒等待者，随后按调度与中断返回规则恢复执行。是否还做数据内容校验取决于设备和协议，不是每次 DMA 的固定步骤。</li>
+</ol>
+<p>CPU 与 DMA 同时请求总线时，DMA 控制器按总线仲裁规则获得使用权；为了避免高速设备缓冲区溢出，教材模型通常让 DMA 请求得到及时响应。DMA 的优点是按块传输、CPU 主要在配置与完成/错误处理时介入、CPU 与 I/O 并行性高。</p>
+<blockquote>
+<p><strong>NOTE</strong> · 教材补充：现代 DMA 的离散缓冲区
+基础教材模型常用“一个起始地址 + 一个计数器”，因而一次描述连续内存区。现代控制器可用描述符链、scatter-gather DMA 或 IOMMU 映射处理多个离散物理片段，所以“DMA 绝不能离散存取”只适用于该简化模型。</p>
+</blockquote>
+<h3 id="section-9">通道控制方式</h3>
+<p>通道是一种可理解为“弱化版 CPU”的专用硬件，能识别并执行一系列通道指令。通道程序存放在主存中，CPU 只需交代通道程序的首地址、目标 I/O 设备、数据在内存中的位置及读/写量；通道完成一组数据块的传输后才向 CPU 中断。</p>
+<ul>
+<li>每次传送单位是一组数据块，CPU 干预频率极低，CPU、通道和 I/O 设备可并行工作。</li>
+<li>它能进一步降低 CPU 负担，但实现成本高，须配置专门的通道硬件。</li>
+</ul>
+<p>| 控制方式 | 完成一次读/写时 CPU 的工作 | CPU 干预 | 传送单位 | 数据流向 | 主要特点 |
+| --- | --- | --- | --- | --- |
+| 程序直接控制 | 发命令后不断轮询并参与全部搬运 | 很高 | 字符/字 | 设备 ↔ CPU ↔ 内存 | 简单，但忙等、CPU 利用率低 |
+| 中断驱动 | 发命令后可做别事；每个字符到达仍要中断搬运 | 高 | 字符/字 | 设备 ↔ CPU ↔ 内存 | 消除忙等，但中断和逐字搬运开销大 |
+| DMA | 初始化后继续执行；整块完成后才中断 | 中 | 块 | 设备 ↔ 内存 | 高吞吐，CPU 只在开始和结束介入 |
+| 通道 | 交代通道程序后继续执行；一组块完成才中断 | 很低 | 一组数据块 | 设备 ↔ 内存 | 并行性最高，但需要专用通道 |</p>
+<h2 id="section-10">11.4 I/O 软件层次</h2>
+<p>I/O 软件层次自下而上为：<strong>中断处理程序 → 设备驱动程序 → 设备独立性软件 → 用户层 I/O 软件</strong>。前三层属于操作系统内部，可统称为 I/O 核心子系统；硬件不属于软件层次。</p>
+<h3 id="section-11">中断处理程序</h3>
+<p>设备完成 I/O 后由控制器产生中断，系统按中断号找到对应处理程序。中断处理程序可直接与硬件交互：读取控制器状态、处理异常、把读出的数据放入内核缓冲区，并唤醒相关阻塞进程。</p>
+<blockquote>
+<p>2010 题型：本地用户通过键盘登录时，最先获得键盘输入信息的是 <strong>中断处理程序</strong>。</p>
+</blockquote>
+<h3 id="section-12">设备驱动程序</h3>
+<p>驱动程序将上层 <code>read</code>、<code>write</code> 等抽象请求转化为设备控制器能识别的命令，负责初始化设备、控制实际读写，并处理中断后的设备相关工作。它与设备硬件特性密切相关，应用程序不能绕开驱动而直接访问硬件。</p>
+<blockquote>
+<p>2013 题型：用户发出磁盘 I/O 请求后，计算磁盘柱面号、磁头号和扇区号的是设备驱动程序。2022 题型：设备驱动程序可能使进程进入阻塞态。</p>
+</blockquote>
+<h3 id="section-13">设备独立性软件</h3>
+<p>设备独立性软件又称设备无关性软件，提供不依赖具体硬件细节的通用功能：</p>
+<ol>
+<li>设备保护；</li>
+<li>错误处理；</li>
+<li>设备分配与回收；</li>
+<li>数据缓冲区管理，以匹配不同设备间的数据交换单位与传输速度；</li>
+<li>建立逻辑设备名到物理设备及驱动程序的映射。</li>
+</ol>
+<p>逻辑设备表 LUT（Logical Unit Table）记录“逻辑设备名—物理设备名—驱动程序入口地址”。单用户系统可使用一张全系统 LUT，逻辑设备名唯一；多用户系统可为每个用户建立 LUT，通常放在该用户管理进程的 PCB 中，不同用户可使用相同的逻辑设备名。</p>
+<h3 id="section-14">用户层 I/O 软件</h3>
+<p>用户层软件提供用户交互接口，将用户请求组织为格式化 I/O 请求，并通过系统调用请求内核服务。Windows API 一类库函数使应用程序能够以较方便的方式访问底层 I/O 服务。</p>
+<h2 id="section-15">11.5 输入/输出应用程序接口</h2>
+<p>设备独立性软件会统一可统一的部分，例如许多系统允许普通文件、终端和管道共同使用 <code>read</code>/<code>write</code> 一类接口；但不同设备的寻址、消息边界、连接和专用控制语义并不完全相同，因此不存在一个毫无差别地覆盖所有操作的单一调用。通用接口之上仍需块设备、字符设备、套接字和 <code>ioctl</code> 等专用接口。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>特点与典型调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符设备接口</td>
+<td>无地址概念，<code>get</code>/<code>put</code> 以字符为单位读/写；如键盘每次读一个字符</td>
+</tr>
+<tr>
+<td>块设备接口</td>
+<td>有地址概念，<code>read</code>/<code>write</code> 指定起始位置并读/写多个字符或块；<code>seek</code> 修改读写指针位置</td>
+</tr>
+<tr>
+<td>网络设备接口</td>
+<td>又称套接字（socket）接口：<code>socket</code> 创建套接字并指定协议，<code>bind</code> 绑定本地端口，<code>connect</code> 连接远程主机，<code>read</code>/<code>write</code> 收发数据</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>阻塞 I/O</strong>：操作当前不能完成时，调用进程睡眠等待，例如阻塞方式读取尚无输入的键盘或管道。</li>
+<li><strong>非阻塞 I/O</strong>：操作当前不能完成时立即返回“暂不可用”，由程序稍后重试或配合事件通知；通常需为描述符设置非阻塞标志。</li>
+<li><strong>教材补充：异步 I/O</strong>：提交请求后立即返回，内核在操作真正完成后再通知程序。普通文件的缓冲写可能在数据尚未落盘时返回，但这不等同于“非阻塞 I/O”。</li>
+</ul>
+<h2 id="section-16">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-0f7e7a7a0522/">上一篇：文件系统</a> · <a href="/en/notes/cs408-69c0d725657f/">下一篇：设备独立性软件</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-914a13597252/">I/O 方式</a></li>
+</ul>
+<h2 id="section-17">11.6 本节复盘与速记</h2>
+<ul>
+<li>块设备可寻址、按块传送；字符设备通常不可寻址、按字符传送。</li>
+<li>控制器通过控制、状态、数据寄存器连接 CPU 与设备；内存映射 I/O 占用内存地址，独立编址使用专用端口地址。</li>
+<li>轮询和中断方式的数据都要经 CPU；DMA 和通道使设备与内存直接传送。</li>
+<li>I/O 请求向下传递，完成响应向上传递；硬件相关的具体操作属于中断处理程序或驱动程序，通用策略属于设备独立性软件。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-39ac80f6dca5/index.html"><span>← Previous item</span><strong>408重写进度</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-3d652a68f786/index.html"><span>Next item →</span><strong>Lecture 4：决策树</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

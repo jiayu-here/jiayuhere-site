@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 2：神经网络与后向传播 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 2：神经网络与后向传播. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 2：神经网络与后向传播 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 2：神经网络与后向传播. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-b1364442cb67/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 2：神经网络与后向传播 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 2：神经网络与后向传播. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 2：神经网络与后向传播",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-b1364442cb67/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-b1364442cb67/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-b1364442cb67/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-b1364442cb67/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-b1364442cb67/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-b1364442cb67/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 2：神经网络与后向传播</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 2：神经网络与后向传播. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>21 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/3dedad320380.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/3dedad320380.pdf" download="Lecture 2：神经网络与后向传播.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 神经网络的基本符号</a><a href="#section-5">$$
+y_k</a><a href="#section-6">\varphi
+\left(
+\sum_{i=1}^{m}w_{ki}x_i+b_k
+\right)</a><a href="#section-7">2.2 感知机算法</a><a href="#section-11">2.3 前向传播</a><a href="#section-13">$$
+z_j^{[1]}</a><a href="#section-14">$$
+\boldsymbol{z}^{[1]}</a><a href="#section-15">$$
+\boldsymbol{a}^{[1]}</a><a href="#section-16">$$
+\boldsymbol{z}^{[2]}</a><a href="#section-17">$$
+\boldsymbol{a}^{[2]}</a><a href="#section-19">$$
+\boldsymbol{z}^{[l]}</a><a href="#section-20">$$
+\boldsymbol{a}^{[l]}</a><a href="#section-21">$$
+Z^{[l]}</a><a href="#section-22">2.4 多层网络为什么需要非线性</a><a href="#section-23">$$
+\boldsymbol{a}^{[1]}</a><a href="#section-24">$$
+\boldsymbol{y}</a><a href="#section-25">$$
+\boldsymbol{y}</a><a href="#section-28">2.5 梯度下降与局部极值</a><a href="#section-30">$$
+w_{k+1}</a><a href="#section-31">$$
+f(w+\Delta w)</a><a href="#section-33">$$
+\boldsymbol{w}_{k+1}</a><a href="#section-34">\boldsymbol{w}_k</a><a href="#section-35">2.6 后向传播的基本过程</a><a href="#section-36">$$
+E</a><a href="#section-37">2.7 激活函数</a><a href="#section-40">$$
+\tanh(x)</a><a href="#section-43">$$
+\operatorname{LeakyReLU}(x)</a><a href="#section-45">2.8 反向传播公式推导</a><a href="#section-47">$$
+\boldsymbol{z}^{[l]}</a><a href="#section-48">$$
+\boldsymbol{a}^{[l]}</a><a href="#section-49">$$
+\boldsymbol{\delta}^{[l]}</a><a href="#section-51">$$
+\boldsymbol{\delta}^{[L]}</a><a href="#section-52">$$
+\boldsymbol{\delta}^{[L]}</a><a href="#section-54">$$
+\boldsymbol{\delta}^{[l]}</a><a href="#section-55">$$
+\delta_i^{[l]}</a><a href="#section-57">$$
+\frac{\partial E}{\partial W^{[l]}}</a><a href="#section-58">$$
+\frac{\partial E}{\partial\boldsymbol{b}^{[l]}}</a><a href="#section-59">$$
+\frac{\partial E}{\partial W_{ij}^{[l]}}</a><a href="#section-61">2.9 数据划分与训练监控</a><a href="#section-64">2.10 批量梯度下降、SGD 与 Mini-batch</a><a href="#section-65">2.11 训练数据标准化</a><a href="#section-66">$$
+\hat x_j</a><a href="#section-67">2.12 参数初始化</a><a href="#section-71">2.13 Batch Normalization</a><a href="#section-73">$$
+\mu_{\mathcal B}</a><a href="#section-74">$$
+\sigma_{\mathcal B}^2</a><a href="#section-75">$$
+\hat x_i</a><a href="#section-76">$$
+y_i</a><a href="#section-78">2.14 目标函数与正则化</a><a href="#section-79">$$
+L</a><a href="#section-80">2.15 Softmax 与交叉熵</a><a href="#section-82">$$
+q_i</a><a href="#section-83">$$
+q_i</a><a href="#section-85">$$
+E</a><a href="#section-86">2.16 常用深度学习数据集</a><a href="#section-89">2.17 自编码器与逐层预训练</a><a href="#section-92">2.18 易错点</a><a href="#section-93">相关知识</a><a href="#section-94">2.19 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节整理神经网络的符号、感知机、前向传播、非线性表达能力、梯度下降与反向传播推导，并进一步讨论数据划分、Mini-batch、激活函数、数据标准化、参数初始化、Batch Normalization、正则化、Softmax、常用数据集和自编码器。</p>
+</blockquote>
+<h2 id="section-1">2.1 神经网络的基本符号</h2>
+<h3 id="section-2">2.1.1 历史背景</h3>
+<p>1957 年，Frank Rosenblatt 提出感知机思想：权重和偏置不必手工给定，可以从输入输出样本对 $(X,y)$ 中通过学习算法获得。</p>
+<h3 id="section-3">2.1.2 层与样本的记号</h3>
+<p>用方括号表示层号，用圆括号表示样本号：</p>
+<ul>
+<li>$W^{[l]}$：第 $l$ 层的权重矩阵。</li>
+<li>$b^{[l]}$：第 $l$ 层的偏置向量。</li>
+<li>$z^{[l]}$：第 $l$ 层的线性输入。</li>
+<li>$a^{[l]}$：第 $l$ 层的激活输出。</li>
+<li>$a^{<a href="i">l</a>}$：第 $i$ 个训练样本在第 $l$ 层的激活。</li>
+<li>$W_{jk}^{[l]}$：从第 $l-1$ 层第 $k$ 个单元到第 $l$ 层第 $j$ 个单元的权重。</li>
+</ul>
+<p>若第 $l$ 层有 $n_l$ 个单元，则：</p>
+<p>$$
+W^{[l]}\in\mathbb R^{n_l\times n_{l-1}},
+\qquad
+b^{[l]}\in\mathbb R^{n_l\times1}.
+$$</p>
+<p>分层：</p>
+<ul>
+<li>输入层记作第 $0$ 层，通常不计入可学习层数。</li>
+<li>隐藏层位于输入与输出之间，其中间表征不由数据直接给出，而由网络学习。</li>
+<li>输出层产生回归值、类别分数或概率等最终结果。</li>
+</ul>
+<h3 id="section-4">2.1.3 单个神经元</h3>
+<p>第 $k$ 个神经元执行：</p>
+<h1 id="section-5">$$
+y_k</h1>
+<h1 id="section-6">\varphi
+\left(
+\sum_{i=1}^{m}w_{ki}x_i+b_k
+\right)</h1>
+<p>\varphi(\boldsymbol{w}_k^{\mathrm T}\boldsymbol{x}+b_k).
+$$</p>
+<p>它包含两个步骤：</p>
+<ol>
+<li>加权求和并加偏置。</li>
+<li>通过激活函数 $\varphi$。</li>
+</ol>
+<p>神经网络就是许多此类单元按层连接并重复计算。</p>
+<h2 id="section-7">2.2 感知机算法</h2>
+<h3 id="section-8">2.2.1 模型</h3>
+<p>二分类感知机常把标签写为：</p>
+<p>$$
+y_i\in{-1,+1}.
+$$</p>
+<p>预测依据为：</p>
+<p>$$
+\operatorname{sign}(\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b).
+$$</p>
+<h3 id="section-9">2.2.2 更新规则</h3>
+<p>随机初始化 $\boldsymbol{w},b$，反复检查训练样本。若样本被误分类，即：</p>
+<p>$$
+y_i(\boldsymbol{w}^{\mathrm T}\boldsymbol{x}_i+b)\leq0,
+$$</p>
+<p>则更新：</p>
+<p>$$
+\boldsymbol{w}
+\leftarrow
+\boldsymbol{w}+\eta y_i\boldsymbol{x}_i,
+$$</p>
+<p>$$
+b
+\leftarrow
+b+\eta y_i,
+$$</p>
+<p>其中 $\eta&gt;0$ 是学习率。</p>
+<p>源课件分别讨论 $y=-1$ 与 $y=+1$ 的加减更新，本质上与上述统一公式一致。</p>
+<h3 id="section-10">2.2.3 感知机收敛定理</h3>
+<p>若训练集线性可分，则存在 $\boldsymbol{w}<em>*,b</em>*$ 使：</p>
+<p>$$
+y_i(\boldsymbol{w}_<em>^{\mathrm T}\boldsymbol{x}<em>i+b</em></em>)&gt;0,
+\qquad i=1,\ldots,N.
+$$</p>
+<p>在标准感知机更新条件下，算法经过有限次误分类更新后能找到一个分离超平面。</p>
+<ul>
+<li>定理只保证线性可分数据上的有限步收敛。</li>
+<li>线性不可分或带噪数据上，原始感知机可能持续振荡，需要设置迭代上限、容错或使用其他损失。</li>
+</ul>
+<h2 id="section-11">2.3 前向传播</h2>
+<h3 id="section-12">2.3.1 单样本计算</h3>
+<p>以一层含四个神经元的隐藏层为例：</p>
+<h1 id="section-13">$$
+z_j^{[1]}</h1>
+<p>(\boldsymbol{w}_j^{[1]})^{\mathrm T}\boldsymbol{x}
++b_j^{[1]},
+\qquad
+a_j^{[1]}=\sigma(z_j^{[1]}),
+$$</p>
+<p>其中 $j=1,2,3,4$。</p>
+<p>把四个标量方程向量化：</p>
+<h1 id="section-14">$$
+\boldsymbol{z}^{[1]}</h1>
+<p>W^{[1]}\boldsymbol{x}+\boldsymbol{b}^{[1]},
+$$</p>
+<h1 id="section-15">$$
+\boldsymbol{a}^{[1]}</h1>
+<p>\sigma(\boldsymbol{z}^{[1]}).
+$$</p>
+<p>输出层：</p>
+<h1 id="section-16">$$
+\boldsymbol{z}^{[2]}</h1>
+<p>W^{[2]}\boldsymbol{a}^{[1]}+\boldsymbol{b}^{[2]},
+$$</p>
+<h1 id="section-17">$$
+\boldsymbol{a}^{[2]}</h1>
+<p>\varphi^{[2]}(\boldsymbol{z}^{[2]}).
+$$</p>
+<h3 id="section-18">2.3.2 一般形式</h3>
+<p>令 $\boldsymbol{a}^{[0]}=\boldsymbol{x}$，对 $l=1,\ldots,L$：</p>
+<h1 id="section-19">$$
+\boldsymbol{z}^{[l]}</h1>
+<p>W^{[l]}\boldsymbol{a}^{[l-1]}+\boldsymbol{b}^{[l]},
+$$</p>
+<h1 id="section-20">$$
+\boldsymbol{a}^{[l]}</h1>
+<p>\varphi^{[l]}(\boldsymbol{z}^{[l]}).
+$$</p>
+<p>对 $m$ 个样本按列组成批矩阵：</p>
+<h1 id="section-21">$$
+Z^{[l]}</h1>
+<p>W^{[l]}A^{[l-1]}+b^{[l]},
+$$</p>
+<p>其中 $b^{[l]}$ 会沿样本维广播。</p>
+<h2 id="section-22">2.4 多层网络为什么需要非线性</h2>
+<p>若两层都没有非线性：</p>
+<h1 id="section-23">$$
+\boldsymbol{a}^{[1]}</h1>
+<p>W^{[1]}\boldsymbol{x}+b^{[1]},
+$$</p>
+<h1 id="section-24">$$
+\boldsymbol{y}</h1>
+<p>W^{[2]}\boldsymbol{a}^{[1]}+b^{[2]},
+$$</p>
+<p>则：</p>
+<h1 id="section-25">$$
+\boldsymbol{y}</h1>
+<p>W^{[2]}W^{[1]}\boldsymbol{x}
++W^{[2]}b^{[1]}+b^{[2]},
+$$</p>
+<p>仍然只是一次仿射变换。无论堆叠多少纯线性层，都不能形成非线性决策边界。</p>
+<p>加入 $\varphi(\cdot)$ 后，各层可以组合出复杂非线性函数。</p>
+<h3 id="section-26">2.4.1 用半空间组合决策区域</h3>
+<p>源课件用阶跃神经元和直线近似说明：</p>
+<ul>
+<li>每个第一层神经元可判断点位于一条直线的哪一侧，即一个半空间。</li>
+<li>后续神经元可以组合多个半空间，形成交集或并集。</li>
+<li>三角形需要三条边界，四边形需要四条边界。</li>
+<li>两个互不相连的三角形可先用六条边界分别描述，再在更高层合并。</li>
+<li>圆形或不规则边界可用越来越多线段逼近，神经元数随近似精度增加。</li>
+</ul>
+<p>源课件把结论表述为“三层神经网络可以模拟所有决策面”。更准确地说：在合适非线性激活、足够隐藏单元以及一定函数条件下，含一个隐藏层的前馈网络可任意精度逼近紧集上的连续函数；有限网络通常是逼近复杂边界，而不是精确表示任意决策面。</p>
+<h3 id="section-27">2.4.2 多层网络的特点</h3>
+<p>优点：</p>
+<ul>
+<li>基本单元简单，组合后表达能力强。</li>
+<li>矩阵计算具有较好的 GPU/并行执行能力。</li>
+<li>可从数据中学习层次化特征，减少完全手工设计特征的负担。</li>
+</ul>
+<p>局限：</p>
+<ul>
+<li>深度网络目标通常非凸，训练结果受初始化、优化器和超参数影响。</li>
+<li>参数含义与最终决策之间关系复杂，可解释性往往有限。</li>
+<li>层数、宽度、激活、学习率、优化器、正则化和停止条件都需选择。</li>
+<li>复杂模型通常需要更多高质量数据和计算资源。</li>
+</ul>
+<h2 id="section-28">2.5 梯度下降与局部极值</h2>
+<h3 id="section-29">2.5.1 一维更新</h3>
+<p>对目标 $f(w)$：</p>
+<h1 id="section-30">$$
+w_{k+1}</h1>
+<p>w_k-\alpha f'(w_k).
+$$</p>
+<p>一阶泰勒展开：</p>
+<h1 id="section-31">$$
+f(w+\Delta w)</h1>
+<p>f(w)+f'(w)\Delta w+o(\Delta w).
+$$</p>
+<p>令：</p>
+<p>$$
+\Delta w=-\alpha f'(w),
+$$</p>
+<p>有：</p>
+<p>$$
+f(w+\Delta w)
+\approx
+f(w)-\alpha[f'(w)]^2.
+$$</p>
+<p>当学习率足够小时，只要梯度不为零，函数值就会沿负梯度方向下降。</p>
+<h3 id="section-32">2.5.2 多维形式</h3>
+<h1 id="section-33">$$
+\boldsymbol{w}_{k+1}</h1>
+<h2 id="section-34">\boldsymbol{w}_k</h2>
+<p>\alpha\nabla f(\boldsymbol{w}_k).
+$$</p>
+<p>下降量的一阶近似为：</p>
+<p>$$
+-\alpha|\nabla f(\boldsymbol{w}_k)|_2^2.
+$$</p>
+<ul>
+<li>梯度给出局部最陡上升方向，负梯度给出局部最陡下降方向。</li>
+<li>深度网络中可能遇到局部极小值、鞍点和平坦区域。</li>
+<li>实现时通常用梯度范数、目标变化或验证指标低于阈值作为停止条件，而不是要求梯度精确等于零。</li>
+</ul>
+<h2 id="section-35">2.6 后向传播的基本过程</h2>
+<p>给定训练样本 $(\boldsymbol{x},\boldsymbol{Y})$，平方误差可写为：</p>
+<h1 id="section-36">$$
+E</h1>
+<p>\frac{1}{2}
+|\boldsymbol{a}^{[L]}-\boldsymbol{Y}|_2^2.
+$$</p>
+<p>训练过程：</p>
+<ol>
+<li>初始化 $W^{[l]},b^{[l]}$。</li>
+<li>前向传播，计算所有 $z^{[l]}$、$a^{[l]}$ 和输出。</li>
+<li>从损失出发，按链式法则从输出层向输入层传播梯度。</li>
+<li>得到每层 $\partial E/\partial W^{[l]}$ 和 $\partial E/\partial b^{[l]}$。</li>
+<li>用优化器更新参数。</li>
+</ol>
+<p>反向传播不是一种与梯度下降并列的更新规则：反向传播负责高效计算梯度，梯度下降或 Adam 等优化器负责使用梯度更新参数。</p>
+<h2 id="section-37">2.7 激活函数</h2>
+<h3 id="section-38">2.7.1 Sigmoid</h3>
+<p>$$
+\sigma(x)=\frac{1}{1+e^{-x}},
+$$</p>
+<p>$$
+\sigma'(x)=\sigma(x)[1-\sigma(x)].
+$$</p>
+<ul>
+<li>输出范围 $(0,1)$，适合二分类概率或门控。</li>
+<li>$|x|$ 很大时导数接近 $0$，深层连乘容易产生梯度消失。</li>
+</ul>
+<h3 id="section-39">2.7.2 双曲正切</h3>
+<h1 id="section-40">$$
+\tanh(x)</h1>
+<p>\frac{e^x-e^{-x}}{e^x+e^{-x}},
+$$</p>
+<p>$$
+\tanh'(x)=1-\tanh^2(x).
+$$</p>
+<ul>
+<li>输出以 $0$ 为中心，范围 $(-1,1)$。</li>
+<li>大幅值区域同样会饱和并造成梯度消失。</li>
+</ul>
+<h3 id="section-41">2.7.3 ReLU</h3>
+<p>$$
+\operatorname{ReLU}(x)=\max(0,x),
+$$</p>
+<p>$$
+\operatorname{ReLU}'(x)=
+\begin{cases}
+1, &amp; x&gt;0,\
+0, &amp; x&lt;0.
+\end{cases}
+$$</p>
+<p>在 $x=0$ 处不可导，实际框架选用约定的次梯度，PyTorch 通常取 $0$。</p>
+<ul>
+<li>正半轴不饱和，计算简单，常缓解 Sigmoid/tanh 的梯度消失。</li>
+<li>负半轴输出为零，会产生稀疏激活。</li>
+<li>若神经元长期落在负半轴，梯度持续为零，可能形成“死亡 ReLU”。</li>
+<li>稀疏激活不等同于 Dropout，也不能简单解释为“为了减少过拟合而干掉神经元”。</li>
+</ul>
+<h3 id="section-42">2.7.4 Leaky ReLU</h3>
+<h1 id="section-43">$$
+\operatorname{LeakyReLU}(x)</h1>
+<p>\begin{cases}
+x, &amp; x&gt;0,\
+\beta x, &amp; x\leq0,
+\end{cases}
+$$</p>
+<p>其中 $\beta$ 是较小正数。负半轴保留小梯度，可降低死亡 ReLU 风险。</p>
+<h3 id="section-44">2.7.5 图示中的其他激活</h3>
+<p>源课件比较图还包含：</p>
+<ul>
+<li>Maxout：输出多个仿射函数的最大值，如</li>
+</ul>
+<p>$$
+\max(\boldsymbol{w}_1^T\boldsymbol{x}+b_1,
+\boldsymbol{w}_2^T\boldsymbol{x}+b_2).
+$$</p>
+<p>它是分段线性函数，表达灵活，但参数量较大。</p>
+<ul>
+<li>ELU：</li>
+</ul>
+<p>$$
+\operatorname{ELU}(x)=
+\begin{cases}
+x, &amp; x\geq0,\
+\alpha(e^x-1), &amp; x&lt;0.
+\end{cases}
+$$</p>
+<p>负区间平滑且允许负输出，但计算比 ReLU 复杂。</p>
+<h2 id="section-45">2.8 反向传播公式推导</h2>
+<h3 id="section-46">2.8.1 前向定义</h3>
+<p>对第 $l$ 层：</p>
+<h1 id="section-47">$$
+\boldsymbol{z}^{[l]}</h1>
+<p>W^{[l]}\boldsymbol{a}^{[l-1]}+\boldsymbol{b}^{[l]},
+$$</p>
+<h1 id="section-48">$$
+\boldsymbol{a}^{[l]}</h1>
+<p>\varphi^{[l]}(\boldsymbol{z}^{[l]}).
+$$</p>
+<p>定义误差信号：</p>
+<h1 id="section-49">$$
+\boldsymbol{\delta}^{[l]}</h1>
+<p>\frac{\partial E}{\partial\boldsymbol{z}^{[l]}}.
+$$</p>
+<h3 id="section-50">2.8.2 输出层误差</h3>
+<p>一般形式：</p>
+<h1 id="section-51">$$
+\boldsymbol{\delta}^{[L]}</h1>
+<p>\frac{\partial E}{\partial\boldsymbol{a}^{[L]}}
+\odot
+\varphi^{[L]\prime}(\boldsymbol{z}^{[L]}),
+$$</p>
+<p>其中 $\odot$ 表示逐元素乘法。</p>
+<p>若使用平方误差：</p>
+<h1 id="section-52">$$
+\boldsymbol{\delta}^{[L]}</h1>
+<p>(\boldsymbol{a}^{[L]}-\boldsymbol{Y})
+\odot
+\varphi^{[L]\prime}(\boldsymbol{z}^{[L]}).
+$$</p>
+<h3 id="section-53">2.8.3 隐藏层递推</h3>
+<p>从后一层向前一层：</p>
+<h1 id="section-54">$$
+\boldsymbol{\delta}^{[l]}</h1>
+<p>(W^{[l+1]})^{\mathrm T}
+\boldsymbol{\delta}^{[l+1]}
+\odot
+\varphi^{[l]\prime}(\boldsymbol{z}^{[l]}),
+$$</p>
+<p>其中 $l=L-1,L-2,\ldots,1$。</p>
+<p>分量形式：</p>
+<h1 id="section-55">$$
+\delta_i^{[l]}</h1>
+<p>\varphi^{[l]\prime}(z_i^{[l]})
+\sum_j
+W_{ji}^{[l+1]}
+\delta_j^{[l+1]}.
+$$</p>
+<h3 id="section-56">2.8.4 参数梯度</h3>
+<p>单个样本：</p>
+<h1 id="section-57">$$
+\frac{\partial E}{\partial W^{[l]}}</h1>
+<p>\boldsymbol{\delta}^{[l]}
+(\boldsymbol{a}^{[l-1]})^{\mathrm T},
+$$</p>
+<h1 id="section-58">$$
+\frac{\partial E}{\partial\boldsymbol{b}^{[l]}}</h1>
+<p>\boldsymbol{\delta}^{[l]}.
+$$</p>
+<p>元素形式：</p>
+<h1 id="section-59">$$
+\frac{\partial E}{\partial W_{ij}^{[l]}}</h1>
+<p>\delta_i^{[l]}a_j^{[l-1]}.
+$$</p>
+<p>对含 $m$ 个样本的批次，梯度通常在样本维求和后除以 $m$。</p>
+<h3 id="section-60">2.8.5 参数更新</h3>
+<p>$$
+W^{[l]}
+\leftarrow
+W^{[l]}-\alpha
+\frac{\partial E}{\partial W^{[l]}},
+$$</p>
+<p>$$
+b^{[l]}
+\leftarrow
+b^{[l]}-\alpha
+\frac{\partial E}{\partial b^{[l]}}.
+$$</p>
+<h2 id="section-61">2.9 数据划分与训练监控</h2>
+<h3 id="section-62">2.9.1 三类数据</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练集</td>
+<td>计算梯度并拟合参数</td>
+</tr>
+<tr>
+<td>验证集</td>
+<td>选择超参数、早停和保存最佳模型</td>
+</tr>
+<tr>
+<td>测试集</td>
+<td>所有选择完成后做一次最终无偏评估</td>
+</tr>
+</tbody>
+</table></div>
+<p>源课件示例使用训练/验证/测试为 $40%/10%/50%$，这只是示例，不是通用最优比例。数据较大时常保留较小比例给验证和测试；数据较小时可使用交叉验证。</p>
+<ul>
+<li>划分前通常打乱数据，并在分类任务中尽量分层抽样。</li>
+<li>同一主体、相邻时间片或重复样本不能跨集合泄漏。</li>
+<li>测试集不能反复用于挑模型，否则它会失去独立评估作用。</li>
+</ul>
+<h3 id="section-63">2.9.2 损失与验证指标</h3>
+<ul>
+<li>全批次训练损失通常应总体下降，但 Mini-batch 损失本来就会波动，不能要求每一步单调下降。</li>
+<li>损失突然持续上升，常见原因包括学习率过高、数值不稳定、数据或实现错误，而不是简单地说明“模型太简单或已经训练好”。</li>
+<li>学习率过大可能震荡或发散；过小则收敛缓慢。</li>
+<li>应定期在验证集计算准确率或任务指标，并保存验证性能最好的检查点。</li>
+<li>验证指标长时间不再改善时可早停，防止过拟合。</li>
+</ul>
+<h2 id="section-64">2.10 批量梯度下降、SGD 与 Mini-batch</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:right">每次更新使用的样本数</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全批量梯度下降</td>
+<td style="text-align:right">全部训练集</td>
+<td>梯度稳定，但单次计算和内存开销大</td>
+</tr>
+<tr>
+<td>随机梯度下降（严格意义）</td>
+<td style="text-align:right">1</td>
+<td>更新频繁、噪声大</td>
+</tr>
+<tr>
+<td>Mini-batch SGD</td>
+<td style="text-align:right">$1&lt;B&lt;m$</td>
+<td>并行效率和梯度噪声之间折中</td>
+</tr>
+</tbody>
+</table></div>
+<p>源课件把“一批样本求平均梯度”统称为 SGD，更精确的名称是 Mini-batch SGD。</p>
+<p>基本过程：</p>
+<ol>
+<li>每轮训练开始前打乱样本索引。</li>
+<li>按 <code>batch_size</code> 划分多个批次。</li>
+<li>对每批执行前向传播。</li>
+<li>反向传播计算平均梯度。</li>
+<li>更新 $W,b$。</li>
+</ol>
+<pre><code class="language-python">for inputs, targets in train_loader:
+    optimizer.zero_grad()
+    outputs = model(inputs)
+    loss = loss_fn(outputs, targets)
+    loss.backward()
+    optimizer.step()
+</code></pre>
+<ul>
+<li>课件建议批大小约 50-200，这是经验示例；现代任务中批大小取决于模型、显存、归一化方法和优化器。</li>
+<li>最后一个批次可能小于 <code>batch_size</code>，不一定要丢弃。</li>
+</ul>
+<h2 id="section-65">2.11 训练数据标准化</h2>
+<p>对每个特征维度，用训练集统计量做标准化：</p>
+<h1 id="section-66">$$
+\hat x_j</h1>
+<p>\frac{x_j-\mu_j}{\sqrt{\sigma_j^2+\varepsilon}}.
+$$</p>
+<p>作用：</p>
+<ul>
+<li>让不同量纲的特征处于可比较的数值范围。</li>
+<li>改善目标函数的条件数，使梯度下降不必在狭长等高线中来回摆动。</li>
+<li>往往允许使用更合适的统一学习率并加快收敛。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>$\mu_j,\sigma_j$ 只能在训练集上估计，再原样用于验证集和测试集。</li>
+<li>标准化把各维变为近似零均值、单位方差，但不会自动消除特征间相关性。</li>
+</ul>
+<h2 id="section-67">2.12 参数初始化</h2>
+<h3 id="section-68">2.12.1 为什么不能全部初始化为零</h3>
+<p>若同一层所有权重完全相同，各神经元会得到相同梯度并始终学习相同特征，产生对称性问题。因此权重需要随机初始化；偏置通常可以初始化为零。</p>
+<h3 id="section-69">2.12.2 梯度消失与爆炸</h3>
+<p>Sigmoid/tanh 在 $|z|$ 很大时导数接近零。若：</p>
+<p>$$
+z=W^Tx+b
+$$</p>
+<p>一开始绝对值过大，或深层链式乘积持续小于 $1$，前层梯度会越来越小；持续大于 $1$ 则可能梯度爆炸。</p>
+<h3 id="section-70">2.12.3 方差缩放初始化</h3>
+<p>源课件给出：</p>
+<p>$$
+w_i\sim
+U\left(-\frac{1}{\sqrt d},\frac{1}{\sqrt d}\right),
+$$</p>
+<p>其中 $d$ 是输入维度。若输入各维独立、零均值、单位方差，则单个权重方差为 $1/(3d)$，$W^Tx$ 的方差约为 $1/3$，有助于让初始激活处在不过度饱和的范围。</p>
+<p>现代常用：</p>
+<ul>
+<li>Xavier/Glorot 初始化：适合 tanh 或近似对称激活，常令</li>
+</ul>
+<p>$$
+\operatorname{Var}(W)
+\approx
+\frac{2}{\operatorname{fan}<em>{in}+\operatorname{fan}</em>{out}}.
+$$</p>
+<ul>
+<li>He/Kaiming 初始化：适合 ReLU，常令</li>
+</ul>
+<p>$$
+\operatorname{Var}(W)
+\approx
+\frac{2}{\operatorname{fan}_{in}}.
+$$</p>
+<p>初始化目标不是让所有参数“在零附近徘徊”，而是保持各层激活和梯度的方差处于合理尺度。</p>
+<h2 id="section-71">2.13 Batch Normalization</h2>
+<h3 id="section-72">2.13.1 前向公式</h3>
+<p>对 Mini-batch $\mathcal B={x_1,\ldots,x_m}$：</p>
+<h1 id="section-73">$$
+\mu_{\mathcal B}</h1>
+<p>\frac{1}{m}
+\sum_{i=1}^{m}x_i,
+$$</p>
+<h1 id="section-74">$$
+\sigma_{\mathcal B}^2</h1>
+<p>\frac{1}{m}
+\sum_{i=1}^{m}
+(x_i-\mu_{\mathcal B})^2,
+$$</p>
+<h1 id="section-75">$$
+\hat x_i</h1>
+<p>\frac{x_i-\mu_{\mathcal B}}
+{\sqrt{\sigma_{\mathcal B}^2+\varepsilon}},
+$$</p>
+<h1 id="section-76">$$
+y_i</h1>
+<p>\gamma\hat x_i+\beta.
+$$</p>
+<ul>
+<li>$\varepsilon$ 防止除零。</li>
+<li>$\gamma,\beta$ 是可学习的缩放和平移参数，使网络在需要时恢复或改变标准化后的分布。</li>
+</ul>
+<p>典型次序：</p>
+<pre><code class="language-text">Linear/Conv -&gt; BatchNorm -&gt; Activation
+</code></pre>
+<h3 id="section-77">2.13.2 训练与推理</h3>
+<ul>
+<li>训练时使用当前 Mini-batch 的均值和方差，并更新运行统计量。</li>
+<li>推理时使用训练期间积累的运行均值和运行方差，而不是当前单个样本统计量。</li>
+<li>因而框架中要正确使用 <code>model.train()</code> 与 <code>model.eval()</code>。</li>
+</ul>
+<p>BatchNorm 往往改善优化稳定性、允许更大学习率并带来一定正则化效果。原论文标题强调减少 internal covariate shift，但现代研究认为其有效机制不只这一种解释。</p>
+<h2 id="section-78">2.14 目标函数与正则化</h2>
+<p>一般形式：</p>
+<p>$$
+L(W)=F(W)+\lambda R(W),
+$$</p>
+<p>其中 $F$ 是数据拟合损失，$R$ 是正则项。</p>
+<p>L2 正则：</p>
+<p>$$
+R(W)=\frac{1}{2}\sum_l|W^{[l]}|_F^2.
+$$</p>
+<p>对批次平方误差可写为：</p>
+<h1 id="section-79">$$
+L</h1>
+<p>\frac{1}{2B}
+\sum_{i=1}^{B}
+|\hat y_i-y_i|_2^2
++
+\frac{\lambda}{2}
+\sum_l|W^{[l]}|_F^2.
+$$</p>
+<ul>
+<li>L2 正则会惩罚过大的权重，常对应优化器中的 weight decay。</li>
+<li>偏置和 BatchNorm 的缩放/平移参数是否衰减，应按实现和经验单独设置。</li>
+</ul>
+<h2 id="section-80">2.15 Softmax 与交叉熵</h2>
+<h3 id="section-81">2.15.1 Softmax</h3>
+<p>给定 $K$ 类 logits：</p>
+<p>$$
+\boldsymbol{z}=(z_1,z_2,\ldots,z_K),
+$$</p>
+<p>Softmax 输出：</p>
+<h1 id="section-82">$$
+q_i</h1>
+<p>\frac{e^{z_i}}
+{\sum_{j=1}^{K}e^{z_j}},
+\qquad i=1,\ldots,K.
+$$</p>
+<p>性质：</p>
+<p>$$
+q_i&gt;0,
+\qquad
+\sum_{i=1}^{K}q_i=1.
+$$</p>
+<p>为避免指数溢出，可利用平移不变性：</p>
+<h1 id="section-83">$$
+q_i</h1>
+<p>\frac{e^{z_i-z_{max}}}
+{\sum_j e^{z_j-z_{max}}}.
+$$</p>
+<h3 id="section-84">2.15.2 多分类交叉熵</h3>
+<p>若真实标签是 one-hot 向量 $\boldsymbol{p}$：</p>
+<h1 id="section-85">$$
+E</h1>
+<p>-\sum_{i=1}^{K}p_i\log q_i.
+$$</p>
+<p>若真实类别为 $c$，则：</p>
+<p>$$
+E=-\log q_c.
+$$</p>
+<ul>
+<li>分类框架通常把 Softmax 和对数交叉熵合并为数值稳定的函数，直接接收 logits。</li>
+<li>注意力机制也用 Softmax 把相似度分数变为和为 $1$ 的权重，但这些权重不一定等同于类别概率。</li>
+</ul>
+<h2 id="section-86">2.16 常用深度学习数据集</h2>
+<h3 id="section-87">2.16.1 MNIST</h3>
+<ul>
+<li>手写数字 $0$ 到 $9$，共 10 类。</li>
+<li>训练集 60,000 张，测试集 10,000 张。</li>
+<li>灰度图大小为 $28\times28$。</li>
+<li>由 LeCun 等人整理，是入门分类和模型验证的经典数据集。</li>
+</ul>
+<h3 id="section-88">2.16.2 ImageNet</h3>
+<ul>
+<li>ImageNet 项目由 Fei-Fei Li 团队推动，数据收集始于约 2007 年，2009 年公开介绍。</li>
+<li>完整 ImageNet 包含超过 1,400 万张图像和两万多个 WordNet 类别节点。</li>
+<li>深度学习论文常说的 ImageNet 分类基准通常指 ILSVRC-2012 子集：约 128 万张训练图像、1,000 类。</li>
+<li>源课件的“1000 类、1000 万张”和“20,000 类”混合了竞赛子集与完整数据库口径，使用时必须区分。</li>
+</ul>
+<h2 id="section-89">2.17 自编码器与逐层预训练</h2>
+<h3 id="section-90">2.17.1 自编码器</h3>
+<p>自编码器包含：</p>
+<ol>
+<li>编码器：把输入 $X$ 压缩成潜在表示 $h$。</li>
+<li>解码器：用 $h$ 重构 $\hat X$。</li>
+</ol>
+<p>训练目标是使：</p>
+<p>$$
+\hat X\approx X.
+$$</p>
+<p>瓶颈层迫使模型保留对重构有用的信息，可用于降维、表征学习和初始化。</p>
+<h3 id="section-91">2.17.2 逐层无监督预训练</h3>
+<p>课件图示的历史方法：</p>
+<ol>
+<li>先训练第一层编码和对应解码，使输出重构输入。</li>
+<li>保留第一层编码参数，用第一层表示作为下一层输入。</li>
+<li>固定前面层，逐层训练新的编码层。</li>
+<li>全部层完成初始化后，再展开完整网络，用反向传播联合微调。</li>
+</ol>
+<p>图示把约 2000 维输入逐步压缩到 30 维，再由解码器重构图像。</p>
+<p>2006 年前后，Hinton 等人的深度信念网络和逐层无监督预训练工作推动了深度学习复兴。课件把这一历史与自编码器合并描述；更准确地说，当时既有 RBM/深度信念网络路线，也有自编码器式逐层预训练。现代残差结构、归一化和初始化技术成熟后，监督任务通常可以端到端训练，逐层预训练不再是所有深网的必需步骤。</p>
+<h2 id="section-92">2.18 易错点</h2>
+<ul>
+<li>$W^{[l]}$ 连接第 $l-1$ 层到第 $l$ 层，形状为 $(n_l,n_{l-1})$。</li>
+<li>输入层通常记为第 0 层，不计入可学习层数。</li>
+<li>感知机收敛定理要求线性可分；不可分数据上原始算法不保证停止。</li>
+<li>多个线性层仍等价于一个线性层，隐藏层之间必须有非线性才能提升表达能力。</li>
+<li>“三层网络模拟所有决策面”应理解为带条件的通用逼近，而不是任意有限网络精确表示一切边界。</li>
+<li>反向传播计算梯度，优化器使用梯度；二者不是同一概念。</li>
+<li>ReLU 的稀疏激活不等于 Dropout，且存在死亡 ReLU 风险。</li>
+<li>隐藏层误差递推必须使用下一层权重的转置：$(W^{[l+1]})^T\delta^{[l+1]}$。</li>
+<li>Mini-batch 损失会波动，不应把单步上升直接判断为训练失败。</li>
+<li>严格意义的 SGD 每次使用一个样本；一批样本更新是 Mini-batch SGD。</li>
+<li>数据标准化统计量只能来自训练集，验证和测试不能重新估计。</li>
+<li>权重不能全部初始化为零；tanh 常用 Xavier，ReLU 常用 He 初始化。</li>
+<li>BatchNorm 训练时用批统计，推理时用运行统计，并通过 $\gamma,\beta$ 恢复表达能力。</li>
+<li>Softmax 应使用减去最大 logit 的数值稳定形式；交叉熵损失通常直接接收 logits。</li>
+<li>完整 ImageNet 与 ILSVRC-2012 的图片数、类别数口径不同。</li>
+<li>逐层自编码器预训练是重要历史方法，但不是现代网络训练的普遍必需步骤。</li>
+</ul>
+<h2 id="section-93">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-2f3d569a9394/">上一篇：预备知识</a> · <a href="/en/notes/cs408-f43cdf74b38c/">下一篇：卷积神经网络</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-5b39b66a185c/">神经网络基础</a></li>
+</ul>
+<h2 id="section-94">2.19 本节复盘</h2>
+<ul>
+<li>神经元执行加权和、偏置与激活；网络按层重复该过程。</li>
+<li>感知机对误分类样本更新参数，并只在线性可分条件下保证有限步收敛。</li>
+<li>前向传播统一写为 $z^{[l]}=W^{[l]}a^{[l-1]}+b^{[l]}$、$a^{[l]}=\varphi^{[l]}(z^{[l]})$。</li>
+<li>非线性使多层网络能够组合半空间并逼近复杂决策边界。</li>
+<li>梯度下降沿负梯度方向更新；反向传播通过链式法则高效计算各层参数梯度。</li>
+<li>输出层先计算 $\delta^{[L]}$，隐藏层用 $(W^{[l+1]})^T\delta^{[l+1]}\odot\varphi'(z^{[l]})$ 递推。</li>
+<li>Mini-batch 在梯度稳定性、并行效率和更新频率之间折中；验证集用于早停和模型选择。</li>
+<li>标准化、Xavier/He 初始化和 BatchNorm 都有助于控制各层数值尺度，但作用机制不同。</li>
+<li>L2 正则限制权重规模；Softmax 把多类 logits 转为和为 1 的分布，并与交叉熵配合训练。</li>
+<li>MNIST 与 ImageNet 是经典视觉数据集；自编码器通过重构学习压缩表示，逐层预训练在深度学习历史上具有重要作用。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-b0e7f0582b88/index.html"><span>← Previous item</span><strong>4 题型 - 虚拟局域网</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-b236e9204607/index.html"><span>Next item →</span><strong>408重写方法</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 2：模型评估和选择 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 2：模型评估和选择. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 2：模型评估和选择 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 2：模型评估和选择. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-a2a1fce63aa5/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 2：模型评估和选择 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 2：模型评估和选择. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 2：模型评估和选择",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-a2a1fce63aa5/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-a2a1fce63aa5/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a2a1fce63aa5/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a2a1fce63aa5/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a2a1fce63aa5/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-a2a1fce63aa5/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 2：模型评估和选择</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 2：模型评估和选择. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>13 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/36e4e5944ead.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/36e4e5944ead.pdf" download="Lecture 2：模型评估和选择.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 什么是好模型</a><a href="#section-2">2.2 泛化误差、经验误差与过拟合</a><a href="#section-6">2.3 模型选择的三个问题</a><a href="#section-7">2.4 正则化</a><a href="#section-8">2.5 测试集的获得方法</a><a href="#section-13">2.6 调参、训练集、验证集与测试集</a><a href="#section-14">2.7 平均损失、训练误差与测试误差</a><a href="#section-15">2.8 性能度量</a><a href="#section-18">2.9 比较检验</a><a href="#section-19">2.10 二分类的混淆矩阵</a><a href="#section-23">2.11 易错点</a><a href="#section-24">相关知识</a><a href="#section-25">2.12 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节围绕模型的泛化能力，整理过拟合、正则化、留出法、交叉验证、自助法、验证集、性能度量、比较检验，以及二分类中的混淆矩阵、查准率、查全率和 $F_\beta$。</p>
+</blockquote>
+<h2 id="section-1">2.1 什么是好模型</h2>
+<ul>
+<li>判断模型好坏前，应先明确任务真正需要什么，再据此定义评价标准。</li>
+<li>机器学习模型的核心要求是泛化能力强，即在未见数据上仍能保持较好的预测性能。</li>
+<li>同一个模型在不同任务、不同数据分布或不同性能度量下，可能得到不同评价。</li>
+</ul>
+<h2 id="section-2">2.2 泛化误差、经验误差与过拟合</h2>
+<h3 id="section-3">2.2.1 泛化误差</h3>
+<p>泛化误差是在未来样本上的期望损失。若真实联合分布为 $P(X,Y)$，学习到的模型为 $\hat f$，则</p>
+<p>$$
+R_{\mathrm{exp}}(\hat f)
+=\mathbb E_{(X,Y)\sim P}
+\left[L(Y,\hat f(X))\right].
+$$</p>
+<ul>
+<li>若 $X,Y$ 都具有连续联合密度 $p(x,y)$，才可写成 $\int!!\int L(y,\hat f(x))p(x,y),\mathrm dx,\mathrm dy$。</li>
+<li>分类任务中的 $Y$ 通常离散，此时应对类别求和；若 $X$ 连续，则写成 $\sum_y\int L(y,\hat f(x))p(x,y),\mathrm dx$。</li>
+<li>真实分布通常未知，因此泛化误差不能直接精确计算。</li>
+<li>使用训练数据估计未来性能的前提，是训练数据与未来数据之间存在稳定联系，通常假设它们来自相同分布。</li>
+</ul>
+<h3 id="section-4">2.2.2 经验误差</h3>
+<p>训练集</p>
+<p>$$
+D={(\boldsymbol{x}<em>i,y_i)}</em>{i=1}^{N}
+$$</p>
+<p>上的平均损失称为经验风险或训练误差：</p>
+<p>$$
+R_{\mathrm{emp}}(\hat f)
+=\frac{1}{N}\sum_{i=1}^{N}
+L(y_i,\hat f(\boldsymbol{x}_i)).
+$$</p>
+<ul>
+<li>经验误差只反映模型对已知训练样本的拟合程度。</li>
+<li>模型最终要处理未来、未见的数据，因此经验误差不能替代泛化误差。</li>
+</ul>
+<h3 id="section-5">2.2.3 过拟合</h3>
+<ul>
+<li>当比较的是同一训练集上的嵌套假设空间，且每个模型都被充分优化时，经验风险的最优值通常不会随模型复杂度增加而上升，但不保证一定趋近于 $0$。</li>
+<li>测试误差“先下降后上升”是有限样本和噪声下常见的偏差-方差趋势，不是对任意模型族、优化算法和数据分布都成立的定律。</li>
+<li>当模型过于复杂，把训练样本中的偶然特征或噪声误当作一般规律时，就发生过拟合。</li>
+<li>因此训练误差不是越小越好。选择模型时要在拟合能力与模型复杂度之间取得平衡。</li>
+</ul>
+<p>可把典型趋势概括为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>模型复杂度</th>
+<th>训练误差</th>
+<th>测试误差</th>
+<th>常见状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>过低</td>
+<td>高</td>
+<td>高</td>
+<td>欠拟合</td>
+</tr>
+<tr>
+<td>适中</td>
+<td>较低</td>
+<td>最低附近</td>
+<td>泛化较好</td>
+</tr>
+<tr>
+<td>过高</td>
+<td>很低</td>
+<td>重新升高</td>
+<td>过拟合</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>学习任何算法时都应追问：它靠什么机制缓解过拟合？该机制在什么条件下会失效？</li>
+</ul>
+<h2 id="section-6">2.3 模型选择的三个问题</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>对应工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>如何获得可信的测试结果</td>
+<td>评估方法</td>
+</tr>
+<tr>
+<td>如何定义性能优劣</td>
+<td>性能度量</td>
+</tr>
+<tr>
+<td>如何判断差异是否具有统计意义</td>
+<td>比较检验</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-7">2.4 正则化</h2>
+<ul>
+<li>正则化是模型选择的典型方法，也是结构风险最小化的实现。</li>
+<li>它在经验风险上增加与模型复杂度相关的正则化项或罚项：</li>
+</ul>
+<p>$$
+\min_{f\in\mathcal F}
+\frac{1}{N}\sum_{i=1}^{N}L(y_i,f(\boldsymbol{x}_i))
++\lambda J(f).
+$$</p>
+<ul>
+<li>第一项衡量训练拟合误差，第二项 $J(f)$ 衡量模型复杂度，$\lambda$ 控制两者的权衡。</li>
+<li>正则化项一般是模型复杂度的单调递增函数，例如参数向量的范数。</li>
+<li>正则化的目标不是单独把训练误差或复杂度压到最小，而是选择二者同时较小的模型。</li>
+<li>从奥卡姆剃刀角度看，应在能够较好解释数据的模型中偏好更简单者。</li>
+<li>从贝叶斯估计角度看，正则化项可对应模型参数的先验：复杂模型先验概率较小，简单模型先验概率较大。</li>
+</ul>
+<h2 id="section-8">2.5 测试集的获得方法</h2>
+<h3 id="section-9">2.5.1 基本原则</h3>
+<ul>
+<li>测试集必须与训练集互斥。</li>
+<li>测试集要尽量反映真实应用分布。</li>
+<li>不能用测试集调参或反复选择模型，否则测试集会间接参与训练，评价将偏乐观。</li>
+</ul>
+<h3 id="section-10">2.5.2 留出法</h3>
+<p>留出法把数据集直接划分为训练集与测试集。</p>
+<ul>
+<li>划分时要保持数据分布一致，例如分类任务可采用分层采样。</li>
+<li>单次随机划分带有偶然性，通常应重复多次随机划分并汇总结果。</li>
+<li>测试集不能太小，否则评估方差大；也不能太大，否则训练数据不足。源资料给出的经验比例约为数据集的 $1/5$ 到 $1/3$。</li>
+<li>留出法实际评估的是用较小训练集得到的模型。例如最终希望用 $100$ 个样本训练，若留出 $20$ 个测试，评估的是用 $80$ 个样本训练的模型，两者并不完全相同。</li>
+</ul>
+<h3 id="section-11">2.5.3 $k$ 折交叉验证</h3>
+<ul>
+<li>把数据集 $D$ 分成 $k$ 个大小相近、分布尽量一致的互斥子集。</li>
+<li>进行 $k$ 轮训练，每轮用一个子集测试，其余 $k-1$ 个子集训练。</li>
+<li>最终结果取 $k$ 轮测试结果的平均值。</li>
+<li>$10$ 折交叉验证可用约 $90%$ 数据训练，并保证每个样本恰好被测试一次。</li>
+<li>留一法是 $k=m$ 的特殊情况，每轮只留一个样本测试。其训练集最接近完整数据集，但计算开销大，而且单个测试样本使单轮结果的方差较大。</li>
+<li>源资料以男女样本为例说明：即使每轮训练集含 $99$ 个样本，若唯一测试样本恰好属于受分布波动影响的类别，单轮精度仍可能极端，因此“训练集更接近完整集”不等于“测试估计一定更稳定”。</li>
+</ul>
+<h3 id="section-12">2.5.4 自助法</h3>
+<ul>
+<li>自助法基于有放回采样。从含 $m$ 个样本的数据集抽取 $m$ 次，每次抽取后把样本放回。</li>
+<li>一些样本会被重复抽到，一些样本一次也没有被抽到。</li>
+<li>某个样本在一次抽取中未被选中的概率为 $1-\frac{1}{m}$，连续 $m$ 次都未被选中的概率为</li>
+</ul>
+<p>$$
+\left(1-\frac{1}{m}\right)^m.
+$$</p>
+<p>当 $m\rightarrow\infty$ 时，</p>
+<p>$$
+\lim_{m\to\infty}
+\left(1-\frac{1}{m}\right)^m
+=\frac{1}{e}\approx0.368.
+$$</p>
+<ul>
+<li>因而约 $36.8%$ 的原始样本不会出现在自助训练集中，可用于包外估计（out-of-bag estimation）。</li>
+<li>自助法能在训练集仍含 $m$ 个抽样项的情况下保留测试样本，适合数据量较小的场景。</li>
+<li>缺点是有放回采样改变了原始训练数据的分布。</li>
+</ul>
+<h2 id="section-13">2.6 调参、训练集、验证集与测试集</h2>
+<ul>
+<li>算法参数中，由人工设定、不能直接通过普通训练过程得到的参数称为超参数。</li>
+<li>模型参数通常由学习算法根据训练数据确定。</li>
+<li>调参过程本质上也是模型选择：先训练若干候选模型，再依据验证结果选择。</li>
+<li>选择不同算法同样是在选择不同假设空间或学习过程。</li>
+</ul>
+<p>三类数据的职责如下：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>数据</th>
+<th>主要用途</th>
+<th>是否参与模型选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练集</td>
+<td>学习模型参数</td>
+<td>是</td>
+</tr>
+<tr>
+<td>验证集</td>
+<td>选择超参数、模型结构或算法</td>
+<td>是</td>
+</tr>
+<tr>
+<td>测试集</td>
+<td>最终一次评估泛化性能</td>
+<td>否</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>源资料给出一种示例划分：$60%$ 训练集、$20%$ 验证集、$20%$ 测试集。</li>
+<li>超参数确定后，应把训练集与验证集合并，重新训练最终模型，再在从未参与选择的测试集上报告结果。</li>
+</ul>
+<h2 id="section-14">2.7 平均损失、训练误差与测试误差</h2>
+<p>设训练集大小为 $N$，测试集大小为 $N'$。</p>
+<p>训练集平均损失：</p>
+<p>$$
+R_{\mathrm{emp}}(\hat f)
+=\frac{1}{N}\sum_{i=1}^{N}L(y_i,\hat f(\boldsymbol{x}_i)).
+$$</p>
+<p>测试集平均损失：</p>
+<p>$$
+e_{\mathrm{test}}
+=\frac{1}{N'}\sum_{i=1}^{N'}
+L(y_i,\hat f(\boldsymbol{x}_i)).
+$$</p>
+<p>若使用 0-1 损失，测试错误率为</p>
+<p>$$
+e_{\mathrm{test}}
+=\frac{1}{N'}
+\sum_{i=1}^{N'}
+\mathbb I\left(y_i\neq\hat f(\boldsymbol{x}_i)\right),
+$$</p>
+<p>测试准确率为</p>
+<p>$$
+r_{\mathrm{test}}
+=\frac{1}{N'}
+\sum_{i=1}^{N'}
+\mathbb I\left(y_i=\hat f(\boldsymbol{x}<em>i)\right)
+=1-e</em>{\mathrm{test}}.
+$$</p>
+<h2 id="section-15">2.8 性能度量</h2>
+<ul>
+<li>性能度量是衡量模型泛化能力的评价标准。</li>
+<li>不同度量反映不同任务需求，可能导致不同的模型排序。</li>
+<li>“好模型”不仅由算法和数据决定，也由任务代价和需求决定。</li>
+</ul>
+<h3 id="section-16">2.8.1 回归任务</h3>
+<p>回归常用均方误差：</p>
+<p>$$
+E(f;D)
+=\frac{1}{m}\sum_{i=1}^{m}
+\left(f(\boldsymbol{x}_i)-y_i\right)^2.
+$$</p>
+<h3 id="section-17">2.8.2 分类错误率与精度</h3>
+<p>错误率：</p>
+<p>$$
+E(f;D)
+=\frac{1}{m}\sum_{i=1}^{m}
+\mathbb I\left(f(\boldsymbol{x}_i)\neq y_i\right).
+$$</p>
+<p>精度：</p>
+<p>$$
+\operatorname{acc}(f;D)
+=\frac{1}{m}\sum_{i=1}^{m}
+\mathbb I\left(f(\boldsymbol{x}_i)=y_i\right)
+=1-E(f;D).
+$$</p>
+<h2 id="section-18">2.9 比较检验</h2>
+<ul>
+<li>单个测试性能值不能直接证明一个学习器的泛化性能一定更好。</li>
+<li>测试结果会随测试集划分变化，许多学习算法本身也含随机性。</li>
+<li>机器学习结论通常是概率性的，因此需要统计假设检验判断差异是否显著。</li>
+</ul>
+<p>源资料列出的两学习器比较方法包括：</p>
+<ul>
+<li>交叉验证 $t$ 检验，基于成对 $t$ 检验。</li>
+<li>$k$ 折交叉验证和 $5\times2$ 交叉验证。</li>
+<li>McNemar 检验，基于两分类器预测结果的列联表和卡方近似。</li>
+</ul>
+<h2 id="section-19">2.10 二分类的混淆矩阵</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>真实情况</th>
+<th style="text-align:right">预测为正例</th>
+<th style="text-align:right">预测为反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正例</td>
+<td style="text-align:right">TP：真正例</td>
+<td style="text-align:right">FN：假反例</td>
+</tr>
+<tr>
+<td>反例</td>
+<td style="text-align:right">FP：假正例</td>
+<td style="text-align:right">TN：真反例</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>TP 和 TN 是预测正确的样本。</li>
+<li>FP 表示模型预测为正，实际为反。</li>
+<li>FN 表示模型预测为反，实际为正。</li>
+<li>混淆矩阵的非主对角线是误分类部分。</li>
+</ul>
+<h3 id="section-20">2.10.1 查准率</h3>
+<p>查准率（precision）表示所有“预测为正”的样本中，真正为正的比例：</p>
+<p>$$
+P=\frac{TP}{TP+FP}.
+$$</p>
+<h3 id="section-21">2.10.2 查全率</h3>
+<p>查全率（recall）表示所有真实正样本中，被模型找出的比例：</p>
+<p>$$
+R=\frac{TP}{TP+FN}.
+$$</p>
+<h3 id="section-22">2.10.3 $F_1$ 与 $F_\beta$</h3>
+<p>$F_1$ 是查准率与查全率的调和平均：</p>
+<p>$$
+F_1=\frac{2PR}{P+R}
+=\frac{2TP}{2TP+FP+FN}.
+$$</p>
+<p>若样本总数为 $m=TP+TN+FP+FN$，也可写为</p>
+<p>$$
+F_1=\frac{2TP}{m+TP-TN}.
+$$</p>
+<p>调和平均会对较小的分量更敏感，因此不会像算术平均那样轻易忽略较低的 $P$ 或 $R$。</p>
+<p>带权形式为</p>
+<p>$$
+F_\beta
+=\frac{(1+\beta^2)PR}{\beta^2P+R},
+$$</p>
+<p>等价地，</p>
+<p>$$
+\frac{1}{F_\beta}
+=\frac{1}{1+\beta^2}
+\left(\frac{1}{P}+\frac{\beta^2}{R}\right).
+$$</p>
+<ul>
+<li>当 $\beta&gt;1$ 时，更重视查全率。</li>
+<li>当 $\beta&lt;1$ 时，更重视查准率。</li>
+<li>当 $\beta=1$ 时，退化为 $F_1$。</li>
+</ul>
+<h2 id="section-23">2.11 易错点</h2>
+<ul>
+<li>训练误差低不代表泛化误差低；复杂度继续增加时，训练误差可能下降而测试误差上升。</li>
+<li>验证集用于调参，测试集用于最终评价；若用测试集反复选模型，测试结果已不再客观。</li>
+<li>留出法的训练集小于完整数据集，所得评估对应的是较少数据训练出的模型。</li>
+<li>留一法训练集虽大，但单轮只有一个测试样本，评估不一定稳定。</li>
+<li>自助法中约 $36.8%$ 是“未被抽中”的原始样本，不是训练集中只含 $63.2%$ 个抽样位置；训练集仍抽取了 $m$ 次，只是存在重复。</li>
+<li>accuracy 适合类分布较均衡、误判代价相近的任务；类别不均衡时应结合 precision、recall、$F_\beta$ 等指标。</li>
+<li>precision 的分母是“预测为正”，recall 的分母是“真实为正”。</li>
+<li>$\beta&gt;1$ 强调 recall，$\beta&lt;1$ 强调 precision。</li>
+</ul>
+<h2 id="section-24">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-311db30928e6/">上一篇：机器学习基础概念</a> · <a href="/en/notes/cs408-52d40cc31415/">下一篇：线性模型</a></li>
+</ul>
+<h2 id="section-25">2.12 本节复盘</h2>
+<ul>
+<li>好模型的核心是泛化能力强；泛化误差是未来样本上的期望损失，经验误差是训练集上的平均损失。</li>
+<li>在嵌套模型、充分优化等常见设定下，过拟合可表现为复杂度增加时训练误差继续下降而测试误差反而上升；该曲线是典型现象，不是无条件定律。</li>
+<li>正则化通过“经验风险加复杂度罚项”在拟合能力与复杂度之间权衡。</li>
+<li>留出法简单但受划分影响；$k$ 折交叉验证让每个样本都被测试；自助法通过有放回采样留下约 $36.8%$ 包外样本。</li>
+<li>训练集学习参数，验证集选超参数，测试集只做最终评价；选定参数后应合并训练集和验证集重新训练。</li>
+<li>回归常用均方误差，分类可用错误率、准确率以及由混淆矩阵得到的 precision、recall、$F_\beta$。</li>
+<li>单个测试值不能充分证明算法优劣，应结合随机重复实验和统计比较检验。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-a1c21fbceeaf/index.html"><span>← Previous item</span><strong>Lecture 23：图的经典应用</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a3a4d665ca47/index.html"><span>Next item →</span><strong>Lecture 4：知识 - 同步与互斥</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

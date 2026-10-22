@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>教材补充：SNMP 与网络管理 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：教材补充：SNMP 与网络管理。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="教材补充：SNMP 与网络管理 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：教材补充：SNMP 与网络管理。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-1aaca18e58e7/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="教材补充：SNMP 与网络管理 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：教材补充：SNMP 与网络管理。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "教材补充：SNMP 与网络管理",
+      "item": "https://www.jiayuhere.com/notes/cs408-1aaca18e58e7/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-1aaca18e58e7/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-1aaca18e58e7/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1aaca18e58e7/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1aaca18e58e7/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-1aaca18e58e7/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>教材补充：SNMP 与网络管理</h1><p class="article-lead">408 学习笔记：教材补充：SNMP 与网络管理。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-10-15">2026-10-15</time></span></span><span>约 10 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 网络管理的目标</a><a href="#section-2">6.2 管理站、代理与被管设备</a><a href="#section-3">6.3 SMI、MIB 与 OID</a><a href="#section-6">6.4 SNMP 协议操作</a><a href="#section-7">6.5 运输层与端口</a><a href="#section-8">6.6 轮询与事件通知</a><a href="#section-9">6.7 版本与安全边界</a><a href="#section-10">6.8 一次查询与一次告警</a><a href="#section-11">6.9 高频边界与易错点</a><a href="#section-12">相关知识</a><a href="#section-13">6.10 本节复盘</a><a href="#section-14">参考标准</a></nav></details><div class="prose"><blockquote>
+<p><strong>NOTE</strong> · 补充属性
+本文不是 Lecture 12 原始知识图的转写，而是为完整表达计算机网络教材中的网络管理体系新增的教材补充。内容以 SNMP 管理框架为主，区分管理体系、MIB/SMI、协议操作、端口、通知可靠性和版本安全边界；考纲只作为最低覆盖线。</p>
+</blockquote>
+<blockquote>
+<p>描述：网络管理不是“远程登录设备”的同义词，而是由管理站通过标准化对象模型持续观察、配置和接收设备事件。SNMP 把被管资源抽象为 MIB 中的对象，管理站向代理读取或设置对象，也可由代理主动发送通知。</p>
+</blockquote>
+<h2 id="section-1">6.1 网络管理的目标</h2>
+<p>教材常用 <strong>FCAPS</strong> 概括网络管理的五类任务：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>目标</th>
+<th>典型问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>故障管理 Fault</td>
+<td>发现、隔离、记录并恢复故障</td>
+<td>接口 down、链路误码突增、设备失联</td>
+</tr>
+<tr>
+<td>配置管理 Configuration</td>
+<td>保存和变更设备参数、核对配置</td>
+<td>地址、路由、VLAN、阈值和软件版本</td>
+</tr>
+<tr>
+<td>计费管理 Accounting</td>
+<td>统计资源使用并支持配额/计费</td>
+<td>用户或业务流量、会话时长、资源占用</td>
+</tr>
+<tr>
+<td>性能管理 Performance</td>
+<td>测量容量、利用率、时延、丢包和趋势</td>
+<td>带宽利用率、队列长度、CPU/内存负载</td>
+</tr>
+<tr>
+<td>安全管理 Security</td>
+<td>控制管理访问并审计安全事件</td>
+<td>身份认证、权限、日志、密钥和告警</td>
+</tr>
+</tbody>
+</table></div>
+<p>这五类任务是管理目标，不代表 SNMP 单独完成全部工作。日志、流量遥测、配置协议、命令行和控制器也可参与网络管理。</p>
+<h2 id="section-2">6.2 管理站、代理与被管设备</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>组成</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理站/NMS</td>
+<td>发起查询或设置、展示状态、保存历史、触发告警与自动化</td>
+</tr>
+<tr>
+<td>被管设备</td>
+<td>路由器、交换机、主机、服务器、打印机等受管理实体</td>
+</tr>
+<tr>
+<td>SNMP 代理 Agent</td>
+<td>运行在被管设备上，把本地状态映射为管理对象并处理 SNMP 操作</td>
+</tr>
+<tr>
+<td>MIB</td>
+<td>按对象标识符组织的“管理信息虚拟存储”，定义可观察或可设置的对象</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    NMS[网络管理站 / NMS] --&gt;|Get / Set，通常 UDP 161| A1[设备 A 的 SNMP Agent]
+    NMS --&gt;|Get / Set，通常 UDP 161| A2[设备 B 的 SNMP Agent]
+    A1 --&gt; M1[MIB 对象与本地状态]
+    A2 --&gt; M2[MIB 对象与本地状态]
+    A1 -.Trap / Inform，通常发往 UDP 162.-&gt; NMS
+    A2 -.Trap / Inform，通常发往 UDP 162.-&gt; NMS
+</pre>
+<p>MIB 是逻辑对象集合，不等于设备里必须存在一张独立关系数据库。代理可在收到请求时从驱动、内核计数器或硬件寄存器读取当前值。</p>
+<h2 id="section-3">6.3 SMI、MIB 与 OID</h2>
+<h3 id="section-4">6.3.1 三者分工</h3>
+<ul>
+<li>**SMI（管理信息结构）**规定对象如何命名、允许的数据类型、模块如何书写以及一致性要求。</li>
+<li><strong>MIB 模块</strong>使用 SMI 定义一组相关的被管对象。</li>
+<li>**OID（对象标识符）**是在全局树形命名空间中的数字路径，用来唯一标识对象类型或对象实例。</li>
+</ul>
+<p>OID 可写成点分数字，例如 <strong>1.3.6.1.2.1...</strong>。它不是 IP 地址：每个数字表示从 OID 树的某个节点走向子节点。标量对象的具体实例常在对象 OID 后加 <strong>.0</strong>；表对象则在列对象 OID 后附索引值。</p>
+<h3 id="section-5">6.3.2 常见对象语义</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对象类型</th>
+<th>例子</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标量</td>
+<td>系统运行时间、设备名称</td>
+<td>具体实例常以 .0 结尾</td>
+</tr>
+<tr>
+<td>计数器 Counter</td>
+<td>接口累计字节数、丢包数</td>
+<td>会回绕；求速率要用两次采样差分并处理回绕</td>
+</tr>
+<tr>
+<td>Gauge</td>
+<td>当前队列长度、连接数</td>
+<td>可升可降，表示瞬时量</td>
+</tr>
+<tr>
+<td>表 Table</td>
+<td>接口表、路由表</td>
+<td>由行、列和索引确定具体单元</td>
+</tr>
+</tbody>
+</table></div>
+<p>“MIB 中存在对象”不等于对象一定可写。访问权限可为只读、可读写或不可访问，并且还受 SNMPv3 访问控制策略限制。</p>
+<h2 id="section-6">6.4 SNMP 协议操作</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作/PDU</th>
+<th>方向</th>
+<th>作用</th>
+<th>是否期望响应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetRequest</td>
+<td>管理站 -&gt; 代理</td>
+<td>读取一个或多个指定对象实例</td>
+<td>是</td>
+</tr>
+<tr>
+<td>GetNextRequest</td>
+<td>管理站 -&gt; 代理</td>
+<td>读取词典序上的下一个对象，便于遍历 OID 树或表</td>
+<td>是</td>
+</tr>
+<tr>
+<td>GetBulkRequest</td>
+<td>管理站 -&gt; 代理</td>
+<td>SNMPv2 及以后批量取得后续对象，减少逐项往返</td>
+<td>是</td>
+</tr>
+<tr>
+<td>SetRequest</td>
+<td>管理站 -&gt; 代理</td>
+<td>请求修改允许写入的对象</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>代理/接收方 -&gt; 请求方</td>
+<td>返回值、错误状态和与请求对应的 request-id</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Trap</td>
+<td>代理 -&gt; 通知接收器</td>
+<td>主动报告事件；不等待协议级确认</td>
+<td>否</td>
+</tr>
+<tr>
+<td>InformRequest</td>
+<td>实体 -&gt; 实体</td>
+<td>发送需要确认的通知</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Report</td>
+<td>SNMPv3 框架内部常用</td>
+<td>报告消息处理或安全相关问题</td>
+<td>不按普通管理查询理解</td>
+</tr>
+</tbody>
+</table></div>
+<p>多个变量通常放在同一 PDU 的变量绑定列表中。<strong>GetNext</strong> 依赖 OID 的词典序，不是“读取整数值加一后的对象”；<strong>GetBulk</strong> 是批量遍历工具，不保证所有设备或所有 SNMP 版本都支持。</p>
+<h2 id="section-7">6.5 运输层与端口</h2>
+<p>教材和常见部署通常按以下模型理解：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>常用运输层与端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理站向代理查询/设置，代理返回 Response</td>
+<td>UDP 161</td>
+</tr>
+<tr>
+<td>Trap/Inform 发往通知接收器</td>
+<td>UDP 162</td>
+</tr>
+</tbody>
+</table></div>
+<p>IANA 同时登记了 TCP 161/162，但基础教材、408 题目和绝大多数经典 SNMP 流程默认 UDP。端口 161/162 是目的服务端口的常见值，响应报文按请求的源地址和源端口返回，不能机械地把每个方向的源端口也写死。</p>
+<p>UDP 无连接、开销小，但不替 SNMP 保证交付、顺序或无重复：</p>
+<ul>
+<li>管理站对 Get/Set 超时后可重试，并用 request-id 匹配 Response；重试可能造成重复请求，因此 Set 操作的设计应考虑幂等性和实际设备语义。</li>
+<li>Trap 本身不确认，丢失后管理站可能不知道事件发生过。</li>
+<li>Inform 需要接收方返回 Response，可靠性高于 Trap，但仍需超时与重传策略。</li>
+</ul>
+<h2 id="section-8">6.6 轮询与事件通知</h2>
+<p>SNMP 通常把两种机制组合使用：</p>
+<ol>
+<li><strong>轮询 polling</strong>：管理站周期性 Get/GetBulk，适合采集利用率、计数器和当前状态；频率过高会增加设备、网络和管理站负载，过低则可能错过短暂异常。</li>
+<li><strong>事件通知 notification</strong>：代理在接口状态变化、阈值越界等事件发生时发送 Trap 或 Inform，时效高；仅靠 Trap 又会受丢包和配置错误影响。</li>
+</ol>
+<p>成熟的监控一般用通知快速发现事件，再通过查询确认当前状态，并用周期轮询弥补通知丢失。</p>
+<h2 id="section-9">6.7 版本与安全边界</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>主要特点</th>
+<th>安全边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SNMPv1</td>
+<td>基本 Get、GetNext、Set、Response、Trap</td>
+<td>常用 community 字符串，缺少现代认证、完整性和保密保护</td>
+</tr>
+<tr>
+<td>SNMPv2c</td>
+<td>增加 GetBulk、改进错误处理和计数器/通知能力</td>
+<td>仍以 community 为主，不应把它当作强身份认证或加密</td>
+</tr>
+<tr>
+<td>SNMPv3</td>
+<td>模块化消息处理、安全与访问控制</td>
+<td>可用 USM/VACM 提供认证、完整性、重放防护、隐私和细粒度授权</td>
+</tr>
+</tbody>
+</table></div>
+<p>SNMPv3 常见安全级别：</p>
+<ul>
+<li><strong>noAuthNoPriv</strong>：不认证、不加密。</li>
+<li><strong>authNoPriv</strong>：认证并保护完整性，但不加密载荷。</li>
+<li><strong>authPriv</strong>：认证、完整性保护并加密载荷。</li>
+</ul>
+<p>因此“使用 SNMPv3”本身不等于一定加密，仍要看实际安全级别和算法配置。USM 负责用户身份、消息完整性、及时性/重放防护与隐私；VACM 根据安全主体、上下文和视图限制可读写的 OID 范围。</p>
+<h2 id="section-10">6.8 一次查询与一次告警</h2>
+<pre class="mermaid">sequenceDiagram
+    participant M as 管理站
+    participant A as 设备 Agent
+    M-&gt;&gt;A: GetRequest(sysUpTime.0, request-id=K)
+    A--&gt;&gt;M: Response(request-id=K, value=...)
+    Note over M,A: request-id 用于把响应与请求对应
+    A--&gt;&gt;M: Trap(linkDown)
+    Note over M,A: Trap 不等待确认；管理站可再查询接口表核实
+</pre>
+<p>若管理站要遍历接口表，可先从相应表的起始 OID 发 GetNext，或用 GetBulk 批量取回多行。返回的 OID 与值必须一起检查，不能只假定代理一定返回预期列。</p>
+<h2 id="section-11">6.9 高频边界与易错点</h2>
+<ul>
+<li>SNMP 是应用层管理协议；MIB/SMI 是信息模型和定义规则，三者不能混为一个概念。</li>
+<li>管理站通常主动查询，代理也能主动通知；不能把代理理解成只会被动回复。</li>
+<li>UDP 161 通常接收查询/设置，UDP 162 通常接收通知；不是“Trap 发到代理 161”。</li>
+<li>Trap 不确认，Inform 期望 Response；两者都不等于 TCP 式可靠字节流。</li>
+<li>OID 是树形对象标识，不是 IP 地址；标量实例常见的末尾 .0 不能随意省略。</li>
+<li>GetNext 返回词典序下一个可访问对象；GetBulk 是批量 GetNext 思想，不是一次读取整个 MIB。</li>
+<li>Set 只能修改代理实现、对象权限和访问控制都允许的对象，不能绕过设备自身校验。</li>
+<li>计数器绝对值不是速率；速率要用两个采样点之差除以时间，并考虑计数器回绕和接口复位。</li>
+<li>SNMPv1/v2c 的 community 不应视为加密口令；跨不可信网络应使用恰当配置的 SNMPv3 或额外安全边界。</li>
+</ul>
+<h2 id="section-12">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>章节总纲</strong>：<a href="/notes/cs408-a8acba740351/">应用层思维导图</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-a8acba740351/">上一篇：应用层思维导图</a> · <a href="/notes/cs408-0bb2d5ae08e6/">下一篇：HTTP 连接</a></li>
+<li><strong>运输层基础</strong>：<a href="/notes/cs408-59e41ea74a00/">UDP、端口与复用分用</a></li>
+</ul>
+<h2 id="section-13">6.10 本节复盘</h2>
+<ul>
+<li>网络管理由管理站、被管设备、代理和管理信息模型协同完成，目标可按 FCAPS 分类。</li>
+<li>SMI 规定管理信息的定义框架，MIB 组织被管对象，OID 唯一标识对象类型或实例。</li>
+<li>Get/GetNext/GetBulk 读取，Set 修改，Response 应答；Trap 不确认，Inform 需要确认。</li>
+<li>常见查询/设置使用 UDP 161，通知接收使用 UDP 162；UDP 丢包由超时、重试、轮询和 Inform 等机制补偿。</li>
+<li>SNMPv3 只有在正确选择认证/隐私级别并配置访问控制时，才提供相应的身份、完整性、重放防护、保密和授权能力。</li>
+</ul>
+<h2 id="section-14">参考标准</h2>
+<ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc3411.html">RFC 3411：SNMP 管理框架体系结构</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc3416.html">RFC 3416：SNMPv2 协议操作</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc3414.html">RFC 3414：SNMPv3 USM</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc3415.html">RFC 3415：SNMPv3 VACM</a></li>
+<li><a href="https://www.iana.org/assignments/service-names-port-numbers">IANA 服务名与端口注册表</a></li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-19ccba30ce38/index.html"><span>← 上一项</span><strong>3. 栈与队列</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-1b0b51efe56e/index.html"><span>下一项 →</span><strong>Lecture 16：二叉树常考性质</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

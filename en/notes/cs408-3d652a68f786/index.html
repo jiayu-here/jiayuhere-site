@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：决策树 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 4：决策树. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：决策树 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 4：决策树. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-3d652a68f786/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：决策树 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 4：决策树. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：决策树",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-3d652a68f786/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-3d652a68f786/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-3d652a68f786/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-3d652a68f786/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-3d652a68f786/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-3d652a68f786/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 4：决策树</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 4：决策树. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>11 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/a0536f08c604.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/a0536f08c604.pdf" download="Lecture 4：决策树.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 决策树模型</a><a href="#section-2">4.2 递归划分过程</a><a href="#section-3">4.3 信息熵</a><a href="#section-4">4.4 信息增益与 ID3</a><a href="#section-6">4.5 增益率与 C4.5</a><a href="#section-9">4.6 基尼指数与 CART</a><a href="#section-10">4.7 剪枝</a><a href="#section-13">4.8 缺失值处理</a><a href="#section-15">$$
+\rho</a><a href="#section-17">$$
+\tilde r_v</a><a href="#section-18">4.9 易错点</a><a href="#section-19">相关知识</a><a href="#section-20">4.10 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节整理决策树的递归生成过程、信息熵与信息增益、增益率、基尼指数、预剪枝与后剪枝，以及属性缺失时的加权划分方法。</p>
+</blockquote>
+<h2 id="section-1">4.1 决策树模型</h2>
+<ul>
+<li>决策树基于树结构进行决策。</li>
+<li>每个内部结点对应某个属性上的测试或判断。</li>
+<li>每条分支对应一次测试的某个结果，即该属性的某个取值。</li>
+<li>每个叶结点对应一个预测结果。</li>
+<li>决策路径同时给出预测结果和形成该结果的判断过程，因此决策树直观、可视化且便于追溯。</li>
+</ul>
+<p>学习与预测是两个过程：</p>
+<ol>
+<li>学习阶段分析训练样本，确定每个内部结点使用的划分属性。</li>
+<li>预测阶段从根结点开始，把待测样本依次代入各属性测试，沿分支下行直到叶结点。</li>
+</ol>
+<h2 id="section-2">4.2 递归划分过程</h2>
+<p>决策树采用“分而治之”的策略，自根向叶递归生成。</p>
+<p>给定训练集</p>
+<p>$$
+D={(\boldsymbol{x}_1,y_1),\ldots,(\boldsymbol{x}_m,y_m)}
+$$</p>
+<p>和属性集</p>
+<p>$$
+A={a_1,a_2,\ldots,a_d},
+$$</p>
+<p>下面先给出离散属性按取值多路划分的 ID3/C4.5 式基本过程：</p>
+<ol>
+<li>生成当前结点。</li>
+<li>若 $D$ 中样本全属于同一类别 $C$，把结点标记为类别 $C$ 的叶结点。</li>
+<li>若 $A$ 为空，或 $D$ 中所有样本在 $A$ 上取值完全相同，把结点标记为叶结点，类别取 $D$ 中样本数最多的类别。</li>
+<li>从 $A$ 中选择最优划分属性 $a_*$。</li>
+<li>对 $a_<em>$ 的每个取值 $a_</em>^v$ 建立一个分支，令</li>
+</ol>
+<p>$$
+D_v={\boldsymbol{x}\in D\mid a_<em>(\boldsymbol{x})=a_</em>^v}.
+$$</p>
+<ol start="6">
+<li>若 $D_v$ 为空，把该分支直接标记为叶结点，类别取父结点数据 $D$ 中的多数类。</li>
+<li>否则用 $D_v$ 和 $A\setminus{a_*}$ 递归生成子树。</li>
+</ol>
+<p>上述“每个取值一条分支并删除已用属性”只适用于这种离散多路划分。连续属性通常选择阈值做二元切分，同一连续属性可在后代结点再次选择；CART 对离散属性也寻找二元子集划分，不能无条件套用步骤 5-7。</p>
+<p>三类停止条件是：</p>
+<ul>
+<li>
+<p>当前结点所有样本属于同一类，不必继续划分。</p>
+</li>
+<li>
+<p>属性集已空，或剩余样本在所有可用属性上取值相同，已无法划分。</p>
+</li>
+<li>
+<p>某个分支对应的样本集合为空，没有数据可继续划分。</p>
+</li>
+<li>
+<p>树太浅可能欠拟合，树过深又容易过拟合；最大深度、最小叶结点样本数等都可作为复杂度控制条件。</p>
+</li>
+</ul>
+<h2 id="section-3">4.3 信息熵</h2>
+<p>信息熵用于度量样本集合的纯度或不确定性。</p>
+<p>假设数据集 $D$ 含 $|\mathcal Y|$ 个类别，第 $k$ 类样本比例为 $p_k$，则</p>
+<p>$$
+\operatorname{Ent}(D)
+=-\sum_{k=1}^{|\mathcal Y|}
+p_k\log_2p_k.
+$$</p>
+<ul>
+<li>信息熵越大，各类别越接近均匀分布，不确定性越高。</li>
+<li>信息熵越小，样本越集中于少数类别，纯度越高。</li>
+<li>当所有样本同属一类时，某个 $p_k=1$，其余为 $0$，有</li>
+</ul>
+<p>$$
+\operatorname{Ent}(D)=0.
+$$</p>
+<ul>
+<li>对 $p_k=0$ 的项约定 $0\log_20=0$。</li>
+<li>直观上，熵回答“还需要多少信息才能说明该样本属于哪一类”。</li>
+</ul>
+<h2 id="section-4">4.4 信息增益与 ID3</h2>
+<p>若离散属性 $a$ 有 $V$ 个可能取值</p>
+<p>$$
+{a^1,a^2,\ldots,a^V},
+$$</p>
+<p>令 $D^v$ 为 $D$ 中属性 $a$ 取值为 $a^v$ 的样本子集，则属性 $a$ 的信息增益为</p>
+<p>$$
+\operatorname{Gain}(D,a)
+=\operatorname{Ent}(D)
+-\sum_{v=1}^{V}
+\frac{|D^v|}{|D|}
+\operatorname{Ent}(D^v).
+$$</p>
+<ul>
+<li>第一项是划分前的熵。</li>
+<li>第二项是划分后各子结点熵的加权和，样本越多的分支权重越大。</li>
+<li>信息增益越大，说明本次划分带来的纯度提升越大。</li>
+<li>ID3 在候选属性中选择信息增益最大的属性，主要用于分类任务。</li>
+</ul>
+<h3 id="section-5">4.4.1 源资料中的西瓜数据示例</h3>
+<p>以属性“色泽”划分，三个分支的样本数分别为 $6,6,5$，对应熵为</p>
+<p>$$
+\operatorname{Ent}(D^1)=1.000,
+\qquad
+\operatorname{Ent}(D^2)=0.918,
+\qquad
+\operatorname{Ent}(D^3)=0.722.
+$$</p>
+<p>根结点熵为 $0.998$，因此</p>
+<p>$$
+\begin{aligned}
+\operatorname{Gain}(D,\text{色泽})
+&amp;=0.998
+-\left(
+\frac{6}{17}\times1.000
++\frac{6}{17}\times0.918
++\frac{5}{17}\times0.722
+\right)\
+&amp;=0.109.
+\end{aligned}
+$$</p>
+<ul>
+<li>对所有属性作同样计算，若“纹理”的信息增益最大，就选“纹理”作为根结点划分属性。</li>
+</ul>
+<h2 id="section-6">4.5 增益率与 C4.5</h2>
+<h3 id="section-7">4.5.1 信息增益的多取值偏好</h3>
+<ul>
+<li>若把每个样本的唯一“编号”也作为候选属性，编号会产生 $17$ 个分支，每个分支只有一个样本，信息增益可达 $0.998$。</li>
+<li>这种划分在训练集上纯度最高，却无法预测新编号，泛化能力很差。</li>
+<li>因而信息增益天然偏好可取值数目较多的属性。</li>
+</ul>
+<h3 id="section-8">4.5.2 固有值与增益率</h3>
+<p>属性 $a$ 的固有值为</p>
+<p>$$
+\operatorname{IV}(a)
+=-\sum_{v=1}^{V}
+\frac{|D^v|}{|D|}
+\log_2\frac{|D^v|}{|D|}.
+$$</p>
+<p>增益率定义为</p>
+<p>$$
+\operatorname{Gain_ratio}(D,a)
+=\frac{\operatorname{Gain}(D,a)}
+{\operatorname{IV}(a)}.
+$$</p>
+<ul>
+<li>属性取值越多，$\operatorname{IV}(a)$ 通常越大，可抑制信息增益对多取值属性的偏好。</li>
+<li>增益率本身又可能偏好取值较少的属性。</li>
+<li>C4.5 采用启发式选择：先找出信息增益高于平均水平的候选属性，再从中选择增益率最高者。</li>
+</ul>
+<h2 id="section-9">4.6 基尼指数与 CART</h2>
+<p>数据集 $D$ 的基尼值为</p>
+<p>$$
+\operatorname{Gini}(D)
+=\sum_{k=1}^{|\mathcal Y|}
+\sum_{k'\neq k}p_kp_{k'}
+=1-\sum_{k=1}^{|\mathcal Y|}p_k^2.
+$$</p>
+<ul>
+<li>直观上，它表示按照 $D$ 的经验类别分布独立、有放回地抽取两次时，两次类别标记不一致的概率；若从有限样本无放回抽取，概率会有修正。</li>
+<li>$\operatorname{Gini}(D)$ 越小，数据集纯度越高。</li>
+<li>二分类中，若两类概率为 $p$ 和 $1-p$，则</li>
+</ul>
+<p>$$
+\operatorname{Gini}(D)
+=1-p^2-(1-p)^2
+=2p(1-p).
+$$</p>
+<p>对一个候选二元切分 $s$，设它把 $D$ 分成 $D_1,D_2$，CART 使用的加权基尼指数为</p>
+<p>$$
+\operatorname{Gini_index}(D,s)
+=\frac{|D_1|}{|D|}\operatorname{Gini}(D_1)
++\frac{|D_2|}{|D|}\operatorname{Gini}(D_2).
+$$</p>
+<ul>
+<li>连续属性的候选 $s$ 通常是阈值；离散属性的候选 $s$ 是把取值集合分成两个子集。CART 比较候选二元切分并选择加权基尼指数最小者，而不是直接建立通用多路分支。</li>
+</ul>
+<h2 id="section-10">4.7 剪枝</h2>
+<ul>
+<li>为了尽量正确分类训练样本，结点划分可能不断进行，形成过多分支，把训练集偶然特征当作一般规律。</li>
+<li>剪枝是决策树降低过拟合风险的主要手段。</li>
+<li>源资料指出，划分准则对树尺寸影响较大，但剪枝方式和程度对泛化性能往往更关键；带噪数据上的影响尤其明显。</li>
+</ul>
+<h3 id="section-11">4.7.1 预剪枝</h3>
+<ul>
+<li>在生成树时，每次划分前先估计划分能否提高泛化性能。</li>
+<li>若不能提升，就停止划分，把当前结点标记为叶结点。</li>
+<li>优点是训练开销小、树较紧凑；缺点是可能过早停止，产生欠拟合。</li>
+</ul>
+<h3 id="section-12">4.7.2 后剪枝</h3>
+<ul>
+<li>
+<p>先生成一棵较完整的决策树。</p>
+</li>
+<li>
+<p>再自底向上考察非叶结点；若把对应子树替换为叶结点能提高验证性能，就进行替换。</p>
+</li>
+<li>
+<p>后剪枝通常比预剪枝保留更多分支，训练成本也更高。</p>
+</li>
+<li>
+<p>单棵决策树通常需要剪枝。源资料补充：部分集成学习方法会保留较深或未剪枝的基学习器，再通过集成降低方差；不能把这一经验机械推广到所有集成算法。</p>
+</li>
+<li>
+<p>源 PDF 中多处写成“剪纸”，正确术语应为“剪枝”。</p>
+</li>
+</ul>
+<h2 id="section-13">4.8 缺失值处理</h2>
+<p>现实数据常有属性缺失。仅丢弃所有含缺失值的样本会浪费数据，需要解决两个问题：</p>
+<ol>
+<li>如何在含缺失值时选择划分属性？</li>
+<li>已选定划分属性后，属性值缺失的样本应进入哪个分支？</li>
+</ol>
+<p>核心方法是“样本加权、按比例分配”。</p>
+<h3 id="section-14">4.8.1 选择划分属性</h3>
+<p>对属性 $a$，令 $\tilde D$ 表示在 $a$ 上没有缺失值的样本集合。若样本权重为 $w_{\boldsymbol{x}}$，定义无缺失样本所占权重比例</p>
+<h1 id="section-15">$$
+\rho</h1>
+<p>\frac{
+\sum_{\boldsymbol{x}\in\tilde D}w_{\boldsymbol{x}}
+}{
+\sum_{\boldsymbol{x}\in D}w_{\boldsymbol{x}}
+}.
+$$</p>
+<p>先在 $\tilde D$ 上计算普通信息增益，再乘 $\rho$：</p>
+<p>$$
+\operatorname{Gain}(D,a)
+=\rho,
+\operatorname{Gain}(\tilde D,a).
+$$</p>
+<p>源资料的缺失值示例中，“色泽”有 $14$ 个无缺失样本：</p>
+<p>$$
+\operatorname{Gain}(\tilde D,\text{色泽})=0.306,
+$$</p>
+<p>所以</p>
+<p>$$
+\operatorname{Gain}(D,\text{色泽})
+=\frac{14}{17}\times0.306
+=0.252.
+$$</p>
+<p>各属性加权信息增益为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>属性</th>
+<th style="text-align:right">信息增益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>色泽</td>
+<td style="text-align:right">$0.252$</td>
+</tr>
+<tr>
+<td>根蒂</td>
+<td style="text-align:right">$0.171$</td>
+</tr>
+<tr>
+<td>敲声</td>
+<td style="text-align:right">$0.145$</td>
+</tr>
+<tr>
+<td>纹理</td>
+<td style="text-align:right">$0.424$</td>
+</tr>
+<tr>
+<td>脐部</td>
+<td style="text-align:right">$0.289$</td>
+</tr>
+<tr>
+<td>触感</td>
+<td style="text-align:right">$0.006$</td>
+</tr>
+</tbody>
+</table></div>
+<p>因此仍选择“纹理”。</p>
+<h3 id="section-16">4.8.2 把缺失样本分给各分支</h3>
+<p>若 $\tilde D^v$ 是在属性 $a$ 上无缺失且取值为 $a^v$ 的样本，定义该分支的权重比例</p>
+<h1 id="section-17">$$
+\tilde r_v</h1>
+<p>\frac{
+\sum_{\boldsymbol{x}\in\tilde D^v}w_{\boldsymbol{x}}
+}{
+\sum_{\boldsymbol{x}\in\tilde D}w_{\boldsymbol{x}}
+}.
+$$</p>
+<ul>
+<li>属性值不缺失的样本只进入对应分支，权重保持不变。</li>
+<li>属性值缺失的样本同时进入所有分支，在第 $v$ 个分支中的新权重为 $\tilde r_vw_{\boldsymbol{x}}$。</li>
+<li>源资料示例中，样本 8、10 在“纹理”上缺失，同时进入“清晰、稍糊、模糊”三个分支，权重分别为</li>
+</ul>
+<p>$$
+\frac{7}{15},\qquad
+\frac{5}{15},\qquad
+\frac{3}{15}.
+$$</p>
+<h2 id="section-18">4.9 易错点</h2>
+<ul>
+<li>结点样本无法继续划分时，通常标记为多数类叶结点，不是随意选择类别。</li>
+<li>信息增益是“父结点熵减去子结点熵的加权和”，不能漏掉权重 $|D^v|/|D|$。</li>
+<li>信息增益越大越好；基尼指数越小越好。</li>
+<li>ID3 使用信息增益，C4.5 使用增益率启发式，CART 常用基尼指数。</li>
+<li>增益率不是简单“归一化到 $0$ 到 $1$”，而是信息增益除以属性固有值。</li>
+<li>剪枝才是术语；预剪枝在划分前停止，后剪枝先生成完整树再自底向上合并。</li>
+<li>缺失属性的样本不是简单复制到所有分支；它进入所有分支时必须按分支概率重新分配权重。</li>
+<li>缺失值示例的 $0.109$ 与 $0.252$ 来自不同计算条件：前者是完整的初始信息增益示例，后者是按无缺失比例修正后的缺失值示例，不能混用。</li>
+</ul>
+<h2 id="section-19">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-52d40cc31415/">上一篇：线性模型</a> · <a href="/en/notes/cs408-5b39b66a185c/">下一篇：神经网络模型</a></li>
+</ul>
+<h2 id="section-20">4.10 本节复盘</h2>
+<ul>
+<li>决策树把属性测试放在内部结点，把预测结果放在叶结点，采用分而治之递归生成。</li>
+<li>离散多路划分在样本同类、可用属性耗尽或分支样本为空时停止；连续属性和 CART 的候选切分与属性复用规则需另行处理，不能无条件删除已用属性。</li>
+<li>信息熵越小纯度越高；ID3 选择信息增益最大的属性。</li>
+<li>信息增益偏好多取值属性，C4.5 先筛选高信息增益属性，再选增益率最高者。</li>
+<li>CART 常选择加权基尼指数最小的二元切分；连续属性比较阈值，离散属性比较取值集合的二分。</li>
+<li>剪枝通过限制或删除分支缓解过拟合，分为预剪枝和后剪枝。</li>
+<li>属性缺失时，先用无缺失样本估计划分质量，再按各分支权重把缺失样本同时分配到多个分支。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-39b45084fd1d/index.html"><span>← Previous item</span><strong>Lecture 11：知识 - IO管理概述</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-424a656729a9/index.html"><span>Next item →</span><strong>0. 重点算法汇总</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

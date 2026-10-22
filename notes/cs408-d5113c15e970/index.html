@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 10：知识 - Cache | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 10：知识 - Cache。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 10：知识 - Cache | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 10：知识 - Cache。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-d5113c15e970/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 10：知识 - Cache | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 10：知识 - Cache。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 10：知识 - Cache",
+      "item": "https://www.jiayuhere.com/notes/cs408-d5113c15e970/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-d5113c15e970/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-d5113c15e970/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d5113c15e970/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d5113c15e970/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-d5113c15e970/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 10：知识 - Cache</h1><p class="article-lead">408 学习笔记：Lecture 10：知识 - Cache。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 15 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/b681ed1e7b56.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/b681ed1e7b56.pdf" download="Lecture 10：知识 - Cache.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">3.1 局部性与基本工作过程</a><a href="#section-5">3.2 命中率与平均访问时间</a><a href="#section-7">3.3 三种地址映射</a><a href="#section-14">3.4 关联度与替换算法</a><a href="#section-16">3.5 Cache 写策略</a><a href="#section-19">3.6 多级 Cache</a><a href="#section-20">相关知识</a><a href="#section-21">3.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：Cache 以局部性换取速度：CPU 先在小而快的 Cache 中找，未命中才按块访问主存。高频题是地址分解、映射方式、关联度、替换、写策略和平均访问时间。</p>
+</blockquote>
+<h2 id="section-1">3.1 局部性与基本工作过程</h2>
+<h3 id="section-2">3.1.1 时间局部性和空间局部性</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>局部性</th>
+<th>含义</th>
+<th>常见来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>时间局部性</td>
+<td>最近访问的信息，近期很可能再次访问</td>
+<td>循环、反复调用子程序、反复访问同一变量/数组元素</td>
+</tr>
+<tr>
+<td>空间局部性</td>
+<td>最近访问的信息附近的地址，近期很可能也被访问</td>
+<td>顺序执行指令、连续数组/向量存储</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>数组应尽量按其存储顺序遍历。例如二维数组按行优先存放时，内层循环连续改变列下标，通常比跨行跳跃更具空间局部性。</li>
+<li>循环体中的指令通常连续存放，内循环又反复执行，因而既有空间局部性也有时间局部性。</li>
+</ul>
+<h3 id="section-3">3.1.2 块、行、标记与有效位</h3>
+<ul>
+<li>主存与 Cache 都划分为大小相等的<strong>块</strong>；Cache 的块称<strong>Cache 行</strong>，块含多个字节，长度为块长/行长。</li>
+<li>Cache 容量远小于主存，只保存主存活跃块的副本。每行至少有：数据区、<strong>标记（tag）<strong>和</strong>有效位（valid）</strong>；标记说明该行来自哪个主存块，有效位说明行内容是否可用。</li>
+<li>CPU–Cache 之间按本次指令要求的访问粒度交换（可为字节、半字、字等，教材常简写为“按字”），Cache–主存之间按<strong>块</strong>交换。把一整块调入的依据是空间局部性。</li>
+</ul>
+<h3 id="section-4">3.1.3 读写命中与 TLB 关系</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>请求</th>
+<th>命中</th>
+<th>未命中</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU 读</td>
+<td>用地址找到 Cache 行并按块内偏移读出，不访问主存</td>
+<td>访问主存并将所在块调入 Cache；满时按替换策略淘汰</td>
+</tr>
+<tr>
+<td>CPU 写</td>
+<td>按全写或回写等策略维护 Cache/主存</td>
+<td>按写分配或非写分配策略处理</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>在操作系统与硬件正确维护页表、TLB 和 Cache 一致性的普通模型中，有效 TLB 命中可作为当前可用映射，针对本次正常访问的 Cache 命中也建立在可用地址转换之上。因此 408 常规模型不列出“TLB 命中而页表无有效映射”或“发生缺页却 Cache 命中”等组合；页表已修改但旧 TLB 项尚未失效属于过期翻译错误，不是正常命中路径。</li>
+<li>TLB/Cache 缺失处理可由硬件完成；教材简化模型中，TLB 未命中需查驻主存的页表，实际页表项读取也可能被 Cache 命中，不一定每次访问 DRAM。在源 PDF 采用的普通透明 Cache 模型中，正常访问时的查找、填充和替换流程由硬件管理。</li>
+</ul>
+<h2 id="section-5">3.2 命中率与平均访问时间</h2>
+<h5 id="section-6"><strong>定义</strong>：#命中率</h5>
+<p>设 $N_c$ 为 Cache 命中次数，$N_m$ 为未命中次数：</p>
+<p>$$H=\frac{N_c}{N_c+N_m},\qquad \text{缺失率}=1-H$$</p>
+<p>若 $T_C$ 为命中时间、$T_M$ 为未命中时的总访问时间，则：</p>
+<p>$$T_{avg}=H\times T_C+(1-H)\times T_M$$</p>
+<ul>
+<li>若 Cache 未命中需“先查 Cache 再查主存”，则 $T_M$ 应包含已经花掉的 Cache 查找时间，不能只写主存时间。</li>
+<li>例：若主存速度是 Cache 的 1/5（即 $T_M$ 的主存部分为 $5T_C$），命中率 $0.95$，且未命中再访问主存，则 $T_{avg}=0.95T_C+0.05(T_C+5T_C)=1.25T_C$；相对只用主存的 $5T_C$，平均访问时间约缩为四分之一。</li>
+</ul>
+<h2 id="section-7">3.3 三种地址映射</h2>
+<h3 id="section-8">3.3.1 直接映射</h3>
+<p>主存每个块只能进入唯一 Cache 行：</p>
+<p>$$\text{Cache 行号}=\text{主存块号}\bmod\text{Cache 总行数}$$</p>
+<ul>
+<li>若主存块号低 $c$ 位为行号，主存块号其余高 $t$ 位为 tag，则 $t=\text{主存块号位数}-c$。</li>
+<li>访问时用中间行号找到唯一行，比较行内 tag 与地址高位 tag，并检查有效位；相同且有效则命中，再用低位块内偏移取数据。否则取整块主存数据覆盖该行，<strong>不需要替换算法</strong>。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现简单、比较快、标记开销小</td>
+<td>冲突概率最高；即使其他行空闲也不能使用，空间利用率与命中率较低</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-9">3.3.2 全相联映射</h3>
+<p>主存任一块可进入任一 Cache 行。地址只有 <code>tag + 块内偏移</code>，访问时需并行比较所有行的标记，常借助按内容寻址的相联存储器。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冲突最少、空行均可利用、命中率高</td>
+<td>tag 比较慢、硬件成本高、标记开销大</td>
+</tr>
+</tbody>
+</table></div>
+<p>全相联在 Cache 满时需全局替换；主存–外存层因缺失 I/O 代价极高，常采用全相联思想以减少频繁外存调入。</p>
+<h3 id="section-10">3.3.3 $N$ 路组相联映射</h3>
+<p>把 Cache 分为若干组，每组 $N$ 行。主存块先按直接映射确定唯一组，再可放入该组任意一路：</p>
+<p>$$\text{组号}=\text{主存块号}\bmod\text{组数}$$</p>
+<ul>
+<li>地址划分为 <code>tag + 组号 + 块内偏移</code>；同组内的 $N$ 个 tag 并行比较，命中后由块内偏移读数据。</li>
+<li>一组满了才在<strong>组内</strong>替换。它在直接映射的快/省与全相联的高命中之间折中，是现代 Cache 常见组织。</li>
+</ul>
+<h3 id="section-11">题型：#地址位数与映射计算</h3>
+<p>给定主存地址位数 $A$、块大小 $B=2^b$ 字节、Cache 数据区容量 $C$、关联度 $N$：</p>
+<p>$$
+\begin{aligned}
+\text{块内偏移位}&amp;=b\
+\text{Cache 总行数}&amp;=C/B\
+\text{组数}&amp;=(C/B)/N\
+\text{组号位}&amp;=\log_2(\text{组数})\
+\text{tag 位}&amp;=A-b-\text{组号位}
+\end{aligned}
+$$</p>
+<p>例：32 位按字节编址、块 64 B、数据区 32 KB、8 路组相联：偏移为 6 位；总行数 $32KB/64B=512$，组数 $512/8=64$，组号 6 位，tag 为 $32-6-6=20$ 位。</p>
+<ul>
+<li>求某字节地址的主存块号，先除以块大小；直接映射行号为“块号模总行数”；组相联组号为“块号模组数”，具体可落在该组的任一路。</li>
+<li>计算 Cache 总容量时不要漏掉 tag、有效位与脏位等控制位：<code>总行数 × (数据位 + tag 位 + 控制位)</code>。</li>
+</ul>
+<h4 id="section-12">2018 年原页图题：TLB、页表与物理地址 Cache</h4>
+<p>原 PDF 第 3 页的图题给出 32 位虚拟地址（20 位虚页号、12 位页内地址）、两级页表（虚页号拆为 10 位页目录索引与 10 位页表索引）、全相联 TLB，以及 2 路组相联、按<strong>物理地址</strong>查找的 Cache。由图中字段可还原访问链：</p>
+<pre><code class="language-text">虚拟地址：20 位虚页号 | 12 位页内地址
+                ↓ TLB 命中取实页号；未命中则查两级页表
+物理地址：16 位实页号 | 12 位页内地址（共 28 位）
+                ↓ 按物理地址拆分
+Cache 地址：20 位 tag | 3 位组号 | 5 位块内偏移
+</code></pre>
+<ul>
+<li>主存物理地址为 $16+12=28$ 位，按字节编址时可表示 $2^{28}$ B，即 256 MiB。TLB 对虚页号采用全相联匹配；TLB 通常用 SRAM 等高速电路实现，而页表驻留在主存中的部分通常使用 DRAM，不应把两者的存储介质混同。</li>
+<li>Cache 的块长是 $2^5=32$ B，组号 3 位表示 $2^3=8$ 组；2 路意味着每组 2 行，共 $8\times2=16$ 行，数据区容量 $16\times32=512$ B。图中虚页号 <code>0x00324</code> 的有效 TLB 项给出实页号 <code>0xF800</code>；若页内偏移为 0，则物理地址 <code>0xF800000</code> 对应 <code>tag=0xF8000</code>、组 0、偏移 0，可与图中组 0 的有效 Cache 行匹配。</li>
+<li>若题目只计每行 1 位有效位、20 位 tag、1 位脏位，且 2 路 LRU 用<strong>每组 1 位</strong>记录最近使用路，则 Cache 总容量为 $16\times(256+20+1+1)+8=4456,bit=557,B$。原 PDF 的 $(1+20+1+1+2^5\times8)\times2=558,bit$ 只乘了每组 2 行，漏掉 8 组；它还把 LRU 位按每行 1 位计。若刻意沿用原图的“每行 1 个替换位”简化口径，修正组数后为 $16\times279=4464,bit$，而不是全 Cache 仅 558 bit。实际硬件总量还取决于额外控制位的约定。</li>
+</ul>
+<h4 id="section-13">源 PDF 数值例题复算</h4>
+<ol>
+<li>32 位按字节编址、32 KB 数据 Cache、块长 64 B、8 路组相联：块内偏移 6 位；共 $32,KB/(64,B\times8)=64$ 组，组号 6 位，tag 为 20 位。数组 <code>int s[1024]</code> 从 <code>0x008000C0</code> 开始，占 $4,B\times1024/64,B=64$ 个主存块，起始地址分解为 <code>tag=0x00800</code>、<code>组号=3</code>、<code>块内偏移=0</code>。顺序执行一次 <code>s[k]=2*s[k]</code> 时，每块含 16 个元素；忽略写策略额外访问，首次读入每块各缺失一次，因此共有 64 次强制缺失，其余块内访问命中。</li>
+<li>主存地址空间 256 MB、直接映射 Cache 有 8 行、每行数据 64 B，且每行只有 1 个有效位：地址 28 位、偏移 6 位、行号 3 位、tag 19 位；每行总位数为 $512+1+19=532$，Cache 含数据和标记项的总容量为 $8\times532=4256,bit$。tag 计算应减去<strong>行号位</strong>，不能把有效位误当地址字段。</li>
+<li>对十进制地址 3200，主存块号为 $3200/64=50$。直接映射到 $50\bmod8=2$ 号行；若改为 2 路组相联，共 4 组，映射到 $50\bmod4=2$ 号组，可放入该组两路中的任一路。</li>
+<li>在上题直接映射结构中，地址 <code>0x0123456</code> 的 28 位写作 <code>0000 0001 0010 0011 0100 0101 0110</code>，拆成 <code>19 位 tag | 3 位行号 | 6 位偏移</code>：行号为 <code>001</code>，偏移为 <code>010110</code>。访问时先查 1 号行的有效位与 tag，命中后再按偏移取字节。</li>
+</ol>
+<p>若主存地址为 32 位、块长 16 B、Cache 有 4K 行，只计算 tag 位而暂不计有效/脏位，则关联度越高、组号越短、tag 越长：直接映射、2 路、4 路、全相联的 tag 分别为 16、17、18、28 位，对 4K 行的 tag 总开销分别是 64K、68K、72K、112K bit。</p>
+<h2 id="section-14">3.4 关联度与替换算法</h2>
+<h5 id="section-15"><strong>定义</strong>：#关联度</h5>
+<p>一个主存块可映射到的 Cache 行数。直接映射关联度为 1，全相联为 Cache 总行数，$N$ 路组相联为 $N$。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>关联度变化</th>
+<th>命中率/冲突</th>
+<th>命中判定时间</th>
+<th>tag 空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>越高</td>
+<td>冲突越少、通常命中率越高</td>
+<td>比较行更多，越慢</td>
+<td>tag 更长，总开销更大</td>
+</tr>
+<tr>
+<td>越低</td>
+<td>冲突越多、命中率通常较低</td>
+<td>更快</td>
+<td>更小</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Cache–主存缺失代价比主存–外存缺失小得多，因此 Cache–主存可采用直接映射换速度；主存–外存更重视避免缺失，适合高关联度映射。</li>
+</ul>
+<p>Cache 缺失可按 3C 模型分为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>成因</th>
+<th>主要改进方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强制缺失（compulsory/cold）</td>
+<td>第一次访问某块，Cache 中从未有过</td>
+<td>预取、适当增大块；单纯增大关联度不能消除首次缺失</td>
+</tr>
+<tr>
+<td>冲突缺失（conflict）</td>
+<td>工作集原本可放入同容量的全相联 Cache，却因固定行/组的映射限制而相互挤出；不要求其他组一定空闲</td>
+<td>提高关联度、改进地址布局</td>
+</tr>
+<tr>
+<td>容量缺失（capacity）</td>
+<td>活跃工作集超过 Cache 可容纳的数据量</td>
+<td>增大 Cache、改善程序工作集与访问顺序</td>
+</tr>
+</tbody>
+</table></div>
+<p>提高关联度主要减少冲突缺失，并不会自动消除强制缺失或容量缺失；块过大也可能减少有效行数，不能只按“空间局部性”无限增大块长。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>淘汰原则</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机（RA）</td>
+<td>随机选一块</td>
+<td>最简单，未利用局部性，命中率不稳定</td>
+</tr>
+<tr>
+<td>FIFO</td>
+<td>淘汰最早调入者</td>
+<td>实现简单，但最早块可能仍被频繁访问，可产生抖动</td>
+</tr>
+<tr>
+<td>LRU</td>
+<td>淘汰最近最少使用者</td>
+<td>符合时间局部性，实际命中率高；可用年龄计数器实现，仍可能抖动</td>
+</tr>
+<tr>
+<td>LFU</td>
+<td>淘汰累计访问次数最少者</td>
+<td>历史热门未必未来热门，通常不如 LRU</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>LRU 的一种年龄计数实现：令 0 表示最近使用。命中年龄为 $k$ 的行时，把原先比它更新、年龄小于 $k$ 的有效行年龄加 1，再把命中行置 0；装入新行时将其他有效行年龄加 1、新行置 0，淘汰年龄最大的行。具体硬件也可用栈、伪 LRU 等近似实现。</li>
+<li>直接映射位置唯一无选择，不用替换算法；全相联在全局替换，组相联只在组内替换。</li>
+</ul>
+<p>源 PDF 用 4 行 Cache 和访问序列 <code>1,2,3,4,1,2,5,1,2,3,4,5</code> 演示替换。按图中具体随机选择，RA 命中 5 次、缺失 7 次；FIFO 命中 2 次、缺失 10 次；严格 LRU 命中 4 次、缺失 8 次。RA 的结果依随机选择而变，不能把图中一次轨迹当作固定结论。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>本例命中的访问序号（从 1 起）</th>
+<th>命中/缺失</th>
+<th>Cache 已满后的被替换块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RA（按原图的一次随机选择）</td>
+<td>5、6、8、9、12</td>
+<td>5/7</td>
+<td>3、4、1</td>
+</tr>
+<tr>
+<td>FIFO</td>
+<td>5、6</td>
+<td>2/10</td>
+<td>1、2、3、4、5、1</td>
+</tr>
+<tr>
+<td>LRU</td>
+<td>5、6、8、9</td>
+<td>4/8</td>
+<td>3、4、5、1</td>
+</tr>
+<tr>
+<td>LFU（按原图的同频选择）</td>
+<td>5、6、8、9、11</td>
+<td>5/7</td>
+<td>3、5、3</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中“命中/缺失”分别是 12 次访问的次数，不是命中率分数。FIFO 命中不改变装入先后；LRU 命中会更新最近使用次序；LFU 按累计访问次数淘汰，同频时必须先约定行号或 FIFO 等平局规则。本例 LFU 的首次满载替换在 3、4 两块同频时选择 3，因此不同平局规则可能得到不同轨迹。</p>
+<h2 id="section-16">3.5 Cache 写策略</h2>
+<h3 id="section-17">3.5.1 写命中</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>写命中动作</th>
+<th>额外状态/特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回写法（write back）</td>
+<td>只改 Cache，直到该块被替换才写回主存</td>
+<td>用脏位记录是否修改；访存次数少，但中间 Cache/主存可能不一致</td>
+</tr>
+<tr>
+<td>全写法（write through）</td>
+<td>同时写 Cache 和主存，常经写缓冲排队</td>
+<td>一致性好、替换时不用回写；写次数多，频繁写会使缓冲阻塞</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>写缓冲一般由 SRAM FIFO 实现：CPU 先把待写信息放入缓冲，由专门控制电路逐项写主存，可掩盖部分慢写延迟。</li>
+</ul>
+<h3 id="section-18">3.5.2 写不命中</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>动作</th>
+<th>常见搭配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写分配（write allocate）</td>
+<td>先把目标主存块调入 Cache，再写</td>
+<td>常与回写法配合，利用空间局部性</td>
+</tr>
+<tr>
+<td>非写分配（not-write-allocate）</td>
+<td>只更新主存，不把块调入 Cache</td>
+<td>常与全写法配合</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>写分配的代价是每次写不命中都要读入整块；是否值得取决于后续是否还会访问附近数据。</li>
+</ul>
+<h2 id="section-19">3.6 多级 Cache</h2>
+<ul>
+<li>现代机器常有 L1、L2（以及更低层）Cache：越靠近 CPU，越快越小；越远越慢越大。L1 常分离为指令 Cache 与数据 Cache，主要目的是减少流水线中取指与访存的资源冲突。</li>
+<li>教材常举“L1 对 L2 全写、L2 对主存回写”的组合，以便由 L2 吸收频繁写；真实处理器也大量采用各级回写、不同包含关系与一致性协议。各级 Cache 之间是否写分配同样取决于实现，不能把“全写 + 非写分配”视为统一标准。</li>
+</ul>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-d33925ae4333/">上一篇：主存储器</a> · <a href="/notes/cs408-5865bd37ecaf/">下一篇：虚拟存储器</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-dd853a0ed1a2/">虚拟内存与局部性</a></li>
+</ul>
+<h2 id="section-21">3.7 本节复盘</h2>
+<ul>
+<li>Cache 按块与主存交换、按 CPU 指令的字节/半字/字等粒度提供数据；tag 指明主存块来源，有效位判定行是否可用，局部性是其效果基础。</li>
+<li>直接映射最快最简单但冲突大；全相联命中率高但比较慢且贵；$N$ 路组相联折中。关联度越高，命中率潜力越高、判定和 tag 开销也越大。</li>
+<li>命中率 $H=N_c/(N_c+N_m)$，平均时间按命中/未命中时间加权；地址题先算偏移、行/组数、tag，再计算控制位容量。</li>
+<li>直接映射无需替换；RA/FIFO/LRU/LFU 的依据分别是随机、调入先后、近期使用、累计频率。写命中区分回写/全写，写不命中区分写分配/非写分配。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-d3d15cc6df11/index.html"><span>← 上一项</span><strong>8 题型 - 移动IP</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-d568b25e2f3d/index.html"><span>下一项 →</span><strong>Lecture 8：知识 - 信道复用技术</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

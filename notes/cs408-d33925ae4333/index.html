@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：知识 - 主存储器 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 9：知识 - 主存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：知识 - 主存储器 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 9：知识 - 主存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-d33925ae4333/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：知识 - 主存储器 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 9：知识 - 主存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：知识 - 主存储器",
+      "item": "https://www.jiayuhere.com/notes/cs408-d33925ae4333/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-d33925ae4333/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-d33925ae4333/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d33925ae4333/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d33925ae4333/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-d33925ae4333/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 9：知识 - 主存储器</h1><p class="article-lead">408 学习笔记：Lecture 9：知识 - 主存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 10 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/8667865bb4b7.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/8667865bb4b7.pdf" download="Lecture 9：知识 - 主存储器.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">3.1 主存结构与读写过程</a><a href="#section-3">3.2 DRAM 地址复用</a><a href="#section-4">3.3 提高主存吞吐率</a><a href="#section-8">3.4 CPU 与主存的总线连接</a><a href="#section-9">3.5 主存容量扩展</a><a href="#section-12">相关知识</a><a href="#section-13">3.6 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：主存题可拆为四条线：编址与总线（MAR/MDR）、DRAM 行列地址、多模块并行、芯片容量扩展。所有连线题都要先分别确定“片内地址、片选地址、数据位、读写控制”。</p>
+</blockquote>
+<h2 id="section-1">3.1 主存结构与读写过程</h2>
+<h3 id="section-2">3.1.1 编址单位、MAR 与 MDR</h3>
+<ul>
+<li>主存的核心是存储矩阵，由能稳定表示 <code>0/1</code> 的记忆单元组成。为了读写，需要给由同一地址控制的一组存储元件编号，该组称<strong>编址单位</strong>。</li>
+<li>现代系统通常<strong>按字节编址</strong>，一个地址对应 1 B；若数据总线 64 位，则一次传送最多 8 个连续字节，但这不改变单个字节地址的含义。</li>
+<li>地址线有 $a$ 位时，按字节编址的地址范围为 $0\sim2^a-1$，最大可寻址字节数为 $2^a$。例如 36 位地址可表示 $2^{36}$ 个字节地址。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>寄存器/总线</th>
+<th>保存或传输</th>
+<th>位数关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAR / 地址线</td>
+<td>待访问主存地址</td>
+<td>MAR 位数通常等于地址线位数</td>
+</tr>
+<tr>
+<td>MDR / 数据线</td>
+<td>读出数据或待写数据</td>
+<td>数据线等于存储字长时，MDR 位数也等于存储字长；否则 MDR 受数据线宽度约束</td>
+</tr>
+</tbody>
+</table></div>
+<p>读写流程：</p>
+<ol>
+<li>CPU 把目标地址送 MAR，经地址线送至主存地址寄存器和译码器，选中单元。</li>
+<li>CPU 经控制线发送读/写命令。</li>
+<li>写操作：CPU 把数据送 MDR，经数据线写入目标单元；读操作：目标单元内容经数据线送入 MDR。</li>
+</ol>
+<h2 id="section-3">3.2 DRAM 地址复用</h2>
+<p>DRAM 容量大、地址位多。为减少封装引脚，采用<strong>地址引脚复用</strong>：同一组地址引脚先传行地址、后传列地址，地址引脚数约减半。</p>
+<ul>
+<li>对 $2^n\times b$ 位 DRAM，若阵列有 $r$ 行、$c$ 列，则 $2^n=r\times c$，所需行列地址位为 $\log_2r$、$\log_2c$。</li>
+<li>仅考虑引脚数时应让行列尽可能接近，即 $|r-c|$ 最小；但 DRAM 按行刷新，行数越少刷新开销越小，因此优化通常满足 $r\le c$。</li>
+</ul>
+<h2 id="section-4">3.3 提高主存吞吐率</h2>
+<h3 id="section-5">3.3.1 单体多字与多体并行</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>组织</th>
+<th>适合的访问</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单体多字存储器</td>
+<td>一个单元含 $m$ 个字，总线同宽，一次并行读出 $m$ 字</td>
+<td>连续取指/连续数据</td>
+<td>遇转移或非连续操作数，优势不明显</td>
+</tr>
+<tr>
+<td>多体并行存储器</td>
+<td>多个相同模块，各自独立地址、数据、读写控制电路</td>
+<td>连续访问可并行或流水交叉</td>
+<td>会受模块冲突与总线组织限制</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>单体多字在一个存取周期取出同一地址下连续的 $m$ 个字，随后可逐条交给 CPU，等效每隔 $1/m$ 存取周期取一字；其本质是一次扩大传输宽度。</li>
+<li>多体存储利用多个模块的<strong>空间并行性</strong>提高吞吐，模块可并行工作或交叉工作。</li>
+</ul>
+<h3 id="section-6">3.3.2 高位与低位交叉编址</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>编址</th>
+<th>模块号</th>
+<th>模块内地址</th>
+<th>连续地址分布</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高位交叉（连续编址）</td>
+<td>高位</td>
+<td>低位</td>
+<td>先填满同一模块再到下一模块</td>
+<td>单个连续地址流通常长期落在同一模块，难以利用跨模块并行；跨模块或多数据流访问仍可能并行</td>
+</tr>
+<tr>
+<td>低位交叉</td>
+<td>低位</td>
+<td>高位</td>
+<td>依次落在相邻模块</td>
+<td>可轮流/交叉并行，适合连续访问</td>
+</tr>
+</tbody>
+</table></div>
+<p>低位交叉下，若有 $m$ 个模块：</p>
+<p>$$\text{模块号}=\text{单元地址}\bmod m$$</p>
+<p>模块 $M_0$ 保存 $0,m,2m,\ldots$，$M_1$ 保存 $1,m+1,2m+1,\ldots$，依次类推。模块数常取 2 的幂以便直接用低地址位选模块；采用质数个模块也可降低某些固定步长访问的冲突，但需要取模等更复杂的选体逻辑，408 常规连线题仍以 2 的幂为主。</p>
+<h3 id="section-7">3.3.3 轮流启动与同时启动</h3>
+<ul>
+<li><strong>轮流启动</strong>：每模块一次传送宽度等于总线宽度。若模块存取周期为 $T$、可发起一次总线传送的间隔为 $r$，连续无冲突流水至少需要 $m\ge\lceil T/r\rceil$ 个模块；理想均匀设计常取 $r=T/m$。</li>
+</ul>
+<p>$$
+\begin{aligned}
+t_{交叉}&amp;=T+(k-1)r\
+t_{顺序}&amp;=kT
+\end{aligned}
+$$</p>
+<p>这里 $k$ 是连续读取的字数；第一个字等待一个完整模块周期 $T$，后续字在无模块冲突且总线允许时以 $r$ 为间隔到达。原先写成 $m$ 只适用于“恰好读取与模块数相同的 $m$ 个连续字”。</p>
+<ul>
+<li><strong>同时启动</strong>：各模块一次传送的数据宽度之和恰好等于总线宽度时，可同时启动所有模块。例如 4 个模块各 16 位、总线 64 位，可并行拼成一个 64 位存储字。</li>
+</ul>
+<h2 id="section-8">3.4 CPU 与主存的总线连接</h2>
+<p>主存经<strong>地址总线、数据总线、控制总线</strong>与 CPU 相连。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>总线</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址总线</td>
+<td>位数决定最大可寻址内存空间</td>
+</tr>
+<tr>
+<td>数据总线</td>
+<td>位数与工作频率共同决定数据传输率</td>
+</tr>
+<tr>
+<td>控制总线</td>
+<td>用读/写等信号指出总线周期类型、操作完成时刻</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>内存模块可由多片 DRAM 组成。例如 8 个 $8M\times8$ DRAM 可并排组成 $8M\times64$ 位模块，即总容量为 $64M$ B（此处存储器容量按 $M=2^{20}$ 计，为 64 MiB）：同一超单元地址 $(i,j)$ 广播给每片，各片分别输出 8 位，模块电路合成为一个 64 位字。</li>
+<li>内存控制器把主存地址转换为 DRAM 的行/列超单元地址，广播地址并收集各芯片同时返回的数据；位扩展的本质正是多芯片并排拼宽数据字。</li>
+</ul>
+<h2 id="section-9">3.5 主存容量扩展</h2>
+<h3 id="section-10">3.5.1 三种扩展</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>何时使用</th>
+<th>连接要点</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>位扩展</td>
+<td>CPU 数据线宽于单芯片字长</td>
+<td>各芯片地址、片选、读写线并联；数据线分别占不同位</td>
+<td>$8\times(8K\times1)$ 组成 $8K\times8$</td>
+</tr>
+<tr>
+<td>字扩展</td>
+<td>CPU 地址线宽于单芯片地址线，字长已匹配</td>
+<td>低位地址并联为片内地址，高位译码产生片选</td>
+<td>$4\times(16K\times8)$ 组成 $64K\times8$</td>
+</tr>
+<tr>
+<td>字位扩展</td>
+<td>字数和字长均不足</td>
+<td>先按位拼成一组，再用多组做字扩展</td>
+<td>$8\times(16K\times4)$ 组成 $64K\times8$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>位扩展中各芯片共享同一片内地址。例如两片 $1K\times4$ 并排，分别接 $D_0\sim D_3$ 与 $D_4\sim D_7$，组成 $1K\times8$。</li>
+<li>字扩展中，芯片数据线和读写线并联到系统总线；高位地址经译码选择一片，低位地址 $A_0\sim A_{k-1}$ 在该片中选字。</li>
+<li>字位扩展示例：8 片 $16K\times4$，两片构成一个 $16K\times8$ 组，4 组再按高地址片选扩为 $64K\times8$。</li>
+</ul>
+<p>**原 PDF 的字扩展地址实例。**4 片 $16K\times8$ 芯片组成 $64K\times8$ 主存时，16 位地址中的 $A_{13}\sim A_0$ 负责片内 $16K$ 个单元的字选，$A_{15}A_{14}$ 负责片选：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>$A_{15}A_{14}$</th>
+<th>被选芯片</th>
+<th>主存地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00</code></td>
+<td>第 1 片</td>
+<td><code>0x0000–0x3FFF</code></td>
+</tr>
+<tr>
+<td><code>01</code></td>
+<td>第 2 片</td>
+<td><code>0x4000–0x7FFF</code></td>
+</tr>
+<tr>
+<td><code>10</code></td>
+<td>第 3 片</td>
+<td><code>0x8000–0xBFFF</code></td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td>第 4 片</td>
+<td><code>0xC000–0xFFFF</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>每片恰占 $2^{14}=16384$ 个连续字节地址；四片总共覆盖 $2^{16}=65536$ 个地址。若芯片片选为低电平有效，应由高位译码器产生相应的低有效片选信号，不能把四片的数据输出同时接通。</p>
+<h3 id="section-11">3.5.2 片选与地址分配</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字选</td>
+<td>在已选芯片内选具体单元，通常由 CPU 低 $N$ 位地址完成，$N=\log_2$(片内字数)</td>
+</tr>
+<tr>
+<td>片选</td>
+<td>先确定目标芯片/芯片组，通常由片外高位地址与访存控制共同产生</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>片选方法</th>
+<th>做法</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线选法</td>
+<td>高位地址线直接连各芯片片选端</td>
+<td>线路简单、不需译码；但只能使用特定低电平组合，地址不连续且浪费地址空间</td>
+</tr>
+<tr>
+<td>译码片选法</td>
+<td>高位地址经译码器产生互斥片选</td>
+<td>地址连续、利用率高；需外部译码器，如 74LS138 的 3-8 译码</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>原页的线选图例用 4 片 $2K\times8$ 芯片，$A_0\sim A_{10}$ 作片内地址，4 根高位片选线 $A_{14}\sim A_{11}$ 采用低有效的“仅一位为 0”模式：第 0～3 片分别对应 <code>1110</code>、<code>1101</code>、<code>1011</code>、<code>0111</code>。其余多位同时为 0 的组合会误选多片，不能当正常单片地址。若 CPU 还有 $A_{15}$ 而它不参与片选，则高低半区可能映射到同一物理芯片，产生地址别名；实际连线须明确处理这根地址线。</li>
+<li>例如 16 位地址、8 片 $8K\times8$ 芯片：每片需 13 根片内地址线，剩余 3 根高位地址线经 3-8 译码器产生 8 个片选。</li>
+<li>连接步骤：先选芯片类型与数量（ROM 常放系统程序/常量、RAM 给用户程序）；CPU 低位地址连片内地址，高位地址连外部片选（例如 16 位 CPU 接 $1K\times4$ 芯片时，$A_0\sim A_9$ 负责片内寻址）；数据线不匹配先位扩展；读/写线按芯片有效电平连接控制端；片选还要受 CPU 的访存控制（如低有效 <code>MREQ</code>）约束，避免 I/O 周期误选主存。</li>
+</ul>
+<h2 id="section-12">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-2d95192b7574/">上一篇：存储器</a> · <a href="/notes/cs408-d5113c15e970/">下一篇：Cache</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-6e190f5755e2/">内存管理基础</a></li>
+</ul>
+<h2 id="section-13">3.6 本节复盘</h2>
+<ul>
+<li>主存按字节编址时地址线决定可寻址字节数；MAR 对应地址线、MDR 对应数据线，读写都经地址、数据、控制三总线完成。</li>
+<li>DRAM 地址复用先后送行列地址；行列接近可减引脚，行数较少能减刷新开销。</li>
+<li>低位交叉把连续地址分散到不同模块，支持轮流流水或同时并行；高位交叉对单个连续流通常难以提升吞吐，但跨模块访问和多数据流仍可利用模块独立性。</li>
+<li>扩容分位扩展、字扩展、字位扩展；低位做字选、高位经线选或译码做片选，最后检查数据线、读写线和访存控制的连接。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-d168b88f4e02/index.html"><span>← 上一项</span><strong>Lecture 4：强化学习</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-d3964962cec4/index.html"><span>下一项 →</span><strong>Lecture 15：树与二叉树</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

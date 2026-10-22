@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 3：软件需求工程 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 3：软件需求工程. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 3：软件需求工程 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 3：软件需求工程. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-c7b75c1ae846/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 3：软件需求工程 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 3：软件需求工程. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 3：软件需求工程",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-c7b75c1ae846/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-c7b75c1ae846/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-c7b75c1ae846/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c7b75c1ae846/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c7b75c1ae846/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-c7b75c1ae846/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 3：软件需求工程</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 3：软件需求工程. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>9 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ab35a1a9b56e.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ab35a1a9b56e.pdf" download="Lecture 3：软件需求工程.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 软件需求工程的基本任务</a><a href="#section-7">3.2 需求类型</a><a href="#section-8">3.3 用例图</a><a href="#section-14">3.4 用例描述</a><a href="#section-15">3.5 活动图建模法</a><a href="#section-19">3.6 常考辨析</a><a href="#section-23">相关知识</a><a href="#section-24">本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节围绕“软件系统必须做什么”，整理需求获取、分析、规格说明、验证和管理五项任务，并系统说明 UML 用例图中的参与者、包含、扩展、泛化关系，以及活动图的行为建模方法。</p>
+</blockquote>
+<h2 id="section-1">3.1 软件需求工程的基本任务</h2>
+<p>需求工程要准确回答：</p>
+<blockquote>
+<p>软件系统必须做什么，以及在什么约束和质量要求下完成。</p>
+</blockquote>
+<p>它不是一次访谈，而是贯穿生命周期的五类活动：</p>
+<pre class="mermaid">flowchart LR
+    A[&quot;需求获取&quot;] --&gt; B[&quot;需求分析&quot;]
+    B --&gt; C[&quot;需求规格说明&quot;]
+    C --&gt; D[&quot;需求验证&quot;]
+    D --&gt; E[&quot;形成需求基线&quot;]
+    E --&gt; F[&quot;需求管理&quot;]
+    F -. &quot;变更反馈&quot; .-&gt; A
+</pre>
+<h3 id="section-2">3.1.1 需求获取</h3>
+<p>开发人员与客户、最终用户和其他利益相关者沟通，聆听他们的目标与问题，并观察实际工作行为。</p>
+<p>常用方法：</p>
+<ul>
+<li>访谈、问卷和研讨会。</li>
+<li>现场观察和民族志式调查。</li>
+<li>文档、法规和现有系统分析。</li>
+<li>原型、场景和用例讨论。</li>
+<li>头脑风暴与焦点小组。</li>
+</ul>
+<p>获取到的往往是原始愿望，其中可能有遗漏、冲突和方案化表述，不能直接当作最终规格。</p>
+<h3 id="section-3">3.1.2 需求分析</h3>
+<p>对原始信息进行分类、建模、协商和优先级排序：</p>
+<ul>
+<li>明确系统范围与外部边界。</li>
+<li>区分业务目标、用户需求和系统需求。</li>
+<li>发现冲突、重复、遗漏和歧义。</li>
+<li>分析数据、状态、业务规则、异常和非功能约束。</li>
+<li>评估需求的可行性、风险和依赖关系。</li>
+</ul>
+<h3 id="section-4">3.1.3 需求规格说明</h3>
+<p>把经确认的需求写成软件需求规格说明（SRS）或等价的受控需求文档。它应成为设计、实现、测试和验收的共同依据。</p>
+<p>常见内容：</p>
+<ul>
+<li>系统目标、范围、术语和假设。</li>
+<li>功能需求与业务规则。</li>
+<li>外部接口和数据需求。</li>
+<li>性能、可靠性、安全、易用性、可维护性等非功能需求。</li>
+<li>约束、验收标准和追踪标识。</li>
+</ul>
+<h3 id="section-5">3.1.4 需求验证</h3>
+<p>通过评审、原型、测试用例推导和利益相关者协商确认需求是否合格。</p>
+<p>重点检查：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>性质</th>
+<th>检查问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正确性</td>
+<td>是否真实反映业务和用户目标</td>
+</tr>
+<tr>
+<td>完整性</td>
+<td>功能、异常、数据和质量要求是否遗漏</td>
+</tr>
+<tr>
+<td>一致性</td>
+<td>不同需求之间是否矛盾</td>
+</tr>
+<tr>
+<td>无歧义</td>
+<td>关键语句是否只有一种合理解释</td>
+</tr>
+<tr>
+<td>可行性</td>
+<td>技术、成本和进度上是否能实现</td>
+</tr>
+<tr>
+<td>可验证性</td>
+<td>是否能通过测试、分析或检查判定满足</td>
+</tr>
+<tr>
+<td>可追踪性</td>
+<td>是否可追到来源，并追到设计、代码和测试</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-6">3.1.5 需求管理</h3>
+<p>验证通过的需求形成<strong>需求基线</strong>。后续变更不能直接口头插入开发，应受控处理：</p>
+<ol>
+<li>提交并记录变更请求。</li>
+<li>分析对范围、架构、成本、进度、测试和风险的影响。</li>
+<li>由授权角色批准、拒绝或延期。</li>
+<li>更新需求基线及相关模型、设计和测试。</li>
+<li>维护双向追踪并通知所有相关方。</li>
+</ol>
+<blockquote>
+<p><strong>WARNING</strong>
+课件原文出现“生命基线”，结合上下文明显应为“需求基线”。</p>
+</blockquote>
+<h2 id="section-7">3.2 需求类型</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>功能需求</td>
+<td>系统必须提供的行为或服务</td>
+<td>用户可以查询订单状态</td>
+</tr>
+<tr>
+<td>非功能需求</td>
+<td>对质量、性能或实现的约束</td>
+<td>95% 查询在 2 秒内返回</td>
+</tr>
+<tr>
+<td>领域需求</td>
+<td>来自业务领域、法规或专业规则</td>
+<td>金融交易必须保留审计记录</td>
+</tr>
+</tbody>
+</table></div>
+<p>需求应尽量可度量。例如“系统响应要快”不可验证；“在给定负载下，95% 请求不超过 2 秒”才可测试。</p>
+<h2 id="section-8">3.3 用例图</h2>
+<h3 id="section-9">3.3.1 定义与作用</h3>
+<p>用例图是由参与者（Actor）、用例（Use Case）、系统边界及其关系组成的 UML 行为图，用于从外部观察者角度描述系统提供的功能。</p>
+<ul>
+<li><strong>参与者</strong>：与系统交互的外部角色，可以是人、外部系统或设备，不等同于具体个人。</li>
+<li><strong>用例</strong>：参与者借助系统实现的有价值目标，名称通常使用动宾短语。</li>
+<li><strong>系统边界</strong>：限定哪些用例属于目标系统。</li>
+<li><strong>关联</strong>：表示参与者参与某个用例。</li>
+</ul>
+<p>用例图可以帮助确定系统范围、讨论功能，并为用例描述和系统测试提供线索，但它不描述详细算法或严格时间顺序。</p>
+<h3 id="section-10">3.3.2 <code>&lt;&lt;include&gt;&gt;</code> 包含关系</h3>
+<p>当多个基础用例都必然执行一段公共行为时，可把公共行为提取为被包含用例。</p>
+<ul>
+<li>基础用例每次执行到该处，都要执行被包含用例。</li>
+<li>用于复用必需行为，避免在多个用例中重复描述。</li>
+<li>UML 虚线箭头从<strong>基础用例</strong>指向<strong>被包含用例</strong>。</li>
+</ul>
+<p>例如，“转账”和“修改密码”都必须“验证身份”，可以包含“验证身份”。</p>
+<h3 id="section-11">3.3.3 <code>&lt;&lt;extend&gt;&gt;</code> 扩展关系</h3>
+<p>扩展用例在指定条件成立时，把附加行为插入基础用例的扩展点。</p>
+<ul>
+<li>基础用例自身应能独立完成。</li>
+<li>扩展行为通常是可选、条件性或异常性流程。</li>
+<li>UML 虚线箭头从<strong>扩展用例</strong>指向<strong>基础用例</strong>。</li>
+</ul>
+<p>例如，“结账”在用户有优惠券时可被“使用优惠券”扩展。</p>
+<blockquote>
+<p><strong>WARNING</strong>
+课件说“扩展用例必须由基础用例启动”容易误解。准确表述是：基础用例在扩展条件满足并到达扩展点时引入扩展行为；基础用例不能依赖扩展用例才能成立。</p>
+</blockquote>
+<h3 id="section-12">3.3.4 包含与扩展对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>include</code></th>
+<th><code>extend</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行为性质</td>
+<td>必需、公共、可复用</td>
+<td>可选、条件或异常附加</td>
+</tr>
+<tr>
+<td>基础用例能否缺少该行为</td>
+<td>不能</td>
+<td>能</td>
+</tr>
+<tr>
+<td>箭头方向</td>
+<td>基础用例指向被包含用例</td>
+<td>扩展用例指向基础用例</td>
+</tr>
+<tr>
+<td>触发位置</td>
+<td>基础流程规定位置</td>
+<td>命名扩展点且条件成立</td>
+</tr>
+</tbody>
+</table></div>
+<p>被包含用例是否能被参与者独立启动，要看其是否本身代表独立用户目标，不能仅凭 <code>include</code> 关系一概而论。</p>
+<h3 id="section-13">3.3.5 泛化关系</h3>
+<p>当多个参与者或用例具有共同结构和行为时，可抽象父元素，子元素继承并可增加或改写特征。</p>
+<ul>
+<li>用例泛化：子用例是父用例的特殊形式。</li>
+<li>参与者泛化：特殊参与者继承一般参与者可参与的用例。</li>
+<li>实线空心三角箭头指向较一般的父元素。</li>
+</ul>
+<p>泛化表达“is-a”关系，不应用来代替必需复用的 <code>include</code>。</p>
+<h2 id="section-14">3.4 用例描述</h2>
+<p>用例图只给出功能总览，完整需求还应配套文字用例：</p>
+<ul>
+<li>用例名称和目标。</li>
+<li>主要参与者与其他利益相关者。</li>
+<li>前置条件和触发事件。</li>
+<li>主成功场景。</li>
+<li>备选、异常和扩展流程。</li>
+<li>后置条件或成功保证。</li>
+<li>特殊非功能要求和业务规则。</li>
+</ul>
+<p>测试人员可从主流程、备选流程、边界条件和失败保证中设计测试用例。</p>
+<h2 id="section-15">3.5 活动图建模法</h2>
+<h3 id="section-16">3.5.1 定义</h3>
+<p>活动图是描述系统或业务行为流程的 UML 行为图，可以记录：</p>
+<ul>
+<li>单个操作或方法的逻辑。</li>
+<li>单个用例的工作流。</li>
+<li>跨角色业务过程的控制流和数据流。</li>
+<li>顺序、分支、循环和并发行为。</li>
+</ul>
+<h3 id="section-17">3.5.2 常用元素</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始节点</td>
+<td>流程开始，实心圆</td>
+</tr>
+<tr>
+<td>动作/活动</td>
+<td>一个处理步骤，圆角矩形</td>
+</tr>
+<tr>
+<td>控制流</td>
+<td>动作之间的执行路径</td>
+</tr>
+<tr>
+<td>判断与合并</td>
+<td>按守卫条件分支或汇合，菱形</td>
+</tr>
+<tr>
+<td>分叉与汇合</td>
+<td>并发路径的开始与同步，粗横线或竖线</td>
+</tr>
+<tr>
+<td>对象节点/对象流</td>
+<td>表示活动间传递的数据对象</td>
+</tr>
+<tr>
+<td>泳道</td>
+<td>按角色、部门或组件划分责任</td>
+</tr>
+<tr>
+<td>活动终结</td>
+<td>终止整个活动，靶心样式</td>
+</tr>
+<tr>
+<td>流终结</td>
+<td>只终止当前路径，带叉圆形</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-18">3.5.3 与其他图的区别</h3>
+<ul>
+<li>用例图回答“系统对外提供哪些目标”。</li>
+<li>活动图回答“某目标或过程怎样流转”。</li>
+<li>顺序图回答“对象按时间顺序怎样发送消息”。</li>
+</ul>
+<h2 id="section-19">3.6 常考辨析</h2>
+<h3 id="section-20">3.6.1 用例是否等于一个按钮或函数</h3>
+<p>不等于。用例表达参与者希望达到的有价值目标，可能涉及多个页面、对象和函数。</p>
+<h3 id="section-21">3.6.2 <code>include</code> 和 <code>extend</code> 是否只是箭头方向不同</h3>
+<p>不是。前者是必需公共行为，后者是条件附加行为，语义差异比箭头方向更重要。</p>
+<h3 id="section-22">3.6.3 需求基线形成后是否不能改变</h3>
+<p>可以改变，但必须经过影响分析、批准、版本控制和追踪更新，不能无控制地改变。</p>
+<h2 id="section-23">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-0cf81cc84b46/">上一篇：软件过程</a> · <a href="/en/notes/cs408-f652c4049d0f/">下一篇：软件设计与实现</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-9c185b7e5178/">数据库设计</a></li>
+</ul>
+<h2 id="section-24">本节复盘</h2>
+<ul>
+<li>需求工程包含获取、分析、规格说明、验证和管理，最终形成并维护需求基线。</li>
+<li>好需求应正确、完整、一致、无歧义、可行、可验证并可追踪。</li>
+<li>用例图从外部角色视角描述系统功能；用例是用户目标，不是界面按钮或代码函数。</li>
+<li><code>include</code> 表示必需公共行为，<code>extend</code> 表示条件附加行为，泛化表示一般与特殊关系。</li>
+<li>活动图适合描述控制流、数据流、分支、循环、并发和责任分工。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-c6142ca80d5a/index.html"><span>← Previous item</span><strong>Lecture 13：知识 - 磁盘管理</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-cbd01644a3c3/index.html"><span>Next item →</span><strong>6 题型 - SDN软件定义网络</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

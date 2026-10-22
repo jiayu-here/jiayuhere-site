@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：栈在括号匹配中的应用 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 9：栈在括号匹配中的应用. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：栈在括号匹配中的应用 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 9：栈在括号匹配中的应用. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-a7218565071e/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：栈在括号匹配中的应用 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 9：栈在括号匹配中的应用. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：栈在括号匹配中的应用",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-a7218565071e/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-a7218565071e/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a7218565071e/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a7218565071e/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a7218565071e/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-a7218565071e/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 9：栈在括号匹配中的应用</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 9：栈在括号匹配中的应用. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>6 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d8ba1ba59053.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d8ba1ba59053.pdf" download="Lecture 9：栈在括号匹配中的应用.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">9.1 括号匹配问题</a><a href="#section-4">9.2 括号匹配的核心规则</a><a href="#section-8">9.3 三种匹配失败情况</a><a href="#section-12">9.4 算法实现</a><a href="#section-16">9.5 题型整理</a><a href="#section-21">相关知识</a><a href="#section-22">9.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">9.1 括号匹配问题</h2>
+<h3 id="section-2">9.1.1 基本概念</h3>
+<h5 id="section-3"><strong>定义</strong>：#括号匹配</h5>
+<blockquote>
+<p>描述：
+括号匹配是判断一串括号中的左括号和右括号是否能够按类型、顺序一一对应。</p>
+</blockquote>
+<p><strong>常见括号类型</strong></p>
+<ul>
+<li>小括号：
+$$
+(\quad )
+$$</li>
+<li>中括号：
+$$
+[\quad ]
+$$</li>
+<li>大括号：
+$$
+{\quad }
+$$</li>
+</ul>
+<p><strong>为什么用栈</strong></p>
+<ul>
+<li>后出现的左括号要先被匹配。</li>
+<li>这正好符合栈的后进先出规则：
+$$
+\text{LIFO}
+$$</li>
+<li>因此可以用栈保存“还没有被匹配的左括号”。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/afa7920ace5d.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L09-括号LIFO匹配.png"><img class="note-image" src="/assets/408/images/afa7920ace5d.png" alt="DS-L09-括号LIFO匹配.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>每遇到一个左括号就入栈；每遇到一个右括号，就与最近尚未匹配的左括号比较。</li>
+<li>栈顶保存“最内层、最晚出现”的未匹配左括号，因此嵌套括号恰好符合 LIFO。</li>
+<li>扫描中出现栈空、括号类型不一致，或扫描结束后栈仍非空，均表示匹配失败。</li>
+</ul>
+<h2 id="section-4">9.2 括号匹配的核心规则</h2>
+<h3 id="section-5">9.2.1 扫描左括号</h3>
+<ul>
+<li>当输入字符是左括号时，将其压入栈中。</li>
+<li>左括号包括：
+$$
+(\quad [\quad {
+$$</li>
+</ul>
+<p><strong>含义</strong></p>
+<ul>
+<li>当前左括号还没有遇到对应的右括号。</li>
+<li>暂时把它存入栈，等待后续匹配。</li>
+</ul>
+<h3 id="section-6">9.2.2 扫描右括号</h3>
+<ul>
+<li>当输入字符是右括号时，需要让栈顶的左括号出栈。</li>
+<li>右括号包括：
+$$
+)\quad ]\quad }
+$$</li>
+</ul>
+<p><strong>匹配关系</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>当前右括号</th>
+<th>栈顶必须是</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>)</code></td>
+<td><code>(</code></td>
+</tr>
+<tr>
+<td><code>]</code></td>
+<td><code>[</code></td>
+</tr>
+<tr>
+<td><code>}</code></td>
+<td><code>{</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>原因</strong></p>
+<ul>
+<li>当前右括号只能匹配离它最近、还未匹配的左括号。</li>
+<li>这个“最近的未匹配左括号”就在栈顶。</li>
+</ul>
+<h3 id="section-7">9.2.3 扫描结束</h3>
+<ul>
+<li>处理完所有输入字符后，如果栈为空，说明所有左括号都已匹配。</li>
+<li>如果栈非空，说明仍然有左括号没有被匹配。</li>
+</ul>
+<p>扫描结束后的判定：
+$$
+\text{栈空}\Rightarrow \text{匹配成功}
+$$</p>
+<p>$$
+\text{栈非空}\Rightarrow \text{匹配失败}
+$$</p>
+<h2 id="section-8">9.3 三种匹配失败情况</h2>
+<h3 id="section-9">9.3.1 右括号多余</h3>
+<p><strong>情况</strong></p>
+<ul>
+<li>扫描到右括号时，栈已经为空。</li>
+</ul>
+<p><strong>原因</strong></p>
+<ul>
+<li>没有可用的左括号与当前右括号匹配。</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">())
+</code></pre>
+<p>扫描到最后一个 <code>)</code> 时，栈中已经没有 <code>(</code>。</p>
+<h3 id="section-10">9.3.2 左右括号类型不匹配</h3>
+<p><strong>情况</strong></p>
+<ul>
+<li>扫描到右括号时，栈非空。</li>
+<li>但栈顶左括号和当前右括号不是同一类。</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">([)]
+</code></pre>
+<p>当扫描到 <code>)</code> 时，栈顶是 <code>[</code>，但 <code>)</code> 需要匹配 <code>(</code>。</p>
+<h3 id="section-11">9.3.3 左括号多余</h3>
+<p><strong>情况</strong></p>
+<ul>
+<li>所有字符都扫描完以后，栈仍然非空。</li>
+</ul>
+<p><strong>原因</strong></p>
+<ul>
+<li>栈中剩下的左括号没有对应的右括号。</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code class="language-text">(()
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-text">((()
+</code></pre>
+<p>扫描结束后仍有未匹配的左括号。</p>
+<h2 id="section-12">9.4 算法实现</h2>
+<h3 id="section-13">9.4.1 栈结构</h3>
+<blockquote>
+<p>原 PDF 提醒：考试中可以直接使用已经定义好的接口名，也可以在代码旁边写出中文含义注释。</p>
+</blockquote>
+<p>本节接口形参中的 <code>&amp;S</code>、<code>&amp;x</code> 是 <strong>C++ 引用</strong>，不是 C 函数形参；<code>MaxSize=10</code> 只是课件的固定容量示例。完整算法假定同一时刻未匹配左括号数不超过 <code>MaxSize</code>，若要处理任意长度输入，应使用可扩容栈。容量不足与括号不匹配是两种不同原因，不能混为一谈。</p>
+<p><strong>栈结构定义</strong></p>
+<pre><code class="language-c">#define MaxSize 10
+
+typedef struct {
+    char data[MaxSize];  // 静态数组存放栈中元素
+    int top;             // 栈顶指针
+} SqStack;
+</code></pre>
+<p><strong>需要使用的接口</strong></p>
+<pre><code class="language-cpp">void InitStack(SqStack &amp;S);
+bool StackEmpty(SqStack S);
+bool Push(SqStack &amp;S, char x);
+bool Pop(SqStack &amp;S, char &amp;x);
+</code></pre>
+<p><strong>接口含义</strong></p>
+<ul>
+<li><code>InitStack(S)</code>：初始化栈。</li>
+<li><code>StackEmpty(S)</code>：判断栈是否为空。</li>
+<li><code>Push(S, x)</code>：把字符 <code>x</code> 入栈。</li>
+<li><code>Pop(S, x)</code>：栈顶元素出栈，并用 <code>x</code> 返回。</li>
+</ul>
+<h3 id="section-14">9.4.2 完整算法</h3>
+<pre><code class="language-cpp">bool bracketCheck(char str[], int length) {
+    SqStack S;
+    InitStack(S);
+
+    for (int i = 0; i &lt; length; i++) {
+        if (str[i] == '(' || str[i] == '[' || str[i] == '{') {
+            if (!Push(S, str[i]))
+                return false;  // 固定栈容量不足；不代表括号本身不匹配
+        } else if (str[i] == ')' || str[i] == ']' || str[i] == '}') {
+            if (StackEmpty(S))
+                return false;
+
+            char topElem;
+            Pop(S, topElem);
+
+            if (str[i] == ')' &amp;&amp; topElem != '(')
+                return false;
+
+            if (str[i] == ']' &amp;&amp; topElem != '[')
+                return false;
+
+            if (str[i] == '}' &amp;&amp; topElem != '{')
+                return false;
+        }
+    }
+
+    return StackEmpty(S);
+}
+</code></pre>
+<blockquote>
+<p>上述版本允许输入中包含普通字符：普通字符会被跳过。若题目已保证输入只含六种括号，也可以把 <code>else if</code> 简写为 <code>else</code>。</p>
+</blockquote>
+<p><strong>说明</strong></p>
+<ul>
+<li>扫描左括号：</li>
+</ul>
+<pre><code class="language-c">Push(S, str[i]);
+</code></pre>
+<ul>
+<li>扫描右括号时，如果栈空：</li>
+</ul>
+<pre><code class="language-c">return false;
+</code></pre>
+<ul>
+<li>扫描右括号时，如果类型不匹配：</li>
+</ul>
+<pre><code class="language-c">return false;
+</code></pre>
+<ul>
+<li>扫描结束后：</li>
+</ul>
+<pre><code class="language-c">return StackEmpty(S);
+</code></pre>
+<h3 id="section-15">9.4.3 PDF 代码中的写法修正</h3>
+<p>原 PDF 中有些地方是课件简写或 OCR 识别结果，正式写题时建议修正为规范形式。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>应写成</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for(int i=0,i&lt;length;i++)</code></td>
+<td><code>for (int i = 0; i &lt; length; i++)</code></td>
+<td><code>for</code> 的三段表达式用分号隔开</td>
+</tr>
+<tr>
+<td><code>topElem = Pop(S);</code></td>
+<td><code>Pop(S, topElem);</code></td>
+<td>前文接口是用引用参数返回出栈元素</td>
+</tr>
+<tr>
+<td><code>topElem != '[]'</code></td>
+<td><code>topElem != '['</code></td>
+<td>栈中保存的是单个字符</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-16">9.5 题型整理</h2>
+<h3 id="section-17">题型：#括号匹配判断</h3>
+<h4 id="section-18">第一部分：解题方法</h4>
+<ul>
+<li>从左到右扫描字符串。</li>
+<li>遇到左括号就入栈。</li>
+<li>遇到右括号先看栈是否为空。</li>
+<li>若栈空，说明右括号多余，匹配失败。</li>
+<li>若栈非空，弹出栈顶左括号并检查类型。</li>
+<li>类型不匹配，匹配失败。</li>
+<li>全部扫描完成后，检查栈是否为空。</li>
+<li>栈空则匹配成功，栈非空则匹配失败。</li>
+</ul>
+<h4 id="section-19">第二部分：典型例题</h4>
+<p><strong>例题 1：判断 <code>([]{})</code> 是否匹配</strong></p>
+<p>扫描过程：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>操作</th>
+<th>栈内未匹配左括号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(</code></td>
+<td>入栈</td>
+<td><code>(</code></td>
+</tr>
+<tr>
+<td><code>[</code></td>
+<td>入栈</td>
+<td><code>([</code></td>
+</tr>
+<tr>
+<td><code>]</code></td>
+<td>匹配 <code>[</code>，出栈</td>
+<td><code>(</code></td>
+</tr>
+<tr>
+<td><code>{</code></td>
+<td>入栈</td>
+<td><code>({</code></td>
+</tr>
+<tr>
+<td><code>}</code></td>
+<td>匹配 <code>{</code>，出栈</td>
+<td><code>(</code></td>
+</tr>
+<tr>
+<td><code>)</code></td>
+<td>匹配 <code>(</code>，出栈</td>
+<td>空</td>
+</tr>
+</tbody>
+</table></div>
+<p>结果：
+$$
+\text{匹配成功}
+$$</p>
+<p><strong>例题 2：判断 <code>([)]</code> 是否匹配</strong></p>
+<p>扫描过程：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(</code></td>
+<td>入栈</td>
+<td>栈中有 <code>(</code></td>
+</tr>
+<tr>
+<td><code>[</code></td>
+<td>入栈</td>
+<td>栈顶为 <code>[</code></td>
+</tr>
+<tr>
+<td><code>)</code></td>
+<td>要匹配 <code>(</code></td>
+<td>但栈顶是 <code>[</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>结果：
+$$
+\text{匹配失败}
+$$</p>
+<h4 id="section-20">第三部分：知识点复盘</h4>
+<ul>
+<li>括号匹配问题的关键不是统计数量，而是判断顺序和类型。</li>
+<li>左右括号数量相等，不一定匹配成功。</li>
+<li>例如：</li>
+</ul>
+<pre><code class="language-text">([)]
+</code></pre>
+<ul>
+<li>数量相等，但顺序错误，所以匹配失败。</li>
+<li>栈的作用是保存“最近的未匹配左括号”。</li>
+</ul>
+<h2 id="section-21">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-113c1bdbdcb7/">上一篇：队列基本概念</a> · <a href="/en/notes/cs408-160305fb8386/">下一篇：栈在表达式求值中的应用</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-19ccba30ce38/">栈与队列代码</a></li>
+</ul>
+<h2 id="section-22">9.6 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>括号匹配用栈实现。</li>
+<li>左括号入栈。</li>
+<li>右括号触发栈顶左括号出栈。</li>
+<li>当前右括号必须和栈顶左括号类型匹配。</li>
+<li>扫描结束后栈必须为空。</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>扫描到右括号时栈空，直接匹配失败。</li>
+<li>扫描结束后栈非空，也匹配失败。</li>
+<li><code>GetTop</code> 只读不删；括号匹配这里通常需要 <code>Pop</code>，因为左括号已经被当前右括号消耗。</li>
+<li><code>[]</code> 不是一个字符，栈中保存的是 <code>'['</code> 或 <code>']'</code> 这样的单个字符。</li>
+</ul>
+<p><strong>一句话总结</strong></p>
+<ul>
+<li>用栈保存未匹配的左括号；每遇到一个右括号，就拿栈顶左括号来配对，最后栈空才算成功。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-a58dbd00622a/index.html"><span>← Previous item</span><strong>Lecture 24：知识 - 中断</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a732e9dcf77f/index.html"><span>Next item →</span><strong>Lecture 7：栈基本概念</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

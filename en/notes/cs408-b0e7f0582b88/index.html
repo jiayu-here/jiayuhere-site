@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>4 题型 - 虚拟局域网 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 4 题型 - 虚拟局域网. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="4 题型 - 虚拟局域网 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 4 题型 - 虚拟局域网. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-b0e7f0582b88/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="4 题型 - 虚拟局域网 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 4 题型 - 虚拟局域网. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "4 题型 - 虚拟局域网",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-b0e7f0582b88/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-b0e7f0582b88/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-b0e7f0582b88/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-b0e7f0582b88/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-b0e7f0582b88/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-b0e7f0582b88/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">4 题型 - 虚拟局域网</h1><p class="article-lead">Chinese-language Computer Science 408 note: 4 题型 - 虚拟局域网. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>10 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/1c6649ad48ab.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/1c6649ad48ab.pdf" download="4 题型 - 虚拟局域网.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 VLAN 的核心作用</a><a href="#section-2">4.2 VLAN 与 ARP</a><a href="#section-5">4.3 Access、Trunk 与 IEEE 802.1Q</a><a href="#section-9">4.4 2024 年真题：H4 的 ARP 表</a><a href="#section-11">4.5 模拟题：跨交换机 VLAN 与 Trunk</a><a href="#section-16">4.6 解题步骤</a><a href="#section-17">4.7 易错点</a><a href="#section-18">相关知识</a><a href="#section-19">4.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：VLAN 用逻辑分组划分广播域。同一 VLAN 内的主机可以进行二层单播和广播，不同 VLAN 之间必须经过三层转发。常考点包括 VLAN 成员判断、ARP 表项、Access/Trunk 端口以及 IEEE 802.1Q 标签处理。</p>
+</blockquote>
+<h2 id="section-1">4.1 VLAN 的核心作用</h2>
+<p>VLAN 是在二层交换网络中划分广播域的技术，不是重新铺设一个物理网络。</p>
+<ul>
+<li>同一交换机上的不同端口可以属于不同 VLAN。</li>
+<li>同一 VLAN 的主机可以连接在不同交换机上，只要交换机间链路能够承载该 VLAN。</li>
+<li>同一 VLAN 内的站点可以直接进行二层单播和广播。</li>
+<li>不同 VLAN 之间不能直接进行二层单播或广播。</li>
+<li>VLAN 间通信需要路由功能，例如多臂路由、单臂路由或三层交换机。</li>
+</ul>
+<p>可以把 VLAN 理解为逻辑广播域：</p>
+<pre><code class="language-text">VLAN1 内部：可直接通信
+VLAN2 内部：可直接通信
+VLAN3 内部：可直接通信
+VLAN1、VLAN2、VLAN3 之间：不能直接通信，必须经过三层转发
+</code></pre>
+<h2 id="section-2">4.2 VLAN 与 ARP</h2>
+<h3 id="section-3">4.2.1 ARP 的基本过程</h3>
+<p>ARP 根据已知 IPv4 地址查询对应的 MAC 地址：</p>
+<ol>
+<li>源主机广播 ARP 请求，目的 MAC 为 <code>FF-FF-FF-FF-FF-FF</code>。</li>
+<li>拥有目标 IPv4 地址的设备通常单播返回 ARP 响应。</li>
+<li>源主机缓存 <code>&lt;IPv4 地址, MAC 地址, 生存时间&gt;</code> 映射。</li>
+</ol>
+<p>ARP 只能在当前链路或广播域内使用，ARP 广播不会被普通路由器转发。</p>
+<ul>
+<li>目的主机与源主机在同一 VLAN，且源主机根据子网掩码/路由表判定目的 IPv4 地址在本链路：源主机可直接 ARP 查询目的主机 MAC。</li>
+<li>若路由表判定目的地址需经网关，源主机 ARP 查询的是本链路下一跳网关的 MAC，而非远端主机 MAC；若把异 VLAN 目的主机误配置成“同一 IP 子网”，源主机会尝试直接 ARP，但广播过不了 VLAN 边界，通常无法得到目的主机应答。<strong>同一 VLAN 与同一 IP 子网是两种不同条件</strong>，不能只凭 VLAN 成员关系断定 ARP 对象。</li>
+<li>若通信路径中有 $n$ 个路由器，且这 $n+1$ 段均为使用 ARP 解析下一跳 MAC 的 IPv4 广播链路、各段相关 ARP 缓存均为空，则最多需要在 $n+1$ 段链路上分别进行 ARP 交互。点到点链路或使用其他邻居解析机制的链路不能机械套用该式。</li>
+</ul>
+<p>一次 ARP 交互通常指“一次广播请求 + 一次单播响应”。</p>
+<h3 id="section-4">4.2.2 ARP 表与交换机 MAC 地址表</h3>
+<ul>
+<li>主机或三层接口维护 ARP 表，记录 IP 与 MAC 的对应关系。</li>
+<li>普通二层交换机主要维护 MAC 地址表，记录 MAC 与交换端口的对应关系。</li>
+<li>题目询问某主机的 ARP 表时，应先判断哪些设备能与该主机在同一 VLAN 内直接通信。</li>
+</ul>
+<h2 id="section-5">4.3 Access、Trunk 与 IEEE 802.1Q</h2>
+<h3 id="section-6">4.3.1 Access 端口</h3>
+<ul>
+<li>Access 端口通常连接终端主机，归属于一个 VLAN。</li>
+<li>主机收发的通常是没有 VLAN 标签的普通以太网 MAC 帧。</li>
+<li>交换机从 Access 端口收到无标签帧后，依据该端口的 PVID 把帧归入相应 VLAN。</li>
+<li>从 Access 端口发送给主机时，交换机会去除 VLAN 标签。</li>
+</ul>
+<h3 id="section-7">4.3.2 Trunk 端口</h3>
+<ul>
+<li>Trunk 端口通常用于交换机之间，或交换机与路由器之间互联。</li>
+<li>一条 Trunk 链路可以承载多个 VLAN。</li>
+<li>Trunk 上通常使用 IEEE 802.1Q 标签区分帧属于哪个 VLAN。</li>
+<li>按本题采用的 PVID 处理模型，从 Trunk 发出的帧既可能是无标签普通以太网帧，也可能是带标签的 802.1Q 帧。</li>
+</ul>
+<p>题目给出的 Trunk 转发规则为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>待发送帧</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>802.1Q 帧的 VID 等于出接口 PVID</td>
+<td>去除 VLAN 标签后转发</td>
+</tr>
+<tr>
+<td>802.1Q 帧的 VID 不等于出接口 PVID</td>
+<td>保留 VLAN 标签直接转发</td>
+</tr>
+<tr>
+<td>Trunk 收到无标签帧</td>
+<td>根据接口 PVID 插入标签，标签 VID 取 PVID</td>
+</tr>
+</tbody>
+</table></div>
+<p>具体设备对原生 VLAN、PVID 和无标签帧的处理可由厂商配置；做题时以题目明确给出的规则为准。</p>
+<h3 id="section-8">4.3.3 802.1Q 帧的变化</h3>
+<p>普通 Ethernet V2 帧结构：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">目的 MAC</th>
+<th style="text-align:right">源 MAC</th>
+<th style="text-align:right">类型</th>
+<th style="text-align:right">数据载荷</th>
+<th style="text-align:right">FCS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">6 B</td>
+<td style="text-align:right">6 B</td>
+<td style="text-align:right">2 B</td>
+<td style="text-align:right">46-1500 B</td>
+<td style="text-align:right">4 B</td>
+</tr>
+</tbody>
+</table></div>
+<p>最大帧长为：</p>
+<p>$$
+6+6+2+1500+4=1518\ \mathrm{B}
+$$</p>
+<p>802.1Q 在源 MAC 与类型字段之间插入 4 B VLAN 标签：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">目的 MAC</th>
+<th style="text-align:right">源 MAC</th>
+<th style="text-align:right">VLAN 标签</th>
+<th style="text-align:right">类型</th>
+<th style="text-align:right">数据载荷</th>
+<th style="text-align:right">FCS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">6 B</td>
+<td style="text-align:right">6 B</td>
+<td style="text-align:right">4 B</td>
+<td style="text-align:right">2 B</td>
+<td style="text-align:right">42-1500 B</td>
+<td style="text-align:right">4 B</td>
+</tr>
+</tbody>
+</table></div>
+<p>最大帧长相应变为：</p>
+<p>$$
+1518+4=1522\ \mathrm{B}
+$$</p>
+<p>802.1Q 标记帧的最小有效载荷可降为 42 B，使最小帧仍为 64 B；若在已有 46 B 载荷的最小普通帧上直接插入标签，得到的是 68 B 帧。原 PDF 图中把带标签帧载荷也固定标成 <code>46–1500 B</code>，只覆盖后一种情况，不能当作所有带标签帧的下限。可参照 <a href="https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/nx-os-software/200692-Troubleshoot-the-Corrupted-Ethernet-Pack.html">Cisco 对带标签最小帧和填充长度的说明</a>。</p>
+<h2 id="section-9">4.4 2024 年真题：H4 的 ARP 表</h2>
+<h3 id="section-10">4.4.1 主机与 VLAN 对应关系</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>主机</th>
+<th>IPv4 地址</th>
+<th>MAC 地址</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td><code>192.168.3.91</code></td>
+<td><code>00-3E-C2-39-12-B5</code></td>
+<td>VLAN1</td>
+</tr>
+<tr>
+<td>H2</td>
+<td><code>192.168.3.81</code></td>
+<td><code>00-18-A2-3B-36-21</code></td>
+<td>VLAN1</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><code>192.168.3.125</code></td>
+<td><code>00-E5-78-4A-09-B2</code></td>
+<td>VLAN1</td>
+</tr>
+<tr>
+<td>H4</td>
+<td><code>192.168.3.12</code></td>
+<td><code>00-35-6A-B1-4C-92</code></td>
+<td>VLAN1</td>
+</tr>
+<tr>
+<td>H5</td>
+<td><code>192.168.3.251</code></td>
+<td><code>00-1A-39-5B-E4-45</code></td>
+<td>VLAN2</td>
+</tr>
+<tr>
+<td>H6</td>
+<td><code>192.168.3.129</code></td>
+<td><code>00-08-6E-05-A7-82</code></td>
+<td>VLAN3</td>
+</tr>
+<tr>
+<td>H7</td>
+<td><code>192.168.3.190</code></td>
+<td><code>00-51-48-C9-63-A3</code></td>
+<td>VLAN3</td>
+</tr>
+</tbody>
+</table></div>
+<p>题目问：下列哪一条 <code>&lt;IP 地址, MAC 地址, TTL&gt;</code> 映射不会出现在 H4 的 ARP 表中？</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>表项对应主机</th>
+<th>是否可能出现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>H2：<code>192.168.3.81</code> / <code>00-18-A2-3B-36-21</code></td>
+<td>可能，同属 VLAN1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>H1：<code>192.168.3.91</code> / <code>00-3E-C2-39-12-B5</code></td>
+<td>可能，同属 VLAN1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>H3：<code>192.168.3.125</code> / <code>00-E5-78-4A-09-B2</code></td>
+<td>可能，同属 VLAN1</td>
+</tr>
+<tr>
+<td>D</td>
+<td>H6：<code>192.168.3.129</code> / <code>00-08-6E-05-A7-82</code></td>
+<td>不可能直接通过 ARP 获得，H6 属于 VLAN3</td>
+</tr>
+</tbody>
+</table></div>
+<p>按题图的 VLAN 划分，H4 只可能与 VLAN1 内的 H1、H2、H3 直接二层通信。H6 与 H4 不在同一广播域，H4 的 ARP 请求到不了 H6；若配置了跨 VLAN 路由且目的地址需经网关，H4 通常解析本 VLAN 下一跳的 MAC，而不是直接取得 H6 的 MAC。本题未给子网掩码，不能仅凭这张图断言 H4 一定会向网关而非目标地址发起 ARP；但两种常规路由判断都不会让 H6 直接应答 H4 的广播。</p>
+<p><strong>答案：D。</strong></p>
+<h2 id="section-11">4.5 模拟题：跨交换机 VLAN 与 Trunk</h2>
+<p>两台二层交换机 S1、S2 通过 S1 端口 4 与 S2 端口 1 相连。主机的 VLAN 关系为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>VLAN</th>
+<th>主机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VLAN1</td>
+<td>H1、H2、H3、H4</td>
+</tr>
+<tr>
+<td>VLAN2</td>
+<td>H5、H6</td>
+</tr>
+<tr>
+<td>VLAN3</td>
+<td>H7</td>
+</tr>
+</tbody>
+</table></div>
+<p>判断四个选项：</p>
+<h3 id="section-12">A. H1 的 ARP 表中可能记录 H3 的 IP3/MAC3</h3>
+<p>H1 与 H3 虽连接不同交换机，但同属 VLAN1。若二者进行过通信且表项尚未超时，H1 可以缓存 H3 的 IP/MAC 映射。</p>
+<p><strong>A 正确。</strong></p>
+<h3 id="section-13">B. 交换机间链路可能传普通帧，也可能传 802.1Q 帧</h3>
+<p>按照题设 Trunk/PVID 规则：VID 等于 Trunk PVID 的帧可去标签发送，VID 不同的帧保留标签。因此链路上两种帧都可能出现。</p>
+<p><strong>B 正确。</strong></p>
+<h3 id="section-14">C. H4 可以收到 H2 发送的广播帧</h3>
+<p>H2、H4 同属 VLAN1，且 VLAN1 已通过 Trunk 跨越两台交换机，所以 H2 的 VLAN1 广播会到达 H4。</p>
+<p><strong>C 正确。</strong></p>
+<h3 id="section-15">D. H5 与 H7 可以直接单播通信</h3>
+<p>H5 属于 VLAN2，H7 属于 VLAN3。不同 VLAN 不能直接进行二层单播，必须经三层转发。</p>
+<p><strong>D 错误，是本题答案。</strong></p>
+<h2 id="section-16">4.6 解题步骤</h2>
+<ol>
+<li>根据端口划分、颜色框或 VLAN 标号，先写出“主机 - VLAN”对应表。</li>
+<li>判断通信双方是否同属一个 VLAN；物理上是否接在同一交换机不是决定条件。</li>
+<li>ARP 表题先按子网掩码和路由表判定目标是否在本链路，再按 VLAN 判断 ARP 广播能否到达；经网关转发时解析本链路下一跳的 MAC。只有在题设有代理 ARP、静态表项等额外机制时才另作判断。</li>
+<li>广播帧只在本 VLAN 内扩散；同 VLAN 可以跨交换机，前提是 Trunk 承载该 VLAN。</li>
+<li>检查端口类型：Access 面向单个 VLAN 的终端，Trunk 承载多个 VLAN。</li>
+<li>遇到 PVID/VID 时严格按题设判断出端口是去标签还是保留标签。</li>
+</ol>
+<h2 id="section-17">4.7 易错点</h2>
+<ul>
+<li>VLAN 划分看逻辑成员关系，不能只看 IP 地址是否相似或主机是否连接同一交换机。</li>
+<li>同一交换机上的主机可能属于不同 VLAN；同一 VLAN 的主机也可能分布在不同交换机。</li>
+<li>ARP 广播不能跨 VLAN；VLAN 间经路由通信且源主机有正确路由时，源主机通常解析本链路下一跳网关的 MAC。不能只看 VLAN 而忽略 IP 子网与路由表。</li>
+<li>二层交换机的 MAC 地址表不是 ARP 表：前者是 <code>MAC -&gt; 端口</code>，后者是 <code>IP -&gt; MAC</code>。</li>
+<li>Access 出方向通常发送无标签帧；Trunk 上是否保留标签还要比较 VID 与 PVID，并以题设规则为准。</li>
+<li>802.1Q 标签长度是 4 B，插入位置在源 MAC 与类型字段之间，最大帧长由 1518 B 变为 1522 B。</li>
+<li>不同 VLAN 之间的广播、单播都不能直接二层转发；跨 VLAN 单播需要路由。</li>
+</ul>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-5064ace109f8/">上一篇：路由协议</a> · <a href="/en/notes/cs408-ac7b677ecc0f/">下一篇：IP 多播</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-fe8e22cc2489/">网络层总纲</a></li>
+</ul>
+<h2 id="section-19">4.8 本节复盘</h2>
+<ul>
+<li>VLAN 是逻辑广播域；同一 VLAN 可直接二层通信，不同 VLAN 需要三层转发。</li>
+<li>同一 VLAN 可以跨越多台交换机，一条 Trunk 链路可以承载多个 VLAN。</li>
+<li>ARP 请求广播、响应通常单播，且只能在当前链路或 VLAN 内生效；是否直接查询目的主机还要看源主机的 IP 路由判断。</li>
+<li>“经过 $n$ 个路由器最多进行 $n+1$ 次 ARP”只适用于每段都使用 ARP 的 IPv4 广播链路且相关缓存均为空。</li>
+<li>2024 年题中 H4 属于 VLAN1，H6 属于 VLAN3，所以 H6 的 IP/MAC 映射不会出现在 H4 的 ARP 表中，答案 D。</li>
+<li>模拟题中 A、B、C 正确，H5 与 H7 属于不同 VLAN，不能直接单播，错误项为 D。</li>
+<li>Access 端口通常向主机发送无标签帧；Trunk 根据 VID/PVID 决定去标签或保留 802.1Q 标签。</li>
+<li>802.1Q 插入 4 B 标签，使最大以太网帧由 1518 B 变为 1522 B。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-b05bacc57032/index.html"><span>← Previous item</span><strong>Lecture 2：关系数据库</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-b1364442cb67/index.html"><span>Next item →</span><strong>Lecture 2：神经网络与后向传播</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>5 题型 - 调制与复用技术 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 5 题型 - 调制与复用技术. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="5 题型 - 调制与复用技术 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 5 题型 - 调制与复用技术. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-95a5278d5a7d/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5 题型 - 调制与复用技术 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 5 题型 - 调制与复用技术. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "5 题型 - 调制与复用技术",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-95a5278d5a7d/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-95a5278d5a7d/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-95a5278d5a7d/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-95a5278d5a7d/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-95a5278d5a7d/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-95a5278d5a7d/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">5 题型 - 调制与复用技术</h1><p class="article-lead">Chinese-language Computer Science 408 note: 5 题型 - 调制与复用技术. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ccf38ece5709.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ccf38ece5709.pdf" download="5 题型 - 调制与复用技术.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 数字调制缩写</a><a href="#section-2">5.2 复用方式对比</a><a href="#section-3">5.3 2024 年真题：哪种调制需要两个频率</a><a href="#section-4">5.4 模拟题</a><a href="#section-7">5.5 16-QAM 星座图信息</a><a href="#section-8">5.6 波形识别顺序</a><a href="#section-9">5.7 易错点</a><a href="#section-10">相关知识</a><a href="#section-11">5.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：调制题看载波的哪个参数随数据改变，复用题看多个用户如何划分时间、频率或码片资源。英文缩写本身通常已经给出线索，但仍要结合“同时/轮流、同频/异频、固定/动态时隙”等题干关键词判断。</p>
+</blockquote>
+<h2 id="section-1">5.1 数字调制缩写</h2>
+<p><code>SK</code> 是 Shift Keying，表示数字键控调制。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>调制方式</th>
+<th>全称</th>
+<th>变化的载波参数</th>
+<th>二进制波形特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASK</td>
+<td>Amplitude Shift Keying</td>
+<td>幅度</td>
+<td>两种不同幅度；典型二进制 ASK 可表现为有载波/无载波</td>
+</tr>
+<tr>
+<td>FSK</td>
+<td>Frequency Shift Keying</td>
+<td>频率</td>
+<td>用两个不同频率的载波表示 0 和 1</td>
+</tr>
+<tr>
+<td>PSK</td>
+<td>Phase Shift Keying</td>
+<td>相位</td>
+<td>载波频率与幅度不变，相位取不同状态</td>
+</tr>
+<tr>
+<td>DPSK</td>
+<td>Differential Phase Shift Keying</td>
+<td>相邻码元的相位差</td>
+<td>由是否发生相位变化表示数据</td>
+</tr>
+<tr>
+<td>QAM</td>
+<td>Quadrature Amplitude Modulation</td>
+<td>幅度与相位</td>
+<td>以多个星座点同时区分幅度和相位</td>
+</tr>
+</tbody>
+</table></div>
+<p>本材料的二进制 DPSK 图采用“有相位跳变表示 1，无相位跳变表示 0”的约定；实际做题仍以题目约定为准。</p>
+<h2 id="section-2">5.2 复用方式对比</h2>
+<p><code>DM</code> 是 Division Multiplexing，表示信道复用。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>复用</th>
+<th>资源划分</th>
+<th>用户是否同时发送</th>
+<th>识别关键词</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FDM 频分复用</td>
+<td>将总频带分成互不重叠的子频带</td>
+<td>是</td>
+<td>同一时间、不同频带</td>
+</tr>
+<tr>
+<td>TDM 时分复用</td>
+<td>各用户轮流使用同一频带的固定时隙</td>
+<td>否</td>
+<td>固定帧、固定时隙、轮流</td>
+</tr>
+<tr>
+<td>STDM 统计时分复用</td>
+<td>按实际需求动态分配时隙</td>
+<td>活跃用户按需发送</td>
+<td>动态、按需、提高利用率</td>
+</tr>
+<tr>
+<td>CDM 码分复用</td>
+<td>同时使用相同时间和频带，以正交码片区分</td>
+<td>是</td>
+<td>同时、同频、不同码片</td>
+</tr>
+</tbody>
+</table></div>
+<p>TDM 即使某用户当前没有数据，其固定时隙也可能空闲；STDM 只给活跃用户分配时隙，因此通常能提高链路利用率，但帧中往往需要附带用户地址等标识。</p>
+<h2 id="section-3">5.3 2024 年真题：哪种调制需要两个频率</h2>
+<p>题目问：二进制数字调制中，需要 2 个不同频率载波的是哪一种？</p>
+<ul>
+<li>ASK 改变幅度。</li>
+<li>PSK 改变相位。</li>
+<li><strong>FSK 改变频率</strong>，二进制 FSK 用两个频率分别表示 0 和 1。</li>
+<li>DPSK 以相邻码元间的相位变化表示数据。</li>
+</ul>
+<p><strong>答案：C，FSK。</strong></p>
+<h2 id="section-4">5.4 模拟题</h2>
+<h3 id="section-5">5.4.1 同时使用不同频带</h3>
+<p>题目问：每一对用户在相同时间占用不同频带资源通信，属于哪种复用？</p>
+<p>“相同时间”说明用户可并行发送，“不同频带”直接对应 FDM。</p>
+<p><strong>答案：B，FDM。</strong></p>
+<h3 id="section-6">5.4.2 幅度与相位混合调制</h3>
+<p>题目问：哪种调制技术同时对幅度和相位进行混合调制？</p>
+<p>ASK 只改幅度，FSK 只改频率，DPSK 表示差分相位；QAM 通过同相与正交两个分量形成不同幅度和相位的星座点。</p>
+<p><strong>答案：B，QAM。</strong></p>
+<h2 id="section-7">5.5 16-QAM 星座图信息</h2>
+<p>材料中的 16-QAM 星座图包含 16 个可区分码元，因此每个码元表示：</p>
+<p>$$\log_2 16=4,bit$$</p>
+<p>图中不同点由幅度与相位的组合区分。相邻星座点的 4 bit 标签采用格雷码，使任意相邻点只有 1 bit 不同：</p>
+<ul>
+<li>噪声最容易把一个点误判为相邻点。</li>
+<li>格雷码让这种相邻误判通常只造成 1 bit 错误。</li>
+<li>格雷码不能消除误码，只是降低相邻判错造成的比特错误数。</li>
+</ul>
+<h2 id="section-8">5.6 波形识别顺序</h2>
+<ol>
+<li>先看振幅：出现有载波/无载波或多种振幅，考虑 ASK/QAM。</li>
+<li>再看周期疏密：码元间频率不同，考虑 FSK。</li>
+<li>若幅度、频率基本不变但波形在码元边界改变相位，考虑 PSK/DPSK。</li>
+<li>若同时有多种幅度和相位，以星座图表达，考虑 QAM。</li>
+<li>DPSK 不看绝对相位，而看相邻码元的相位差。</li>
+</ol>
+<h2 id="section-9">5.7 易错点</h2>
+<ul>
+<li>ASK、FSK、PSK 的 <code>A/F/P</code> 分别对应幅度、频率、相位。</li>
+<li>QAM 不是单纯的多幅度 ASK，而是幅度与相位的联合调制。</li>
+<li>FDM 是同时使用不同频带；TDM 是不同用户轮流使用同一频带。</li>
+<li>CDM 中多个用户可同时占用相同时间和频带，靠正交码片分离。</li>
+<li>STDM 的“统计”表示按需动态分配，不等同于给每个用户保留固定周期时隙。</li>
+</ul>
+<h2 id="section-10">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-8d35cda087a1/">上一篇：最大传输速率</a> · <a href="/en/notes/cs408-1c2f720beeaf/">下一篇：检错与纠错机制</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-d568b25e2f3d/">信道复用技术</a></li>
+</ul>
+<h2 id="section-11">5.8 本节复盘</h2>
+<ul>
+<li>ASK 改幅度、FSK 改频率、PSK 改相位、DPSK 看相位差、QAM 联合改变幅度与相位。</li>
+<li>二进制 FSK 需要两个不同频率载波，2024 年真题答案为 FSK。</li>
+<li>FDM 按频率分、TDM 按固定时间分、STDM 按需求动态分、CDM 按码片分。</li>
+<li>16-QAM 有 16 个星座点，每码元携带 4 bit；相邻点用格雷码降低相邻误判的影响。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-937337386c65/index.html"><span>← Previous item</span><strong>Lecture 0：PyTorch 总结</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-9af3b667a6a2/index.html"><span>Next item →</span><strong>Lecture 2：知识 - 计算机网络体系结构与参考模型</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

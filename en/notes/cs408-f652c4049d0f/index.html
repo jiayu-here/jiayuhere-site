@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：软件设计与实现 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 4：软件设计与实现. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：软件设计与实现 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 4：软件设计与实现. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-f652c4049d0f/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：软件设计与实现 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 4：软件设计与实现. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：软件设计与实现",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-f652c4049d0f/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-f652c4049d0f/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-f652c4049d0f/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-f652c4049d0f/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-f652c4049d0f/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-f652c4049d0f/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 4：软件设计与实现</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 4：软件设计与实现. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>13 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/58f340aab5ad.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/58f340aab5ad.pdf" download="Lecture 4：软件设计与实现.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 模块与设计原则</a><a href="#section-7">4.2 耦合等级</a><a href="#section-8">4.3 内聚等级</a><a href="#section-9">4.4 顺序图</a><a href="#section-15">4.5 UML 与类图</a><a href="#section-20">4.6 顺序图与类图的配合</a><a href="#section-21">4.7 常考辨析</a><a href="#section-26">相关知识</a><a href="#section-27">本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节整理模块化、抽象、信息隐藏和模块独立性，完整转写耦合与内聚的等级次序；进一步说明 UML 顺序图的生命线、消息和激活，并按课件借书示例还原 18 条交互，最后总结类图、类关系及边界类/控制类/实体类识别方法。</p>
+</blockquote>
+<h2 id="section-1">4.1 模块与设计原则</h2>
+<h3 id="section-2">4.1.1 模块</h3>
+<p>模块是具有独立名称、明确输入输出和特定功能的程序实体。它可以表现为函数、类、包、组件、服务或子系统。</p>
+<p>良好模块应具有：</p>
+<ul>
+<li>清晰而单一的职责。</li>
+<li>最小且稳定的接口。</li>
+<li>隐藏的内部实现。</li>
+<li>可独立理解、测试、修改和复用的边界。</li>
+</ul>
+<h3 id="section-3">4.1.2 软件模块化</h3>
+<p>把复杂系统分解为若干职责明确、通过接口协作的模块，以控制复杂度并支持并行开发、测试和维护。</p>
+<p>分解并非越细越好：模块过大难以理解，过小则接口和通信成本增加。应按职责、变化原因和信息边界划分。</p>
+<h3 id="section-4">4.1.3 抽象</h3>
+<p>抽象关注对象或模块“是什么、能做什么”，暂时忽略不影响当前层次的实现细节。</p>
+<ul>
+<li>数据抽象：规定数据及其允许操作。</li>
+<li>过程抽象：用一个名称代表一组步骤。</li>
+<li>控制抽象：隐藏控制流程细节，如迭代器或事件机制。</li>
+</ul>
+<h3 id="section-5">4.1.4 信息隐藏</h3>
+<p>模块只公开完成协作所需的接口，把容易变化的设计决策、数据表示和算法封装在内部。其他模块不能依赖这些秘密，从而减少修改传播。</p>
+<h3 id="section-6">4.1.5 模块独立性</h3>
+<p>模块独立性表示一个模块只完成相对独立的功能，并尽量少依赖其他模块。衡量的两个核心指标是：</p>
+<ul>
+<li><strong>耦合</strong>：模块之间连接和依赖的紧密程度，越低越好。</li>
+<li><strong>内聚</strong>：一个模块内部各元素为同一职责协作的紧密程度，越高越好。</li>
+</ul>
+<p>目标是：</p>
+<p>$$
+\text{高内聚}+\text{低耦合}\Rightarrow\text{较强模块独立性}.
+$$</p>
+<h2 id="section-7">4.2 耦合等级</h2>
+<p>课件图从左到右耦合逐渐增强、模块独立性逐渐减弱：</p>
+<pre><code class="language-text">无直接耦合 &lt; 数据耦合 &lt; 标记耦合 &lt; 控制耦合 &lt; 外部耦合 &lt; 公共耦合 &lt; 内容耦合
+独立性强 ------------------------------------------------------&gt; 独立性弱
+</code></pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>例子或问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无直接耦合</td>
+<td>两模块没有直接关系，通过上层协调或完全独立</td>
+<td>最弱耦合</td>
+</tr>
+<tr>
+<td>数据耦合</td>
+<td>只通过简单参数传递必要数据</td>
+<td>传入订单号而非整个全局对象</td>
+</tr>
+<tr>
+<td>标记耦合</td>
+<td>传递复合结构，但接收方只使用其中一部分</td>
+<td>传整个记录只读取一个字段</td>
+</tr>
+<tr>
+<td>控制耦合</td>
+<td>传递控制标志，决定另一个模块内部逻辑</td>
+<td><code>mode=true</code> 决定执行分支</td>
+</tr>
+<tr>
+<td>外部耦合</td>
+<td>共同依赖外部规定的协议、设备接口或文件格式</td>
+<td>两模块都依赖特定通信协议</td>
+</tr>
+<tr>
+<td>公共耦合</td>
+<td>多个模块访问同一全局数据区</td>
+<td>共享全局变量，修改影响难追踪</td>
+</tr>
+<tr>
+<td>内容耦合</td>
+<td>一个模块直接访问或修改另一模块内部实现</td>
+<td>跳入内部代码、修改私有数据</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong>
+有些教材会因定义口径调整外部耦合与控制耦合的相对位置。考试应优先按题目所用教材分类；本课件给出的明确顺序如上。</p>
+</blockquote>
+<p>降低耦合的方法：缩小接口、只传必要数据、消除全局状态、面向稳定抽象编程、通过事件或依赖注入隔离具体实现。</p>
+<h2 id="section-8">4.3 内聚等级</h2>
+<p>经典结构化设计教材通常把内聚分为七级；从左到右内聚逐渐降低、模块独立性逐渐减弱：</p>
+<pre><code class="language-text">功能内聚 &gt; 顺序内聚 &gt; 通信内聚 &gt; 过程内聚 &gt; 时间内聚 &gt; 逻辑内聚 &gt; 偶然内聚
+独立性强 -----------------------------------------------------&gt; 独立性弱
+功能单一 -----------------------------------------------------&gt; 功能分散
+</code></pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>功能内聚</td>
+<td>所有元素共同完成一个明确功能</td>
+<td>计算订单总额</td>
+</tr>
+<tr>
+<td>顺序内聚</td>
+<td>一个元素的输出直接作为下一个元素的输入</td>
+<td>读取原始数据、清洗后再计算统计量</td>
+</tr>
+<tr>
+<td>通信内聚</td>
+<td>多个操作使用或产生相同数据</td>
+<td>读取一条记录并生成多个相关结果</td>
+</tr>
+<tr>
+<td>过程内聚</td>
+<td>元素必须按指定控制次序执行</td>
+<td>先校验、再记录、再通知，但处理数据不一定相同</td>
+</tr>
+<tr>
+<td>时间内聚</td>
+<td>因在同一时间执行而组合</td>
+<td>系统初始化或关闭时的一组不同操作</td>
+</tr>
+<tr>
+<td>逻辑内聚</td>
+<td>一组逻辑相似操作由控制参数选择其一</td>
+<td>一个函数按标志执行多种输入操作</td>
+</tr>
+<tr>
+<td>偶然内聚</td>
+<td>元素之间几乎没有有意义联系</td>
+<td>把杂项工具和无关处理放在同一模块</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 信息内聚的教材口径
+有些教材在经典七级之外另列<strong>信息内聚</strong>：多个操作围绕同一数据结构组织，但通过各自独立的入口调用，例如抽象数据类型对同一对象提供增、删、改、查。它常被评价为较强内聚，但是否高于功能内聚、以及是否纳入统一排序，取决于教材体系；作答时应以题目给定口径为准，不能把它替换成经典七级中的“顺序内聚”。</p>
+</blockquote>
+<p>提升内聚的关键是让模块围绕单一职责和单一变化原因组织，而不是只把代码放进同一文件。</p>
+<h2 id="section-9">4.4 顺序图</h2>
+<h3 id="section-10">4.4.1 定义</h3>
+<p>顺序图（Sequence Diagram）是 UML 交互图，详细表示参与者实例、对象实例之间按时间先后发送消息的过程。</p>
+<ul>
+<li>横向表示不同参与者或对象。</li>
+<li>时间通常自上而下推进。</li>
+<li>重点是“谁在什么时候向谁发送什么消息”。</li>
+</ul>
+<h3 id="section-11">4.4.2 参与者、对象和系统边界</h3>
+<p>参与者位于系统边界外，代表与系统交互的角色。系统边界内放置边界对象、控制对象、实体对象或其他协作对象。</p>
+<p>对象头通常写成 <code>对象名:类名</code>，也可以只写对象名或匿名类实例。</p>
+<h3 id="section-12">4.4.3 生命线与激活</h3>
+<ul>
+<li><strong>生命线</strong>：对象头下方的垂直虚线，表示该实例在一段时间内存在。</li>
+<li><strong>激活条</strong>：生命线上的细长矩形，表示对象正在执行操作或等待嵌套调用返回。</li>
+<li>对象被创建时生命线从创建消息处开始；销毁时以 <code>X</code> 结束。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong>
+课件说对象应“错落有致”并不严谨。通常参与者和已有对象放在图顶端横向排列；只有较晚创建的对象，其对象头和生命线才从较低位置开始。位置首先表达生命周期，不是为了美观随意错开。</p>
+</blockquote>
+<h3 id="section-13">4.4.4 消息</h3>
+<p>消息是对象之间通信的规格，既可传递调用等控制信息，也可携带参数和返回数据。</p>
+<p>常见消息：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>含义</th>
+<th>常见画法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步调用</td>
+<td>发送者等待被调用操作返回</td>
+<td>实线加实心箭头</td>
+</tr>
+<tr>
+<td>异步消息</td>
+<td>发送后不等待接收者完成</td>
+<td>实线加开放箭头</td>
+</tr>
+<tr>
+<td>返回消息</td>
+<td>返回结果或控制</td>
+<td>虚线箭头</td>
+</tr>
+<tr>
+<td>自消息</td>
+<td>对象调用自身操作</td>
+<td>回折到同一生命线</td>
+</tr>
+<tr>
+<td>创建消息</td>
+<td>创建新对象</td>
+<td>箭头指向新对象头</td>
+</tr>
+<tr>
+<td>销毁消息</td>
+<td>终止对象生命线</td>
+<td>箭头指向 <code>X</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>复杂控制可用组合片段表达：<code>alt</code> 分支、<code>opt</code> 可选、<code>loop</code> 循环、<code>par</code> 并行。</p>
+<h3 id="section-14">4.4.5 课件“借书”顺序图完整转写</h3>
+<p>参与对象：</p>
+<ul>
+<li>图书管理员。</li>
+<li><code>借书界面类</code>，边界类。</li>
+<li><code>借书控制类</code>，控制类。</li>
+<li><code>读者类</code>，实体类。</li>
+<li><code>借阅信息类</code>，实体类。</li>
+<li><code>图书类</code>，实体类。</li>
+<li><code>预约信息类</code>，实体类。</li>
+</ul>
+<p>图中的 18 条消息按时间顺序为：</p>
+<ol>
+<li>图书管理员向借书界面录入读者信息。</li>
+<li>借书界面请求借书控制类验证读者信息。</li>
+<li>借书控制类调用读者类验证读者信息。</li>
+<li>读者类返回验证成功。</li>
+<li>借书控制类向借阅信息类查询读者借阅信息。</li>
+<li>借阅信息类返回读者借阅信息。</li>
+<li>借书控制类自调用，验证是否符合借阅条件。</li>
+<li>借书控制类向借书界面返回并显示读者信息和借阅信息。</li>
+<li>图书管理员向借书界面录入图书信息。</li>
+<li>借书界面请求借书控制类验证图书信息。</li>
+<li>借书控制类调用图书类，验证图书是否可借。</li>
+<li>图书类返回“图书可借”。</li>
+<li>借书控制类向借书界面返回并显示图书信息。</li>
+<li>图书管理员在借书界面确认借阅。</li>
+<li>借书界面请求借书控制类保存借阅信息。</li>
+<li>借书控制类调用借阅信息类保存借阅信息。</li>
+<li>借书控制类调用图书类修改图书状态。</li>
+<li>借书控制类调用预约信息类删除相应预约信息。</li>
+</ol>
+<p>该图体现典型分层协作：参与者只与界面交互，界面把业务请求交给控制类，控制类协调实体类完成校验和状态更新。</p>
+<blockquote>
+<p><strong>TIP</strong>
+第 16 至 18 步共同构成一次借阅业务更新。真实系统还要考虑事务边界：保存借阅、修改图书状态、删除预约应保持一致，要么全部成功，要么整体回滚。</p>
+</blockquote>
+<h2 id="section-15">4.5 UML 与类图</h2>
+<h3 id="section-16">4.5.1 UML</h3>
+<p>UML（Unified Modeling Language，统一建模语言）是一种标准化的可视化建模语言，用于说明、可视化、构造和记录软件密集系统的制品。</p>
+<p>UML 是建模语言，不是完整的软件开发方法，也不规定团队必须采用哪一种过程模型。</p>
+<p>常见 UML 图：</p>
+<ul>
+<li>用例图、活动图、状态机图。</li>
+<li>顺序图、通信图。</li>
+<li>类图、对象图、构件图、部署图、包图。</li>
+</ul>
+<p>UML 模型是系统语义信息的整体；UML 图只是从某个视角呈现模型信息。一个模型可以由多张图表达，删除某一张图不一定等于删除模型中的全部语义。</p>
+<h3 id="section-17">4.5.2 类图</h3>
+<p>类图描述类、接口、属性、操作以及它们之间的静态关系，是系统逻辑视图和静态结构建模的重要组成部分。</p>
+<p>一个类通常分三格：</p>
+<ol>
+<li>类名。</li>
+<li>属性。</li>
+<li>操作或方法。</li>
+</ol>
+<p>可见性符号：</p>
+<ul>
+<li><code>+</code>：public。</li>
+<li><code>-</code>：private。</li>
+<li><code>#</code>：protected。</li>
+<li><code>~</code>：package。</li>
+</ul>
+<h3 id="section-18">4.5.3 类之间的关系</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>关系</th>
+<th>含义</th>
+<th>记法要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依赖 Dependency</td>
+<td>临时使用，供应者变化可能影响客户</td>
+<td>虚线箭头</td>
+</tr>
+<tr>
+<td>关联 Association</td>
+<td>对象间较稳定的结构联系</td>
+<td>实线，可写角色、导航性和多重性</td>
+</tr>
+<tr>
+<td>聚合 Aggregation</td>
+<td>较弱的整体-部分，部分可独立存在</td>
+<td>整体端空心菱形</td>
+</tr>
+<tr>
+<td>组合 Composition</td>
+<td>强整体-部分，部分生命周期依赖整体</td>
+<td>整体端实心菱形</td>
+</tr>
+<tr>
+<td>泛化 Generalization</td>
+<td>类之间的继承，is-a</td>
+<td>实线空心三角指向父类</td>
+</tr>
+<tr>
+<td>实现 Realization</td>
+<td>类实现接口规定的契约</td>
+<td>虚线空心三角指向接口</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-19">4.5.4 识别类的步骤</h3>
+<p>课件给出两步主线：</p>
+<ol>
+<li>发现领域对象，从具体对象抽象出概念类。</li>
+<li>在用例明确后，识别完成用例所需的对象，把具有相似属性和操作的对象归为类。</li>
+</ol>
+<p>目标系统中的类常分为：</p>
+<ul>
+<li><strong>边界类</strong>：处理参与者与系统之间的界面，如页面、API 适配器。</li>
+<li><strong>控制类</strong>：协调某个用例的业务流程和对象协作。</li>
+<li><strong>实体类</strong>：保存领域概念、业务数据和规则。</li>
+</ul>
+<p>识别后还要分配职责、确定属性与操作、补充类关系和多重性，并检查是否存在上帝类、重复职责或不必要依赖。</p>
+<h2 id="section-20">4.6 顺序图与类图的配合</h2>
+<ul>
+<li>类图描述系统有哪些类及其静态关系。</li>
+<li>顺序图描述某个场景中对象如何按时间协作。</li>
+<li>顺序图中的消息可帮助发现类所需的操作。</li>
+<li>类图中的关联和依赖应能支撑顺序图中的合法通信。</li>
+</ul>
+<p>二者应相互校验：若顺序图要求对象发送某消息，而类图中接收类没有相应职责或关系，设计可能不一致。</p>
+<h2 id="section-21">4.7 常考辨析</h2>
+<h3 id="section-22">4.7.1 高内聚是否必然导致低耦合</h3>
+<p>二者通常正相关但不是逻辑必然。应分别检查模块内部职责与模块之间依赖，目标同时是高内聚和低耦合。</p>
+<h3 id="section-23">4.7.2 公共耦合与外部耦合</h3>
+<ul>
+<li>公共耦合是多个模块共享同一全局数据区。</li>
+<li>外部耦合是模块共同依赖外部接口、协议、设备或数据格式。</li>
+</ul>
+<h3 id="section-24">4.7.3 顺序图与活动图</h3>
+<ul>
+<li>顺序图强调对象之间的消息时序。</li>
+<li>活动图强调业务或控制流程，可突出分支、并发和责任泳道。</li>
+</ul>
+<h3 id="section-25">4.7.4 UML 是否是一种开发过程</h3>
+<p>不是。UML 只提供建模符号和语义，可配合瀑布、迭代、敏捷等不同过程使用。</p>
+<h2 id="section-26">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-c7b75c1ae846/">上一篇：软件需求工程</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-9c185b7e5178/">数据库设计</a></li>
+</ul>
+<h2 id="section-27">本节复盘</h2>
+<ul>
+<li>模块化通过抽象和信息隐藏控制复杂度，模块独立性由耦合与内聚共同衡量。</li>
+<li>耦合由弱到强为无直接、数据、标记、控制、外部、公共、内容耦合。</li>
+<li>经典七级内聚由强到弱为功能、顺序、通信、过程、时间、逻辑、偶然内聚；信息内聚属于另一种扩展口径。</li>
+<li>顺序图自上而下表达消息时序，核心元素包括参与者、对象、生命线、激活条和不同类型消息。</li>
+<li>借书顺序图通过边界类、控制类和实体类完成读者校验、图书校验及三项一致性更新。</li>
+<li>类图描述类、接口和静态关系；UML 是建模语言，不是软件开发过程。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-f43cdf74b38c/index.html"><span>← Previous item</span><strong>Lecture 3：卷积神经网络</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-fe8e22cc2489/index.html"><span>Next item →</span><strong>Lecture 10：知识框架 - 网络层</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

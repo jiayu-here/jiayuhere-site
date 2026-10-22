@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>1 题型 - 三种可靠传输协议 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 1 题型 - 三种可靠传输协议. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="1 题型 - 三种可靠传输协议 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 1 题型 - 三种可靠传输协议. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-0d03dc451308/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1 题型 - 三种可靠传输协议 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 1 题型 - 三种可靠传输协议. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "1 题型 - 三种可靠传输协议",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-0d03dc451308/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-0d03dc451308/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-0d03dc451308/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-0d03dc451308/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-0d03dc451308/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-0d03dc451308/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">1 题型 - 三种可靠传输协议</h1><p class="article-lead">Chinese-language Computer Science 408 note: 1 题型 - 三种可靠传输协议. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/784257aa9d43.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/784257aa9d43.pdf" download="1 题型 - 三种可靠传输协议.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">1.1 三种协议对比</a><a href="#section-3">1.2 判断重传范围</a><a href="#section-6">1.3 历年真题</a><a href="#section-9">1.4 易错点</a><a href="#section-10">相关知识</a><a href="#section-11">1.5 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：停止等待、后退 N 帧和选择重传都是自动重传请求协议。三者的主要差别在于发送/接收窗口大小、确认方式、接收方是否缓存失序帧，以及发生丢帧或超时时需要重传多少帧。</p>
+</blockquote>
+<h2 id="section-1">1.1 三种协议对比</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>停止等待 SW</th>
+<th>后退 N 帧 GBN</th>
+<th>选择重传 SR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发送窗口</td>
+<td>$W_S=1$</td>
+<td>$1&lt;W_S\le2^m-1$</td>
+<td>通常 $W_S\le2^{m-1}$</td>
+</tr>
+<tr>
+<td>接收窗口</td>
+<td>$W_R=1$</td>
+<td>$W_R=1$</td>
+<td>$W_R&gt;1$，可缓存失序帧</td>
+</tr>
+<tr>
+<td>确认方式</td>
+<td>每帧确认</td>
+<td>累计确认</td>
+<td>逐帧/选择确认</td>
+</tr>
+<tr>
+<td>计时器</td>
+<td>一次只等待一个帧</td>
+<td>通常为最早未确认帧计时</td>
+<td>每个未确认帧分别计时</td>
+</tr>
+<tr>
+<td>超时重传</td>
+<td>重传当前帧</td>
+<td>从最早未确认帧起，重传其后所有已发送未确认帧</td>
+<td>只重传超时或被选择拒绝的帧</td>
+</tr>
+<tr>
+<td>失序帧处理</td>
+<td>不涉及流水失序</td>
+<td>丢弃失序帧</td>
+<td>缓存接收窗口内的失序帧</td>
+</tr>
+</tbody>
+</table></div>
+<p>其中 $m$ 为帧序号位数，序号空间大小为 $2^m$。</p>
+<h3 id="section-2">1.1.1 窗口与序号空间</h3>
+<p>GBN 使用累计确认且接收窗口为 1，为避免新旧帧混淆：</p>
+<p>$$W_S\le2^m-1$$</p>
+<p>SR 的接收方会缓存失序帧，发送与接收窗口不能在循环序号空间中重叠：</p>
+<p>$$W_S+W_R\le2^m$$</p>
+<p>若 SR 的发送窗口和接收窗口相等，则：</p>
+<p>$$W_S=W_R\le2^{m-1}$$</p>
+<h2 id="section-3">1.2 判断重传范围</h2>
+<h3 id="section-4">1.2.1 GBN：看最高累计确认</h3>
+<p><code>ACK i</code> 的编号语义必须先服从题目约定：有的教材用它表示“帧 $i$ 及以前均已确认”，也有协议用它表示“下一帧期待编号为 $i$”，此时实际累计确认到 $i-1$。本题采用前一种约定，因此 GBN 的 <code>ACK i</code> 表示截至帧 $i$ 的数据均已按序收到。即使发送方没有分别收到较早的 ACK，只要收到了更大的累计 ACK，较早帧也视为已确认。</p>
+<p>若最早未确认帧超时，发送方从该帧开始，把其后所有已经发出但未被累计确认的帧全部重传。</p>
+<h3 id="section-5">1.2.2 SR：看各帧自身状态</h3>
+<p>SR 的每个帧独立确认、独立计时。某帧超时只重传该帧；其他已经正确到达或仍未超时的帧不随它一起重传。</p>
+<h2 id="section-6">1.3 历年真题</h2>
+<h3 id="section-7">1.3.1 2009 年：GBN 累计确认</h3>
+<p>发送方已经发送编号 <code>0-7</code> 的帧。定时器超时时，只收到 <code>0、2、3</code> 号帧的确认。</p>
+<p>由于 GBN 使用累计确认，收到 <code>ACK 3</code> 就表示 <code>0-3</code> 均已正确收到。当前未确认的已发送帧是：</p>
+<pre><code class="language-text">4、5、6、7
+</code></pre>
+<p>发送方需从 4 号帧开始后退重传，共 4 帧。</p>
+<p><strong>答案：C，4 帧。</strong></p>
+<h3 id="section-8">1.3.2 2011 年：SR 选择重传</h3>
+<p>发送方已发送 <code>0-3</code> 号帧，目前只收到 1 号帧的确认，0 号帧和 2 号帧依次超时。</p>
+<p>SR 只重传各自超时的帧，因此需要重传：</p>
+<pre><code class="language-text">0、2
+</code></pre>
+<p>共 2 帧；1 号帧已经确认，3 号帧尚未说明超时，均不重传。</p>
+<p><strong>答案：B，2 帧。</strong></p>
+<h2 id="section-9">1.4 易错点</h2>
+<ul>
+<li>GBN 的累计确认以收到的最高有效 ACK 为准，不要求每个较小 ACK 都单独到达。</li>
+<li><code>ACK i</code> 究竟确认到 $i$ 还是期待 $i$ 并非跨教材统一；先读题目定义，再确定窗口左边界。</li>
+<li>GBN 不是只重传丢失的那一帧，而是从最早未确认帧起“后退 N 帧”。</li>
+<li>SR 不使用 GBN 式的累计重传；它可缓存失序帧，只重传具体丢失/超时帧。</li>
+<li>“已发送但未确认”不等于“都要立即重传”，还要看协议和哪些定时器已经超时。</li>
+<li>GBN 的窗口上限是 $2^m-1$，SR 等大收发窗口的上限是 $2^{m-1}$，不要混用。</li>
+</ul>
+<h2 id="section-10">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-cd234cc86adc/">上一篇：数据链路层思维导图</a> · <a href="/en/notes/cs408-df715a00a371/">下一篇：信道利用率计算</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-cd234cc86adc/">数据链路层总纲</a></li>
+</ul>
+<h2 id="section-11">1.5 本节复盘</h2>
+<ul>
+<li>停止等待协议的发送、接收窗口均为 1，每发一帧必须等待确认。</li>
+<li>GBN 接收窗口为 1、使用累计确认；最早未确认帧超时后重传它及其后的所有未确认帧。</li>
+<li>SR 对帧逐个确认和计时，可缓存失序帧，只重传发生超时的具体帧。</li>
+<li>2009 年 GBN 题收到最高 <code>ACK 3</code> 后重传 <code>4-7</code>，共 4 帧；2011 年 SR 题只重传 0、2，共 2 帧。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-0cf81cc84b46/index.html"><span>← Previous item</span><strong>Lecture 2：软件过程</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-0f7e7a7a0522/index.html"><span>Next item →</span><strong>Lecture 10：知识 - 文件系统</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

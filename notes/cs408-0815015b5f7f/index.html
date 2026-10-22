@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 9：注意力机制 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 9：注意力机制。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 复试扩展">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 9：注意力机制 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 9：注意力机制。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-0815015b5f7f/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 9：注意力机制 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 9：注意力机制。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 9：注意力机制",
+      "item": "https://www.jiayuhere.com/notes/cs408-0815015b5f7f/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-0815015b5f7f/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-0815015b5f7f/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-0815015b5f7f/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-0815015b5f7f/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-0815015b5f7f/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 9：注意力机制</h1><p class="article-lead">408 学习笔记：Lecture 9：注意力机制。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>约 19 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">复试扩展</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/a4486d914903.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/a4486d914903.pdf" download="Lecture 9：注意力机制.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">9.1 注意力机制的直觉</a><a href="#section-4">9.2 注意力分数、权重与输出</a><a href="#section-8">9.3 非参数注意力池化</a><a href="#section-11">$$
+f(x)</a><a href="#section-12">$$
+\alpha(x,x_i)</a><a href="#section-14">9.4 可加性注意力</a><a href="#section-17">$$
+a(\boldsymbol k,\boldsymbol q)</a><a href="#section-18">$$
+e_{ij}</a><a href="#section-19">9.5 缩放点积注意力</a><a href="#section-21">$$
+a(\boldsymbol q,\boldsymbol k_i)</a><a href="#section-23">$$
+\operatorname{Attention}(Q,K,V)
+=AV</a><a href="#section-24">9.6 掩码与可加性注意力代码</a><a href="#section-25">9.7 CNN、RNN 与自注意力</a><a href="#section-28">9.8 自注意力</a><a href="#section-30">$$
+Z</a><a href="#section-33">$$
+\left(
+\frac{\boldsymbol q_1^{\mathrm T}\boldsymbol k_1}{\sqrt2},
+\frac{\boldsymbol q_1^{\mathrm T}\boldsymbol k_2}{\sqrt2}
+\right)</a><a href="#section-34">9.9 Q、K、V 的含义</a><a href="#section-35">9.10 多头自注意力</a><a href="#section-38">$$
+\operatorname{head}_r</a><a href="#section-40">$$
+\operatorname{MultiHead}(Q,K,V)</a><a href="#section-41">9.11 自注意力为什么需要位置编码</a><a href="#section-44">9.12 正弦/余弦位置编码</a><a href="#section-46">$$
+P_{\mathrm{pos},2i}</a><a href="#section-47">$$
+P_{\mathrm{pos},2i+1}</a><a href="#section-49">$$
+\begin{bmatrix}
+\sin\omega(\mathrm{pos}+k)\\
+\cos\omega(\mathrm{pos}+k)
+\end{bmatrix}</a><a href="#section-51">9.13 Transformer 总体架构</a><a href="#section-54">9.14 因果掩码注意力</a><a href="#section-55">$$
+M_{ij}</a><a href="#section-56">$$
+A</a><a href="#section-57">9.15 层归一化</a><a href="#section-59">$$
+\operatorname{LN}(\boldsymbol x)</a><a href="#section-61">9.16 编码器到解码器的信息传递</a><a href="#section-62">$$
+\operatorname{CrossAttention}</a><a href="#section-63">9.17 易错点</a><a href="#section-64">相关知识</a><a href="#section-65">9.18 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：本节从查询、键和值的注意力池化出发，推导非参数注意力、可加性注意力和缩放点积注意力；随后整理自注意力、多头注意力、正弦位置编码以及 Transformer 编码器、解码器、因果掩码、层归一化和交叉注意力的信息流。</p>
+</blockquote>
+<h2 id="section-1">9.1 注意力机制的直觉</h2>
+<h3 id="section-2">9.1.1 随意线索与不随意线索</h3>
+<p>课件借用心理学中的两类线索解释注意力：</p>
+<ul>
+<li><strong>随意线索</strong>：由当前目标主动决定关注方向，例如“我现在想找什么”。</li>
+<li><strong>不随意线索</strong>：由环境中显眼、突出的信息自然吸引注意。</li>
+</ul>
+<p>卷积、池化和普通全连接层主要按固定参数和输入内容处理信息，没有为每个目标显式提供“我想找什么”的查询。</p>
+<p>注意力机制则显式加入查询，使模型能根据当前目的偏向性地选择输入。</p>
+<h3 id="section-3">9.1.2 Query、Key、Value</h3>
+<p>每个候选输入可表示为键值对：</p>
+<p>$$
+(\boldsymbol k_i,\boldsymbol v_i).
+$$</p>
+<p>另给定查询：</p>
+<p>$$
+\boldsymbol q.
+$$</p>
+<p>三者含义为：</p>
+<ul>
+<li><strong>Query（查询）</strong>：当前想寻找的信息，表示关注目标。</li>
+<li><strong>Key（键）</strong>：候选信息的匹配索引，用来与 Query 计算相关性。</li>
+<li><strong>Value（值）</strong>：候选位置实际携带、最终要被聚合的内容。</li>
+</ul>
+<p>注意力层先比较 Query 与各 Key，再用所得权重加权聚合对应 Value。</p>
+<h2 id="section-4">9.2 注意力分数、权重与输出</h2>
+<p>设有 $m$ 个键值对：</p>
+<p>$$
+(\boldsymbol k_1,\boldsymbol v_1),
+\ldots,
+(\boldsymbol k_m,\boldsymbol v_m).
+$$</p>
+<h3 id="section-5">9.2.1 注意力分数</h3>
+<p>用评分函数衡量 Query 与第 $i$ 个 Key 的相关性：</p>
+<p>$$
+s_i=a(\boldsymbol q,\boldsymbol k_i).
+$$</p>
+<p>Softmax 默认把更大的分数解释为更相关。点积、余弦相似度或可学习网络可直接产生相似度分数；若原始量是距离 $d(\boldsymbol q,\boldsymbol k_i)$，应先转成随距离减小而增大的分数，例如 $s_i=-d(\boldsymbol q,\boldsymbol k_i)$ 或高斯核的负平方距离，不能把正距离直接送入 Softmax。</p>
+<h3 id="section-6">9.2.2 注意力权重</h3>
+<p>对所有分数做 Softmax：</p>
+<p>$$
+\alpha_i
+=\frac{\exp(s_i)}
+{\sum_{j=1}^{m}\exp(s_j)}.
+$$</p>
+<p>因此：</p>
+<p>$$
+\alpha_i&gt;0,
+\qquad
+\sum_{i=1}^{m}\alpha_i=1.
+$$</p>
+<h3 id="section-7">9.2.3 加权聚合</h3>
+<p>注意力输出为：</p>
+<p>$$
+\boldsymbol o
+=\sum_{i=1}^{m}\alpha_i\boldsymbol v_i.
+$$</p>
+<p>核心关系可以记为：</p>
+<pre><code class="language-text">Query 与 Key → 注意力分数
+注意力分数 → Softmax → 注意力权重
+注意力权重 × Value → 加权求和 → 输出
+</code></pre>
+<blockquote>
+<p><strong>WARNING</strong> · 易错点
+分数 $s_i$ 可以为任意实数；经过 Softmax 后的 $\alpha_i$ 才位于 $(0,1)$ 且总和为 1。</p>
+</blockquote>
+<h2 id="section-8">9.3 非参数注意力池化</h2>
+<h3 id="section-9">9.3.1 定义</h3>
+<p>非参数注意力池化不学习评分函数参数，而是使用预先规定的相似度或核函数动态分配权重。</p>
+<p>给定样本：</p>
+<p>$$
+{(x_i,y_i)}_{i=1}^{n},
+$$</p>
+<p>对查询 $x$ 的预测为：</p>
+<p>$$
+f(x)=\sum_{i=1}^{n}\alpha(x,x_i)y_i.
+$$</p>
+<p>其中 $x_i$ 相当于 Key，$y_i$ 相当于 Value，$x$ 是 Query。</p>
+<h3 id="section-10">9.3.2 高斯核形式</h3>
+<p>课件给出的 Nadaraya-Watson 型注意力为：</p>
+<h1 id="section-11">$$
+f(x)</h1>
+<p>\sum_{i=1}^{n}
+\operatorname{softmax}_i!\left(
+-\frac{1}{2}(x-x_i)^2
+\right)y_i.
+$$</p>
+<p>也就是：</p>
+<h1 id="section-12">$$
+\alpha(x,x_i)</h1>
+<p>\frac{
+\exp!\left[-\frac12(x-x_i)^2\right]
+}{
+\sum_{j=1}^{n}
+\exp!\left[-\frac12(x-x_j)^2\right]
+}.
+$$</p>
+<p>查询越接近某个 $x_i$，对应 $y_i$ 的权重通常越大。</p>
+<h3 id="section-13">9.3.3 一般相似函数</h3>
+<p>若输入是向量，可使用：</p>
+<ul>
+<li>点积 $\boldsymbol q^{\mathrm T}\boldsymbol k$。</li>
+<li>余弦相似度。</li>
+<li>负欧氏距离。</li>
+<li>高斯核或其他核函数。</li>
+</ul>
+<p>非参数表示评分规则本身没有可学习参数，并不表示模型的其他部分一定没有参数。</p>
+<h2 id="section-14">9.4 可加性注意力</h2>
+<h3 id="section-15">9.4.1 适用场景</h3>
+<p>当 Query 和 Key 的维数不同，或希望通过可学习非线性变换计算相关性时，可使用可加性注意力（Additive Attention）。</p>
+<p>它常见于经典 RNN Seq2Seq 注意力模型。原始 Transformer 的核心注意力则采用缩放点积，而不是可加性注意力。</p>
+<h3 id="section-16">9.4.2 公式</h3>
+<p>设：</p>
+<p>$$
+W_k\in\mathbb R^{h\times d_k},
+\qquad
+W_q\in\mathbb R^{h\times d_q},
+\qquad
+\boldsymbol v\in\mathbb R^h.
+$$</p>
+<p>单个 Query-Key 对的分数为：</p>
+<h1 id="section-17">$$
+a(\boldsymbol k,\boldsymbol q)</h1>
+<p>\boldsymbol v^{\mathrm T}
+\tanh!\left(
+W_k\boldsymbol k+W_q\boldsymbol q
+\right).
+$$</p>
+<p>对第 $i$ 个查询与第 $j$ 个键：</p>
+<h1 id="section-18">$$
+e_{ij}</h1>
+<p>\boldsymbol v^{\mathrm T}
+\tanh!\left(
+W_q\boldsymbol q_i+W_k\boldsymbol k_j
+\right).
+$$</p>
+<p>这等价于把变换后的 Query 和 Key 广播相加，经过隐藏维度为 $h$ 的 $\tanh$ 非线性，再映射为一个标量。</p>
+<p>三个可学习部分的作用：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$W_q$</td>
+<td>把 Query 映射到共同隐藏空间</td>
+</tr>
+<tr>
+<td>$W_k$</td>
+<td>把 Key 映射到共同隐藏空间</td>
+</tr>
+<tr>
+<td>$\boldsymbol v$</td>
+<td>把隐藏表示映射为标量分数</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-19">9.5 缩放点积注意力</h2>
+<h3 id="section-20">9.5.1 单个 Query-Key 对</h3>
+<p>若 Query 与 Key 维度均为 $d_k$：</p>
+<h1 id="section-21">$$
+a(\boldsymbol q,\boldsymbol k_i)</h1>
+<p>\frac{\boldsymbol q^{\mathrm T}\boldsymbol k_i}
+{\sqrt{d_k}}.
+$$</p>
+<p>除以 $\sqrt{d_k}$ 是为了防止维度较大时点积方差随 $d_k$ 增长，使 Softmax 过早饱和、梯度过小。</p>
+<h3 id="section-22">9.5.2 向量化公式</h3>
+<p>设：</p>
+<p>$$
+Q\in\mathbb R^{n\times d_k},
+\qquad
+K\in\mathbb R^{m\times d_k},
+\qquad
+V\in\mathbb R^{m\times d_v}.
+$$</p>
+<p>注意力分数矩阵：</p>
+<p>$$
+S=\frac{QK^{\mathrm T}}{\sqrt{d_k}}
+\in\mathbb R^{n\times m}.
+$$</p>
+<p>沿每个 Query 对应的 Key 维做 Softmax：</p>
+<p>$$
+A=\operatorname{softmax}(S)
+\in\mathbb R^{n\times m}.
+$$</p>
+<p>最终输出：</p>
+<h1 id="section-23">$$
+\operatorname{Attention}(Q,K,V)
+=AV</h1>
+<p>\operatorname{softmax}!\left(
+\frac{QK^{\mathrm T}}{\sqrt{d_k}}
+\right)V
+\in\mathbb R^{n\times d_v}.
+$$</p>
+<h2 id="section-24">9.6 掩码与可加性注意力代码</h2>
+<p>变长序列批处理会补 padding。无效 Key 不应参与 Softmax，因此要把对应分数置为极小值。</p>
+<p>下面把课件的 <code>AdditiveAttention</code> 代码补全为可解析版本：</p>
+<pre><code class="language-python">import torch
+from torch import nn
+
+
+def sequence_mask(x, valid_lens, value=0.0):
+    &quot;&quot;&quot;屏蔽每行中超过有效长度的位置。&quot;&quot;&quot;
+    max_len = x.size(1)
+    mask = (
+        torch.arange(max_len, device=x.device)[None, :]
+        &lt; valid_lens[:, None]
+    )
+    x = x.clone()
+    x[~mask] = value
+    return x
+
+
+def masked_softmax(x, valid_lens):
+    &quot;&quot;&quot;在最后一维做带有效长度掩码的 Softmax。&quot;&quot;&quot;
+    if valid_lens is None:
+        return nn.functional.softmax(x, dim=-1)
+
+    shape = x.shape
+    if valid_lens.dim() == 1:
+        valid_lens = valid_lens.repeat_interleave(shape[1])
+    else:
+        valid_lens = valid_lens.reshape(-1)
+
+    flat = x.reshape(-1, shape[-1])
+    mask = (
+        torch.arange(shape[-1], device=x.device)[None, :]
+        &lt; valid_lens[:, None]
+    )
+    masked = flat.masked_fill(~mask, -1e6)
+    weights = nn.functional.softmax(masked, dim=-1) * mask
+    normalizer = weights.sum(dim=-1, keepdim=True)
+    weights = torch.where(
+        normalizer &gt; 0,
+        weights / normalizer.clamp_min(torch.finfo(weights.dtype).tiny),
+        torch.zeros_like(weights),
+    )
+    return weights.reshape(shape)
+
+
+class AdditiveAttention(nn.Module):
+    &quot;&quot;&quot;可加性注意力。&quot;&quot;&quot;
+
+    def __init__(
+        self,
+        key_size,
+        query_size,
+        num_hiddens,
+        dropout,
+    ):
+        super().__init__()
+        self.w_k = nn.Linear(key_size, num_hiddens, bias=False)
+        self.w_q = nn.Linear(query_size, num_hiddens, bias=False)
+        self.w_v = nn.Linear(num_hiddens, 1, bias=False)
+        self.dropout = nn.Dropout(dropout)
+        self.attention_weights = None
+
+    def forward(self, queries, keys, values, valid_lens):
+        &quot;&quot;&quot;
+        queries: [batch, num_queries, query_size]
+        keys: [batch, num_keys, key_size]
+        values: [batch, num_keys, value_size]
+        &quot;&quot;&quot;
+        queries = self.w_q(queries)
+        keys = self.w_k(keys)
+
+        # [batch, num_queries, num_keys, num_hiddens]
+        features = queries.unsqueeze(2) + keys.unsqueeze(1)
+        features = torch.tanh(features)
+
+        # [batch, num_queries, num_keys]
+        scores = self.w_v(features).squeeze(-1)
+        self.attention_weights = masked_softmax(scores, valid_lens)
+
+        # [batch, num_queries, value_size]
+        return torch.bmm(
+            self.dropout(self.attention_weights), values
+        )
+</code></pre>
+<p>代码与公式的对应关系：</p>
+<ul>
+<li><code>w_q</code> 对应 $W_q$。</li>
+<li><code>w_k</code> 对应 $W_k$。</li>
+<li><code>w_v</code> 对应 $\boldsymbol v^{\mathrm T}$。</li>
+<li><code>queries.unsqueeze(2) + keys.unsqueeze(1)</code> 通过广播得到所有 Query-Key 组合。</li>
+<li><code>masked_softmax</code> 保证 padding 不获得注意力权重；当某行 <code>valid_len=0</code> 时显式返回全零，而不是对一整行 <code>-1e6</code> 做 Softmax 后得到均匀分布。</li>
+</ul>
+<h2 id="section-25">9.7 CNN、RNN 与自注意力</h2>
+<p>设序列长度为 $n$、表示维数为 $d$、卷积核宽度为 $k$。课件的理想化比较为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>架构</th>
+<th style="text-align:right">计算复杂度</th>
+<th style="text-align:right">同层可并行位置数</th>
+<th style="text-align:right">最长信息路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CNN</td>
+<td style="text-align:right">$O(knd^2)$</td>
+<td style="text-align:right">$O(n)$</td>
+<td style="text-align:right">$O(n/k)$</td>
+</tr>
+<tr>
+<td>RNN</td>
+<td style="text-align:right">$O(nd^2)$</td>
+<td style="text-align:right">$O(1)$</td>
+<td style="text-align:right">$O(n)$</td>
+</tr>
+<tr>
+<td>自注意力</td>
+<td style="text-align:right">$O(n^2d)$</td>
+<td style="text-align:right">$O(n)$</td>
+<td style="text-align:right">$O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-26">9.7.1 含义</h3>
+<ul>
+<li><strong>CNN</strong>：局部连接，可并行；要跨越远距离通常需堆叠多层、扩大核或使用膨胀卷积。</li>
+<li><strong>RNN</strong>：每一步依赖前一步，时间维串行；两端信息交互路径长。</li>
+<li><strong>自注意力</strong>：任意两个位置可在一层直接交互，并能并行计算各 Query；但完整注意力矩阵有 $n^2$ 个元素。</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong>
+表中复杂度依赖具体实现、通道宽度和 CNN 感受野增长方式。“同层可并行位置数”若改写成“最少串行步骤”，CNN 与自注意力为 $O(1)$，RNN 为 $O(n)$。</p>
+</blockquote>
+<h3 id="section-27">9.7.2 长序列的取舍</h3>
+<p>自注意力的最长路径短，适合建立远距离关系；但标准全注意力的时间和显存通常随 $n^2$ 增长。</p>
+<p>因此“能直接看远处”和“适合任意超长序列”不是同义词。很长序列常需要局部注意力、稀疏注意力、线性注意力或分块策略。</p>
+<h2 id="section-28">9.8 自注意力</h2>
+<h3 id="section-29">9.8.1 定义</h3>
+<p>自注意力（Self-Attention）在同一序列内部建立元素之间的联系。输入序列为：</p>
+<p>$$
+X\in\mathbb R^{n\times d_{\mathrm{model}}}.
+$$</p>
+<p>通过三组可学习投影：</p>
+<p>$$
+Q=XW_Q,
+\qquad
+K=XW_K,
+\qquad
+V=XW_V.
+$$</p>
+<p>因为 Query、Key、Value 都来自同一个 $X$，所以称为自注意力。</p>
+<p>输出为：</p>
+<h1 id="section-30">$$
+Z</h1>
+<p>\operatorname{softmax}!\left(
+\frac{QK^{\mathrm T}}{\sqrt{d_k}}
+\right)V.
+$$</p>
+<h3 id="section-31">9.8.2 三个特点</h3>
+<ol>
+<li><strong>长程依赖</strong>：任意两个位置可直接计算相关性。</li>
+<li><strong>动态权重</strong>：根据内容为不同位置分配不同权重，而不是固定卷积核连接。</li>
+<li><strong>并行计算</strong>：没有 RNN 那样的逐时间步状态依赖。</li>
+</ol>
+<h3 id="section-32">9.8.3 课件二维数值图</h3>
+<p>课件用二维 Query 与 Key 说明缩放点积。取：</p>
+<p>$$
+\boldsymbol q_1=(1,2),
+\qquad
+\boldsymbol q_2=(1,1),
+$$</p>
+<p>$$
+\boldsymbol k_1=(1,0),
+\qquad
+\boldsymbol k_2=(0,1),
+\qquad
+d_k=2.
+$$</p>
+<p>对 $\boldsymbol q_1$：</p>
+<h1 id="section-33">$$
+\left(
+\frac{\boldsymbol q_1^{\mathrm T}\boldsymbol k_1}{\sqrt2},
+\frac{\boldsymbol q_1^{\mathrm T}\boldsymbol k_2}{\sqrt2}
+\right)</h1>
+<p>(0.71,1.41).
+$$</p>
+<p>Softmax 后约为：</p>
+<p>$$
+(0.33,0.67).
+$$</p>
+<p>对 $\boldsymbol q_2$：</p>
+<p>$$
+\left(
+\frac{1}{\sqrt2},
+\frac{1}{\sqrt2}
+\right)
+=(0.71,0.71),
+$$</p>
+<p>Softmax 后为：</p>
+<p>$$
+(0.50,0.50).
+$$</p>
+<p>因此两位置聚合结果为：</p>
+<p>$$
+\boldsymbol b_1
+=0.33\boldsymbol v_1+0.67\boldsymbol v_2,
+$$</p>
+<p>$$
+\boldsymbol b_2
+=0.50\boldsymbol v_1+0.50\boldsymbol v_2.
+$$</p>
+<h2 id="section-34">9.9 Q、K、V 的含义</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>向量</th>
+<th>角色</th>
+<th>搜索类比</th>
+<th>NLP 中的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query</td>
+<td>主动寻找信息的主体</td>
+<td>搜索词</td>
+<td>当前词/当前位置想寻找什么</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>被匹配的信息索引</td>
+<td>网页关键词标签</td>
+<td>各位置用于匹配的特征</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>实际携带的信息</td>
+<td>网页正文</td>
+<td>各位置要被聚合的语义内容</td>
+</tr>
+</tbody>
+</table></div>
+<p>可以把三个投影矩阵理解为：</p>
+<ul>
+<li>$W_Q$：学习“如何提出问题”。</li>
+<li>$W_K$：学习“如何组织可检索索引”。</li>
+<li>$W_V$：学习“匹配后要传递什么内容”。</li>
+</ul>
+<p>点积 $QK^{\mathrm T}$ 只决定匹配强度；真正被加权汇总的是 $V$。</p>
+<h2 id="section-35">9.10 多头自注意力</h2>
+<h3 id="section-36">9.10.1 动机</h3>
+<p>单个注意力头只有一套投影，可能只擅长一种关系。多头注意力让不同子空间分别学习：</p>
+<ul>
+<li>短距离与长距离关系。</li>
+<li>语法依赖与语义相似。</li>
+<li>不同位置或不同特征维度的交互。</li>
+</ul>
+<h3 id="section-37">9.10.2 每个头</h3>
+<p>对第 $r$ 个头：</p>
+<h1 id="section-38">$$
+\operatorname{head}_r</h1>
+<p>\operatorname{Attention}!\left(
+QW_r^Q,
+KW_r^K,
+VW_r^V
+\right).
+$$</p>
+<p>课件的两头图把每个输入投影/划分为两部分，分别送入 <code>head1</code> 和 <code>head2</code> 独立计算。</p>
+<h3 id="section-39">9.10.3 拼接与输出投影</h3>
+<h1 id="section-40">$$
+\operatorname{MultiHead}(Q,K,V)</h1>
+<p>\operatorname{Concat}
+(\operatorname{head}_1,\ldots,\operatorname{head}_h)
+W^O.
+$$</p>
+<p>完整步骤：</p>
+<ol>
+<li>各头用自己的 $W_r^Q,W_r^K,W_r^V$ 投影输入。</li>
+<li>各头独立计算注意力和输出。</li>
+<li>对同一 token 的各头输出沿特征维拼接。</li>
+<li>用 $W^O$ 融合所有头。</li>
+</ol>
+<p>课件图中的 $b_{1,1},b_{1,2}$ 是第一个 token 在不同头中的输出分块；拼接后再经 $W^O$，才得到最终表示。</p>
+<blockquote>
+<p><strong>WARNING</strong>
+多头不是把同一份单头结果复制多次。各头有独立投影参数，能学习不同关系；拼接后还需要输出投影。</p>
+</blockquote>
+<h2 id="section-41">9.11 自注意力为什么需要位置编码</h2>
+<h3 id="section-42">9.11.1 无位置时的性质</h3>
+<p>自注意力仅根据内容计算两两关系，本身没有 CNN 的局部位置结构，也没有 RNN 的递推顺序。</p>
+<p>若 $P$ 是位置置换矩阵，则无位置自注意力满足：</p>
+<p>$$
+\operatorname{SA}(PX)=P\operatorname{SA}(X).
+$$</p>
+<p>这叫<strong>排列等变（permutation equivariant）</strong>：输入位置被置换，输出位置以同样方式置换。</p>
+<p>若随后对所有位置做对称池化，整体表示才可能是排列不变的。</p>
+<blockquote>
+<p><strong>WARNING</strong> · 课件表述纠错
+课件直接写“自注意力本身是排列不变的”不够准确。保留逐位置输出的自注意力是排列等变；集合池化后的结果才可排列不变。</p>
+</blockquote>
+<h3 id="section-43">9.11.2 注入位置信息</h3>
+<p>设输入嵌入为：</p>
+<p>$$
+X\in\mathbb R^{n\times d},
+$$</p>
+<p>位置编码矩阵为：</p>
+<p>$$
+P\in\mathbb R^{n\times d}.
+$$</p>
+<p>送入第一层的表示为：</p>
+<p>$$
+X'=X+P.
+$$</p>
+<p>位置编码不改变注意力公式，而是先把顺序信息写入输入表示。</p>
+<h2 id="section-44">9.12 正弦/余弦位置编码</h2>
+<h3 id="section-45">9.12.1 公式</h3>
+<p>经典 Transformer 的固定位置编码为：</p>
+<h1 id="section-46">$$
+P_{\mathrm{pos},2i}</h1>
+<p>\sin!\left(
+\frac{\mathrm{pos}}
+{10000^{2i/d}}
+\right),
+$$</p>
+<h1 id="section-47">$$
+P_{\mathrm{pos},2i+1}</h1>
+<p>\cos!\left(
+\frac{\mathrm{pos}}
+{10000^{2i/d}}
+\right).
+$$</p>
+<p>不同维度使用不同频率，因此课件曲线图中各列具有不同周期。</p>
+<h3 id="section-48">9.12.2 为什么用 Sin/Cos</h3>
+<p>由加法公式：</p>
+<p>$$
+\sin(a+b)=\sin a\cos b+\cos a\sin b,
+$$</p>
+<p>$$
+\cos(a+b)=\cos a\cos b-\sin a\sin b.
+$$</p>
+<p>对某一频率 $\omega$：</p>
+<h1 id="section-49">$$
+\begin{bmatrix}
+\sin\omega(\mathrm{pos}+k)\
+\cos\omega(\mathrm{pos}+k)
+\end{bmatrix}</h1>
+<p>\begin{bmatrix}
+\cos\omega k &amp; \sin\omega k\
+-\sin\omega k &amp; \cos\omega k
+\end{bmatrix}
+\begin{bmatrix}
+\sin\omega\mathrm{pos}\
+\cos\omega\mathrm{pos}
+\end{bmatrix}.
+$$</p>
+<p>因此固定偏移 $k$ 对应一个只依赖 $k$ 的线性变换，有利于模型学习相对位置关系。</p>
+<h3 id="section-50">9.12.3 长度外推的准确说法</h3>
+<p>正弦/余弦位置编码由公式生成，可以为训练长度之外的位置计算数值，不受固定嵌入表大小限制。</p>
+<p>但“编码可计算”不等于“模型一定能可靠理解超长序列”。注意力模式、训练分布和数值频率都可能限制外推性能。</p>
+<blockquote>
+<p><strong>NOTE</strong>
+相比固定大小的 learned positional embedding，正弦编码具备生成任意位置表示的结构优势；实际长上下文泛化仍需单独验证。</p>
+</blockquote>
+<h2 id="section-51">9.13 Transformer 总体架构</h2>
+<p>Transformer 基于编码器-解码器处理序列对，但不使用 RNN 递推，核心序列交互由多头注意力完成。</p>
+<h3 id="section-52">9.13.1 编码器块</h3>
+<p>经典编码器每层包含：</p>
+<ol>
+<li>多头自注意力。</li>
+<li>残差连接与层归一化。</li>
+<li>逐位置前馈网络（Feed-Forward Network，FFN）。</li>
+<li>残差连接与层归一化。</li>
+</ol>
+<pre><code class="language-text">输入
+ ↓
+多头自注意力
+ ↓  + 残差
+LayerNorm
+ ↓
+前馈网络
+ ↓  + 残差
+LayerNorm
+</code></pre>
+<h3 id="section-53">9.13.2 解码器块</h3>
+<p>经典解码器每层包含：</p>
+<ol>
+<li>带因果掩码的多头自注意力。</li>
+<li>残差连接与层归一化。</li>
+<li>编码器-解码器交叉注意力。</li>
+<li>残差连接与层归一化。</li>
+<li>逐位置前馈网络。</li>
+<li>残差连接与层归一化。</li>
+</ol>
+<p>最后用线性层与 Softmax 生成输出 token 概率。</p>
+<blockquote>
+<p><strong>NOTE</strong>
+课件图采用原始 Transformer 的 Post-LN 画法，即子层后做 Add &amp; Norm。现代模型也常采用 Pre-LN，先归一化再进入子层。</p>
+</blockquote>
+<h2 id="section-54">9.14 因果掩码注意力</h2>
+<p>自回归解码时，第 $i$ 个位置不能读取未来位置 $j&gt;i$，否则训练时会泄漏答案。</p>
+<p>构造掩码：</p>
+<h1 id="section-55">$$
+M_{ij}</h1>
+<p>\begin{cases}
+0,&amp;j\le i,\
+-\infty,&amp;j&gt;i.
+\end{cases}
+$$</p>
+<p>带掩码注意力为：</p>
+<h1 id="section-56">$$
+A</h1>
+<p>\operatorname{softmax}!\left(
+\frac{QK^{\mathrm T}}{\sqrt{d_k}}+M
+\right).
+$$</p>
+<p>Softmax 后，被掩码的未来位置权重为 0。</p>
+<p>课件所说“计算 $x_i$ 输出时，假装当前序列长度为 $i$”就是这一因果约束的直观解释。</p>
+<p>padding mask 与 causal mask 作用不同：</p>
+<ul>
+<li>padding mask：忽略补齐位置。</li>
+<li>causal mask：阻止访问未来位置。</li>
+</ul>
+<h2 id="section-57">9.15 层归一化</h2>
+<h3 id="section-58">9.15.1 LayerNorm</h3>
+<p>对单个 token 表示：</p>
+<p>$$
+\boldsymbol x\in\mathbb R^d,
+$$</p>
+<p>在特征维上计算：</p>
+<p>$$
+\mu=\frac1d\sum_{j=1}^{d}x_j,
+$$</p>
+<p>$$
+\sigma^2
+=\frac1d\sum_{j=1}^{d}(x_j-\mu)^2.
+$$</p>
+<p>层归一化为：</p>
+<h1 id="section-59">$$
+\operatorname{LN}(\boldsymbol x)</h1>
+<p>\boldsymbol\gamma\odot
+\frac{\boldsymbol x-\mu}
+{\sqrt{\sigma^2+\epsilon}}
++\boldsymbol\beta.
+$$</p>
+<p>它对每个样本、每个 token 独立沿隐藏维归一化，不依赖其他样本或序列长度。</p>
+<h3 id="section-60">9.15.2 与 BatchNorm 的区别</h3>
+<p>对形状 $[B,L,D]$ 的序列张量：</p>
+<ul>
+<li>BatchNorm 通常按特征通道统计跨 batch、位置的均值方差，受批大小、padding 和长度分布影响。</li>
+<li>LayerNorm 对每个 $[D]$ token 向量独立归一化，训练与推理行为一致，更适合变长序列。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong> · 课件表述纠错
+“Transformer 中不能使用 BatchNorm”过于绝对。标准 Transformer 选择 LayerNorm，且它通常更合适；但研究和变体中可以设计使用 BatchNorm 或其他归一化的方法。应记为“标准结构使用 LayerNorm”，不是数学上的禁止。</p>
+</blockquote>
+<h2 id="section-61">9.16 编码器到解码器的信息传递</h2>
+<p>设编码器输出：</p>
+<p>$$
+Y=(\boldsymbol y_1,\ldots,\boldsymbol y_n).
+$$</p>
+<p>在解码器交叉注意力中：</p>
+<ul>
+<li>Query 来自解码器当前目标序列表示。</li>
+<li>Key 来自编码器输出 $Y$。</li>
+<li>Value 也来自编码器输出 $Y$。</li>
+</ul>
+<p>因此：</p>
+<p>$$
+Q=H_{\mathrm{dec}}W_Q,
+\qquad
+K=YW_K,
+\qquad
+V=YW_V.
+$$</p>
+<p>交叉注意力输出：</p>
+<h1 id="section-62">$$
+\operatorname{CrossAttention}</h1>
+<p>\operatorname{softmax}!\left(
+\frac{QK^{\mathrm T}}{\sqrt{d_k}}
+\right)V.
+$$</p>
+<p>这让每个目标位置按需读取全部源序列表示，而不是把整个源序列压成单一固定向量。</p>
+<p>课件图中编码器和解码器都堆叠 $N$ 层，并保持 $d_{\mathrm{model}}$ 不变，便于残差连接；这是经典 Transformer 的对称设计，并非所有变体必须使用相同层数。</p>
+<h2 id="section-63">9.17 易错点</h2>
+<ul>
+<li>Query 决定想找什么，Key 决定如何匹配，Value 才是被汇总的信息。</li>
+<li>注意力分数不是注意力权重；只有 Softmax 后的权重才非负且和为 1。</li>
+<li>非参数注意力没有可学习评分参数，但仍可嵌入有参数模型。</li>
+<li>可加性注意力用 MLP 式打分；原始 Transformer 使用缩放点积注意力。</li>
+<li>缩放因子是 $\sqrt{d_k}$，不是 $d_k$ 或 Value 维度。</li>
+<li>Softmax 沿 Key 维执行，因此每个 Query 对所有可见 Key 的权重和为 1。</li>
+<li>标准自注意力能直接建立远距离关系，但完整注意力的时间和显存为二次规模。</li>
+<li>无位置编码的逐位置自注意力是排列等变，不应简单说成排列不变。</li>
+<li>多头注意力具有独立的 Q/K/V 投影，各头拼接后还需 $W^O$ 融合。</li>
+<li>位置编码加在输入嵌入上，不是给注意力权重矩阵简单加位置编号。</li>
+<li>正弦位置编码可计算训练长度外的位置，但不保证模型一定成功外推。</li>
+<li>causal mask 防未来泄漏，padding mask 忽略补齐，两者用途不同。</li>
+<li>标准 Transformer 使用 LayerNorm；“绝对不能使用 BatchNorm”是过强表述。</li>
+<li>编码器-解码器交叉注意力的 Query 来自解码器，Key/Value 来自编码器。</li>
+<li>残差连接要求相加张量形状兼容，因此经典块保持统一的 $d_{\mathrm{model}}$。</li>
+</ul>
+<h2 id="section-64">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-b37e35e60de6/">上一篇：循环神经网络与 LSTM</a> · <a href="/notes/cs408-eea268c88872/">下一篇：数据库绪论</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-b37e35e60de6/">RNN、LSTM 与编码器-解码器</a></li>
+</ul>
+<h2 id="section-65">9.18 本节复盘</h2>
+<ul>
+<li>注意力用 Query 与 Key 计算分数，Softmax 得到权重，再对 Value 加权求和。</li>
+<li>非参数注意力可用固定距离核；可加性注意力用可学习 MLP 式评分；缩放点积注意力使用 $QK^T/\sqrt{d_k}$。</li>
+<li>向量化注意力输出是 $\operatorname{softmax}(QK^T/\sqrt{d_k})V$，掩码可排除 padding 或未来位置。</li>
+<li>自注意力的 Q、K、V 都来自同一序列，支持全局交互和并行计算，但标准实现具有 $O(n^2d)$ 复杂度。</li>
+<li>课件二维例子中，$q_1$ 对两个 Key 的权重约为 $(0.33,0.67)$，$q_2$ 为 $(0.50,0.50)$。</li>
+<li>多头注意力在多个子空间独立计算关系，拼接各头后用 $W^O$ 融合。</li>
+<li>无位置自注意力不记录顺序；正弦/余弦位置编码通过 $X+P$ 注入绝对位置并提供相对偏移结构。</li>
+<li>Transformer 编码器由自注意力、前馈网络、残差和归一化组成；解码器还含因果掩码和交叉注意力。</li>
+<li>LayerNorm 对每个 token 的隐藏维归一化，通常比依赖批统计的 BatchNorm 更适合变长序列。</li>
+<li>交叉注意力用解码器状态作 Query、编码器输出作 Key/Value，实现源序列到目标序列的信息传递。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-04eb683de74c/index.html"><span>← 上一项</span><strong>Lecture 7：知识 - 信道的极限容量</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-0bb2d5ae08e6/index.html"><span>下一项 →</span><strong>1 题型 - HTTP连接</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-53cbe59d76f3/"><span class="related-type">笔记</span><strong>复试常考科目导航</strong><span>408 学习笔记：复试常考科目导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

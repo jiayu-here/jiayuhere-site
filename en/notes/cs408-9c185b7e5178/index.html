@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 6：数据库设计 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 6：数据库设计. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 6：数据库设计 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 6：数据库设计. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-9c185b7e5178/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 6：数据库设计 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 6：数据库设计. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 6：数据库设计",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-9c185b7e5178/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-9c185b7e5178/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-9c185b7e5178/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-9c185b7e5178/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-9c185b7e5178/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-9c185b7e5178/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 6：数据库设计</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 6：数据库设计. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>12 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/1847d8e7e597.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/1847d8e7e597.pdf" download="Lecture 6：数据库设计.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">6.1 数据库设计的六个阶段</a><a href="#section-2">6.2 需求分析</a><a href="#section-6">6.3 概念结构设计</a><a href="#section-11">6.4 逻辑结构设计</a><a href="#section-15">6.5 物理结构设计</a><a href="#section-18">6.6 数据库实施</a><a href="#section-19">6.7 运行与维护</a><a href="#section-20">6.8 常考辨析</a><a href="#section-25">相关知识</a><a href="#section-26">本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节按需求分析、概念设计、逻辑设计、物理设计、数据库实施、运行与维护六个阶段整理数据库设计，并完整转写数据字典、E-R 图、自底向上集成、E-R 模型到关系模式的转换规则，以及物理结构评价流程。</p>
+</blockquote>
+<h2 id="section-1">6.1 数据库设计的六个阶段</h2>
+<p>数据库设计不是直接建表，而是从用户需求逐步抽象到可运行数据库的过程。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>核心任务</th>
+<th>主要产物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需求分析</td>
+<td>明确用户的信息、处理、安全性和完整性需求</td>
+<td>数据流图、数据字典、需求说明</td>
+</tr>
+<tr>
+<td>概念结构设计</td>
+<td>把现实世界抽象为独立于具体 DBMS 的概念模型</td>
+<td>基本 E-R 图或类图</td>
+</tr>
+<tr>
+<td>逻辑结构设计</td>
+<td>将概念模型转换成目标 DBMS 支持的数据模型</td>
+<td>关系模式、完整性约束、用户子模式</td>
+</tr>
+<tr>
+<td>物理结构设计</td>
+<td>选择存储结构、存取路径和索引等</td>
+<td>物理模型、存储与索引方案</td>
+</tr>
+<tr>
+<td>数据库实施</td>
+<td>建库建表、装载数据、编写和调试应用程序</td>
+<td>可试运行的数据库系统</td>
+</tr>
+<tr>
+<td>运行与维护</td>
+<td>监测性能，备份恢复，调整和修改数据库结构</td>
+<td>持续可用并逐步优化的系统</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    A[&quot;需求分析&quot;] --&gt; B[&quot;概念结构设计&quot;]
+    B --&gt; C[&quot;逻辑结构设计&quot;]
+    C --&gt; D[&quot;物理结构设计&quot;]
+    D --&gt; E[&quot;数据库实施&quot;]
+    E --&gt; F[&quot;运行与维护&quot;]
+    F -. &quot;需求或性能变化&quot; .-&gt; A
+</pre>
+<blockquote>
+<p><strong>TIP</strong>
+概念模型回答“现实世界中有什么以及它们如何联系”；逻辑模型回答“在某种数据模型中如何表示”；物理模型回答“在具体 DBMS 中如何存取得更快、更省空间”。</p>
+</blockquote>
+<h2 id="section-2">6.2 需求分析</h2>
+<h3 id="section-3">6.2.1 参与者与需求类型</h3>
+<p>需求由数据库设计人员和用户共同收集、分析和确认，不能只由技术人员单方面推断。</p>
+<p>课件列出三类核心需求：</p>
+<ul>
+<li><strong>信息需求</strong>：系统需要保存哪些对象、属性和联系。</li>
+<li><strong>处理需求</strong>：需要执行哪些查询、统计、更新和业务流程，以及频率、响应时间和数据量。</li>
+<li><strong>安全性与完整性需求</strong>：谁能访问或修改哪些数据，数据必须满足哪些规则。</li>
+</ul>
+<p>需求分析还应关注数据生命周期、并发规模、备份恢复目标和未来数据增长，否则后续物理设计缺少依据。</p>
+<h3 id="section-4">6.2.2 结构化分析方法</h3>
+<p>结构化分析方法（Structured Analysis，SA）是一种自顶向下、逐层分解的分析方法：</p>
+<ol>
+<li>从系统最上层的组织和业务目标入手。</li>
+<li>把复杂系统分解成若干处理过程。</li>
+<li>继续逐层细化，直到处理逻辑足够明确。</li>
+<li>用数据流图（Data Flow Diagram，DFD）描述数据如何流动和被处理。</li>
+<li>用数据字典（Data Dictionary，DD）定义 DFD 中出现的数据。</li>
+</ol>
+<p>DFD 偏重“数据从哪里来、经过什么处理、到哪里去”；数据字典负责消除图中名称的歧义。</p>
+<h3 id="section-5">6.2.3 数据字典</h3>
+<p>数据字典是对数据流图中所有数据元素给出逻辑定义和详细说明的文档。课件图示包含五方面：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>组成</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据项</td>
+<td>不可再分的最小数据单位，如学号、姓名</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>数据项或其他数据结构的组合关系，如“学生信息”</td>
+</tr>
+<tr>
+<td>数据流</td>
+<td>数据结构在系统内部传输的路径</td>
+</tr>
+<tr>
+<td>数据存储</td>
+<td>数据结构停留或保存的位置</td>
+</tr>
+<tr>
+<td>处理过程</td>
+<td>对数据进行加工的逻辑，可用判定表或判定树描述</td>
+</tr>
+</tbody>
+</table></div>
+<p>一份可用的数据字典通常还要写明名称、别名、类型、长度、取值范围、来源、去向、约束和使用频率。</p>
+<h2 id="section-6">6.3 概念结构设计</h2>
+<h3 id="section-7">6.3.1 目标与输入</h3>
+<p>概念结构设计是把需求分析得到的用户需求抽象为信息结构，即概念模型的过程。</p>
+<ul>
+<li>输入：需求分析形成的数据流图、数据字典和业务规则。</li>
+<li>输出：独立于具体 DBMS 的基本 E-R 图。</li>
+<li>目标：准确表达实体、属性、联系、基数和约束，同时尽量消除语义冲突与冗余。</li>
+</ul>
+<h3 id="section-8">6.3.2 E-R 图的基本符号</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>常用表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实体型</td>
+<td>矩形，框内写实体名</td>
+</tr>
+<tr>
+<td>联系</td>
+<td>菱形，框内写联系名，并用无向边连接相关实体</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>椭圆，与所属实体或联系相连</td>
+</tr>
+<tr>
+<td>码属性</td>
+<td>属性名加下划线</td>
+</tr>
+<tr>
+<td>多值属性</td>
+<td>双椭圆</td>
+</tr>
+<tr>
+<td>派生属性</td>
+<td>虚线椭圆</td>
+</tr>
+<tr>
+<td>弱实体</td>
+<td>双矩形，识别联系常用双菱形</td>
+</tr>
+</tbody>
+</table></div>
+<p>联系边旁标明基数：</p>
+<ul>
+<li>$1:1$：一对一。</li>
+<li>$1:n$：一对多。</li>
+<li>$m:n$：多对多。</li>
+</ul>
+<p>联系本身也可以具有属性。例如“学生选修课程”这一联系可以有“成绩”属性，因为成绩取决于具体的学生和课程组合。</p>
+<h3 id="section-9">6.3.3 课件 E-R 图的信息转写</h3>
+<p>课件示例包含四个实体：系、教师、学生、课程。</p>
+<ul>
+<li><strong>系</strong>：系名、电话。</li>
+<li><strong>教师</strong>：教师号、姓名、性别、职称。</li>
+<li><strong>学生</strong>：学号、姓名、性别、年龄。</li>
+<li><strong>课程</strong>：课程号、课程名。</li>
+</ul>
+<p>主要联系如下：</p>
+<ul>
+<li>一个系拥有多名教师，教师属于一个系，为 $1:m$。</li>
+<li>一个系拥有多名学生，学生属于一个系，为 $1:m$。</li>
+<li>教师与课程之间通过“讲授”联系关联，图中标为 $m:n$。</li>
+<li>学生与课程之间通过“选修”联系关联，为 $m:n$，联系具有“成绩”属性。</li>
+<li>系与课程之间还画有“开设”联系。</li>
+</ul>
+<p>图中用“消除冗余”标出三个需要重新审视的元素：平均成绩、课程实体中的教师号，以及可由其他联系推导的“开设”联系。判断原则是：</p>
+<ul>
+<li>若“平均成绩”可以由选修成绩计算，应作为派生属性，不应重复存储为独立事实。</li>
+<li>已用“讲授”联系表达教师与课程时，再把教师号放进课程实体可能造成重复和更新异常；是否保留取决于业务是否明确规定唯一责任教师。</li>
+<li>若课程所属系能通过稳定且唯一的其他联系推导，“开设”联系可能冗余；若课程归属系是独立业务事实，则仍应保留。</li>
+</ul>
+<blockquote>
+<p><strong>WARNING</strong>
+是否冗余必须依据业务语义和函数依赖判断，不能只看图形相似就删除。课件圈注是设计检查提示，不是对所有系统都成立的固定结论。</p>
+</blockquote>
+<h3 id="section-10">6.3.4 自底向上设计 E-R 模型</h3>
+<p>课件给出两步：</p>
+<ol>
+<li>抽象数据，逐步形成各部门或应用的局部视图。</li>
+<li>自底向上集成局部视图，得到全局概念结构。</li>
+</ol>
+<p>集成时需要处理：</p>
+<ul>
+<li><strong>命名冲突</strong>：同名异义或异名同义。</li>
+<li><strong>结构冲突</strong>：同一对象在不同视图中被表示为实体、属性或联系。</li>
+<li><strong>约束冲突</strong>：不同视图给出的基数、可选性或取值范围不一致。</li>
+<li><strong>冗余</strong>：同一事实被多次表示，或某联系可由其他联系推导。</li>
+</ul>
+<p>最后还要验证全局 E-R 图是否完整、正确、可理解，并由用户确认。</p>
+<h2 id="section-11">6.4 逻辑结构设计</h2>
+<p>逻辑结构设计把基本 E-R 图转换为目标 DBMS 支持的数据模型。关系数据库中，结果是二维表形式的关系模式。</p>
+<h3 id="section-12">6.4.1 实体型的转换</h3>
+<p>每个实体型通常转换为一个关系模式：</p>
+<p>$$
+\text{实体关系}(\text{实体属性},\ldots).
+$$</p>
+<p>实体的码转换为关系的候选码或主码。</p>
+<p>例如：</p>
+<p>$$
+\operatorname{Student}(\underline{Sno},Sname,Sex,Age).
+$$</p>
+<h3 id="section-13">6.4.2 联系的转换</h3>
+<p>“联系可以转换为独立关系”是总原则，但不同基数有更直接的实现方法。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>联系类型</th>
+<th>常用转换规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1:1$</td>
+<td>可把任一方主码作为外码放入另一方，并加入 <code>UNIQUE</code>；也可单独建联系表</td>
+</tr>
+<tr>
+<td>$1:n$</td>
+<td>把“1”端主码作为外码加入“n”端关系，并把联系属性一并放入“n”端</td>
+</tr>
+<tr>
+<td>$m:n$</td>
+<td>必须建立独立联系关系，两端主码作为外码，通常共同组成主码，并加入联系属性</td>
+</tr>
+<tr>
+<td>三元及以上联系</td>
+<td>通常建立独立关系，参与实体的码作为外码，主码由业务基数决定</td>
+</tr>
+</tbody>
+</table></div>
+<p>例如“学生选修课程”是 $m:n$ 联系：</p>
+<p>$$
+\operatorname{Enroll}(
+\underline{Sno},
+\underline{Cno},
+Grade
+).
+$$</p>
+<p>其中 <code>Sno</code> 和 <code>Cno</code> 分别引用学生表和课程表。</p>
+<p>多值属性也应独立成表。例如一个教师有多个电话号码：</p>
+<p>$$
+\operatorname{TeacherPhone}(\underline{Tno},\underline{Phone}).
+$$</p>
+<h3 id="section-14">6.4.3 逻辑结构优化与验证</h3>
+<p>转换后还需：</p>
+<ul>
+<li>根据函数依赖检查关系模式是否达到适当范式。</li>
+<li>检查分解是否无损连接并尽量保持依赖。</li>
+<li>定义主码、外码、<code>UNIQUE</code>、<code>CHECK</code>、<code>NOT NULL</code> 等约束。</li>
+<li>为不同用户或应用设计视图。</li>
+<li>验证所有业务查询与更新是否能由逻辑模式支持。</li>
+</ul>
+<blockquote>
+<p><strong>TIP</strong>
+不能机械地把每个菱形都建成独立表。$1:n$ 联系通常可通过“n”端外码实现；$m:n$ 联系才必须单独建表。</p>
+</blockquote>
+<h2 id="section-15">6.5 物理结构设计</h2>
+<h3 id="section-16">6.5.1 核心目标</h3>
+<p>物理结构设计是在逻辑结构基础上选择合适的存储结构和存取路径，以提高时间效率、空间效率和系统可维护性。</p>
+<p>常见决策包括：</p>
+<ul>
+<li>文件组织、页和记录的存储方式。</li>
+<li>索引类型、索引列和联合索引顺序。</li>
+<li>聚簇方式、分区、分片或物化视图。</li>
+<li>数据与日志、备份文件的存放位置。</li>
+<li>是否保留受控冗余以换取查询性能。</li>
+</ul>
+<h3 id="section-17">6.5.2 图示流程</h3>
+<p>课件物理设计图可整理为以下反馈循环：</p>
+<pre class="mermaid">flowchart LR
+    A[&quot;逻辑结构设计&quot;] --&gt; B[&quot;确定数据库的物理结构&quot;]
+    B --&gt; C[&quot;评价数据库的物理结构&quot;]
+    C --&gt;|&quot;满足时间与空间要求&quot;| D[&quot;形成物理模型&quot;]
+    D --&gt; E[&quot;数据库实施&quot;]
+    C --&gt;|&quot;不满足&quot;| B
+    B --&gt; F[&quot;存储结构与存取方法&quot;]
+    F --&gt; B
+    C --&gt; G[&quot;时间效率与空间效率&quot;]
+</pre>
+<p>评价不能只看“有没有索引”。索引可提高部分查询速度，但也占空间，并增加插入、删除和更新成本。</p>
+<h2 id="section-18">6.6 数据库实施</h2>
+<p>数据库实施阶段把设计结果落地：</p>
+<ol>
+<li>用 DDL 创建数据库、表、索引、视图和约束。</li>
+<li>组织、清洗并装载初始数据。</li>
+<li>编写和调试应用程序、存储过程或接口。</li>
+<li>进行功能、性能、安全、并发与恢复测试。</li>
+<li>试运行，发现问题后反馈到逻辑或物理设计。</li>
+</ol>
+<h2 id="section-19">6.7 运行与维护</h2>
+<p>数据库投入运行后仍需持续维护：</p>
+<ul>
+<li>性能监测和查询优化。</li>
+<li>定期备份与恢复演练。</li>
+<li>权限、审计和安全策略维护。</li>
+<li>索引、统计信息和存储空间维护。</li>
+<li>随业务变化调整表、视图和约束。</li>
+<li>监控数据质量并修复不一致数据。</li>
+</ul>
+<p>运行与维护不是一次性阶段；它会把新需求和性能问题反馈给前面的设计阶段。</p>
+<h2 id="section-20">6.8 常考辨析</h2>
+<h3 id="section-21">6.8.1 DFD 与 E-R 图</h3>
+<ul>
+<li>DFD 描述数据在系统中的流动和处理过程，属于需求分析工具。</li>
+<li>E-R 图描述实体、属性和联系，属于概念结构设计工具。</li>
+</ul>
+<h3 id="section-22">6.8.2 概念结构与逻辑结构</h3>
+<ul>
+<li>概念结构独立于 DBMS，强调业务语义。</li>
+<li>逻辑结构依赖选用的数据模型，但通常仍不涉及具体磁盘组织。</li>
+</ul>
+<h3 id="section-23">6.8.3 逻辑结构与物理结构</h3>
+<ul>
+<li>关系模式、主外码和约束属于逻辑结构。</li>
+<li>索引、分区、文件组织和存取路径属于物理结构。</li>
+</ul>
+<h3 id="section-24">6.8.4 实体和联系是否都必须单独建表</h3>
+<p>实体通常单独建表；联系如何转换取决于基数。$m:n$ 联系需要独立表，$1:n$ 联系通常用外码即可实现。</p>
+<h2 id="section-25">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-8f1f495f90b2/">上一篇：关系数据理论</a> · <a href="/en/notes/cs408-871e91cac1d7/">下一篇：数据库恢复技术</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c7b75c1ae846/">软件需求工程</a></li>
+</ul>
+<h2 id="section-26">本节复盘</h2>
+<ul>
+<li>数据库设计依次经历需求分析、概念设计、逻辑设计、物理设计、实施、运行与维护。</li>
+<li>需求分析的核心产物是 DFD 和数据字典；数据字典包含数据项、数据结构、数据流、数据存储和处理过程。</li>
+<li>E-R 图用实体、属性、联系和基数表达现实世界，局部视图集成时要解决冲突和冗余。</li>
+<li>E-R 模型转换为关系模型时，实体通常成表，$1:n$ 联系常放到“n”端，$m:n$ 联系必须单独成表。</li>
+<li>物理设计要在存储结构、存取方法、时间效率和空间效率之间权衡，并经评价后再实施。</li>
+<li>数据库上线后仍需性能监测、备份恢复、安全维护和结构调整。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-9af3b667a6a2/index.html"><span>← Previous item</span><strong>Lecture 2：知识 - 计算机网络体系结构与参考模型</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-9cd28cace452/index.html"><span>Next item →</span><strong>Lecture 4：数据库完整性</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

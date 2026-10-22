@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>0. 重点算法汇总 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="0. 重点算法汇总 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-424a656729a9/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="0. 重点算法汇总 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "0. 重点算法汇总",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-424a656729a9/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-424a656729a9/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-424a656729a9/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-424a656729a9/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-424a656729a9/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-424a656729a9/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">0. 重点算法汇总</h1><p class="article-lead">Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>16 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c78d86423401.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c78d86423401.pdf" download="0. 重点算法汇总.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">1. 专题入口与验证状态</a><a href="#section-2">2. 顺序表与虚拟数组</a><a href="#section-3">3. 链表</a><a href="#section-4">4. 栈与队列</a><a href="#section-5">5. 二叉树</a><a href="#section-6">6. 查找</a><a href="#section-7">7. 图</a><a href="#section-8">8. 排序</a><a href="#section-9">9. 30 页逐页覆盖记录</a><a href="#section-10">10. 代码题统一检查清单</a><a href="#section-11">相关知识</a><a href="#section-12">11. 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p><strong>ABSTRACT</strong> · 定位
+本页是数据结构代码题的总入口，逐页覆盖原 PDF 的 30 页：顺序表、链表、栈与队列、二叉树、查找、图和排序。原 PDF 只有文字与代码，没有独立知识图；正文用可编辑 Mermaid 图补充导航。</p>
+</blockquote>
+<blockquote>
+<p><strong>IMPORTANT</strong> · 唯一权威代码
+汇总页保留每个原算法的核心不变量、边界、复杂度和专题深链接，不再复制同一份 C++。完整实现只维护在 1～7 篇专题笔记中，避免“专题代码已修正、汇总代码仍旧错误”的双份漂移。七篇现有 97 个 C++17 代码块，并已分别通过 7 套可执行测试。</p>
+</blockquote>
+<pre class="mermaid">flowchart LR
+    H[重点算法汇总] --&gt; A[顺序表]
+    H --&gt; L[链表]
+    H --&gt; S[栈与队列]
+    H --&gt; T[二叉树]
+    H --&gt; F[查找]
+    H --&gt; G[图]
+    H --&gt; O[排序]
+    A --&gt; I1[下标与写指针]
+    L --&gt; I2[前驱与断链重连]
+    S --&gt; I3[栈顶与队头边界]
+    T --&gt; I4[递归出口与回溯]
+    F --&gt; I5[区间与全局约束]
+    G --&gt; I6[访问标记与方向]
+    O --&gt; I7[有序区与稳定性]
+</pre>
+<h2 id="section-1">1. 专题入口与验证状态</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>专题</th>
+<th>原资料范围</th>
+<th>权威笔记</th>
+<th>当前验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序表</td>
+<td>逆置、删除、去重、合并、中位数、最小未出现正整数</td>
+<td><a href="/en/notes/cs408-7528c27ca114/">顺序表专题</a></td>
+<td>11 页，14 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>链表</td>
+<td>删除、逆置、拆分、合并、公共元素、倒数第 $k$ 个、对称、重排</td>
+<td><a href="/en/notes/cs408-200f7524e253/">链表专题</a></td>
+<td>24 页，25 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>栈与队列</td>
+<td>队列逆置、中心对称、括号匹配</td>
+<td><a href="/en/notes/cs408-19ccba30ce38/">栈与队列专题</a></td>
+<td>6 页，7 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>二叉树</td>
+<td>递归统计、查找、路径、构造、层次遍历、完全性、线索化</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/">二叉树专题</a></td>
+<td>30 页，23 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>有序表查找/插入、折半、BST 判断与操作</td>
+<td><a href="/en/notes/cs408-18a77c541c35/">查找专题</a></td>
+<td>7 页，8 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>图</td>
+<td>存储、BFS/DFS、最短路、可达性、判树、连通分量、转换</td>
+<td><a href="/en/notes/cs408-d690a826208c/">图专题</a></td>
+<td>13 页，12 个代码块，断言通过</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>插入、冒泡、快速、选择、堆、归并</td>
+<td><a href="/en/notes/cs408-c558f3264d82/">排序专题</a></td>
+<td>8 页，8 个代码块，断言通过</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-2">2. 顺序表与虚拟数组</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法</th>
+<th>核心不变量</th>
+<th>边界与复杂度</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原地逆置</td>
+<td>左右下标向中间收缩，每次交换一对</td>
+<td>空表、单元素均不交换；$O(n)$ 时间、$O(1)$ 空间</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-6">原地逆置</a></td>
+</tr>
+<tr>
+<td>删除指定值或区间</td>
+<td>读下标扫描原表，写下标始终指向下一个保留位置</td>
+<td>写指针只在保留时前进；$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-9">删除指定值</a>、<a href="/en/notes/cs408-7528c27ca114/#section-12">删除区间</a></td>
+</tr>
+<tr>
+<td>递增表去重</td>
+<td><code>write</code> 指向最后一个已保留的不同值</td>
+<td>依赖“原表有序”；空表单独处理；$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-13">有序表去重</a></td>
+</tr>
+<tr>
+<td>合并两个递增表</td>
+<td>两个读指针指向各自未处理首元，写指针指向输出尾</td>
+<td>输出容量至少 $m+n$；$O(m+n)$</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-14">递增表合并</a></td>
+</tr>
+<tr>
+<td>两递增序列中位数</td>
+<td>只需归并到合并序列目标下标，不必复制全部结果</td>
+<td>先明确总长度奇偶与题目采用的中位数口径；$O(m+n)$ 上界</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-15">合并中位数</a></td>
+</tr>
+<tr>
+<td>最小未出现正整数</td>
+<td>长度为 $n$ 时答案只可能位于 $[1,n+1]$，记录 $1..n$ 是否出现</td>
+<td>忽略非正数和大于 $n$ 的数；$O(n)$ 时间、$O(n)$ 空间</td>
+<td><a href="/en/notes/cs408-7528c27ca114/#section-18">最小缺失正整数</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>TIP</strong> · 专题页补充题型
+<a href="/en/notes/cs408-7528c27ca114/#section-2">有序插入</a>、<a href="/en/notes/cs408-7528c27ca114/#section-4">末元素覆盖最小值</a>、<a href="/en/notes/cs408-7528c27ca114/#section-7">交换连续子序列</a>和<a href="/en/notes/cs408-7528c27ca114/#section-20">Boyer-Moore 主元素</a>也已纳入专题笔记。</p>
+</blockquote>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+去重时覆盖位置和 <code>length</code> 少 1；合并函数混用 <code>l/l3</code> 且漏分号；虚拟数组写成 <code>int record = new int[n]</code>，返回时又使用未定义的 <code>maxNumber</code>。以上均不能直接编译，专题版本已按空表、容量和下标边界重写。</p>
+</blockquote>
+<h2 id="section-3">3. 链表</h2>
+<p>链表题的通用动作是：先保存后继，再断链或重连；释放结点后绝不再访问；带头结点与无头链表不能混用同一套首结点处理。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法</th>
+<th>核心不变量与边界</th>
+<th style="text-align:right">复杂度</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>递归删除无头链表中所有 <code>x</code></td>
+<td>头指针必须按引用传递；命中首结点后更新头再递归</td>
+<td style="text-align:right">$O(n)$ 时间，$O(n)$ 递归栈</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-2">递归删除</a></td>
+</tr>
+<tr>
+<td>非递归删除带头链表中所有 <code>x</code></td>
+<td><code>previous</code> 指向待检查结点前驱；删除后不前移前驱</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-3">非递归删除</a></td>
+</tr>
+<tr>
+<td>删除唯一最小结点</td>
+<td>扫描并保存最小结点的前驱，最后统一摘链释放</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-8">删除最小结点</a></td>
+</tr>
+<tr>
+<td>递增链表去重</td>
+<td>只比较相邻结点；删除重复者后当前基准不前移</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-13">链表去重</a></td>
+</tr>
+<tr>
+<td>原地逆置</td>
+<td>保存 <code>next</code>，把当前结点头插到已逆置区</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-6">单链表逆置</a></td>
+</tr>
+<tr>
+<td>按奇偶位置稳定拆分</td>
+<td>两条尾指针分别接收奇位、偶位结点，结尾都置空</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-11">稳定拆分</a></td>
+</tr>
+<tr>
+<td>奇位正序、偶位逆序拆分</td>
+<td>奇位尾插，偶位头插；每次先保存下一结点</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-12">正逆序拆分</a></td>
+</tr>
+<tr>
+<td>两递增链表合并为非递减链表</td>
+<td>尾指针接较小原结点；相等时选择顺序决定稳定口径</td>
+<td style="text-align:right">$O(m+n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-14">递增链合并</a></td>
+</tr>
+<tr>
+<td>公共元素生成新链 <code>C</code></td>
+<td>两指针比较：相等则复制并双双前进，否则较小者前进</td>
+<td style="text-align:right">$O(m+n)$，另需结果空间</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-16">公共元素</a></td>
+</tr>
+<tr>
+<td>倒数第 $k$ 个结点</td>
+<td>快指针先走 $k$ 步，再与慢指针同步前进</td>
+<td style="text-align:right">$k\ge1$ 且长度不少于 $k$；$O(n)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-19">倒数第 k 个</a></td>
+</tr>
+<tr>
+<td>循环双链表对称</td>
+<td>首尾指针相向移动；奇偶长度分别在相遇或交叉时停止</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-21">循环双链表对称</a></td>
+</tr>
+<tr>
+<td>重排为 $a_1,a_n,a_2,a_{n-1},\ldots$</td>
+<td>快慢指针分半、逆置后半、两链交替合并</td>
+<td style="text-align:right">$O(n)$、$O(1)$</td>
+<td><a href="/en/notes/cs408-200f7524e253/#section-25">链表重排</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+递归删除按值传递头指针；非递归删除无条件前移前驱而跳过连续 <code>x</code>；空指针检查写在解引用之后；<code>new LNode*</code> 把“结点”误写成“指针对象”；循环双链表向左移动却写成 <code>q = q-&gt;next</code>。专题页已统一内存所有权、头结点约定和循环终止条件。</p>
+</blockquote>
+<h2 id="section-4">4. 栈与队列</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法</th>
+<th>核心不变量与边界</th>
+<th style="text-align:right">复杂度</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用空栈逆置队列</td>
+<td>所有队列元素依次入栈，再全部出栈回队；必须检查容量</td>
+<td style="text-align:right">$O(n)$ 时间、$O(n)$ 栈空间</td>
+<td><a href="/en/notes/cs408-19ccba30ce38/#section-2">队列逆置</a></td>
+</tr>
+<tr>
+<td>判断带头单链表是否中心对称</td>
+<td>前半段入栈；奇数长度跳过中点；后半段与栈逆序比较</td>
+<td style="text-align:right">$O(n)$ 时间、$O(n)$ 空间</td>
+<td><a href="/en/notes/cs408-19ccba30ce38/#section-7">中心对称</a></td>
+</tr>
+<tr>
+<td>圆括号匹配</td>
+<td>左括号入栈；右括号到来时栈不得空；扫描结束栈必须空</td>
+<td style="text-align:right">$O(n)$ 时间、$O(n)$ 空间</td>
+<td><a href="/en/notes/cs408-19ccba30ce38/#section-17">括号匹配</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>TIP</strong> · 专题页补充题型
+<a href="/en/notes/cs408-19ccba30ce38/#section-12">共享栈</a>补全了两栈判满、判空、入栈与出栈；<a href="/en/notes/cs408-19ccba30ce38/#section-21">字符序列重排</a>补全了按字符类别分区题型。该实现会逆转 <code>H</code> 组；只有字符完全相同时逆序才不可见，不能称为一般意义上的稳定分区。</p>
+</blockquote>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+队列与栈对象、指针访问方式混用，<code>front/rear/top</code> 有时漏写所属对象；括号匹配在空栈上直接 <code>pop</code>，结尾真假分支相反且包含连续两个 <code>return</code>。</p>
+</blockquote>
+<h2 id="section-5">5. 二叉树</h2>
+<p>树递归先写空树出口，再明确“本结点贡献”和“左右子树结果如何组合”。根位于第 1 层；WPL 的根路径长度按边数记为 0。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法组</th>
+<th>关键条件与易错边界</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>统计结点总数、双分支结点数、树高</td>
+<td>空树分别返回 0；双分支要求左右孩子均非空；高度为两侧最大值加 1</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-2">递归统计</a></td>
+</tr>
+<tr>
+<td>表达式树求值</td>
+<td>叶结点返回操作数；内部结点必须有两个孩子并按运算符组合</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-8">表达式树</a></td>
+</tr>
+<tr>
+<td>判断结构相似、镜像二叉树</td>
+<td>两空相似、一空一非空不相似；镜像须交换每个结点的左右子树，既可先递归后交换，也可先交换再分别递归两棵新子树</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-10">结构相似</a>、<a href="/en/notes/cs408-033ead68e5bc/#section-11">镜像</a></td>
+</tr>
+<tr>
+<td>查找值为 <code>key</code> 的结点与层号</td>
+<td>返回指针或层号必须向上传播“已找到”状态，不能找到后继续覆盖</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-12">查找与层号</a></td>
+</tr>
+<tr>
+<td>叶结点串链、输出根到叶路径</td>
+<td><code>head/tail</code> 必须按引用更新；路径进入压栈、每个分支返回时都回溯弹栈</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-17">叶链表</a>、<a href="/en/notes/cs408-033ead68e5bc/#section-18">根到叶路径</a></td>
+</tr>
+<tr>
+<td>叶结点带权路径长度 WPL</td>
+<td>只在叶结点累计 $w\times d$，根深度为 0；兄弟分支深度不能互相污染</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-35">WPL</a></td>
+</tr>
+<tr>
+<td>满二叉树先序转后序</td>
+<td>仅适用于各层全满、结点数为 $2^h-1$ 的完美二叉树，左右子树才可等分</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-20">先序转后序</a></td>
+</tr>
+<tr>
+<td>先序 + 中序重建</td>
+<td>关键字互异时唯一；先序首元定位中序根，左段长度决定两边递归范围</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-21">遍历序列重建</a></td>
+</tr>
+<tr>
+<td>顺序存储转链式二叉树</td>
+<td>0 下标孩子为 $2i+1,2i+2$；普通树数组必须显式保留空位置</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-22">顺序存储建树</a></td>
+</tr>
+<tr>
+<td>层次遍历与完全性</td>
+<td>队列保存待访问结点；判完全树时首个空位置之后不得再出现非空结点</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-30">层次遍历</a>、<a href="/en/notes/cs408-033ead68e5bc/#section-34">完全二叉树</a></td>
+</tr>
+<tr>
+<td>中序线索化</td>
+<td>当前无左孩子才设前驱线索；应检查“前驱无右孩子”后给前驱设后继线索</td>
+<td><a href="/en/notes/cs408-033ead68e5bc/#section-37">中序线索化</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>除由先序/中序重建在直接线性定位根时最坏为 $O(n^2)$ 外，上述遍历、统计、查找和转换通常都访问每个结点一次，为 $O(n)$；递归辅助空间为 $O(h)$，层次遍历为 $O(w)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+多处左右递归写成两次左子树；深度与 WPL 递归进入子树后未正确恢复；表达式树使用未声明的 <code>p</code>；查找结果按值传递；叶链表 <code>head/tail</code> 按值传递；顺序建树把右孩子再次赋给左孩子；完整树空树判断写成 <code>bt == true</code>；线索化检查的是当前结点右孩子而不是前驱右孩子。</p>
+</blockquote>
+<h2 id="section-6">6. 查找</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法</th>
+<th>核心不变量与边界</th>
+<th style="text-align:right">复杂度</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>递增顺序表查找：找到则与后继交换，否则插入</td>
+<td>折半区间统一为半开区间 <code>[low, high)</code>；未找到时 <code>low</code> 就是插入位置；末元素命中时没有后继可换。若命中后与更大的后继交换，表不再有序，不能不经重排就再次折半查找</td>
+<td style="text-align:right">查找 $O(\log n)$，插入移动 $O(n)$</td>
+<td><a href="/en/notes/cs408-18a77c541c35/#section-2">查找后交换或插入</a></td>
+</tr>
+<tr>
+<td>BST 最大值</td>
+<td>非空树沿真实右孩子走到底；空树没有合法最大值，不能用 0 冒充</td>
+<td style="text-align:right">$O(h)$</td>
+<td><a href="/en/notes/cs408-18a77c541c35/#section-14">BST 最值</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>TIP</strong> · 专题页补充题型
+专题还覆盖<a href="/en/notes/cs408-18a77c541c35/#section-5">链表命中后与前驱交换</a>、<a href="/en/notes/cs408-18a77c541c35/#section-8">两种折半查找</a>、<a href="/en/notes/cs408-18a77c541c35/#section-11">BST 全局范围验证</a>、<a href="/en/notes/cs408-18a77c541c35/#section-15">BST 层次</a>和<a href="/en/notes/cs408-18a77c541c35/#section-16">中序范围输出</a>。</p>
+</blockquote>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+折半查找把 <code>high = mid - 1</code> 放到循环外，插入移动时混用 <code>list.data</code> 与 <code>list[]</code>，还未检查容量；BST 空树直接返回 0 会把“无结果”和合法关键字 0 混为一谈。</p>
+</blockquote>
+<h2 id="section-7">7. 图</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原 PDF 算法组</th>
+<th>核心不变量与边界</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接表、邻接矩阵与无向边插入</td>
+<td>无向边在邻接表存两条邻接记录，但逻辑边数只加 1；自环度数贡献 2</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-1">图存储</a></td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>顶点首次发现、准备入队时立即标记，保证最多入队一次</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-6">BFS</a></td>
+</tr>
+<tr>
+<td>BFS 求无权最短路</td>
+<td><code>distance[source]=0</code>，未发现为 -1；首次发现邻点时距离加 1</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-7">无权最短路</a></td>
+</tr>
+<tr>
+<td>递归 DFS 与可达性</td>
+<td>进入结点立即标记；有向图必须按弧方向判断，不能假设可达对称</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-9">DFS</a>、<a href="/en/notes/cs408-d690a826208c/#section-10">可达性</a></td>
+</tr>
+<tr>
+<td>无向图判树</td>
+<td>非空、无向、连通且 $\lvert E\rvert=\lvert V\rvert-1$；单顶点无边图是树</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-11">无向图判树</a></td>
+</tr>
+<tr>
+<td>无向图连通分量</td>
+<td>每从一个未访问顶点启动一次 DFS，就完整覆盖一个新分量</td>
+<td><a href="/en/notes/cs408-d690a826208c/#section-16">连通分量</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>邻接表上的 BFS、DFS、可达性、判树与连通分量均为 $O(|V|+|E|)$；邻接矩阵遍历通常为 $O(|V|^2)$。</p>
+<blockquote>
+<p><strong>TIP</strong> · 专题页补充题型
+<a href="/en/notes/cs408-d690a826208c/#section-4">欧拉通路</a>补全了非零度顶点连通性与奇度条件；<a href="/en/notes/cs408-d690a826208c/#section-13">最远顶点</a>规定了同层平局；<a href="/en/notes/cs408-d690a826208c/#section-14">非递归 DFS</a>保存下一邻接位置；<a href="/en/notes/cs408-d690a826208c/#section-17">存储转换</a>处理方向、自环、重边和边数一致性。</p>
+</blockquote>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+类型在使用后才声明，<code>new AGraph*</code>/<code>new ArcNode*</code> 分配了错误对象，成员访问混用 <code>.</code> 与 <code>-&gt;</code>；BFS 初始化在循环外，队列前置自增易错；DFS 混用 <code>p.adjVertex</code>、<code>visit[]</code> 和未声明变量；可达性分支含不可达 <code>return</code>；连通分量调用未定义的 <code>v</code>。</p>
+</blockquote>
+<h2 id="section-8">8. 排序</h2>
+<p>原汇总 PDF 只重复了直接插入与快速排序，完整排序族以排序专题为准。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>算法</th>
+<th style="text-align:right">最好时间</th>
+<th style="text-align:right">平均/最坏时间</th>
+<th>空间与稳定性</th>
+<th>权威入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入</td>
+<td style="text-align:right">$\Theta(n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td>$\Theta(1)$，稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-2">直接插入</a></td>
+</tr>
+<tr>
+<td>折半插入</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">平均/最坏 $\Theta(n^2)$</td>
+<td>$\Theta(1)$，稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-4">折半插入</a></td>
+</tr>
+<tr>
+<td>优化冒泡</td>
+<td style="text-align:right">$\Theta(n)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td>$\Theta(1)$，稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-6">冒泡</a></td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">平均 $\Theta(n\log n)$，最坏 $\Theta(n^2)$</td>
+<td>平均栈 $O(\log n)$，不稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-7">快速排序</a></td>
+</tr>
+<tr>
+<td>简单选择</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td style="text-align:right">$\Theta(n^2)$</td>
+<td>$\Theta(1)$，不稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-9">简单选择</a></td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td>$\Theta(1)$，不稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-10">堆排序</a></td>
+</tr>
+<tr>
+<td>二路归并</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td style="text-align:right">$\Theta(n\log n)$</td>
+<td>$\Theta(n)$，稳定</td>
+<td><a href="/en/notes/cs408-c558f3264d82/#section-12">归并排序</a></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>DANGER</strong> · 原汇总代码的代表性错误
+直接插入在 <code>j</code> 离开作用域后继续使用，并把哨兵写回成 <code>R[j]</code> 而非 <code>R[0]</code>；快排使用严格不等号，重复关键字可能使双指针停滞，递归调用又被错误放到了函数花括号之外。</p>
+</blockquote>
+<h2 id="section-9">9. 30 页逐页覆盖记录</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">页码</th>
+<th>原 PDF 内容</th>
+<th>复核去向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1～3</td>
+<td>顺序表逆置、删除、去重、合并、中位数、虚拟数组</td>
+<td>本文第 2 节 + 顺序表专题</td>
+</tr>
+<tr>
+<td style="text-align:right">4～10</td>
+<td>链表删除、最小值、去重、逆置、拆分、合并、交集、倒数第 $k$ 个、循环双链表、重排</td>
+<td>本文第 3 节 + 链表专题</td>
+</tr>
+<tr>
+<td style="text-align:right">11～12</td>
+<td>栈/队列结构、队列逆置、中心对称思路、括号匹配</td>
+<td>本文第 4 节 + 栈与队列专题</td>
+</tr>
+<tr>
+<td style="text-align:right">13～24</td>
+<td>二叉树递归统计、表达式、相似/镜像、查找、叶链表、路径、WPL、构造、层次遍历、完全性</td>
+<td>本文第 5 节 + 二叉树专题</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td>中序线索化与有序顺序表查找/插入</td>
+<td>本文第 5、6 节</td>
+</tr>
+<tr>
+<td style="text-align:right">26</td>
+<td>BST 最大值与图的存储结构</td>
+<td>本文第 6、7 节</td>
+</tr>
+<tr>
+<td style="text-align:right">27～28</td>
+<td>无向边插入、BFS、无权最短路、DFS、可达性</td>
+<td>本文第 7 节 + 图专题</td>
+</tr>
+<tr>
+<td style="text-align:right">29</td>
+<td>图判树、连通分量、直接插入排序</td>
+<td>本文第 7、8 节</td>
+</tr>
+<tr>
+<td style="text-align:right">30</td>
+<td>快速排序</td>
+<td>本文第 8 节 + 排序专题</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>SUCCESS</strong> · 完整性结论
+30 页中的每个算法项都已在本页建立检索项并指向权威专题；水印、错位花括号、未声明变量和不可编译旧代码没有带入正式笔记。没有独立知识图被遗漏。</p>
+</blockquote>
+<h2 id="section-10">10. 代码题统一检查清单</h2>
+<ol>
+<li><strong>结构约定</strong>：是否带头结点、是否循环、数组从 0 还是 1 开始、图是有向还是无向。</li>
+<li><strong>空与单元素</strong>：空表、空树、单结点、无边图分别返回什么，是否允许空答案。</li>
+<li><strong>指针所有权</strong>：改变头指针或输出指针时是否按引用传递；<code>new/delete</code> 与 <code>malloc/free</code> 不混用。</li>
+<li><strong>保存下一位置</strong>：覆盖数组元素、摘链、释放结点、移动图邻接指针之前，先保存仍需使用的位置。</li>
+<li><strong>标记时机</strong>：BFS/DFS 在首次发现结点时标记，避免重复入队、入栈或递归。</li>
+<li><strong>递归状态</strong>：空结构出口、左右递归方向、返回值传播、路径/深度回溯是否全部正确。</li>
+<li><strong>数学前提</strong>：BST 的全局范围、欧拉路的连通性、完全树的连续位置、排序稳定性的相等元素处理。</li>
+<li><strong>复杂度</strong>：区分总时间、关键字比较、元素移动、递归栈和结果空间；写明最坏退化条件。</li>
+<li><strong>验证输入</strong>：至少覆盖空、单元素、重复值、负数、已有序、逆序、断连与非法边界。</li>
+</ol>
+<h2 id="section-11">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-160888f26a5f/">上一篇：排序算法总结</a> · <a href="/en/notes/cs408-7528c27ca114/">下一篇：顺序表代码</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-01ad73094eab/">算法与算法评价</a></li>
+</ul>
+<h2 id="section-12">11. 本节复盘</h2>
+<ul>
+<li>顺序表题抓“读指针/写指针”和容量；链表题抓“前驱、后继、断链、重连、所有权”。</li>
+<li>栈队列题先画清栈顶和队头队尾含义；括号匹配同时检查提前右括号和最终剩余左括号。</li>
+<li>二叉树递归统一为“空树出口 + 当前贡献 + 左右结果”，路径与深度状态必须在回溯时恢复。</li>
+<li>查找题统一折半区间并写明失败后的插入点；BST 递归必须传递全局上下界。</li>
+<li>图遍历在首次发现时标记；无向判树、欧拉路和连通分量都必须明确连通条件。</li>
+<li>排序先写下标体系、有序区边界和稳定性；快排重复值、堆孩子越界、归并剩余段是高频错误。</li>
+<li>汇总页负责导航和审查，专题页负责唯一可编译实现；修改算法时只更新专题权威代码，再回查本页链接与口径。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-3d652a68f786/index.html"><span>← Previous item</span><strong>Lecture 4：决策树</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-47193abe2561/index.html"><span>Next item →</span><strong>Lecture 3：知识 - 数制与编码</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-7528c27ca114/"><span class="related-type">Note</span><strong>1. 顺序表</strong><span>Chinese-language Computer Science 408 note: 1. 顺序表. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

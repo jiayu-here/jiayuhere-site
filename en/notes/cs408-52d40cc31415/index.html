@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 3：线性模型 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 3：线性模型. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 3：线性模型 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 3：线性模型. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-52d40cc31415/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 3：线性模型 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 3：线性模型. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 3：线性模型",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-52d40cc31415/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-52d40cc31415/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-52d40cc31415/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-52d40cc31415/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-52d40cc31415/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-52d40cc31415/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 3：线性模型</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 3：线性模型. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>16 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/572e0a338a4e.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/572e0a338a4e.pdf" download="Lecture 3：线性模型.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 为什么需要线性模型</a><a href="#section-2">3.2 离散属性的数值化</a><a href="#section-5">3.3 一元线性回归</a><a href="#section-8">3.4 多元线性回归</a><a href="#section-10">$$
+\tilde{\boldsymbol{w}}</a><a href="#section-11">\begin{pmatrix}
+\boldsymbol{w}\\
+b
+\end{pmatrix},
+\qquad
+\hat{\boldsymbol{x}}_i</a><a href="#section-12">$$
+\boldsymbol{X}</a><a href="#section-14">$$
+\tilde{\boldsymbol{w}}^*</a><a href="#section-15">3.5 正则化在线性回归中的作用</a><a href="#section-16">3.6 广义线性模型</a><a href="#section-17">3.7 对数几率回归</a><a href="#section-21">$$
+\boldsymbol{\beta}</a><a href="#section-22">\begin{pmatrix}
+\boldsymbol{w}\\
+b
+\end{pmatrix},
+\qquad
+\hat{\boldsymbol{x}}</a><a href="#section-23">$$
+p(y_i\mid\hat{\boldsymbol{x}}_i;\boldsymbol{\beta})</a><a href="#section-24">3.8 线性判别分析</a><a href="#section-27">$$
+\boldsymbol{S}_b</a><a href="#section-28">$$
+J(\boldsymbol{w})</a><a href="#section-29">3.9 LDA 的多分类推广</a><a href="#section-30">3.10 多分类任务的拆解</a><a href="#section-33">3.11 类别不平衡</a><a href="#section-35">$$
+\frac{y'}{1-y'}</a><a href="#section-37">3.12 易错点</a><a href="#section-38">相关知识</a><a href="#section-39">3.13 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节从最小二乘线性回归出发，推导多元线性模型，进一步整理广义线性模型、对数几率回归、线性判别分析、多分类拆解和类别不平衡处理。</p>
+</blockquote>
+<h2 id="section-1">3.1 为什么需要线性模型</h2>
+<ul>
+<li>人类对线性关系的理解和分析较直观，线性模型也具有计算简单、可解释性较强等优点。</li>
+<li>线性模型试图通过属性的线性组合进行预测：</li>
+</ul>
+<p>$$
+f(\boldsymbol{x})
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<ul>
+<li>在线性回归中，模型用直线、平面或超平面拟合连续目标。</li>
+<li>在线性分类中，模型可用超平面把不同类别分开。</li>
+<li>线性模型只能直接表达线性关系，但可以通过特征变换、核方法或联系函数扩展其表达能力。</li>
+</ul>
+<h2 id="section-2">3.2 离散属性的数值化</h2>
+<p>线性模型擅长处理数值属性，离散属性需先编码。</p>
+<h3 id="section-3">3.2.1 有序属性</h3>
+<ul>
+<li>若离散取值具有明确顺序，可映射为有序数值。</li>
+<li>例如“低、中、高”可映射为 $0,1,2$，但数值间距是否等距仍需结合任务判断。</li>
+</ul>
+<h3 id="section-4">3.2.2 无序属性</h3>
+<ul>
+<li>若取值之间没有自然顺序，不能粗暴编码成 $0,1,2$，否则会引入虚假的大小关系。</li>
+<li>对含 $k$ 个取值的无序属性，可转成 $k$ 维 0-1 向量，即独热编码。</li>
+<li>源资料将离散属性处理概括为：有序则连续化，无序则转为 $k$ 维向量。</li>
+</ul>
+<h2 id="section-5">3.3 一元线性回归</h2>
+<h3 id="section-6">3.3.1 模型与目标函数</h3>
+<p>给定数据</p>
+<p>$$
+D={(x_i,y_i)}_{i=1}^{m},
+$$</p>
+<p>寻找</p>
+<p>$$
+f(x_i)=wx_i+b
+$$</p>
+<p>使预测值尽量接近真实值。采用平方损失时，最小二乘目标为</p>
+<p>$$
+(w^<em>,b^</em>)
+=\mathop{\arg\min}<em>{w,b}
+\sum</em>{i=1}^{m}
+\left(f(x_i)-y_i\right)^2
+$$</p>
+<p>即</p>
+<p>$$
+(w^<em>,b^</em>)
+=\mathop{\arg\min}<em>{w,b}
+\sum</em>{i=1}^{m}
+\left(y_i-wx_i-b\right)^2.
+$$</p>
+<p>记</p>
+<p>$$
+E_{(w,b)}
+=\sum_{i=1}^{m}(y_i-wx_i-b)^2.
+$$</p>
+<h3 id="section-7">3.3.2 求偏导</h3>
+<p>分别对 $w$ 和 $b$ 求偏导：</p>
+<p>$$
+\frac{\partial E_{(w,b)}}{\partial w}
+=2\left(
+w\sum_{i=1}^{m}x_i^2
+-\sum_{i=1}^{m}(y_i-b)x_i
+\right),
+$$</p>
+<p>$$
+\frac{\partial E_{(w,b)}}{\partial b}
+=2\left(
+mb-\sum_{i=1}^{m}(y_i-wx_i)
+\right).
+$$</p>
+<p>令两式为 $0$ 可得闭式解：</p>
+<p>$$
+w
+=\frac{\sum_{i=1}^{m}y_i(x_i-\bar x)}
+{\sum_{i=1}^{m}x_i^2-\frac{1}{m}
+\left(\sum_{i=1}^{m}x_i\right)^2},
+$$</p>
+<p>$$
+b
+=\frac{1}{m}\sum_{i=1}^{m}(y_i-wx_i)
+=\bar y-w\bar x.
+$$</p>
+<p>其中</p>
+<p>$$
+\bar x=\frac{1}{m}\sum_{i=1}^{m}x_i,
+\qquad
+\bar y=\frac{1}{m}\sum_{i=1}^{m}y_i.
+$$</p>
+<p>等价地，</p>
+<p>$$
+w
+=\frac{\sum_{i=1}^{m}(x_i-\bar x)(y_i-\bar y)}
+{\sum_{i=1}^{m}(x_i-\bar x)^2}.
+$$</p>
+<ul>
+<li>令导数为 $0$ 是为了寻找驻点。平方误差关于 $w,b$ 是凸二次函数；在非退化条件下，该驻点就是全局最小点。</li>
+<li>线性回归目标没有有限最大值，因此求得的有限驻点对应最小值而非最大值。</li>
+</ul>
+<h2 id="section-8">3.4 多元线性回归</h2>
+<h3 id="section-9">3.4.1 向量形式</h3>
+<p>多元表示每个输入含多个属性：</p>
+<p>$$
+\boldsymbol{x}<em>i
+=(x</em>{i1},x_{i2},\ldots,x_{id})^\mathrm T,
+\qquad
+y_i\in\mathbb R.
+$$</p>
+<p>模型为</p>
+<p>$$
+f(\boldsymbol{x}_i)
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}_i+b.
+$$</p>
+<p>把偏置吸收到参数中：</p>
+<h1 id="section-10">$$
+\tilde{\boldsymbol{w}}</h1>
+<h1 id="section-11">\begin{pmatrix}
+\boldsymbol{w}\
+b
+\end{pmatrix},
+\qquad
+\hat{\boldsymbol{x}}_i</h1>
+<p>\begin{pmatrix}
+\boldsymbol{x}_i\
+1
+\end{pmatrix}.
+$$</p>
+<p>构造设计矩阵与目标向量：</p>
+<h1 id="section-12">$$
+\boldsymbol{X}</h1>
+<p>\begin{pmatrix}
+\boldsymbol{x}_1^\mathrm T &amp; 1\
+\boldsymbol{x}_2^\mathrm T &amp; 1\
+\vdots &amp; \vdots\
+\boldsymbol{x}_m^\mathrm T &amp; 1
+\end{pmatrix},
+\qquad
+\boldsymbol{y}
+=(y_1,y_2,\ldots,y_m)^\mathrm T.
+$$</p>
+<h3 id="section-13">3.4.2 最小二乘解</h3>
+<p>目标函数为</p>
+<p>$$
+\tilde{\boldsymbol{w}}^*
+=\mathop{\arg\min}_{\tilde{\boldsymbol{w}}}
+(\boldsymbol{y}-\boldsymbol{X}\tilde{\boldsymbol{w}})^\mathrm T
+(\boldsymbol{y}-\boldsymbol{X}\tilde{\boldsymbol{w}}).
+$$</p>
+<p>记</p>
+<p>$$
+E_{\tilde{\boldsymbol{w}}}
+=(\boldsymbol{y}-\boldsymbol{X}\tilde{\boldsymbol{w}})^\mathrm T
+(\boldsymbol{y}-\boldsymbol{X}\tilde{\boldsymbol{w}}),
+$$</p>
+<p>则</p>
+<p>$$
+\frac{\partial E_{\tilde{\boldsymbol{w}}}}
+{\partial\tilde{\boldsymbol{w}}}
+=2\boldsymbol{X}^{\mathrm T}
+(\boldsymbol{X}\tilde{\boldsymbol{w}}-\boldsymbol{y}).
+$$</p>
+<p>令梯度为 $0$，得到正规方程</p>
+<p>$$
+\boldsymbol{X}^{\mathrm T}\boldsymbol{X}
+\tilde{\boldsymbol{w}}
+=\boldsymbol{X}^{\mathrm T}\boldsymbol{y}.
+$$</p>
+<ul>
+<li>若 $\boldsymbol{X}^{\mathrm T}\boldsymbol{X}$ 满秩且正定，则</li>
+</ul>
+<h1 id="section-14">$$
+\tilde{\boldsymbol{w}}^*</h1>
+<p>(\boldsymbol{X}^{\mathrm T}\boldsymbol{X})^{-1}
+\boldsymbol{X}^{\mathrm T}\boldsymbol{y}.
+$$</p>
+<ul>
+<li>若 $\boldsymbol{X}^{\mathrm T}\boldsymbol{X}$ 不满秩，正规方程可能存在多个解，需要伪逆、正则化或其他约束选出合适解。</li>
+<li>实际数值计算通常不直接显式求逆，可使用 QR 分解、奇异值分解或稳定的线性方程求解方法。</li>
+</ul>
+<h2 id="section-15">3.5 正则化在线性回归中的作用</h2>
+<ul>
+<li>当特征高度相关、样本数不足或设计矩阵不满秩时，普通最小二乘解可能不唯一或对噪声极敏感。</li>
+<li>加入正则化可限制参数，改善可解性和泛化性能。</li>
+<li>典型的 $L_2$ 正则化形式为</li>
+</ul>
+<p>$$
+\min_{\tilde{\boldsymbol{w}}}
+|\boldsymbol{y}-\boldsymbol{X}\tilde{\boldsymbol{w}}|_2^2
++\lambda|\boldsymbol{w}|_2^2.
+$$</p>
+<ul>
+<li>此处通常不惩罚偏置 $b$。$\lambda$ 越大，参数收缩越强，但过大也会导致欠拟合。</li>
+</ul>
+<h2 id="section-16">3.6 广义线性模型</h2>
+<ul>
+<li>普通线性回归令预测值直接逼近 $y$：</li>
+</ul>
+<p>$$
+y\approx\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<ul>
+<li>广义线性模型通常假设响应变量的条件分布属于指数族，并用联系函数 $g$ 把条件均值或相应分布参数与线性预测量联系起来。令</li>
+</ul>
+<p>$$
+\mu(\boldsymbol{x})
+=\mathbb E[Y\mid X=\boldsymbol{x}],
+\qquad
+g!\left(\mu(\boldsymbol{x})\right)
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<p>因此</p>
+<p>$$
+\mu(\boldsymbol{x})
+=g^{-1}
+\left(\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b\right).
+$$</p>
+<p>例如采用对数链接</p>
+<p>$$
+g(\mu)=\ln\mu,
+$$</p>
+<p>则条件均值满足</p>
+<p>$$
+\ln\mu(\boldsymbol{x})
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b,
+\qquad
+\mu(\boldsymbol{x})=\exp
+\left(\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b\right),
+$$</p>
+<p>这就是源资料图示所表达的对数线性关系。观测值 $y$ 仍是随机变量的一次实现，不能把它无噪声地恒等于该条件均值。</p>
+<h2 id="section-17">3.7 对数几率回归</h2>
+<h3 id="section-18">3.7.1 从阶跃函数到对数几率函数</h3>
+<ul>
+<li>二分类期望输出是离散的 $0$ 或 $1$，而线性模型输出实数</li>
+</ul>
+<p>$$
+z=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<ul>
+<li>理想单位阶跃函数能把实数变成类别，但它在阈值处不连续、不可微，不利于优化。</li>
+<li>对数几率函数使用平滑、单调、任意阶可导的 Sigmoid 函数替代阶跃函数：</li>
+</ul>
+<p>$$
+y
+=\frac{1}{1+e^{-z}}
+=\frac{1}
+{1+e^{-(\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b)}}.
+$$</p>
+<ul>
+<li>将上式变形：</li>
+</ul>
+<p>$$
+\ln\frac{y}{1-y}
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<p>左侧称为对数几率（log odds，亦称 logit），表示样本为正例的相对可能性。</p>
+<h3 id="section-19">3.7.2 性质</h3>
+<ul>
+<li>虽然名称含“回归”，对数几率回归实际是分类学习方法。</li>
+<li>它直接对分类可能性建模，可输出类别的近似概率。</li>
+<li>无需事先假定特征服从某个特定概率分布。</li>
+<li>目标函数具有良好的可导、凸优化性质，可使用梯度下降、牛顿法等数值优化算法。</li>
+<li>若真实分类边界不是线性的，未经特征变换的对率回归效果可能受限。</li>
+</ul>
+<h3 id="section-20">3.7.3 极大似然求解</h3>
+<p>把 $y$ 看作后验概率估计 $p(y=1\mid\boldsymbol{x})$，则</p>
+<p>$$
+\ln
+\frac{p(y=1\mid\boldsymbol{x})}
+{p(y=0\mid\boldsymbol{x})}
+=\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b.
+$$</p>
+<p>令</p>
+<h1 id="section-21">$$
+\boldsymbol{\beta}</h1>
+<h1 id="section-22">\begin{pmatrix}
+\boldsymbol{w}\
+b
+\end{pmatrix},
+\qquad
+\hat{\boldsymbol{x}}</h1>
+<p>\begin{pmatrix}
+\boldsymbol{x}\
+1
+\end{pmatrix},
+$$</p>
+<p>则</p>
+<p>$$
+p_1(\hat{\boldsymbol{x}};\boldsymbol{\beta})
+=p(y=1\mid\hat{\boldsymbol{x}};\boldsymbol{\beta})
+=\frac{e^{\boldsymbol{\beta}^{\mathrm T}\hat{\boldsymbol{x}}}}
+{1+e^{\boldsymbol{\beta}^{\mathrm T}\hat{\boldsymbol{x}}}},
+$$</p>
+<p>$$
+p_0(\hat{\boldsymbol{x}};\boldsymbol{\beta})
+=p(y=0\mid\hat{\boldsymbol{x}};\boldsymbol{\beta})
+=\frac{1}
+{1+e^{\boldsymbol{\beta}^{\mathrm T}\hat{\boldsymbol{x}}}}.
+$$</p>
+<p>单个样本的似然可写为</p>
+<h1 id="section-23">$$
+p(y_i\mid\hat{\boldsymbol{x}}_i;\boldsymbol{\beta})</h1>
+<p>y_i p_1(\hat{\boldsymbol{x}}_i;\boldsymbol{\beta})
++(1-y_i)p_0(\hat{\boldsymbol{x}}_i;\boldsymbol{\beta}).
+$$</p>
+<p>最大化对数似然</p>
+<p>$$
+\ell(\boldsymbol{\beta})
+=\sum_{i=1}^{m}
+\ln p(y_i\mid\hat{\boldsymbol{x}}_i;\boldsymbol{\beta})
+$$</p>
+<p>等价于最小化负对数似然</p>
+<p>$$
+\sum_{i=1}^{m}
+\left[
+-y_i\boldsymbol{\beta}^{\mathrm T}\hat{\boldsymbol{x}}_i
++\ln
+\left(1+e^{\boldsymbol{\beta}^{\mathrm T}\hat{\boldsymbol{x}}_i}\right)
+\right].
+$$</p>
+<h2 id="section-24">3.8 线性判别分析</h2>
+<h3 id="section-25">3.8.1 核心思想</h3>
+<ul>
+<li>线性判别分析（Linear Discriminant Analysis，LDA）是一种经典线性学习方法。</li>
+<li>它把样本投影到一条直线上，使同类样本投影尽可能接近、异类样本投影尽可能远离。</li>
+<li>对新样本使用同一投影方向，再根据投影位置判断类别。</li>
+</ul>
+<h3 id="section-26">3.8.2 二分类目标</h3>
+<p>给定两类样本集合 $X_0,X_1$，均值向量为 $\boldsymbol{\mu}_0,\boldsymbol{\mu}_1$。</p>
+<p>类内散度矩阵为</p>
+<p>$$
+\boldsymbol{S}_w
+=\boldsymbol{\Sigma}_0+\boldsymbol{\Sigma}_1
+$$</p>
+<p>其中</p>
+<p>$$
+\boldsymbol{\Sigma}<em>0
+=\sum</em>{\boldsymbol{x}\in X_0}
+(\boldsymbol{x}-\boldsymbol{\mu}_0)
+(\boldsymbol{x}-\boldsymbol{\mu}_0)^\mathrm T,
+$$</p>
+<p>$$
+\boldsymbol{\Sigma}<em>1
+=\sum</em>{\boldsymbol{x}\in X_1}
+(\boldsymbol{x}-\boldsymbol{\mu}_1)
+(\boldsymbol{x}-\boldsymbol{\mu}_1)^\mathrm T.
+$$</p>
+<p>类间散度矩阵为</p>
+<h1 id="section-27">$$
+\boldsymbol{S}_b</h1>
+<p>(\boldsymbol{\mu}_0-\boldsymbol{\mu}_1)
+(\boldsymbol{\mu}_0-\boldsymbol{\mu}_1)^\mathrm T.
+$$</p>
+<p>在投影方向 $\boldsymbol{w}$ 上，两类中心距离平方为</p>
+<p>$$
+\left|
+\boldsymbol{w}^{\mathrm T}\boldsymbol{\mu}_0
+-\boldsymbol{w}^{\mathrm T}\boldsymbol{\mu}_1
+\right|_2^2,
+$$</p>
+<p>类内散度为</p>
+<p>$$
+\boldsymbol{w}^{\mathrm T}
+\boldsymbol{S}_w
+\boldsymbol{w}.
+$$</p>
+<p>因此最大化广义瑞利商</p>
+<h1 id="section-28">$$
+J(\boldsymbol{w})</h1>
+<p>\frac{\boldsymbol{w}^{\mathrm T}
+\boldsymbol{S}_b
+\boldsymbol{w}}
+{\boldsymbol{w}^{\mathrm T}
+\boldsymbol{S}_w
+\boldsymbol{w}}.
+$$</p>
+<p>令</p>
+<p>$$
+\boldsymbol{w}^{\mathrm T}
+\boldsymbol{S}_w
+\boldsymbol{w}=1,
+$$</p>
+<p>可转为带约束优化，并得到广义特征值问题</p>
+<p>$$
+\boldsymbol{S}_b\boldsymbol{w}
+=\lambda
+\boldsymbol{S}_w\boldsymbol{w}.
+$$</p>
+<p>由于 $\boldsymbol{S}_b$ 的结构，可取</p>
+<p>$$
+\boldsymbol{w}
+=\boldsymbol{S}_w^{-1}
+(\boldsymbol{\mu}_0-\boldsymbol{\mu}_1).
+$$</p>
+<ul>
+<li>$\boldsymbol{w}$ 的非零缩放不改变投影方向。</li>
+<li>若 $\boldsymbol{S}_w$ 奇异，实践中可采用正则化或奇异值分解求伪逆。</li>
+</ul>
+<h2 id="section-29">3.9 LDA 的多分类推广</h2>
+<p>假设有 $N$ 个类别，全集均值为 $\boldsymbol{\mu}$，第 $i$ 类样本数为 $m_i$，均值为 $\boldsymbol{\mu}_i$。</p>
+<p>全局散度矩阵：</p>
+<p>$$
+\boldsymbol{S}_t
+=\boldsymbol{S}_b+\boldsymbol{S}<em>w
+=\sum</em>{i=1}^{m}
+(\boldsymbol{x}_i-\boldsymbol{\mu})
+(\boldsymbol{x}_i-\boldsymbol{\mu})^\mathrm T.
+$$</p>
+<p>类内散度矩阵：</p>
+<p>$$
+\boldsymbol{S}<em>w
+=\sum</em>{i=1}^{N}\boldsymbol{S}_{w_i},
+$$</p>
+<p>$$
+\boldsymbol{S}<em>{w_i}
+=\sum</em>{\boldsymbol{x}\in X_i}
+(\boldsymbol{x}-\boldsymbol{\mu}_i)
+(\boldsymbol{x}-\boldsymbol{\mu}_i)^\mathrm T.
+$$</p>
+<p>类间散度矩阵：</p>
+<p>$$
+\boldsymbol{S}_b
+=\boldsymbol{S}_t-\boldsymbol{S}<em>w
+=\sum</em>{i=1}^{N}
+m_i(\boldsymbol{\mu}_i-\boldsymbol{\mu})
+(\boldsymbol{\mu}_i-\boldsymbol{\mu})^\mathrm T.
+$$</p>
+<p>一种标准的多分类 LDA 目标是</p>
+<p>$$
+\max_{\boldsymbol{W}}
+\operatorname{tr}
+\left[
+\left(\boldsymbol{W}^{\mathrm T}\boldsymbol{S}_w\boldsymbol{W}\right)^{-1}
+\boldsymbol{W}^{\mathrm T}\boldsymbol{S}_b\boldsymbol{W}
+\right].
+$$</p>
+<p>等价地，可在约束</p>
+<p>$$
+\boldsymbol{W}^{\mathrm T}\boldsymbol{S}_w\boldsymbol{W}
+=\boldsymbol{I}
+$$</p>
+<p>下最大化 $\operatorname{tr}(\boldsymbol{W}^{\mathrm T}\boldsymbol{S}_b\boldsymbol{W})$。各投影方向分别满足广义特征值方程</p>
+<p>$$
+\boldsymbol{S}_b\boldsymbol{w}_j
+=\lambda_j
+\boldsymbol{S}_w\boldsymbol{w}_j.
+$$</p>
+<ul>
+<li>$\boldsymbol{W}$ 可由最大的 $d'$ 个非零广义特征值对应的特征向量组成；$\boldsymbol{S}_w$ 奇异时需用广义逆、降维或正则化等处理。</li>
+<li>降维后的维数满足 $d'\leq N-1$。</li>
+<li>分子迹与分母迹之比属于 trace-ratio 目标，一般不能不加约束地直接等同于给整个 $\boldsymbol W$ 一个公共 $\lambda$ 的上述特征值问题；多分类 LDA 的不同目标应分别说明。</li>
+</ul>
+<h2 id="section-30">3.10 多分类任务的拆解</h2>
+<p>不能直接处理多分类的二分类学习器，可通过拆解法构造多分类器。</p>
+<h3 id="section-31">3.10.1 一对一</h3>
+<ul>
+<li>OvO（One-vs-One）为每两个类别训练一个二分类器。</li>
+<li>$N$ 个类别需要</li>
+</ul>
+<p>$$
+\frac{N(N-1)}{2}
+$$</p>
+<p>个分类器。</p>
+<ul>
+<li>预测时由各二分类器投票或聚合得分。</li>
+</ul>
+<h3 id="section-32">3.10.2 一对其余</h3>
+<ul>
+<li>OvR（One-vs-Rest）每次把一个类别当正类，其余类别合并为反类。</li>
+<li>$N$ 个类别需要 $N$ 个分类器。</li>
+<li>预测时通常选取得分最高的类别。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:right">分类器数量</th>
+<th>单个训练任务</th>
+<th>主要特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OvO</td>
+<td style="text-align:right">$N(N-1)/2$</td>
+<td>两类之间</td>
+<td>分类器多，但每个任务较小</td>
+</tr>
+<tr>
+<td>OvR</td>
+<td style="text-align:right">$N$</td>
+<td>一类对其余类</td>
+<td>分类器少，但类别可能不平衡</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-33">3.11 类别不平衡</h2>
+<ul>
+<li>类别不平衡表示不同类别的样本比例相差很大，少数类往往更重要。</li>
+<li>只有当少数类被忽略会造成重要损失时，才需要专门处理；不能只看到数量不等就机械重采样。</li>
+</ul>
+<h3 id="section-34">3.11.1 阈值移动</h3>
+<p>若模型输出正类后验概率估计 $y$，普通规则为</p>
+<p>$$
+\frac{y}{1-y}&gt;1
+$$</p>
+<p>时预测为正类。</p>
+<p>若训练集中正类和反类样本数分别为 $m^+$、$m^-$，可按源资料图示把阈值改为</p>
+<p>$$
+\frac{y}{1-y}&gt;
+\frac{m^+}{m^-}.
+$$</p>
+<p>等价地对几率进行再缩放：</p>
+<h1 id="section-35">$$
+\frac{y'}{1-y'}</h1>
+<p>\frac{y}{1-y}
+\times
+\frac{m^-}{m^+}.
+$$</p>
+<p>然后仍以</p>
+<p>$$
+\frac{y'}{1-y'}&gt;1
+$$</p>
+<p>作为正类判定条件。</p>
+<ul>
+<li>该方法依赖对真实类别比例的估计，而真实先验比例往往难以精确获得。</li>
+</ul>
+<h3 id="section-36">3.11.2 重采样</h3>
+<ul>
+<li>过采样增加少数类样本，典型方法包括 SMOTE。</li>
+<li>欠采样减少多数类样本，源资料举例为 EasyEnsemble。</li>
+<li>过采样可能放大噪声，欠采样可能丢失有用信息，应在验证集上比较。</li>
+<li>除重采样外，还可使用代价敏感学习和阈值移动。</li>
+</ul>
+<h2 id="section-37">3.12 易错点</h2>
+<ul>
+<li>无序类别不能直接按 $0,1,2$ 编码，否则会人为制造顺序和距离。</li>
+<li>最小二乘解来自平方误差的凸优化；不能只说“导数为零所以一定最小”，还要结合目标函数性质。</li>
+<li>直接计算 $(\boldsymbol{X}^{\mathrm T}\boldsymbol{X})^{-1}$ 可能数值不稳定，公式推导与工程求解方法要区分。</li>
+<li>广义线性模型中的联系函数 $g$ 连接的是目标分布参数与线性预测量；$g^{-1}$ 才把线性预测量变回目标尺度。</li>
+<li>对数几率回归是分类算法，不是连续值回归；其输出可解释为正类概率估计。</li>
+<li>Sigmoid 输出的是概率形式，但分类边界在原始特征空间仍是线性的，除非先做非线性特征变换。</li>
+<li>LDA 与对率回归都可得到线性分类边界，但目标不同：LDA 最大化类间分离并压缩类内散度，对率回归最大化条件似然。</li>
+<li>二分类 LDA 的投影方向可任意非零缩放；真正重要的是方向而不是向量长度。</li>
+<li>OvO 需要 $N(N-1)/2$ 个分类器，OvR 只需 $N$ 个，但 OvR 的单个任务更容易出现类别不平衡。</li>
+<li>阈值移动公式中 $m^+$、$m^-$ 的位置不能颠倒：原始几率乘 $m^-/m^+$ 后再与 $1$ 比较。</li>
+</ul>
+<h2 id="section-38">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-a2a1fce63aa5/">上一篇：模型评估和选择</a> · <a href="/en/notes/cs408-3d652a68f786/">下一篇：决策树</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-2f3d569a9394/">逻辑回归与向量化</a></li>
+</ul>
+<h2 id="section-39">3.13 本节复盘</h2>
+<ul>
+<li>线性模型以 $\boldsymbol{w}^{\mathrm T}\boldsymbol{x}+b$ 表示属性的线性组合，可用于回归或构造线性分类边界。</li>
+<li>有序离散属性可数值化，无序属性应使用向量编码，避免制造虚假顺序。</li>
+<li>一元线性回归通过最小化平方误差求 $w,b$；多元情形得到正规方程 $\boldsymbol{X}^{\mathrm T}\boldsymbol{X}\tilde{\boldsymbol{w}}=\boldsymbol{X}^{\mathrm T}\boldsymbol{y}$。</li>
+<li>设计矩阵不满秩时可能有多解，可使用伪逆或正则化。</li>
+<li>广义线性模型通过联系函数把线性预测量与目标联系起来；对数几率回归用 Sigmoid 输出正类概率并通过极大似然求解。</li>
+<li>LDA 选择使类内投影紧凑、类间投影分离的方向，二分类解与 $\boldsymbol{S}_w^{-1}(\boldsymbol{\mu}_0-\boldsymbol{\mu}_1)$ 同方向。</li>
+<li>多分类 LDA 的降维维数不超过类别数减 $1$；一般多分类还可使用 OvO 或 OvR 拆解。</li>
+<li>类别不平衡可通过过采样、欠采样、阈值移动和代价敏感方法处理，具体选择取决于少数类的重要性和数据分布。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-518c0a668e31/index.html"><span>← Previous item</span><strong>Lecture 19：树与二叉树的应用</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-53073a86de3c/index.html"><span>Next item →</span><strong>Lecture 28：散列查找</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

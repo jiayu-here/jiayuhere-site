@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 5：神经网络模型 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 5：神经网络模型. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 5：神经网络模型 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 5：神经网络模型. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-5b39b66a185c/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 5：神经网络模型 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 5：神经网络模型. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 5：神经网络模型",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-5b39b66a185c/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-5b39b66a185c/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5b39b66a185c/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5b39b66a185c/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5b39b66a185c/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-5b39b66a185c/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 5：神经网络模型</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 5：神经网络模型. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>9 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/08010dbdbae2.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/08010dbdbae2.pdf" download="Lecture 5：神经网络模型.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 神经网络基础</a><a href="#section-2">5.2 M-P 神经元模型</a><a href="#section-3">5.3 激活函数</a><a href="#section-5">$$
+\operatorname{sgn}(x)</a><a href="#section-7">5.4 多层前馈网络</a><a href="#section-8">5.5 万有逼近能力</a><a href="#section-9">5.6 BP 算法的网络与符号</a><a href="#section-10">5.7 参数数量</a><a href="#section-11">5.8 BP 误差逆传播</a><a href="#section-13">$$
+\frac{\partial E_k}{\partial w_{hj}}</a><a href="#section-16">5.9 学习率</a><a href="#section-17">5.10 易错点</a><a href="#section-18">相关知识</a><a href="#section-19">5.11 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节从 M-P 神经元与激活函数出发，说明多层前馈网络和万有逼近能力，并完整整理单隐层 Sigmoid 网络的 BP 误差逆传播公式。</p>
+</blockquote>
+<h2 id="section-1">5.1 神经网络基础</h2>
+<ul>
+<li>神经网络由具有适应性的简单单元组成，并通过大量连接进行并行信息处理。</li>
+<li>其思想受到生物神经系统启发，但机器学习中的人工神经网络是数学模型，不等同于真实生物神经系统。</li>
+<li>神经网络学习也称连接主义（connectionism）学习。</li>
+<li>学习的核心是根据训练数据确定连接权重与神经元阈值等参数。</li>
+</ul>
+<h2 id="section-2">5.2 M-P 神经元模型</h2>
+<p>一个神经元接收 $n$ 个输入 $x_1,\ldots,x_n$，每个输入具有权重 $w_i$。先计算加权和，再减去阈值 $\theta$，最后通过激活函数 $f$：</p>
+<p>$$
+y
+=f\left(
+\sum_{i=1}^{n}w_ix_i-\theta
+\right).
+$$</p>
+<ul>
+<li>$x_i$ 是输入信号。</li>
+<li>$w_i$ 表示连接强度，可放大、减小或反转输入影响。</li>
+<li>$\theta$ 是激活阈值。</li>
+<li>$f$ 是激活函数，决定神经元输出。</li>
+<li>神经网络学到的知识主要编码在连接权重和阈值中。</li>
+</ul>
+<h2 id="section-3">5.3 激活函数</h2>
+<h3 id="section-4">5.3.1 阶跃函数</h3>
+<p>理想二值神经元可使用阶跃函数：</p>
+<h1 id="section-5">$$
+\operatorname{sgn}(x)</h1>
+<p>\begin{cases}
+1,&amp;x\geq0,\
+0,&amp;x&lt;0.
+\end{cases}
+$$</p>
+<ul>
+<li>输出 $0$ 表示抑制，输出 $1$ 表示激活。</li>
+<li>阶跃函数不连续且在阈值处不可导，不适合直接用普通梯度法训练。</li>
+</ul>
+<h3 id="section-6">5.3.2 Sigmoid 函数</h3>
+<p>常用平滑替代是</p>
+<p>$$
+\operatorname{sigmoid}(x)
+=\frac{1}{1+e^{-x}}.
+$$</p>
+<p>其导数为</p>
+<p>$$
+f'(x)=f(x)\left(1-f(x)\right).
+$$</p>
+<ul>
+<li>Sigmoid 连续、单调、可导，输出范围为 $(0,1)$。</li>
+<li>当 $|x|$ 很大时导数接近 $0$，深层网络中可能出现梯度消失；本节 BP 推导仍以 Sigmoid 为例。</li>
+</ul>
+<h2 id="section-7">5.4 多层前馈网络</h2>
+<ul>
+<li>含隐层的网络称为多层网络。</li>
+<li>前馈网络要求连接构成有向无环计算图，信息沿拓扑顺序从输入流向输出；它不含形成环的反馈连接，但可以有跨层跳连或残差连接。“只能连接相邻层”是特定分层网络结构的约束，不是前馈网络的定义。</li>
+<li>输入层只接收输入，通常不把输入结点称为功能神经元。</li>
+<li>隐层和输出层神经元执行加权、阈值和激活计算，也称功能单元。</li>
+<li>输入特征有 $d$ 维时，输入层有 $d$ 个输入结点；输出有 $l$ 个分量时，输出层有 $l$ 个结点；中间可设置 $q$ 个隐层神经元。</li>
+</ul>
+<h2 id="section-8">5.5 万有逼近能力</h2>
+<ul>
+<li>具有足够多神经元的单隐层前馈网络，在适当激活函数等条件下，能以任意精度逼近紧集上的连续函数。</li>
+<li>该结论说明满足条件的函数逼近问题存在神经网络表示解。</li>
+<li>但定理不告诉我们需要多少隐层神经元，也不保证训练算法能找到该解，更不保证数据量、计算量或泛化性能合理。</li>
+<li>隐层神经元数量仍需结合验证集、正则化和实际计算资源选择；源资料将常见方法概括为试错。</li>
+<li>源资料还从表达能力角度提到神经网络可表示图灵可计算过程；这同样是“存在性/表达能力”结论，不等于训练一定高效成功。</li>
+</ul>
+<h2 id="section-9">5.6 BP 算法的网络与符号</h2>
+<p>给定训练集</p>
+<p>$$
+D=
+{(\boldsymbol{x}_1,\boldsymbol{y}_1),
+\ldots,
+(\boldsymbol{x}_m,\boldsymbol{y}_m)},
+$$</p>
+<p>其中</p>
+<p>$$
+\boldsymbol{x}_k\in\mathbb R^d,
+\qquad
+\boldsymbol{y}_k\in\mathbb R^l.
+$$</p>
+<p>考虑一个含 $q$ 个隐层神经元、$l$ 个输出神经元的单隐层前馈网络，并假设隐层和输出层都使用 Sigmoid。</p>
+<p>记：</p>
+<ul>
+<li>$v_{ih}$：输入结点 $i$ 到隐层结点 $h$ 的权重。</li>
+<li>$w_{hj}$：隐层结点 $h$ 到输出结点 $j$ 的权重。</li>
+<li>$\gamma_h$：隐层结点 $h$ 的阈值。</li>
+<li>$\theta_j$：输出结点 $j$ 的阈值。</li>
+<li>$b_h$：隐层结点 $h$ 的输出。</li>
+<li>$\hat y_j^k$：样本 $k$ 在输出结点 $j$ 上的预测。</li>
+</ul>
+<p>隐层输入与输出：</p>
+<p>$$
+\alpha_h
+=\sum_{i=1}^{d}v_{ih}x_i^k,
+$$</p>
+<p>$$
+b_h
+=f(\alpha_h-\gamma_h).
+$$</p>
+<p>输出层输入与输出：</p>
+<p>$$
+\beta_j
+=\sum_{h=1}^{q}w_{hj}b_h,
+$$</p>
+<p>$$
+\hat y_j^k
+=f(\beta_j-\theta_j).
+$$</p>
+<p>对样本 $(\boldsymbol{x}_k,\boldsymbol{y}_k)$，均方误差写为</p>
+<p>$$
+E_k
+=\frac{1}{2}
+\sum_{j=1}^{l}
+\left(\hat y_j^k-y_j^k\right)^2.
+$$</p>
+<h2 id="section-10">5.7 参数数量</h2>
+<p>需要学习的参数包括：</p>
+<ul>
+<li>输入层到隐层的 $dq$ 个权重。</li>
+<li>隐层到输出层的 $ql$ 个权重。</li>
+<li>隐层的 $q$ 个阈值。</li>
+<li>输出层的 $l$ 个阈值。</li>
+</ul>
+<p>总数为</p>
+<p>$$
+dq+ql+q+l
+=(d+l+1)q+l.
+$$</p>
+<h2 id="section-11">5.8 BP 误差逆传播</h2>
+<p>BP 是迭代学习算法。每轮先前向计算输出和误差，再依据链式法则把误差信号从输出层传回隐层，最后沿目标函数负梯度方向更新参数。</p>
+<p>设学习率为 $\eta$，基本梯度更新形式为</p>
+<p>$$
+\Delta p=-\eta\frac{\partial E_k}{\partial p}.
+$$</p>
+<h3 id="section-12">5.8.1 输出层误差信号</h3>
+<p>定义输出结点 $j$ 的误差信号</p>
+<p>$$
+g_j
+=-\frac{\partial E_k}{\partial\hat y_j^k}
+\frac{\partial\hat y_j^k}{\partial\beta_j}.
+$$</p>
+<p>因为</p>
+<p>$$
+-\frac{\partial E_k}{\partial\hat y_j^k}
+=y_j^k-\hat y_j^k
+$$</p>
+<p>且</p>
+<p>$$
+\frac{\partial\hat y_j^k}{\partial\beta_j}
+=\hat y_j^k(1-\hat y_j^k),
+$$</p>
+<p>所以</p>
+<p>$$
+g_j
+=\hat y_j^k(1-\hat y_j^k)
+(y_j^k-\hat y_j^k).
+$$</p>
+<p>权重 $w_{hj}$ 的链式求导为</p>
+<h1 id="section-13">$$
+\frac{\partial E_k}{\partial w_{hj}}</h1>
+<p>\frac{\partial E_k}{\partial\hat y_j^k}
+\frac{\partial\hat y_j^k}{\partial\beta_j}
+\frac{\partial\beta_j}{\partial w_{hj}}.
+$$</p>
+<p>由于</p>
+<p>$$
+\frac{\partial\beta_j}{\partial w_{hj}}=b_h,
+$$</p>
+<p>得到</p>
+<p>$$
+\Delta w_{hj}
+=\eta g_jb_h.
+$$</p>
+<p>输出层阈值更新为</p>
+<p>$$
+\Delta\theta_j=-\eta g_j.
+$$</p>
+<h3 id="section-14">5.8.2 隐层误差信号</h3>
+<p>隐层结点 $h$ 的误差信号为</p>
+<p>$$
+e_h
+=-\frac{\partial E_k}{\partial b_h}
+\frac{\partial b_h}{\partial\alpha_h}.
+$$</p>
+<p>误差通过所有输出结点反向汇总：</p>
+<p>$$
+-\frac{\partial E_k}{\partial b_h}
+=\sum_{j=1}^{l}w_{hj}g_j.
+$$</p>
+<p>又因为</p>
+<p>$$
+\frac{\partial b_h}{\partial\alpha_h}
+=b_h(1-b_h),
+$$</p>
+<p>所以</p>
+<p>$$
+e_h
+=b_h(1-b_h)
+\sum_{j=1}^{l}w_{hj}g_j.
+$$</p>
+<p>输入到隐层的权重更新为</p>
+<p>$$
+\Delta v_{ih}
+=\eta e_hx_i^k,
+$$</p>
+<p>隐层阈值更新为</p>
+<p>$$
+\Delta\gamma_h=-\eta e_h.
+$$</p>
+<h3 id="section-15">5.8.3 一轮训练顺序</h3>
+<ol>
+<li>前向计算 $\alpha_h,b_h,\beta_j,\hat y_j^k$。</li>
+<li>计算样本误差 $E_k$。</li>
+<li>计算输出层误差信号 $g_j$。</li>
+<li>计算隐层误差信号 $e_h$。</li>
+<li>更新 $w_{hj},\theta_j,v_{ih},\gamma_h$。</li>
+<li>对其他样本或下一轮迭代重复，直到满足停止条件。</li>
+</ol>
+<h2 id="section-16">5.9 学习率</h2>
+<ul>
+<li>源资料给出 $\eta\in(0,1)$，并强调不能过大或过小。</li>
+<li>学习率过大可能跨过极小值并导致振荡或发散。</li>
+<li>学习率过小会使收敛非常缓慢，也可能在有限训练时间内看不到有效进展。</li>
+<li>实际训练还可使用学习率衰减、自适应优化和批量梯度等方法；本节公式对应最基本的逐样本梯度更新。</li>
+</ul>
+<h2 id="section-17">5.10 易错点</h2>
+<ul>
+<li>前馈网络的“前馈”描述连接拓扑无环，不表示训练时没有误差反向传播。</li>
+<li>阈值形式是 $f(\text{加权和}-\theta)$；若改写为偏置 $b=-\theta$，更新符号也会相应变化。</li>
+<li>参数总数不能漏掉隐层和输出层阈值：$(d+l+1)q+l$。</li>
+<li>BP 的“反向”是通过链式法则计算梯度，不是把输入数据倒序传输。</li>
+<li>输出层误差信号 $g_j$ 包含 Sigmoid 导数和预测残差；隐层误差信号 $e_h$ 还要累加所有输出结点的反向贡献。</li>
+<li>$w_{hj}$ 与 $v_{ih}$ 的更新符号为正，是因为 $g_j,e_h$ 已把负梯度符号吸收进去；若直接定义普通梯度，公式会写成减号。</li>
+<li>万有逼近定理只保证存在足够大的网络，不保证训练算法一定找到、也不保证泛化好。</li>
+<li>Sigmoid 在饱和区导数很小，容易造成梯度消失。</li>
+</ul>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-3d652a68f786/">上一篇：决策树</a> · <a href="/en/notes/cs408-3815c94d76d9/">下一篇：支持向量机</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-b1364442cb67/">神经网络与后向传播</a></li>
+</ul>
+<h2 id="section-19">5.11 本节复盘</h2>
+<ul>
+<li>M-P 神经元先计算输入加权和，再减阈值并通过激活函数输出。</li>
+<li>阶跃函数不连续不可导；Sigmoid 平滑可导，且满足 $f'(x)=f(x)(1-f(x))$。</li>
+<li>多层前馈网络按输入层、隐层、输出层单向连接，不存在环。</li>
+<li>单隐层网络具有强大逼近能力，但隐层规模和可训练性仍需实际选择。</li>
+<li>含 $d$ 个输入、$q$ 个隐层结点、$l$ 个输出的网络共有 $(d+l+1)q+l$ 个权重与阈值参数。</li>
+<li>BP 先前向计算误差，再计算输出层信号 $g_j$ 和隐层信号 $e_h$，最后沿负梯度方向更新权重与阈值。</li>
+<li>学习率控制单步更新幅度，过大可能发散，过小则收敛缓慢。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-5a6e8759de60/index.html"><span>← Previous item</span><strong>Lecture 21：图的存储及其操作</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-5c0168fd0259/index.html"><span>Next item →</span><strong>Lecture 1：知识 - 计算机网络概述</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

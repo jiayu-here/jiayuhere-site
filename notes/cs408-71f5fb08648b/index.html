@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2026-10-17 四科教材覆盖度与补全记录 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：2026-10-17 四科教材覆盖度与补全记录。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 总览与说明">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="2026-10-17 四科教材覆盖度与补全记录 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：2026-10-17 四科教材覆盖度与补全记录。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-71f5fb08648b/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2026-10-17 四科教材覆盖度与补全记录 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：2026-10-17 四科教材覆盖度与补全记录。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "2026-10-17 四科教材覆盖度与补全记录",
+      "item": "https://www.jiayuhere.com/notes/cs408-71f5fb08648b/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-71f5fb08648b/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-71f5fb08648b/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-71f5fb08648b/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-71f5fb08648b/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-71f5fb08648b/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>2026-10-17 四科教材覆盖度与补全记录</h1><p class="article-lead">408 学习笔记：2026-10-17 四科教材覆盖度与补全记录。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-10-17">2026-10-17</time></span></span><span>约 100 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">总览与说明</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1. 覆盖口径与证据</a><a href="#section-2">2. 数据结构：43 份 PDF，397 页</a><a href="#section-3">3. 操作系统：13 份 PDF，307 页</a><a href="#section-4">4. 计算机组成原理：27 份 PDF，272 页，另有 1 篇教材补充</a><a href="#section-5">5. 计算机网络：36 个来源，含 32 份 PDF 共 135 页</a><a href="#section-6">6. 图示与不可数字化内容的处理</a><a href="#section-7">7. 教材目录反查与新增内容标识</a><a href="#section-8">8. 本轮发现与修复摘要</a><a href="#section-9">9. 自动与人工验收门槛</a><a href="#section-10">10. 2026-10-18 阶段性结构验收记录</a><a href="#section-11">11. 2026-10-18 独立内容复审增量</a><a href="#section-12">12. 2026-10-18 继续逐项复核</a><a href="#section-13">13. 2026-10-18 数据表示来源深入复核</a><a href="#section-14">14. 2026-10-19 四科继续深入复核</a><a href="#section-15">15. 2026-10-19 四科交叉复核增量</a><a href="#section-16">16. 2026-10-20 外排、I/O、总线与多播复核</a><a href="#section-17">17. 2026-10-20 散列、文件、接口与 VLAN 复核</a><a href="#section-18">18. 2026-10-20 插入排序、文件系统、指令周期与 SDN 复核</a><a href="#section-19">19. 2026-10-20 基础概念与进程、网络概述续审</a><a href="#section-20">20. 2026-10-20 线性表、虚拟内存、多处理器与网络分层续审</a><a href="#section-21">21. 2026-10-20 顺序表、存储层次与物理层续审</a><a href="#section-22">22. 2026-10-20 链式线性表代码与图示续审</a><a href="#section-23">23. 2026-10-21 处理器调度与上下文切换续审</a><a href="#section-24">24. 2026-10-21 栈、递归与矩阵压缩续审</a><a href="#section-25">25. 2026-10-21 队列与括号匹配续审</a><a href="#section-26">26. 2026-10-21 串与朴素匹配续审</a><a href="#section-27">27. 2026-10-21 KMP 原图与代码续审</a><a href="#section-28">28. 2026-10-21 树性质与遍历续审</a><a href="#section-29">29. 2026-10-21 树森林转换与应用续审</a><a href="#section-30">30. 2026-10-21 图基础、存储与遍历续审</a><a href="#section-31">31. 2026-10-21 图的经典应用续审</a><a href="#section-32">32. 2026-10-21 查找基本概念续审</a><a href="#section-33">33. 2026-10-21 顺序、折半与分块查找续审</a><a href="#section-34">34. 2026-10-21 树形查找续审</a><a href="#section-35">35. 2026-10-21 B 树与 B+ 树续审</a><a href="#section-36">36. 2026-10-21 散列查找续审</a><a href="#section-37">37. 2026-10-21 排序基础与内部排序续审</a><a href="#section-38">38. 2026-10-21 数据结构代码专题续审</a><a href="#section-39">39. 2026-10-21 栈队列、查找与图代码续审</a><a href="#section-40">40. 2026-10-21 二叉树代码专题续审</a><a href="#section-41">41. 2026-10-21 内存管理基础续审</a><a href="#section-42">42. 2026-10-21 虚拟内存管理续审</a><a href="#section-43">43. 2026-10-21 文件结构续审</a><a href="#section-44">44. 2026-10-21 目录与链接续审</a><a href="#section-45">45. 2026-10-21 文件系统结构续审</a><a href="#section-46">46. 2026-10-21 性能指标与 Cache 续审</a><a href="#section-47">47. 2026-10-21 存储器硬件续审</a><a href="#section-48">48. 2026-10-21 主存储器芯片扩展续审</a><a href="#section-49">49. 2026-10-21 指令系统概念续审</a><a href="#section-50">50. 2026-10-21 寻址、指令格式与 CPU 结构续审</a><a href="#section-51">51. 2026-10-21 指令执行与数据通路续审</a><a href="#section-52">52. 2026-10-21 控制器续审</a><a href="#section-53">53. 2026-10-21 指令流水线续审</a><a href="#section-54">54. 2026-10-21 多处理器续审</a><a href="#section-55">55. 2026-10-21 总线续审</a><a href="#section-56">56. 2026-10-21 中断续审</a><a href="#section-57">57. 2026-10-21 外部设备续审</a><a href="#section-58">58. 2026-10-21 I/O 接口续审</a><a href="#section-59">59. 2026-10-21 I/O 方式续审</a><a href="#section-60">60. 2026-10-21 网络体系结构与物理层前半续审</a><a href="#section-61">61. 2026-10-21 信道复用与物理层题型续审</a><a href="#section-62">62. 2026-10-21 数据链路层题型续审</a><a href="#section-63">63. 2026-10-21 网络层题型续审</a><a href="#section-64">64. 2026-10-21 运输层与应用层题型续审</a><a href="#section-65">65. 2026-10-22 跨篇概念一致性续审</a><a href="#section-66">相关入口</a></nav></details><div class="prose"><blockquote>
+<p><strong>ABSTRACT</strong> · 记录目的
+本记录回答三件事：四科原始资料是否都有对应笔记；各章应从哪里进入；原资料之外补了什么、图示怎样处理。这里把公开考纲目录只作为防止遗漏基础主题的最低反查线，内容范围仍以完整表达四科教材体系和原始资料为准，不以应试条目为上限。</p>
+</blockquote>
+<h2 id="section-1">1. 覆盖口径与证据</h2>
+<p>四科共有 <strong>119 个正式来源</strong>：115 份 PDF、3 张 PNG 知识图和 1 份 Excalidraw Markdown 原始源。115 份 PDF 共 <strong>1,111 页</strong>，均经过 MarkItDown 0.1.6 正文解析，并留有渲染页面供公式、表格、波形、结构图和纯图片页复核。来源映射、页面可追溯与逐项语义无遗漏是不同层级的结论；后者仍需持续对照原页。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>科目</th>
+<th style="text-align:right">正式来源</th>
+<th>来源构成</th>
+<th style="text-align:right">PDF 页数</th>
+<th style="text-align:right">本地图片</th>
+<th style="text-align:right">Mermaid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据结构</td>
+<td style="text-align:right">43</td>
+<td>43 PDF</td>
+<td style="text-align:right">397</td>
+<td style="text-align:right">144</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td style="text-align:right">13</td>
+<td>13 PDF</td>
+<td style="text-align:right">307</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td>计算机组成原理</td>
+<td style="text-align:right">27</td>
+<td>27 PDF</td>
+<td style="text-align:right">272</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">15</td>
+</tr>
+<tr>
+<td>计算机网络</td>
+<td style="text-align:right">36</td>
+<td>32 PDF、3 PNG、1 Markdown</td>
+<td style="text-align:right">135</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td style="text-align:right"><strong>119</strong></td>
+<td><strong>115 PDF、3 PNG、1 Markdown</strong></td>
+<td style="text-align:right"><strong>1,111</strong></td>
+<td style="text-align:right"><strong>153</strong></td>
+<td style="text-align:right"><strong>47</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>原来源与正式笔记按各篇 YAML 的 <code>source</code> 字段一一对应；115 份 PDF 的完整路径映射同时记录在 <a href="/assets/408/pdf-rewrite-index.csv">PDF 重写清单</a> 中。没有用一篇笔记冒充多个来源，也没有把原资料之外的内容伪装成原文。</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> · “完整”的准确含义
+这里的结构性完成是：119 个既有四科来源全部建立对应关系，并以常见教材目录做了跨章缺漏反查。这并不证明每个例题、图示细节已零遗漏；独立复审仍发现过具体缺口，见第 11、12 节。不同作者、不同版次教材仍可能采用不同章节边界或扩展专题，因此本记录不把“通过一个考纲列表”误写成“穷尽世界上所有教材版本”。</p>
+</blockquote>
+<h2 id="section-2">2. 数据结构：43 份 PDF，397 页</h2>
+<p>总入口：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>教材部分</th>
+<th>来源与页数</th>
+<th>主要入口</th>
+<th>已表达的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>绪论</td>
+<td>2 PDF / 5 页</td>
+<td><a href="/notes/cs408-1f1367236d2a/">基本概念</a>、<a href="/notes/cs408-01ad73094eab/">算法评价</a></td>
+<td>数据对象、逻辑/存储结构、ADT、时间与空间复杂度、$O/\Omega/\Theta$</td>
+</tr>
+<tr>
+<td>线性表</td>
+<td>4 PDF / 25 页</td>
+<td><a href="/notes/cs408-550507fbf66d/">定义与操作</a>、<a href="/notes/cs408-55bc6e80698d/">链式实现</a></td>
+<td>顺序表、单/双/循环/静态链表、操作边界、结构选型</td>
+</tr>
+<tr>
+<td>栈、队列、数组</td>
+<td>6 PDF / 28 页</td>
+<td><a href="/notes/cs408-a732e9dcf77f/">栈</a>、<a href="/notes/cs408-113c1bdbdcb7/">队列</a>、<a href="/notes/cs408-36ff99353ad8/">数组与压缩存储</a></td>
+<td>栈/队列实现与应用、表达式、递归、矩阵压缩、任意维数组地址</td>
+</tr>
+<tr>
+<td>串</td>
+<td>2 PDF / 17 页</td>
+<td><a href="/notes/cs408-1b5515efe82c/">串</a>、<a href="/notes/cs408-2eed9d5baec0/">KMP</a></td>
+<td>串存储、朴素匹配、前后缀、next/nextval 及下标口径</td>
+</tr>
+<tr>
+<td>树与二叉树</td>
+<td>5 PDF / 51 页</td>
+<td><a href="/notes/cs408-d3964962cec4/">树与二叉树</a>、<a href="/notes/cs408-9128ab174798/">遍历与重建</a>、<a href="/notes/cs408-518c0a668e31/">树的应用</a></td>
+<td>性质、遍历、线索化、树/森林转换、BST、AVL、Huffman、并查集、堆与优先队列</td>
+</tr>
+<tr>
+<td>图</td>
+<td>4 PDF / 38 页</td>
+<td><a href="/notes/cs408-312cfdf36075/">图基本概念</a>、<a href="/notes/cs408-a1c21fbceeaf/">图的经典应用</a></td>
+<td>存储、BFS/DFS、MST、最短路、拓扑排序、关键路径及适用前提</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>5 PDF / 61 页</td>
+<td><a href="/notes/cs408-c58d699dca6a/">查找概念</a>、<a href="/notes/cs408-1fb21507ad5e/">树形查找</a>、<a href="/notes/cs408-53073a86de3c/">散列查找</a></td>
+<td>ASL、折半/分块、BST/AVL/红黑树、B/B+ 树、散列与结构选型</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>7 PDF / 43 页</td>
+<td><a href="/notes/cs408-2e90359dd8ec/">排序概念</a>、<a href="/notes/cs408-160888f26a5f/">排序总结</a></td>
+<td>插入、希尔、交换、选择、堆、归并、基数、外部排序、稳定性与复杂度边界</td>
+</tr>
+<tr>
+<td>代码专题</td>
+<td>8 PDF / 129 页</td>
+<td><a href="/notes/cs408-424a656729a9/">重点算法汇总</a>及顺序表、链表、栈队列、二叉树、查找、图、排序专题</td>
+<td>97 个 C++17 代码块、题意前提、空结构/下标/重复值/内存边界与回归测试</td>
+</tr>
+</tbody>
+</table></div>
+<p>本轮特别复核了 KMP 的下标约定、遍历序列重建的唯一性前提、树与森林转换、Huffman/WPL、图算法的权值和负边界、红黑树与 B/B+ 树、散列探测覆盖、排序稳定性和最好/最坏复杂度。遍历重建已明确限定“关键字互异、结点集合一致”；单条遍历只有在携带完整空指针标记等额外信息时才可能唯一描述树；前缀/后缀表达式的无括号唯一性也已注明运算符元数和词法分隔前提。</p>
+<h2 id="section-3">3. 操作系统：13 份 PDF，307 页</h2>
+<p>总入口：<a href="/notes/cs408-b2e9e261e13a/">操作系统导航</a>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>教材部分</th>
+<th>来源与页数</th>
+<th>主要入口</th>
+<th>已表达的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统概述</td>
+<td>1 PDF / 30 页</td>
+<td><a href="/notes/cs408-20d7b070155d/">操作系统概述</a></td>
+<td>系统目标、特征、运行机制、内核、异常/中断、系统调用、体系结构</td>
+</tr>
+<tr>
+<td>进程与线程</td>
+<td>4 PDF / 110 页</td>
+<td><a href="/notes/cs408-bc90db5fb862/">进程与线程</a>、<a href="/notes/cs408-8b0d4ecd05ad/">调度</a>、<a href="/notes/cs408-a3a4d665ca47/">同步互斥</a>、<a href="/notes/cs408-9fd9ee90b095/">死锁</a></td>
+<td>PCB/状态、线程模型、调度、临界区、信号量/管程、死锁条件与处理</td>
+</tr>
+<tr>
+<td>内存管理</td>
+<td>2 PDF / 60 页</td>
+<td><a href="/notes/cs408-6e190f5755e2/">内存管理基础</a>、<a href="/notes/cs408-dd853a0ed1a2/">虚拟内存管理</a></td>
+<td>连续/非连续分配、分页/分段/段页式、页表/TLB、缺页、置换、工作集、映射文件、EAT</td>
+</tr>
+<tr>
+<td>文件管理</td>
+<td>3 PDF / 61 页</td>
+<td><a href="/notes/cs408-01376a76f77e/">文件</a>、<a href="/notes/cs408-5cc130a6e9c2/">目录</a>、<a href="/notes/cs408-0f7e7a7a0522/">文件系统</a></td>
+<td>文件逻辑/物理结构、目录、FCB/inode、分配、空闲空间、挂载与访问路径</td>
+</tr>
+<tr>
+<td>I/O 管理</td>
+<td>3 PDF / 46 页</td>
+<td><a href="/notes/cs408-39b45084fd1d/">I/O 概述</a>、<a href="/notes/cs408-69c0d725657f/">设备独立性软件</a>、<a href="/notes/cs408-c6142ca80d5a/">磁盘管理</a></td>
+<td>I/O 层次、控制方式、缓冲、设备分配、SPOOLing、磁盘调度与可靠性</td>
+</tr>
+</tbody>
+</table></div>
+<p>虚拟内存篇已经补清虚拟地址容量口径、TLB 中访问/修改位的实现差异、工作集窗口、CLOCK 指针、NRU 与 CLOCK 的区别、Belady 异常、共享/私有映射和有效访问时间。设备独立性篇给出有限 $n$ 块单/双缓冲的启动与排空公式，并把“安全/静态设备分配避免死锁”限定到相应设备资源模型，不能推出整个系统绝无死锁。</p>
+<h2 id="section-4">4. 计算机组成原理：27 份 PDF，272 页，另有 1 篇教材补充</h2>
+<p>总入口：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>教材部分</th>
+<th>来源与页数</th>
+<th>主要入口</th>
+<th>已表达的主线</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统概述</td>
+<td>2 PDF / 12 页</td>
+<td><a href="/notes/cs408-f40d324810a1/"> 系统层次</a>、<a href="/notes/cs408-c4914b00ec31/"> 性能指标</a></td>
+<td>软硬件层次、指令执行主线、吞吐/响应、CPI、时钟与性能公式</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据表示与运算</td>
+<td>4 PDF / 45 页</td>
+<td><a href="/notes/cs408-47193abe2561/"> 数制编码</a>、<a href="/notes/cs408-bb3c8bf8e273/"> 运算电路</a></td>
+<td>编码、定点/浮点、补码、标志位、加减乘除、溢出、逻辑电路</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>存储器层次</td>
+<td>4 PDF / 56 页</td>
+<td><a href="/notes/cs408-bfaf5bd149c2/"> 层次与单位</a>、<a href="/notes/cs408-d5113c15e970/"> Cache</a>、<a href="/notes/cs408-5865bd37ecaf/"> 虚拟存储器补充</a></td>
+<td>存储器/主存、芯片扩展、DRAM、交叉存储、Cache 映射与替换、RAID、页表/TLB/Cache 协作</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指令系统</td>
+<td>6 PDF / 43 页</td>
+<td><a href="/notes/cs408-e93053729cfd/"> 指令系统概念</a>、<a href="/notes/cs408-3150a4e10306/"> 寻址方式</a>、<a href="/notes/cs408-8a0212571862/"> 机器级代码</a></td>
+<td>ISA、指令格式、寻址、对齐与端序、CISC/RISC、汇编、调用约定与栈帧</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>中央处理器</td>
+<td>6 PDF / 58 页</td>
+<td><a href="/notes/cs408-8aa8809e8e26/"> CPU</a>、<a href="/notes/cs408-c60c78e602f8/"> 控制器</a>、<a href="/notes/cs408-ba3d460787c2/"> 流水线</a></td>
+<td>数据通路、指令周期、硬布线/微程序控制、流水线冒险、异常、多发与多处理器</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>总线与 I/O</td>
+<td>5 PDF / 58 页</td>
+<td><a href="/notes/cs408-310416bce0d2/"> 总线</a>、<a href="/notes/cs408-a58dbd00622a/"> 中断</a>、<a href="/notes/cs408-914a13597252/"> I/O 方式</a></td>
+<td>总线事务/定时、外设、I/O 接口、查询/中断/DMA/通道及计算</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>本轮复核并修正了译码器输出约束：应为 $m\le 2^n$，不能无条件增加 $n\le m$；单/多/半字长只描述指令字长与机器字长的关系，取指访存次数还受存储字长、总线和 Cache 影响。中断篇明确区分外部中断、内部异常和系统调用，区分响应优先级与处理优先级，并把 PC 断点、NMI、硬件自动保存和软件现场保存限定到具体 ISA/题设。</p>
+<p><a href="/notes/cs408-5865bd37ecaf/">教材补充：虚拟存储器</a>不是 27 份 PDF 中的内容，已在 YAML 与正文中明确标明“教材补充”。它补齐页式虚拟存储器、PTE、多级页表、TLB、缺页精确异常、TLB/页表/Cache 路径、段式与段页式以及 EAT，避免组成原理的存储层次在 Cache 后直接跳到操作系统。</p>
+<h2 id="section-5">5. 计算机网络：36 个来源，含 32 份 PDF 共 135 页</h2>
+<p>总入口：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>教材部分</th>
+<th>正式来源</th>
+<th style="text-align:right">PDF 页数</th>
+<th>主要入口</th>
+<th>已表达的主线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>体系结构</td>
+<td>2 PDF</td>
+<td style="text-align:right">21</td>
+<td><a href="/notes/cs408-5c0168fd0259/">网络概述</a>、<a href="/notes/cs408-9af3b667a6a2/">体系结构</a></td>
+<td>交换、性能指标、分层、协议/服务/接口、OSI 与 TCP/IP</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>12 PDF</td>
+<td style="text-align:right">46</td>
+<td><a href="/notes/cs408-47eb3dfcdc83/">物理层概述</a>、<a href="/notes/cs408-e503e71568f6/">编码与调制</a>、<a href="/notes/cs408-1c2f720beeaf/">检错纠错</a></td>
+<td>媒体、传输方式、编码/调制、奈氏/香农、复用、传输时延、CRC/海明/校验和</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>1 PNG 知识图 + 5 PDF</td>
+<td style="text-align:right">17</td>
+<td><a href="/notes/cs408-cd234cc86adc/">数据链路层总纲</a></td>
+<td>成帧、差错与流量控制、停止等待/GBN/SR、介质访问、以太网、VLAN、PPP、802.11</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>1 Excalidraw Markdown + 8 PDF</td>
+<td style="text-align:right">32</td>
+<td><a href="/notes/cs408-fe8e22cc2489/">网络层总纲</a>、<a href="/notes/cs408-e843016612d3/">IPv4 与 VLSM</a>、<a href="/notes/cs408-5064ace109f8/">路由协议</a></td>
+<td>IPv4/CIDR/VLSM、ARP/ICMP/DHCP、转发、RIP/OSPF/BGP、NAT/VPN、组播、IPv6、移动 IP、SDN</td>
+</tr>
+<tr>
+<td>运输层</td>
+<td>1 PNG 知识图 + 2 PDF</td>
+<td style="text-align:right">9</td>
+<td><a href="/notes/cs408-59e41ea74a00/">运输层总纲</a>、<a href="/notes/cs408-efc7c4d94382/">连接控制</a></td>
+<td>UDP/TCP 首部、序号与 ACK、可靠传输、流量/拥塞控制、握手/挥手、状态与计时器</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>1 PNG 知识图 + 3 PDF</td>
+<td style="text-align:right">10</td>
+<td><a href="/notes/cs408-a8acba740351/">应用层总纲</a>、<a href="/notes/cs408-b9c8f13ec3e6/">DNS 与 HTTP</a>、<a href="/notes/cs408-1aaca18e58e7/">SNMP 补充</a></td>
+<td>客户/服务器与 P2P、DHCP、DNS、FTP、邮件、HTTP、Telnet、SNMP 与网络管理</td>
+</tr>
+</tbody>
+</table></div>
+<p>三张超大知识图均按区域精读，不能可靠数字化的整体结构保留原图入口；图中可表达的节点、分支、端口、状态和计算规则则改写成可搜索的 Markdown、表格、公式或 Mermaid。网络层 Excalidraw 的文本节点也独立抽取、反查，没有只看导出的缩略图。</p>
+<p>高风险计算已重新复算，包括反码校验和 <code>0xE083</code>、CRC、VLSM、最长前缀匹配、RIP 传播时序、IPv4 分片、IPv6 压缩、移动 IP、HTTP/DNS/DHCP 时延及 TCP 序号。TCP 已明确：确认号只有在 <code>ACK=1</code> 时才有效；累计 ACK 只确认连续字节，不能跨越接收缺口；SACK 只能附加报告已收到的非连续块，不能替代累计 ACK。</p>
+<p><a href="/notes/cs408-1aaca18e58e7/">教材补充：SNMP 与网络管理</a>补齐管理站/代理、MIB、SMI、ASN.1/BER、轮询与 Trap/Inform、UDP 161/162 和安全边界；其 YAML 与正文都明确标注为原来源之外的教材补充。</p>
+<h2 id="section-6">6. 图示与不可数字化内容的处理</h2>
+<p>四科现有 153 张本地图片全部能解码、全部被笔记引用一次，且 153 个文件哈希互不重复：</p>
+<ul>
+<li>数据结构保留 144 张确有结构信息的树、图、链表、排序过程和代码题图示；每张图附近都有文字化读图说明。</li>
+<li>网络保留 3 张原始知识图、编码/调制笔记中的 3 张波形或星座图，以及编码分析题型中从原 PDF 裁取的 3 张必要波形图。</li>
+<li>操作系统和组成原理能够无损表达的流程、数据通路和状态关系优先改写为 19 个 Mermaid；网络与数据结构另有 28 个 Mermaid。</li>
+<li>PDF 中的装饰图、重复图和已被文字/公式完整覆盖的截图不机械重复粘贴；波形、结构布局、复杂树图等纯文本难以可靠替代的内容才保留清晰图片，并同时给出可检索说明。</li>
+</ul>
+<p>因此，“PDF 里的图片”并未被统一丢弃或统一截图：已有页面渲染与图片去向记录；对已核清的信息，按是否可无损数字化选择 Markdown、表格、公式、Mermaid 或原图。视觉记录本身不等于图中每个题设都已准确转写，仍须逐项抽核。</p>
+<h2 id="section-7">7. 教材目录反查与新增内容标识</h2>
+<p>在 119 个原来源一一映射之外，又用公开的 2027 计算机学科专业基础大纲目录反查基础主题：数据结构 38 组、操作系统 54 组、组成原理 50 组、计算机网络 68 组均能定位到具体笔记。参考：<a href="https://www.hep.com.cn/book/show/2099763850751057921">高等教育出版社书目</a>、<a href="https://zhenti.beokayy.club/outline">公开目录转写</a>。这一步只用于发现明显空洞，不作为内容上限，也不替代原书逐页复核。</p>
+<p>原来源之外的新增知识采用两种明确标识：</p>
+<ol>
+<li>在原笔记中补入的边界、反例或教材主题，段首标注“教材补充”或“教材补充与纠错”。</li>
+<li>跨篇新增主题单独建为 <code>教材补充：……</code>，并在 YAML 中写入 <code>basis</code> 与 <code>supplement: true</code>。当前两篇为虚拟存储器、SNMP 与网络管理。</li>
+</ol>
+<h2 id="section-8">8. 本轮发现与修复摘要</h2>
+<ul>
+<li>数据结构：补严遍历重建唯一性、前缀/后缀表达式、KMP、树/森林、图算法、查找结构和排序边界。</li>
+<li>操作系统：补严虚拟地址容量、TLB 状态维护、工作集/CLOCK/NRU、映射文件、EAT、单/双缓冲有限批次与设备死锁结论范围。</li>
+<li>组成原理：纠正译码器约束、指令字长与取指次数混淆、中断/异常/系统调用边界，并新增完整虚拟存储器硬件链路。</li>
+<li>计算机网络：复算校验、路由、VLSM、组播、端口和 TCP 序号；补严累计 ACK/SACK 边界与完整 SNMP 体系。</li>
+</ul>
+<h2 id="section-9">9. 自动与人工验收门槛</h2>
+<p>以下是结构和内容两类验收门槛；前者可自动复跑，后者须按具体来源人工核对，不能由 <code>hard_failures=0</code> 替代：</p>
+<ol>
+<li>119 个四科来源、115 份 PDF 和 1,111 个 PDF 页面都能回溯到笔记与视觉记录；</li>
+<li>网络三张知识图和一份 Excalidraw 原始源完成文本节点/区域复核；</li>
+<li>已发现的知识错误、隐含前提和例外得到修正；对尚未独立逐项复核的内容不作“绝无错误”保证；</li>
+<li>全库结构、乱码、占位符、公式、LaTeX、链接、锚点、来源、导航和图片审计均为 0；</li>
+<li>内容稳定后重新计算四科 115 份 PDF 对应笔记的 Markdown SHA-256；全库 Manifest 另含复试科目的 31 份 PDF，合计 146 份，须整体保持 <code>hard_failures=0</code>。</li>
+</ol>
+<h2 id="section-10">10. 2026-10-18 阶段性结构验收记录</h2>
+<p>截至当时，来源映射、页面渲染记录、全库结构与 Manifest 哈希检查通过；当时复核到的以下确定性问题也已修正。此处保留该轮结果作为历史记录，不将其解释为四科知识已完成穷尽式逐页审查。后续仍发现并修正了例题遗漏和题目转写错误，见第 11、12 节。</p>
+<ul>
+<li>串：KMP 避免的是主串下标整体回退和已匹配前缀的重复匹配，不代表同一主串位置绝不再与其他模式字符比较；<code>next[2]</code> 只在模式长度至少为 2 时存在；朴素匹配与 KMP 都补入空模式及 $m&gt;n$ 的接口边界。</li>
+<li>数组、树与图：三对角矩阵的 $3n-2$ 只适用于 $n\ge2$；孩子兄弟表示中树根没有的是右兄弟；BST 的单次最好查找与等概率平均查找不再混写；DFS 连通分量结论明确指外层启动次数。</li>
+<li>查找与排序：标准 B 树阶数限定为 $m\ge3$；负关键字取模归一化；大根堆右孩子、第二大元素与 Top-K 参数边界；外部排序整体稳定所需的初始段和等键比较规则均已写明。</li>
+<li>网络：PPP 零比特填充例题删除两处填充位后的 20 bit 原串已复算纠正；OSPF 的一致拓扑限定为同一区域链路状态数据库已同步且协议收敛，不能外推到任意区域或收敛瞬间。</li>
+</ul>
+<p>当时全库（四科加复试科目）的自动审计记录：162 个 Markdown、150 篇正式笔记、150 个来源、150 张唯一图片、55 个 Mermaid；146 份 PDF、1,365 页的视觉记录均标为 <code>visual_pass</code>。结构、控制字符/乱码、占位、Python 语法、公式与 LaTeX、Wiki 链接、歧义、锚点、来源、导航、图片和 Manifest 问题均为 0。全部 146 条 Markdown SHA-256 在当时正文状态下刷新，并连续复跑两次得到 <code>hard_failures=0</code>。这些数值是全库结构检查结果，不是四科 115 份 PDF 的单独计数，也不能证明语义零遗漏。</p>
+<h2 id="section-11">11. 2026-10-18 独立内容复审增量</h2>
+<p>本轮没有把上述自动审计结论当作知识准确性的证明。另用 MarkItDown 0.1.6 重新解析 B 树、图的经典应用、处理器调度、内存管理基础、整数表示、Cache、网络转发、TCP 连接控制八份来源，并查看 Cache 与 TCP 的渲染页；对每页文字量偏少的操作系统同步/内存管理笔记再次反查源主题。复核结论只覆盖这些独立抽核的内容，不等同于本轮重新逐页审完全部 1,111 页四科来源。</p>
+<ul>
+<li>数据结构：Dijkstra 二叉堆实现的 $O((|V|+|E|)\log|V|)$ 不可对含大量孤立顶点的稀疏图无条件简写为 $O(|E|\log|V|)$，已补明省略 $|V|$ 项的条件。</li>
+<li>操作系统：单一基址寄存器实现的动态重定位并不能独自提供非连续分配或按需部分装入；内存管理基础篇已区分这些机制，并补回原资料提到的覆盖与交换区别、空闲分区回收的四种相邻情况。</li>
+<li>计算机组成原理：整数转换篇将“固定补码截断/重解释”的题设模型与 C 语言有符号越界转换分开；Cache 篇对照原 PDF 第 15–16 页补入 RA、FIFO、LRU、LFU 的 12 次访问命中位置、被替换块和 LFU 平局规则，FIFO/LRU/LFU 轨迹已独立复算。</li>
+<li>计算机网络：TCP 连接控制篇区分 $\min(cwnd,rwnd)$ 给出的在途数据上限与扣除未确认数据后还能继续发送的字节数；连接时延与纯 ACK 序号另与原 PDF 渲染页核对。网络层转发篇补严 TTL 到零时 ICMP 差错的协议例外，并把题目中特定的“映射为 R2 出接口地址”与一般 NAT 可使用公网地址池的情况区分。</li>
+</ul>
+<p>上述正文变动所对应的 6 条 Manifest <code>md_sha256</code> 已刷新，其他 Manifest 字段保持原值。全库审计再次得到 <code>hard_failures=0</code>。这一结果证明当前结构与追溯关系通过检查；关于教材知识“绝无遗漏或错误”，仍不应由单次自动审计或有限抽核推断。</p>
+<h2 id="section-12">12. 2026-10-18 继续逐项复核</h2>
+<p>本次继续用 MarkItDown 0.1.6 对照来源文字，并查看易丢信息的原 PDF 页面；“原题出现过的年份”只用于筛查候选，不把年份未写入笔记直接判作知识遗漏。确认并补正的内容如下：</p>
+<ul>
+<li>组成原理主存篇补回原 PDF 的 DRAM 组装容量与四片芯片地址分段例子；端序/对齐篇则从第 2 页恢复 2012 年结构体例题的代码、选项和逐地址推导：$273=0x00000111$，小端地址 <code>0xC008</code> 中为 <code>0x11</code>，<code>record.c</code> 从 <code>0xC00E</code> 开始。单有通用对齐规则不能代替原题的全部条件。</li>
+<li>网络检错纠错篇补回 IPv4 首部校验和完整例题，十个 16 位字独立复算得到 <code>0xEA5C</code>；IP/UDP/TCP 篇把“IPv6 UDP 校验和绝对必须使用”改为默认规则及特定隧道外层报文的受限例外。</li>
+<li>802.11 CSMA/CA 篇对照六页原稿，把“所有帧逐帧 ACK”的笼统说法限定为典型普通单播数据交换，并注明组播/广播、块确认及重试上限；数据链路层知识图笔记也同步限定了这一边界。原题 CTS 中的 NAV 仍为 $354,\mu s$。</li>
+<li>IPv6 篇对照原 PDF 第 2 页纠正题目转写：原题第 II 项是“IPv6 支持<strong>任播</strong>”，不是“支持多播”；另补任播只送达共享地址的接口之一、与多播不同。</li>
+</ul>
+<p>另外抽核了数据结构特殊矩阵六页的压缩映射图、操作系统磁盘管理的调度与地址例题，以及组成原理性能、ISA、显存带宽等年份标记候选。三对角矩阵顺/逆映射在 $n=1\ldots12$ 的 210 个带状位置逐一复算，均相符；磁盘 SSTF 的 41 磁道、SCAN 的 325 磁道和 C-SCAN 的 788 磁道例题也与原条件一致。操作系统目录篇则补明硬链接数归零后仍有打开引用时不能立即回收文件。这些结果只说明上述抽核范围，不能推出其余页面零遗漏。</p>
+<p>本次修改的正式笔记对应 Manifest 哈希已更新。全库自动检查用于保证链接、来源、图片及哈希等结构关系；语义完整度仍按来源逐项审查，发现新问题再记录并修正。</p>
+<h2 id="section-13">13. 2026-10-18 数据表示来源深入复核</h2>
+<p>重新通过 MarkItDown 0.1.6 解析组成原理 P060，并逐页查看 11 页 PDF。正式笔记已补回第 3 页的 2012 年最大正整数与 2018 年最小正规格化正数两道完整题目及推导；补齐第 5 页双精度规格化范围与非规格化下界、第 7 页二进制小数换算例。第 1 页把 IEEE 单精度偏置写为 128，而后页及标准均为 127，笔记明确标注该源稿误印。此轮只说明 P060 的对照结果，四科剩余内容仍需继续逐项核对。</p>
+<p>同样重新解析并查看 P059 数制与编码 9 页。正式笔记补回第 3 页 $1111000010.01101_2$ 转八进制的分组图例、第 4 页 $123_{10}$ 除 2 取余和 $0.6875_{10}$ 乘 2 取整的逐步运算、第 8 页双符号位变形补码的位数与范围，并明确普通整数移码与 IEEE 754 阶码采用不同偏置。此轮两篇笔记的 Manifest 哈希均已刷新，自动检查仅用于结构一致性，不能代替全科语义审查。</p>
+<p>继续通过 MarkItDown 0.1.6 解析并查看 P061 运算方法和运算电路 21 页：补写第 2–5 页的 2-4 译码器与全加器进位关系、第 10 页 8 位补码 $15\pm24$、第 15 页 3 位补码 <code>101 - 011</code> 的有符号溢出、第 16 页定点小数乘法和 Booth 相邻位重编码、第 20 页普通整数除法与 GF(2) 模 2 除法的独立图例。原笔记已有的 $255\div15=17$ 商溢出例保留。此篇的 Manifest 哈希也已刷新；仍不把这些抽核推断为四科穷尽式零遗漏。</p>
+<p>另核对网络 P090 信道极限容量 6 页与 P105 路由协议 10 页。本轮没有确认需要修改的错误：P090 的奈奎斯特/香农公式、分贝换算及 2009/2011/2014/2016 数值题均在笔记中；其 MarkItDown 输出仅约 507 字，原稿大量信息在页面图表中，因此以渲染页核对为主。P105 的 2016/2021/2024 路由题、RIP 两网络传播时间、OSPF 代价和 BGP 报文/选路在现有笔记中均有对应表述。此结论只覆盖本轮检查范围，未改这两篇正文和清单哈希。</p>
+<p>操作系统 P056 磁盘管理重新解析并查看 9 页，补回第 2–3 页磁头移动性和盘片可换性两种独立分类、第 3 页 2012 年 I/O 性能优化措施。原 PDF 第 5 页把标准 SCAN/C-SCAN 也列为近邻请求可令磁臂长期粘着；按固定端点、扫描方向不重置且每次服务有限的标准定义，这一推论不成立，正式笔记已明确标出源稿表述边界。先前复算的 41、325、788 磁道例题未变；对应 Manifest 哈希已刷新。</p>
+<p>数据结构 P025 顺序查找和折半查找重新解析并查看 9 页。原有判定树与分块索引图片仍可用；正文补出第 8 页 14 个元素、5 个索引块的查找 27 实例，并把第 8–9 页 $s=\sqrt n$ 的最佳块长公式限定为连续变量下界：真实等长分块必须选整数且满足 $n=bs$。对应 Manifest 哈希已刷新，未改已有图片附件。</p>
+<h2 id="section-14">14. 2026-10-19 四科继续深入复核</h2>
+<p>这次重新通过 MarkItDown 解析并查看了四科五份原 PDF，共 112 页：数据结构 P026（34 页）、操作系统 P047（40 页）与 P048（11 页）、组成原理 P077（22 页）和计算机网络 P099（5 页）。逐页查看页面或拼页图，重点核对 MarkItDown 难以提取的树形、时序表和题目条件。此增量是五篇的独立内容复核，不代表 115 份 PDF、1,111 页都已再次逐项审完，也不把自动检查通过解释成知识零遗漏。</p>
+<ul>
+<li>P026 树形查找：原 PDF 第 11 页的 2021 年 AVL 插入题未在正文表达，现补出原树、插入 $23$ 后的 RL 双旋、最终根 $25$ 及中序校验。源稿第 16 页的 RR 口诀误写为“左孩子”，已有笔记的 RR 方向为右孩子、左单旋，本次没有照抄误句。现有红黑树 16 个互异键的长序列结果另核过 BST 次序、红红约束与各路径黑高；原序列最后一个 $18$ 为重复键，仍按正文约定拒绝插入。</li>
+<li>P047 同步与互斥：对照 40 页来源后，补回第 25–27 页的单槽水果盘两类生产者/消费者关系与三个信号量的完整配对，指出只在这一单槽模型下可不另设互斥量；补回第 36–37 页的碗与筷子两类资源、同时就餐人数上界及一次性分配原则。第 39 页源稿用 <code>if</code> 表达管程条件等待，现注明常见 Mesa 式条件变量须用 <code>while</code> 醒后重检，避免将强交接语义下的伪代码误用到一般实现。</li>
+<li>P048 死锁：对照了四个必要条件、预防/避免/检测/解除、银行家算法的 $Available=(3,3,2)$ 例表和图化简流程；本轮未确认需要修改的正文错误。原资料 2015/2019 年判断题所体现的策略区别及“银行家算法不直接检测死锁”已被正文概念覆盖。</li>
+<li>P077 指令流水线：原 PDF 第 22 页的四指令无转发时序补齐为 <code>I3</code> 在第 7 周期 ID、<code>I4</code> 在第 7 周期 IF 和第 11 周期 ID，明确 <code>I3→I4</code> 对 <code>R2</code> 的 RAW 依赖与前端寄存器占用是两个不同的阻塞原因。第 10–11 页另一组 <code>add/load/add/store</code> 原例也补回，区分 <code>I2→I3</code> 的寄存器 RAW 和 <code>I2、I4</code> 同地址但在按序流水线中不构成本题寄存器 RAW 冒险。</li>
+<li>P099 信道利用率：逐页核对 2012、题图标为 2014 但 PDF 标签写 2015、2015、2018、2020、2023 六道题的条件和答案；独立复算 $W_{2012}=11$、2014 题利用率约 $0.7994$、2015 题 $W=8$、2018 题 $800,bit$、2020 题 $40%$，本轮无需改正文。</li>
+</ul>
+<p>已刷新 P026、P047、P077 三条 Manifest 的 Markdown SHA-256；P048、P099 未改。全库结构、来源、链接、图片及 Manifest 检查重新运行得到 <code>hard_failures=0</code>。这只证明当前文件关系和格式检查通过，内容准确性仍以原资料逐项复核结论为限。</p>
+<h2 id="section-15">15. 2026-10-19 四科交叉复核增量</h2>
+<p>继续用 MarkItDown 解析并对照四科八份原 PDF，共 62 页：数据结构 P027（B 树，6 页）、P031（交换排序，8 页）；操作系统 P053（目录，6 页）、P055（设备独立性软件，15 页）；组成原理 P071（CISC/RISC，2 页）、P076（控制器，17 页）；计算机网络 P100（CSMA/CD，2 页）、P103（IPv4 地址计算，6 页）。另外查看 P027、P076、P100、P103 的拼页图，并单独放大核对 P076 第 3、5 页和 P103 第 2、3 页。这些是本次确实核对过的范围，不表示其余来源已完成同强度逐页复审。</p>
+<ul>
+<li>P076：原 PDF 第 3、6 页给出 <code>M(MAR)-&gt;MDR</code> 在取指、间址和部分执行周期的控制信号逻辑式，第 5 页有 $T_0/T_1/T_2$ 的具体取指时序。原笔记只有抽象设计原则，已补上这两个原始实例，并说明组合逻辑式与真实存储器读/就绪时序的区别。</li>
+<li>P103：题图把 H1/H2 默认网关设为 <code>192.168.3.1</code>，而 R2 的局域网接口是 <code>192.168.3.254/25</code>；原资料第 3 页却称 H1/H2 网关正确、可访问 Internet。这与所给设备和地址配置不符。正式笔记已补全四台主机的原始网关条件，明确在没有额外网关或代理 ARP 等题设时，H1/H2 只能在本 <code>/25</code> 内直接通信，不能依靠该错误网关经 R2 出网。</li>
+<li>P027 的 B/B+ 树阶数、上移/借位/合并和源图；P031 的冒泡/快排复杂度与 2019 年划分判断；P053 的目录、硬/软链接删除边界；P055 的单/双缓冲、设备分配与 SPOOLing；P071 的 CISC/RISC 范围；P100 的四道 CSMA/CD 数值题，本次未发现有证据的新正文错误。P031 源稿中快排最坏递归空间的排版/OCR 有误，现有笔记按 $O(n)$ 给出正确结论；P055 源稿把输入/输出进程方向写反的地方，现有笔记已有纠错。</li>
+</ul>
+<p>本次只修改 P076、P103 两篇正式笔记，并刷新对应 Manifest Markdown 哈希。全库自动审计为 <code>hard_failures=0</code>；这仍只证明结构与文件一致性，不证明四本书的语义内容已零遗漏。</p>
+<h2 id="section-16">16. 2026-10-20 外排、I/O、总线与多播复核</h2>
+<p>继续用 MarkItDown 解析 P034 外部排序（9 页）、P054 I/O 管理概述（22 页）、P079 总线（19 页）、P107 IP 多播（2 页），共 52 页；对 P034 第 5–6 页的归并/败者树实例及 P107 的图片题另外查看了原 PDF 渲染。没有把解析文本中缺失的题图条件当成真实来源缺漏。</p>
+<ul>
+<li>P034 原 PDF 第 6 页把 1024 路败者树更新的比较次数写成 19 次；平衡树路径为 $\log_2 1024=10$ 层，首次建树才需要 1023 次比较。现有笔记算法量级正确，新增源稿数值误写说明，避免读者在对照原页时产生矛盾。</li>
+<li>P054 笔记原把“中断处理程序”放在每次 I/O 请求下发到硬件的路径中。正常请求经用户层、设备独立性软件和驱动到控制器；中断处理程序是设备完成或报告事件后的上行入口，轮询方式甚至没有完成中断。正文已纠正并限定驱动与中断处理的实现分工。</li>
+<li>P079 笔记原把传送 $B$ 字节所需数据拍数写成 $B/(W/8)$，未说明仅整除时成立。现改为 $\lceil B/(W/8)\rceil$，并指出不满一总线字的末拍仍可能占用完整传输拍，具体有效字节由协议表达。</li>
+<li>P107 的 <code>224.0.0.1</code> 到 <code>01-00-5E-00-00-01</code> 映射、IGMP 查询与 TTL 边界、原模拟题题干不足的说明均与本次原页核对一致，未改正文。</li>
+</ul>
+<p>上述仅是四篇 52 页的增量复核。正式笔记修改 P034、P054、P079 三篇，对应 Manifest 哈希已刷新；全库结构审计另行复跑，不能把它解释为四科内容穷尽式无误。</p>
+<h2 id="section-17">17. 2026-10-20 散列、文件、接口与 VLAN 复核</h2>
+<p>用 MarkItDown 0.1.6 对照 P028 散列查找（10 页）、P052 文件（24 页）、P082 I/O 接口（6 页）和 P106 VLAN（5 页），共 45 页；另查看 P028、P052、P082、P106 的原页拼图，特别核对散列探测序列、文件分配图、端口编址图和 VLAN 题图。此次记录的是这四篇的增量复核，不推断为其余四科来源零遗漏。</p>
+<ul>
+<li>P028 补回原 PDF 拉链法删除 $27$、$20$ 与未命中 $66$ 的图例。原 PDF 第 9 页文字把伪随机偏移列为 $0,3,5,11$，同页插入 $1$ 的图与算式却先用 $+5$ 再用 $+3$，即 $1\to6\to4$；笔记明确按图中实际序列 $0,5,3,11$ 复现，并标出源稿内部不一致。</li>
+<li>P052 将“两个进程打开同一文件必共用偏移”的简化图改为 fd、打开文件描述、inode/vnode 三层：独立 <code>open</code> 可各有偏移，<code>dup</code>/<code>fork</code> 共享描述时共享偏移。FAT 虽在内存查后继块，仍须沿链逐项追踪，不能把它当作连续分配的直接地址计算。原 PDF 将 $2^{32}\times1020$ B 写作 <code>4080 GB</code>；按二进制单位准确写为 <code>4080 GiB</code>，并标明全部块号可用是理想化上界。</li>
+<li>P082 把统一编址普通访存指令与独立编址专用 I/O 指令分别写清；状态/控制共用端口地址不必共用物理寄存器；DMA 的数据路径也不经过 CPU 通用寄存器逐次搬运。</li>
+<li>P106 补明直接 ARP 同时取决于 IP 路由/本链路判断和 VLAN 可达性，异 VLAN 但误设同子网时不会自动改为 ARP 网关。2024 年 H4/H6 图未给掩码，不从 VLAN 图凭空推断路由表。原 PDF 的带标签帧图把载荷下限固定写为 46 B；现区分“给 64 B 普通帧加标签得到 68 B”与“最小 64 B 带标签帧可有 42 B 载荷”，并附厂商技术说明作外部交叉依据。</li>
+</ul>
+<p>四篇正文变动的 Manifest Markdown 哈希已刷新；全库结构、来源、链接、图片及哈希审计得到 <code>hard_failures=0</code>。这项自动检查不替代四科语义完整度审查。</p>
+<h2 id="section-18">18. 2026-10-20 插入排序、文件系统、指令周期与 SDN 复核</h2>
+<p>用 MarkItDown 0.1.6 对照 P030 插入排序（6 页）、P051 文件系统（31 页）、P074 指令执行过程（4 页）、P108 SDN（1 页），共 42 页；四篇的页面拼图均已查看。P108 的 MarkItDown 仅取出少量文字，字段图和题目选项以原 PDF 页面为准。本轮发现与修订如下：</p>
+<ul>
+<li>P030：将“插入类排序始终维护连续有序前缀”限定为直接/折半插入，希尔排序在 $d&gt;1$ 时只维护各增量子表有序。原 PDF 折半代码把 <code>high=mid-1</code> 误排成 <code>high=mind-1</code>；笔记代码原已使用正确写法，本次显式标注。源稿称希尔图有“9 个元素”，实图下标 1--8 是 8 条记录，0 号位为暂存；笔记按 8 条记录计算 $d=4,2,1$。</li>
+<li>P051：传统 BIOS/MBR 启动路径加上适用范围，不再当作 UEFI/GPT 的通则。原题容量计算实际按 1024 进位，已说明教材 <code>KB/MB/GB</code> 在严格单位下为 <code>KiB/MiB/GiB</code>。原 PDF 把 Ext2 超级块/组描述符副本说成每组都有，这只适用于早期 revision 0；启用 <code>sparse_super</code> 后仅特定块组保存备份，已按 Linux 内核 Ext2 文档修正并保留来源说明。</li>
+<li>P074：把“取指必读主存”限定为无 Cache 的教材模型；补回原 2019 年 <code>R[r2] &lt;- R[r1] + M[R[0]]</code> 题对数据路径和译码器的区分，并注明间址地址码可来自 IR 或 MDR，视题设数据通路而定。</li>
+<li>P108：原页的 OpenFlow 1.0 图中 11 个首部字段、入端口、计数器/动作及题目答案 C（TTL 不可匹配）均在正式笔记中；本次未确认需要修改的正文错误。</li>
+</ul>
+<p>本轮只修改 P030、P051、P074 三篇笔记，并刷新对应 Manifest Markdown 哈希。全库自动审计仍应只解释为结构和追溯关系检查，不能推断全部教材知识零遗漏。</p>
+<h2 id="section-19">19. 2026-10-20 基础概念与进程、网络概述续审</h2>
+<p>继续以 MarkItDown 0.1.6 对照四科八份原 PDF：P001（2 页）、P002（3 页）、P044（30 页）、P045（31 页）、P057（7 页）、P073（7 页）、P084（11 页）、P110（2 页），共 93 页；同时查看八份来源的页面拼图，特别检查 P044 的引导/内核结构与 VMM 图、P045 的进程状态/IPC/线程映射图、P057 的数据通路图、P084 的交换方式与虚电路题图。这里记录的是本轮复审范围，不表示其余来源已经同强度审完。</p>
+<ul>
+<li>P001：把“顺序存储支持随机存取”限定到定长元素、地址可算的顺序表/数组；链式插删“只改指针”补上已定位位置、结点分配和查找成本。P002：原 PDF 第 2 页 <code>i=0; i*=2</code> 会死循环，笔记原已指出；第 3 页递归空间例混用 C++ 默认参数与 C99 变长数组，且会进入 <code>n=0</code> 的零长度数组，本轮补明这只是用于 $n+(n-1)+\cdots+1=\Theta(n^2)$ 的伪代码模型，不能直接当标准 C/C++ 运行。</li>
+<li>P044：原 PDF 的“原语不能被中断”是单核临界段教学模型，笔记现区分原子效果与物理中断、多处理器同步；普通子程序调用与中断的 PSW/寄存器差别不再绝对化。修正“资源访问每次必系统调用”的外推，说明已建立映射后的普通访问。外核明确为精简内核而非“内核之外的部件”；两类 VMM 的性能、虚拟机数量、迁移难易和特权级不再写成无条件排序。</li>
+<li>P045：同样限定原语的单核关中断模型；补回原 PDF 第 13 页 $P_1/P_2/P_3$ 的 CPU/I/O 比例与 $P_3&gt;P_2&gt;P_1$ 的题设目标。单条 POSIX 管道的读写方向固定，教材“半双工”只用于强调不能同管道同时双向传输；缓存容量不是普遍固定 4 KiB。同进程线程各用自己的栈，但其内存并非彼此隔离。</li>
+<li>P084：原 PDF 第 5 页虚电路/数据报题正确项为 D；原解析把虚电路可靠性一律归网络保证，笔记标明可靠、无丢失须看具体服务承诺。分组交换相对整报文交换的流水时延优势限于较长报文和多跳等条件；报文多目标投送需协议支持复制/多播。</li>
+<li>P057 的五层机器模型、MAR/MDR、程序生成链与原页对应；P073 的 CPU/运算器部件及单总线/三态门与结构图对应；P110 已正确把 <code>218.75.230.0/24</code> 识别为网络前缀，移动主机永久地址为 <code>218.75.230.16</code>，并区分 P1 外层目的与 P2 源地址。这三篇本次没有确认新的正文错误，未修改。</li>
+</ul>
+<p>本轮修改 P001、P002、P044、P045、P084 五篇正式笔记，仅刷新对应 Manifest <code>md_sha256</code>；P057、P073、P110 未改。全库自动检查复跑得到 <code>hard_failures=0</code>，但它只验证结构、引用与来源追溯，不可替代四科知识的穷尽式语义审查。</p>
+<h2 id="section-20">20. 2026-10-20 线性表、虚拟内存、多处理器与网络分层续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P003 线性表定义（2 页）、P050 虚拟内存（22 页）、P078 多处理器（4 页）与 P085 网络分层模型（10 页），共 38 页；四篇均查看原 PDF 拼页图，重点检查页表/缺页流程、页面置换轨迹、Flynn 分类图及 OSI/TCP-IP 层次和协议题图。解析文本可能遗漏图中文字，因此图示结论以原页为准。</p>
+<ul>
+<li>P003：源稿把“元素类型相同”直接解释成“每个元素占用相同大小的存储空间”，现限定为定长元素的顺序存储模型；变长编码或指针所指的对象不能直接套用。基本操作中的 <code>ListInsert</code> 是逻辑插入，原笔记写成后续元素必然物理后移；现区分顺序表后移与链表定位后的链接调整。</li>
+<li>P050：逐项对照请求分页、工作集、2012 年空闲页框链表题、OPT/FIFO/LRU/CLOCK 与内存映射文件。现有笔记已限定源稿关于 CLOCK 指针、MAP_PRIVATE、<code>close</code> 与虚拟内存容量的过度绝对化说法；本次没有确认新增的正文错误，未修改。</li>
+<li>P078：Flynn 四类、多处理器/多计算机图、向量处理器及三类硬件多线程在笔记中均有对应，且已区分 SMP 教材用法与多核缓存拓扑；本次未改。</li>
+<li>P085：协议三要素、服务原语、OSI 七层、TCP/IP 四层、封装图和 HTTP 时序题已对应原页；“SAP 不等同于具体分用字段”等限定已在笔记中，本次未改。</li>
+</ul>
+<p>本轮仅改 P003 并刷新该条 Manifest Markdown 哈希。结构、来源与链接校验仍需独立复跑；上述 38 页的复核不能推断四科其余来源已零遗漏。</p>
+<h2 id="section-21">21. 2026-10-20 顺序表、存储层次与物理层续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P004 顺序表（5 页）、P006 顺序表与链表比较（2 页）、P064 存储器分类与层次（4 页）、P086 物理层概述（2 页），共 13 页；四份原 PDF 的拼页图均已查看。P004 的 C++ 动态顺序表示例另将笔记中的初始化、扩容和主函数三段直接拼接做语法检查，通过。</p>
+<ul>
+<li>P004：静态初始化、地址公式、插入/删除循环及平均移动次数与来源一致；笔记已纠正源稿 <code>lenght/date</code> 等拼写错误。笔记自己的动态扩容示例在 <code>main</code> 结束时未释放最后分配的数组，本次补上配对的 <code>delete[]</code>。</li>
+<li>P006：源稿概括“链表插删只改指针”，但这取决于定位条件。原笔记已提查找成本，却仍把“仅已知待删结点”与“已知前驱”合并为单链表 $O(1)$ 删除；现明确单链表删除通常需要前驱，并处理被删结点回收。比较表和复盘同步改正。</li>
+<li>P064：存储元/单元/体、容量与带宽公式、存取时间/周期和 Cache–主存–辅存图已在笔记中对应，并注明突发/流水接口的带宽计算边界；本次未确认新错误，未改。</li>
+<li>P086：原页的透明比特流、四类接口特性、中继器/集线器概念已对应。原笔记“不负责差错校验”过于宽泛，现限定为不承担帧级校验；实际 PHY 可实现线路编码与纠错，不应说它绝不处理差错。</li>
+</ul>
+<p>本轮修改 P004、P006、P086 三篇并刷新对应 Manifest 哈希；P064 未改。上述复核只覆盖四份 13 页，不作为全部四科知识已穷尽的证明。</p>
+<h2 id="section-22">22. 2026-10-20 链式线性表代码与图示续审</h2>
+<p>以 MarkItDown 0.1.6 重新解析 P005 线性表链式实现 16 页，并查看全部原页拼图；逐项核对单/双链表、带/不带头结点、前后插、按位删、头尾插、循环链表与静态链表游标图。正式笔记保留了四张必要的本地结构图，单链表前插“复制数据而非物理移到前方”及尾结点删除限制已写清。</p>
+<ul>
+<li>循环单链表原 <code>isTail(L,p)</code> 仅判断 <code>p-&gt;next==L</code>，空表的头结点也满足，且空指针输入会被解引用。现要求 <code>p</code> 非空且不是头结点；只把非空表的尾数据结点判为尾。</li>
+<li>循环双链表原 <code>DeleteNextDNode(p)</code> 没有头指针，若空表令 <code>p=L</code>，或令 <code>p</code> 为尾结点，会把哨兵头结点释放，链表悬空。现为教学示例增加头指针参数，在 <code>p-&gt;next==L</code> 时拒绝删除；并写明结点须属于本表、待插结点须尚未链接的前提。</li>
+<li>上述两段从笔记直接提取，分别与对应结点定义拼接后通过 C++17 语法检查。未把“语法可编译”当作所有输入/调用方式都经过运行验证。</li>
+</ul>
+<p>P005 正文哈希已在 Manifest 刷新。这里的结论只覆盖该 PDF 及所指两段代码，不代表其他算法题或四科其余页已无误。</p>
+<h2 id="section-23">23. 2026-10-21 处理器调度与上下文切换续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P046《处理器调度》28 页，复看原 PDF 第 7、23、25–26 页及其余页面拼图，重点核对调度指标、2019 年多级反馈队列题和上下文切换实现。原页第 7 页的僵尸/孤儿进程要点，已在 P045《进程与线程》父子进程段落准确覆盖，未在本篇机械重复。</p>
+<ul>
+<li>原 PDF 的 CPU 利用率分母只列“有效工作 + 空闲”，是忽略调度开销的二分模型；P046 现改为忙碌时间 / 观测总时间，并区分包含内核开销的利用率与用户任务有效工作占比，避免有上下文切换时分母漏项。</li>
+<li>原 PDF 第 23 页 2019 年二级反馈队列题原先仅在笔记中归纳规则，未保留完整实例。现补入 $Q_1$ 的 $10,\mathrm{ms}$ 时间片、$Q_2$ 的短进程优先、$P_1/P_2$ 的 $30/20,\mathrm{ms}$ 服务时间、四段 CPU 时间线，复算两进程等待时间为 $20/10,\mathrm{ms}$，平均 $15,\mathrm{ms}$，与原图 C 项一致。</li>
+<li>第 25–26 页的现场保存、状态入队、选新进程与恢复流程已由笔记概括；本次补清“旧进程 → 分派程序 → 新进程”的教材模型及模式切换不必然引起进程切换。原页并置了 RISC-V <code>sscratch</code> 与 x86-64 <code>%rsp</code>/<code>pushq</code> 样例，不能合并为同一架构的一段通用流程，笔记现显式提醒这一来源问题。</li>
+</ul>
+<p>本轮仅修改 P046 正文并刷新对应 Manifest 哈希。自动审计验证结构与文件一致性，不能据此宣称四科剩余来源的语义审查已穷尽。</p>
+<h2 id="section-24">24. 2026-10-21 栈、递归与矩阵压缩续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P007 表达式求值 5 页、P008 递归 1 页、P009 特殊矩阵 6 页、P010 栈基本概念 5 页，共 17 页，并查看四份原 PDF 的页面拼图及 P008、P009 关键原页。P007 的中缀/前后缀转换图、运算符次序、栈算法与原页对应，本轮未确认新错误，不改正文。</p>
+<ul>
+<li>P008：原 PDF 斐波那契函数只给 $n=0,1$ 出口，笔记此前未说明定义域；现明确教学代码只接受非负整数，避免负输入无限递归。PDF 的 <code>it n</code> 拼写按原页确认，笔记保持已纠正的 <code>int n</code>。</li>
+<li>P009：原 PDF 把三对角矩阵称作“带状矩阵”，笔记此前也照写成同义词；现明确三对角只是带状矩阵的一种，一般带状矩阵可有更宽的非零带。原 PDF 第 6 页的 $5\times6$ 稀疏矩阵图已嵌入笔记，此次再把六个非零三元组及空的第 5 行写成可检索文本。对称/三角/三对角映射公式及逆映射以 $n=1\ldots20$ 的全部合法下标做边界核算，未发现公式错误。</li>
+<li>P010：原 PDF 函数定义使用 C++ 引用形参，但部分笔记代码块标为 C，易误导为可直接用 C 编译；现说明 <code>ElemType</code> 占位与抽象操作记号，并把含引用形参的代码块标为 C++。共享栈满条件、链栈结构和循环队列判空/判满图已与原页对应，本次不改算法。</li>
+</ul>
+<p>修改 P008、P009、P010 三篇并刷新对应 Manifest 哈希；P007 未改。结构审计还需复跑，这轮结论仅限四份 17 页及所列公式、图示。</p>
+<h2 id="section-25">25. 2026-10-21 队列与括号匹配续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P011《队列基本概念》9 页、P012《栈在括号匹配中的应用》2 页，并查看全部原 PDF 拼页图及 P012 第 2 页代码原图。循环队列的取模、三种判满方法、链式队列头尾指针、双端队列限制和括号匹配的三类失败情况均有对应。P011 原页第 9 页指出输入 $1234$ 时 $4213$、$4231$ 对输入受限双端队列不合法；按固定输入顺序、可交错两端出队枚举 22 种合法输出，确认两序列确不在其中。</p>
+<ul>
+<li>P011：普通非循环顺序队列入队代码原本保留 <code>if (队列已满)</code> 占位，现按 <code>rear</code> 只增不回绕的实现改为 <code>Q.rear == MaxSize</code>。原页函数用 C++ 引用形参，笔记原先误标为 C；现说明语言、<code>ElemType</code> 占位和各备选实现不能直接拼成一个程序，并标明含引用形参的代码块。<code>size</code> 方案的容量常量统一为 <code>MAXSIZE</code>，<code>tag</code> 方案补明初始化空队时置 0。</li>
+<li>P012：原 PDF 第 2 页的 <code>for</code> 头、<code>Pop</code> 返回形式和字符比较错误，笔记已有纠正；本次指出固定 <code>MaxSize=10</code> 的栈只有在未匹配左括号最大深度不超过容量时才可正确判定，增加入栈失败检查，并说明容量不足不等于括号本身不匹配；任意长度应换用可扩容栈。含 C++ 引用的接口和算法代码块不再误标 C。</li>
+</ul>
+<p>修改 P011、P012 并刷新对应 Manifest 哈希；本轮不把 11 页复核延伸为其他来源已无遗漏的判断。</p>
+<h2 id="section-26">26. 2026-10-21 串与朴素匹配续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P013《串》7 页并查看全部原 PDF 拼页图，复核子串/空串定义、四种定长存储布局、顺序/链式实现、子串截取、比较与朴素匹配。笔记已指出原 PDF 把空串记成空集、静态数组 <code>ch[MAXLEN]</code> 与 1 起始位序不相容等来源问题，空模式与 $m&gt;n$ 的边界也已有处理；本轮未重复改动这些已正确内容。</p>
+<ul>
+<li>P013 的动态 <code>HString</code> 示例仍只申请 <code>MAXLEN</code> 个字符，却紧接着按本节 1 起始位序解释存储。现改为 <code>MAXLEN+1</code> 单元并初始化长度，说明这是运行时分配而非自动扩容，避免照搬时越界。</li>
+<li><code>StrCompare</code> 示例现按无符号字节值求差，避免实现采用有符号 <code>char</code> 时比较结果受符号影响；同时明确该代码仅比较单字节存储序，不等于 Unicode 文本的自然语言排序。</li>
+<li><code>SubString</code> 的 C++ 引用形参代码块改为 C++ 标注；两份同名 <code>Index</code> 算法注明是备选实现。原例 <code>&quot;Pro&quot;</code> 在 <code>&quot;iPhone 11 Pro Max?&quot;</code> 中的位置补算为第 $11$ 位，并说明前面第 $2$ 位的 <code>P</code> 不是完整子串匹配。</li>
+</ul>
+<p>仅修改 P013 并刷新对应 Manifest 哈希；仍需全库结构审计，不能以此推出四科已无其它知识错误。</p>
+<h2 id="section-27">27. 2026-10-21 KMP 原图与代码续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P014《KMP 算法》10 页并查看全部原 PDF 拼页图。<code>abaabc</code> 的 <code>next=[0,1,1,2,2,3]</code>、<code>ababaa</code> 的 <code>next=[0,1,1,2,3,4]</code> / <code>nextval=[0,1,0,1,0,4]</code> 与原图和笔记相符；主串指针不回退并不意味着同一主串字符只比较一次，笔记此前已有限定。</p>
+<ul>
+<li>原 PDF 第 9 页还有 <code>aaaab</code> 的 <code>next/nextval</code> 对照图，笔记此前未文字化。现补入 <code>next=[0,1,2,3,4]</code>、<code>nextval=[0,0,0,0,4]</code>，说明相同字符连续失配时优化跳过的位置。</li>
+<li>原 PDF 的 <code>int next[T.length+1]</code> 是变长数组写法，不能直接作为标准 C++ 数组声明；笔记现沿用同库 <code>SString</code> 的 <code>MAXLEN</code> 定长约定，并补 <code>get_next</code> 的前置声明。该修改不改变失配回退或返回位置。</li>
+<li>以 3,937 组仅含 <code>a/b</code> 的短主串与模式串（含空模式）穷举对照，按笔记同一 1 起始 <code>next</code>/匹配流程计算的返回值均与首次出现位置一致。此测试只覆盖这些短输入，不作为任意字符集和所有实现边界已通过的证明。</li>
+</ul>
+<p>仅修改 P014 并刷新对应 Manifest 哈希；全库结构审计需复跑。</p>
+<h2 id="section-28">28. 2026-10-21 树性质与遍历续审</h2>
+<p>继续按 MarkItDown 0.1.6 解析 P015《树与二叉树》5 页、P016《二叉树常考性质》7 页和 P017《二叉树的遍历》16 页；P016 的顺序/链式存储原页及 P017 的遍历、重建、线索化图和代码页另与 PDF 渲染图逐项核对。P015 的树术语和基本性质本轮未确认新错误，不修改正文。</p>
+<ul>
+<li>P016：笔记采用 <code>t[0]</code> 留空、编号从 1 开始的约定，却用 <code>TreeNode t[MaxSize]</code> 表示可存至编号 <code>MaxSize</code>，会少一个槽位。现改为 <code>MaxSize+1</code> 并初始化完整数组，说明访问编号范围仍须检查。右单支树最深编号为 $2^h-1$，这是有效编号位置数；连同空置的 <code>t[0]</code>，实际数组至少要有 $2^h$ 个槽位。原 PDF 第 6 页把前者称为存储单元数，笔记现按约定区分。第 7 页构建语句原放在文件作用域，本轮包入函数，检查两次分配并在示例结束释放两结点。两段 C 示例均通过 GCC C11 语法检查。</li>
+<li>P017：原 PDF 的三类遍历、层序、序列重建、线索化与前驱/后继题图均有对应；独立复核笔记时发现把“满二叉树”与“每个非叶结点均有两个孩子”混称。现改为后者对应的“真二叉树”，并明确满二叉树只是特例；关键字互异的真二叉树可由前序和后序唯一重建。另写清抽象队列接口、重复查询时辅助变量重置、线索化前标志初始化，并消除“层序遍历必须用队列”的绝对化措辞。按笔记中先/中/后序线索化流程枚举 1–6 个结点的 588 组树形/遍历组合，空指针线索与真实孩子标志均符合对应访问顺序；这是流程模型核验，不是所有实际输入的运行证明。</li>
+</ul>
+<p>P016、P017 的 Manifest Markdown 哈希已刷新。此处只记录三份 28 页的增量复核，不以本轮或全库结构审计推断四科语义零遗漏。</p>
+<h2 id="section-29">29. 2026-10-21 树森林转换与应用续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P018《树、森林》10 页和 P019《树与二叉树的应用》13 页，另查看两份 PDF 的页面拼图，重点核对双亲/孩子/孩子兄弟存储图、树森林转换、失败 ASL、哈夫曼合并与并查集路径压缩图。</p>
+<ul>
+<li>P018 的三种树存储结构、遍历对应和四向转换均与原页相符。两段“先根/后根遍历”原先把 <code>R还有下一个子树T</code> 这样的中文占位条件放在标为 C 的代码块中，不能直接编译；现沿用本篇的 <code>CSTree</code> 孩子兄弟结点，用 <code>firstchild</code> 进入子树、<code>nextsibling</code> 枚举兄弟。与结点定义拼接后通过 GCC C11 语法检查。</li>
+<li>P019 的失败 ASL 两例按原页分别为 $29/9\approx3.22$、$38/9\approx4.22$，BST/AVL/并查集图及主要结论与原页一致。补齐原 PDF 第 7 页哈夫曼图的具体合并路径：$1+2=3$、$2+3=5$、$3+5=8$、$7+8=15$，并列权值可导致不同树形，合并权值之和 $3+5+8+15=31$ 与 WPL 一致。将“平均编码长度最优”限定为给定权值的<strong>二元前缀码</strong>范围，避免外推到所有压缩方案。</li>
+</ul>
+<p>P018、P019 的 Manifest Markdown 哈希已刷新。这是两份 23 页的增量复核，不代表四科其余来源均已同强度核准。</p>
+<h2 id="section-30">30. 2026-10-21 图基础、存储与遍历续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P020《图基本概念》6 页、P021《图的存储及其操作》10 页、P022《图的遍历》6 页，并查看三份 PDF 的页面拼图；特别核对完全图与连通性公式、邻接矩阵/邻接表与十字链表图、BFS 生成树及 DFS 回溯图。P020 的图术语、度数、连通分量和边数边界本轮未确认新错误，未改正文。</p>
+<ul>
+<li>P021：笔记原已纠正原 PDF 将矩阵幂宽称为“路径数”、<code>AddEdge</code> 误写成“删除边”等问题。本轮补明数学式的顶点编号从 1 开始，而 C 数组下标从 0 开始；<code>A^k</code> 用 $0/1$ 邻接矩阵计数不同游走时默认没有平行边，若平行边须按重数建矩阵。</li>
+<li>P022：原 PDF 的 <code>TREUE</code>、<code>NextNeighor</code> 和 <code>w&gt;0</code> 拼写/边界错误，笔记此前已纠正。此次明确 BFS 示例依赖已初始化的队列及抽象接口；将“必须用 <code>visited[]</code>”改为“必须记录已访问状态”；将外层遍历后的“连通分量”表述限定于无向图，有向图仅能称为当前起点的可达部分。原页第 4 页两棵 BFS 树因顶点 $6$ 的邻接点次序不同而不同，笔记的图示说明与此一致。</li>
+</ul>
+<p>P021、P022 的 Manifest Markdown 哈希已刷新。上述三份 22 页的核对只说明该范围内本轮确认的事项，不推断四科教材内容已经穷尽复核。</p>
+<h2 id="section-31">31. 2026-10-21 图的经典应用续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P023《图的经典应用》16 页，并查看全部原 PDF 页面和已有本地图示。逐项核对 MST/Prim/Kruskal、BFS/Dijkstra/Floyd、表达式 DAG、拓扑与逆拓扑排序、AOE 关键路径；对笔记自带的关键路径数值例题独立重算，所得 $ve=[0,3,2,6,8,11]$、$vl=[0,4,2,6,8,11]$、工期 $11$ 及逐活动余量均与表格一致。原 PDF 第 1 页的“MST 边数 = 顶点数 +1”是错误，笔记此前已改为 $n-1$。</p>
+<ul>
+<li>原 PDF 第 11–12 页不仅有 $(x+y)((x+y)/x)$，还有较复杂的 $\bigl((a+b)(b(c+d))+(c+d)e\bigr)((c+d)e)$。笔记原先保留了含两题的图片，但文字只解释左题；现把右题完整表达式和 DAG 共享过程写出：三处 $(c+d)$ 合为一顶点，两处 $(c+d)e$ 合为一顶点，最终共 12 个顶点。核对依据是原页及已嵌入的 DS-L23-表达式DAG.png，不是 MarkItDown 对图片的推测。</li>
+<li>原 PDF 第 8 页的 Dijkstra 例给出 $V_0$ 到 $V_2$ 距离 $9$ 及前驱回溯；笔记现将 $V_0\to V_4\to V_1\to V_2$ 和 $5+3+1=9$ 文字化。BFS 的层次、Prim/Kruskal 图中 MST 总权值 $15$、Floyd 三点负边示例和拓扑排序结论与原页相符。</li>
+<li>通用 MST 片段含中文自然语言，只能作伪代码；现改为 text 代码块，并指出该选边框架偏 Kruskal 式，Prim 限定当前树的横切边。Floyd 的 $A[i][i]=0$ 原写法只适用于没有负权自环的通常情形；现说明若允许负权自环，应取 $\min(0,w(i,i))$，以免漏检负环。</li>
+</ul>
+<p>本轮仅修改 P023 正文并刷新对应 Manifest Markdown 哈希。该 16 页的语义核对与全库结构审计分属不同证据层级，不能据此声称四科所有来源已经穷尽核准。</p>
+<h2 id="section-32">32. 2026-10-21 查找基本概念续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P024《查找的基本概念》2 页，并查看两页原 PDF。来源的静态/动态查找表、查找长度、ASL 公式及第 2 页二叉排序树图均有对应；图中 8 个成功结点按层为 $1,2,4,1$，故 $ASL=(1+4+12+4)/8=21/8=2.625$，与笔记一致。原页把“关键字”限为唯一标识，现笔记已区分可唯一标识的主关键字与可能重复的次关键字。</p>
+<ul>
+<li>独立审查笔记时发现“某个结果所在层数就是查找长度”对失败外部结点不成立。若根按第 1 层、外部结点不作关键字比较，则失败查找的比较次数等于外部结点层数减 1。现将成功、失败两种计数口径分开，并加根后立即落空的例子。</li>
+</ul>
+<p>本轮仅修改 P024 并刷新 Manifest Markdown 哈希。P024 复核结论不外推至其余查找章节或四科全书。</p>
+<h2 id="section-33">33. 2026-10-21 顺序、折半与分块查找续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P025《顺序查找和折半查找》9 页，并查看全部原 PDF 页面；逐项核对普通/哨兵顺序查找、有序表判定树、概率优化、折半查找代码及 11 元素判定树、2017 年统考树形选择题和 14 元素分块索引图。原图的折半查找成功 ASL 为 $33/11=3$，失败 ASL 为 $44/12=11/3$；笔记数值正确。原页分块索引的 5 个最大值和各区间、查找 27 的落块与笔记一致；均匀分块公式的前提已写明。</p>
+<ul>
+<li>发现笔记把“失败结果比较 3 次/4 次”写成“失败结点位于第 3 层/第 4 层”。按根为第 1 层的原图，外部失败结点实际位于第 4 层和第 5 层，本身不再比较关键字；现将计算口径改成经过的内部结点数，并在通用解题步骤和该例题同时澄清。公式及 $11/3$ 结果不变。</li>
+</ul>
+<p>本轮仅修改 P025 并刷新 Manifest Markdown 哈希。后续复查 P026 时，还把 P025 成功/失败 ASL 两个算式的“等概率”前提写明；数值不变。上述 9 页复核不代表后续树形查找、B 树和散列查找已审完。</p>
+<h2 id="section-34">34. 2026-10-21 树形查找续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P026《树形查找》34 页，查看五组原 PDF 拼页图，并复看第 11 页 AVL 插入题、第 17–18 页删除图、第 20–21 页红黑树性质、第 26 页和第 34 页插入例原页。BST 定义/插删/失败 ASL、AVL 四类旋转和删除向上传播、红黑树黑高与插入修复均有对应；原 PDF 中把红黑树“黑路同”说成到根、把调整泛称常数时间等不严谨表述，笔记已明确纠正。2021 年 AVL 题插入 $23$ 后属 RL，最终根 $25$；与原图 D 项一致。</p>
+<ul>
+<li>对笔记补充的红黑树长序列 $20,10,5,30,40,57,3,2,4,35,25,18,22,23,24,19$ 按标准红黑树插入/旋转/染色流程独立模拟，所得根 $10_B$ 和各子树颜色、结构与笔记一致。原资料末尾重复出现第二个 $18$；按本笔记互异关键字约定，应拒绝重复插入，现有说明正确。</li>
+<li>P026 的失败 ASL 图有 9 个失败区间，$7$ 个比较 $3$ 次、$2$ 个比较 $4$ 次，$29/9$ 只在这些区间等概率时成立；笔记原未在算式前明说概率前提，本轮补明。其余本轮未确认新的算法结论错误。</li>
+</ul>
+<p>本轮仅修改 P026 该概率前提，并再次刷新 P025、P026 的 Manifest Markdown 哈希。上述复核仍不能推出其余 PDF 已经同等深度审查。</p>
+<h2 id="section-35">35. 2026-10-21 B 树与 B+ 树续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P027《B 树》6 页并查看全部原 PDF 页面。5 阶 B 树图中查找 $9$ 的分支、终端与外部失败位置，$m$ 阶结点上下限、树高推导、插入分裂和 B+ 树“每个孩子对应最大关键字索引项”的教材约定均与笔记对应。原页的高度上界未取整，笔记已按整数层数写为 $\lfloor\log_{\lceil m/2\rceil}((n+1)/2)\rfloor+1$；根为第 1 层且不计外部失败层的口径已说明。</p>
+<ul>
+<li>为免“叶结点”混用，现把查找失败的终点写为：在实际终端结点比较后沿空指针落到外部失败位置。B 树非终端结点发生分裂、借位或合并时，原笔记只叙述关键字移动；本轮补明孩子指针也须按关键字范围同步转移，才能维持 $k$ 键对应 $k+1$ 棵子树的结构。</li>
+</ul>
+<p>本轮仅修改 P027 并刷新 Manifest Markdown 哈希。以上是这 6 页的复核结论，不代表 B+ 树所有实现变体都采用同一索引键约定。</p>
+<h2 id="section-36">36. 2026-10-21 散列查找续审</h2>
+<p>用 MarkItDown 0.1.6 重新对照 P028《散列查找》10 页，并查看两张全页拼图及拉链插删、四种开放定址探测和墓碑删除的原图。除留余数、直接定址、数字分析、平方取中、装填因子、拉链法、线性/平方/双散列/伪随机探测和删除标记均有正文或本地图示对应。原 PDF 第 9 页的伪随机文字序列为 $0,3,5,11$，同页插入图却依次使用 $+5,+3$；笔记已经指出这一矛盾，并按图示写出 $1\to6\to4$。双散列步长为零的边界与平方探测的表长条件也已有说明。</p>
+<p>本轮未确认新的正文错误或缺失，不重复改动 P028，Manifest 哈希保持原值。这个结论只覆盖该 PDF 的可核对内容，不外推为其他篇目零遗漏。</p>
+<h2 id="section-37">37. 2026-10-21 排序基础与内部排序续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P029《排序》1 页、P031《交换排序》8 页、P032《选择排序》9 页、P033《归并排序与基准排序》6 页和 P035《排序算法总结》4 页，共 28 页；查看五份原 PDF 的全页图，特别核对快排第二趟选择题、堆插删图、基数排序三趟图以及排序总表的手写来源。P030 插入排序和 P034 外部排序已有此前的独立审查记录，本节不冒充重新逐页复核了它们。P033 的源文件名将“基数”误写成“基准”、P032 删除图起点不满足小根堆序等来源问题，正式笔记此前已有明确提醒。</p>
+<ul>
+<li>P029：将“原地”的两种常见口径分开，明确递归快排即使在原数组划分也须计入平均 $O(\log n)$、最坏 $O(n)$ 的栈空间，避免与 P031 复杂度表矛盾。</li>
+<li>P031：原稿代码使用 C++ <code>bool</code>/引用形参，正式笔记展示的是 C 实现；将未引入 <code>&lt;stdbool.h&gt;</code> 的 <code>bool</code> 标志改为 C 可直接使用的 <code>int</code> 标志。原页 2019 年快排第二趟题的 D 项判断与笔记一致。</li>
+<li>P032：补明堆代码采用 <code>A[1..len]</code> 存元素、<code>A[0]</code> 暂存，调用者实际须提供至少 <code>len+1</code> 个数组单元。自底向上建堆 $O(n)$、堆排序 $O(n\log n)$ 及堆插删方向与原页核对一致。</li>
+<li>P033：原笔记把辅助数组 <code>B</code> 只声明为未分配的指针就用于归并，照抄会访问无效内存。现由排序入口分配一次、递归传入并在结束后释放；分配失败返回状态。原稿三位十进制基数例的个位、十位、百位三趟序列经独立计算，与笔记及原图一致。</li>
+<li>P035：计数排序补齐 C 标准库声明和 <code>Record</code> 示例类型，说明输入/输出数组不能重叠，并在内存分配失败时返回状态；保持原有从右向左填充的稳定性逻辑。这是笔记标明的教材扩展，不误称为 P035 原 PDF 内容。</li>
+</ul>
+<p>上述四篇含 C 代码的示例（P031、P032、P033、P035）分别抽取后通过 GCC C11 严格语法检查，并以含重复键的短输入运行，四组测试退出码均为 0；其中计数排序另核对了相等键附带字段的原顺序。测试只覆盖所列示例，不构成任意输入已验证的证明。修改 P029、P031、P032、P033、P035 并刷新对应 Manifest Markdown 哈希。</p>
+<h2 id="section-38">38. 2026-10-21 数据结构代码专题续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P036《重点算法汇总》30 页、P037《顺序表》11 页、P038《链表》24 页、P043《排序代码》8 页，并查看这四份 PDF 的全部页面拼图，共 73 页。此轮对照关注的是来源题目是否在专题页有相应解释，以及笔记代码是否保持题目约定；运行测试只能覆盖选取的输入，不代表任意输入均已形式化证明。</p>
+<ul>
+<li>P036：汇总表原先没有说明“有序顺序表命中后与更大后继交换”的后果。现补明交换会破坏有序性，不能不经重排继续折半查找；对应 P041 查找专题已有完整边界说明。七篇代码专题的 C++ 代码块总数核为 97（14+25+7+23+8+12+8），此数字仅用于核对汇总覆盖，不等于所有代码均已完整测试。</li>
+<li>P037：11 页顺序表代码题均有对应；笔记 14 个 C++ 代码块通过 C++17 编译和 780 组随机短输入测试。本轮未确认新错误，不修改正文。</li>
+<li>P038：逐题对照 24 道链表题及原页图，重点复查无头/带头结点、删除后释放、循环终止、交集与拆分后的所有权。笔记的 25 个 C++ 代码块通过 C++17 严格编译；本轮测试覆盖 24 道题的代表性输入及空表、重复值、循环链表等边界，运行退出码为 0。原 PDF 中多处 <code>new/free</code> 混用、空指针解引用和错连头结点的问题，正式笔记此前已明确修正。本轮仅将“递增”在允许重复值的输出和交集前提中表述为“非递减”，避免把相等元素排除。</li>
+<li>P043：8 页排序代码与原图、MarkItDown 解析文本逐项核对；笔记 8 段 C++17 代码编译通过，每种排序用 1700 组短输入核对，链表插入另查相等键的稳定性。本轮未确认新的正文错误，不修改该篇。</li>
+</ul>
+<p>P036、P038 的 Manifest Markdown 哈希已刷新；P037、P043 未改，哈希保持原值。本节是这四份来源的增量证据，不把结构检查或有限测试写成四科全部知识零遗漏的结论。</p>
+<h2 id="section-39">39. 2026-10-21 栈队列、查找与图代码续审</h2>
+<p>继续以 MarkItDown 0.1.6 对照 P039《栈与队列》6 页、P041《查找》7 页、P042《图》13 页，并查看三份 PDF 的全部页面拼图，共 26 页。P040《二叉树》留待下一轮单独审查，不混入本节结论。</p>
+<ul>
+<li>P039：原页 5 题的队列逆置、链表回文、共享栈、圆括号与 <code>S/H</code> 重排在笔记中均有对应。7 个 C++ 代码块通过 C++17 严格编译；运行检查覆盖空队列、奇偶长度回文、共享数组满/空、括号两类失败和 <code>S/H</code> 极端输入。未确认新正文错误，未改该篇。</li>
+<li>P041：原页 7 题与笔记的折半查找、相邻结点交换和 BST 边界逐题对应。8 个 C++ 代码块通过同样的编译与运行检查，包含空表、首/尾结点、未命中、<code>INT_MIN</code>/<code>INT_MAX</code> 和全局 BST 约束。本轮未确认新正文错误；“命中交换后破坏有序性”的限定已在本篇及 P036 汇总表说明。</li>
+<li>P042：原页实际题号为 0～8、10、11、13，笔记 12 题均有对应；原 PDF 第 3 页欧拉路题给定无向连通图且有边，笔记推广到一般无向图时补充非零度顶点连通条件，正确。12 个 C++ 代码块通过严格编译，运行检查覆盖 BFS/DFS、可达性、树、最远点平局、欧拉路、自环、重边和两种存储互转。发现本篇前段把转换题写成“默认简单图、矩阵 0/1”，而后段代码实际支持重边与自环；现区分原题的简单图约定与本稿扩展。又将邻接表转矩阵的时间复杂度由 $O(|V|^2)$ 改为 $O(|V|^2+|E|)$，因为支持重边时 $|E|$ 可以大于 $|V|^2$；简单图时才可简写。</li>
+</ul>
+<p>P042 的 Manifest Markdown 哈希已刷新，P039、P041 未改而保持原哈希。以上运行检查是选定输入下的证据，不证明所有图表示或全部输入已穷尽验证。</p>
+<h2 id="section-40">40. 2026-10-21 二叉树代码专题续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P040《二叉树》30 页，查看四组覆盖全部页面的拼图；核对源文件实际 33 题（1～17、19～29、31～35），其中原 PDF 没有题 18、30，题 33 只有题干没有答案，正式笔记已如实说明并补出 BST 先序建树实现。其余题涉及结点/叶子/双分支统计、表达式树、子树释放、叶链表、序列建树、三种非递归遍历、祖先、LCA、层序统计、完全性、WPL、中序线索与孩子兄弟树，均在现有专题中有对应。</p>
+<ul>
+<li>笔记的 23 个 C++ 代码块合并后通过 C++17 严格编译；选定测试树及空树、左右单支树、最小/最大边界、错误序列、线索前驱、重复 BST 关键字等输入的运行退出码为 0。两种 WPL 算法、递归/层次高度与三种遍历结果在相同测试树上相互核对。</li>
+<li>独立复查发现，先序＋中序建树会在不一致序列的递归分支中抛错，但原实现已分配的上层结点未回收；现用异常清理释放部分树后再抛出，并新增错误序列运行检查。孩子兄弟树叶数函数会从传入结点一并遍历其后续兄弟，现明确“传入整棵树根且根无兄弟”的调用前提。</li>
+<li>题 13 利用叶结点的右指针构链是破坏性操作，笔记已有警示；本轮测试没有把修改后的结构再当普通树递归释放。题 15 的“满二叉树”限定为各层都满的完美二叉树，题 28 的完全二叉树和题 31～34 的线索标志边界与原页及笔记说明相符。</li>
+</ul>
+<p>P040 的 Manifest Markdown 哈希已刷新。此节的逐页对照与定向测试不构成任意二叉树形态、异常输入或四科全部知识已被穷尽证明的结论。</p>
+<h2 id="section-41">41. 2026-10-21 内存管理基础续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P049《内存管理基础》38 页，并查看覆盖全部页面的五张拼页图，特别核对装入与重定位、上下界保护、分区回收、分页/TLB/多级页表数值题、共享段及段页式地址转换。原 PDF 第 23 页的 $8\times1024=8196$ 和第 31 页把 12 位全 1 偏移当成 1023 的两处算术错误，正式笔记此前已纠正为 8192、4095；本轮再次复算，最终物理地址分别为 8644、20479。</p>
+<ul>
+<li>补齐取指与访存操作数触发地址转换、内部/外部碎片区别、页框与虚页及末页平均浪费的适用前提；将源图中 4 KB 页面下两个十六进制地址同页的判断写成可检验的数值例。</li>
+<li>补明物理上下界保护与基址/限长保护是两种检查口径，明确页号、段号从 0 起算时与表项数比较应使用严格小于，修正复盘中“先组成物理地址、最后检查权限”的错误顺序。与 P050 对照后，进一步区分有磁盘后备的缺页调入与首次访问匿名页的分配清零。</li>
+<li>分开说明快速适应与伙伴系统的碎片条件，并补回来源中的哈希索引和 slab 对象缓存；原 PDF 的“SLABS / Simplified Lease Allocator”并非 slab 的正确名称，不照抄。补明 TLB 未命中不等于缺页、页表项控制位因系统而异、二级页表无命中时的三次访存。</li>
+<li>补齐共享段可用不同逻辑段号指向同一物理段且须按引用数回收，以及段页式末页按真实段长保护的条件。修复分页例题中漏写反斜杠的 LaTeX 命令。</li>
+</ul>
+<p>P049 的 Manifest Markdown 哈希已随本轮修订刷新。以上是该来源 38 页和现有笔记的增量核对；页面示意已能由文字、公式和数值例表达，未额外复制原 PDF 图片，也不据此声称四科所有知识点零遗漏。</p>
+<h2 id="section-42">42. 2026-10-21 虚拟内存管理续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P050《虚拟内存管理》22 页，并查看三张覆盖全部页面的拼页图。笔记中的虚拟内存特征、请求分页、驻留集与工作集、分配/置换组合、调页来源、OPT/FIFO/LRU/CLOCK、映射文件和性能因素均有原页依据或明确标记的教材补充。原 PDF 把 CLOCK 与严格 NRU 混称、把命中时指针移到目标页、把私有映射限定为只读、把 close 当成解除映射等问题，正式笔记此前已纠正，本轮不恢复这些说法。</p>
+<ul>
+<li>独立模拟原页访问串：OPT 在 3 页框下缺页 9 次；Belady 例 FIFO 在 3/4 页框下分别缺页 9/10 次；2019 年 LRU 题置换 5 次；简单 CLOCK 例在 4 页框下缺页 8 次、置换 4 次。均与正式笔记一致，模拟只验证这些确定的输入串。</li>
+<li>修订一处跨章节的完整性边界：合法缺页不总伴随磁盘读取。文件/交换区后备页需要读入；首次访问的匿名页可由系统分配并清零。因此细化请求分页页表项的后备信息、缺页流程图、调页步骤，并同步修正 P049 的概括句。</li>
+</ul>
+<p>P049、P050 的 Manifest Markdown 哈希已刷新。此处未确认 P050 其他新增正文错误；22 页复核和有限访问串模拟不构成所有实现或四科全书无误的证明。</p>
+<h2 id="section-43">43. 2026-10-21 文件结构续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P052《文件》24 页，并查看全部三张拼页图与第 19 页链式插入题原页。FCB/inode、打开文件表、文件保护、逻辑结构、连续/链式/FAT/索引分配及混合索引图的主体结论均有对应；正式笔记此前已纠正原 PDF 将磁盘容量单位写作 GB 而实际按 $2^{30}$ 计算、以及不同独立 open 共用读写偏移等过度概括，本轮保持纠正。</p>
+<ul>
+<li>原 PDF 中 640 个目录项的检索例把 40 块和 10 块的平均访问近似写成 20 次、5 次。现笔记明确这是“查一半块”的近似；若目标均匀分布、冷缓存从首块线性扫描，严格期望为 20.5 次、5.5 次，不应把 $1/4$ 当精确比值。</li>
+<li>原页第 18–19 页问把新记录插为第 30 条时的块访问次数。正式笔记原已给连续分配 59 次，但链式分配只叙述步骤；现依据原图补明读前 29 块、写新块、写回第 29 块更新后继指针，共 31 次，且新块指向旧第 30 块。此数按题目的简化口径，不含分配器元数据 I/O。</li>
+</ul>
+<p>P052 的 Manifest Markdown 哈希已刷新。这是 24 页来源的增量核对，不等于其余文件系统篇目或四科全书均无遗漏。</p>
+<h2 id="section-44">44. 2026-10-21 目录与链接续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P053《目录》6 页并查看全部原页图，核对目录项/FCB、单级/两级/树形/无环图目录、基本目录操作、硬链接计数与软链接路径解析。正式笔记已将原 PDF 中单级目录“不能重命名”、软链接计数“恒为 1”、目标文件只有文件主可删除等绝对化说法改为条件明确的描述；也已补明链接计数归零后仍有打开引用时的回收边界。本轮未确认新的正文错误或图示遗漏，不重复修改 P053，Manifest 哈希保持原值。</p>
+<h2 id="section-45">45. 2026-10-21 文件系统结构续审</h2>
+<p>沿用 MarkItDown 0.1.6 对 P051《文件系统》31 页的解析，并复核原 PDF 页面图，重点重看第 1、27～31 页的层次结构、FAT 题、挂载和 Ext2 图。现有笔记已覆盖格式化、空闲空间管理、VFS 四对象、UNIX inode 与 FAT 路径查找、2016/2022 题及挂载；此前对 BIOS/MBR 启动范围、二进制容量单位和 Ext2 <code>sparse_super</code> 的纠正仍保留。</p>
+<ul>
+<li>原图是五个主处理层加两个底层支撑模块，原笔记的“六层”计数不准确，已改为对应图示的表述。</li>
+<li>将根目录“物理固定、启动后常驻”的泛化说法收回到题图的内存前提；说明根目录入口可由文件系统规则定位，目录数据块本身不必固定。将源稿“每次 <code>open</code> 都新建 <code>vnode</code>”改为可复用的教学模型，并区分 Linux VFS 的 inode、dentry、file 对象。</li>
+<li>原 PDF 第 31 页 Ext2 组内图实际依次有超级块、组描述符表、数据块位图、inode 位图、inode 表、数据块六项；补齐笔记跳过的第 2 项和编号。4 KB 数据块位图的 32K 位覆盖<strong>组内全部块号</strong>，包含元数据占用的块，不能理解为可放文件内容的 32K 个纯数据块；每组 128 MiB、32 GiB 约 256 组仅按位图上限作简化估算。MINIX 文件系统也不再写成 ext 家族的一员。</li>
+</ul>
+<p>P051 的 Manifest Markdown 哈希已刷新。这是该来源的增量语义复核；自动审计只检查结构与追溯关系，不证明其余章节或四科全书零遗漏。</p>
+<h2 id="section-46">46. 2026-10-21 性能指标与 Cache 续审</h2>
+<p>以 MarkItDown 0.1.6 重新解析组成原理 P058《计算机性能指标》5 页、P063《Cache》18 页，并查看两篇全部原 PDF 页面图。P058 的字长/存储字长/MAR/MDR、吞吐与响应、主频/CPI、MIPS/FLOPS、速率 bit/s 和容量 Byte 的题设口径均已在笔记中对应；本轮未确认新的正文错误，不修改 P058 或其 Manifest 哈希。</p>
+<ul>
+<li>P063 原 PDF 第 1 页文字把“行优先数组的外层列、内层行遍历”说成空间局部性好，正式笔记已有正确的内层连续改变列下标表述，本轮保留纠正。地址映射、命中率、2020 年 64 次强制缺失、标记位计算、2024 年关联度、RA/FIFO/LRU/LFU 轨迹及写策略也都有对应。</li>
+<li>第 3 页的 2018 年题图只在旧笔记中被零散提及，现补全 <code>20 位虚页号 + 12 位页内地址 → 16 位实页号 + 12 位页内地址 → 20 位 tag + 3 位组号 + 5 位偏移</code> 的两级页表、全相联 TLB、2 路组相联 Cache 链路，并按图中 TLB 项与 Cache 组 0 作一次地址验证。</li>
+<li>原页把 Cache “总容量”写作 $(1+20+1+1+2^5\times8)\times2=558$ bit，只乘 2 路而漏乘 8 组；正确数据区为 $8\times2\times32=512$ B。若每行计有效位、tag、脏位，且 2 路 LRU 每组 1 位，则合计 $16\times(256+20+1+1)+8=4456$ bit；即使沿原图每行 1 个替换位的简化口径，也应为 4464 bit。正文明确两种口径，避免把源页的 558 bit 当全 Cache 容量。</li>
+<li>将冲突缺失定义修正为“同容量全相联可容纳而固定映射挤出”，不要求别的组必然空闲；TLB 未命中查页表也不再说成必然读取 DRAM，因页表项访问可能被 Cache 命中。</li>
+</ul>
+<p>P063 的 Manifest Markdown 哈希已刷新。容量数值已独立复算；以上 23 页的逐页对照不证明其余来源零遗漏。</p>
+<h2 id="section-47">47. 2026-10-21 存储器硬件续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P065《存储器》19 页并查看覆盖全部页面的三张拼页图，重点核对 SRAM/DRAM、刷新与时序、ROM/Flash/SSD、磁盘结构、RAID 条带和芯片译码图。正式笔记对源稿的过度概括已有多处限定：RAID 1 的读取不能一律保证翻倍、RAID 不自动提供热插拔、SSD 的寿命不能仅用容量乘标称擦写次数推断实际主机可写量、平均寻道时间也不能普遍取全程时间的一半；本轮未把这些更正改回去。</p>
+<ul>
+<li>第 14 页包含扇区间隙的数据传输率式子，在旧笔记只有“扣除间隙”的叙述。现区分整圈平均用户数据率 $N/T_{rev}$ 与仅在扇区数据部分传送时的 $N/(T_{rev}-sT_{gap})$，防止把后者误当含间隙的持续吞吐。补入同页 16 盘面、256 磁道、16 扇区的 CHS 地址例，按 0 起编号需 4+8+4=16 位。</li>
+<li>第 19 页的芯片图有 8 个位平面，每平面 $64\times64$ 单元，X/Y 译码分别由 6 位地址选择行/列；现补出 $2^{12}=4096$ 个字、每字 8 bit、总计 4 KiB 的图示计算，并说明片选和读写控制不是额外寻址位。</li>
+</ul>
+<p>P065 的 Manifest Markdown 哈希已刷新。上述是 19 页来源的针对性补全，不代表四科语义审查已穷尽。</p>
+<h2 id="section-48">48. 2026-10-21 主存储器芯片扩展续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P066《主存储器》15 页，查看两张覆盖全部页面的拼页图并单独核对第 12、15 页连线图。现有笔记已保留前轮补回的 8 片 $8M\times8$ DRAM 构成 64 MiB 模块，以及 4 片 $16K\times8$ 的四段地址范围；本轮复算均相符。DRAM 行列复用、低位交叉启动条件、总线连接与字/位/字位扩展也有相应解释。</p>
+<ul>
+<li>原页第 12 页线选法例有 4 片 $2K\times8$、片内地址 $A_0\sim A_{10}$，四根低有效片选线 $A_{14}\sim A_{11}$ 分别呈 <code>1110</code>、<code>1101</code>、<code>1011</code>、<code>0111</code>。旧笔记只写原则，现补具体码型及“同时多位为 0 会误选多片”的限制。</li>
+<li>原图没有使 $A_{15}$ 参与片选。若按 16 位 CPU 地址线直接实现而不另行限定，高、低半区将映射同一物理芯片，形成地址别名；笔记现明确指出这个题图边界，并以第 15 页 $1K\times4$ 芯片只需 $A_0\sim A_9$ 作为片内地址的示例说明高位应另作译码/片选。读写与访存控制按有效电平匹配，不把片选仅写作孤立地址比较。</li>
+</ul>
+<p>P066 的 Manifest Markdown 哈希已刷新。这是来源 15 页的增量复核，未据此声称其余笔记零遗漏。</p>
+<h2 id="section-49">49. 2026-10-21 指令系统概念续审</h2>
+<p>用 MarkItDown 0.1.6 对照 P067《指令系统的基本概念》2 页并查看两张原页。原页的考试范围、2022 年 ISA 可见内容、指令/指令集定义、操作码与地址码、单/多/半字长及定长/变长指令划分均在正式笔记有对应；现有笔记已将源稿“一台机器不能执行其他 ISA 指令”的绝对说法限定为“不能<strong>直接</strong>执行，可重新编译、翻译或模拟”，并区分指令字长与取指访存次数的条件。本轮未确认新增错误或图示遗漏，不改 P067 正文与 Manifest 哈希。</p>
+<h2 id="section-50">50. 2026-10-21 寻址、指令格式与 CPU 结构续审</h2>
+<p>以 MarkItDown 0.1.6 解析 P068～P073 六份原 PDF，共 48 页，并对照原页拼图；P068 的 2020 年位宽题和二次间接图、P069 的扩展码分配图、P070 的 2012 年结构体题、P072 的 2019 年递归机器码题另查看单页。P070《数据对齐和大小端》3 页、P071《CISC 和 RISC》2 页本轮未确认新增错误或遗漏，不修改正文和 Manifest 哈希。其余四篇有以下修订：</p>
+<ul>
+<li>P068《寻址方式》13 页：补回 16 位定长、48 种操作、4 种寻址方式的 2020 年例题，按 6 位 OP＋2 位寻址码得直接地址字段 8 位、范围 0～255；把二次间接图的两级指针及数据访问逐次写清。PC 相对寻址保留“以下一条顺序指令地址为基准”的语义，但不再误称所有处理器都在固定译码时刻更新 PC。</li>
+<li>P069《指令格式》8 页：补回原页 15/12/62/32 条三/二/一/零地址指令的另一组扩展操作码分配；原页末的 R、PC、MDR、M[addr] 微操作记号已文字化。将“地址字段多必然使寻址范围下降”改为依操作码及地址字段位宽取舍而定。</li>
+<li>P072《高级语言与机器级代码》15 页：补全 2019 年递归函数机器码例，把 <code>jle</code>、<code>call</code>、<code>jmp</code>、<code>ret</code> 的控制流与相对位移算到实际地址；补上 <code>caller/add</code> 实参和栈帧数值例。原 PDF 的 <code>jbe</code> 注释漏掉相等，本篇现明确其无符号小于等于条件，并限定 C 中无关对象指针关系比较的可移植性。说明立即数写入内存时需要明确操作数宽度；原 PDF <code>*32</code> 比例因子不可直接由 x86 SIB 编码，笔记已有正确限定。</li>
+<li>P073《CPU 的功能与结构》7 页：把原图中 ALU/加法器/乘除法器/三态门/MUX/译码器与寄存器的组合、时序区别补入，并解释移位、自增、符号扩展、零扩展等附加功能。原有程序员可见寄存器与专用/单总线结构未确认新误。</li>
+</ul>
+<p>P068、P069、P072、P073 的 Manifest Markdown 哈希已刷新。上述只是这 48 页的增量语义复核；结构检查和有限数值复算都不能推出四科全部内容零遗漏。下一步从 P074《指令执行过程》继续。</p>
+<h2 id="section-51">51. 2026-10-21 指令执行与数据通路续审</h2>
+<p>继续以 MarkItDown 0.1.6 与原 PDF 四页拼图逐页核对 P074《指令执行过程》和 P075《数据通路》，共 8 页，并单独查看 P075 第 4 页专用通路图。P074 的时钟/机器/指令周期、取指/间址/执行/中断阶段、PC/MAR/MDR/IR 微操作与笔记对应；笔记已纠正原稿把脉冲宽度等同周期、无条件写 PC+1 等过度概括。本轮未确认 P074 新错误，不改正文。</p>
+<p>P075 对数据通路所含组合/时序电路、单周期/多周期/流水线、单总线的源输出与目的输入、ACC＋主存操作数加法已有对应。原 PDF 第 4 页的专用通路图还给出 $C_0$～$C_4$ 五个取指控制点；旧笔记只叙述专用连线优缺点，现补成逐步表：PC→MAR、MAR 地址送主存并读、主存→MDR、MDR→IR、IR 操作码→CU，并注明这些 $C_i$ 是本图编号而非 CPU 通用名称。P075 Manifest Markdown 哈希已刷新。此 8 页复核不等于后续控制器、流水线章节已审完。</p>
+<h2 id="section-52">52. 2026-10-21 控制器续审</h2>
+<p>P076《控制器的功能和工作原理》17 页经 MarkItDown 0.1.6 与三张覆盖全页的拼图对照。硬布线信号逻辑式、取指 T0～T2、微程序控制器的 CM/CMAR/CMDR、水平/垂直/混合微指令、三种控制字段编码，以及 2012 年 33 个微命令得 15 位控制字段、2014 年 130 条微指令得 8 位下地址字段，均与现有笔记对应；此前对源稿“微命令等于微操作”和 EPROM 动态可写等过度概括的限定保留。</p>
+<p>本轮补回第 10 页控存地址示例：公共取指 #1～#3、LDA 执行 #13～#15、STA 执行 #16～#18，并指出后页另以 #0 作公共入口，两张图编号不同。补明微程序运行自身所需的后继地址动作 <code>Ad(CMDR)-&gt;CMAR</code>、取指末依据 <code>OP(IR)</code> 形成执行入口及执行末返回公共取指入口；原笔记此前只说“补充 CMAR/CMDR 特有操作”，未把这条执行链写实。P076 Manifest Markdown 哈希已刷新。17 页复核不证明后续流水线或四科已穷尽核准。</p>
+<h2 id="section-53">53. 2026-10-21 指令流水线续审</h2>
+<p>P077《指令流水线》22 页已用 MarkItDown 0.1.6 解析并与三张覆盖全部页面的拼图逐页对照，第 1 页三阶段重叠图另单页放大核验。现有笔记对五段 IF/ID/EX/M/WB、结构/数据/控制冒险、转发与 load-use 限制、分类及多发技术、4 级流水线 100 条指令的吞吐计算均有对应；第 10～11 页的 RAW 依赖例和第 22 页完整停顿时序已在旧笔记中列出，本轮复核未将其重算结果改动。</p>
+<p>确认的遗漏是第 1 页“三阶段顺序、一次重叠、二次重叠”的启动间隔与总耗时。现按每阶段同为 $t$、无冲突且不计段间开销的前提，补入相邻指令启动间隔 $3t/2t/t$，完成 $n$ 条的时间分别为 $3nt$、$(2n+1)t$、$(n+2)t$；$n=1$ 时三式均为 $3t$。这些公式只适用于该理想三阶段图，不可无条件套到含气泡或不等长的五段流水线。P077 Manifest Markdown 哈希已刷新。此轮对照不证明四科笔记已零遗漏或零错误。</p>
+<h2 id="section-54">54. 2026-10-21 多处理器续审</h2>
+<p>P078《多处理器》4 页以 MarkItDown 0.1.6 和覆盖全页的拼图核对。Flynn 四分类、共享/分布式存储、多核、向量处理器和细粒度/粗粒度/同时多线程均在现有笔记有对应；原页把 SIMD 分支效率、MISD 实例、多核共享 LLC 等说得过于绝对，现有笔记已有条件限定，本轮保留。</p>
+<p>新修订两处实现边界：向量处理器需要的是足够的供数带宽，而非按定义要求“主存必须多端口”；多端口、交叉多模块以及缓存/缓冲可共同实现。粗粒度硬件多线程通常在较长时间的阻塞时切换线程，不宜把每个短暂流水停顿都说成必然切换。P078 Manifest Markdown 哈希已刷新。本轮未确认其他新增知识点遗漏，四页核对不等于全书穷尽审查。</p>
+<h2 id="section-55">55. 2026-10-21 总线续审</h2>
+<p>P079《总线》19 页用 MarkItDown 0.1.6 与三张覆盖全部原页的拼图复核。总线标准与分类、单/双/三/四总线结构、事务阶段、突发/非突发、同步/异步/半同步及分离式通信、异步串行帧、性能指标均有笔记对应；2023 年 32 B 非突发读块 32 ns 与 2013 年 8 体交叉 85 ns、总执行 1010 ns 的算术结果按原题模型复算一致。</p>
+<p>发现 2013 年题目只明确给出各存储体的<strong>存储周期</strong> 40 ns，原解析及旧笔记在计算 85 ns 时还把它当成首字准备时间；一般情况下存取时间可能短于存储周期，因此单凭题干不能推出普适首字延迟。正式笔记现将 85 ns 明确限定为原题图所采用的简化时序，并解释 5 ns 连续启动间隔来自 8 体交叉和 40 ns 周期。P079 Manifest Markdown 哈希已刷新。逐页图核和复算不意味着所有总线硬件都遵循该时序，更不证明四科全书无误。</p>
+<h2 id="section-56">56. 2026-10-21 中断续审</h2>
+<p>P080《中断》17 页由 MarkItDown 0.1.6 解析并查看三张全页拼图，第 17 页四中断源题另放大原页确认。已有笔记覆盖中断/异常边界、请求与响应判优、隐指令与 ISR、单重/多重中断、屏蔽字、2016 年 I/O 中断时间题；原稿把关中断下 NMI 的响应写成“立即”、将系统调用与外部中断混为同一机制等过度概括，现有笔记已限定。</p>
+<p>本轮补回第 13 页向量跳转表示意 <code>13H: JMP 300</code> 与显示器 ISR 地址 300 的两级区别；补回第 17 页完整屏蔽字题：响应优先级 $A&gt;B&gt;C&gt;D$、处理优先级 $D&gt;A&gt;C&gt;B$ 时，A/B/C/D 屏蔽字分别为 <code>1110/0100/0110/1111</code>。在 B/D/A/C 于 $5/10/35/60,\mu s$ 请求、各 ISR 净执行 20 $\mu s$、忽略响应开销的源图模型中，CPU 依次执行原程序 $0\sim5$、B $5\sim10$、D $10\sim30$、B $30\sim35$、A $35\sim55$、B $55\sim60$、C $60\sim80$、B $80\sim85$ 后返回原程序。该题可由文字和表格准确表达，不必复制低清原图。P080 Manifest Markdown 哈希已刷新；这些确定输入的复核不证明所有体系结构的中断实现相同。</p>
+<h2 id="section-57">57. 2026-10-21 外部设备续审</h2>
+<p>P081《外部设备》3 页经 MarkItDown 0.1.6 与三页原图核对。键盘/鼠标、VRAM 容量和 2010 年刷新带宽 $3916.8/0.5=7833.6,Mb/s$、CRT 字符与图形显示、击打/非击打及针式/喷墨/激光打印都有笔记对应。原页第 1 页还单列屏幕尺寸、分辨率、灰度级与刷新率，旧笔记只在公式里涉及后三者；现补明屏幕尺寸是可视区对角线长度，不能据此直接推出像素数，并区分刷新率影响带宽而不影响单帧容量。P081 Manifest Markdown 哈希已刷新；本节无需要无法数字化的插图。</p>
+<h2 id="section-58">58. 2026-10-21 I/O 接口续审</h2>
+<p>P082《I/O 接口》6 页由 MarkItDown 0.1.6 与全部原页图核对。接口五项功能、外设侧串/并行与查询/中断/DMA 分类、I/O 指令与通道指令、数据/控制/状态端口、统一/独立编址、接口工作过程及 2014/2017/2021 年辨析题均在现有笔记有对应。原页“状态端口与控制端口可共用同一寄存器”的表述在硬件实现上可能是同一地址的不同读/写锁存器，正式笔记已有此限定。本轮未确认新的正文错误或必要图示遗漏，不改 P082 正文和 Manifest 哈希。</p>
+<h2 id="section-59">59. 2026-10-21 I/O 方式续审</h2>
+<p>P083《I/O 方式》13 页用 MarkItDown 0.1.6 与两张覆盖全部页面的拼图复核。查询/中断/DMA/通道的 CPU 参与边界、DMA 请求与总线仲裁、控制器寄存器、三种主存争用方式、流程图及 2012 年 $1.5$ 次缺页/s、$1536$ 次 DMA 请求/s、4 体交叉 $320,MB/s$，以及 2020 年 512 B 块的 128 次单字挪用均与笔记对应；这些复算依赖题设的周期挪用和稳定交叉启动模型。</p>
+<p>确认一处条件过弱：旧笔记把固定交替使用写成适于“CPU 周期大于主存周期”，但若一个 CPU 周期要平分给 CPU、DMA 各一次完整访存，至少需 $T_{CPU}\ge2T_m$。现补上原页 $1.2,\mu s$ CPU 周期、主存存取周期小于 $0.6,\mu s$ 的具体例，并注明切换/建立时间。P083 Manifest Markdown 哈希已刷新。该三总线与 DMA 模型不是所有实际机器的唯一实现。</p>
+<h2 id="section-60">60. 2026-10-21 网络体系结构与物理层前半续审</h2>
+<p>继续用 MarkItDown 0.1.6 对照 P084～P090 七份原 PDF，共 46 页，并查看覆盖全部页面的原页拼图；P087 双绞线等级表和无线传播图另放大核验。P085《网络体系结构与参考模型》、P086《物理层概述》、P088《传输方式》、P089《编码与调制》已有对原页概念、层次映射、接口特性、传输方向及原始波形/星座图的对应，本轮未确认新错误或必要图示遗漏，不改这四篇正文。</p>
+<ul>
+<li>P084《计算机网络概述》11 页：原页称报文“大小没有限制”，现限定为不采用分组交换统一的小分组上限，真实报文仍受协议和缓存约束。原页称网状网络“每节点至少两条路径”，现限定为有冗余路径的教材模型，部分网状不保证每对结点两条独立路径。另为吞吐量与带宽的比较限定同一信道统计口径，为 BDP 的“管道内比特数”补上按链路速率持续发送的前提。</li>
+<li>P087《传输媒体》8 页：把原图中的双绞线类别、光电转换链、无线频段/传播、ISM、微波中继、同步卫星和红外旧式速率例转成可检索文字。原 PDF 把 Cat 5e 的频率写成 125 MHz；按 <a href="https://www.flukenetworks.com/knowledge-base/dtx-cableanalyzer/accuracy-dtx-cableanalyzer">Fluke Networks 的类别测试范围</a>修正为 100 MHz，并注明 MHz 不等于链路 bit/s。单模光纤“衰减更小”也不再写作无条件结论，具体损耗仍随波长与链路条件变化。没有将原图的 ISM 频段或红外 4～16 Mb/s 当作全球规则/普适上限。</li>
+<li>P090《信道的极限容量》6 页：奈奎斯特、香农及 2009/2011/2014/2016 年例题对照相符；把反推码元状态数的等式修正为满足目标速率所需的下界 $V\ge 2^{R/(2W)}$，并说明整数状态/固定每码元位数的取整。</li>
+</ul>
+<p>P084、P087、P090 的 Manifest Markdown 哈希已刷新。全库审计脚本原先把 P080 的 <code>page-17-hi.png</code> 放大核验副本也计入正式页数，现仅统计 <code>page-数字.png</code> 正式渲染页，保留放大图；复跑结果 <code>hard_failures=0</code>。这只证明结构、引用与现有来源映射检查通过，不证明四科语义零遗漏。下一步从 P091《信道复用技术》继续。</p>
+<h2 id="section-61">61. 2026-10-21 信道复用与物理层题型续审</h2>
+<p>P091～P097 七份 PDF 共 21 页经 MarkItDown 0.1.6 与全部原页图核对。P092《分组或报文传输速率》的 2010/2013/2023 年题与模拟题、P094 原文件名《CSMA计算》实际的 2014 年 CDMA 题、P095《最大传输速率》的奈奎斯特/香农题、P096《调制与复用技术》以及 P097《检错与纠错机制》均有笔记对应；P097 的 UDP 2024 年 <code>0xE083</code> 与 IPv4 示例 <code>0xEA5C</code> 另做整数求和复算相符。P092、P094～P097 本轮不改正文。</p>
+<ul>
+<li>P091《信道复用技术》5 页：补入复用器/分用器和管理机制带来的成本边界；把原页 A=<code>01011001</code>、B=<code>00110101</code> 的 8 码片正交示例按 <code>0→−1、1→+1</code> 展开，8 项乘积之和为 0，以免只记“码串不同”而未验正交。</li>
+<li>P093《编码分析》2 页：原笔记有 2013 年 10BaseT、2015 年 NRZ/曼彻斯特和 2021 年差分曼彻斯特的答案，但没有各题波形，独立复核不便。现直接从两页原 PDF 裁取并嵌入三张必要波形图，文字说明各自应读码元中点还是码元开始处；图中文字来自原页，不以 AI 重画改变跳变位置。三图均已单独目检，且只在 P093 引用一次。</li>
+</ul>
+<p>P091、P093 的 Manifest Markdown 哈希已刷新。复跑全库检查为 <code>hard_failures=0</code>，153 张库内图均有唯一引用；这验证附件与链接完整，不代表后续数据链路层已复核。下一步 P098 起。</p>
+<h2 id="section-62">62. 2026-10-21 数据链路层题型续审</h2>
+<p>接续上一轮，以 MarkItDown 0.1.6 与原 PDF 页面核对 P098～P102 五份资料，共 17 页。P098 的停止等待、GBN、SR 窗口与确认边界，P099 的信道利用率计算，P100 的 CSMA/CD 最短帧长与冲突检测条件，P101 的字符/比特填充及 PPP 帧结构，均已在正式笔记对应；P101 的零比特反填充结果另行复算相符。本轮未确认这四篇需要新增改动。</p>
+<p>P102《CSMA CA协议》六页还逐页对照了 2024 年 CTS 时序图、隐蔽站 RTS/CTS 图、退避冻结与发送后退避、四地址表及模拟题。CTS 发出后的 NAV 是 $28+296+28+2=354,\mu s$；模拟题从决定发送到收到 ACK 为 $128+3+28+2+28+800+28+2=1019,\mu s$，均与笔记相符。笔记已限定普通单播逐帧 ACK 的适用范围、重试上限及 CTS 非广播但可被旁听，保留这些区别。本轮未确认必要图示或正文缺漏，P098～P102 正文与 Manifest 哈希不变。</p>
+<p>上述 17 页的局部复核并不推出其他章节或四科全书零遗漏。下一步从 P103《IPv4地址结构及其计算》继续。</p>
+<h2 id="section-63">63. 2026-10-21 网络层题型续审</h2>
+<p>以 MarkItDown 0.1.6 解析并对照原 PDF 页面图，复核 P103～P110 八篇共 32 页。P103、P104 的子网/最长前缀匹配和 NAT 数值，P105 的 2021 年距离向量 <code>9、20、28、20</code> 及 2024 年 RIP 传播时间，P106 的 VLAN 与 802.1Q，P107 的组播地址映射和 IGMP 题干边界，P108 的 OpenFlow 1.0 字段，P109 的 IPv6 任播/压缩/ICMPv6，以及 P110 的移动 IP 内外层地址，均与现有笔记逐项对照。P104、P106～P110 本轮未确认新增正文错误或必要图示遗漏，不改这些篇目。</p>
+<ul>
+<li>P103《IPv4地址结构及其计算》6 页：原页第 5 页的 A～E 类历史地址范围在旧笔记未完整列出，现补上 A/B/C 单播默认前缀与 D 类组播、E 类保留/特殊用途，并强调现代 CIDR 应以实际掩码为准。将“NAT 后必须用路由器公网接口地址”的泛化修正为可使用接口地址或分配的公网地址池；2016 年题图的 <code>192.168.3.1</code> 网关缺口及 2019 年 <code>/20</code> 分 5 个子网、最小 <code>/24</code> 的既有纠正保留。</li>
+<li>P105《路由协议》10 页：原讲义称 RIPv1 不支持任何子网划分，现明确其不携带掩码、不能表达 VLSM/CIDR，但在同一有类主网络统一掩码等条件下可用于 FLSM。NAPT 对外地址也不再被无条件限定为接口地址。旧笔记对 2024 年图上 <code>210.2.3.0/24</code> 至少 30 s、<code>210.2.4.0/24</code> 至少 60 s 的纠正保留；同一区域 OSPF 收敛后 SPF 无环的前提未删去。</li>
+</ul>
+<p>P103、P105 的 Manifest Markdown 哈希已刷新；全库复跑 <code>hard_failures=0</code>，153 张库内图均被引用。结构与来源检查不能证明四科全书零遗漏。下一步从 P111 继续运输层等后续章节。</p>
+<h2 id="section-64">64. 2026-10-21 运输层与应用层题型续审</h2>
+<p>以 MarkItDown 0.1.6 对照 P111～P115 五份原 PDF、共 19 页，并查看覆盖全部页面的拼页图。P111 的 1500 B/800 B 分片得 776 B 与 704 B、片偏移 0/97，222 B HTTP 封装效率约 79.3%；P112 的 3000 B 传输 60.04 s、11 KB 窗口题 60.06 s，以及 512 B 序号链；P113 的持续/非持续 HTTP 时序；P114 的 DHCP 中继与 UDP 67/68；P115 的 DNS 层级查询与 2～5 RTT，均与笔记对照。P112～P115 本轮未确认新的正文错误或必要图片遗漏；原页将 HTTP/1.1 流水线写成默认、将 DHCP 服务器 ARP 探测写成必然、将 TCP ACK 写成“HTTP 确认”等过度概括，正式笔记已有相应限定。</p>
+<p>P111《IP、UDP、TCP报文段》4 页：把“TCP 序号就是数据第一个字节”限定为携带数据时的规则，补明 SYN/FIN 各占一个序号而纯 ACK 不占；把“TTL 减到 0 必定发送 ICMP 时间超过”限定为通常情况，列出广播/多播、非首片、ICMP 差错本身等不返回 ICMP 差错的情形。IPv6 UDP 检验和的普通规则及受限隧道例外、原页伪首部和数值例均保留。P111 Manifest Markdown 哈希已刷新。</p>
+<p>已复跑全库结构、来源和附件检查，<code>hard_failures=0</code>，153 张库内图均被引用；这 19 页的逐页核对和结构检查仍不能替代跨章节概念一致性与全书级语义审查。</p>
+<h2 id="section-65">65. 2026-10-22 跨篇概念一致性续审</h2>
+<p>本轮不重复 P098～P115 的全页复核，而是交叉检查了 TCP 序号、IPv4 分片与 ICMP、HTTP 请求依赖、操作系统进程/线程共享状态，并抽查数据结构 Dijkstra 与网络 OSPF、操作系统/组成原理的 TLB 与缺页有效访问时间，以及两科中断/异常的口径。后面三组本轮未确认新增冲突；前面四组发现了需要统一的边界：</p>
+<ul>
+<li>P111 原 PDF 第 2 页把 TCP <code>seq</code> 概括为数据首字节序号。依据 <a href="https://www.rfc-editor.org/rfc/rfc9293.html">RFC 9293</a> 补全例外：若 SYN 与数据同段，<code>seq</code> 是 SYN 的序号，数据从 <code>seq+1</code> 起；FIN 在数据后占 1 个序号。运输层知识图改写笔记中的字段表、计算关系与复盘也同步统一，不能只在题型篇修正一处。</li>
+<li>网络层总纲原先把 <code>DF=1</code> 且 MTU 不足时“丢弃并返回 ICMP”写成必然。现区分丢弃与回报：普通允许回报的单播报文应返回类型 3/代码 4；广播/多播、非首片、ICMP 差错本身等禁止回报，依据 <a href="https://www.rfc-editor.org/rfc/rfc1812.html">RFC 1812</a>。这与 P111 已写明的 TTL/ICMP 禁发边界保持一致。</li>
+<li>P113 原 PDF 第 3 页把“主 HTML 完整到达后才能请求引用对象”用作离散 RTT 题的时序前提。现明确 6/4/16/3 RTT 等旧例仍按原题模型计算，但不能把它升级为真实浏览器的必然规则：浏览器可流式解析、预扫描 HTML，发现 URL 后即可能开始请求。应用层知识总纲的网页对象与 RTT 表也同步限定模型；补注依据 <a href="https://html.spec.whatwg.org/multipage/parsing.html">HTML Standard</a>。</li>
+<li>操作系统 P045《进程与线程》把共享内存一概写作必须互斥、把线程一概写作内核 CPU 调度单位。现限定为并发修改共享可变状态且存在写入时须安排同步；纯并发读取不因共享而需要互斥。纯用户级线程由用户态库调度，内核调度其承载实体；同进程线程各有栈，但栈仍在共享地址空间，不等于彼此内存隔离。</li>
+</ul>
+<p>已改的 P045、P111、P113 正文 SHA-256 在 Manifest 中刷新；三篇非 PDF 来源的网络层、运输层和应用层知识总纲不属于该 PDF 哈希清单。全库自动审计复跑为 <code>hard_failures=0</code>，153 张库内图片均有引用，146 份 PDF 的清单状态均为 <code>visual_pass</code>。此轮是针对性跨篇抽核，不是四本书所有概念和例题的穷尽证明。</p>
+<h2 id="section-66">相关入口</h2>
+<ul>
+<li><a href="/notes/cs408-7afacd3a9ea5/">408 知识图谱总览</a></li>
+<li><a href="/notes/cs408-b236e9204607/">重写方法与质量标准</a></li>
+<li><a href="/notes/cs408-39ac80f6dca5/">重写进度与复核记录</a></li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-6f958f0fc0e0/index.html"><span>← 上一项</span><strong>Lecture 4：知识 - 浮点数的表示与运算</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-73a51c61296d/index.html"><span>下一项 →</span><strong>Lecture 6：顺序表和链表对比</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7afacd3a9ea5/"><span class="related-type">笔记</span><strong>408 知识图谱总览</strong><span>408 学习笔记：408 知识图谱总览。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

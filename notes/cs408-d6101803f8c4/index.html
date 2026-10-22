@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 19：知识 - 数据通路的功能和基本结构 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 19：知识 - 数据通路的功能和基本结构。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 19：知识 - 数据通路的功能和基本结构 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 19：知识 - 数据通路的功能和基本结构。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-d6101803f8c4/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 19：知识 - 数据通路的功能和基本结构 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 19：知识 - 数据通路的功能和基本结构。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 19：知识 - 数据通路的功能和基本结构",
+      "item": "https://www.jiayuhere.com/notes/cs408-d6101803f8c4/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-d6101803f8c4/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-d6101803f8c4/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d6101803f8c4/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d6101803f8c4/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-d6101803f8c4/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 19：知识 - 数据通路的功能和基本结构</h1><p class="article-lead">408 学习笔记：Lecture 19：知识 - 数据通路的功能和基本结构。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 7 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/547c6c1c4aac.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/547c6c1c4aac.pdf" download="Lecture 19：知识 - 数据通路的功能和基本结构.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">5.1 数据通路与执行方案</a><a href="#section-3">5.2 CPU 内部单总线结构</a><a href="#section-4">5.3 单总线微操作例子</a><a href="#section-8">5.4 专用数据通路与多总线</a><a href="#section-13">相关知识</a><a href="#section-14">5.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：数据通路是指令执行时数据实际经过的部件和路径。它包括 ALU、寄存器、异常检测/响应电路等，但<strong>不包括控制器 CU</strong>；CU 用控制信号决定通路何时、向哪流动。</p>
+</blockquote>
+<h2 id="section-1">5.1 数据通路与执行方案</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据通路</td>
+<td>指令执行中数据流经的路径及路径上的部件，含组合逻辑和时序逻辑</td>
+</tr>
+<tr>
+<td>组合逻辑部件</td>
+<td>ALU、加法器、MUX、异常检测等</td>
+</tr>
+<tr>
+<td>时序逻辑部件</td>
+<td>通用寄存器、PC、IR、MDR、暂存寄存器、标志寄存器等</td>
+</tr>
+<tr>
+<td>控制信号</td>
+<td>选择数据源、目的地、ALU 操作、读写动作，驱动数据流</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-2">5.1.1 单周期、多周期、流水线</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>指令执行关系</th>
+<th>时钟与控制特点</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单周期</td>
+<td>指令串行，一条指令一个时钟周期完成</td>
+<td>所有指令周期取最慢指令，控制信号在周期内不变，$CPI=1$</td>
+<td>设计简单；周期长、主频低</td>
+</tr>
+<tr>
+<td>多周期</td>
+<td>指令串行，但不同类型用不同数量的时钟周期</td>
+<td>每周期完成一个步骤，控制信号随周期变化</td>
+<td>比单周期更高效；控制复杂</td>
+</tr>
+<tr>
+<td>流水线</td>
+<td>多条指令同时处于不同步骤</td>
+<td>尽量每周期启动一条</td>
+<td>提升吞吐；需处理冒险</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>单周期的 $CPI=1$ 并不意味着性能一定好：为了容纳最慢指令，其时钟周期很长。</li>
+<li>单总线一次只能完成一条内部数据传输，故通常不能满足“所有微操作同一时钟完成”的单周期数据通路需求。</li>
+</ul>
+<h2 id="section-3">5.2 CPU 内部单总线结构</h2>
+<p>将 ALU 与所有寄存器连接到一条 CPU 内部公共总线，称单总线数据通路。它简单、省硬件，但总线争用使许多传送必须分多个微操作完成。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPRs</td>
+<td>通用寄存器组，<code>rs/rd</code> 为读/写寄存器编号</td>
+</tr>
+<tr>
+<td>Y、Z</td>
+<td>ALU 两侧的暂存寄存器；Y 保留输入，Z 暂存结果</td>
+</tr>
+<tr>
+<td>FR</td>
+<td>标志寄存器，保存 ALU 的状态标志</td>
+</tr>
+<tr>
+<td><code>Xin</code> / <code>Xout</code></td>
+<td><code>in</code> 允许总线写入 X，<code>out</code> 允许 X 驱动总线</td>
+</tr>
+<tr>
+<td>三态门</td>
+<td>连接寄存器输出与总线，未使能时高阻，防止多源同时驱动</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>内部总线</strong>连接同一部件内部的寄存器和运算部件；<strong>系统总线</strong>连接 CPU、主存、外设，二者不可混淆。</li>
+<li>任意时刻一般只能一个 <code>out</code> 生效，但可有多个兼容的 <code>in</code> 同时接收总线数据；否则会造成总线冲突。</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    SRC[&quot;PC / IR / MDR / GPR / ACC / Z&quot;] --&gt;|&quot;同一时刻仅一个 out&quot;| BUS[&quot;CPU 内部单总线&quot;]
+    BUS --&gt;|&quot;可同时使能多个 in&quot;| DST[&quot;MAR / IR / MDR / GPR / ACC / Y&quot;]
+    BUS --&gt; Y[&quot;暂存寄存器 Y&quot;]
+    Y --&gt; ALU[&quot;ALU&quot;]
+    ACC[&quot;ACC 或另一专用输入&quot;] --&gt; ALU
+    ALU --&gt; Z[&quot;结果寄存器 Z&quot;]
+    Z --&gt;|&quot;Zout&quot;| BUS
+    CU[&quot;CU&quot;] -. &quot;选择 out/in 与 ALU 功能&quot; .-&gt; BUS
+</pre>
+<h2 id="section-4">5.3 单总线微操作例子</h2>
+<h3 id="section-5">5.3.1 寄存器到寄存器</h3>
+<p>把 PC 内容送 MAR：</p>
+<p>$$PC\xrightarrow{Bus}MAR$$</p>
+<ul>
+<li><code>PCout</code> 有效：$(PC)\to Bus$；<code>MARin</code> 有效：$Bus\to MAR$。</li>
+<li>简写为 $(PC)\to Bus\to MAR$；箭头不表示 CU 自身在搬运数据，而表示 CU 已发出相应使能控制。</li>
+</ul>
+<h3 id="section-6">5.3.2 取指</h3>
+<p>$$
+\begin{aligned}
+(PC)&amp;\to Bus\to MAR\
+1&amp;\to R\
+M(MAR)&amp;\to MDR\
+(MDR)&amp;\to Bus\to IR
+\end{aligned}
+$$</p>
+<ul>
+<li>第一步需 <code>PCout</code>、<code>MARin</code>；第二步 CU 经控制总线发主存读；主存数据到 MDR 时 <code>MDRin</code> 有效；最后 <code>MDRout</code>、<code>IRin</code> 有效。</li>
+<li>若还需更新 PC，单总线通路须安排额外时序或借助专门增量通路，不能假设所有传送自动并行。</li>
+</ul>
+<h3 id="section-7">5.3.3 加法指令执行</h3>
+<p>以累加器 ACC 与主存操作数相加为例：</p>
+<p>$$
+\begin{aligned}
+Ad(IR)&amp;\to Bus\to MAR\
+1&amp;\to R\
+M(MAR)&amp;\to MDR\
+(MDR)&amp;\to Bus\to Y\
+(ACC)+(Y)&amp;\to Z\
+(Z)&amp;\to Bus\to ACC
+\end{aligned}
+$$</p>
+<ul>
+<li>Y 暂存从主存读来的操作数，避免单总线下一时刻覆盖；ALU 对 ACC、Y 运算，Z 保存中间结果，最后才回写 ACC。</li>
+<li><code>Ad(IR)</code> 是 IR 的地址字段，不能错误写成 MDR 内容；从 IR 地址码到 MAR 通常由 IR 输出相关控制支持。</li>
+</ul>
+<h2 id="section-8">5.4 专用数据通路与多总线</h2>
+<p>专用数据通路按指令执行中数据/地址流向设置专门连线，或采用多条内部总线同时传送多个源/目的。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>性能</th>
+<th>硬件复杂度</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单总线</td>
+<td>较低</td>
+<td>低</td>
+<td>数据争用，需要分时传送</td>
+</tr>
+<tr>
+<td>多总线/专用通路</td>
+<td>较高</td>
+<td>高</td>
+<td>避免共享总线冲突，可并行发生多次传送</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>专用通路可让 PC 到 MAR、寄存器到 ALU、ALU 到结果寄存器等不同流动同时或更紧凑地进行；代价是更多连线、MUX/三态门和控制逻辑。</li>
+<li>图中实线通常画数据路径，带箭头虚线通常画控制路径。分析题先找“数据从哪里来、到哪里去”，再写使能和 ALU 功能控制。</li>
+</ul>
+<h4 id="section-9">原 PDF 专用通路取指图的控制信号</h4>
+<p>原页第 4 页的连线图用 $C_0$～$C_4$ 标记这张图中特定的通路使能，而不是所有 CPU 通用的控制信号名称：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>图中信号/动作</th>
+<th>数据流或含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$C_0$ 有效</td>
+<td>$(PC)\to MAR$</td>
+</tr>
+<tr>
+<td>$C_1$ 有效，再发读命令</td>
+<td>将 MAR 中的地址送往主存，并请求主存读取</td>
+</tr>
+<tr>
+<td>$C_2$ 有效</td>
+<td>$M(MAR)\to MDR$</td>
+</tr>
+<tr>
+<td>$C_3$ 有效</td>
+<td>$(MDR)\to IR$</td>
+</tr>
+<tr>
+<td>$C_4$ 有效</td>
+<td>$Op(IR)\to CU$，把操作码提供给控制器译码</td>
+</tr>
+</tbody>
+</table></div>
+<p>该图还画出 $(PC)+1\to PC$ 的顺序地址更新；其中的 $1$ 是题图采用的指令地址单位，字节编址或变长指令要按实际长度改写。不能把主存读命令本身误认为数据已经送入 MDR：地址、读控制和返回数据是不同环节。</p>
+<h3 id="section-10">题型：#数据通路控制信号</h3>
+<h4 id="section-11">第一部分：作答步骤</h4>
+<ol>
+<li>把语义拆成不能再并行的微操作，例如“地址送 MAR、主存读、数据进 MDR、数据进 IR”。</li>
+<li>每次总线传送只指定一个源 <code>out</code>，列出所有需要接收的 <code>in</code>；涉及 ALU 时写清操作和结果寄存器。</li>
+<li>区分 CPU 内部总线、数据线、地址线、控制线；主存读写命令由 CU 发出，而主存数据仍经 MDR/数据通路流动。</li>
+</ol>
+<h4 id="section-12">第二部分：易错点</h4>
+<ul>
+<li>数据通路不是 CU；CU 控制通路但不属于数据通路组成。</li>
+<li>单总线可同时让多个寄存器写入，却不能让两个寄存器同时输出到总线。</li>
+<li>Y/Z 是为解决单总线暂存和 ALU 输入/输出时序而设，不能省略后把两次冲突传送硬并到同一节拍。</li>
+</ul>
+<h2 id="section-13">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-d889ec3bdd23/">上一篇：指令执行过程</a> · <a href="/notes/cs408-c60c78e602f8/">下一篇：控制器的功能和工作原理</a></li>
+</ul>
+<h2 id="section-14">5.5 本节复盘</h2>
+<ul>
+<li>数据通路含 ALU、寄存器、异常检测/响应等路径部件，不含 CU；控制信号决定通路数据流。</li>
+<li>单周期 $CPI=1$ 但受最慢指令制约，多周期按步骤改变控制信号，流水线提高吞吐并引入冒险问题。</li>
+<li>单总线简单但有争用，<code>out</code> 驱动总线、<code>in</code> 接收总线，三态门保证不同时多源冲突。</li>
+<li>取指、访存加法等要分解成 MAR/MDR/IR/Y/Z 的微操作；专用通路性能高但硬件和控制更复杂。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-d568b25e2f3d/index.html"><span>← 上一项</span><strong>Lecture 8：知识 - 信道复用技术</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-d690a826208c/index.html"><span>下一项 →</span><strong>6. 图</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

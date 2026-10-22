@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>3 题型 - DNS与HTTP综合 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 3 题型 - DNS与HTTP综合. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="3 题型 - DNS与HTTP综合 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 3 题型 - DNS与HTTP综合. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-b9c8f13ec3e6/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3 题型 - DNS与HTTP综合 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 3 题型 - DNS与HTTP综合. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "3 题型 - DNS与HTTP综合",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-b9c8f13ec3e6/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-b9c8f13ec3e6/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-b9c8f13ec3e6/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-b9c8f13ec3e6/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-b9c8f13ec3e6/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-b9c8f13ec3e6/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">3 题型 - DNS与HTTP综合</h1><p class="article-lead">Chinese-language Computer Science 408 note: 3 题型 - DNS与HTTP综合. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>7 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/9b2876bf9f51.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/9b2876bf9f51.pdf" download="3 题型 - DNS与HTTP综合.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 DNS 基础</a><a href="#section-4">3.2 递归查询与迭代查询</a><a href="#section-7">3.3 缓存如何影响次数与时间</a><a href="#section-8">3.4 2016 年真题：DNS 查询最少与最多次数</a><a href="#section-12">3.5 得到 IP 后的 HTTP 时间</a><a href="#section-13">3.6 2020 年真题：最短 20 ms、最长 50 ms</a><a href="#section-17">3.7 模拟题：`SuccessOnShore408.com`</a><a href="#section-21">3.8 通用计算模板</a><a href="#section-22">3.9 解题步骤</a><a href="#section-23">3.10 易错点</a><a href="#section-24">相关知识</a><a href="#section-25">3.11 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：DNS 与 HTTP 综合题先计算域名解析，再计算 TCP 建连和 HTTP 请求。核心是识别缓存、递归/迭代查询层级和计时起点：DNS 每次 UDP 查询-响应通常按 1 RTT，小 Web 页在得到 IP 后通常再用 1 RTT 建 TCP、1 RTT 请求响应。</p>
+</blockquote>
+<blockquote>
+<p><strong>TIP</strong> · 章节导航：<a href="/en/notes/cs408-a8acba740351/">返回第六章：应用层总纲</a></p>
+</blockquote>
+<h2 id="section-1">3.1 DNS 基础</h2>
+<h3 id="section-2">3.1.1 常用协议与端口</h3>
+<p>DNS 使用 53 端口：</p>
+<ul>
+<li>普通查询通常使用 UDP 53。</li>
+<li>响应过大、截断后重试或区域传送等场景可以使用 TCP 53。</li>
+<li>本资料各题明确或默认按 UDP 查询，因此每个远端查询-响应不需要额外建立 TCP，计为 1 RTT。</li>
+</ul>
+<h3 id="section-3">3.1.2 域名层次</h3>
+<p>解析 <code>www.abc.xyz.com</code> 时，可能涉及：</p>
+<pre><code class="language-text">根域名服务器
+-&gt; .com 顶级域名服务器
+-&gt; xyz.com 权限域名服务器
+-&gt; abc.xyz.com 权限域名服务器
+-&gt; www.abc.xyz.com 的资源记录
+</code></pre>
+<p>具体需要访问几级服务器，取决于域名的区域委派和缓存情况。</p>
+<h2 id="section-4">3.2 递归查询与迭代查询</h2>
+<h3 id="section-5">3.2.1 递归查询</h3>
+<p>请求方要求被查询服务器给出最终答案：</p>
+<ul>
+<li>若服务器已有答案，直接返回。</li>
+<li>若没有，它代表请求方继续查询其他服务器。</li>
+<li>主机向本地域名服务器的请求通常按递归查询理解。</li>
+</ul>
+<h3 id="section-6">3.2.2 迭代查询</h3>
+<p>被查询服务器若没有最终答案，就返回下一步应访问的域名服务器线索；查询方自己继续询问：</p>
+<pre><code class="language-text">本地 DNS -&gt; 根 DNS
+本地 DNS -&gt; 顶级域 DNS
+本地 DNS -&gt; 权限 DNS
+</code></pre>
+<p>因此题目若说“本地域名服务器提供递归服务，Internet 中其他 DNS 只提供迭代服务”，含义是：主机只把问题交给本地 DNS，本地 DNS 依次访问各层服务器。</p>
+<h2 id="section-7">3.3 缓存如何影响次数与时间</h2>
+<p>可利用的缓存包括：</p>
+<ul>
+<li>浏览器或操作系统 DNS 缓存。</li>
+<li>主机配置的本地域名服务器缓存。</li>
+<li>各级 DNS 服务器缓存。</li>
+</ul>
+<p>若主机缓存已有目标映射，主机不发 DNS 查询；若本地 DNS 缓存已有映射，主机到本地 DNS 的一次交互仍可能存在，但题目常明确忽略局域网内时延，所以这部分计时可为 0。</p>
+<p>解题时必须区分：</p>
+<ul>
+<li>“发出多少次查询”：要数实际 DNS 请求报文。</li>
+<li>“消耗多少 RTT”：只数题目要求计时的远端查询-响应。</li>
+</ul>
+<h2 id="section-8">3.4 2016 年真题：DNS 查询最少与最多次数</h2>
+<h3 id="section-9">3.4.1 条件</h3>
+<ul>
+<li>所有域名服务器均采用迭代查询。</li>
+<li>目标规范域名为 <code>www.abc.xyz.com</code>。</li>
+<li>问域名服务器完成解析时可能发出的 DNS 查询最少和最多次数。</li>
+</ul>
+<h3 id="section-10">3.4.2 最少次数</h3>
+<p>若主机或相关解析器缓存中已有完整域名到 IP 的映射，不需要继续访问任何 DNS 服务器：</p>
+<pre><code class="language-text">最少查询次数 = 0
+</code></pre>
+<h3 id="section-11">3.4.3 最多次数</h3>
+<p>所有相关缓存都未命中时，本地域名服务器依次查询：</p>
+<ol>
+<li>根域名服务器。</li>
+<li><code>.com</code> 顶级域名服务器。</li>
+<li><code>xyz.com</code> 权限域名服务器。</li>
+<li><code>abc.xyz.com</code> 权限域名服务器。</li>
+</ol>
+<pre><code class="language-text">最多查询次数 = 4
+</code></pre>
+<p><strong>答案：最少 0 次，最多 4 次。</strong></p>
+<h2 id="section-12">3.5 得到 IP 后的 HTTP 时间</h2>
+<p>在忽略 DNS、发送时间且只获取一个小型纯文本页面的经典模型中：</p>
+<pre><code class="language-text">建立 TCP 连接：1 RTT
+发送 HTTP 请求并收到页面：1 RTT
+</code></pre>
+<p>因此：</p>
+<p>$$
+T_{HTTP}=2RTT
+$$</p>
+<p>这一部分与 DNS 解析时间相加：</p>
+<p>$$
+T_{总}=T_{DNS}+2RTT
+$$</p>
+<h2 id="section-13">3.6 2020 年真题：最短 20 ms、最长 50 ms</h2>
+<h3 id="section-14">3.6.1 条件</h3>
+<ul>
+<li>本地域名服务器只提供递归查询。</li>
+<li>Internet 中其他域名服务器只提供迭代查询。</li>
+<li>目标为 <code>http://www.abc.com/index.html</code>。</li>
+<li>主机到 Internet 上各服务器的 RTT 为 10 ms。</li>
+<li>忽略其他各种时延，包括题设中的本地主机到本地 DNS 的时延。</li>
+<li>页面为纯文本，不含其他引用对象。</li>
+</ul>
+<h3 id="section-15">3.6.2 最短时间</h3>
+<p>主机或本地 DNS 缓存已有 <code>www.abc.com</code> 映射：</p>
+<pre><code class="language-text">DNS：0 RTT
+TCP 建连：1 RTT
+HTTP 请求-响应：1 RTT
+</code></pre>
+<p>$$
+T_{min}=2RTT=20\ \mathrm{ms}
+$$</p>
+<h3 id="section-16">3.6.3 最长时间</h3>
+<p>主机和本地 DNS 均无缓存。本地 DNS 迭代访问：</p>
+<pre><code class="language-text">根 DNS：1 RTT
+.com 顶级 DNS：1 RTT
+abc.com 权限 DNS：1 RTT
+</code></pre>
+<p>DNS 共 3 RTT，再加 Web 访问 2 RTT：</p>
+<p>$$
+T_{max}=(3+2)RTT=5RTT=50\ \mathrm{ms}
+$$</p>
+<p><strong>答案：D，20 ms、50 ms。</strong></p>
+<h2 id="section-17">3.7 模拟题：<code>SuccessOnShore408.com</code></h2>
+<h3 id="section-18">3.7.1 条件</h3>
+<ul>
+<li>本地 DNS 提供递归查询。</li>
+<li>Internet 中其他 DNS 只提供迭代查询。</li>
+<li>DNS 使用 UDP。</li>
+<li>访问 Internet 各服务器的往返时间均为 RTT，忽略其他时延。</li>
+<li>URL 为 <code>http://www.SuccessOnShore408.com/index.html</code>。</li>
+<li>页面为纯文本，不含其他对象。</li>
+</ul>
+<h3 id="section-19">3.7.2 DNS 查询流程</h3>
+<pre class="mermaid">flowchart LR
+    D[主机 D] --&gt;|递归查询| L[本地域名服务器]
+    L --&gt;|迭代查询| R[根域名服务器]
+    R --&gt;|返回 com 线索| L
+    L --&gt;|迭代查询| T[com 顶级域名服务器]
+    T --&gt;|返回权限服务器线索| L
+    L --&gt;|迭代查询| A[SuccessOnShore408.com 权限域名服务器]
+    A --&gt;|返回 Web 服务器 IP| L
+    L --&gt;|最终结果| D
+</pre>
+<p>最少情况：本地 DNS 已缓存最终映射，且题目忽略主机到本地 DNS 时延：</p>
+<p>$$
+T_{DNS,min}=0
+$$</p>
+<p>最多情况：根、<code>.com</code>、权限服务器各一次迭代查询：</p>
+<p>$$
+T_{DNS,max}=3RTT
+$$</p>
+<h3 id="section-20">3.7.3 加上 HTTP</h3>
+<p>得到 Web 服务器 IP 后，还需 2 RTT：</p>
+<pre><code class="language-text">1 RTT：TCP 三次握手建立连接
+1 RTT：请求并接收 index.html
+</code></pre>
+<p>所以：</p>
+<p>$$
+T_{min}=0+2RTT=2RTT
+$$</p>
+<p>$$
+T_{max}=3RTT+2RTT=5RTT
+$$</p>
+<p><strong>答案：最短 2 RTT，最长 5 RTT。</strong></p>
+<h2 id="section-21">3.8 通用计算模板</h2>
+<p>对于不含引用对象的小页面：</p>
+<p>$$
+T=T_{本地DNS}+kRTT_{DNS}+1RTT_{TCP}+1RTT_{HTTP}
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$T_{本地DNS}$ 是否计算由题目决定，很多题明确忽略。</li>
+<li>$k$ 是实际访问的远端 DNS 层级数。</li>
+<li>缓存每命中一级，就可能减少后续迭代查询。</li>
+<li>若页面还引用图片、脚本等对象，应在 HTTP 部分继续按持久/非持久、流水线/非流水线规则增加时间。</li>
+</ul>
+<h2 id="section-22">3.9 解题步骤</h2>
+<ol>
+<li>从完整域名拆出根、顶级域、各级权限域，判断最多需要几次迭代。</li>
+<li>检查主机、本地 DNS 或中间 DNS 是否可能缓存命中。</li>
+<li>区分主机到本地 DNS 的递归请求与本地 DNS 对外的迭代请求。</li>
+<li>明确 DNS 使用 UDP 还是 TCP；本题型按 UDP，每次远端查询-响应为 1 RTT。</li>
+<li>域名解析完成后不要停，继续加 TCP 建连 1 RTT 和 HTTP 请求-响应 1 RTT。</li>
+<li>若存在引用对象，转入 HTTP 连接类型题继续计算。</li>
+</ol>
+<h2 id="section-23">3.10 易错点</h2>
+<ul>
+<li>DNS 最少查询次数可以是 0，因为缓存可能直接命中。</li>
+<li>域名层级多不等于固定查询次数多；缓存和区域委派会改变实际次数。</li>
+<li>2016 年 <code>www.abc.xyz.com</code> 最多是根、<code>.com</code>、<code>xyz.com</code>、<code>abc.xyz.com</code> 四次，不是三次。</li>
+<li>2020 年题忽略主机到本地 DNS 的时延，所以最长只把三次 Internet 迭代计为 3 RTT。</li>
+<li>DNS 解析完成后仍需 TCP 建连和 HTTP 请求，共 2 RTT。</li>
+<li>“DNS 使用 UDP”是这些题每次查询只算 1 RTT 的依据之一，但现实 DNS 也可能改用 TCP。</li>
+<li>查询次数与 RTT 数不能混为一谈；本地交互可能发生但被题目设为 0 时延。</li>
+</ul>
+<h2 id="section-24">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-c001d492e92c/">上一篇：DHCP 应用</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-a8acba740351/">应用层总纲</a></li>
+</ul>
+<h2 id="section-25">3.11 本节复盘</h2>
+<ul>
+<li>主机通常向本地 DNS 发递归查询，本地 DNS 再向根、顶级和权限 DNS 发迭代查询。</li>
+<li>普通 DNS 查询常用 UDP 53，每次远端查询-响应在题目模型中计 1 RTT。</li>
+<li>缓存命中时 DNS 查询可降到 0；缓存全未命中时按实际域名委派层级逐次查询。</li>
+<li>2016 年 <code>www.abc.xyz.com</code> 最少 0 次、最多 4 次。</li>
+<li>单个小 Web 页面在获得 IP 后通常还需 1 RTT 建 TCP、1 RTT 完成 HTTP 请求响应。</li>
+<li>2020 年题最短 2 RTT=20 ms，最长 5 RTT=50 ms，答案 D。</li>
+<li><code>SuccessOnShore408.com</code> 模拟题最短 2 RTT、最长 5 RTT。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-b78f75dd8c69/index.html"><span>← Previous item</span><strong>计算机网络导航</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-ba3d460787c2/index.html"><span>Next item →</span><strong>Lecture 21：知识 - 指令流水线</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

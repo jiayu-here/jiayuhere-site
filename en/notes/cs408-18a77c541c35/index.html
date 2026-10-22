@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>5. 查找 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 5. 查找. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="5. 查找 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 5. 查找. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-18a77c541c35/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5. 查找 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 5. 查找. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "5. 查找",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-18a77c541c35/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-18a77c541c35/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-18a77c541c35/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-18a77c541c35/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-18a77c541c35/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-18a77c541c35/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">5. 查找</h1><p class="article-lead">Chinese-language Computer Science 408 note: 5. 查找. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>9 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ac8cca2a0770.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ac8cca2a0770.pdf" download="5. 查找.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">0. 公共定义</a><a href="#section-2">1. 有序顺序表：查找后交换，否则插入</a><a href="#section-5">2. 单链表目标结点与前驱交换</a><a href="#section-8">3. 折半查找：非递归与递归</a><a href="#section-11">4. 判断一棵树是否为 BST</a><a href="#section-14">5. BST 的最小值与最大值</a><a href="#section-15">6. 求指定结点在 BST 中的层次</a><a href="#section-16">7. 输出 BST 中所有大于 `key` 的结点</a><a href="#section-17">8. 七题覆盖与纠错速查</a><a href="#section-18">相关知识</a><a href="#section-19">9. 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p><strong>ABSTRACT</strong> · 本节范围
+本笔记逐页覆盖原 PDF 的 7 页、7 道代码题：有序表查找/交换/插入、单链表结点前移、递归与非递归折半查找、BST 合法性、BST 最值、BST 结点层次、输出所有大于关键字的结点。代码统一为 C++17，原稿的查找方向、返回值、空表和空树语义均已订正。</p>
+</blockquote>
+<h2 id="section-1">0. 公共定义</h2>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;cstddef&gt;
+#include &lt;limits&gt;
+#include &lt;optional&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+
+struct LNode {
+    int data{};
+    LNode* next = nullptr;
+};
+
+struct BSTNode {
+    int data{};
+    BSTNode* left = nullptr;
+    BSTNode* right = nullptr;
+};
+</code></pre>
+<ul>
+<li>顺序表和向量下标统一从 0 开始，查找失败返回 <code>-1</code>。</li>
+<li>BST 采用严格次序：左子树关键字 $&lt;$ 根关键字 $&lt;$ 右子树关键字，不允许重复关键字。</li>
+<li>BST 根结点层号为 1；空树合法，空树没有最大值、最小值或结点层号。</li>
+</ul>
+<h2 id="section-2">1. 有序顺序表：查找后交换，否则插入</h2>
+<h3 id="section-3">1.1 题目</h3>
+<p>顺序表严格递增。以尽可能低的时间复杂度查找 $x$：</p>
+<ul>
+<li>若找到且它有后继元素，将它与后继交换；</li>
+<li>若找到但它已是表尾，不交换；</li>
+<li>若未找到，按递增次序插入 $x$。</li>
+</ul>
+<h3 id="section-4">1.2 算法</h3>
+<p>先用折半思想求第一个“不小于 $x$”的位置 <code>pos</code>。若该位置等于 $x$，执行相邻交换；否则 <code>pos</code> 正是插入位置。</p>
+<pre><code class="language-cpp">std::size_t lowerBoundIndex(const std::vector&lt;int&gt;&amp; values, int x) {
+    std::size_t low = 0;
+    std::size_t high = values.size();  // 半开区间 [low, high)
+    while (low &lt; high) {
+        const std::size_t mid = low + (high - low) / 2;
+        if (values[mid] &lt; x) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+    return low;
+}
+
+void findSwapOrInsert(std::vector&lt;int&gt;&amp; values, int x) {
+    const std::size_t position = lowerBoundIndex(values, x);
+    if (position &lt; values.size() &amp;&amp; values[position] == x) {
+        if (position + 1 &lt; values.size()) {
+            std::swap(values[position], values[position + 1]);
+        }
+        return;
+    }
+    values.insert(values.begin()
+                      + static_cast&lt;std::ptrdiff_t&gt;(position), x);
+}
+</code></pre>
+<p>查找为 $O(\log n)$；找到时交换为 $O(1)$，未找到时顺序表移动元素不可避免，插入最坏为 $O(n)$。</p>
+<blockquote>
+<p><strong>WARNING</strong> · 操作后的有序性
+当 $x$ 与更大的后继交换后，局部次序变成“后继、$x$”，顺序表不再递增。这是题目明确要求的结果，因此本算法不能在不重新排序的情况下连续依赖原有序性再次执行。</p>
+</blockquote>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿在空表或查找失败时仍可能读取未初始化的 <code>mid</code>；插入循环的下标在循环后使用也不清楚。半开区间写法直接得到合法插入位置，空表同样成立。</p>
+</blockquote>
+<h2 id="section-5">2. 单链表目标结点与前驱交换</h2>
+<h3 id="section-6">2.1 题目与边界</h3>
+<p>带头结点单链表中，找到第一个值为 <code>key</code> 的数据结点，将它与前一个数据结点交换。若目标是首元结点或不存在，则无法交换，返回 <code>false</code>。</p>
+<h3 id="section-7">2.2 可运行实现</h3>
+<pre><code class="language-cpp">bool swapWithPredecessor(LNode* head, int key) {
+    if (head == nullptr || head-&gt;next == nullptr) {
+        return false;
+    }
+
+    LNode* beforePrevious = head;
+    LNode* previous = head-&gt;next;
+    if (previous-&gt;data == key) {
+        return false;  // 首元结点没有数据前驱。
+    }
+
+    LNode* current = previous-&gt;next;
+    while (current != nullptr &amp;&amp; current-&gt;data != key) {
+        beforePrevious = previous;
+        previous = current;
+        current = current-&gt;next;
+    }
+    if (current == nullptr) {
+        return false;
+    }
+
+    previous-&gt;next = current-&gt;next;
+    current-&gt;next = previous;
+    beforePrevious-&gt;next = current;
+    return true;
+}
+</code></pre>
+<p>时间复杂度 $O(n)$，辅助空间 $O(1)$。交换尾结点同样成立。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿在空表、单结点表上会直接解引用 <code>list-&gt;next</code> 或 <code>list-&gt;next-&gt;next</code>；遍历与交换后的判断还会把“找到最后一个结点”误判为失败。</p>
+</blockquote>
+<h2 id="section-8">3. 折半查找：非递归与递归</h2>
+<h3 id="section-9">3.1 前提与区间</h3>
+<p>数组必须递增并支持随机访问。闭区间 <code>[low, high]</code> 有效时条件为 <code>low &lt;= high</code>；失败条件为 <code>low &gt; high</code>。</p>
+<h3 id="section-10">3.2 可运行实现</h3>
+<pre><code class="language-cpp">int binarySearch(const std::vector&lt;int&gt;&amp; values, int key) {
+    int low = 0;
+    int high = static_cast&lt;int&gt;(values.size()) - 1;
+    while (low &lt;= high) {
+        const int mid = low + (high - low) / 2;
+        if (values[mid] == key) {
+            return mid;
+        }
+        if (values[mid] &lt; key) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int binarySearchRecursiveImpl(const std::vector&lt;int&gt;&amp; values,
+                              int key,
+                              int low,
+                              int high) {
+    if (low &gt; high) {
+        return -1;
+    }
+
+    const int mid = low + (high - low) / 2;
+    if (values[mid] == key) {
+        return mid;
+    }
+    if (values[mid] &lt; key) {
+        return binarySearchRecursiveImpl(
+            values, key, mid + 1, high);
+    }
+    return binarySearchRecursiveImpl(
+        values, key, low, mid - 1);
+}
+
+int binarySearchRecursive(const std::vector&lt;int&gt;&amp; values, int key) {
+    return binarySearchRecursiveImpl(
+        values, key, 0, static_cast&lt;int&gt;(values.size()) - 1);
+}
+</code></pre>
+<p>两种方法时间均为 $O(\log n)$；非递归辅助空间 $O(1)$，递归调用栈 $O(\log n)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿在 <code>values[mid] &gt; key</code> 时错误地令 <code>low = mid + 1</code>，在 <code>values[mid] &lt; key</code> 时又缩小右边界，方向完全相反；递归版还没有返回递归调用结果，并存在函数声明为 <code>void</code> 却返回整数等语法错误。</p>
+</blockquote>
+<h2 id="section-11">4. 判断一棵树是否为 BST</h2>
+<h3 id="section-12">4.1 全局约束</h3>
+<p>仅比较“当前结点与直接孩子”不够，因为 BST 要求左子树所有关键字都小于根、右子树所有关键字都大于根。递归传递当前结点允许的开区间 $(lower, upper)$：</p>
+<ul>
+<li>左子树上界收紧为当前值；</li>
+<li>右子树下界收紧为当前值。</li>
+</ul>
+<h3 id="section-13">4.2 可运行实现</h3>
+<pre><code class="language-cpp">bool isBSTImpl(const BSTNode* root,
+               long long lower,
+               long long upper) {
+    if (root == nullptr) {
+        return true;
+    }
+    if (root-&gt;data &lt;= lower || root-&gt;data &gt;= upper) {
+        return false;
+    }
+    return isBSTImpl(root-&gt;left, lower, root-&gt;data)
+        &amp;&amp; isBSTImpl(root-&gt;right, root-&gt;data, upper);
+}
+
+bool isBST(const BSTNode* root) {
+    return isBSTImpl(
+        root,
+        std::numeric_limits&lt;long long&gt;::lowest(),
+        std::numeric_limits&lt;long long&gt;::max());
+}
+</code></pre>
+<p>时间 $O(n)$，递归栈 $O(h)$。使用 <code>long long</code> 边界使合法的 <code>INT_MIN</code>、<code>INT_MAX</code> 结点不会与哨兵冲突。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿使用全局 <code>pre = -INT_MAX</code>：它不是 <code>INT_MIN</code>，会错误拒绝最小整型关键字；全局状态在多次调用前若不重置，也会让后一次判断受到前一次影响。</p>
+</blockquote>
+<h2 id="section-14">5. BST 的最小值与最大值</h2>
+<p>BST 最小结点是沿左孩子走到尽头的结点，最大结点是沿右孩子走到尽头的结点。空树返回空指针，不能返回整数 0，因为 0 可能是合法关键字。</p>
+<pre><code class="language-cpp">const BSTNode* minimumNode(const BSTNode* root) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+    while (root-&gt;left != nullptr) {
+        root = root-&gt;left;
+    }
+    return root;
+}
+
+const BSTNode* maximumNode(const BSTNode* root) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+    while (root-&gt;right != nullptr) {
+        root = root-&gt;right;
+    }
+    return root;
+}
+</code></pre>
+<p>时间复杂度 $O(h)$，辅助空间 $O(1)$。</p>
+<h2 id="section-15">6. 求指定结点在 BST 中的层次</h2>
+<p>沿 BST 查找路径移动，每下降一层将层号加 1；命中时返回层号，不存在时返回 <code>-1</code>。</p>
+<pre><code class="language-cpp">int bstLevel(const BSTNode* root, int key) {
+    int level = 1;
+    while (root != nullptr) {
+        if (root-&gt;data == key) {
+            return level;
+        }
+        root = key &lt; root-&gt;data ? root-&gt;left : root-&gt;right;
+        ++level;
+    }
+    return -1;
+}
+</code></pre>
+<p>时间 $O(h)$，辅助空间 $O(1)$。原稿命中后错误地返回 <code>key</code>，并对未声明变量 <code>n</code> 自增，因而没有真正返回层号。</p>
+<h2 id="section-16">7. 输出 BST 中所有大于 <code>key</code> 的结点</h2>
+<p>为了按递增次序输出，采用中序顺序。若当前值不大于 <code>key</code>，它的整棵左子树也不可能满足条件，可直接剪枝，只搜索右子树。</p>
+<pre><code class="language-cpp">void collectGreaterThan(const BSTNode* root,
+                        int key,
+                        std::vector&lt;int&gt;&amp; result) {
+    if (root == nullptr) {
+        return;
+    }
+    if (root-&gt;data &lt;= key) {
+        collectGreaterThan(root-&gt;right, key, result);
+        return;
+    }
+
+    collectGreaterThan(root-&gt;left, key, result);
+    result.push_back(root-&gt;data);
+    collectGreaterThan(root-&gt;right, key, result);
+}
+
+std::vector&lt;int&gt; greaterThan(const BSTNode* root, int key) {
+    std::vector&lt;int&gt; result;
+    collectGreaterThan(root, key, result);
+    return result;
+}
+</code></pre>
+<p>设输出结点数为 $k$，平衡 BST 中可做到 $O(h+k)$；最坏退化树仍为 $O(n)$。原稿无条件遍历左右子树，虽然结果正确，但没有利用 BST 次序剪枝。</p>
+<h2 id="section-17">8. 七题覆盖与纠错速查</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">题号</th>
+<th>主题</th>
+<th>关键边界或修正</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>折半定位后交换/插入</td>
+<td>空表不读 <code>mid</code>；插入位置直接取 <code>lower_bound</code></td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>链表目标与前驱交换</td>
+<td>空表、首元、尾元、不存在均有确定行为</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>折半查找</td>
+<td>大小方向纠正；递归结果必须 <code>return</code></td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>判断 BST</td>
+<td>用全局值域，不用有状态的全局 <code>pre</code></td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>BST 最小/最大</td>
+<td>空树返回空指针，避免 0 歧义</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>BST 层次</td>
+<td>命中返回 <code>level</code>，不是返回关键字</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>输出大于 <code>key</code></td>
+<td>利用 BST 性质剪去不可能的左子树</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-033ead68e5bc/">上一篇：二叉树代码</a> · <a href="/en/notes/cs408-d690a826208c/">下一篇：图代码</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c58d699dca6a/">查找原理</a></li>
+</ul>
+<h2 id="section-19">9. 本节复盘</h2>
+<ul>
+<li>折半查找的核心不是背代码，而是始终维护“答案仍在当前区间内”的不变式。</li>
+<li>顺序表查找可为 $O(\log n)$，但中间插入仍需移动元素，最坏 $O(n)$。</li>
+<li>链表交换相邻结点需要同时保存前前驱、前驱和当前结点。</li>
+<li>BST 判断传递的是祖先给出的全局范围，不能只比较父子。</li>
+<li>BST 的极值、层次和范围输出都应利用“左小右大”剪枝。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-160888f26a5f/index.html"><span>← Previous item</span><strong>Lecture 35：排序算法总结</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-19ccba30ce38/index.html"><span>Next item →</span><strong>3. 栈与队列</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

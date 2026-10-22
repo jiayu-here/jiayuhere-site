@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 5：知识 - 死锁 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 5：知识 - 死锁. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 5：知识 - 死锁 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 5：知识 - 死锁. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-9fd9ee90b095/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 5：知识 - 死锁 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 5：知识 - 死锁. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 5：知识 - 死锁",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-9fd9ee90b095/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-9fd9ee90b095/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-9fd9ee90b095/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-9fd9ee90b095/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-9fd9ee90b095/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-9fd9ee90b095/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 5：知识 - 死锁</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 5：知识 - 死锁. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>13 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ea45c13ef733.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ea45c13ef733.pdf" download="Lecture 5：知识 - 死锁.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 概念与辨析</a><a href="#section-3">5.2 产生死锁的四个必要条件</a><a href="#section-4">5.3 死锁处理策略总览</a><a href="#section-5">5.4 死锁预防</a><a href="#section-10">5.5 死锁避免与银行家算法</a><a href="#section-16">5.6 资源分配图、死锁检测与解除</a><a href="#section-20">相关知识</a><a href="#section-21">5.7 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>死锁题先判断“是否有资源竞争”和“四个必要条件”，再分清预防、避免、检测、解除四种策略。银行家算法判断的是安全性，不是直接判定系统已经死锁。</p>
+</blockquote>
+<h2 id="section-1">5.1 概念与辨析</h2>
+<h3 id="section-2">5.1.1 死锁</h3>
+<p>在 408 的经典资源分配模型中，死锁是并发环境下多个进程因竞争资源而互相等待对方持有的资源，导致一组进程都处于阻塞状态、无法继续推进的现象；题目通常讨论至少两个进程形成的循环等待。工程语境还存在<strong>自死锁</strong>：单线程再次获取自己已持有的非递归锁，也会永久阻塞。因此，“死锁必定至少涉及两个进程”只适用于经典考试模型，不应当作所有系统实现中的绝对结论。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>进程状态/成因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>死锁</td>
+<td>多个进程相互等待资源，彼此无法推进</td>
+<td>相关进程阻塞；资源分配和请求关系形成僵局</td>
+</tr>
+<tr>
+<td>饥饿</td>
+<td>一个进程长期得不到所需资源或 CPU</td>
+<td>可长期处于就绪或阻塞；调度/分配不公平导致</td>
+</tr>
+<tr>
+<td>死循环</td>
+<td>程序反复执行某段逻辑而不退出</td>
+<td>可处于运行态；通常是程序逻辑错误</td>
+</tr>
+<tr>
+<td>活锁</td>
+<td>进程不断改变状态、彼此谦让却没有实际进展</td>
+<td>仍在活动；常由错误的重试/让步策略造成</td>
+</tr>
+</tbody>
+</table></div>
+<p>循环等待是死锁的必要条件，但不充分。例如同类资源存在多个实例时，资源分配图有环不必然表示已经死锁。安全状态说明<strong>当前</strong>至少存在一条可使全部进程完成的安全序列，因此当前并未死锁；它不是对任意后续分配的永久保证。只有进程申报的最大需求有效，且系统以后按安全序列推进，或每次分配后都保持安全状态，才能保证继续避免死锁。</p>
+<h2 id="section-3">5.2 产生死锁的四个必要条件</h2>
+<p>四个条件必须<strong>同时</strong>满足才可能产生死锁：</p>
+<ol>
+<li><strong>互斥条件</strong>：资源一次只能由一个进程使用。可同时共享的资源不会因竞争本身造成死锁。</li>
+<li><strong>不可剥夺条件</strong>：进程获得的资源在未用完前不能被其他进程强制夺走，只能主动释放。</li>
+<li><strong>请求和保持条件</strong>：进程已保持至少一个资源，又提出新的资源请求；请求不能满足时被阻塞，却仍不释放已有资源。</li>
+<li><strong>循环等待条件</strong>：存在进程资源的环形等待链，每个进程等待下一个进程持有的资源。</li>
+</ol>
+<p>记忆：<strong>互斥、不可剥夺、请求保持、循环等待</strong>。死锁预防的本质是破坏其中至少一个条件。</p>
+<h2 id="section-4">5.3 死锁处理策略总览</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>基本思想</th>
+<th>何时动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预防</td>
+<td>静态破坏四个必要条件之一</td>
+<td>分配前即限制资源使用方式</td>
+</tr>
+<tr>
+<td>避免</td>
+<td>每次资源请求都只在仍安全时批准</td>
+<td>运行中动态判断安全状态</td>
+</tr>
+<tr>
+<td>检测与解除</td>
+<td>允许发生，定期检测后恢复</td>
+<td>死锁发生后处理</td>
+</tr>
+</tbody>
+</table></div>
+<p>预防限制强、资源利用率可能低；避免需要知道进程最大需求并频繁做安全性检查；检测/解除资源利用率高但恢复代价大。</p>
+<h2 id="section-5">5.4 死锁预防</h2>
+<h3 id="section-6">5.4.1 破坏互斥条件</h3>
+<p>尽量把独占资源改为可共享服务。例如使用 <strong>SPOOLing</strong>：进程把打印输出写入共享磁盘队列，由后台打印进程独占物理打印机，普通进程不再直接竞争打印机。并非所有资源都可共享，故该策略适用范围有限。</p>
+<h3 id="section-7">5.4.2 破坏不可剥夺条件</h3>
+<p>可采用两类方式：</p>
+<ul>
+<li>进程请求新资源不能满足时，立即释放已持有资源，稍后重新申请。</li>
+<li>在满足安全规则和优先级约束时，由系统剥夺某些进程已持有的资源并分配给更合适的进程。</li>
+</ul>
+<p>缺点是实现复杂、可能使前一阶段工作失效；反复释放和重新申请会增加系统开销，并可能导致饥饿。CPU 等资源也不一定能随意剥夺。</p>
+<h3 id="section-8">5.4.3 破坏请求和保持条件</h3>
+<p><strong>静态分配法</strong>：进程运行前一次申请并获得所需全部资源，资源未满足时不让其投入运行；一旦开始运行，运行中不再申请新资源。</p>
+<ul>
+<li>优点：实现简单，直接消除“占有又等待”。</li>
+<li>缺点：资源可能只在很短时间内真正使用，却在整个运行期间被占有，利用率低；有的进程还可能长期等不到全套资源而饥饿。</li>
+</ul>
+<h3 id="section-9">5.4.4 破坏循环等待条件</h3>
+<p><strong>顺序资源分配法</strong>：为资源编号，规定进程必须按编号递增顺序申请，同类资源通常一次申请完。持有较大编号资源的进程不能回头申请较小编号资源，因此无法形成环路。</p>
+<p>例如系统有编号 $1\sim10$ 的资源，某时刻 $P_1$ 持有 $1、3$，$P_2$ 持有 $2、4$，$P_3$ 持有 $5、7$。若所有进程都只能继续申请比自己已持有资源编号更大的资源，那么当前持有全局最大编号资源的进程不可能等待一个更小编号资源；它可以继续推进并释放资源。之后再对剩余进程重复同样推理，循环等待链无法成立。</p>
+<p>缺点是资源编号顺序可能与实际使用顺序不一致，造成资源浪费；新增设备会影响编号；用户编程时也必须遵守此顺序。</p>
+<h2 id="section-10">5.5 死锁避免与银行家算法</h2>
+<h3 id="section-11">5.5.1 安全状态</h3>
+<p>在各进程最大需求已知且不会临时突破该上限的模型中，若存在一个进程序列 $\langle P_{i_1},P_{i_2},\ldots,P_{i_n}\rangle$，系统按此顺序满足尚需资源时，每个进程都能执行完成并释放已占资源，则该序列为<strong>安全序列</strong>，当前系统状态是安全的。安全序列可不唯一。</p>
+<ul>
+<li>找得到至少一个安全序列：当前状态安全、当前没有死锁；若后续只批准仍能保持安全的请求，则可继续保证避免死锁。</li>
+<li>分配后找不到安全序列：系统不安全；它将来可能发生死锁，但<strong>不安全不等于已经死锁</strong>。</li>
+<li>已发生死锁的系统一定不安全。</li>
+</ul>
+<h3 id="section-12">5.5.2 数据结构与关系</h3>
+<p>对 $n$ 个进程、$m$ 类资源，银行家算法维护：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>维度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Available[m]</code></td>
+<td>向量</td>
+<td>每类当前可用资源数</td>
+</tr>
+<tr>
+<td><code>Max[n][m]</code></td>
+<td>矩阵</td>
+<td>各进程声明的最大需求</td>
+</tr>
+<tr>
+<td><code>Allocation[n][m]</code></td>
+<td>矩阵</td>
+<td>已分配给各进程的资源</td>
+</tr>
+<tr>
+<td><code>Need[n][m]</code></td>
+<td>矩阵</td>
+<td>尚需资源，$Need=Max-Allocation$</td>
+</tr>
+<tr>
+<td><code>Request_i[m]</code></td>
+<td>向量</td>
+<td>进程 $P_i$ 的本次请求</td>
+</tr>
+</tbody>
+</table></div>
+<p>银行家算法属于<strong>死锁避免</strong>：必须事先掌握最大需求。它可判断当前或试探分配后的系统是否安全，不能直接判定系统是否已经死锁。</p>
+<h3 id="section-13">5.5.3 安全性算法</h3>
+<ol>
+<li>令 <code>Work = Available</code>，所有进程 <code>Finish = false</code>。</li>
+<li>寻找一个 <code>Finish[i]==false</code> 且 <code>Need[i] &lt;= Work</code> 的进程 $P_i$。</li>
+<li>假定 $P_i$ 获得所需资源并完成，释放已分配资源：<code>Work = Work + Allocation[i]</code>，<code>Finish[i]=true</code>，把 $P_i$ 记入安全序列。</li>
+<li>重复步骤 2；若所有进程都能标为完成，则安全，否则不安全。</li>
+</ol>
+<p>手算时每轮只需比较“当前 <code>Work</code> 能否满足某一尚未完成进程的 <code>Need</code>”；选中后把其 <code>Allocation</code> 加回 <code>Work</code>。能选出的顺序就是一条安全序列。</p>
+<h3 id="section-14">5.5.4 资源请求算法</h3>
+<p>进程 $P_i$ 提出 <code>Request_i</code> 时：</p>
+<ol>
+<li>若 <code>Request_i &gt; Need_i</code>，请求超过最大声明，视为错误。</li>
+<li>若 <code>Request_i &gt; Available</code>，资源暂不足，$P_i$ 等待。</li>
+<li>否则试探分配：</li>
+</ol>
+<pre><code class="language-text">Available   -= Request_i
+Allocation_i += Request_i
+Need_i       -= Request_i
+</code></pre>
+<ol start="4">
+<li>对试探后的状态执行安全性算法；安全则正式批准，否则撤销试探分配并让进程等待。</li>
+</ol>
+<h3 id="section-15">5.5.5 银行家算法完整例题</h3>
+<p>设系统有三类资源 $A、B、C$，当前可利用资源向量为：</p>
+<p>$$
+Available=(3,3,2)
+$$</p>
+<p>各进程的最大需求、已分配资源和剩余需求如下。<code>Need</code> 由 <code>Max-Allocation</code> 逐项相减得到。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>进程</th>
+<th><code>Max</code></th>
+<th><code>Allocation</code></th>
+<th><code>Need</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$P_0$</td>
+<td>$(7,5,3)$</td>
+<td>$(0,1,0)$</td>
+<td>$(7,4,3)$</td>
+</tr>
+<tr>
+<td>$P_1$</td>
+<td>$(3,2,2)$</td>
+<td>$(2,0,0)$</td>
+<td>$(1,2,2)$</td>
+</tr>
+<tr>
+<td>$P_2$</td>
+<td>$(9,0,2)$</td>
+<td>$(3,0,2)$</td>
+<td>$(6,0,0)$</td>
+</tr>
+<tr>
+<td>$P_3$</td>
+<td>$(2,2,2)$</td>
+<td>$(2,1,1)$</td>
+<td>$(0,1,1)$</td>
+</tr>
+<tr>
+<td>$P_4$</td>
+<td>$(4,3,3)$</td>
+<td>$(0,0,2)$</td>
+<td>$(4,3,1)$</td>
+</tr>
+</tbody>
+</table></div>
+<p>从 <code>Work=(3,3,2)</code> 开始执行安全性算法，可以得到一条安全序列：</p>
+<p>$$
+\langle P_1,P_3,P_0,P_2,P_4\rangle
+$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>选中进程</th>
+<th>判定依据 <code>Need &lt;= Work</code></th>
+<th>进程完成后 <code>Work = Work + Allocation</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始</td>
+<td>-</td>
+<td>-</td>
+<td>$(3,3,2)$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$P_1$</td>
+<td>$(1,2,2)\le(3,3,2)$</td>
+<td>$(3,3,2)+(2,0,0)=(5,3,2)$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$P_3$</td>
+<td>$(0,1,1)\le(5,3,2)$</td>
+<td>$(5,3,2)+(2,1,1)=(7,4,3)$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$P_0$</td>
+<td>$(7,4,3)\le(7,4,3)$</td>
+<td>$(7,4,3)+(0,1,0)=(7,5,3)$</td>
+</tr>
+<tr>
+<td>4</td>
+<td>$P_2$</td>
+<td>$(6,0,0)\le(7,5,3)$</td>
+<td>$(7,5,3)+(3,0,2)=(10,5,5)$</td>
+</tr>
+<tr>
+<td>5</td>
+<td>$P_4$</td>
+<td>$(4,3,1)\le(10,5,5)$</td>
+<td>$(10,5,5)+(0,0,2)=(10,5,7)$</td>
+</tr>
+</tbody>
+</table></div>
+<p>五个进程都能完成，所以当前状态安全。安全序列不唯一；只要每一步都满足 <code>Need &lt;= Work</code>，并最终能让全部进程完成，就是合法安全序列。</p>
+<p>现在 $P_0$ 发出请求：</p>
+<p>$$
+Request_0=(2,1,1)
+$$</p>
+<p>先做两项前置检查：</p>
+<p>$$
+Request_0=(2,1,1)\le Need_0=(7,4,3)
+$$</p>
+<p>$$
+Request_0=(2,1,1)\le Available=(3,3,2)
+$$</p>
+<p>两项均满足，可以试探分配。试探后的关键数据为：</p>
+<p>$$
+Available'=(3,3,2)-(2,1,1)=(1,2,1)
+$$</p>
+<p>$$
+Allocation'_0=(0,1,0)+(2,1,1)=(2,2,1)
+$$</p>
+<p>$$
+Need'_0=(7,4,3)-(2,1,1)=(5,3,2)
+$$</p>
+<p>对试探后的状态重新执行安全性算法，可取安全序列：</p>
+<p>$$
+\langle P_3,P_1,P_0,P_2,P_4\rangle
+$$</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>选中进程</th>
+<th>判定依据 <code>Need &lt;= Work</code></th>
+<th>完成后 <code>Work</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始</td>
+<td>-</td>
+<td>-</td>
+<td>$(1,2,1)$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$P_3$</td>
+<td>$(0,1,1)\le(1,2,1)$</td>
+<td>$(1,2,1)+(2,1,1)=(3,3,2)$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$P_1$</td>
+<td>$(1,2,2)\le(3,3,2)$</td>
+<td>$(3,3,2)+(2,0,0)=(5,3,2)$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$P_0$</td>
+<td>$(5,3,2)\le(5,3,2)$</td>
+<td>$(5,3,2)+(2,2,1)=(7,5,3)$</td>
+</tr>
+<tr>
+<td>4</td>
+<td>$P_2$</td>
+<td>$(6,0,0)\le(7,5,3)$</td>
+<td>$(7,5,3)+(3,0,2)=(10,5,5)$</td>
+</tr>
+<tr>
+<td>5</td>
+<td>$P_4$</td>
+<td>$(4,3,1)\le(10,5,5)$</td>
+<td>$(10,5,5)+(0,0,2)=(10,5,7)$</td>
+</tr>
+</tbody>
+</table></div>
+<p>试分配后仍能找到安全序列，因此系统仍处于安全状态，<strong>可以正式批准 $P_0$ 的请求</strong>。若试分配后找不到安全序列，则必须恢复试分配前的数据并让 $P_0$ 等待。</p>
+<h2 id="section-16">5.6 资源分配图、死锁检测与解除</h2>
+<h3 id="section-17">5.6.1 资源分配图</h3>
+<ul>
+<li>圆形结点表示进程；矩形结点表示一类资源，矩形内的小圆点表示该类资源实例数。</li>
+<li><strong>请求边</strong>：进程 → 资源，表示该进程正在申请该类资源的一个实例。</li>
+<li><strong>分配边</strong>：资源 → 进程，表示该资源的一个实例已分配给该进程。</li>
+</ul>
+<h3 id="section-18">5.6.2 图化简检测算法</h3>
+<p>检测策略允许死锁先发生。反复执行：</p>
+<ol>
+<li>在资源分配图中找一个<strong>既不阻塞又不是孤点</strong>的进程：它的所有资源请求都可由当前空闲实例满足。</li>
+<li>假定该进程获得资源、执行完成并释放其全部分配资源，删除与该进程相连的请求边和分配边。</li>
+<li>用新释放的资源继续寻找可完成进程。</li>
+</ol>
+<p>若最终所有边都能删除，图可完全化简，系统无死锁；若化简后仍有边相连，仍连着边的那些进程处于死锁状态。注意：系统中并非所有进程都会因一组死锁而死锁。</p>
+<h3 id="section-19">5.6.3 死锁解除</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>代价/风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资源剥夺</td>
+<td>挂起或回收某些死锁进程的资源，分配给其他进程</td>
+<td>被剥夺者可能饥饿；需选择牺牲者并保存恢复信息</td>
+</tr>
+<tr>
+<td>撤销进程</td>
+<td>强制撤销部分或全部死锁进程，释放资源</td>
+<td>简单但损失大，可能浪费已完成的大量工作</td>
+</tr>
+<tr>
+<td>进程回退</td>
+<td>让一个或多个进程回到安全检查点（还原点）后重新执行</td>
+<td>需维护检查点和恢复机制</td>
+</tr>
+</tbody>
+</table></div>
+<p>选择牺牲进程时，可考虑：进程优先级、已执行时间、距完成还需多长时间、已占资源量、是交互式还是批处理任务等。目标是在解除死锁的同时尽量减少损失并避免同一进程反复被牺牲。</p>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-a3a4d665ca47/">上一篇：同步与互斥</a> · <a href="/en/notes/cs408-6e190f5755e2/">下一篇：内存管理基础</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-312cfdf36075/">资源分配图所需的图概念</a></li>
+</ul>
+<h2 id="section-21">5.7 本节复盘</h2>
+<ol>
+<li>死锁是多个阻塞进程因资源相互等待而无法推进；饥饿和死循环不是死锁。</li>
+<li>四个必要条件为互斥、不可剥夺、请求和保持、循环等待；必要不等于充分。</li>
+<li>预防是破坏条件，避免是保持安全，检测是发生后化简图，解除是剥夺/撤销/回退。</li>
+<li>$Need=Max-Allocation$；银行家算法找安全序列。当前安全即当前未死锁；在最大需求有效且后续始终保持安全的前提下可继续避免死锁；不安全未必已经死锁。</li>
+<li>资源分配图中进程→资源为请求，资源→进程为分配；化简后仍有边相连的进程才是死锁进程。</li>
+</ol>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-9cd28cace452/index.html"><span>← Previous item</span><strong>Lecture 4：数据库完整性</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a1c21fbceeaf/index.html"><span>Next item →</span><strong>Lecture 23：图的经典应用</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 26：知识 - IO接口 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 26：知识 - IO接口。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 26：知识 - IO接口 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 26：知识 - IO接口。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-67e2b38e518a/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 26：知识 - IO接口 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 26：知识 - IO接口。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 26：知识 - IO接口",
+      "item": "https://www.jiayuhere.com/notes/cs408-67e2b38e518a/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-67e2b38e518a/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-67e2b38e518a/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-67e2b38e518a/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-67e2b38e518a/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-67e2b38e518a/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 26：知识 - IO接口</h1><p class="article-lead">408 学习笔记：Lecture 26：知识 - IO接口。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 10 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/ebd8b629ec26.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/ebd8b629ec26.pdf" download="Lecture 26：知识 - IO接口.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 I/O 接口（I/O 控制器）</a><a href="#section-4">6.2 I/O 指令与通道指令</a><a href="#section-7">6.3 I/O 端口：接口内可直接访问的寄存器</a><a href="#section-8">6.4 I/O 端口的编址方式</a><a href="#section-11">6.5 接口、端口与指令的关系</a><a href="#section-12">6.6 I/O 的基本工作过程</a><a href="#section-16">相关知识</a><a href="#section-17">6.7 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：I/O 接口（控制器）是主机和外设之间的协调层；端口是接口内部能被 CPU 直接访问的寄存器。理解“接口、端口、指令”三个不同层级后，统一/独立编址和 I/O 过程就不会混淆。</p>
+</blockquote>
+<h2 id="section-1">6.1 I/O 接口（I/O 控制器）</h2>
+<p><strong>I/O 接口</strong>又称 I/O Controller、设备控制器，负责协调主机与外部设备间的信息传输。它一端连接系统总线/CPU，另一端连接具体设备；它不是外设本体。</p>
+<p>主机与设备之间存在速度、信号形式、控制逻辑差异，I/O 接口的主要作用如下：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>实现与意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据缓冲</td>
+<td>用数据缓冲寄存器 DBR 暂存数据，匹配主机和外设不同速度</td>
+</tr>
+<tr>
+<td>状态/错误监测</td>
+<td>用状态寄存器保存就绪、忙、完成、错误等信息，供 CPU 查询</td>
+</tr>
+<tr>
+<td>控制与定时</td>
+<td>接收控制总线来的命令/时钟信号，控制设备动作时序</td>
+</tr>
+<tr>
+<td>数据格式转换</td>
+<td>串—并、并—串等转换，适配双方数据组织</td>
+</tr>
+<tr>
+<td>通信协调</td>
+<td>建立 <code>主机 &lt;-&gt; I/O 接口 &lt;-&gt; I/O 设备</code> 的可靠传递链路</td>
+</tr>
+</tbody>
+</table></div>
+<pre class="mermaid">flowchart LR
+    CPU[CPU / 系统总线] &lt;--&gt; LOGIC[地址译码与 I/O 控制逻辑]
+    LOGIC &lt;--&gt; DBR[数据缓冲寄存器 DBR]
+    LOGIC --&gt; CR[控制寄存器]
+    SR[状态寄存器] --&gt; LOGIC
+    DBR &lt;--&gt; DEV[外部设备]
+    CR --&gt; DEV
+    DEV --&gt; SR
+</pre>
+<h3 id="section-2">6.1.1 I/O 接口的常见分类</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类依据</th>
+<th>类型</th>
+<th>含义与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外设侧的数据传送方式</td>
+<td>并行接口</td>
+<td>一个字节或一个字的多个数据位同时传送</td>
+</tr>
+<tr>
+<td>外设侧的数据传送方式</td>
+<td>串行接口</td>
+<td>数据位按时间顺序逐位传送</td>
+</tr>
+<tr>
+<td>主机控制设备的方式</td>
+<td>程序查询接口</td>
+<td>CPU 反复读取状态并亲自传送数据</td>
+</tr>
+<tr>
+<td>主机控制设备的方式</td>
+<td>中断接口</td>
+<td>设备就绪后请求中断，CPU 在 ISR 中服务</td>
+</tr>
+<tr>
+<td>主机控制设备的方式</td>
+<td>DMA 接口</td>
+<td>DMA 控制器取得总线控制权，成批在设备与主存间传送</td>
+</tr>
+<tr>
+<td>功能可配置性</td>
+<td>可编程接口</td>
+<td>工作方式、速率或格式等可由控制字配置</td>
+</tr>
+<tr>
+<td>功能可配置性</td>
+<td>不可编程接口</td>
+<td>功能和时序主要由固定逻辑决定</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里的串行/并行主要描述<strong>外设与接口一侧</strong>的传输。主机系统总线一侧通常按字节或字并行传送，接口可在两侧之间完成串—并转换；不能因为外设侧使用串行线，就断言 CPU 内部也逐位处理。</p>
+<h3 id="section-3">6.1.2 接口与设备的辨析</h3>
+<ul>
+<li>打印机适配器、网络控制器、可编程中断控制器等“适配器/控制器”通常属于 I/O 接口。</li>
+<li>磁盘驱动器本身负责驱动磁盘稳定旋转，是外部存储设备硬件的一部分，不是 I/O 接口。</li>
+<li>“设备控制器”不等同于“CPU 的控制器”：前者服务于某类 I/O 设备，后者负责解释和控制指令执行。</li>
+</ul>
+<h2 id="section-4">6.2 I/O 指令与通道指令</h2>
+<h3 id="section-5">6.2.1 I/O 指令</h3>
+<p>主机常用 I/O 指令同接口交换信息。一条 I/O 指令通常包括：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作码</td>
+<td>标识这是 I/O 指令</td>
+</tr>
+<tr>
+<td>命令码</td>
+<td>规定要做什么，例如启动、读、写、复位；随设备特性而变化，需驱动程序配合</td>
+</tr>
+<tr>
+<td>设备码</td>
+<td>指出操作哪一个设备/接口</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-6">6.2.2 通道指令</h3>
+<p>通道是具有专门 I/O 管理功能的处理器。<strong>通道指令</strong>是通道能识别和执行的指令；预先编写成通道程序并放在主存。</p>
+<p>在含通道的机器中：<code>CPU 执行 I/O 指令向通道发命令 -&gt; 通道执行一串通道指令 -&gt; 管理设备传输</code>。通道因此可代替 CPU 完成细粒度 I/O 控制，减少 CPU 对慢速设备的直接参与。</p>
+<h2 id="section-7">6.3 I/O 端口：接口内可直接访问的寄存器</h2>
+<p><strong>I/O 端口</strong>是 I/O 接口中可被 CPU 直接访问的寄存器；若干端口加上相应控制逻辑才组成一个 I/O 接口。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>CPU 常见访问</th>
+<th>保存内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据端口</td>
+<td>读、写</td>
+<td>输入/输出数据，通常对应数据缓冲寄存器</td>
+</tr>
+<tr>
+<td>控制端口</td>
+<td>写</td>
+<td>命令字、控制信息</td>
+</tr>
+<tr>
+<td>状态端口</td>
+<td>读</td>
+<td>就绪、忙、错误、完成等状态字</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>状态端口与控制端口可以共用同一个<strong>端口地址</strong>：CPU 读该地址时得到状态，写该地址时送入控制字。硬件内部既可能复用一个寄存器，也可能连接到不同的读/写锁存器，不能仅凭地址相同断言物理存储一定相同。</li>
+<li>端口不是外部插孔，也不是整个控制器；在组成原理语境中它首先是 CPU 可寻址的接口寄存器。</li>
+</ul>
+<h2 id="section-8">6.4 I/O 端口的编址方式</h2>
+<h3 id="section-9">6.4.1 统一编址（存储器映射 I/O）</h3>
+<p>统一编址用<strong>不同的地址码</strong>区分主存单元与 I/O 端口，把端口映射进同一地址空间。</p>
+<ul>
+<li>对端口的访问可使用普通访存类指令和寻址方式。</li>
+<li>内存与 I/O 的地址范围不可重叠，因它们要靠地址本身区分。</li>
+<li>优点是无需专用 I/O 指令、可利用较丰富的访存寻址方式，编程灵活。</li>
+<li>缺点是会占用部分主存地址空间；端口地址若与完整存储器地址同宽，地址译码电路和指令地址字段也可能较长。</li>
+</ul>
+<h3 id="section-10">6.4.2 独立编址（I/O 映射 I/O）</h3>
+<p>独立编址用<strong>不同的指令</strong>区分主存和 I/O，端口位于独立 I/O 地址空间。</p>
+<ul>
+<li>只能用专门 I/O 指令访问端口，例如 <code>IN</code>、<code>OUT</code>。</li>
+<li>因为由指令类型区分，同一个数值可以同时是某主存地址和某 I/O 端口地址。</li>
+<li>优点是主存地址空间不被 I/O 端口占用，端口地址通常可较短，译码和区分明确。</li>
+<li>缺点是可用的 I/O 指令与寻址形式较少，程序设计灵活性较低，并需设置专用指令及相应的 I/O 读写控制逻辑。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比点</th>
+<th>统一编址</th>
+<th>独立编址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区分依据</td>
+<td>地址码/地址空间</td>
+<td>指令类型</td>
+</tr>
+<tr>
+<td>访问指令</td>
+<td>普通访存指令即可</td>
+<td>专用 I/O 指令</td>
+</tr>
+<tr>
+<td>地址是否可同值</td>
+<td>不可在同一地址空间冲突</td>
+<td>可以与主存地址同值</td>
+</tr>
+<tr>
+<td>常见名称</td>
+<td>存储器映射 I/O</td>
+<td>I/O 映射 I/O</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-11">6.5 接口、端口与指令的关系</h2>
+<pre><code class="language-text">CPU 的通用寄存器
+        │  访存指令（统一编址）或专用 I/O 指令（独立编址）
+        ▼
+I/O 端口（数据/状态/控制寄存器）
+        │  端口 + 控制逻辑
+        ▼
+I/O 接口（控制器）
+        │
+        ▼
+外部设备
+</code></pre>
+<ul>
+<li>I/O 接口接收主机控制信号并控制主机和设备之间的信息交换。</li>
+<li>I/O 端口是接口的一部分，分别保存数据、状态、控制信息。</li>
+<li>专用 I/O 指令的数据传输通常发生在<strong>CPU 的通用寄存器</strong>与<strong>I/O 端口</strong>之间；统一编址时则可用普通访存指令访问端口。两种情况都不是 CPU 直接与设备的机械/电气部件交换数据。</li>
+</ul>
+<h2 id="section-12">6.6 I/O 的基本工作过程</h2>
+<p>查询、中断与 DMA 都需要 CPU 配置命令并获知状态，但数据搬运路径不同，可概括为：</p>
+<ol>
+<li><strong>发命令</strong>：CPU 将命令字写入 I/O 控制寄存器；设备相关命令通常由驱动程序组织。</li>
+<li><strong>读状态</strong>：CPU 从状态寄存器读状态字，判断设备/控制器是否就绪、忙、完成或出错。</li>
+<li><strong>传送数据</strong>：查询/中断方式通常由 CPU 指令在接口数据端口与 CPU/主存之间逐次搬运；DMA 方式由 DMA 控制器取得总线后在设备接口与主存之间直接传送，CPU 不逐次读写数据端口。</li>
+</ol>
+<p>实际顺序依设备与 I/O 方式而定：例如读设备可反复确认就绪后读数据；写设备通常先写数据/命令再等待完成。状态与数据分离使速度不匹配的主机和外设能正确协作。</p>
+<h3 id="section-13">题型：#接口、端口与编址辨析</h3>
+<h4 id="section-14">第一部分：解题方法</h4>
+<ol>
+<li>问“能被 CPU 直接访问的寄存器”时答 <strong>I/O 端口</strong>；问“协调主机和外设”时答 <strong>I/O 接口/控制器</strong>。</li>
+<li>出现普通 <code>load/store</code> 访问端口、内存和端口用地址区分时，判断为<strong>统一编址</strong>；出现 <code>IN/OUT</code> 等专用指令时，判断为<strong>独立编址</strong>。</li>
+<li>读状态、写控制、读写数据分别对应状态、控制、数据端口；状态与控制可共用端口地址，是否共用同一物理寄存器取决于实现。</li>
+</ol>
+<h4 id="section-15">第二部分：易错点</h4>
+<ul>
+<li>“网络控制器”通常是 I/O 接口，“网卡所连网络”不是端口；“端口地址”也不等于网络 TCP/UDP 端口号。</li>
+<li>独立编址下端口地址可与主存地址数值相同，因为 CPU 已由指令类别知道目标空间。</li>
+<li>CPU 发 I/O 指令的直接数据对象通常是端口；控制器再与设备进行实际握手、格式适配和缓冲。</li>
+</ul>
+<h2 id="section-16">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-c2d3a38a7b30/">上一篇：外部设备</a> · <a href="/notes/cs408-914a13597252/">下一篇：I/O 方式</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-69c0d725657f/">设备驱动与设备独立性</a></li>
+</ul>
+<h2 id="section-17">6.7 本节复盘</h2>
+<ul>
+<li>I/O 接口/控制器负责缓冲、状态/错误监测、控制定时、格式转换与通信协调；它不同于具体外设。</li>
+<li>I/O 接口可按外设侧串/并行、查询/中断/DMA 控制方式以及可编程性分类；串/并行接口还能负责两侧格式转换。</li>
+<li>数据、控制、状态端口是接口中 CPU 可直接访问的寄存器，状态和控制可以共用端口地址，但不必共用同一物理锁存器。</li>
+<li>I/O 指令含操作码、命令码、设备码；通道以主存中的通道程序代替 CPU 执行一系列设备管理动作。</li>
+<li>统一编址用地址区分并可用访存指令；独立编址用专用 I/O 指令区分，端口地址可与主存地址同值。</li>
+<li>基本交互为发命令、读状态、读/写数据；程序查询与中断方式通常经 CPU 通用寄存器和 I/O 端口传送数据，DMA 则由控制器在设备接口与主存之间搬运。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-659f35b126ff/index.html"><span>← 上一项</span><strong>Lecture 14：知识 - 数据的对齐和大小端存放方式</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-69c0d725657f/index.html"><span>下一项 →</span><strong>Lecture 12：知识 - 设备独立性软件</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

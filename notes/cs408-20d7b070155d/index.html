@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 1：知识 - 操作系统概述 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 1：知识 - 操作系统概述。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 操作系统">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 1：知识 - 操作系统概述 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 1：知识 - 操作系统概述。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-20d7b070155d/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 1：知识 - 操作系统概述 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 1：知识 - 操作系统概述。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 1：知识 - 操作系统概述",
+      "item": "https://www.jiayuhere.com/notes/cs408-20d7b070155d/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-20d7b070155d/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-20d7b070155d/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-20d7b070155d/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-20d7b070155d/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-20d7b070155d/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 1：知识 - 操作系统概述</h1><p class="article-lead">408 学习笔记：Lecture 1：知识 - 操作系统概述。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 15 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">操作系统</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/9ba5b64ed016.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/9ba5b64ed016.pdf" download="Lecture 1：知识 - 操作系统概述.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">1.1 操作系统的功能与特征</a><a href="#section-4">1.2 发展与分类</a><a href="#section-5">1.3 程序运行环境</a><a href="#section-9">1.4 系统调用：从 API 到内核服务</a><a href="#section-10">1.5 中断机制的细化</a><a href="#section-13">1.6 操作系统结构</a><a href="#section-14">1.7 引导、磁盘初始化与虚拟机</a><a href="#section-18">相关知识</a><a href="#section-19">1.8 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>操作系统是管理计算机软硬件资源、为用户和程序提供服务的系统软件。学习本章要把“资源管理者、用户接口、硬件扩展层”三种角色，与并发、共享、虚拟和异步四个特征连起来。</p>
+</blockquote>
+<h2 id="section-1">1.1 操作系统的功能与特征</h2>
+<h3 id="section-2">1.1.1 三种角色</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>主要内容</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资源管理者</td>
+<td>处理机、内存、文件、设备管理</td>
+<td>安全、高效地分配和回收资源</td>
+</tr>
+<tr>
+<td>用户与硬件的接口</td>
+<td>命令接口、系统调用、GUI</td>
+<td>方便用户和应用程序使用</td>
+</tr>
+<tr>
+<td>最接近硬件的系统软件</td>
+<td>在裸机上提供抽象与服务</td>
+<td>将裸机扩展成易用的虚拟机器</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>处理机管理包含进程控制、同步、通信、死锁处理与调度；存储器管理包含分配回收、地址映射、保护共享与扩充。</li>
+<li>命令接口可分为交互式联机接口与批处理脱机接口；程序接口通过系统调用向应用提供内核服务。</li>
+<li>调用库函数不必然进入内核，例如纯计算的数学库函数可完全在用户态执行；需要 OS 服务时才会通过系统调用陷入内核。</li>
+</ul>
+<h3 id="section-3">1.1.2 四个基本特征</h3>
+<ul>
+<li><strong>并发</strong>：多个事件在同一时间段内交替推进；在教材的单核、单硬件线程模型中，同一时刻只有一个进程执行指令，多个进程可并发而非并行。多核或同时多线程硬件需另行判断。</li>
+<li><strong>共享</strong>：资源可被多个并发进程使用，分为互斥共享和同时共享。所谓同时共享在微观上常为分时交替。</li>
+<li><strong>虚拟</strong>：将一个物理实体映射为多个逻辑实体，如时分复用形成虚拟处理器、空分复用形成虚拟内存。</li>
+<li><strong>异步</strong>：多道环境下进程因资源竞争和调度走走停停，以不可预知速度推进。</li>
+</ul>
+<p>并发和共享互为条件：没有并发就无共享需求；没有共享，多程序也不能共同使用系统资源。虚拟性和异步性则建立在并发之上。</p>
+<h2 id="section-4">1.2 发展与分类</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段/类型</th>
+<th>核心特征</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手工操作</td>
+<td>用户独占机器，人工装卸作业</td>
+<td>人机速度矛盾，资源利用率低</td>
+</tr>
+<tr>
+<td>单道批处理</td>
+<td>脱机 I/O、监督程序</td>
+<td>自动成批执行，但 CPU 易等待 I/O</td>
+</tr>
+<tr>
+<td>多道批处理</td>
+<td>多个作业装入内存并发运行</td>
+<td>CPU/设备利用率和吞吐量提高，不能交互</td>
+</tr>
+<tr>
+<td>分时系统</td>
+<td>时间片轮流服务多个终端用户</td>
+<td>交互及时、公平；不擅长优先紧急任务</td>
+</tr>
+<tr>
+<td>实时系统</td>
+<td>在严格时限内处理外部事件</td>
+<td>及时性、可靠性；分硬实时与软实时</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>多道程序即使没有虚拟存储也能实现：早期系统可把多道程序全部装入主存后并发执行。</li>
+<li>现代单核计算机可多任务并发；CPU 可与外设并行工作，不要误称单核上的多个进程并行。</li>
+<li>网络 OS 强调网络资源共享与通信；分布式 OS 中多台计算机地位对等、协同完成任务；个人 OS 面向单机用户。</li>
+</ul>
+<h2 id="section-5">1.3 程序运行环境</h2>
+<h3 id="section-6">1.3.1 用户态与内核态</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>可执行指令</th>
+<th>典型代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户态（目态）</td>
+<td>非特权指令</td>
+<td>用户程序、普通库函数</td>
+</tr>
+<tr>
+<td>内核态（管态/核心态）</td>
+<td>特权和非特权指令</td>
+<td>中断处理、调度、驱动、内核服务</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>特权指令包括关中断、I/O 控制、访问特殊寄存器等；普通算术、跳转、压栈可在用户态执行。</li>
+<li>除零、缺页等<strong>事件可发生在用户态</strong>，但处理会使 CPU 进入内核态；不要混淆“指令能否在用户态执行”与“它是否导致进管”。</li>
+<li>PSW 的状态位标识当前模式。用户态到内核态由中断/异常/陷入触发，硬件保存必要现场并转入内核；系统调用处理完成后由特权返回指令恢复用户态。</li>
+</ul>
+<h3 id="section-7">1.3.2 中断、异常与系统调用</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>与当前指令关系</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内中断/异常</td>
+<td>相关，来源于 CPU 内部</td>
+<td>除零、越界、缺页、特权指令错、陷入</td>
+</tr>
+<tr>
+<td>外中断（狭义中断）</td>
+<td>无关，来源于 CPU 外部</td>
+<td>时钟、I/O 完成、网络到达、掉电</td>
+</tr>
+<tr>
+<td>系统调用/陷入</td>
+<td>用户主动执行陷入指令</td>
+<td><code>read</code>、进程控制、文件服务</td>
+</tr>
+</tbody>
+</table></div>
+<p>中断处理：检测并受理请求 → 硬件保存必要的返回状态、进入内核态并定位处理入口 → 软件保存其余现场 → 执行服务程序 → 恢复现场。向量查询与最小现场保存的具体先后由体系结构规定。外中断一般在指令周期末检查；内中断在指令执行过程中检测。</p>
+<ul>
+<li>硬件完成中断入口切换并保存必要返回状态，OS 负责初始化向量表、保存约定的通用寄存器并执行服务例程；普通子程序调用通常不切换特权级或经中断向量进入处理程序，但寄存器/标志位是否变化由指令及调用约定决定，不能概括为“PSW 绝不改变”。</li>
+<li>陷入指令可在用户态执行，执行后立即引发内中断；它本身不是普通用户程序直接执行特权操作。</li>
+</ul>
+<h3 id="section-8">1.3.3 链接、装入与运行时内存</h3>
+<ul>
+<li>编译将源程序变为目标模块；链接将多个模块和库解析符号形成装入模块；装入将模块放入内存并完成地址重定位。</li>
+<li>静态链接在装入前完成，运行时动态链接可延迟到执行过程中；绝对装入、可重定位装入与动态运行时装入的差别在地址绑定时机。</li>
+<li>进程地址空间通常含代码段、数据段、BSS、堆和栈；堆向高地址增长、栈通常向低地址增长是常见约定，具体体系结构以题目为准。</li>
+</ul>
+<h2 id="section-9">1.4 系统调用：从 API 到内核服务</h2>
+<p>系统调用是应用程序请求内核服务的低层接口。用户程序若需内核执行受保护的资源管理操作（如打开文件、创建进程、建立内存映射），须通过系统调用或封装它的库/API 请求；已获授权的普通内存访问、映射后的读写等，不是每次操作都要再次陷入内核。用户态也不能直接执行仅允许内核态使用的硬件控制指令。</p>
+<pre><code class="language-text">用户程序/库函数 → 执行陷入指令 → 硬件切换至内核态
+→ 传递参数并保存上下文 → 对应系统调用服务例程 → 恢复上下文 → 返回用户态
+</code></pre>
+<ul>
+<li>发出系统调用请求时 CPU 仍处于用户态；陷入指令执行后产生内中断，硬件完成转内核态，随后才在内核态执行服务例程。</li>
+<li>中断硬件阶段负责保存中断点、关中断（按体系结构规则）和改变 CPU 模式；OS 负责解释系统调用号、保存必要的通用寄存器、执行服务和恢复现场。不要把硬件完成的状态切换工作误写为 OS 软件完成。</li>
+<li>系统调用接口可看作 OS 向程序员提供的 API；Shell 是用户同 OS 交互的接口。<code>libc</code>、Windows API、POSIX API 等库把底层调用封装成较易使用的函数。使用同一 API 的系统通常具有更好的可移植性。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>功能与示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备管理</td>
+<td>请求、释放、启动设备</td>
+</tr>
+<tr>
+<td>文件管理</td>
+<td>创建、删除、打开、关闭、读、写文件，如 <code>open</code>、<code>read</code>、<code>write</code>、<code>lseek</code></td>
+</tr>
+<tr>
+<td>进程控制</td>
+<td>创建、撤销、阻塞、唤醒进程，如 <code>fork</code>、<code>execve</code>、<code>exit</code></td>
+</tr>
+<tr>
+<td>进程通信</td>
+<td>消息传递、管道、共享内存，如 <code>pipe</code>、<code>wait</code></td>
+</tr>
+<tr>
+<td>内存管理</td>
+<td>分配、回收、映射与保护，如 <code>mmap</code>、<code>munmap</code>、<code>mprotect</code></td>
+</tr>
+<tr>
+<td>信息维护与保护</td>
+<td>查询用户数、版本、空闲空间；设置/取得资源访问权限</td>
+</tr>
+</tbody>
+</table></div>
+<p>判别题要点：纯用户态计算的库函数（如求绝对值、三角函数）不必触发系统调用；页置换、进程调度等由内核自主完成，对用户透明，也不是用户通过系统调用直接要求执行的操作。</p>
+<h2 id="section-10">1.5 中断机制的细化</h2>
+<h3 id="section-11">1.5.1 内中断与外中断</h3>
+<p>内中断又常称异常，与当前正在执行的指令相关，信号来源于 CPU 内部；常见场景包括执行特权指令、除数为零、陷入指令、缺页、地址越界和存储保护错。外中断与当前指令无关，来自 CPU 外部，例如时钟到期、I/O 完成、网络数据到达和掉电；掉电属于不可屏蔽中断。</p>
+<p>异常还可按处理结果理解：</p>
+<ul>
+<li><strong>故障（fault）</strong>：通常可由内核修复后重启相关指令，如缺页；</li>
+<li><strong>陷入（trap）</strong>：程序有意引发的同步事件，如系统调用、调试断点；服务后通常从陷入指令的下一条指令继续；</li>
+<li><strong>终止（abort）</strong>：发生不可恢复的严重错误，内核一般终止相应程序，而不再交还 CPU 使用权。</li>
+</ul>
+<p>课件和 408 试题中，“中断”常特指狭义的外中断，“内中断”则常写作“异常”。</p>
+<h3 id="section-12">1.5.2 中断处理中的职责边界</h3>
+<ol>
+<li>CPU 在指令执行中检测内中断，或在每个指令周期末检查外中断请求；</li>
+<li>硬件保存中断点 PC、改变状态位并转入内核态；外中断的 PC 通常由中断隐指令自动保存；</li>
+<li>CPU 根据中断类型查询中断向量表，转入相应服务程序；</li>
+<li>OS 保存 PSW、通用寄存器等现场，执行中断服务；</li>
+<li>OS 恢复现场，硬件/特权返回使处理器回到被中断程序。</li>
+</ol>
+<p>程序状态字 PSW 记录处理器状态与控制信息，是实现程序状态保护和恢复的关键。与普通子程序调用相比，中断/异常入口需要保护可返回的处理器状态，并可能切换特权级；普通调用不因此自动取得内核权限。具体标志位和寄存器是否被调用指令或被调函数改变，取决于 ISA 与调用约定。2020 类题中，提供中断服务、初始化中断向量表、保存中断屏蔽字属于 OS；中断服务寻址、关中断、保存中断点 PC 属于题设硬件机制。</p>
+<h2 id="section-13">1.6 操作系统结构</h2>
+<p>内核是操作系统中最基本、最核心的底层软件；内核程序实现内核功能。常见内核组成有进程、存储器和设备管理，以及时钟管理、中断处理和原语。原语通常短小、调用频繁，关键要求是对外呈现不可分割的原子效果；教材常用“执行时不被中断”说明单核临界段，但实现原子性不等于任何硬件中断都绝不发生，多处理器上还需锁或原子指令等同步手段。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>核心思想</th>
+<th>优点</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分层结构</td>
+<td>自下而上分层，每层仅调用相邻低层提供的接口</td>
+<td>易调试验证，接口清晰，便于维护</td>
+<td>层次边界难划分；不能跨层调用，经过多层会降低效率</td>
+</tr>
+<tr>
+<td>模块化</td>
+<td>内核 = 主模块 + 可加载模块；主模块提供核心服务和模块通信/加载能力</td>
+<td>结构较清晰，可并行开发，可动态加载驱动或文件系统，模块可直接调用，效率高</td>
+<td>模块相互依赖，接口边界仍可能不清晰</td>
+</tr>
+<tr>
+<td>宏内核（大内核）</td>
+<td>大部分系统功能均在内核态，通常也采用模块化组织</td>
+<td>内核内部可直接调用，性能高</td>
+<td>代码庞大复杂、维护困难；一个模块故障可能拖垮整个系统</td>
+</tr>
+<tr>
+<td>微内核</td>
+<td>内核只保留最小的进程管理、内存管理和通信机制；其他服务在用户态，以消息传递协作</td>
+<td>可扩展、易维护，隔离更好，单个服务故障不必导致整体崩溃</td>
+<td>频繁用户态/内核态切换及 IPC 带来额外开销</td>
+</tr>
+<tr>
+<td>外核（Exokernel）</td>
+<td>外核本身是精简的内核，负责安全地复用、分配和保护底层硬件资源；具体抽象与策略多由用户态库操作系统（library OS）实现</td>
+<td>应用可按需构建抽象，减少不必要的映射层</td>
+<td>资源保护和库操作系统设计复杂，通用接口的一致性更难维护</td>
+</tr>
+</tbody>
+</table></div>
+<p>补充：macOS 为混合结构，包含 Mach 微内核思想与 BSD 等组件；Android 采用分层结构，底层 Linux 内核向上提供进程、内存与硬件驱动支持。</p>
+<h2 id="section-14">1.7 引导、磁盘初始化与虚拟机</h2>
+<h3 id="section-15">1.7.1 传统 BIOS/MBR 引导链</h3>
+<p>以下是课件中的传统 BIOS/MBR 口径（现代 UEFI/GPT 的实现不同）：</p>
+<pre><code class="language-text">复位 → ROM 中 BIOS/引导程序 → 建立中断向量表、POST 自检
+→ 读启动磁盘 MBR（磁盘引导程序 + 分区表）
+→ 找到活动分区并执行 PBR/分区引导程序
+→ 装入并执行 OS 初始化程序/启动管理器 → 操作系统初始化
+</code></pre>
+<ul>
+<li>系统初始化不等于操作系统初始化：系统启动先由 ROM 固件、BIOS、引导记录完成，OS 的初始化程序在定位到相应分区后才装入 RAM 执行。</li>
+<li>MBR 位于启动盘第一个扇区，包含磁盘引导程序和分区表；活动分区的第一个扇区是 PBR，其中的引导程序继续定位启动管理器。常见 Linux 引导程序例子为 GRUB。</li>
+<li>2021 题型中四者执行顺序为：<strong>ROM 引导程序 → 磁盘引导程序 → 分区引导程序 → 操作系统初始化程序</strong>。</li>
+</ul>
+<h3 id="section-16">1.7.2 磁盘准备顺序</h3>
+<p>安装操作系统前的典型顺序是：<strong>低级（物理）格式化 → 磁盘分区 → 逻辑格式化 → 安装 OS</strong>。</p>
+<ul>
+<li>物理格式化划分磁道和扇区；扇区一般含头、数据区和尾，头尾可含奇偶校验、CRC 等校验信息。</li>
+<li>分区将磁盘划为若干卷；完成逻辑格式化后才可在该分区上安装 OS。</li>
+<li>逻辑格式化创建文件系统，并初始化根目录、空闲空间管理结构（如位示图）、超级块、索引结点区等数据结构；根目录在创建文件系统时建立，而不是在物理格式化或仅分区时建立。</li>
+</ul>
+<h3 id="section-17">1.7.3 虚拟机与两类 VMM</h3>
+<p>虚拟化技术可把一台物理机抽象为多台虚拟机（VM），每台 VM 可独立运行客户操作系统。虚拟机管理程序也称 VMM 或 Hypervisor。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>第一类 VMM（裸机型）</th>
+<th>第二类 VMM（宿主型）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>位置</td>
+<td>直接运行在硬件之上</td>
+<td>运行在 Host OS 之上</td>
+</tr>
+<tr>
+<td>资源分配</td>
+<td>直接控制、分配物理资源</td>
+<td>依赖 Host OS 分配；虚拟磁盘常是 Host 文件系统中的文件</td>
+</tr>
+<tr>
+<td>性能与数量</td>
+<td>少一层宿主 OS 依赖，特定场景开销可能较低</td>
+<td>需要宿主 OS 提供服务，可能增加开销；两类可支持的 VM 数量均取决于硬件资源、实现和配置，不能仅凭类别断定</td>
+</tr>
+<tr>
+<td>可迁移性</td>
+<td>可迁移，取决于共享存储、网络和管理能力</td>
+<td>镜像文件便于复制，但迁移仍受设备状态、存储和目标环境约束；不能仅凭类别断定难易</td>
+</tr>
+<tr>
+<td>运行模式</td>
+<td>VMM 直接控制硬件，运行在相应平台提供的高权限/虚拟化模式，不必一律等同于传统 Ring 0</td>
+<td>VMM 可包含用户态与内核态组件；Guest 应用的系统调用通常先由 Guest OS 处理，Guest 执行敏感/特权操作或访问虚拟设备时才可能陷入 VMM，由 VMM 模拟或借助 Host OS 完成</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 源稿表述边界
+原 PDF 第 22 页的外核图意在强调“内核向程序暴露更多底层资源”，不是把“外核”放到内核之外；第 29--30 页的 VMM 比较把性能、虚拟机数量和迁移难易写成固定排序。它们可帮助理解典型部署，但这些结论不能脱离具体实现和资源条件当作普遍定律。</p>
+</blockquote>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-bc90db5fb862/">下一篇：进程与线程</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-f40d324810a1/">计算机系统层次结构</a></li>
+</ul>
+<h2 id="section-19">1.8 本节复盘</h2>
+<ul>
+<li>OS 管资源、供接口、扩展裸机；基本特征是并发、共享、虚拟、异步。</li>
+<li>单核进程可并发不可并行；CPU 与外设可并行。</li>
+<li>用户态不能执行特权指令，进入内核由中断/异常/陷入触发；“发生在用户态”不等于“处理在用户态”。</li>
+<li>系统调用经陷入进入内核，调用库函数不必然进入内核；中断题必须区分硬件状态与 OS 服务程序。</li>
+<li>结构题比较层次边界、模块通信、故障隔离和性能；引导题抓住 ROM → MBR → PBR → OS 初始化的顺序。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-200f7524e253/index.html"><span>← 上一项</span><strong>2. 链表</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-2406c8c61473/index.html"><span>下一项 →</span><strong>计算机组成原理导航</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-b2e9e261e13a/"><span class="related-type">笔记</span><strong>操作系统导航</strong><span>408 学习笔记：操作系统导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

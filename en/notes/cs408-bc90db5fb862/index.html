@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 2：知识 - 进程与线程 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 2：知识 - 进程与线程. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Operating Systems">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 2：知识 - 进程与线程 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 2：知识 - 进程与线程. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-bc90db5fb862/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 2：知识 - 进程与线程 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 2：知识 - 进程与线程. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 2：知识 - 进程与线程",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-bc90db5fb862/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-bc90db5fb862/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-bc90db5fb862/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-bc90db5fb862/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-bc90db5fb862/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-bc90db5fb862/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 2：知识 - 进程与线程</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 2：知识 - 进程与线程. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>16 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Operating Systems</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d9cbfa04d923.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d9cbfa04d923.pdf" download="Lecture 2：知识 - 进程与线程.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 进程的概念、特征与组成</a><a href="#section-5">2.2 进程状态与状态转换</a><a href="#section-9">2.3 进程控制</a><a href="#section-14">2.4 进程通信（IPC）</a><a href="#section-17">2.5 线程</a><a href="#section-22">相关知识</a><a href="#section-23">2.6 本节复盘与易错点</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>程序是静态的指令集合；进程是程序的一次执行过程、也是资源分配和保护的独立单位；线程是进程内一条独立执行流。通常在内核级线程模型下，内核以线程为 CPU 调度单位；纯用户级线程另由用户态库调度。比较概念时，抓住“资源归谁、CPU 调谁、切换保存什么”。</p>
+</blockquote>
+<h2 id="section-1">2.1 进程的概念、特征与组成</h2>
+<h3 id="section-2">2.1.1 程序与进程</h3>
+<h5 id="section-3"><strong>定义</strong>：#进程</h5>
+<p>进程是程序在某个数据集合上的一次执行过程。程序文件本身是静态的；操作系统创建 PCB、地址空间及必要的执行上下文后，就形成了进程这一动态执行实体。进程不必正占用 CPU，也可处于就绪或阻塞状态；采用请求分页时，程序更不必全部装入内存才算进程。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>程序</th>
+<th>进程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>形态</td>
+<td>静态的指令和数据集合</td>
+<td>动态的执行过程</td>
+</tr>
+<tr>
+<td>是否具有生命周期</td>
+<td>无</td>
+<td>有创建、就绪、运行、阻塞、终止等状态</td>
+</tr>
+<tr>
+<td>并发性</td>
+<td>不体现</td>
+<td>多个进程可交替推进</td>
+</tr>
+<tr>
+<td>资源</td>
+<td>不直接占有资源</td>
+<td>是资源分配、保护的基本单位</td>
+</tr>
+</tbody>
+</table></div>
+<p>进程具有以下特征：</p>
+<ul>
+<li><strong>动态性</strong>：有产生、变化、消亡的过程，是进程最基本的特征。</li>
+<li><strong>并发性</strong>：内存中可同时存在多个进程，它们在一段时间内交替向前推进。</li>
+<li><strong>独立性</strong>：进程是能独立获得资源、独立接受调度的基本单位。</li>
+<li><strong>异步性</strong>：并发进程以各自不可预知的速度推进；必须用同步机制协调，否则可能出现结果不确定。</li>
+<li><strong>结构性</strong>：每个进程都由程序段、数据段和 PCB 构成。</li>
+</ul>
+<h3 id="section-4">2.1.2 进程实体与 PCB</h3>
+<p><strong>进程实体（进程映像）= 程序段 + 数据段 + PCB。</strong> 其中 PCB（Process Control Block，进程控制块）是进程存在的唯一标志，常驻主存；操作系统通过 PCB 感知、管理和调度进程。</p>
+<p>PCB 中的信息可按用途归纳为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>典型内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>描述信息</td>
+<td>PID、父进程 PID、用户标识</td>
+<td>唯一标识进程及其归属</td>
+</tr>
+<tr>
+<td>控制和管理信息</td>
+<td>当前状态、优先级、调度/同步信息、通信信息</td>
+<td>决定管理和调度方式</td>
+</tr>
+<tr>
+<td>资源分配清单</td>
+<td>内存地址/页表、打开文件、I/O 设备、已分配资源</td>
+<td>记录进程已占有资源</td>
+</tr>
+<tr>
+<td>处理机相关信息</td>
+<td>程序计数器 PC、通用寄存器、程序状态字 PSW、栈指针</td>
+<td>进程恢复运行时的现场</td>
+</tr>
+</tbody>
+</table></div>
+<p>PCB 通常按进程状态组织为队列：</p>
+<ul>
+<li><strong>链接方式</strong>：PCB 中设置队列指针，同一状态的 PCB 链成就绪队列、各事件等待队列等。</li>
+<li><strong>索引方式</strong>：用索引表记录各队列首/尾指针或相关 PCB 的下标，便于按状态定位。</li>
+</ul>
+<h2 id="section-5">2.2 进程状态与状态转换</h2>
+<h3 id="section-6">2.2.1 五状态模型</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+<th>可发生的转换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建态</td>
+<td>正申请 PCB、分配初始资源、初始化信息</td>
+<td>创建工作完成 → 就绪态</td>
+</tr>
+<tr>
+<td>就绪态</td>
+<td>除 CPU 外已具备运行条件，正在等待处理机</td>
+<td>被调度 → 运行态</td>
+</tr>
+<tr>
+<td>运行态</td>
+<td>已获得 CPU，正在执行</td>
+<td>时间片到/被抢占 → 就绪；等待事件 → 阻塞；执行结束 → 终止</td>
+</tr>
+<tr>
+<td>阻塞态（等待态）</td>
+<td>正等待 I/O 完成、资源到达或同步事件</td>
+<td>等待事件发生 → 就绪态</td>
+</tr>
+<tr>
+<td>终止态</td>
+<td>正回收资源、撤销 PCB</td>
+<td>完成回收后消亡</td>
+</tr>
+</tbody>
+</table></div>
+<p>状态图的高频限制：</p>
+<ul>
+<li><strong>阻塞态不能直接变为运行态</strong>：事件发生后，进程只是具备运行条件，应先转入就绪队列，再由调度程序选中。</li>
+<li><strong>就绪态不能直接变为阻塞态</strong>：只有正在执行的进程才能主动请求 I/O、等待资源或执行等待操作。</li>
+<li>运行态因时间片用完、被高优先级进程抢占而转就绪态，是主动/被动调度导致的转换。</li>
+<li>阻塞态转就绪态由外部事件完成触发，通常是<strong>被动</strong>转换；其时 CPU 可正在执行其他进程。</li>
+</ul>
+<h3 id="section-7">2.2.2 挂起状态</h3>
+<p>若内存紧张，操作系统可把某些进程的程序和数据换出外存，形成<strong>就绪挂起</strong>或<strong>阻塞挂起</strong>。挂起强调进程暂不在内存，阻塞强调进程在等待事件；二者可以同时存在。</p>
+<h3 id="section-8">2.2.3 进程切换与模式切换</h3>
+<p>进程切换通常包括：保存当前进程的 CPU 现场到 PCB，选择下一个就绪进程，恢复其 PCB 中的现场并继续执行。它有调度和寄存器保存/恢复开销，必要时还涉及地址空间切换。</p>
+<ul>
+<li><strong>进程切换</strong>：CPU 从一个进程的执行流转到另一个进程的执行流。</li>
+<li><strong>线程切换</strong>：CPU 从一个线程转到另一个线程；同一进程内切换通常无需切换地址空间，开销较小。</li>
+<li><strong>用户态/内核态切换</strong>：权限级变化，例如系统调用、异常、中断；它不必然引发进程或线程切换。</li>
+</ul>
+<h2 id="section-9">2.3 进程控制</h2>
+<h3 id="section-10">2.3.1 原语</h3>
+<p><strong>原语</strong>是完成某种系统功能的一组对外不可分割的操作，关键是避免其他执行流观察到 PCB、队列和资源的中间不一致状态。教材用“执行期间不被中断”描述单核临界段，但原子性不等于所有硬件中断绝不能发生；实现取决于体系结构和并发环境。</p>
+<p>常见实现是在进入关键原语前<strong>关中断</strong>，执行原语指令后<strong>开中断</strong>。关中断只应覆盖很短的临界代码，避免影响中断响应；多处理机中还需配合硬件原子指令或锁。</p>
+<h3 id="section-11">2.3.2 五类基本进程控制原语</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>原语</th>
+<th>核心步骤</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建原语</td>
+<td>申请空白 PCB；分配 PID 和初始资源；初始化 PCB；插入就绪队列</td>
+</tr>
+<tr>
+<td>撤销原语</td>
+<td>从队列摘除；终止子孙进程或解除其关系；回收内存、文件、I/O 等资源；撤销 PCB</td>
+</tr>
+<tr>
+<td>阻塞原语</td>
+<td>保存现场和状态；把运行态改为阻塞态；插入相应事件等待队列；重新调度</td>
+</tr>
+<tr>
+<td>唤醒原语</td>
+<td>从等待队列移出满足条件的 PCB；改为就绪态；插入就绪队列；必要时触发抢占</td>
+</tr>
+<tr>
+<td>切换原语</td>
+<td>保存当前进程上下文；选择下一个就绪进程；恢复其上下文并转入执行</td>
+</tr>
+</tbody>
+</table></div>
+<p>创建、撤销、阻塞、唤醒与切换都要借助 PCB 修改状态和队列，因此是内核提供的原语。</p>
+<h3 id="section-12">2.3.3 父子进程与常用系统调用</h3>
+<ul>
+<li><code>fork()</code>：父进程创建子进程。成功后父、子都从 <code>fork()</code> 返回处继续执行；子进程得到新的 PID，返回值为 0，父进程得到子 PID。创建失败时父进程返回负值。</li>
+<li><code>exec()</code> 系列：以一个新程序替换<strong>当前进程</strong>的程序段、数据和用户态执行上下文；成功后通常不返回到原程序。它不创建新进程。</li>
+<li><code>wait()</code> / <code>waitpid()</code>：父进程等待并回收子进程终止状态；若目标子进程尚未退出，父进程可阻塞。</li>
+<li><code>exit()</code>：进程正常结束或异常结束时请求内核撤销自身；内核回收大部分资源，并向父进程报告终止状态。</li>
+</ul>
+<p>子进程可继承父进程的部分资源和环境（例如打开文件描述符、当前工作目录等），但拥有独立 PID 和独立的虚拟地址空间；父子进程默认<strong>不共享地址空间</strong>。父进程先结束而子进程仍在运行时，子进程成为孤儿进程，由 <code>init</code>（或相应的系统管理进程）收养。子进程先结束而父进程未 <code>wait</code> 回收时，会暂留终止信息，形成僵尸进程。</p>
+<h3 id="section-13">2.3.4 调度优先级</h3>
+<p>进程优先级反映调度时的优先程度。I/O 密集型进程经常主动让出 CPU 并等待 I/O，为提高设备和 CPU 的并行利用率，调度策略常使其得到较高或动态提高的优先级；纯 CPU 密集型进程则可能得到较低优先级或在运行后被降低。</p>
+<blockquote>
+<p>2013 年原题给出 $P_1$ 的 CPU/I/O 时间占比为 $90%/10%$，$P_2$ 为 $50%/50%$，$P_3$ 为 $15%/85%$。按题设目标“提高系统资源利用率”，优先级为 $P_3&gt;P_2&gt;P_1$：让 I/O 型进程尽早发起 I/O，可与其他进程的 CPU 计算重叠；这不是所有调度目标下的固定排序。</p>
+</blockquote>
+<h2 id="section-14">2.4 进程通信（IPC）</h2>
+<p>进程地址空间相互隔离，若要交换数据或协调动作，需使用操作系统提供的 IPC 机制。常见方式有管道、信号、消息队列、共享内存、信号量和套接字。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>数据/特点</th>
+<th>典型限制或用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管道</td>
+<td>内核中的 FIFO 字节流缓冲区</td>
+<td>单条 POSIX 管道有固定读端和写端，只沿一个方向传输；适合连续数据流</td>
+</tr>
+<tr>
+<td>信号</td>
+<td>异步通知事件</td>
+<td>传递信息量很少，处理要及时</td>
+</tr>
+<tr>
+<td>消息队列</td>
+<td>内核维护的离散消息及消息头</td>
+<td>可按类型接收，适合结构化消息</td>
+</tr>
+<tr>
+<td>共享内存</td>
+<td>多进程映射同一物理存储区</td>
+<td>传输快；并发修改共享状态时需自行设计同步，纯并发读取不必因此加互斥锁</td>
+</tr>
+<tr>
+<td>信号量</td>
+<td>整数计数及 P/V 操作</td>
+<td>主要用于互斥与同步，不适于大量数据传输</td>
+</tr>
+<tr>
+<td>套接字</td>
+<td>网络通信端点</td>
+<td>可用于同机或不同主机进程通信</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-15">2.4.1 管道通信</h3>
+<p>管道可看作内核提供的有限容量缓冲区：一端写入、另一端读取，数据按 <strong>FIFO</strong> 顺序流动。单条 POSIX 匿名管道的读写端方向固定，本身是<strong>单向</strong>字节流；要双向通信，通常建立两条方向相反的管道。教材把管道概括为“半双工”时，意在强调不能用同一条管道同时实现双向传输，不能据此推断其方向可随时反转。缓冲区容量也随系统与配置变化，不是普遍固定的 4 KiB。</p>
+<ul>
+<li><strong>匿名管道</strong>：没有文件系统名字，常用于有亲缘关系的进程，如父子进程；创建后通过继承的文件描述符读写。</li>
+<li><strong>命名管道（FIFO）</strong>：在文件系统中以特殊文件形式存在，可用于无亲缘关系的进程。</li>
+<li>管道为空时，读端通常阻塞等待写入；管道满时，写端通常阻塞等待空间。读写端关闭的语义还要结合是否仍有其他端点打开判断。</li>
+<li>管道缓存容量有限，且一般只保证单次不超过特定原子写入上限的数据不与其他写入交错；答题应强调读写同步和缓冲区容量。</li>
+</ul>
+<h3 id="section-16">2.4.2 共享内存、消息传递与信号量</h3>
+<p>共享内存由内核建立和映射后，多个进程可直接读写同一存储区。建立、附接和撤销时需要系统调用；建立完成后的普通读写通常无需每次陷入内核，因此传送大量数据时效率高。</p>
+<ul>
+<li>**教材补充与纠错：**共享本身不必然产生竞态。多个进程并发访问同一可变状态且至少一方写入时，若缺少必要同步，就可能出现竞态；可按操作语义使用互斥锁、信号量或原子操作，不能因为“共享内存快”而忽略同步。</li>
+<li>多核下还需考虑高速缓存一致性与伪共享等问题；共享内存未必总比消息传递更有优势。</li>
+<li><strong>直接通信</strong>：发送方显式写明接收进程，进程间连接通常自动建立。</li>
+<li><strong>间接通信</strong>：通过信箱/端口传递消息，发送者和接收者围绕同一个信箱通信，耦合更低。</li>
+<li>消息一般包含消息头和消息体；消息头可含发送者、接收者、消息类型、长度、优先级等控制信息。</li>
+<li>消息传递的 <code>send</code>、<code>receive</code> 可设计为阻塞（同步）或非阻塞（异步）操作；在分布式系统中消息传递比共享内存更自然。</li>
+</ul>
+<h2 id="section-17">2.5 线程</h2>
+<h3 id="section-18">2.5.1 基本概念与资源关系</h3>
+<p>线程是进程中的一个执行单元。在内核级线程模型中，内核以线程为调度和分派单位；纯用户级线程由用户态库调度，内核只看见承载它们的内核调度实体。一个进程可只有一个线程，也可包含多个可并发执行的线程。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>进程</th>
+<th>线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本角色</td>
+<td>资源分配和保护单位</td>
+<td>调度和执行单位</td>
+</tr>
+<tr>
+<td>控制块</td>
+<td>PCB</td>
+<td>TCB</td>
+</tr>
+<tr>
+<td>地址空间</td>
+<td>各进程独立</td>
+<td>同一进程的线程共享</td>
+</tr>
+<tr>
+<td>创建/切换开销</td>
+<td>较大，往往涉及地址空间和资源表</td>
+<td>较小，同进程内通常只需切换寄存器、PC、栈等</td>
+</tr>
+<tr>
+<td>故障影响</td>
+<td>一般隔离于其他进程</td>
+<td>一个线程越界/崩溃可能危及整个进程</td>
+</tr>
+</tbody>
+</table></div>
+<p>每个线程有自己的 TCB，记录线程标识、状态、优先级、程序计数器、寄存器、栈指针及调度/同步信息等。线程私有的典型资源是<strong>线程栈、寄存器现场、PC、线程局部存储</strong>；同一进程内线程共享代码段、数据段/堆、打开文件、地址空间和进程拥有的 I/O 资源。</p>
+<blockquote>
+<p>2024 年文件描述符题：同一进程的线程共享进程地址空间，也共享打开文件表/文件描述符；每个线程有各自使用的栈，以保存自己的调用链和局部变量。“栈私有”指正常执行时各用各的栈，不代表内存保护将栈彼此隔离；同进程其他线程若持有地址，仍可能访问该栈内存。</p>
+</blockquote>
+<h3 id="section-19">2.5.2 线程的实现方式</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>管理者与优点</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户级线程（ULT）</td>
+<td>用户态线程库管理，内核不可见；创建和切换快</td>
+<td>一个线程因阻塞系统调用进入内核阻塞时，整个进程往往被阻塞；同一进程通常不能利用多核并行</td>
+</tr>
+<tr>
+<td>内核级线程（KLT）</td>
+<td>内核负责创建、调度和切换；一个线程阻塞不必阻塞同进程其他线程，可多核并行</td>
+<td>每次管理/切换需内核参与，开销较大；线程数过多会增加内核负担</td>
+</tr>
+<tr>
+<td>组合方式</td>
+<td>用户线程可复用到较少的内核线程上</td>
+<td>实现和调度策略更复杂</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-20">2.5.3 多线程映射模型</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>映射关系</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多对一</td>
+<td>多个用户线程 → 一个内核线程</td>
+<td>管理快但并发度低；一个线程阻塞常使全体阻塞；不能多核并行</td>
+</tr>
+<tr>
+<td>一对一</td>
+<td>一个用户线程 → 一个内核线程</td>
+<td>并发性和并行性好；一个线程阻塞不影响其他线程；内核线程数多时开销大</td>
+</tr>
+<tr>
+<td>多对多</td>
+<td>多个用户线程 → 不多于其数量的多个内核线程</td>
+<td>兼顾并发性与内核线程数量控制；实现复杂</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-21">2.5.4 线程池与线程同步</h3>
+<p>线程池预先创建一组工作线程，任务到达后交给空闲线程执行；任务完成后线程回到池中，而不必频繁创建和撤销线程。</p>
+<ul>
+<li><strong>优点</strong>：降低创建/销毁开销；可限制并发线程数量；任务到达响应更快；便于统一管理。</li>
+<li><strong>限制</strong>：线程池大小要与 CPU 核数、任务类型和资源上限相匹配；过小会排队，过大则造成上下文切换和资源竞争。</li>
+</ul>
+<p>并发线程访问同一可变状态且至少一方写入时，也要根据操作是否需要原子性安排同步；只读共享数据不因共享而天然需要互斥。自旋锁在获取不到锁时循环检查，称为<strong>忙等</strong>，适合临界区很短且不宜睡眠的情形；阻塞锁在等待锁时让出 CPU，不忙等，适合等待可能较长的情形。信号量的 P（wait）/V（signal）操作常用于实现互斥和同步，P 操作在资源不可用时可使线程阻塞。</p>
+<h2 id="section-22">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b2e9e261e13a/">操作系统导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-20d7b070155d/">上一篇：操作系统概述</a> · <a href="/en/notes/cs408-8b0d4ecd05ad/">下一篇：处理器调度</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-8aa8809e8e26/">CPU 的功能与结构</a></li>
+</ul>
+<h2 id="section-23">2.6 本节复盘与易错点</h2>
+<ol>
+<li>PCB 是进程存在的唯一标志；TCB 是线程管理和保存线程现场的依据。</li>
+<li>进程是资源分配单位；内核级线程是内核 CPU 调度单位，纯用户级线程由用户态库调度。同进程线程共享地址空间和文件描述符，各有自己的栈与寄存器现场；栈虽各用各的，仍处在共享地址空间内，并非彼此内存隔离。</li>
+<li>阻塞完成只能使阻塞态转为就绪态，是否运行取决于后续调度；就绪态也不能直接转阻塞态。</li>
+<li><code>fork</code> 创建进程，<code>exec</code> 替换当前进程程序，<code>wait</code> 等待/回收子进程，<code>exit</code> 终止自身；父子地址空间默认独立。</li>
+<li>管道是受容量约束的 FIFO 字节流；共享内存并发修改可变状态时须按访问模式安排同步，纯并发读取不必加互斥锁；消息传递可直接或经信箱间接完成。</li>
+<li>区分 ULT/KLT 和三种映射模型时，优先从“内核是否看见线程、阻塞是否连累同进程线程、能否多核并行、切换开销”四点作答。</li>
+</ol>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-bb3c8bf8e273/index.html"><span>← Previous item</span><strong>Lecture 5：知识 - 运算方法和运算电路</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-bfaf5bd149c2/index.html"><span>Next item →</span><strong>Lecture 7：知识 - 存储器的分类、层次结构与单位</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-20d7b070155d/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 操作系统概述</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 操作系统概述. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 5：关系数据理论 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 5：关系数据理论. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 5：关系数据理论 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 5：关系数据理论. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-8f1f495f90b2/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 5：关系数据理论 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 5：关系数据理论. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 5：关系数据理论",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-8f1f495f90b2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-8f1f495f90b2/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-8f1f495f90b2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8f1f495f90b2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8f1f495f90b2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-8f1f495f90b2/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 5：关系数据理论</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 5：关系数据理论. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>11 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d7a7dae394bb.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d7a7dae394bb.pdf" download="Lecture 5：关系数据理论.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 不良关系模式的问题</a><a href="#section-6">5.2 函数依赖</a><a href="#section-7">5.3 平凡与非平凡函数依赖</a><a href="#section-10">5.4 完全与部分函数依赖</a><a href="#section-13">5.5 传递函数依赖</a><a href="#section-14">5.6 候选码与属性闭包</a><a href="#section-15">5.7 范式与规范化</a><a href="#section-16">5.8 第一范式 1NF</a><a href="#section-19">5.9 第二范式 2NF</a><a href="#section-23">5.10 第三范式 3NF</a><a href="#section-28">5.11 BCNF</a><a href="#section-32">5.12 范式包含与快速判定</a><a href="#section-33">5.13 分解的质量要求</a><a href="#section-36">5.14 易错点</a><a href="#section-37">相关知识</a><a href="#section-38">5.15 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节从冗余与更新异常出发，整理函数依赖、平凡/非平凡依赖、完全/部分依赖和传递依赖，并依次说明 1NF、2NF、3NF、BCNF 的判定、分解与 SQL 示例。</p>
+</blockquote>
+<h2 id="section-1">5.1 不良关系模式的问题</h2>
+<p>课件把学生、系、系主任、课程和成绩放在一个关系中：</p>
+<p>$$
+\operatorname{Teaching}(
+\text{学号},\text{姓名},\text{年龄},
+\text{系名},\text{系主任},
+\text{课程名},\text{成绩}
+).
+$$</p>
+<p>同一学生选多门课时，姓名、年龄、系名和系主任会重复出现。</p>
+<h3 id="section-2">5.1.1 数据冗余</h3>
+<p>同一事实存储多次，例如每条选课记录都重复学生和院系信息。</p>
+<h3 id="section-3">5.1.2 更新异常</h3>
+<p>若某系主任更换，必须修改该系所有相关元组；漏改一行就产生矛盾。</p>
+<h3 id="section-4">5.1.3 插入异常</h3>
+<p>如果某系暂时没有学生或课程，可能无法单独插入系和系主任信息。</p>
+<h3 id="section-5">5.1.4 删除异常</h3>
+<p>删除某学生最后一条选课记录时，可能同时丢失学生、系或系主任事实。</p>
+<p>这些异常的根源不是“表太宽”本身，而是多个不同语义的函数依赖被混放在同一关系模式中。</p>
+<h2 id="section-6">5.2 函数依赖</h2>
+<p>设关系模式：</p>
+<p>$$
+R(U),
+$$</p>
+<p>$X,Y\subseteq U$。若对 $R$ 的任何合法关系实例，任意两个元组在 $X$ 上取值相同，就必然在 $Y$ 上取值相同，则称 $X$ 函数决定 $Y$：</p>
+<p>$$
+X\rightarrow Y.
+$$</p>
+<p>也称 $Y$ 函数依赖于 $X$。</p>
+<p>例如：</p>
+<p>$$
+\text{Sno}\rightarrow\text{Sname},
+$$</p>
+<p>$$
+\text{Sno}\rightarrow\text{Sdept}.
+$$</p>
+<p>含义是同一学号不能对应两个不同姓名或院系。</p>
+<blockquote>
+<p><strong>WARNING</strong>
+函数依赖是关系模式语义上的约束，不能只根据当前少量样本“碰巧没有重复”就断定成立。</p>
+</blockquote>
+<h2 id="section-7">5.3 平凡与非平凡函数依赖</h2>
+<h3 id="section-8">5.3.1 平凡函数依赖</h3>
+<p>若：</p>
+<p>$$
+Y\subseteq X,
+$$</p>
+<p>则：</p>
+<p>$$
+X\rightarrow Y
+$$</p>
+<p>是平凡函数依赖，总是成立。</p>
+<p>例如：</p>
+<p>$$
+{\text{StudentID},\text{Name}}
+\rightarrow
+{\text{Name}}.
+$$</p>
+<h3 id="section-9">5.3.2 非平凡函数依赖</h3>
+<p>若：</p>
+<p>$$
+Y\nsubseteq X,
+$$</p>
+<p>则 $X\rightarrow Y$ 是非平凡函数依赖。</p>
+<p>若还有：</p>
+<p>$$
+X\cap Y=\varnothing,
+$$</p>
+<p>则称完全非平凡依赖。</p>
+<p>规范化判定主要关注非平凡函数依赖。</p>
+<h2 id="section-10">5.4 完全与部分函数依赖</h2>
+<h3 id="section-11">5.4.1 完全函数依赖</h3>
+<p>若 $X\rightarrow Y$，且对 $X$ 的任何真子集 $X'$ 都有：</p>
+<p>$$
+X'\nrightarrow Y,
+$$</p>
+<p>则 $Y$ 完全函数依赖于 $X$，记作：</p>
+<p>$$
+X\xrightarrow{F}Y.
+$$</p>
+<h3 id="section-12">5.4.2 部分函数依赖</h3>
+<p>若 $X\rightarrow Y$，但存在真子集 $X'\subset X$ 使：</p>
+<p>$$
+X'\rightarrow Y,
+$$</p>
+<p>则 $Y$ 部分函数依赖于 $X$，记作：</p>
+<p>$$
+X\xrightarrow{P}Y.
+$$</p>
+<p>例如选课关系的候选码为：</p>
+<p>$$
+(\text{StudentID},\text{CourseID}),
+$$</p>
+<p>而：</p>
+<p>$$
+\text{StudentID}\rightarrow\text{StudentName},
+$$</p>
+<p>所以 <code>StudentName</code> 对复合码是部分依赖。</p>
+<p>单属性候选码没有非空真子集，因此不会产生针对该码的部分依赖。</p>
+<h2 id="section-13">5.5 传递函数依赖</h2>
+<p>若：</p>
+<p>$$
+X\rightarrow Y,
+$$</p>
+<p>$$
+Y\rightarrow Z,
+$$</p>
+<p>且 $Y\nrightarrow X$，$Z\nsubseteq Y$，则称 $Z$ 对 $X$ 传递函数依赖：</p>
+<p>$$
+X\xrightarrow{T}Z.
+$$</p>
+<p>课件例子：</p>
+<p>$$
+\text{学号}\rightarrow\text{系名},
+$$</p>
+<p>$$
+\text{系名}\rightarrow\text{系主任名字},
+$$</p>
+<p>所以：</p>
+<p>$$
+\text{学号}\xrightarrow{T}\text{系主任名字}.
+$$</p>
+<p>传递依赖会让系主任信息在每个学生元组中重复。</p>
+<h2 id="section-14">5.6 候选码与属性闭包</h2>
+<p>给定函数依赖集 $F$，属性集 $X$ 关于 $F$ 的闭包 $X_F^+$ 是由 $X$ 能函数决定的全部属性。</p>
+<p>若：</p>
+<p>$$
+X_F^+=U,
+$$</p>
+<p>则 $X$ 是超码；若 $X$ 还没有能决定 $U$ 的真子集，则 $X$ 是候选码。</p>
+<p>闭包计算：</p>
+<ol>
+<li>初始化 $X^+=X$。</li>
+<li>若存在 $Y\rightarrow Z$ 且 $Y\subseteq X^+$，把 $Z$ 加入 $X^+$。</li>
+<li>重复直到不再增加属性。</li>
+</ol>
+<p>范式判定前必须先确认候选码和主属性，否则容易误判 2NF、3NF、BCNF。</p>
+<h2 id="section-15">5.7 范式与规范化</h2>
+<p>范式（Normal Form）是评价关系模式规范化程度的理论标准。</p>
+<p>常见层次：</p>
+<p>$$
+\text{1NF}
+\supset
+\text{2NF}
+\supset
+\text{3NF}
+\supset
+\text{BCNF}.
+$$</p>
+<p>更高阶还有 4NF、5NF，分别处理多值依赖和连接依赖。</p>
+<p>规范化是把低级范式的关系模式分解为更高级范式的过程，目标是减少冗余和更新异常。</p>
+<blockquote>
+<p><strong>NOTE</strong>
+范式越高通常冗余越少，但查询可能需要更多连接，不能简单说所有操作复杂度都必然降低。设计时还要权衡无损连接、依赖保持和性能。</p>
+</blockquote>
+<h2 id="section-16">5.8 第一范式 1NF</h2>
+<h3 id="section-17">5.8.1 定义</h3>
+<p>若关系模式的每个属性在当前关系模型中都取原子值，即每个分量是定义域中的单一值，则属于第一范式。</p>
+<p>直观要求：</p>
+<ul>
+<li>一个单元格不能放可变数量的列表或重复组。</li>
+<li>每一列在既定语义下取单一值。</li>
+</ul>
+<p>1NF 是关系模型的基本要求。</p>
+<h3 id="section-18">5.8.2 出生日期图的准确解释</h3>
+<p>课件把出生日期分成“年、月、日”来说明可分性。</p>
+<p>如果一个单元格内部存放结构化的多个独立字段，且系统要把它们当重复组处理，可能违反 1NF。</p>
+<p>但现代数据库中的单个 <code>DATE</code> 值属于一个原子定义域，即使逻辑上能提取年、月、日，也不因此违反 1NF。</p>
+<blockquote>
+<p><strong>WARNING</strong> · 课件图示纠错
+“出生日期能拆成年月日，所以一定不属于 1NF”过于机械。原子性相对于关系模式选定的定义域和业务语义；标准 <code>DATE</code> 列通常视为原子值。</p>
+</blockquote>
+<h2 id="section-19">5.9 第二范式 2NF</h2>
+<h3 id="section-20">5.9.1 定义</h3>
+<p>关系模式 $R$ 属于 2NF，当且仅当：</p>
+<ol>
+<li>$R\in\text{1NF}$；</li>
+<li>每个非主属性都完全函数依赖于每一个候选码，不存在对候选码真子集的部分依赖。</li>
+</ol>
+<p>口诀：</p>
+<pre><code class="language-text">2NF：消除非主属性对候选码的部分依赖
+</code></pre>
+<h3 id="section-21">5.9.2 推论</h3>
+<p>若所有候选码都是单属性，则不会存在对候选码的部分依赖，因此满足 1NF 的该关系必然满足 2NF。</p>
+<h3 id="section-22">5.9.3 课件选课例子</h3>
+<p>原关系：</p>
+<pre><code class="language-sql">CREATE TABLE StudentCourses (
+    StudentID   INT,
+    CourseID    INT,
+    StudentName VARCHAR(50),
+    PRIMARY KEY (StudentID, CourseID)
+);
+</code></pre>
+<p>函数依赖：</p>
+<p>$$
+(\text{StudentID},\text{CourseID})
+\rightarrow\text{StudentName},
+$$</p>
+<p>同时：</p>
+<p>$$
+\text{StudentID}\rightarrow\text{StudentName}.
+$$</p>
+<p>所以 <code>StudentName</code> 只依赖复合码的一部分，不符合 2NF。</p>
+<p>分解为：</p>
+<pre><code class="language-sql">CREATE TABLE Students (
+    StudentID   INT PRIMARY KEY,
+    StudentName VARCHAR(50)
+);
+
+CREATE TABLE StudentCourses (
+    StudentID INT,
+    CourseID  INT,
+    PRIMARY KEY (StudentID, CourseID),
+    FOREIGN KEY (StudentID)
+        REFERENCES Students(StudentID)
+);
+</code></pre>
+<p>学生姓名只存一份，选课关系只保留与整个复合码有关的事实。</p>
+<h2 id="section-23">5.10 第三范式 3NF</h2>
+<h3 id="section-24">5.10.1 直观定义</h3>
+<p>关系满足 2NF，并且非主属性不传递依赖于候选码，则属于 3NF。</p>
+<p>口诀：</p>
+<pre><code class="language-text">3NF：消除非主属性对候选码的传递依赖
+</code></pre>
+<h3 id="section-25">5.10.2 正式判定</h3>
+<p>对函数依赖集 $F^+$ 中每个非平凡依赖：</p>
+<p>$$
+X\rightarrow A,
+$$</p>
+<p>至少满足一项：</p>
+<ol>
+<li>$X$ 是超码；</li>
+<li>$A$ 是主属性。</li>
+</ol>
+<p>第二项是 3NF 与 BCNF 的关键差别。</p>
+<h3 id="section-26">5.10.3 课件班级例子</h3>
+<p>原关系：</p>
+<pre><code class="language-sql">CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name      VARCHAR(50),
+    ClassID   INT,
+    ClassName VARCHAR(50)
+);
+</code></pre>
+<p>存在：</p>
+<p>$$
+\text{StudentID}\rightarrow\text{ClassID},
+$$</p>
+<p>$$
+\text{ClassID}\rightarrow\text{ClassName}.
+$$</p>
+<p>所以 <code>ClassName</code> 传递依赖于 <code>StudentID</code>，不符合 3NF。</p>
+<p>分解为：</p>
+<pre><code class="language-sql">CREATE TABLE Classes (
+    ClassID   INT PRIMARY KEY,
+    ClassName VARCHAR(50)
+);
+
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name      VARCHAR(50),
+    ClassID   INT,
+    FOREIGN KEY (ClassID)
+        REFERENCES Classes(ClassID)
+);
+</code></pre>
+<h3 id="section-27">5.10.4 二属性关系</h3>
+<p>对只有两个属性 $A,B$ 的关系模式，若非平凡函数依赖的决定因素非空，例如 $A\to B$，则 $A$ 连同其平凡决定的自身可决定全部属性，所以决定因素是超码，通常满足 BCNF，自然也满足 3NF。这个常用结论隐含了“忽略空决定因素”的教材口径；若允许 $\varnothing\to A$ 且 $\varnothing$ 不能决定 $B$，则 $\varnothing$ 不是超码，二属性关系仍可违反 BCNF。</p>
+<h2 id="section-28">5.11 BCNF</h2>
+<h3 id="section-29">5.11.1 定义</h3>
+<p>关系模式 $R$ 属于 BCNF，当且仅当对 $F^+$ 中每个非平凡函数依赖：</p>
+<p>$$
+X\rightarrow Y,
+$$</p>
+<p>$X$ 都是超码。</p>
+<p>口诀：</p>
+<pre><code class="language-text">BCNF：每个非平凡函数依赖的决定因素都是超码
+</code></pre>
+<p>BCNF 蕴含 3NF，但 3NF 不一定蕴含 BCNF。</p>
+<h3 id="section-30">5.11.2 课件课程-教师例子</h3>
+<p>原关系：</p>
+<pre><code class="language-sql">CREATE TABLE StudentCourses (
+    StudentID INT,
+    CourseID  INT,
+    TeacherID INT,
+    PRIMARY KEY (StudentID, CourseID)
+);
+</code></pre>
+<p>业务规定每门课程只有一名教师：</p>
+<p>$$
+\text{CourseID}\rightarrow\text{TeacherID}.
+$$</p>
+<p><code>CourseID</code> 不是超码，所以违反 BCNF。</p>
+<p>可分解为：</p>
+<pre><code class="language-sql">CREATE TABLE Courses (
+    CourseID  INT PRIMARY KEY,
+    TeacherID INT
+);
+
+CREATE TABLE StudentCourses (
+    StudentID INT,
+    CourseID  INT,
+    PRIMARY KEY (StudentID, CourseID),
+    FOREIGN KEY (CourseID)
+        REFERENCES Courses(CourseID)
+);
+</code></pre>
+<blockquote>
+<p><strong>WARNING</strong> · 例子口径纠错
+在该模式中 <code>TeacherID</code> 是非主属性，<code>CourseID</code> 又不是超码，因此 <code>CourseID→TeacherID</code> 同时违反 3NF。它能说明 BCNF 的决定因素要求，但不是“满足 3NF、仅违反 BCNF”的严格反例。</p>
+</blockquote>
+<h3 id="section-31">5.11.3 3NF 但不满足 BCNF 的严格例子</h3>
+<p>设：</p>
+<p>$$
+R(S,C,T),
+$$</p>
+<p>函数依赖：</p>
+<p>$$
+SC\rightarrow T,
+$$</p>
+<p>$$
+T\rightarrow C.
+$$</p>
+<p>候选码为：</p>
+<p>$$
+SC, ST.
+$$</p>
+<p>在 $T\rightarrow C$ 中：</p>
+<ul>
+<li>$T$ 不是超码，所以违反 BCNF。</li>
+<li>$C$ 属于候选码 $SC$，是主属性，所以满足 3NF 的例外条件。</li>
+</ul>
+<p>因此该关系满足 3NF，但不满足 BCNF。</p>
+<h2 id="section-32">5.12 范式包含与快速判定</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>范式</th>
+<th>核心条件</th>
+<th>消除的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1NF</td>
+<td>属性取原子值</td>
+<td>重复组、非原子分量</td>
+</tr>
+<tr>
+<td>2NF</td>
+<td>非主属性完全依赖候选码</td>
+<td>部分依赖</td>
+</tr>
+<tr>
+<td>3NF</td>
+<td>非平凡 $X\to A$ 中，$X$ 为超码或 $A$ 为主属性</td>
+<td>非主属性传递依赖</td>
+</tr>
+<tr>
+<td>BCNF</td>
+<td>每个非平凡依赖左部都是超码</td>
+<td>决定因素不是码造成的冗余</td>
+</tr>
+</tbody>
+</table></div>
+<p>判定步骤：</p>
+<ol>
+<li>写出关系模式和函数依赖集。</li>
+<li>用属性闭包求全部候选码。</li>
+<li>标出主属性与非主属性。</li>
+<li>检查属性是否原子，判断 1NF。</li>
+<li>检查非主属性是否部分依赖候选码，判断 2NF。</li>
+<li>用 3NF 正式条件检查每个非平凡依赖。</li>
+<li>检查每个决定因素是否都是超码，判断 BCNF。</li>
+</ol>
+<h2 id="section-33">5.13 分解的质量要求</h2>
+<p>提高范式时不能只追求“拆表”，还要考虑：</p>
+<h3 id="section-34">5.13.1 无损连接</h3>
+<p>分解后自然连接应能恢复原关系，不能产生伪元组或丢失合法信息。</p>
+<p>二元分解 $R\to R_1,R_2$ 对函数依赖集 $F$ 无损的常用判据是：</p>
+<p>$$
+(R_1\cap R_2)\rightarrow R_1
+$$</p>
+<p>或：</p>
+<p>$$
+(R_1\cap R_2)\rightarrow R_2
+$$</p>
+<p>能由 $F^+$ 推出。</p>
+<h3 id="section-35">5.13.2 依赖保持</h3>
+<p>原函数依赖应尽量能在各子关系内部检查，而不必每次连接多个关系。</p>
+<p>3NF 综合算法通常能兼顾无损连接与依赖保持；BCNF 分解保证无损，但可能不能保持全部依赖。</p>
+<h2 id="section-36">5.14 易错点</h2>
+<ul>
+<li>函数依赖是模式语义约束，不是从当前样本偶然现象推断。</li>
+<li>$Y\subseteq X$ 时 $X\to Y$ 是平凡依赖。</li>
+<li>完全依赖要求左部任何真子集都不能决定右部；存在能决定右部的真子集就是部分依赖。</li>
+<li>2NF 检查的是每个非主属性对每个候选码，不是只看已选主键。</li>
+<li>单属性候选码的 1NF 关系不会有部分依赖，因此满足 2NF。</li>
+<li>3NF 的正式条件允许右部为主属性；BCNF 不允许这一例外。</li>
+<li>BCNF 要求每个非平凡依赖的左部为超码，不是“右部为超码”。</li>
+<li>标准 <code>DATE</code> 值通常是原子定义域，不能因可提取年月日就直接判为非 1NF。</li>
+<li>课件的课程-教师关系同时违反 3NF 与 BCNF，不是两者差异的严格反例。</li>
+<li>范式提高减少冗余，但可能增加查询连接，不能忽略无损连接和依赖保持。</li>
+</ul>
+<h2 id="section-37">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-9cd28cace452/">上一篇：数据库完整性</a> · <a href="/en/notes/cs408-9c185b7e5178/">下一篇：数据库设计</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-9c185b7e5178/">数据库逻辑设计</a></li>
+</ul>
+<h2 id="section-38">5.15 本节复盘</h2>
+<ul>
+<li>不良关系模式会产生冗余、插入异常、删除异常和更新异常，根源是依赖混杂。</li>
+<li>$X\to Y$ 表示相同 $X$ 值必然对应相同 $Y$ 值。</li>
+<li>平凡依赖的右部包含在左部；部分依赖、传递依赖分别导致 2NF、3NF 问题。</li>
+<li>属性闭包用于判断超码和候选码，是范式判定的前置工具。</li>
+<li>1NF 要求属性相对于定义域取原子值。</li>
+<li>2NF 消除非主属性对候选码的部分依赖。</li>
+<li>3NF 要求每个非平凡依赖左部为超码，或右部为主属性。</li>
+<li>BCNF 更严格，要求每个非平凡依赖的左部都是超码。</li>
+<li>规范化分解还必须关注无损连接和依赖保持，不能机械拆表。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-8d35cda087a1/index.html"><span>← Previous item</span><strong>4 题型 - 最大传输速率</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-9128ab174798/index.html"><span>Next item →</span><strong>Lecture 17：二叉树的遍历</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

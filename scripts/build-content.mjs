@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, rm, writeFile as writeFileOnce } from "node:fs/promises";
 import path from "node:path";
+import { render408Markdown, set408ImagePreviews } from "./render-408.mjs";
 
 const root = process.cwd();
 const writeFile = async (...args) => {
@@ -17,7 +18,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20260922a";
+const assetVersion = "20261022a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1176,6 +1177,9 @@ const cardRecordMeta = (item, locale) => {
 };
 
 const noteHierarchyFor = (item, locale = "zh") => {
+  if (item.meta.noteMajor && item.meta.noteCourse && item.meta.noteChapter) {
+    return { major: item.meta.noteMajor, course: item.meta.noteCourse, chapter: item.meta.noteChapter };
+  }
   const tags = item.meta.tags || [];
   const isEnglish = locale === "en";
   const labels = isEnglish
@@ -1201,7 +1205,7 @@ const cardFor = (item, section, locale, prefix, noteHierarchy) => {
   const headingTag = noteHierarchy ? "h5" : "h2";
   return `<article class="content-card" data-content-card data-category="${escapeHtml(item.meta.category || (isEnglish ? "All" : "全部"))}" data-search="${escapeHtml(searchText.toLowerCase())}">
     <div class="card-topline"><span class="card-category">${escapeHtml(categoryLabel)}</span>${cardRecordMeta(item, locale)}</div>
-    <${headingTag}><a href="${href}">${escapeHtml(item.meta.title)}</a></${headingTag}>
+    <${headingTag}${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}><a href="${href}">${escapeHtml(item.meta.title)}</a></${headingTag}>
     <p>${escapeHtml(item.meta.description)}</p>
     ${tagList(item.meta.tags || [], locale)}
     <a class="text-link" href="${href}">${isEnglish ? "View details" : "查看详情"} <span aria-hidden="true">→</span></a>
@@ -1263,13 +1267,15 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
   const isEnglish = locale === "en";
   const prefix = isEnglish ? "../../" : "../";
   const route = "notes/";
-  const groupOrder = isEnglish ? ["Mathematics", "English", "Other Study Notes"] : ["数学", "英语", "其他学习笔记"];
+  const groupOrder = isEnglish ? ["Mathematics", "English", "Computer Science 408", "Other Study Notes"] : ["数学", "英语", "408 计算机", "其他学习笔记"];
   const courseOrder = isEnglish ? {
     Mathematics: ["Mathematics Summary", "Advanced Mathematics", "Linear Algebra", "Engineering Mathematics"],
-    English: ["English Grammar", "English Reading", "English Writing"]
+    English: ["English Grammar", "English Reading", "English Writing"],
+    "Computer Science 408": ["Overview and Records", "Data Structures", "Operating Systems", "Computer Organization", "Computer Networks", "Interview Subjects"]
   } : {
     数学: ["数学总结", "高等数学", "线性代数", "工程数学"],
-    英语: ["英语语法", "英语阅读", "英语写作"]
+    英语: ["英语语法", "英语阅读", "英语写作"],
+    "408 计算机": ["总览与说明", "数据结构", "操作系统", "计算机组成原理", "计算机网络", "复试扩展"]
   };
   const groups = new Map();
   const hierarchyBySlug = new Map(hierarchyItems.map((item) => [item.meta.slug, noteHierarchyFor(item, locale)]));
@@ -1289,7 +1295,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
     return left.localeCompare(right, isEnglish ? "en-US" : "zh-CN");
   });
   const noteGroupId = (...parts) => `notes-${locale}-${parts.map((part) => encodeURIComponent(part).replace(/%/g, "-")).join("-")}`;
-  const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], isEnglish ? ["Mathematics", "English"] : ["数学", "英语"]);
+  const categories = sortNames([...new Set(items.map((item) => item.meta.category).filter(Boolean))], isEnglish ? ["Mathematics", "English", "Computer Science 408"] : ["数学", "英语", "408 计算机"]);
   const controls = `<div class="content-controls compact-controls">
     <label class="search-box"><span>${isEnglish ? "Search notes" : "搜索笔记"}</span><input type="search" enterkeyhint="search" data-content-search placeholder="${isEnglish ? "Enter a title, tag or keyword" : "输入标题、标签或关键词"}"></label>
     <div class="filter-control"><span>${isEnglish ? "Filter by category" : "按分类筛选"}</span><div class="filter-row" role="group" aria-label="${isEnglish ? "Note categories" : "笔记大类"}"><button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">${isEnglish ? "All" : "全部"}</button>${categories.map((category) => `<button class="filter-chip" type="button" data-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(category)}</button>`).join("")}</div></div>
@@ -1299,8 +1305,11 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
     const courses = groups.get(major);
     const courseContent = sortNames(courses.keys(), courseOrder[major] || []).map((course) => {
       const chapters = courses.get(course);
-      const chapterContent = [...chapters.keys()].map((chapter) => {
-        const entries = chapters.get(chapter);
+      const chapterNames = major === "Computer Science 408" || major === "408 计算机"
+        ? [...chapters.keys()].sort((left, right) => Number(chapters.get(left)[0].item.meta.order) - Number(chapters.get(right)[0].item.meta.order))
+        : [...chapters.keys()];
+      const chapterContent = chapterNames.map((chapter) => {
+        const entries = [...chapters.get(chapter)].sort((left, right) => Number(left.item.meta.order || 0) - Number(right.item.meta.order || 0));
         return `<details class="notes-chapter-section" data-note-group data-note-details data-note-group-id="${noteGroupId(major, course, chapter)}">
           <summary class="notes-chapter-header"><h4>${escapeHtml(chapter)}</h4><span>${entries.length} ${isEnglish ? "items" : "篇"}</span></summary>
           <div class="content-grid">${entries.map(({ item, hierarchy: itemHierarchy }) => cardFor(item, "notes", locale, prefix, itemHierarchy)).join("")}</div>
@@ -1326,7 +1335,7 @@ const buildNoteIndex = async (items, locale = "zh", hierarchyItems = items) => {
     <section class="section container content-index-section"><div class="notes-major-list" data-notes-index>${hierarchy}</div><p class="empty-state" data-empty-state hidden>${isEnglish ? "No matching notes." : "暂时没有匹配的内容。"}</p></section>`;
   const output = path.join(root, localeConfig[locale].routeRoot, "notes");
   await mkdir(output, { recursive: true });
-  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: "notes", title: isEnglish ? "Learning Notes" : "学习笔记", description: isEnglish ? "Mathematics and English learning notes" : "数学与英语学习笔记", content }));
+  await writeFile(path.join(output, "index.html"), page({ prefix, locale, route, active: "notes", title: isEnglish ? "Learning Notes" : "学习笔记", description: isEnglish ? "Mathematics, English and Computer Science 408 notes" : "数学、英语与 408 计算机学习笔记", content }));
 };
 
 const buildIndex = async (section, items, locale) => {
@@ -1358,7 +1367,7 @@ const buildIndex = async (section, items, locale) => {
 const buildDetail = async (section, item, index, items, catalog, locale) => {
   const config = localizedSections[locale][section];
   const isEnglish = locale === "en";
-  const rendered = markdownToHtml(item.body, locale);
+  const rendered = item.meta.contentFormat === "obsidian408" ? render408Markdown(item.body, locale) : markdownToHtml(item.body, locale);
   const toc = rendered.headings.filter((heading) => heading.sourceLevel <= 2).map((heading) => `<a href="#${heading.id}">${escapeHtml(heading.text)}</a>`).join("");
   const recordDate = recordDateFor(item);
   const recordDateLabel = item.meta.updated
@@ -1379,6 +1388,16 @@ const buildDetail = async (section, item, index, items, catalog, locale) => {
         <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/issues" target="_blank" rel="noreferrer">Issues</a>
         <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/releases" target="_blank" rel="noreferrer">${isEnglish ? "Releases" : "版本日志"}</a>
       </div>` : "";
+  const sourceAsset = item.meta.sourceAsset || "";
+  const sourceIsPdf = sourceAsset.endsWith(".pdf");
+  const sourceIsImage = sourceAsset.endsWith(".png");
+  const sourceControls = sourceAsset ? `<div class="button-row note-source-controls">
+        <a class="button secondary-button" href="${escapeHtml(sourceAsset)}" target="_blank" rel="noreferrer">${isEnglish ? `View original ${sourceIsPdf ? "PDF" : sourceIsImage ? "image" : "canvas source"}` : `查看原始${sourceIsPdf ? " PDF" : sourceIsImage ? "图片" : "画布源文件"}`}</a>
+        <a class="button secondary-button" href="${escapeHtml(sourceAsset)}" download="${escapeHtml(item.meta.sourceName || "source")}">${isEnglish ? "Download original" : "下载原件"}</a>
+      </div>` : "";
+  const languageNotice = item.meta.contentLanguage === "zh-CN" && isEnglish
+    ? `<p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p>`
+    : "";
   const previous = items[index - 1];
   const next = items[index + 1];
   const previousLabel = isEnglish ? (section === "articles" ? "Previous article" : "Previous item") : (section === "articles" ? "上一篇" : "上一项");
@@ -1389,8 +1408,8 @@ ${next ? `    <a class="article-pagination-next" rel="next" href="../${escapeHtm
   </nav>` : "";
   const content = `
     <article class="article-page">
-      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [], locale)}</div>${repository}</header>
-      <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}">${toc}</nav></details><div class="prose">${rendered.html}${pagination}</div></div>
+      <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [], locale)}</div>${repository}${sourceControls}</header>
+      <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}"${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}>${toc}</nav></details><div class="prose">${languageNotice}${item.meta.contentLanguage ? `<div lang="${escapeHtml(item.meta.contentLanguage)}">${rendered.html}</div>` : rendered.html}${pagination}</div></div>
 ${relatedContentFor(item, section, catalog, locale)}
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);
@@ -1641,6 +1660,8 @@ const staticSearchEntries = async (locale) => {
 
 const build = async () => {
   await loadNoteImageManifest();
+  const previewFiles408 = await readdir(path.join(root, "assets/408/previews")).catch(() => []);
+  set408ImagePreviews(previewFiles408.map((file) => `/assets/408/previews/${file}`));
   const authoredContent = await loadPairedContent();
   const authoredLogs = await loadPairedLogs();
   const publicRepositories = await fetchPublicRepositories();

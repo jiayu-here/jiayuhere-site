@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 6：顺序表和链表对比 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 6：顺序表和链表对比。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 6：顺序表和链表对比 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 6：顺序表和链表对比。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-73a51c61296d/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 6：顺序表和链表对比 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 6：顺序表和链表对比。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 6：顺序表和链表对比",
+      "item": "https://www.jiayuhere.com/notes/cs408-73a51c61296d/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-73a51c61296d/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-73a51c61296d/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-73a51c61296d/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-73a51c61296d/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-73a51c61296d/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 6：顺序表和链表对比</h1><p class="article-lead">408 学习笔记：Lecture 6：顺序表和链表对比。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>约 9 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/51648243cf2f.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/51648243cf2f.pdf" download="Lecture 6：顺序表和链表对比.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">6.1 存储结构对比</a><a href="#section-6">6.2 基本操作对比</a><a href="#section-11">6.3 综合对比表</a><a href="#section-12">6.4 选择顺序表还是链表</a><a href="#section-17">教材补充：线性表的典型应用</a><a href="#section-21">相关知识</a><a href="#section-22">6.5 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">6.1 存储结构对比</h2>
+<p><strong>共同点</strong></p>
+<ul>
+<li>顺序表和链表在逻辑结构上都是线性结构。</li>
+<li>它们都表示数据元素之间的一对一前后关系。</li>
+<li>区别主要在存储结构：
+<ul>
+<li>顺序表：顺序存储；</li>
+<li>链表：链式存储。</li>
+</ul>
+</li>
+</ul>
+<h3 id="section-2">6.1.1 顺序表</h3>
+<h5 id="section-3"><strong>定义</strong>：#顺序表</h5>
+<blockquote>
+<p>描述：
+顺序表用一组物理地址连续的存储单元依次存储线性表中的数据元素。</p>
+</blockquote>
+<p><strong>优点</strong></p>
+<ul>
+<li>支持随机存取。</li>
+<li>存储密度高。</li>
+<li>按位查找效率高：
+$$
+O(1)
+$$</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>需要大片连续空间。</li>
+<li>分配空间不方便。</li>
+<li>改变容量不方便。</li>
+<li>插入、删除需要移动大量元素。</li>
+</ul>
+<h3 id="section-4">6.1.2 链表</h3>
+<h5 id="section-5"><strong>定义</strong>：#链表</h5>
+<blockquote>
+<p>描述：
+链表用指针表示元素之间的逻辑关系，结点在物理存储中不要求连续。</p>
+</blockquote>
+<p><strong>优点</strong></p>
+<ul>
+<li>离散的小空间分配方便。</li>
+<li>改变容量方便。</li>
+<li>定位到操作位置后，插入主要修改链接；删除还要释放被删结点，且单链表通常需要其前驱结点。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>不支持随机存取。</li>
+<li>需要额外指针空间。</li>
+<li>存储密度低。</li>
+</ul>
+<h2 id="section-6">6.2 基本操作对比</h2>
+<h3 id="section-7">6.2.1 创建</h3>
+<p><strong>顺序表</strong></p>
+<ul>
+<li>需要预先分配大片连续空间。</li>
+<li>如果分配空间过小，之后扩展容量不方便。</li>
+<li>如果分配空间过大，会浪费内存资源。</li>
+</ul>
+<p><strong>链表</strong></p>
+<ul>
+<li>只需要先分配一个头结点。</li>
+<li>也可以不要头结点，只声明一个头指针。</li>
+<li>之后需要多少结点，就申请多少结点，扩展更方便。</li>
+</ul>
+<p><strong>对比</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>顺序表</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建方式</td>
+<td>预分配连续空间</td>
+<td>先建立头结点或头指针</td>
+</tr>
+<tr>
+<td>容量变化</td>
+<td>不方便</td>
+<td>方便</td>
+</tr>
+<tr>
+<td>空间要求</td>
+<td>需要连续空间</td>
+<td>不要求连续空间</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-8">6.2.2 销毁</h3>
+<p><strong>顺序表</strong></p>
+<ul>
+<li>如果使用静态数组，空间由系统自动回收。</li>
+<li>如果使用动态分配数组，需要手动释放：</li>
+</ul>
+<pre><code class="language-c">free(L.data);
+</code></pre>
+<p><strong>链表</strong></p>
+<ul>
+<li>链表中每个结点通常是单独申请的。</li>
+<li>销毁时需要依次释放每个结点：</li>
+</ul>
+<pre><code class="language-c">free(p);
+</code></pre>
+<p><strong>对比</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>顺序表</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静态分配</td>
+<td>系统自动回收</td>
+<td>不涉及</td>
+</tr>
+<tr>
+<td>动态分配</td>
+<td>释放整片数组空间</td>
+<td>逐个释放结点</td>
+</tr>
+<tr>
+<td>销毁难点</td>
+<td>记得 <code>free</code> 动态数组</td>
+<td>避免漏删结点</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-9">6.2.3 增加和删除</h3>
+<p><strong>顺序表</strong></p>
+<ul>
+<li>插入元素时，需要将插入位置及其之后的元素后移。</li>
+<li>删除元素时，需要将删除位置之后的元素前移。</li>
+<li>时间复杂度：
+$$
+O(n)
+$$</li>
+<li>时间开销主要来自移动元素。</li>
+<li>如果数据元素很大，移动元素的时间代价会更高。</li>
+</ul>
+<p><strong>链表</strong></p>
+<ul>
+<li>插入在已知前驱结点后可通过链接调整完成；删除单链表结点通常还需已知其前驱并释放被删结点。</li>
+<li>如果不知道操作位置，仍需先查找目标结点或其前驱结点。</li>
+<li>时间复杂度通常也是：
+$$
+O(n)
+$$</li>
+<li>时间开销主要来自查找目标元素。</li>
+</ul>
+<p><strong>重要区别</strong></p>
+<ul>
+<li>顺序表的 $O(n)$ 主要花在“移动元素”。</li>
+<li>链表的 $O(n)$ 主要花在“查找位置”。</li>
+<li>对单链表，已知插入位置的前驱，或已知待删结点的前驱时，链接调整可在常数时间完成；仅知道待删结点而不知道前驱时，不能无条件断言删除为 $O(1)$：
+$$
+O(1)
+$$</li>
+</ul>
+<h3 id="section-10">6.2.4 查找</h3>
+<p><strong>顺序表</strong></p>
+<ul>
+<li>按位查找：
+$$
+O(1)
+$$</li>
+<li>按值查找：
+$$
+O(n)
+$$</li>
+<li>若表内元素有序，可以使用折半查找：
+$$
+O(\log_2 n)
+$$</li>
+</ul>
+<p><strong>链表</strong></p>
+<ul>
+<li>按位查找需要从头结点开始遍历：
+$$
+O(n)
+$$</li>
+<li>按值查找也需要遍历：
+$$
+O(n)
+$$</li>
+<li>链表不能直接使用折半查找。
+<ul>
+<li>因为折半查找要求能快速访问中间位置；</li>
+<li>链表无法 $O(1)$ 访问第 $i$ 个元素。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-11">6.3 综合对比表</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>顺序表</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>逻辑结构</td>
+<td>线性结构</td>
+<td>线性结构</td>
+</tr>
+<tr>
+<td>存储结构</td>
+<td>顺序存储</td>
+<td>链式存储</td>
+</tr>
+<tr>
+<td>存储空间</td>
+<td>需要连续空间</td>
+<td>不要求连续空间</td>
+</tr>
+<tr>
+<td>存储密度</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>随机存取</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>按位查找</td>
+<td>$O(1)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>按值查找</td>
+<td>$O(n)$，有序时可 $O(\log_2 n)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>插入删除</td>
+<td>需要移动元素</td>
+<td>定位后修改链接；删除还须释放结点</td>
+</tr>
+<tr>
+<td>插入删除平均复杂度</td>
+<td>$O(n)$</td>
+<td>通常 $O(n)$</td>
+</tr>
+<tr>
+<td>容量扩展</td>
+<td>不方便</td>
+<td>方便</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>查找多、少增删</td>
+<td>增删多、容量变化大</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-12">6.4 选择顺序表还是链表</h2>
+<h3 id="section-13">题型：#顺序表链表选择</h3>
+<h4 id="section-14">第一部分：解题方法</h4>
+<ul>
+<li>如果题目强调“按位访问、随机访问、查找第 $i$ 个元素”，优先考虑顺序表。</li>
+<li>如果题目强调“频繁插入删除、容量变化大、不要求连续空间”，优先考虑链表。</li>
+<li>如果题目强调“内存利用率、存储密度”，顺序表更优。</li>
+<li>如果题目强调“动态扩展”，链表更优。</li>
+</ul>
+<h4 id="section-15">第二部分：典型例题</h4>
+<p><strong>例题 1：需要频繁访问第 $i$ 个元素</strong></p>
+<ul>
+<li>选择顺序表。</li>
+<li>原因：
+$$
+\text{顺序表按位查找}=O(1)
+$$</li>
+</ul>
+<p><strong>例题 2：需要频繁在表中间插入删除</strong></p>
+<ul>
+<li>若已知插入删除位置的前驱结点，选择链表更合适。</li>
+<li>原因：
+$$
+\text{链表修改指针}=O(1)
+$$</li>
+</ul>
+<p><strong>例题 3：表长变化很大</strong></p>
+<ul>
+<li>选择链表。</li>
+<li>原因：
+<ul>
+<li>不要求连续空间；</li>
+<li>扩容方便。</li>
+</ul>
+</li>
+</ul>
+<h4 id="section-16">第三部分：知识点复盘</h4>
+<ul>
+<li>顺序表不是所有操作都快，它主要快在随机访问。</li>
+<li>链表不是所有插入删除都快，若要先查找位置，整体仍可能是 $O(n)$。</li>
+<li>判断结构优劣时，一定要结合操作场景。</li>
+</ul>
+<h2 id="section-17">教材补充：线性表的典型应用</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 补充说明
+“线性表的应用”不等于再背一种存储结构，重点是根据输入有序性、能否修改原表、是否允许额外空间，选择顺序表或链表并证明复杂度。</p>
+</blockquote>
+<h3 id="section-18">有序表合并与集合运算</h3>
+<p>设两个非递减表长度分别为 $m,n$：</p>
+<ul>
+<li><strong>合并为一个非递减表</strong>：双指针各扫描一次，时间 $O(m+n)$。顺序表通常需要 $O(m+n)$ 的结果空间；链表若允许破坏原表，可复用原结点，仅需 $O(1)$ 个辅助指针。</li>
+<li><strong>求交集</strong>：关键字相等时输出并同时前进；较小的一侧前进。若要求集合语义，还要跳过相等关键字的重复项。</li>
+<li><strong>求并集</strong>：较小者输出并前进，相等时只输出一次并同时前进；若题目按多重集合处理，则重复次数规则必须由题干确定。</li>
+<li><strong>求差集 $A-B$</strong>：当 $A[i]&lt;B[j]$ 时保留 $A[i]$；相等时丢弃 $A[i]$；当 $A[i]&gt;B[j]$ 时只移动 $B$。</li>
+</ul>
+<p>这些线性算法成立的关键是<strong>两个输入已按同一关键字顺序排列</strong>。若输入无序，直接双指针会漏解；需先排序、使用散列表，或采用朴素的嵌套查找。</p>
+<h3 id="section-19">删除、筛选、去重与逆置</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>顺序表常用不变量</th>
+<th>链表常用不变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按条件删除</td>
+<td><code>read</code> 扫描，<code>write</code> 始终指向下一个保留位置</td>
+<td><code>pre</code> 指向已确认保留链的尾部，检查 <code>pre-&gt;next</code></td>
+</tr>
+<tr>
+<td>有序去重</td>
+<td>保留区尾元素与当前元素比较</td>
+<td>比较相邻结点，重复时摘链并释放</td>
+</tr>
+<tr>
+<td>原地逆置</td>
+<td>对称位置交换，或逐个前插</td>
+<td><code>pre-cur-next</code> 三指针逐边反向</td>
+</tr>
+<tr>
+<td>找倒数第 $k$ 个</td>
+<td>可直接由下标定位</td>
+<td>快指针先走 $k$ 步，再与慢指针同步</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-20">代码题必须先写清的边界</h3>
+<ol>
+<li>表是否带头结点；<code>L</code> 指向头结点还是首元结点。</li>
+<li>位序采用 $1$ 开始，还是数组下标采用 $0$ 开始。</li>
+<li>是否允许修改、销毁或复用输入表；这直接决定能否原地算法。</li>
+<li>相等关键字按集合、多重集合还是稳定保留处理。</li>
+<li>顺序表结果是否有足够容量；链表删除后是否必须释放结点。</li>
+<li>空表、单元素表、全部删除、一个也不删除以及 $k$ 越界是否被正确处理。</li>
+</ol>
+<p>完整可运行模板见<a href="/notes/cs408-7528c27ca114/">顺序表代码</a>与<a href="/notes/cs408-200f7524e253/">链表代码</a>。</p>
+<h2 id="section-21">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-55bc6e80698d/">上一篇：线性表的链式实现</a> · <a href="/notes/cs408-a732e9dcf77f/">下一篇：栈基本概念</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-7528c27ca114/">顺序表代码</a></li>
+</ul>
+<h2 id="section-22">6.5 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>顺序表和链表逻辑结构相同，存储结构不同。</li>
+<li>顺序表支持随机存取，链表不支持。</li>
+<li>顺序表存储密度高，链表存储密度低。</li>
+<li>顺序表插入删除通常移动元素；链表定位后主要调整链接，删除结点还需按其内存管理方式回收。</li>
+<li>链表容量扩展方便，顺序表容量扩展不方便。</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>链表插入删除不是无条件 $O(1)$。
+<ul>
+<li>对单链表，已知插入位置的前驱、或待删结点的前驱时，链接调整是 $O(1)$；</li>
+<li>若需要先查找位置，总体仍是 $O(n)$。</li>
+</ul>
+</li>
+<li>顺序表按值查找一般是 $O(n)$，只有有序时才可以考虑折半查找。</li>
+<li>链表即使有序，也不能直接高效折半查找。</li>
+</ul>
+<p><strong>一句话总结</strong></p>
+<ul>
+<li>查找多、少增删 <code>-&gt;</code> 顺序表。</li>
+<li>增删多、容量变化大 <code>-&gt;</code> 链表。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-71f5fb08648b/index.html"><span>← 上一项</span><strong>2026-10-17 四科教材覆盖度与补全记录</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-7528c27ca114/index.html"><span>下一项 →</span><strong>1. 顺序表</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 5：线性表的链式实现 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 5：线性表的链式实现. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 5：线性表的链式实现 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 5：线性表的链式实现. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-55bc6e80698d/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 5：线性表的链式实现 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 5：线性表的链式实现. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 5：线性表的链式实现",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-55bc6e80698d/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-55bc6e80698d/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-55bc6e80698d/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-55bc6e80698d/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-55bc6e80698d/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-55bc6e80698d/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 5：线性表的链式实现</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 5：线性表的链式实现. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>15 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/2e153bed33fc.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/2e153bed33fc.pdf" download="Lecture 5：线性表的链式实现.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 单链表的实现</a><a href="#section-7">5.2 不带头结点的单链表</a><a href="#section-11">5.3 带头结点的单链表</a><a href="#section-15">5.4 单链表的插入</a><a href="#section-23">5.5 单链表的删除</a><a href="#section-27">5.6 单链表的查找</a><a href="#section-34">5.7 单链表的建立</a><a href="#section-39">5.8 双链表</a><a href="#section-48">5.9 循环单链表</a><a href="#section-52">5.10 循环双链表</a><a href="#section-57">5.11 静态链表</a><a href="#section-61">相关知识</a><a href="#section-62">5.12 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">5.1 单链表的实现</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 代码口径
+本文沿用 408 教材常见的 C++ 接口写法（<code>bool</code>、引用参数 <code>&amp;L</code>），并保留 <code>malloc/free</code> 以便与课件对照。实际工程中应包含 <code>&lt;cstdlib&gt;</code> 并保证 <code>malloc</code> 与 <code>free</code> 成对，或统一改用 <code>new/delete</code>、智能指针和容器。若写纯 C，应把引用参数改成相应的指针或二级指针接口。</p>
+</blockquote>
+<h3 id="section-2">5.1.1 顺序表和单链表对比</h3>
+<p><strong>顺序表</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>可以随机存取；</li>
+<li>存储密度高。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>要求大片连续空间；</li>
+<li>改变容量不方便；</li>
+<li>插入、删除需要移动大量元素。</li>
+</ul>
+</li>
+</ul>
+<p><strong>单链表</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>不要求大片连续空间；</li>
+<li>改变容量比较方便；</li>
+<li>插入、删除时不需要整体移动元素。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>不可随机存取；</li>
+<li>需要额外空间存放指针。</li>
+</ul>
+</li>
+</ul>
+<p><strong>理解</strong></p>
+<ul>
+<li>顺序表靠“地址连续”体现逻辑关系。</li>
+<li>单链表靠“指针”体现逻辑关系。</li>
+<li>顺序表适合按位查找，单链表适合频繁插入删除。</li>
+</ul>
+<h3 id="section-3">5.1.2 单链表结点定义</h3>
+<h5 id="section-4"><strong>定义</strong>：#单链表结点</h5>
+<blockquote>
+<p>描述：
+单链表的每个结点通常由数据域和指针域组成，数据域存放元素值，指针域指向下一个结点。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">struct LNode {
+    ElemType data;       // 数据域：存放一个数据元素
+    struct LNode *next;  // 指针域：指向下一个结点
+};
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>data</code> 保存当前结点的数据。</li>
+<li><code>next</code> 保存下一个结点的地址。</li>
+<li>如果当前结点是最后一个结点，则：</li>
+</ul>
+<pre><code class="language-cpp">p-&gt;next == NULL
+</code></pre>
+<h3 id="section-5">5.1.3 typedef 写法</h3>
+<p><strong>重命名语法</strong></p>
+<pre><code class="language-cpp">typedef &lt;数据类型&gt; &lt;别名&gt;;
+</code></pre>
+<p><strong>教材常用写法</strong></p>
+<pre><code class="language-cpp">typedef struct LNode {
+    ElemType data;
+    struct LNode *next;
+} LNode, *LinkList;
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>LNode</code> 表示结点类型。</li>
+<li><code>LinkList</code> 表示指向结点的指针类型。</li>
+<li>也就是说：</li>
+</ul>
+<pre><code class="language-cpp">LinkList L;
+</code></pre>
+<p>等价于：</p>
+<pre><code class="language-cpp">LNode *L;
+</code></pre>
+<h3 id="section-6">5.1.4 申请一个新结点</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">struct LNode *p = (struct LNode *)malloc(sizeof(struct LNode));
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>malloc</code> 在内存中申请一个结点大小的空间。</li>
+<li><code>p</code> 指向新申请的结点。</li>
+<li>若申请失败，<code>p</code> 可能为 <code>NULL</code>，实际写代码时应判断。</li>
+</ul>
+<h2 id="section-7">5.2 不带头结点的单链表</h2>
+<h3 id="section-8">5.2.1 初始化</h3>
+<h5 id="section-9"><strong>定义</strong>：#不带头结点</h5>
+<blockquote>
+<p>描述：
+不带头结点的单链表中，头指针直接指向第一个数据结点；若链表为空，则头指针为 <code>NULL</code>。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">typedef struct LNode {
+    ElemType data;
+    struct LNode *next;
+} LNode, *LinkList;
+
+bool InitList(LinkList &amp;L) {
+    L = NULL;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>空表没有任何结点，所以头指针为 <code>NULL</code>。</li>
+<li>第一个数据结点就是头指针指向的结点。</li>
+</ul>
+<h3 id="section-10">5.2.2 判空</h3>
+<p><strong>写法 1</strong></p>
+<pre><code class="language-cpp">bool Empty(LinkList L) {
+    if (L == NULL) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</code></pre>
+<p><strong>写法 2</strong></p>
+<pre><code class="language-cpp">bool Empty(LinkList L) {
+    return (L == NULL);
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>不带头结点时：
+$$
+L=NULL
+$$
+表示空表。</li>
+</ul>
+<h2 id="section-11">5.3 带头结点的单链表</h2>
+<h3 id="section-12">5.3.1 头指针和头结点</h3>
+<h5 id="section-13"><strong>定义</strong>：#头指针</h5>
+<blockquote>
+<p>描述：
+头指针是指向链表第一个结点的指针，是链表的必要元素。</p>
+</blockquote>
+<h5 id="section-14"><strong>定义</strong>：#头结点</h5>
+<blockquote>
+<p>描述：
+头结点是放在第一个数据结点之前的附加结点，通常不存储有效数据，用于统一插入和删除操作。</p>
+</blockquote>
+<p><strong>区别</strong></p>
+<ul>
+<li>头指针：
+<ul>
+<li>必须存在；</li>
+<li>用来标识整条链表；</li>
+<li>链表为空时也存在。</li>
+</ul>
+</li>
+<li>头结点：
+<ul>
+<li>可有可无；</li>
+<li>位于第一个数据结点之前；</li>
+<li>数据域可以不存储任何信息；</li>
+<li>主要作用是让表头插入和删除更方便。</li>
+</ul>
+</li>
+</ul>
+<p><strong>带头结点空表</strong></p>
+<ul>
+<li>无论链表是否为空，头指针都指向头结点。</li>
+<li>空表中，头结点的指针域为空：</li>
+</ul>
+<pre><code class="language-cpp">L-&gt;next == NULL
+</code></pre>
+<p><strong>为什么推荐带头结点</strong></p>
+<ul>
+<li>不带头结点时，插入第一个结点和插入其他结点的代码不同。</li>
+<li>带头结点后，空表和非空表、表头和非表头位置的处理更统一。</li>
+</ul>
+<h2 id="section-15">5.4 单链表的插入</h2>
+<h3 id="section-16">5.4.1 按位序插入：带头结点</h3>
+<h5 id="section-17"><strong>定义</strong>：#按位序插入</h5>
+<blockquote>
+<p>描述：
+<code>ListInsert(&amp;L,i,e)</code> 表示在链表 $L$ 的第 $i$ 个位置插入元素 $e$。</p>
+</blockquote>
+<p><strong>核心思路</strong></p>
+<ul>
+<li>找到第 $i-1$ 个结点。</li>
+<li>将新结点插入到第 $i-1$ 个结点之后。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool ListInsert(LinkList &amp;L, int i, ElemType e) {
+    if (i &lt; 1) {
+        return false;
+    }
+
+    LNode *p = L;  // p 指向头结点
+    int j = 0;     // 头结点是第 0 个结点
+
+    while (p != NULL &amp;&amp; j &lt; i - 1) {
+        p = p-&gt;next;
+        j++;
+    }
+
+    if (p == NULL) {
+        return false;
+    }
+
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    if (s == NULL) {
+        return false;
+    }
+
+    s-&gt;data = e;
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>p=L</code>：从头结点开始扫描。</li>
+<li><code>j=0</code>：头结点视为第 0 个结点。</li>
+<li>循环结束时，若合法，则 <code>p</code> 指向第 $i-1$ 个结点。</li>
+<li>插入的关键两步：</li>
+</ul>
+<pre><code class="language-cpp">s-&gt;next = p-&gt;next;
+p-&gt;next = s;
+</code></pre>
+<p><strong>注意</strong></p>
+<ul>
+<li>两行顺序不能颠倒。</li>
+<li>如果先写：</li>
+</ul>
+<pre><code class="language-cpp">p-&gt;next = s;
+</code></pre>
+<p>则原来 <code>p</code> 后面的链会断掉。</p>
+<p><a class="note-image-link" href="/assets/408/images/ecedde7092c2.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L05-单链表按位插入.png"><img class="note-image" src="/assets/408/images/ecedde7092c2.png" alt="DS-L05-单链表按位插入.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>图中先找到第 $i-1$ 个结点 $p$，新结点 $s$ 保存元素 $e$。</li>
+<li>先令 <code>s-&gt;next=p-&gt;next</code> 保存原后继，再令 <code>p-&gt;next=s</code> 把新结点接入链中；图中的两条新指向正对应这两步。</li>
+</ul>
+<h3 id="section-18">5.4.2 按位序插入：不带头结点</h3>
+<p><strong>特点</strong></p>
+<ul>
+<li>不带头结点时，插入第 1 个结点需要特殊处理。</li>
+<li>因为插入第 1 个结点会改变头指针。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool ListInsert(LinkList &amp;L, int i, ElemType e) {
+    if (i &lt; 1) {
+        return false;
+    }
+
+    if (i == 1) {
+        LNode *s = (LNode *)malloc(sizeof(LNode));
+        if (s == NULL) {
+            return false;
+        }
+        s-&gt;data = e;
+        s-&gt;next = L;
+        L = s;
+        return true;
+    }
+
+    LNode *p = L;
+    int j = 1;
+
+    while (p != NULL &amp;&amp; j &lt; i - 1) {
+        p = p-&gt;next;
+        j++;
+    }
+
+    if (p == NULL) {
+        return false;
+    }
+
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    if (s == NULL) {
+        return false;
+    }
+
+    s-&gt;data = e;
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+    return true;
+}
+</code></pre>
+<p><strong>结论</strong></p>
+<ul>
+<li>不带头结点的代码更麻烦。</li>
+<li>推荐使用带头结点的单链表。</li>
+</ul>
+<h3 id="section-19">5.4.3 后插操作</h3>
+<h5 id="section-20"><strong>定义</strong>：#后插操作</h5>
+<blockquote>
+<p>描述：
+后插操作是在已知结点 $p$ 后面插入新结点 $s$。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool InsertNextNode(LNode *p, ElemType e) {
+    if (p == NULL) {
+        return false;
+    }
+
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    if (s == NULL) {
+        return false;
+    }
+
+    s-&gt;data = e;
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+    return true;
+}
+</code></pre>
+<p><strong>时间复杂度</strong></p>
+<ul>
+<li>已知结点 $p$，只需修改指针：
+$$
+O(1)
+$$</li>
+</ul>
+<h3 id="section-21">5.4.4 前插操作</h3>
+<h5 id="section-22"><strong>定义</strong>：#前插操作</h5>
+<blockquote>
+<p>描述：
+前插操作是在已知结点 $p$ 前面插入元素 $e$。</p>
+</blockquote>
+<p><strong>普通思路</strong></p>
+<ul>
+<li>单链表无法直接找到 $p$ 的前驱。</li>
+<li>若从头开始找 $p$ 的前驱，时间复杂度为：
+$$
+O(n)
+$$</li>
+</ul>
+<p><strong>巧妙写法：后插 + 交换数据</strong></p>
+<ul>
+<li>在 $p$ 后面插入新结点 $s$；</li>
+<li>把 $p$ 的数据复制到 $s$；</li>
+<li>把 $e$ 放入 $p$ 的数据域；</li>
+<li>逻辑效果等价于在 $p$ 前面插入 $e$。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool InsertPriorNode(LNode *p, ElemType e) {
+    if (p == NULL) {
+        return false;
+    }
+
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    if (s == NULL) {
+        return false;
+    }
+
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+    s-&gt;data = p-&gt;data;
+    p-&gt;data = e;
+    return true;
+}
+</code></pre>
+<p><strong>时间复杂度</strong></p>
+<ul>
+<li>已知结点 $p$，用“后插 + 交换数据”实现前插：
+$$
+O(1)
+$$</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>这种方法改变的是结点中的数据内容，而不是实际把新结点放到 $p$ 的物理前面。</li>
+<li>在只关心线性表逻辑顺序时，效果是正确的。</li>
+</ul>
+<h2 id="section-23">5.5 单链表的删除</h2>
+<h3 id="section-24">5.5.1 按位序删除：带头结点</h3>
+<h5 id="section-25"><strong>定义</strong>：#按位序删除</h5>
+<blockquote>
+<p>描述：
+<code>ListDelete(&amp;L,i,&amp;e)</code> 表示删除表 $L$ 中第 $i$ 个位置的元素，并用 $e$ 返回被删除元素的值。</p>
+</blockquote>
+<p><strong>核心思路</strong></p>
+<ul>
+<li>找到第 $i-1$ 个结点 $p$。</li>
+<li>令 $q=p-&gt;next$ 指向被删除结点。</li>
+<li>让 $p$ 跳过 $q$。</li>
+<li>释放 $q$。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool ListDelete(LinkList &amp;L, int i, ElemType &amp;e) {
+    if (i &lt; 1) {
+        return false;
+    }
+
+    LNode *p = L;
+    int j = 0;
+
+    while (p != NULL &amp;&amp; j &lt; i - 1) {
+        p = p-&gt;next;
+        j++;
+    }
+
+    if (p == NULL || p-&gt;next == NULL) {
+        return false;
+    }
+
+    LNode *q = p-&gt;next;
+    e = q-&gt;data;
+    p-&gt;next = q-&gt;next;
+    free(q);
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>p</code> 指向第 $i-1$ 个结点。</li>
+<li><code>q</code> 指向第 $i$ 个结点，也就是要删除的结点。</li>
+<li><code>p-&gt;next=q-&gt;next</code> 将 $q$ 从链中断开。</li>
+<li><code>free(q)</code> 释放被删除结点。</li>
+</ul>
+<h3 id="section-26">5.5.2 删除指定结点 p</h3>
+<p><strong>普通思路</strong></p>
+<ul>
+<li>单链表删除结点 $p$，需要找到 $p$ 的前驱。</li>
+<li>如果 $p$ 是最后一个结点，只能从表头开始查找前驱。</li>
+<li>时间复杂度：
+$$
+O(n)
+$$</li>
+</ul>
+<p><strong>特殊技巧：删除 p 的后继并交换数据</strong></p>
+<ul>
+<li>如果 $p$ 不是最后一个结点，可以将后继结点的数据复制到 $p$ 中，再删除后继结点。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool DeleteNode(LNode *p) {
+    if (p == NULL || p-&gt;next == NULL) {
+        return false;
+    }
+
+    LNode *q = p-&gt;next;
+    p-&gt;data = q-&gt;data;
+    p-&gt;next = q-&gt;next;
+    free(q);
+    return true;
+}
+</code></pre>
+<p><strong>时间复杂度</strong></p>
+<ul>
+<li>若 $p$ 不是最后一个结点：
+$$
+O(1)
+$$</li>
+<li>若 $p$ 是最后一个结点，必须找前驱：
+$$
+O(n)
+$$</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>这个技巧不能直接删除最后一个结点，因为最后一个结点没有后继。</li>
+</ul>
+<h2 id="section-27">5.6 单链表的查找</h2>
+<h3 id="section-28">5.6.1 按位查找</h3>
+<h5 id="section-29"><strong>定义</strong>：#GetElem</h5>
+<blockquote>
+<p>描述：
+按位查找是查找链表中第 $i$ 个结点。</p>
+</blockquote>
+<p><strong>带头结点代码</strong></p>
+<pre><code class="language-cpp">LNode *GetElem(LinkList L, int i) {
+    if (i &lt; 0) {
+        return NULL;
+    }
+
+    LNode *p = L;
+    int j = 0;
+
+    while (p != NULL &amp;&amp; j &lt; i) {
+        p = p-&gt;next;
+        j++;
+    }
+
+    return p;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>当 $i=0$ 时，返回头结点。</li>
+<li>当 $i=1$ 时，返回第一个数据结点。</li>
+<li>单链表不能随机访问，只能从头开始顺序查找。</li>
+</ul>
+<p><strong>时间复杂度</strong>
+$$
+O(n)
+$$</p>
+<h3 id="section-30">5.6.2 按值查找</h3>
+<h5 id="section-31"><strong>定义</strong>：#LocateElem</h5>
+<blockquote>
+<p>描述：
+按值查找是在链表中查找数据域等于 $e$ 的结点。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">LNode *LocateElem(LinkList L, ElemType e) {
+    LNode *p = L-&gt;next;
+
+    while (p != NULL &amp;&amp; p-&gt;data != e) {
+        p = p-&gt;next;
+    }
+
+    return p;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>从第一个数据结点开始查找。</li>
+<li>找到则返回该结点指针。</li>
+<li>找不到则返回 <code>NULL</code>。</li>
+</ul>
+<p><strong>时间复杂度</strong>
+$$
+O(n)
+$$</p>
+<h3 id="section-32">5.6.3 求表长</h3>
+<h5 id="section-33"><strong>定义</strong>：#Length</h5>
+<blockquote>
+<p>描述：
+求表长是统计单链表中数据结点的个数。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">int Length(LinkList L) {
+    int len = 0;
+    LNode *p = L;
+
+    while (p-&gt;next != NULL) {
+        p = p-&gt;next;
+        len++;
+    }
+
+    return len;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>p=L</code> 从头结点开始。</li>
+<li>每经过一个数据结点，<code>len++</code>。</li>
+<li>当 <code>p-&gt;next==NULL</code> 时，说明已经到达尾结点。</li>
+</ul>
+<p><strong>时间复杂度</strong>
+$$
+O(n)
+$$</p>
+<h2 id="section-34">5.7 单链表的建立</h2>
+<h3 id="section-35">5.7.1 尾插法</h3>
+<h5 id="section-36"><strong>定义</strong>：#尾插法</h5>
+<blockquote>
+<p>描述：
+尾插法每次把新结点插入到链表尾部，可以正向建立单链表。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">LinkList List_TailInsert(LinkList &amp;L) {
+    int x;
+    L = (LinkList)malloc(sizeof(LNode));
+
+    LNode *s;
+    LNode *r = L;  // r 始终指向表尾结点
+
+    scanf(&quot;%d&quot;, &amp;x);
+    while (x != 9999) {
+        s = (LNode *)malloc(sizeof(LNode));
+        s-&gt;data = x;
+
+        r-&gt;next = s;
+        r = s;
+
+        scanf(&quot;%d&quot;, &amp;x);
+    }
+
+    r-&gt;next = NULL;
+    return L;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>r</code> 是表尾指针。</li>
+<li>每输入一个新元素，就把新结点接到 <code>r</code> 后面。</li>
+<li>然后令 <code>r=s</code>，让 <code>r</code> 继续指向新的尾结点。</li>
+<li>最后尾结点指针域置空：</li>
+</ul>
+<pre><code class="language-cpp">r-&gt;next = NULL;
+</code></pre>
+<p><strong>特点</strong></p>
+<ul>
+<li>建立出来的链表顺序与输入顺序一致。</li>
+<li>时间复杂度：
+$$
+O(n)
+$$</li>
+</ul>
+<h3 id="section-37">5.7.2 头插法</h3>
+<h5 id="section-38"><strong>定义</strong>：#头插法</h5>
+<blockquote>
+<p>描述：
+头插法每次把新结点插入到头结点之后，因此建立出来的链表顺序与输入顺序相反。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">LinkList List_HeadInsert(LinkList &amp;L) {
+    int x;
+    LNode *s;
+
+    L = (LinkList)malloc(sizeof(LNode));
+    L-&gt;next = NULL;
+
+    scanf(&quot;%d&quot;, &amp;x);
+    while (x != 9999) {
+        s = (LNode *)malloc(sizeof(LNode));
+        s-&gt;data = x;
+
+        s-&gt;next = L-&gt;next;
+        L-&gt;next = s;
+
+        scanf(&quot;%d&quot;, &amp;x);
+    }
+
+    return L;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>新结点总是插在头结点后面。</li>
+<li>后输入的结点在前面。</li>
+<li>因此头插法可以用于链表逆置。</li>
+</ul>
+<p><strong>时间复杂度</strong>
+$$
+O(n)
+$$</p>
+<p><strong>注意</strong></p>
+<ul>
+<li>PDF 中强调：头插法得到的是链表的逆置。</li>
+</ul>
+<h2 id="section-39">5.8 双链表</h2>
+<h3 id="section-40">5.8.1 双链表结点定义</h3>
+<h5 id="section-41"><strong>定义</strong>：#双链表</h5>
+<blockquote>
+<p>描述：
+双链表的每个结点有两个指针域，分别指向前驱结点和后继结点。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">typedef struct DNode {
+    ElemType data;
+    struct DNode *prior;
+    struct DNode *next;
+} DNode, *DLinkList;
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>prior</code> 指向前驱结点。</li>
+<li><code>next</code> 指向后继结点。</li>
+<li>双链表可以向后遍历，也可以向前遍历。</li>
+</ul>
+<h3 id="section-42">5.8.2 双链表初始化：带头结点</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool InitDLinkList(DLinkList &amp;L) {
+    L = (DNode *)malloc(sizeof(DNode));
+    if (L == NULL) {
+        return false;
+    }
+
+    L-&gt;prior = NULL;
+    L-&gt;next = NULL;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>带头结点的空双链表中，头结点存在。</li>
+<li>头结点没有前驱。</li>
+<li>头结点后面暂时没有数据结点。</li>
+</ul>
+<h3 id="section-43">5.8.3 双链表插入</h3>
+<h5 id="section-44"><strong>定义</strong>：#双链表插入</h5>
+<blockquote>
+<p>描述：
+在双链表中，可以在已知结点 $p$ 后面插入结点 $s$。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/8f47cc8f4076.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L05-双链表插入.png"><img class="note-image" src="/assets/408/images/8f47cc8f4076.png" alt="DS-L05-双链表插入.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>插入前，$p$ 的后继为 $c$；插入后应形成 $p\leftrightarrow s\leftrightarrow c$。</li>
+<li>必须维护四个方向关系：<code>s-&gt;next</code> 指向 $c$，$c$ 的 <code>prior</code> 指向 $s$，<code>s-&gt;prior</code> 指向 $p$，$p$ 的 <code>next</code> 指向 $s$。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool InsertNextDNode(DNode *p, DNode *s) {
+    if (p == NULL || s == NULL) {
+        return false;
+    }
+
+    s-&gt;next = p-&gt;next;
+
+    if (p-&gt;next != NULL) {
+        p-&gt;next-&gt;prior = s;
+    }
+
+    s-&gt;prior = p;
+    p-&gt;next = s;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>如果 $p$ 有后继，则需要修改后继结点的 <code>prior</code>。</li>
+<li>插入时要同时维护：
+<ul>
+<li>前驱方向；</li>
+<li>后继方向。</li>
+</ul>
+</li>
+<li>代码顺序很重要，避免断链。</li>
+</ul>
+<h3 id="section-45">5.8.4 双链表删除后继结点</h3>
+<p><a class="note-image-link" href="/assets/408/images/fb113c9f178f.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L05-双链表删除.png"><img class="note-image" src="/assets/408/images/fb113c9f178f.png" alt="DS-L05-双链表删除.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>删除 $p$ 的后继 $q$ 后，应让 $p$ 与 $q$ 的后继 $c$ 重新双向相连：<code>p-&gt;next=c</code>，且当 $c$ 存在时令 <code>c-&gt;prior=p</code>。</li>
+<li>两条实线表示删除前的相邻关系，虚线表示绕过 $q$ 后需要建立的新关系。</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool DeleteNextDNode(DNode *p) {
+    if (p == NULL) {
+        return false;
+    }
+
+    DNode *q = p-&gt;next;
+    if (q == NULL) {
+        return false;
+    }
+
+    p-&gt;next = q-&gt;next;
+
+    if (q-&gt;next != NULL) {
+        q-&gt;next-&gt;prior = p;
+    }
+
+    free(q);
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>删除 $p$ 的后继结点 $q$。</li>
+<li>如果 $q$ 后面还有结点，则要让后继结点的 <code>prior</code> 指回 $p$。</li>
+</ul>
+<h3 id="section-46">5.8.5 销毁双链表</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">void DestroyList(DLinkList &amp;L) {
+    while (L-&gt;next != NULL) {
+        DeleteNextDNode(L);
+    }
+    free(L);
+    L = NULL;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>循环释放各个数据结点。</li>
+<li>最后释放头结点。</li>
+<li>头指针置为 <code>NULL</code>。</li>
+</ul>
+<h3 id="section-47">5.8.6 双链表遍历</h3>
+<p><strong>后向遍历</strong></p>
+<pre><code class="language-cpp">while (p != NULL) {
+    // 对结点 p 做相应处理
+    p = p-&gt;next;
+}
+</code></pre>
+<p><strong>前向遍历</strong></p>
+<pre><code class="language-cpp">while (p != NULL) {
+    // 对结点 p 做相应处理
+    p = p-&gt;prior;
+}
+</code></pre>
+<p><strong>前向遍历：跳过头结点</strong></p>
+<pre><code class="language-cpp">while (p-&gt;prior != NULL) {
+    p = p-&gt;prior;
+}
+</code></pre>
+<p><strong>PDF 笔误修正</strong></p>
+<ul>
+<li>PDF 中出现 <code>while(p!==NULL)</code>，C/C++ 中应写为：</li>
+</ul>
+<pre><code class="language-cpp">while (p != NULL)
+</code></pre>
+<h2 id="section-48">5.9 循环单链表</h2>
+<h3 id="section-49">5.9.1 循环单链表的定义</h3>
+<h5 id="section-50"><strong>定义</strong>：#循环单链表</h5>
+<blockquote>
+<p>描述：
+循环单链表的尾结点 <code>next</code> 指针不再指向 <code>NULL</code>，而是指向头结点。</p>
+</blockquote>
+<p><strong>初始化</strong></p>
+<pre><code class="language-cpp">typedef struct LNode {
+    ElemType data;
+    struct LNode *next;
+} LNode, *LinkList;
+
+bool InitList(LinkList &amp;L) {
+    L = (LNode *)malloc(sizeof(LNode));
+    if (L == NULL) {
+        return false;
+    }
+    L-&gt;next = L;
+    return true;
+}
+</code></pre>
+<p><strong>判空</strong></p>
+<pre><code class="language-cpp">bool Empty(LinkList L) {
+    if (L-&gt;next == L) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>普通单链表空表：</li>
+</ul>
+<pre><code class="language-cpp">L-&gt;next == NULL
+</code></pre>
+<ul>
+<li>循环单链表空表：</li>
+</ul>
+<pre><code class="language-cpp">L-&gt;next == L
+</code></pre>
+<h3 id="section-51">5.9.2 判断尾结点</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool isTail(LinkList L, LNode *p) {
+    if (L != NULL &amp;&amp; p != NULL &amp;&amp; p != L &amp;&amp; p-&gt;next == L) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>带头结点的循环单链表中，非空表尾数据结点的后继是头结点；空表只有头结点，不能把它误判为数据尾结点。</li>
+<li>因此，只有 <code>p != L &amp;&amp; p-&gt;next == L</code> 时，$p$ 才是数据尾结点。</li>
+</ul>
+<h2 id="section-52">5.10 循环双链表</h2>
+<h3 id="section-53">5.10.1 循环双链表的定义</h3>
+<h5 id="section-54"><strong>定义</strong>：#循环双链表</h5>
+<blockquote>
+<p>描述：
+循环双链表中，头结点的 <code>prior</code> 指向尾结点，尾结点的 <code>next</code> 指向头结点。</p>
+</blockquote>
+<p><strong>结点定义</strong></p>
+<pre><code class="language-cpp">typedef struct DNode {
+    ElemType data;
+    struct DNode *prior;
+    struct DNode *next;
+} DNode, *DLinkList;
+</code></pre>
+<p><strong>初始化</strong></p>
+<pre><code class="language-cpp">bool InitDLinkList(DLinkList &amp;L) {
+    L = (DNode *)malloc(sizeof(DNode));
+    if (L == NULL) {
+        return false;
+    }
+
+    L-&gt;prior = L;
+    L-&gt;next = L;
+    return true;
+}
+</code></pre>
+<p><strong>判空</strong></p>
+<pre><code class="language-cpp">bool Empty(DLinkList L) {
+    if (L-&gt;next == L) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>空的循环双链表中，头结点的前驱和后继都指向自己。</li>
+<li>即：
+$$
+L-&gt;prior=L,\quad L-&gt;next=L
+$$</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/9b377c5862aa.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L05-普通与循环双链表.png"><img class="note-image" src="/assets/408/images/9b377c5862aa.png" alt="DS-L05-普通与循环双链表.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>普通双链表两端以 <code>NULL</code> 为边界：头结点的 <code>prior=NULL</code>，尾结点的 <code>next=NULL</code>。</li>
+<li>循环双链表没有 <code>NULL</code> 端点：头结点的 <code>prior</code> 指向尾结点，尾结点的 <code>next</code> 指向头结点；空表则退化为头结点的两个指针都指向自身。</li>
+</ul>
+<h3 id="section-55">5.10.2 循环双链表插入</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool InsertNextDNode(DNode *p, DNode *s) {
+    if (p == NULL || s == NULL) {
+        return false;
+    }
+
+    s-&gt;next = p-&gt;next;
+    p-&gt;next-&gt;prior = s;
+    s-&gt;prior = p;
+    p-&gt;next = s;
+    return true;
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li>循环双链表中，$p$ 的后继一定存在。</li>
+<li>因此通常不需要判断 <code>p-&gt;next != NULL</code>。</li>
+</ul>
+<h3 id="section-56">5.10.3 循环双链表删除</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool DeleteNextDNode(DLinkList L, DNode *p) {
+    if (L == NULL || p == NULL || p-&gt;next == L) {
+        return false;
+    }
+
+    DNode *q = p-&gt;next;
+    p-&gt;next = q-&gt;next;
+    q-&gt;next-&gt;prior = p;
+    free(q);
+    return true;
+}
+</code></pre>
+<p><strong>注意</strong></p>
+<ul>
+<li>这里额外传入头指针 <code>L</code>，以便在空表或 <code>p</code> 为尾结点时拒绝删除 <code>p-&gt;next</code> 指向的头结点；若沿用原 PDF 只传 <code>p</code> 的代码，必须由调用者保证后继不是头结点，否则会释放哨兵并留下悬空指针。</li>
+<li>上述插入、删除代码都假定 <code>p</code> 是本表内有效结点；插入时 <code>s</code> 还应是未链接到任何链表的独立新结点。</li>
+<li>做题时要关注：
+<ul>
+<li>如何判断链表是否为空；</li>
+<li>如何判断结点是否为头结点；</li>
+<li>如何判断结点是否为尾结点；</li>
+<li>如何在表头、表尾、中间进行插入和删除。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-57">5.11 静态链表</h2>
+<h3 id="section-58">5.11.1 静态链表的定义</h3>
+<h5 id="section-59"><strong>定义</strong>：#静态链表</h5>
+<blockquote>
+<p>描述：
+静态链表是用数组来模拟链表的一种存储结构，结点中用游标 <code>next</code> 表示下一个元素的数组下标。</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">#define MaxSize 10
+
+struct Node {
+    ElemType data;
+    int next;
+};
+
+typedef struct Node SLinkList[MaxSize];
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>data</code> 存储数据元素。</li>
+<li><code>next</code> 存储下一个元素的数组下标。</li>
+<li><code>SLinkList</code> 相当于一个长度为 <code>MaxSize</code> 的 <code>Node</code> 型数组。</li>
+</ul>
+<h3 id="section-60">5.11.2 静态链表的特点</h3>
+<p><strong>优点</strong></p>
+<ul>
+<li>不需要指针。</li>
+<li>适用于不支持指针的低级语言。</li>
+<li>可以用数组模拟链式结构。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>不能随机存取。</li>
+<li>只能从头结点开始依次往后查找。</li>
+<li>容量固定不变。</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>不支持指针的低级语言。</li>
+<li>最大容量预先确定、但仍希望在数组内部灵活插入和删除的场景。</li>
+<li>操作系统中的文件分配表 FAT 可作为理解例子。</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>静态链表要同时约定“链尾”和“空闲单元”的游标标记，具体取值由实现决定，不能把普通数组下标当作标记值。</li>
+<li>例如可约定 <code>-1</code> 表示链尾、<code>-2</code> 表示空闲单元：
+$$
+\text{next}=-1\Rightarrow\text{链尾},\qquad
+\text{next}=-2\Rightarrow\text{空闲}
+$$</li>
+<li>插入时从空闲单元中取一个结点并修改游标；删除后把该数组位置重新标为空闲。若实现维护备用链表，也可以用另一套游标规则。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/ed494d75a168.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L05-静态链表游标结构.png"><img class="note-image" src="/assets/408/images/ed494d75a168.png" alt="DS-L05-静态链表游标结构.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>静态链表的结点在数组中物理连续，但逻辑次序由 <code>next</code> 游标决定。图中逻辑链为 $0\to2\to1\to6\to3$，并不等于数组下标顺序。</li>
+<li>游标保存的是“下一个结点的数组下标”，作用类似普通链表中的地址指针，因此静态链表仍不能按逻辑位序随机存取。</li>
+</ul>
+<h2 id="section-61">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-1e099c203994/">上一篇：线性表的顺序实现</a> · <a href="/en/notes/cs408-73a51c61296d/">下一篇：顺序表和链表对比</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-200f7524e253/">链表代码</a></li>
+</ul>
+<h2 id="section-62">5.12 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>单链表结点由数据域和指针域组成。</li>
+<li>带头结点可以统一表头和非表头位置的插入删除。</li>
+<li>单链表按位查找、按值查找、求表长的时间复杂度都是：
+$$
+O(n)
+$$</li>
+<li>已知结点 $p$ 后插，时间复杂度是：
+$$
+O(1)
+$$</li>
+<li>双链表比单链表多一个 <code>prior</code> 指针，可以向前查找。</li>
+<li>循环链表的尾结点不指向 <code>NULL</code>，而是指回头结点。</li>
+<li>静态链表用数组下标模拟指针。</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>头指针必须存在，头结点可有可无。</li>
+<li>不带头结点时，插入第一个结点要单独处理。</li>
+<li>单链表插入时：</li>
+</ul>
+<pre><code class="language-cpp">s-&gt;next = p-&gt;next;
+p-&gt;next = s;
+</code></pre>
+<p>顺序不能反。</p>
+<ul>
+<li>删除结点后要释放空间：</li>
+</ul>
+<pre><code class="language-cpp">free(q);
+</code></pre>
+<ul>
+<li>单链表不能随机存取。</li>
+<li>循环单链表判空不是 <code>L-&gt;next == NULL</code>，而是：</li>
+</ul>
+<pre><code class="language-cpp">L-&gt;next == L
+</code></pre>
+<p><strong>代码题抓手</strong></p>
+<ul>
+<li>单链表按位插入：先找第 $i-1$ 个结点。</li>
+<li>单链表按位删除：先找第 $i-1$ 个结点，再删它的后继。</li>
+<li>尾插法：正向建表，关键是维护尾指针 <code>r</code>。</li>
+<li>头插法：逆向建表，可以用于链表逆置。</li>
+<li>双链表插入删除：必须同时维护 <code>prior</code> 和 <code>next</code>。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-55b7284bc1ed/index.html"><span>← Previous item</span><strong>3 题型 - CSMA计算</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-5620bc526d96/index.html"><span>Next item →</span><strong>数据结构导航</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

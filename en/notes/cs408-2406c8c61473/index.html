@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>计算机组成原理导航 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 计算机组成原理导航. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="计算机组成原理导航 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 计算机组成原理导航. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-2406c8c61473/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="计算机组成原理导航 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 计算机组成原理导航. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "计算机组成原理导航",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-2406c8c61473/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-2406c8c61473/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-2406c8c61473/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-2406c8c61473/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-2406c8c61473/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-2406c8c61473/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">计算机组成原理导航</h1><p class="article-lead">Chinese-language Computer Science 408 note: 计算机组成原理导航. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-10-11">2026-10-11</time></span></span><span>2 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">第一章：计算机系统概述</a><a href="#section-2">第二章：数据的表示和运算</a><a href="#section-3">第三章：存储器层次结构</a><a href="#section-4">第四章：指令系统</a><a href="#section-5">第五章：中央处理器</a><a href="#section-6">第六章：总线与 I/O</a><a href="#section-7">核心因果链</a><a href="#section-8">与操作系统衔接</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p><strong>TIP</strong> · 导航
+上级：<a href="/en/notes/cs408-7afacd3a9ea5/">408 知识图谱总览</a>。主线是“数据如何表示 → 数据存在哪里 → 指令如何描述操作 → CPU 如何执行 → 部件如何交换信息”。</p>
+</blockquote>
+<h2 id="section-1">第一章：计算机系统概述</h2>
+<ol>
+<li><a href="/en/notes/cs408-f40d324810a1/">计算机系统层次结构</a></li>
+<li><a href="/en/notes/cs408-c4914b00ec31/">计算机性能指标</a></li>
+</ol>
+<h2 id="section-2">第二章：数据的表示和运算</h2>
+<ol>
+<li><a href="/en/notes/cs408-47193abe2561/">数制与编码</a></li>
+<li><a href="/en/notes/cs408-6f958f0fc0e0/">浮点数的表示与运算</a></li>
+<li><a href="/en/notes/cs408-bb3c8bf8e273/">运算方法和运算电路</a></li>
+<li><a href="/en/notes/cs408-4da34b87d8cd/">整数的表示与运算</a></li>
+</ol>
+<h2 id="section-3">第三章：存储器层次结构</h2>
+<ol>
+<li><a href="/en/notes/cs408-bfaf5bd149c2/">存储器分类、层次结构与单位</a></li>
+<li><a href="/en/notes/cs408-2d95192b7574/">存储器</a></li>
+<li><a href="/en/notes/cs408-d33925ae4333/">主存储器</a></li>
+<li><a href="/en/notes/cs408-d5113c15e970/">Cache</a></li>
+<li><a href="/en/notes/cs408-5865bd37ecaf/">虚拟存储器（教材补充）</a></li>
+</ol>
+<h2 id="section-4">第四章：指令系统</h2>
+<ol>
+<li><a href="/en/notes/cs408-e93053729cfd/">指令系统的基本概念</a></li>
+<li><a href="/en/notes/cs408-3150a4e10306/">寻址方式</a></li>
+<li><a href="/en/notes/cs408-35c58c723ece/">指令格式</a></li>
+<li><a href="/en/notes/cs408-659f35b126ff/">数据对齐和大小端存放</a></li>
+<li><a href="/en/notes/cs408-cd157e10da5e/">CISC 和 RISC</a></li>
+<li><a href="/en/notes/cs408-8a0212571862/">高级语言与机器级代码的对应</a></li>
+</ol>
+<h2 id="section-5">第五章：中央处理器</h2>
+<ol>
+<li><a href="/en/notes/cs408-8aa8809e8e26/">CPU 的功能与结构</a></li>
+<li><a href="/en/notes/cs408-d889ec3bdd23/">指令执行过程</a></li>
+<li><a href="/en/notes/cs408-d6101803f8c4/">数据通路的功能和基本结构</a></li>
+<li><a href="/en/notes/cs408-c60c78e602f8/">控制器的功能和工作原理</a></li>
+<li><a href="/en/notes/cs408-ba3d460787c2/">指令流水线</a></li>
+<li><a href="/en/notes/cs408-cd74b2a4d67e/">多处理器</a></li>
+</ol>
+<p>异常和中断机制同时属于 CPU 控制与 I/O 协同问题，本库在第六章“中断”专篇统一说明，避免在顺序导航中重复同一节点。</p>
+<h2 id="section-6">第六章：总线与 I/O</h2>
+<ol>
+<li><a href="/en/notes/cs408-310416bce0d2/">总线</a></li>
+<li><a href="/en/notes/cs408-a58dbd00622a/">中断</a></li>
+<li><a href="/en/notes/cs408-c2d3a38a7b30/">外部设备</a></li>
+<li><a href="/en/notes/cs408-67e2b38e518a/">I/O 接口</a></li>
+<li><a href="/en/notes/cs408-914a13597252/">I/O 方式</a></li>
+</ol>
+<h2 id="section-7">核心因果链</h2>
+<ul>
+<li>指令格式给出操作码和地址信息 → 寻址方式得到操作数 → 数据通路完成传送与运算 → 控制器按时序发出控制信号。</li>
+<li>流水线提高吞吐率，但会引入结构、数据和控制冒险；多处理器进一步引出并行与一致性问题。</li>
+<li>Cache 缓解 CPU 与主存速度差距；虚拟存储器通过页表/TLB 把虚拟页映射到物理页框并按需调页。TLB 缓存翻译、Cache 缓存数据，三者不能混为一谈。</li>
+</ul>
+<h2 id="section-8">与操作系统衔接</h2>
+<ul>
+<li><a href="/en/notes/cs408-6e190f5755e2/">内存管理基础</a>和<a href="/en/notes/cs408-dd853a0ed1a2/">虚拟内存管理</a>建立在地址转换、存储层次和局部性之上。</li>
+<li><a href="/en/notes/cs408-39b45084fd1d/">操作系统 I/O 管理</a>把中断、DMA、接口和设备抽象为统一的软件访问体系。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-20d7b070155d/index.html"><span>← Previous item</span><strong>Lecture 1：知识 - 操作系统概述</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-2b48e6ed0cd0/index.html"><span>Next item →</span><strong>Lecture 31：交换排序</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

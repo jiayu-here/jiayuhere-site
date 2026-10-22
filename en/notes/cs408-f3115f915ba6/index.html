@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>2 题型 - 网络层转发 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 2 题型 - 网络层转发. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="2 题型 - 网络层转发 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 2 题型 - 网络层转发. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-f3115f915ba6/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2 题型 - 网络层转发 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 2 题型 - 网络层转发. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "2 题型 - 网络层转发",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-f3115f915ba6/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-f3115f915ba6/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-f3115f915ba6/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-f3115f915ba6/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-f3115f915ba6/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-f3115f915ba6/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">2 题型 - 网络层转发</h1><p class="article-lead">Chinese-language Computer Science 408 note: 2 题型 - 网络层转发. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/0229b81a7357.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/0229b81a7357.pdf" download="2 题型 - 网络层转发.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 路由器转发步骤</a><a href="#section-2">2.2 IP 与 MAC 地址如何变化</a><a href="#section-3">2.3 历年真题</a><a href="#section-7">2.4 路由类型</a><a href="#section-8">2.5 易错点</a><a href="#section-9">相关知识</a><a href="#section-10">2.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：路由器根据目的 IP 地址查转发表，若多条路由同时匹配，选择网络前缀最长的条目。IP 分组跨越不同链路时，源/目的 IP 通常保持不变，链路层源/目的 MAC 每跳重写；若经过 NAT，IP 地址还会按转换表修改。</p>
+</blockquote>
+<h2 id="section-1">2.1 路由器转发步骤</h2>
+<ol>
+<li>检查 IPv4 首部并将 TTL 减 1；若 TTL 变为 0，则丢弃，通常向源主机发送 ICMP 时间超过报文（教材补充：目的为广播/多播、非首片分片或原报文本身是 ICMP 差错等情形，不再发送 ICMP 差错）。</li>
+<li>用目的 IP 地址与各路由条目的掩码按位与，判断该目的是否匹配条目前缀。</li>
+<li>在所有匹配项中选择<strong>最长前缀匹配</strong>。</li>
+<li>若路由指向下一跳，解析下一跳的链路层地址；若为直连路由，解析目的主机的链路层地址。</li>
+<li>用出接口重新封装链路层帧并发送；IPv4 首部因 TTL 改变而需更新首部校验和。</li>
+</ol>
+<p>默认路由 <code>0.0.0.0/0</code> 匹配任何目的地址，但前缀长度为 0，只有没有更具体路由时才使用。</p>
+<h2 id="section-2">2.2 IP 与 MAC 地址如何变化</h2>
+<p>在没有 NAT/NAPT 的普通路由转发中：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址</th>
+<th>是否逐跳变化</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>源 IP</td>
+<td>否</td>
+<td>始终是原始发送主机</td>
+</tr>
+<tr>
+<td>目的 IP</td>
+<td>否</td>
+<td>始终是最终接收主机</td>
+</tr>
+<tr>
+<td>源 MAC</td>
+<td>是</td>
+<td>当前链路发送端接口</td>
+</tr>
+<tr>
+<td>目的 MAC</td>
+<td>是</td>
+<td>当前链路下一跳接口或最终主机</td>
+</tr>
+</tbody>
+</table></div>
+<p>因此：</p>
+<ul>
+<li>主机向异网目的发送时，首跳以太网帧的目的 MAC 是默认网关接口的 MAC，不是远端主机的 MAC。</li>
+<li>远端主机收到最后一跳帧时，源 MAC 是最后一跳路由器出接口的 MAC，不是原始发送主机的 MAC。</li>
+</ul>
+<h2 id="section-3">2.3 历年真题</h2>
+<h3 id="section-4">2.3.1 2015 年：最长前缀匹配</h3>
+<p>路由表为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>目的网络</th>
+<th>下一跳</th>
+<th>接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>169.96.40.0/23</code></td>
+<td><code>176.1.1.1</code></td>
+<td>S1</td>
+</tr>
+<tr>
+<td><code>169.96.40.0/25</code></td>
+<td><code>176.2.2.2</code></td>
+<td>S2</td>
+</tr>
+<tr>
+<td><code>169.96.40.0/27</code></td>
+<td><code>176.3.3.3</code></td>
+<td>S3</td>
+</tr>
+<tr>
+<td><code>0.0.0.0/0</code></td>
+<td><code>176.4.4.4</code></td>
+<td>S4</td>
+</tr>
+</tbody>
+</table></div>
+<p>目的地址 <code>169.96.40.5</code> 同时落在 <code>/23、/25、/27</code> 三个范围中。最长前缀是 <code>/27</code>，覆盖 <code>169.96.40.0-169.96.40.31</code>，因此选择接口 S3。</p>
+<p><strong>答案：C，S3。</strong></p>
+<h3 id="section-5">2.3.2 2018 年：跨路由器的 MAC 地址</h3>
+<p>H1=<code>192.168.3.2</code>，H2=<code>192.168.4.2</code>，两者通过路由器 R 相连。R 左接口 MAC 为：</p>
+<pre><code class="language-text">00-1a-2b-3c-4d-51
+</code></pre>
+<p>R 右接口 MAC 为：</p>
+<pre><code class="language-text">00-a1-b2-c3-d4-61
+</code></pre>
+<p>H1 与 H2 不同网段：</p>
+<ul>
+<li>H1 发出的首跳帧交给默认网关，目的 MAC 是 R 左接口 <code>00-1a-2b-3c-4d-51</code>。</li>
+<li>R 从右接口转发给 H2，H2 收到的帧的源 MAC 是 R 右接口 <code>00-a1-b2-c3-d4-61</code>。</li>
+</ul>
+<p><strong>答案：D。</strong></p>
+<h3 id="section-6">2.3.3 2023 年：/30 链路上的 NAT 公网地址</h3>
+<p>R1 与执行 NAT 的 R2 通过 <code>195.123.0.34/30</code> 所在点到点链路相连，H 的私有地址为 <code>192.168.0.3</code>。</p>
+<p><code>195.123.0.34/30</code> 所在地址块是：</p>
+<pre><code class="language-text">网络地址：195.123.0.32
+可用地址：195.123.0.33、195.123.0.34
+广播地址：195.123.0.35
+</code></pre>
+<p>R1 已使用 <code>.34</code>，所以 R2 的公网接口只能是 <code>195.123.0.33</code>。H 发往 Internet 的分组经 R2 转发后，NAT 将私有源地址换为 R2 公网地址：</p>
+<pre><code class="language-text">源 IP = 195.123.0.33
+</code></pre>
+<p>不能选择 R2 的内网地址 <code>192.168.0.1</code>，因为私有地址不能在公网中直接路由。</p>
+<p><strong>答案：A，<code>195.123.0.33</code>。</strong></p>
+<h2 id="section-7">2.4 路由类型</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>典型前缀</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络路由</td>
+<td>如 <code>192.168.1.0/24</code></td>
+<td>到达整个目标网络</td>
+</tr>
+<tr>
+<td>主机路由</td>
+<td><code>/32</code></td>
+<td>只匹配一个具体主机，优先级最高</td>
+</tr>
+<tr>
+<td>默认路由</td>
+<td><code>0.0.0.0/0</code></td>
+<td>其他条目均不匹配时使用</td>
+</tr>
+<tr>
+<td>直连路由</td>
+<td>与本接口在同一子网</td>
+<td>直接交付给目的主机</td>
+</tr>
+</tbody>
+</table></div>
+<p>最长前缀匹配比较的是前缀长度，不是路由表中的书写顺序，也不是下一跳 IP 的数值大小。</p>
+<h2 id="section-8">2.5 易错点</h2>
+<ul>
+<li>多条路由匹配时选掩码最长、前缀最具体的条目，不能“从上到下遇到第一条就停”。</li>
+<li>默认路由一定匹配，但优先级最低。</li>
+<li>跨网段首跳的目的 MAC 是默认网关；最终主机收到帧的源 MAC 是最后一跳路由器。</li>
+<li>普通转发中端到端 IP 地址不变，MAC 地址逐跳改变；经过 NAT 时 IP 地址可能改变。</li>
+<li>/30 地址块只有两个可用接口地址，网络地址和广播地址不能分配。</li>
+</ul>
+<h2 id="section-9">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-e843016612d3/">上一篇：IPv4 地址结构及计算</a> · <a href="/en/notes/cs408-5064ace109f8/">下一篇：路由协议</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-fe8e22cc2489/">网络层总纲</a></li>
+</ul>
+<h2 id="section-10">2.6 本节复盘</h2>
+<ul>
+<li>路由器查表使用最长前缀匹配；<code>169.96.40.5</code> 在 2015 年题中选择 <code>/27</code> 的 S3。</li>
+<li>没有 NAT 时源/目的 IP 端到端保持不变，源/目的 MAC 每条链路重新封装。</li>
+<li>主机向异网发送时把帧交给默认网关；远端收到的帧来自最后一跳路由器接口。</li>
+<li>本题的源 NAT 把内网私有源地址换为 R2 的公网接口地址 <code>195.123.0.33</code>；教材补充：一般 NAT 也可能使用地址池中的其他公网地址，不能把“必用出接口地址”当成通则。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-efc7c4d94382/index.html"><span>← Previous item</span><strong>2 题型 - 连接控制</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-f40d324810a1/index.html"><span>Next item →</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

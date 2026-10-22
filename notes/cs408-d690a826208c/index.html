@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>6. 图 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：6. 图。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="6. 图 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：6. 图。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-d690a826208c/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="6. 图 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：6. 图。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "6. 图",
+      "item": "https://www.jiayuhere.com/notes/cs408-d690a826208c/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-d690a826208c/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-d690a826208c/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d690a826208c/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d690a826208c/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-d690a826208c/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>6. 图</h1><p class="article-lead">408 学习笔记：6. 图。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 16 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/640dc584f56c.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/640dc584f56c.pdf" download="6. 图.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">0. 图的存储结构与基本操作</a><a href="#section-3">1. 欧拉路判定</a><a href="#section-5">2. BFS 与无权最短路</a><a href="#section-8">3. 递归 DFS、可达性与判树</a><a href="#section-12">4. 最远顶点与非递归 DFS</a><a href="#section-15">5. 连通分量</a><a href="#section-17">6. 邻接表与邻接矩阵互转</a><a href="#section-20">7. 原稿纠错与题目覆盖</a><a href="#section-21">相关知识</a><a href="#section-22">8. 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p><strong>ABSTRACT</strong> · 本节范围
+本笔记逐页覆盖原 PDF 的 13 页和 12 道实际题目：题 0～8、10、11、13。原文件本身没有题 9、12。内容包括两种存储结构、欧拉路、BFS/DFS、无权最短路、可达性、判树、最远点、非递归 DFS、连通分量和存储转换。代码统一为 C++17。</p>
+</blockquote>
+<h2 id="section-1">0. 图的存储结构与基本操作</h2>
+<h3 id="section-2">题 0：邻接表、邻接矩阵与无向边插入</h3>
+<p>以下结构统一支持顶点编号 <code>0...n-1</code>。<code>edgeCount</code> 统计逻辑边数：无向边虽然在邻接表中存两份邻接关系，但只计 1 条边。</p>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;cstddef&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;stdexcept&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+
+struct AdjListGraph {
+    bool directed = false;
+    std::size_t edgeCount = 0;
+    std::vector&lt;std::vector&lt;int&gt;&gt; adjacent;
+
+    explicit AdjListGraph(std::size_t vertexCount = 0,
+                          bool isDirected = false)
+        : directed(isDirected), adjacent(vertexCount) {}
+};
+
+struct AdjMatrixGraph {
+    bool directed = false;
+    std::size_t edgeCount = 0;
+    std::vector&lt;std::vector&lt;int&gt;&gt; edge;
+
+    explicit AdjMatrixGraph(std::size_t vertexCount = 0,
+                            bool isDirected = false)
+        : directed(isDirected),
+          edge(vertexCount,
+               std::vector&lt;int&gt;(vertexCount, 0)) {}
+};
+
+void checkVertex(std::size_t vertexCount, int vertex) {
+    if (vertex &lt; 0
+            || static_cast&lt;std::size_t&gt;(vertex) &gt;= vertexCount) {
+        throw std::out_of_range(&quot;vertex index&quot;);
+    }
+}
+
+void addEdge(AdjListGraph&amp; graph, int from, int to) {
+    checkVertex(graph.adjacent.size(), from);
+    checkVertex(graph.adjacent.size(), to);
+    graph.adjacent[from].push_back(to);
+    if (!graph.directed) {
+        graph.adjacent[to].push_back(from);
+    }
+    ++graph.edgeCount;
+}
+
+void addEdge(AdjMatrixGraph&amp; graph, int from, int to) {
+    checkVertex(graph.edge.size(), from);
+    checkVertex(graph.edge.size(), to);
+    ++graph.edge[from][to];
+    if (!graph.directed &amp;&amp; from != to) {
+        ++graph.edge[to][from];
+    }
+    ++graph.edgeCount;
+}
+</code></pre>
+<p>邻接表空间为 $O(|V|+|E|)$，适合稀疏图；邻接矩阵空间为 $O(|V|^2)$，判断两点是否邻接为 $O(1)$。原 PDF 的转换题按简单图、无自环理解时，矩阵元素只需 0/1；本稿的矩阵元素记录边的条数，后文转换实现还可处理重边和自环。欧拉路函数按此约定正确计算对角线自环的度数贡献。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿先使用 <code>VNode</code>、<code>ArcNode</code> 再声明它们，结点指针和对象成员访问混用 <code>.</code>/<code>-&gt;</code>，最后还返回未声明的 <code>G</code>。无向边必须对两个端点各加入一条邻接记录。</p>
+</blockquote>
+<h2 id="section-3">1. 欧拉路判定</h2>
+<h3 id="section-4">题 1：无向图是否存在经过全部边一次的路</h3>
+<p>对含边的无向图，存在欧拉通路当且仅当：</p>
+<ol>
+<li>所有度数非 0 的顶点位于同一连通分量；</li>
+<li>奇度顶点数为 0 或 2。</li>
+</ol>
+<p>奇度数为 0 时存在欧拉回路；为 2 时存在端点不同的欧拉通路。原题已给“无向连通图且 $|E|&gt;0$”，因此只数奇度顶点也足够；下列实现保留完整检查。</p>
+<pre><code class="language-cpp">int matrixDegree(const AdjMatrixGraph&amp; graph, int vertex) {
+    int degree = 0;
+    for (std::size_t other = 0;
+         other &lt; graph.edge.size(); ++other) {
+        degree += graph.edge[vertex][other];
+    }
+    degree += graph.edge[vertex][vertex];
+    return degree;  // 自环对无向图度数贡献 2。
+}
+
+bool hasEulerTrail(const AdjMatrixGraph&amp; graph) {
+    if (graph.directed || graph.edgeCount == 0) {
+        return false;
+    }
+
+    const int n = static_cast&lt;int&gt;(graph.edge.size());
+    int start = -1;
+    int oddDegreeVertices = 0;
+    for (int vertex = 0; vertex &lt; n; ++vertex) {
+        const int degree = matrixDegree(graph, vertex);
+        if (degree &gt; 0 &amp;&amp; start == -1) {
+            start = vertex;
+        }
+        oddDegreeVertices += degree % 2;
+    }
+
+    std::vector&lt;bool&gt; visited(n, false);
+    std::queue&lt;int&gt; pending;
+    visited[start] = true;
+    pending.push(start);
+    while (!pending.empty()) {
+        const int vertex = pending.front();
+        pending.pop();
+        for (int next = 0; next &lt; n; ++next) {
+            if (graph.edge[vertex][next] &gt; 0 &amp;&amp; !visited[next]) {
+                visited[next] = true;
+                pending.push(next);
+            }
+        }
+    }
+    for (int vertex = 0; vertex &lt; n; ++vertex) {
+        if (matrixDegree(graph, vertex) &gt; 0 &amp;&amp; !visited[vertex]) {
+            return false;
+        }
+    }
+    return oddDegreeVertices == 0 || oddDegreeVertices == 2;
+}
+</code></pre>
+<p>矩阵求度和连通检查均需扫描行，时间 $O(|V|^2)$，辅助空间 $O(|V|)$。</p>
+<h2 id="section-5">2. BFS 与无权最短路</h2>
+<h3 id="section-6">题 2：广度优先遍历</h3>
+<p>顶点在“首次发现、准备入队”时立即标记，保证每个顶点最多入队一次。</p>
+<pre><code class="language-cpp">std::vector&lt;int&gt; breadthFirstOrder(const AdjListGraph&amp; graph,
+                                   int start) {
+    checkVertex(graph.adjacent.size(), start);
+    std::vector&lt;int&gt; order;
+    std::vector&lt;bool&gt; visited(graph.adjacent.size(), false);
+    std::queue&lt;int&gt; pending;
+
+    visited[start] = true;
+    pending.push(start);
+    while (!pending.empty()) {
+        const int vertex = pending.front();
+        pending.pop();
+        order.push_back(vertex);
+        for (int next : graph.adjacent[vertex]) {
+            if (!visited[next]) {
+                visited[next] = true;
+                pending.push(next);
+            }
+        }
+    }
+    return order;
+}
+</code></pre>
+<h3 id="section-7">题 3：BFS 求无权图最短距离</h3>
+<p><code>distance[v]</code> 表示源点到 $v$ 的最少边数，<code>-1</code> 表示不可达。首次发现邻点时：</p>
+<p>$$
+distance[next]=distance[vertex]+1.
+$$</p>
+<pre><code class="language-cpp">std::vector&lt;int&gt; unweightedDistances(const AdjListGraph&amp; graph,
+                                     int source) {
+    checkVertex(graph.adjacent.size(), source);
+    std::vector&lt;int&gt; distance(graph.adjacent.size(), -1);
+    std::queue&lt;int&gt; pending;
+    distance[source] = 0;
+    pending.push(source);
+
+    while (!pending.empty()) {
+        const int vertex = pending.front();
+        pending.pop();
+        for (int next : graph.adjacent[vertex]) {
+            if (distance[next] == -1) {
+                distance[next] = distance[vertex] + 1;
+                pending.push(next);
+            }
+        }
+    }
+    return distance;
+}
+</code></pre>
+<p>邻接表 BFS 和无权最短路均为时间 $O(|V|+|E|)$、空间 $O(|V|)$。原稿把 <code>visited</code> 初始化语句放到了循环外，还使用 <code>INT16_MAX</code> 作为通用距离哨兵，顶点较多时会溢出；<code>-1</code> 足以表达不可达。</p>
+<h2 id="section-8">3. 递归 DFS、可达性与判树</h2>
+<h3 id="section-9">题 4：递归深度优先遍历</h3>
+<pre><code class="language-cpp">void depthFirstImpl(const AdjListGraph&amp; graph,
+                    int vertex,
+                    std::vector&lt;bool&gt;&amp; visited,
+                    std::vector&lt;int&gt;&amp; order) {
+    visited[vertex] = true;
+    order.push_back(vertex);
+    for (int next : graph.adjacent[vertex]) {
+        if (!visited[next]) {
+            depthFirstImpl(graph, next, visited, order);
+        }
+    }
+}
+
+std::vector&lt;int&gt; depthFirstOrder(const AdjListGraph&amp; graph,
+                                 int start) {
+    checkVertex(graph.adjacent.size(), start);
+    std::vector&lt;bool&gt; visited(graph.adjacent.size(), false);
+    std::vector&lt;int&gt; order;
+    depthFirstImpl(graph, start, visited, order);
+    return order;
+}
+</code></pre>
+<h3 id="section-10">题 5：判断从顶点 $i$ 到 $j$ 是否有路径</h3>
+<p>有向图按弧方向判断，故“$i$ 可达 $j$”不一定推出“$j$ 可达 $i$”；无向图才具有对称性。</p>
+<pre><code class="language-cpp">bool reachableImpl(const AdjListGraph&amp; graph,
+                   int vertex,
+                   int target,
+                   std::vector&lt;bool&gt;&amp; visited) {
+    if (vertex == target) {
+        return true;
+    }
+    visited[vertex] = true;
+    for (int next : graph.adjacent[vertex]) {
+        if (!visited[next]
+                &amp;&amp; reachableImpl(graph, next, target, visited)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool hasPath(const AdjListGraph&amp; graph, int from, int to) {
+    checkVertex(graph.adjacent.size(), from);
+    checkVertex(graph.adjacent.size(), to);
+    std::vector&lt;bool&gt; visited(graph.adjacent.size(), false);
+    return reachableImpl(graph, from, to, visited);
+}
+</code></pre>
+<h3 id="section-11">题 6：判断无向图是否为树</h3>
+<p>非空无向图是树，当且仅当它连通且</p>
+<p>$$
+|E|=|V|-1.
+$$</p>
+<pre><code class="language-cpp">bool isUndirectedTree(const AdjListGraph&amp; graph) {
+    const std::size_t n = graph.adjacent.size();
+    if (graph.directed || n == 0 || graph.edgeCount != n - 1) {
+        return false;
+    }
+
+    std::vector&lt;bool&gt; visited(n, false);
+    std::queue&lt;int&gt; pending;
+    visited[0] = true;
+    pending.push(0);
+    std::size_t reached = 0;
+    while (!pending.empty()) {
+        const int vertex = pending.front();
+        pending.pop();
+        ++reached;
+        for (int next : graph.adjacent[vertex]) {
+            if (!visited[next]) {
+                visited[next] = true;
+                pending.push(next);
+            }
+        }
+    }
+    return reached == n;
+}
+</code></pre>
+<p>单顶点、无边图满足树定义；空图不视为树。三题在邻接表上的时间均为 $O(|V|+|E|)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+多个 DFS 函数混用了 <code>vertex/v</code>、<code>p.adjVertex/p-&gt;adjVertex</code>、<code>nextArc/netxArc</code>，数组实参还错误写成 <code>visit[]</code>。判树代码把指针与对象混用，并存在同一分支中连续 <code>return true; return false;</code> 的不可达语句。</p>
+</blockquote>
+<h2 id="section-12">4. 最远顶点与非递归 DFS</h2>
+<h3 id="section-13">题 7：求无向连通图中距顶点 $v$ 最远的一个顶点</h3>
+<p>这里的“距离”指最短路径所含的边数。BFS 按距离非递减顺序处理顶点，所以最后一层中的顶点都最远；但同一层可能有多个顶点，单说“最后出队者”会依赖邻接表次序。下列实现规定：若最远顶点不唯一，返回编号最小者，使结果确定。</p>
+<pre><code class="language-cpp">int farthestVertex(const AdjListGraph&amp; graph, int source) {
+    if (graph.directed || graph.adjacent.empty()) {
+        throw std::invalid_argument(
+            &quot;a nonempty undirected graph is required&quot;);
+    }
+    const std::vector&lt;int&gt; distance =
+        unweightedDistances(graph, source);
+
+    int farthest = source;
+    for (int vertex = 0;
+         vertex &lt; static_cast&lt;int&gt;(distance.size()); ++vertex) {
+        if (distance[vertex] == -1) {
+            throw std::invalid_argument(
+                &quot;the graph must be connected&quot;);
+        }
+        if (distance[vertex] &gt; distance[farthest]
+                || (distance[vertex] == distance[farthest]
+                    &amp;&amp; vertex &lt; farthest)) {
+            farthest = vertex;
+        }
+    }
+    return farthest;
+}
+</code></pre>
+<p>单顶点图返回该顶点自身。时间 $O(|V|+|E|)$，辅助空间 $O(|V|)$。</p>
+<h3 id="section-14">题 8：深度优先遍历的非递归算法</h3>
+<p>若只在栈中保存顶点，每次回到栈顶后都从第一条邻边重新扫描，虽可借助 <code>visited</code> 得到遍历结果，却会反复扫描，且不容易严格复现递归 DFS 的邻接次序。准确模拟递归调用时，栈帧还应保存“下一条待检查邻边”的位置。</p>
+<pre><code class="language-cpp">struct DfsFrame {
+    int vertex;
+    std::size_t nextNeighbor;
+};
+
+std::vector&lt;int&gt; depthFirstOrderIterative(
+        const AdjListGraph&amp; graph, int start) {
+    checkVertex(graph.adjacent.size(), start);
+    std::vector&lt;bool&gt; visited(graph.adjacent.size(), false);
+    std::vector&lt;int&gt; order;
+    std::vector&lt;DfsFrame&gt; path;
+
+    visited[start] = true;
+    order.push_back(start);
+    path.push_back({start, 0});
+
+    while (!path.empty()) {
+        DfsFrame&amp; frame = path.back();
+        const auto&amp; neighbors = graph.adjacent[frame.vertex];
+        if (frame.nextNeighbor == neighbors.size()) {
+            path.pop_back();
+            continue;
+        }
+
+        const int next = neighbors[frame.nextNeighbor++];
+        if (!visited[next]) {
+            visited[next] = true;
+            order.push_back(next);
+            path.push_back({next, 0});
+        }
+    }
+    return order;
+}
+</code></pre>
+<p>每条邻接记录最多检查一次，时间 $O(|V|+|E|)$，显式栈、访问数组和结果均占 $O(|V|)$。其输出与本节递归版本在相同邻接表次序下完全一致。</p>
+<pre class="mermaid">flowchart LR
+    S[访问起点] --&gt; C{待处理结构}
+    C --&gt;|队列| B[BFS 按层扩展]
+    B --&gt; D[无权最短路与最远层]
+    C --&gt;|递归或栈帧| F[DFS 沿路径深入]
+    F --&gt; A[可达性、判树与连通分量]
+</pre>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+题 7 的代码声明为 <code>void</code> 却返回顶点，并把队列下标写成容易越界的前置自增形式；“最后出队”也没有说明同层平局。题 8 出栈后又在 <code>p == null</code> 分支重复 <code>top--</code>，会跳过栈帧；同时每次都把邻接指针重置到首边，无法正确保存递归回溯位置。</p>
+</blockquote>
+<h2 id="section-15">5. 连通分量</h2>
+<h3 id="section-16">题 10：求无向图的连通分量个数</h3>
+<p>依次扫描所有顶点；每遇到一个未访问顶点，就从它开始一次 DFS，并把计数加 1。一次 DFS 恰好覆盖一个连通分量。空图的连通分量数为 0。</p>
+<pre><code class="language-cpp">std::size_t countConnectedComponents(
+        const AdjListGraph&amp; graph) {
+    if (graph.directed) {
+        throw std::invalid_argument(
+            &quot;connected components require an undirected graph&quot;);
+    }
+
+    std::vector&lt;bool&gt; visited(graph.adjacent.size(), false);
+    std::size_t components = 0;
+    for (int start = 0;
+         start &lt; static_cast&lt;int&gt;(graph.adjacent.size()); ++start) {
+        if (visited[start]) {
+            continue;
+        }
+
+        ++components;
+        std::stack&lt;int&gt; pending;
+        visited[start] = true;
+        pending.push(start);
+        while (!pending.empty()) {
+            const int vertex = pending.top();
+            pending.pop();
+            for (int next : graph.adjacent[vertex]) {
+                if (!visited[next]) {
+                    visited[next] = true;
+                    pending.push(next);
+                }
+            }
+        }
+    }
+    return components;
+}
+</code></pre>
+<p>时间 $O(|V|+|E|)$，辅助空间 $O(|V|)$。对有向图必须先明确求弱连通分量还是强连通分量，不能直接套用本函数。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+原稿调用 <code>DFS(G, v, visit[])</code>，其中 <code>v</code> 未定义，数组实参语法也错误；它还没有声明算法只适用于无向图。</p>
+</blockquote>
+<h2 id="section-17">6. 邻接表与邻接矩阵互转</h2>
+<p>本文矩阵元素记录边的条数，因此简单图取值为 0/1，也能表示重边；无向图对角元素记录自环条数，而邻接表按常规定义为每个自环保存两条邻接记录。</p>
+<h3 id="section-18">题 11：邻接表转换为邻接矩阵</h3>
+<p>先逐条统计邻接记录。对无向图，还要验证矩阵关于主对角线对称，并把对角线上成对的自环邻接记录折算为自环条数。</p>
+<pre><code class="language-cpp">AdjMatrixGraph toAdjMatrix(const AdjListGraph&amp; graph) {
+    const std::size_t n = graph.adjacent.size();
+    AdjMatrixGraph result(n, graph.directed);
+
+    for (int from = 0; from &lt; static_cast&lt;int&gt;(n); ++from) {
+        for (int to : graph.adjacent[from]) {
+            checkVertex(n, to);
+            ++result.edge[from][to];
+            if (graph.directed) {
+                ++result.edgeCount;
+            }
+        }
+    }
+
+    if (!graph.directed) {
+        for (int vertex = 0;
+             vertex &lt; static_cast&lt;int&gt;(n); ++vertex) {
+            if (result.edge[vertex][vertex] % 2 != 0) {
+                throw std::logic_error(
+                    &quot;an undirected self-loop needs two list entries&quot;);
+            }
+            result.edge[vertex][vertex] /= 2;
+            result.edgeCount += result.edge[vertex][vertex];
+
+            for (int other = vertex + 1;
+                 other &lt; static_cast&lt;int&gt;(n); ++other) {
+                if (result.edge[vertex][other]
+                        != result.edge[other][vertex]) {
+                    throw std::logic_error(
+                        &quot;the undirected adjacency list is asymmetric&quot;);
+                }
+                result.edgeCount += result.edge[vertex][other];
+            }
+        }
+    }
+
+    if (result.edgeCount != graph.edgeCount) {
+        throw std::logic_error(&quot;inconsistent edge count&quot;);
+    }
+    return result;
+}
+</code></pre>
+<h3 id="section-19">题 13：邻接矩阵转换为邻接表</h3>
+<p>有向图扫描全部矩阵元素；无向图只处理主对角线及上三角，避免把一条无向边加入两次。矩阵必须为方阵、元素非负；无向矩阵还必须对称。</p>
+<pre><code class="language-cpp">AdjListGraph toAdjList(const AdjMatrixGraph&amp; graph) {
+    const std::size_t n = graph.edge.size();
+    for (const auto&amp; row : graph.edge) {
+        if (row.size() != n) {
+            throw std::invalid_argument(&quot;the matrix must be square&quot;);
+        }
+    }
+
+    AdjListGraph result(n, graph.directed);
+    if (graph.directed) {
+        for (int from = 0; from &lt; static_cast&lt;int&gt;(n); ++from) {
+            for (int to = 0; to &lt; static_cast&lt;int&gt;(n); ++to) {
+                if (graph.edge[from][to] &lt; 0) {
+                    throw std::invalid_argument(
+                        &quot;edge multiplicity cannot be negative&quot;);
+                }
+                for (int copy = 0;
+                     copy &lt; graph.edge[from][to]; ++copy) {
+                    addEdge(result, from, to);
+                }
+            }
+        }
+    } else {
+        for (int vertex = 0;
+             vertex &lt; static_cast&lt;int&gt;(n); ++vertex) {
+            if (graph.edge[vertex][vertex] &lt; 0) {
+                throw std::invalid_argument(
+                    &quot;edge multiplicity cannot be negative&quot;);
+            }
+            for (int copy = 0;
+                 copy &lt; graph.edge[vertex][vertex]; ++copy) {
+                addEdge(result, vertex, vertex);
+            }
+
+            for (int other = vertex + 1;
+                 other &lt; static_cast&lt;int&gt;(n); ++other) {
+                if (graph.edge[vertex][other] &lt; 0
+                        || graph.edge[other][vertex] &lt; 0) {
+                    throw std::invalid_argument(
+                        &quot;edge multiplicity cannot be negative&quot;);
+                }
+                if (graph.edge[vertex][other]
+                        != graph.edge[other][vertex]) {
+                    throw std::invalid_argument(
+                        &quot;an undirected matrix must be symmetric&quot;);
+                }
+                for (int copy = 0;
+                     copy &lt; graph.edge[vertex][other]; ++copy) {
+                    addEdge(result, vertex, other);
+                }
+            }
+        }
+    }
+
+    if (result.edgeCount != graph.edgeCount) {
+        throw std::logic_error(&quot;inconsistent edge count&quot;);
+    }
+    return result;
+}
+</code></pre>
+<p>邻接表转矩阵需要初始化 $|V|^2$ 个单元并遍历 $O(|E|)$ 条邻接记录，时间为 $O(|V|^2+|E|)$、结果空间为 $O(|V|^2)$；邻接矩阵转邻接表扫描矩阵的时间为 $O(|V|^2+|E|)$，结果空间为 $O(|V|+|E|)$。在简单图中 $|E|=O(|V|^2)$，前者时间才可简写为 $O(|V|^2)$。</p>
+<blockquote>
+<p><strong>DANGER</strong> · 原稿错误
+两个转换函数都把输出图按值传递，调用者得不到修改结果；<code>edgeNum</code> 被错误赋成 <code>vertexNum</code>。邻接表转矩阵未清零无边位置；矩阵转邻接表把顶点结点误赋为 <code>null</code>，也没有区分有向图与无向图的重复计边。</p>
+</blockquote>
+<h2 id="section-20">7. 原稿纠错与题目覆盖</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>范围</th>
+<th>原稿主要问题</th>
+<th>本稿处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储与插边</td>
+<td>类型声明顺序、指针访问、返回值均有编译错误</td>
+<td>统一两种结构与插边接口</td>
+</tr>
+<tr>
+<td>欧拉路</td>
+<td>只数奇度，不检查非零度顶点连通性</td>
+<td>同时检查连通性与 0/2 个奇度顶点</td>
+</tr>
+<tr>
+<td>BFS/最短路</td>
+<td>初始化位置、队列下标、距离哨兵错误</td>
+<td>首次发现即标记，<code>-1</code> 表示不可达</td>
+</tr>
+<tr>
+<td>DFS/可达性</td>
+<td>变量名、成员名和数组实参混乱</td>
+<td>递归状态显式传引用</td>
+</tr>
+<tr>
+<td>判树</td>
+<td>指针对象混用，返回分支矛盾</td>
+<td>严格检查非空、无向、连通和 $</td>
+</tr>
+<tr>
+<td>最远顶点</td>
+<td>未说明最远层平局，函数返回类型错误</td>
+<td>规定平局取最小编号</td>
+</tr>
+<tr>
+<td>非递归 DFS</td>
+<td>重复出栈，未保存下一邻边</td>
+<td>栈帧保存顶点与邻边位置</td>
+</tr>
+<tr>
+<td>连通分量</td>
+<td>未定义变量，适用图类型不明</td>
+<td>逐顶点启动 DFS，并限定无向图</td>
+</tr>
+<tr>
+<td>存储转换</td>
+<td>按值输出、边数错误、重复计边</td>
+<td>返回新图并验证矩阵/邻接表不变量</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">原题号</th>
+<th>内容</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td>图的存储结构与无向边插入</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td>欧拉通路判定</td>
+<td>已覆盖并补全连通条件</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>BFS</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>BFS 求无权最短路</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>递归 DFS</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>可达性</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>无向图判树</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>最远顶点</td>
+<td>已覆盖并规定平局</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>非递归 DFS</td>
+<td>已覆盖并修正回溯状态</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>无向图连通分量</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>邻接表转邻接矩阵</td>
+<td>已覆盖</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td>邻接矩阵转邻接表</td>
+<td>已覆盖</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>NOTE</strong> · 题号说明
+原 PDF 的实际编号就是题 0～8、10、11、13，共 12 题；文件中没有题 9 和题 12，并非本稿遗漏。</p>
+</blockquote>
+<h2 id="section-21">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-18a77c541c35/">上一篇：查找代码</a> · <a href="/notes/cs408-c558f3264d82/">下一篇：排序代码</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-5a6e8759de60/">图的存储与操作</a></li>
+</ul>
+<h2 id="section-22">8. 本节复盘</h2>
+<ul>
+<li>BFS 用队列按层扩展，可直接求无权最短距离；最远点来自最大距离层，同层答案可能不唯一。</li>
+<li>DFS 用递归或显式栈沿路径深入；若要复现递归次序，栈帧必须保存下一邻接位置。</li>
+<li>无向图是树，当且仅当非空、连通且 $|E|=|V|-1$；单顶点无边图是树。</li>
+<li>无向图存在欧拉通路，需要所有非零度顶点连通，并且奇度顶点恰有 0 个或 2 个。</li>
+<li>从每个尚未访问的顶点启动一次 DFS，启动次数就是无向图的连通分量数。</li>
+<li>存储转换必须同步顶点数、图方向和逻辑边数；无向图要处理矩阵对称性、自环与重复邻接记录。</li>
+<li>邻接表适合稀疏图，邻接矩阵适合稠密图或频繁进行邻接判定的场景。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-d6101803f8c4/index.html"><span>← 上一项</span><strong>Lecture 19：知识 - 数据通路的功能和基本结构</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-d889ec3bdd23/index.html"><span>下一项 →</span><strong>Lecture 18：知识 - 指令执行过程</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

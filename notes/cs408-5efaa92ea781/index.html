@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 22：图的遍历 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 22：图的遍历。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 22：图的遍历 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 22：图的遍历。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-5efaa92ea781/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 22：图的遍历 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 22：图的遍历。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 22：图的遍历",
+      "item": "https://www.jiayuhere.com/notes/cs408-5efaa92ea781/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-5efaa92ea781/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5efaa92ea781/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5efaa92ea781/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5efaa92ea781/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-5efaa92ea781/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 22：图的遍历</h1><p class="article-lead">408 学习笔记：Lecture 22：图的遍历。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-14">2026-07-14</time></span></span><span>约 13 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/448d18523e0e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/448d18523e0e.pdf" download="Lecture 22：图的遍历.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">22.1 广度优先遍历</a><a href="#section-22">22.2 深度优先遍历</a><a href="#section-36">22.3 BFS 与 DFS 对比</a><a href="#section-38">相关知识</a><a href="#section-39">22.4 题型与复盘</a></nav></details><div class="prose"><blockquote>
+<p>图的遍历是从一个顶点出发，按照某种规则访问其<strong>可达范围</strong>内的每个顶点且只访问一次；若要覆盖非连通图，还需通过外层循环选择新的起点。核心是 <code>visited[]</code>：图可能有环，不标记已访问顶点会在环中反复访问。</p>
+</blockquote>
+<h2 id="section-1">22.1 广度优先遍历</h2>
+<h3 id="section-2">22.1.1 基本概念</h3>
+<h5 id="section-3"><strong>定义</strong>：#广度优先遍历 #BFS</h5>
+<blockquote>
+<p>描述：广度优先遍历（Breadth-First Search，BFS）从起始顶点 $v$ 出发，先依次访问 $v$ 的所有未访问邻接顶点，再依次访问这些邻接顶点的所有未访问邻接顶点，按“由近到远、逐层扩展”的方式直至不能继续。</p>
+</blockquote>
+<p>若从 $v$ 开始，$v$ 的未访问邻接顶点为：</p>
+<p>$$
+w_1,w_2,\cdots,w_n
+$$</p>
+<p>则 BFS 的访问层次是：</p>
+<p>$$
+v\longrightarrow {w_1,w_2,\cdots,w_n}\longrightarrow \text{这些顶点的未访问邻接点}\longrightarrow\cdots
+$$</p>
+<h5 id="section-4"><strong>三个关键动作</strong>：</h5>
+<ol>
+<li>找到当前顶点的所有邻接顶点。</li>
+<li>只处理尚未访问过的邻接顶点。</li>
+<li>使用一个<strong>辅助队列</strong>保存“已经发现但还没有展开邻接点”的顶点。</li>
+</ol>
+<h5 id="section-5"><strong>队列含义</strong>：#BFS队列</h5>
+<ul>
+<li>顶点被首次访问时，立刻标记并入队。</li>
+<li>队头顶点出队后，扫描它的所有邻接点。</li>
+<li>新发现的顶点按发现次序进入队尾，因此先发现的顶点先展开。</li>
+<li>“访问时标记”而非“出队时标记”，可防止同一顶点被多个邻接点重复入队。</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    A[&quot;访问起点并立即标记&quot;] --&gt; B[&quot;起点入队&quot;]
+    B --&gt; C[&quot;队头顶点出队&quot;]
+    C --&gt; D[&quot;按既定次序扫描邻接点&quot;]
+    D --&gt; E{&quot;发现未访问顶点?&quot;}
+    E -- &quot;是&quot; --&gt; F[&quot;访问、标记并入队&quot;]
+    F --&gt; D
+    E -- &quot;否/扫描完&quot; --&gt; G{&quot;队列为空?&quot;}
+    G -- &quot;否&quot; --&gt; C
+    G -- &quot;是&quot; --&gt; H[&quot;本次 BFS 结束&quot;]
+</pre>
+<p>以边 $1-2,1-3,2-4,3-4$ 且按编号递增扫描邻接点为例：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>动作</th>
+<th>队列（队头在左）</th>
+<th>已访问序列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始</td>
+<td>访问并入队 1</td>
+<td>$[1]$</td>
+<td>$1$</td>
+</tr>
+<tr>
+<td>展开 1</td>
+<td>发现 2、3</td>
+<td>$[2,3]$</td>
+<td>$1,2,3$</td>
+</tr>
+<tr>
+<td>展开 2</td>
+<td>发现 4</td>
+<td>$[3,4]$</td>
+<td>$1,2,3,4$</td>
+</tr>
+<tr>
+<td>展开 3</td>
+<td>4 已访问，不重复入队</td>
+<td>$[4]$</td>
+<td>不变</td>
+</tr>
+<tr>
+<td>展开 4</td>
+<td>无新顶点</td>
+<td>$[]$</td>
+<td>遍历结束</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-6">22.1.2 BFS 遍历序列是否唯一</h3>
+<h5 id="section-7"><strong>邻接矩阵</strong>：</h5>
+<p>在<strong>顶点编号顺序固定、起始顶点固定、按固定列序扫描邻接点</strong>的条件下，邻接矩阵确定，因此 BFS 访问序列唯一。若改变顶点编号或扫描顺序，序列仍可能改变。</p>
+<h5 id="section-8"><strong>邻接表</strong>：</h5>
+<p>同一个图的邻接表表示通常不唯一：同一顶点边表中邻接点的链接次序可以不同。因此即使起点相同，BFS 访问序列也可能不同。</p>
+<h5 id="section-9"><strong>易错点</strong>：#BFS序列</h5>
+<ul>
+<li>图本身固定并不自动保证遍历序列唯一。</li>
+<li>题目若给邻接表，应严格按边表给出的次序访问。</li>
+<li>题目若只给图而未规定邻接点访问次序，多个合法遍历序列都可能成立。</li>
+</ul>
+<h3 id="section-10">22.1.3 性能分析</h3>
+<h5 id="section-11"><strong>空间复杂度</strong>：</h5>
+<p>$$
+O(\lvert V\rvert)
+$$</p>
+<ul>
+<li><code>visited[]</code> 需要 $O(\lvert V\rvert)$ 空间。</li>
+<li>辅助队列最多可保存 $O(\lvert V\rvert)$ 个顶点。</li>
+<li>队列达到最大长度的典型情况是：当前访问顶点连接着大量尚未访问的顶点。</li>
+</ul>
+<h5 id="section-12"><strong>时间复杂度</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>存储结构</th>
+<th>分析</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接矩阵</td>
+<td>每个顶点出队后均要扫描完整一行，扫描 $\lvert V\rvert$ 次</td>
+<td>$O(\lvert V\rvert^2)$</td>
+</tr>
+<tr>
+<td>邻接表</td>
+<td>访问顶点共 $O(\lvert V\rvert)$；沿边表查找邻接点共 $O(\lvert E\rvert)$</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+</tbody>
+</table></div>
+<p><a class="note-image-link" href="/assets/408/images/fc319b438b5d.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L22-存储复杂度对比.png"><img class="note-image" src="/assets/408/images/fc319b438b5d.png" alt="DS-L22-存储复杂度对比.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>无向邻接表实际会扫描 $2\lvert E\rvert$ 个边表结点，有向邻接表扫描 $\lvert E\rvert$ 个弧结点；二者在渐近复杂度中都写成 $O(\lvert V\rvert+\lvert E\rvert)$。图中右侧邻接表的链内次序只是其中一种合法排列。</p>
+</blockquote>
+<h3 id="section-13">22.1.4 算法实现</h3>
+<h5 id="section-14"><strong>从单一起点开始的 BFS</strong>：</h5>
+<pre><code class="language-c">bool visited[MAX_VERTEX_NUM];
+
+void BFS(Graph G, int v) {
+    visit(v);
+    visited[v] = TRUE;
+    EnQueue(Q, v);
+
+    while (!isEmpty(Q)) {
+        DeQueue(Q, v);
+        for (int w = FirstNeighbor(G, v);
+             w &gt;= 0;
+             w = NextNeighbor(G, v, w)) {
+            if (!visited[w]) {
+                visit(w);
+                visited[w] = TRUE;
+                EnQueue(Q, w);
+            }
+        }
+    }
+}
+</code></pre>
+<h5 id="section-15"><strong>逐行理解</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>代码动作</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visit(v)</code></td>
+<td>处理或输出顶点 $v$</td>
+</tr>
+<tr>
+<td><code>visited[v] = TRUE</code></td>
+<td>标明 $v$ 已被发现，不能重复入队</td>
+</tr>
+<tr>
+<td><code>EnQueue(Q, v)</code></td>
+<td>等待后续扫描 $v$ 的邻接点</td>
+</tr>
+<tr>
+<td><code>DeQueue(Q, v)</code></td>
+<td>取出当前最早发现、尚未展开的顶点</td>
+</tr>
+<tr>
+<td><code>FirstNeighbor</code> / <code>NextNeighbor</code></td>
+<td>依次枚举 $v$ 的邻接点</td>
+</tr>
+<tr>
+<td><code>if (!visited[w])</code></td>
+<td>只把第一次发现的顶点加入遍历</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-16"><strong>代码易错点</strong>：#BFS代码</h5>
+<ul>
+<li>课件中 <code>TREUE</code> 是拼写错误，应为 <code>TRUE</code>。</li>
+<li><code>w &gt;= 0</code> 与前一讲 <code>FirstNeighbor</code> 返回 $-1$ 的约定匹配。</li>
+<li>若在 <code>DeQueue</code> 后才设置 <code>visited[w]</code>，同一个 $w$ 可能被多次入队。</li>
+<li>单次 <code>BFS(G, v)</code> 只能覆盖从 $v$ 可达的顶点，不能保证覆盖非连通图全部顶点。</li>
+<li>代码是沿用课件抽象 <code>Graph</code>、队列 <code>Q</code> 与邻接点接口的算法片段；调用 <code>BFS</code> 前须先初始化队列，<code>EnQueue/DeQueue</code> 的具体实现及容量失败处理也须由所用队列接口提供。</li>
+</ul>
+<h3 id="section-17">22.1.5 非连通图的处理</h3>
+<h5 id="section-18"><strong>遍历框架</strong>：#非连通图BFS</h5>
+<blockquote>
+<p>描述：先将所有顶点标记为未访问，再按顶点编号逐一检查。每遇到一个未访问顶点，就以它为起点执行一次 BFS。</p>
+</blockquote>
+<pre><code class="language-c">void BFSTraverse(Graph G) {
+    for (int i = 0; i &lt; G.vexnum; ++i) {
+        visited[i] = FALSE;
+    }
+
+    InitQueue(Q);
+
+    for (int i = 0; i &lt; G.vexnum; ++i) {
+        if (!visited[i]) {
+            BFS(G, i);
+        }
+    }
+}
+</code></pre>
+<h5 id="section-19"><strong>连通分量结论</strong>：</h5>
+<ul>
+<li>对<strong>无向图</strong>，外层循环中实际调用 <code>BFS</code> 的次数等于图的连通分量个数。</li>
+<li>因而可用 BFS 确定无向图的连通分量。</li>
+<li>对连通无向图，只需要调用 $1$ 次 BFS。</li>
+<li>对有向图，调用次数取决于起点及弧方向，不能直接等同于强连通分量个数。</li>
+</ul>
+<h3 id="section-20">22.1.6 广度优先生成树</h3>
+<h5 id="section-21"><strong>定义</strong>：#广度优先生成树</h5>
+<blockquote>
+<p>描述：在 BFS 过程中，每当首次访问一个新顶点 $w$ 时，把“发现 $w$ 的顶点”记为其双亲，并把对应边记为树边。</p>
+</blockquote>
+<ul>
+<li>对含 $n$ 个顶点的<strong>连通无向图</strong>，这些树边组成一棵 BFS 生成树，恰有 $n-1$ 条树边。</li>
+<li>对含 $c$ 个连通分量的无向图，外层遍历得到 BFS 生成森林，共有 $n-c$ 条树边。</li>
+<li>对有向图，单次 BFS 得到的是从起点沿弧可达部分的搜索树；只有起点能到达全部顶点时，才覆盖全图并形成以起点为根的有向外向树，不能把一般情形直接称为无向意义下的生成树。</li>
+<li>BFS 生成树体现起点到各顶点的“最少边数层次”。</li>
+<li>在无权图中，BFS 首次到达一个可达顶点所处的层数，等于从起点到它的最短路径边数；双亲链给出其中一条最短路径，但最短路径本身可能不唯一。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/71451526c0e6.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L22-BFS生成树对比.png"><img class="note-image" src="/assets/408/images/71451526c0e6.png" alt="DS-L22-BFS生成树对比.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>两张图从同一顶点 $2$ 出发，但顶点 $6$ 的邻接点次序不同，导致 $3$、$7$ 的发现先后和最终 BFS 树不同；各顶点的层次仍保持最短路层次。</p>
+</blockquote>
+<p><a class="note-image-link" href="/assets/408/images/cb62e0d660c8.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L22-BFS生成森林.png"><img class="note-image" src="/assets/408/images/cb62e0d660c8.png" alt="DS-L22-BFS生成森林.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>非连通无向图需由外层循环重新选择起点，每个连通分量产生一棵树，合起来是生成森林。</p>
+</blockquote>
+<hr>
+<h2 id="section-22">22.2 深度优先遍历</h2>
+<h3 id="section-23">22.2.1 基本概念</h3>
+<h5 id="section-24"><strong>定义</strong>：#深度优先遍历 #DFS</h5>
+<blockquote>
+<p>描述：深度优先遍历（Depth-First Search，DFS）从起始顶点出发，在当前顶点的未访问邻接点中任选一个继续访问；只要还能向下，就持续深入。当当前顶点没有未访问邻接点时，回退到最近一个仍有未访问邻接点的顶点，继续搜索。</p>
+</blockquote>
+<p>DFS 的过程可概括为：</p>
+<p>$$
+\text{访问一个顶点}\rightarrow\text{选择一个未访问邻接点}\rightarrow\text{递归深入}\rightarrow\text{无法深入时回溯}
+$$</p>
+<h5 id="section-25"><strong>直观理解</strong>：</h5>
+<ul>
+<li>BFS 是“先横向、后纵向”，按层扩展。</li>
+<li>DFS 是“先纵向、后回退”，沿一条路尽可能走到底。</li>
+<li>DFS 的递归调用过程等价于使用一个辅助栈；递归返回就是出栈回溯。</li>
+</ul>
+<blockquote>
+<p><strong>TIP</strong> · 回溯位置
+当当前顶点没有未访问邻接点时，DFS 返回到递归调用者，并从调用者上次暂停的位置继续扫描“下一个邻接点”，而不是重新从整张图任意选点。只有当前连通/可达部分结束后，外层循环才选择新的起点。</p>
+</blockquote>
+<h3 id="section-26">22.2.2 性能分析</h3>
+<h5 id="section-27"><strong>空间复杂度</strong>：</h5>
+<p>$$
+O(\lvert V\rvert)
+$$</p>
+<ul>
+<li><code>visited[]</code> 占用 $O(\lvert V\rvert)$。</li>
+<li>递归最深时，递归工作栈最多保存 $\lvert V\rvert$ 个顶点。</li>
+</ul>
+<h5 id="section-28"><strong>时间复杂度</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>存储结构</th>
+<th>分析</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接矩阵</td>
+<td>每访问一个顶点，都扫描一整行寻找邻接点</td>
+<td>$O(\lvert V\rvert^2)$</td>
+</tr>
+<tr>
+<td>邻接表</td>
+<td>顶点被访问一次，边表结点总共扫描一次</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+</tbody>
+</table></div>
+<p>无向邻接表中每条边对应两个边表结点，实际扫描 $2\lvert E\rvert$ 次；有向邻接表扫描 $\lvert E\rvert$ 个弧结点，渐近复杂度相同。</p>
+<p>课件也将邻接矩阵的时间写作：</p>
+<p>$$
+O(\lvert V\rvert+\lvert V\rvert^2)=O(\lvert V\rvert^2)
+$$</p>
+<h3 id="section-29">22.2.3 算法实现</h3>
+<pre><code class="language-c">bool visited[MAX_VERTEX_NUM];
+
+void DFS(Graph G, int v) {
+    visit(v);
+    visited[v] = TRUE;
+
+    for (int w = FirstNeighbor(G, v);
+         w &gt;= 0;
+         w = NextNeighbor(G, v, w)) {
+        if (!visited[w]) {
+            DFS(G, w);
+        }
+    }
+}
+</code></pre>
+<h5 id="section-30"><strong>递归过程</strong>：</h5>
+<ol>
+<li>访问当前顶点 $v$，立即做已访问标记。</li>
+<li>按既定顺序扫描 $v$ 的邻接点。</li>
+<li>若发现未访问顶点 $w$，递归执行 <code>DFS(G, w)</code>。</li>
+<li>当 $w$ 的分支遍历结束后，函数自动返回到 $v$，继续枚举 $v$ 的下一个邻接点。</li>
+</ol>
+<h5 id="section-31"><strong>代码易错点</strong>：#DFS代码</h5>
+<ul>
+<li>课件中 <code>NextNeighor</code> 少写了 <code>b</code>，应为 <code>NextNeighbor</code>。</li>
+<li>条件应使用 <code>w &gt;= 0</code>，因为合法顶点编号可以为 $0$；写成 <code>w &gt; 0</code> 会漏掉 $0$ 号顶点。</li>
+<li><code>visited[v] = TRUE</code> 必须在递归进入邻接点之前完成，否则有环时会无限递归。</li>
+<li>用显式栈改写 DFS 时，若希望得到与递归版相同的访问顺序，通常要按<strong>相反顺序</strong>压入邻接点；否则算法仍正确，但遍历序列可能不同。</li>
+</ul>
+<h3 id="section-32">22.2.4 非连通图的处理</h3>
+<pre><code class="language-c">void DFSTraverse(Graph G) {
+    for (int v = 0; v &lt; G.vexnum; ++v) {
+        visited[v] = FALSE;
+    }
+
+    for (int v = 0; v &lt; G.vexnum; ++v) {
+        if (!visited[v]) {
+            DFS(G, v);
+        }
+    }
+}
+</code></pre>
+<h5 id="section-33"><strong>调用次数</strong>：</h5>
+<ul>
+<li>对无向图，外层遍历从未访问顶点启动 <code>DFS</code> 的次数等于连通分量数；不要与递归函数的总调用次数混淆，后者通常对每个首次发现的顶点调用一次。</li>
+<li>对连通无向图，外层只需启动 $1$ 次 DFS。</li>
+<li>对有向图，外层启动次数要具体分析；若指定起始顶点能沿弧到达其他所有顶点，则外层只需启动 $1$ 次。</li>
+</ul>
+<h3 id="section-34">22.2.5 深度优先生成树</h3>
+<h5 id="section-35"><strong>定义</strong>：#深度优先生成树</h5>
+<blockquote>
+<p>描述：DFS 中每次递归访问一个未访问邻接点时，把触发递归的边记为树边。</p>
+</blockquote>
+<ul>
+<li>含 $n$ 个顶点的连通无向图得到一棵 DFS 生成树，含 $n-1$ 条树边；含 $c$ 个连通分量的无向图得到 DFS 生成森林，共有 $n-c$ 条树边。</li>
+<li>对有向图，得到的是按弧方向展开的 DFS 搜索树/森林；是否覆盖全部顶点取决于可达性和外层起点次序。</li>
+<li>给定起点和邻接点访问顺序后，生成树随 DFS 过程确定。</li>
+<li>在顶点编号、起点（或外层起点次序）及邻接点扫描顺序都固定时，邻接矩阵对应的遍历序列和搜索树唯一。</li>
+<li>邻接表的边表顺序不唯一时，遍历序列和生成树也不唯一。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/1e422155437e.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L22-DFS回溯森林.png"><img class="note-image" src="/assets/408/images/1e422155437e.png" alt="DS-L22-DFS回溯森林.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中先从顶点 $2$ 深入其可达部分，回溯完成后，外层循环再从未访问的顶点 $3$ 启动 DFS；红、绿、蓝箭头表示不同递归分支的树边。</p>
+</blockquote>
+<hr>
+<h2 id="section-36">22.3 BFS 与 DFS 对比</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>BFS</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中文名称</td>
+<td>广度优先遍历</td>
+<td>深度优先遍历</td>
+</tr>
+<tr>
+<td>核心思想</td>
+<td>逐层扩展，先访问距离近的顶点</td>
+<td>沿一条分支尽量深入，再回溯</td>
+</tr>
+<tr>
+<td>辅助结构</td>
+<td>队列</td>
+<td>递归工作栈或显式栈</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>$O(\lvert V\rvert)$</td>
+<td>$O(\lvert V\rvert)$</td>
+</tr>
+<tr>
+<td>邻接矩阵时间</td>
+<td>$O(\lvert V\rvert^2)$</td>
+<td>$O(\lvert V\rvert^2)$</td>
+</tr>
+<tr>
+<td>邻接表时间</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+<tr>
+<td>生成结构</td>
+<td>连通无向图得到 BFS 生成树；非连通图得到森林</td>
+<td>连通无向图得到 DFS 生成树；非连通图得到森林</td>
+</tr>
+<tr>
+<td>无权图最短路</td>
+<td>可得到起点到每个可达顶点的最少边数</td>
+<td>不保证最短路</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-37"><strong>共同点</strong>：</h5>
+<ul>
+<li>都须记录已发现/访问状态以避免重复处理；本讲示例用 <code>visited[]</code>，也可以在图结构中保存等价标记。</li>
+<li>都要通过外层循环覆盖非连通图。</li>
+<li>都会受邻接表中邻接点存储顺序影响。</li>
+<li>无向图中，外层循环启动次数等于连通分量数。</li>
+<li>有向图中，外层启动次数由顶点次序和有向可达性共同决定，既不等于强连通分量数，也不一定等于弱连通分量数。</li>
+</ul>
+<hr>
+<h2 id="section-38">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-5a6e8759de60/">上一篇：图的存储及其操作</a> · <a href="/notes/cs408-a1c21fbceeaf/">下一篇：图的经典应用</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-d690a826208c/">图代码</a></li>
+</ul>
+<h2 id="section-39">22.4 题型与复盘</h2>
+<h3 id="section-40">22.4.1 常见题型</h3>
+<h5 id="section-41"><strong>题型一：写出 BFS / DFS 序列</strong></h5>
+<ul>
+<li>先写清起始顶点和邻接点访问顺序。</li>
+<li>BFS 用队列模拟：入队时访问，出队时展开邻接点。</li>
+<li>DFS 按递归路径模拟：先深入，走不通后回溯。</li>
+<li>遇到尚未访问的顶点，完成当前可达部分后按外层约定从下一个未访问顶点重新开始；无向图中每个这样的可达部分恰是一个连通分量，有向图中不能这样等同。</li>
+</ul>
+<h5 id="section-42"><strong>题型二：画生成树</strong></h5>
+<ul>
+<li>首次发现一个顶点时使用的边为树边。</li>
+<li>BFS 树按层次展开；DFS 树通常呈现较长的深入分支。</li>
+<li>含 $n$ 个顶点、$c$ 个连通分量的无向图，生成森林有 $n-c$ 条树边；连通时 $c=1$，即 $n-1$ 条。</li>
+<li>有向图先判断从根的可达范围，不要直接套用无向图“生成树”结论。</li>
+</ul>
+<h5 id="section-43"><strong>题型三：复杂度判断</strong></h5>
+<ul>
+<li>邻接矩阵：不管实际边数多少，每次都扫描一行，所以是 $O(\lvert V\rvert^2)$。</li>
+<li>邻接表：顶点和边各处理一次，所以是 $O(\lvert V\rvert+\lvert E\rvert)$。</li>
+<li>BFS 队列与 DFS 递归栈的辅助空间均为 $O(\lvert V\rvert)$。</li>
+</ul>
+<h5 id="section-44"><strong>题型四：连通分量</strong></h5>
+<ul>
+<li>无向图中，外层循环每新启动一次 BFS/DFS，就发现一个新的连通分量。</li>
+<li>不能把有向图中的调用次数直接当作强连通分量数。</li>
+</ul>
+<h3 id="section-45">22.4.2 本节复盘</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>必须掌握的结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS</td>
+<td>队列；按层访问；入队时标记</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>递归或栈；一路深入；无法深入时回溯</td>
+</tr>
+<tr>
+<td><code>visited[]</code></td>
+<td>防止图中有环时重复访问或无限递归</td>
+</tr>
+<tr>
+<td>非连通图</td>
+<td>外层循环逐个启动 BFS/DFS</td>
+</tr>
+<tr>
+<td>无向图连通分量</td>
+<td>BFS/DFS 的外层启动次数等于连通分量数</td>
+</tr>
+<tr>
+<td>生成森林边数</td>
+<td>无向图有 $n$ 个顶点、$c$ 个连通分量时，树边数为 $n-c$</td>
+</tr>
+<tr>
+<td>邻接矩阵</td>
+<td>BFS、DFS 时间均为 $O(\lvert V\rvert^2)$</td>
+</tr>
+<tr>
+<td>邻接表</td>
+<td>BFS、DFS 时间均为 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+<tr>
+<td>遍历序列</td>
+<td>邻接表次序不唯一时，序列和生成树不唯一</td>
+</tr>
+<tr>
+<td>无权最短路</td>
+<td>BFS 层数给出起点到可达顶点的最少边数；DFS 不保证最短</td>
+</tr>
+</tbody>
+</table></div>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-5cc130a6e9c2/index.html"><span>← 上一项</span><strong>Lecture 9：知识 - 目录</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-620376646216/index.html"><span>下一项 →</span><strong>Lecture 1：软件工程概述</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

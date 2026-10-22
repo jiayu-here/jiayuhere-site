@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 27：B 树 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 27：B 树。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 27：B 树 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 27：B 树。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-7b4c62ebd1f2/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 27：B 树 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 27：B 树。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 27：B 树",
+      "item": "https://www.jiayuhere.com/notes/cs408-7b4c62ebd1f2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-7b4c62ebd1f2/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-7b4c62ebd1f2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-7b4c62ebd1f2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-7b4c62ebd1f2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-7b4c62ebd1f2/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 27：B 树</h1><p class="article-lead">408 学习笔记：Lecture 27：B 树。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 10 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/b2c86dc221e0.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/b2c86dc221e0.pdf" download="Lecture 27：B 树.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">27.1 m 阶 B 树</a><a href="#section-8">27.2 B 树的插入与删除</a><a href="#section-14">27.3 B+ 树</a><a href="#section-21">27.4 易错点总检</a><a href="#section-22">相关知识</a><a href="#section-23">27.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>B 树不是二叉树，而是面向外存的多路平衡查找树。一个结点装多个关键字和多个子指针，以较少的磁盘块访问跨越大量关键字；B+ 树则把全部记录放在叶结点，并把叶结点串起来以支持高效范围查询。</p>
+</blockquote>
+<h2 id="section-1">27.1 m 阶 B 树</h2>
+<h3 id="section-2">27.1.1 结构定义</h3>
+<h5 id="section-3"><strong>定义</strong>：#m阶B树</h5>
+<blockquote>
+<p>描述：一棵 $m$ 阶 B 树是多路平衡查找树。一个结点至多有 $m$ 棵子树，关键字按升序排列；所有表示查找失败的外部空指针位于同一层，因此所有实际终端结点也位于同一层。</p>
+</blockquote>
+<ul>
+<li>教材补充：本节采用标准 B 树约定 $m\ge 3$；若取 $m=1$ 或 $m=2$，最少分支约束以及以 $\lceil m/2\rceil$ 为底的高度公式会退化，不属于下文公式的适用范围。</li>
+</ul>
+<p>设某非叶结点有 $k$ 个关键字：</p>
+<p>$$
+(P_0,K_1,P_1,K_2,\ldots,K_k,P_k)
+$$</p>
+<p>则它有 $k+1$ 个子树，且满足：</p>
+<p>$$
+\begin{aligned}
+&amp;\forall x\in T_0,\quad x&lt;K_1,\
+&amp;\forall x\in T_i,\quad K_i&lt;x&lt;K_{i+1}\quad(1\le i&lt;k),\
+&amp;\forall x\in T_k,\quad K_k&lt;x.
+\end{aligned}
+$$</p>
+<p>其中 $P_i$ 是指向子树 $T_i$ 的指针。不能直接写成“$P_0&lt;K_1&lt;P_1$”，因为指针本身不是关键字；真正参与大小关系的是它所指子树中的全部关键字。</p>
+<h5 id="section-4"><strong>阶数约束</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结点类别</th>
+<th>实际子树数</th>
+<th>关键字数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>根结点（非终端）</td>
+<td>$2\sim m$</td>
+<td>$1\sim m-1$</td>
+</tr>
+<tr>
+<td>根结点（也是终端结点）</td>
+<td>$0$</td>
+<td>$1\sim m-1$；空 B 树则无根</td>
+</tr>
+<tr>
+<td>非根、非终端结点</td>
+<td>$\lceil m/2\rceil\sim m$</td>
+<td>$\lceil m/2\rceil-1\sim m-1$</td>
+</tr>
+<tr>
+<td>非根终端结点</td>
+<td>$0$（其 $k+1$ 个孩子指针均为空）</td>
+<td>$\lceil m/2\rceil-1\sim m-1$</td>
+</tr>
+<tr>
+<td>外部叶结点/失败结点</td>
+<td>实际上不存在，仅表示空指针</td>
+<td>不存关键字</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>“$m$ 阶”表示<strong>最多 $m$ 个孩子</strong>，因此最多只有 $m-1$ 个关键字；这是 B 树最常见的计数错误。</li>
+<li>除根外的最少孩子数为 $\lceil m/2\rceil$，不是 $m/2$ 的简单小数截断。</li>
+<li>408 教材常把不带信息的空指针位置称为“叶结点”，把最底层实际关键字结点称为“终端结点”；有些资料则直接把终端结点称作叶结点。答题时先看题目术语，但两种口径描述的是同一结构。</li>
+<li>外部叶结点同层保证从根下降到失败位置的路径等长，B 树不会退化成单支链。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/845fcc043573.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L27-B树终端与叶结点.png"><img class="note-image" src="/assets/408/images/845fcc043573.png" alt="DS-L27-B树终端与叶结点.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>蓝色结点是保存关键字的实际结点，紫色方块是概念上的失败结点/空指针位置。不能把紫色方块误认为存储记录的 B 树结点。</p>
+</blockquote>
+<h3 id="section-5">27.1.2 高度范围</h3>
+<p>令 $n$ 为 B 树中的关键字总数，$h$ 为实际关键字结点的层数（根为第 $1$ 层，不计最下方外部空指针），并令：</p>
+<p>$$
+t=\left\lceil\frac m2\right\rceil
+$$</p>
+<ul>
+<li>当每个结点都尽量装满时，高度最小。前 $h$ 层最多包含：</li>
+</ul>
+<p>$$
+(m-1)(1+m+\cdots+m^{h-1})=m^h-1
+$$</p>
+<p>故 $n\le m^h-1$，得到：</p>
+<p>$$
+h\ge\left\lceil\log_m(n+1)\right\rceil
+$$</p>
+<ul>
+<li>当结点都尽量少装时，高度最大。若 $h\ge2$，根至少有 $1$ 个关键字和 $2$ 个孩子，其余非根结点至少有 $t-1$ 个关键字，因此：</li>
+</ul>
+<p>$$
+n\ge 1+2(t-1)(1+t+\cdots+t^{h-2})=2t^{h-1}-1
+$$</p>
+<p>从而：</p>
+<p>$$
+h\le\left\lfloor\log_t\frac{n+1}{2}\right\rfloor+1
+$$</p>
+<p>综合可写为：</p>
+<p>$$
+\left\lceil\log_m(n+1)\right\rceil
+\le h\le
+\left\lfloor\log_{\lceil m/2\rceil}\frac{n+1}{2}\right\rfloor+1
+$$</p>
+<blockquote>
+<p><strong>WARNING</strong> · 高度口径
+若题目把外部失败结点也计入层数，上述上下界整体再加 $1$；计算前必须先确认题目是否把空指针层算作树高。</p>
+</blockquote>
+<h3 id="section-6">27.1.3 查找</h3>
+<h5 id="section-7"><strong>过程</strong>：</h5>
+<ol>
+<li>在当前结点内从小到大（或用结点内二分）比较关键字。</li>
+<li>若等于某个 $K_i$，查找成功。</li>
+<li>若 $K_i&lt;key&lt;K_{i+1}$，转入中间指针 $P_i$；小于最小键走 $P_0$，大于最大键走 $P_k$。</li>
+<li>在实际终端结点仍未找到目标时，沿相应空指针到达外部失败位置，查找失败；不要把存关键字的终端结点与不存信息的外部叶结点混为一谈。</li>
+</ol>
+<p><a class="note-image-link" href="/assets/408/images/042cc318b8c5.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L27-B树查找.png"><img class="note-image" src="/assets/408/images/042cc318b8c5.png" alt="DS-L27-B树查找.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>查找 $9$ 时，先在根结点用 $22$ 判断走左子树，再在 $5,11$ 间选择中间子树，最后在终端结点 $6,8,9$ 中命中。</p>
+</blockquote>
+<ul>
+<li>外存模型中，一般把读取一个结点当作一次磁盘 I/O。B 树分支多、高度低，故 I/O 次数远少于同规模二叉树。</li>
+<li>结点内比较次数并非 I/O 次数；题目问“比较关键字次数”与问“磁盘访问次数”时，统计口径不同。</li>
+<li><strong>B 树成功查找可能在内部结点提前结束</strong>，所以不同成功查找的结点访问层数不一定相同；只有失败查找都会下降到同一外部叶层。B+ 树才要求成功查找最终到达叶结点。</li>
+<li>若结点内采用二分查找，单结点比较为 $O(\log m)$、结点访问为 $O(h)$，总 CPU 比较量为 $O(h\log m)=O(\log n)$；外存分析通常更关注至多 $h$ 次结点读取。</li>
+</ul>
+<hr>
+<h2 id="section-8">27.2 B 树的插入与删除</h2>
+<h3 id="section-9">27.2.1 插入与分裂</h3>
+<h5 id="section-10"><strong>插入原则</strong>：</h5>
+<ol>
+<li>像查找一样向下定位，<strong>新关键字总是先插入终端（叶）结点</strong>。</li>
+<li>若插入后该结点至多有 $m-1$ 个关键字，结束。</li>
+<li>若出现 $m$ 个关键字，结点上溢：取中间关键字上移到父结点，两侧关键字分别组成两个子结点。</li>
+<li>父结点也可能上溢，按相同规则继续向上分裂；根分裂时产生新根，树高加 $1$。</li>
+</ol>
+<p>对一个含 $m$ 个关键字的溢出结点，按 1 开始计数，上移第 $\lceil m/2\rceil$ 个关键字。分裂后左右结点均满足关键字数下限。</p>
+<ul>
+<li>例如 5 阶 B 树原结点最多有 4 个关键字；插入第 5 个后，上移第 3 个，左右各保留 2 个。</li>
+<li>上移的关键字不再留在两个子结点中；把它复制到父结点但不移出子结点是 B+ 树索引概念，不能直接套在 B 树插入上。</li>
+<li>若分裂发生在非终端结点，还须按关键字区间把原来的孩子指针分配给分裂后的左右结点；不能只拆分关键字数组。</li>
+</ul>
+<h3 id="section-11">27.2.2 删除、借位与合并</h3>
+<h5 id="section-12"><strong>删除原则</strong>：</h5>
+<ul>
+<li>若待删关键字在非终端结点，用其<strong>直接前驱</strong>或<strong>直接后继</strong>替换，然后转化为删除终端结点关键字。</li>
+<li>删除后若结点关键字数仍不少于 $\lceil m/2\rceil-1$，结束。</li>
+<li>若低于下限，优先向相邻兄弟结点借一个关键字：父结点中的分隔关键字下移，本兄弟的一个关键字上移到父结点，保持范围关系。</li>
+<li>若相邻兄弟也处于下限，便与兄弟及父结点中间的分隔关键字合并；父结点可能因此继续下溢，向上递归处理。</li>
+<li>根结点删除后若没有关键字且仍有唯一孩子，可让该孩子成为新根，树高减 $1$。</li>
+</ul>
+<h5 id="section-13"><strong>易错点</strong>：</h5>
+<ul>
+<li>“借”不是只把兄弟一个关键字横向搬过来，必须经过父结点的分隔关键字，否则子树范围会错位。</li>
+<li>合并时要把父结点的分隔关键字一起放入合并结点。</li>
+<li>借位或合并若发生在非终端结点，还必须同步转移相应的孩子指针，保持每个子树的关键字范围以及“$k$ 个关键字对应 $k+1$ 个孩子”的关系。</li>
+<li>非终端结点删除不会直接丢掉整个结点，先用前驱/后继替换才可保持有序关系。</li>
+</ul>
+<hr>
+<h2 id="section-14">27.3 B+ 树</h2>
+<h3 id="section-15">27.3.1 结构特点</h3>
+<h5 id="section-16"><strong>定义</strong>：#B+树</h5>
+<blockquote>
+<p>描述：B+ 树同样是多路平衡查找树，但全部关键字及对应记录地址都存于叶结点；非叶结点只保存用于导航的索引关键字和孩子指针，所有叶结点通过指针按关键字顺序连接。</p>
+</blockquote>
+<ul>
+<li>每个分支结点最多有 $m$ 个孩子；非叶根结点至少有两个孩子，其他分支结点至少有 $\lceil m/2\rceil$ 个孩子。</li>
+<li>非叶结点关键字仅起索引作用，不存放该关键字对应记录地址；因此一个磁盘块能容纳更多索引项，树通常更矮。</li>
+<li>叶结点保存全部关键字和记录指针，且相邻叶结点相互链接。</li>
+<li>课件采用“分支结点关键字是相应子树最大关键字”的表述。部分教材使用子树最小关键字作分隔符；做题应按题干的分隔符约定判断走向，结构思想相同。</li>
+</ul>
+<p>按本讲“每个孩子对应一个最大关键字索引项”的约定，分支结点中<strong>关键字数等于孩子数</strong>：非叶根通常有 $2\sim m$ 个孩子/索引键，其他分支结点有 $\lceil m/2\rceil\sim m$ 个孩子/索引键。若整棵树只有一个叶根，根的最少记录数按题目给定的根特例处理；不同教材对 B+ 树阶数和叶结点最少记录数的定义可能不同，不能脱离题干硬套区间。</p>
+<h3 id="section-17">27.3.2 B 树与 B+ 树对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>B 树</th>
+<th>B+ 树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>记录位置</td>
+<td>各结点均可存关键字及记录地址</td>
+<td>记录全部在叶结点</td>
+</tr>
+<tr>
+<td>内部关键字</td>
+<td>每个关键字通常只出现一次</td>
+<td>内部索引键会在叶结点重复出现</td>
+</tr>
+<tr>
+<td>关键字与孩子数</td>
+<td>$k$ 个关键字对应 $k+1$ 个孩子</td>
+<td>常按教材约定，分支结点索引键数与孩子数对应</td>
+</tr>
+<tr>
+<td>成功查找终点</td>
+<td>可能在非叶结点提前结束</td>
+<td>必定到达叶结点，路径长度更稳定</td>
+</tr>
+<tr>
+<td>顺序/范围查找</td>
+<td>需中序遍历或反复查找</td>
+<td>沿叶结点链表顺序扫描</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-18"><strong>为什么 B+ 树适合范围查询</strong>：</h5>
+<ol>
+<li>先从根查到范围左端点所在叶结点。</li>
+<li>在该叶结点内定位第一个满足下界的关键字。</li>
+<li>沿叶结点链表向右扫描，直到超过上界。</li>
+</ol>
+<p>这样不必反复回到上层索引结点，顺序 I/O 友好。</p>
+<p><a class="note-image-link" href="/assets/408/images/2c158cf6f029.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L27-B加树顺序查找.png"><img class="note-image" src="/assets/408/images/2c158cf6f029.png" alt="DS-L27-B加树顺序查找.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中先沿多路索引定位到包含 $9$ 的叶结点，再利用叶链顺序访问；叶结点下方的“记录”才是对应的数据记录地址，非叶结点只负责导航。</p>
+</blockquote>
+<h3 id="section-19">题型：#B树阶数与结点范围</h3>
+<h4 id="section-20">第一部分：解题方法</h4>
+<ol>
+<li>先把“$m$ 阶”翻译成“最多 $m$ 个孩子、最多 $m-1$ 个关键字”。</li>
+<li>对非根结点写出最少孩子 $\lceil m/2\rceil$，再减一得到最少关键字。</li>
+<li>插入题先定位叶结点，再检查上溢、分裂和关键字上移；删除题先转换到叶结点，再检查下溢、借位和合并。</li>
+<li>B/B+ 对比题优先抓住“记录在哪”和“叶结点是否连链”两个本质区别。</li>
+</ol>
+<h2 id="section-21">27.4 易错点总检</h2>
+<ul>
+<li>“$m$ 阶”是最多 $m$ 个孩子，不是每个结点固定有 $m$ 个孩子。</li>
+<li>B 树结点的 $k$ 个关键字对应 $k+1$ 个孩子；按本讲约定，B+ 树分支结点的 $k$ 个索引关键字对应 $k$ 个孩子。</li>
+<li>B 树内部结点可命中记录，成功查找深度不固定；B+ 树内部命中索引键仍要继续下降到叶结点。</li>
+<li>B 树插入时中间关键字<strong>上移并离开原结点</strong>；B+ 树内部索引键可与叶结点关键字重复。</li>
+<li>B 树删除借位必须经过父分隔键，合并必须带上父分隔键；只在兄弟间横向搬键会破坏值域。</li>
+<li>外部失败叶结点与实际终端结点的名称容易混淆，计算高度时尤其要先统一层数口径。</li>
+</ul>
+<h2 id="section-22">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-1fb21507ad5e/">上一篇：树形查找</a> · <a href="/notes/cs408-53073a86de3c/">下一篇：散列查找</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-18a77c541c35/">查找代码</a></li>
+</ul>
+<h2 id="section-23">27.5 本节复盘</h2>
+<ul>
+<li>B 树的多路、同层叶结点特性用较低树高换取少量 I/O。</li>
+<li>$m$ 阶最多 $m$ 个孩子、$m-1$ 个关键字；非根结点下限由 $\lceil m/2\rceil$ 决定。</li>
+<li>插入靠分裂上移，删除靠前驱/后继转换、借位和合并维持下限。</li>
+<li>B+ 树将记录集中在叶结点并链接叶子，特别适合数据库索引和范围查询。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-7afacd3a9ea5/index.html"><span>← 上一项</span><strong>408 知识图谱总览</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-7b66c3b26ed2/index.html"><span>下一项 →</span><strong>Lecture 6：目标检测</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

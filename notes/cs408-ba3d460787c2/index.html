@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 21：知识 - 指令流水线 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 21：知识 - 指令流水线。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 21：知识 - 指令流水线 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 21：知识 - 指令流水线。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-ba3d460787c2/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 21：知识 - 指令流水线 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 21：知识 - 指令流水线。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 21：知识 - 指令流水线",
+      "item": "https://www.jiayuhere.com/notes/cs408-ba3d460787c2/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-ba3d460787c2/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-ba3d460787c2/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-ba3d460787c2/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-ba3d460787c2/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-ba3d460787c2/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 21：知识 - 指令流水线</h1><p class="article-lead">408 学习笔记：Lecture 21：知识 - 指令流水线。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/8794e044af9e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/8794e044af9e.pdf" download="Lecture 21：知识 - 指令流水线.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">5.1 基本概念与性能</a><a href="#section-3">5.2 五段式 RISC 流水线</a><a href="#section-5">5.3 三类冒险</a><a href="#section-9">5.4 流水线分类与多发技术</a><a href="#section-11">相关知识</a><a href="#section-12">5.5 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：流水线把一条指令分段，让多条指令在不同段重叠执行，提升吞吐率而非单条延迟。核心计算是装入/排空时间，核心难点是结构、数据、控制三类冒险。</p>
+</blockquote>
+<h2 id="section-1">5.1 基本概念与性能</h2>
+<p>一条指令可分为取指、译码/取数、执行等阶段；在流水线中，后一条在前一条进入下一段后即可进入前一段。段间的流水线寄存器（流水线站/锁存器）保存本段结果并隔离时序。</p>
+<p><strong>原资料的三阶段重叠例。</strong> 设每条指令依次经过取指、分析、执行三个阶段，每阶段均耗时 $t$，共执行 $n\ge1$ 条指令；暂不计段间寄存器开销、资源冲突及数据/控制冒险。三种安排的区别是相邻指令的启动间隔：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>安排</th>
+<th>相邻指令启动间隔</th>
+<th>完成 $n$ 条指令的时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序执行，阶段不重叠</td>
+<td>$3t$</td>
+<td>$3nt$</td>
+</tr>
+<tr>
+<td>一次重叠：上一条执行时，下一条取指</td>
+<td>$2t$</td>
+<td>$3t+(n-1)2t=(2n+1)t$</td>
+</tr>
+<tr>
+<td>二次重叠：三段可同时处理不同指令</td>
+<td>$t$</td>
+<td>$3t+(n-1)t=(n+2)t$</td>
+</tr>
+</tbody>
+</table></div>
+<p>$n=1$ 时三者都需 $3t$；当 $n$ 较大时，二次重叠才趋近于每 $t$ 完成一条。这里的“重叠”只提高多条指令的总体吞吐率，不把单条指令的三段执行时间缩短。</p>
+<p>$$T_{clk}=\max(\text{各流水段组合逻辑延迟})+\text{流水段寄存器延迟}$$</p>
+<ul>
+<li>例如五段逻辑延迟为 80、50、50、70、50，段寄存器延迟 20，则时钟周期至少为 $80+20=100$。</li>
+<li>有利于流水：指令长度和格式规整、指令/数据对齐、源寄存器字段位置固定、采用 Load/Store 风格（仅 Load/Store 访问内存）。</li>
+</ul>
+<h3 id="section-2">5.1.1 吞吐率、加速比、效率</h3>
+<p>设 $k$ 段理想均衡流水线，段周期为 $\Delta t$，完成 $n$ 个任务：</p>
+<p>$$
+\begin{aligned}
+T_n&amp;=(k+n-1)\Delta t\
+TP&amp;=\frac{n}{(k+n-1)\Delta t},\quad TP_{max}=\frac{1}{\Delta t}\
+S&amp;=\frac{kn\Delta t}{(k+n-1)\Delta t}=\frac{kn}{k+n-1}\
+E&amp;=\frac{n}{k+n-1}
+\end{aligned}
+$$</p>
+<ul>
+<li>$n\to\infty$ 时理想吞吐趋于每周期一项、加速比趋于 $k$、效率趋于 1；短任务会受装入和排空时间明显影响。</li>
+<li>无阻塞基本流水线稳态 $CPI=1$。若主频 $f$、执行 $n$ 条指令共 $k+n-1$ 周期，实际吞吐为 $f\times n/(k+n-1)$。</li>
+</ul>
+<p><strong>例：4 级流水线的实际吞吐率。</strong> 某 4 级流水线主频为 $1.03\ \text{GHz}$，连续执行 100 条指令且无任何阻塞。装入第一条指令需 4 个周期，随后每周期完成 1 条，因此</p>
+<p>$$
+N_{cycle}=4+(100-1)=103
+$$</p>
+<p>$$
+TP=\frac{100}{103/(1.03\times10^9)}
+=1.03\times10^9\times\frac{100}{103}
+=1.0\times10^9\ \text{条指令/s}
+$$</p>
+<p>这里不能直接把主频 $1.03\ \text{GHz}$ 当作这 100 条指令的平均吞吐率，因为有限指令序列仍有装入和排空开销。</p>
+<h2 id="section-3">5.2 五段式 RISC 流水线</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>名称</th>
+<th>主要工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IF</td>
+<td>Instruction Fetch</td>
+<td>由 PC 从指令 Cache 取指到 IF/ID 锁存器</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>Decode / Register Fetch</td>
+<td>译码、读通用寄存器，立即数送 Imm，结果进 A/B 锁存器</td>
+</tr>
+<tr>
+<td>EX</td>
+<td>Execute / Address</td>
+<td>ALU 运算、比较或计算有效地址</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Memory</td>
+<td>访问数据 Cache，或处理部分 PC 更新</td>
+</tr>
+<tr>
+<td>WB</td>
+<td>Write Back</td>
+<td>将结果写回通用寄存器</td>
+</tr>
+</tbody>
+</table></div>
+<p>三条互不相关指令在理想五段流水线中的装入、稳态与排空可画成：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指令/周期</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I1</td>
+<td>IF</td>
+<td>ID</td>
+<td>EX</td>
+<td>M</td>
+<td>WB</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>I2</td>
+<td></td>
+<td>IF</td>
+<td>ID</td>
+<td>EX</td>
+<td>M</td>
+<td>WB</td>
+<td></td>
+</tr>
+<tr>
+<td>I3</td>
+<td></td>
+<td></td>
+<td>IF</td>
+<td>ID</td>
+<td>EX</td>
+<td>M</td>
+<td>WB</td>
+</tr>
+</tbody>
+</table></div>
+<p>第一条要经过 5 个周期才完成，此后理想稳态每周期完成一条；因此提高的是长期吞吐率，单条指令延迟并未缩短。</p>
+<h3 id="section-4">5.2.1 各类指令流动</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>ID</th>
+<th>EX</th>
+<th>M</th>
+<th>WB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运算 <code>ADD Rs,Rd</code></td>
+<td>读寄存器</td>
+<td>ALU 算术</td>
+<td>空段</td>
+<td>结果写 Rd</td>
+</tr>
+<tr>
+<td>Load <code>LOAD Rd,off(Rs)</code></td>
+<td>Rs 到 A、偏移到 Imm</td>
+<td>$EA=Rs+off$</td>
+<td>数据 Cache 读</td>
+<td>数据写 Rd</td>
+</tr>
+<tr>
+<td>Store <code>STORE Rs,off(Rd)</code></td>
+<td>基址到 A、数据到 B、偏移 Imm</td>
+<td>算 EA</td>
+<td>B 写数据 Cache</td>
+<td>空段</td>
+</tr>
+<tr>
+<td>条件转移 <code>beq/bne</code></td>
+<td>两操作数到 A/B，偏移 Imm</td>
+<td>比较</td>
+<td>写目标 PC</td>
+<td>空段</td>
+</tr>
+<tr>
+<td>无条件 <code>jmp</code></td>
+<td>偏移 Imm</td>
+<td>直接写目标 PC</td>
+<td>空段</td>
+<td>空段</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>典型 Load/Store 型 RISC 中，只有 Load/Store 显式访问<strong>数据存储器</strong>；每条指令仍须在 IF 段访问指令 Cache/存储器。运算指令的 M 段可能空置但仍占用一个流水时钟，以保持五段结构规整。</li>
+<li>源 PDF 的定长指令模型把分支立即数按“指令条数”编码，故目标为 $PC+\text{指令字长}+\text{偏移}\times\text{指令字长}$。若某 ISA 直接给字节位移，则不再额外乘指令字长，应以题设编码为准。材料模型中条件分支 PC 在 M 段更新，而无条件跳转可在 EX 段更新，故控制代价不同。</li>
+</ul>
+<h2 id="section-5">5.3 三类冒险</h2>
+<h3 id="section-6">5.3.1 结构冒险</h3>
+<p>多条指令同一时刻争用同一硬件资源，例如 IF 取指与 M 段访存共用单端口存储器。</p>
+<ul>
+<li>处理：暂停相关指令插入气泡，或复制资源（分离指令/数据存储器或 I-Cache/D-Cache）。本质是解决互斥资源不足。</li>
+</ul>
+<h3 id="section-7">5.3.2 数据冒险</h3>
+<p>后一指令依赖前一指令尚未产生/写回的结果。处理方法：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>相关类型</th>
+<th>含义</th>
+<th>在简单顺序五段流水中的情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAW（写后读）</td>
+<td>后指令要读前指令尚未写出的值</td>
+<td>真相关，是本讲最主要的数据冒险</td>
+</tr>
+<tr>
+<td>WAR（读后写）</td>
+<td>后指令先写，破坏前指令尚未完成的读</td>
+<td>顺序发射、顺序读写时通常不会出现；乱序执行需处理</td>
+</tr>
+<tr>
+<td>WAW（写后写）</td>
+<td>两条指令写同一位置但完成顺序颠倒</td>
+<td>顺序完成时通常不会出现；乱序/多发射需处理</td>
+</tr>
+</tbody>
+</table></div>
+<p>不要把“寄存器名相同”一律判成必须停顿：先判断读写方向、结果何时可用、是否已有转发，以及处理器是否允许乱序。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等待/阻塞</td>
+<td>硬件 stall 或软件插 <code>nop</code>，直到数据可用</td>
+</tr>
+<tr>
+<td>数据旁路/转发</td>
+<td>将 ALU 输出直接送到后续 ALU 输入，不必等 WB</td>
+</tr>
+<tr>
+<td>编译调度</td>
+<td>把无依赖指令移入间隙</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>例：无转发且寄存器不能同周期读写时的前端阻塞。</strong> 按序五段流水线依次执行：</p>
+<pre><code class="language-text">I1: LOAD  R1, [a]
+I2: LOAD  R2, [b]
+I3: ADD   R1, R2
+I4: STORE R2, [x]
+</code></pre>
+<ul>
+<li><code>I3</code> 在 ID 段需要读取 <code>R1</code> 和 <code>R2</code>，分别依赖 <code>I1</code>、<code>I2</code> 的写回，属于两个 RAW 相关。由于无转发，且题设不允许寄存器在同一周期先写后读，<code>I3</code> 必须等到较晚的 <code>I2</code> 完成 WB <strong>之后的下一周期</strong>才能完成 ID。</li>
+<li>本题 <code>ADD R1,R2</code> 的目标寄存器是 <code>R2</code>，即 <code>R2←R1+R2</code>；<code>I4</code> 要把新的 <code>R2</code> 写入 <code>[x]</code>，所以 <strong><code>I3→I4</code> 也有 RAW 相关</strong>。<code>I4</code> 不能提前进入 ID 是为了等 <code>I3</code> 的结果，而它最初不能提前进入 IF，则是因为 <code>I3</code> 阻塞时占着 IF/ID 流水寄存器；这两个原因不能混为一谈。</li>
+<li>与原 PDF 第 22 页的时序表一致，在“按序发射、按序完成、无转发且同周期不可先写后读”的模型中：</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指令</th>
+<th style="text-align:right">IF</th>
+<th style="text-align:right">ID</th>
+<th style="text-align:right">EX</th>
+<th style="text-align:right">M</th>
+<th style="text-align:right">WB</th>
+<th>中间等待</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>I1</code></td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code>I2</code></td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">6</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code>I3</code></td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">10</td>
+<td>第 4–6 周期等待 <code>I1、I2</code> 写回</td>
+</tr>
+<tr>
+<td><code>I4</code></td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">14</td>
+<td>第 8–10 周期等待 <code>I3</code> 写回</td>
+</tr>
+</tbody>
+</table></div>
+<p>因此 <code>I3</code> 的 ID 到第 7 周期才开始，<code>I4</code> 的 IF 也只能从第 7 周期开始；<code>I4</code> 的 ID 还要等到 <code>I3</code> 在第 10 周期完成 WB 之后的第 11 周期。</p>
+<p><strong>另一个源例：判断真正的数据依赖。</strong> 原 PDF 第 10–11 页给出如下四条指令：</p>
+<pre><code class="language-text">I1: add   s2, s1, s0   # s2 ← s1+s0
+I2: load  s3, 0(t2)    # s3 ← M[t2]
+I3: add   s2, s2, s3   # s2 ← s2+s3
+I4: store s2, 0(t2)    # M[t2] ← s2
+</code></pre>
+<p><code>I1→I3</code> 对 <code>s2</code>、<code>I2→I3</code> 对 <code>s3</code>、<code>I3→I4</code> 对 <code>s2</code> 都有 RAW 相关；<strong><code>I2</code> 与 <code>I4</code> 没有寄存器 RAW 相关</strong>，因为前者写 <code>s3</code>，后者读 <code>s2</code> 和 <code>t2</code>。两者确实访问同一内存地址，且顺序是先读后写；若处理器允许访存乱序，仍须保持这一内存先后语义。但在本题的按序五段流水线中，它不构成需要停顿的寄存器数据冒险。</p>
+<ul>
+<li>旁路不能消除所有冲突：典型 <code>load-use</code> 中数据到 M 末才可用，紧随的使用者仍常需停 1 周期。</li>
+<li>插入足够 <code>nop</code> 一定可从正确性上消除数据冒险，但会降低吞吐；是否能交换指令必须保证程序语义不变。</li>
+</ul>
+<h3 id="section-8">5.3.3 控制冒险</h3>
+<p>分支、跳转、异常或中断改变 PC，使已经按顺序取入的指令可能无效。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>处理方向</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>停顿/冲刷流水线</td>
+<td>等分支确定后再取正确路径</td>
+</tr>
+<tr>
+<td>尽早形成结果</td>
+<td>提前比较/计算目标地址</td>
+</tr>
+<tr>
+<td>分支预测</td>
+<td>静态预测或动态预测；错误后冲刷错误路径</td>
+</tr>
+<tr>
+<td>预取</td>
+<td>预取可能的目标/顺序路径指令</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>异常检测可分布在不同段：无效指令在 ID、算术溢出在 EX、指令地址问题在 IF、数据地址问题在 EX 或 M。发现异常的那条指令是发生异常的指令，后续已进入流水线的指令须清除或阻塞。</li>
+<li>外部中断可在 IF 前检测以尽早进入服务程序，或在 WB 等边界检测以保证精确状态；检测位置影响需冲刷的指令数。</li>
+<li>对精确异常，异常指令之前的更老指令应完成，异常指令及其之后的年轻指令不得把不应提交的结果留在体系结构状态中；仅说“发现后全部清空”会漏掉这一先后边界。</li>
+</ul>
+<h2 id="section-9">5.4 流水线分类与多发技术</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类维度</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用级别</td>
+<td>部件功能级</td>
+<td>把复杂运算（如浮点加法的求阶差、对阶、尾数加、规格化）分段</td>
+</tr>
+<tr>
+<td></td>
+<td>处理机级</td>
+<td>把一条指令分为 IF/ID/EX/M/WB 等</td>
+</tr>
+<tr>
+<td></td>
+<td>处理机间级</td>
+<td>多处理机各做专门任务，经共享存储传递结果</td>
+</tr>
+<tr>
+<td>功能</td>
+<td>单功能 / 多功能</td>
+<td>只能一种固定功能 / 可通过不同连接实现多种功能</td>
+</tr>
+<tr>
+<td>同时连接</td>
+<td>静态 / 动态</td>
+<td>同时各段只按一种连接工作 / 可同时以不同连接完成不同运算</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>超标量</td>
+<td>一个时钟周期发射多条独立指令，需要多个功能部件，可配合动态调度</td>
+</tr>
+<tr>
+<td>超流水</td>
+<td>把一个时钟周期再细分，在不同时间点发射多条，功能部件一个周期可多次使用</td>
+</tr>
+<tr>
+<td>VLIW</td>
+<td>编译器把可并行操作编码进包含多个 OP 字段的超长指令字，执行时分开执行</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>超标量/超流水/VLIW 均需要足够独立性和编译/硬件调度，不能随意颠倒有依赖指令。</li>
+</ul>
+<h3 id="section-10">题型：#流水线计算与冒险</h3>
+<ol>
+<li>先确定段数 $k$、时钟周期 $\Delta t$、任务数 $n$ 和是否阻塞；无阻塞总周期为 $k+n-1$。</li>
+<li>若给各部件延迟，取最大段延迟并加流水寄存器延迟；不要把所有段延迟相加当作流水时钟。</li>
+<li>画时空表追踪每条指令的 IF/ID/EX/M/WB，资源同列冲突是结构冒险，读到未写回/未转发值是数据冒险，PC 未确定造成错误路径是控制冒险。</li>
+</ol>
+<h2 id="section-11">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-c60c78e602f8/">上一篇：控制器的功能和工作原理</a> · <a href="/notes/cs408-cd74b2a4d67e/">下一篇：多处理器</a></li>
+</ul>
+<h2 id="section-12">5.5 本节复盘</h2>
+<ul>
+<li>流水线通过阶段重叠提升吞吐，理想总时间 $(k+n-1)\Delta t$，长期 $CPI\to1$。</li>
+<li>五段为 IF、ID、EX、M、WB；运算类、Load、Store、分支在 M/WB 的工作不同。</li>
+<li>结构冒险靠停顿或资源复制，数据冒险靠 stall/nop、旁路、编译调度，控制冒险靠停顿、提前判断、预测/预取。</li>
+<li>时钟周期由最慢段和段寄存器延迟决定；浮点/处理机级/处理机间均可形成流水，超标量、超流水、VLIW 是提高并行发射的不同路径。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-b9c8f13ec3e6/index.html"><span>← 上一项</span><strong>3 题型 - DNS与HTTP综合</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-bb3c8bf8e273/index.html"><span>下一项 →</span><strong>Lecture 5：知识 - 运算方法和运算电路</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

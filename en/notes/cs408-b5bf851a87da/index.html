@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>3 题型 - CSMA CD相关信息计算 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 3 题型 - CSMA CD相关信息计算. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="3 题型 - CSMA CD相关信息计算 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 3 题型 - CSMA CD相关信息计算. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-b5bf851a87da/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3 题型 - CSMA CD相关信息计算 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 3 题型 - CSMA CD相关信息计算. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "3 题型 - CSMA CD相关信息计算",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-b5bf851a87da/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-b5bf851a87da/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-b5bf851a87da/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-b5bf851a87da/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-b5bf851a87da/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-b5bf851a87da/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">3 题型 - CSMA CD相关信息计算</h1><p class="article-lead">Chinese-language Computer Science 408 note: 3 题型 - CSMA CD相关信息计算. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>5 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/fbd687b34df3.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/fbd687b34df3.pdf" download="3 题型 - CSMA CD相关信息计算.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 冲突检测与最小帧长</a><a href="#section-2">3.2 经典以太网参数</a><a href="#section-3">3.3 历年真题</a><a href="#section-8">3.4 二进制指数退避补充</a><a href="#section-9">3.5 易错点</a><a href="#section-10">相关知识</a><a href="#section-11">3.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：CSMA/CD 要求发送站在最坏情况下仍能在发完一帧前检测到远端冲突，因此最小帧发送时延不得小于冲突域的往返传播时延。常考量包括最小帧长、最大站间距离、Hub 延迟、争用期和二进制指数退避。</p>
+</blockquote>
+<h2 id="section-1">3.1 冲突检测与最小帧长</h2>
+<p>设冲突域内最远两站的单向传播时延为 $\tau$，链路传输速率为 $R$。最坏情况下，发送站要等信号传播到远端并让冲突信号返回，才能检测到碰撞：</p>
+<p>$$t_{frame}\ge2\tau$$</p>
+<p>因此：</p>
+<p>$$L_{min}=2\tau R$$</p>
+<p>若介质中的信号传播速度为 $v$、最远站间距离为 $d$：</p>
+<p>$$\tau=\frac{d}{v},\qquad d_{max}=\frac{L_{min}v}{2R}$$</p>
+<p>若路径中存在 Hub/中继器等设备延迟，往返延迟也必须计入：</p>
+<p>$$t_{frame}\ge2(t_{prop}+t_{device})$$</p>
+<h2 id="section-2">3.2 经典以太网参数</h2>
+<ul>
+<li>传统以太网争用期/时隙为 512 bit time。</li>
+<li>10 Mb/s 以太网的时隙长度为：</li>
+</ul>
+<p>$$\frac{512,bit}{10,Mb/s}=51.2,\mu s$$</p>
+<ul>
+<li>以太网最小 MAC 帧为 64 B，即 512 bit；其中目的地址 6 B、源地址 6 B、类型/长度 2 B、FCS 4 B，数据和填充至少 46 B。</li>
+<li>Hub 扩展同一个冲突域；交换机的不同端口隔离冲突域。全双工交换式以太网不使用 CSMA/CD。</li>
+</ul>
+<h2 id="section-3">3.3 历年真题</h2>
+<h3 id="section-4">3.3.1 2009 年：最小帧长变化与距离变化</h3>
+<p><strong>条件</strong>：$R=1,Gb/s$，电缆中的传播速度 $v=200000,km/s=2\times10^8,m/s$。最小帧长减少 $800,bit$。</p>
+<p>由 $L_{min}=2dR/v$，最大距离的变化量为：</p>
+<p>$$
+\begin{aligned}
+\Delta d&amp;=\frac{\Delta L\cdot v}{2R}\
+&amp;=\frac{800\times2\times10^8}{2\times10^9}\
+&amp;=80,m
+\end{aligned}
+$$</p>
+<p>最小帧长变短会缩小允许的最大冲突域，所以距离应减少 80 m。</p>
+<p><strong>答案：D，减少 $80,m$。</strong></p>
+<h3 id="section-5">3.3.2 2016 年：Hub 再生延迟</h3>
+<p><strong>条件</strong>：Switch 和 Hub 均为 100Base-T 设备；Hub 再生比特流会产生 $1.535,\mu s$ 延迟，信号传播速度为 $200,m/\mu s$，求同一 Hub 冲突域内 H3 与 H4 的最远距离。忽略前导码。</p>
+<p>100Base-T 仍使用 64 B 的最小 MAC 帧：</p>
+<p>$$t_{frame}=\frac{64\times8}{100,Mb/s}=5.12,\mu s$$</p>
+<p>最坏冲突检测时间等于往返时间，因此单向总预算为：</p>
+<p>$$\frac{5.12}{2}=2.56,\mu s$$</p>
+<p>单向路径中 Hub 占用 $1.535,\mu s$，留给电缆传播的时间为：</p>
+<p>$$t_{prop}=2.56-1.535=1.025,\mu s$$</p>
+<p>最大距离：</p>
+<p>$$d=1.025,\mu s\times200,m/\mu s=205,m$$</p>
+<p><strong>答案：B，$205,m$。</strong></p>
+<h3 id="section-6">3.3.3 2019 年：最小帧长求单向传播时延</h3>
+<p><strong>条件</strong>：$R=100,Mb/s$，最小帧长 $128,B=1024,bit$。</p>
+<p>$$\tau_{max}=\frac{L_{min}}{2R}=\frac{1024}{2\times100\times10^6}=5.12,\mu s$$</p>
+<p><strong>答案：B，$5.12,\mu s$。</strong></p>
+<h3 id="section-7">3.3.4 2023 年：二进制指数退避</h3>
+<p>10Base-T 的争用时间片为 $51.2,\mu s$。二进制指数退避在第 $i$ 次碰撞后取：</p>
+<p>$$k=\min(i,10)$$</p>
+<p>再从离散整数集合中等概率选择：</p>
+<p>$$r\in{0,1,\ldots,2^k-1}$$</p>
+<p>退避时间为：</p>
+<p>$$T_{backoff}=r\times51.2,\mu s$$</p>
+<p>连续发生 4 次碰撞后，$k=4$，最大 $r=2^4-1=15$：</p>
+<p>$$T_{max}=15\times51.2,\mu s=768,\mu s$$</p>
+<p><strong>答案：C，$768,\mu s$。</strong></p>
+<h2 id="section-8">3.4 二进制指数退避补充</h2>
+<ul>
+<li>第 1 次碰撞后从 ${0,1}$ 中选，等待 0 或 1 个时隙。</li>
+<li>第 2 次碰撞后从 ${0,1,2,3}$ 中选。</li>
+<li>当碰撞次数达到 10 后，$k$ 固定为 10，不再扩大取值上限。</li>
+<li>以太网连续碰撞 16 次后放弃发送，并向上层报告失败。</li>
+<li>题目问“最长等待时间”取 $r=2^k-1$；问平均等待时间则使用该均匀离散集合的均值。</li>
+</ul>
+<h2 id="section-9">3.5 易错点</h2>
+<ul>
+<li>最小帧发送时延对应的是<strong>往返</strong>传播时延 $2\tau$，求单向时延时必须再除以 2。</li>
+<li>站间距离缩短会减小传播时延，因此允许使用更短的最小帧；两者同向变化。</li>
+<li>Hub 的处理/再生延迟属于冲突检测往返延迟，不能只计算电缆传播。</li>
+<li>交换机隔离冲突域，图中只有同一 Hub 下的站点共享 CSMA/CD 冲突域。</li>
+<li>连续 4 次碰撞后的退避集合是 $0-15$，不是 $0-16$；最大等待为 15 个时隙。</li>
+<li>64 B 是以太网 MAC 帧最小长度，不包含前导码和帧开始定界符。</li>
+</ul>
+<h2 id="section-10">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-df715a00a371/">上一篇：信道利用率计算</a> · <a href="/en/notes/cs408-34e57b06068c/">下一篇：透明传输与 PPP</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-cd234cc86adc/">数据链路层总纲</a></li>
+</ul>
+<h2 id="section-11">3.6 本节复盘</h2>
+<ul>
+<li>CSMA/CD 的基本约束是 $L_{min}/R\ge2\tau$，故 $L_{min}=2\tau R$。</li>
+<li>最大距离由 $d_{max}=L_{min}v/(2R)$ 求得；设备延迟也要占用往返时间预算。</li>
+<li>传统以太网争用期为 512 bit time，10 Mb/s 下等于 $51.2,\mu s$。</li>
+<li>2016 年题在 $2.56,\mu s$ 单向预算中扣除 Hub 的 $1.535,\mu s$，得到最远 $205,m$。</li>
+<li>二进制指数退避第 4 次碰撞后从 $0-15$ 个时隙中选，最长等待 $768,\mu s$。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-b4e470ce1426/index.html"><span>← Previous item</span><strong>5 题型 - CSMA CA协议</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-b78f75dd8c69/index.html"><span>Next item →</span><strong>计算机网络导航</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

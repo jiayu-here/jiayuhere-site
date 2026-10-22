@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>5 题型 - IP多播 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: 5 题型 - IP多播. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Networks">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="5 题型 - IP多播 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: 5 题型 - IP多播. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-ac7b677ecc0f/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5 题型 - IP多播 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: 5 题型 - IP多播. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "5 题型 - IP多播",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-ac7b677ecc0f/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-ac7b677ecc0f/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-ac7b677ecc0f/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-ac7b677ecc0f/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-ac7b677ecc0f/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-ac7b677ecc0f/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">5 题型 - IP多播</h1><p class="article-lead">Chinese-language Computer Science 408 note: 5 题型 - IP多播. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>8 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Networks</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/02ae2d2f78ce.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/02ae2d2f78ce.pdf" download="5 题型 - IP多播.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 IPv4 多播基础</a><a href="#section-2">5.2 IPv4 多播地址映射为以太网 MAC</a><a href="#section-6">5.3 IGMP</a><a href="#section-10">5.4 多播路由与转发树</a><a href="#section-11">5.5 模拟题：目的地址为 `224.0.0.1`（原题前提不足）</a><a href="#section-16">5.6 解题步骤</a><a href="#section-17">5.7 易错点</a><a href="#section-18">相关知识</a><a href="#section-19">5.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：IP 多播把一个分组交付给一个多播组。常考点是 IPv4 多播地址到以太网多播 MAC 的映射、<code>224.0.0.1</code> 的含义、IGMP 的作用范围与 TTL，以及多播转发树的建立和剪枝。</p>
+</blockquote>
+<h2 id="section-1">5.1 IPv4 多播基础</h2>
+<p>IPv4 多播地址使用 D 类地址空间：</p>
+<pre><code class="language-text">224.0.0.0/4
+</code></pre>
+<p>其 32 位结构为：</p>
+<pre><code class="language-text">高 4 位固定为 1110，低 28 位用于表示多播组
+</code></pre>
+<p>多播通信的接收者以“组”组织：</p>
+<ul>
+<li>发送者把目的 IPv4 地址设为多播组地址。</li>
+<li>加入该组的主机接收相应多播分组。</li>
+<li>多播路由器负责把分组沿多播转发树复制到存在组成员的网络。</li>
+</ul>
+<p><code>224.0.0.1</code> 是本地网络上的“所有主机”多播地址。在该网络中，参加 IP 多播的主机和路由器的网际层都应接收目的地址为 <code>224.0.0.1</code> 的分组。</p>
+<h2 id="section-2">5.2 IPv4 多播地址映射为以太网 MAC</h2>
+<h3 id="section-3">5.2.1 映射规则</h3>
+<p>IANA 为 IPv4 多播保留的以太网 MAC 前缀为：</p>
+<pre><code class="language-text">01-00-5E
+</code></pre>
+<p>完整映射方法：</p>
+<ol>
+<li>MAC 地址前 25 位固定为 <code>01-00-5E</code> 加一个 <code>0</code> 位。</li>
+<li>IPv4 多播地址只取最低 23 位。</li>
+<li>把这 23 位填入 MAC 地址最低 23 位。</li>
+</ol>
+<p>因此以太网多播目的 MAC 的形式为：</p>
+<pre><code class="language-text">01-00-5E-0xxxxxxx-xxxxxxxx-xxxxxxxx
+</code></pre>
+<p>其中后 23 位来自 IPv4 多播地址的低 23 位。</p>
+<h3 id="section-4">5.2.2 映射不是一一对应</h3>
+<p>IPv4 多播地址在固定前缀 <code>1110</code> 后还有 28 个可变位，但 MAC 只能携带其中低 23 位，最高的 5 个可变位没有参与映射。</p>
+<p>$$
+28-23=5
+$$</p>
+<p>所以同一个多播 MAC 最多对应：</p>
+<p>$$
+2^5=32
+$$</p>
+<p>个不同的 IPv4 多播地址。网卡按 MAC 过滤之后，IP 层还需要继续检查真正的目的多播 IP。</p>
+<h3 id="section-5">5.2.3 示例：<code>224.0.0.1</code></h3>
+<p><code>224.0.0.1</code> 的低 23 位为 1，映射结果为：</p>
+<pre><code class="language-text">IPv4 多播地址：224.0.0.1
+以太网多播 MAC：01-00-5E-00-00-01
+</code></pre>
+<h2 id="section-6">5.3 IGMP</h2>
+<h3 id="section-7">5.3.1 作用</h3>
+<p>IGMP 用于让连接在本地局域网上的多播路由器获知：</p>
+<ul>
+<li>本局域网是否有主机加入某个多播组。</li>
+<li>本局域网是否有主机退出某个多播组。</li>
+</ul>
+<p>IGMP 管理的是“主机与本地多播路由器之间的组成员关系”，不是路由器之间的全网多播选路协议。</p>
+<h3 id="section-8">5.3.2 能知道与不能知道的信息</h3>
+<p>通过 IGMP，多播路由器可以判断本地网络上是否存在某组成员，但不能仅靠 IGMP 得知：</p>
+<ul>
+<li>该多播组一共有多少成员。</li>
+<li>各成员具体是谁。</li>
+<li>这些成员分布在哪些远端网络。</li>
+</ul>
+<h3 id="section-9">5.3.3 <code>224.0.0.1</code> 与 TTL</h3>
+<p>IGMP 成员查询报文可以封装在目的地址为 <code>224.0.0.1</code> 的 IP 多播数据报中发送。为了把查询限制在本地网络，不让路由器转发到其他网络，IPv4 首部的 TTL 设为：</p>
+<pre><code class="language-text">1
+</code></pre>
+<p>IGMP 直接封装在 IP 中，其 IPv4 首部协议字段值为 2。</p>
+<h2 id="section-10">5.4 多播路由与转发树</h2>
+<p>IGMP 只解决本地组成员关系；要跨网络交付多播数据，还需要多播路由协议在多播路由器之间建立转发结构。</p>
+<p>基本过程：</p>
+<ol>
+<li>为多播组建立多播转发树。</li>
+<li>IP 多播数据报沿树进行复制和转发，到达所有存在该组成员的多播路由器。</li>
+<li>可利用反向路径广播建立初始广播转发树。</li>
+<li>再通过剪枝去掉下游没有该组成员的分支，避免无效泛洪。</li>
+</ol>
+<pre class="mermaid">flowchart LR
+    S[多播源] --&gt; R1[多播路由器]
+    R1 --&gt; R2[有组成员的下游网络]
+    R1 --&gt; R3[无组成员的下游网络]
+    R3 -.剪枝.-&gt; X[不再转发]
+    R2 --&gt; G[多播组成员]
+</pre>
+<h2 id="section-11">5.5 模拟题：目的地址为 <code>224.0.0.1</code>（原题前提不足）</h2>
+<p>原题只说明“以太网中的某个 IP 多播数据报 P 的目的地址为 <code>224.0.0.1</code>”，随后要求单选判断错误项。按协议的严格语义，这些条件不足以唯一确定一个答案；下面把“由题干必然推出的结论”和“原讲义默认的 IGMP 查询语境”分开。</p>
+<h3 id="section-12">A. 目的 MAC 为 <code>01-00-5E-00-00-01</code></h3>
+<p>根据“固定前 25 位 + IP 低 23 位”的规则，映射结果确实是：</p>
+<pre><code class="language-text">01-00-5E-00-00-01
+</code></pre>
+<p><strong>A 正确。</strong></p>
+<h3 id="section-13">B. 本以太网内参加多播的主机和路由器都会在网际层接收 P</h3>
+<p><code>224.0.0.1</code> 表示本地网络上的所有 IP 多播主机，因此相应主机和路由器的网际层都会接收该目的地址的分组。</p>
+<p><strong>B 正确。</strong></p>
+<h3 id="section-14">C. P 的 TTL 初值为 1</h3>
+<p>仅知道目的地址为 <code>224.0.0.1</code>，<strong>不能反推出任意发送方设置的 TTL 初值</strong>。<code>224.0.0.0/24</code> 属于链路本地网络控制块，多播路由器不得把这类目的地址的分组转发到其他网络；这个转发范围规则与发送方究竟把 TTL 字段填写为多少是两回事。只有再补充“P 是 IGMP 成员查询等本地链路控制报文”这一前提时，才可依据 IGMP 规则判定其 TTL 为 1。</p>
+<p><strong>C 按原题字面不能判为必然正确；若补充 P 是 IGMP 查询报文，则 C 正确。</strong></p>
+<h3 id="section-15">D. P 的数据载荷不可能是 IGMP 成员查询报文</h3>
+<p>IGMP 成员查询报文确实可以封装在目的地址为 <code>224.0.0.1</code>、TTL 为 1 的 IP 多播数据报中。因此“载荷不可能是 IGMP 查询”这一绝对说法不成立。</p>
+<p><strong>D 错误。原讲义把 D 作为单选答案。</strong></p>
+<blockquote>
+<p><strong>WARNING</strong> · 原题严谨性
+原讲义在解析 C 时静默假定 P 是“封装 IGMP 查询的本地控制报文”，但题干只说 P 是某个发往 <code>224.0.0.1</code> 的 IP 多播数据报。按字面，C 与 D 都不能成立，原单选题不严谨；若要保留答案 D，必须在题干中明确“P 是 IGMP 成员查询报文”，此时 C 才能随之确定为真。</p>
+</blockquote>
+<h2 id="section-16">5.6 解题步骤</h2>
+<ol>
+<li>看到 <code>224.0.0.0/4</code>，先确认它是 IPv4 多播地址。</li>
+<li>求 MAC 时写出固定前缀 <code>01-00-5E</code>，只复制 IP 地址低 23 位。</li>
+<li>注意有 5 位未映射，因此 IP 多播地址与 MAC 多播地址不是一一对应。</li>
+<li>判断 IGMP 题时区分本地成员管理与跨网络多播路由。</li>
+<li>看到 <code>224.0.0.1</code> 且题干<strong>明确</strong>是 IGMP 本地查询场景，联想到“所有多播主机”和 TTL=1；不要只凭目的地址推断任意数据报的发送 TTL。若原题没有这个前提，应指出题目条件不足。</li>
+<li>转发树题先反向路径广播，再剪除没有组成员的下游分支。</li>
+</ol>
+<h2 id="section-17">5.7 易错点</h2>
+<ul>
+<li>多播不是广播：只有加入相应多播组的主机才是目标接收者。</li>
+<li>IPv4 多播的 28 个可变位并没有全部映射到 MAC，只有低 23 位参与。</li>
+<li>一个多播 MAC 最多对应 32 个 IPv4 多播地址，不能由 MAC 唯一反推出组地址。</li>
+<li><code>224.0.0.1</code> 映射为 <code>01-00-5E-00-00-01</code>，不能把整个 IP 地址机械拼到 MAC 后面。</li>
+<li>IGMP 不能计算全网成员数，也不能建立路由器之间的多播转发树。</li>
+<li>IGMP 查询的 TTL=1 是本地链路控制报文的规则；它不是“经过一个路由器后仍继续传播”，也不能推广到所有发往 <code>224.0.0.1</code> 的任意数据报。</li>
+<li>反向路径广播用于形成转发结构，剪枝用于删除下游没有成员的分支。</li>
+</ul>
+<h2 id="section-18">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-b0e7f0582b88/">上一篇：虚拟局域网</a> · <a href="/en/notes/cs408-cbd01644a3c3/">下一篇：SDN 软件定义网络</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-fe8e22cc2489/">网络层总纲</a></li>
+</ul>
+<h2 id="section-19">5.8 本节复盘</h2>
+<ul>
+<li>IPv4 多播地址属于 <code>224.0.0.0/4</code>，高 4 位固定为 <code>1110</code>。</li>
+<li>以太网多播 MAC 固定前缀为 <code>01-00-5E</code>，只映射 IPv4 多播地址的低 23 位。</li>
+<li>因有 5 位未映射，一个多播 MAC 最多对应 $2^5=32$ 个 IPv4 多播地址。</li>
+<li><code>224.0.0.1</code> 映射为 <code>01-00-5E-00-00-01</code>，表示本地网络上的所有 IP 多播主机。</li>
+<li>IGMP 让本地多播路由器知道本网络是否有主机加入或退出某组，但不能得知全网成员数量和分布。</li>
+<li>IGMP 成员查询可以使用目的地址 <code>224.0.0.1</code>，TTL 设为 1；原模拟题把 D 作为预期答案，但题干未声明 P 是 IGMP 查询，因此严格说 C 也不能由题干推出。</li>
+<li>多播路由协议建立多播转发树，可先反向路径广播，再剪枝删除无成员分支。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-a8acba740351/index.html"><span>← Previous item</span><strong>Lecture 12：思维导图 - 应用层</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-ad7ab8f32e2a/index.html"><span>Next item →</span><strong>Lecture 7：贝叶斯决策论</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-0bb2d5ae08e6/"><span class="related-type">Note</span><strong>1 题型 - HTTP连接</strong><span>Chinese-language Computer Science 408 note: 1 题型 - HTTP连接. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = "jiayuhere-20260922a";
+const CACHE_NAME = "jiayuhere-20261022a";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -7,13 +7,13 @@ const APP_SHELL = [
   "/en/offline/",
   "/resume/",
   "/en/resume/",
-  "/assets/styles.css?v=20260922a",
-  "/assets/script.js?v=20260922a",
+  "/assets/styles.css?v=20261022a",
+  "/assets/script.js?v=20261022a",
   "/assets/images/github-avatar.jpg",
   "/assets/images/app-icon-192.png",
   "/assets/images/app-icon-512.png",
   "/assets/images/app-icon-maskable-512.png",
-  "/favicon.ico?v=20260922a",
+  "/favicon.ico?v=20261022a",
   "/site.webmanifest"
 ];
 
@@ -33,6 +33,7 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith("/assets/408/")) return;
 
   if (request.mode === "navigate") {
     event.respondWith(

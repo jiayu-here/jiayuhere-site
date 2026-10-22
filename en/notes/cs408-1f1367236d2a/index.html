@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 1：数据结构的基本概念 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 1：数据结构的基本概念. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 1：数据结构的基本概念 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 1：数据结构的基本概念. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-1f1367236d2a/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 1：数据结构的基本概念 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 1：数据结构的基本概念. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 1：数据结构的基本概念",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-1f1367236d2a/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-1f1367236d2a/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-1f1367236d2a/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1f1367236d2a/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1f1367236d2a/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-1f1367236d2a/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 1：数据结构的基本概念</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 1：数据结构的基本概念. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>14 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/07ec2d45c9fb.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/07ec2d45c9fb.pdf" download="Lecture 1：数据结构的基本概念.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">1.1 数据结构的存储结构</a><a href="#section-10">1.2 四种存储结构对比</a><a href="#section-11">1.3 面试题：循环一定比递归效率高吗</a><a href="#section-16">1.4 面试题：数组中找出和为固定值的所有数对</a><a href="#section-21">1.5 什么是数据结构</a><a href="#section-23">教材补充：数据结构的基本概念体系</a><a href="#section-30">1.6 C 语言、数据结构、算法和程序的关系</a><a href="#section-31">1.7 程序和软件的区别</a><a href="#section-36">相关知识</a><a href="#section-37">1.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">1.1 数据结构的存储结构</h2>
+<p><strong>核心问题</strong></p>
+<ul>
+<li>数据结构不仅要考虑“数据元素是什么”，还要考虑“元素之间是什么关系”。</li>
+<li>存储结构要解决的问题是：如何把逻辑关系放到计算机的存储空间中。</li>
+<li>同一种逻辑结构，可以采用不同的存储结构；不同存储结构会影响查找、插入、删除和空间利用率。</li>
+</ul>
+<h3 id="section-2">1.1.1 顺序存储</h3>
+<h5 id="section-3"><strong>定义</strong>：#顺序存储</h5>
+<blockquote>
+<p>描述：
+把逻辑上相邻的元素，存储在物理位置也相邻的存储单元中，元素之间的关系由存储单元的相邻关系体现。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>逻辑相邻：从数据关系上看，两个元素前后相邻。</li>
+<li>物理相邻：在内存地址上连续存放。</li>
+<li>典型结构：数组、顺序表。</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>在元素定长、地址可由下标计算的顺序表/数组中，可以按下标随机存取；</li>
+<li>每个元素只保存数据本身，不需要额外保存指针，所以单个元素占用空间较少。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>必须使用相邻的一整块存储单元；</li>
+<li>当连续空间不足时，可能出现外部碎片问题；</li>
+<li>插入、删除时可能需要移动大量元素。</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子</strong></p>
+<ul>
+<li>数组 <code>a[0], a[1], a[2]</code> 在内存中连续存放。</li>
+<li>若以 $a_1$ 为第一个元素、首地址为 <code>base</code>，每个元素占 $L$ 个存储单元，则第 $i$ 个元素地址为：
+$$
+LOC(a_i)=base+(i-1)\times L
+$$</li>
+<li>若采用从 0 开始的数组下标，则 <code>a[i]</code> 的地址才是 $base+i\times L$。</li>
+</ul>
+<h3 id="section-4">1.1.2 链式存储</h3>
+<h5 id="section-5"><strong>定义</strong>：#链式存储</h5>
+<blockquote>
+<p>描述：
+不要求逻辑上相邻的元素在物理位置上相邻，而是借助指针表示元素之间的逻辑关系。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>链式存储的核心不是“放在一起”，而是“通过指针找到下一个”。</li>
+<li>每个结点通常包含：
+<ul>
+<li>数据域：保存数据元素；</li>
+<li>指针域：保存相关结点的地址。</li>
+</ul>
+</li>
+<li>典型结构：单链表、双链表、循环链表。</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>不要求连续存储空间；</li>
+<li>不要求整表占用一块连续空间，能利用离散的可用存储块；</li>
+<li>已定位到操作位置时，插入、删除主要修改相关指针，不必像顺序表那样整体移动后续元素；结点分配/释放和查找位置仍有成本。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>每个元素需要额外保存指针；</li>
+<li>不能直接随机存取；</li>
+<li>查找第 $i$ 个结点通常要从头结点开始顺序查找。</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>PDF 中写到“只能实现顺序存储”，这里更准确的理解是：链式存储通常只能<strong>顺序访问</strong>，不能像数组那样按下标随机访问。</li>
+</ul>
+<h3 id="section-6">1.1.3 索引存储</h3>
+<h5 id="section-7"><strong>定义</strong>：#索引存储</h5>
+<blockquote>
+<p>描述：
+在存储数据元素信息的同时，额外建立索引表，用索引项辅助定位数据元素。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>索引表类似一本书的目录。</li>
+<li>数据本体可以放在原位置，索引表负责记录关键字与地址之间的对应关系。</li>
+<li>索引项的一般形式：
+$$
+(\text{关键字},\text{地址})
+$$</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>检索速度快；</li>
+<li>适合查找频繁的数据集合。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>索引表会额外占用存储空间；</li>
+<li>增加、删除数据时，索引表也要同步修改，因此会花费更多时间。</li>
+</ul>
+</li>
+</ul>
+<p><strong>理解</strong></p>
+<ul>
+<li>顺序存储靠“物理位置”找元素；</li>
+<li>链式存储靠“指针”找元素；</li>
+<li>索引存储靠“目录”找元素。</li>
+</ul>
+<h3 id="section-8">1.1.4 散列存储</h3>
+<h5 id="section-9"><strong>定义</strong>：#散列存储</h5>
+<blockquote>
+<p>描述：
+根据元素的关键字直接计算出该元素的存储地址，又称哈希存储。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>散列存储的核心过程：
+$$
+\text{关键字}\xrightarrow{\text{散列函数}}\text{存储地址}
+$$</li>
+<li>典型结构：哈希表。</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>优点：
+<ul>
+<li>查找、插入和删除结点的操作通常很快；</li>
+<li>理想情况下，平均时间复杂度可以接近 $O(1)$。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>如果散列函数设计不好，可能出现冲突；</li>
+<li>解决冲突会增加时间开销或空间开销。</li>
+</ul>
+</li>
+</ul>
+<p><strong>补充</strong></p>
+<ul>
+<li>冲突：不同关键字通过散列函数计算后，得到同一个存储地址。</li>
+<li>常见冲突处理方法：
+<ul>
+<li>开放定址法；</li>
+<li>链地址法；</li>
+<li>再散列法。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-10">1.2 四种存储结构对比</h2>
+<p><strong>对比表</strong></p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>存储结构</th>
+<th>核心方式</th>
+<th>查找特点</th>
+<th>插入删除</th>
+<th>空间开销</th>
+<th>典型例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序存储</td>
+<td>物理相邻表示逻辑相邻</td>
+<td>定长元素且地址可计算时支持按下标随机存取</td>
+<td>可能移动大量元素</td>
+<td>较小</td>
+<td>数组、顺序表</td>
+</tr>
+<tr>
+<td>链式存储</td>
+<td>指针表示逻辑关系</td>
+<td>通常顺序访问</td>
+<td>定位后修改指针较方便</td>
+<td>指针占额外空间</td>
+<td>链表</td>
+</tr>
+<tr>
+<td>索引存储</td>
+<td>建立索引表</td>
+<td>检索较快</td>
+<td>需要维护索引</td>
+<td>索引表占空间</td>
+<td>数据库索引</td>
+</tr>
+<tr>
+<td>散列存储</td>
+<td>关键字映射到地址</td>
+<td>平均很快</td>
+<td>平均很快</td>
+<td>取决于冲突处理</td>
+<td>哈希表</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>记忆方法</strong></p>
+<ul>
+<li>顺序存储：位置。</li>
+<li>链式存储：指针。</li>
+<li>索引存储：目录。</li>
+<li>散列存储：函数。</li>
+</ul>
+<h2 id="section-11">1.3 面试题：循环一定比递归效率高吗</h2>
+<h3 id="section-12">题型：#循环递归比较</h3>
+<h4 id="section-13">第一部分：解题方法</h4>
+<ul>
+<li>这类题不能直接回答“循环一定更高”。</li>
+<li>更稳的表达方式：
+<ul>
+<li>
+<ol>
+<li>先说明二者很多情况下可以互换；</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>再比较递归和循环的优缺点；</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>最后说明具体问题具体分析。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="section-14">第二部分：典型回答</h4>
+<ul>
+<li>循环和递归在很多场景下可以互相转换，因此不能决定性地说循环效率一定比递归高。</li>
+<li>递归的优点：
+<ul>
+<li>代码简洁清晰；</li>
+<li>逻辑更接近数学定义；</li>
+<li>容易检查正确性；</li>
+<li>适合树、图、分治、回溯等天然递归结构。</li>
+</ul>
+</li>
+<li>递归的缺点：
+<ul>
+<li>每次调用都要保存现场；</li>
+<li>调用次数过多时会增加栈空间开销；</li>
+<li>递归层数太深可能导致栈溢出；</li>
+<li>函数调用本身也会带来一定时间开销。</li>
+</ul>
+</li>
+<li>循环的优点：
+<ul>
+<li>结构简单；</li>
+<li>不需要额外的递归调用栈；</li>
+<li>对线性重复操作，通常速度更稳定。</li>
+</ul>
+</li>
+<li>循环的缺点：
+<ul>
+<li>并不能自然解决全部问题；</li>
+<li>对某些递归结构，强行写成循环会使代码更复杂。</li>
+</ul>
+</li>
+</ul>
+<h4 id="section-15">第三部分：知识点复盘</h4>
+<ul>
+<li>如果问题本身具有递归定义，用递归表达更自然。</li>
+<li>如果问题只是简单重复，用循环更直接。</li>
+<li>判断效率时，不能只看“递归/循环”这个形式，还要看：
+<ul>
+<li>数据规模；</li>
+<li>调用深度；</li>
+<li>是否有重复计算；</li>
+<li>是否能尾递归优化；</li>
+<li>是否需要额外数据结构模拟递归。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-16">1.4 面试题：数组中找出和为固定值的所有数对</h2>
+<h3 id="section-17">题型：#TwoSum</h3>
+<h4 id="section-18">第一部分：解题方法</h4>
+<ul>
+<li>问题描述：给定一个数组和一个固定值 <code>target</code>，找出所有满足和为 <code>target</code> 的数对。</li>
+<li>典型思路有三种：
+<ul>
+<li>暴力枚举；</li>
+<li>排序后双指针；</li>
+<li>哈希表。</li>
+</ul>
+</li>
+</ul>
+<h4 id="section-19">第二部分：典型例题</h4>
+<p><strong>方法 1：暴力枚举</strong></p>
+<ul>
+<li>两层循环枚举所有数对。</li>
+<li>时间复杂度：
+$$
+O(n^2)
+$$</li>
+<li>空间复杂度：
+$$
+O(1)
+$$</li>
+<li>优点：简单直接。</li>
+<li>缺点：数据量大时效率低。</li>
+</ul>
+<p><strong>方法 2：排序 + 双指针</strong></p>
+<ul>
+<li>先对数组排序。</li>
+<li>左指针指向最小值，右指针指向最大值。</li>
+<li>若两数之和小于 <code>target</code>，左指针右移。</li>
+<li>若两数之和大于 <code>target</code>，右指针左移。</li>
+<li>若两数之和等于 <code>target</code>，记录答案。</li>
+<li>时间复杂度：
+$$
+O(n\log n)
+$$</li>
+<li>如果题目要求原下标，需要在排序前保存元素原始位置。</li>
+</ul>
+<p><strong>方法 3：哈希表</strong></p>
+<ul>
+<li>遍历每个元素 $x$。</li>
+<li>查找 <code>target - x</code> 是否已经出现。</li>
+<li>如果出现，则找到一组数对。</li>
+<li>如果没出现，把 $x$ 放入哈希表。</li>
+<li>平均时间复杂度：
+$$
+O(n)
+$$</li>
+<li>空间复杂度：
+$$
+O(n)
+$$</li>
+</ul>
+<h4 id="section-20">第三部分：知识点复盘</h4>
+<ul>
+<li>如果数组无序且追求时间效率，优先考虑哈希表。</li>
+<li>如果数组有序，优先考虑双指针。</li>
+<li>如果需要输出所有数对，要处理重复元素和重复答案。</li>
+</ul>
+<h2 id="section-21">1.5 什么是数据结构</h2>
+<h5 id="section-22"><strong>定义</strong>：#数据结构</h5>
+<blockquote>
+<p>描述：
+数据结构是指数据元素以及数据元素之间的关系，可以看作相互之间存在某种特定关系的数据元素集合。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>数据结构不是单纯的数据堆放，而是“带结构的数据元素集合”。</li>
+<li>结构强调的是元素之间的关系。</li>
+<li>选择合适的数据结构，可以提高：
+<ul>
+<li>运行效率；</li>
+<li>存储效率；</li>
+<li>程序可维护性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>补充</strong></p>
+<ul>
+<li>数据结构通常包含三个层次：
+<ul>
+<li>逻辑结构；</li>
+<li>存储结构；</li>
+<li>数据运算。</li>
+</ul>
+</li>
+<li>逻辑结构回答：数据之间是什么关系。</li>
+<li>存储结构回答：数据在计算机中怎么存。</li>
+<li>数据运算回答：对这些数据可以进行什么操作。</li>
+</ul>
+<h2 id="section-23">教材补充：数据结构的基本概念体系</h2>
+<blockquote>
+<p><strong>NOTE</strong> · 补充范围
+本节不是原 PDF 的逐字转写，而是为完整表达教材的概念体系补入，并以 2027 年 408 大纲作最低覆盖核验。后续各章默认使用这些概念。</p>
+</blockquote>
+<h3 id="section-24">数据、数据元素、数据项与数据对象</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>准确定义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据</td>
+<td>能被计算机识别、存储和处理的符号集合</td>
+<td>数值、字符、图像编码、学生记录</td>
+</tr>
+<tr>
+<td>数据元素</td>
+<td>数据的基本单位，程序通常把它作为一个整体处理</td>
+<td>一条学生记录、图中的一个顶点</td>
+</tr>
+<tr>
+<td>数据项</td>
+<td>构成数据元素的、具有独立含义的最小单位；“最小”与当前问题的划分粒度有关</td>
+<td>学生记录中的学号、姓名</td>
+</tr>
+<tr>
+<td>数据对象</td>
+<td>性质相同的数据元素的集合，是数据的一个子集</td>
+<td>某班全部学生记录</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>一个数据元素可以由多个数据项组成；“元素”和“项”不能无条件互换。</li>
+<li>数据结构研究的不只是元素本身，还研究元素之间的关系以及作用在这些元素上的运算。</li>
+</ul>
+<h3 id="section-25">数据结构的三要素</h3>
+<pre class="mermaid">flowchart LR
+    A[数据结构] --&gt; B[逻辑结构\n元素之间的逻辑关系]
+    A --&gt; C[存储结构\n逻辑关系在计算机中的表示]
+    A --&gt; D[数据运算\n定义及其具体实现]
+    B --&gt; B1[集合]
+    B --&gt; B2[线性结构]
+    B --&gt; B3[树形结构]
+    B --&gt; B4[图状结构]
+</pre>
+<ol>
+<li><strong>逻辑结构</strong>独立于具体存储位置，按关系可分为：
+<ul>
+<li>集合：元素除“同属一个集合”外没有其他特定关系；</li>
+<li>线性结构：除首尾外，每个元素各有唯一直接前驱和唯一直接后继；</li>
+<li>树形结构：一对多的层次关系；</li>
+<li>图状结构：多对多关系。</li>
+</ul>
+</li>
+<li>**存储结构（物理结构）**是逻辑结构在计算机中的映像，常见为顺序、链式、索引和散列存储。</li>
+<li><strong>数据运算</strong>包括创建、销毁、查找、插入、删除、修改、遍历、排序等。运算的逻辑定义可以相同，但在不同存储结构上的实现和复杂度可能不同。</li>
+</ol>
+<p>逻辑结构与存储结构不是一一对应关系。例如，线性表既可用连续地址的顺序表实现，也可用结点地址离散的链表实现；图也可以用邻接矩阵或邻接表实现。</p>
+<h3 id="section-26">数据类型与抽象数据类型</h3>
+<h5 id="section-27"><strong>定义</strong>：#数据类型</h5>
+<blockquote>
+<p>数据类型是一个值的集合以及定义在该集合上的一组操作的总称。</p>
+</blockquote>
+<ul>
+<li>原子类型的值不可再分，如给定语言语境下的整数、字符；结构类型的值由若干成分按某种结构组成，如数组、结构体。</li>
+<li>数据类型通常还受具体语言的表示范围约束，例如 C 语言中不同整数类型的位宽与取值范围由实现和标准共同规定。</li>
+</ul>
+<h5 id="section-28"><strong>定义</strong>：#抽象数据类型 #ADT</h5>
+<blockquote>
+<p>抽象数据类型（Abstract Data Type，ADT）从逻辑上说明数据对象、数据关系和允许的基本操作，不规定这些操作必须采用哪一种存储结构或代码实现。</p>
+</blockquote>
+<p>可把 ADT 概括为三元组：</p>
+<p>$$
+ADT=(D,S,P)
+$$</p>
+<p>其中 $D$ 是数据对象，$S$ 是 $D$ 上的关系集合，$P$ 是基本操作集合。例如“栈”规定后进先出以及入栈、出栈、读栈顶等操作，但既可用顺序栈实现，也可用链栈实现。</p>
+<h3 id="section-29">易错边界</h3>
+<ul>
+<li>“线性表有序”在数据结构定义中表示元素存在前驱、后继次序，<strong>不等于</strong>关键字按数值递增或递减；若关键字有大小顺序，应明确写“递增有序表”等。</li>
+<li>顺序存储强调物理地址连续；逻辑上相邻不必物理相邻，链式存储就是典型反例。</li>
+<li>ADT 描述“是什么、能做什么”，具体数据结构实现回答“怎样存、怎样做”。同一个 ADT 可以有多种实现。</li>
+<li>算法是对特定问题求解步骤的有限描述；数据结构是算法操作的数据组织基础，两者相关但不是同一概念。</li>
+</ul>
+<h2 id="section-30">1.6 C 语言、数据结构、算法和程序的关系</h2>
+<p><strong>核心关系</strong></p>
+<ul>
+<li>数据结构解决“数据如何组织”。</li>
+<li>算法解决“问题如何求解”。</li>
+<li>程序是数据结构和算法在计算机中的具体实现。</li>
+</ul>
+<p><strong>常用助记表达</strong>
+$$
+\text{数据结构}+\text{算法}=\text{程序}
+$$</p>
+<p><strong>解释</strong></p>
+<ul>
+<li>这是一句强调“数据组织方式与处理步骤共同决定程序”的助记表达，不是严格的数学恒等式；完整程序还包含输入输出、控制逻辑、错误处理等组成部分。</li>
+<li>算法不一定要求能直接在计算机上运行；</li>
+<li>程序必须能够在计算机中运行；</li>
+<li>C 语言只是描述数据结构和算法的一种工具。</li>
+<li>描述数据结构和算法不局限于 C 语言，也可以使用：
+<ul>
+<li>C++；</li>
+<li>Java；</li>
+<li>Python；</li>
+<li>伪代码；</li>
+<li>自然语言。</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-31">1.7 程序和软件的区别</h2>
+<h3 id="section-32">题型：#程序软件辨析</h3>
+<h4 id="section-33">第一部分：解题方法</h4>
+<ul>
+<li>抓住两句话：
+<ul>
+<li>程序是实现功能的指令集合；</li>
+<li>软件是由程序、数据和文档组成的完整系统。</li>
+</ul>
+</li>
+</ul>
+<h4 id="section-34">第二部分：典型回答</h4>
+<ul>
+<li>软件是相对于硬件而言的，是一系列按照特定顺序组织的计算机数据和指令的集合。</li>
+<li>程序是软件的组成部分之一，是实现软件功能的主要动力。</li>
+<li>程序是软件的必要元素，但软件不等于程序。</li>
+</ul>
+<p><strong>关系式</strong>
+$$
+\text{软件}=\text{程序}+\text{数据}+\text{文档}
+$$</p>
+<ul>
+<li>其中，程序负责实现功能，数据是程序处理或依赖的内容，文档用于说明需求、设计、使用与维护。</li>
+<li>“数据结构＋算法＝程序”可用于理解程序的核心，但不能据此省略软件中的数据，也不能把两条助记式机械相加。</li>
+</ul>
+<h4 id="section-35">第三部分：知识点复盘</h4>
+<ul>
+<li>程序偏向“能执行的代码或指令”。</li>
+<li>软件偏向“完整产品或系统”。</li>
+<li>在工程项目中，数据和文档都是软件的重要组成部分。</li>
+</ul>
+<h2 id="section-36">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-01ad73094eab/">下一篇：算法和算法评价</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-424a656729a9/">重点算法汇总</a></li>
+</ul>
+<h2 id="section-37">1.8 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>四种存储结构：
+<ul>
+<li>顺序存储；</li>
+<li>链式存储；</li>
+<li>索引存储；</li>
+<li>散列存储。</li>
+</ul>
+</li>
+<li>四种存储结构的优缺点和适用场景。</li>
+<li>数据结构、算法、程序、软件之间的关系。</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>链式存储不是“只能实现顺序存储”，而是通常只能顺序访问。</li>
+<li>索引存储和散列存储都能提高查找效率，但原理不同：
+<ul>
+<li>索引靠目录；</li>
+<li>散列靠函数。</li>
+</ul>
+</li>
+<li>程序是软件的一部分，软件不等于程序。</li>
+</ul>
+<p><strong>面试表达</strong></p>
+<ul>
+<li>遇到“是否一定”类问题，不要绝对化。</li>
+<li>更稳的表达方式：
+<ul>
+<li>先给结论；</li>
+<li>再说条件；</li>
+<li>再比较优缺点；</li>
+<li>最后给适用场景。</li>
+</ul>
+</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-1e099c203994/index.html"><span>← Previous item</span><strong>Lecture 4：线性表的顺序实现</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-1fb21507ad5e/index.html"><span>Next item →</span><strong>Lecture 26：树形查找</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

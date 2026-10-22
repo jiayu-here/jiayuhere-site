@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 8：知识 - 存储器 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 存储器. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 8：知识 - 存储器 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 存储器. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-2d95192b7574/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 8：知识 - 存储器 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 8：知识 - 存储器. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 8：知识 - 存储器",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-2d95192b7574/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-2d95192b7574/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-2d95192b7574/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-2d95192b7574/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-2d95192b7574/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-2d95192b7574/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 8：知识 - 存储器</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 8：知识 - 存储器. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>12 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/5d8382fb3aff.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/5d8382fb3aff.pdf" download="Lecture 8：知识 - 存储器.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">3.1 存储系统硬件分类</a><a href="#section-2">3.2 半导体随机访问存储器</a><a href="#section-5">3.3 ROM、闪存与 SSD</a><a href="#section-9">3.4 磁盘与 RAID</a><a href="#section-13">3.5 存储器芯片内部结构</a><a href="#section-14">相关知识</a><a href="#section-15">3.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本讲将半导体存储器、闪存、磁盘与存储芯片组织放在同一张图里：RAM/ROM 按随机访问分类，磁带/磁盘按串行访问分类；SRAM/DRAM 分别服务 Cache/主存，磁盘与 SSD 服务大容量辅存。</p>
+</blockquote>
+<h2 id="section-1">3.1 存储系统硬件分类</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>访问特点</th>
+<th>代表</th>
+<th>主要用途/特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机访问存储器</td>
+<td>任意单元均可按地址直接访问，时间与物理位置无关</td>
+<td>RAM、ROM</td>
+<td>主存、Cache 或固化程序</td>
+</tr>
+<tr>
+<td>顺序访问存储器（SAM）</td>
+<td>必须按物理顺序访问，位置越靠后等待越长</td>
+<td>磁带</td>
+<td>串行、慢、适合顺序处理</td>
+</tr>
+<tr>
+<td>直接访问存储器（DAM）</td>
+<td>先定位一个小区域，再在区域内顺序查找</td>
+<td>磁盘</td>
+<td>介于随机与顺序访问之间</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>RAM 的主要用途是主存或 Cache，分为 SRAM 与 DRAM；ROM 通常保存不变程序、常数或字库。RAM 是易失性，ROM 以及磁/光介质通常非易失。</li>
+<li>Cache 与虚拟存储器都把数据分成块、都需要地址映射、替换与写策略、都依赖局部性将高频数据留在高速层。</li>
+</ul>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>Cache</th>
+<th>虚拟存储器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主解决 CPU–主存的<strong>速度</strong>鸿沟</td>
+<td>主解决主存–辅存的<strong>容量</strong>鸿沟</td>
+</tr>
+<tr>
+<td>由硬件实现，对程序员透明</td>
+<td>OS 与硬件共同实现；对应用程序员透明，对系统程序员可见</td>
+</tr>
+<tr>
+<td>CPU 与 Cache、主存均有直接通路</td>
+<td>CPU 与辅存没有直接通路，缺页时先把块调入主存</td>
+</tr>
+<tr>
+<td>未命中代价较小</td>
+<td>缺页需辅存 I/O，代价远大于 Cache 未命中</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-2">3.2 半导体随机访问存储器</h2>
+<h3 id="section-3">3.2.1 SRAM 与 DRAM</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SRAM</th>
+<th>DRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储原理</td>
+<td>双稳态触发器，常见 6 管 MOS 单元</td>
+<td>电容电荷，常见 1 管单元</td>
+</tr>
+<tr>
+<td>读出/保持</td>
+<td>非破坏性读出，不需刷新；断电仍丢失</td>
+<td>读出后需再生，且需周期性刷新；断电丢失</td>
+</tr>
+<tr>
+<td>速度、密度、功耗</td>
+<td>快、集成度低、功耗和价格高</td>
+<td>较慢、密度高、功耗和位价低</td>
+</tr>
+<tr>
+<td>常见位置</td>
+<td>Cache、TLB、CPU 片内小容量 SRAM</td>
+<td>大容量主存</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>SRAM 的“静态”指信息读出后仍保持原状态，并非断电保持；SRAM 仍是易失性半导体存储器。</li>
+<li>DRAM 用电容是否存有足够电荷表示位值。电荷会泄漏，读操作亦会扰动单元，因此既要读后再生，也必须定期刷新。</li>
+<li>SDRAM 在 DRAM 基础上与系统时钟同步，锁存地址/控制后可在等待期间让 CPU 执行其他操作，并支持突发传送：给出连续块首地址后，连续数据可每时钟输出一个字。</li>
+<li>DDR SDRAM 在一个时钟周期的两个边沿传送数据，数据传输率可较单沿 SDRAM 加倍，是 PC 内存和高端显存常用形式。</li>
+</ul>
+<h3 id="section-4">3.2.2 DRAM 刷新</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>做法</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集中刷新</td>
+<td>在一个刷新周期内连续刷新所有行</td>
+<td>正常读写阶段不受刷新影响</td>
+<td>刷新期间形成访存死区</td>
+</tr>
+<tr>
+<td>分散刷新</td>
+<td>每个存储周期前/后半分别访问与刷新</td>
+<td>无连续死区</td>
+<td>系统存取周期被拉长</td>
+</tr>
+<tr>
+<td>异步刷新</td>
+<td>将刷新周期按行数均分，间隔到达即刷新一行</td>
+<td>等待分散，避免 CPU 长时间连续等待</td>
+<td>控制较复杂</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>DRAM 以<strong>行</strong>为刷新单位，芯片内部产生行地址；例如 $2048\times2048\times4b$ 芯片每轮只需刷新 2048 行，而不需要逐列寻址。</li>
+<li>刷新对 CPU 透明、不依赖外部访存请求；刷新类似读操作但不等同于读后再生。刷新逐行恢复，读后再生仅恢复被读出的单元。</li>
+<li>刷新时不需逐片选中，存储器中相应芯片可同时执行刷新。</li>
+</ul>
+<h2 id="section-5">3.3 ROM、闪存与 SSD</h2>
+<h3 id="section-6">3.3.1 ROM 家族</h3>
+<p>ROM 可随机读、断电保持，与 RAM 一同可映射进主存地址空间。广义 ROM 可被电擦写，仍保留“非易失、随机读、写慢于读”的特征。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>写入/擦除方式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MROM（掩模 ROM）</td>
+<td>制造时固化</td>
+<td>可靠、密度高、廉价；灵活性最差</td>
+</tr>
+<tr>
+<td>PROM</td>
+<td>用户一次编程</td>
+<td>写入后不可改变</td>
+</tr>
+<tr>
+<td>EPROM</td>
+<td>紫外线擦除后再编程</td>
+<td>封装常有石英窗；编程慢、次数有限，不能代替 RAM</td>
+</tr>
+<tr>
+<td>EEPROM</td>
+<td>电信号擦除、写入</td>
+<td>可电改写，但电路复杂、重编程慢且次数有限</td>
+</tr>
+<tr>
+<td>Flash</td>
+<td>从 EEPROM 发展</td>
+<td>非易失、可在线快速擦除/重写、密度高、价格较低</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Flash 通过浮栅等电荷状态存储信息，擦写寿命有限；反复充放电会使器件老化，故需控制擦写次数。</li>
+</ul>
+<h3 id="section-7">3.3.2 SSD 与磨损均衡</h3>
+<h5 id="section-8"><strong>定义</strong>：#SSD</h5>
+<p>SSD 由一个或多个 Flash 芯片、控制器与**闪存翻译层（FTL）**组成。FTL 把主机的逻辑块读写请求翻译为底层物理页/块操作。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>介质/接口粒度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主机逻辑 I/O</td>
+<td>常以 512 B 或 4 KiB 逻辑扇区寻址，这是控制器对外接口粒度</td>
+</tr>
+<tr>
+<td>NAND 读/编程</td>
+<td>以 Flash 页为基本单位，页通常为数 KiB 或更大；具体代际差异很大</td>
+</tr>
+<tr>
+<td>NAND 擦除</td>
+<td>以含许多页的擦除块为单位，粒度远大于页；源 PDF 的页数与容量仅是示例，计算必须以题设为准</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>页不能在未擦除的块中原地随意改写；修改含旧数据的页往往需把该块的有效页迁移到新擦除块，再擦除旧块，故随机写慢于读。</li>
+<li>SSD 无机械运动部件，随机访问快、无噪声振动、功耗低、抗震性好；代价是价格较高且闪存块有有限擦写寿命。U 盘、SD 卡和 SSD 都以闪存为核心，SSD 主要在容量、控制器/FTL 与性能上更强。</li>
+<li><strong>动态磨损均衡</strong>优先把新写入分散到擦除次数较少的空闲块；<strong>静态磨损均衡</strong>还会搬迁长期不变的冷数据，使高、低擦除次数块都能轮换承担写入。若按理想模型计算，$256,GB\times500=128,TB$；若容量按 $256,GiB$ 计，则为 $125,TiB$。这只是原始介质写入上限，实际主机可写量还受预留空间、坏块、写放大和控制策略影响。</li>
+</ul>
+<h2 id="section-9">3.4 磁盘与 RAID</h2>
+<h3 id="section-10">3.4.1 磁盘组织与容量</h3>
+<p>磁盘由驱动器（旋转盘片、磁头读写）和控制器（主机接口、命令解释、状态检测）构成。记录面划分磁道，磁道再分扇区；<strong>扇区/块是最小读写单位</strong>。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>记录面/盘面</td>
+<td>每个可记录表面通常对应一个磁头</td>
+</tr>
+<tr>
+<td>磁道（track）</td>
+<td>单个盘面上的同心圆；相同编号磁道构成柱面</td>
+</tr>
+<tr>
+<td>柱面（cylinder）</td>
+<td>多个记录面上同半径磁道的集合，柱面数常等于每面磁道数</td>
+</tr>
+<tr>
+<td>扇区（sector）</td>
+<td>磁道划分的块，最小 I/O 单位</td>
+</tr>
+</tbody>
+</table></div>
+<p>$$
+\begin{aligned}
+\text{非格式化容量}&amp;=\text{记录面数}\times\text{柱面数}\times\text{每道磁化单元数}\
+\text{格式化容量}&amp;=\text{记录面数}\times\text{柱面数}\times\text{每道扇区数}\times\text{每扇区容量}
+\end{aligned}
+$$</p>
+<ul>
+<li>格式化会放入标识、同步、纠错等信息，故格式化容量小于非格式化容量。</li>
+<li>道密度是半径方向单位长度磁道数，位密度是磁道单位长度可记录位数，面密度为二者乘积。磁记录靠磁头与磁介质相对运动的电磁转换实现，可采用 FM/MFM 等编码方式。</li>
+</ul>
+<h3 id="section-11">3.4.2 磁盘性能与工作过程</h3>
+<p>$$T_{access}=T_{seek}+T_{rotation}+T_{transfer}$$</p>
+<ul>
+<li>寻道时间是磁头移到目标磁道的时间；旋转延迟是等待目标扇区转到磁头下的时间；传输时间是实际传数据的时间。均匀随机扇区下平均旋转延迟为半圈；平均寻道时间与磁道分布、机构加减速有关，应优先使用题设或设备给定值，不能普遍取“最外道到最内道全程时间的一半”。</li>
+<li>若转速为 $r$ 转/s、每道有效数据容量为 $N$ B，则不计其他开销时一整圈的平均用户数据传输率为 $D=rN=N/T_{rev}$。原 PDF 还给出扣除扇区间隙的口径：若每道有 $s$ 个扇区、每个间隙经过时间为 $T_{gap}$，则<strong>实际传送扇区数据期间</strong>的速率为 $N/(T_{rev}-sT_{gap})$；它不等于把间隙也算在内的整圈平均速率。做题先看所问的是哪一种时间口径。</li>
+<li>传统柱面—磁头—扇区（CHS）地址可按“柱面号｜盘面/磁头号｜扇区号”拆分。原页例有 16 个盘面、每面 256 个磁道、每道 16 个扇区；若各编号从 0 起，分别需 4、8、4 位，合计 16 位。若扇区号按 1 起或设备实际几何结构不同，编码约定须以题设为准。</li>
+<li>磁盘控制字可表示寻址、读盘、写盘等操作；磁盘通常经控制器与主存交换数据而非逐字直接交给 CPU。经典单执行器、单通道机械磁盘一次只服务一个磁头/请求；多执行器或磁盘阵列可提供并行性，因此“任何机械磁盘都绝不能并行”不是跨实现的普遍结论。</li>
+<li>磁盘高速缓冲是内存中的区域，汇集小数据后按簇等较大单位写盘，并可让尚未落盘的中间结果被快速复用。</li>
+</ul>
+<h3 id="section-12">3.4.3 RAID</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>级别</th>
+<th>核心机制</th>
+<th>性能与可靠性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAID 0</td>
+<td>条带化：连续块交错分布到多盘并行读写</td>
+<td>容量、吞吐提高；<strong>无冗余，无容错</strong></td>
+</tr>
+<tr>
+<td>RAID 1</td>
+<td>镜像：两盘存相同内容</td>
+<td>可从另一盘恢复，容量约减半；读可并行提升，写仍须双写</td>
+</tr>
+<tr>
+<td>RAID 2</td>
+<td>海明码纠错阵列</td>
+<td>使用纠错编码</td>
+</tr>
+<tr>
+<td>RAID 3</td>
+<td>位交叉奇偶校验</td>
+<td>以位级交叉与校验实现容错</td>
+</tr>
+<tr>
+<td>RAID 4</td>
+<td>块交叉奇偶校验</td>
+<td>以块级校验实现容错</td>
+</tr>
+<tr>
+<td>RAID 5</td>
+<td>块级条带 + 分布式单奇偶校验</td>
+<td>可容忍任意 1 盘故障；小随机写有读改写与校验开销</td>
+</tr>
+<tr>
+<td>RAID 6</td>
+<td>块级条带 + 分布式双校验</td>
+<td>可容忍任意 2 盘故障；容量与写入开销更高</td>
+</tr>
+<tr>
+<td>RAID 10</td>
+<td>先镜像再条带（镜像组的条带）</td>
+<td>至少 4 盘，兼顾并行性能与镜像恢复能力，容量利用率约 50%</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>RAID 将多块物理盘组成逻辑盘，通过并行访问提升吞吐；镜像与校验可提高可靠性。交错条带使顺序访问也可利用多盘并行，单纯把数据块不交错分盘无法获得同样收益。</li>
+<li>冗余使故障后可重建数据，但“热插拔”还要求背板、控制器、驱动和电源设计共同支持，并不是 RAID 级别本身自动保证的能力。</li>
+</ul>
+<h2 id="section-13">3.5 存储器芯片内部结构</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>部件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储体/存储矩阵</td>
+<td>存储单元集合，行选择线 X 与列选择线 Y 选中位置；同一行列上的多个位平面可并行读写</td>
+</tr>
+<tr>
+<td>地址译码器</td>
+<td>将地址转换为选通信号，驱动目标单元读写</td>
+</tr>
+<tr>
+<td>I/O 读写电路</td>
+<td>控制已选单元读出/写入，并放大读出信息</td>
+</tr>
+<tr>
+<td>片选控制</td>
+<td>多芯片扩展时仅使目标芯片响应</td>
+</tr>
+<tr>
+<td>读写控制</td>
+<td>按 CPU 读/写命令控制被选中单元</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>单译码法只有行译码器，同一行所有单元作为一个字同时读写，但译码输出线多。</li>
+<li>双译码法分 X、Y 两个译码器，用行列交点定位单元，DRAM 芯片普遍采用以降低译码线数量。</li>
+<li>原页芯片图以 8 个位平面、每平面 $64\times64$ 个 1-bit 单元说明双译码：$A_0\sim A_5$ 经 X 译码选 64 行之一，$A_6\sim A_{11}$ 经 Y 译码选 64 列之一；同一行列交点在 8 个位平面各取 1 bit，并行组成 8 位字。因此芯片有 $2^{12}=4096$ 个可寻址字，组织为 $4K\times8$ bit，总数据容量 4 KiB。片选决定该芯片是否响应，读写控制决定本次方向；8 个位平面不是 8 个独立地址。</li>
+</ul>
+<h2 id="section-14">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-bfaf5bd149c2/">上一篇：存储器分类、层次结构与单位</a> · <a href="/en/notes/cs408-d33925ae4333/">下一篇：主存储器</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-c6142ca80d5a/">磁盘管理</a></li>
+</ul>
+<h2 id="section-15">3.6 本节复盘</h2>
+<ul>
+<li>RAM、ROM 都支持随机访问；SRAM 快且贵用于 Cache/TLB，DRAM 高密度低价用于主存且需行刷新。</li>
+<li>Cache 和虚拟存储均基于局部性与块交换；前者解决速度且硬件透明，后者解决容量且由 OS/硬件共同管理。</li>
+<li>ROM 家族按写擦方式区分；Flash 支撑 U 盘、SD 卡与 SSD，SSD 以页读写、块擦除并借助 FTL 和磨损均衡控制寿命。</li>
+<li>磁盘最小 I/O 为扇区，访问时间由寻道、旋转和传输构成；RAID 0 提速不容错，RAID 1 用镜像换可靠性与容量。</li>
+<li>存储芯片包括存储体、译码、I/O、片选与读写控制；DRAM 常用行列双译码。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-2b5ec3d1aa84/index.html"><span>← Previous item</span><strong>Lecture 11：栈在递归中的应用</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-2e90359dd8ec/index.html"><span>Next item →</span><strong>Lecture 29：排序</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

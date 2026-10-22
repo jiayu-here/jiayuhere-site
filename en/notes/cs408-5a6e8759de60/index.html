@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 21：图的存储及其操作 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 21：图的存储及其操作. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Data Structures">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 21：图的存储及其操作 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 21：图的存储及其操作. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-5a6e8759de60/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 21：图的存储及其操作 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 21：图的存储及其操作. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 21：图的存储及其操作",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-5a6e8759de60/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-5a6e8759de60/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5a6e8759de60/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5a6e8759de60/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5a6e8759de60/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-5a6e8759de60/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 21：图的存储及其操作</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 21：图的存储及其操作. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-14">2026-07-14</time></span></span><span>22 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Data Structures</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/fe50fa713f08.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/fe50fa713f08.pdf" download="Lecture 21：图的存储及其操作.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">21.1 邻接矩阵法</a><a href="#section-17">21.2 邻接表法</a><a href="#section-32">21.3 十字链表与邻接多重表</a><a href="#section-45">21.4 图的基本操作</a><a href="#section-61">相关知识</a><a href="#section-62">21.5 题型与复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>本讲解决两个问题：图怎样存入内存，以及不同存储结构下基本操作的代价。做题时先看图是稠密还是稀疏、是有向还是无向、是否频繁删边或查入边，再选择存储方式。</p>
+</blockquote>
+<h2 id="section-1">21.1 邻接矩阵法</h2>
+<h3 id="section-2">21.1.1 邻接矩阵</h3>
+<h5 id="section-3"><strong>定义</strong>：#邻接矩阵</h5>
+<blockquote>
+<p>描述：设图 $G=(V,E)$ 有 $n$ 个顶点，依次编号为 $v_1,v_2,\cdots,v_n$。用一个 $n\times n$ 的二维数组 $A$ 记录任意两个顶点间是否有边，则 $A$ 称为图 $G$ 的邻接矩阵。</p>
+</blockquote>
+<p>对于不带权图：</p>
+<p>$$
+A[i][j]=
+\begin{cases}
+1,&amp;\text{若 }(v_i,v_j)\text{ 或 }\langle v_i,v_j\rangle\in E(G)\
+0,&amp;\text{若 }(v_i,v_j)\text{ 或 }\langle v_i,v_j\rangle\notin E(G)
+\end{cases}
+$$</p>
+<ul>
+<li>无向图的边 $(v_i,v_j)$ 没有方向，因此 $A[i][j]=A[j][i]$。</li>
+<li>有向图的弧 $\langle v_i,v_j\rangle$ 有方向；矩阵第 $i$ 行第 $j$ 列表示从 $v_i$ 指向 $v_j$。</li>
+<li>简单图通常令 $A[i][i]=0$，即主对角线元素为 $0$。</li>
+<li>上述数学编号从 $1$ 开始；下文 C 数组的实际下标从 $0$ 开始，应将顶点编号统一映射到 <code>0</code> 至 <code>vexnum-1</code>，不能把公式中的 $v_n$ 直接访问为 <code>Edge[n][...]</code>。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/03c525035300.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-邻接矩阵.png"><img class="note-image" src="/assets/408/images/03c525035300.png" alt="DS-L21-邻接矩阵.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>图中顶点顺序固定为 $A,B,C,D,E,F$。无向图的矩阵关于主对角线对称；有向图的第 $i$ 行记录从 $v_i$ 发出的弧，因此一般不对称。</p>
+</blockquote>
+<h5 id="section-4"><strong>空间复杂度</strong>：#邻接矩阵复杂度</h5>
+<p>$$
+O(\lvert V\rvert^2)
+$$</p>
+<ul>
+<li>数组大小只取决于顶点数 $\lvert V\rvert$，与实际边数 $\lvert E\rvert$ 无关。</li>
+<li>因此邻接矩阵适合<strong>稠密图</strong>；稀疏图会保存大量 $0$，空间浪费明显。</li>
+</ul>
+<h5 id="section-5"><strong>优缺点</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>邻接矩阵的表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判断 $v_i$ 与 $v_j$ 是否相邻</td>
+<td>直接检查 $A[i][j]$，时间 $O(1)$</td>
+</tr>
+<tr>
+<td>求某顶点所有邻接点</td>
+<td>扫描一行或一列，时间 $O(\lvert V\rvert)$</td>
+</tr>
+<tr>
+<td>适用图</td>
+<td>稠密图、需要频繁判边的场景</td>
+</tr>
+<tr>
+<td>无向图性质</td>
+<td>矩阵对称，可只存上三角或下三角区以压缩存储</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>固定占用 $O(\lvert V\rvert^2)$ 空间，不适合稀疏图</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-6">21.1.2 有向图、无向图与度</h3>
+<h5 id="section-7"><strong>无向图</strong>：#无向图邻接矩阵</h5>
+<p>在<strong>无自环的无向图</strong>中，第 $i$ 个顶点的度等于第 $i$ 行（也等于第 $i$ 列）非零元素的个数：</p>
+<p>$$
+\operatorname{TD}(v_i)=\sum_{j=1}^{n} A[i][j]
+$$</p>
+<h5 id="section-8"><strong>有向图</strong>：#有向图邻接矩阵</h5>
+<p>对有向图：</p>
+<p>$$
+\operatorname{OD}(v_i)=\sum_{j=1}^{n} A[i][j]
+$$</p>
+<p>$$
+\operatorname{ID}(v_i)=\sum_{j=1}^{n} A[j][i]
+$$</p>
+<p>$$
+\operatorname{TD}(v_i)=\operatorname{OD}(v_i)+\operatorname{ID}(v_i)
+$$</p>
+<ul>
+<li>第 $i$ 行非零元素个数是 $v_i$ 的<strong>出度</strong>。</li>
+<li>第 $i$ 列非零元素个数是 $v_i$ 的<strong>入度</strong>。</li>
+<li>求度、入度或出度都要扫描一行或一列，时间复杂度均为：</li>
+</ul>
+<p>$$
+O(\lvert V\rvert)
+$$</p>
+<blockquote>
+<p><strong>WARNING</strong> · 自环的计数口径
+若题目允许自环，无向自环对顶点的度贡献 $2$，不能只把对角线上的一个非零元素计作 $1$；有向自环则对入度、出度各贡献 $1$。408 题目若未特别说明，通常讨论简单图。</p>
+</blockquote>
+<h5 id="section-9"><strong>带权图</strong>：#网的邻接矩阵</h5>
+<blockquote>
+<p>描述：带权图（网）的邻接矩阵仍是二维数组，只是将原来的 $1$ 改为边的权值。</p>
+</blockquote>
+<p>在最短路径等算法中通常约定：</p>
+<p>$$
+A[i][j]=
+\begin{cases}
+w_{ij},&amp;\text{若存在从 }v_i\text{ 到 }v_j\text{ 的边，权值为 }w_{ij}\
+\infty,&amp;\text{若 }v_i\text{ 到 }v_j\text{ 无边}
+\end{cases}
+$$</p>
+<ul>
+<li>主对角线通常取 $0$，表示顶点到自身的路径长度为 $0$。</li>
+<li>不能把“不存在的边”也写为 $0$，否则会和权值为 $0$ 的边混淆；因此常使用 $\infty$。</li>
+<li>若只是存图而不是做最短路径，也可以用专门的 <code>NO_EDGE</code> 标记；具体哨兵值必须与合法权值区分。</li>
+</ul>
+<h3 id="section-10">21.1.3 邻接矩阵的幂</h3>
+<h5 id="section-11"><strong>性质</strong>：#邻接矩阵幂</h5>
+<blockquote>
+<p>描述：设图 $G$ 的邻接矩阵为 $A$，矩阵元素为 $0/1$，则 $A^k$ 的元素 $A^k[i][j]$ 等于从顶点 $i$ 到顶点 $j$ 的、长度为 $k$ 的<strong>游走（walk）数目</strong>。</p>
+</blockquote>
+<p>矩阵乘法展开为：</p>
+<p>$$
+A^2[i][j]=\sum_{r=1}^{n} A[i][r]A[r][j]
+$$</p>
+<p>其中每一个乘积项 $A[i][r]A[r][j]$ 对应一条：</p>
+<p>$$
+v_i\rightarrow v_r\rightarrow v_j
+$$</p>
+<p>的长度为 $2$ 的游走。</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> · 路径与游走
+矩阵幂允许中间顶点或边重复，因此严格说统计的是游走，不一定是顶点互异的简单路径。部分教材在这里宽泛地写“路径”，做题时应按矩阵乘法的游走口径理解。</p>
+</blockquote>
+<p>这里还默认无平行边：$0/1$ 矩阵只记录两点是否相邻。若多重图要把不同平行边看作不同的游走，矩阵元素应记录对应顶点间的边数，而不能仍只写 $0/1$。</p>
+<h5 id="section-12"><strong>课件例子</strong>：</h5>
+<p>若顶点为 $A,B,C,D$，则：</p>
+<p>$$
+A^2[1][4]=a_{1,1}a_{1,4}+a_{1,2}a_{2,4}+a_{1,3}a_{3,4}+a_{1,4}a_{4,4}=1
+$$</p>
+<p>表示从 $A$ 到 $D$ 恰好有 $1$ 条长度为 $2$ 的游走，即 $A\to B\to D$。本例邻接矩阵为：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">$A$</th>
+<th style="text-align:right">$B$</th>
+<th style="text-align:right">$C$</th>
+<th style="text-align:right">$D$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$A$</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td>$B$</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>$C$</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>$D$</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-13">21.1.4 代码实现</h3>
+<h5 id="section-14"><strong>不带权图结构</strong>：</h5>
+<pre><code class="language-c">#define MaxVertexNum 100
+
+typedef struct {
+    char Vex[MaxVertexNum];
+    int Edge[MaxVertexNum][MaxVertexNum];
+    int vexnum, arcnum;
+} MGraph;
+</code></pre>
+<ul>
+<li><code>Vex</code>：顶点表。元素可以是字符，也可以替换为更复杂的顶点信息。</li>
+<li><code>Edge</code>：邻接矩阵，即边表或弧表。</li>
+<li><code>vexnum</code>：当前顶点数。</li>
+<li><code>arcnum</code>：当前边数；有向图中也可理解为当前弧数。</li>
+</ul>
+<h5 id="section-15"><strong>带权图结构</strong>：</h5>
+<pre><code class="language-c">#define MaxVertexNum 100
+#define INFINITY 0x3f3f3f3f
+
+typedef char VertexType;
+typedef int EdgeType;
+
+typedef struct {
+    VertexType Vex[MaxVertexNum];
+    EdgeType Edge[MaxVertexNum][MaxVertexNum];
+    int vexnum, arcnum;
+} MGraph;
+</code></pre>
+<h5 id="section-16"><strong>易错点</strong>：#邻接矩阵易错</h5>
+<ul>
+<li><code>arcnum</code> 是边/弧的数量，不是数组中非零元素数量。无向图的一条边会在矩阵中出现两次。</li>
+<li>无向图矩阵对称，但有向图不要求对称。</li>
+<li>带权图中 <code>INFINITY</code> 表示没有边，不能参加普通加法而产生溢出。</li>
+</ul>
+<hr>
+<h2 id="section-17">21.2 邻接表法</h2>
+<h3 id="section-18">21.2.1 图的存储</h3>
+<h5 id="section-19"><strong>定义</strong>：#邻接表</h5>
+<blockquote>
+<p>描述：为图中的每一个顶点建立一个单链表。第 $i$ 个单链表中的结点表示依附于顶点 $v_i$ 的边，这个单链表称为顶点 $v_i$ 的<strong>边表</strong>；所有顶点表头按顺序存放，整体称为邻接表。</p>
+</blockquote>
+<p>邻接表由两类结点组成：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>结点</th>
+<th>数据域</th>
+<th>指针域</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顶点结点</td>
+<td><code>data</code></td>
+<td><code>firstarc</code></td>
+<td>保存顶点值及第一条边/弧</td>
+</tr>
+<tr>
+<td>边表结点</td>
+<td><code>adjvex</code></td>
+<td><code>nextarc</code></td>
+<td>保存邻接顶点下标及下一条边/弧</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>顶点结点构成顺序表，支持按编号直接定位顶点。</li>
+<li>每个顶点结点之后接一个单链表。</li>
+<li>边表结点的 <code>adjvex</code> 不保存完整顶点数据，只保存邻接顶点的编号。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/325dc9acbd46.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-邻接表结点.png"><img class="note-image" src="/assets/408/images/325dc9acbd46.png" alt="DS-L21-邻接表结点.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p><code>firstarc</code>（代码中也常简写为 <code>first</code>）指向该顶点的第一条边/弧；<code>nextarc</code> 将同一顶点的边表结点串成单链表。</p>
+</blockquote>
+<h3 id="section-20">21.2.2 无向图的邻接表</h3>
+<h5 id="section-21"><strong>存储规则</strong>：#无向图邻接表</h5>
+<p>无向边 $(v_i,v_j)$ 同时与两个顶点相关，因此要写入两份边表结点：</p>
+<ul>
+<li>在 $v_i$ 的边表中写入 $j$。</li>
+<li>在 $v_j$ 的边表中写入 $i$。</li>
+</ul>
+<p>所以无向图共有：</p>
+<p>$$
+2\lvert E\rvert
+$$</p>
+<p>个边表结点，整体空间复杂度为：</p>
+<p>$$
+O(\lvert V\rvert+2\lvert E\rvert)
+$$</p>
+<p>在渐近意义上也可写为 $O(\lvert V\rvert+\lvert E\rvert)$，但在判断“边表结点数”时必须答 $2\lvert E\rvert$。</p>
+<h5 id="section-22"><strong>求度</strong>：</h5>
+<p>无向图中，顶点 $v_i$ 的边表长度就是其度：</p>
+<p>$$
+\operatorname{TD}(v_i)=\text{第 }i\text{ 条边表的结点个数}
+$$</p>
+<h3 id="section-23">21.2.3 有向图的邻接表</h3>
+<h5 id="section-24"><strong>存储规则</strong>：#有向图邻接表</h5>
+<p>对于有向弧：</p>
+<p>$$
+\langle v_i,v_j\rangle
+$$</p>
+<p>只在弧尾 $v_i$ 的边表中写入 $j$。因此有向图共有：</p>
+<p>$$
+\lvert E\rvert
+$$</p>
+<p>个边表结点，空间复杂度为：</p>
+<p>$$
+O(\lvert V\rvert+\lvert E\rvert)
+$$</p>
+<h5 id="section-25"><strong>度的获取</strong>：</h5>
+<ul>
+<li>顶点 $v_i$ 的边表长度就是其<strong>出度</strong>。</li>
+<li>若只使用普通邻接表，入边分散在其他顶点的边表中；求 $v_i$ 的入度需要访问全部顶点表头并遍历所有边表。</li>
+<li>因而求某个顶点入度的时间复杂度为：</li>
+</ul>
+<p>$$
+O(\lvert V\rvert+\lvert E\rvert)
+$$</p>
+<p>若另外建立<strong>逆邻接表</strong>，每条弧改为挂在弧头顶点之后，则可直接枚举入边、计算入度，但枚举出边会变得不便；十字链表相当于把两种方向的链同时保留下来。</p>
+<p><a class="note-image-link" href="/assets/408/images/90a61956aedf.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-邻接表示例.png"><img class="note-image" src="/assets/408/images/90a61956aedf.png" alt="DS-L21-邻接表示例.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>上半部分为无向图：每条无向边在两个端点的表中各出现一次。下半部分为有向图的普通邻接表：每条弧只在弧尾的出边表中出现一次。</p>
+</blockquote>
+<h3 id="section-26">21.2.4 特点与适用性</h3>
+<h5 id="section-27"><strong>优点</strong>：</h5>
+<ul>
+<li>对稀疏图节省空间，空间随实际边数增长。</li>
+<li>枚举一个顶点的出边或无向邻接边时，只需遍历该顶点的边表。</li>
+<li>采用头插法时，若已知顶点下标且无需先判断重边，插入一条边表结点可在 $O(1)$ 时间完成。</li>
+</ul>
+<h5 id="section-28"><strong>缺陷</strong>：#邻接表缺陷</h5>
+<ul>
+<li>无向图的一条边保存两份冗余信息。</li>
+<li>普通有向邻接表只直接保存出边，查询入边和删除顶点时通常需要扫描所有边表。</li>
+<li>同一图的邻接表不唯一：边表中各邻接点的排列顺序可以不同。</li>
+<li>上述 $2\lvert E\rvert$ 结点结论默认无向图按常规方式存储且不单独讨论自环；若允许自环，必须按具体实现确定自环建立一个还是两个边表结点，并保证度数按 $2$ 计。</li>
+</ul>
+<h3 id="section-29">21.2.5 代码实现</h3>
+<pre><code class="language-c">#define MaxVertexNum 100
+typedef char VertexType;
+
+typedef struct ArcNode {
+    int adjvex;
+    struct ArcNode *next;
+    // InfoType info;
+} ArcNode;
+
+typedef struct VNode {
+    VertexType data;
+    ArcNode *first;
+} VNode, AdjList[MaxVertexNum];
+
+typedef struct {
+    AdjList vertices;
+    int vexnum, arcnum;
+} ALGraph;
+</code></pre>
+<h5 id="section-30"><strong>字段说明</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>adjvex</code></td>
+<td>该边/弧所指向的邻接顶点的数组下标</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td>指向同一顶点边表中的下一条边/弧</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>顶点信息</td>
+</tr>
+<tr>
+<td><code>first</code></td>
+<td>指向该顶点第一条边/弧</td>
+</tr>
+<tr>
+<td><code>vertices</code></td>
+<td>顶点表，也就是邻接表的表头数组</td>
+</tr>
+<tr>
+<td><code>vexnum</code>、<code>arcnum</code></td>
+<td>当前顶点数与边数/弧数</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-31"><strong>易错点</strong>：#邻接表易错</h5>
+<ul>
+<li>无向图中 <code>arcnum</code> 仍记真实边数 $\lvert E\rvert$，不是边表结点数 $2\lvert E\rvert$。</li>
+<li>边表的先后顺序不唯一，所以由邻接表得到的 DFS/BFS 遍历序列也可能不同。</li>
+<li>课件中成员名写作 <code>first</code>；教材中常写作 <code>firstarc</code>，含义相同。</li>
+</ul>
+<hr>
+<h2 id="section-32">21.3 十字链表与邻接多重表</h2>
+<h3 id="section-33">21.3.1 十字链表</h3>
+<h5 id="section-34"><strong>定义</strong>：#十字链表</h5>
+<blockquote>
+<p>描述：十字链表是<strong>有向图</strong>的一种链式存储方式。一条弧同时被串入弧尾顶点的出弧链和弧头顶点的入弧链，因而能方便地访问出边和入边。</p>
+</blockquote>
+<h5 id="section-35"><strong>顶点结点</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>顶点本身的数据，如顶点名称</td>
+</tr>
+<tr>
+<td><code>firstin</code></td>
+<td>指向以该顶点为弧头的第一条弧，即第一条入弧</td>
+</tr>
+<tr>
+<td><code>firstout</code></td>
+<td>指向以该顶点为弧尾的第一条弧，即第一条出弧</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>顶点结点之间采用顺序存储。</li>
+<li><code>firstin</code> 方便找入边，<code>firstout</code> 方便找出边。</li>
+</ul>
+<h5 id="section-36"><strong>弧结点</strong>：</h5>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tailvex</code></td>
+<td>弧尾顶点的下标</td>
+</tr>
+<tr>
+<td><code>headvex</code></td>
+<td>弧头顶点的下标</td>
+</tr>
+<tr>
+<td><code>hlink</code></td>
+<td>指向弧头相同的下一条弧结点，即同一入弧链的下一项</td>
+</tr>
+<tr>
+<td><code>tlink</code></td>
+<td>指向弧尾相同的下一条弧结点，即同一出弧链的下一项</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>边权、标记等相关信息</td>
+</tr>
+</tbody>
+</table></div>
+<p>对于弧：</p>
+<p>$$
+\langle v_i,v_j\rangle
+$$</p>
+<ul>
+<li><code>tailvex=i</code>，<code>headvex=j</code>。</li>
+<li>它通过 <code>tlink</code> 接到 $v_i$ 的出弧链。</li>
+<li>它通过 <code>hlink</code> 接到 $v_j$ 的入弧链。</li>
+</ul>
+<h5 id="section-37"><strong>空间复杂度</strong>：</h5>
+<p>$$
+O(\lvert V\rvert+\lvert E\rvert)
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/02d2e31afe45.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-十字链表.png"><img class="note-image" src="/assets/408/images/02d2e31afe45.png" alt="DS-L21-十字链表.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>读图时从顶点结点的 <code>firstout</code> 沿 <code>tlink</code> 走，可枚举同一弧尾的全部出弧；从 <code>firstin</code> 沿 <code>hlink</code> 走，可枚举同一弧头的全部入弧。一条弧结点同时出现在这两条逻辑链中，但物理上只存一份。</p>
+</blockquote>
+<h5 id="section-38"><strong>优势</strong>：</h5>
+<ul>
+<li>有向图中查询一个顶点的入弧和出弧都很方便。</li>
+<li>删除一条弧或删除一个顶点时，可以沿入弧链、出弧链处理相关弧，比普通邻接表更直接。</li>
+<li>每条弧只存一个弧结点，没有普通有向邻接表查询入边时的全表扫描问题。</li>
+<li>经典十字链表的 <code>hlink</code>、<code>tlink</code> 通常仍是单向后继指针；若只给出两个端点而没有目标弧指针，删除前仍需在相应链中查找目标及其前驱，不能无条件宣称删除为 $O(1)$。</li>
+</ul>
+<h3 id="section-39">21.3.2 邻接多重表</h3>
+<h5 id="section-40"><strong>定义</strong>：#邻接多重表</h5>
+<blockquote>
+<p>描述：邻接多重表是<strong>无向图</strong>的一种链式存储方式。每条无向边只建立一个边结点，但该结点同时链接到其两个端点的边链表中。</p>
+</blockquote>
+<p>一个边结点通常包含：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ivex</code>、<code>jvex</code></td>
+<td>该边两端顶点的下标</td>
+</tr>
+<tr>
+<td><code>ilink</code></td>
+<td>指向依附于顶点 <code>ivex</code> 的下一条边</td>
+</tr>
+<tr>
+<td><code>jlink</code></td>
+<td>指向依附于顶点 <code>jvex</code> 的下一条边</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>权值或其他边信息</td>
+</tr>
+</tbody>
+</table></div>
+<p>顶点结点通常保存：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>顶点数据</td>
+</tr>
+<tr>
+<td><code>firstedge</code></td>
+<td>指向与该顶点相连的第一条边</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-41"><strong>空间复杂度</strong>：</h5>
+<p>$$
+O(\lvert V\rvert+\lvert E\rvert)
+$$</p>
+<h5 id="section-42"><strong>优势与限制</strong>：</h5>
+<ul>
+<li>每条无向边只保存一次，不再像普通无向邻接表那样保存两份边表结点。</li>
+<li>删除边、删除顶点等操作方便，因为一条边结点知道自己的两个端点及两条后继链接。</li>
+<li>邻接多重表<strong>只适用于无向图</strong>。</li>
+<li>与十字链表类似，“方便删除”不等于任何情况下都是 $O(1)$；若没有已知边结点或前驱信息，仍要先沿关联边链定位。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/ea1229478479.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-邻接多重表.png"><img class="note-image" src="/assets/408/images/ea1229478479.png" alt="DS-L21-邻接多重表.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>遍历顶点 $i$ 的关联边时，每到一个边结点都要先判断 $i$ 等于 <code>ivex</code> 还是 <code>jvex</code>：前者沿 <code>ilink</code>，后者沿 <code>jlink</code>。同一边结点由两个端点共享。</p>
+</blockquote>
+<h3 id="section-43">21.3.3 四种存储结构对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>比较项</th>
+<th>邻接矩阵</th>
+<th>邻接表</th>
+<th>十字链表</th>
+<th>邻接多重表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空间复杂度</td>
+<td>$O(\lvert V\rvert^2)$</td>
+<td>无向图 $O(\lvert V\rvert+2\lvert E\rvert)$；有向图 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>$O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+<tr>
+<td>枚举某顶点关联边</td>
+<td>扫描一行或一列，$O(\lvert V\rvert)$</td>
+<td>无向邻边/有向出边 $O(\deg)$；普通有向邻接表查入边 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>出弧 $O(\operatorname{OD})$，入弧 $O(\operatorname{ID})$</td>
+<td>$O(\deg)$</td>
+</tr>
+<tr>
+<td>删除边/顶点</td>
+<td>删边 $O(1)$；删点代价取决于清空还是物理压缩</td>
+<td>需查找并维护相关链，删点最坏 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>入、出弧均有链可循，但仍可能要找前驱</td>
+<td>一条边只存一次，但仍可能要找前驱</td>
+</tr>
+<tr>
+<td>适用于</td>
+<td>稠密图</td>
+<td>稀疏图和其他一般图</td>
+<td>只能存有向图</td>
+<td>只能存无向图</td>
+</tr>
+<tr>
+<td>表示是否唯一</td>
+<td>固定顶点顺序后唯一</td>
+<td>链内次序不同，表示不唯一</td>
+<td>链内次序不同，表示不唯一</td>
+<td>链内次序不同，表示不唯一</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-44"><strong>选择口诀</strong>：</h5>
+<blockquote>
+<p>稠密图查边选矩阵；稀疏图遍历邻边选邻接表；有向图还要频繁查入边选十字链表；无向图还要频繁删边删点选邻接多重表。</p>
+</blockquote>
+<hr>
+<h2 id="section-45">21.4 图的基本操作</h2>
+<h3 id="section-46">21.4.1 基本操作接口</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Adjacent(G, x, y)</code></td>
+<td>判断图 $G$ 中是否存在边 $(x,y)$ 或弧 $\langle x,y\rangle$</td>
+</tr>
+<tr>
+<td><code>Neighbors(G, x)</code></td>
+<td>列出与顶点 $x$ 邻接的顶点（或等价地列出关联边，取决于接口约定）</td>
+</tr>
+<tr>
+<td><code>InsertVertex(G, x)</code></td>
+<td>在图 $G$ 中插入顶点 $x$</td>
+</tr>
+<tr>
+<td><code>DeleteVertex(G, x)</code></td>
+<td>从图 $G$ 中删除顶点 $x$ 及其关联边</td>
+</tr>
+<tr>
+<td><code>AddEdge(G, x, y)</code></td>
+<td>若边 $(x,y)$ 或弧 $\langle x,y\rangle$ 不存在，则向图中添加该边</td>
+</tr>
+<tr>
+<td><code>RemoveEdge(G, x, y)</code></td>
+<td>若边 $(x,y)$ 或弧 $\langle x,y\rangle$ 存在，则从图中删除该边</td>
+</tr>
+<tr>
+<td><code>FirstNeighbor(G, x)</code></td>
+<td>返回顶点 $x$ 的第一个邻接点；不存在或 $x$ 不在图中时返回 $-1$</td>
+</tr>
+<tr>
+<td><code>NextNeighbor(G, x, y)</code></td>
+<td>已知 $y$ 是 $x$ 的邻接点时，按当前存储次序返回排在 $y$ 之后的下一个邻接点；没有则返回 $-1$</td>
+</tr>
+<tr>
+<td><code>Get_edge_value(G, x, y)</code></td>
+<td>获取边 $(x,y)$ 或弧 $\langle x,y\rangle$ 的权值</td>
+</tr>
+<tr>
+<td><code>Set_edge_value(G, x, y, v)</code></td>
+<td>将边 $(x,y)$ 或弧 $\langle x,y\rangle$ 的权值设为 $v$</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="section-47"><strong>易错点</strong>：#图基本操作</h5>
+<ul>
+<li><code>AddEdge</code> 是添加边；原课件文字“向图中删除该边”为笔误，应按函数名和上下文理解为“添加该边”。</li>
+<li>对有向图，<code>Adjacent(G,x,y)</code> 判断的是 $x\to y$，不能把 $y\to x$ 当作同一条弧。</li>
+<li>删除顶点不只是删除顶点表项，还必须删除所有与该顶点关联的边或弧。</li>
+</ul>
+<h3 id="section-48">21.4.2 判断邻接：<code>Adjacent(G, x, y)</code></h3>
+<h5 id="section-49"><strong>邻接矩阵</strong>：</h5>
+<p>直接检查矩阵元素：</p>
+<p>$$
+A[x][y]
+$$</p>
+<p>故无论有向图还是无向图，时间复杂度均为：</p>
+<p>$$
+O(1)
+$$</p>
+<h5 id="section-50"><strong>邻接表</strong>：</h5>
+<p>在顶点 $x$ 的边表中顺序查找 $y$。有向图检查的是 $x$ 的出边表，复杂度为 $O(\operatorname{OD}(x))$；无向图为 $O(\deg(x))$。最坏情况下课件统一记为：</p>
+<p>$$
+O(\lvert V\rvert)
+$$</p>
+<p>在简单图中，度或出度最多为 $\lvert V\rvert-1$，所以最坏为 $O(\lvert V\rvert)$。</p>
+<h3 id="section-51">21.4.3 列出邻接边：<code>Neighbors(G, x)</code></h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>图与存储结构</th>
+<th>复杂度</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无向图的邻接矩阵</td>
+<td>$\Theta(\lvert V\rvert)$</td>
+<td>扫描顶点 $x$ 对应的一行</td>
+</tr>
+<tr>
+<td>无向图的邻接表</td>
+<td>$\Theta(1+\deg(x))$</td>
+<td>访问表头并输出整条边表；时间至少与输出量成正比</td>
+</tr>
+<tr>
+<td>有向图的邻接矩阵</td>
+<td>$\Theta(\lvert V\rvert)$</td>
+<td>扫描行列出出边，扫描列列出入边</td>
+</tr>
+<tr>
+<td>有向图的普通邻接表，查出边</td>
+<td>$\Theta(1+\operatorname{OD}(x))$</td>
+<td>直接遍历 $x$ 的出边表</td>
+</tr>
+<tr>
+<td>有向图的普通邻接表，查入边</td>
+<td>$\Theta(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>必须访问全部表头并扫描所有边表</td>
+</tr>
+<tr>
+<td>有向图的十字链表</td>
+<td>出边 $\Theta(1+\operatorname{OD}(x))$；入边 $\Theta(1+\operatorname{ID}(x))$</td>
+<td>分别沿 <code>firstout/tlink</code> 或 <code>firstin/hlink</code> 遍历</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-52">21.4.4 插入顶点：<code>InsertVertex(G, x)</code></h3>
+<h5 id="section-53"><strong>邻接矩阵</strong>：</h5>
+<ul>
+<li>若最大容量已经预留，且整张矩阵在建图时已经统一初始化为“无边”，插入孤立顶点只需写顶点表并增加 <code>vexnum</code>，课件记为 $O(1)$。</li>
+<li>若新增的行、列尚未初始化，则需要写入 $2\lvert V\rvert+1$ 个无边标记，时间为 $O(\lvert V\rvert)$。</li>
+<li>若容量不足而重新分配并复制整个矩阵，代价可达 $O(\lvert V\rvert^2)$。</li>
+</ul>
+<h5 id="section-54"><strong>邻接表</strong>：</h5>
+<ul>
+<li>新增一个顶点表头，将 <code>first</code> 置空即可。</li>
+<li>时间复杂度：</li>
+</ul>
+<p>$$
+O(1)
+$$</p>
+<p><a class="note-image-link" href="/assets/408/images/96ef2d34822e.png" target="_blank" rel="noreferrer" aria-label="Open original image: DS-L21-插入顶点.png"><img class="note-image" src="/assets/408/images/96ef2d34822e.png" alt="DS-L21-插入顶点.png" loading="lazy" decoding="async"></a></p>
+<blockquote>
+<p>新顶点 $X$ 暂时没有关联边，所以对应的新行和新列都为 $0$；带权图则应填入约定的无边标记，并将对角线按题意设为 $0$。</p>
+</blockquote>
+<h3 id="section-55">21.4.5 删除顶点：<code>DeleteVertex(G, x)</code></h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>存储结构</th>
+<th>图类型</th>
+<th>复杂度</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接矩阵</td>
+<td>有向、无向</td>
+<td>标记删除/清空行列为 $O(\lvert V\rvert)$；物理压缩矩阵为 $O(\lvert V\rvert^2)$</td>
+<td>是否移动后续行、列取决于实现</td>
+</tr>
+<tr>
+<td>普通邻接表</td>
+<td>无向图</td>
+<td>最坏 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>释放 $x$ 的边表，还要在各邻接点的链中删除指向 $x$ 的对称结点</td>
+</tr>
+<tr>
+<td>普通邻接表</td>
+<td>有向图</td>
+<td>最坏 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+<td>释放 $x$ 的全部出弧，并扫描所有边表删除指向 $x$ 的入弧</td>
+</tr>
+<tr>
+<td>十字链表/邻接多重表</td>
+<td>对应图类型</td>
+<td>与关联边数及链中定位代价有关</td>
+<td>入、出弧或两个端点的链都可直接访问，维护更清楚，但并非无条件 $O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-56">21.4.6 添加边：<code>AddEdge(G, x, y)</code></h3>
+<blockquote>
+<p>描述：若无向边 $(x,y)$ 或有向弧 $\langle x,y\rangle$ 不存在，则加入该边。</p>
+</blockquote>
+<ul>
+<li>邻接矩阵：令 $A[x][y]$ 为 $1$ 或相应权值；无向图还要同步令 $A[y][x]$ 为相同值。</li>
+<li>邻接表：有向图在 $x$ 的边表插入一个指向 $y$ 的结点；无向图需在 $x$、$y$ 两条边表各插入一个结点。</li>
+<li>复杂度口径：邻接矩阵判重并写入都是 $O(1)$；邻接表在“题目已保证边不存在”或“允许平行边”且采用头插法时为 $O(1)$。若接口必须先确认边不存在，则普通邻接表还要先查找，代价为 $O(\operatorname{OD}(x))$ 或 $O(\deg(x))$，最坏 $O(\lvert V\rvert)$。</li>
+</ul>
+<h3 id="section-57">21.4.7 删除边与权值操作</h3>
+<h5 id="section-58"><strong>删除边</strong>：<code>RemoveEdge(G, x, y)</code></h5>
+<ul>
+<li>邻接矩阵中将对应位置改为 $0$ 或 $\infty$；无向图同时修改两个对称位置，时间为 $O(1)$。</li>
+<li>有向邻接表在 $x$ 的出边表中查找并摘除 $y$，时间为 $O(\operatorname{OD}(x))$。</li>
+<li>无向邻接表需分别从 $x$、$y$ 的边表摘除对称结点，时间为 $O(\deg(x)+\deg(y))$。</li>
+<li>十字链表、邻接多重表能从两类关联链处理同一弧/边；若已持有目标结点及所需前驱，修改链接可为 $O(1)$，否则仍要计入定位目标和前驱的时间。</li>
+</ul>
+<h5 id="section-59"><strong>边权值</strong>：</h5>
+<ul>
+<li><code>Get_edge_value(G,x,y)</code>：读取边 $(x,y)$ 或弧 $\langle x,y\rangle$ 的权值。</li>
+<li><code>Set_edge_value(G,x,y,v)</code>：将对应边权改为 $v$。</li>
+<li>邻接矩阵可直接读写 $A[x][y]$，为 $O(1)$；普通邻接表须先在 $x$ 的边表中找到目标边，代价与 <code>Adjacent</code> 相同。</li>
+</ul>
+<h3 id="section-60">21.4.8 邻接点迭代：<code>FirstNeighbor</code> 与 <code>NextNeighbor</code></h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>存储结构</th>
+<th><code>FirstNeighbor(G,x)</code></th>
+<th><code>NextNeighbor(G,x,y)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接矩阵</td>
+<td>从第 0 列起扫描，最坏 $O(\lvert V\rvert)$</td>
+<td>从 $y$ 后一列继续扫描，最坏 $O(\lvert V\rvert)$</td>
+</tr>
+<tr>
+<td>邻接表</td>
+<td>读取首个边表结点，$O(1)$</td>
+<td>若已持有 $y$ 对应的边表结点指针，沿 <code>next</code> 为 $O(1)$；若只给顶点号 $y$，需先在线性链中定位，最坏 $O(\deg(x))$</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>“第一个”和“下一个”由邻接矩阵的列序或邻接表的链内次序决定。邻接表的链内次序不唯一，因此依赖这两个接口的 DFS/BFS 访问序列也可能不唯一。</p>
+</blockquote>
+<hr>
+<h2 id="section-61">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-312cfdf36075/">上一篇：图基本概念</a> · <a href="/en/notes/cs408-5efaa92ea781/">下一篇：图的遍历</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-d690a826208c/">图代码</a></li>
+</ul>
+<h2 id="section-62">21.5 题型与复盘</h2>
+<h3 id="section-63">21.5.1 常见题型</h3>
+<h5 id="section-64"><strong>题型一：由图写邻接矩阵或邻接表</strong></h5>
+<ul>
+<li>先给顶点确定编号顺序。</li>
+<li>无向图矩阵要检查对称性；无向边在邻接表中必须写两次。</li>
+<li>有向图按弧尾建立边表，不能反向写入。</li>
+<li>带权图的无边位置按题意填 $\infty$ 或其他约定值。</li>
+</ul>
+<h5 id="section-65"><strong>题型二：由邻接矩阵求度</strong></h5>
+<ul>
+<li>无自环无向图：数任一行的非零元素；若允许自环，主对角线上的自环对度贡献 $2$。</li>
+<li>有向图：行和为出度，列和为入度，二者和为总度。</li>
+<li>注意权值不为 $0$ 的带权图依旧按“是否有边”计数，而不是把权值相加。</li>
+</ul>
+<h5 id="section-66"><strong>题型三：邻接矩阵幂的含义</strong></h5>
+<ul>
+<li>$A^2[i][j]$：从 $i$ 到 $j$ 的长度为 $2$ 的游走数。</li>
+<li>$A^k[i][j]$：从 $i$ 到 $j$ 的长度为 $k$ 的游走数。</li>
+<li>游走长度按经过的边数计算，不是经过的顶点数；游走允许重复顶点或边。</li>
+</ul>
+<h5 id="section-67"><strong>题型四：存储结构选择</strong></h5>
+<ul>
+<li>顶点很多、边很少：邻接表。</li>
+<li>顶点之间关系接近完全图、常判两点是否相邻：邻接矩阵。</li>
+<li>有向图需同时高效找入边、出边：十字链表。</li>
+<li>无向图需频繁删除边或顶点：邻接多重表。</li>
+</ul>
+<h3 id="section-68">21.5.2 本节复盘</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>必须掌握的结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邻接矩阵</td>
+<td>空间 $O(\lvert V\rvert^2)$，判边 $O(1)$，适合稠密图</td>
+</tr>
+<tr>
+<td>无向图矩阵</td>
+<td>固定顶点次序后为对称矩阵；无自环时第 $i$ 行非零数等于 $v_i$ 的度</td>
+</tr>
+<tr>
+<td>有向图矩阵</td>
+<td>行求出度、列求入度</td>
+</tr>
+<tr>
+<td>$A^k$</td>
+<td>元素表示长度为 $k$ 的游走条数，不保证是简单路径</td>
+</tr>
+<tr>
+<td>无向邻接表</td>
+<td>每条边对应 $2$ 个边表结点</td>
+</tr>
+<tr>
+<td>有向邻接表</td>
+<td>每条弧对应 $1$ 个结点；普通邻接表查询入边最坏 $O(\lvert V\rvert+\lvert E\rvert)$</td>
+</tr>
+<tr>
+<td>十字链表</td>
+<td>仅用于有向图，同时维护入弧链和出弧链</td>
+</tr>
+<tr>
+<td>邻接多重表</td>
+<td>仅用于无向图，一条边只存一次，便于删除</td>
+</tr>
+<tr>
+<td>图基本操作</td>
+<td>矩阵判边 $O(1)$；邻接表判边最坏 $O(\lvert V\rvert)$；增删复杂度必须说明判重、初始化和物理移动前提</td>
+</tr>
+</tbody>
+</table></div>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-59e41ea74a00/index.html"><span>← Previous item</span><strong>Lecture 11：思维导图 - 运输层</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-5b39b66a185c/index.html"><span>Next item →</span><strong>Lecture 5：神经网络模型</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-424a656729a9/"><span class="related-type">Note</span><strong>0. 重点算法汇总</strong><span>Chinese-language Computer Science 408 note: 0. 重点算法汇总. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

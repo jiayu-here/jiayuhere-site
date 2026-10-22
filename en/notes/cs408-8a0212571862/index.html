@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 16：知识 - 高级语言程序与机器级代码之间的对应 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 16：知识 - 高级语言程序与机器级代码之间的对应. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Computer Organization">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 16：知识 - 高级语言程序与机器级代码之间的对应 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 16：知识 - 高级语言程序与机器级代码之间的对应. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-8a0212571862/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 16：知识 - 高级语言程序与机器级代码之间的对应 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 16：知识 - 高级语言程序与机器级代码之间的对应. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 16：知识 - 高级语言程序与机器级代码之间的对应",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-8a0212571862/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-8a0212571862/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-8a0212571862/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8a0212571862/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8a0212571862/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-8a0212571862/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 16：知识 - 高级语言程序与机器级代码之间的对应</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 16：知识 - 高级语言程序与机器级代码之间的对应. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>13 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Computer Organization</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/d062b532426b.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/d062b532426b.pdf" download="Lecture 16：知识 - 高级语言程序与机器级代码之间的对应.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">4.1 考查边界与 x86 基础</a><a href="#section-3">4.2 寄存器与标志</a><a href="#section-6">4.3 常用指令与寻址</a><a href="#section-9">4.4 选择与循环</a><a href="#section-12">4.5 函数调用与栈帧</a><a href="#section-20">相关知识</a><a href="#section-21">4.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：408 只要求结合 C 看懂关键 x86 汇编和相应机器码，不要求手工把 C 完整翻译成汇编。关键抓手是：Intel 语法“目的在左、源在右”、条件码、典型 32 位栈帧与 <code>call/ret</code>；具体寄存器保存、传参与对齐属于调用约定/ABI，不能当成所有 x86 程序都固定不变的 ISA 规则。</p>
+</blockquote>
+<h2 id="section-1">4.1 考查边界与 x86 基础</h2>
+<ul>
+<li>题目会给出简单 C、汇编或机器码，要求识别常见指令、选择结构、循环和函数调用；可结合给定编码分析汇编与机器码的对应关系，也会考查指令格式/寻址。这里不主张“同一功能只有唯一机器码”：不同编码或助记写法可能表达相同语义。</li>
+<li>通常不要求人工完成 C <code>-&gt;</code> 汇编/机器码的逐行翻译；若出现非 x86 汇编，题目一般会提供充分注释。</li>
+<li>Intel 格式通常写作 <code>op destination, source</code>，<strong>第一个是目的操作数，第二个是源操作数，数据从右向左流动</strong>。操作数可在寄存器、主存或指令立即数中。</li>
+</ul>
+<h3 id="section-2">4.1.1 Intel 与 AT&amp;T 语法边界</h3>
+<p>同一条 x86 机器指令可用不同汇编语法书写，语法差异不等于 ISA 不同：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Intel 语法</th>
+<th>AT&amp;T 语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作数顺序</td>
+<td><code>目的, 源</code></td>
+<td><code>源, 目的</code></td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td><code>eax</code></td>
+<td><code>%eax</code></td>
+</tr>
+<tr>
+<td>立即数</td>
+<td><code>10</code> 或 <code>0x0A</code></td>
+<td><code>$10</code> 或 <code>$0x0A</code></td>
+</tr>
+<tr>
+<td>内存</td>
+<td><code>[ebx+4]</code></td>
+<td><code>4(%ebx)</code></td>
+</tr>
+<tr>
+<td>宽度</td>
+<td>常用 <code>byte/word/dword ptr</code></td>
+<td>常在助记符后加 <code>b/w/l</code> 等后缀</td>
+</tr>
+</tbody>
+</table></div>
+<p>本讲后文统一采用 Intel 语法；读题时先确认语法，不能只凭逗号两侧位置判断数据方向。</p>
+<h2 id="section-3">4.2 寄存器与标志</h2>
+<h3 id="section-4">4.2.1 常用寄存器</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>寄存器</th>
+<th>典型作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用</td>
+<td>EAX、EBX、ECX、EDX</td>
+<td>计算、暂存、参数/返回值等；32 位寄存器名常以 E 开头</td>
+</tr>
+<tr>
+<td>AX 分割</td>
+<td>AH/AL，BH/BL，CH/CL，DH/DL</td>
+<td>16 位 AX/BX/CX/DX 的高/低 8 位可独立使用</td>
+</tr>
+<tr>
+<td>指针/变址</td>
+<td>EBP、ESP、ESI、EDI</td>
+<td>典型帧指针代码中 EBP 作栈帧基址，ESP 指向栈顶，ESI/EDI 可作源/目的变址</td>
+</tr>
+<tr>
+<td>指令</td>
+<td>EIP/IP</td>
+<td>下一条指令位置</td>
+</tr>
+<tr>
+<td>段</td>
+<td>CS、DS、SS、ES</td>
+<td>代码、数据、栈和附加段</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><code>EBP</code> 与 <code>ESP</code> 也可作一般算术逻辑寄存器，但其常见约定用途是访问栈。ESP 动态指向栈顶；建立帧指针的函数中 EBP 通常在本次调用期间保持不变。优化编译器可以省略帧指针并把 EBP 当通用寄存器，此时改由 ESP 或其他方式定位栈内对象。</li>
+<li>以 EAX 为例：EAX 为 32 bit，AX 为低 16 bit，AH/AL 为 AX 的高/低 8 bit。</li>
+</ul>
+<h3 id="section-5">4.2.2 重要标志位</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OF</td>
+<td>有符号溢出</td>
+</tr>
+<tr>
+<td>SF</td>
+<td>结果符号，负为 1</td>
+</tr>
+<tr>
+<td>ZF</td>
+<td>结果为 0 时为 1</td>
+</tr>
+<tr>
+<td>CF</td>
+<td>最高位进位/无符号借位相关</td>
+</tr>
+<tr>
+<td>AF</td>
+<td>第 3 位向第 4 位的辅助进位</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>结果低字节中 1 的数目为偶数时为 1</td>
+</tr>
+<tr>
+<td>DF</td>
+<td>串操作方向，1 时 SI/DI 递减，0 时递增</td>
+</tr>
+<tr>
+<td>IF</td>
+<td>1 允许可屏蔽中断</td>
+</tr>
+<tr>
+<td>TF</td>
+<td>调试单步陷阱</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-6">4.3 常用指令与寻址</h2>
+<h3 id="section-7">4.3.1 传送与算术逻辑</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用/约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mov d,s</code></td>
+<td>复制 <code>s</code> 到 <code>d</code>；<code>dword/word/byte ptr</code> 指定内存访问宽度 32/16/8 bit</td>
+</tr>
+<tr>
+<td><code>add/sub d,s</code></td>
+<td>加/减，结果回写 d</td>
+</tr>
+<tr>
+<td><code>mul s</code></td>
+<td>32 位形式将无符号 <code>EAX</code> 与 s 相乘，64 位积放入 <code>EDX:EAX</code>；只有一个显式源操作数</td>
+</tr>
+<tr>
+<td><code>imul s</code> / <code>imul d,s</code> / <code>imul d,s,imm</code></td>
+<td>有符号乘法有一、二、三操作数形式；单操作数 32 位形式的完整积也放入 <code>EDX:EAX</code></td>
+</tr>
+<tr>
+<td><code>div/idiv s</code></td>
+<td>32 位形式用 <code>EDX:EAX</code> 除以 s，商入 EAX，余数入 EDX；分别按无符号/有符号解释</td>
+</tr>
+<tr>
+<td><code>neg/inc/dec</code></td>
+<td>取负、自增、自减</td>
+</tr>
+<tr>
+<td><code>and/or/not/xor</code></td>
+<td>逐位逻辑运算</td>
+</tr>
+<tr>
+<td><code>shl/shr/sar</code></td>
+<td>左移、逻辑右移、算术右移；不发生有效位丢失时，左移 $k$ 位可对应乘 $2^k$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>目的操作数可为寄存器或主存，不能是常量；源操作数可为寄存器、主存或立即数。对本讲常见的 <code>mov</code> 和双操作数算术逻辑指令，通常不允许两个显式操作数<strong>同时</strong>来自主存；字符串指令等专用形式另有隐含内存操作数，不能把这条简化规则推广到全部 x86 指令。</li>
+<li><code>mov eax, ebx</code> 是寄存器寻址；<code>mov eax, dword ptr [0xaf996]</code> 是直接内存寻址；<code>mov eax, dword ptr [ebx]</code> 是寄存器间接寻址。</li>
+<li>复杂地址 <code>[base + index*scale + displacement]</code> 体现基址/变址/位移组合，硬件比例因子 <code>scale</code> 只能取 1、2、4、8。例如 <code>mov eax,[ebx+ecx*4+4]</code> 取以 EBX 为基址、ECX 按 4 B 元素缩放后的内存位置；<code>*32</code> 不能直接编码成 x86 的 SIB 比例因子。</li>
+</ul>
+<h3 id="section-8">4.3.2 数组寻址例</h3>
+<p><code>int a[24][64]</code> 采用行优先、元素 4 B 时，一行大小为 $64\times4=256$ B。指令：</p>
+<pre><code class="language-asm">mov [ecx + edx*4 + 0x00422000], 0x0A
+</code></pre>
+<ul>
+<li><code>0x0A</code> 是立即数源操作数；中括号说明目的为内存单元。</li>
+<li><code>0x00422000</code> 是数组基址；<code>ecx</code> 可预先保存 <code>row*256</code>，<code>edx*4</code> 表示列号乘元素大小。因此有效地址为 <code>base + row*256 + col*4</code>。行偏移 256 B 需由前序移位/乘法得到，不能在该内存操作数中写成硬件不支持的 <code>row*256</code> 比例因子。</li>
+<li>原题写法省略了目的内存操作数的宽度；真正汇编 <code>mov [地址], 立即数</code> 时，单凭立即数 <code>0x0A</code> 通常无法判定写 8、16 还是 32 bit，须由题设或 <code>byte/word/dword ptr</code> 等声明确定。本题 <code>int</code> 元素占 4 B，若要写整个元素，应明确为 <code>mov dword ptr [ecx + edx*4 + 0x00422000], 0x0A</code>。</li>
+</ul>
+<h2 id="section-9">4.4 选择与循环</h2>
+<h3 id="section-10">4.4.1 选择结构</h3>
+<p><code>cmp a,b</code> 本质执行比较并设置标志位，不保存算术结果；随后 <code>jz/jne/jbe/...</code> 根据 ZF、SF、OF、CF 等条件跳转。典型 <code>if/else</code>：比较 <code>-&gt;</code> 条件跳转到 else/then <code>-&gt;</code> 必要时无条件跳过另一分支 <code>-&gt;</code> 汇合。</p>
+<p>例如原页的函数比较两个指针 <code>p1,p2</code>：先从 <code>[ebp+8]</code>、<code>[ebp+12]</code> 取参数，<code>cmp eax,edx</code>，随后 <code>jbe .L1</code> 在按<strong>无符号地址</strong>比较得到 <code>p1&lt;=p2</code> 时跳转（原页注释只写 <code>&lt;</code>，遗漏等于）。两条路径分别执行 <code>mov eax,[edx]</code> 或 <code>mov eax,[eax]</code>，EAX 承载返回值。若把原 C 代码当作严格 ISO C，<code>p1&gt;p2</code> 的关系比较只在标准规定的相关对象之间有定义（例如同一数组中的元素及尾后位置、同一结构体的成员）；任意两个无关对象的指针不能仅凭这段汇编反推为可移植的 C 语义。</p>
+<h3 id="section-11">4.4.2 循环结构</h3>
+<p>循环机器级结构为：<strong>初始化 <code>-&gt;</code> 首次条件（可跳过）<code>-&gt;</code> 循环体 <code>-&gt;</code> 更新 <code>-&gt;</code> 条件跳回</strong>。<code>loop L1</code> 的控制流语义是先将 ECX 减 1，若 ECX 不为 0 就跳到 L1；它本身不修改 EFLAGS。若只关心是否跳转，可近似理解为：</p>
+<pre><code class="language-asm">dec ecx
+cmp ecx, 0
+jne L1
+</code></pre>
+<ul>
+<li>上述三条伪代码会修改标志位，因而与真实 <code>loop</code> <strong>并非完全等价</strong>；后续代码若读取标志位，必须按真实指令语义分析。</li>
+<li><code>loop</code> 默认以 ECX 为计数器；<code>loopnz</code> 要求递减后的 ECX 非零且原有 <code>ZF=0</code>，<code>loopz</code> 要求递减后的 ECX 非零且原有 <code>ZF=1</code>。这些 <code>loop</code> 指令不会替前面的比较重新计算 ZF。</li>
+<li>不要只看 <code>jmp</code> 就断定无限循环，需结合跳转前的计数器/比较更新判断出口。</li>
+</ul>
+<h2 id="section-12">4.5 函数调用与栈帧</h2>
+<h3 id="section-13">4.5.1 call/ret 与寄存器约定</h3>
+<ul>
+<li><code>call func</code> 的作用近似“把返回 IP 压栈，再跳转到 func”；<code>ret</code> 从栈顶弹出返回 IP 并跳回调用点之后。</li>
+<li>在常见 32 位 <code>cdecl</code> 类约定中，EAX、ECX、EDX 通常由调用者保存，EBX、ESI、EDI、EBP 通常由被调用者保护；内层函数若改动被调用者保护寄存器，返回前须恢复。<code>stdcall</code>、<code>fastcall</code>、System V、Windows x64 等约定的传参、清栈和保存集合可能不同，这些规则属于 ABI/调用约定而非 x86 ISA 本身。</li>
+</ul>
+<h3 id="section-14">4.5.2 栈帧布局与访问</h3>
+<p>在本讲采用的典型 32 位、基于帧指针的调用约定中，栈向<strong>低地址</strong>增长，常以 4 B 为基本压栈宽度。一个过程的栈帧可由稳定的 EBP 和变化的 ESP 定位；每个未被尾调用消除的普通嵌套调用形成自己的调用记录。以下偏移布局以常见的栈上传参方式为例，不是所有 x86 ABI 的唯一布局。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>典型区域（相对 EBP）</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[ebp]</code></td>
+<td>上一层 EBP（保存的旧帧基址）</td>
+</tr>
+<tr>
+<td><code>[ebp+4]</code></td>
+<td>返回地址</td>
+</tr>
+<tr>
+<td><code>[ebp+8]</code> 起</td>
+<td>调用参数，靠前参数通常更靠近栈顶/低正偏移</td>
+</tr>
+<tr>
+<td><code>[ebp-...]</code></td>
+<td>局部变量，通常在负偏移区域</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><code>push x</code> 可压入立即数、寄存器或内存值；<code>pop d</code> 弹出到寄存器或内存。<code>sub esp,n</code> 可一次为局部变量留空间，<code>add esp,n</code> 回收。</li>
+<li>常见恢复序列：<code>mov esp, ebp</code> 后 <code>pop ebp</code>。编译器可能把栈帧大小对齐到 16 B，因此会出现未使用填充区。</li>
+</ul>
+<p>原页的 <code>caller()</code> 示例令 <code>temp1=125</code>、<code>temp2=80</code>，调用 <code>add(temp1,temp2)</code>，其 <code>return x+y</code> 得到 $125+80=205$。在所示 32 位栈上传参及帧指针代码里，<code>caller</code> 用 <code>[ebp-12]</code>、<code>[ebp-8]</code> 保存两个局部变量，调用前把实参压栈；<code>add</code> 以 <code>[ebp+8]</code>、<code>[ebp+12]</code> 读取两个实参，结果由 EAX 返回。这里的负偏移和正偏移是<strong>该实例</strong>的布局，不是任意编译器都必须照用的数值。</p>
+<h3 id="section-15">4.5.3 进程地址空间中的栈</h3>
+<p>源 PDF 还给出了典型进程虚拟地址空间：只读代码/常量、可写数据、堆和栈属于不同区域，堆常向高地址扩展，栈常向低地址扩展。具体区域顺序、随机化地址、共享库映射和保护权限由操作系统、装载器与 ABI 决定；该图用于理解栈帧所处位置，不属于 x86 ISA 对地址布局的硬性规定。</p>
+<h3 id="section-16">题型：#函数代码阅读</h3>
+<h4 id="section-17">第一部分：固定流程</h4>
+<ul>
+<li>若代码建立了帧指针，先找函数入口的保存 EBP/建立帧、<code>sub esp</code> 分配局部空间和结尾恢复序列，确定栈向下增长与参数偏移；若没有这套序言，考虑编译器省略帧指针、直接基于 ESP 寻址或进行了优化。</li>
+<li>再把 <code>[ebp+...]</code> 标成参数、<code>[ebp-...]</code> 标成局部变量，追踪 EAX 返回值和条件跳转目标。</li>
+<li>遇到 <code>call</code> 记住返回地址压栈；遇到 <code>ret</code> 从栈顶取返回地址。若有嵌套调用，检查哪些寄存器需要保存恢复。</li>
+</ul>
+<h4 id="section-18">第二部分：易错点</h4>
+<ul>
+<li>Intel 语法目的在左源在右，不能按 AT&amp;T 语法反读。</li>
+<li><code>mov</code> 只是复制，<code>cmp</code> 主要改标志，<code>jcc</code> 决定控制流；三者连读才知道 C 条件的方向。</li>
+<li>建立帧指针时，EBP 在帧内通常固定而 ESP 会随 <code>push/pop/sub/add</code> 变化；若编译器省略 EBP，仍可在精确跟踪 ESP 变化后用其偏移访问参数和局部变量，不能机械套用 <code>[ebp+8]</code> 模板。</li>
+</ul>
+<h4 id="section-19">源 PDF 的递归函数与机器码例题（2019 年）</h4>
+<p>原页给出 <code>f1(n)</code>：$n&gt;1$ 时返回 $n\times f1(n-1)$，否则返回 $1$。题图列出部分 32 位 x86 机器码与地址，可把控制流直接读成下表：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>地址与机器码</th>
+<th>汇编</th>
+<th>在该题中的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00401018: 83 7D 08 01</code></td>
+<td><code>cmp dword ptr [ebp+8], 1</code></td>
+<td>将参数 $n$ 与 1 比较，设置标志位</td>
+</tr>
+<tr>
+<td><code>0040101C: 7E 17</code></td>
+<td><code>jle 00401035</code></td>
+<td>$n\le1$ 时跳到基本情形，属于条件转移</td>
+</tr>
+<tr>
+<td><code>00401021: 83 E8 01</code>、<code>00401024: 50</code></td>
+<td><code>sub eax,1</code>、<code>push eax</code></td>
+<td>形成并压入递归实参 $n-1$</td>
+</tr>
+<tr>
+<td><code>00401025: E8 D6 FF FF FF</code></td>
+<td><code>call f1 (00401000)</code></td>
+<td>压入返回地址并调用同一函数，属于调用转移</td>
+</tr>
+<tr>
+<td><code>00401033: EB 05</code></td>
+<td><code>jmp 0040103A</code></td>
+<td>跳过基本情形，属于无条件转移</td>
+</tr>
+<tr>
+<td><code>00401035: B8 01 00 00 00</code></td>
+<td><code>mov eax,1</code></td>
+<td>基本情形的返回值</td>
+</tr>
+<tr>
+<td><code>0040104A: C3</code></td>
+<td><code>ret</code></td>
+<td>从栈中取返回地址并返回</td>
+</tr>
+</tbody>
+</table></div>
+<p>相对位移按<strong>指令末尾的顺序下一地址</strong>计算：<code>jle</code> 长 2 B，<code>0040101E + 0x17 = 00401035</code>；<code>jmp</code> 长 2 B，<code>00401035 + 0x05 = 0040103A</code>。<code>call</code> 长 5 B，下一地址为 <code>0040102A</code>，后四字节 <code>D6 FF FF FF</code> 在小端下是有符号 32 位位移 <code>0xFFFFFFD6=-42</code>，故 <code>0040102A-0x2A=00401000</code>。这些数值既说明控制流，也把前一节的 PC 相对寻址与本节机器码联系起来；未显示的指令不从截图臆测。</p>
+<h2 id="section-20">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-cd157e10da5e/">上一篇：CISC 和 RISC</a> · <a href="/en/notes/cs408-8aa8809e8e26/">下一篇：CPU 的功能与结构</a></li>
+</ul>
+<h2 id="section-21">4.6 本节复盘</h2>
+<ul>
+<li>408 要求会读 x86 的 C/汇编/机器码对应关系，不要求手译整段程序；Intel 语法为 <code>目的,源</code>。</li>
+<li>寄存器、标志、<code>mov</code>、算术逻辑、<code>cmp+jcc</code> 是阅读选择和循环的基础；二维数组地址遵循基址加行列字节偏移。</li>
+<li>普通 <code>loop</code> 只递减计数寄存器 ECX/CX 并在其非零时跳转，不检查 ZF；<code>loope/loopz</code>、<code>loopne/loopnz</code> 才把计数条件与 ZF 结合。选择与一般条件循环常通过比较后改变 IP。</li>
+<li><code>call</code> 压返回地址并跳转，<code>ret</code> 弹出返回地址；典型 32 位帧指针代码用 EBP/ESP 组织向低地址生长的栈帧，参数常在 EBP 正偏移、局部变量常在负偏移，但最终以题设调用约定和实际指令为准。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-871e91cac1d7/index.html"><span>← Previous item</span><strong>Lecture 7：数据库恢复技术</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-8aa8809e8e26/index.html"><span>Next item →</span><strong>Lecture 17：知识 - CPU 的功能与结构</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-f40d324810a1/"><span class="related-type">Note</span><strong>Lecture 1：知识 - 计算机系统层次结构</strong><span>Chinese-language Computer Science 408 note: Lecture 1：知识 - 计算机系统层次结构. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

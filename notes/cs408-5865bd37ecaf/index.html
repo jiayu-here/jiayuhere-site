@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>教材补充：虚拟存储器 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：教材补充：虚拟存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机组成原理">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="教材补充：虚拟存储器 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：教材补充：虚拟存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-5865bd37ecaf/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="教材补充：虚拟存储器 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：教材补充：虚拟存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "教材补充：虚拟存储器",
+      "item": "https://www.jiayuhere.com/notes/cs408-5865bd37ecaf/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-5865bd37ecaf/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-5865bd37ecaf/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5865bd37ecaf/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5865bd37ecaf/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-5865bd37ecaf/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>教材补充：虚拟存储器</h1><p class="article-lead">408 学习笔记：教材补充：虚拟存储器。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-10-15">2026-10-15</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机组成原理</span></div></div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">3.1 地址空间、页与页框</a><a href="#section-2">3.2 页表与页表项</a><a href="#section-5">3.3 TLB：页表项的高速缓存</a><a href="#section-8">3.4 TLB、页表与 Cache 的整机路径</a><a href="#section-9">3.5 缺页处理与精确异常</a><a href="#section-10">3.6 段式与段页式虚拟存储器</a><a href="#section-13">3.7 典型题型与计算顺序</a><a href="#section-16">相关知识</a><a href="#section-17">3.8 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p><strong>NOTE</strong> · 补充属性
+本文不是 Lecture 1-27 原 PDF 的改写，而是为完整表达组成原理教材中的虚拟存储器体系而新增的教材补充，覆盖页式虚拟存储器、页表、地址转换、TLB、段式与段页式虚拟存储器。2027 年 408 大纲只用于确认最低覆盖范围，不是本文的内容上限；硬件地址转换是本篇重点，页面置换与工作集等操作系统策略见文末链接。</p>
+</blockquote>
+<blockquote>
+<p>描述：虚拟存储器让每个进程看到连续、统一的虚拟地址空间，而主存中只保留当前需要的页面。CPU 给出虚拟地址，MMU 通过 TLB 和页表得到物理地址；若页面不在主存，则触发缺页异常，由操作系统调页后重启原指令。</p>
+</blockquote>
+<h2 id="section-1">3.1 地址空间、页与页框</h2>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>易错边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>虚拟地址 VA</td>
+<td>CPU 执行程序时产生、进程可见的地址</td>
+<td>不是磁盘地址，也不一定能直接送主存</td>
+</tr>
+<tr>
+<td>物理地址 PA</td>
+<td>主存实际使用的地址</td>
+<td>由 MMU 完成虚实转换后形成</td>
+</tr>
+<tr>
+<td>虚拟页（page）</td>
+<td>虚拟地址空间按固定大小划分的块</td>
+<td>页号属于虚拟地址</td>
+</tr>
+<tr>
+<td>物理页框（frame）</td>
+<td>主存按同样大小划分的块</td>
+<td>页框号属于物理地址</td>
+</tr>
+<tr>
+<td>页表</td>
+<td>保存“虚拟页号 -&gt; 物理页框号”及权限、状态</td>
+<td>通常每个进程拥有自己的页表根</td>
+</tr>
+</tbody>
+</table></div>
+<p>若页面大小为 $2^p$ B，则虚拟地址和物理地址都可拆成：</p>
+<p>$$
+VA=[VPN\mid VPO],\qquad PA=[PPN\mid PPO]
+$$</p>
+<ul>
+<li>$VPN$ 是虚拟页号，$PPN$ 是物理页框号；页内偏移分别记作 $VPO$、$PPO$。</li>
+<li>页面装入任意页框时，页内相对位置不变，所以 <strong>$VPO=PPO$</strong>。地址转换只替换页号，不改变低 $p$ 位页内偏移。</li>
+<li>页面大小必须先换成 $2^p$ B，再确定低 $p$ 位。题目若按字编址，应以“每页含多少可寻址单元”计算偏移位，不能机械按字节数取对数。</li>
+</ul>
+<h2 id="section-2">3.2 页表与页表项</h2>
+<p>页表存放在主存中，CPU/MMU 用页表基址寄存器（PTBR，名称依体系结构而异）定位当前进程的页表根。单级页表可抽象为：</p>
+<p>$$
+PTE_addr=PTBR+VPN\times\text{PTE 大小}
+$$</p>
+<p>典型页表项 PTE 不只保存 PPN，还包含控制信息：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有效/存在位</td>
+<td>表示该虚拟页当前是否有合法驻留映射；不存在时可能触发缺页</td>
+</tr>
+<tr>
+<td>物理页框号 PPN</td>
+<td>与页内偏移拼接成物理地址</td>
+</tr>
+<tr>
+<td>读/写/执行权限</td>
+<td>区分可读、可写、可执行，权限不满足产生保护异常</td>
+</tr>
+<tr>
+<td>用户/内核权限</td>
+<td>防止用户态访问内核页</td>
+</tr>
+<tr>
+<td>访问位/引用位</td>
+<td>记录近期是否访问，可辅助页面置换</td>
+</tr>
+<tr>
+<td>修改位/脏位</td>
+<td>页面是否被写过；淘汰脏页时须先写回辅存</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>WARNING</strong> · 易错边界
+“页面不在主存”和“访问权限非法”不是同一件事。前者是缺页/不存在异常，调页后通常可重启；后者是保护异常，即使页面在主存也不能直接继续访问。</p>
+</blockquote>
+<h3 id="section-3">3.2.1 单级页表容量</h3>
+<p>虚拟地址 $v$ 位、页面大小 $2^p$ B 时，虚拟页数为 $2^{v-p}$。若每个 PTE 占 $e$ B，则单级页表大小为：</p>
+<p>$$
+2^{v-p}\times e\ \text{B}
+$$</p>
+<p>例如 32 位虚拟地址、4 KiB 页面、PTE 为 4 B：页内偏移 12 位，VPN 为 20 位，共 $2^{20}$ 个 PTE；单个进程完整单级页表需 $2^{20}\times4=4$ MiB。</p>
+<h3 id="section-4">3.2.2 多级页表</h3>
+<p>多级页表把 VPN 再拆成多段。高层表项指向下一级页表，只有被实际使用的虚拟地址区域才分配下级表，适合稀疏地址空间。</p>
+<ul>
+<li>多级页表既避免为完整单级页表保留一大块连续主存，又因下级页表按需分配而减少稀疏地址空间中页表实际占用的主存；它不改变程序虚拟地址位数和页面大小。</li>
+<li>它没有消除页表访问；TLB 未命中时，页表级数越多，最坏情况下页表遍历需要的主存访问次数越多。</li>
+<li>32 位地址、4 KiB 页面、4 B PTE 时，一页页表可放 $4096/4=1024=2^{10}$ 个表项，因此常见二级拆分是 <code>10 位页目录号 + 10 位页表号 + 12 位页内偏移</code>。</li>
+</ul>
+<h2 id="section-5">3.3 TLB：页表项的高速缓存</h2>
+<p>TLB（Translation Lookaside Buffer，快表）是位于 MMU 附近、按内容查找的页表项高速缓存。它缓存近期使用的 <code>VPN -&gt; PPN + 权限/状态</code>，解决“每次访存都先查主存页表”的速度问题。</p>
+<pre class="mermaid">flowchart LR
+    VA[&quot;CPU 给出虚拟地址 VA&quot;] --&gt; SPLIT[&quot;拆分 VPN 与 VPO&quot;]
+    SPLIT --&gt; TLB{&quot;TLB 查 VPN&quot;}
+    TLB --&gt;|命中且权限允许| JOIN[&quot;PPN 与 VPO 拼成 PA&quot;]
+    TLB --&gt;|未命中| PT[&quot;按页表根遍历页表&quot;]
+    PT --&gt; RES{&quot;PTE 有效且页面驻留?&quot;}
+    RES --&gt;|是| FILL[&quot;把 PTE 填入 TLB&quot;]
+    FILL --&gt; JOIN
+    RES --&gt;|否| PF[&quot;缺页异常：转入操作系统&quot;]
+    PF --&gt; LOAD[&quot;调页 / 必要时置换并更新 PTE&quot;]
+    LOAD --&gt; RETRY[&quot;使旧 TLB 项失效并重启故障指令&quot;]
+    RETRY --&gt; VA
+    JOIN --&gt; CACHE[&quot;用物理地址访问 Cache / 主存&quot;]
+</pre>
+<h3 id="section-6">3.3.1 命中、未命中与缺页的关系</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>含义</th>
+<th>后续动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TLB 命中</td>
+<td>所需有效 PTE 已在 TLB</td>
+<td>检查权限后直接形成 PA</td>
+</tr>
+<tr>
+<td>TLB 未命中、页表命中</td>
+<td>TLB 没缓存，但 PTE 有效且页面在主存</td>
+<td>遍历页表、回填 TLB，再重试地址转换</td>
+</tr>
+<tr>
+<td>TLB 未命中、页表不存在/页面不驻留</td>
+<td>PTE 表示页面不在主存或映射不存在</td>
+<td>触发缺页或地址异常</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>TLB 未命中不等于缺页</strong>：绝大多数 TLB 未命中可通过查页表得到有效 PTE。</li>
+<li>在软硬件正确维护页表与 TLB 一致性的前提下，<strong>TLB 命中项可作为当前有效映射使用</strong>。操作系统修改或撤销映射时，必须在旧项可能再次被使用前完成对应 TLB 失效；多处理器还可能需要发起 TLB shootdown（跨核失效通知）。否则即使查询“命中”，得到的也只是过期翻译，不能据此断言当前页表仍有效。</li>
+<li>进程切换时，可清空相关 TLB 项；若 TLB 支持 ASID/PCID 等地址空间标识，则可让不同进程的翻译共存，但匹配时必须同时比较标识。</li>
+</ul>
+<h3 id="section-7">3.3.2 有效访问时间</h3>
+<p>设 TLB 查询时间为 $t_T$、一次主存访问时间为 $t_M$、TLB 命中率为 $h$。在“TLB 与主存串行、单级页表、忽略 Cache 和缺页”的简化模型中：</p>
+<p>$$
+EAT=h(t_T+t_M)+(1-h)(t_T+2t_M)
+$$</p>
+<p>命中时查 TLB 后访问一次数据；未命中时还要多访问一次主存页表。若题目允许 TLB 查询与 Cache/页表访问并行，或采用多级页表，必须按给定时序重列路径，不能直接套此式。</p>
+<p>例：$h=98%$、$t_T=10,ns$、$t_M=100,ns$，则</p>
+<p>$$EAT=0.98\times110+0.02\times210=112,ns$$</p>
+<p>缺页需访问辅存，代价通常比纳秒级主存访问大许多数量级；若题目给缺页率，应把缺页服务时间按概率另行计入，不能把缺页当作普通 TLB 未命中。</p>
+<h2 id="section-8">3.4 TLB、页表与 Cache 的整机路径</h2>
+<p>在 408 常见的“物理地址访问 Cache”模型中，访问链为：</p>
+<p><code>虚拟地址 -&gt; TLB/页表完成地址转换 -&gt; 物理地址 -&gt; Cache -&gt; 主存</code></p>
+<pre class="mermaid">flowchart LR
+    VPN[&quot;VPN&quot;] --&gt; MMU[&quot;TLB / 页表&quot;]
+    MMU --&gt; PPN[&quot;PPN&quot;]
+    VPO[&quot;VPO&quot;] --&gt; PPO[&quot;PPO：位模式不变&quot;]
+    PPN --&gt; PA[&quot;物理地址 PA&quot;]
+    PPO --&gt; PA
+    PA --&gt; C{&quot;Cache 命中?&quot;}
+    C --&gt;|是| DATA[&quot;返回字节 / 字&quot;]
+    C --&gt;|否| MEM[&quot;从主存调入 Cache 块&quot;]
+    MEM --&gt; DATA
+</pre>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>组合</th>
+<th>是否可能</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TLB 命中、Cache 命中</td>
+<td>可能</td>
+<td>翻译与数据都在高速缓存</td>
+</tr>
+<tr>
+<td>TLB 命中、Cache 未命中</td>
+<td>可能</td>
+<td>有地址翻译，但数据块不在 Cache，须访问主存</td>
+</tr>
+<tr>
+<td>TLB 未命中、页表命中、Cache 命中</td>
+<td>可能</td>
+<td>先由页表得到 PA；对应物理块仍可能已在 Cache</td>
+</tr>
+<tr>
+<td>TLB 未命中、发生缺页、Cache 命中</td>
+<td>在普通一致模型中不可能</td>
+<td>页面尚未驻留主存，不能存在可供本次正常访问的有效数据 Cache 副本</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>TIP</strong> · 易错边界
+TLB 缓存的是<strong>地址翻译</strong>，Cache 缓存的是<strong>指令或数据块</strong>，页表是主存中的映射数据结构。三者都会“命中/未命中”，但对象、粒度、缺失代价和管理者完全不同。</p>
+</blockquote>
+<p>若 Cache 的组索引位全部落在页内偏移范围内，硬件可在 TLB 翻译 VPN 的同时用页内偏移开始索引 Cache；但 tag 比较仍须使用正确的物理标记。408 题未说明这种并行优化时，按题给的串行路径计算最稳妥。</p>
+<h2 id="section-9">3.5 缺页处理与精确异常</h2>
+<p>一次可恢复缺页的典型过程：</p>
+<ol>
+<li>MMU 在取指或 Load/Store 时发现 PTE 不存在/页面不驻留，保存故障虚拟地址和原因。</li>
+<li>CPU 以异常方式进入内核；断点应指向<strong>尚未完成的故障指令</strong>，以便调页后重执行。</li>
+<li>操作系统定位页面在辅存中的位置，取得空闲页框；无空闲页框时选择牺牲页。</li>
+<li>若牺牲页为脏页，先写回辅存；再把所需页面读入目标页框。</li>
+<li>更新页表项及相关状态，使过期 TLB 项失效。</li>
+<li>执行异常返回，重新执行故障指令；这一次地址转换应得到有效映射。</li>
+</ol>
+<p>这里的页面置换算法、驻留集、抖动等属于操作系统策略；组成原理重点是 MMU、PTE、TLB、异常入口和重启之间的硬件协作。</p>
+<h2 id="section-10">3.6 段式与段页式虚拟存储器</h2>
+<h3 id="section-11">3.6.1 段式虚拟存储器</h3>
+<p>段式地址由 <code>段号 s + 段内偏移 d</code> 构成。每段对应程序的逻辑单元，如代码段、数据段、栈段；段长可不同。</p>
+<p>段表项至少给出段基址、段长/界限和权限。访问过程为：</p>
+<ol>
+<li>用段号索引段表，检查段是否存在及访问权限。</li>
+<li>检查 $d&lt;\text{段长}$；越界产生异常。</li>
+<li>形成物理地址 $PA=\text{段基址}+d$。</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>页式</th>
+<th>段式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>划分</td>
+<td>固定大小页面</td>
+<td>按逻辑意义、可变长分段</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>页号 + 页内偏移</td>
+<td>段号 + 段内偏移</td>
+</tr>
+<tr>
+<td>碎片</td>
+<td>可能有页内碎片</td>
+<td>可能有外部碎片</td>
+</tr>
+<tr>
+<td>共享保护</td>
+<td>以页面为单位</td>
+<td>逻辑段边界更直观</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-12">3.6.2 段页式虚拟存储器</h3>
+<p>段页式先按逻辑分段，再把每段划成固定大小的页。虚拟地址通常为：</p>
+<p>$$VA=[\text{段号}\mid\text{段内页号}\mid\text{页内偏移}]$$</p>
+<p>地址转换先由段表项得到该段页表的基址和段界限，再由段内页号查页表得到物理页框号，最后与页内偏移拼接。它兼有分段的逻辑保护/共享和分页的离散装入能力，但地址转换层次、表项和硬件控制更复杂。</p>
+<h2 id="section-13">3.7 典型题型与计算顺序</h2>
+<h3 id="section-14">题型：#虚拟地址转换</h3>
+<p>给定 32 位虚拟地址、30 位物理地址、页面大小 4 KiB：</p>
+<ul>
+<li>页内偏移为 $\log_2 4,KiB=12$ 位；</li>
+<li>VPN 为 $32-12=20$ 位；</li>
+<li>PPN 为 $30-12=18$ 位；</li>
+<li>转换只把高 20 位 VPN 查成 18 位 PPN，低 12 位原样保留。</li>
+</ul>
+<p>固定解题步骤：</p>
+<ol>
+<li>由页面大小求页内偏移位数。</li>
+<li>分别用虚拟/物理地址位数减偏移位数，得到 VPN/PPN 位数。</li>
+<li>按 VPN 查 TLB/页表，先检查有效位和权限，再取 PPN。</li>
+<li>拼接 <code>PPN + 原页内偏移</code> 得 PA。</li>
+<li>若还考 Cache，再用 PA 按 <code>tag + 组号 + 块内偏移</code> 继续分解；不要把 VPN 直接当 Cache tag。</li>
+</ol>
+<h3 id="section-15">题型：#页表与TLB综合</h3>
+<ul>
+<li>页表容量：虚拟页数乘 PTE 大小；多级页表按“每级索引位数、实际分配表页数”计算。</li>
+<li>TLB 容量：表项数乘每项的 VPN tag、PPN、有效位、权限位、ASID 等；题目若只问数据项，不要擅自漏算或增加控制位。</li>
+<li>平均时间：把 TLB 命中、页表命中、缺页三条路径分别列出“各访问几次、每次多长”，再按概率加权。</li>
+</ul>
+<h2 id="section-16">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-2406c8c61473/">计算机组成原理导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-d5113c15e970/">上一篇：Cache</a> · <a href="/notes/cs408-e93053729cfd/">下一篇：指令系统的基本概念</a></li>
+<li><strong>操作系统视角</strong>：<a href="/notes/cs408-6e190f5755e2/">内存管理基础</a> · <a href="/notes/cs408-dd853a0ed1a2/">虚拟内存管理</a></li>
+<li><strong>异常机制</strong>：<a href="/notes/cs408-a58dbd00622a/">异常与中断</a></li>
+</ul>
+<h2 id="section-17">3.8 本节复盘</h2>
+<ul>
+<li>页式地址转换把 VPN 映射为 PPN，页内偏移原样保留；页表项还保存有效、权限、访问和脏等状态。</li>
+<li>TLB 是 PTE 的高速缓存：TLB 未命中不等于缺页；页表命中后可回填 TLB，页面不驻留才进入缺页异常。</li>
+<li>物理地址 Cache 的常见路径是“VA -&gt; TLB/页表 -&gt; PA -&gt; Cache/主存”；TLB 缓存翻译，Cache 缓存数据，二者不可混淆。</li>
+<li>缺页是可恢复异常时，应保存故障指令地址，调页、更新 PTE/TLB 后重执行原指令。</li>
+<li>段式按逻辑单元用基址加界限保护，段页式先分段再分页；三类地址结构与表项职责必须分清。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-5620bc526d96/index.html"><span>← 上一项</span><strong>数据结构导航</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-598d9fb6fbb4/index.html"><span>下一项 →</span><strong>Lecture 5：特征选择与特征提取</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-2406c8c61473/"><span class="related-type">笔记</span><strong>计算机组成原理导航</strong><span>408 学习笔记：计算机组成原理导航。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 4：知识 - 物理层下的传输媒体 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 4：知识 - 物理层下的传输媒体。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 计算机网络">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 4：知识 - 物理层下的传输媒体 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 4：知识 - 物理层下的传输媒体。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-769850dc79d7/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 4：知识 - 物理层下的传输媒体 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 4：知识 - 物理层下的传输媒体。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 4：知识 - 物理层下的传输媒体",
+      "item": "https://www.jiayuhere.com/notes/cs408-769850dc79d7/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-769850dc79d7/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-769850dc79d7/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-769850dc79d7/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-769850dc79d7/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-769850dc79d7/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 4：知识 - 物理层下的传输媒体</h1><p class="article-lead">408 学习笔记：Lecture 4：知识 - 物理层下的传输媒体。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-22">2026-07-22</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">计算机网络</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/c1b48ed6217d.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/c1b48ed6217d.pdf" download="Lecture 4：知识 - 物理层下的传输媒体.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">2.1 传输媒体的分类</a><a href="#section-2">2.2 导向型传输媒体</a><a href="#section-9">2.3 非导向型传输媒体</a><a href="#section-13">相关知识</a><a href="#section-14">2.4 本节复盘</a></nav></details><div class="prose"><blockquote>
+<p>描述：传输媒体是网络设备间信号走的物理通路，但不属于网络体系结构的分层协议本身。选择媒体时比较带宽、损耗、抗干扰、传输距离、施工和成本；光纤以全反射传光脉冲，具有容量大、损耗小和抗电磁干扰的显著优势。</p>
+</blockquote>
+<h2 id="section-1">2.1 传输媒体的分类</h2>
+<p><strong>传输媒体</strong>又称传输介质/传输媒介，是计算机网络设备间传递信号的物理通路。它是物理层依赖的环境，<strong>不包含在网络体系结构层次之中</strong>；物理层协议规定如何使用媒体传比特。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>大类</th>
+<th>别称</th>
+<th>信号传播路径</th>
+<th>主要类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导向型传输媒体</td>
+<td>有线/固体媒体</td>
+<td>信号沿明确的实体介质传播</td>
+<td>同轴电缆、双绞线、光纤</td>
+</tr>
+<tr>
+<td>非导向型传输媒体</td>
+<td>无线/自由空间</td>
+<td>电磁波在空气或真空等自由空间传播</td>
+<td>无线电波、微波、红外线、大气激光、可见光</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-2">2.2 导向型传输媒体</h2>
+<h3 id="section-3">2.2.1 同轴电缆</h3>
+<p>同轴电缆的导体、绝缘层、外导体等各层共用同一轴心，故称“同轴”。相对双绞线，它价格更高、布线不够灵活；随着双绞线和集线/交换设备的普及，局域网通常更多采用双绞线。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>信号形式</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基带同轴电缆</td>
+<td>数字传输</td>
+<td>早期局域网</td>
+</tr>
+<tr>
+<td>宽带同轴电缆</td>
+<td>模拟传输</td>
+<td>有线电视入户等</td>
+</tr>
+</tbody>
+</table></div>
+<p>同轴的屏蔽结构有较好抗干扰能力，但施工、接头和拓扑扩展相对不如双绞线方便。</p>
+<h3 id="section-4">2.2.2 双绞线</h3>
+<p>一对双绞线由两根相互绝缘的铜导线按一定密度相互绞合而成；多对绞线组合后构成双绞线电缆。</p>
+<p><strong>绞合的作用</strong>：</p>
+<ol>
+<li>减少相邻导线对之间的电磁干扰和串扰。</li>
+<li>抵御部分外界电磁干扰，使两根线受到相似干扰时可通过差分传输减小影响。</li>
+</ol>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非屏蔽双绞线 UTP</td>
+<td>不带额外屏蔽层，柔软、便宜、施工方便，常用于以太网布线</td>
+</tr>
+<tr>
+<td>屏蔽双绞线 STP</td>
+<td>带保护/屏蔽层，抗干扰较好，但成本、接地和施工要求更高</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>易错：双绞线抗干扰主要来自“成对绞合”和（若有）屏蔽层；它不等同于光纤，也不是因为使用了多根铜线就天然比所有无线链路快。</p>
+</blockquote>
+<p>原资料还有一张双绞线等级表。这里保留其类别脉络，并按常用布线等级修正其中的 Cat 5e 频率值：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>标称测试频率上限</th>
+<th>常见用途与注意点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cat 3</td>
+<td>16 MHz</td>
+<td>早期 10 Mb/s 以太网、电话布线</td>
+</tr>
+<tr>
+<td>Cat 4</td>
+<td>20 MHz</td>
+<td>早期局域网布线，现已少见</td>
+</tr>
+<tr>
+<td>Cat 5</td>
+<td>100 MHz</td>
+<td>常用于 100 Mb/s；是否可承载更高速率还取决于整条链路质量和采用的以太网标准</td>
+</tr>
+<tr>
+<td>Cat 5e</td>
+<td><strong>100 MHz</strong></td>
+<td>改善串扰等指标，常用于 1000BASE-T；原 PDF 表中的 125 MHz 不宜作为该类别的标准频率</td>
+</tr>
+<tr>
+<td>Cat 6</td>
+<td>250 MHz</td>
+<td>串扰性能进一步改善；可用于千兆，部分较短链路也可用于 10 Gb/s</td>
+</tr>
+<tr>
+<td>Cat 7 / Class F</td>
+<td>600 MHz</td>
+<td>属另一套布线类别/等级体系，通常采用屏蔽结构；不能仅凭“Cat 7”字样保证特定速率或距离</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中 MHz 描述的是布线测试频率范围，不是 bit/s；实际速率由网卡/交换机所用标准、线缆长度、连接器、布线及干扰共同决定。频率与 Cat 5e 修正可参照 <a href="https://www.flukenetworks.com/knowledge-base/dtx-cableanalyzer/accuracy-dtx-cableanalyzer">Fluke Networks 的布线等级说明</a>。</p>
+<h3 id="section-5">2.2.3 光纤与光纤通信</h3>
+<p>光纤通信以光脉冲在光纤中传播来表示/传送比特。可见光频率约为 $10^{14}\sim10^{15},Hz$（教材常写作约 $10^8,MHz$ 量级），频率极高，故光纤通信系统可提供远高于多数其他媒体的传输带宽。</p>
+<p>原图的通信链可文字化为：<strong>输入电脉冲 → LED/半导体激光器发出光脉冲 → 光纤传输 → 光电二极管/光接收器转换为输出电脉冲</strong>。光纤是中间的传输媒体；发射器和接收器分别完成电/光、光/电转换。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通信容量极大</td>
+<td>高频光载波与波分复用带来高带宽</td>
+</tr>
+<tr>
+<td>抗雷电/电磁干扰</td>
+<td>以光而非电流传输，不受普通电磁串扰影响</td>
+</tr>
+<tr>
+<td>损耗小、中继距离长</td>
+<td>适合长距离干线传输</td>
+</tr>
+<tr>
+<td>无串音、保密性较好</td>
+<td>不易被电磁泄漏窃听，线间互扰低</td>
+</tr>
+<tr>
+<td>体积小、重量轻</td>
+<td>同等容量下缆线更紧凑</td>
+</tr>
+</tbody>
+</table></div>
+<p>主要代价：切割、熔接、测试光纤需较贵的专用设备；光电转换接口也较昂贵、施工技术要求高。</p>
+<h4 id="section-6">2.2.3.1 全反射原理与结构</h4>
+<p>光纤的核心由高折射率的<strong>纤芯</strong>和较低折射率的<strong>包层</strong>构成。光由高折射率介质射向低折射率介质时，折射角大于入射角；入射角大到超过临界条件时发生<strong>全反射</strong>，光被反射回纤芯而被约束向前传播。</p>
+<pre><code class="language-text">高折射率纤芯
+  光脉冲沿芯传播，碰到低折射率包层时满足全反射
+低折射率包层
+  外部保护层/加强件构成光缆
+</code></pre>
+<p>光缆是在光纤外增加保护、加强、防潮等结构的成品电缆；不要把“单根光纤的传播结构”和“光缆的工程封装”混为一谈。</p>
+<h4 id="section-7">2.2.3.2 多模与单模光纤</h4>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>光路</th>
+<th>适用与特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多模光纤</td>
+<td>不同入射角的多条光波在芯内多次全反射</td>
+<td>模间色散较明显，适合建筑物内等近距离传输，光源成本较低</td>
+</tr>
+<tr>
+<td>单模光纤</td>
+<td>基本只允许单一传播模式、近似沿轴向前进</td>
+<td>没有多模光纤的模间色散，适合长距离、高速传输；具体衰减还取决于波长、材料和连接损耗，不能只由“单模”二字决定；制造及接口成本较高，通常需半导体激光器而非较便宜 LED</td>
+</tr>
+</tbody>
+</table></div>
+<p>“多模”不是指能同时传多个用户的数据，而是指同一光信号可沿不同传播模式/路径到达，路径长度差导致脉冲展宽。</p>
+<h4 id="section-8">2.2.3.3 常用波长窗口与光纤规格</h4>
+<p>材料列出的三个常用光通信中心波长为 <strong>850 nm、1300 nm、1550 nm</strong>。其中 850 nm 窗口衰减相对较大但器件成熟；1300 nm 和 1550 nm 窗口衰减较小，1550 nm 常用于长距离系统。材料用 $25{,}000\sim30{,}000,GHz$ 的数量级说明光载波可利用频谱很宽；这表示光通信的容量潜力，不是单个信道无需器件限制即可达到的速率。</p>
+<p>规格中的“芯径/包层直径”通常以 $\mu m$ 表示：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>材料列出的常见规格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单模光纤</td>
+<td>$8/125,\mu m$、$9/125,\mu m$、$10/125,\mu m$</td>
+</tr>
+<tr>
+<td>多模光纤</td>
+<td>$50/125,\mu m$、$62.5/125,\mu m$</td>
+</tr>
+</tbody>
+</table></div>
+<p>材料还给出了若干系统性能示例，用来观察“速率越高，允许距离通常越短”以及不同光纤类型的差异：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>光纤示例</th>
+<th>波长</th>
+<th>速率与距离示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G.652 单模，芯径约 $9,\mu m$</td>
+<td>1550 nm</td>
+<td>2.5 Gb/s：100 km；10 Gb/s：60 km；40 Gb/s：4 km</td>
+</tr>
+<tr>
+<td>G.655 单模，芯径约 $9,\mu m$</td>
+<td>1550 nm</td>
+<td>2.5 Gb/s：390 km；10 Gb/s：240 km；40 Gb/s：16 km</td>
+</tr>
+<tr>
+<td>普通多模，芯径 $50,\mu m$</td>
+<td>850 nm</td>
+<td>1 Gb/s：550 m；10 Gb/s：250 m</td>
+</tr>
+<tr>
+<td>普通多模，芯径 $62.5,\mu m$</td>
+<td>850 nm</td>
+<td>1 Gb/s：275 m；10 Gb/s：100 m</td>
+</tr>
+<tr>
+<td>材料所称“新型”多模，芯径 $50,\mu m$</td>
+<td>850 nm</td>
+<td>1 Gb/s：1100 m；10 Gb/s：550 m</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>上表是源资料中的器件/标准示例，不是所有光纤链路的通用极限。实际距离还受光模块、色散、连接损耗、误码指标和具体标准版本影响。</p>
+</blockquote>
+<h2 id="section-9">2.3 非导向型传输媒体</h2>
+<p>非导向型媒体使用自由空间传播电磁波，频谱资源通常需由无线频谱管理机构统一规划和许可，以避免相互干扰。</p>
+<p>原资料的无线频谱图可按数量级整理如下；$f\lambda\approx c$，频率越高，真空波长越短：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>频段</th>
+<th>大致频率范围</th>
+<th>典型传播/应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LF、MF（低频、中频）</td>
+<td>30～300 kHz；300 kHz～3 MHz</td>
+<td>较低频可沿地表传播；广播等</td>
+</tr>
+<tr>
+<td>HF（高频）</td>
+<td>3～30 MHz</td>
+<td>可借电离层折返实现远距离短波通信</td>
+</tr>
+<tr>
+<td>VHF、UHF（甚高频、特高频）</td>
+<td>30～300 MHz；300 MHz～3 GHz</td>
+<td>调频/电视广播、移动通信等；通常更依赖视距或中继，不能把 VHF 普遍说成电离层反射传播</td>
+</tr>
+<tr>
+<td>SHF、EHF（超高频、极高频）</td>
+<td>3～30 GHz；30～300 GHz</td>
+<td>微波、卫星、雷达等；方向性和遮挡问题更明显</td>
+</tr>
+</tbody>
+</table></div>
+<p>工业、科学、医疗等用途的 <strong>ISM 频段</strong>可供符合当地规则的设备共享使用，但“免单独许可”不等于没有发射功率、干扰或地域限制。原图举有 902～928 MHz、2.400～2.4835 GHz、5.725～5.850 GHz 等频段；各地区开放范围和使用条件可能不同，不能把图中三个区间当作全球统一的无线局域网信道表。</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>媒体</th>
+<th>传播与特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无线电波</td>
+<td>覆盖灵活，可绕射/穿透一定障碍，适合移动无线通信等</td>
+</tr>
+<tr>
+<td>微波</td>
+<td>频率高、方向性强，常需视距；可用地面中继站逐段接力，也可经地球卫星中继。原图给出地面站间约 50～100 km 作为示例，不是所有微波链路的固定距离</td>
+</tr>
+<tr>
+<td>红外线</td>
+<td>近距离、方向性较强，通常不穿透墙体，适于室内局部通信/遥控；原图的 4～16 Mb/s 是旧式系统示例，并非红外通信的普适速率上限</td>
+</tr>
+<tr>
+<td>大气激光</td>
+<td>在大气自由空间定向传输，容量高但易受天气、遮挡、对准精度影响</td>
+</tr>
+<tr>
+<td>可见光</td>
+<td>可用于可见光通信，例如 LiFi；可照明与通信结合，但受遮挡/环境光影响</td>
+</tr>
+</tbody>
+</table></div>
+<p>原图的同步地球卫星位于约 <strong>3.6 万 km</strong> 高的地球静止轨道，可作为远距离微波中继；覆盖范围广，但信号要往返空间链路，传播时延显著，且可见区域、轨道位置和地面天线方向均有限制。</p>
+<h3 id="section-10">题型：#媒体与光纤辨析</h3>
+<h4 id="section-11">第一部分：解题方法</h4>
+<ol>
+<li>题干给铜缆实体通道选导向型；给空气、卫星、无线电波选非导向型。</li>
+<li>“基带/数字、早期 LAN”指基带同轴；“模拟、有线电视”指宽带同轴。</li>
+<li>“全反射、高折射率纤芯、低折射率包层”是光纤；“多个入射角、近距离”是多模，“单一路径、远距离/低衰减”是单模。</li>
+<li>媒体不属于体系结构分层；问 0/1 如何在媒体传输才是物理层的功能。</li>
+</ol>
+<h4 id="section-12">第二部分：易错点</h4>
+<ul>
+<li>光纤带宽大并不等于没有光电接口、设备和施工成本；题目问优缺点时两面都要写。</li>
+<li>单模成本高的关键在于更严格的纤芯/光源与接口要求，不是因为它“有更多光路”。</li>
+<li>传输媒体与物理层不同：前者是通路，后者是利用通路传比特的一层规范和设备技术。</li>
+</ul>
+<h2 id="section-13">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-b78f75dd8c69/">计算机网络导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-47eb3dfcdc83/">上一篇：物理层概述</a> · <a href="/notes/cs408-3560d9d2909b/">下一篇：传输方式</a></li>
+</ul>
+<h2 id="section-14">2.4 本节复盘</h2>
+<ul>
+<li>传输媒体分导向型（同轴、双绞、光纤）和非导向型（无线电、微波、红外、激光、可见光）；它不属于网络体系结构本身。</li>
+<li>基带同轴传数字、早期 LAN 常见；宽带同轴传模拟、有线电视常见。双绞线靠绞合降低内外电磁干扰。</li>
+<li>光纤靠纤芯—包层间全反射传光脉冲，容量大、损耗小、抗干扰、保密性好，但施工与接口成本高。</li>
+<li>多模多路径、近距离；单模近轴传播、无模间色散、适合远距离且通常要求激光器；具体衰减还需看波长和链路质量。</li>
+<li>常用中心波长为 850/1300/1550 nm；光纤规格的前后两个数字分别表示芯径与包层直径，源资料中的距离表只作系统示例。</li>
+<li>微波可地面中继或卫星中继；LiFi 属可见光通信。不同频段的传播方式、遮挡与频谱管理要求不同，不能把所有无线媒体都当成相同的视距模型。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-7528c27ca114/index.html"><span>← 上一项</span><strong>1. 顺序表</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-7822ebc414be/index.html"><span>下一项 →</span><strong>1 题型 - 分组或报文传输速率</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-7822ebc414be/"><span class="related-type">笔记</span><strong>1 题型 - 分组或报文传输速率</strong><span>408 学习笔记：1 题型 - 分组或报文传输速率。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

@@ -26,7 +26,7 @@
 - A browser-based engineering toolbox
 - Resource navigation and engineering lab logs
 
-The site uses a lightweight static architecture and is deployed from the repository root with GitHub Pages. Projects, articles and notes are maintained in Markdown, then converted into static detail pages, search indexes, RSS feeds and a sitemap by a zero-dependency Node.js build script.
+The site uses a lightweight static architecture and is deployed from the repository root with GitHub Pages. Projects, articles and notes are maintained in Markdown, then converted into static detail pages, search indexes, RSS feeds and a sitemap by a Node.js build script.
 
 ### Features
 
@@ -66,8 +66,11 @@ content/en/projects/*.md      Matching English project source files
 content/en/articles/*.md      Matching English article source files
 content/en/notes/*.md         Matching English note source files
 content/en/logs/*.md          Matching English lab-log source files
+assets/408/                   Original 408 PDFs, diagrams, canvas source and image previews
 content/templates/            Reusable Markdown templates
 scripts/build-content.mjs     Static content generator
+scripts/import-408.mjs        One-time Obsidian 408 library importer
+scripts/check-408.mjs         408 source and link validation
 assets/styles.css             Global styles
 assets/files/                 Chinese and English resume PDFs
 assets/script.js              Navigation, search and interactive tools
@@ -99,16 +102,20 @@ Article content.
 
 Projects may also define `status` and `repository`. Lab logs use `projectSlug` to link back to the related generated project page. The complete workflow is documented in [`写作与发布说明.md`](写作与发布说明.md).
 
+The Computer Science 408 section contains 161 readable rewritten notes, with matching original PDFs/images/canvas source available from the relevant pages. Its English-site pages intentionally retain Chinese technical text and label it clearly; they are not presented as verified English translations. Three large diagrams use lightweight WebP previews while preserving the full original PNGs for viewing or download.
+
 ### Build and Validate
 
 Node.js 18 or newer is required.
 
 ```powershell
+npm ci
 npm run check
 npm run build
+npm run check:408
 ```
 
-The build validates that every Chinese Markdown file has a matching English file with the same filename and slug. Project pairs must reference the same GitHub repository; log pairs must use the same date and `projectSlug`. A missing or mismatched translation stops the build before invalid language links can be published.
+The build validates that every Chinese Markdown file has a matching English-site file with the same filename and slug. Project pairs must reference the same GitHub repository; log pairs must use the same date and `projectSlug`. A missing or mismatched pair stops the build before invalid language links can be published.
 
 After validation, the build generates both language versions of all project, blog, note and lab-log pages, together with search indexes, RSS feeds and `sitemap.xml`.
 
@@ -145,7 +152,7 @@ The repository keeps its `CNAME` file and is published at [www.jiayuhere.com](ht
 - 浏览器在线工程工具箱
 - 常用资源导航与实验日志
 
-网站采用轻量静态架构，兼容 GitHub Pages 根目录部署。项目、文章、笔记和实验日志使用 Markdown 维护，再由零依赖 Node.js 构建脚本生成静态页面、搜索索引、RSS 和站点地图。
+网站采用轻量静态架构，兼容 GitHub Pages 根目录部署。项目、文章、笔记和实验日志使用 Markdown 维护，再由 Node.js 构建脚本生成静态页面、搜索索引、RSS 和站点地图。
 
 ### 主要功能
 
@@ -185,8 +192,11 @@ content/en/projects/*.md      对应的英文项目源文件
 content/en/articles/*.md      对应的英文文章源文件
 content/en/notes/*.md         对应的英文笔记源文件
 content/en/logs/*.md          对应的英文实验日志源文件
+assets/408/                   408 原始 PDF、知识图、画布源文件与图片预览
 content/templates/            可复用的 Markdown 模板
 scripts/build-content.mjs     静态内容生成脚本
+scripts/import-408.mjs        Obsidian 408 笔记库导入脚本
+scripts/check-408.mjs         408 来源与链接检查
 assets/styles.css             全站样式
 assets/files/                 中英文简历 PDF
 assets/script.js              导航、搜索与工具交互
@@ -218,16 +228,20 @@ tags: [标签一, 标签二]
 
 项目还可以设置 `status` 和 `repository`；日志使用 `projectSlug` 关联项目详情页。完整写作流程见 [`写作与发布说明.md`](写作与发布说明.md)。
 
+408 分类包含 161 篇可阅读的重写笔记，对应页面提供原始 PDF、知识图或 Excalidraw 画布源文件入口。英文站的 408 页面暂时保留中文专业正文，并明确标注内容语言，不冒充已经核准的英文翻译。三张大型知识图使用轻量 WebP 预览，同时保留可查看和下载的完整原 PNG。
+
 ### 构建与检查
 
 需要 Node.js 18 或更高版本。
 
 ```powershell
+npm ci
 npm run check
 npm run build
+npm run check:408
 ```
 
-构建脚本会校验每一篇中文 Markdown 是否存在文件名和 slug 相同的英文稿。中英文项目必须指向同一个 GitHub 仓库；中英文日志必须使用相同的日期和 `projectSlug`。缺少翻译或配对不一致时，构建会立即失败，避免发布无效的语言切换链接。
+构建脚本会校验每一篇中文 Markdown 是否存在文件名和 slug 相同的英文站对应稿。中英文项目必须指向同一个 GitHub 仓库；中英文日志必须使用相同的日期和 `projectSlug`。缺少对应稿或配对不一致时，构建会立即失败，避免发布无效的语言切换链接。
 
 校验通过后，构建脚本会生成中英文项目、博客、笔记和实验日志页面，同时更新双语搜索索引、RSS 和 `sitemap.xml`。
 

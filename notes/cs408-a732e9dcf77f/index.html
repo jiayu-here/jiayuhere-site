@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 7：栈基本概念 | Jiayu Lab</title>
+  <meta name="description" content="408 学习笔记：Lecture 7：栈基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, 数据结构">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 7：栈基本概念 | Jiayu Lab">
+  <meta property="og:description" content="408 学习笔记：Lecture 7：栈基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/notes/cs408-a732e9dcf77f/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 7：栈基本概念 | Jiayu Lab">
+  <meta name="twitter:description" content="408 学习笔记：Lecture 7：栈基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiayuhere.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "笔记",
+      "item": "https://www.jiayuhere.com/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 7：栈基本概念",
+      "item": "https://www.jiayuhere.com/notes/cs408-a732e9dcf77f/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/notes/cs408-a732e9dcf77f/">
+  <link rel="author" href="https://www.jiayuhere.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-a732e9dcf77f/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-a732e9dcf77f/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-a732e9dcf77f/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
+  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Jiayu Lab 首页"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="打开导航"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主要导航">
+      <a  href="../../projects/index.html">项目</a>
+      <a  href="../../blog/index.html">博客</a>
+      <a aria-current="page" href="../../notes/index.html">笔记</a>
+      <a href="../../toolbox/index.html">工具箱</a>
+      <a href="../../resources/index.html">资源</a>
+      <a href="../../lab/index.html">日志</a>
+      <a class="nav-cta" href="../../contact/index.html">联系我</a>
+      <a class="language-switch" href="../../en/notes/cs408-a732e9dcf77f/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← 返回学习笔记</a><h1>Lecture 7：栈基本概念</h1><p class="article-lead">408 学习笔记：Lecture 7：栈基本概念。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</p><div class="article-meta"><span class="record-meta"><span class="record-category">408 计算机</span><span class="record-date"><span>记录日期</span><time datetime="2026-07-01">2026-07-01</time></span></span><span>约 12 分钟阅读</span><div class="tag-list" role="list" aria-label="内容标签"><span role="listitem">408</span><span role="listitem">数据结构</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/3413a603428e.pdf" target="_blank" rel="noreferrer">查看原始 PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/3413a603428e.pdf" download="Lecture 7：栈基本概念.pdf">下载原件</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">7.1 栈的定义</a><a href="#section-3">7.2 栈的基本操作</a><a href="#section-8">7.3 卡特兰数</a><a href="#section-13">7.4 栈的顺序存储实现</a><a href="#section-22">7.5 共享栈</a><a href="#section-24">7.6 栈的链式存储实现</a><a href="#section-27">7.7 面试题：栈和队列的区别</a><a href="#section-32">7.8 面试题：如何区分循环队列队空和队满</a><a href="#section-36">相关知识</a><a href="#section-37">7.9 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">7.1 栈的定义</h2>
+<h5 id="section-2"><strong>定义</strong>：#栈</h5>
+<blockquote>
+<p>描述：
+栈是只允许在一端进行插入或删除操作的线性表。</p>
+</blockquote>
+<p><strong>解释</strong></p>
+<ul>
+<li>栈本质上仍然是线性表。</li>
+<li>栈的限制在于：
+<ul>
+<li>只能在一端插入；</li>
+<li>只能在同一端删除。</li>
+</ul>
+</li>
+<li>允许插入和删除的一端称为栈顶：
+$$
+\text{Top}
+$$</li>
+<li>另一端称为栈底：
+$$
+\text{Bottom}
+$$</li>
+<li>不含任何元素的栈称为空栈。</li>
+</ul>
+<p><strong>逻辑特点</strong></p>
+<ul>
+<li>后进入栈的元素先离开栈。</li>
+<li>先进入栈的元素后离开栈。</li>
+<li>因此栈又称为后进先出表：
+$$
+\text{LIFO}=\text{Last In First Out}
+$$</li>
+</ul>
+<p><strong>图示信息结构化</strong></p>
+<ul>
+<li>栈底是最早进入且最后离开的元素所在端，位置通常固定。</li>
+<li>栈顶是唯一允许插入、删除的一端，随入栈和出栈移动。</li>
+<li>空栈没有栈顶元素；顺序栈采用 <code>top=-1</code> 时，<code>top</code> 表示当前栈顶元素的数组下标。</li>
+</ul>
+<h2 id="section-3">7.2 栈的基本操作</h2>
+<h3 id="section-4">7.2.1 初始化和销毁</h3>
+<p><strong>初始化</strong></p>
+<pre><code class="language-c">InitStack(&amp;S);
+</code></pre>
+<ul>
+<li>作用：初始化栈。</li>
+<li>含义：
+<ul>
+<li>构造一个空栈 <code>S</code>；</li>
+<li>分配必要的存储空间；</li>
+<li>设置初始状态。</li>
+</ul>
+</li>
+</ul>
+<p><strong>销毁</strong></p>
+<pre><code class="language-c">DestroyStack(&amp;S);
+</code></pre>
+<ul>
+<li>作用：销毁栈。</li>
+<li>含义：
+<ul>
+<li>释放栈 <code>S</code> 占用的存储空间；</li>
+<li>使栈不再可用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="section-5">7.2.2 入栈和出栈</h3>
+<p><strong>入栈</strong></p>
+<pre><code class="language-c">Push(&amp;S, x);
+</code></pre>
+<ul>
+<li>又称进栈、压栈。</li>
+<li>若栈 <code>S</code> 未满，则将元素 <code>x</code> 加入栈中。</li>
+<li>加入后，<code>x</code> 成为新的栈顶元素。</li>
+</ul>
+<p><strong>出栈</strong></p>
+<pre><code class="language-c">Pop(&amp;S, &amp;x);
+</code></pre>
+<ul>
+<li>又称弹栈。</li>
+<li>若栈 <code>S</code> 非空，则弹出栈顶元素。</li>
+<li>被弹出的元素用 <code>x</code> 返回。</li>
+</ul>
+<h3 id="section-6">7.2.3 读栈顶和判空</h3>
+<p><strong>读栈顶元素</strong></p>
+<pre><code class="language-c">GetTop(S, &amp;x);
+</code></pre>
+<ul>
+<li>若栈 <code>S</code> 非空，则用 <code>x</code> 返回栈顶元素。</li>
+<li>该操作只读取，不删除栈顶元素。</li>
+</ul>
+<p><strong>判断栈空</strong></p>
+<pre><code class="language-c">StackEmpty(S);
+</code></pre>
+<ul>
+<li>若栈 <code>S</code> 为空，则返回 <code>true</code>。</li>
+<li>否则返回 <code>false</code>。</li>
+</ul>
+<h3 id="section-7">7.2.4 操作分类总结</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>操作</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创</td>
+<td><code>InitStack(&amp;S)</code></td>
+<td>构造空栈</td>
+</tr>
+<tr>
+<td>消</td>
+<td><code>DestroyStack(&amp;S)</code></td>
+<td>销毁栈</td>
+</tr>
+<tr>
+<td>增</td>
+<td><code>Push(&amp;S, x)</code></td>
+<td>入栈</td>
+</tr>
+<tr>
+<td>删</td>
+<td><code>Pop(&amp;S, &amp;x)</code></td>
+<td>出栈</td>
+</tr>
+<tr>
+<td>查</td>
+<td><code>GetTop(S, &amp;x)</code></td>
+<td>读栈顶元素</td>
+</tr>
+<tr>
+<td>判定</td>
+<td><code>StackEmpty(S)</code></td>
+<td>判断栈是否为空</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-8">7.3 卡特兰数</h2>
+<h3 id="section-9">题型：#进栈出栈序列</h3>
+<h4 id="section-10">第一部分：解题方法</h4>
+<p>有 $n$ 个不同元素按照固定顺序依次进栈，能够得到的合法出栈序列个数为：
+$$
+\frac{1}{n+1}C_{2n}^{n}
+$$</p>
+<p>也可以写成组合数形式：
+$$
+\frac{1}{n+1}\binom{2n}{n}
+$$</p>
+<p>该公式称为卡特兰数：
+$$
+C_n=\frac{1}{n+1}\binom{2n}{n}
+$$</p>
+<p><strong>使用条件</strong></p>
+<ul>
+<li>入栈顺序已经固定。</li>
+<li>每个元素都必须入栈一次、出栈一次。</li>
+<li>出栈过程中不能违反栈的后进先出规则。</li>
+</ul>
+<h4 id="section-11">第二部分：典型例题</h4>
+<p><strong>例题：3 个不同元素按 $1,2,3$ 的顺序入栈，合法出栈序列有多少种？</strong></p>
+<p>代入公式：
+$$
+\frac{1}{3+1}\binom{2\times 3}{3}
+=\frac{1}{4}\binom{6}{3}
+=\frac{1}{4}\times 20
+=5
+$$</p>
+<p>所以共有 $5$ 种合法出栈序列。</p>
+<h4 id="section-12">第三部分：知识点复盘</h4>
+<ul>
+<li>卡特兰数不是任意排列数。</li>
+<li>全排列数量是：
+$$
+n!
+$$</li>
+<li>合法出栈序列数量通常小于 $n!$。</li>
+<li>判断某个序列是否合法时，要模拟入栈、出栈过程。</li>
+</ul>
+<h2 id="section-13">7.4 栈的顺序存储实现</h2>
+<h3 id="section-14">7.4.1 顺序栈定义</h3>
+<h5 id="section-15"><strong>定义</strong>：#顺序栈</h5>
+<blockquote>
+<p>描述：
+顺序栈是用顺序存储方式实现的栈，通常用静态数组保存栈中元素，并用栈顶指针记录栈顶位置。</p>
+</blockquote>
+<p><strong>特点</strong></p>
+<ul>
+<li>和顺序表类似，都用数组保存元素。</li>
+<li>由于栈只允许在栈顶操作，所以只需要重点维护栈顶指针。</li>
+<li>常见约定：
+<ul>
+<li><code>top</code> 指向当前栈顶元素；</li>
+<li>空栈时 <code>top == -1</code>；</li>
+<li>栈满时 <code>top == MaxSize - 1</code>。</li>
+</ul>
+</li>
+</ul>
+<p>以下 <code>ElemType</code> 是待替换的元素类型；函数形参 <code>SqStack &amp;S</code>、<code>ElemType &amp;x</code> 使用 <strong>C++ 引用</strong>，并非 C 语言函数形参。原 PDF 的示例整体按 C++ 语法阅读，前面的 <code>InitStack(&amp;S)</code> 等是抽象操作记号，不要与下文具体调用 <code>InitStack(S)</code> 混作同一套函数签名。</p>
+<p><strong>代码定义</strong></p>
+<pre><code class="language-c">#define MaxSize 10
+
+typedef struct {
+    ElemType data[MaxSize];  // 静态数组存放栈中元素
+    int top;                 // 栈顶指针
+} SqStack;                   // Sq: sequence，表示顺序存储
+</code></pre>
+<h3 id="section-16">7.4.2 初始化</h3>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">void InitStack(SqStack &amp;S) {
+    S.top = -1;
+}
+</code></pre>
+<p><strong>使用示例</strong></p>
+<pre><code class="language-cpp">void testStack() {
+    SqStack S;       // 声明一个顺序栈，系统分配空间
+    InitStack(S);    // 初始化栈
+
+    // 后续操作
+
+    // 函数运行结束后，系统自动回收局部变量空间
+}
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>top = -1</code> 表示当前没有栈顶元素。</li>
+<li>因为数组下标从 $0$ 开始，所以 $-1$ 可以表示“无有效元素”。</li>
+<li>若用静态数组作为局部变量，函数结束后系统会自动回收空间。</li>
+</ul>
+<h3 id="section-17">7.4.3 判断栈空</h3>
+<p><strong>逻辑</strong></p>
+<ul>
+<li>最开始栈中无元素时：
+$$
+S.top=-1
+$$</li>
+<li>因此判断栈空的条件为：
+$$
+S.top==-1
+$$</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-c">bool StackEmpty(SqStack S) {
+    if (S.top == -1)
+        return true;
+    else
+        return false;
+}
+</code></pre>
+<p><strong>补充：另一种栈顶指针约定</strong></p>
+<ul>
+<li>如果把初始值设置为：
+$$
+S.top=0
+$$</li>
+<li>通常表示 <code>top</code> 指向下一个可插入位置，而不是当前栈顶元素。</li>
+<li>此时第一个元素入栈后，<code>top</code> 会移动到 <code>data[1]</code> 的位置。</li>
+<li>对应的栈满条件变为：
+$$
+S.top==MaxSize
+$$</li>
+<li>注意：两种约定不能混用，代码中的入栈、出栈、判空、判满条件必须保持一致。</li>
+</ul>
+<h3 id="section-18">7.4.4 入栈</h3>
+<p><strong>逻辑</strong></p>
+<ul>
+<li>入栈前必须先判断栈是否已满。</li>
+<li>若未满：
+<ul>
+<li>栈顶指针先加 $1$；</li>
+<li>再把新元素写入新的栈顶位置。</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool Push(SqStack &amp;S, ElemType x) {
+    if (S.top == MaxSize - 1)
+        return false;
+
+    S.top = S.top + 1;
+    S.data[S.top] = x;
+    return true;
+}
+</code></pre>
+<p><strong>等价写法</strong></p>
+<pre><code class="language-c">S.data[++S.top] = x;
+</code></pre>
+<p><strong>易错点</strong></p>
+<ul>
+<li><code>++S.top</code> 表示先让 <code>top</code> 加 $1$，再访问数组。</li>
+<li>不能写成：</li>
+</ul>
+<pre><code class="language-c">S.data[S.top++] = x;
+</code></pre>
+<ul>
+<li>因为在 <code>top == -1</code> 的空栈约定下，后者会先访问 <code>data[-1]</code>，下标非法。</li>
+</ul>
+<h3 id="section-19">7.4.5 出栈</h3>
+<p><strong>逻辑</strong></p>
+<ul>
+<li>出栈前必须先判断栈是否为空。</li>
+<li>若非空：
+<ul>
+<li>先取出当前栈顶元素；</li>
+<li>再让栈顶指针减 $1$。</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool Pop(SqStack &amp;S, ElemType &amp;x) {
+    if (S.top == -1)
+        return false;
+
+    x = S.data[S.top];
+    S.top = S.top - 1;
+    return true;
+}
+</code></pre>
+<p><strong>注意</strong></p>
+<ul>
+<li>出栈以后，原数组位置中的数据仍可能留在内存中。</li>
+<li>该元素只是逻辑上被删除。</li>
+<li>顺序栈的出栈操作没有 <code>free</code>。</li>
+</ul>
+<h3 id="section-20">7.4.6 读取栈顶元素</h3>
+<p><strong>逻辑</strong></p>
+<ul>
+<li>读取栈顶前必须先判断栈是否为空。</li>
+<li>读取栈顶元素不会改变 <code>top</code>。</li>
+<li>因此 <code>GetTop</code> 与 <code>Pop</code> 的区别是：
+<ul>
+<li><code>GetTop</code> 只读不删；</li>
+<li><code>Pop</code> 既读又删。</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码</strong></p>
+<pre><code class="language-cpp">bool GetTop(SqStack S, ElemType &amp;x) {
+    if (S.top == -1)
+        return false;
+
+    x = S.data[S.top];
+    return true;
+}
+</code></pre>
+<h3 id="section-21">7.4.7 顺序栈操作复杂度</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>条件判断</th>
+<th>是否移动大量元素</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判空</td>
+<td><code>S.top == -1</code></td>
+<td>否</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>判满</td>
+<td><code>S.top == MaxSize - 1</code></td>
+<td>否</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>入栈</td>
+<td>先判满</td>
+<td>否</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>出栈</td>
+<td>先判空</td>
+<td>否</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>读栈顶</td>
+<td>先判空</td>
+<td>否</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-22">7.5 共享栈</h2>
+<h5 id="section-23"><strong>定义</strong>：#共享栈</h5>
+<blockquote>
+<p>描述：
+共享栈是在同一片数组空间中实现两个栈，使两个栈从数组两端向中间增长。</p>
+</blockquote>
+<p><strong>基本思想</strong></p>
+<ul>
+<li>0 号栈从数组左端开始增长。</li>
+<li>1 号栈从数组右端开始增长。</li>
+<li>两个栈共享同一片数组空间。</li>
+<li>当两个栈顶相邻时，说明没有剩余空间。</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/1edec2ab3315.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L07-共享栈.png"><img class="note-image" src="/assets/408/images/1edec2ab3315.png" alt="DS-L07-共享栈.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>0 号栈从下标 $0$ 向右增长，1 号栈从下标 $MaxSize-1$ 向左增长。</li>
+<li>初始时 <code>top0=-1</code>、<code>top1=MaxSize</code>；栈满条件为 <code>top0+1==top1</code>。</li>
+<li>两个栈共用尚未占用的中间区域，能减少两个普通顺序栈一边溢出、另一边仍有空位的浪费。</li>
+</ul>
+<p><strong>代码定义</strong></p>
+<pre><code class="language-c">#define MaxSize 10
+
+typedef struct {
+    ElemType data[MaxSize];  // 静态数组存放两个栈的元素
+    int top0;                // 0 号栈栈顶指针
+    int top1;                // 1 号栈栈顶指针
+} ShStack;
+</code></pre>
+<p><strong>初始化</strong></p>
+<pre><code class="language-cpp">void InitStack(ShStack &amp;S) {
+    S.top0 = -1;
+    S.top1 = MaxSize;
+}
+</code></pre>
+<p><strong>栈满条件</strong></p>
+<ul>
+<li>0 号栈栈顶的右边紧挨着 1 号栈栈顶时，两个栈之间没有空闲单元。</li>
+<li>因此共享栈的栈满条件为：
+$$
+S.top0+1==S.top1
+$$</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>实现了两个栈。</li>
+<li>两个栈共享同一个存储空间。</li>
+<li>当一个栈元素较多、另一个栈元素较少时，可以更充分地利用数组空间。</li>
+<li>适合两个栈空间需求此消彼长的场景。</li>
+</ul>
+<h2 id="section-24">7.6 栈的链式存储实现</h2>
+<h5 id="section-25"><strong>定义</strong>：#链栈</h5>
+<blockquote>
+<p>描述：
+链栈是用链式存储方式实现的栈，本质上是操作受限的单链表。</p>
+</blockquote>
+<p><strong>概念</strong></p>
+<ul>
+<li>链栈和单链表的定义几乎没有区别。</li>
+<li>区别主要是名词和操作限制：
+<ul>
+<li>单链表可以在多个位置插入、删除；</li>
+<li>链栈只在栈顶插入、删除。</li>
+</ul>
+</li>
+</ul>
+<p><a class="note-image-link" href="/assets/408/images/2dac3ccdda64.png" target="_blank" rel="noreferrer" aria-label="打开原图: DS-L07-链栈存储.png"><img class="note-image" src="/assets/408/images/2dac3ccdda64.png" alt="DS-L07-链栈存储.png" loading="lazy" decoding="async"></a></p>
+<p><strong>图示解读</strong></p>
+<ul>
+<li>链栈结点在物理内存中不必连续，逻辑次序由 <code>next</code> 指针连接。</li>
+<li>栈顶指针指向链表首元结点；入栈和出栈都在表头完成，时间复杂度均为 $O(1)$。</li>
+<li>采用带头结点还是不带头结点会影响空栈判定和具体代码，但不会改变后进先出的逻辑。</li>
+</ul>
+<p><strong>代码定义</strong></p>
+<pre><code class="language-c">typedef struct Linknode {
+    ElemType data;
+    struct Linknode *next;
+} *LiStack;
+</code></pre>
+<p><strong>解释</strong></p>
+<ul>
+<li><code>data</code> 是数据域。</li>
+<li><code>next</code> 是指针域。</li>
+<li><code>LiStack</code> 可以理解为链栈的栈顶指针。</li>
+<li>链栈通常把链表头部作为栈顶，便于在 $O(1)$ 时间内入栈、出栈。</li>
+</ul>
+<p><strong>补充写法</strong>
+在一些教材中，也会把结点类型和指针类型分开写：</p>
+<pre><code class="language-c">typedef struct Linknode {
+    ElemType data;
+    struct Linknode *next;
+} Linknode, *LiStack;
+</code></pre>
+<h3 id="section-26">7.6.1 链栈与顺序栈对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>顺序栈</th>
+<th>链栈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储方式</td>
+<td>顺序存储</td>
+<td>链式存储</td>
+</tr>
+<tr>
+<td>存储空间</td>
+<td>需要连续空间</td>
+<td>不要求连续空间</td>
+</tr>
+<tr>
+<td>容量限制</td>
+<td>受 <code>MaxSize</code> 限制</td>
+<td>理论上只受内存限制</td>
+</tr>
+<tr>
+<td>栈满判断</td>
+<td>需要</td>
+<td>通常不需要固定容量判满</td>
+</tr>
+<tr>
+<td>指针开销</td>
+<td>无额外指针域</td>
+<td>每个结点有指针域</td>
+</tr>
+<tr>
+<td>入栈出栈</td>
+<td>$O(1)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-27">7.7 面试题：栈和队列的区别</h2>
+<h3 id="section-28">7.7.1 队列</h3>
+<h5 id="section-29"><strong>定义</strong>：#队列</h5>
+<blockquote>
+<p>描述：
+队列是允许在一端进行插入、另一端进行删除的线性表。</p>
+</blockquote>
+<p><strong>特点</strong></p>
+<ul>
+<li>队列像排队一样。</li>
+<li>进入队列的元素按先进先出的规则处理：
+$$
+\text{FIFO}=\text{First In First Out}
+$$</li>
+<li>通常在表尾插入。</li>
+<li>通常在表头删除。</li>
+<li>因为队列经常插入、删除，常用定长数组实现循环队列。</li>
+<li>操作前需要判断队列是否为空、是否已满。</li>
+<li>如果想要动态长度，也可以用链表存储队列。</li>
+<li>链式队列需要记录：
+<ul>
+<li>队头指针；</li>
+<li>队尾指针。</li>
+</ul>
+</li>
+</ul>
+<h3 id="section-30">7.7.2 栈</h3>
+<p><strong>特点</strong></p>
+<ul>
+<li>栈只能在固定的栈顶一端进行插入和删除；顺序栈常把数组有效区末端作为栈顶，而链栈常把链表表头作为栈顶，因此“栈顶”不能无条件等同于某种实现的物理表尾。</li>
+<li>入栈、出栈都发生在栈顶。</li>
+<li>栈按后进先出规则处理元素：
+$$
+\text{LIFO}=\text{Last In First Out}
+$$</li>
+<li>栈常用定长数组实现。</li>
+<li>若用数组实现，可以用一个变量记录当前栈大小或栈顶位置。</li>
+</ul>
+<h3 id="section-31">7.7.3 对比表</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>栈</th>
+<th>队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入位置</td>
+<td>栈顶</td>
+<td>队尾</td>
+</tr>
+<tr>
+<td>删除位置</td>
+<td>栈顶</td>
+<td>队头</td>
+</tr>
+<tr>
+<td>操作端数</td>
+<td>同一端插入、删除</td>
+<td>一端插入、另一端删除</td>
+</tr>
+<tr>
+<td>逻辑规则</td>
+<td>后进先出</td>
+<td>先进先出</td>
+</tr>
+<tr>
+<td>英文缩写</td>
+<td>LIFO</td>
+<td>FIFO</td>
+</tr>
+<tr>
+<td>常见顺序实现</td>
+<td>顺序栈</td>
+<td>循环队列</td>
+</tr>
+<tr>
+<td>常见链式实现</td>
+<td>链栈</td>
+<td>链式队列</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-32">7.8 面试题：如何区分循环队列队空和队满</h2>
+<blockquote>
+<p>这一部分出现在原 PDF 的 Lecture 7 末尾，但主要属于后续队列内容。这里先按原 PDF 保留，正式讲队列时再展开。</p>
+</blockquote>
+<h3 id="section-33">7.8.1 普通情况下的问题</h3>
+<ul>
+<li>循环队列中，队空和队满有时会出现相同的判断形式：
+$$
+Q.front==Q.rear
+$$</li>
+<li>若不额外处理，就无法只靠这个条件区分队空和队满。</li>
+</ul>
+<p><strong>指针含义</strong></p>
+<ul>
+<li>队头指针 <code>front</code> 指向第一个队列元素。</li>
+<li>队尾指针 <code>rear</code> 指向最后一个元素的下一个位置。</li>
+<li><code>rear</code> 指向的位置也就是即将入队的位置。</li>
+</ul>
+<h3 id="section-34">7.8.2 方法一：牺牲一个存储单元</h3>
+<ul>
+<li>让循环队列永远空出一个位置。</li>
+<li>当队尾指针再向后移动一格就会到达队头指针时，认为队列已满。</li>
+<li>队满条件为：
+$$
+(Q.rear+1)\bmod MaxSize==Q.front
+$$</li>
+<li>队空条件仍为：
+$$
+Q.front==Q.rear
+$$</li>
+</ul>
+<h3 id="section-35">7.8.3 方法二：增加元素个数变量</h3>
+<ul>
+<li>在队列类型中增设一个表示元素个数的数据成员：</li>
+</ul>
+<pre><code class="language-c">int size;
+</code></pre>
+<ul>
+<li>队空条件为：
+$$
+Q.size==0
+$$</li>
+<li>队满条件为：
+$$
+Q.size==MaxSize
+$$</li>
+</ul>
+<h2 id="section-36">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/notes/cs408-5620bc526d96/">数据结构导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/notes/cs408-73a51c61296d/">上一篇：顺序表和链表对比</a> · <a href="/notes/cs408-113c1bdbdcb7/">下一篇：队列基本概念</a></li>
+<li><strong>关联专题</strong>：<a href="/notes/cs408-19ccba30ce38/">栈与队列代码</a></li>
+</ul>
+<h2 id="section-37">7.9 本节复盘</h2>
+<p><strong>必须掌握</strong></p>
+<ul>
+<li>栈是只允许在一端插入或删除的线性表。</li>
+<li>栈顶是允许操作的一端，栈底是另一端。</li>
+<li>栈的逻辑规则是后进先出：
+$$
+\text{LIFO}
+$$</li>
+<li>顺序栈通常用数组和栈顶指针实现。</li>
+<li>常见空栈条件：
+$$
+S.top==-1
+$$</li>
+<li>常见栈满条件：
+$$
+S.top==MaxSize-1
+$$</li>
+<li>共享栈的栈满条件：
+$$
+S.top0+1==S.top1
+$$</li>
+<li>$n$ 个不同元素按固定顺序入栈时，合法出栈序列个数为：
+$$
+\frac{1}{n+1}\binom{2n}{n}
+$$</li>
+</ul>
+<p><strong>易错点</strong></p>
+<ul>
+<li>栈只能在栈顶插入、删除，不是任意位置都能操作。</li>
+<li><code>GetTop</code> 只读取栈顶元素，不删除元素。</li>
+<li><code>Pop</code> 会改变栈顶指针。</li>
+<li>顺序栈出栈后，数组中的旧值可能还在，但逻辑上已经被删除。</li>
+<li><code>S.data[++S.top]=x</code> 中的 <code>++</code> 不能随意写反。</li>
+<li>链栈不是新的逻辑结构，它仍然是栈，只是存储方式变成链式。</li>
+<li>循环队列中 <code>Q.front==Q.rear</code> 可能表示队空，也可能在未经处理时与队满混淆。</li>
+</ul>
+<p><strong>一句话总结</strong></p>
+<ul>
+<li>栈：只在一端操作，后进先出。</li>
+<li>顺序栈：数组加栈顶指针。</li>
+<li>共享栈：两个栈从数组两端向中间增长。</li>
+<li>链栈：用单链表思想实现栈顶插入和删除。</li>
+</ul>
+<nav class="article-pagination" aria-label="相邻内容">
+    <a rel="prev" href="../cs408-a7218565071e/index.html"><span>← 上一项</span><strong>Lecture 9：栈在括号匹配中的应用</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-a8acba740351/index.html"><span>下一项 →</span><strong>Lecture 12：思维导图 - 应用层</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">继续阅读</p><h2 id="related-content-title">相关内容</h2></div>
+    <div class="related-grid"><a class="related-card" href="/notes/cs408-424a656729a9/"><span class="related-type">笔记</span><strong>0. 重点算法汇总</strong><span>408 学习笔记：0. 重点算法汇总。保留原有知识内容、公式与图示；有对应原件时提供查看和下载入口。</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../index.html">Jiayu Lab</a><p>把工程实践、学习过程和可复用的方法整理成长期资产。</p></div>
+    <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../assets/script.js?v=20261022a"></script>
+</body>
+</html>

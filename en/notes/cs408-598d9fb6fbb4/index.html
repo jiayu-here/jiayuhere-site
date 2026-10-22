@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script data-google-analytics-loader>
+    (() => {
+      const loadAnalytics = () => {
+        if (document.querySelector("script[data-google-analytics]")) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", "G-V2VWFFLH85");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-V2VWFFLH85";
+        script.dataset.googleAnalytics = "";
+        document.head.append(script);
+      };
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) window.requestIdleCallback(loadAnalytics, { timeout: 3500 });
+        else window.setTimeout(loadAnalytics, 1800);
+      }, { once: true });
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script data-theme-restore>
+    (() => {
+      try {
+        const theme = localStorage.getItem("jiayuhere-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Lecture 5：特征选择与特征提取 | Jiayu Lab</title>
+  <meta name="description" content="Chinese-language Computer Science 408 note: Lecture 5：特征选择与特征提取. Original source available where applicable.">
+  <meta name="author" content="JiaYu">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="keywords" content="408, Interview Subjects">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jiayu Lab">
+  <meta property="og:title" content="Lecture 5：特征选择与特征提取 | Jiayu Lab">
+  <meta property="og:description" content="Chinese-language Computer Science 408 note: Lecture 5：特征选择与特征提取. Original source available where applicable.">
+  <meta property="og:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jiayu Lab">
+  <meta property="og:url" content="https://www.jiayuhere.com/en/notes/cs408-598d9fb6fbb4/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lecture 5：特征选择与特征提取 | Jiayu Lab">
+  <meta name="twitter:description" content="Chinese-language Computer Science 408 note: Lecture 5：特征选择与特征提取. Original source available where applicable.">
+  <meta name="twitter:image" content="https://www.jiayuhere.com/assets/images/og.png">
+  <meta name="twitter:image:alt" content="Jiayu Lab">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.jiayuhere.com/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://www.jiayuhere.com/en/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lecture 5：特征选择与特征提取",
+      "item": "https://www.jiayuhere.com/en/notes/cs408-598d9fb6fbb4/"
+    }
+  ]
+}
+  </script>
+  <link rel="canonical" href="https://www.jiayuhere.com/en/notes/cs408-598d9fb6fbb4/">
+  <link rel="author" href="https://www.jiayuhere.com/en/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.jiayuhere.com/notes/cs408-598d9fb6fbb4/">
+  <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-598d9fb6fbb4/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-598d9fb6fbb4/">
+  <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
+  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+        displayMath: [["$$", "$$"]],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../../../en/index.html" aria-label="Jiayu Lab home"><span>Jiayu <span class="brand-muted">Lab</span></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a  href="../../../en/projects/index.html">Projects</a>
+      <a  href="../../../en/blog/index.html">Blog</a>
+      <a aria-current="page" href="../../../en/notes/index.html">Notes</a>
+      <a href="../../../en/toolbox/index.html">Toolbox</a>
+      <a href="../../../en/resources/index.html">Resources</a>
+      <a href="../../../en/lab/index.html">Lab Log</a>
+      <a class="nav-cta" href="../../../en/contact/index.html">Contact</a>
+      <a class="language-switch" href="../../../notes/cs408-598d9fb6fbb4/" lang="zh-CN" hreflang="zh-CN" aria-label="切换到中文">中文</a>
+    </nav>
+  </header>
+<main id="main" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header container"><a class="back-link" href="../index.html" data-notes-back-link>← Back to Learning Notes</a><h1 lang="zh-CN">Lecture 5：特征选择与特征提取</h1><p class="article-lead">Chinese-language Computer Science 408 note: Lecture 5：特征选择与特征提取. Original source available where applicable.</p><div class="article-meta"><span class="record-meta"><span class="record-category">Computer Science 408</span><span class="record-date"><span>Record date</span><time datetime="2026-08-14">2026-08-14</time></span></span><span>11 min read</span><div class="tag-list" role="list" aria-label="Content tags"><span role="listitem">408</span><span role="listitem">Interview Subjects</span></div></div><div class="button-row note-source-controls">
+        <a class="button secondary-button" href="/assets/408/originals/68d143ce7bb5.pdf" target="_blank" rel="noreferrer">View original PDF</a>
+        <a class="button secondary-button" href="/assets/408/originals/68d143ce7bb5.pdf" download="Lecture 5：特征选择与特征提取.pdf">Download original</a>
+      </div></header>
+      <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">5.1 特征选择与特征提取</a><a href="#section-2">$$
+\boldsymbol{x}_i</a><a href="#section-6">5.2 PCA 基本模型</a><a href="#section-7">$$
+U_M</a><a href="#section-8">$$
+\boldsymbol{y}_i</a><a href="#section-9">5.3 数据中心化与协方差</a><a href="#section-10">$$
+\boldsymbol{\mu}</a><a href="#section-11">$$
+\tilde{\boldsymbol{x}}_i</a><a href="#section-12">$$
+\Sigma</a><a href="#section-13">5.4 第一主成分的推导</a><a href="#section-15">$$
+y_i</a><a href="#section-16">$$
+\frac{1}{p}
+\sum_{i=1}^{p}y_i^2</a><a href="#section-18">$$
+\mathcal L(\boldsymbol{u},\lambda)</a><a href="#section-19">\boldsymbol{u}^{\mathrm T}\Sigma\boldsymbol{u}</a><a href="#section-20">$$
+\frac{\partial\mathcal L}
+{\partial\boldsymbol{u}}</a><a href="#section-21">$$
+\Sigma\boldsymbol{u}</a><a href="#section-22">$$
+\boldsymbol{u}^{\mathrm T}\Sigma\boldsymbol{u}</a><a href="#section-23">5.5 多个主成分</a><a href="#section-24">$$
+\boldsymbol{u}_i^{\mathrm T}\boldsymbol{u}_j</a><a href="#section-25">$$
+\operatorname{EVR}(M)</a><a href="#section-26">5.6 PCA 算法流程</a><a href="#section-27">$$
+\hat x_i</a><a href="#section-28">5.7 PCA 的注意事项</a><a href="#section-29">5.8 特征脸应用</a><a href="#section-30">5.9 特征子集搜索</a><a href="#section-31">$$
+\binom{M}{N}</a><a href="#section-34">5.10 AdaBoost 基本思想</a><a href="#section-35">5.11 AdaBoost 公式</a><a href="#section-39">$$
+e_m</a><a href="#section-41">$$
+\alpha_m</a><a href="#section-43">$$
+w_{m+1,i}</a><a href="#section-44">$$
+Z_m</a><a href="#section-46">$$
+f(x)</a><a href="#section-47">5.12 AdaBoost 流程</a><a href="#section-48">5.13 易错点</a><a href="#section-49">相关知识</a><a href="#section-50">5.14 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><blockquote>
+<p>描述：本节区分特征选择和特征提取，推导 PCA 的最大方差与特征值问题，整理特征脸应用，并说明前向/后向特征选择与 AdaBoost 的样本权重、弱分类器权重和最终集成公式。</p>
+</blockquote>
+<h2 id="section-1">5.1 特征选择与特征提取</h2>
+<p>设原始样本：</p>
+<h1 id="section-2">$$
+\boldsymbol{x}_i</h1>
+<p>\begin{bmatrix}
+x_{i1} &amp; x_{i2} &amp; \cdots &amp; x_{iN}
+\end{bmatrix}^{\mathrm T}
+\in\mathbb R^N.
+$$</p>
+<h3 id="section-3">5.1.1 特征选择</h3>
+<p>从原有 $N$ 个特征中选出 $M$ 个：</p>
+<p>$$
+M&lt;N.
+$$</p>
+<p>输出仍是原始特征的子集，不改变每个特征的语义。</p>
+<p>目标通常是：在减少冗余、噪声和计算量的同时，尽量保持或提高验证集上的任务性能。</p>
+<h3 id="section-4">5.1.2 特征提取</h3>
+<p>构造映射：</p>
+<p>$$
+f:\mathbb R^N\rightarrow\mathbb R^M,
+$$</p>
+<p>得到新特征：</p>
+<p>$$
+\boldsymbol{y}=f(\boldsymbol{x}).
+$$</p>
+<p>新特征通常是原特征的组合，不再直接对应某个原始维度。PCA 是线性特征提取方法；神经网络、自编码器可学习非线性特征。</p>
+<h3 id="section-5">5.1.3 对比</h3>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>特征选择</th>
+<th>特征提取</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出</td>
+<td>原特征子集</td>
+<td>新构造的特征</td>
+</tr>
+<tr>
+<td>可解释性</td>
+<td>通常较强</td>
+<td>取决于变换，可能较弱</td>
+</tr>
+<tr>
+<td>典型方法</td>
+<td>过滤、包装、嵌入式选择</td>
+<td>PCA、LDA、自编码器</td>
+</tr>
+<tr>
+<td>是否必须降维</td>
+<td>通常是</td>
+<td>通常是，也可做等维变换</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-6">5.2 PCA 基本模型</h2>
+<p>主成分分析（Principal Component Analysis，PCA）寻找数据方差最大的正交方向，并把样本投影到这些方向。</p>
+<p>PCA 是：</p>
+<ul>
+<li>无监督方法，不使用类别标签。</li>
+<li>线性降维方法。</li>
+<li>保留最大方差方向，也等价于在给定维数下最小化线性正交重构误差。</li>
+</ul>
+<p>设保留 $M$ 个主成分，令：</p>
+<h1 id="section-7">$$
+U_M</h1>
+<p>\begin{bmatrix}
+\boldsymbol{u}_1 &amp;
+\boldsymbol{u}_2 &amp;
+\cdots &amp;
+\boldsymbol{u}_M
+\end{bmatrix}
+\in\mathbb R^{N\times M}.
+$$</p>
+<p>降维：</p>
+<h1 id="section-8">$$
+\boldsymbol{y}_i</h1>
+<p>U_M^{\mathrm T}
+(\boldsymbol{x}_i-\boldsymbol{\mu})
+\in\mathbb R^M.
+$$</p>
+<p>这可看成仿射层：</p>
+<p>$$
+\boldsymbol{y}=A\boldsymbol{x}+\boldsymbol{b},
+$$</p>
+<p>其中 $A=U_M^T$、$b=-U_M^T\mu$。但 PCA 的参数由协方差特征分解/SVD 决定，不是普通神经网络那样依靠标签和反向传播训练。</p>
+<h2 id="section-9">5.3 数据中心化与协方差</h2>
+<p>有 $p$ 个样本：</p>
+<p>$$
+{\boldsymbol{x}_1,\ldots,\boldsymbol{x}_p}.
+$$</p>
+<p>均值：</p>
+<h1 id="section-10">$$
+\boldsymbol{\mu}</h1>
+<p>\frac{1}{p}
+\sum_{i=1}^{p}\boldsymbol{x}_i.
+$$</p>
+<p>中心化样本：</p>
+<h1 id="section-11">$$
+\tilde{\boldsymbol{x}}_i</h1>
+<p>\boldsymbol{x}_i-\boldsymbol{\mu}.
+$$</p>
+<p>协方差矩阵可写为：</p>
+<h1 id="section-12">$$
+\Sigma</h1>
+<p>\frac{1}{p}
+\sum_{i=1}^{p}
+\tilde{\boldsymbol{x}}_i
+\tilde{\boldsymbol{x}}_i^{\mathrm T}.
+$$</p>
+<p>统计学无偏样本协方差常用 $1/(p-1)$。两种缩放不会改变特征向量，只会按同一比例缩放特征值。</p>
+<h2 id="section-13">5.4 第一主成分的推导</h2>
+<h3 id="section-14">5.4.1 最大化投影方差</h3>
+<p>选单位方向 $\boldsymbol{u}$：</p>
+<p>$$
+\boldsymbol{u}^{\mathrm T}\boldsymbol{u}=1.
+$$</p>
+<p>样本投影：</p>
+<h1 id="section-15">$$
+y_i</h1>
+<p>\boldsymbol{u}^{\mathrm T}
+(\boldsymbol{x}_i-\boldsymbol{\mu}).
+$$</p>
+<p>投影方差：</p>
+<h1 id="section-16">$$
+\frac{1}{p}
+\sum_{i=1}^{p}y_i^2</h1>
+<p>\boldsymbol{u}^{\mathrm T}
+\Sigma
+\boldsymbol{u}.
+$$</p>
+<p>PCA 求解：</p>
+<p>$$
+\max_{\boldsymbol{u}}
+\boldsymbol{u}^{\mathrm T}\Sigma\boldsymbol{u},
+\qquad
+\text{s.t. }
+\boldsymbol{u}^{\mathrm T}\boldsymbol{u}=1.
+$$</p>
+<p>源课件说“让每个点到直线距离的方差最大”，不准确。应是让点在该方向上的投影方差最大；从重构角度看，则是让点到所选子空间的平方距离总和最小。</p>
+<h3 id="section-17">5.4.2 拉格朗日乘子</h3>
+<h1 id="section-18">$$
+\mathcal L(\boldsymbol{u},\lambda)</h1>
+<h2 id="section-19">\boldsymbol{u}^{\mathrm T}\Sigma\boldsymbol{u}</h2>
+<p>\lambda
+(\boldsymbol{u}^{\mathrm T}\boldsymbol{u}-1).
+$$</p>
+<p>令梯度为零：</p>
+<h1 id="section-20">$$
+\frac{\partial\mathcal L}
+{\partial\boldsymbol{u}}</h1>
+<p>2\Sigma\boldsymbol{u}
+-2\lambda\boldsymbol{u}
+=0.
+$$</p>
+<p>因此：</p>
+<h1 id="section-21">$$
+\Sigma\boldsymbol{u}</h1>
+<p>\lambda\boldsymbol{u}.
+$$</p>
+<p>$\boldsymbol{u}$ 是协方差矩阵特征向量，目标值为：</p>
+<h1 id="section-22">$$
+\boldsymbol{u}^{\mathrm T}\Sigma\boldsymbol{u}</h1>
+<p>\lambda.
+$$</p>
+<p>所以第一主成分是最大特征值对应的单位特征向量。</p>
+<h2 id="section-23">5.5 多个主成分</h2>
+<p>第二主成分还要满足与第一主成分正交：</p>
+<p>$$
+\boldsymbol{u}_2^{\mathrm T}\boldsymbol{u}_2=1,
+$$</p>
+<p>$$
+\boldsymbol{u}_2^{\mathrm T}\boldsymbol{u}_1=0.
+$$</p>
+<p>一般地：</p>
+<h1 id="section-24">$$
+\boldsymbol{u}_i^{\mathrm T}\boldsymbol{u}_j</h1>
+<p>\begin{cases}
+1, &amp; i=j,\
+0, &amp; i\neq j.
+\end{cases}
+$$</p>
+<p>把协方差特征值降序排列：</p>
+<p>$$
+\lambda_1\geq\lambda_2\geq\cdots\geq\lambda_N\geq0.
+$$</p>
+<p>前 $M$ 个特征向量构成 $U_M$。</p>
+<p>保留方差比例：</p>
+<h1 id="section-25">$$
+\operatorname{EVR}(M)</h1>
+<p>\frac{\sum_{j=1}^{M}\lambda_j}
+{\sum_{j=1}^{N}\lambda_j}.
+$$</p>
+<p>可根据累计解释方差或下游验证性能选择 $M$。</p>
+<h2 id="section-26">5.6 PCA 算法流程</h2>
+<ol>
+<li>组织样本，计算均值 $\mu$。</li>
+<li>中心化每个样本 $\tilde x_i=x_i-\mu$。</li>
+<li>计算协方差矩阵 $\Sigma$，或直接对中心化数据做 SVD。</li>
+<li>求特征值和特征向量。</li>
+<li>按特征值从大到小排序。</li>
+<li>取前 $M$ 个单位正交特征向量组成 $U_M$。</li>
+<li>投影：</li>
+</ol>
+<p>$$
+y_i=U_M^T(x_i-\mu).
+$$</p>
+<ol start="8">
+<li>需要重构时：</li>
+</ol>
+<h1 id="section-27">$$
+\hat x_i</h1>
+<p>U_My_i+\mu.
+$$</p>
+<p>高维且样本较少时，直接对数据矩阵做经济型 SVD 通常比显式构造巨大协方差矩阵更稳定高效。</p>
+<h2 id="section-28">5.7 PCA 的注意事项</h2>
+<ul>
+<li>PCA 只看方差，不看标签；高方差方向不一定最有分类能力。</li>
+<li>特征量纲差异很大时，应先标准化，否则大尺度特征会主导主成分。</li>
+<li>PCA 对异常值较敏感。</li>
+<li>主成分方向的正负号可以整体翻转，不影响所表示子空间。</li>
+<li>必须只在训练集拟合均值和主成分，再应用到验证/测试集，防止数据泄漏。</li>
+</ul>
+<h2 id="section-29">5.8 特征脸应用</h2>
+<p>课件示例使用 XM2VTS 人脸数据：</p>
+<ul>
+<li>295 人。</li>
+<li>每人 8 张图片，分 4 次拍摄，每次 2 张。</li>
+<li>人脸检测和对齐后缩放为 $128\times128$ 灰度图。</li>
+<li>每人前 4 张训练、后 4 张测试。</li>
+<li>训练集和测试集各：</li>
+</ul>
+<p>$$
+295\times4=1180
+$$</p>
+<p>张。</p>
+<p>每张图展平后维度：</p>
+<p>$$
+128\times128=16384.
+$$</p>
+<p>取前 100 个主成分：</p>
+<p>$$
+U_{100}
+\in
+\mathbb R^{16384\times100},
+$$</p>
+<p>输出特征：</p>
+<p>$$
+y\in\mathbb R^{100}.
+$$</p>
+<ul>
+<li>平均脸是训练图像均值 $\mu$。</li>
+<li>主成分向量重新排列成图像后称为特征脸（eigenfaces），表示人脸数据中方差最大的变化模式。</li>
+<li>它们不是“某个局部最有特征的部位”，而是覆盖整张图像的正交基方向。</li>
+</ul>
+<p>课件实验结果：</p>
+<div class="note-table-scroll"><table>
+<thead>
+<tr>
+<th>分类器</th>
+<th style="text-align:right">识别率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最近邻</td>
+<td style="text-align:right">$76.02%$</td>
+</tr>
+<tr>
+<td>SVM</td>
+<td style="text-align:right">$80.25%$</td>
+</tr>
+</tbody>
+</table></div>
+<p>该结果只对应课件的数据划分、预处理、PCA 维数和分类器设置，不能直接当作数据集统一基准。</p>
+<h2 id="section-30">5.9 特征子集搜索</h2>
+<p>从 $M$ 个候选特征选 $N$ 个，组合数为：</p>
+<h1 id="section-31">$$
+\binom{M}{N}</h1>
+<p>\frac{M!}{N!(M-N)!}.
+$$</p>
+<p>当 $M$ 较大时，穷举代价很高。</p>
+<h3 id="section-32">5.9.1 顺序前向选择</h3>
+<ol>
+<li>从空集合开始。</li>
+<li>每轮尝试加入一个未选特征。</li>
+<li>选择使验证指标提升最大的特征。</li>
+<li>达到目标维数或提升不足时停止。</li>
+</ol>
+<h3 id="section-33">5.9.2 顺序后向消除</h3>
+<ol>
+<li>从全部特征开始。</li>
+<li>每轮尝试删除一个特征。</li>
+<li>删除对验证指标损害最小的特征。</li>
+<li>达到目标维数时停止。</li>
+</ol>
+<p>两者都是贪心启发式，不能保证全局最优。</p>
+<p>源课件说“神经网络已经做了这些事情，所以递增/递减法不好用”，过于绝对。深度网络能学习表示，但显式特征选择仍可用于高维小样本、可解释性、降低采集成本和表格数据任务。</p>
+<h2 id="section-34">5.10 AdaBoost 基本思想</h2>
+<p>训练集：</p>
+<p>$$
+T={(x_i,y_i)}_{i=1}^{N},
+\qquad
+y_i\in{-1,+1}.
+$$</p>
+<p>AdaBoost 顺序训练多个弱分类器：</p>
+<ul>
+<li>每轮关注当前被错分的样本。</li>
+<li>错误率低的弱分类器获得更大组合权重。</li>
+<li>最后对弱分类器加权投票。</li>
+</ul>
+<p>若弱分类器是只使用单个特征的决策树桩，被选中的弱学习器也会间接完成特征选择；但 AdaBoost 本质是提升/集成算法，不是对任意基学习器都天然等于特征选择。</p>
+<h2 id="section-35">5.11 AdaBoost 公式</h2>
+<h3 id="section-36">5.11.1 初始化样本权重</h3>
+<p>$$
+w_{1,i}=\frac{1}{N},
+\qquad
+i=1,\ldots,N.
+$$</p>
+<p>记：</p>
+<p>$$
+D_m=(w_{m,1},w_{m,2},\ldots,w_{m,N}).
+$$</p>
+<h3 id="section-37">5.11.2 训练弱分类器</h3>
+<p>第 $m$ 轮根据 $D_m$ 训练：</p>
+<p>$$
+G_m(x)\in{-1,+1}.
+$$</p>
+<p>经典 AdaBoost 可以直接让基学习器使用样本权重；按权重有放回重采样是可选实现，不是算法必须步骤。</p>
+<h3 id="section-38">5.11.3 加权错误率</h3>
+<h1 id="section-39">$$
+e_m</h1>
+<p>\sum_{i=1}^{N}
+w_{m,i}
+\mathbb I(G_m(x_i)\neq y_i).
+$$</p>
+<h3 id="section-40">5.11.4 弱分类器权重</h3>
+<h1 id="section-41">$$
+\alpha_m</h1>
+<p>\frac{1}{2}
+\ln
+\frac{1-e_m}{e_m}.
+$$</p>
+<ul>
+<li>若 $e_m&lt;1/2$，则 $\alpha_m&gt;0$。</li>
+<li>若 $e_m=0$，公式趋于无穷，实现时需提前停止或做数值裁剪。</li>
+<li>若 $e_m\geq1/2$，该弱分类器不比随机猜测好，应停止、重训或调整学习器。</li>
+</ul>
+<h3 id="section-42">5.11.5 更新样本权重</h3>
+<h1 id="section-43">$$
+w_{m+1,i}</h1>
+<p>\frac{
+w_{m,i}
+\exp[-\alpha_my_iG_m(x_i)]
+}{Z_m},
+$$</p>
+<p>其中归一化因子：</p>
+<h1 id="section-44">$$
+Z_m</h1>
+<p>\sum_{i=1}^{N}
+w_{m,i}
+\exp[-\alpha_my_iG_m(x_i)].
+$$</p>
+<p>若分类正确，$y_iG_m(x_i)=1$，权重乘 $e^{-\alpha_m}$；若分类错误，乘 $e^{\alpha_m}$。归一化后，错分样本的相对权重上升。</p>
+<h3 id="section-45">5.11.6 最终分类器</h3>
+<h1 id="section-46">$$
+f(x)</h1>
+<p>\sum_{m=1}^{M}
+\alpha_mG_m(x),
+$$</p>
+<p>$$
+G(x)=\operatorname{sign}[f(x)].
+$$</p>
+<h2 id="section-47">5.12 AdaBoost 流程</h2>
+<ol>
+<li>初始化所有样本权重为 $1/N$。</li>
+<li>训练一个加权错误率尽量小的弱分类器。</li>
+<li>计算 $e_m$ 和 $\alpha_m$。</li>
+<li>提高错分样本权重，降低正确样本权重并归一化。</li>
+<li>重复 $M$ 轮。</li>
+<li>按 $\alpha_m$ 对所有弱分类器加权投票。</li>
+</ol>
+<p>AdaBoost 对噪声和异常点可能敏感，因为持续错分的样本会获得很高权重。</p>
+<h2 id="section-48">5.13 易错点</h2>
+<ul>
+<li>特征选择保留原维度子集，特征提取生成新维度，两者不能混用。</li>
+<li>PCA 最大化的是投影方差，不是点到主轴距离的方差。</li>
+<li>PCA 投影前必须中心化；量纲差异大时还应标准化。</li>
+<li>第一主成分是最大特征值对应方向，后续主成分还要与已选方向正交。</li>
+<li>变换矩阵取法要统一：若主成分按列组成 $U_M$，则降维是 $U_M^T(x-\mu)$。</li>
+<li>PCA 不使用标签，高方差方向不一定最适合分类。</li>
+<li>$128\times128$ 图像展平维度是 16384；100 个特征脸组成的基矩阵是 $16384\times100$。</li>
+<li>从 $M$ 个特征选 $N$ 个的组合数是 $M!/[N!(M-N)!]$。</li>
+<li>顺序前向和后向选择是贪心算法，不能保证最优子集。</li>
+<li>AdaBoost 通常直接使用样本权重；重采样只是可选实现。</li>
+<li>AdaBoost 样本权重更新必须包含指数项和归一化因子 $Z_m$。</li>
+<li>AdaBoost 是集成算法；只有在弱学习器按特征构造时，才自然体现特征选择效果。</li>
+</ul>
+<h2 id="section-49">相关知识</h2>
+<ul>
+<li><strong>科目导航</strong>：<a href="/en/notes/cs408-53cbe59d76f3/">复试常考科目导航</a></li>
+<li><strong>阅读顺序</strong>：<a href="/en/notes/cs408-d168b88f4e02/">上一篇：强化学习</a> · <a href="/en/notes/cs408-7b66c3b26ed2/">下一篇：目标检测</a></li>
+<li><strong>关联专题</strong>：<a href="/en/notes/cs408-a42ee6cb57ff/">AdaBoost</a></li>
+</ul>
+<h2 id="section-50">5.14 本节复盘</h2>
+<ul>
+<li>特征选择从原特征中挑子集，特征提取把原特征映射为新表示。</li>
+<li>PCA 是无监督线性降维，选择协方差矩阵最大特征值对应的正交方向。</li>
+<li>前 $M$ 个主成分最大化保留方差，并在正交线性投影中最小化重构误差。</li>
+<li>PCA 流程包括中心化、协方差/SVD、特征排序、投影和可选重构。</li>
+<li>特征脸把高维人脸图像投影到少量主成分坐标，再交给最近邻或 SVM 分类。</li>
+<li>特征子集穷举具有组合爆炸，顺序前向和后向方法用贪心方式近似搜索。</li>
+<li>AdaBoost 顺序训练弱分类器，提高错分样本权重，并按弱分类器可靠性加权投票。</li>
+<li>AdaBoost 的核心公式是加权错误率、$\alpha_m$、指数样本权重更新和最终符号函数。</li>
+</ul>
+</div><nav class="article-pagination" aria-label="Adjacent content">
+    <a rel="prev" href="../cs408-5865bd37ecaf/index.html"><span>← Previous item</span><strong>教材补充：虚拟存储器</strong></a>
+    <a class="article-pagination-next" rel="next" href="../cs408-59e41ea74a00/index.html"><span>Next item →</span><strong>Lecture 11：思维导图 - 运输层</strong></a>
+  </nav></div></div>
+<aside class="related-content container" aria-labelledby="related-content-title">
+    <div class="related-heading"><p class="eyebrow">Continue exploring</p><h2 id="related-content-title">Related records</h2></div>
+    <div class="related-grid"><a class="related-card" href="/en/notes/cs408-937337386c65/"><span class="related-type">Note</span><strong>Lecture 0：PyTorch 总结</strong><span>Chinese-language Computer Science 408 note: Lecture 0：PyTorch 总结. Original source available where applicable.</span></a></div>
+  </aside>
+    </article></main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div><a class="brand footer-brand" href="../../../en/index.html">Jiayu Lab</a><p>Turning engineering practice, learning and reusable methods into long-term assets.</p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
+    <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
+  </footer>
+  <script src="../../../assets/script.js?v=20261022a"></script>
+</body>
+</html>
