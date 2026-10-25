@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-5efaa92ea781/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-5efaa92ea781/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -134,7 +134,7 @@
 </blockquote>
 <h2 id="section-1">22.1 广度优先遍历</h2>
 <h3 id="section-2">22.1.1 基本概念</h3>
-<h5 id="section-3"><strong>定义</strong>：#广度优先遍历 #BFS</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86">#广度优先遍历</a> <a class="note-concept-tag" href="/notes/?tag=%23BFS">#BFS</a></h5>
 <blockquote>
 <p>描述：广度优先遍历（Breadth-First Search，BFS）从起始顶点 $v$ 出发，先依次访问 $v$ 的所有未访问邻接顶点，再依次访问这些邻接顶点的所有未访问邻接顶点，按“由近到远、逐层扩展”的方式直至不能继续。</p>
 </blockquote>
@@ -152,7 +152,7 @@ $$</p>
 <li>只处理尚未访问过的邻接顶点。</li>
 <li>使用一个<strong>辅助队列</strong>保存“已经发现但还没有展开邻接点”的顶点。</li>
 </ol>
-<h5 id="section-5"><strong>队列含义</strong>：#BFS队列</h5>
+<h5 id="section-5"><strong>队列含义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23BFS%E9%98%9F%E5%88%97">#BFS队列</a></h5>
 <ul>
 <li>顶点被首次访问时，立刻标记并入队。</li>
 <li>队头顶点出队后，扫描它的所有邻接点。</li>
@@ -218,7 +218,7 @@ $$</p>
 <p>在<strong>顶点编号顺序固定、起始顶点固定、按固定列序扫描邻接点</strong>的条件下，邻接矩阵确定，因此 BFS 访问序列唯一。若改变顶点编号或扫描顺序，序列仍可能改变。</p>
 <h5 id="section-8"><strong>邻接表</strong>：</h5>
 <p>同一个图的邻接表表示通常不唯一：同一顶点边表中邻接点的链接次序可以不同。因此即使起点相同，BFS 访问序列也可能不同。</p>
-<h5 id="section-9"><strong>易错点</strong>：#BFS序列</h5>
+<h5 id="section-9"><strong>易错点</strong>：<a class="note-concept-tag" href="/notes/?tag=%23BFS%E5%BA%8F%E5%88%97">#BFS序列</a></h5>
 <ul>
 <li>图本身固定并不自动保证遍历序列唯一。</li>
 <li>题目若给邻接表，应严格按边表给出的次序访问。</li>
@@ -318,7 +318,7 @@ void BFS(Graph G, int v) {
 </tr>
 </tbody>
 </table></div>
-<h5 id="section-16"><strong>代码易错点</strong>：#BFS代码</h5>
+<h5 id="section-16"><strong>代码易错点</strong>：<a class="note-concept-tag" href="/notes/?tag=%23BFS%E4%BB%A3%E7%A0%81">#BFS代码</a></h5>
 <ul>
 <li>课件中 <code>TREUE</code> 是拼写错误，应为 <code>TRUE</code>。</li>
 <li><code>w &gt;= 0</code> 与前一讲 <code>FirstNeighbor</code> 返回 $-1$ 的约定匹配。</li>
@@ -327,7 +327,7 @@ void BFS(Graph G, int v) {
 <li>代码是沿用课件抽象 <code>Graph</code>、队列 <code>Q</code> 与邻接点接口的算法片段；调用 <code>BFS</code> 前须先初始化队列，<code>EnQueue/DeQueue</code> 的具体实现及容量失败处理也须由所用队列接口提供。</li>
 </ul>
 <h3 id="section-17">22.1.5 非连通图的处理</h3>
-<h5 id="section-18"><strong>遍历框架</strong>：#非连通图BFS</h5>
+<h5 id="section-18"><strong>遍历框架</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%9D%9E%E8%BF%9E%E9%80%9A%E5%9B%BEBFS">#非连通图BFS</a></h5>
 <blockquote>
 <p>描述：先将所有顶点标记为未访问，再按顶点编号逐一检查。每遇到一个未访问顶点，就以它为起点执行一次 BFS。</p>
 </blockquote>
@@ -353,7 +353,7 @@ void BFS(Graph G, int v) {
 <li>对有向图，调用次数取决于起点及弧方向，不能直接等同于强连通分量个数。</li>
 </ul>
 <h3 id="section-20">22.1.6 广度优先生成树</h3>
-<h5 id="section-21"><strong>定义</strong>：#广度优先生成树</h5>
+<h5 id="section-21"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%94%9F%E6%88%90%E6%A0%91">#广度优先生成树</a></h5>
 <blockquote>
 <p>描述：在 BFS 过程中，每当首次访问一个新顶点 $w$ 时，把“发现 $w$ 的顶点”记为其双亲，并把对应边记为树边。</p>
 </blockquote>
@@ -375,7 +375,7 @@ void BFS(Graph G, int v) {
 <hr>
 <h2 id="section-22">22.2 深度优先遍历</h2>
 <h3 id="section-23">22.2.1 基本概念</h3>
-<h5 id="section-24"><strong>定义</strong>：#深度优先遍历 #DFS</h5>
+<h5 id="section-24"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86">#深度优先遍历</a> <a class="note-concept-tag" href="/notes/?tag=%23DFS">#DFS</a></h5>
 <blockquote>
 <p>描述：深度优先遍历（Depth-First Search，DFS）从起始顶点出发，在当前顶点的未访问邻接点中任选一个继续访问；只要还能向下，就持续深入。当当前顶点没有未访问邻接点时，回退到最近一个仍有未访问邻接点的顶点，继续搜索。</p>
 </blockquote>
@@ -452,7 +452,7 @@ void DFS(Graph G, int v) {
 <li>若发现未访问顶点 $w$，递归执行 <code>DFS(G, w)</code>。</li>
 <li>当 $w$ 的分支遍历结束后，函数自动返回到 $v$，继续枚举 $v$ 的下一个邻接点。</li>
 </ol>
-<h5 id="section-31"><strong>代码易错点</strong>：#DFS代码</h5>
+<h5 id="section-31"><strong>代码易错点</strong>：<a class="note-concept-tag" href="/notes/?tag=%23DFS%E4%BB%A3%E7%A0%81">#DFS代码</a></h5>
 <ul>
 <li>课件中 <code>NextNeighor</code> 少写了 <code>b</code>，应为 <code>NextNeighbor</code>。</li>
 <li>条件应使用 <code>w &gt;= 0</code>，因为合法顶点编号可以为 $0$；写成 <code>w &gt; 0</code> 会漏掉 $0$ 号顶点。</li>
@@ -479,7 +479,7 @@ void DFS(Graph G, int v) {
 <li>对有向图，外层启动次数要具体分析；若指定起始顶点能沿弧到达其他所有顶点，则外层只需启动 $1$ 次。</li>
 </ul>
 <h3 id="section-34">22.2.5 深度优先生成树</h3>
-<h5 id="section-35"><strong>定义</strong>：#深度优先生成树</h5>
+<h5 id="section-35"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E7%94%9F%E6%88%90%E6%A0%91">#深度优先生成树</a></h5>
 <blockquote>
 <p>描述：DFS 中每次递归访问一个未访问邻接点时，把触发递归的边记为树边。</p>
 </blockquote>
@@ -655,6 +655,6 @@ void DFS(Graph G, int v) {
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-312cfdf36075/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-312cfdf36075/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">20.1 基本概念</a><a href="#section-6">20.2 常见图</a><a href="#section-19">20.3 顶点与度</a><a href="#section-28">20.4 路径、距离与连通性</a><a href="#section-51">20.5 子图、连通分量、生成树和生成森林</a><a href="#section-72">20.6 权值与特殊图</a><a href="#section-84">20.7 性质总结</a><a href="#section-88">20.8 题型：图基本概念</a><a href="#section-100">相关知识</a><a href="#section-101">20.9 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">20.1 基本概念</h2>
 <h3 id="section-2">20.1.1 图的定义</h3>
-<h5 id="section-3"><strong>定义</strong>：#图</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%9B%BE">#图</a></h5>
 <blockquote>
 <p>描述：图是由顶点集合和边集合组成的一种非线性数据结构，通常记为：
 $$
@@ -158,7 +158,7 @@ $$
 E\subseteq V\times V
 $$</p>
 <p>无向边则用顶点的无序对表示。这里的“子集”非常重要：它只限定边的端点必须来自 $V$，并不表示任意两个顶点之间必然有边；只有完全图才把所有允许的顶点对都取为边。</p>
-<h5 id="section-4"><strong>易错点</strong>：#空图</h5>
+<h5 id="section-4"><strong>易错点</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A9%BA%E5%9B%BE">#空图</a></h5>
 <blockquote>
 <p>描述：线性表可以为空表，树可以为空树，但图不允许没有顶点。</p>
 </blockquote>
@@ -176,7 +176,7 @@ $$</p>
 $$
 E=\varnothing
 $$</p>
-<h5 id="section-5"><strong>基本术语</strong>：#图术语</h5>
+<h5 id="section-5"><strong>基本术语</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%9B%BE%E6%9C%AF%E8%AF%AD">#图术语</a></h5>
 <div class="note-table-scroll"><table>
 <thead>
 <tr>
@@ -237,7 +237,7 @@ $$</p>
 <hr>
 <h2 id="section-6">20.2 常见图</h2>
 <h3 id="section-7">20.2.1 无向图</h3>
-<h5 id="section-8"><strong>定义</strong>：#无向图</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%97%A0%E5%90%91%E5%9B%BE">#无向图</a></h5>
 <blockquote>
 <p>描述：若图 $G$ 中的每条边都没有方向，则称 $G$ 为无向图。</p>
 </blockquote>
@@ -265,7 +265,7 @@ A\text{ 是 }B\text{ 的好友}\Longleftrightarrow B\text{ 是 }A\text{ 的好�
 $$</p>
 <hr>
 <h3 id="section-10">20.2.2 有向图</h3>
-<h5 id="section-11"><strong>定义</strong>：#有向图</h5>
+<h5 id="section-11"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%89%E5%90%91%E5%9B%BE">#有向图</a></h5>
 <blockquote>
 <p>描述：若图 $G$ 中的每条边都有方向，则称 $G$ 为有向图。</p>
 </blockquote>
@@ -303,7 +303,7 @@ B\text{ 页面也链接到 }A\text{ 页面}
 $$</p>
 <hr>
 <h3 id="section-13">20.2.3 简单图</h3>
-<h5 id="section-14"><strong>定义</strong>：#简单图</h5>
+<h5 id="section-14"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%AE%80%E5%8D%95%E5%9B%BE">#简单图</a></h5>
 <blockquote>
 <p>描述：若图中不存在重复边，也不存在顶点到自身的边，则称该图为简单图。</p>
 </blockquote>
@@ -326,7 +326,7 @@ $$</p>
 </blockquote>
 <hr>
 <h3 id="section-16">20.2.4 多重图</h3>
-<h5 id="section-17"><strong>定义</strong>：#多重图</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%9A%E9%87%8D%E5%9B%BE">#多重图</a></h5>
 <blockquote>
 <p>描述：若图中允许两个顶点之间存在多条边，或允许顶点通过边和自身相关联，则称该图为多重图。</p>
 </blockquote>
@@ -386,7 +386,7 @@ $$</p>
 <hr>
 <h2 id="section-19">20.3 顶点与度</h2>
 <h3 id="section-20">20.3.1 无向图中顶点的度</h3>
-<h5 id="section-21"><strong>定义</strong>：#度</h5>
+<h5 id="section-21"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BA%A6">#度</a></h5>
 <blockquote>
 <p>描述：无向图中，顶点 $v$ 的度是依附于该顶点的边的条数，记作 $TD(v)$。</p>
 </blockquote>
@@ -412,11 +412,11 @@ $$</p>
 <p>所以一条边总共贡献 $2$。</p>
 <hr>
 <h3 id="section-23">20.3.2 有向图中顶点的入度和出度</h3>
-<h5 id="section-24"><strong>定义</strong>：#入度</h5>
+<h5 id="section-24"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%85%A5%E5%BA%A6">#入度</a></h5>
 <blockquote>
 <p>描述：有向图中，以顶点 $v$ 为终点的弧的数目称为 $v$ 的入度，记作 $ID(v)$。</p>
 </blockquote>
-<h5 id="section-25"><strong>定义</strong>：#出度</h5>
+<h5 id="section-25"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%87%BA%E5%BA%A6">#出度</a></h5>
 <blockquote>
 <p>描述：有向图中，以顶点 $v$ 为起点的弧的数目称为 $v$ 的出度，记作 $OD(v)$。</p>
 </blockquote>
@@ -477,7 +477,7 @@ $$</p>
 <hr>
 <h2 id="section-28">20.4 路径、距离与连通性</h2>
 <h3 id="section-29">20.4.1 路径</h3>
-<h5 id="section-30"><strong>定义</strong>：#路径</h5>
+<h5 id="section-30"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%B7%AF%E5%BE%84">#路径</a></h5>
 <blockquote>
 <p>描述：从顶点 $v_p$ 到顶点 $v_q$ 的路径，是一个顶点序列。</p>
 </blockquote>
@@ -492,7 +492,7 @@ $$</p>
 <li>依次类推，最后能到达 $v_q$。</li>
 </ul>
 <p>在有向图中，路径还必须满足方向一致。</p>
-<h5 id="section-31"><strong>路径长度</strong>：#路径长度</h5>
+<h5 id="section-31"><strong>路径长度</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6">#路径长度</a></h5>
 <blockquote>
 <p>描述：路径长度是路径上边或弧的数目。</p>
 </blockquote>
@@ -511,7 +511,7 @@ $$</p>
 <p>共 $k$ 条边。</p>
 <hr>
 <h3 id="section-32">20.4.2 回路与简单路径</h3>
-<h5 id="section-33"><strong>定义</strong>：#回路 #环</h5>
+<h5 id="section-33"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%9B%9E%E8%B7%AF">#回路</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E7%8E%AF">#环</a></h5>
 <blockquote>
 <p>描述：若一条长度大于 $0$ 的路径的第一个顶点和最后一个顶点相同，则称该路径为回路，也称为环。</p>
 </blockquote>
@@ -519,7 +519,7 @@ $$</p>
 $$
 v_0=v_k
 $$</p>
-<h5 id="section-34"><strong>定义</strong>：#简单路径</h5>
+<h5 id="section-34"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%AE%80%E5%8D%95%E8%B7%AF%E5%BE%84">#简单路径</a></h5>
 <blockquote>
 <p>描述：若路径序列中各顶点不重复出现，则称该路径为简单路径。</p>
 </blockquote>
@@ -534,7 +534,7 @@ $$</p>
 </blockquote>
 <hr>
 <h3 id="section-36">20.4.3 点到点的距离</h3>
-<h5 id="section-37"><strong>定义</strong>：#距离</h5>
+<h5 id="section-37"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%B7%9D%E7%A6%BB">#距离</a></h5>
 <blockquote>
 <p>描述：从顶点 $u$ 到顶点 $v$ 的距离，是 $u$ 到 $v$ 的最短路径长度。</p>
 </blockquote>
@@ -553,11 +553,11 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-39">20.4.4 无向图的连通</h3>
-<h5 id="section-40"><strong>定义</strong>：#连通</h5>
+<h5 id="section-40"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%BF%9E%E9%80%9A">#连通</a></h5>
 <blockquote>
 <p>描述：无向图中，若顶点 $v$ 到顶点 $w$ 之间存在路径，则称 $v$ 和 $w$ 是连通的。</p>
 </blockquote>
-<h5 id="section-41"><strong>定义</strong>：#连通图</h5>
+<h5 id="section-41"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%BF%9E%E9%80%9A%E5%9B%BE">#连通图</a></h5>
 <blockquote>
 <p>描述：若无向图中任意两个顶点都是连通的，则称该图为连通图。</p>
 </blockquote>
@@ -582,7 +582,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-43">20.4.5 有向图的强连通</h3>
-<h5 id="section-44"><strong>定义</strong>：#强连通</h5>
+<h5 id="section-44"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BC%BA%E8%BF%9E%E9%80%9A">#强连通</a></h5>
 <blockquote>
 <p>描述：有向图中，若顶点 $v$ 到顶点 $w$ 有路径，且顶点 $w$ 到顶点 $v$ 也有路径，则称 $v$ 和 $w$ 是强连通的。</p>
 </blockquote>
@@ -594,7 +594,7 @@ $$</p>
 $$
 w\leadsto v
 $$</p>
-<h5 id="section-45"><strong>定义</strong>：#强连通图</h5>
+<h5 id="section-45"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%9B%BE">#强连通图</a></h5>
 <blockquote>
 <p>描述：若有向图中任意两个顶点都是强连通的，则称该图为强连通图。</p>
 </blockquote>
@@ -620,7 +620,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-47">20.4.6 不连通无向图的最多边数</h3>
-<h5 id="section-48"><strong>结论</strong>：#不连通图最多边数</h5>
+<h5 id="section-48"><strong>结论</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%8D%E8%BF%9E%E9%80%9A%E5%9B%BE%E6%9C%80%E5%A4%9A%E8%BE%B9%E6%95%B0">#不连通图最多边数</a></h5>
 <blockquote>
 <p>描述：若一个 $n\ge 2$ 顶点无向简单图是不连通的，则它最多有 $C_{n-1}^{2}$ 条边。</p>
 </blockquote>
@@ -653,7 +653,7 @@ $$</p>
 <hr>
 <h2 id="section-51">20.5 子图、连通分量、生成树和生成森林</h2>
 <h3 id="section-52">20.5.1 子图</h3>
-<h5 id="section-53"><strong>定义</strong>：#子图</h5>
+<h5 id="section-53"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AD%90%E5%9B%BE">#子图</a></h5>
 <blockquote>
 <p>描述：设图 $G=(V,E)$ 和图 $G'=(V',E')$，若 $V'\subseteq V$ 且 $E'\subseteq E$，则称 $G'$ 是 $G$ 的子图。</p>
 </blockquote>
@@ -673,7 +673,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-55">20.5.2 生成子图</h3>
-<h5 id="section-56"><strong>定义</strong>：#生成子图</h5>
+<h5 id="section-56"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%94%9F%E6%88%90%E5%AD%90%E5%9B%BE">#生成子图</a></h5>
 <blockquote>
 <p>描述：若子图 $G'$ 包含原图 $G$ 的全部顶点，则称 $G'$ 为 $G$ 的生成子图。</p>
 </blockquote>
@@ -691,7 +691,7 @@ $$</p>
 </blockquote>
 <hr>
 <h3 id="section-58">20.5.3 连通分量</h3>
-<h5 id="section-59"><strong>定义</strong>：#连通分量</h5>
+<h5 id="section-59"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F">#连通分量</a></h5>
 <blockquote>
 <p>描述：无向图中的极大连通子图称为连通分量。</p>
 </blockquote>
@@ -709,7 +709,7 @@ $$</p>
 <p>若无向图不是连通图，则它有多个连通分量。</p>
 <hr>
 <h3 id="section-61">20.5.4 强连通分量</h3>
-<h5 id="section-62"><strong>定义</strong>：#强连通分量</h5>
+<h5 id="section-62"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F">#强连通分量</a></h5>
 <blockquote>
 <p>描述：有向图中的极大强连通子图称为强连通分量。</p>
 </blockquote>
@@ -725,7 +725,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-64">20.5.5 生成树</h3>
-<h5 id="section-65"><strong>定义</strong>：#生成树</h5>
+<h5 id="section-65"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%94%9F%E6%88%90%E6%A0%91">#生成树</a></h5>
 <blockquote>
 <p>描述：连通图的生成树是包含图中全部顶点的一个极小连通子图。</p>
 </blockquote>
@@ -790,7 +790,7 @@ $$</p>
 </table></div>
 <hr>
 <h3 id="section-68">20.5.6 生成森林</h3>
-<h5 id="section-69"><strong>定义</strong>：#生成森林</h5>
+<h5 id="section-69"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%94%9F%E6%88%90%E6%A3%AE%E6%9E%97">#生成森林</a></h5>
 <blockquote>
 <p>描述：在非连通图中，各个连通分量的生成树组成的集合称为生成森林。</p>
 </blockquote>
@@ -836,7 +836,7 @@ $$</p>
 <hr>
 <h2 id="section-72">20.6 权值与特殊图</h2>
 <h3 id="section-73">20.6.1 权值和网</h3>
-<h5 id="section-74"><strong>定义</strong>：#权值</h5>
+<h5 id="section-74"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9D%83%E5%80%BC">#权值</a></h5>
 <blockquote>
 <p>描述：图中边或弧上带有的数值称为权值。</p>
 </blockquote>
@@ -849,11 +849,11 @@ $$</p>
 <li>相似度。</li>
 <li>其他与关系相关的数量。</li>
 </ul>
-<h5 id="section-75"><strong>定义</strong>：#带权图 #网</h5>
+<h5 id="section-75"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B8%A6%E6%9D%83%E5%9B%BE">#带权图</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E7%BD%91">#网</a></h5>
 <blockquote>
 <p>描述：边上带有权值的图称为带权图，也称为网。</p>
 </blockquote>
-<h5 id="section-76"><strong>定义</strong>：#带权路径长度</h5>
+<h5 id="section-76"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6">#带权路径长度</a></h5>
 <blockquote>
 <p>描述：带权路径长度是路径上各条边权值之和。</p>
 </blockquote>
@@ -873,7 +873,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-78">20.6.2 无向完全图</h3>
-<h5 id="section-79"><strong>定义</strong>：#无向完全图</h5>
+<h5 id="section-79"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%97%A0%E5%90%91%E5%AE%8C%E5%85%A8%E5%9B%BE">#无向完全图</a></h5>
 <blockquote>
 <p>描述：无向图中，若任意两个不同顶点之间都存在一条边，则称该图为无向完全图。</p>
 </blockquote>
@@ -896,7 +896,7 @@ $$</p>
 </ul>
 <hr>
 <h3 id="section-81">20.6.3 有向完全图</h3>
-<h5 id="section-82"><strong>定义</strong>：#有向完全图</h5>
+<h5 id="section-82"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%89%E5%90%91%E5%AE%8C%E5%85%A8%E5%9B%BE">#有向完全图</a></h5>
 <blockquote>
 <p>描述：有向图中，若任意两个不同顶点之间都存在方向相反的两条弧，则称该图为有向完全图。</p>
 </blockquote>
@@ -1178,6 +1178,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

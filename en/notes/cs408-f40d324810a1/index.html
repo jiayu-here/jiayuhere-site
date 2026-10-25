@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-f40d324810a1/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-f40d324810a1/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -133,7 +133,7 @@
 <p>描述：本讲从硬件、软件与冯·诺依曼机出发，建立“程序如何被保存、取出、解释并执行”的全局视角。重点是各部件的职责、关键寄存器、层次结构和从源程序到可执行程序的全过程。</p>
 </blockquote>
 <h2 id="section-1">1.1 计算机系统与软硬件</h2>
-<h5 id="section-2"><strong>定义</strong>：#计算机系统</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F">#计算机系统</a></h5>
 <ul>
 <li><strong>硬件</strong>是可见、可触的物理设备总称，如 CPU、主存、硬盘、键盘与显示器。</li>
 <li><strong>软件</strong>是运行于硬件上的程序、数据和相关文档。计算机性能最终通常通过软件的执行效率和作用体现。</li>
@@ -184,7 +184,7 @@
 <li>一条指令通常由<strong>操作码</strong>和<strong>地址码</strong>构成：操作码说明做什么，地址码说明操作数或转移目标在哪里。</li>
 <li>CPU 并不是凭“存储位置”区分指令和数据，而是依据<strong>指令周期所处阶段</strong>解释同一串二进制位。因此“CPU 无法区分指令和数据”是错误说法。</li>
 </ul>
-<h5 id="section-5"><strong>定义</strong>：#存储程序</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AD%98%E5%82%A8%E7%A8%8B%E5%BA%8F">#存储程序</a></h5>
 <p>程序及其数据先以二进制形式装入主存；CPU 从程序首地址取第一条指令，随后按指令规定的顺序或转移关系连续执行，直到结束。启动之后通常不需要操作人员逐条干预。</p>
 <h3 id="section-6">1.2.2 存储器、MAR 与 MDR</h3>
 <div class="note-table-scroll"><table>
@@ -322,7 +322,7 @@
 </tbody>
 </table></div>
 <p>这五层是教材用于说明“逐层抽象、下层支撑上层”的概念模型，并不表示每台真实计算机都以同样方式实现。例如，硬布线控制器并不存在由微指令构成的实际微程序；此时第 1 级应理解为控制信号与数据通路层面的硬件实现，而不是强行套用微程序。</p>
-<h5 id="section-11"><strong>定义</strong>：#ISA</h5>
+<h5 id="section-11"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23ISA">#ISA</a></h5>
 <p>**指令集体系结构（ISA）**规定软件可见的机器接口，核心包括指令及其编码、操作数类型、寄存器组织、寻址方式、存储器地址空间，以及异常/中断等程序可见行为。它是软硬件的重要接口；同一 ISA 可由流水线结构、Cache 组织和控制器实现均不同的多种微体系结构实现。</p>
 <h2 id="section-12">1.4 程序的执行与生成</h2>
 <h3 id="section-13">1.4.1 指令周期与取数示例</h3>
@@ -410,6 +410,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

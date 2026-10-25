@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-2e90359dd8ec/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-2e90359dd8ec/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -133,7 +133,7 @@
 <p>排序是把记录按关键字重新排列为有序序列。408 中不只问“结果是否有序”，还常考稳定性、存储位置、时间/空间复杂度，以及外存场景下的 I/O 代价。</p>
 </blockquote>
 <h2 id="section-1">29.1 排序的基本概念</h2>
-<h5 id="section-2"><strong>定义</strong>：#排序</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%8E%92%E5%BA%8F">#排序</a></h5>
 <blockquote>
 <p>描述：排序是将一组记录按关键字的非递减（或非递增）次序重新排列的过程。默认升序时，结果满足：</p>
 </blockquote>
@@ -146,7 +146,7 @@ $$</p>
 <li>题目未说明升降序时，要先结合比较条件或最终序列判断，不能把算法名直接等同于升序。</li>
 </ul>
 <h3 id="section-3">29.1.1 稳定性</h3>
-<h5 id="section-4"><strong>定义</strong>：#稳定排序</h5>
+<h5 id="section-4"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F">#稳定排序</a></h5>
 <blockquote>
 <p>描述：若排序前两个记录 $R_i,R_j$ 满足 $key_i=key_j$ 且 $R_i$ 在 $R_j$ 之前，排序后 $R_i$ 仍在 $R_j$ 之前，则该排序算法稳定；否则不稳定。</p>
 </blockquote>
@@ -198,7 +198,7 @@ $$</p>
 <hr>
 <h2 id="section-6">29.2 内部排序与外部排序</h2>
 <h3 id="section-7">29.2.1 内部排序</h3>
-<h5 id="section-8"><strong>定义</strong>：#内部排序</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F">#内部排序</a></h5>
 <blockquote>
 <p>描述：待排序记录在排序过程中可全部放入内存的排序，称为内部排序。</p>
 </blockquote>
@@ -208,7 +208,7 @@ $$</p>
 <li>数据量并非按文件大小绝对划分，而看可用内存能否同时容纳待排数据。</li>
 </ul>
 <h3 id="section-9">29.2.2 外部排序</h3>
-<h5 id="section-10"><strong>定义</strong>：#外部排序</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F">#外部排序</a></h5>
 <blockquote>
 <p>描述：待排序数据量过大，无法一次全部读入内存，需要在外存与内存之间分批读写并完成排序，称为外部排序。</p>
 </blockquote>
@@ -245,6 +245,6 @@ $$</p>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

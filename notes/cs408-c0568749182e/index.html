@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c0568749182e/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c0568749182e/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">18.1 树的存储结构</a><a href="#section-12">18.2 树和森林的遍历</a><a href="#section-24">18.3 树、森林与二叉树的转换</a><a href="#section-34">18.4 题型：树、森林与二叉树转换</a><a href="#section-51">相关知识</a><a href="#section-52">18.5 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">18.1 树的存储结构</h2>
 <h3 id="section-2">18.1.1 双亲表示法</h3>
-<h5 id="section-3"><strong>定义</strong>：#双亲表示法</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95">#双亲表示法</a></h5>
 <blockquote>
 <p>描述：
 双亲表示法是一种顺序存储结构。它用数组存储树中各个结点，并在每个结点中保存该结点双亲在数组中的下标。</p>
@@ -262,7 +262,7 @@ typedef struct {
 <li>根结点的 <code>parent</code> 为 <code>-1</code>。</li>
 </ul>
 <h3 id="section-5">18.1.2 孩子表示法</h3>
-<h5 id="section-6"><strong>定义</strong>：#孩子表示法</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95">#孩子表示法</a></h5>
 <blockquote>
 <p>描述：
 孩子表示法使用数组顺序存储各个结点，同时为每个结点建立一个孩子链表，用来保存该结点所有孩子在数组中的位置。</p>
@@ -339,7 +339,7 @@ typedef struct {
 <li><code>CTNode.child</code> 存的是孩子在数组中的位置，不是孩子的数据本身。</li>
 </ul>
 <h3 id="section-8">18.1.3 孩子兄弟表示法</h3>
-<h5 id="section-9"><strong>定义</strong>：#孩子兄弟表示法</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95">#孩子兄弟表示法</a></h5>
 <blockquote>
 <p>描述：
 孩子兄弟表示法是一种链式存储结构。每个结点保存两个指针：一个指向第一个孩子，另一个指向右边的第一个兄弟。</p>
@@ -454,7 +454,7 @@ typedef struct {
 下列遍历序列和转换结果都依赖固定的孩子次序。408 题目中的树通常按从左到右有序；若讨论无序树，必须先约定孩子排列顺序，否则遍历序列和对应二叉树并不唯一。</p>
 </blockquote>
 <h3 id="section-13">18.2.1 树的先根遍历</h3>
-<h5 id="section-14"><strong>定义</strong>：#树的先根遍历</h5>
+<h5 id="section-14"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A0%91%E7%9A%84%E5%85%88%E6%A0%B9%E9%81%8D%E5%8E%86">#树的先根遍历</a></h5>
 <blockquote>
 <p>描述：
 若树非空，先访问根结点，再依次对每棵子树进行先根遍历。</p>
@@ -489,7 +489,7 @@ typedef struct {
 <li>根先访问，所以和二叉树先序遍历一致。</li>
 </ul>
 <h3 id="section-16">18.2.2 树的后根遍历</h3>
-<h5 id="section-17"><strong>定义</strong>：#树的后根遍历</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A0%91%E7%9A%84%E5%90%8E%E6%A0%B9%E9%81%8D%E5%8E%86">#树的后根遍历</a></h5>
 <blockquote>
 <p>描述：
 若树非空，先依次对每棵子树进行后根遍历，最后再访问根结点。</p>
@@ -524,7 +524,7 @@ typedef struct {
 <li>这是本节常考对应关系之一。</li>
 </ul>
 <h3 id="section-19">18.2.3 森林的先序遍历</h3>
-<h5 id="section-20"><strong>定义</strong>：#森林先序遍历</h5>
+<h5 id="section-20"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A3%AE%E6%9E%97%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86">#森林先序遍历</a></h5>
 <blockquote>
 <p>描述：
 若森林非空，先访问森林中第一棵树的根结点，再先序遍历第一棵树根结点的子树森林，最后先序遍历去除第一棵树后剩余树构成的森林。</p>
@@ -541,7 +541,7 @@ typedef struct {
 <li>做题时可以先转换成二叉树，再求先序遍历。</li>
 </ul>
 <h3 id="section-21">18.2.4 森林的中序遍历</h3>
-<h5 id="section-22"><strong>定义</strong>：#森林中序遍历</h5>
+<h5 id="section-22"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A3%AE%E6%9E%97%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86">#森林中序遍历</a></h5>
 <blockquote>
 <p>描述：
 若森林非空，先中序遍历森林中第一棵树根结点的子树森林，再访问第一棵树的根结点，最后中序遍历去除第一棵树后剩余树构成的森林。</p>
@@ -611,7 +611,7 @@ typedef struct {
 <li>后续兄弟依次挂在前一个兄弟的右指针上。</li>
 </ul>
 <h3 id="section-26">18.3.2 树转二叉树</h3>
-<h5 id="section-27"><strong>定义</strong>：#树转二叉树</h5>
+<h5 id="section-27"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A0%91%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91">#树转二叉树</a></h5>
 <blockquote>
 <p>描述：
 将一棵普通树按孩子兄弟表示法转换成一棵二叉树。</p>
@@ -663,7 +663,7 @@ typedef struct {
 <li>图中的黄色边表示由兄弟关系形成的右指针。</li>
 </ul>
 <h3 id="section-28">18.3.3 森林转二叉树</h3>
-<h5 id="section-29"><strong>定义</strong>：#森林转二叉树</h5>
+<h5 id="section-29"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A3%AE%E6%9E%97%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91">#森林转二叉树</a></h5>
 <blockquote>
 <p>描述：
 将森林中的多棵树按孩子兄弟表示法合并表示为一棵二叉树。</p>
@@ -707,7 +707,7 @@ typedef struct {
 <li>每棵树内部仍执行“第一个孩子接左边、其余兄弟接右边”。</li>
 </ul>
 <h3 id="section-30">18.3.4 二叉树转树</h3>
-<h5 id="section-31"><strong>定义</strong>：#二叉树转树</h5>
+<h5 id="section-31"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E6%A0%91">#二叉树转树</a></h5>
 <blockquote>
 <p>描述：
 将由一棵树转换得到的二叉树，按左孩子右兄弟规则还原为原来的树。</p>
@@ -751,7 +751,7 @@ C-&gt;rchild = D
 <li>每个结点的左孩子及其右链，被还原为该结点从左到右的一组孩子。</li>
 </ul>
 <h3 id="section-32">18.3.5 二叉树转森林</h3>
-<h5 id="section-33"><strong>定义</strong>：#二叉树转森林</h5>
+<h5 id="section-33"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E6%A3%AE%E6%9E%97">#二叉树转森林</a></h5>
 <blockquote>
 <p>描述：
 将由森林转换得到的二叉树，按左孩子右兄弟规则还原为多棵树组成的森林。</p>
@@ -1058,6 +1058,6 @@ C-&gt;rchild = D
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

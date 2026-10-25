@@ -28,6 +28,7 @@ let tables = 0;
 let diagrams = 0;
 let links = 0;
 let identicalSources = 0;
+let collapsedCallouts = 0;
 const libraryRoot = process.argv[2] ? path.resolve(process.argv[2]) : "";
 for (const file of zh) {
   const slug = file.slice(0, -3);
@@ -38,7 +39,19 @@ for (const file of zh) {
   assert(zhSource.includes(`slug: ${slug}`) && enSource.includes(`slug: ${slug}`), `Slug mismatch: ${file}`);
   assert(enHtml.includes("note-language-notice") && enHtml.includes('lang="zh-CN"'), `Missing Chinese-language notice: ${file}`);
   assert(!zhHtml.includes("�") && !enHtml.includes("�"), `Replacement character: ${file}`);
+  const callouts = [...zhSource.matchAll(/^> \[![a-z]+\][-+] /gm)].length;
+  if (callouts) {
+    collapsedCallouts += callouts;
+    assert.equal((zhHtml.match(/<details class="note-callout"/g) || []).length, callouts, `Chinese callouts missing: ${file}`);
+    assert.equal((enHtml.match(/<details class="note-callout"/g) || []).length, callouts, `English callouts missing: ${file}`);
+  }
   const sourceAsset = zhSource.match(/^sourceAsset: (\/assets\/408\/[^\r\n]+)/m)?.[1];
+  const sourcePreview = zhSource.match(/^sourcePreview: (\/assets\/408\/[^\r\n]+)/m)?.[1];
+  if (sourcePreview) {
+    assert(enSource.includes(`sourcePreview: ${sourcePreview}`), `Canvas preview differs between languages: ${file}`);
+    assert(zhHtml.includes(`src="${sourcePreview}"`) && enHtml.includes(`src="${sourcePreview}"`), `Canvas preview absent: ${file}`);
+    await exists(sourcePreview);
+  }
   if (sourceAsset) {
     originalLinks += 1;
     assert(enSource.includes(`sourceAsset: ${sourceAsset}`), `Source differs between languages: ${file}`);
@@ -76,5 +89,9 @@ for (const file of zh) {
   }
 }
 assert.equal(originalLinks, 150, "Original source link count");
+assert.equal(collapsedCallouts, 8, "Collapsed Obsidian callout count");
+const canvasSvg = await readFile(path.join(root, "assets/408/diagrams/network-layer.svg"), "utf8");
+assert(!canvasSvg.includes("NaN") && !canvasSvg.includes("https://"), "Canvas SVG must be self-contained and use valid coordinates");
+assert.equal((canvasSvg.match(/<text /g) || []).length, 27, "Canvas text element count");
 console.log(`408 audit passed: ${zh.length} bilingual notes, ${originalLinks} source links, ${tables} tables, ${diagrams} diagram notes, ${links} checked local links.`);
 if (libraryRoot) console.log(`Verified ${identicalSources} published originals are byte-identical to the iCloud library.`);

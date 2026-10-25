@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-55bc6e80698d/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-55bc6e80698d/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -174,7 +174,7 @@
 <li>顺序表适合按位查找，单链表适合频繁插入删除。</li>
 </ul>
 <h3 id="section-3">5.1.2 单链表结点定义</h3>
-<h5 id="section-4"><strong>定义</strong>：#单链表结点</h5>
+<h5 id="section-4"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8D%95%E9%93%BE%E8%A1%A8%E7%BB%93%E7%82%B9">#单链表结点</a></h5>
 <blockquote>
 <p>描述：
 单链表的每个结点通常由数据域和指针域组成，数据域存放元素值，指针域指向下一个结点。</p>
@@ -226,7 +226,7 @@
 </ul>
 <h2 id="section-7">5.2 不带头结点的单链表</h2>
 <h3 id="section-8">5.2.1 初始化</h3>
-<h5 id="section-9"><strong>定义</strong>：#不带头结点</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%8D%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9">#不带头结点</a></h5>
 <blockquote>
 <p>描述：
 不带头结点的单链表中，头指针直接指向第一个数据结点；若链表为空，则头指针为 <code>NULL</code>。</p>
@@ -272,12 +272,12 @@ $$
 </ul>
 <h2 id="section-11">5.3 带头结点的单链表</h2>
 <h3 id="section-12">5.3.1 头指针和头结点</h3>
-<h5 id="section-13"><strong>定义</strong>：#头指针</h5>
+<h5 id="section-13"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%B4%E6%8C%87%E9%92%88">#头指针</a></h5>
 <blockquote>
 <p>描述：
 头指针是指向链表第一个结点的指针，是链表的必要元素。</p>
 </blockquote>
-<h5 id="section-14"><strong>定义</strong>：#头结点</h5>
+<h5 id="section-14"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%B4%E7%BB%93%E7%82%B9">#头结点</a></h5>
 <blockquote>
 <p>描述：
 头结点是放在第一个数据结点之前的附加结点，通常不存储有效数据，用于统一插入和删除操作。</p>
@@ -314,7 +314,7 @@ $$
 </ul>
 <h2 id="section-15">5.4 单链表的插入</h2>
 <h3 id="section-16">5.4.1 按位序插入：带头结点</h3>
-<h5 id="section-17"><strong>定义</strong>：#按位序插入</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8C%89%E4%BD%8D%E5%BA%8F%E6%8F%92%E5%85%A5">#按位序插入</a></h5>
 <blockquote>
 <p>描述：
 <code>ListInsert(&amp;L,i,e)</code> 表示在链表 $L$ 的第 $i$ 个位置插入元素 $e$。</p>
@@ -429,7 +429,7 @@ p-&gt;next = s;
 <li>推荐使用带头结点的单链表。</li>
 </ul>
 <h3 id="section-19">5.4.3 后插操作</h3>
-<h5 id="section-20"><strong>定义</strong>：#后插操作</h5>
+<h5 id="section-20"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%90%8E%E6%8F%92%E6%93%8D%E4%BD%9C">#后插操作</a></h5>
 <blockquote>
 <p>描述：
 后插操作是在已知结点 $p$ 后面插入新结点 $s$。</p>
@@ -459,7 +459,7 @@ O(1)
 $$</li>
 </ul>
 <h3 id="section-21">5.4.4 前插操作</h3>
-<h5 id="section-22"><strong>定义</strong>：#前插操作</h5>
+<h5 id="section-22"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%89%8D%E6%8F%92%E6%93%8D%E4%BD%9C">#前插操作</a></h5>
 <blockquote>
 <p>描述：
 前插操作是在已知结点 $p$ 前面插入元素 $e$。</p>
@@ -511,7 +511,7 @@ $$</li>
 </ul>
 <h2 id="section-23">5.5 单链表的删除</h2>
 <h3 id="section-24">5.5.1 按位序删除：带头结点</h3>
-<h5 id="section-25"><strong>定义</strong>：#按位序删除</h5>
+<h5 id="section-25"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8C%89%E4%BD%8D%E5%BA%8F%E5%88%A0%E9%99%A4">#按位序删除</a></h5>
 <blockquote>
 <p>描述：
 <code>ListDelete(&amp;L,i,&amp;e)</code> 表示删除表 $L$ 中第 $i$ 个位置的元素，并用 $e$ 返回被删除元素的值。</p>
@@ -599,7 +599,7 @@ $$</li>
 </ul>
 <h2 id="section-27">5.6 单链表的查找</h2>
 <h3 id="section-28">5.6.1 按位查找</h3>
-<h5 id="section-29"><strong>定义</strong>：#GetElem</h5>
+<h5 id="section-29"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23GetElem">#GetElem</a></h5>
 <blockquote>
 <p>描述：
 按位查找是查找链表中第 $i$ 个结点。</p>
@@ -632,7 +632,7 @@ $$
 O(n)
 $$</p>
 <h3 id="section-30">5.6.2 按值查找</h3>
-<h5 id="section-31"><strong>定义</strong>：#LocateElem</h5>
+<h5 id="section-31"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23LocateElem">#LocateElem</a></h5>
 <blockquote>
 <p>描述：
 按值查找是在链表中查找数据域等于 $e$ 的结点。</p>
@@ -659,7 +659,7 @@ $$
 O(n)
 $$</p>
 <h3 id="section-32">5.6.3 求表长</h3>
-<h5 id="section-33"><strong>定义</strong>：#Length</h5>
+<h5 id="section-33"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23Length">#Length</a></h5>
 <blockquote>
 <p>描述：
 求表长是统计单链表中数据结点的个数。</p>
@@ -689,7 +689,7 @@ O(n)
 $$</p>
 <h2 id="section-34">5.7 单链表的建立</h2>
 <h3 id="section-35">5.7.1 尾插法</h3>
-<h5 id="section-36"><strong>定义</strong>：#尾插法</h5>
+<h5 id="section-36"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B0%BE%E6%8F%92%E6%B3%95">#尾插法</a></h5>
 <blockquote>
 <p>描述：
 尾插法每次把新结点插入到链表尾部，可以正向建立单链表。</p>
@@ -735,7 +735,7 @@ O(n)
 $$</li>
 </ul>
 <h3 id="section-37">5.7.2 头插法</h3>
-<h5 id="section-38"><strong>定义</strong>：#头插法</h5>
+<h5 id="section-38"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%B4%E6%8F%92%E6%B3%95">#头插法</a></h5>
 <blockquote>
 <p>描述：
 头插法每次把新结点插入到头结点之后，因此建立出来的链表顺序与输入顺序相反。</p>
@@ -778,7 +778,7 @@ $$</p>
 </ul>
 <h2 id="section-39">5.8 双链表</h2>
 <h3 id="section-40">5.8.1 双链表结点定义</h3>
-<h5 id="section-41"><strong>定义</strong>：#双链表</h5>
+<h5 id="section-41"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%8C%E9%93%BE%E8%A1%A8">#双链表</a></h5>
 <blockquote>
 <p>描述：
 双链表的每个结点有两个指针域，分别指向前驱结点和后继结点。</p>
@@ -816,7 +816,7 @@ $$</p>
 <li>头结点后面暂时没有数据结点。</li>
 </ul>
 <h3 id="section-43">5.8.3 双链表插入</h3>
-<h5 id="section-44"><strong>定义</strong>：#双链表插入</h5>
+<h5 id="section-44"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%8C%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5">#双链表插入</a></h5>
 <blockquote>
 <p>描述：
 在双链表中，可以在已知结点 $p$ 后面插入结点 $s$。</p>
@@ -930,7 +930,7 @@ $$</p>
 </code></pre>
 <h2 id="section-48">5.9 循环单链表</h2>
 <h3 id="section-49">5.9.1 循环单链表的定义</h3>
-<h5 id="section-50"><strong>定义</strong>：#循环单链表</h5>
+<h5 id="section-50"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BE%AA%E7%8E%AF%E5%8D%95%E9%93%BE%E8%A1%A8">#循环单链表</a></h5>
 <blockquote>
 <p>描述：
 循环单链表的尾结点 <code>next</code> 指针不再指向 <code>NULL</code>，而是指向头结点。</p>
@@ -987,7 +987,7 @@ bool InitList(LinkList &amp;L) {
 </ul>
 <h2 id="section-52">5.10 循环双链表</h2>
 <h3 id="section-53">5.10.1 循环双链表的定义</h3>
-<h5 id="section-54"><strong>定义</strong>：#循环双链表</h5>
+<h5 id="section-54"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BE%AA%E7%8E%AF%E5%8F%8C%E9%93%BE%E8%A1%A8">#循环双链表</a></h5>
 <blockquote>
 <p>描述：
 循环双链表中，头结点的 <code>prior</code> 指向尾结点，尾结点的 <code>next</code> 指向头结点。</p>
@@ -1082,7 +1082,7 @@ $$</li>
 </ul>
 <h2 id="section-57">5.11 静态链表</h2>
 <h3 id="section-58">5.11.1 静态链表的定义</h3>
-<h5 id="section-59"><strong>定义</strong>：#静态链表</h5>
+<h5 id="section-59"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8">#静态链表</a></h5>
 <blockquote>
 <p>描述：
 静态链表是用数组来模拟链表的一种存储结构，结点中用游标 <code>next</code> 表示下一个元素的数组下标。</p>
@@ -1205,6 +1205,6 @@ p-&gt;next = s;
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

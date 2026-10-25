@@ -88,10 +88,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-e93053729cfd/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-e93053729cfd/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
 
 </head>
 <body>
@@ -121,11 +121,11 @@
 <p>描述：指令集体系结构（ISA）是软硬件的交界面：程序员/编译器看到的是寄存器、指令、地址空间和异常等规则，CPU 内部如何用流水线、微码或电路实现则是微结构问题。</p>
 </blockquote>
 <h2 id="section-1">4.1 指令、指令集与 ISA</h2>
-<h5 id="section-2"><strong>定义</strong>：#指令</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8C%87%E4%BB%A4">#指令</a></h5>
 <p>指令是计算机执行某种操作的命令，是机器可识别并执行的最小功能单位。程序本质上是按既定顺序组织的一串指令及其数据。</p>
-<h5 id="section-3"><strong>定义</strong>：#指令集</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8C%87%E4%BB%A4%E9%9B%86">#指令集</a></h5>
 <p>一台计算机全部机器指令的集合称为其<strong>指令系统/指令集</strong>。机器只能直接执行本 ISA 规定的指令，不能直接执行其他 ISA 的机器码；例如 x86 与 ARM 的二进制指令通常不可互换，需要重新编译、翻译或模拟。</p>
-<h5 id="section-4"><strong>定义</strong>：#ISA</h5>
+<h5 id="section-4"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23ISA">#ISA</a></h5>
 <p>指令集体系结构是软件与硬件之间的可见约定。它说明“机器对外能做什么、如何编码和访问”，而不规定某型号 CPU 内部一定如何实现。ISA 是计算机体系结构的重要内容；同一个 ISA 可由不同主频、流水线深度、Cache 组织的处理器实现。</p>
 <h2 id="section-5">4.2 ISA 规定的内容</h2>
 <div class="note-table-scroll"><table>
@@ -270,7 +270,7 @@
 <li>地址码字段越多，一条指令可直接描述更多操作数；但指令长度、取指带宽与译码复杂度也会增加，因此很多 ISA 使用寄存器操作数、隐含操作数或不同长度指令折中。</li>
 <li>ISA 一经广泛采用，兼容性很重要。新处理器可在内部彻底改变实现，只要保持程序可见行为和指令语义不变，旧二进制程序仍可运行。</li>
 </ul>
-<h3 id="section-12">题型：#ISA 与微结构辨析</h3>
+<h3 id="section-12">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23ISA">#ISA</a> 与微结构辨析</h3>
 <h4 id="section-13">第一部分：判断方法</h4>
 <ul>
 <li>问“程序可见的寄存器、指令、地址空间、异常入口”通常属于 ISA。</li>
@@ -309,6 +309,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

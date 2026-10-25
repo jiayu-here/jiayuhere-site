@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-3150a4e10306/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-3150a4e10306/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -218,17 +218,17 @@
 <h3 id="section-5">4.2.1 直接、间接、寄存器、立即与隐含</h3>
 <h4 id="section-6">源 PDF 的地址字段位宽例题（2020 年）</h4>
 <p>单地址、定长 16 位指令共有 48 条操作指令，支持直接、间接、立即、相对四种寻址方式，且操作码和寻址方式位数固定。操作码至少占 $\lceil\log_2 48\rceil=6$ 位，寻址方式占 $\log_2 4=2$ 位，因此形式地址最多剩 $16-6-2=8$ 位。在<strong>直接寻址且该字段按无符号主存地址解释</strong>时，可寻址范围是 $0\sim 2^8-1$，即 $0\sim255$；不能把相对寻址的有符号位移范围套到直接寻址上。这个计算按题设字段独立、等长编码进行；若 ISA 对不同指令采用扩展操作码或不同格式，应重新按实际格式分配位数。</p>
-<h5 id="section-7"><strong>定义</strong>：#直接寻址</h5>
+<h5 id="section-7"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80">#直接寻址</a></h5>
 <p>$EA=A$。指令取指 1 次、执行取操作数再访存 1 次，因此不计写回时总访存 2 次。优点是简单、执行阶段只访存一次；缺点是形式地址位数限制范围，且操作数地址不易修改。</p>
-<h5 id="section-8"><strong>定义</strong>：#间接寻址</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80">#间接寻址</a></h5>
 <p>$EA=(A)$。先访问 $A$ 所指单元获得 EA，再访问 EA 获得操作数；一次间接不计写回总访存 3 次。优点是 EA 位宽可大于形式地址、范围更大，且便于子程序返回等；缺点是多次访存。多次间接需通过间址字的标志判断是否继续。</p>
 <p>原页的二次间接图可逐级读作：先从 $M[A]$ 取得带“继续间接”标志的地址 $A_1$，再从 $M[A_1]$ 取得带“结束间接”标志的 $EA$，最后读 $M[EA]$ 才是操作数。按这张图的取址流程，不计取指与写回时需访问主存 3 次；连同一次取指则为 4 次。标志位属于题设的间址字格式，不能把它当成普通地址位。</p>
-<h5 id="section-9"><strong>定义</strong>：#寄存器寻址与寄存器间接寻址</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AF%84%E5%AD%98%E5%99%A8%E5%AF%BB%E5%9D%80%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80">#寄存器寻址与寄存器间接寻址</a></h5>
 <ul>
 <li>寄存器寻址：指令给出寄存器号，操作数就是寄存器内容 $(R_i)$，不需要形成主存有效地址 EA；执行阶段不访问主存，指令短且快，代价是寄存器数量有限。</li>
 <li>寄存器间接：$R_i$ 保存操作数所在主存地址，$EA=(R_i)$；执行阶段须访问该内存单元一次，适合指针。</li>
 </ul>
-<h5 id="section-10"><strong>定义</strong>：#立即寻址与隐含寻址</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%AB%8B%E5%8D%B3%E5%AF%BB%E5%9D%80%E4%B8%8E%E9%9A%90%E5%90%AB%E5%AF%BB%E5%9D%80">#立即寻址与隐含寻址</a></h5>
 <ul>
 <li>立即寻址中 $A$ 就是操作数本身，通常以 <code>#</code> 表示。执行阶段零访存、最快，但 $A$ 位数限制立即数范围；若为 $n$ 位补码，范围为 $[-2^{n-1},2^{n-1}-1]$。</li>
 <li>隐含寻址不显式写操作数地址，由指令默认使用的 ACC、SP 等给出。优点是缩短指令，缺点是需要相应隐含硬件/寄存器。</li>
@@ -280,7 +280,7 @@
 <p>变址寄存器 IX 面向用户，IX 是随循环/下标变化的偏移，形式地址 $A$ 常为数组首地址。不断改 IX 即可生成数组任一元素地址；IX 位数足够时可覆盖整个寻址空间，特别适合循环程序。</p>
 <h3 id="section-14">4.3.3 相对寻址</h3>
 <p>相对寻址用下一条指令的 PC 加补码位移 $A$。目标随程序整体移动而同样移动，且与当前指令距离固定，因此适合条件转移和位置相对的代码。</p>
-<h3 id="section-15">题型：#复合寻址</h3>
+<h3 id="section-15">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%8D%E5%90%88%E5%AF%BB%E5%9D%80">#复合寻址</a></h3>
 <ul>
 <li>一定按题目顺序逐层代入。先基址再变址只是先形成“基址 + 形式地址”这一中间和，再加变址量，最终为 $EA=(BR)+(IX)+A$；这里没有间接寻址，也不应因分组括号多算一次访存。</li>
 <li>先变址再间接：先得中间地址 $(IX)+D$，再取该单元内容：$EA=((IX)+D)$；最终操作数为 $(EA)=(((IX)+D))$。</li>
@@ -354,6 +354,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

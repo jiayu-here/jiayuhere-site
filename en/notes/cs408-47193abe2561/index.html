@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-47193abe2561/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-47193abe2561/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -139,7 +139,7 @@
 <li><code>0/1</code> 与逻辑假/真天然对应，便于逻辑判断和逻辑门运算。</li>
 <li>编码规则、算术规则简单，适合由门电路实现。</li>
 </ul>
-<h5 id="section-3"><strong>定义</strong>：#基数与位权</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%9F%BA%E6%95%B0%E4%B8%8E%E4%BD%8D%E6%9D%83">#基数与位权</a></h5>
 <ul>
 <li>$r$ 进制的<strong>基数</strong>为可用数码数，共有 $0,1,\ldots,r-1$；十进制的基数为 10。</li>
 <li>第 $i$ 位的<strong>位权</strong>为 $r^i$。一个混合数的值是各数码按位权展开之和：</li>
@@ -287,24 +287,24 @@ $$</p>
 </tr>
 </tbody>
 </table></div>
-<h5 id="section-8"><strong>定义</strong>：#补码</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%A1%A5%E7%A0%81">#补码</a></h5>
 <p>补码可理解为模 $2^n$ 运算的编码。对负数 $x$，有 $[x]_{补}=2^n+x=2^n-|x|$；也可记为“正数不变，负数按位取反加 1”。</p>
 <ul>
 <li>$[+0]<em>{补}=[-0]</em>{补}=00\cdots0$；$[-1]_{补}=11\cdots1$。</li>
 <li>最小负数的补码为 $100\cdots0$，代表 $-2^{n-1}$；最大正数为 $011\cdots1$。</li>
 <li>已知某数补码为 $Y$，其相反数补码可由 $Y$ <strong>逐位取反再加 1</strong>得到；最小负数取反加一仍为自己，表示溢出语义。</li>
 </ul>
-<h5 id="section-9"><strong>定义</strong>：#移码</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A7%BB%E7%A0%81">#移码</a></h5>
 <p>移码是把真值整体向正轴偏移一个偏置，$[x]_{移}=2^{n-1}+x$。在这里的 $n$ 位整数编码中，<strong>移码等于补码的符号位取反，数值位不变</strong>。这一定义采用偏置 $2^{n-1}$；IEEE 754 阶码字段采用的偏置是 $2^{k-1}-1$（单精度 $k=8$ 时为 127），不能直接套用“翻转补码符号位”的规则。</p>
 <ul>
 <li>移码全 0 表示最小真值，移码全 1 表示最大真值；所以可直接按无符号数比较大小。</li>
 <li>正数的原码、反码、补码相同。对在三种编码中都可表示的非零真值，它们的符号位也相同；但双零和最小负数是边界例外，不能脱离字长机械套用。对同一真值的同字长补码与移码，二者仅最高位相反。</li>
 <li>原码与反码在数轴上对称，均有双零；补码和移码零唯一，并各比原码/反码多表示一个负数。</li>
 </ul>
-<h5 id="section-10"><strong>定义</strong>：#变形补码</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%98%E5%BD%A2%E8%A1%A5%E7%A0%81">#变形补码</a></h5>
 <p>变形补码使用双符号位（模 4 补码），<code>00</code> 表示正、<code>11</code> 表示负，常用于 ALU 运算以便判断溢出。结果的两个符号位不同时意味着发生溢出。</p>
 <p>若数值位为 $m$ 位，变形补码另设 2 位符号位，总位数为 $m+2$；其可表示的真值仍为 $-2^m\le x\le2^m-1$。非负数直接写成 <code>00</code> 加 $m$ 位数值；负数按模 $2^{m+2}$ 编码为 $2^{m+2}+x$，正常结果以 <code>11</code> 开头。运算后出现 <code>01</code> 或 <code>10</code> 时，双符号位不一致，说明结果越出了这 $m$ 位数值所对应的范围。</p>
-<h3 id="section-11">题型：#机器数转换</h3>
+<h3 id="section-11">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%BA%E5%99%A8%E6%95%B0%E8%BD%AC%E6%8D%A2">#机器数转换</a></h3>
 <h4 id="section-12">第一部分：解题方法</h4>
 <ul>
 <li>先写清“字长”和“定点整数/定点小数”，不要把符号位也当普通数值位。</li>
@@ -318,7 +318,7 @@ $$</p>
 <li>移码只表示<strong>整数</strong>，通常用于浮点数阶码，不用于表示浮点尾数。</li>
 </ul>
 <h2 id="section-14">2.3 常用检验码</h2>
-<h5 id="section-15"><strong>定义</strong>：#码距</h5>
+<h5 id="section-15"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A0%81%E8%B7%9D">#码距</a></h5>
 <p>码距是任意两合法码字的最小不同位数。若最小码距为 $d_{min}$，最多可检测 $d_{min}-1$ 个比特错误，最多可纠正 $\left\lfloor(d_{min}-1)/2\right\rfloor$ 个比特错误；因此 $d_{min}\ge2$ 才开始具有检错能力。</p>
 <div class="note-table-scroll"><table>
 <thead>
@@ -374,6 +374,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

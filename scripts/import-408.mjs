@@ -188,7 +188,9 @@ const convertBody = (note, locale) => {
     const normalized = line
       .replace(/<font\s+color=["']#[0-9a-f]{3,8}["']>/gi, "")
       .replace(/<\/font>/gi, "")
-      .replace(/^(\s*>\s*)\[!([a-z]+)\][-+]?\s*(.*)$/i, (_, prefix, type, content) => `${prefix}**${type.toUpperCase()}**${content ? ` · ${content}` : ""}`);
+      .replace(/^(\s*>\s*)\[!([a-z]+)\]([-+])?\s*(.*)$/i, (_, prefix, type, state, content) => state
+        ? `${prefix}[!${type}]${state}${content ? ` ${content}` : ""}`
+        : `${prefix}**${type.toUpperCase()}**${content ? ` · ${content}` : ""}`);
     let result = "";
     let inlineCode = false;
     for (let index = 0; index < normalized.length;) {
@@ -244,7 +246,8 @@ for (const note of notes) {
       ...(note.meta.date ? [`date: ${note.meta.date}`] : []),
       `tags: [408, ${english ? enCourse : zhCourse}]`,
       ...(note.meta.supplement === "true" ? ["supplement: true"] : []),
-      ...(sourceAsset ? [`sourceAsset: ${sourceAsset}`, `sourceName: ${path.posix.basename(sourcePath)}`, `sourceOriginal: ${sourcePath}`] : []),
+       ...(sourceAsset ? [`sourceAsset: ${sourceAsset}`, `sourceName: ${path.posix.basename(sourcePath)}`, `sourceOriginal: ${sourcePath}`] : []),
+       ...(sourceAsset.endsWith(".md") ? ["sourcePreview: /assets/408/diagrams/network-layer.svg"] : []),
       "---", ""
     ];
     const directory = english ? "content/en/notes" : "content/notes";

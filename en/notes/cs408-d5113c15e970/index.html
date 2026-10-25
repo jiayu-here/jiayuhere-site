@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d5113c15e970/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d5113c15e970/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -192,7 +192,7 @@
 <li>TLB/Cache 缺失处理可由硬件完成；教材简化模型中，TLB 未命中需查驻主存的页表，实际页表项读取也可能被 Cache 命中，不一定每次访问 DRAM。在源 PDF 采用的普通透明 Cache 模型中，正常访问时的查找、填充和替换流程由硬件管理。</li>
 </ul>
 <h2 id="section-5">3.2 命中率与平均访问时间</h2>
-<h5 id="section-6"><strong>定义</strong>：#命中率</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%91%BD%E4%B8%AD%E7%8E%87">#命中率</a></h5>
 <p>设 $N_c$ 为 Cache 命中次数，$N_m$ 为未命中次数：</p>
 <p>$$H=\frac{N_c}{N_c+N_m},\qquad \text{缺失率}=1-H$$</p>
 <p>若 $T_C$ 为命中时间、$T_M$ 为未命中时的总访问时间，则：</p>
@@ -247,7 +247,7 @@
 <li>地址划分为 <code>tag + 组号 + 块内偏移</code>；同组内的 $N$ 个 tag 并行比较，命中后由块内偏移读数据。</li>
 <li>一组满了才在<strong>组内</strong>替换。它在直接映射的快/省与全相联的高命中之间折中，是现代 Cache 常见组织。</li>
 </ul>
-<h3 id="section-11">题型：#地址位数与映射计算</h3>
+<h3 id="section-11">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%9C%B0%E5%9D%80%E4%BD%8D%E6%95%B0%E4%B8%8E%E6%98%A0%E5%B0%84%E8%AE%A1%E7%AE%97">#地址位数与映射计算</a></h3>
 <p>给定主存地址位数 $A$、块大小 $B=2^b$ 字节、Cache 数据区容量 $C$、关联度 $N$：</p>
 <p>$$
 \begin{aligned}
@@ -285,7 +285,7 @@ Cache 地址：20 位 tag | 3 位组号 | 5 位块内偏移
 </ol>
 <p>若主存地址为 32 位、块长 16 B、Cache 有 4K 行，只计算 tag 位而暂不计有效/脏位，则关联度越高、组号越短、tag 越长：直接映射、2 路、4 路、全相联的 tag 分别为 16、17、18、28 位，对 4K 行的 tag 总开销分别是 64K、68K、72K、112K bit。</p>
 <h2 id="section-14">3.4 关联度与替换算法</h2>
-<h5 id="section-15"><strong>定义</strong>：#关联度</h5>
+<h5 id="section-15"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%85%B3%E8%81%94%E5%BA%A6">#关联度</a></h5>
 <p>一个主存块可映射到的 Cache 行数。直接映射关联度为 1，全相联为 Cache 总行数，$N$ 路组相联为 $N$。</p>
 <div class="note-table-scroll"><table>
 <thead>
@@ -499,6 +499,6 @@ Cache 地址：20 位 tag | 3 位组号 | 5 位块内偏移
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

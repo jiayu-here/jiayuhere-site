@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-d3964962cec4/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-d3964962cec4/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">15.1 树的基本概念</a><a href="#section-8">15.2 结点和树的属性</a><a href="#section-19">15.3 森林</a><a href="#section-21">15.4 树的常考性质</a><a href="#section-25">15.5 度为 m 的树和 m 叉树</a><a href="#section-30">15.6 m 叉树的常考性质</a><a href="#section-36">15.7 题型整理</a><a href="#section-45">相关知识</a><a href="#section-46">15.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">15.1 树的基本概念</h2>
 <h3 id="section-2">15.1.1 什么是树</h3>
-<h5 id="section-3"><strong>定义</strong>：#树</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%A0%91">#树</a></h5>
 <blockquote>
 <p>描述：
 树是 $n(n\ge 0)$ 个结点的有限集合。当 $n=0$ 时，称为空树；任意一棵非空树有且仅有一个根结点，其余结点可划分为若干棵互不相交的子树。</p>
@@ -162,12 +162,12 @@ $$
 <li>这种递归定义是树结构的重要特征。</li>
 </ul>
 <h3 id="section-4">15.1.2 叶子结点和分支结点</h3>
-<h5 id="section-5"><strong>定义</strong>：#叶子结点</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%B6%E5%AD%90%E7%BB%93%E7%82%B9">#叶子结点</a></h5>
 <blockquote>
 <p>描述：
 没有后继的结点称为叶子结点，也称终端结点。</p>
 </blockquote>
-<h5 id="section-6"><strong>定义</strong>：#分支结点</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%88%86%E6%94%AF%E7%BB%93%E7%82%B9">#分支结点</a></h5>
 <blockquote>
 <p>描述：
 有后继的结点称为分支结点，也称非终端结点。</p>
@@ -191,7 +191,7 @@ $$
 </ul>
 <h2 id="section-8">15.2 结点和树的属性</h2>
 <h3 id="section-9">15.2.1 路径和路径长度</h3>
-<h5 id="section-10"><strong>定义</strong>：#路径</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%B7%AF%E5%BE%84">#路径</a></h5>
 <blockquote>
 <p>描述：
 在把父子关系看作有方向时，祖先到后代的有向路径只能沿边向下；若忽略边的方向，则树中任意两个结点之间都存在且仅存在一条简单路径。</p>
@@ -225,12 +225,12 @@ $$</li>
 <li>也称树的深度。</li>
 </ul>
 <h3 id="section-12">15.2.3 结点的度和树的度</h3>
-<h5 id="section-13"><strong>定义</strong>：#结点的度</h5>
+<h5 id="section-13"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%BB%93%E7%82%B9%E7%9A%84%E5%BA%A6">#结点的度</a></h5>
 <blockquote>
 <p>描述：
 结点的度是该结点拥有的孩子个数，也就是分支数。</p>
 </blockquote>
-<h5 id="section-14"><strong>定义</strong>：#树的度</h5>
+<h5 id="section-14"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%A0%91%E7%9A%84%E5%BA%A6">#树的度</a></h5>
 <blockquote>
 <p>描述：
 树的度是树中各结点的度的最大值。</p>
@@ -251,12 +251,12 @@ $$
 $$</li>
 </ul>
 <h3 id="section-15">15.2.4 有序树和无序树</h3>
-<h5 id="section-16"><strong>定义</strong>：#有序树</h5>
+<h5 id="section-16"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%89%E5%BA%8F%E6%A0%91">#有序树</a></h5>
 <blockquote>
 <p>描述：
 若树中结点的各棵子树从左到右有次序，不能互换，则称为有序树。</p>
 </blockquote>
-<h5 id="section-17"><strong>定义</strong>：#无序树</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%97%A0%E5%BA%8F%E6%A0%91">#无序树</a></h5>
 <blockquote>
 <p>描述：
 若树中结点的各棵子树从左到右无次序，可以互换，则称为无序树。</p>
@@ -274,7 +274,7 @@ $$</li>
 <li>从根 <code>A</code> 到 <code>M</code> 的有向路径为 <code>A-D-H-M</code>，包含 $3$ 条边，因此路径长度为 $3$。</li>
 </ul>
 <h2 id="section-19">15.3 森林</h2>
-<h5 id="section-20"><strong>定义</strong>：#森林</h5>
+<h5 id="section-20"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%A3%AE%E6%9E%97">#森林</a></h5>
 <blockquote>
 <p>描述：
 森林是 $m(m\ge 0)$ 棵互不相交的树的集合。</p>
@@ -358,12 +358,12 @@ $$
 $$</p>
 <h2 id="section-25">15.5 度为 m 的树和 m 叉树</h2>
 <h3 id="section-26">15.5.1 定义区别</h3>
-<h5 id="section-27"><strong>定义</strong>：#度为m的树</h5>
+<h5 id="section-27"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BA%A6%E4%B8%BAm%E7%9A%84%E6%A0%91">#度为m的树</a></h5>
 <blockquote>
 <p>描述：
 度为 $m$ 的树是指树中各结点度的最大值为 $m$，并且至少存在一个结点的度为 $m$。</p>
 </blockquote>
-<h5 id="section-28"><strong>定义</strong>：#m叉树</h5>
+<h5 id="section-28"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23m%E5%8F%89%E6%A0%91">#m叉树</a></h5>
 <blockquote>
 <p>描述：
 $m$ 叉树是指每个结点最多只有 $m$ 个孩子的树。</p>
@@ -516,7 +516,7 @@ $$</li>
 </ul>
 <p>当 $m=1$ 时，非空树只能是一条链，最小高度就是 $n$；空树的高度按本笔记约定为 $0$。</p>
 <h2 id="section-36">15.7 题型整理</h2>
-<h3 id="section-37">题型：#树的结点度计算</h3>
+<h3 id="section-37">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%A0%91%E7%9A%84%E7%BB%93%E7%82%B9%E5%BA%A6%E8%AE%A1%E7%AE%97">#树的结点度计算</a></h3>
 <h4 id="section-38">第一部分：解题方法</h4>
 <ul>
 <li>先按结点度分类，写出 $n_0,n_1,n_2,\cdots,n_m$。</li>
@@ -552,7 +552,7 @@ $$</p>
 <li>树的边数等于结点数减 $1$。</li>
 <li>叶子结点公式来自总结点数和总度数两个式子相减。</li>
 </ul>
-<h3 id="section-41">题型：#m叉树高度</h3>
+<h3 id="section-41">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23m%E5%8F%89%E6%A0%91%E9%AB%98%E5%BA%A6">#m叉树高度</a></h3>
 <h4 id="section-42">第一部分：解题方法</h4>
 <ul>
 <li>求最多结点数，用：
@@ -643,6 +643,6 @@ $$</li>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

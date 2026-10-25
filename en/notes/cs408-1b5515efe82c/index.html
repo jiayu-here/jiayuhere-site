@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1b5515efe82c/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1b5515efe82c/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -130,7 +130,7 @@
         <a class="button secondary-button" href="/assets/408/originals/bd60a76ba275.pdf" download="Lecture 13：串.pdf">Download original</a>
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">13.1 串的基本概念</a><a href="#section-3">13.2 串的相关概念</a><a href="#section-8">13.3 串的结构特点</a><a href="#section-9">13.4 串的基本操作</a><a href="#section-13">13.5 串的顺序存储</a><a href="#section-17">13.6 串的链式存储</a><a href="#section-20">13.7 串的基本操作代码</a><a href="#section-25">13.8 串的朴素模式匹配算法</a><a href="#section-31">13.9 题型整理</a><a href="#section-40">相关知识</a><a href="#section-41">13.10 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">13.1 串的基本概念</h2>
-<h5 id="section-2"><strong>定义</strong>：#串</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%B2">#串</a></h5>
 <blockquote>
 <p>描述：
 串，即字符串，是由零个或多个字符组成的有限序列。</p>
@@ -169,12 +169,12 @@ $$
 </ul>
 <h2 id="section-3">13.2 串的相关概念</h2>
 <h3 id="section-4">13.2.1 子串和主串</h3>
-<h5 id="section-5"><strong>定义</strong>：#子串</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AD%90%E4%B8%B2">#子串</a></h5>
 <blockquote>
 <p>描述：
 子串是串中任意个连续字符组成的子序列。</p>
 </blockquote>
-<h5 id="section-6"><strong>定义</strong>：#主串</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%BB%E4%B8%B2">#主串</a></h5>
 <blockquote>
 <p>描述：
 主串是包含某个子串的串。</p>
@@ -360,7 +360,7 @@ $$</li>
 </blockquote>
 <h2 id="section-13">13.5 串的顺序存储</h2>
 <h3 id="section-14">13.5.1 静态数组实现</h3>
-<h5 id="section-15"><strong>定义</strong>：#串的顺序存储</h5>
+<h5 id="section-15"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%B2%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8">#串的顺序存储</a></h5>
 <blockquote>
 <p>描述：
 串的顺序存储用一组地址连续的存储单元保存串中的字符。</p>
@@ -534,7 +534,7 @@ $$
 <li>该代码比较的是存储字节，不是中文等多字节文本的自然语言排序；处理 Unicode 字符和本地化排序时须另定字符边界与比较规则。</li>
 </ul>
 <h3 id="section-23">13.7.3 定位操作 <code>Index</code></h3>
-<h5 id="section-24"><strong>定义</strong>：#Index</h5>
+<h5 id="section-24"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23Index">#Index</a></h5>
 <blockquote>
 <p>描述：
 若主串 <code>S</code> 中存在与串 <code>T</code> 值相同的子串，则返回它在主串 <code>S</code> 中第一次出现的位置；否则返回 <code>0</code>。</p>
@@ -572,7 +572,7 @@ $$
 </ul>
 <h2 id="section-25">13.8 串的朴素模式匹配算法</h2>
 <h3 id="section-26">13.8.1 串的模式匹配</h3>
-<h5 id="section-27"><strong>定义</strong>：#模式匹配</h5>
+<h5 id="section-27"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">#模式匹配</a></h5>
 <blockquote>
 <p>描述：
 串的模式匹配是在主串中找到与模式串相同的子串，并返回其所在位置。</p>
@@ -700,7 +700,7 @@ O((n-m+1)m)=O(nm)
 $$</p>
 <p>若 $m&gt;n$，先比较长度即可在 $O(1)$ 时间判定失败；若 $m=0$，按上述空模式约定在 $O(1)$ 时间返回起始位置。</p>
 <h2 id="section-31">13.9 题型整理</h2>
-<h3 id="section-32">题型：#串的基本概念</h3>
+<h3 id="section-32">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">#串的基本概念</a></h3>
 <h4 id="section-33">第一部分：解题方法</h4>
 <ul>
 <li>判断是否为子串时，必须连续。</li>
@@ -717,7 +717,7 @@ $$</p>
 <li>空格也是字符。</li>
 <li>空串长度为 $0$。</li>
 </ul>
-<h3 id="section-36">题型：#朴素模式匹配</h3>
+<h3 id="section-36">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%B4%E7%B4%A0%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">#朴素模式匹配</a></h3>
 <h4 id="section-37">第一部分：解题方法</h4>
 <ul>
 <li>从主串第 $1$ 个位置开始尝试。</li>
@@ -795,6 +795,6 @@ $$</li>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

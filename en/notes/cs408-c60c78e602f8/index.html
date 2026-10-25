@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c60c78e602f8/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c60c78e602f8/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -160,7 +160,7 @@
 </tbody>
 </table></div>
 <h2 id="section-2">5.2 硬布线控制器</h2>
-<h5 id="section-3"><strong>定义</strong>：#硬布线控制器</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A1%AC%E5%B8%83%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8">#硬布线控制器</a></h5>
 <p>硬布线控制器由组合逻辑和触发器构成，根据<strong>操作码、当前机器周期、节拍信号、机器状态条件</strong>即时产生微命令；也称组合逻辑控制器。</p>
 <div class="note-table-scroll"><table>
 <thead>
@@ -318,7 +318,7 @@ $$</p>
 </ul>
 <p>原页第 10 页的控存布局示例把公共取指微指令放在 <code>#1</code>～<code>#3</code>，间址/中断各占另一段，而 <code>LDA X</code> 的执行入口为 <code>#13</code>，随后执行 <code>#14</code>、<code>#15</code>；<code>STA</code> 的入口为 <code>#16</code>，随后执行 <code>#17</code>、<code>#18</code>。是否经过间址段取决于寻址标志；取指结束后依据 <code>OP(IR)</code> 转到对应执行入口，执行段末再回取指入口。图中编号只是这份示例的<strong>控存地址</strong>，不是机器指令地址；后面设计步骤图另把公共入口记为 <code>#0</code>，两张示意图采用不同编号，不能拼成一张连续地址表。</p>
 <p>微程序控制相对硬布线还须安排“下一条微指令从哪里取”：普通顺序步可用 <code>Ad(CMDR)-&gt;CMAR</code> 读当前微指令的下地址字段；取指末步用 <code>OP(IR)-&gt;微地址形成部件-&gt;CMAR</code> 选择机器指令的执行微程序；执行末步再把公共取指入口地址送入 CMAR。只有数据通路中的 <code>PC-&gt;MAR</code>、<code>MDR-&gt;IR</code> 等微操作还不足以让微程序本身继续运行。</p>
-<h3 id="section-10">题型：#下地址字段位数</h3>
+<h3 id="section-10">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%8B%E5%9C%B0%E5%9D%80%E5%AD%97%E6%AE%B5%E4%BD%8D%E6%95%B0">#下地址字段位数</a></h3>
 <p>若控制存储器总共需容纳 $N$ 条微指令，断定法下地址字段至少为：</p>
 <p>$$\lceil\log_2 N\rceil\text{ 位}$$</p>
 <p>例：32 条机器指令、每条平均 4 条微指令，加公共取指 2 条，共 $32\times4+2=130$ 条微指令，需 $\lceil\log_2 130\rceil=8$ 位下地址字段。</p>
@@ -436,6 +436,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

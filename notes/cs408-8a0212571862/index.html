@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8a0212571862/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8a0212571862/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -380,7 +380,7 @@ jne L1
 <p>原页的 <code>caller()</code> 示例令 <code>temp1=125</code>、<code>temp2=80</code>，调用 <code>add(temp1,temp2)</code>，其 <code>return x+y</code> 得到 $125+80=205$。在所示 32 位栈上传参及帧指针代码里，<code>caller</code> 用 <code>[ebp-12]</code>、<code>[ebp-8]</code> 保存两个局部变量，调用前把实参压栈；<code>add</code> 以 <code>[ebp+8]</code>、<code>[ebp+12]</code> 读取两个实参，结果由 EAX 返回。这里的负偏移和正偏移是<strong>该实例</strong>的布局，不是任意编译器都必须照用的数值。</p>
 <h3 id="section-15">4.5.3 进程地址空间中的栈</h3>
 <p>源 PDF 还给出了典型进程虚拟地址空间：只读代码/常量、可写数据、堆和栈属于不同区域，堆常向高地址扩展，栈常向低地址扩展。具体区域顺序、随机化地址、共享库映射和保护权限由操作系统、装载器与 ABI 决定；该图用于理解栈帧所处位置，不属于 x86 ISA 对地址布局的硬性规定。</p>
-<h3 id="section-16">题型：#函数代码阅读</h3>
+<h3 id="section-16">题型：<a class="note-concept-tag" href="/notes/?tag=%23%E5%87%BD%E6%95%B0%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB">#函数代码阅读</a></h3>
 <h4 id="section-17">第一部分：固定流程</h4>
 <ul>
 <li>若代码建立了帧指针，先找函数入口的保存 EBP/建立帧、<code>sub esp</code> 分配局部空间和结尾恢复序列，确定栈向下增长与参数偏移；若没有这套序言，考虑编译器省略帧指针、直接基于 ESP 寻址或进行了优化。</li>
@@ -469,6 +469,6 @@ jne L1
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

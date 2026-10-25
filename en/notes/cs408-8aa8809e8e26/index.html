@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-8aa8809e8e26/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-8aa8809e8e26/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -317,7 +317,7 @@
 </tr>
 </tbody>
 </table></div>
-<h5 id="section-8"><strong>定义</strong>：#三态门</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%89%E6%80%81%E9%97%A8">#三态门</a></h5>
 <p>三态门除 0、1 外还可呈高阻态，用于把寄存器受控接入公共总线。例如 <code>SRout</code> 有效时开放 SR 输出三态门，使 SR 驱动总线；无效时 SR 与总线断开。多源共用单总线时，必须保证不会有多个输出三态门同时使能。</p>
 <h2 id="section-9">5.5 控制器在整体中的位置</h2>
 <p>控制器接收 IR 的操作码、PSW 状态、时钟/中断等信息，产生寄存器读写、ALU 功能选择、总线驱动、主存读写等控制信号。运算器负责“算”，控制器负责“让谁在何时经哪条路算”。</p>
@@ -325,7 +325,7 @@
 <li>运算器数据通路与控制器并不是互相独立：控制器通过微操作信号选择 MUX、打开三态门、装入寄存器、发起存储器读写。</li>
 <li>后续的硬布线控制、微程序控制、指令周期和流水线，都是围绕“如何更快更正确地产生这些控制信号”展开。</li>
 </ul>
-<h3 id="section-10">题型：#CPU结构辨析</h3>
+<h3 id="section-10">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23CPU%E7%BB%93%E6%9E%84%E8%BE%A8%E6%9E%90">#CPU结构辨析</a></h3>
 <h4 id="section-11">第一部分：判断方法</h4>
 <ul>
 <li>题问“保存当前指令”答 IR；“保存待访问主存地址”答 MAR；“暂存读/写主存数据”答 MDR；“程序顺序地址”答 PC。</li>
@@ -360,6 +360,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c58d699dca6a/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c58d699dca6a/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -134,7 +134,7 @@
 </blockquote>
 <h2 id="section-1">24.1 查找、查找表与关键字</h2>
 <h3 id="section-2">24.1.1 查找的对象</h3>
-<h5 id="section-3"><strong>定义</strong>：#查找 #查找表</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9F%A5%E6%89%BE">#查找</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9F%A5%E6%89%BE%E8%A1%A8">#查找表</a></h5>
 <blockquote>
 <p>描述：在数据集合中寻找满足给定条件的数据元素的过程，称为查找（search）。供查找使用、由同类记录组成的数据集合称为查找表（search table）。</p>
 </blockquote>
@@ -143,7 +143,7 @@
 <li>408 中通常以记录的<strong>关键字</strong>作为比较依据；若题目只要求判断是否存在，返回位置或指针的写法不同，但查找过程相同。</li>
 <li>查找表不要求天然有序。顺序查找可用于无序表；折半查找则对表的有序性和存储结构有额外要求。</li>
 </ul>
-<h5 id="section-4"><strong>定义</strong>：#关键字</h5>
+<h5 id="section-4"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%85%B3%E9%94%AE%E5%AD%97">#关键字</a></h5>
 <blockquote>
 <p>描述：关键字是记录中可用于标识、区分或检索记录的某个数据项的值；一般关键字不一定能唯一确定一条记录。</p>
 </blockquote>
@@ -188,7 +188,7 @@
 <hr>
 <h2 id="section-7">24.2 查找长度与平均查找长度</h2>
 <h3 id="section-8">24.2.1 查找长度</h3>
-<h5 id="section-9"><strong>定义</strong>：#查找长度</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6">#查找长度</a></h5>
 <blockquote>
 <p>描述：一次查找中，关键字之间进行比较的次数称为查找长度（Search Length，SL）。</p>
 </blockquote>
@@ -198,7 +198,7 @@
 <li>在同一种算法中，不同关键字所在位置、树的形状或散列冲突情况不同，查找长度往往不同，所以不能只看某一次查找。</li>
 </ul>
 <h3 id="section-10">24.2.2 平均查找长度</h3>
-<h5 id="section-11"><strong>定义</strong>：#平均查找长度 #ASL</h5>
+<h5 id="section-11"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6">#平均查找长度</a> <a class="note-concept-tag" href="/en/notes/?tag=%23ASL">#ASL</a></h5>
 <blockquote>
 <p>描述：所有可能查找的查找长度按其发生概率加权后的平均值，称为平均查找长度（Average Search Length，ASL）。</p>
 </blockquote>
@@ -218,7 +218,7 @@ $$</p>
 <li>ASL 反映的是比较次数的期望值；若题目改为统计磁盘块访问、散列探测次数或 I/O 次数，应以题目明确的代价单位为准。</li>
 </ul>
 <h3 id="section-12">24.2.3 用判定树理解 ASL</h3>
-<h5 id="section-13"><strong>定义</strong>：#查找判定树</h5>
+<h5 id="section-13"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9F%A5%E6%89%BE%E5%88%A4%E5%AE%9A%E6%A0%91">#查找判定树</a></h5>
 <blockquote>
 <p>描述：把一次次关键字比较表示为树的分支，成功或失败的结果表示为结点或外部叶子，就得到查找判定树。成功结点的层数可直接对应比较次数；失败外部结点本身不再与关键字比较，须按到达它之前经过的内部结点数计数。</p>
 </blockquote>
@@ -228,7 +228,7 @@ $$</p>
 <li>在二叉排序树中，树越高，深层结点越多，ASL 往往越大；这解释了为什么极端退化的 BST 查找会变慢。</li>
 <li>对顺序查找和折半查找，失败结果也可看作外部结点。折半查找含 $n$ 个成功结点时有 $n+1$ 个失败结点，对应有序表中的 $n+1$ 个空隙。</li>
 </ul>
-<h3 id="section-14">题型：#平均查找长度计算</h3>
+<h3 id="section-14">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6%E8%AE%A1%E7%AE%97">#平均查找长度计算</a></h3>
 <h4 id="section-15">第一部分：解题方法</h4>
 <ol>
 <li>明确题目要求的是成功、失败，还是二者的综合 ASL。</li>
@@ -366,6 +366,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

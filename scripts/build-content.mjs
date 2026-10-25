@@ -1,6 +1,6 @@
 import { mkdir, readFile, readdir, rm, writeFile as writeFileOnce } from "node:fs/promises";
 import path from "node:path";
-import { render408Markdown, set408ImagePreviews } from "./render-408.mjs";
+import { conceptTagsFor408, render408Markdown, set408ImagePreviews } from "./render-408.mjs";
 
 const root = process.cwd();
 const writeFile = async (...args) => {
@@ -18,7 +18,7 @@ const socialImageUrl = `${siteUrl}/assets/images/og.png`;
 const socialImageType = "image/png";
 const socialImageWidth = 1200;
 const socialImageHeight = 630;
-const assetVersion = "20261022a";
+const assetVersion = "20261025a";
 const lightThemeColor = "#f7f8fb";
 const darkThemeColor = "#0d1117";
 const githubUser = "jiayu-here";
@@ -1200,7 +1200,8 @@ const cardFor = (item, section, locale, prefix, noteHierarchy) => {
   const isEnglish = locale === "en";
   const targetFolder = section === "articles" ? "blog" : section;
   const href = `${routeFromRoot(prefix, locale, `${targetFolder}/${escapeHtml(item.meta.slug)}/index.html`)}`;
-  const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || [])].join(" ");
+  const conceptTags = item.meta.contentFormat === "obsidian408" ? conceptTagsFor408(item.body) : [];
+  const searchText = [item.meta.title, item.meta.description, item.meta.category, ...(item.meta.tags || []), ...conceptTags].join(" ");
   const categoryLabel = noteHierarchy ? `${noteHierarchy.course} · ${noteHierarchy.chapter}` : (item.meta.category || config.label);
   const headingTag = noteHierarchy ? "h5" : "h2";
   return `<article class="content-card" data-content-card data-category="${escapeHtml(item.meta.category || (isEnglish ? "All" : "全部"))}" data-search="${escapeHtml(searchText.toLowerCase())}">
@@ -1389,12 +1390,14 @@ const buildDetail = async (section, item, index, items, catalog, locale) => {
         <a class="button secondary-button" href="${escapeHtml(repositoryBase)}/releases" target="_blank" rel="noreferrer">${isEnglish ? "Releases" : "版本日志"}</a>
       </div>` : "";
   const sourceAsset = item.meta.sourceAsset || "";
+  const sourcePreview = item.meta.sourcePreview || "";
   const sourceIsPdf = sourceAsset.endsWith(".pdf");
   const sourceIsImage = sourceAsset.endsWith(".png");
   const sourceControls = sourceAsset ? `<div class="button-row note-source-controls">
-        <a class="button secondary-button" href="${escapeHtml(sourceAsset)}" target="_blank" rel="noreferrer">${isEnglish ? `View original ${sourceIsPdf ? "PDF" : sourceIsImage ? "image" : "canvas source"}` : `查看原始${sourceIsPdf ? " PDF" : sourceIsImage ? "图片" : "画布源文件"}`}</a>
+        <a class="button secondary-button" href="${escapeHtml(sourcePreview || sourceAsset)}" target="_blank" rel="noreferrer">${sourcePreview ? (isEnglish ? "View canvas diagram" : "查看画布图") : (isEnglish ? `View original ${sourceIsPdf ? "PDF" : sourceIsImage ? "image" : "canvas source"}` : `查看原始${sourceIsPdf ? " PDF" : sourceIsImage ? "图片" : "画布源文件"}`)}</a>
         <a class="button secondary-button" href="${escapeHtml(sourceAsset)}" download="${escapeHtml(item.meta.sourceName || "source")}">${isEnglish ? "Download original" : "下载原件"}</a>
       </div>` : "";
+  const canvasPreview = sourcePreview ? `<figure class="note-canvas-preview"><a class="note-image-link" href="${escapeHtml(sourcePreview)}" target="_blank" rel="noreferrer" aria-label="${isEnglish ? "Open full-size canvas diagram" : "打开画布大图"}"><img class="note-image" src="${escapeHtml(sourcePreview)}" alt="${isEnglish ? "Original network layer knowledge map, with Chinese labels" : "网络层原始知识框架画布"}" loading="lazy" decoding="async"></a><figcaption>${isEnglish ? "Open the diagram for a full-size view. The original canvas file is available above." : "点击图片查看大图；上方可下载原始画布文件。"}</figcaption></figure>` : "";
   const languageNotice = item.meta.contentLanguage === "zh-CN" && isEnglish
     ? `<p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p>`
     : "";
@@ -1409,7 +1412,7 @@ ${next ? `    <a class="article-pagination-next" rel="next" href="../${escapeHtm
   const content = `
     <article class="article-page">
       <header class="article-header container"><a class="back-link" href="../index.html"${section === "notes" ? " data-notes-back-link" : ""}>← ${isEnglish ? `Back to ${config.label}` : `返回${config.label}`}</a><h1${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}>${escapeHtml(item.meta.title)}</h1><p class="article-lead">${escapeHtml(item.meta.description)}</p><div class="article-meta">${recordMeta ? `<span class="record-meta">${recordMeta}</span>` : ""}<span>${isEnglish ? `${readingMinutes(item.body)} min read` : `约 ${readingMinutes(item.body)} 分钟阅读`}</span>${tagList(item.meta.tags || [], locale)}</div>${repository}${sourceControls}</header>
-      <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}"${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}>${toc}</nav></details><div class="prose">${languageNotice}${item.meta.contentLanguage ? `<div lang="${escapeHtml(item.meta.contentLanguage)}">${rendered.html}</div>` : rendered.html}${pagination}</div></div>
+      <div class="article-layout container"><details class="article-toc" open><summary>${isEnglish ? "On this page" : "本页目录"}</summary><nav aria-label="${isEnglish ? "On this page" : "本页目录"}"${item.meta.contentLanguage ? ` lang="${escapeHtml(item.meta.contentLanguage)}"` : ""}>${toc}</nav></details><div class="prose">${languageNotice}${canvasPreview}${item.meta.contentLanguage ? `<div lang="${escapeHtml(item.meta.contentLanguage)}">${rendered.html}</div>` : rendered.html}${pagination}</div></div>
 ${relatedContentFor(item, section, catalog, locale)}
     </article>`;
   const output = path.join(root, localeConfig[locale].routeRoot, config.output, item.meta.slug);

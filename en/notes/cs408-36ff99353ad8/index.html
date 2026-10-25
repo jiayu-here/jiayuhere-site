@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-36ff99353ad8/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-36ff99353ad8/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">12.1 数组</a><a href="#section-12">12.2 特殊矩阵</a><a href="#section-14">12.3 对称矩阵的压缩存储</a><a href="#section-19">12.4 三角矩阵的压缩存储</a><a href="#section-23">12.5 三对角矩阵的压缩存储</a><a href="#section-28">12.6 稀疏矩阵的压缩存储</a><a href="#section-33">12.7 题型整理</a><a href="#section-38">相关知识</a><a href="#section-39">12.8 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">12.1 数组</h2>
 <h3 id="section-2">12.1.1 一维数组</h3>
-<h5 id="section-3"><strong>定义</strong>：#一维数组</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84">#一维数组</a></h5>
 <blockquote>
 <p>描述：
 一维数组中的各个元素大小相同，并且在物理存储空间中连续存放。</p>
@@ -158,7 +158,7 @@ $$
 $$</li>
 </ul>
 <h3 id="section-4">12.1.2 二维数组</h3>
-<h5 id="section-5"><strong>定义</strong>：#二维数组</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84">#二维数组</a></h5>
 <blockquote>
 <p>描述：
 二维数组在逻辑上是二维表，但计算机内部存储空间是线性的，所以需要把二维逻辑位置映射到一维物理地址。</p>
@@ -298,7 +298,7 @@ $$
 </li>
 </ul>
 <h2 id="section-14">12.3 对称矩阵的压缩存储</h2>
-<h5 id="section-15"><strong>定义</strong>：#对称矩阵</h5>
+<h5 id="section-15"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5">#对称矩阵</a></h5>
 <blockquote>
 <p>描述：
 若 $n$ 阶方阵中任意元素都满足 $a_{i,j}=a_{j,i}$，则该矩阵称为对称矩阵。</p>
@@ -373,7 +373,7 @@ $$
 k=\frac{(j-1)(2n-j+2)}{2}+(i-j)
 $$</p>
 <h2 id="section-19">12.4 三角矩阵的压缩存储</h2>
-<h5 id="section-20"><strong>定义</strong>：#三角矩阵</h5>
+<h5 id="section-20"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5">#三角矩阵</a></h5>
 <blockquote>
 <p>描述：
 三角矩阵是指除主对角线和某一侧三角区外，其余元素都相同的矩阵。</p>
@@ -448,7 +448,7 @@ $$</p>
 <li>所有位于常量区的位置都映射到同一个数组单元，不需要重复保存 $c$。</li>
 </ul>
 <h2 id="section-23">12.5 三对角矩阵的压缩存储</h2>
-<h5 id="section-24"><strong>定义</strong>：#三对角矩阵</h5>
+<h5 id="section-24"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5">#三对角矩阵</a></h5>
 <blockquote>
 <p>描述：
 三对角矩阵是带状矩阵的一种，只有主对角线及其上下相邻两条对角线上的元素可能非零；一般带状矩阵还可以有更宽的非零带，二者不能互称。</p>
@@ -538,7 +538,7 @@ $$
 a_{3,2}\rightarrow B[5]
 $$</p>
 <h2 id="section-28">12.6 稀疏矩阵的压缩存储</h2>
-<h5 id="section-29"><strong>定义</strong>：#稀疏矩阵</h5>
+<h5 id="section-29"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5">#稀疏矩阵</a></h5>
 <blockquote>
 <p>描述：
 稀疏矩阵是指非零元素个数远远小于矩阵元素总数的矩阵。</p>
@@ -605,7 +605,7 @@ $$</p>
 <li>稀疏矩阵还可以使用链式存储。</li>
 <li>常见方法是十字链表法。</li>
 </ul>
-<h5 id="section-32"><strong>定义</strong>：#十字链表法</h5>
+<h5 id="section-32"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8%E6%B3%95">#十字链表法</a></h5>
 <blockquote>
 <p>描述：
 十字链表法用链表同时维护每一行和每一列的非零元素关系。</p>
@@ -632,7 +632,7 @@ $$</p>
 <li>行头数组与列头数组分别提供行链、列链入口；这种结构适合需要同时按行和按列遍历或修改的稀疏矩阵。</li>
 </ul>
 <h2 id="section-33">12.7 题型整理</h2>
-<h3 id="section-34">题型：#矩阵压缩下标计算</h3>
+<h3 id="section-34">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E4%B8%8B%E6%A0%87%E8%AE%A1%E7%AE%97">#矩阵压缩下标计算</a></h3>
 <h4 id="section-35">第一部分：解题方法</h4>
 <ul>
 <li>第一步：看清矩阵类型。
@@ -756,6 +756,6 @@ $$</li>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

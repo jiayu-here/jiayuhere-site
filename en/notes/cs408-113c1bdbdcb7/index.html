@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-113c1bdbdcb7/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-113c1bdbdcb7/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -130,7 +130,7 @@
         <a class="button secondary-button" href="/assets/408/originals/054e6df71de6.pdf" download="Lecture 8：队列基本概念.pdf">Download original</a>
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">8.1 队列的定义</a><a href="#section-3">8.2 队列的基本操作</a><a href="#section-8">8.3 队列的顺序实现</a><a href="#section-15">8.4 循环队列</a><a href="#section-26">8.5 队列的链式实现</a><a href="#section-36">8.6 双端队列</a><a href="#section-44">教材补充：队列的典型应用与边界</a><a href="#section-48">相关知识</a><a href="#section-49">8.7 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">8.1 队列的定义</h2>
-<h5 id="section-2"><strong>定义</strong>：#队列</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%98%9F%E5%88%97">#队列</a></h5>
 <blockquote>
 <p>描述：
 队列是只允许在一端进行插入、在另一端进行删除的线性表。</p>
@@ -268,7 +268,7 @@ $$</li>
 </table></div>
 <h2 id="section-8">8.3 队列的顺序实现</h2>
 <h3 id="section-9">8.3.1 队列的顺序存储</h3>
-<h5 id="section-10"><strong>定义</strong>：#顺序队列</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%A1%BA%E5%BA%8F%E9%98%9F%E5%88%97">#顺序队列</a></h5>
 <blockquote>
 <p>描述：
 顺序队列是用顺序存储方式实现的队列，通常用数组保存队列元素，并用队头指针、队尾指针表示队列范围。</p>
@@ -364,7 +364,7 @@ $$</p>
 </ul>
 <p>因此，顺序队列常采用循环队列实现。</p>
 <h2 id="section-15">8.4 循环队列</h2>
-<h5 id="section-16"><strong>定义</strong>：#循环队列</h5>
+<h5 id="section-16"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97">#循环队列</a></h5>
 <blockquote>
 <p>描述：
 循环队列是把顺序队列的数组空间看成首尾相接的环，使队头、队尾指针可以循环移动。</p>
@@ -545,7 +545,7 @@ $$
 </ul>
 <h2 id="section-26">8.5 队列的链式实现</h2>
 <h3 id="section-27">8.5.1 链式队列定义</h3>
-<h5 id="section-28"><strong>定义</strong>：#链式队列</h5>
+<h5 id="section-28"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97">#链式队列</a></h5>
 <blockquote>
 <p>描述：
 链式队列是用链式存储方式实现的队列，通常同时保存队头指针和队尾指针。</p>
@@ -798,7 +798,7 @@ Q.rear = NULL;
 <li>链式队列也不是无限容量，最终仍然受机器内存限制。</li>
 </ul>
 <h2 id="section-36">8.6 双端队列</h2>
-<h5 id="section-37"><strong>定义</strong>：#双端队列</h5>
+<h5 id="section-37"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97">#双端队列</a></h5>
 <blockquote>
 <p>描述：
 双端队列是允许从两端进行插入和删除的线性表。</p>
@@ -839,7 +839,7 @@ Q.rear = NULL;
 <li>判断输出序列是否合法时，必须同时遵守输入顺序和受限端的操作约束，不能只看最终元素排列。</li>
 </ul>
 <h3 id="section-39">8.6.2 常见考点</h3>
-<h3 id="section-40">题型：#双端队列输出序列</h3>
+<h3 id="section-40">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E8%BE%93%E5%87%BA%E5%BA%8F%E5%88%97">#双端队列输出序列</a></h3>
 <h4 id="section-41">第一部分：解题方法</h4>
 <ul>
 <li>常见题目会给定输入序列，要求判断某个输出序列是否合法。</li>
@@ -1013,6 +1013,6 @@ $$</li>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

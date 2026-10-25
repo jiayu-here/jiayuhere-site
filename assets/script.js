@@ -543,7 +543,7 @@ const closeAutoOpenedNoteGroups = () => {
   autoOpenedNoteDetails.clear();
 };
 
-const updateContentList = ({ autoExpandMatchingNotes = false } = {}) => {
+const updateContentList = ({ autoExpandMatchingNotes = false, expandAllMatchingNotes = false } = {}) => {
   if (!contentCards.length && !resourceItems.length) return;
   const query = searchInput?.value.trim().toLowerCase() || "";
   let visibleCount = 0;
@@ -576,7 +576,7 @@ const updateContentList = ({ autoExpandMatchingNotes = false } = {}) => {
   });
 
   closeAutoOpenedNoteGroups();
-  if (autoExpandMatchingNotes && query && visibleCount <= 12) {
+  if (autoExpandMatchingNotes && query && (expandAllMatchingNotes || visibleCount <= 12)) {
     noteDetails.forEach((group) => {
       const hasVisibleCard = Array.from(group.querySelectorAll("[data-content-card]")).some((card) => !card.classList.contains("is-hidden"));
       if (hasVisibleCard) {
@@ -619,9 +619,19 @@ if (savedNoteIndexState) {
   });
 }
 
-updateContentList();
+const requestedNoteTag = notesIndex ? new URLSearchParams(window.location.search).get("tag") : null;
+if (requestedNoteTag && searchInput) {
+  searchInput.value = requestedNoteTag;
+  activeFilter = "all";
+  filterButtons.forEach((button) => {
+    const isActive = button.dataset.filter === "all";
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+updateContentList({ autoExpandMatchingNotes: Boolean(requestedNoteTag), expandAllMatchingNotes: Boolean(requestedNoteTag) });
 
-if (savedNoteIndexState && Number.isFinite(savedNoteIndexState.scrollY)) {
+if (!requestedNoteTag && savedNoteIndexState && Number.isFinite(savedNoteIndexState.scrollY)) {
   requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: Math.max(0, savedNoteIndexState.scrollY), behavior: "instant" })));
 }
 

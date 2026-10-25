@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-424a656729a9/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-424a656729a9/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -257,10 +257,9 @@
 </tr>
 </tbody>
 </table></div>
-<blockquote>
-<p><strong>TIP</strong> · 专题页补充题型
-<a href="/en/notes/cs408-7528c27ca114/#section-2">有序插入</a>、<a href="/en/notes/cs408-7528c27ca114/#section-4">末元素覆盖最小值</a>、<a href="/en/notes/cs408-7528c27ca114/#section-7">交换连续子序列</a>和<a href="/en/notes/cs408-7528c27ca114/#section-20">Boyer-Moore 主元素</a>也已纳入专题笔记。</p>
-</blockquote>
+<details class="note-callout"><summary>专题页补充题型</summary>
+<p><a href="/en/notes/cs408-7528c27ca114/#section-2">有序插入</a>、<a href="/en/notes/cs408-7528c27ca114/#section-4">末元素覆盖最小值</a>、<a href="/en/notes/cs408-7528c27ca114/#section-7">交换连续子序列</a>和<a href="/en/notes/cs408-7528c27ca114/#section-20">Boyer-Moore 主元素</a>也已纳入专题笔记。</p>
+</details>
 <blockquote>
 <p><strong>DANGER</strong> · 原汇总代码的代表性错误
 去重时覆盖位置和 <code>length</code> 少 1；合并函数混用 <code>l/l3</code> 且漏分号；虚拟数组写成 <code>int record = new int[n]</code>，返回时又使用未定义的 <code>maxNumber</code>。以上均不能直接编译，专题版本已按空表、容量和下标边界重写。</p>
@@ -386,10 +385,9 @@
 </tr>
 </tbody>
 </table></div>
-<blockquote>
-<p><strong>TIP</strong> · 专题页补充题型
-<a href="/en/notes/cs408-19ccba30ce38/#section-12">共享栈</a>补全了两栈判满、判空、入栈与出栈；<a href="/en/notes/cs408-19ccba30ce38/#section-21">字符序列重排</a>补全了按字符类别分区题型。该实现会逆转 <code>H</code> 组；只有字符完全相同时逆序才不可见，不能称为一般意义上的稳定分区。</p>
-</blockquote>
+<details class="note-callout"><summary>专题页补充题型</summary>
+<p><a href="/en/notes/cs408-19ccba30ce38/#section-12">共享栈</a>补全了两栈判满、判空、入栈与出栈；<a href="/en/notes/cs408-19ccba30ce38/#section-21">字符序列重排</a>补全了按字符类别分区题型。该实现会逆转 <code>H</code> 组；只有字符完全相同时逆序才不可见，不能称为一般意义上的稳定分区。</p>
+</details>
 <blockquote>
 <p><strong>DANGER</strong> · 原汇总代码的代表性错误
 队列与栈对象、指针访问方式混用，<code>front/rear/top</code> 有时漏写所属对象；括号匹配在空栈上直接 <code>pop</code>，结尾真假分支相反且包含连续两个 <code>return</code>。</p>
@@ -492,10 +490,9 @@
 </tr>
 </tbody>
 </table></div>
-<blockquote>
-<p><strong>TIP</strong> · 专题页补充题型
-专题还覆盖<a href="/en/notes/cs408-18a77c541c35/#section-5">链表命中后与前驱交换</a>、<a href="/en/notes/cs408-18a77c541c35/#section-8">两种折半查找</a>、<a href="/en/notes/cs408-18a77c541c35/#section-11">BST 全局范围验证</a>、<a href="/en/notes/cs408-18a77c541c35/#section-15">BST 层次</a>和<a href="/en/notes/cs408-18a77c541c35/#section-16">中序范围输出</a>。</p>
-</blockquote>
+<details class="note-callout"><summary>专题页补充题型</summary>
+<p>专题还覆盖<a href="/en/notes/cs408-18a77c541c35/#section-5">链表命中后与前驱交换</a>、<a href="/en/notes/cs408-18a77c541c35/#section-8">两种折半查找</a>、<a href="/en/notes/cs408-18a77c541c35/#section-11">BST 全局范围验证</a>、<a href="/en/notes/cs408-18a77c541c35/#section-15">BST 层次</a>和<a href="/en/notes/cs408-18a77c541c35/#section-16">中序范围输出</a>。</p>
+</details>
 <blockquote>
 <p><strong>DANGER</strong> · 原汇总代码的代表性错误
 折半查找把 <code>high = mid - 1</code> 放到循环外，插入移动时混用 <code>list.data</code> 与 <code>list[]</code>，还未检查容量；BST 空树直接返回 0 会把“无结果”和合法关键字 0 混为一谈。</p>
@@ -543,10 +540,9 @@
 </tbody>
 </table></div>
 <p>邻接表上的 BFS、DFS、可达性、判树与连通分量均为 $O(|V|+|E|)$；邻接矩阵遍历通常为 $O(|V|^2)$。</p>
-<blockquote>
-<p><strong>TIP</strong> · 专题页补充题型
-<a href="/en/notes/cs408-d690a826208c/#section-4">欧拉通路</a>补全了非零度顶点连通性与奇度条件；<a href="/en/notes/cs408-d690a826208c/#section-13">最远顶点</a>规定了同层平局；<a href="/en/notes/cs408-d690a826208c/#section-14">非递归 DFS</a>保存下一邻接位置；<a href="/en/notes/cs408-d690a826208c/#section-17">存储转换</a>处理方向、自环、重边和边数一致性。</p>
-</blockquote>
+<details class="note-callout"><summary>专题页补充题型</summary>
+<p><a href="/en/notes/cs408-d690a826208c/#section-4">欧拉通路</a>补全了非零度顶点连通性与奇度条件；<a href="/en/notes/cs408-d690a826208c/#section-13">最远顶点</a>规定了同层平局；<a href="/en/notes/cs408-d690a826208c/#section-14">非递归 DFS</a>保存下一邻接位置；<a href="/en/notes/cs408-d690a826208c/#section-17">存储转换</a>处理方向、自环、重边和边数一致性。</p>
+</details>
 <blockquote>
 <p><strong>DANGER</strong> · 原汇总代码的代表性错误
 类型在使用后才声明，<code>new AGraph*</code>/<code>new ArcNode*</code> 分配了错误对象，成员访问混用 <code>.</code> 与 <code>-&gt;</code>；BFS 初始化在循环外，队列前置自增易错；DFS 混用 <code>p.adjVertex</code>、<code>visit[]</code> 和未声明变量；可达性分支含不可达 <code>return</code>；连通分量调用未定义的 <code>v</code>。</p>
@@ -723,6 +719,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

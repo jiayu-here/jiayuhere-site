@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-c0d1b15ecf57/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-c0d1b15ecf57/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -134,7 +134,7 @@
 </blockquote>
 <h2 id="section-1">34.1 外部排序与归并过程</h2>
 <h3 id="section-2">34.1.1 基本模型</h3>
-<h5 id="section-3"><strong>定义</strong>：#外部排序 #初始归并段</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F">#外部排序</a> <a class="note-concept-tag" href="/notes/?tag=%23%E5%88%9D%E5%A7%8B%E5%BD%92%E5%B9%B6%E6%AE%B5">#初始归并段</a></h5>
 <blockquote>
 <p>描述：当待排序文件不能全部装入内存时，将外存数据分批读入内存、在内存中形成有序段并写回外存；这些有序段称为初始归并段。之后反复归并，直到只剩一个有序文件。</p>
 </blockquote>
@@ -197,7 +197,7 @@ $$</p>
 <p>图示：归并树的叶结点是初始归并段，树高对应归并趟数。减少树高可以减少整文件读写次数。</p>
 </blockquote>
 <h3 id="section-7">34.2.2 败者树</h3>
-<h5 id="section-8"><strong>定义</strong>：#败者树</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E8%B4%A5%E8%80%85%E6%A0%91">#败者树</a></h5>
 <blockquote>
 <p>描述：败者树是一种锦标赛式选择树。叶结点对应各归并段的当前记录；普通内部结点保存该场比较的败者，胜者继续向上比较。总冠军通常保存在树顶的额外位置或单独槽位，而不是笼统地由普通内部根结点同时保存。</p>
 </blockquote>
@@ -233,7 +233,7 @@ $$</p>
 <hr>
 <h2 id="section-9">34.3 置换—选择排序</h2>
 <h3 id="section-10">34.3.1 目标与核心约束</h3>
-<h5 id="section-11"><strong>定义</strong>：#置换选择排序</h5>
+<h5 id="section-11"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E7%BD%AE%E6%8D%A2%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">#置换选择排序</a></h5>
 <blockquote>
 <p>描述：利用容量为 $w$ 的内存工作区生成初始归并段。每次输出当前未冻结记录中的最小关键字并读入一条新记录；若新记录小于本归并段刚输出的关键字，则将它冻结到下一归并段。</p>
 </blockquote>
@@ -299,7 +299,7 @@ $$</p>
 </blockquote>
 <hr>
 <h2 id="section-14">34.4 最佳归并树</h2>
-<h5 id="section-15"><strong>定义</strong>：#最佳归并树 #多路Huffman树</h5>
+<h5 id="section-15"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%9C%80%E4%BD%B3%E5%BD%92%E5%B9%B6%E6%A0%91">#最佳归并树</a> <a class="note-concept-tag" href="/notes/?tag=%23%E5%A4%9A%E8%B7%AFHuffman%E6%A0%91">#多路Huffman树</a></h5>
 <blockquote>
 <p>描述：当初始归并段长度不等时，以各段长度为叶结点权值构造 $k$ 叉 Huffman 树，使带权路径长度最小；该树称为最佳归并树。</p>
 </blockquote>
@@ -327,7 +327,7 @@ $$</p>
 <li>虚段必须在<strong>最初</strong>作为零权叶结点参与选择，不能随意补在树的高层；否则未必得到最小 WPL。</li>
 <li>当各初始段等长且可以做完全平衡归并时，平衡归并树已经最优；长度不等时，最佳归并树可以减少总读写量。</li>
 </ul>
-<h3 id="section-16">题型：#外部排序I/O计算</h3>
+<h3 id="section-16">题型：<a class="note-concept-tag" href="/notes/?tag=%23%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8FI%2FO%E8%AE%A1%E7%AE%97">#外部排序I/O计算</a></h3>
 <h4 id="section-17">第一部分：解题方法</h4>
 <ol>
 <li>求初始归并段数 $r$；若使用置换选择，按模拟得到的实际段数和段长计算，不能直接用文件总量除以工作区容量。</li>
@@ -365,6 +365,6 @@ $$</p>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

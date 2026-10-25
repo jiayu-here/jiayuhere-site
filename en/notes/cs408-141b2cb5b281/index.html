@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-141b2cb5b281/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-141b2cb5b281/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -134,7 +134,7 @@
 </blockquote>
 <h2 id="section-1">25.1 顺序查找</h2>
 <h3 id="section-2">25.1.1 基本思想与普通实现</h3>
-<h5 id="section-3"><strong>定义</strong>：#顺序查找 #线性查找</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE">#顺序查找</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E7%BA%BF%E6%80%A7%E6%9F%A5%E6%89%BE">#线性查找</a></h5>
 <blockquote>
 <p>描述：从表的一端开始，依次将待查关键字与表中元素的关键字比较，直到找到相等元素或扫描完表。顺序查找适用于顺序表和链表，也不要求表有序。</p>
 </blockquote>
@@ -161,7 +161,7 @@ int Search_Seq(SSTable ST, ElemType key) {
 ASL_{\text{成功}}=\frac{1+2+\cdots+n}{n}=\frac{n+1}{2}
 $$</p>
 <h3 id="section-5">25.1.2 哨兵优化</h3>
-<h5 id="section-6"><strong>定义</strong>：#哨兵</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%93%A8%E5%85%B5">#哨兵</a></h5>
 <blockquote>
 <p>描述：在顺序表的约定位置暂存待查关键字，使循环只需判断“当前元素是否等于关键字”，省去每轮边界判断。</p>
 </blockquote>
@@ -208,7 +208,7 @@ $$</p>
 <hr>
 <h2 id="section-10">25.2 折半查找</h2>
 <h3 id="section-11">25.2.1 使用条件与过程</h3>
-<h5 id="section-12"><strong>定义</strong>：#折半查找 #二分查找</h5>
+<h5 id="section-12"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE">#折半查找</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE">#二分查找</a></h5>
 <blockquote>
 <p>描述：在有序表中取中间元素与 <code>key</code> 比较；若不相等，则根据大小关系将查找区间缩小到左半或右半，直到找到目标或区间为空。</p>
 </blockquote>
@@ -270,7 +270,7 @@ $$</p>
 <li>折半查找不一定在每个具体样例中都比顺序查找快。例如目标恰在表首，顺序查找只比较一次。</li>
 <li>判定树的形状由元素<strong>个数</strong>和 <code>mid</code> 规则决定，与关键字具体数值无关；但必须同时满足二叉排序树的大小关系。</li>
 </ul>
-<h3 id="section-18">题型：#折半查找判定树</h3>
+<h3 id="section-18">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%E5%88%A4%E5%AE%9A%E6%A0%91">#折半查找判定树</a></h3>
 <h4 id="section-19">第一部分：解题方法</h4>
 <ol>
 <li>根据题目给出的 <code>mid</code> 定义确定偶数段是左少右多，还是左多右少。</li>
@@ -296,7 +296,7 @@ $$</p>
 <hr>
 <h2 id="section-22">25.3 分块查找</h2>
 <h3 id="section-23">25.3.1 结构与过程</h3>
-<h5 id="section-24"><strong>定义</strong>：#分块查找 #索引顺序查找</h5>
+<h5 id="section-24"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%88%86%E5%9D%97%E6%9F%A5%E6%89%BE">#分块查找</a> <a class="note-concept-tag" href="/en/notes/?tag=%23%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE">#索引顺序查找</a></h5>
 <blockquote>
 <p>描述：将查找表分成若干块，建立索引表。索引表记录每块的最大关键字和该块的存储范围；查找时先在索引表确定目标块，再在块内顺序查找。</p>
 </blockquote>
@@ -361,6 +361,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

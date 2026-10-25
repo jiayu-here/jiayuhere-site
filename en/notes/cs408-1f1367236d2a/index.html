@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1f1367236d2a/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1f1367236d2a/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -137,7 +137,7 @@
 <li>同一种逻辑结构，可以采用不同的存储结构；不同存储结构会影响查找、插入、删除和空间利用率。</li>
 </ul>
 <h3 id="section-2">1.1.1 顺序存储</h3>
-<h5 id="section-3"><strong>定义</strong>：#顺序存储</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8">#顺序存储</a></h5>
 <blockquote>
 <p>描述：
 把逻辑上相邻的元素，存储在物理位置也相邻的存储单元中，元素之间的关系由存储单元的相邻关系体现。</p>
@@ -174,7 +174,7 @@ $$</li>
 <li>若采用从 0 开始的数组下标，则 <code>a[i]</code> 的地址才是 $base+i\times L$。</li>
 </ul>
 <h3 id="section-4">1.1.2 链式存储</h3>
-<h5 id="section-5"><strong>定义</strong>：#链式存储</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8">#链式存储</a></h5>
 <blockquote>
 <p>描述：
 不要求逻辑上相邻的元素在物理位置上相邻，而是借助指针表示元素之间的逻辑关系。</p>
@@ -212,7 +212,7 @@ $$</li>
 <li>PDF 中写到“只能实现顺序存储”，这里更准确的理解是：链式存储通常只能<strong>顺序访问</strong>，不能像数组那样按下标随机访问。</li>
 </ul>
 <h3 id="section-6">1.1.3 索引存储</h3>
-<h5 id="section-7"><strong>定义</strong>：#索引存储</h5>
+<h5 id="section-7"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%B4%A2%E5%BC%95%E5%AD%98%E5%82%A8">#索引存储</a></h5>
 <blockquote>
 <p>描述：
 在存储数据元素信息的同时，额外建立索引表，用索引项辅助定位数据元素。</p>
@@ -248,7 +248,7 @@ $$</li>
 <li>索引存储靠“目录”找元素。</li>
 </ul>
 <h3 id="section-8">1.1.4 散列存储</h3>
-<h5 id="section-9"><strong>定义</strong>：#散列存储</h5>
+<h5 id="section-9"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%95%A3%E5%88%97%E5%AD%98%E5%82%A8">#散列存储</a></h5>
 <blockquote>
 <p>描述：
 根据元素的关键字直接计算出该元素的存储地址，又称哈希存储。</p>
@@ -343,7 +343,7 @@ $$</li>
 <li>散列存储：函数。</li>
 </ul>
 <h2 id="section-11">1.3 面试题：循环一定比递归效率高吗</h2>
-<h3 id="section-12">题型：#循环递归比较</h3>
+<h3 id="section-12">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%BE%AA%E7%8E%AF%E9%80%92%E5%BD%92%E6%AF%94%E8%BE%83">#循环递归比较</a></h3>
 <h4 id="section-13">第一部分：解题方法</h4>
 <ul>
 <li>这类题不能直接回答“循环一定更高”。</li>
@@ -415,7 +415,7 @@ $$</li>
 </li>
 </ul>
 <h2 id="section-16">1.4 面试题：数组中找出和为固定值的所有数对</h2>
-<h3 id="section-17">题型：#TwoSum</h3>
+<h3 id="section-17">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23TwoSum">#TwoSum</a></h3>
 <h4 id="section-18">第一部分：解题方法</h4>
 <ul>
 <li>问题描述：给定一个数组和一个固定值 <code>target</code>，找出所有满足和为 <code>target</code> 的数对。</li>
@@ -477,7 +477,7 @@ $$</li>
 <li>如果需要输出所有数对，要处理重复元素和重复答案。</li>
 </ul>
 <h2 id="section-21">1.5 什么是数据结构</h2>
-<h5 id="section-22"><strong>定义</strong>：#数据结构</h5>
+<h5 id="section-22"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">#数据结构</a></h5>
 <blockquote>
 <p>描述：
 数据结构是指数据元素以及数据元素之间的关系，可以看作相互之间存在某种特定关系的数据元素集合。</p>
@@ -572,7 +572,7 @@ $$</li>
 </ol>
 <p>逻辑结构与存储结构不是一一对应关系。例如，线性表既可用连续地址的顺序表实现，也可用结点地址离散的链表实现；图也可以用邻接矩阵或邻接表实现。</p>
 <h3 id="section-26">数据类型与抽象数据类型</h3>
-<h5 id="section-27"><strong>定义</strong>：#数据类型</h5>
+<h5 id="section-27"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">#数据类型</a></h5>
 <blockquote>
 <p>数据类型是一个值的集合以及定义在该集合上的一组操作的总称。</p>
 </blockquote>
@@ -580,7 +580,7 @@ $$</li>
 <li>原子类型的值不可再分，如给定语言语境下的整数、字符；结构类型的值由若干成分按某种结构组成，如数组、结构体。</li>
 <li>数据类型通常还受具体语言的表示范围约束，例如 C 语言中不同整数类型的位宽与取值范围由实现和标准共同规定。</li>
 </ul>
-<h5 id="section-28"><strong>定义</strong>：#抽象数据类型 #ADT</h5>
+<h5 id="section-28"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">#抽象数据类型</a> <a class="note-concept-tag" href="/en/notes/?tag=%23ADT">#ADT</a></h5>
 <blockquote>
 <p>抽象数据类型（Abstract Data Type，ADT）从逻辑上说明数据对象、数据关系和允许的基本操作，不规定这些操作必须采用哪一种存储结构或代码实现。</p>
 </blockquote>
@@ -624,7 +624,7 @@ $$</p>
 </li>
 </ul>
 <h2 id="section-31">1.7 程序和软件的区别</h2>
-<h3 id="section-32">题型：#程序软件辨析</h3>
+<h3 id="section-32">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A8%8B%E5%BA%8F%E8%BD%AF%E4%BB%B6%E8%BE%A8%E6%9E%90">#程序软件辨析</a></h3>
 <h4 id="section-33">第一部分：解题方法</h4>
 <ul>
 <li>抓住两句话：
@@ -712,6 +712,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-2b5ec3d1aa84/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-2b5ec3d1aa84/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -130,7 +130,7 @@
         <a class="button secondary-button" href="/assets/408/originals/38127b5de6d4.pdf" download="Lecture 11：栈在递归中的应用.pdf">下载原件</a>
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">11.1 基本概念</a><a href="#section-3">11.2 递归示例</a><a href="#section-8">11.3 栈和递归的关系</a><a href="#section-12">11.4 递归实现</a><a href="#section-15">11.5 递归的缺点</a><a href="#section-19">11.6 题型整理</a><a href="#section-24">相关知识</a><a href="#section-25">11.7 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">11.1 基本概念</h2>
-<h5 id="section-2"><strong>定义</strong>：#递归</h5>
+<h5 id="section-2"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%80%92%E5%BD%92">#递归</a></h5>
 <blockquote>
 <p>描述：
 递归是指一个函数在求解问题时，直接或间接调用自身，把原始问题转化为属性相同但规模更小的子问题。</p>
@@ -148,7 +148,7 @@
 </ul>
 <h2 id="section-3">11.2 递归示例</h2>
 <h3 id="section-4">11.2.1 阶乘</h3>
-<h5 id="section-5"><strong>定义</strong>：#阶乘递归</h5>
+<h5 id="section-5"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%98%B6%E4%B9%98%E9%80%92%E5%BD%92">#阶乘递归</a></h5>
 <blockquote>
 <p>描述：
 计算正整数阶乘时，$n!$ 可以转化为 $n\times(n-1)!$，直到遇到边界条件。</p>
@@ -177,7 +177,7 @@ $$</li>
 factorial(0)=1
 $$</p>
 <h3 id="section-6">11.2.2 斐波那契数列</h3>
-<h5 id="section-7"><strong>定义</strong>：#斐波那契递归</h5>
+<h5 id="section-7"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E9%80%92%E5%BD%92">#斐波那契递归</a></h5>
 <blockquote>
 <p>描述：
 斐波那契数列中，当前项可以由前两项相加得到。</p>
@@ -210,7 +210,7 @@ $$</p>
 </blockquote>
 <h2 id="section-8">11.3 栈和递归的关系</h2>
 <h3 id="section-9">11.3.1 函数调用栈</h3>
-<h5 id="section-10"><strong>定义</strong>：#递归工作栈</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%80%92%E5%BD%92%E5%B7%A5%E4%BD%9C%E6%A0%88">#递归工作栈</a></h5>
 <blockquote>
 <p>描述：
 递归调用时，系统会用函数调用栈保存每一层函数调用的信息，这个函数调用栈也称为递归工作栈。</p>
@@ -310,7 +310,7 @@ $$</p>
 </ul>
 <h2 id="section-15">11.5 递归的缺点</h2>
 <h3 id="section-16">11.5.1 栈溢出</h3>
-<h5 id="section-17"><strong>定义</strong>：#栈溢出</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%A0%88%E6%BA%A2%E5%87%BA">#栈溢出</a></h5>
 <blockquote>
 <p>描述：
 栈溢出是指函数调用层数过多，递归工作栈无法继续容纳新的调用信息。</p>
@@ -354,7 +354,7 @@ $$</li>
 <li>但它会重复计算大量子问题，时间复杂度较高。</li>
 </ul>
 <h2 id="section-19">11.6 题型整理</h2>
-<h3 id="section-20">题型：#递归与栈</h3>
+<h3 id="section-20">题型：<a class="note-concept-tag" href="/notes/?tag=%23%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88">#递归与栈</a></h3>
 <h4 id="section-21">第一部分：解题方法</h4>
 <ul>
 <li>看到递归，要想到函数调用栈。</li>
@@ -429,6 +429,6 @@ $$</li>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

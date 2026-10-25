@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-1b0b51efe56e/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-1b0b51efe56e/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab 技术博客" href="../../feed.xml">
-  <link rel="icon" href="../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../site.webmanifest">
-  <link rel="stylesheet" href="../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>本页目录</summary><nav aria-label="本页目录"><a href="#section-1">16.1 二叉树的定义和基本术语</a><a href="#section-13">16.2 二叉树的性质</a><a href="#section-20">16.2.2 二叉树的常考性质</a><a href="#section-24">16.2.3 完全二叉树的常考性质</a><a href="#section-32">16.3 二叉树的存储结构</a><a href="#section-43">16.4 题型：二叉树性质计算</a><a href="#section-56">相关知识</a><a href="#section-57">16.5 本节复盘</a></nav></details><div class="prose"><h2 id="section-1">16.1 二叉树的定义和基本术语</h2>
 <h3 id="section-2">16.1.1 二叉树的基本概念</h3>
-<h5 id="section-3"><strong>定义</strong>：#二叉树</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E4%BA%8C%E5%8F%89%E6%A0%91">#二叉树</a></h5>
 <blockquote>
 <p>描述：
 二叉树是 $n(n\ge 0)$ 个结点的有限集合。它要么是空二叉树，要么由一个根结点和两棵互不相交的二叉树组成，这两棵二叉树分别称为根的左子树和右子树。</p>
@@ -208,7 +208,7 @@ $$</p>
 </ul>
 <h3 id="section-4">16.1.2 常见二叉树</h3>
 <h4 id="section-5">满二叉树</h4>
-<h5 id="section-6"><strong>定义</strong>：#满二叉树</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91">#满二叉树</a></h5>
 <blockquote>
 <p>描述：
 一棵高度为 $h$，且含有 $2^h-1$ 个结点的二叉树，称为满二叉树。</p>
@@ -248,7 +248,7 @@ $$</li>
 <li>图中每层都达到容量上限，按层序编号后，结点 $i$ 的左右孩子分别位于 $2i$ 和 $2i+1$；第四层编号为 $8\sim15$。</li>
 </ul>
 <h4 id="section-7">完全二叉树</h4>
-<h5 id="section-8"><strong>定义</strong>：#完全二叉树</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91">#完全二叉树</a></h5>
 <blockquote>
 <p>描述：
 当且仅当一棵二叉树的每个结点都与高度为 $h$ 的满二叉树中编号为 $1\sim n$ 的结点一一对应时，称为完全二叉树。</p>
@@ -298,7 +298,7 @@ $$
 <li>现有结点编号连续为 $1\sim12$；若出现编号 $13$ 而编号 $12$ 不存在，就不再是完全二叉树。</li>
 </ul>
 <h4 id="section-9">二叉排序树</h4>
-<h5 id="section-10"><strong>定义</strong>：#二叉排序树</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91">#二叉排序树</a></h5>
 <blockquote>
 <p>描述：
 二叉排序树是一种可用于元素排序和搜索的二叉树。</p>
@@ -329,7 +329,7 @@ $$
 <li>右半部分展示一个局部平衡的二叉排序树；AVL 的平衡条件必须对树中每个结点都成立。</li>
 </ul>
 <h4 id="section-11">平衡二叉树</h4>
-<h5 id="section-12"><strong>定义</strong>：#平衡二叉树</h5>
+<h5 id="section-12"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91">#平衡二叉树</a></h5>
 <blockquote>
 <p>描述：
 408 语境中的平衡二叉树通常指 AVL 树：它首先是一棵二叉排序树，并且树上任一结点的左、右子树高度之差的绝对值不超过 $1$。</p>
@@ -724,7 +724,7 @@ $$</p>
 </ul>
 <h2 id="section-32">16.3 二叉树的存储结构</h2>
 <h3 id="section-33">16.3.1 顺序存储</h3>
-<h5 id="section-34"><strong>定义</strong>：#顺序存储</h5>
+<h5 id="section-34"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8">#顺序存储</a></h5>
 <blockquote>
 <p>描述：
 二叉树的顺序存储用数组 <code>t</code> 按对应满二叉树的层序编号存放结点。若最大结点编号为 <code>MaxSize</code>，并约定 <code>t[0]</code> 留空，则数组至少需要 <code>MaxSize+1</code> 个槽位。</p>
@@ -865,7 +865,7 @@ void InitTreeArray(TreeNode t[]) {
 <li>访问 <code>t[i]</code> 前仍须保证 $1\le i\le\texttt{MaxSize}$；<code>isEmpty</code> 不能代替数组越界检查。</li>
 </ul>
 <h3 id="section-36">16.3.2 链式存储</h3>
-<h5 id="section-37"><strong>定义</strong>：#链式存储</h5>
+<h5 id="section-37"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8">#链式存储</a></h5>
 <blockquote>
 <p>描述：
 二叉树的链式存储用结点和指针表示树中结点之间的父子关系，每个结点通常包含数据域、左孩子指针和右孩子指针。</p>
@@ -976,7 +976,7 @@ void LinkTreeExample(void) {
 <li>动态申请的结点用完后需释放；此示例先释放子结点，再释放根结点。</li>
 </ol>
 <h3 id="section-40">16.3.3 三叉链表</h3>
-<h5 id="section-41"><strong>定义</strong>：#三叉链表</h5>
+<h5 id="section-41"><strong>定义</strong>：<a class="note-concept-tag" href="/notes/?tag=%23%E4%B8%89%E5%8F%89%E9%93%BE%E8%A1%A8">#三叉链表</a></h5>
 <blockquote>
 <p>描述：
 三叉链表在二叉链表的基础上，除了左孩子指针和右孩子指针外，还增加一个指向父结点的指针。</p>
@@ -1292,6 +1292,6 @@ $$</p>
     <nav class="footer-links" aria-label="页脚导航"><a href="../../about/index.html">关于我</a><a href="../../privacy/index.html">隐私说明</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../feed.xml">RSS</a><a href="../../sitemap.xml">站点地图</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../assets/script.js?v=20261022a"></script>
+  <script src="../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

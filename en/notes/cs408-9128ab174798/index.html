@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-9128ab174798/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-9128ab174798/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">17.1 二叉树的递归遍历</a><a href="#section-5">17.2 先序、中序、后序遍历</a><a href="#section-16">17.3 二叉树的层次遍历</a><a href="#section-20">17.4 遍历序列构造二叉树</a><a href="#section-26">17.5 线索二叉树的概念</a><a href="#section-31">17.6 二叉树的线索化</a><a href="#section-41">17.7 线索二叉树找前驱后继</a><a href="#section-58">17.8 题型：二叉树遍历与线索化</a><a href="#section-75">相关知识</a><a href="#section-76">17.9 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">17.1 二叉树的递归遍历</h2>
 <h3 id="section-2">17.1.1 二叉树的遍历</h3>
-<h5 id="section-3"><strong>定义</strong>：#二叉树遍历</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86">#二叉树遍历</a></h5>
 <blockquote>
 <p>描述：
 二叉树的遍历是按某种规则访问二叉树中的每个结点，并且每个结点恰好访问一次。</p>
@@ -352,7 +352,7 @@ $$</p>
 </ul>
 <h2 id="section-5">17.2 先序、中序、后序遍历</h2>
 <h3 id="section-6">17.2.1 先序遍历</h3>
-<h5 id="section-7"><strong>定义</strong>：#先序遍历</h5>
+<h5 id="section-7"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86">#先序遍历</a></h5>
 <blockquote>
 <p>描述：
 先序遍历按照“根-左-右”的顺序访问二叉树。</p>
@@ -402,7 +402,7 @@ void PreOrder(BiTree T) {
 }
 </code></pre>
 <h3 id="section-9">17.2.2 中序遍历</h3>
-<h5 id="section-10"><strong>定义</strong>：#中序遍历</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86">#中序遍历</a></h5>
 <blockquote>
 <p>描述：
 中序遍历按照“左-根-右”的顺序访问二叉树。</p>
@@ -443,7 +443,7 @@ void PreOrder(BiTree T) {
 }
 </code></pre>
 <h3 id="section-12">17.2.3 后序遍历</h3>
-<h5 id="section-13"><strong>定义</strong>：#后序遍历</h5>
+<h5 id="section-13"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86">#后序遍历</a></h5>
 <blockquote>
 <p>描述：
 后序遍历按照“左-右-根”的顺序访问二叉树。</p>
@@ -515,7 +515,7 @@ $$</li>
 </ul>
 <h2 id="section-16">17.3 二叉树的层次遍历</h2>
 <h3 id="section-17">17.3.1 基础概念</h3>
-<h5 id="section-18"><strong>定义</strong>：#层次遍历</h5>
+<h5 id="section-18"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86">#层次遍历</a></h5>
 <blockquote>
 <p>描述：
 层次遍历按照从上到下、从左到右的顺序访问二叉树中的结点。</p>
@@ -607,7 +607,7 @@ typedef struct {
 </ul>
 <h2 id="section-20">17.4 遍历序列构造二叉树</h2>
 <h3 id="section-21">17.4.1 基本结论</h3>
-<h5 id="section-22"><strong>定义</strong>：#遍历序列构造二叉树</h5>
+<h5 id="section-22"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91">#遍历序列构造二叉树</a></h5>
 <blockquote>
 <p>描述：
 根据给定的遍历序列，还原二叉树的结构。</p>
@@ -837,7 +837,7 @@ typedef struct {
 <li>可以把这些空指针改造成指向前驱或后继的线索。</li>
 <li>建立整棵树的线索时，通常按相应次序遍历一次，在访问结点时确定其前驱或后继并建立线索。</li>
 </ul>
-<h5 id="section-28"><strong>定义</strong>：#线索二叉树</h5>
+<h5 id="section-28"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91">#线索二叉树</a></h5>
 <blockquote>
 <p>描述：
 线索二叉树是把二叉链表中的空指针改为指向某种遍历序列中前驱或后继的指针后得到的二叉树。</p>
@@ -1692,6 +1692,6 @@ $$</p>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>

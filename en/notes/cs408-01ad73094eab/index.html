@@ -89,10 +89,10 @@
   <link rel="alternate" hreflang="en" href="https://www.jiayuhere.com/en/notes/cs408-01ad73094eab/">
   <link rel="alternate" hreflang="x-default" href="https://www.jiayuhere.com/notes/cs408-01ad73094eab/">
   <link rel="alternate" type="application/rss+xml" title="Jiayu Lab Technical Blog" href="../../../en/feed.xml">
-  <link rel="icon" href="../../../favicon.ico?v=20261022a" sizes="any">
+  <link rel="icon" href="../../../favicon.ico?v=20261025a" sizes="any">
   <link rel="apple-touch-icon" href="../../../assets/images/app-icon-192.png" sizes="192x192">
   <link rel="manifest" href="../../../site.webmanifest">
-  <link rel="stylesheet" href="../../../assets/styles.css?v=20261022a">
+  <link rel="stylesheet" href="../../../assets/styles.css?v=20261025a">
   <script>
     window.MathJax = {
       tex: {
@@ -131,7 +131,7 @@
       </div></header>
       <div class="article-layout container"><details class="article-toc" open><summary>On this page</summary><nav aria-label="On this page" lang="zh-CN"><a href="#section-1">2.1 算法和算法评价</a><a href="#section-24">2.2 算法的时间复杂度</a><a href="#section-29">2.3 时间复杂度的运算规则</a><a href="#section-35">2.4 时间复杂度分析方法</a><a href="#section-48">2.5 空间复杂度</a><a href="#section-61">相关知识</a><a href="#section-62">2.6 本节复盘</a></nav></details><div class="prose"><p class="note-language-notice">This note is currently available in Chinese. The original wording, formulas and diagrams are preserved to avoid an unverified technical translation.</p><div lang="zh-CN"><h2 id="section-1">2.1 算法和算法评价</h2>
 <h3 id="section-2">2.1.1 什么是算法</h3>
-<h5 id="section-3"><strong>定义</strong>：#算法</h5>
+<h5 id="section-3"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%AE%97%E6%B3%95">#算法</a></h5>
 <blockquote>
 <p>描述：
 算法是解决特定问题的一系列有限步骤。</p>
@@ -170,7 +170,7 @@ $$</li>
 </li>
 </ul>
 <h4 id="section-5">2.1.2.1 有穷性</h4>
-<h5 id="section-6"><strong>定义</strong>：#有穷性</h5>
+<h5 id="section-6"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%9C%89%E7%A9%B7%E6%80%A7">#有穷性</a></h5>
 <blockquote>
 <p>描述：
 算法必须在执行有穷步之后结束。</p>
@@ -186,7 +186,7 @@ $$</li>
 </li>
 </ul>
 <h4 id="section-7">2.1.2.2 确定性</h4>
-<h5 id="section-8"><strong>定义</strong>：#确定性</h5>
+<h5 id="section-8"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A1%AE%E5%AE%9A%E6%80%A7">#确定性</a></h5>
 <blockquote>
 <p>描述：
 算法中的每条指令必须有确切含义，对于相同输入只能得到相同输出。</p>
@@ -197,7 +197,7 @@ $$</li>
 <li>算法步骤不能含糊，比如“适当处理一下”就不是严格算法描述。</li>
 </ul>
 <h4 id="section-9">2.1.2.3 可行性</h4>
-<h5 id="section-10"><strong>定义</strong>：#可行性</h5>
+<h5 id="section-10"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%AF%E8%A1%8C%E6%80%A7">#可行性</a></h5>
 <blockquote>
 <p>描述：
 算法中描述的操作，都可以通过已经实现的基本运算执行有限次来完成。</p>
@@ -208,7 +208,7 @@ $$</li>
 <li>每一步都必须是计算机或执行者可以完成的操作。</li>
 </ul>
 <h4 id="section-11">2.1.2.4 输入</h4>
-<h5 id="section-12"><strong>定义</strong>：#输入</h5>
+<h5 id="section-12"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%BE%93%E5%85%A5">#输入</a></h5>
 <blockquote>
 <p>描述：
 一个算法有零个或多个输入，这些输入来自某个特定对象集合。</p>
@@ -223,7 +223,7 @@ $$</li>
 <li>但多数算法需要输入数据。</li>
 </ul>
 <h4 id="section-13">2.1.2.5 输出</h4>
-<h5 id="section-14"><strong>定义</strong>：#输出</h5>
+<h5 id="section-14"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E8%BE%93%E5%87%BA">#输出</a></h5>
 <blockquote>
 <p>描述：
 一个算法有一个或多个输出，这些输出是与输入存在某种特定关系的量。</p>
@@ -242,7 +242,7 @@ $$</li>
 <li>高效率与低存储量需求。</li>
 </ul>
 <h4 id="section-16">2.1.3.1 正确性</h4>
-<h5 id="section-17"><strong>定义</strong>：#正确性</h5>
+<h5 id="section-17"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%AD%A3%E7%A1%AE%E6%80%A7">#正确性</a></h5>
 <blockquote>
 <p>描述：
 算法应能够正确地解决求解问题。</p>
@@ -253,7 +253,7 @@ $$</li>
 <li>如果算法结果错误，时间复杂度再低也没有意义。</li>
 </ul>
 <h4 id="section-18">2.1.3.2 可读性</h4>
-<h5 id="section-19"><strong>定义</strong>：#可读性</h5>
+<h5 id="section-19"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8F%AF%E8%AF%BB%E6%80%A7">#可读性</a></h5>
 <blockquote>
 <p>描述：
 算法应具有良好的可读性，便于人们理解、检查和维护。</p>
@@ -264,7 +264,7 @@ $$</li>
 <li>面试或考试中，清晰的伪代码通常比晦涩的技巧更稳。</li>
 </ul>
 <h4 id="section-20">2.1.3.3 健壮性</h4>
-<h5 id="section-21"><strong>定义</strong>：#健壮性</h5>
+<h5 id="section-21"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%81%A5%E5%A3%AE%E6%80%A7">#健壮性</a></h5>
 <blockquote>
 <p>描述：
 当输入非法数据时，算法能够适当地做出反应或处理，而不会产生莫名其妙的输出结果。</p>
@@ -283,7 +283,7 @@ $$</li>
 </li>
 </ul>
 <h4 id="section-22">2.1.3.4 高效率与低存储量需求</h4>
-<h5 id="section-23"><strong>定义</strong>：#效率</h5>
+<h5 id="section-23"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%95%88%E7%8E%87">#效率</a></h5>
 <blockquote>
 <p>描述：
 好算法应尽可能时间复杂度低、空间复杂度低。</p>
@@ -296,7 +296,7 @@ $$</li>
 </ul>
 <h2 id="section-24">2.2 算法的时间复杂度</h2>
 <h3 id="section-25">2.2.1 时间复杂度的概念</h3>
-<h5 id="section-26"><strong>定义</strong>：#时间复杂度</h5>
+<h5 id="section-26"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">#时间复杂度</a></h5>
 <blockquote>
 <p>描述：
 时间复杂度用于事前预估算法时间开销 $T(n)$ 与问题规模 $n$ 之间的增长关系。</p>
@@ -321,7 +321,7 @@ T(n)=O(n^2)
 $$</li>
 </ul>
 <h3 id="section-27">2.2.2 大 O 表示法</h3>
-<h5 id="section-28"><strong>定义</strong>：#大O表示法</h5>
+<h5 id="section-28"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%A4%A7O%E8%A1%A8%E7%A4%BA%E6%B3%95">#大O表示法</a></h5>
 <blockquote>
 <p>描述：
 若存在正常数 $c$ 和 $n_0$，使得对任意 $n\ge n_0$ 都有 $0\le T(n)\le c f(n)$，则记作 $T(n)=O(f(n))$。大 O 给出渐近上界，不要求 $T(n)$ 与 $f(n)$ 同阶。</p>
@@ -384,7 +384,7 @@ $$</li>
 </ul>
 <h2 id="section-29">2.3 时间复杂度的运算规则</h2>
 <h3 id="section-30">2.3.1 加法规则</h3>
-<h5 id="section-31"><strong>定义</strong>：#加法规则</h5>
+<h5 id="section-31"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%8A%A0%E6%B3%95%E8%A7%84%E5%88%99">#加法规则</a></h5>
 <blockquote>
 <p>描述：
 多项相加时，只保留最高阶的项，并且系数变为 1。</p>
@@ -408,7 +408,7 @@ $$
 O(n)+O(n^2)=O(n^2)
 $$</p>
 <h3 id="section-32">2.3.2 乘法规则</h3>
-<h5 id="section-33"><strong>定义</strong>：#乘法规则</h5>
+<h5 id="section-33"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E4%B9%98%E6%B3%95%E8%A7%84%E5%88%99">#乘法规则</a></h5>
 <blockquote>
 <p>描述：
 多项相乘时，各项都要保留。</p>
@@ -475,7 +475,7 @@ $$</p>
 <li>循环、递归和嵌套结构通常是重点。</li>
 </ul>
 <h3 id="section-37">2.4.2 例题 1：二层嵌套循环</h3>
-<h3 id="section-38">题型：#嵌套循环复杂度</h3>
+<h3 id="section-38">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF%E5%A4%8D%E6%9D%82%E5%BA%A6">#嵌套循环复杂度</a></h3>
 <h4 id="section-39">第一部分：解题方法</h4>
 <ul>
 <li>外层循环若执行 $n$ 次；</li>
@@ -508,7 +508,7 @@ $$</li>
 <li>最终结果只保留最高阶。</li>
 </ul>
 <h3 id="section-42">2.4.3 例题 2：每次倍增的循环</h3>
-<h3 id="section-43">题型：#对数复杂度</h3>
+<h3 id="section-43">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E5%AF%B9%E6%95%B0%E5%A4%8D%E6%9D%82%E5%BA%A6">#对数复杂度</a></h3>
 <h4 id="section-44">第一部分：解题方法</h4>
 <ul>
 <li>如果循环变量每次乘以 2，循环次数通常是对数级。</li>
@@ -605,7 +605,7 @@ $$</li>
 </ul>
 <h2 id="section-48">2.5 空间复杂度</h2>
 <h3 id="section-49">2.5.1 空间复杂度的概念</h3>
-<h5 id="section-50"><strong>定义</strong>：#空间复杂度</h5>
+<h5 id="section-50"><strong>定义</strong>：<a class="note-concept-tag" href="/en/notes/?tag=%23%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">#空间复杂度</a></h5>
 <blockquote>
 <p>描述：
 空间复杂度用于估计算法执行过程中，额外存储空间随问题规模 $n$ 增长的关系。</p>
@@ -620,7 +620,7 @@ S(n)=O(f(n))
 $$</li>
 </ul>
 <h3 id="section-51">2.5.2 普通程序的空间复杂度计算</h3>
-<h3 id="section-52">题型：#普通程序空间复杂度</h3>
+<h3 id="section-52">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E6%99%AE%E9%80%9A%E7%A8%8B%E5%BA%8F%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">#普通程序空间复杂度</a></h3>
 <h4 id="section-53">第一部分：解题方法</h4>
 <ul>
 <li>
@@ -663,7 +663,7 @@ $$</li>
 <li>固定数量的变量通常只贡献 $O(1)$。</li>
 </ul>
 <h3 id="section-56">2.5.3 递归程序的空间复杂度计算</h3>
-<h3 id="section-57">题型：#递归空间复杂度</h3>
+<h3 id="section-57">题型：<a class="note-concept-tag" href="/en/notes/?tag=%23%E9%80%92%E5%BD%92%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">#递归空间复杂度</a></h3>
 <h4 id="section-58">第一部分：解题方法</h4>
 <ul>
 <li>递归程序需要考虑递归调用栈。</li>
@@ -869,6 +869,6 @@ $$</li>
     <nav class="footer-links" aria-label="Footer navigation"><a href="../../../en/about/index.html">About</a><a href="../../../en/privacy/index.html">Privacy</a><a href="https://github.com/jiayu-here" target="_blank" rel="me noreferrer">GitHub</a><a href="../../../en/feed.xml">RSS</a><a href="../../../sitemap.xml">Sitemap</a></nav>
     <p class="copyright">© <span data-current-year></span> Jiayu Lab</p>
   </footer>
-  <script src="../../../assets/script.js?v=20261022a"></script>
+  <script src="../../../assets/script.js?v=20261025a"></script>
 </body>
 </html>
